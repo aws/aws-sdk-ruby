@@ -532,6 +532,41 @@ module Aws::BackupGateway
       req.send_request(options)
     end
 
+    # By providing the ARN (Amazon Resource Name), this API returns the
+    # gateway.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway.
+    #
+    # @return [Types::GetGatewayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGatewayOutput#gateway #gateway} => Types::GatewayDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_gateway({
+    #     gateway_arn: "GatewayArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway.gateway_arn #=> String
+    #   resp.gateway.gateway_display_name #=> String
+    #   resp.gateway.gateway_type #=> String, one of "BACKUP_VM"
+    #   resp.gateway.hypervisor_id #=> String
+    #   resp.gateway.last_seen_time #=> Time
+    #   resp.gateway.next_update_availability_time #=> Time
+    #   resp.gateway.vpc_endpoint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetGateway AWS API Documentation
+    #
+    # @overload get_gateway(params = {})
+    # @param [Hash] params ({})
+    def get_gateway(params = {}, options = {})
+      req = build_request(:get_gateway, params)
+      req.send_request(options)
+    end
+
     # Connect to a hypervisor by importing its configuration.
     #
     # @option params [required, String] :host
@@ -941,6 +976,41 @@ module Aws::BackupGateway
       req.send_request(options)
     end
 
+    # Updates the gateway virtual machine (VM) software. The request
+    # immediately triggers the software update.
+    #
+    # <note markdown="1"> When you make this request, you get a `200 OK` success response
+    # immediately. However, it might take some time for the update to
+    # complete.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway to be updated.
+    #
+    # @return [Types::UpdateGatewaySoftwareNowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateGatewaySoftwareNowOutput#gateway_arn #gateway_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_gateway_software_now({
+    #     gateway_arn: "GatewayArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/UpdateGatewaySoftwareNow AWS API Documentation
+    #
+    # @overload update_gateway_software_now(params = {})
+    # @param [Hash] params ({})
+    def update_gateway_software_now(params = {}, options = {})
+      req = build_request(:update_gateway_software_now, params)
+      req.send_request(options)
+    end
+
     # Updates a hypervisor metadata, including its host, username, and
     # password. Specify which hypervisor to update using the Amazon Resource
     # Name (ARN) of the hypervisor in your request.
@@ -951,6 +1021,9 @@ module Aws::BackupGateway
     #
     # @option params [required, String] :hypervisor_arn
     #   The Amazon Resource Name (ARN) of the hypervisor to update.
+    #
+    # @option params [String] :name
+    #   The updated name for the hypervisor
     #
     # @option params [String] :password
     #   The updated password for the hypervisor.
@@ -967,6 +1040,7 @@ module Aws::BackupGateway
     #   resp = client.update_hypervisor({
     #     host: "Host",
     #     hypervisor_arn: "ServerArn", # required
+    #     name: "Name",
     #     password: "Password",
     #     username: "Username",
     #   })
@@ -997,7 +1071,7 @@ module Aws::BackupGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backupgateway'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

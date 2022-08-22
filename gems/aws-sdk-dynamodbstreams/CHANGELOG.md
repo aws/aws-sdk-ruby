@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2022-06-17)
+------------------
+
+* Feature - Doc only update for DynamoDB service
+
 1.38.0 (2022-02-24)
 ------------------
 

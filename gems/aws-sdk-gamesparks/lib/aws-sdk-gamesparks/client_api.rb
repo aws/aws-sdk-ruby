@@ -35,6 +35,7 @@ module Aws::GameSparks
     DeleteStageResult = Shapes::StructureShape.new(name: 'DeleteStageResult')
     DeploymentAction = Shapes::StringShape.new(name: 'DeploymentAction')
     DeploymentId = Shapes::StringShape.new(name: 'DeploymentId')
+    DeploymentResult = Shapes::StructureShape.new(name: 'DeploymentResult')
     DeploymentState = Shapes::StringShape.new(name: 'DeploymentState')
     DisconnectPlayerRequest = Shapes::StructureShape.new(name: 'DisconnectPlayerRequest')
     DisconnectPlayerResult = Shapes::StructureShape.new(name: 'DisconnectPlayerResult')
@@ -108,6 +109,7 @@ module Aws::GameSparks
     ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    Message = Shapes::StringShape.new(name: 'Message')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     Operation = Shapes::StringShape.new(name: 'Operation')
     Path = Shapes::StringShape.new(name: 'Path')
@@ -115,6 +117,7 @@ module Aws::GameSparks
     RawGameConfigurationData = Shapes::BlobShape.new(name: 'RawGameConfigurationData')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResultCode = Shapes::StringShape.new(name: 'ResultCode')
     RoleARN = Shapes::StringShape.new(name: 'RoleARN')
     S3PresignedUrl = Shapes::StringShape.new(name: 'S3PresignedUrl')
     Section = Shapes::StructureShape.new(name: 'Section')
@@ -213,6 +216,10 @@ module Aws::GameSparks
     DeleteStageRequest.struct_class = Types::DeleteStageRequest
 
     DeleteStageResult.struct_class = Types::DeleteStageResult
+
+    DeploymentResult.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    DeploymentResult.add_member(:result_code, Shapes::ShapeRef.new(shape: ResultCode, location_name: "ResultCode"))
+    DeploymentResult.struct_class = Types::DeploymentResult
 
     DisconnectPlayerRequest.add_member(:game_name, Shapes::ShapeRef.new(shape: GameName, required: true, location: "uri", location_name: "GameName"))
     DisconnectPlayerRequest.add_member(:player_id, Shapes::ShapeRef.new(shape: PlayerId, required: true, location: "uri", location_name: "PlayerId"))
@@ -474,6 +481,7 @@ module Aws::GameSparks
     StageDeploymentDetails.add_member(:created, Shapes::ShapeRef.new(shape: DateTime, location_name: "Created"))
     StageDeploymentDetails.add_member(:deployment_action, Shapes::ShapeRef.new(shape: DeploymentAction, location_name: "DeploymentAction"))
     StageDeploymentDetails.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "DeploymentId"))
+    StageDeploymentDetails.add_member(:deployment_result, Shapes::ShapeRef.new(shape: DeploymentResult, location_name: "DeploymentResult"))
     StageDeploymentDetails.add_member(:deployment_state, Shapes::ShapeRef.new(shape: DeploymentState, location_name: "DeploymentState"))
     StageDeploymentDetails.add_member(:last_updated, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastUpdated"))
     StageDeploymentDetails.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
@@ -483,6 +491,7 @@ module Aws::GameSparks
 
     StageDeploymentSummary.add_member(:deployment_action, Shapes::ShapeRef.new(shape: DeploymentAction, location_name: "DeploymentAction"))
     StageDeploymentSummary.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "DeploymentId"))
+    StageDeploymentSummary.add_member(:deployment_result, Shapes::ShapeRef.new(shape: DeploymentResult, location_name: "DeploymentResult"))
     StageDeploymentSummary.add_member(:deployment_state, Shapes::ShapeRef.new(shape: DeploymentState, location_name: "DeploymentState"))
     StageDeploymentSummary.add_member(:last_updated, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastUpdated"))
     StageDeploymentSummary.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))

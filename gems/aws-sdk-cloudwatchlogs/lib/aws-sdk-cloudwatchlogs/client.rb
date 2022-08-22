@@ -447,6 +447,12 @@ module Aws::CloudWatchLogs
     # permission to write to the S3 bucket that you specify as the
     # destination.
     #
+    # Exporting log data to Amazon S3 buckets that are encrypted by KMS is
+    # not supported. Exporting log data to Amazon S3 buckets that have S3
+    # Object Lock enabled with a retention period is not supported.
+    #
+    #  Exporting to S3 buckets that are encrypted with AES-256 is supported.
+    #
     # This is an asynchronous call. If all the required information is
     # provided, this operation initiates an export task and responds with
     # the ID of the task. After the task has started, you can use
@@ -459,8 +465,11 @@ module Aws::CloudWatchLogs
     # you can specify a prefix to be used as the Amazon S3 key prefix for
     # all exported objects.
     #
-    # Exporting to S3 buckets that are encrypted with AES-256 is supported.
-    # Exporting to S3 buckets encrypted with SSE-KMS is not supported.
+    # <note markdown="1"> Time-based sorting on chunks of log data inside an exported file is
+    # not guaranteed. You can sort the exported log fild data by using Linux
+    # utilities.
+    #
+    #  </note>
     #
     #
     #
@@ -483,9 +492,9 @@ module Aws::CloudWatchLogs
     #   timestamp earlier than this time are not exported.
     #
     # @option params [required, Integer] :to
-    #   The end time of the range for the request, expreswatchlogsdocused as
-    #   the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with
-    #   a timestamp later than this time are not exported.
+    #   The end time of the range for the request, expressed as the number of
+    #   milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp
+    #   later than this time are not exported.
     #
     # @option params [required, String] :destination
     #   The name of S3 bucket for the exported log data. The bucket must be in
@@ -2251,7 +2260,7 @@ module Aws::CloudWatchLogs
     # @option params [required, Integer] :retention_in_days
     #   The number of days to retain the log events in the specified log
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180,
-    #   365, 400, 545, 731, 1827, and 3653.
+    #   365, 400, 545, 731, 1827, 2192, 2557, 2922, 3288, and 3653.
     #
     #   To set a log group to never have log events expire, use
     #   [DeleteRetentionPolicy][1].
@@ -2633,7 +2642,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

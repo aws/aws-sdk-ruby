@@ -192,6 +192,79 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssumeDecoratedRoleWithSAMLRequest
+    #   data as a hash:
+    #
+    #       {
+    #         saml_assertion: "SAMLAssertionString", # required
+    #         role_arn: "IAMRoleArn", # required
+    #         principal_arn: "IAMSAMLProviderArn", # required
+    #         duration_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] saml_assertion
+    #   A SAML assertion consisting of an assertion statement for the user
+    #   who needs temporary credentials. This must match the SAML assertion
+    #   that was issued to IAM. This must be Base64 encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The role that represents an IAM principal whose scope down policy
+    #   allows it to call credential vending APIs such as
+    #   `GetTemporaryTableCredentials`. The caller must also have
+    #   iam:PassRole permission on this role.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The Amazon Resource Name (ARN) of the SAML provider in IAM that
+    #   describes the IdP.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration_seconds
+    #   The time period, between 900 and 43,200 seconds, for the timeout of
+    #   the temporary credentials.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/AssumeDecoratedRoleWithSAMLRequest AWS API Documentation
+    #
+    class AssumeDecoratedRoleWithSAMLRequest < Struct.new(
+      :saml_assertion,
+      :role_arn,
+      :principal_arn,
+      :duration_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_key_id
+    #   The access key ID for the temporary credentials. (The access key
+    #   consists of an access key ID and a secret key).
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_access_key
+    #   The secret key for the temporary credentials. (The access key
+    #   consists of an access key ID and a secret key).
+    #   @return [String]
+    #
+    # @!attribute [rw] session_token
+    #   The session token for the temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration
+    #   The date and time when the temporary credentials expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/AssumeDecoratedRoleWithSAMLResponse AWS API Documentation
+    #
+    class AssumeDecoratedRoleWithSAMLResponse < Struct.new(
+      :access_key_id,
+      :secret_access_key,
+      :session_token,
+      :expiration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure used to include auditing information on the privileged
     # API.
     #

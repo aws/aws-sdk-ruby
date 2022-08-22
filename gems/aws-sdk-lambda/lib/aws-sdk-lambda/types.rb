@@ -380,6 +380,32 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # Specific configuration settings for an Amazon Managed Streaming for
+    # Apache Kafka (Amazon MSK) event source.
+    #
+    # @note When making an API call, you may pass AmazonManagedKafkaEventSourceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         consumer_group_id: "URI",
+    #       }
+    #
+    # @!attribute [rw] consumer_group_id
+    #   The identifier for the Kafka consumer group to join. The consumer
+    #   group ID must be unique among all your Kafka event sources. After
+    #   creating a Kafka event source mapping with the consumer group ID
+    #   specified, you cannot update this value. For more information, see
+    #   services-msk-consumer-group-id.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AmazonManagedKafkaEventSourceConfig AWS API Documentation
+    #
+    class AmazonManagedKafkaEventSourceConfig < Struct.new(
+      :consumer_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a [Code signing configuration][1].
     #
     #
@@ -760,6 +786,12 @@ module Aws::Lambda
     #           },
     #         },
     #         function_response_types: ["ReportBatchItemFailures"], # accepts ReportBatchItemFailures
+    #         amazon_managed_kafka_event_source_config: {
+    #           consumer_group_id: "URI",
+    #         },
+    #         self_managed_kafka_event_source_config: {
+    #           consumer_group_id: "URI",
+    #         },
     #       }
     #
     # @!attribute [rw] event_source_arn
@@ -810,7 +842,7 @@ module Aws::Lambda
     #
     #   * **Amazon Kinesis** - Default 100. Max 10,000.
     #
-    #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
+    #   * **Amazon DynamoDB Streams** - Default 100. Max 10,000.
     #
     #   * **Amazon Simple Queue Service** - Default 10. For standard queues
     #     the max is 10,000. For FIFO queues the max is 10.
@@ -818,7 +850,7 @@ module Aws::Lambda
     #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
     #     10,000.
     #
-    #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
+    #   * **Self-managed Apache Kafka** - Default 100. Max 10,000.
     #
     #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
     #   @return [Integer]
@@ -852,7 +884,7 @@ module Aws::Lambda
     # @!attribute [rw] starting_position
     #   The position in a stream from which to start reading. Required for
     #   Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources.
-    #   `AT_TIMESTAMP` is only supported for Amazon Kinesis streams.
+    #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams.
     #   @return [String]
     #
     # @!attribute [rw] starting_position_timestamp
@@ -878,12 +910,12 @@ module Aws::Lambda
     # @!attribute [rw] maximum_retry_attempts
     #   (Streams only) Discard records after the specified number of
     #   retries. The default value is infinite (-1). When set to infinite
-    #   (-1), failed records will be retried until the record expires.
+    #   (-1), failed records are retried until the record expires.
     #   @return [Integer]
     #
     # @!attribute [rw] tumbling_window_in_seconds
     #   (Streams only) The duration in seconds of a processing window. The
-    #   range is between 1 second up to 900 seconds.
+    #   range is between 1 second and 900 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] topics
@@ -900,13 +932,23 @@ module Aws::Lambda
     #   @return [Array<Types::SourceAccessConfiguration>]
     #
     # @!attribute [rw] self_managed_event_source
-    #   The Self-Managed Apache Kafka cluster to send records.
+    #   The self-managed Apache Kafka cluster to receive records from.
     #   @return [Types::SelfManagedEventSource]
     #
     # @!attribute [rw] function_response_types
     #   (Streams and Amazon SQS) A list of current response type enums
     #   applied to the event source mapping.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] amazon_managed_kafka_event_source_config
+    #   Specific configuration settings for an Amazon Managed Streaming for
+    #   Apache Kafka (Amazon MSK) event source.
+    #   @return [Types::AmazonManagedKafkaEventSourceConfig]
+    #
+    # @!attribute [rw] self_managed_kafka_event_source_config
+    #   Specific configuration settings for a self-managed Apache Kafka
+    #   event source.
+    #   @return [Types::SelfManagedKafkaEventSourceConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMappingRequest AWS API Documentation
     #
@@ -929,7 +971,9 @@ module Aws::Lambda
       :queues,
       :source_access_configurations,
       :self_managed_event_source,
-      :function_response_types)
+      :function_response_types,
+      :amazon_managed_kafka_event_source_config,
+      :self_managed_kafka_event_source_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -939,7 +983,7 @@ module Aws::Lambda
     #
     #       {
     #         function_name: "FunctionName", # required
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         role: "RoleArn", # required
     #         handler: "Handler",
     #         code: { # required
@@ -2063,9 +2107,19 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] function_response_types
-    #   (Streams only) A list of current response type enums applied to the
-    #   event source mapping.
+    #   (Streams and Amazon SQS) A list of current response type enums
+    #   applied to the event source mapping.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] amazon_managed_kafka_event_source_config
+    #   Specific configuration settings for an Amazon Managed Streaming for
+    #   Apache Kafka (Amazon MSK) event source.
+    #   @return [Types::AmazonManagedKafkaEventSourceConfig]
+    #
+    # @!attribute [rw] self_managed_kafka_event_source_config
+    #   Specific configuration settings for a self-managed Apache Kafka
+    #   event source.
+    #   @return [Types::SelfManagedKafkaEventSourceConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration AWS API Documentation
     #
@@ -2092,7 +2146,9 @@ module Aws::Lambda
       :bisect_batch_on_function_error,
       :maximum_retry_attempts,
       :tumbling_window_in_seconds,
-      :function_response_types)
+      :function_response_types,
+      :amazon_managed_kafka_event_source_config,
+      :self_managed_kafka_event_source_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4414,7 +4470,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         layer_name: "LayerName", # required
     #         marker: "String",
     #         max_items: 1,
@@ -4479,7 +4535,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         marker: "String",
     #         max_items: 1,
     #         compatible_architecture: "x86_64", # accepts x86_64, arm64
@@ -4854,7 +4910,7 @@ module Aws::Lambda
     #           s3_object_version: "S3ObjectVersion",
     #           zip_file: "data",
     #         },
-    #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         license_info: "LicenseInfo",
     #         compatible_architectures: ["x86_64"], # accepts x86_64, arm64
     #       }
@@ -5519,6 +5575,32 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # Specific configuration settings for a self-managed Apache Kafka event
+    # source.
+    #
+    # @note When making an API call, you may pass SelfManagedKafkaEventSourceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         consumer_group_id: "URI",
+    #       }
+    #
+    # @!attribute [rw] consumer_group_id
+    #   The identifier for the Kafka consumer group to join. The consumer
+    #   group ID must be unique among all your Kafka event sources. After
+    #   creating a Kafka event source mapping with the consumer group ID
+    #   specified, you cannot update this value. For more information, see
+    #   services-msk-consumer-group-id.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/SelfManagedKafkaEventSourceConfig AWS API Documentation
+    #
+    class SelfManagedKafkaEventSourceConfig < Struct.new(
+      :consumer_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Lambda service encountered an internal error.
     #
     # @!attribute [rw] type
@@ -5578,7 +5660,7 @@ module Aws::Lambda
     #     source. This property cannot be specified in an
     #     UpdateEventSourceMapping API call.
     #
-    #   * `CLIENT_CERTIFICATE_TLS_AUTH` - (Amazon MSK, Self-managed Apache
+    #   * `CLIENT_CERTIFICATE_TLS_AUTH` - (Amazon MSK, self-managed Apache
     #     Kafka) The Secrets Manager ARN of your secret key containing the
     #     certificate chain (X.509 PEM), private key (PKCS#8 PEM), and
     #     private key password (optional) used for mutual TLS authentication
@@ -5959,7 +6041,7 @@ module Aws::Lambda
     #
     #   * **Amazon Kinesis** - Default 100. Max 10,000.
     #
-    #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
+    #   * **Amazon DynamoDB Streams** - Default 100. Max 10,000.
     #
     #   * **Amazon Simple Queue Service** - Default 10. For standard queues
     #     the max is 10,000. For FIFO queues the max is 10.
@@ -5967,7 +6049,7 @@ module Aws::Lambda
     #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
     #     10,000.
     #
-    #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
+    #   * **Self-managed Apache Kafka** - Default 100. Max 10,000.
     #
     #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
     #   @return [Integer]
@@ -6011,7 +6093,7 @@ module Aws::Lambda
     # @!attribute [rw] maximum_retry_attempts
     #   (Streams only) Discard records after the specified number of
     #   retries. The default value is infinite (-1). When set to infinite
-    #   (-1), failed records will be retried until the record expires.
+    #   (-1), failed records are retried until the record expires.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -6026,7 +6108,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] tumbling_window_in_seconds
     #   (Streams only) The duration in seconds of a processing window. The
-    #   range is between 1 second up to 900 seconds.
+    #   range is between 1 second and 900 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] function_response_types
@@ -6175,7 +6257,7 @@ module Aws::Lambda
     #             "EnvironmentVariableName" => "EnvironmentVariableValue",
     #           },
     #         },
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         dead_letter_config: {
     #           target_arn: "ResourceArn",
     #         },

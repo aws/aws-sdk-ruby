@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2022-08-04)
+------------------
+
+* Feature - The release is to support attach a provisioning template to CACert for JITP function,  Customer now doesn't have to hardcode a roleArn and templateBody during register a CACert to enable JITP.
+
+1.93.0 (2022-07-20)
+------------------
+
+* Feature - GA release the ability to enable/disable IoT Fleet Indexing for Device Defender and Named Shadow information, and search them through IoT Fleet Indexing APIs. This includes Named Shadow Selection as a part of the UpdateIndexingConfiguration API.
+
+1.92.0 (2022-07-07)
+------------------
+
+* Feature - This release adds support to register a CA certificate without having to provide a verification certificate. This also allows multiple AWS accounts to register the same CA in the same region.
+
+1.91.0 (2022-06-27)
+------------------
+
+* Feature - This release ease the restriction for the input of tag value to align with AWS standard, now instead of min length 1, we change it to min length 0.
+
+1.90.0 (2022-05-12)
+------------------
+
+* Feature - Documentation update for China region ListMetricValues for IoT
+
+1.89.0 (2022-05-05)
+------------------
+
+* Feature - AWS IoT Jobs now allows you to create up to 100,000 active continuous and snapshot jobs by using concurrency control.
+
 1.88.0 (2022-04-04)
 ------------------
 

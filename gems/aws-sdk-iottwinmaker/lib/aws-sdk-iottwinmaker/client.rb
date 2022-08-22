@@ -1238,7 +1238,14 @@ module Aws::IoTTwinMaker
     #   The date and time of the latest property value to return.
     #
     # @option params [String] :end_time
-    #   Timestamp represented in ISO 8601 format
+    #   The ISO8601 DateTime of the latest property value to return.
+    #
+    #   For more information about the ISO8601 DateTime format, see the data
+    #   type [PropertyValue][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/roci/latest/roci-api/API_PropertyValue.html
     #
     # @option params [String] :entity_id
     #   The ID of the entity.
@@ -1266,7 +1273,14 @@ module Aws::IoTTwinMaker
     #   The date and time of the earliest property value to return.
     #
     # @option params [String] :start_time
-    #   Timestamp represented in ISO 8601 format
+    #   The ISO8601 DateTime of the earliest property value to return.
+    #
+    #   For more information about the ISO8601 DateTime format, see the data
+    #   type [PropertyValue][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/roci/latest/roci-api/API_PropertyValue.html
     #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace.
@@ -1506,6 +1520,10 @@ module Aws::IoTTwinMaker
     #
     # @option params [Array<Types::ListEntitiesFilter>] :filters
     #   A list of objects that filter the request.
+    #
+    #   <note markdown="1"> Only one object is accepted as a valid input.
+    #
+    #    </note>
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to display.
@@ -2107,7 +2125,7 @@ module Aws::IoTTwinMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iottwinmaker'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

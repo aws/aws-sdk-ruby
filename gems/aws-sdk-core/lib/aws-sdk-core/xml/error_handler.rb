@@ -24,6 +24,7 @@ module Aws
         else
           code, message, data = extract_error(body, context)
         end
+        context[:request_id] = request_id(body)
         errors_module = context.client.class.errors_module
         error_class = errors_module.error_class(code).new(context, message, data)
         error_class
@@ -91,6 +92,12 @@ module Aws
           unescape(matches[1])
         else
           ''
+        end
+      end
+
+      def request_id(body)
+        if matches = body.match(/<RequestId>(.+?)<\/RequestId>/m)
+          matches[1]
         end
       end
 

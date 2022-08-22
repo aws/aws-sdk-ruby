@@ -4,6 +4,11 @@ require 'time'
 require 'net/http'
 
 module Aws
+  # An auto-refreshing credential provider that loads credentials from
+  # EC2 instances.
+  #
+  #     instance_credentials = Aws::InstanceProfileCredentials.new
+  #     ec2 = Aws::EC2::Client.new(credentials: instance_credentials)
   class InstanceProfileCredentials
     include CredentialProvider
     include RefreshingCredentials

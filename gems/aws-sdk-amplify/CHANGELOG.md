@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2022-04-27)
+------------------
+
+* Feature - Documentation only update to support the Amplify GitHub App feature launch
+
 1.40.0 (2022-02-28)
 ------------------
 

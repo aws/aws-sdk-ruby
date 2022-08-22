@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2022-08-04)
+------------------
+
+* Feature - Documentation updates for Database Migration Service (DMS).
+
+1.71.0 (2022-07-21)
+------------------
+
+* Feature - Documentation updates for Database Migration Service (DMS).
+
+1.70.0 (2022-07-07)
+------------------
+
+* Feature - New api to migrate event subscriptions to event bridge rules
+
+1.69.0 (2022-07-01)
+------------------
+
+* Feature - Added new features for AWS DMS version 3.4.7 that includes new endpoint settings for S3, OpenSearch, Postgres, SQLServer and Oracle.
+
+1.68.0 (2022-06-08)
+------------------
+
+* Feature - This release adds DMS Fleet Advisor APIs and exposes functionality for DMS Fleet Advisor. It adds functionality to create and modify fleet advisor instances, and to collect and analyze information about the local data infrastructure.
+
 1.67.0 (2022-02-24)
 ------------------
 

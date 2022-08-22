@@ -164,7 +164,7 @@ module Aws::DynamoDB
     # @!attribute [rw] l
     #   An attribute of type List. For example:
     #
-    #   `"L": [ \{"S": "Cookies"\} , \{"S": "Coffee"\}, \{"N", "3.14159"\}]`
+    #   `"L": [ \{"S": "Cookies"\} , \{"S": "Coffee"\}, \{"N": "3.14159"\}]`
     #   @return [Array<Types::AttributeValue>]
     #
     # @!attribute [rw] null
@@ -304,10 +304,9 @@ module Aws::DynamoDB
     #
     #   * `DELETE` - Nothing happens; there is no attribute to delete.
     #
-    #   * `ADD` - DynamoDB creates an item with the supplied primary key and
-    #     number (or set of numbers) for the attribute value. The only data
-    #     types allowed are number and number set; no other data types can
-    #     be specified.
+    #   * `ADD` - DynamoDB creates a new item with the supplied primary key
+    #     and number (or set) for the attribute value. The only data types
+    #     allowed are number, number set, string set or binary set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AttributeValueUpdate AWS API Documentation
@@ -605,7 +604,9 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] backup_size_bytes
-    #   Size of the backup in bytes.
+    #   Size of the backup in bytes. DynamoDB updates this value
+    #   approximately every six hours. Recent changes might not be reflected
+    #   in this value.
     #   @return [Integer]
     #
     # @!attribute [rw] backup_status
@@ -1025,7 +1026,7 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   The error message associated with the PartiQL batch resposne.
+    #   The error message associated with the PartiQL batch response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchStatementError AWS API Documentation
@@ -2330,6 +2331,38 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Processing options for the CSV file being imported.
+    #
+    # @note When making an API call, you may pass CsvOptions
+    #   data as a hash:
+    #
+    #       {
+    #         delimiter: "CsvDelimiter",
+    #         header_list: ["CsvHeader"],
+    #       }
+    #
+    # @!attribute [rw] delimiter
+    #   The delimiter used for separating items in the CSV file being
+    #   imported.
+    #   @return [String]
+    #
+    # @!attribute [rw] header_list
+    #   List of the headers used to specify a common header for all source
+    #   CSV files being imported. If this field is specified then the first
+    #   line of each CSV file is treated as data instead of the header. If
+    #   this field is not specified the the first line of each CSV file is
+    #   treated as the header.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CsvOptions AWS API Documentation
+    #
+    class CsvOptions < Struct.new(
+      :delimiter,
+      :header_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a request to perform a `DeleteItem` operation.
     #
     # @note When making an API call, you may pass Delete
@@ -2521,6 +2554,10 @@ module Aws::DynamoDB
     #     `ReturnValues`.)
     #
     #   * `ALL_OLD` - The content of the old item is returned.
+    #
+    #   There is no additional cost associated with requesting a return
+    #   value aside from the small network and processing overhead of
+    #   receiving a larger response. No read capacity units are consumed.
     #
     #   <note markdown="1"> The `ReturnValues` parameter is used by several DynamoDB operations;
     #   however, `DeleteItem` does not recognize any values other than
@@ -3093,6 +3130,41 @@ module Aws::DynamoDB
     class DescribeGlobalTableSettingsOutput < Struct.new(
       :global_table_name,
       :replica_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeImportInput
+    #   data as a hash:
+    #
+    #       {
+    #         import_arn: "ImportArn", # required
+    #       }
+    #
+    # @!attribute [rw] import_arn
+    #   The Amazon Resource Name (ARN) associated with the table you're
+    #   importing to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeImportInput AWS API Documentation
+    #
+    class DescribeImportInput < Struct.new(
+      :import_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_table_description
+    #   Represents the properties of the table created for the import, and
+    #   parameters of the import. The import parameters include import
+    #   status, how many items were processed, and how many errors were
+    #   encountered.
+    #   @return [Types::ImportTableDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeImportOutput AWS API Documentation
+    #
+    class DescribeImportOutput < Struct.new(
+      :import_table_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3958,8 +4030,9 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] export_time
-    #   Time in the past from which to export table data. The table export
-    #   will be a snapshot of the table's state at this point in time.
+    #   Time in the past from which to export table data, counted in seconds
+    #   from the start of the Unix epoch. The table export will be a
+    #   snapshot of the table's state at this point in time.
     #   @return [Time]
     #
     # @!attribute [rw] client_token
@@ -3975,7 +4048,7 @@ module Aws::DynamoDB
     #
     #   If you submit a request with the same client token but a change in
     #   other parameters within the 8-hour idempotency window, DynamoDB
-    #   returns an `IdempotentParameterMismatch` exception.
+    #   returns an `ImportConflictException`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -4812,6 +4885,338 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # There was a conflict when importing from the specified S3 source. This
+    # can occur when the current import conflicts with a previous import
+    # request that had the same client token.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ImportConflictException AWS API Documentation
+    #
+    class ImportConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified import was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ImportNotFoundException AWS API Documentation
+    #
+    class ImportNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about the source file for the import.
+    #
+    # @!attribute [rw] import_arn
+    #   The Amazon Resource Number (ARN) corresponding to the import
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_status
+    #   The status of the import operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Number (ARN) of the table being imported into.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_source
+    #   The path and S3 bucket of the source file that is being imported.
+    #   This includes the S3Bucket (required), S3KeyPrefix (optional) and
+    #   S3BucketOwner (optional if the bucket is owned by the requester).
+    #   @return [Types::S3BucketSource]
+    #
+    # @!attribute [rw] cloud_watch_log_group_arn
+    #   The Amazon Resource Number (ARN) of the Cloudwatch Log Group
+    #   associated with this import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_format
+    #   The format of the source data. Valid values are `CSV`,
+    #   `DYNAMODB_JSON` or `ION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time at which this import task began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time at which this import task ended. (Does this include the
+    #   successful complete creation of the table it was imported to?)
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ImportSummary AWS API Documentation
+    #
+    class ImportSummary < Struct.new(
+      :import_arn,
+      :import_status,
+      :table_arn,
+      :s3_bucket_source,
+      :cloud_watch_log_group_arn,
+      :input_format,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the properties of the table being imported into.
+    #
+    # @!attribute [rw] import_arn
+    #   The Amazon Resource Number (ARN) corresponding to the import
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_status
+    #   The status of the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Number (ARN) of the table being imported into.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_id
+    #   The table id corresponding to the table created by import table
+    #   process.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The client token that was provided for the import task. Reusing the
+    #   client token on retry makes a call to `ImportTable` idempotent.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_source
+    #   Values for the S3 bucket the source file is imported from. Includes
+    #   bucket name (required), key prefix (optional) and bucket account
+    #   owner ID (optional).
+    #   @return [Types::S3BucketSource]
+    #
+    # @!attribute [rw] error_count
+    #   The number of errors occurred on importing the source file into the
+    #   target table.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cloud_watch_log_group_arn
+    #   The Amazon Resource Number (ARN) of the Cloudwatch Log Group
+    #   associated with the target table.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_format
+    #   The format of the source data going into the target table.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_format_options
+    #   The format options for the data that was imported into the target
+    #   table. There is one value, CsvOption.
+    #   @return [Types::InputFormatOptions]
+    #
+    # @!attribute [rw] input_compression_type
+    #   The compression options for the data that has been imported into the
+    #   target table. The values are NONE, GZIP, or ZSTD.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_creation_parameters
+    #   The parameters for the new table that is being imported into.
+    #   @return [Types::TableCreationParameters]
+    #
+    # @!attribute [rw] start_time
+    #   The time when this import task started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time at which the creation of the table associated with this
+    #   import task completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] processed_size_bytes
+    #   The total size of data processed from the source file, in Bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] processed_item_count
+    #   The total number of items processed from the source file.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] imported_item_count
+    #   The number of items successfully imported into the new table.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failure_code
+    #   The error code corresponding to the failure that the import job ran
+    #   into during execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   The error message corresponding to the failure that the import job
+    #   ran into during execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ImportTableDescription AWS API Documentation
+    #
+    class ImportTableDescription < Struct.new(
+      :import_arn,
+      :import_status,
+      :table_arn,
+      :table_id,
+      :client_token,
+      :s3_bucket_source,
+      :error_count,
+      :cloud_watch_log_group_arn,
+      :input_format,
+      :input_format_options,
+      :input_compression_type,
+      :table_creation_parameters,
+      :start_time,
+      :end_time,
+      :processed_size_bytes,
+      :processed_item_count,
+      :imported_item_count,
+      :failure_code,
+      :failure_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ImportTableInput
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "ClientToken",
+    #         s3_bucket_source: { # required
+    #           s3_bucket_owner: "S3BucketOwner",
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_key_prefix: "S3Prefix",
+    #         },
+    #         input_format: "DYNAMODB_JSON", # required, accepts DYNAMODB_JSON, ION, CSV
+    #         input_format_options: {
+    #           csv: {
+    #             delimiter: "CsvDelimiter",
+    #             header_list: ["CsvHeader"],
+    #           },
+    #         },
+    #         input_compression_type: "GZIP", # accepts GZIP, ZSTD, NONE
+    #         table_creation_parameters: { # required
+    #           table_name: "TableName", # required
+    #           attribute_definitions: [ # required
+    #             {
+    #               attribute_name: "KeySchemaAttributeName", # required
+    #               attribute_type: "S", # required, accepts S, N, B
+    #             },
+    #           ],
+    #           key_schema: [ # required
+    #             {
+    #               attribute_name: "KeySchemaAttributeName", # required
+    #               key_type: "HASH", # required, accepts HASH, RANGE
+    #             },
+    #           ],
+    #           billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
+    #           provisioned_throughput: {
+    #             read_capacity_units: 1, # required
+    #             write_capacity_units: 1, # required
+    #           },
+    #           sse_specification: {
+    #             enabled: false,
+    #             sse_type: "AES256", # accepts AES256, KMS
+    #             kms_master_key_id: "KMSMasterKeyId",
+    #           },
+    #           global_secondary_indexes: [
+    #             {
+    #               index_name: "IndexName", # required
+    #               key_schema: [ # required
+    #                 {
+    #                   attribute_name: "KeySchemaAttributeName", # required
+    #                   key_type: "HASH", # required, accepts HASH, RANGE
+    #                 },
+    #               ],
+    #               projection: { # required
+    #                 projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #                 non_key_attributes: ["NonKeyAttributeName"],
+    #               },
+    #               provisioned_throughput: {
+    #                 read_capacity_units: 1, # required
+    #                 write_capacity_units: 1, # required
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Providing a `ClientToken` makes the call to `ImportTableInput`
+    #   idempotent, meaning that multiple identical calls have the same
+    #   effect as one single call.
+    #
+    #   A client token is valid for 8 hours after the first request that
+    #   uses it is completed. After 8 hours, any request with the same
+    #   client token is treated as a new request. Do not resubmit the same
+    #   request with the same client token for more than 8 hours, or the
+    #   result might not be idempotent.
+    #
+    #   If you submit a request with the same client token but a change in
+    #   other parameters within the 8-hour idempotency window, DynamoDB
+    #   returns an `IdempotentParameterMismatch` exception.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_source
+    #   The S3 bucket that provides the source for the import.
+    #   @return [Types::S3BucketSource]
+    #
+    # @!attribute [rw] input_format
+    #   The format of the source data. Valid values for `ImportFormat` are
+    #   `CSV`, `DYNAMODB_JSON` or `ION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_format_options
+    #   Additional properties that specify how the input is formatted,
+    #   @return [Types::InputFormatOptions]
+    #
+    # @!attribute [rw] input_compression_type
+    #   Type of compression to be used on the input coming from the imported
+    #   table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_creation_parameters
+    #   Parameters for the table to import the data into.
+    #   @return [Types::TableCreationParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ImportTableInput AWS API Documentation
+    #
+    class ImportTableInput < Struct.new(
+      :client_token,
+      :s3_bucket_source,
+      :input_format,
+      :input_format_options,
+      :input_compression_type,
+      :table_creation_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_table_description
+    #   Represents the properties of the table created for the import, and
+    #   parameters of the import. The import parameters include import
+    #   status, how many items were processed, and how many errors were
+    #   encountered.
+    #   @return [Types::ImportTableDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ImportTableOutput AWS API Documentation
+    #
+    class ImportTableOutput < Struct.new(
+      :import_table_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The operation tried to access a nonexistent index.
     #
     # @!attribute [rw] message
@@ -4821,6 +5226,32 @@ module Aws::DynamoDB
     #
     class IndexNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The format options for the data that was imported into the target
+    # table. There is one value, CsvOption.
+    #
+    # @note When making an API call, you may pass InputFormatOptions
+    #   data as a hash:
+    #
+    #       {
+    #         csv: {
+    #           delimiter: "CsvDelimiter",
+    #           header_list: ["CsvHeader"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] csv
+    #   The options for imported source files in CSV format. The values are
+    #   Delimiter and HeaderList.
+    #   @return [Types::CsvOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/InputFormatOptions AWS API Documentation
+    #
+    class InputFormatOptions < Struct.new(
+      :csv)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5188,17 +5619,17 @@ module Aws::DynamoDB
     # There is no limit to the number of daily on-demand backups that can be
     # taken.
     #
-    # Up to 50 simultaneous table operations are allowed per account. These
+    # Up to 500 simultaneous table operations are allowed per account. These
     # operations include `CreateTable`, `UpdateTable`,
     # `DeleteTable`,`UpdateTimeToLive`, `RestoreTableFromBackup`, and
     # `RestoreTableToPointInTime`.
     #
     # The only exception is when you are creating a table with one or more
-    # secondary indexes. You can have up to 25 such requests running at a
+    # secondary indexes. You can have up to 250 such requests running at a
     # time; however, if the table or index specifications are complex,
     # DynamoDB might temporarily reduce the number of concurrent operations.
     #
-    # There is a soft account quota of 256 tables.
+    # There is a soft account quota of 2,500 tables.
     #
     # @!attribute [rw] message
     #   Too many operations for a given subscriber.
@@ -5255,7 +5686,8 @@ module Aws::DynamoDB
     #
     #   Where `BackupType` can be:
     #
-    #   * `USER` - On-demand backup created by you.
+    #   * `USER` - On-demand backup created by you. (The default setting if
+    #     no other backup types are specified.)
     #
     #   * `SYSTEM` - On-demand backup automatically created by DynamoDB.
     #
@@ -5454,6 +5886,59 @@ module Aws::DynamoDB
     class ListGlobalTablesOutput < Struct.new(
       :global_tables,
       :last_evaluated_global_table_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListImportsInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_arn: "TableArn",
+    #         page_size: 1,
+    #         next_token: "ImportNextToken",
+    #       }
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) associated with the table that was
+    #   imported to.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The number of `ImportSummary `objects returned in a single page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An optional string that, if supplied, must be copied from the output
+    #   of a previous call to `ListImports`. When provided in this manner,
+    #   the API fetches the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListImportsInput AWS API Documentation
+    #
+    class ListImportsInput < Struct.new(
+      :table_arn,
+      :page_size,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_summary_list
+    #   A list of `ImportSummary` objects.
+    #   @return [Array<Types::ImportSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If this value is returned, there are additional results to be
+    #   displayed. To retrieve them, call `ListImports` again, with
+    #   `NextToken` set to this value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListImportsOutput AWS API Documentation
+    #
+    class ListImportsOutput < Struct.new(
+      :import_summary_list,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5859,7 +6344,7 @@ module Aws::DynamoDB
     #
     #   For local secondary indexes, the total count of `NonKeyAttributes`
     #   summed across all of the local secondary indexes, must not exceed
-    #   20. If you project the same attribute into two different indexes,
+    #   100. If you project the same attribute into two different indexes,
     #   this counts as two distinct attributes when determining the total.
     #   @return [Array<String>]
     #
@@ -6179,6 +6664,10 @@ module Aws::DynamoDB
     #     then the content of the old item is returned.
     #
     #   The values returned are strongly consistent.
+    #
+    #   There is no additional cost associated with requesting a return
+    #   value aside from the small network and processing overhead of
+    #   receiving a larger response. No read capacity units are consumed.
     #
     #   <note markdown="1"> The `ReturnValues` parameter is used by several DynamoDB operations;
     #   however, `PutItem` does not recognize any values other than `NONE`
@@ -6505,8 +6994,9 @@ module Aws::DynamoDB
     #     matching items themselves.
     #
     #   * `SPECIFIC_ATTRIBUTES` - Returns only the attributes listed in
-    #     `AttributesToGet`. This return value is equivalent to specifying
-    #     `AttributesToGet` without specifying any value for `Select`.
+    #     `ProjectionExpression`. This return value is equivalent to
+    #     specifying `ProjectionExpression` without specifying any value for
+    #     `Select`.
     #
     #     If you query or scan a local secondary index and request only
     #     attributes that are projected into that index, the operation will
@@ -6520,13 +7010,13 @@ module Aws::DynamoDB
     #     secondary index queries cannot fetch attributes from the parent
     #     table.
     #
-    #   If neither `Select` nor `AttributesToGet` are specified, DynamoDB
-    #   defaults to `ALL_ATTRIBUTES` when accessing a table, and
+    #   If neither `Select` nor `ProjectionExpression` are specified,
+    #   DynamoDB defaults to `ALL_ATTRIBUTES` when accessing a table, and
     #   `ALL_PROJECTED_ATTRIBUTES` when accessing an index. You cannot use
-    #   both `Select` and `AttributesToGet` together in a single request,
-    #   unless the value for `Select` is `SPECIFIC_ATTRIBUTES`. (This usage
-    #   is equivalent to specifying `AttributesToGet` without any value for
-    #   `Select`.)
+    #   both `Select` and `ProjectionExpression` together in a single
+    #   request, unless the value for `Select` is `SPECIFIC_ATTRIBUTES`.
+    #   (This usage is equivalent to specifying `ProjectionExpression`
+    #   without any value for `Select`.)
     #
     #   <note markdown="1"> If you use the `ProjectionExpression` parameter, then the value for
     #   `Select` can only be `SPECIFIC_ATTRIBUTES`. Any other value for
@@ -6688,7 +7178,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
     #   @return [String]
     #
     # @!attribute [rw] key_condition_expression
@@ -7658,6 +8148,12 @@ module Aws::DynamoDB
     #   `DeleteTableReplica` action in the destination Region, deleting the
     #   replica and all if its items in the destination Region.
     #
+    # <note markdown="1"> When you manually remove a table or global table replica, you do not
+    # automatically remove any associated scalable targets, scaling
+    # policies, or CloudWatch alarms.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass ReplicationGroupUpdate
     #   data as a hash:
     #
@@ -8043,6 +8539,40 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # The S3 bucket that is being imported from.
+    #
+    # @note When making an API call, you may pass S3BucketSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket_owner: "S3BucketOwner",
+    #         s3_bucket: "S3Bucket", # required
+    #         s3_key_prefix: "S3Prefix",
+    #       }
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The account number of the S3 bucket that is being imported from. If
+    #   the bucket is owned by the requester this is optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket
+    #   The S3 bucket that is being imported from.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key_prefix
+    #   The key prefix shared by all S3 Objects that are being imported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/S3BucketSource AWS API Documentation
+    #
+    class S3BucketSource < Struct.new(
+      :s3_bucket_owner,
+      :s3_bucket,
+      :s3_key_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The description of the server-side encryption status on the specified
     # table.
     #
@@ -8233,8 +8763,9 @@ module Aws::DynamoDB
     #     matching items themselves.
     #
     #   * `SPECIFIC_ATTRIBUTES` - Returns only the attributes listed in
-    #     `AttributesToGet`. This return value is equivalent to specifying
-    #     `AttributesToGet` without specifying any value for `Select`.
+    #     `ProjectionExpression`. This return value is equivalent to
+    #     specifying `ProjectionExpression` without specifying any value for
+    #     `Select`.
     #
     #     If you query or scan a local secondary index and request only
     #     attributes that are projected into that index, the operation reads
@@ -8248,13 +8779,13 @@ module Aws::DynamoDB
     #     secondary index queries cannot fetch attributes from the parent
     #     table.
     #
-    #   If neither `Select` nor `AttributesToGet` are specified, DynamoDB
-    #   defaults to `ALL_ATTRIBUTES` when accessing a table, and
+    #   If neither `Select` nor `ProjectionExpression` are specified,
+    #   DynamoDB defaults to `ALL_ATTRIBUTES` when accessing a table, and
     #   `ALL_PROJECTED_ATTRIBUTES` when accessing an index. You cannot use
-    #   both `Select` and `AttributesToGet` together in a single request,
-    #   unless the value for `Select` is `SPECIFIC_ATTRIBUTES`. (This usage
-    #   is equivalent to specifying `AttributesToGet` without any value for
-    #   `Select`.)
+    #   both `Select` and `ProjectionExpression` together in a single
+    #   request, unless the value for `Select` is `SPECIFIC_ATTRIBUTES`.
+    #   (This usage is equivalent to specifying `ProjectionExpression`
+    #   without any value for `Select`.)
     #
     #   <note markdown="1"> If you use the `ProjectionExpression` parameter, then the value for
     #   `Select` can only be `SPECIFIC_ATTRIBUTES`. Any other value for
@@ -8385,7 +8916,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
     #   @return [String]
     #
     # @!attribute [rw] expression_attribute_names
@@ -8796,6 +9327,111 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # The parameters for the table created as part of the import operation.
+    #
+    # @note When making an API call, you may pass TableCreationParameters
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "TableName", # required
+    #         attribute_definitions: [ # required
+    #           {
+    #             attribute_name: "KeySchemaAttributeName", # required
+    #             attribute_type: "S", # required, accepts S, N, B
+    #           },
+    #         ],
+    #         key_schema: [ # required
+    #           {
+    #             attribute_name: "KeySchemaAttributeName", # required
+    #             key_type: "HASH", # required, accepts HASH, RANGE
+    #           },
+    #         ],
+    #         billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
+    #         provisioned_throughput: {
+    #           read_capacity_units: 1, # required
+    #           write_capacity_units: 1, # required
+    #         },
+    #         sse_specification: {
+    #           enabled: false,
+    #           sse_type: "AES256", # accepts AES256, KMS
+    #           kms_master_key_id: "KMSMasterKeyId",
+    #         },
+    #         global_secondary_indexes: [
+    #           {
+    #             index_name: "IndexName", # required
+    #             key_schema: [ # required
+    #               {
+    #                 attribute_name: "KeySchemaAttributeName", # required
+    #                 key_type: "HASH", # required, accepts HASH, RANGE
+    #               },
+    #             ],
+    #             projection: { # required
+    #               projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #               non_key_attributes: ["NonKeyAttributeName"],
+    #             },
+    #             provisioned_throughput: {
+    #               read_capacity_units: 1, # required
+    #               write_capacity_units: 1, # required
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table created as part of the import operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_definitions
+    #   The attributes of the table created as part of the import operation.
+    #   @return [Array<Types::AttributeDefinition>]
+    #
+    # @!attribute [rw] key_schema
+    #   The primary key and option sort key of the table created as part of
+    #   the import operation.
+    #   @return [Array<Types::KeySchemaElement>]
+    #
+    # @!attribute [rw] billing_mode
+    #   The billing mode for provisioning the table created as part of the
+    #   import operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_throughput
+    #   Represents the provisioned throughput settings for a specified table
+    #   or index. The settings can be modified using the `UpdateTable`
+    #   operation.
+    #
+    #   For current minimum and maximum provisioned throughput values, see
+    #   [Service, Account, and Table Quotas][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
+    #   @return [Types::ProvisionedThroughput]
+    #
+    # @!attribute [rw] sse_specification
+    #   Represents the settings used to enable server-side encryption.
+    #   @return [Types::SSESpecification]
+    #
+    # @!attribute [rw] global_secondary_indexes
+    #   The Global Secondary Indexes (GSI) of the table to be created as
+    #   part of the import operation.
+    #   @return [Array<Types::GlobalSecondaryIndex>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableCreationParameters AWS API Documentation
+    #
+    class TableCreationParameters < Struct.new(
+      :table_name,
+      :attribute_definitions,
+      :key_schema,
+      :billing_mode,
+      :provisioned_throughput,
+      :sse_specification,
+      :global_secondary_indexes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the properties of a table.
     #
     # @!attribute [rw] attribute_definitions
@@ -8943,7 +9579,7 @@ module Aws::DynamoDB
     #     * `NonKeyAttributes` - A list of one or more non-key attribute
     #       names that are projected into the secondary index. The total
     #       count of attributes provided in `NonKeyAttributes`, summed
-    #       across all of the secondary indexes, must not exceed 20. If you
+    #       across all of the secondary indexes, must not exceed 100. If you
     #       project the same attribute into two different indexes, this
     #       counts as two distinct attributes when determining the total.
     #
@@ -9023,7 +9659,7 @@ module Aws::DynamoDB
     #     * `NonKeyAttributes` - A list of one or more non-key attribute
     #       names that are projected into the secondary index. The total
     #       count of attributes provided in `NonKeyAttributes`, summed
-    #       across all of the secondary indexes, must not exceed 20. If you
+    #       across all of the secondary indexes, must not exceed 100. If you
     #       project the same attribute into two different indexes, this
     #       counts as two distinct attributes when determining the total.
     #
@@ -9133,7 +9769,8 @@ module Aws::DynamoDB
     end
 
     # A source table with the name `TableName` does not currently exist
-    # within the subscriber's account.
+    # within the subscriber's account or the subscriber is operating in the
+    # wrong Amazon Web Services Region.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -9675,7 +10312,7 @@ module Aws::DynamoDB
     # <note markdown="1"> If using Java, DynamoDB lists the cancellation reasons on the
     # `CancellationReasons` property. This property is not set for other
     # languages. Transaction cancellation reasons are ordered in the order
-    # of requested items, if an item has no error it will have `NONE` code
+    # of requested items, if an item has no error it will have `None` code
     # and `Null` message.
     #
     #  </note>
@@ -9684,7 +10321,7 @@ module Aws::DynamoDB
     #
     # * No Errors:
     #
-    #   * Code: `NONE`
+    #   * Code: `None`
     #
     #   * Message: `null`
     #

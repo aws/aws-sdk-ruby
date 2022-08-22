@@ -314,7 +314,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -326,7 +328,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -364,7 +368,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -734,7 +740,9 @@ module Aws::ElastiCache
     #     **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #     `cache.t2.medium`
     #
-    #   * Previous generation: (not recommended)
+    #   * Previous generation: (not recommended. Existing clusters are still
+    #     supported but creation of new clusters is not supported for these
+    #     types.)
     #
     #     **T1 node types:** `cache.t1.micro`
     #
@@ -746,7 +754,9 @@ module Aws::ElastiCache
     #
     # * Compute optimized:
     #
-    #   * Previous generation: (not recommended)
+    #   * Previous generation: (not recommended. Existing clusters are still
+    #     supported but creation of new clusters is not supported for these
+    #     types.)
     #
     #     **C1 node types:** `cache.c1.xlarge`
     #
@@ -783,7 +793,9 @@ module Aws::ElastiCache
     #     `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #     `cache.r4.16xlarge`
     #
-    #   * Previous generation: (not recommended)
+    #   * Previous generation: (not recommended. Existing clusters are still
+    #     supported but creation of new clusters is not supported for these
+    #     types.)
     #
     #     **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #     `cache.m2.4xlarge`
@@ -1614,6 +1626,7 @@ module Aws::ElastiCache
     #             enabled: false,
     #           },
     #         ],
+    #         transit_encryption_enabled: false,
     #       }
     #
     # @!attribute [rw] cache_cluster_id
@@ -1746,7 +1759,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -1758,7 +1773,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -1785,7 +1802,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -1994,6 +2013,17 @@ module Aws::ElastiCache
     #   Specifies the destination, format and type of the logs.
     #   @return [Array<Types::LogDeliveryConfigurationRequest>]
     #
+    # @!attribute [rw] transit_encryption_enabled
+    #   A flag that enables in-transit encryption when set to true. You
+    #   cannot modify the value of `TransitEncryptionEnabled` after the
+    #   cluster is created. To enable in-transit encryption on a cluster you
+    #   must set `TransitEncryptionEnabled` to true when you create a
+    #   cluster.
+    #
+    #   **Required:** Only available when creating a cache cluster in an
+    #   Amazon VPC using Memcached version `1.6.12` or later.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheClusterMessage AWS API Documentation
     #
     class CreateCacheClusterMessage < Struct.new(
@@ -2023,7 +2053,8 @@ module Aws::ElastiCache
       :outpost_mode,
       :preferred_outpost_arn,
       :preferred_outpost_arns,
-      :log_delivery_configurations)
+      :log_delivery_configurations,
+      :transit_encryption_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2531,7 +2562,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -2543,7 +2576,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -2581,7 +2616,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -4206,7 +4243,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -4218,7 +4257,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -4256,7 +4297,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -4400,7 +4443,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -4412,7 +4457,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -4450,7 +4497,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -7876,6 +7925,13 @@ module Aws::ElastiCache
     #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html
     #   @return [String]
     #
+    # @!attribute [rw] auto_minor_version_upgrade
+    #    If you are running Redis engine version 6.0 or later, set this
+    #   parameter to yes if you want to opt-in to the next auto minor
+    #   version upgrade campaign. This parameter is disabled for previous
+    #   versions. 
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup AWS API Documentation
     #
     class ReplicationGroup < Struct.new(
@@ -7904,7 +7960,8 @@ module Aws::ElastiCache
       :user_group_ids,
       :log_delivery_configurations,
       :replication_group_create_time,
-      :data_tiering)
+      :data_tiering,
+      :auto_minor_version_upgrade)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8046,7 +8103,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -8058,7 +8117,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -8096,7 +8157,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -8270,7 +8333,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -8282,7 +8347,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -8320,7 +8387,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -8773,7 +8842,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -8785,7 +8856,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -8827,7 +8900,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are
+    #       still supported but creation of new clusters is not supported
+    #       for these types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`

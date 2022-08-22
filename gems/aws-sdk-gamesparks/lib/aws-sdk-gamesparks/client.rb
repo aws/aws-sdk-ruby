@@ -969,6 +969,8 @@ module Aws::GameSparks
     #   resp.stage_deployment.created #=> Time
     #   resp.stage_deployment.deployment_action #=> String, one of "DEPLOY", "UNDEPLOY"
     #   resp.stage_deployment.deployment_id #=> String
+    #   resp.stage_deployment.deployment_result.message #=> String
+    #   resp.stage_deployment.deployment_result.result_code #=> String, one of "SUCCESS", "INVALID_ROLE_FAILURE", "UNSPECIFIED_FAILURE"
     #   resp.stage_deployment.deployment_state #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.stage_deployment.last_updated #=> Time
     #   resp.stage_deployment.snapshot_id #=> String
@@ -1330,6 +1332,8 @@ module Aws::GameSparks
     #   resp.stage_deployments #=> Array
     #   resp.stage_deployments[0].deployment_action #=> String, one of "DEPLOY", "UNDEPLOY"
     #   resp.stage_deployments[0].deployment_id #=> String
+    #   resp.stage_deployments[0].deployment_result.message #=> String
+    #   resp.stage_deployments[0].deployment_result.result_code #=> String, one of "SUCCESS", "INVALID_ROLE_FAILURE", "UNSPECIFIED_FAILURE"
     #   resp.stage_deployments[0].deployment_state #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.stage_deployments[0].last_updated #=> Time
     #   resp.stage_deployments[0].snapshot_id #=> String
@@ -1509,6 +1513,8 @@ module Aws::GameSparks
     #   resp.stage_deployment.created #=> Time
     #   resp.stage_deployment.deployment_action #=> String, one of "DEPLOY", "UNDEPLOY"
     #   resp.stage_deployment.deployment_id #=> String
+    #   resp.stage_deployment.deployment_result.message #=> String
+    #   resp.stage_deployment.deployment_result.result_code #=> String, one of "SUCCESS", "INVALID_ROLE_FAILURE", "UNSPECIFIED_FAILURE"
     #   resp.stage_deployment.deployment_state #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.stage_deployment.last_updated #=> Time
     #   resp.stage_deployment.snapshot_id #=> String
@@ -1767,7 +1773,7 @@ module Aws::GameSparks
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamesparks'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

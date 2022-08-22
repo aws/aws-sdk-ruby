@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2022-07-14)
+------------------
+
+* Feature - Adds support for strict ordering in stateful rule groups in Network Firewall policies.
+
 1.49.0 (2022-03-30)
 ------------------
 

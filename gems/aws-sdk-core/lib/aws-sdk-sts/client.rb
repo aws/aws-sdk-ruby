@@ -2145,6 +2145,14 @@ module Aws::STS
     # Credentials][1] and [Comparing the Amazon Web Services STS API
     # operations][2] in the *IAM User Guide*.
     #
+    # <note markdown="1"> No permissions are required for users to perform this operation. The
+    # purpose of the `sts:GetSessionToken` operation is to authenticate the
+    # user using MFA. You cannot use policies to control authentication
+    # operations. For more information, see [Permissions for
+    # GetSessionToken][3] in the *IAM User Guide*.
+    #
+    #  </note>
+    #
     # **Session Duration**
     #
     # The `GetSessionToken` operation must be called by using the long-term
@@ -2170,7 +2178,7 @@ module Aws::STS
     #
     # <note markdown="1"> We recommend that you do not call `GetSessionToken` with Amazon Web
     # Services account root user credentials. Instead, follow our [best
-    # practices][3] by creating one or more IAM users, giving them the
+    # practices][4] by creating one or more IAM users, giving them the
     # necessary permissions, and using IAM users for everyday interaction
     # with Amazon Web Services.
     #
@@ -2186,14 +2194,15 @@ module Aws::STS
     #
     # For more information about using `GetSessionToken` to create temporary
     # credentials, go to [Temporary Credentials for Users in Untrusted
-    # Environments][4] in the *IAM User Guide*.
+    # Environments][5] in the *IAM User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison
-    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users
-    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getsessiontoken
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_getsessiontoken.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getsessiontoken
     #
     # @option params [Integer] :duration_seconds
     #   The duration, in seconds, that the credentials should remain valid.
@@ -2290,7 +2299,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.130.1'
+      context[:gem_version] = '3.132.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

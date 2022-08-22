@@ -609,7 +609,7 @@ module Aws::MediaLive
     #               height: 1,
     #               image: { # required
     #                 password_param: "__string",
-    #                 uri: "__string", # required
+    #                 uri: "__stringMax2048", # required
     #                 username: "__string",
     #               },
     #               image_x: 1,
@@ -972,7 +972,7 @@ module Aws::MediaLive
     #           },
     #           language_code: "__stringMin1Max35",
     #           language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #           name: "__string", # required
+    #           name: "__stringMax255", # required
     #           remix_settings: {
     #             channel_mappings: [ # required
     #               {
@@ -994,7 +994,7 @@ module Aws::MediaLive
     #       avail_blanking: {
     #         avail_blanking_image: {
     #           password_param: "__string",
-    #           uri: "__string", # required
+    #           uri: "__stringMax2048", # required
     #           username: "__string",
     #         },
     #         state: "DISABLED", # accepts DISABLED, ENABLED
@@ -1016,13 +1016,13 @@ module Aws::MediaLive
     #       blackout_slate: {
     #         blackout_slate_image: {
     #           password_param: "__string",
-    #           uri: "__string", # required
+    #           uri: "__stringMax2048", # required
     #           username: "__string",
     #         },
     #         network_end_blackout: "DISABLED", # accepts DISABLED, ENABLED
     #         network_end_blackout_image: {
     #           password_param: "__string",
-    #           uri: "__string", # required
+    #           uri: "__stringMax2048", # required
     #           username: "__string",
     #         },
     #         network_id: "__stringMin34Max34",
@@ -1030,6 +1030,7 @@ module Aws::MediaLive
     #       },
     #       caption_descriptions: [
     #         {
+    #           accessibility: "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", # accepts DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES, IMPLEMENTS_ACCESSIBILITY_FEATURES
     #           caption_selector_name: "__string", # required
     #           destination_settings: {
     #             arib_destination_settings: {
@@ -1040,7 +1041,7 @@ module Aws::MediaLive
     #               background_opacity: 1,
     #               font: {
     #                 password_param: "__string",
-    #                 uri: "__string", # required
+    #                 uri: "__stringMax2048", # required
     #                 username: "__string",
     #               },
     #               font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -1063,7 +1064,7 @@ module Aws::MediaLive
     #               background_opacity: 1,
     #               font: {
     #                 password_param: "__string",
-    #                 uri: "__string", # required
+    #                 uri: "__stringMax2048", # required
     #                 username: "__string",
     #               },
     #               font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -1123,7 +1124,7 @@ module Aws::MediaLive
     #           input_loss_image_color: "__stringMin6Max6",
     #           input_loss_image_slate: {
     #             password_param: "__string",
-    #             uri: "__string", # required
+    #             uri: "__stringMax2048", # required
     #             username: "__string",
     #           },
     #           input_loss_image_type: "COLOR", # accepts COLOR, SLATE
@@ -1240,7 +1241,7 @@ module Aws::MediaLive
     #                 static_key_settings: {
     #                   key_provider_server: {
     #                     password_param: "__string",
-    #                     uri: "__string", # required
+    #                     uri: "__stringMax2048", # required
     #                     username: "__string",
     #                   },
     #                   static_key_value: "__stringMin32Max32", # required
@@ -1393,7 +1394,7 @@ module Aws::MediaLive
     #                       audio_group_id: "__string",
     #                       audio_only_image: {
     #                         password_param: "__string",
-    #                         uri: "__string", # required
+    #                         uri: "__stringMax2048", # required
     #                         username: "__string",
     #                       },
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
@@ -1934,6 +1935,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.blackout_slate.network_id #=> String
     #   resp.channel.encoder_settings.blackout_slate.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.caption_descriptions #=> Array
+    #   resp.channel.encoder_settings.caption_descriptions[0].accessibility #=> String, one of "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", "IMPLEMENTS_ACCESSIBILITY_FEATURES"
     #   resp.channel.encoder_settings.caption_descriptions[0].caption_selector_name #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.burn_in_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "SMART"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.burn_in_destination_settings.background_color #=> String, one of "BLACK", "NONE", "WHITE"
@@ -2996,6 +2998,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.blackout_slate.network_id #=> String
     #   resp.encoder_settings.blackout_slate.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.caption_descriptions #=> Array
+    #   resp.encoder_settings.caption_descriptions[0].accessibility #=> String, one of "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", "IMPLEMENTS_ACCESSIBILITY_FEATURES"
     #   resp.encoder_settings.caption_descriptions[0].caption_selector_name #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.burn_in_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "SMART"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.burn_in_destination_settings.background_color #=> String, one of "BLACK", "NONE", "WHITE"
@@ -3697,6 +3700,7 @@ module Aws::MediaLive
     #   * {Types::DeleteReservationResponse#offering_id #offering_id} => String
     #   * {Types::DeleteReservationResponse#offering_type #offering_type} => String
     #   * {Types::DeleteReservationResponse#region #region} => String
+    #   * {Types::DeleteReservationResponse#renewal_settings #renewal_settings} => Types::RenewalSettings
     #   * {Types::DeleteReservationResponse#reservation_id #reservation_id} => String
     #   * {Types::DeleteReservationResponse#resource_specification #resource_specification} => Types::ReservationResourceSpecification
     #   * {Types::DeleteReservationResponse#start #start} => String
@@ -3724,6 +3728,8 @@ module Aws::MediaLive
     #   resp.offering_id #=> String
     #   resp.offering_type #=> String, one of "NO_UPFRONT"
     #   resp.region #=> String
+    #   resp.renewal_settings.automatic_renewal #=> String, one of "DISABLED", "ENABLED", "UNAVAILABLE"
+    #   resp.renewal_settings.renewal_count #=> Integer
     #   resp.reservation_id #=> String
     #   resp.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK"
@@ -3928,6 +3934,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.blackout_slate.network_id #=> String
     #   resp.encoder_settings.blackout_slate.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.caption_descriptions #=> Array
+    #   resp.encoder_settings.caption_descriptions[0].accessibility #=> String, one of "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", "IMPLEMENTS_ACCESSIBILITY_FEATURES"
     #   resp.encoder_settings.caption_descriptions[0].caption_selector_name #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.burn_in_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "SMART"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.burn_in_destination_settings.background_color #=> String, one of "BLACK", "NONE", "WHITE"
@@ -4571,7 +4578,7 @@ module Aws::MediaLive
     #   resp.arn #=> String
     #   resp.connection_state #=> String, one of "DISCONNECTED", "CONNECTED"
     #   resp.device_settings_sync_state #=> String, one of "SYNCED", "SYNCING"
-    #   resp.device_update_status #=> String, one of "UP_TO_DATE", "NOT_UP_TO_DATE"
+    #   resp.device_update_status #=> String, one of "UP_TO_DATE", "NOT_UP_TO_DATE", "UPDATING"
     #   resp.hd_device_settings.active_input #=> String, one of "HDMI", "SDI"
     #   resp.hd_device_settings.configured_input #=> String, one of "AUTO", "HDMI", "SDI"
     #   resp.hd_device_settings.device_state #=> String, one of "IDLE", "STREAMING"
@@ -4881,6 +4888,7 @@ module Aws::MediaLive
     #   * {Types::DescribeReservationResponse#offering_id #offering_id} => String
     #   * {Types::DescribeReservationResponse#offering_type #offering_type} => String
     #   * {Types::DescribeReservationResponse#region #region} => String
+    #   * {Types::DescribeReservationResponse#renewal_settings #renewal_settings} => Types::RenewalSettings
     #   * {Types::DescribeReservationResponse#reservation_id #reservation_id} => String
     #   * {Types::DescribeReservationResponse#resource_specification #resource_specification} => Types::ReservationResourceSpecification
     #   * {Types::DescribeReservationResponse#start #start} => String
@@ -4908,6 +4916,8 @@ module Aws::MediaLive
     #   resp.offering_id #=> String
     #   resp.offering_type #=> String, one of "NO_UPFRONT"
     #   resp.region #=> String
+    #   resp.renewal_settings.automatic_renewal #=> String, one of "DISABLED", "ENABLED", "UNAVAILABLE"
+    #   resp.renewal_settings.renewal_count #=> Integer
     #   resp.reservation_id #=> String
     #   resp.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK"
@@ -5228,7 +5238,7 @@ module Aws::MediaLive
     #   resp.input_devices[0].arn #=> String
     #   resp.input_devices[0].connection_state #=> String, one of "DISCONNECTED", "CONNECTED"
     #   resp.input_devices[0].device_settings_sync_state #=> String, one of "SYNCED", "SYNCING"
-    #   resp.input_devices[0].device_update_status #=> String, one of "UP_TO_DATE", "NOT_UP_TO_DATE"
+    #   resp.input_devices[0].device_update_status #=> String, one of "UP_TO_DATE", "NOT_UP_TO_DATE", "UPDATING"
     #   resp.input_devices[0].hd_device_settings.active_input #=> String, one of "HDMI", "SDI"
     #   resp.input_devices[0].hd_device_settings.configured_input #=> String, one of "AUTO", "HDMI", "SDI"
     #   resp.input_devices[0].hd_device_settings.device_state #=> String, one of "IDLE", "STREAMING"
@@ -5600,6 +5610,8 @@ module Aws::MediaLive
     #   resp.reservations[0].offering_id #=> String
     #   resp.reservations[0].offering_type #=> String, one of "NO_UPFRONT"
     #   resp.reservations[0].region #=> String
+    #   resp.reservations[0].renewal_settings.automatic_renewal #=> String, one of "DISABLED", "ENABLED", "UNAVAILABLE"
+    #   resp.reservations[0].renewal_settings.renewal_count #=> Integer
     #   resp.reservations[0].reservation_id #=> String
     #   resp.reservations[0].resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.reservations[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK"
@@ -5660,6 +5672,9 @@ module Aws::MediaLive
     #
     # @option params [required, String] :offering_id
     #
+    # @option params [Types::RenewalSettings] :renewal_settings
+    #   The Renewal settings for Reservations
+    #
     # @option params [String] :request_id
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -5678,6 +5693,10 @@ module Aws::MediaLive
     #     count: 1, # required
     #     name: "__string",
     #     offering_id: "__string", # required
+    #     renewal_settings: {
+    #       automatic_renewal: "DISABLED", # accepts DISABLED, ENABLED, UNAVAILABLE
+    #       renewal_count: 1,
+    #     },
     #     request_id: "__string",
     #     start: "__string",
     #     tags: {
@@ -5699,6 +5718,8 @@ module Aws::MediaLive
     #   resp.reservation.offering_id #=> String
     #   resp.reservation.offering_type #=> String, one of "NO_UPFRONT"
     #   resp.reservation.region #=> String
+    #   resp.reservation.renewal_settings.automatic_renewal #=> String, one of "DISABLED", "ENABLED", "UNAVAILABLE"
+    #   resp.reservation.renewal_settings.renewal_count #=> Integer
     #   resp.reservation.reservation_id #=> String
     #   resp.reservation.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK"
@@ -5720,6 +5741,34 @@ module Aws::MediaLive
     # @param [Hash] params ({})
     def purchase_offering(params = {}, options = {})
       req = build_request(:purchase_offering, params)
+      req.send_request(options)
+    end
+
+    # Send a reboot command to the specified input device. The device will
+    # begin rebooting within a few seconds of sending the command. When the
+    # reboot is complete, the device’s connection status will change to
+    # connected.
+    #
+    # @option params [String] :force
+    #   Whether or not to force reboot the input device.
+    #
+    # @option params [required, String] :input_device_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reboot_input_device({
+    #     force: "NO", # accepts NO, YES
+    #     input_device_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RebootInputDevice AWS API Documentation
+    #
+    # @overload reboot_input_device(params = {})
+    # @param [Hash] params ({})
+    def reboot_input_device(params = {}, options = {})
+      req = build_request(:reboot_input_device, params)
       req.send_request(options)
     end
 
@@ -5879,6 +5928,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.blackout_slate.network_id #=> String
     #   resp.encoder_settings.blackout_slate.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.caption_descriptions #=> Array
+    #   resp.encoder_settings.caption_descriptions[0].accessibility #=> String, one of "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", "IMPLEMENTS_ACCESSIBILITY_FEATURES"
     #   resp.encoder_settings.caption_descriptions[0].caption_selector_name #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.burn_in_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "SMART"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.burn_in_destination_settings.background_color #=> String, one of "BLACK", "NONE", "WHITE"
@@ -6406,6 +6456,35 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Start a maintenance window for the specified input device. Starting a
+    # maintenance window will give the device up to two hours to install
+    # software. If the device was streaming prior to the maintenance, it
+    # will resume streaming when the software is fully installed. Devices
+    # automatically install updates while they are powered on and their
+    # MediaLive channels are stopped. A maintenance window allows you to
+    # update a device without having to stop MediaLive channels that use the
+    # device. The device must remain powered on and connected to the
+    # internet for the duration of the maintenance.
+    #
+    # @option params [required, String] :input_device_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_input_device_maintenance_window({
+    #     input_device_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartInputDeviceMaintenanceWindow AWS API Documentation
+    #
+    # @overload start_input_device_maintenance_window(params = {})
+    # @param [Hash] params ({})
+    def start_input_device_maintenance_window(params = {}, options = {})
+      req = build_request(:start_input_device_maintenance_window, params)
+      req.send_request(options)
+    end
+
     # Start (run) the multiplex. Starting the multiplex does not start the
     # channels. You must explicitly start each channel.
     #
@@ -6593,6 +6672,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.blackout_slate.network_id #=> String
     #   resp.encoder_settings.blackout_slate.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.caption_descriptions #=> Array
+    #   resp.encoder_settings.caption_descriptions[0].accessibility #=> String, one of "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", "IMPLEMENTS_ACCESSIBILITY_FEATURES"
     #   resp.encoder_settings.caption_descriptions[0].caption_selector_name #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.burn_in_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "SMART"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.burn_in_destination_settings.background_color #=> String, one of "BLACK", "NONE", "WHITE"
@@ -7343,7 +7423,7 @@ module Aws::MediaLive
     #           },
     #           language_code: "__stringMin1Max35",
     #           language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #           name: "__string", # required
+    #           name: "__stringMax255", # required
     #           remix_settings: {
     #             channel_mappings: [ # required
     #               {
@@ -7365,7 +7445,7 @@ module Aws::MediaLive
     #       avail_blanking: {
     #         avail_blanking_image: {
     #           password_param: "__string",
-    #           uri: "__string", # required
+    #           uri: "__stringMax2048", # required
     #           username: "__string",
     #         },
     #         state: "DISABLED", # accepts DISABLED, ENABLED
@@ -7387,13 +7467,13 @@ module Aws::MediaLive
     #       blackout_slate: {
     #         blackout_slate_image: {
     #           password_param: "__string",
-    #           uri: "__string", # required
+    #           uri: "__stringMax2048", # required
     #           username: "__string",
     #         },
     #         network_end_blackout: "DISABLED", # accepts DISABLED, ENABLED
     #         network_end_blackout_image: {
     #           password_param: "__string",
-    #           uri: "__string", # required
+    #           uri: "__stringMax2048", # required
     #           username: "__string",
     #         },
     #         network_id: "__stringMin34Max34",
@@ -7401,6 +7481,7 @@ module Aws::MediaLive
     #       },
     #       caption_descriptions: [
     #         {
+    #           accessibility: "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", # accepts DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES, IMPLEMENTS_ACCESSIBILITY_FEATURES
     #           caption_selector_name: "__string", # required
     #           destination_settings: {
     #             arib_destination_settings: {
@@ -7411,7 +7492,7 @@ module Aws::MediaLive
     #               background_opacity: 1,
     #               font: {
     #                 password_param: "__string",
-    #                 uri: "__string", # required
+    #                 uri: "__stringMax2048", # required
     #                 username: "__string",
     #               },
     #               font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -7434,7 +7515,7 @@ module Aws::MediaLive
     #               background_opacity: 1,
     #               font: {
     #                 password_param: "__string",
-    #                 uri: "__string", # required
+    #                 uri: "__stringMax2048", # required
     #                 username: "__string",
     #               },
     #               font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -7494,7 +7575,7 @@ module Aws::MediaLive
     #           input_loss_image_color: "__stringMin6Max6",
     #           input_loss_image_slate: {
     #             password_param: "__string",
-    #             uri: "__string", # required
+    #             uri: "__stringMax2048", # required
     #             username: "__string",
     #           },
     #           input_loss_image_type: "COLOR", # accepts COLOR, SLATE
@@ -7611,7 +7692,7 @@ module Aws::MediaLive
     #                 static_key_settings: {
     #                   key_provider_server: {
     #                     password_param: "__string",
-    #                     uri: "__string", # required
+    #                     uri: "__stringMax2048", # required
     #                     username: "__string",
     #                   },
     #                   static_key_value: "__stringMin32Max32", # required
@@ -7764,7 +7845,7 @@ module Aws::MediaLive
     #                       audio_group_id: "__string",
     #                       audio_only_image: {
     #                         password_param: "__string",
-    #                         uri: "__string", # required
+    #                         uri: "__stringMax2048", # required
     #                         username: "__string",
     #                       },
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
@@ -8296,6 +8377,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.blackout_slate.network_id #=> String
     #   resp.channel.encoder_settings.blackout_slate.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.caption_descriptions #=> Array
+    #   resp.channel.encoder_settings.caption_descriptions[0].accessibility #=> String, one of "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", "IMPLEMENTS_ACCESSIBILITY_FEATURES"
     #   resp.channel.encoder_settings.caption_descriptions[0].caption_selector_name #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.burn_in_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "SMART"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.burn_in_destination_settings.background_color #=> String, one of "BLACK", "NONE", "WHITE"
@@ -8970,6 +9052,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.blackout_slate.network_id #=> String
     #   resp.channel.encoder_settings.blackout_slate.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.caption_descriptions #=> Array
+    #   resp.channel.encoder_settings.caption_descriptions[0].accessibility #=> String, one of "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES", "IMPLEMENTS_ACCESSIBILITY_FEATURES"
     #   resp.channel.encoder_settings.caption_descriptions[0].caption_selector_name #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.burn_in_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "SMART"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.burn_in_destination_settings.background_color #=> String, one of "BLACK", "NONE", "WHITE"
@@ -9639,7 +9722,7 @@ module Aws::MediaLive
     #   resp.arn #=> String
     #   resp.connection_state #=> String, one of "DISCONNECTED", "CONNECTED"
     #   resp.device_settings_sync_state #=> String, one of "SYNCED", "SYNCING"
-    #   resp.device_update_status #=> String, one of "UP_TO_DATE", "NOT_UP_TO_DATE"
+    #   resp.device_update_status #=> String, one of "UP_TO_DATE", "NOT_UP_TO_DATE", "UPDATING"
     #   resp.hd_device_settings.active_input #=> String, one of "HDMI", "SDI"
     #   resp.hd_device_settings.configured_input #=> String, one of "AUTO", "HDMI", "SDI"
     #   resp.hd_device_settings.device_state #=> String, one of "IDLE", "STREAMING"
@@ -9860,6 +9943,9 @@ module Aws::MediaLive
     #
     # @option params [String] :name
     #
+    # @option params [Types::RenewalSettings] :renewal_settings
+    #   The Renewal settings for Reservations
+    #
     # @option params [required, String] :reservation_id
     #
     # @return [Types::UpdateReservationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -9870,6 +9956,10 @@ module Aws::MediaLive
     #
     #   resp = client.update_reservation({
     #     name: "__string",
+    #     renewal_settings: {
+    #       automatic_renewal: "DISABLED", # accepts DISABLED, ENABLED, UNAVAILABLE
+    #       renewal_count: 1,
+    #     },
     #     reservation_id: "__string", # required
     #   })
     #
@@ -9887,6 +9977,8 @@ module Aws::MediaLive
     #   resp.reservation.offering_id #=> String
     #   resp.reservation.offering_type #=> String, one of "NO_UPFRONT"
     #   resp.reservation.region #=> String
+    #   resp.reservation.renewal_settings.automatic_renewal #=> String, one of "DISABLED", "ENABLED", "UNAVAILABLE"
+    #   resp.reservation.renewal_settings.renewal_count #=> Integer
     #   resp.reservation.reservation_id #=> String
     #   resp.reservation.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK"
@@ -9924,7 +10016,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2022-06-01)
+------------------
+
+* Feature - Added Format field to Import and Export APIs in Amazon Forecast. Added TimeSeriesSelector to Create Forecast API.
+
+1.35.0 (2022-05-26)
+------------------
+
+* Feature - Introduced a new field in Auto Predictor as Time Alignment Boundary. It helps in aligning the timestamps generated during Forecast exports
+
+1.34.0 (2022-05-23)
+------------------
+
+* Feature - New APIs for Monitor that help you understand how your predictors perform over time.
+
 1.33.0 (2022-02-24)
 ------------------
 

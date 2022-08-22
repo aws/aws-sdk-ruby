@@ -10,6 +10,36 @@
 module Aws::MQ
   module Types
 
+    # The action required to resolve a broker issue when the broker is in a
+    # CRITICAL\_ACTION\_REQUIRED state.
+    #
+    # @!attribute [rw] action_required_code
+    #   The code you can use to resolve your broker issue when the broker is
+    #   in a CRITICAL\_ACTION\_REQUIRED state. You can find instructions by
+    #   choosing the link for your code from the list of action required
+    #   codes in [Amazon MQ action required codes][1]. Each code references
+    #   a topic with detailed information, instructions, and recommendations
+    #   for how to resolve the issue and prevent future occurrences.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//latest/developer-guide/troubleshooting-action-required-codes.html
+    #   @return [String]
+    #
+    # @!attribute [rw] action_required_info
+    #   Information about the action required to resolve your broker issue
+    #   when the broker is in a CRITICAL\_ACTION\_REQUIRED state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ActionRequired AWS API Documentation
+    #
+    class ActionRequired < Struct.new(
+      :action_required_code,
+      :action_required_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Name of the availability zone.
     #
     # @!attribute [rw] name
@@ -1214,6 +1244,10 @@ module Aws::MQ
 
     # Returns information about the specified broker.
     #
+    # @!attribute [rw] actions_required
+    #   A list of actions required for a broker.
+    #   @return [Array<Types::ActionRequired>]
+    #
     # @!attribute [rw] authentication_strategy
     #   The authentication strategy used to secure the broker. The default
     #   is SIMPLE.
@@ -1361,6 +1395,7 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerOutput AWS API Documentation
     #
     class DescribeBrokerOutput < Struct.new(
+      :actions_required,
       :authentication_strategy,
       :auto_minor_version_upgrade,
       :broker_arn,
@@ -1411,6 +1446,9 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # @!attribute [rw] actions_required
+    #   @return [Array<Types::ActionRequired>]
+    #
     # @!attribute [rw] authentication_strategy
     #   Optional. The authentication strategy used to secure the broker. The
     #   default is SIMPLE.
@@ -1520,6 +1558,7 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerResponse AWS API Documentation
     #
     class DescribeBrokerResponse < Struct.new(
+      :actions_required,
       :authentication_strategy,
       :auto_minor_version_upgrade,
       :broker_arn,

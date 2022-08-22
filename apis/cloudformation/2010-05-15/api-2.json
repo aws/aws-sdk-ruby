@@ -998,6 +998,15 @@
       "type":"string",
       "pattern":"^[0-9]{12}$"
     },
+    "AccountFilterType":{
+      "type":"string",
+      "enum":[
+        "NONE",
+        "INTERSECTION",
+        "DIFFERENCE",
+        "UNION"
+      ]
+    },
     "AccountGateResult":{
       "type":"structure",
       "members":{
@@ -1564,7 +1573,8 @@
       "members":{
         "Accounts":{"shape":"AccountList"},
         "AccountsUrl":{"shape":"AccountsUrl"},
-        "OrganizationalUnitIds":{"shape":"OrganizationalUnitIdList"}
+        "OrganizationalUnitIds":{"shape":"OrganizationalUnitIdList"},
+        "AccountFilterType":{"shape":"AccountFilterType"}
       }
     },
     "DeprecatedStatus":{
@@ -3691,7 +3701,8 @@
         "CreationTimestamp":{"shape":"Timestamp"},
         "EndTimestamp":{"shape":"Timestamp"},
         "DeploymentTargets":{"shape":"DeploymentTargets"},
-        "StackSetDriftDetectionDetails":{"shape":"StackSetDriftDetectionDetails"}
+        "StackSetDriftDetectionDetails":{"shape":"StackSetDriftDetectionDetails"},
+        "StatusReason":{"shape":"StackSetOperationStatusReason"}
       }
     },
     "StackSetOperationAction":{
@@ -3750,6 +3761,7 @@
         "QUEUED"
       ]
     },
+    "StackSetOperationStatusReason":{"type":"string"},
     "StackSetOperationSummaries":{
       "type":"list",
       "member":{"shape":"StackSetOperationSummary"}
@@ -3761,7 +3773,8 @@
         "Action":{"shape":"StackSetOperationAction"},
         "Status":{"shape":"StackSetOperationStatus"},
         "CreationTimestamp":{"shape":"Timestamp"},
-        "EndTimestamp":{"shape":"Timestamp"}
+        "EndTimestamp":{"shape":"Timestamp"},
+        "StatusReason":{"shape":"StackSetOperationStatusReason"}
       }
     },
     "StackSetStatus":{

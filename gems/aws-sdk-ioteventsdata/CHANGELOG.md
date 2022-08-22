@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2022-05-18)
+------------------
+
+* Feature - Introducing new API for deleting detectors: BatchDeleteDetector.
+
 1.26.0 (2022-02-24)
 ------------------
 

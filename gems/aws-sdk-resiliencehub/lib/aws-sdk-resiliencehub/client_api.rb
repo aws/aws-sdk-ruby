@@ -18,9 +18,11 @@ module Aws::ResilienceHub
     AddDraftAppVersionResourceMappingsResponse = Shapes::StructureShape.new(name: 'AddDraftAppVersionResourceMappingsResponse')
     AlarmRecommendation = Shapes::StructureShape.new(name: 'AlarmRecommendation')
     AlarmRecommendationList = Shapes::ListShape.new(name: 'AlarmRecommendationList')
+    AlarmReferenceIdList = Shapes::ListShape.new(name: 'AlarmReferenceIdList')
     AlarmType = Shapes::StringShape.new(name: 'AlarmType')
     App = Shapes::StructureShape.new(name: 'App')
     AppAssessment = Shapes::StructureShape.new(name: 'AppAssessment')
+    AppAssessmentScheduleType = Shapes::StringShape.new(name: 'AppAssessmentScheduleType')
     AppAssessmentSummary = Shapes::StructureShape.new(name: 'AppAssessmentSummary')
     AppAssessmentSummaryList = Shapes::ListShape.new(name: 'AppAssessmentSummaryList')
     AppComplianceStatusType = Shapes::StringShape.new(name: 'AppComplianceStatusType')
@@ -92,6 +94,7 @@ module Aws::ResilienceHub
     EntityName = Shapes::StringShape.new(name: 'EntityName')
     EntityNameList = Shapes::ListShape.new(name: 'EntityNameList')
     EntityVersion = Shapes::StringShape.new(name: 'EntityVersion')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EstimatedCostTier = Shapes::StringShape.new(name: 'EstimatedCostTier')
     FailurePolicy = Shapes::StructureShape.new(name: 'FailurePolicy')
     HaArchitecture = Shapes::StringShape.new(name: 'HaArchitecture')
@@ -159,6 +162,9 @@ module Aws::ResilienceHub
     ResiliencyScore = Shapes::StructureShape.new(name: 'ResiliencyScore')
     ResolveAppVersionResourcesRequest = Shapes::StructureShape.new(name: 'ResolveAppVersionResourcesRequest')
     ResolveAppVersionResourcesResponse = Shapes::StructureShape.new(name: 'ResolveAppVersionResourcesResponse')
+    ResourceError = Shapes::StructureShape.new(name: 'ResourceError')
+    ResourceErrorList = Shapes::ListShape.new(name: 'ResourceErrorList')
+    ResourceErrorsDetails = Shapes::StructureShape.new(name: 'ResourceErrorsDetails')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceImportStatusType = Shapes::StringShape.new(name: 'ResourceImportStatusType')
     ResourceMapping = Shapes::StructureShape.new(name: 'ResourceMapping')
@@ -169,6 +175,7 @@ module Aws::ResilienceHub
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
+    S3Url = Shapes::StringShape.new(name: 'S3Url')
     Seconds = Shapes::IntegerShape.new(name: 'Seconds')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SopRecommendation = Shapes::StructureShape.new(name: 'SopRecommendation')
@@ -188,6 +195,8 @@ module Aws::ResilienceHub
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TemplateFormat = Shapes::StringShape.new(name: 'TemplateFormat')
+    TerraformSource = Shapes::StructureShape.new(name: 'TerraformSource')
+    TerraformSourceList = Shapes::ListShape.new(name: 'TerraformSourceList')
     TestRecommendation = Shapes::StructureShape.new(name: 'TestRecommendation')
     TestRecommendationList = Shapes::ListShape.new(name: 'TestRecommendationList')
     TestRisk = Shapes::StringShape.new(name: 'TestRisk')
@@ -229,7 +238,10 @@ module Aws::ResilienceHub
 
     AlarmRecommendationList.member = Shapes::ShapeRef.new(shape: AlarmRecommendation)
 
+    AlarmReferenceIdList.member = Shapes::ShapeRef.new(shape: String500)
+
     App.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    App.add_member(:assessment_schedule, Shapes::ShapeRef.new(shape: AppAssessmentScheduleType, location_name: "assessmentSchedule"))
     App.add_member(:compliance_status, Shapes::ShapeRef.new(shape: AppComplianceStatusType, location_name: "complianceStatus"))
     App.add_member(:creation_time, Shapes::ShapeRef.new(shape: TimeStamp, required: true, location_name: "creationTime"))
     App.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
@@ -255,6 +267,7 @@ module Aws::ResilienceHub
     AppAssessment.add_member(:message, Shapes::ShapeRef.new(shape: String500, location_name: "message"))
     AppAssessment.add_member(:policy, Shapes::ShapeRef.new(shape: ResiliencyPolicy, location_name: "policy"))
     AppAssessment.add_member(:resiliency_score, Shapes::ShapeRef.new(shape: ResiliencyScore, location_name: "resiliencyScore"))
+    AppAssessment.add_member(:resource_errors_details, Shapes::ShapeRef.new(shape: ResourceErrorsDetails, location_name: "resourceErrorsDetails"))
     AppAssessment.add_member(:start_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "startTime"))
     AppAssessment.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     AppAssessment.struct_class = Types::AppAssessment
@@ -290,6 +303,7 @@ module Aws::ResilienceHub
     AppComponentList.member = Shapes::ShapeRef.new(shape: AppComponent)
 
     AppSummary.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    AppSummary.add_member(:assessment_schedule, Shapes::ShapeRef.new(shape: AppAssessmentScheduleType, location_name: "assessmentSchedule"))
     AppSummary.add_member(:compliance_status, Shapes::ShapeRef.new(shape: AppComplianceStatusType, location_name: "complianceStatus"))
     AppSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: TimeStamp, required: true, location_name: "creationTime"))
     AppSummary.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
@@ -344,6 +358,7 @@ module Aws::ResilienceHub
     Cost.add_member(:frequency, Shapes::ShapeRef.new(shape: CostFrequency, required: true, location_name: "frequency"))
     Cost.struct_class = Types::Cost
 
+    CreateAppRequest.add_member(:assessment_schedule, Shapes::ShapeRef.new(shape: AppAssessmentScheduleType, location_name: "assessmentSchedule"))
     CreateAppRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateAppRequest.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
     CreateAppRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "name"))
@@ -484,13 +499,15 @@ module Aws::ResilienceHub
     FailurePolicy.struct_class = Types::FailurePolicy
 
     ImportResourcesToDraftAppVersionRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
-    ImportResourcesToDraftAppVersionRequest.add_member(:source_arns, Shapes::ShapeRef.new(shape: ArnList, required: true, location_name: "sourceArns"))
+    ImportResourcesToDraftAppVersionRequest.add_member(:source_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "sourceArns"))
+    ImportResourcesToDraftAppVersionRequest.add_member(:terraform_sources, Shapes::ShapeRef.new(shape: TerraformSourceList, location_name: "terraformSources"))
     ImportResourcesToDraftAppVersionRequest.struct_class = Types::ImportResourcesToDraftAppVersionRequest
 
     ImportResourcesToDraftAppVersionResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     ImportResourcesToDraftAppVersionResponse.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
-    ImportResourcesToDraftAppVersionResponse.add_member(:source_arns, Shapes::ShapeRef.new(shape: ArnList, required: true, location_name: "sourceArns"))
+    ImportResourcesToDraftAppVersionResponse.add_member(:source_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "sourceArns"))
     ImportResourcesToDraftAppVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ResourceImportStatusType, required: true, location_name: "status"))
+    ImportResourcesToDraftAppVersionResponse.add_member(:terraform_sources, Shapes::ShapeRef.new(shape: TerraformSourceList, location_name: "terraformSources"))
     ImportResourcesToDraftAppVersionResponse.struct_class = Types::ImportResourcesToDraftAppVersionResponse
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String500, location_name: "message"))
@@ -647,6 +664,7 @@ module Aws::ResilienceHub
     LogicalResourceId.add_member(:identifier, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "identifier"))
     LogicalResourceId.add_member(:logical_stack_name, Shapes::ShapeRef.new(shape: String255, location_name: "logicalStackName"))
     LogicalResourceId.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "resourceGroupName"))
+    LogicalResourceId.add_member(:terraform_source_name, Shapes::ShapeRef.new(shape: String255, location_name: "terraformSourceName"))
     LogicalResourceId.struct_class = Types::LogicalResourceId
 
     PhysicalResource.add_member(:app_components, Shapes::ShapeRef.new(shape: AppComponentList, location_name: "appComponents"))
@@ -724,6 +742,7 @@ module Aws::ResilienceHub
     RemoveDraftAppVersionResourceMappingsRequest.add_member(:logical_stack_names, Shapes::ShapeRef.new(shape: String255List, location_name: "logicalStackNames"))
     RemoveDraftAppVersionResourceMappingsRequest.add_member(:resource_group_names, Shapes::ShapeRef.new(shape: EntityNameList, location_name: "resourceGroupNames"))
     RemoveDraftAppVersionResourceMappingsRequest.add_member(:resource_names, Shapes::ShapeRef.new(shape: EntityNameList, location_name: "resourceNames"))
+    RemoveDraftAppVersionResourceMappingsRequest.add_member(:terraform_source_names, Shapes::ShapeRef.new(shape: String255List, location_name: "terraformSourceNames"))
     RemoveDraftAppVersionResourceMappingsRequest.struct_class = Types::RemoveDraftAppVersionResourceMappingsRequest
 
     RemoveDraftAppVersionResourceMappingsResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "appArn"))
@@ -759,12 +778,24 @@ module Aws::ResilienceHub
     ResolveAppVersionResourcesResponse.add_member(:status, Shapes::ShapeRef.new(shape: ResourceResolutionStatusType, required: true, location_name: "status"))
     ResolveAppVersionResourcesResponse.struct_class = Types::ResolveAppVersionResourcesResponse
 
+    ResourceError.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: String255, location_name: "logicalResourceId"))
+    ResourceError.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: String255, location_name: "physicalResourceId"))
+    ResourceError.add_member(:reason, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "reason"))
+    ResourceError.struct_class = Types::ResourceError
+
+    ResourceErrorList.member = Shapes::ShapeRef.new(shape: ResourceError)
+
+    ResourceErrorsDetails.add_member(:has_more_errors, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "hasMoreErrors"))
+    ResourceErrorsDetails.add_member(:resource_errors, Shapes::ShapeRef.new(shape: ResourceErrorList, location_name: "resourceErrors"))
+    ResourceErrorsDetails.struct_class = Types::ResourceErrorsDetails
+
     ResourceMapping.add_member(:app_registry_app_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "appRegistryAppName"))
     ResourceMapping.add_member(:logical_stack_name, Shapes::ShapeRef.new(shape: String255, location_name: "logicalStackName"))
     ResourceMapping.add_member(:mapping_type, Shapes::ShapeRef.new(shape: ResourceMappingType, required: true, location_name: "mappingType"))
     ResourceMapping.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: PhysicalResourceId, required: true, location_name: "physicalResourceId"))
     ResourceMapping.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "resourceGroupName"))
     ResourceMapping.add_member(:resource_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "resourceName"))
+    ResourceMapping.add_member(:terraform_source_name, Shapes::ShapeRef.new(shape: String255, location_name: "terraformSourceName"))
     ResourceMapping.struct_class = Types::ResourceMapping
 
     ResourceMappingList.member = Shapes::ShapeRef.new(shape: ResourceMapping)
@@ -818,7 +849,13 @@ module Aws::ResilienceHub
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TerraformSource.add_member(:s3_state_file_url, Shapes::ShapeRef.new(shape: S3Url, required: true, location_name: "s3StateFileUrl"))
+    TerraformSource.struct_class = Types::TerraformSource
+
+    TerraformSourceList.member = Shapes::ShapeRef.new(shape: TerraformSource)
+
     TestRecommendation.add_member(:app_component_name, Shapes::ShapeRef.new(shape: EntityId, location_name: "appComponentName"))
+    TestRecommendation.add_member(:depends_on_alarms, Shapes::ShapeRef.new(shape: AlarmReferenceIdList, location_name: "dependsOnAlarms"))
     TestRecommendation.add_member(:description, Shapes::ShapeRef.new(shape: String500, location_name: "description"))
     TestRecommendation.add_member(:intent, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "intent"))
     TestRecommendation.add_member(:items, Shapes::ShapeRef.new(shape: RecommendationItemList, location_name: "items"))
@@ -850,6 +887,7 @@ module Aws::ResilienceHub
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateAppRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    UpdateAppRequest.add_member(:assessment_schedule, Shapes::ShapeRef.new(shape: AppAssessmentScheduleType, location_name: "assessmentSchedule"))
     UpdateAppRequest.add_member(:clear_resiliency_policy_arn, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "clearResiliencyPolicyArn"))
     UpdateAppRequest.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
     UpdateAppRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "policyArn"))

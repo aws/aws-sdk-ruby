@@ -21,6 +21,8 @@ module Aws::DevOpsGuru
     AddNotificationChannelRequest = Shapes::StructureShape.new(name: 'AddNotificationChannelRequest')
     AddNotificationChannelResponse = Shapes::StructureShape.new(name: 'AddNotificationChannelResponse')
     AmazonCodeGuruProfilerIntegration = Shapes::StructureShape.new(name: 'AmazonCodeGuruProfilerIntegration')
+    AnomalousLogGroup = Shapes::StructureShape.new(name: 'AnomalousLogGroup')
+    AnomalousLogGroups = Shapes::ListShape.new(name: 'AnomalousLogGroups')
     AnomalyDescription = Shapes::StringShape.new(name: 'AnomalyDescription')
     AnomalyId = Shapes::StringShape.new(name: 'AnomalyId')
     AnomalyLimit = Shapes::FloatShape.new(name: 'AnomalyLimit')
@@ -111,6 +113,7 @@ module Aws::DevOpsGuru
     EventSourcesConfig = Shapes::StructureShape.new(name: 'EventSourcesConfig')
     EventTimeRange = Shapes::StructureShape.new(name: 'EventTimeRange')
     Events = Shapes::ListShape.new(name: 'Events')
+    Explanation = Shapes::StringShape.new(name: 'Explanation')
     GetCostEstimationRequest = Shapes::StructureShape.new(name: 'GetCostEstimationRequest')
     GetCostEstimationResponse = Shapes::StructureShape.new(name: 'GetCostEstimationResponse')
     GetResourceCollectionRequest = Shapes::StructureShape.new(name: 'GetResourceCollectionRequest')
@@ -131,6 +134,9 @@ module Aws::DevOpsGuru
     ListAnomaliesForInsightMaxResults = Shapes::IntegerShape.new(name: 'ListAnomaliesForInsightMaxResults')
     ListAnomaliesForInsightRequest = Shapes::StructureShape.new(name: 'ListAnomaliesForInsightRequest')
     ListAnomaliesForInsightResponse = Shapes::StructureShape.new(name: 'ListAnomaliesForInsightResponse')
+    ListAnomalousLogGroupsMaxResults = Shapes::IntegerShape.new(name: 'ListAnomalousLogGroupsMaxResults')
+    ListAnomalousLogGroupsRequest = Shapes::StructureShape.new(name: 'ListAnomalousLogGroupsRequest')
+    ListAnomalousLogGroupsResponse = Shapes::StructureShape.new(name: 'ListAnomalousLogGroupsResponse')
     ListEventsFilters = Shapes::StructureShape.new(name: 'ListEventsFilters')
     ListEventsMaxResults = Shapes::IntegerShape.new(name: 'ListEventsMaxResults')
     ListEventsRequest = Shapes::StructureShape.new(name: 'ListEventsRequest')
@@ -144,6 +150,10 @@ module Aws::DevOpsGuru
     ListInsightsRequest = Shapes::StructureShape.new(name: 'ListInsightsRequest')
     ListInsightsResponse = Shapes::StructureShape.new(name: 'ListInsightsResponse')
     ListInsightsStatusFilter = Shapes::StructureShape.new(name: 'ListInsightsStatusFilter')
+    ListMonitoredResourcesFilters = Shapes::StructureShape.new(name: 'ListMonitoredResourcesFilters')
+    ListMonitoredResourcesMaxResults = Shapes::IntegerShape.new(name: 'ListMonitoredResourcesMaxResults')
+    ListMonitoredResourcesRequest = Shapes::StructureShape.new(name: 'ListMonitoredResourcesRequest')
+    ListMonitoredResourcesResponse = Shapes::StructureShape.new(name: 'ListMonitoredResourcesResponse')
     ListNotificationChannelsRequest = Shapes::StructureShape.new(name: 'ListNotificationChannelsRequest')
     ListNotificationChannelsResponse = Shapes::StructureShape.new(name: 'ListNotificationChannelsResponse')
     ListOrganizationInsightsRequest = Shapes::StructureShape.new(name: 'ListOrganizationInsightsRequest')
@@ -151,8 +161,22 @@ module Aws::DevOpsGuru
     ListRecommendationsRequest = Shapes::StructureShape.new(name: 'ListRecommendationsRequest')
     ListRecommendationsResponse = Shapes::StructureShape.new(name: 'ListRecommendationsResponse')
     Locale = Shapes::StringShape.new(name: 'Locale')
+    LogAnomalyClass = Shapes::StructureShape.new(name: 'LogAnomalyClass')
+    LogAnomalyClasses = Shapes::ListShape.new(name: 'LogAnomalyClasses')
+    LogAnomalyShowcase = Shapes::StructureShape.new(name: 'LogAnomalyShowcase')
+    LogAnomalyShowcases = Shapes::ListShape.new(name: 'LogAnomalyShowcases')
+    LogAnomalyToken = Shapes::StringShape.new(name: 'LogAnomalyToken')
+    LogAnomalyType = Shapes::StringShape.new(name: 'LogAnomalyType')
+    LogEventId = Shapes::StringShape.new(name: 'LogEventId')
+    LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
+    LogStreamName = Shapes::StringShape.new(name: 'LogStreamName')
+    LogsAnomalyDetectionIntegration = Shapes::StructureShape.new(name: 'LogsAnomalyDetectionIntegration')
+    LogsAnomalyDetectionIntegrationConfig = Shapes::StructureShape.new(name: 'LogsAnomalyDetectionIntegrationConfig')
     MeanTimeToRecoverInMilliseconds = Shapes::IntegerShape.new(name: 'MeanTimeToRecoverInMilliseconds')
     MetricValue = Shapes::FloatShape.new(name: 'MetricValue')
+    MonitoredResourceIdentifier = Shapes::StructureShape.new(name: 'MonitoredResourceIdentifier')
+    MonitoredResourceIdentifiers = Shapes::ListShape.new(name: 'MonitoredResourceIdentifiers')
+    MonitoredResourceName = Shapes::StringShape.new(name: 'MonitoredResourceName')
     NotificationChannel = Shapes::StructureShape.new(name: 'NotificationChannel')
     NotificationChannelConfig = Shapes::StructureShape.new(name: 'NotificationChannelConfig')
     NotificationChannelId = Shapes::StringShape.new(name: 'NotificationChannelId')
@@ -161,6 +185,8 @@ module Aws::DevOpsGuru
     NumOpenReactiveInsights = Shapes::IntegerShape.new(name: 'NumOpenReactiveInsights')
     NumProactiveInsights = Shapes::IntegerShape.new(name: 'NumProactiveInsights')
     NumReactiveInsights = Shapes::IntegerShape.new(name: 'NumReactiveInsights')
+    NumberOfLogLinesOccurrences = Shapes::IntegerShape.new(name: 'NumberOfLogLinesOccurrences')
+    NumberOfLogLinesScanned = Shapes::IntegerShape.new(name: 'NumberOfLogLinesScanned')
     OpsCenterIntegration = Shapes::StructureShape.new(name: 'OpsCenterIntegration')
     OpsCenterIntegrationConfig = Shapes::StructureShape.new(name: 'OpsCenterIntegrationConfig')
     OptInStatus = Shapes::StringShape.new(name: 'OptInStatus')
@@ -248,7 +274,10 @@ module Aws::DevOpsGuru
     ResourceIdType = Shapes::StringShape.new(name: 'ResourceIdType')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourcePermission = Shapes::StringShape.new(name: 'ResourcePermission')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ResourceTypeFilter = Shapes::StringShape.new(name: 'ResourceTypeFilter')
+    ResourceTypeFilters = Shapes::ListShape.new(name: 'ResourceTypeFilters')
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
     SearchInsightsAccountIdList = Shapes::ListShape.new(name: 'SearchInsightsAccountIdList')
     SearchInsightsFilters = Shapes::StructureShape.new(name: 'SearchInsightsFilters')
@@ -334,6 +363,15 @@ module Aws::DevOpsGuru
 
     AmazonCodeGuruProfilerIntegration.add_member(:status, Shapes::ShapeRef.new(shape: EventSourceOptInStatus, location_name: "Status"))
     AmazonCodeGuruProfilerIntegration.struct_class = Types::AmazonCodeGuruProfilerIntegration
+
+    AnomalousLogGroup.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "LogGroupName"))
+    AnomalousLogGroup.add_member(:impact_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ImpactStartTime"))
+    AnomalousLogGroup.add_member(:impact_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ImpactEndTime"))
+    AnomalousLogGroup.add_member(:number_of_log_lines_scanned, Shapes::ShapeRef.new(shape: NumberOfLogLinesScanned, location_name: "NumberOfLogLinesScanned"))
+    AnomalousLogGroup.add_member(:log_anomaly_showcases, Shapes::ShapeRef.new(shape: LogAnomalyShowcases, location_name: "LogAnomalyShowcases"))
+    AnomalousLogGroup.struct_class = Types::AnomalousLogGroup
+
+    AnomalousLogGroups.member = Shapes::ShapeRef.new(shape: AnomalousLogGroup)
 
     AnomalyReportedTimeRange.add_member(:open_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "OpenTime"))
     AnomalyReportedTimeRange.add_member(:close_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CloseTime"))
@@ -595,6 +633,16 @@ module Aws::DevOpsGuru
     ListAnomaliesForInsightResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
     ListAnomaliesForInsightResponse.struct_class = Types::ListAnomaliesForInsightResponse
 
+    ListAnomalousLogGroupsRequest.add_member(:insight_id, Shapes::ShapeRef.new(shape: InsightId, required: true, location_name: "InsightId"))
+    ListAnomalousLogGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAnomalousLogGroupsMaxResults, location_name: "MaxResults"))
+    ListAnomalousLogGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
+    ListAnomalousLogGroupsRequest.struct_class = Types::ListAnomalousLogGroupsRequest
+
+    ListAnomalousLogGroupsResponse.add_member(:insight_id, Shapes::ShapeRef.new(shape: InsightId, required: true, location_name: "InsightId"))
+    ListAnomalousLogGroupsResponse.add_member(:anomalous_log_groups, Shapes::ShapeRef.new(shape: AnomalousLogGroups, required: true, location_name: "AnomalousLogGroups"))
+    ListAnomalousLogGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
+    ListAnomalousLogGroupsResponse.struct_class = Types::ListAnomalousLogGroupsResponse
+
     ListEventsFilters.add_member(:insight_id, Shapes::ShapeRef.new(shape: InsightId, location_name: "InsightId"))
     ListEventsFilters.add_member(:event_time_range, Shapes::ShapeRef.new(shape: EventTimeRange, location_name: "EventTimeRange"))
     ListEventsFilters.add_member(:event_class, Shapes::ShapeRef.new(shape: EventClass, location_name: "EventClass"))
@@ -643,6 +691,19 @@ module Aws::DevOpsGuru
     ListInsightsStatusFilter.add_member(:any, Shapes::ShapeRef.new(shape: ListInsightsAnyStatusFilter, location_name: "Any"))
     ListInsightsStatusFilter.struct_class = Types::ListInsightsStatusFilter
 
+    ListMonitoredResourcesFilters.add_member(:resource_permission, Shapes::ShapeRef.new(shape: ResourcePermission, required: true, location_name: "ResourcePermission"))
+    ListMonitoredResourcesFilters.add_member(:resource_type_filters, Shapes::ShapeRef.new(shape: ResourceTypeFilters, required: true, location_name: "ResourceTypeFilters"))
+    ListMonitoredResourcesFilters.struct_class = Types::ListMonitoredResourcesFilters
+
+    ListMonitoredResourcesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListMonitoredResourcesFilters, required: true, location_name: "Filters"))
+    ListMonitoredResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMonitoredResourcesMaxResults, location_name: "MaxResults"))
+    ListMonitoredResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
+    ListMonitoredResourcesRequest.struct_class = Types::ListMonitoredResourcesRequest
+
+    ListMonitoredResourcesResponse.add_member(:monitored_resource_identifiers, Shapes::ShapeRef.new(shape: MonitoredResourceIdentifiers, required: true, location_name: "MonitoredResourceIdentifiers"))
+    ListMonitoredResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
+    ListMonitoredResourcesResponse.struct_class = Types::ListMonitoredResourcesResponse
+
     ListNotificationChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
     ListNotificationChannelsRequest.struct_class = Types::ListNotificationChannelsRequest
 
@@ -671,6 +732,35 @@ module Aws::DevOpsGuru
     ListRecommendationsResponse.add_member(:recommendations, Shapes::ShapeRef.new(shape: Recommendations, location_name: "Recommendations"))
     ListRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
     ListRecommendationsResponse.struct_class = Types::ListRecommendationsResponse
+
+    LogAnomalyClass.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, location_name: "LogStreamName"))
+    LogAnomalyClass.add_member(:log_anomaly_type, Shapes::ShapeRef.new(shape: LogAnomalyType, location_name: "LogAnomalyType"))
+    LogAnomalyClass.add_member(:log_anomaly_token, Shapes::ShapeRef.new(shape: LogAnomalyToken, location_name: "LogAnomalyToken"))
+    LogAnomalyClass.add_member(:log_event_id, Shapes::ShapeRef.new(shape: LogEventId, location_name: "LogEventId"))
+    LogAnomalyClass.add_member(:explanation, Shapes::ShapeRef.new(shape: Explanation, location_name: "Explanation"))
+    LogAnomalyClass.add_member(:number_of_log_lines_occurrences, Shapes::ShapeRef.new(shape: NumberOfLogLinesOccurrences, location_name: "NumberOfLogLinesOccurrences"))
+    LogAnomalyClass.add_member(:log_event_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LogEventTimestamp"))
+    LogAnomalyClass.struct_class = Types::LogAnomalyClass
+
+    LogAnomalyClasses.member = Shapes::ShapeRef.new(shape: LogAnomalyClass)
+
+    LogAnomalyShowcase.add_member(:log_anomaly_classes, Shapes::ShapeRef.new(shape: LogAnomalyClasses, location_name: "LogAnomalyClasses"))
+    LogAnomalyShowcase.struct_class = Types::LogAnomalyShowcase
+
+    LogAnomalyShowcases.member = Shapes::ShapeRef.new(shape: LogAnomalyShowcase)
+
+    LogsAnomalyDetectionIntegration.add_member(:opt_in_status, Shapes::ShapeRef.new(shape: OptInStatus, location_name: "OptInStatus"))
+    LogsAnomalyDetectionIntegration.struct_class = Types::LogsAnomalyDetectionIntegration
+
+    LogsAnomalyDetectionIntegrationConfig.add_member(:opt_in_status, Shapes::ShapeRef.new(shape: OptInStatus, location_name: "OptInStatus"))
+    LogsAnomalyDetectionIntegrationConfig.struct_class = Types::LogsAnomalyDetectionIntegrationConfig
+
+    MonitoredResourceIdentifier.add_member(:monitored_resource_name, Shapes::ShapeRef.new(shape: MonitoredResourceName, location_name: "MonitoredResourceName"))
+    MonitoredResourceIdentifier.add_member(:type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "Type"))
+    MonitoredResourceIdentifier.add_member(:resource_permission, Shapes::ShapeRef.new(shape: ResourcePermission, location_name: "ResourcePermission"))
+    MonitoredResourceIdentifier.struct_class = Types::MonitoredResourceIdentifier
+
+    MonitoredResourceIdentifiers.member = Shapes::ShapeRef.new(shape: MonitoredResourceIdentifier)
 
     NotificationChannel.add_member(:id, Shapes::ShapeRef.new(shape: NotificationChannelId, location_name: "Id"))
     NotificationChannel.add_member(:config, Shapes::ShapeRef.new(shape: NotificationChannelConfig, location_name: "Config"))
@@ -945,6 +1035,8 @@ module Aws::DevOpsGuru
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location_name: "ResourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    ResourceTypeFilters.member = Shapes::ShapeRef.new(shape: ResourceTypeFilter)
+
     SearchInsightsAccountIdList.member = Shapes::ShapeRef.new(shape: AwsAccountId)
 
     SearchInsightsFilters.add_member(:severities, Shapes::ShapeRef.new(shape: InsightSeverities, location_name: "Severities"))
@@ -998,6 +1090,7 @@ module Aws::DevOpsGuru
     ServiceInsightHealth.struct_class = Types::ServiceInsightHealth
 
     ServiceIntegrationConfig.add_member(:ops_center, Shapes::ShapeRef.new(shape: OpsCenterIntegration, location_name: "OpsCenter"))
+    ServiceIntegrationConfig.add_member(:logs_anomaly_detection, Shapes::ShapeRef.new(shape: LogsAnomalyDetectionIntegration, location_name: "LogsAnomalyDetection"))
     ServiceIntegrationConfig.struct_class = Types::ServiceIntegrationConfig
 
     ServiceNames.member = Shapes::ShapeRef.new(shape: ServiceName)
@@ -1087,6 +1180,7 @@ module Aws::DevOpsGuru
     UpdateResourceCollectionResponse.struct_class = Types::UpdateResourceCollectionResponse
 
     UpdateServiceIntegrationConfig.add_member(:ops_center, Shapes::ShapeRef.new(shape: OpsCenterIntegrationConfig, location_name: "OpsCenter"))
+    UpdateServiceIntegrationConfig.add_member(:logs_anomaly_detection, Shapes::ShapeRef.new(shape: LogsAnomalyDetectionIntegrationConfig, location_name: "LogsAnomalyDetection"))
     UpdateServiceIntegrationConfig.struct_class = Types::UpdateServiceIntegrationConfig
 
     UpdateServiceIntegrationRequest.add_member(:service_integration, Shapes::ShapeRef.new(shape: UpdateServiceIntegrationConfig, required: true, location_name: "ServiceIntegration"))
@@ -1303,6 +1397,7 @@ module Aws::DevOpsGuru
         o.output = Shapes::ShapeRef.new(shape: DescribeServiceIntegrationResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -1362,6 +1457,25 @@ module Aws::DevOpsGuru
         )
       end)
 
+      api.add_operation(:list_anomalous_log_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAnomalousLogGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-log-anomalies"
+        o.input = Shapes::ShapeRef.new(shape: ListAnomalousLogGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAnomalousLogGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_events, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListEvents"
         o.http_method = "POST"
@@ -1388,6 +1502,24 @@ module Aws::DevOpsGuru
         o.input = Shapes::ShapeRef.new(shape: ListInsightsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListInsightsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_monitored_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMonitoredResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/monitoredResources"
+        o.input = Shapes::ShapeRef.new(shape: ListMonitoredResourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMonitoredResourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

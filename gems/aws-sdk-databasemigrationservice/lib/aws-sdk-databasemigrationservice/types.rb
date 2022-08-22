@@ -269,6 +269,150 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Describes the last Fleet Advisor collector health check.
+    #
+    # @!attribute [rw] collector_status
+    #   The status of the Fleet Advisor collector.
+    #   @return [String]
+    #
+    # @!attribute [rw] local_collector_s3_access
+    #   Whether the local collector can access its Amazon S3 bucket.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] web_collector_s3_access
+    #   Whether the web collector can access its Amazon S3 bucket.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] web_collector_granted_role_based_access
+    #   Whether the role that you provided when creating the Fleet Advisor
+    #   collector has sufficient permissions to access the Fleet Advisor web
+    #   collector.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CollectorHealthCheck AWS API Documentation
+    #
+    class CollectorHealthCheck < Struct.new(
+      :collector_status,
+      :local_collector_s3_access,
+      :web_collector_s3_access,
+      :web_collector_granted_role_based_access)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified collector doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CollectorNotFoundFault AWS API Documentation
+    #
+    class CollectorNotFoundFault < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a Fleet Advisor collector.
+    #
+    # @!attribute [rw] collector_referenced_id
+    #   The reference ID of the Fleet Advisor collector.
+    #   @return [String]
+    #
+    # @!attribute [rw] collector_name
+    #   The name of the Fleet Advisor collector .
+    #   @return [String]
+    #
+    # @!attribute [rw] collector_version
+    #   The version of your Fleet Advisor collector, in semantic versioning
+    #   format, for example `1.0.2`
+    #   @return [String]
+    #
+    # @!attribute [rw] version_status
+    #   Whether the collector version is up to date.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A summary description of the Fleet Advisor collector.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The Amazon S3 bucket that the Fleet Advisor collector uses to store
+    #   inventory metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_access_role_arn
+    #   The IAM role that grants permissions to access the specified Amazon
+    #   S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] collector_health_check
+    #   Describes the last Fleet Advisor collector health check.
+    #   @return [Types::CollectorHealthCheck]
+    #
+    # @!attribute [rw] last_data_received
+    #   The timestamp of the last time the collector received data, in the
+    #   following format: `2022-01-24T19:04:02.596113Z`
+    #   @return [String]
+    #
+    # @!attribute [rw] registered_date
+    #   The timestamp when DMS registered the collector, in the following
+    #   format: `2022-01-24T19:04:02.596113Z`
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The timestamp when you created the collector, in the following
+    #   format: `2022-01-24T19:04:02.596113Z`
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_date
+    #   The timestamp when DMS last modified the collector, in the following
+    #   format: `2022-01-24T19:04:02.596113Z`
+    #   @return [String]
+    #
+    # @!attribute [rw] inventory_data
+    #   Describes a Fleet Advisor collector inventory.
+    #   @return [Types::InventoryData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CollectorResponse AWS API Documentation
+    #
+    class CollectorResponse < Struct.new(
+      :collector_referenced_id,
+      :collector_name,
+      :collector_version,
+      :version_status,
+      :description,
+      :s3_bucket_name,
+      :service_access_role_arn,
+      :collector_health_check,
+      :last_data_received,
+      :registered_date,
+      :created_date,
+      :modified_date,
+      :inventory_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Briefly describes a Fleet Advisor collector.
+    #
+    # @!attribute [rw] collector_referenced_id
+    #   The reference ID of the Fleet Advisor collector.
+    #   @return [String]
+    #
+    # @!attribute [rw] collector_name
+    #   The name of the Fleet Advisor collector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CollectorShortInfoResponse AWS API Documentation
+    #
+    class CollectorShortInfoResponse < Struct.new(
+      :collector_referenced_id,
+      :collector_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Status of the connection between an endpoint and a replication
     # instance, including Amazon Resource Names (ARNs) and the last error
     # message issued.
@@ -389,6 +533,8 @@ module Aws::DatabaseMigrationService
     #           max_file_size: 1,
     #           rfc_4180: false,
     #           date_partition_timezone: "String",
+    #           add_trailing_padding_character: false,
+    #           expected_bucket_owner: "String",
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -447,6 +593,7 @@ module Aws::DatabaseMigrationService
     #           endpoint_uri: "String", # required
     #           full_load_error_percentage: 1,
     #           error_retry_duration: 1,
+    #           use_new_mapping_type: false,
     #         },
     #         neptune_settings: {
     #           service_access_role_arn: "String",
@@ -508,6 +655,7 @@ module Aws::DatabaseMigrationService
     #           plugin_name: "no-preference", # accepts no-preference, test-decoding, pglogical
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
+    #           trim_space_in_char: false,
     #         },
     #         my_sql_settings: {
     #           after_connect_script: "String",
@@ -566,6 +714,7 @@ module Aws::DatabaseMigrationService
     #           secrets_manager_secret_id: "String",
     #           secrets_manager_oracle_asm_access_role_arn: "String",
     #           secrets_manager_oracle_asm_secret_id: "String",
+    #           trim_space_in_char: false,
     #         },
     #         sybase_settings: {
     #           database_name: "String",
@@ -591,6 +740,7 @@ module Aws::DatabaseMigrationService
     #           use_third_party_backup_device: false,
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
+    #           trim_space_in_char: false,
     #         },
     #         ibm_db_2_settings: {
     #           database_name: "String",
@@ -682,7 +832,8 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] database_name
     #   The name of the endpoint database. For a MySQL source or target
-    #   endpoint, do not specify DatabaseName.
+    #   endpoint, do not specify DatabaseName. To migrate to a specific
+    #   database, use this setting and `targetDbType`.
     #   @return [String]
     #
     # @!attribute [rw] extra_connection_attributes
@@ -1081,6 +1232,81 @@ module Aws::DatabaseMigrationService
     #
     class CreateEventSubscriptionResponse < Struct.new(
       :event_subscription)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFleetAdvisorCollectorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         collector_name: "String", # required
+    #         description: "String",
+    #         service_access_role_arn: "String", # required
+    #         s3_bucket_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] collector_name
+    #   The name of your Fleet Advisor collector (for example,
+    #   `sample-collector`).
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A summary description of your Fleet Advisor collector.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_access_role_arn
+    #   The IAM role that grants permissions to access the specified Amazon
+    #   S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The Amazon S3 bucket that the Fleet Advisor collector uses to store
+    #   inventory metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateFleetAdvisorCollectorRequest AWS API Documentation
+    #
+    class CreateFleetAdvisorCollectorRequest < Struct.new(
+      :collector_name,
+      :description,
+      :service_access_role_arn,
+      :s3_bucket_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collector_referenced_id
+    #   The unique ID of the new Fleet Advisor collector, for example:
+    #   `22fda70c-40d5-4acf-b233-a495bd8eb7f5`
+    #   @return [String]
+    #
+    # @!attribute [rw] collector_name
+    #   The name of the new Fleet Advisor collector.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A summary description of the Fleet Advisor collector.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_access_role_arn
+    #   The IAM role that grants permissions to access the specified Amazon
+    #   S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The Amazon S3 bucket that the collector uses to store inventory
+    #   metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateFleetAdvisorCollectorResponse AWS API Documentation
+    #
+    class CreateFleetAdvisorCollectorResponse < Struct.new(
+      :collector_referenced_id,
+      :collector_name,
+      :description,
+      :service_access_role_arn,
+      :s3_bucket_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1528,6 +1754,132 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Describes an inventory database instance for a Fleet Advisor
+    # collector.
+    #
+    # @!attribute [rw] engine
+    #   The database engine of a database in a Fleet Advisor collector
+    #   inventory, for example `Microsoft SQL Server`.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The database engine version of a database in a Fleet Advisor
+    #   collector inventory, for example `2019`.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_edition
+    #   The database engine edition of a database in a Fleet Advisor
+    #   collector inventory, for example `Express`.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_pack
+    #   The service pack level of the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_level
+    #   The support level of the database, for example `Mainstream support`.
+    #   @return [String]
+    #
+    # @!attribute [rw] os_architecture
+    #   The operating system architecture of the database.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tooltip
+    #   Information about the database engine software, for example
+    #   `Mainstream support ends on November 14th, 2024`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DatabaseInstanceSoftwareDetailsResponse AWS API Documentation
+    #
+    class DatabaseInstanceSoftwareDetailsResponse < Struct.new(
+      :engine,
+      :engine_version,
+      :engine_edition,
+      :service_pack,
+      :support_level,
+      :os_architecture,
+      :tooltip)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a database in a Fleet Advisor collector inventory.
+    #
+    # @!attribute [rw] database_id
+    #   The ID of a database in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of a database in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   The IP address of a database in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_schemas
+    #   The number of schemas in a Fleet Advisor collector inventory
+    #   database.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server
+    #   The server name of a database in a Fleet Advisor collector
+    #   inventory.
+    #   @return [Types::ServerShortInfoResponse]
+    #
+    # @!attribute [rw] software_details
+    #   The software details of a database in a Fleet Advisor collector
+    #   inventory, such as database engine and version.
+    #   @return [Types::DatabaseInstanceSoftwareDetailsResponse]
+    #
+    # @!attribute [rw] collectors
+    #   A list of collectors associated with the database.
+    #   @return [Array<Types::CollectorShortInfoResponse>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DatabaseResponse AWS API Documentation
+    #
+    class DatabaseResponse < Struct.new(
+      :database_id,
+      :database_name,
+      :ip_address,
+      :number_of_schemas,
+      :server,
+      :software_details,
+      :collectors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a database in a Fleet Advisor collector inventory.
+    #
+    # @!attribute [rw] database_id
+    #   The ID of a database in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of a database in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_ip_address
+    #   The IP address of a database in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_engine
+    #   The database engine of a database in a Fleet Advisor collector
+    #   inventory, for example `PostgreSQL`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DatabaseShortInfoResponse AWS API Documentation
+    #
+    class DatabaseShortInfoResponse < Struct.new(
+      :database_id,
+      :database_name,
+      :database_ip_address,
+      :database_engine)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteCertificateMessage
     #   data as a hash:
     #
@@ -1555,6 +1907,25 @@ module Aws::DatabaseMigrationService
     #
     class DeleteCertificateResponse < Struct.new(
       :certificate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteCollectorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         collector_referenced_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] collector_referenced_id
+    #   The reference ID of the Fleet Advisor collector to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteCollectorRequest AWS API Documentation
+    #
+    class DeleteCollectorRequest < Struct.new(
+      :collector_referenced_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1656,6 +2027,37 @@ module Aws::DatabaseMigrationService
     #
     class DeleteEventSubscriptionResponse < Struct.new(
       :event_subscription)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteFleetAdvisorDatabasesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         database_ids: ["String"], # required
+    #       }
+    #
+    # @!attribute [rw] database_ids
+    #   The IDs of the Fleet Advisor collector databases to delete.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteFleetAdvisorDatabasesRequest AWS API Documentation
+    #
+    class DeleteFleetAdvisorDatabasesRequest < Struct.new(
+      :database_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] database_ids
+    #   The IDs of the databases that the operation deleted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteFleetAdvisorDatabasesResponse AWS API Documentation
+    #
+    class DeleteFleetAdvisorDatabasesResponse < Struct.new(
+      :database_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2442,6 +2844,352 @@ module Aws::DatabaseMigrationService
     class DescribeEventsResponse < Struct.new(
       :marker,
       :events)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFleetAdvisorCollectorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   If you specify any of the following filters, the output includes
+    #   information for only those collectors that meet the filter criteria:
+    #
+    #   * `collector-referenced-id` – The ID of the collector agent, for
+    #     example `d4610ac5-e323-4ad9-bc50-eaf7249dfe9d`.
+    #
+    #   * `collector-name` – The name of the collector agent.
+    #
+    #   An example is: `describe-fleet-advisor-collectors --filter
+    #   Name="collector-referenced-id",Values="d4610ac5-e323-4ad9-bc50-eaf7249dfe9d"`
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   Sets the maximum number of records returned in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If `NextToken` is returned by a previous response, there are more
+    #   results available. The value of `NextToken` is a unique pagination
+    #   token for each page. Make the call again using the returned token to
+    #   retrieve the next page. Keep all other arguments unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeFleetAdvisorCollectorsRequest AWS API Documentation
+    #
+    class DescribeFleetAdvisorCollectorsRequest < Struct.new(
+      :filters,
+      :max_records,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collectors
+    #   Provides descriptions of the Fleet Advisor collectors, including the
+    #   collectors' name and ID, and the latest inventory data.
+    #   @return [Array<Types::CollectorResponse>]
+    #
+    # @!attribute [rw] next_token
+    #   If `NextToken` is returned, there are more results available. The
+    #   value of `NextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeFleetAdvisorCollectorsResponse AWS API Documentation
+    #
+    class DescribeFleetAdvisorCollectorsResponse < Struct.new(
+      :collectors,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFleetAdvisorDatabasesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   If you specify any of the following filters, the output includes
+    #   information for only those databases that meet the filter criteria:
+    #
+    #   * `database-id` – The ID of the database.
+    #
+    #   * `database-name` – The name of the database.
+    #
+    #   * `database-engine` – The name of the database engine.
+    #
+    #   * `server-ip-address` – The IP address of the database server.
+    #
+    #   * `database-ip-address` – The IP address of the database.
+    #
+    #   * `collector-name` – The name of the associated Fleet Advisor
+    #     collector.
+    #
+    #   An example is: `describe-fleet-advisor-databases --filter
+    #   Name="database-id",Values="45"`
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   Sets the maximum number of records returned in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If `NextToken` is returned by a previous response, there are more
+    #   results available. The value of `NextToken` is a unique pagination
+    #   token for each page. Make the call again using the returned token to
+    #   retrieve the next page. Keep all other arguments unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeFleetAdvisorDatabasesRequest AWS API Documentation
+    #
+    class DescribeFleetAdvisorDatabasesRequest < Struct.new(
+      :filters,
+      :max_records,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] databases
+    #   Provides descriptions of the Fleet Advisor collector databases,
+    #   including the database's collector, ID, and name.
+    #   @return [Array<Types::DatabaseResponse>]
+    #
+    # @!attribute [rw] next_token
+    #   If `NextToken` is returned, there are more results available. The
+    #   value of `NextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeFleetAdvisorDatabasesResponse AWS API Documentation
+    #
+    class DescribeFleetAdvisorDatabasesResponse < Struct.new(
+      :databases,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFleetAdvisorLsaAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_records: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] max_records
+    #   Sets the maximum number of records returned in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If `NextToken` is returned by a previous response, there are more
+    #   results available. The value of `NextToken` is a unique pagination
+    #   token for each page. Make the call again using the returned token to
+    #   retrieve the next page. Keep all other arguments unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeFleetAdvisorLsaAnalysisRequest AWS API Documentation
+    #
+    class DescribeFleetAdvisorLsaAnalysisRequest < Struct.new(
+      :max_records,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis
+    #   A list of `FleetAdvisorLsaAnalysisResponse` objects.
+    #   @return [Array<Types::FleetAdvisorLsaAnalysisResponse>]
+    #
+    # @!attribute [rw] next_token
+    #   If `NextToken` is returned, there are more results available. The
+    #   value of `NextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeFleetAdvisorLsaAnalysisResponse AWS API Documentation
+    #
+    class DescribeFleetAdvisorLsaAnalysisResponse < Struct.new(
+      :analysis,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFleetAdvisorSchemaObjectSummaryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   If you specify any of the following filters, the output includes
+    #   information for only those schema objects that meet the filter
+    #   criteria:
+    #
+    #   * `schema-id` – The ID of the schema, for example
+    #     `d4610ac5-e323-4ad9-bc50-eaf7249dfe9d`.
+    #
+    #   ^
+    #
+    #   Example: `describe-fleet-advisor-schema-object-summary --filter
+    #   Name="schema-id",Values="50"`
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   Sets the maximum number of records returned in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If `NextToken` is returned by a previous response, there are more
+    #   results available. The value of `NextToken` is a unique pagination
+    #   token for each page. Make the call again using the returned token to
+    #   retrieve the next page. Keep all other arguments unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeFleetAdvisorSchemaObjectSummaryRequest AWS API Documentation
+    #
+    class DescribeFleetAdvisorSchemaObjectSummaryRequest < Struct.new(
+      :filters,
+      :max_records,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fleet_advisor_schema_objects
+    #   A collection of `FleetAdvisorSchemaObjectResponse` objects.
+    #   @return [Array<Types::FleetAdvisorSchemaObjectResponse>]
+    #
+    # @!attribute [rw] next_token
+    #   If `NextToken` is returned, there are more results available. The
+    #   value of `NextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeFleetAdvisorSchemaObjectSummaryResponse AWS API Documentation
+    #
+    class DescribeFleetAdvisorSchemaObjectSummaryResponse < Struct.new(
+      :fleet_advisor_schema_objects,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFleetAdvisorSchemasRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   If you specify any of the following filters, the output includes
+    #   information for only those schemas that meet the filter criteria:
+    #
+    #   * `complexity` – The schema's complexity, for example `Simple`.
+    #
+    #   * `database-id` – The ID of the schema's database.
+    #
+    #   * `database-ip-address` – The IP address of the schema's database.
+    #
+    #   * `database-name` – The name of the schema's database.
+    #
+    #   * `database-engine` – The name of the schema database's engine.
+    #
+    #   * `original-schema-name` – The name of the schema's database's
+    #     main schema.
+    #
+    #   * `schema-id` – The ID of the schema, for example `15`.
+    #
+    #   * `schema-name` – The name of the schema.
+    #
+    #   * `server-ip-address` – The IP address of the schema database's
+    #     server.
+    #
+    #   An example is: `describe-fleet-advisor-schemas --filter
+    #   Name="schema-id",Values="50"`
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   Sets the maximum number of records returned in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If `NextToken` is returned by a previous response, there are more
+    #   results available. The value of `NextToken` is a unique pagination
+    #   token for each page. Make the call again using the returned token to
+    #   retrieve the next page. Keep all other arguments unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeFleetAdvisorSchemasRequest AWS API Documentation
+    #
+    class DescribeFleetAdvisorSchemasRequest < Struct.new(
+      :filters,
+      :max_records,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fleet_advisor_schemas
+    #   A collection of `SchemaResponse` objects.
+    #   @return [Array<Types::SchemaResponse>]
+    #
+    # @!attribute [rw] next_token
+    #   If `NextToken` is returned, there are more results available. The
+    #   value of `NextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeFleetAdvisorSchemasResponse AWS API Documentation
+    #
+    class DescribeFleetAdvisorSchemasResponse < Struct.new(
+      :fleet_advisor_schemas,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3395,6 +4143,7 @@ module Aws::DatabaseMigrationService
     #         endpoint_uri: "String", # required
     #         full_load_error_percentage: 1,
     #         error_retry_duration: 1,
+    #         use_new_mapping_type: false,
     #       }
     #
     # @!attribute [rw] service_access_role_arn
@@ -3423,13 +4172,21 @@ module Aws::DatabaseMigrationService
     #   requests to the OpenSearch cluster.
     #   @return [Integer]
     #
+    # @!attribute [rw] use_new_mapping_type
+    #   Set this option to `true` for DMS to migrate documentation using the
+    #   documentation type `_doc`. OpenSearch and an Elasticsearch cluster
+    #   only support the \_doc documentation type in versions 7. x and
+    #   later. The default value is `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ElasticsearchSettings AWS API Documentation
     #
     class ElasticsearchSettings < Struct.new(
       :service_access_role_arn,
       :endpoint_uri,
       :full_load_error_percentage,
-      :error_retry_duration)
+      :error_retry_duration,
+      :use_new_mapping_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3888,6 +4645,72 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Describes a large-scale assessment (LSA) analysis run by a Fleet
+    # Advisor collector.
+    #
+    # @!attribute [rw] lsa_analysis_id
+    #   The ID of an LSA analysis run by a Fleet Advisor collector.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of an LSA analysis run by a Fleet Advisor collector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/FleetAdvisorLsaAnalysisResponse AWS API Documentation
+    #
+    class FleetAdvisorLsaAnalysisResponse < Struct.new(
+      :lsa_analysis_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a schema object in a Fleet Advisor collector inventory.
+    #
+    # @!attribute [rw] schema_id
+    #   The ID of a schema object in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_type
+    #   The type of the schema object, as reported by the database engine.
+    #   Examples include the following:
+    #
+    #   * `function`
+    #
+    #   * `trigger`
+    #
+    #   * `SYSTEM_TABLE`
+    #
+    #   * `QUEUE`
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_objects
+    #   The number of objects in a schema object in a Fleet Advisor
+    #   collector inventory.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] code_line_count
+    #   The number of lines of code in a schema object in a Fleet Advisor
+    #   collector inventory.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] code_size
+    #   The size level of the code in a schema object in a Fleet Advisor
+    #   collector inventory.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/FleetAdvisorSchemaObjectResponse AWS API Documentation
+    #
+    class FleetAdvisorSchemaObjectResponse < Struct.new(
+      :schema_id,
+      :object_type,
+      :number_of_objects,
+      :code_line_count,
+      :code_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Settings in JSON format for the source GCP MySQL endpoint.
     #
     # @note When making an API call, you may pass GcpMySQLSettings
@@ -4236,6 +5059,19 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # The action or operation requested isn't valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/InvalidOperationFault AWS API Documentation
+    #
+    class InvalidOperationFault < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource is in a state that prevents it from being used for
     # database migration.
     #
@@ -4259,6 +5095,25 @@ module Aws::DatabaseMigrationService
     #
     class InvalidSubnet < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a Fleet Advisor collector inventory.
+    #
+    # @!attribute [rw] number_of_databases
+    #   The number of databases in the Fleet Advisor collector inventory.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_schemas
+    #   The number of schemas in the Fleet Advisor collector inventory.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/InventoryData AWS API Documentation
+    #
+    class InventoryData < Struct.new(
+      :number_of_databases,
+      :number_of_schemas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4697,6 +5552,7 @@ module Aws::DatabaseMigrationService
     #         use_third_party_backup_device: false,
     #         secrets_manager_access_role_arn: "String",
     #         secrets_manager_secret_id: "String",
+    #         trim_space_in_char: false,
     #       }
     #
     # @!attribute [rw] port
@@ -4812,6 +5668,12 @@ module Aws::DatabaseMigrationService
     #   connection details.
     #   @return [String]
     #
+    # @!attribute [rw] trim_space_in_char
+    #   Use the `TrimSpaceInChar` source endpoint setting to trim data on
+    #   CHAR and NCHAR data types during migration. The default value is
+    #   `true`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MicrosoftSQLServerSettings AWS API Documentation
     #
     class MicrosoftSQLServerSettings < Struct.new(
@@ -4828,7 +5690,8 @@ module Aws::DatabaseMigrationService
       :use_bcp_full_load,
       :use_third_party_backup_device,
       :secrets_manager_access_role_arn,
-      :secrets_manager_secret_id)
+      :secrets_manager_secret_id,
+      :trim_space_in_char)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -4893,6 +5756,8 @@ module Aws::DatabaseMigrationService
     #           max_file_size: 1,
     #           rfc_4180: false,
     #           date_partition_timezone: "String",
+    #           add_trailing_padding_character: false,
+    #           expected_bucket_owner: "String",
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -4951,6 +5816,7 @@ module Aws::DatabaseMigrationService
     #           endpoint_uri: "String", # required
     #           full_load_error_percentage: 1,
     #           error_retry_duration: 1,
+    #           use_new_mapping_type: false,
     #         },
     #         neptune_settings: {
     #           service_access_role_arn: "String",
@@ -5012,6 +5878,7 @@ module Aws::DatabaseMigrationService
     #           plugin_name: "no-preference", # accepts no-preference, test-decoding, pglogical
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
+    #           trim_space_in_char: false,
     #         },
     #         my_sql_settings: {
     #           after_connect_script: "String",
@@ -5070,6 +5937,7 @@ module Aws::DatabaseMigrationService
     #           secrets_manager_secret_id: "String",
     #           secrets_manager_oracle_asm_access_role_arn: "String",
     #           secrets_manager_oracle_asm_secret_id: "String",
+    #           trim_space_in_char: false,
     #         },
     #         sybase_settings: {
     #           database_name: "String",
@@ -5095,6 +5963,7 @@ module Aws::DatabaseMigrationService
     #           use_third_party_backup_device: false,
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
+    #           trim_space_in_char: false,
     #         },
     #         ibm_db_2_settings: {
     #           database_name: "String",
@@ -6128,7 +6997,9 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] target_db_type
     #   Specifies where to migrate source tables on the target, either to a
-    #   single database or multiple databases.
+    #   single database or multiple databases. If you specify
+    #   `SPECIFIC_DATABASE`, specify the database name using the
+    #   `DatabaseName` parameter of the `Endpoint` object.
     #
     #   Example: `targetDbType=MULTIPLE_DATABASES`
     #   @return [String]
@@ -6353,6 +7224,7 @@ module Aws::DatabaseMigrationService
     #         secrets_manager_secret_id: "String",
     #         secrets_manager_oracle_asm_access_role_arn: "String",
     #         secrets_manager_oracle_asm_secret_id: "String",
+    #         trim_space_in_char: false,
     #       }
     #
     # @!attribute [rw] add_supplemental_logging
@@ -6749,6 +7621,12 @@ module Aws::DatabaseMigrationService
     #   connection details for the Oracle endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] trim_space_in_char
+    #   Use the `TrimSpaceInChar` source endpoint setting to trim data on
+    #   CHAR and NCHAR data types during migration. The default value is
+    #   `true`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/OracleSettings AWS API Documentation
     #
     class OracleSettings < Struct.new(
@@ -6791,7 +7669,8 @@ module Aws::DatabaseMigrationService
       :secrets_manager_access_role_arn,
       :secrets_manager_secret_id,
       :secrets_manager_oracle_asm_access_role_arn,
-      :secrets_manager_oracle_asm_secret_id)
+      :secrets_manager_oracle_asm_secret_id,
+      :trim_space_in_char)
       SENSITIVE = [:asm_password, :password, :security_db_encryption]
       include Aws::Structure
     end
@@ -6953,6 +7832,7 @@ module Aws::DatabaseMigrationService
     #         plugin_name: "no-preference", # accepts no-preference, test-decoding, pglogical
     #         secrets_manager_access_role_arn: "String",
     #         secrets_manager_secret_id: "String",
+    #         trim_space_in_char: false,
     #       }
     #
     # @!attribute [rw] after_connect_script
@@ -7098,6 +7978,12 @@ module Aws::DatabaseMigrationService
     #   connection details.
     #   @return [String]
     #
+    # @!attribute [rw] trim_space_in_char
+    #   Use the `TrimSpaceInChar` source endpoint setting to trim data on
+    #   CHAR and NCHAR data types during migration. The default value is
+    #   `true`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/PostgreSQLSettings AWS API Documentation
     #
     class PostgreSQLSettings < Struct.new(
@@ -7118,7 +8004,8 @@ module Aws::DatabaseMigrationService
       :slot_name,
       :plugin_name,
       :secrets_manager_access_role_arn,
-      :secrets_manager_secret_id)
+      :secrets_manager_secret_id,
+      :trim_space_in_char)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -8165,18 +9052,38 @@ module Aws::DatabaseMigrationService
     #   The reason the replication task was stopped. This response parameter
     #   can return one of the following values:
     #
-    #   * `"STOP_REASON_FULL_LOAD_COMPLETED"` – Full-load migration
-    #     completed.
+    #   * `"Stop Reason NORMAL"`
     #
-    #   * `"STOP_REASON_CACHED_CHANGES_APPLIED"` – Change data capture (CDC)
-    #     load completed.
+    #   * `"Stop Reason RECOVERABLE_ERROR"`
     #
-    #   * `"STOP_REASON_CACHED_CHANGES_NOT_APPLIED"` – In a full-load and
-    #     CDC migration, the full load stopped as specified before starting
-    #     the CDC migration.
+    #   * `"Stop Reason FATAL_ERROR"`
     #
-    #   * `"STOP_REASON_SERVER_TIME"` – The migration stopped at the
-    #     specified server time.
+    #   * `"Stop Reason FULL_LOAD_ONLY_FINISHED"`
+    #
+    #   * `"Stop Reason STOPPED_AFTER_FULL_LOAD"` – Full load completed,
+    #     with cached changes not applied
+    #
+    #   * `"Stop Reason STOPPED_AFTER_CACHED_EVENTS"` – Full load completed,
+    #     with cached changes applied
+    #
+    #   * `"Stop Reason EXPRESS_LICENSE_LIMITS_REACHED"`
+    #
+    #   * `"Stop Reason STOPPED_AFTER_DDL_APPLY"` – User-defined stop task
+    #     after DDL applied
+    #
+    #   * `"Stop Reason STOPPED_DUE_TO_LOW_MEMORY"`
+    #
+    #   * `"Stop Reason STOPPED_DUE_TO_LOW_DISK"`
+    #
+    #   * `"Stop Reason STOPPED_AT_SERVER_TIME"` – User-defined server time
+    #     for stopping task
+    #
+    #   * `"Stop Reason STOPPED_AT_COMMIT_TIME"` – User-defined commit time
+    #     for stopping task
+    #
+    #   * `"Stop Reason RECONFIGURATION_RESTART"`
+    #
+    #   * `"Stop Reason RECYCLE_TASK"`
     #   @return [String]
     #
     # @!attribute [rw] replication_task_creation_date
@@ -8657,6 +9564,23 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] lsa_analysis_id
+    #   The ID of the LSA analysis run.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the LSA analysis, for example `COMPLETED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RunFleetAdvisorLsaAnalysisResponse AWS API Documentation
+    #
+    class RunFleetAdvisorLsaAnalysisResponse < Struct.new(
+      :lsa_analysis_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Insufficient privileges are preventing access to an Amazon S3 object.
     #
     # @!attribute [rw] message
@@ -8728,6 +9652,8 @@ module Aws::DatabaseMigrationService
     #         max_file_size: 1,
     #         rfc_4180: false,
     #         date_partition_timezone: "String",
+    #         add_trailing_padding_character: false,
+    #         expected_bucket_owner: "String",
     #       }
     #
     # @!attribute [rw] service_access_role_arn
@@ -9281,6 +10207,23 @@ module Aws::DatabaseMigrationService
     #   "dms-nattarat-test"\}'`
     #   @return [String]
     #
+    # @!attribute [rw] add_trailing_padding_character
+    #   Use the S3 target endpoint setting `AddTrailingPaddingCharacter` to
+    #   add padding on string data. The default value is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   To specify a bucket owner and prevent sniping, you can use the
+    #   `ExpectedBucketOwner` endpoint setting.
+    #
+    #   Example: `--s3-settings='\{"ExpectedBucketOwner":
+    #   "AWS_Account_ID"\}'`
+    #
+    #   When you make a request to test a connection or perform a migration,
+    #   S3 checks the account ID of the bucket owner against the specified
+    #   parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3Settings AWS API Documentation
     #
     class S3Settings < Struct.new(
@@ -9321,7 +10264,9 @@ module Aws::DatabaseMigrationService
       :ignore_header_rows,
       :max_file_size,
       :rfc_4180,
-      :date_partition_timezone)
+      :date_partition_timezone,
+      :add_trailing_padding_character,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9348,6 +10293,124 @@ module Aws::DatabaseMigrationService
     #
     class SNSNoAuthorizationFault < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a schema in a Fleet Advisor collector inventory.
+    #
+    # @!attribute [rw] code_line_count
+    #   The number of lines of code in a schema in a Fleet Advisor collector
+    #   inventory.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] code_size
+    #   The size level of the code in a schema in a Fleet Advisor collector
+    #   inventory.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] complexity
+    #   The complexity level of the code in a schema in a Fleet Advisor
+    #   collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] server
+    #   The database server for a schema in a Fleet Advisor collector
+    #   inventory.
+    #   @return [Types::ServerShortInfoResponse]
+    #
+    # @!attribute [rw] database_instance
+    #   The database for a schema in a Fleet Advisor collector inventory.
+    #   @return [Types::DatabaseShortInfoResponse]
+    #
+    # @!attribute [rw] schema_id
+    #   The ID of a schema in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   The name of a schema in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] original_schema
+    #   Describes a schema in a Fleet Advisor collector inventory.
+    #   @return [Types::SchemaShortInfoResponse]
+    #
+    # @!attribute [rw] similarity
+    #   The similarity value for a schema in a Fleet Advisor collector
+    #   inventory. A higher similarity value indicates that a schema is
+    #   likely to be a duplicate.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SchemaResponse AWS API Documentation
+    #
+    class SchemaResponse < Struct.new(
+      :code_line_count,
+      :code_size,
+      :complexity,
+      :server,
+      :database_instance,
+      :schema_id,
+      :schema_name,
+      :original_schema,
+      :similarity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a schema in a Fleet Advisor collector inventory.
+    #
+    # @!attribute [rw] schema_id
+    #   The ID of a schema in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   The name of a schema in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_id
+    #   The ID of a database in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of a database in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_ip_address
+    #   The IP address of a database in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SchemaShortInfoResponse AWS API Documentation
+    #
+    class SchemaShortInfoResponse < Struct.new(
+      :schema_id,
+      :schema_name,
+      :database_id,
+      :database_name,
+      :database_ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a server in a Fleet Advisor collector inventory.
+    #
+    # @!attribute [rw] server_id
+    #   The ID of a server in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   The IP address of a server in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_name
+    #   The name address of a server in a Fleet Advisor collector inventory.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ServerShortInfoResponse AWS API Documentation
+    #
+    class ServerShortInfoResponse < Struct.new(
+      :server_id,
+      :ip_address,
+      :server_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9879,8 +10942,8 @@ module Aws::DatabaseMigrationService
     #   The state of the tables described.
     #
     #   Valid states: Table does not exist \| Before load \| Full load \|
-    #   Table completed \| Table cancelled \| Table error \| Table all \|
-    #   Table updates \| Table is being reloaded
+    #   Table completed \| Table cancelled \| Table error \| Table is being
+    #   reloaded
     #   @return [String]
     #
     # @!attribute [rw] validation_pending_records
@@ -10075,6 +11138,42 @@ module Aws::DatabaseMigrationService
     #
     class TestConnectionResponse < Struct.new(
       :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateSubscriptionsToEventBridgeMessage
+    #   data as a hash:
+    #
+    #       {
+    #         force_move: false,
+    #       }
+    #
+    # @!attribute [rw] force_move
+    #   When set to true, this operation migrates DMS subscriptions for
+    #   Amazon SNS notifications no matter what your replication instance
+    #   version is. If not set or set to false, this operation runs only
+    #   when all your replication instances are from DMS version 3.4.6 or
+    #   higher.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/UpdateSubscriptionsToEventBridgeMessage AWS API Documentation
+    #
+    class UpdateSubscriptionsToEventBridgeMessage < Struct.new(
+      :force_move)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result
+    #   A string that indicates how many event subscriptions were migrated
+    #   and how many remain to be migrated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/UpdateSubscriptionsToEventBridgeResponse AWS API Documentation
+    #
+    class UpdateSubscriptionsToEventBridgeResponse < Struct.new(
+      :result)
       SENSITIVE = []
       include Aws::Structure
     end

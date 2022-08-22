@@ -28,7 +28,7 @@ require_relative 'aws-sdk-ssoadmin/customizations'
 # structure.
 #
 #     sso_admin = Aws::SSOAdmin::Client.new
-#     resp = sso_admin.attach_managed_policy_to_permission_set(params)
+#     resp = sso_admin.attach_customer_managed_policy_reference_to_permission_set(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-ssoadmin/customizations'
 # @!group service
 module Aws::SSOAdmin
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.18.0'
 
 end

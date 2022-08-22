@@ -5,6 +5,7 @@ require_relative '../spec_helper'
 module Aws
   module S3
     module Plugins
+
       describe StreamingRetry do
         let(:creds) { Aws::Credentials.new('akid', 'secret') }
         let(:client) { S3::Client.new(region: 'us-east-1', credentials: creds, retry_base_delay: 0.001) }
@@ -145,6 +146,33 @@ module Aws
             end.to raise_error(Errors::Http500Error)
             output.rewind
             expect(File.read(tempfile.path)).to eq(parts[0])
+          end
+
+          it 'rewinds the underlying file on non-truncated errors' do
+            parts = %w[data_part_1 part2 longer_data_at_end_part3]
+            full_test_data = parts.join
+
+            first_call = true
+            allow_any_instance_of(Seahorse::Client::NetHttp::Handler).to receive(:transmit) do |s, config, req, resp|
+              if first_call
+
+                resp.signal_headers(200, {})
+
+                underlying_file = resp.body.instance_variable_get(:@file)
+                expect(underlying_file).to receive(:rewind).and_call_original
+
+                resp.signal_data(parts[0])
+                resp.signal_error(Seahorse::Client::NetworkingError.new(SocketError.new))
+                first_call = false
+              else
+                resp.signal_headers(200, {})
+                resp.signal_data(full_test_data)
+                resp.signal_done
+              end
+            end
+
+            client.get_object(request)
+            expect(File.read(tempfile.path)).to eq(full_test_data)
           end
         end
       end

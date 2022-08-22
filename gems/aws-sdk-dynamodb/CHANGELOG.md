@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2022-08-18)
+------------------
+
+* Feature - This release adds support for importing data from S3 into a new DynamoDB table
+
+1.75.0 (2022-06-17)
+------------------
+
+* Feature - Doc only update for DynamoDB service
+
 1.74.0 (2022-02-24)
 ------------------
 

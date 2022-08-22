@@ -69,7 +69,7 @@ module Aws::CloudControlApi
   #
   # | waiter_name              | params                               | :delay   | :max_attempts |
   # | ------------------------ | ------------------------------------ | -------- | ------------- |
-  # | resource_request_success | {Client#get_resource_request_status} | 5        | 720           |
+  # | resource_request_success | {Client#get_resource_request_status} | 5        | 24            |
   #
   module Waiters
 
@@ -78,34 +78,34 @@ module Aws::CloudControlApi
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (720)
+      # @option options [Integer] :max_attempts (24)
       # @option options [Integer] :delay (5)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 720,
+          max_attempts: 24,
           delay: 5,
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_resource_request_status,
             acceptors: [
               {
-                "state" => "success",
                 "matcher" => "path",
                 "argument" => "progress_event.operation_status",
+                "state" => "success",
                 "expected" => "SUCCESS"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "progress_event.operation_status",
+                "state" => "failure",
                 "expected" => "FAILED"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "progress_event.operation_status",
+                "state" => "failure",
                 "expected" => "CANCEL_COMPLETE"
               }
             ]

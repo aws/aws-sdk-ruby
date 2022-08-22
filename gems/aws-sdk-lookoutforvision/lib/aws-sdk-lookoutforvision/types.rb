@@ -23,6 +23,29 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
+    # Information about an anomaly type found on an image by an image
+    # segmentation model. For more information, see DetectAnomalies.
+    #
+    # @!attribute [rw] name
+    #   The name of an anomaly type found in an image. `Name` maps to an
+    #   anomaly type in the training dataset, apart from the anomaly type
+    #   `background`. The service automatically inserts the `background`
+    #   anomaly type into the response from `DetectAnomalies`.
+    #   @return [String]
+    #
+    # @!attribute [rw] pixel_anomaly
+    #   Information about the pixel mask that covers an anomaly type.
+    #   @return [Types::PixelAnomaly]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/Anomaly AWS API Documentation
+    #
+    class Anomaly < Struct.new(
+      :name,
+      :pixel_anomaly)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The update or deletion of a resource caused an inconsistent state.
     #
     # @!attribute [rw] message
@@ -812,6 +835,12 @@ module Aws::LookoutforVision
     end
 
     # The prediction results from a call to DetectAnomalies.
+    # `DetectAnomalyResult` includes classification information for the
+    # prediction (`IsAnomalous` and `Confidence`). If the model you use is
+    # an image segementation model, `DetectAnomalyResult` also includes
+    # segmentation information (`Anomalies` and `AnomalyMask`).
+    # Classification information is calculated separately from segmentation
+    # information and you shouldn't assume a relationship between them.
     #
     # @!attribute [rw] source
     #   The source of the image that was analyzed. `direct` means that the
@@ -820,20 +849,51 @@ module Aws::LookoutforVision
     #   @return [Types::ImageSource]
     #
     # @!attribute [rw] is_anomalous
-    #   True if the image contains an anomaly, otherwise false.
+    #   True if Amazon Lookout for Vision classifies the image as containing
+    #   an anomaly, otherwise false.
     #   @return [Boolean]
     #
     # @!attribute [rw] confidence
-    #   The confidence that Amazon Lookout for Vision has in the accuracy of
-    #   the prediction.
+    #   The confidence that Lookout for Vision has in the accuracy of the
+    #   classification in `IsAnomalous`.
     #   @return [Float]
+    #
+    # @!attribute [rw] anomalies
+    #   If the model is an image segmentation model, `Anomalies` contains a
+    #   list of anomaly types found in the image. There is one entry for
+    #   each type of anomaly found (even if multiple instances of an anomaly
+    #   type exist on the image). The first element in the list is always an
+    #   anomaly type representing the image background ('background') and
+    #   shouldn't be considered an anomaly. Amazon Lookout for Vision
+    #   automatically add the background anomaly type to the response, and
+    #   you don't need to declare a background anomaly type in your
+    #   dataset.
+    #
+    #   If the list has one entry ('background'), no anomalies were found
+    #   on the image.
+    #
+    #
+    #
+    #   An image classification model doesn't return an `Anomalies` list.
+    #   @return [Array<Types::Anomaly>]
+    #
+    # @!attribute [rw] anomaly_mask
+    #   If the model is an image segmentation model, `AnomalyMask` contains
+    #   pixel masks that covers all anomaly types found on the image. Each
+    #   anomaly type has a different mask color. To map a color to an
+    #   anomaly type, see the `color` field of the PixelAnomaly object.
+    #
+    #   An image classification model doesn't return an `Anomalies` list.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DetectAnomalyResult AWS API Documentation
     #
     class DetectAnomalyResult < Struct.new(
       :source,
       :is_anomalous,
-      :confidence)
+      :confidence,
+      :anomalies,
+      :anomaly_mask)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -857,7 +917,7 @@ module Aws::LookoutforVision
     #         target_platform: {
     #           os: "LINUX", # required, accepts LINUX
     #           arch: "ARM64", # required, accepts ARM64, X86_64
-    #           accelerator: "NVIDIA", # required, accepts NVIDIA
+    #           accelerator: "NVIDIA", # accepts NVIDIA
     #         },
     #         s3_output_location: { # required
     #           bucket: "S3BucketName", # required
@@ -876,9 +936,9 @@ module Aws::LookoutforVision
     #
     # @!attribute [rw] compiler_options
     #   Additional compiler options for the Greengrass component. Currently,
-    #   only NVIDIA Graphics Processing Units (GPU) are supported. If you
-    #   specify `TargetPlatform`, you must specify `CompilerOptions`. If you
-    #   specify `TargetDevice`, don't specify `CompilerOptions`.
+    #   only NVIDIA Graphics Processing Units (GPU) and CPU accelerators are
+    #   supported. If you specify `TargetDevice`, don't specify
+    #   `CompilerOptions`.
     #
     #   For more information, see *Compiler options* in the Amazon Lookout
     #   for Vision Developer Guide.
@@ -1380,6 +1440,16 @@ module Aws::LookoutforVision
     #   was used to encrypt the model during training.
     #   @return [String]
     #
+    # @!attribute [rw] min_inference_units
+    #   The minimum number of inference units used by the model. For more
+    #   information, see StartModel
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_inference_units
+    #   The maximum number of inference units Amazon Lookout for Vision uses
+    #   to auto-scale the model. For more information, see StartModel.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ModelDescription AWS API Documentation
     #
     class ModelDescription < Struct.new(
@@ -1394,7 +1464,9 @@ module Aws::LookoutforVision
       :evaluation_manifest,
       :evaluation_result,
       :evaluation_end_timestamp,
-      :kms_key_id)
+      :kms_key_id,
+      :min_inference_units,
+      :max_inference_units)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1457,7 +1529,7 @@ module Aws::LookoutforVision
     #           target_platform: {
     #             os: "LINUX", # required, accepts LINUX
     #             arch: "ARM64", # required, accepts ARM64, X86_64
-    #             accelerator: "NVIDIA", # required, accepts NVIDIA
+    #             accelerator: "NVIDIA", # accepts NVIDIA
     #           },
     #           s3_output_location: { # required
     #             bucket: "S3BucketName", # required
@@ -1699,6 +1771,29 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
+    # Information about the pixels in an anomaly mask. For more information,
+    # see Anomaly. `PixelAnomaly` is only returned by image segmentation
+    # models.
+    #
+    # @!attribute [rw] total_percentage_area
+    #   The percentage area of the image that the anomaly type covers.
+    #   @return [Float]
+    #
+    # @!attribute [rw] color
+    #   A hex color value for the mask that covers an anomaly type. Each
+    #   anomaly type has a different mask color. The color maps to the color
+    #   of the anomaly type used in the training dataset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/PixelAnomaly AWS API Documentation
+    #
+    class PixelAnomaly < Struct.new(
+      :total_percentage_area,
+      :color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describe an Amazon Lookout for Vision project. For more information,
     # see DescribeProject.
     #
@@ -1860,7 +1955,7 @@ module Aws::LookoutforVision
     #             target_platform: {
     #               os: "LINUX", # required, accepts LINUX
     #               arch: "ARM64", # required, accepts ARM64, X86_64
-    #               accelerator: "NVIDIA", # required, accepts NVIDIA
+    #               accelerator: "NVIDIA", # accepts NVIDIA
     #             },
     #             s3_output_location: { # required
     #               bucket: "S3BucketName", # required
@@ -1961,6 +2056,7 @@ module Aws::LookoutforVision
     #         model_version: "ModelVersion", # required
     #         min_inference_units: 1, # required
     #         client_token: "ClientToken",
+    #         max_inference_units: 1,
     #       }
     #
     # @!attribute [rw] project_name
@@ -2000,13 +2096,20 @@ module Aws::LookoutforVision
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] max_inference_units
+    #   The maximum number of inference units to use for auto-scaling the
+    #   model. If you don't specify a value, Amazon Lookout for Vision
+    #   doesn't auto-scale the model.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/StartModelRequest AWS API Documentation
     #
     class StartModelRequest < Struct.new(
       :project_name,
       :model_version,
       :min_inference_units,
-      :client_token)
+      :client_token,
+      :max_inference_units)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2155,7 +2258,7 @@ module Aws::LookoutforVision
     #       {
     #         os: "LINUX", # required, accepts LINUX
     #         arch: "ARM64", # required, accepts ARM64, X86_64
-    #         accelerator: "NVIDIA", # required, accepts NVIDIA
+    #         accelerator: "NVIDIA", # accepts NVIDIA
     #       }
     #
     # @!attribute [rw] os
@@ -2170,10 +2273,20 @@ module Aws::LookoutforVision
     #   @return [String]
     #
     # @!attribute [rw] accelerator
-    #   The target accelerator for the model. NVIDIA (Nvidia graphics
-    #   processing unit) is the only accelerator that is currently
-    #   supported. You must also specify the `gpu-code`, `trt-ver`, and
-    #   `cuda-ver` compiler options.
+    #   The target accelerator for the model. Currently, Amazon Lookout for
+    #   Vision only supports NVIDIA (Nvidia graphics processing unit) and
+    #   CPU accelerators. If you specify NVIDIA as an accelerator, you must
+    #   also specify the `gpu-code`, `trt-ver`, and `cuda-ver` compiler
+    #   options. If you don't specify an accelerator, Lookout for Vision
+    #   uses the CPU for compilation and we highly recommend that you use
+    #   the GreengrassConfiguration$CompilerOptions field. For example, you
+    #   can use the following compiler options for CPU:
+    #
+    #   * `mcpu`\: CPU micro-architecture. For example, `\{'mcpu':
+    #     'skylake-avx512'\}`
+    #
+    #   * `mattr`\: CPU flags. For example, `\{'mattr': ['+neon',
+    #     '+vfpv4']\}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/TargetPlatform AWS API Documentation

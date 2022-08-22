@@ -152,6 +152,7 @@ module Aws::FMS
     PreviousAppsList = Shapes::MapShape.new(name: 'PreviousAppsList')
     PreviousListVersion = Shapes::StringShape.new(name: 'PreviousListVersion')
     PreviousProtocolsList = Shapes::MapShape.new(name: 'PreviousProtocolsList')
+    PriorityNumber = Shapes::IntegerShape.new(name: 'PriorityNumber')
     ProtectionData = Shapes::StringShape.new(name: 'ProtectionData')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     ProtocolsList = Shapes::ListShape.new(name: 'ProtocolsList')
@@ -187,11 +188,13 @@ module Aws::FMS
     Route = Shapes::StructureShape.new(name: 'Route')
     RouteHasOutOfScopeEndpointViolation = Shapes::StructureShape.new(name: 'RouteHasOutOfScopeEndpointViolation')
     Routes = Shapes::ListShape.new(name: 'Routes')
+    RuleOrder = Shapes::StringShape.new(name: 'RuleOrder')
     SecurityGroupRemediationAction = Shapes::StructureShape.new(name: 'SecurityGroupRemediationAction')
     SecurityGroupRemediationActions = Shapes::ListShape.new(name: 'SecurityGroupRemediationActions')
     SecurityGroupRuleDescription = Shapes::StructureShape.new(name: 'SecurityGroupRuleDescription')
     SecurityServicePolicyData = Shapes::StructureShape.new(name: 'SecurityServicePolicyData')
     SecurityServiceType = Shapes::StringShape.new(name: 'SecurityServiceType')
+    StatefulEngineOptions = Shapes::StructureShape.new(name: 'StatefulEngineOptions')
     StatefulRuleGroup = Shapes::StructureShape.new(name: 'StatefulRuleGroup')
     StatefulRuleGroupList = Shapes::ListShape.new(name: 'StatefulRuleGroupList')
     StatelessRuleGroup = Shapes::StructureShape.new(name: 'StatelessRuleGroup')
@@ -635,6 +638,8 @@ module Aws::FMS
     NetworkFirewallPolicyDescription.add_member(:stateless_fragment_default_actions, Shapes::ShapeRef.new(shape: NetworkFirewallActionList, location_name: "StatelessFragmentDefaultActions"))
     NetworkFirewallPolicyDescription.add_member(:stateless_custom_actions, Shapes::ShapeRef.new(shape: NetworkFirewallActionList, location_name: "StatelessCustomActions"))
     NetworkFirewallPolicyDescription.add_member(:stateful_rule_groups, Shapes::ShapeRef.new(shape: StatefulRuleGroupList, location_name: "StatefulRuleGroups"))
+    NetworkFirewallPolicyDescription.add_member(:stateful_default_actions, Shapes::ShapeRef.new(shape: NetworkFirewallActionList, location_name: "StatefulDefaultActions"))
+    NetworkFirewallPolicyDescription.add_member(:stateful_engine_options, Shapes::ShapeRef.new(shape: StatefulEngineOptions, location_name: "StatefulEngineOptions"))
     NetworkFirewallPolicyDescription.struct_class = Types::NetworkFirewallPolicyDescription
 
     NetworkFirewallPolicyModifiedViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
@@ -874,8 +879,12 @@ module Aws::FMS
     SecurityServicePolicyData.add_member(:policy_option, Shapes::ShapeRef.new(shape: PolicyOption, location_name: "PolicyOption"))
     SecurityServicePolicyData.struct_class = Types::SecurityServicePolicyData
 
+    StatefulEngineOptions.add_member(:rule_order, Shapes::ShapeRef.new(shape: RuleOrder, location_name: "RuleOrder"))
+    StatefulEngineOptions.struct_class = Types::StatefulEngineOptions
+
     StatefulRuleGroup.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: NetworkFirewallResourceName, location_name: "RuleGroupName"))
     StatefulRuleGroup.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
+    StatefulRuleGroup.add_member(:priority, Shapes::ShapeRef.new(shape: PriorityNumber, location_name: "Priority"))
     StatefulRuleGroup.struct_class = Types::StatefulRuleGroup
 
     StatefulRuleGroupList.member = Shapes::ShapeRef.new(shape: StatefulRuleGroup)

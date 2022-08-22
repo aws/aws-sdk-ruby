@@ -731,6 +731,7 @@ module Aws::MQ
     #
     # @return [Types::DescribeBrokerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DescribeBrokerResponse#actions_required #actions_required} => Array&lt;Types::ActionRequired&gt;
     #   * {Types::DescribeBrokerResponse#authentication_strategy #authentication_strategy} => String
     #   * {Types::DescribeBrokerResponse#auto_minor_version_upgrade #auto_minor_version_upgrade} => Boolean
     #   * {Types::DescribeBrokerResponse#broker_arn #broker_arn} => String
@@ -768,6 +769,9 @@ module Aws::MQ
     #
     # @example Response structure
     #
+    #   resp.actions_required #=> Array
+    #   resp.actions_required[0].action_required_code #=> String
+    #   resp.actions_required[0].action_required_info #=> String
     #   resp.authentication_strategy #=> String, one of "SIMPLE", "LDAP"
     #   resp.auto_minor_version_upgrade #=> Boolean
     #   resp.broker_arn #=> String
@@ -778,7 +782,7 @@ module Aws::MQ
     #   resp.broker_instances[0].endpoints[0] #=> String
     #   resp.broker_instances[0].ip_address #=> String
     #   resp.broker_name #=> String
-    #   resp.broker_state #=> String, one of "CREATION_IN_PROGRESS", "CREATION_FAILED", "DELETION_IN_PROGRESS", "RUNNING", "REBOOT_IN_PROGRESS"
+    #   resp.broker_state #=> String, one of "CREATION_IN_PROGRESS", "CREATION_FAILED", "DELETION_IN_PROGRESS", "RUNNING", "REBOOT_IN_PROGRESS", "CRITICAL_ACTION_REQUIRED"
     #   resp.configurations.current.id #=> String
     #   resp.configurations.current.revision #=> Integer
     #   resp.configurations.history #=> Array
@@ -1095,7 +1099,7 @@ module Aws::MQ
     #   resp.broker_summaries[0].broker_arn #=> String
     #   resp.broker_summaries[0].broker_id #=> String
     #   resp.broker_summaries[0].broker_name #=> String
-    #   resp.broker_summaries[0].broker_state #=> String, one of "CREATION_IN_PROGRESS", "CREATION_FAILED", "DELETION_IN_PROGRESS", "RUNNING", "REBOOT_IN_PROGRESS"
+    #   resp.broker_summaries[0].broker_state #=> String, one of "CREATION_IN_PROGRESS", "CREATION_FAILED", "DELETION_IN_PROGRESS", "RUNNING", "REBOOT_IN_PROGRESS", "CRITICAL_ACTION_REQUIRED"
     #   resp.broker_summaries[0].created #=> Time
     #   resp.broker_summaries[0].deployment_mode #=> String, one of "SINGLE_INSTANCE", "ACTIVE_STANDBY_MULTI_AZ", "CLUSTER_MULTI_AZ"
     #   resp.broker_summaries[0].engine_type #=> String, one of "ACTIVEMQ", "RABBITMQ"
@@ -1506,7 +1510,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

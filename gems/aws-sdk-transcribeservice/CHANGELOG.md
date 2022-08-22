@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2022-07-22)
+------------------
+
+* Feature - Remove unsupported language codes for StartTranscriptionJob and update VocabularyFileUri for UpdateMedicalVocabulary
+
+1.75.0 (2022-05-31)
+------------------
+
+* Feature - Amazon Transcribe now supports automatic language identification for multi-lingual audio in batch mode.
+
 1.74.0 (2022-03-24)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2022-06-30)
+------------------
+
+* Feature - This release adds support for managing user availability configurations in Amazon WorkMail.
+
 1.49.0 (2022-02-24)
 ------------------
 

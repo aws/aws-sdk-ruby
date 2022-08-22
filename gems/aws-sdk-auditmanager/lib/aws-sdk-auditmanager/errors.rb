@@ -30,6 +30,8 @@ module Aws::AuditManager
   # * {AccessDeniedException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
+  # * {ThrottlingException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -90,6 +92,36 @@ module Aws::AuditManager
       # @return [String]
       def resource_type
         @data[:resource_type]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AuditManager::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AuditManager::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

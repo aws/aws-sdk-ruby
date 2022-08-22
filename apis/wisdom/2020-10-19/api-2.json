@@ -157,6 +157,7 @@
       "output":{"shape":"DeleteKnowledgeBaseResponse"},
       "errors":[
         {"shape":"ConflictException"},
+        {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
         {"shape":"ResourceNotFoundException"}
       ],
@@ -347,6 +348,22 @@
       },
       "input":{"shape":"NotifyRecommendationsReceivedRequest"},
       "output":{"shape":"NotifyRecommendationsReceivedResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "idempotent":true
+    },
+    "PutFeedback":{
+      "name":"PutFeedback",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/assistants/{assistantId}/feedback",
+        "responseCode":200
+      },
+      "input":{"shape":"PutFeedbackRequest"},
+      "output":{"shape":"PutFeedbackResponse"},
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
@@ -687,14 +704,16 @@
         "status":{"shape":"ContentStatus"},
         "tags":{"shape":"Tags"},
         "title":{"shape":"ContentTitle"},
-        "url":{"shape":"SyntheticContentDataUrl"},
+        "url":{"shape":"Url"},
         "urlExpiry":{"shape":"SyntheticTimestamp_epoch_seconds"}
       }
     },
     "ContentMetadata":{
       "type":"map",
       "key":{"shape":"NonEmptyString"},
-      "value":{"shape":"NonEmptyString"}
+      "value":{"shape":"NonEmptyString"},
+      "max":10,
+      "min":0
     },
     "ContentReference":{
       "type":"structure",
@@ -756,7 +775,7 @@
     },
     "ContentType":{
       "type":"string",
-      "pattern":"^(text/(plain|html))|(application/x\\.wisdom-json;source=(salesforce|servicenow))$"
+      "pattern":"^(text/(plain|html))|(application/x\\.wisdom-json;source=(salesforce|servicenow|zendesk))$"
     },
     "CreateAssistantAssociationRequest":{
       "type":"structure",
@@ -993,7 +1012,14 @@
       "type":"structure",
       "members":{
         "highlights":{"shape":"Highlights"},
-        "text":{"shape":"SyntheticDocumentTextString"}
+        "text":{"shape":"SensitiveString"}
+      }
+    },
+    "FeedbackData":{
+      "type":"structure",
+      "required":["relevance"],
+      "members":{
+        "relevance":{"shape":"Relevance"}
       }
     },
     "Filter":{
@@ -1169,7 +1195,8 @@
       "type":"structure",
       "required":["recommendations"],
       "members":{
-        "recommendations":{"shape":"RecommendationList"}
+        "recommendations":{"shape":"RecommendationList"},
+        "triggers":{"shape":"RecommendationTriggerList"}
       }
     },
     "GetSessionRequest":{
@@ -1488,6 +1515,42 @@
       },
       "exception":true
     },
+    "PutFeedbackRequest":{
+      "type":"structure",
+      "required":[
+        "assistantId",
+        "feedback",
+        "targetId",
+        "targetType"
+      ],
+      "members":{
+        "assistantId":{
+          "shape":"UuidOrArn",
+          "location":"uri",
+          "locationName":"assistantId"
+        },
+        "feedback":{"shape":"FeedbackData"},
+        "targetId":{"shape":"String"},
+        "targetType":{"shape":"TargetType"}
+      }
+    },
+    "PutFeedbackResponse":{
+      "type":"structure",
+      "required":[
+        "assistantArn",
+        "assistantId",
+        "feedback",
+        "targetId",
+        "targetType"
+      ],
+      "members":{
+        "assistantArn":{"shape":"UuidOrArn"},
+        "assistantId":{"shape":"Uuid"},
+        "feedback":{"shape":"FeedbackData"},
+        "targetId":{"shape":"Uuid"},
+        "targetType":{"shape":"TargetType"}
+      }
+    },
     "QueryAssistantRequest":{
       "type":"structure",
       "required":[
@@ -1513,6 +1576,12 @@
         "results":{"shape":"QueryResultsList"}
       }
     },
+    "QueryRecommendationTriggerData":{
+      "type":"structure",
+      "members":{
+        "text":{"shape":"QueryText"}
+      }
+    },
     "QueryResultsList":{
       "type":"list",
       "member":{"shape":"ResultData"}
@@ -1531,7 +1600,8 @@
         "document":{"shape":"Document"},
         "recommendationId":{"shape":"String"},
         "relevanceLevel":{"shape":"RelevanceLevel"},
-        "relevanceScore":{"shape":"RelevanceScore"}
+        "relevanceScore":{"shape":"RelevanceScore"},
+        "type":{"shape":"RecommendationType"}
       }
     },
     "RecommendationIdList":{
@@ -1541,6 +1611,57 @@
     "RecommendationList":{
       "type":"list",
       "member":{"shape":"RecommendationData"}
+    },
+    "RecommendationSourceType":{
+      "type":"string",
+      "enum":[
+        "ISSUE_DETECTION",
+        "RULE_EVALUATION",
+        "OTHER"
+      ]
+    },
+    "RecommendationTrigger":{
+      "type":"structure",
+      "required":[
+        "data",
+        "id",
+        "recommendationIds",
+        "source",
+        "type"
+      ],
+      "members":{
+        "data":{"shape":"RecommendationTriggerData"},
+        "id":{"shape":"Uuid"},
+        "recommendationIds":{"shape":"RecommendationIdList"},
+        "source":{"shape":"RecommendationSourceType"},
+        "type":{"shape":"RecommendationTriggerType"}
+      }
+    },
+    "RecommendationTriggerData":{
+      "type":"structure",
+      "members":{
+        "query":{"shape":"QueryRecommendationTriggerData"}
+      },
+      "union":true
+    },
+    "RecommendationTriggerList":{
+      "type":"list",
+      "member":{"shape":"RecommendationTrigger"}
+    },
+    "RecommendationTriggerType":{
+      "type":"string",
+      "enum":["QUERY"]
+    },
+    "RecommendationType":{
+      "type":"string",
+      "enum":["KNOWLEDGE_CONTENT"]
+    },
+    "Relevance":{
+      "type":"string",
+      "enum":[
+        "HELPFUL",
+        "NOT_HELPFUL"
+      ]
     },
     "RelevanceLevel":{
       "type":"string",
@@ -1673,6 +1794,10 @@
         "sessionSummaries":{"shape":"SessionSummaries"}
       }
     },
+    "SensitiveString":{
+      "type":"string",
+      "sensitive":true
+    },
     "ServerSideEncryptionConfiguration":{
       "type":"structure",
       "members":{
@@ -1757,27 +1882,11 @@
       "members":{
         "headersToInclude":{"shape":"Headers"},
         "uploadId":{"shape":"NonEmptyString"},
-        "url":{"shape":"SyntheticStartContentUploadResponseUrl"},
+        "url":{"shape":"Url"},
         "urlExpiry":{"shape":"SyntheticTimestamp_epoch_seconds"}
       }
     },
     "String":{"type":"string"},
-    "SyntheticContentDataUrl":{
-      "type":"string",
-      "max":4096,
-      "min":1,
-      "sensitive":true
-    },
-    "SyntheticDocumentTextString":{
-      "type":"string",
-      "sensitive":true
-    },
-    "SyntheticStartContentUploadResponseUrl":{
-      "type":"string",
-      "max":4096,
-      "min":1,
-      "sensitive":true
-    },
     "SyntheticTimestamp_epoch_seconds":{
       "type":"timestamp",
       "timestampFormat":"unixTimestamp"
@@ -1823,6 +1932,13 @@
       "type":"map",
       "key":{"shape":"TagKey"},
       "value":{"shape":"TagValue"}
+    },
+    "TargetType":{
+      "type":"string",
+      "enum":[
+        "RECOMMENDATION",
+        "RESULT"
+      ]
     },
     "TooManyTagsException":{
       "type":"structure",
@@ -1916,6 +2032,12 @@
       "type":"string",
       "max":4096,
       "min":1
+    },
+    "Url":{
+      "type":"string",
+      "max":4096,
+      "min":1,
+      "sensitive":true
     },
     "Uuid":{
       "type":"string",

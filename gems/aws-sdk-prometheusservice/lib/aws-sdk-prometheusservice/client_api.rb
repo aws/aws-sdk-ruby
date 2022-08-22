@@ -21,15 +21,20 @@ module Aws::PrometheusService
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAlertManagerDefinitionRequest = Shapes::StructureShape.new(name: 'CreateAlertManagerDefinitionRequest')
     CreateAlertManagerDefinitionResponse = Shapes::StructureShape.new(name: 'CreateAlertManagerDefinitionResponse')
+    CreateLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'CreateLoggingConfigurationRequest')
+    CreateLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'CreateLoggingConfigurationResponse')
     CreateRuleGroupsNamespaceRequest = Shapes::StructureShape.new(name: 'CreateRuleGroupsNamespaceRequest')
     CreateRuleGroupsNamespaceResponse = Shapes::StructureShape.new(name: 'CreateRuleGroupsNamespaceResponse')
     CreateWorkspaceRequest = Shapes::StructureShape.new(name: 'CreateWorkspaceRequest')
     CreateWorkspaceResponse = Shapes::StructureShape.new(name: 'CreateWorkspaceResponse')
     DeleteAlertManagerDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteAlertManagerDefinitionRequest')
+    DeleteLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteLoggingConfigurationRequest')
     DeleteRuleGroupsNamespaceRequest = Shapes::StructureShape.new(name: 'DeleteRuleGroupsNamespaceRequest')
     DeleteWorkspaceRequest = Shapes::StructureShape.new(name: 'DeleteWorkspaceRequest')
     DescribeAlertManagerDefinitionRequest = Shapes::StructureShape.new(name: 'DescribeAlertManagerDefinitionRequest')
     DescribeAlertManagerDefinitionResponse = Shapes::StructureShape.new(name: 'DescribeAlertManagerDefinitionResponse')
+    DescribeLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeLoggingConfigurationRequest')
+    DescribeLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeLoggingConfigurationResponse')
     DescribeRuleGroupsNamespaceRequest = Shapes::StructureShape.new(name: 'DescribeRuleGroupsNamespaceRequest')
     DescribeRuleGroupsNamespaceResponse = Shapes::StructureShape.new(name: 'DescribeRuleGroupsNamespaceResponse')
     DescribeWorkspaceRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceRequest')
@@ -45,6 +50,10 @@ module Aws::PrometheusService
     ListWorkspacesRequest = Shapes::StructureShape.new(name: 'ListWorkspacesRequest')
     ListWorkspacesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListWorkspacesRequestMaxResultsInteger')
     ListWorkspacesResponse = Shapes::StructureShape.new(name: 'ListWorkspacesResponse')
+    LogGroupArn = Shapes::StringShape.new(name: 'LogGroupArn')
+    LoggingConfigurationMetadata = Shapes::StructureShape.new(name: 'LoggingConfigurationMetadata')
+    LoggingConfigurationStatus = Shapes::StructureShape.new(name: 'LoggingConfigurationStatus')
+    LoggingConfigurationStatusCode = Shapes::StringShape.new(name: 'LoggingConfigurationStatusCode')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PutAlertManagerDefinitionRequest = Shapes::StructureShape.new(name: 'PutAlertManagerDefinitionRequest')
     PutAlertManagerDefinitionResponse = Shapes::StructureShape.new(name: 'PutAlertManagerDefinitionResponse')
@@ -71,6 +80,8 @@ module Aws::PrometheusService
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateLoggingConfigurationRequest')
+    UpdateLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateLoggingConfigurationResponse')
     UpdateWorkspaceAliasRequest = Shapes::StructureShape.new(name: 'UpdateWorkspaceAliasRequest')
     Uri = Shapes::StringShape.new(name: 'Uri')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -112,6 +123,14 @@ module Aws::PrometheusService
     CreateAlertManagerDefinitionResponse.add_member(:status, Shapes::ShapeRef.new(shape: AlertManagerDefinitionStatus, required: true, location_name: "status"))
     CreateAlertManagerDefinitionResponse.struct_class = Types::CreateAlertManagerDefinitionResponse
 
+    CreateLoggingConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateLoggingConfigurationRequest.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "logGroupArn"))
+    CreateLoggingConfigurationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    CreateLoggingConfigurationRequest.struct_class = Types::CreateLoggingConfigurationRequest
+
+    CreateLoggingConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: LoggingConfigurationStatus, required: true, location_name: "status"))
+    CreateLoggingConfigurationResponse.struct_class = Types::CreateLoggingConfigurationResponse
+
     CreateRuleGroupsNamespaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateRuleGroupsNamespaceRequest.add_member(:data, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceData, required: true, location_name: "data"))
     CreateRuleGroupsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, required: true, location_name: "name"))
@@ -140,6 +159,10 @@ module Aws::PrometheusService
     DeleteAlertManagerDefinitionRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     DeleteAlertManagerDefinitionRequest.struct_class = Types::DeleteAlertManagerDefinitionRequest
 
+    DeleteLoggingConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteLoggingConfigurationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    DeleteLoggingConfigurationRequest.struct_class = Types::DeleteLoggingConfigurationRequest
+
     DeleteRuleGroupsNamespaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DeleteRuleGroupsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, required: true, location: "uri", location_name: "name"))
     DeleteRuleGroupsNamespaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
@@ -154,6 +177,12 @@ module Aws::PrometheusService
 
     DescribeAlertManagerDefinitionResponse.add_member(:alert_manager_definition, Shapes::ShapeRef.new(shape: AlertManagerDefinitionDescription, required: true, location_name: "alertManagerDefinition"))
     DescribeAlertManagerDefinitionResponse.struct_class = Types::DescribeAlertManagerDefinitionResponse
+
+    DescribeLoggingConfigurationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    DescribeLoggingConfigurationRequest.struct_class = Types::DescribeLoggingConfigurationRequest
+
+    DescribeLoggingConfigurationResponse.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfigurationMetadata, required: true, location_name: "loggingConfiguration"))
+    DescribeLoggingConfigurationResponse.struct_class = Types::DescribeLoggingConfigurationResponse
 
     DescribeRuleGroupsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, required: true, location: "uri", location_name: "name"))
     DescribeRuleGroupsNamespaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
@@ -196,6 +225,17 @@ module Aws::PrometheusService
     ListWorkspacesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWorkspacesResponse.add_member(:workspaces, Shapes::ShapeRef.new(shape: WorkspaceSummaryList, required: true, location_name: "workspaces"))
     ListWorkspacesResponse.struct_class = Types::ListWorkspacesResponse
+
+    LoggingConfigurationMetadata.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    LoggingConfigurationMetadata.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "logGroupArn"))
+    LoggingConfigurationMetadata.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modifiedAt"))
+    LoggingConfigurationMetadata.add_member(:status, Shapes::ShapeRef.new(shape: LoggingConfigurationStatus, required: true, location_name: "status"))
+    LoggingConfigurationMetadata.add_member(:workspace, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspace"))
+    LoggingConfigurationMetadata.struct_class = Types::LoggingConfigurationMetadata
+
+    LoggingConfigurationStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: LoggingConfigurationStatusCode, required: true, location_name: "statusCode"))
+    LoggingConfigurationStatus.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    LoggingConfigurationStatus.struct_class = Types::LoggingConfigurationStatus
 
     PutAlertManagerDefinitionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     PutAlertManagerDefinitionRequest.add_member(:data, Shapes::ShapeRef.new(shape: AlertManagerDefinitionData, required: true, location_name: "data"))
@@ -275,6 +315,14 @@ module Aws::PrometheusService
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateLoggingConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateLoggingConfigurationRequest.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "logGroupArn"))
+    UpdateLoggingConfigurationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    UpdateLoggingConfigurationRequest.struct_class = Types::UpdateLoggingConfigurationRequest
+
+    UpdateLoggingConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: LoggingConfigurationStatus, required: true, location_name: "status"))
+    UpdateLoggingConfigurationResponse.struct_class = Types::UpdateLoggingConfigurationResponse
+
     UpdateWorkspaceAliasRequest.add_member(:alias, Shapes::ShapeRef.new(shape: WorkspaceAlias, location_name: "alias"))
     UpdateWorkspaceAliasRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateWorkspaceAliasRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
@@ -346,6 +394,18 @@ module Aws::PrometheusService
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLoggingConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/workspaces/{workspaceId}/logging"
+        o.input = Shapes::ShapeRef.new(shape: CreateLoggingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLoggingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_rule_groups_namespace, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateRuleGroupsNamespace"
         o.http_method = "POST"
@@ -389,6 +449,19 @@ module Aws::PrometheusService
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLoggingConfiguration"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/workspaces/{workspaceId}/logging"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLoggingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_rule_groups_namespace, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteRuleGroupsNamespace"
         o.http_method = "DELETE"
@@ -424,6 +497,18 @@ module Aws::PrometheusService
         o.input = Shapes::ShapeRef.new(shape: DescribeAlertManagerDefinitionRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAlertManagerDefinitionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLoggingConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/workspaces/{workspaceId}/logging"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLoggingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeLoggingConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -556,6 +641,19 @@ module Aws::PrometheusService
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLoggingConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/workspaces/{workspaceId}/logging"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLoggingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLoggingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

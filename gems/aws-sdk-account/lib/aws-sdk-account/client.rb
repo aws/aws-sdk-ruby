@@ -357,9 +357,18 @@ module Aws::Account
     # For complete details about how to use the alternate contact
     # operations, see [Access or updating the alternate contacts][1].
     #
+    # <note markdown="1"> Before you can update the alternate contact information for an Amazon
+    # Web Services account that is managed by Organizations, you must first
+    # enable integration between Amazon Web Services Account Management and
+    # Organizations. For more information, see [Enabling trusted access for
+    # Amazon Web Services Account Management][2].
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html
+    # [2]: https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html
     #
     # @option params [String] :account_id
     #   Specifies the 12 digit account ID number of the Amazon Web Services
@@ -421,9 +430,18 @@ module Aws::Account
     # For complete details about how to use the alternate contact
     # operations, see [Access or updating the alternate contacts][1].
     #
+    # <note markdown="1"> Before you can update the alternate contact information for an Amazon
+    # Web Services account that is managed by Organizations, you must first
+    # enable integration between Amazon Web Services Account Management and
+    # Organizations. For more information, see [Enabling trusted access for
+    # Amazon Web Services Account Management][2].
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html
+    # [2]: https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html
     #
     # @option params [String] :account_id
     #   Specifies the 12 digit account ID number of the Amazon Web Services
@@ -489,15 +507,99 @@ module Aws::Account
       req.send_request(options)
     end
 
+    # Retrieves the primary contact information of an Amazon Web Services
+    # account.
+    #
+    # For complete details about how to use the primary contact operations,
+    # see [Update the primary and alternate contact information][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html
+    #
+    # @option params [String] :account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. If you
+    #   don't specify this parameter, it defaults to the Amazon Web Services
+    #   account of the identity used to call the operation. To use this
+    #   parameter, the caller must be an identity in the [organization's
+    #   management account][1] or a delegated administrator account. The
+    #   specified account ID must also be a member account in the same
+    #   organization. The organization must have [all features enabled][2],
+    #   and the organization must have [trusted access][3] enabled for the
+    #   Account Management service, and optionally a [delegated admin][4]
+    #   account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`. It must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, don't specify this parameter. Instead, call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #
+    # @return [Types::GetContactInformationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetContactInformationResponse#contact_information #contact_information} => Types::ContactInformation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_contact_information({
+    #     account_id: "AccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_information.address_line_1 #=> String
+    #   resp.contact_information.address_line_2 #=> String
+    #   resp.contact_information.address_line_3 #=> String
+    #   resp.contact_information.city #=> String
+    #   resp.contact_information.company_name #=> String
+    #   resp.contact_information.country_code #=> String
+    #   resp.contact_information.district_or_county #=> String
+    #   resp.contact_information.full_name #=> String
+    #   resp.contact_information.phone_number #=> String
+    #   resp.contact_information.postal_code #=> String
+    #   resp.contact_information.state_or_region #=> String
+    #   resp.contact_information.website_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/GetContactInformation AWS API Documentation
+    #
+    # @overload get_contact_information(params = {})
+    # @param [Hash] params ({})
+    def get_contact_information(params = {}, options = {})
+      req = build_request(:get_contact_information, params)
+      req.send_request(options)
+    end
+
     # Modifies the specified alternate contact attached to an Amazon Web
     # Services account.
     #
     # For complete details about how to use the alternate contact
     # operations, see [Access or updating the alternate contacts][1].
     #
+    # <note markdown="1"> Before you can update the alternate contact information for an Amazon
+    # Web Services account that is managed by Organizations, you must first
+    # enable integration between Amazon Web Services Account Management and
+    # Organizations. For more information, see [Enabling trusted access for
+    # Amazon Web Services Account Management][2].
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html
+    # [2]: https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html
     #
     # @option params [String] :account_id
     #   Specifies the 12 digit account ID number of the Amazon Web Services
@@ -569,6 +671,82 @@ module Aws::Account
       req.send_request(options)
     end
 
+    # Updates the primary contact information of an Amazon Web Services
+    # account.
+    #
+    # For complete details about how to use the primary contact operations,
+    # see [Update the primary and alternate contact information][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html
+    #
+    # @option params [String] :account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. If you
+    #   don't specify this parameter, it defaults to the Amazon Web Services
+    #   account of the identity used to call the operation. To use this
+    #   parameter, the caller must be an identity in the [organization's
+    #   management account][1] or a delegated administrator account. The
+    #   specified account ID must also be a member account in the same
+    #   organization. The organization must have [all features enabled][2],
+    #   and the organization must have [trusted access][3] enabled for the
+    #   Account Management service, and optionally a [delegated admin][4]
+    #   account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`. It must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, don't specify this parameter. Instead, call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #
+    # @option params [required, Types::ContactInformation] :contact_information
+    #   Contains the details of the primary contact information associated
+    #   with an Amazon Web Services account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_contact_information({
+    #     account_id: "AccountId",
+    #     contact_information: { # required
+    #       address_line_1: "AddressLine", # required
+    #       address_line_2: "AddressLine",
+    #       address_line_3: "AddressLine",
+    #       city: "City", # required
+    #       company_name: "CompanyName",
+    #       country_code: "CountryCode", # required
+    #       district_or_county: "DistrictOrCounty",
+    #       full_name: "FullName", # required
+    #       phone_number: "ContactInformationPhoneNumber", # required
+    #       postal_code: "PostalCode", # required
+    #       state_or_region: "StateOrRegion",
+    #       website_url: "WebsiteUrl",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/PutContactInformation AWS API Documentation
+    #
+    # @overload put_contact_information(params = {})
+    # @param [Hash] params ({})
+    def put_contact_information(params = {}, options = {})
+      req = build_request(:put_contact_information, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -582,7 +760,7 @@ module Aws::Account
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-account'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

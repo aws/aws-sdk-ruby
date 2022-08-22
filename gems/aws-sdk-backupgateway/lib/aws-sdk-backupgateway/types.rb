@@ -274,6 +274,86 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
+    # The details of gateway.
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the
+    #   `ListGateways` operation to return a list of gateways for your
+    #   account and Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_display_name
+    #   The display name of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_type
+    #   The type of the gateway type.
+    #   @return [String]
+    #
+    # @!attribute [rw] hypervisor_id
+    #   The hypervisor ID of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_seen_time
+    #   Details showing the last time Backup gateway communicated with the
+    #   cloud, in Unix format and UTC time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_update_availability_time
+    #   Details showing the next update availability time of the gateway.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vpc_endpoint
+    #   The DNS name for the virtual private cloud (VPC) endpoint the
+    #   gateway uses to connect to the cloud for backup gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GatewayDetails AWS API Documentation
+    #
+    class GatewayDetails < Struct.new(
+      :gateway_arn,
+      :gateway_display_name,
+      :gateway_type,
+      :hypervisor_id,
+      :last_seen_time,
+      :next_update_availability_time,
+      :vpc_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetGatewayInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "GatewayArn", # required
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetGatewayInput AWS API Documentation
+    #
+    class GetGatewayInput < Struct.new(
+      :gateway_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway
+    #   By providing the ARN (Amazon Resource Name), this API returns the
+    #   gateway.
+    #   @return [Types::GatewayDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetGatewayOutput AWS API Documentation
+    #
+    class GetGatewayOutput < Struct.new(
+      :gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the hypervisor's permissions to which the gateway will
     # connect.
     #
@@ -678,7 +758,7 @@ module Aws::BackupGateway
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The key part of a value's key-value pair.
+    #   The value part of a tag's key-value pair.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/Tag AWS API Documentation
@@ -851,12 +931,44 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateGatewaySoftwareNowInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "GatewayArn", # required
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway to be updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/UpdateGatewaySoftwareNowInput AWS API Documentation
+    #
+    class UpdateGatewaySoftwareNowInput < Struct.new(
+      :gateway_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway you updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/UpdateGatewaySoftwareNowOutput AWS API Documentation
+    #
+    class UpdateGatewaySoftwareNowOutput < Struct.new(
+      :gateway_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateHypervisorInput
     #   data as a hash:
     #
     #       {
     #         host: "Host",
     #         hypervisor_arn: "ServerArn", # required
+    #         name: "Name",
     #         password: "Password",
     #         username: "Username",
     #       }
@@ -868,6 +980,10 @@ module Aws::BackupGateway
     #
     # @!attribute [rw] hypervisor_arn
     #   The Amazon Resource Name (ARN) of the hypervisor to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated name for the hypervisor
     #   @return [String]
     #
     # @!attribute [rw] password
@@ -883,6 +999,7 @@ module Aws::BackupGateway
     class UpdateHypervisorInput < Struct.new(
       :host,
       :hypervisor_arn,
+      :name,
       :password,
       :username)
       SENSITIVE = [:password, :username]
@@ -943,7 +1060,8 @@ module Aws::BackupGateway
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the virtual machine.
+    #   The Amazon Resource Name (ARN) of the virtual machine. For example,
+    #   `arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/VirtualMachine AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2022-05-25)
+------------------
+
+* Feature - Documentation-only update added for CodeConfiguration.
+
 1.13.0 (2022-04-11)
 ------------------
 

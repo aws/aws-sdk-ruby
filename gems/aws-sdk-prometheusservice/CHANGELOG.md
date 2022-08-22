@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2022-08-12)
+------------------
+
+* Feature - This release adds log APIs that allow customers to manage logging for their Amazon Managed Service for Prometheus workspaces.
+
 1.14.0 (2022-02-24)
 ------------------
 

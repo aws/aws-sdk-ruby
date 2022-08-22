@@ -1788,6 +1788,86 @@ module Aws::Pinpoint
     #         connect_campaign_arn: "__string",
     #         connect_campaign_execution_role_arn: "__string",
     #       },
+    #       sending_schedule: false,
+    #       open_hours: {
+    #         email: {
+    #           "MONDAY" => [
+    #             {
+    #               start_time: "__string",
+    #               end_time: "__string",
+    #             },
+    #           ],
+    #         },
+    #         sms: {
+    #           "MONDAY" => [
+    #             {
+    #               start_time: "__string",
+    #               end_time: "__string",
+    #             },
+    #           ],
+    #         },
+    #         push: {
+    #           "MONDAY" => [
+    #             {
+    #               start_time: "__string",
+    #               end_time: "__string",
+    #             },
+    #           ],
+    #         },
+    #         voice: {
+    #           "MONDAY" => [
+    #             {
+    #               start_time: "__string",
+    #               end_time: "__string",
+    #             },
+    #           ],
+    #         },
+    #         custom: {
+    #           "MONDAY" => [
+    #             {
+    #               start_time: "__string",
+    #               end_time: "__string",
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       closed_days: {
+    #         email: [
+    #           {
+    #             name: "__string",
+    #             start_date_time: "__string",
+    #             end_date_time: "__string",
+    #           },
+    #         ],
+    #         sms: [
+    #           {
+    #             name: "__string",
+    #             start_date_time: "__string",
+    #             end_date_time: "__string",
+    #           },
+    #         ],
+    #         push: [
+    #           {
+    #             name: "__string",
+    #             start_date_time: "__string",
+    #             end_date_time: "__string",
+    #           },
+    #         ],
+    #         voice: [
+    #           {
+    #             name: "__string",
+    #             start_date_time: "__string",
+    #             end_date_time: "__string",
+    #           },
+    #         ],
+    #         custom: [
+    #           {
+    #             name: "__string",
+    #             start_date_time: "__string",
+    #             end_date_time: "__string",
+    #           },
+    #         ],
+    #       },
     #     },
     #   })
     #
@@ -1970,8 +2050,51 @@ module Aws::Pinpoint
     #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journey_response.tags #=> Hash
     #   resp.journey_response.tags["__string"] #=> String
+    #   resp.journey_response.wait_for_quiet_time #=> Boolean
+    #   resp.journey_response.refresh_on_segment_update #=> Boolean
     #   resp.journey_response.journey_channel_settings.connect_campaign_arn #=> String
     #   resp.journey_response.journey_channel_settings.connect_campaign_execution_role_arn #=> String
+    #   resp.journey_response.sending_schedule #=> Boolean
+    #   resp.journey_response.open_hours.email #=> Hash
+    #   resp.journey_response.open_hours.email["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.email["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.email["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.sms #=> Hash
+    #   resp.journey_response.open_hours.sms["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.sms["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.sms["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.push #=> Hash
+    #   resp.journey_response.open_hours.push["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.push["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.push["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.voice #=> Hash
+    #   resp.journey_response.open_hours.voice["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.voice["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.voice["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.custom #=> Hash
+    #   resp.journey_response.open_hours.custom["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.custom["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.custom["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.closed_days.email #=> Array
+    #   resp.journey_response.closed_days.email[0].name #=> String
+    #   resp.journey_response.closed_days.email[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.email[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.sms #=> Array
+    #   resp.journey_response.closed_days.sms[0].name #=> String
+    #   resp.journey_response.closed_days.sms[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.sms[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.push #=> Array
+    #   resp.journey_response.closed_days.push[0].name #=> String
+    #   resp.journey_response.closed_days.push[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.push[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.voice #=> Array
+    #   resp.journey_response.closed_days.voice[0].name #=> String
+    #   resp.journey_response.closed_days.voice[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.voice[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.custom #=> Array
+    #   resp.journey_response.closed_days.custom[0].name #=> String
+    #   resp.journey_response.closed_days.custom[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.custom[0].end_date_time #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateJourney AWS API Documentation
     #
@@ -3531,8 +3654,51 @@ module Aws::Pinpoint
     #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journey_response.tags #=> Hash
     #   resp.journey_response.tags["__string"] #=> String
+    #   resp.journey_response.wait_for_quiet_time #=> Boolean
+    #   resp.journey_response.refresh_on_segment_update #=> Boolean
     #   resp.journey_response.journey_channel_settings.connect_campaign_arn #=> String
     #   resp.journey_response.journey_channel_settings.connect_campaign_execution_role_arn #=> String
+    #   resp.journey_response.sending_schedule #=> Boolean
+    #   resp.journey_response.open_hours.email #=> Hash
+    #   resp.journey_response.open_hours.email["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.email["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.email["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.sms #=> Hash
+    #   resp.journey_response.open_hours.sms["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.sms["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.sms["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.push #=> Hash
+    #   resp.journey_response.open_hours.push["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.push["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.push["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.voice #=> Hash
+    #   resp.journey_response.open_hours.voice["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.voice["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.voice["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.custom #=> Hash
+    #   resp.journey_response.open_hours.custom["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.custom["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.custom["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.closed_days.email #=> Array
+    #   resp.journey_response.closed_days.email[0].name #=> String
+    #   resp.journey_response.closed_days.email[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.email[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.sms #=> Array
+    #   resp.journey_response.closed_days.sms[0].name #=> String
+    #   resp.journey_response.closed_days.sms[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.sms[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.push #=> Array
+    #   resp.journey_response.closed_days.push[0].name #=> String
+    #   resp.journey_response.closed_days.push[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.push[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.voice #=> Array
+    #   resp.journey_response.closed_days.voice[0].name #=> String
+    #   resp.journey_response.closed_days.voice[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.voice[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.custom #=> Array
+    #   resp.journey_response.closed_days.custom[0].name #=> String
+    #   resp.journey_response.closed_days.custom[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.custom[0].end_date_time #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteJourney AWS API Documentation
     #
@@ -6638,8 +6804,51 @@ module Aws::Pinpoint
     #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journey_response.tags #=> Hash
     #   resp.journey_response.tags["__string"] #=> String
+    #   resp.journey_response.wait_for_quiet_time #=> Boolean
+    #   resp.journey_response.refresh_on_segment_update #=> Boolean
     #   resp.journey_response.journey_channel_settings.connect_campaign_arn #=> String
     #   resp.journey_response.journey_channel_settings.connect_campaign_execution_role_arn #=> String
+    #   resp.journey_response.sending_schedule #=> Boolean
+    #   resp.journey_response.open_hours.email #=> Hash
+    #   resp.journey_response.open_hours.email["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.email["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.email["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.sms #=> Hash
+    #   resp.journey_response.open_hours.sms["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.sms["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.sms["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.push #=> Hash
+    #   resp.journey_response.open_hours.push["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.push["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.push["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.voice #=> Hash
+    #   resp.journey_response.open_hours.voice["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.voice["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.voice["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.custom #=> Hash
+    #   resp.journey_response.open_hours.custom["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.custom["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.custom["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.closed_days.email #=> Array
+    #   resp.journey_response.closed_days.email[0].name #=> String
+    #   resp.journey_response.closed_days.email[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.email[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.sms #=> Array
+    #   resp.journey_response.closed_days.sms[0].name #=> String
+    #   resp.journey_response.closed_days.sms[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.sms[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.push #=> Array
+    #   resp.journey_response.closed_days.push[0].name #=> String
+    #   resp.journey_response.closed_days.push[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.push[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.voice #=> Array
+    #   resp.journey_response.closed_days.voice[0].name #=> String
+    #   resp.journey_response.closed_days.voice[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.voice[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.custom #=> Array
+    #   resp.journey_response.closed_days.custom[0].name #=> String
+    #   resp.journey_response.closed_days.custom[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.custom[0].end_date_time #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourney AWS API Documentation
     #
@@ -8039,8 +8248,51 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journeys_response.item[0].tags #=> Hash
     #   resp.journeys_response.item[0].tags["__string"] #=> String
+    #   resp.journeys_response.item[0].wait_for_quiet_time #=> Boolean
+    #   resp.journeys_response.item[0].refresh_on_segment_update #=> Boolean
     #   resp.journeys_response.item[0].journey_channel_settings.connect_campaign_arn #=> String
     #   resp.journeys_response.item[0].journey_channel_settings.connect_campaign_execution_role_arn #=> String
+    #   resp.journeys_response.item[0].sending_schedule #=> Boolean
+    #   resp.journeys_response.item[0].open_hours.email #=> Hash
+    #   resp.journeys_response.item[0].open_hours.email["DayOfWeek"] #=> Array
+    #   resp.journeys_response.item[0].open_hours.email["DayOfWeek"][0].start_time #=> String
+    #   resp.journeys_response.item[0].open_hours.email["DayOfWeek"][0].end_time #=> String
+    #   resp.journeys_response.item[0].open_hours.sms #=> Hash
+    #   resp.journeys_response.item[0].open_hours.sms["DayOfWeek"] #=> Array
+    #   resp.journeys_response.item[0].open_hours.sms["DayOfWeek"][0].start_time #=> String
+    #   resp.journeys_response.item[0].open_hours.sms["DayOfWeek"][0].end_time #=> String
+    #   resp.journeys_response.item[0].open_hours.push #=> Hash
+    #   resp.journeys_response.item[0].open_hours.push["DayOfWeek"] #=> Array
+    #   resp.journeys_response.item[0].open_hours.push["DayOfWeek"][0].start_time #=> String
+    #   resp.journeys_response.item[0].open_hours.push["DayOfWeek"][0].end_time #=> String
+    #   resp.journeys_response.item[0].open_hours.voice #=> Hash
+    #   resp.journeys_response.item[0].open_hours.voice["DayOfWeek"] #=> Array
+    #   resp.journeys_response.item[0].open_hours.voice["DayOfWeek"][0].start_time #=> String
+    #   resp.journeys_response.item[0].open_hours.voice["DayOfWeek"][0].end_time #=> String
+    #   resp.journeys_response.item[0].open_hours.custom #=> Hash
+    #   resp.journeys_response.item[0].open_hours.custom["DayOfWeek"] #=> Array
+    #   resp.journeys_response.item[0].open_hours.custom["DayOfWeek"][0].start_time #=> String
+    #   resp.journeys_response.item[0].open_hours.custom["DayOfWeek"][0].end_time #=> String
+    #   resp.journeys_response.item[0].closed_days.email #=> Array
+    #   resp.journeys_response.item[0].closed_days.email[0].name #=> String
+    #   resp.journeys_response.item[0].closed_days.email[0].start_date_time #=> String
+    #   resp.journeys_response.item[0].closed_days.email[0].end_date_time #=> String
+    #   resp.journeys_response.item[0].closed_days.sms #=> Array
+    #   resp.journeys_response.item[0].closed_days.sms[0].name #=> String
+    #   resp.journeys_response.item[0].closed_days.sms[0].start_date_time #=> String
+    #   resp.journeys_response.item[0].closed_days.sms[0].end_date_time #=> String
+    #   resp.journeys_response.item[0].closed_days.push #=> Array
+    #   resp.journeys_response.item[0].closed_days.push[0].name #=> String
+    #   resp.journeys_response.item[0].closed_days.push[0].start_date_time #=> String
+    #   resp.journeys_response.item[0].closed_days.push[0].end_date_time #=> String
+    #   resp.journeys_response.item[0].closed_days.voice #=> Array
+    #   resp.journeys_response.item[0].closed_days.voice[0].name #=> String
+    #   resp.journeys_response.item[0].closed_days.voice[0].start_date_time #=> String
+    #   resp.journeys_response.item[0].closed_days.voice[0].end_date_time #=> String
+    #   resp.journeys_response.item[0].closed_days.custom #=> Array
+    #   resp.journeys_response.item[0].closed_days.custom[0].name #=> String
+    #   resp.journeys_response.item[0].closed_days.custom[0].start_date_time #=> String
+    #   resp.journeys_response.item[0].closed_days.custom[0].end_date_time #=> String
     #   resp.journeys_response.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListJourneys AWS API Documentation
@@ -10930,6 +11182,86 @@ module Aws::Pinpoint
     #         connect_campaign_arn: "__string",
     #         connect_campaign_execution_role_arn: "__string",
     #       },
+    #       sending_schedule: false,
+    #       open_hours: {
+    #         email: {
+    #           "MONDAY" => [
+    #             {
+    #               start_time: "__string",
+    #               end_time: "__string",
+    #             },
+    #           ],
+    #         },
+    #         sms: {
+    #           "MONDAY" => [
+    #             {
+    #               start_time: "__string",
+    #               end_time: "__string",
+    #             },
+    #           ],
+    #         },
+    #         push: {
+    #           "MONDAY" => [
+    #             {
+    #               start_time: "__string",
+    #               end_time: "__string",
+    #             },
+    #           ],
+    #         },
+    #         voice: {
+    #           "MONDAY" => [
+    #             {
+    #               start_time: "__string",
+    #               end_time: "__string",
+    #             },
+    #           ],
+    #         },
+    #         custom: {
+    #           "MONDAY" => [
+    #             {
+    #               start_time: "__string",
+    #               end_time: "__string",
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       closed_days: {
+    #         email: [
+    #           {
+    #             name: "__string",
+    #             start_date_time: "__string",
+    #             end_date_time: "__string",
+    #           },
+    #         ],
+    #         sms: [
+    #           {
+    #             name: "__string",
+    #             start_date_time: "__string",
+    #             end_date_time: "__string",
+    #           },
+    #         ],
+    #         push: [
+    #           {
+    #             name: "__string",
+    #             start_date_time: "__string",
+    #             end_date_time: "__string",
+    #           },
+    #         ],
+    #         voice: [
+    #           {
+    #             name: "__string",
+    #             start_date_time: "__string",
+    #             end_date_time: "__string",
+    #           },
+    #         ],
+    #         custom: [
+    #           {
+    #             name: "__string",
+    #             start_date_time: "__string",
+    #             end_date_time: "__string",
+    #           },
+    #         ],
+    #       },
     #     },
     #   })
     #
@@ -11112,8 +11444,51 @@ module Aws::Pinpoint
     #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journey_response.tags #=> Hash
     #   resp.journey_response.tags["__string"] #=> String
+    #   resp.journey_response.wait_for_quiet_time #=> Boolean
+    #   resp.journey_response.refresh_on_segment_update #=> Boolean
     #   resp.journey_response.journey_channel_settings.connect_campaign_arn #=> String
     #   resp.journey_response.journey_channel_settings.connect_campaign_execution_role_arn #=> String
+    #   resp.journey_response.sending_schedule #=> Boolean
+    #   resp.journey_response.open_hours.email #=> Hash
+    #   resp.journey_response.open_hours.email["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.email["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.email["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.sms #=> Hash
+    #   resp.journey_response.open_hours.sms["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.sms["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.sms["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.push #=> Hash
+    #   resp.journey_response.open_hours.push["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.push["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.push["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.voice #=> Hash
+    #   resp.journey_response.open_hours.voice["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.voice["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.voice["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.custom #=> Hash
+    #   resp.journey_response.open_hours.custom["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.custom["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.custom["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.closed_days.email #=> Array
+    #   resp.journey_response.closed_days.email[0].name #=> String
+    #   resp.journey_response.closed_days.email[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.email[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.sms #=> Array
+    #   resp.journey_response.closed_days.sms[0].name #=> String
+    #   resp.journey_response.closed_days.sms[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.sms[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.push #=> Array
+    #   resp.journey_response.closed_days.push[0].name #=> String
+    #   resp.journey_response.closed_days.push[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.push[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.voice #=> Array
+    #   resp.journey_response.closed_days.voice[0].name #=> String
+    #   resp.journey_response.closed_days.voice[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.voice[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.custom #=> Array
+    #   resp.journey_response.closed_days.custom[0].name #=> String
+    #   resp.journey_response.closed_days.custom[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.custom[0].end_date_time #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateJourney AWS API Documentation
     #
@@ -11326,8 +11701,51 @@ module Aws::Pinpoint
     #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journey_response.tags #=> Hash
     #   resp.journey_response.tags["__string"] #=> String
+    #   resp.journey_response.wait_for_quiet_time #=> Boolean
+    #   resp.journey_response.refresh_on_segment_update #=> Boolean
     #   resp.journey_response.journey_channel_settings.connect_campaign_arn #=> String
     #   resp.journey_response.journey_channel_settings.connect_campaign_execution_role_arn #=> String
+    #   resp.journey_response.sending_schedule #=> Boolean
+    #   resp.journey_response.open_hours.email #=> Hash
+    #   resp.journey_response.open_hours.email["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.email["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.email["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.sms #=> Hash
+    #   resp.journey_response.open_hours.sms["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.sms["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.sms["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.push #=> Hash
+    #   resp.journey_response.open_hours.push["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.push["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.push["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.voice #=> Hash
+    #   resp.journey_response.open_hours.voice["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.voice["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.voice["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.open_hours.custom #=> Hash
+    #   resp.journey_response.open_hours.custom["DayOfWeek"] #=> Array
+    #   resp.journey_response.open_hours.custom["DayOfWeek"][0].start_time #=> String
+    #   resp.journey_response.open_hours.custom["DayOfWeek"][0].end_time #=> String
+    #   resp.journey_response.closed_days.email #=> Array
+    #   resp.journey_response.closed_days.email[0].name #=> String
+    #   resp.journey_response.closed_days.email[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.email[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.sms #=> Array
+    #   resp.journey_response.closed_days.sms[0].name #=> String
+    #   resp.journey_response.closed_days.sms[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.sms[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.push #=> Array
+    #   resp.journey_response.closed_days.push[0].name #=> String
+    #   resp.journey_response.closed_days.push[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.push[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.voice #=> Array
+    #   resp.journey_response.closed_days.voice[0].name #=> String
+    #   resp.journey_response.closed_days.voice[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.voice[0].end_date_time #=> String
+    #   resp.journey_response.closed_days.custom #=> Array
+    #   resp.journey_response.closed_days.custom[0].name #=> String
+    #   resp.journey_response.closed_days.custom[0].start_date_time #=> String
+    #   resp.journey_response.closed_days.custom[0].end_date_time #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateJourneyState AWS API Documentation
     #
@@ -12056,7 +12474,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

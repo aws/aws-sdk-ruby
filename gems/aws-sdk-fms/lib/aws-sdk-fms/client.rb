@@ -1045,6 +1045,10 @@ module Aws::FMS
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_rule_groups #=> Array
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_rule_groups[0].rule_group_name #=> String
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_rule_groups[0].resource_id #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_rule_groups[0].priority #=> Integer
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_default_actions #=> Array
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_default_actions[0] #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_engine_options.rule_order #=> String, one of "STRICT_ORDER", "DEFAULT_ACTION_ORDER"
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_rule_groups #=> Array
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_rule_groups[0].rule_group_name #=> String
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_rule_groups[0].resource_id #=> String
@@ -1058,6 +1062,10 @@ module Aws::FMS
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_rule_groups #=> Array
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_rule_groups[0].rule_group_name #=> String
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_rule_groups[0].resource_id #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_rule_groups[0].priority #=> Integer
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_default_actions #=> Array
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_default_actions[0] #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_engine_options.rule_order #=> String, one of "STRICT_ORDER", "DEFAULT_ACTION_ORDER"
     #   resp.violation_detail.resource_violations[0].network_firewall_internet_traffic_not_inspected_violation.subnet_id #=> String
     #   resp.violation_detail.resource_violations[0].network_firewall_internet_traffic_not_inspected_violation.subnet_availability_zone #=> String
     #   resp.violation_detail.resource_violations[0].network_firewall_internet_traffic_not_inspected_violation.route_table_id #=> String
@@ -2047,7 +2055,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

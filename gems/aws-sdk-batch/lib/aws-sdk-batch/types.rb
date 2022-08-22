@@ -627,16 +627,20 @@ module Aws::Batch
     #   "String1": "String2", where String1 is the tag key and String2
     #   is the tag value−for example, `\{ "Name": "Batch Instance -
     #   C4OnDemand" \}`. This is helpful for recognizing your Batch
-    #   instances in the Amazon EC2 console. These tags can't be updated or
-    #   removed after the compute environment is created. Any changes to
-    #   these tags require that you create a new compute environment and
-    #   remove the old compute environment. These tags aren't seen when
-    #   using the Batch `ListTagsForResource` API operation.
+    #   instances in the Amazon EC2 console. Updating these tags requires an
+    #   infrastructure update to the compute environment. For more
+    #   information, see [Updating compute environments][1] in the *Batch
+    #   User Guide*. These tags aren't seen when using the Batch
+    #   `ListTagsForResource` API operation.
     #
     #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] placement_group
@@ -5879,7 +5883,10 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] share_identifier
-    #   The share identifier for the job.
+    #   The share identifier for the job. If the job queue does not have a
+    #   scheduling policy, then this parameter must not be specified. If the
+    #   job queue has a scheduling policy, then this parameter must be
+    #   specified.
     #   @return [String]
     #
     # @!attribute [rw] scheduling_priority_override

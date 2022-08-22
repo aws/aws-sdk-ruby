@@ -12,9 +12,9 @@ module Aws
         allow(utc).to receive(:strftime).and_return(datetime)
       end
 
-      let(:now) { double('now') }
       let(:utc) { double('utc-time') }
       let(:datetime) { '20160101T112233Z' }
+      let(:now) { Time.parse(datetime) }
 
       let(:credentials) { Credentials.new('akid', 'secret') }
       let(:region) { 'us-west-2' }
@@ -67,7 +67,7 @@ module Aws
           }
 
           actual_url = pre.synthesize_speech_presigned_url(params)
-          expect(actual_url).to eq(expected_url)
+          expect(CGI.parse(actual_url)).to eq(CGI.parse(expected_url))
         end
 
         it 'can presign #synthesize_speech using region and credentials' do
@@ -93,7 +93,7 @@ module Aws
           }
 
           actual_url = pre.synthesize_speech_presigned_url(params)
-          expect(actual_url).to eq(expected_url)
+          expect(CGI.parse(actual_url)).to eq(CGI.parse(expected_url))
         end
 
       end

@@ -1010,7 +1010,7 @@ module Aws::AppSync
     #       },
     #     },
     #     caching_config: {
-    #       ttl: 1,
+    #       ttl: 1, # required
     #       caching_keys: ["String"],
     #     },
     #     max_batch_size: 1,
@@ -1310,6 +1310,51 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def disassociate_api(params = {}, options = {})
       req = build_request(:disassociate_api, params)
+      req.send_request(options)
+    end
+
+    # Evaluates a given template and returns the response. The mapping
+    # template can be a request or response template.
+    #
+    # Request templates take the incoming request after a GraphQL operation
+    # is parsed and convert it into a request configuration for the selected
+    # data source operation. Response templates interpret responses from the
+    # data source and map it to the shape of the GraphQL field output type.
+    #
+    # Mapping templates are written in the Apache Velocity Template Language
+    # (VTL).
+    #
+    # @option params [required, String] :template
+    #   The mapping template; this can be a request or response template. A
+    #   `template` is required for this action.
+    #
+    # @option params [required, String] :context
+    #   The map that holds all of the contextual information for your resolver
+    #   invocation. A `context` is required for this action.
+    #
+    # @return [Types::EvaluateMappingTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EvaluateMappingTemplateResponse#evaluation_result #evaluation_result} => String
+    #   * {Types::EvaluateMappingTemplateResponse#error #error} => Types::ErrorDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.evaluate_mapping_template({
+    #     template: "Template", # required
+    #     context: "Context", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation_result #=> String
+    #   resp.error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EvaluateMappingTemplate AWS API Documentation
+    #
+    # @overload evaluate_mapping_template(params = {})
+    # @param [Hash] params ({})
+    def evaluate_mapping_template(params = {}, options = {})
+      req = build_request(:evaluate_mapping_template, params)
       req.send_request(options)
     end
 
@@ -2925,7 +2970,7 @@ module Aws::AppSync
     #       },
     #     },
     #     caching_config: {
-    #       ttl: 1,
+    #       ttl: 1, # required
     #       caching_keys: ["String"],
     #     },
     #     max_batch_size: 1,
@@ -3016,7 +3061,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

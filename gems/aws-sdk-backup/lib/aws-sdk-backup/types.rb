@@ -497,9 +497,8 @@ module Aws::Backup
     #   The “transition to cold after days” setting cannot be changed after
     #   a backup has been transitioned to cold.
     #
-    #   Only resource types that support full Backup management can
-    #   transition their backups to cold storage. Those resource types are
-    #   listed in the "Full Backup management" section of the [ Feature
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
     #   availability by resource][1] table. Backup ignores this expression
     #   for other resource types.
     #
@@ -616,9 +615,8 @@ module Aws::Backup
     #   The “transition to cold after days” setting cannot be changed after
     #   a backup has been transitioned to cold.
     #
-    #   Only resource types that support full Backup management can
-    #   transition their backups to cold storage. Those resource types are
-    #   listed in the "Full Backup management" section of the [ Feature
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
     #   availability by resource][1] table. Backup ignores this expression
     #   for other resource types.
     #
@@ -661,6 +659,11 @@ module Aws::Backup
     end
 
     # Used to specify a set of resources to a backup plan.
+    #
+    # Specifying your desired `Conditions`, `ListOfTags`, `NotResources`,
+    # and/or `Resources` is recommended. If none of these are specified,
+    # Backup will attempt to select all supported and opted-in storage
+    # resources, which could have unintended cost implications.
     #
     # @note When making an API call, you may pass BackupSelection
     #   data as a hash:
@@ -729,9 +732,9 @@ module Aws::Backup
     #
     # @!attribute [rw] list_of_tags
     #   A list of conditions that you define to assign resources to your
-    #   backup plans using tags. For example, `"StringEquals":
-    #   \{"Department": "accounting"`. Condition operators are case
-    #   sensitive.
+    #   backup plans using tags. For example, `"StringEquals": \{
+    #   "ConditionKey": "aws:ResourceTag/CreatedByCryo", "ConditionValue":
+    #   "true" \},`. Condition operators are case sensitive.
     #
     #   `ListOfTags` differs from `Conditions` as follows:
     #
@@ -755,9 +758,9 @@ module Aws::Backup
     #
     # @!attribute [rw] conditions
     #   A list of conditions that you define to assign resources to your
-    #   backup plans using tags. For example, `"StringEquals":
-    #   \{"Department": "accounting"`. Condition operators are case
-    #   sensitive.
+    #   backup plans using tags. For example, `"StringEquals": \{
+    #   "ConditionKey": "aws:ResourceTag/CreatedByCryo", "ConditionValue":
+    #   "true" \},`. Condition operators are case sensitive.
     #
     #   `Conditions` differs from `ListOfTags` as follows:
     #
@@ -964,11 +967,10 @@ module Aws::Backup
     # “transition to cold after days” setting cannot be changed after a
     # backup has been transitioned to cold.
     #
-    # Only resource types that support full Backup management can transition
-    # their backups to cold storage. Those resource types are listed in the
-    # "Full Backup management" section of the [ Feature availability by
-    # resource][1] table. Backup ignores this expression for other resource
-    # types.
+    # Resource types that are able to be transitioned to cold storage are
+    # listed in the "Lifecycle to cold storage" section of the [ Feature
+    # availability by resource][1] table. Backup ignores this expression for
+    # other resource types.
     #
     #
     #
@@ -1268,9 +1270,8 @@ module Aws::Backup
     #   days” setting. The “transition to cold after days” setting cannot be
     #   changed after a backup has been transitioned to cold.
     #
-    #   Only resource types that support full Backup management can
-    #   transition their backups to cold storage. Those resource types are
-    #   listed in the "Full Backup management" section of the [ Feature
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
     #   availability by resource][1] table. Backup ignores this expression
     #   for other resource types.
     #
@@ -2779,9 +2780,8 @@ module Aws::Backup
     #   setting. The “transition to cold after days” setting cannot be
     #   changed after a backup has been transitioned to cold.
     #
-    #   Only resource types that support full Backup management can
-    #   transition their backups to cold storage. Those resource types are
-    #   listed in the "Full Backup management" section of the [ Feature
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
     #   availability by resource][1] table. Backup ignores this expression
     #   for other resource types.
     #
@@ -3205,7 +3205,8 @@ module Aws::Backup
     #   The scope of a control. The control scope defines what the control
     #   will evaluate. Three examples of control scopes are: a specific
     #   backup plan, all backup plans with a specific tag, or all backup
-    #   plans. For more information, see `ControlScope`.
+    #   plans. For more information, see [
+    #   `ControlScope`.](aws-backup/latest/devguide/API_ControlScope.html)
     #   @return [Types::ControlScope]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/FrameworkControl AWS API Documentation
@@ -3725,11 +3726,10 @@ module Aws::Backup
     # days” setting. The “transition to cold after days” setting cannot be
     # changed after a backup has been transitioned to cold.
     #
-    # Only resource types that support full Backup management can transition
-    # their backups to cold storage. Those resource types are listed in the
-    # "Full Backup management" section of the [ Feature availability by
-    # resource][1] table. Backup ignores this expression for other resource
-    # types.
+    # Resource types that are able to be transitioned to cold storage are
+    # listed in the "Lifecycle to cold storage" section of the [ Feature
+    # availability by resource][1] table. Backup ignores this expression for
+    # other resource types.
     #
     #
     #
@@ -3802,6 +3802,8 @@ module Aws::Backup
     #         by_created_after: Time.now,
     #         by_resource_type: "ResourceType",
     #         by_account_id: "AccountId",
+    #         by_complete_after: Time.now,
+    #         by_complete_before: Time.now,
     #       }
     #
     # @!attribute [rw] next_token
@@ -3877,6 +3879,16 @@ module Aws::Backup
     #   returns all jobs across the organization.
     #   @return [String]
     #
+    # @!attribute [rw] by_complete_after
+    #   Returns only backup jobs completed after a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] by_complete_before
+    #   Returns only backup jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobsInput AWS API Documentation
     #
     class ListBackupJobsInput < Struct.new(
@@ -3888,7 +3900,9 @@ module Aws::Backup
       :by_created_before,
       :by_created_after,
       :by_resource_type,
-      :by_account_id)
+      :by_account_id,
+      :by_complete_after,
+      :by_complete_before)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4193,6 +4207,8 @@ module Aws::Backup
     #         by_resource_type: "ResourceType",
     #         by_destination_vault_arn: "string",
     #         by_account_id: "AccountId",
+    #         by_complete_before: Time.now,
+    #         by_complete_after: Time.now,
     #       }
     #
     # @!attribute [rw] next_token
@@ -4262,6 +4278,16 @@ module Aws::Backup
     #   associated with the specified account ID.
     #   @return [String]
     #
+    # @!attribute [rw] by_complete_before
+    #   Returns only copy jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] by_complete_after
+    #   Returns only copy jobs completed after a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobsInput AWS API Documentation
     #
     class ListCopyJobsInput < Struct.new(
@@ -4273,7 +4299,9 @@ module Aws::Backup
       :by_created_after,
       :by_resource_type,
       :by_destination_vault_arn,
-      :by_account_id)
+      :by_account_id,
+      :by_complete_before,
+      :by_complete_after)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4701,6 +4729,8 @@ module Aws::Backup
     #         by_created_before: Time.now,
     #         by_created_after: Time.now,
     #         by_status: "PENDING", # accepts PENDING, RUNNING, COMPLETED, ABORTED, FAILED
+    #         by_complete_before: Time.now,
+    #         by_complete_after: Time.now,
     #       }
     #
     # @!attribute [rw] next_token
@@ -4733,6 +4763,16 @@ module Aws::Backup
     #   Returns only restore jobs associated with the specified job status.
     #   @return [String]
     #
+    # @!attribute [rw] by_complete_before
+    #   Returns only copy jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] by_complete_after
+    #   Returns only copy jobs completed after a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreJobsInput AWS API Documentation
     #
     class ListRestoreJobsInput < Struct.new(
@@ -4741,7 +4781,9 @@ module Aws::Backup
       :by_account_id,
       :by_created_before,
       :by_created_after,
-      :by_status)
+      :by_status,
+      :by_complete_before,
+      :by_complete_after)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5155,9 +5197,8 @@ module Aws::Backup
     #   The “transition to cold after days” setting cannot be changed after
     #   a backup has been transitioned to cold.
     #
-    #   Only resource types that support full Backup management can
-    #   transition their backups to cold storage. Those resource types are
-    #   listed in the "Full Backup management" section of the [ Feature
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
     #   availability by resource][1] table. Backup ignores this expression
     #   for other resource types.
     #
@@ -5761,9 +5802,8 @@ module Aws::Backup
     #   The “transition to cold after days” setting cannot be changed after
     #   a backup has been transitioned to cold.
     #
-    #   Only resource types that support full Backup management can
-    #   transition their backups to cold storage. Those resource types are
-    #   listed in the "Full Backup management" section of the [ Feature
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
     #   availability by resource][1] table. Backup ignores this expression
     #   for other resource types.
     #
@@ -5888,9 +5928,8 @@ module Aws::Backup
     #   days” setting. The “transition to cold after days” setting cannot be
     #   changed after a backup has been transitioned to cold.
     #
-    #   Only resource types that support full Backup management can
-    #   transition their backups to cold storage. Those resource types are
-    #   listed in the "Full Backup management" section of the [ Feature
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
     #   availability by resource][1] table. Backup ignores this expression
     #   for other resource types.
     #
@@ -5985,7 +6024,7 @@ module Aws::Backup
     #         metadata: { # required
     #           "MetadataKey" => "MetadataValue",
     #         },
-    #         iam_role_arn: "IAMRoleArn", # required
+    #         iam_role_arn: "IAMRoleArn",
     #         idempotency_token: "string",
     #         resource_type: "ResourceType",
     #       }
@@ -6465,9 +6504,8 @@ module Aws::Backup
     #   The “transition to cold after days” setting cannot be changed after
     #   a backup has been transitioned to cold.
     #
-    #   Only resource types that support full Backup management can
-    #   transition their backups to cold storage. Those resource types are
-    #   listed in the "Full Backup management" section of the [ Feature
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
     #   availability by resource][1] table. Backup ignores this expression
     #   for other resource types.
     #

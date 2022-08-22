@@ -33,6 +33,7 @@ module Aws::EMR
     #                       volume_type: "String", # required
     #                       iops: 1,
     #                       size_in_gb: 1, # required
+    #                       throughput: 1,
     #                     },
     #                     volumes_per_instance: 1,
     #                   },
@@ -143,6 +144,7 @@ module Aws::EMR
     #                     volume_type: "String", # required
     #                     iops: 1,
     #                     size_in_gb: 1, # required
+    #                     throughput: 1,
     #                   },
     #                   volumes_per_instance: 1,
     #                 },
@@ -258,6 +260,7 @@ module Aws::EMR
     #             },
     #           },
     #         ],
+    #         execution_role_arn: "ArnType",
     #       }
     #
     # @!attribute [rw] job_flow_id
@@ -269,11 +272,23 @@ module Aws::EMR
     #   A list of StepConfig to be executed by the job flow.
     #   @return [Array<Types::StepConfig>]
     #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the runtime role for a step on the
+    #   cluster. The runtime role can be a cross-account IAM role. The
+    #   runtime role ARN is a combination of account ID, role name, and role
+    #   type using the following format:
+    #   `arn:partition:service:region:account:resource`.
+    #
+    #   For example, `arn:aws:iam::1234567890:role/ReadOnly` is a correctly
+    #   formatted runtime role ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddJobFlowStepsInput AWS API Documentation
     #
     class AddJobFlowStepsInput < Struct.new(
       :job_flow_id,
-      :steps)
+      :steps,
+      :execution_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1050,6 +1065,12 @@ module Aws::EMR
     #   Placement group configured for an Amazon EMR cluster.
     #   @return [Array<Types::PlacementGroupConfig>]
     #
+    # @!attribute [rw] os_release_label
+    #   The Amazon Linux release specified in a cluster launch RunJobFlow
+    #   request. If no Amazon Linux release was specified, the default
+    #   Amazon Linux release is shown in the response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -1082,7 +1103,8 @@ module Aws::EMR
       :cluster_arn,
       :outpost_arn,
       :step_concurrency_level,
-      :placement_groups)
+      :placement_groups,
+      :os_release_label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1870,12 +1892,25 @@ module Aws::EMR
     #   null.
     #   @return [String]
     #
+    # @!attribute [rw] available_os_releases
+    #   The list of available Amazon Linux release versions for an Amazon
+    #   EMR release. Contains a Label field that is formatted as shown in [
+    #   *Amazon Linux 2 Release Notes* ][1]. For example,
+    #   [2.0.20220218.1][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AL2/latest/relnotes/relnotes-al2.html
+    #   [2]: https://docs.aws.amazon.com/AL2/latest/relnotes/relnotes-20220218.html
+    #   @return [Array<Types::OSRelease>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeReleaseLabelOutput AWS API Documentation
     #
     class DescribeReleaseLabelOutput < Struct.new(
       :release_label,
       :applications,
-      :next_token)
+      :next_token,
+      :available_os_releases)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1997,9 +2032,9 @@ module Aws::EMR
     # instance group.
     #
     # @!attribute [rw] volume_specification
-    #   EBS volume specifications such as volume type, IOPS, and size (GiB)
-    #   that will be requested for the EBS volume attached to an EC2
-    #   instance in the cluster.
+    #   EBS volume specifications such as volume type, IOPS, size (GiB) and
+    #   throughput (MiB/s) that are requested for the EBS volume attached to
+    #   an EC2 instance in the cluster.
     #   @return [Types::VolumeSpecification]
     #
     # @!attribute [rw] device
@@ -2016,7 +2051,7 @@ module Aws::EMR
     end
 
     # Configuration of requested EBS block device associated with the
-    # instance group with count of volumes that will be associated to every
+    # instance group with count of volumes that are associated to every
     # instance.
     #
     # @note When making an API call, you may pass EbsBlockDeviceConfig
@@ -2027,19 +2062,20 @@ module Aws::EMR
     #           volume_type: "String", # required
     #           iops: 1,
     #           size_in_gb: 1, # required
+    #           throughput: 1,
     #         },
     #         volumes_per_instance: 1,
     #       }
     #
     # @!attribute [rw] volume_specification
-    #   EBS volume specifications such as volume type, IOPS, and size (GiB)
-    #   that will be requested for the EBS volume attached to an EC2
-    #   instance in the cluster.
+    #   EBS volume specifications such as volume type, IOPS, size (GiB) and
+    #   throughput (MiB/s) that are requested for the EBS volume attached to
+    #   an EC2 instance in the cluster.
     #   @return [Types::VolumeSpecification]
     #
     # @!attribute [rw] volumes_per_instance
-    #   Number of EBS volumes with a specific volume configuration that will
-    #   be associated with every instance in the instance group
+    #   Number of EBS volumes with a specific volume configuration that are
+    #   associated with every instance in the instance group
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/EbsBlockDeviceConfig AWS API Documentation
@@ -2063,6 +2099,7 @@ module Aws::EMR
     #               volume_type: "String", # required
     #               iops: 1,
     #               size_in_gb: 1, # required
+    #               throughput: 1,
     #             },
     #             volumes_per_instance: 1,
     #           },
@@ -2756,6 +2793,7 @@ module Aws::EMR
     #                     volume_type: "String", # required
     #                     iops: 1,
     #                     size_in_gb: 1, # required
+    #                     throughput: 1,
     #                   },
     #                   volumes_per_instance: 1,
     #                 },
@@ -3229,6 +3267,7 @@ module Aws::EMR
     #                 volume_type: "String", # required
     #                 iops: 1,
     #                 size_in_gb: 1, # required
+    #                 throughput: 1,
     #               },
     #               volumes_per_instance: 1,
     #             },
@@ -3452,6 +3491,7 @@ module Aws::EMR
     #             instance_termination_timeout: 1,
     #           },
     #         },
+    #         reconfiguration_type: "OVERWRITE", # accepts OVERWRITE, MERGE
     #         configurations: [
     #           {
     #             classification: "String",
@@ -3482,6 +3522,11 @@ module Aws::EMR
     #   Policy for customizing shrink operations.
     #   @return [Types::ShrinkPolicy]
     #
+    # @!attribute [rw] reconfiguration_type
+    #   Type of reconfiguration requested. Valid values are MERGE and
+    #   OVERWRITE.
+    #   @return [String]
+    #
     # @!attribute [rw] configurations
     #   A list of new or modified configurations to apply for an instance
     #   group.
@@ -3494,6 +3539,7 @@ module Aws::EMR
       :instance_count,
       :ec2_instance_ids_to_terminate,
       :shrink_policy,
+      :reconfiguration_type,
       :configurations)
       SENSITIVE = []
       include Aws::Structure
@@ -3704,6 +3750,7 @@ module Aws::EMR
     #                 volume_type: "String", # required
     #                 iops: 1,
     #                 size_in_gb: 1, # required
+    #                 throughput: 1,
     #               },
     #               volumes_per_instance: 1,
     #             },
@@ -4090,6 +4137,7 @@ module Aws::EMR
     #                     volume_type: "String", # required
     #                     iops: 1,
     #                     size_in_gb: 1, # required
+    #                     throughput: 1,
     #                   },
     #                   volumes_per_instance: 1,
     #                 },
@@ -4156,6 +4204,7 @@ module Aws::EMR
     #                         volume_type: "String", # required
     #                         iops: 1,
     #                         size_in_gb: 1, # required
+    #                         throughput: 1,
     #                       },
     #                       volumes_per_instance: 1,
     #                     },
@@ -5313,6 +5362,7 @@ module Aws::EMR
     #                 instance_termination_timeout: 1,
     #               },
     #             },
+    #             reconfiguration_type: "OVERWRITE", # accepts OVERWRITE, MERGE
     #             configurations: [
     #               {
     #                 classification: "String",
@@ -5529,6 +5579,27 @@ module Aws::EMR
       :status,
       :start_time,
       :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Linux release specified for a cluster in the RunJobFlow
+    # request.
+    #
+    # @!attribute [rw] label
+    #   The Amazon Linux release specified for a cluster in the RunJobFlow
+    #   request. The format is as shown in [ *Amazon Linux 2 Release Notes*
+    #   ][1]. For example, 2.0.20220218.1.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AL2/latest/relnotes/relnotes-20220218.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/OSRelease AWS API Documentation
+    #
+    class OSRelease < Struct.new(
+      :label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6140,6 +6211,7 @@ module Aws::EMR
     #                       volume_type: "String", # required
     #                       iops: 1,
     #                       size_in_gb: 1, # required
+    #                       throughput: 1,
     #                     },
     #                     volumes_per_instance: 1,
     #                   },
@@ -6206,6 +6278,7 @@ module Aws::EMR
     #                           volume_type: "String", # required
     #                           iops: 1,
     #                           size_in_gb: 1, # required
+    #                           throughput: 1,
     #                         },
     #                         volumes_per_instance: 1,
     #                       },
@@ -6355,6 +6428,7 @@ module Aws::EMR
     #         auto_termination_policy: {
     #           idle_timeout: 1,
     #         },
+    #         os_release_label: "XmlStringMaxLen256",
     #       }
     #
     # @!attribute [rw] name
@@ -6626,6 +6700,13 @@ module Aws::EMR
     #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html
     #   @return [Types::AutoTerminationPolicy]
     #
+    # @!attribute [rw] os_release_label
+    #   Specifies a particular Amazon Linux release for all nodes in a
+    #   cluster launch RunJobFlow request. If a release is not specified,
+    #   Amazon EMR uses the latest validated Amazon Linux release for
+    #   cluster launch.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput AWS API Documentation
     #
     class RunJobFlowInput < Struct.new(
@@ -6656,7 +6737,8 @@ module Aws::EMR
       :step_concurrency_level,
       :managed_scaling_policy,
       :placement_group_configs,
-      :auto_termination_policy)
+      :auto_termination_policy,
+      :os_release_label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7401,6 +7483,17 @@ module Aws::EMR
     #   The current execution status details of the cluster step.
     #   @return [Types::StepStatus]
     #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the runtime role for a step on the
+    #   cluster. The runtime role can be a cross-account IAM role. The
+    #   runtime role ARN is a combination of account ID, role name, and role
+    #   type using the following format:
+    #   `arn:partition:service:region:account:resource`.
+    #
+    #   For example, `arn:aws:iam::1234567890:role/ReadOnly` is a correctly
+    #   formatted runtime role ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Step AWS API Documentation
     #
     class Step < Struct.new(
@@ -7408,7 +7501,8 @@ module Aws::EMR
       :name,
       :config,
       :action_on_failure,
-      :status)
+      :status,
+      :execution_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8022,9 +8116,9 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # EBS volume specifications such as volume type, IOPS, and size (GiB)
-    # that will be requested for the EBS volume attached to an EC2 instance
-    # in the cluster.
+    # EBS volume specifications such as volume type, IOPS, size (GiB) and
+    # throughput (MiB/s) that are requested for the EBS volume attached to
+    # an EC2 instance in the cluster.
     #
     # @note When making an API call, you may pass VolumeSpecification
     #   data as a hash:
@@ -8033,6 +8127,7 @@ module Aws::EMR
     #         volume_type: "String", # required
     #         iops: 1,
     #         size_in_gb: 1, # required
+    #         throughput: 1,
     #       }
     #
     # @!attribute [rw] volume_type
@@ -8049,12 +8144,19 @@ module Aws::EMR
     #   1024. If the volume type is EBS-optimized, the minimum value is 10.
     #   @return [Integer]
     #
+    # @!attribute [rw] throughput
+    #   The throughput, in mebibyte per second (MiB/s). This optional
+    #   parameter can be a number from 125 - 1000 and is valid only for gp3
+    #   volumes.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/VolumeSpecification AWS API Documentation
     #
     class VolumeSpecification < Struct.new(
       :volume_type,
       :iops,
-      :size_in_gb)
+      :size_in_gb,
+      :throughput)
       SENSITIVE = []
       include Aws::Structure
     end

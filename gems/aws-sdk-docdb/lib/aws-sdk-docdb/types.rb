@@ -942,6 +942,7 @@ module Aws::DocDB
     #           },
     #         ],
     #         db_cluster_identifier: "String", # required
+    #         copy_tags_to_snapshot: false,
     #         promotion_tier: 1,
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
@@ -1014,6 +1015,11 @@ module Aws::DocDB
     #   The identifier of the cluster that the instance will belong to.
     #   @return [String]
     #
+    # @!attribute [rw] copy_tags_to_snapshot
+    #   A value that indicates whether to copy tags from the DB instance to
+    #   snapshots of the DB instance. By default, tags are not copied.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] promotion_tier
     #   A value that specifies the order in which an Amazon DocumentDB
     #   replica is promoted to the primary instance after a failure of the
@@ -1058,6 +1064,7 @@ module Aws::DocDB
       :auto_minor_version_upgrade,
       :tags,
       :db_cluster_identifier,
+      :copy_tags_to_snapshot,
       :promotion_tier,
       :enable_performance_insights,
       :performance_insights_kms_key_id)
@@ -1468,6 +1475,10 @@ module Aws::DocDB
     #   other Amazon Web Services services on your behalf.
     #   @return [Array<Types::DBClusterRole>]
     #
+    # @!attribute [rw] clone_group_id
+    #   Identifies the clone group to which the DB cluster is associated.
+    #   @return [String]
+    #
     # @!attribute [rw] cluster_create_time
     #   Specifies the time when the cluster was created, in Universal
     #   Coordinated Time (UTC).
@@ -1517,6 +1528,7 @@ module Aws::DocDB
       :db_cluster_resource_id,
       :db_cluster_arn,
       :associated_roles,
+      :clone_group_id,
       :cluster_create_time,
       :enabled_cloudwatch_logs_exports,
       :deletion_protection)
@@ -2114,6 +2126,11 @@ module Aws::DocDB
     #   The identifier of the CA certificate for this DB instance.
     #   @return [String]
     #
+    # @!attribute [rw] copy_tags_to_snapshot
+    #   A value that indicates whether to copy tags from the DB instance to
+    #   snapshots of the DB instance. By default, tags are not copied.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] promotion_tier
     #   A value that specifies the order in which an Amazon DocumentDB
     #   replica is promoted to the primary instance after a failure of the
@@ -2155,6 +2172,7 @@ module Aws::DocDB
       :kms_key_id,
       :dbi_resource_id,
       :ca_certificate_identifier,
+      :copy_tags_to_snapshot,
       :promotion_tier,
       :db_instance_arn,
       :enabled_cloudwatch_logs_exports)
@@ -4690,6 +4708,7 @@ module Aws::DocDB
     #         auto_minor_version_upgrade: false,
     #         new_db_instance_identifier: "String",
     #         ca_certificate_identifier: "String",
+    #         copy_tags_to_snapshot: false,
     #         promotion_tier: 1,
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
@@ -4780,6 +4799,11 @@ module Aws::DocDB
     #   instance.
     #   @return [String]
     #
+    # @!attribute [rw] copy_tags_to_snapshot
+    #   A value that indicates whether to copy all tags from the DB instance
+    #   to snapshots of the DB instance. By default, tags are not copied.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] promotion_tier
     #   A value that specifies the order in which an Amazon DocumentDB
     #   replica is promoted to the primary instance after a failure of the
@@ -4823,6 +4847,7 @@ module Aws::DocDB
       :auto_minor_version_upgrade,
       :new_db_instance_identifier,
       :ca_certificate_identifier,
+      :copy_tags_to_snapshot,
       :promotion_tier,
       :enable_performance_insights,
       :performance_insights_kms_key_id)
@@ -5751,6 +5776,7 @@ module Aws::DocDB
     #
     #       {
     #         db_cluster_identifier: "String", # required
+    #         restore_type: "String",
     #         source_db_cluster_identifier: "String", # required
     #         restore_to_time: Time.now,
     #         use_latest_restorable_time: false,
@@ -5778,6 +5804,23 @@ module Aws::DocDB
     #   * The first character must be a letter.
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_type
+    #   The type of restore to be performed. You can specify one of the
+    #   following values:
+    #
+    #   * `full-copy` - The new DB cluster is restored as a full copy of the
+    #     source DB cluster.
+    #
+    #   * `copy-on-write` - The new DB cluster is restored as a clone of the
+    #     source DB cluster.
+    #
+    #   Constraints: You can't specify `copy-on-write` if the engine
+    #   version of the source DB cluster is earlier than 1.11.
+    #
+    #   If you don't specify a `RestoreType` value, then the new DB cluster
+    #   is restored as a full copy of the source DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] source_db_cluster_identifier
@@ -5892,6 +5935,7 @@ module Aws::DocDB
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
       :db_cluster_identifier,
+      :restore_type,
       :source_db_cluster_identifier,
       :restore_to_time,
       :use_latest_restorable_time,

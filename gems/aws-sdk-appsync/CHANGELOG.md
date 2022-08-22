@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2022-07-26)
+------------------
+
+* Feature - Adds support for a new API to evaluate mapping templates with mock data, allowing you to remotely unit test your AppSync resolvers and functions.
+
 1.52.0 (2022-02-24)
 ------------------
 

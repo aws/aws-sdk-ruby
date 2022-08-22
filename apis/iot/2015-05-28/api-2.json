@@ -217,7 +217,8 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
-        {"shape":"ServiceUnavailableException"}
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"LimitExceededException"}
       ]
     },
     "CancelJobExecution":{
@@ -3025,6 +3026,7 @@
       "input":{"shape":"RegisterCACertificateRequest"},
       "output":{"shape":"RegisterCACertificateResponse"},
       "errors":[
+        {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceAlreadyExistsException"},
         {"shape":"RegistrationCodeValidationException"},
         {"shape":"InvalidRequestException"},
@@ -4767,6 +4769,7 @@
     },
     "Boolean":{"type":"boolean"},
     "BooleanKey":{"type":"boolean"},
+    "BooleanWrapperObject":{"type":"boolean"},
     "Bucket":{
       "type":"structure",
       "members":{
@@ -4808,7 +4811,8 @@
         "lastModifiedDate":{"shape":"DateType"},
         "customerVersion":{"shape":"CustomerVersion"},
         "generationId":{"shape":"GenerationId"},
-        "validity":{"shape":"CertificateValidity"}
+        "validity":{"shape":"CertificateValidity"},
+        "certificateMode":{"shape":"CertificateMode"}
       }
     },
     "CACertificateStatus":{
@@ -5717,7 +5721,8 @@
         "enabled":{"shape":"Enabled"},
         "provisioningRoleArn":{"shape":"RoleArn"},
         "preProvisioningHook":{"shape":"ProvisioningHook"},
-        "tags":{"shape":"TagList"}
+        "tags":{"shape":"TagList"},
+        "type":{"shape":"TemplateType"}
       }
     },
     "CreateProvisioningTemplateResponse":{
@@ -7099,7 +7104,8 @@
         "templateBody":{"shape":"TemplateBody"},
         "enabled":{"shape":"Enabled"},
         "provisioningRoleArn":{"shape":"RoleArn"},
-        "preProvisioningHook":{"shape":"ProvisioningHook"}
+        "preProvisioningHook":{"shape":"ProvisioningHook"},
+        "type":{"shape":"TemplateType"}
       }
     },
     "DescribeProvisioningTemplateVersionRequest":{
@@ -8371,6 +8377,12 @@
         "REBUILDING"
       ]
     },
+    "IndexingFilter":{
+      "type":"structure",
+      "members":{
+        "namedShadowNames":{"shape":"NamedShadowNamesFilter"}
+      }
+    },
     "InlineDocument":{"type":"string"},
     "InputName":{
       "type":"string",
@@ -8504,7 +8516,8 @@
         "namespaceId":{"shape":"NamespaceId"},
         "jobTemplateArn":{"shape":"JobTemplateArn"},
         "jobExecutionsRetryConfig":{"shape":"JobExecutionsRetryConfig"},
-        "documentParameters":{"shape":"ParameterMap"}
+        "documentParameters":{"shape":"ParameterMap"},
+        "isConcurrent":{"shape":"BooleanWrapperObject"}
       }
     },
     "JobArn":{"type":"string"},
@@ -8652,7 +8665,8 @@
         "status":{"shape":"JobStatus"},
         "createdAt":{"shape":"DateType"},
         "lastUpdatedAt":{"shape":"DateType"},
-        "completedAt":{"shape":"DateType"}
+        "completedAt":{"shape":"DateType"},
+        "isConcurrent":{"shape":"BooleanWrapperObject"}
       }
     },
     "JobSummaryList":{
@@ -9089,6 +9103,11 @@
           "shape":"AscendingOrder",
           "location":"querystring",
           "locationName":"isAscendingOrder"
+        },
+        "templateName":{
+          "shape":"TemplateName",
+          "location":"querystring",
+          "locationName":"templateName"
         }
       }
     },
@@ -10799,6 +10818,10 @@
         "ON"
       ]
     },
+    "NamedShadowNamesFilter":{
+      "type":"list",
+      "member":{"shape":"ShadowName"}
+    },
     "NamespaceId":{
       "type":"string",
       "max":64,
@@ -11152,7 +11175,8 @@
         "description":{"shape":"TemplateDescription"},
         "creationDate":{"shape":"DateType"},
         "lastModifiedDate":{"shape":"DateType"},
-        "enabled":{"shape":"Enabled"}
+        "enabled":{"shape":"Enabled"},
+        "type":{"shape":"TemplateType"}
       }
     },
     "ProvisioningTemplateVersionListing":{
@@ -11271,10 +11295,7 @@
     "Regex":{"type":"string"},
     "RegisterCACertificateRequest":{
       "type":"structure",
-      "required":[
-        "caCertificate",
-        "verificationCertificate"
-      ],
+      "required":["caCertificate"],
       "members":{
         "caCertificate":{"shape":"CertificatePem"},
         "verificationCertificate":{"shape":"CertificatePem"},
@@ -11289,7 +11310,8 @@
           "locationName":"allowAutoRegistration"
         },
         "registrationConfig":{"shape":"RegistrationConfig"},
-        "tags":{"shape":"TagList"}
+        "tags":{"shape":"TagList"},
+        "certificateMode":{"shape":"CertificateMode"}
       }
     },
     "RegisterCACertificateResponse":{
@@ -11369,7 +11391,8 @@
       "type":"structure",
       "members":{
         "templateBody":{"shape":"TemplateBody"},
-        "roleArn":{"shape":"RoleArn"}
+        "roleArn":{"shape":"RoleArn"},
+        "templateName":{"shape":"TemplateName"}
       }
     },
     "RegistryMaxResults":{
@@ -11913,6 +11936,12 @@
         "disableAllLogs":{"shape":"DisableAllLogs"}
       }
     },
+    "ShadowName":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[a-zA-Z0-9:_-]+"
+    },
     "SigV4Authorization":{
       "type":"structure",
       "required":[
@@ -12292,7 +12321,7 @@
     "TagValue":{
       "type":"string",
       "max":256,
-      "min":1
+      "min":0
     },
     "Target":{"type":"string"},
     "TargetArn":{
@@ -12377,6 +12406,13 @@
       "max":36,
       "min":1,
       "pattern":"^[0-9A-Za-z_-]+$"
+    },
+    "TemplateType":{
+      "type":"string",
+      "enum":[
+        "FLEET_PROVISIONING",
+        "JITP"
+      ]
     },
     "TemplateVersionId":{"type":"integer"},
     "TermsAggregation":{
@@ -12571,7 +12607,8 @@
         "deviceDefenderIndexingMode":{"shape":"DeviceDefenderIndexingMode"},
         "namedShadowIndexingMode":{"shape":"NamedShadowIndexingMode"},
         "managedFields":{"shape":"Fields"},
-        "customFields":{"shape":"Fields"}
+        "customFields":{"shape":"Fields"},
+        "filter":{"shape":"IndexingFilter"}
       }
     },
     "ThingIndexingMode":{

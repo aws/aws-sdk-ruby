@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2022-08-17)
+------------------
+
+* Feature - Documentation updates for Secrets Manager.
+
+1.64.0 (2022-06-16)
+------------------
+
+* Feature - Documentation updates for Secrets Manager
+
+1.63.0 (2022-06-16)
+------------------
+
+* Feature - Documentation updates for Secrets Manager
+
+1.62.0 (2022-05-25)
+------------------
+
+* Feature - Documentation updates for Secrets Manager
+
+1.61.0 (2022-05-11)
+------------------
+
+* Feature - Doc only update for Secrets Manager that fixes several customer-reported issues.
+
+1.60.0 (2022-04-21)
+------------------
+
+* Feature - Documentation updates for Secrets Manager
+
 1.59.0 (2022-03-11)
 ------------------
 

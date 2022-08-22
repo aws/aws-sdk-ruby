@@ -2168,7 +2168,7 @@ module Aws::CloudFront
     #             },
     #           },
     #           web_acl_id: "string",
-    #           http_version: "http1.1", # accepts http1.1, http2
+    #           http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #           is_ipv6_enabled: false,
     #         },
     #       }
@@ -2466,7 +2466,7 @@ module Aws::CloudFront
     #               },
     #             },
     #             web_acl_id: "string",
-    #             http_version: "http1.1", # accepts http1.1, http2
+    #             http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #             is_ipv6_enabled: false,
     #           },
     #           tags: { # required
@@ -3101,6 +3101,10 @@ module Aws::CloudFront
     #                 override: false, # required
     #               },
     #             ],
+    #           },
+    #           server_timing_headers_config: {
+    #             enabled: false, # required
+    #             sampling_rate: 1.0,
     #           },
     #         },
     #       }
@@ -4762,7 +4766,7 @@ module Aws::CloudFront
     #           },
     #         },
     #         web_acl_id: "string",
-    #         http_version: "http1.1", # accepts http1.1, http2
+    #         http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #         is_ipv6_enabled: false,
     #       }
     #
@@ -4932,18 +4936,26 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] http_version
-    #   (Optional) Specify the maximum HTTP version that you want viewers to
-    #   use to communicate with CloudFront. The default value for new web
-    #   distributions is http2. Viewers that don't support HTTP/2
+    #   (Optional) Specify the maximum HTTP version(s) that you want viewers
+    #   to use to communicate with CloudFront. The default value for new web
+    #   distributions is `http2`. Viewers that don't support HTTP/2
     #   automatically use an earlier HTTP version.
     #
-    #   For viewers and CloudFront to use HTTP/2, viewers must support TLS
-    #   1.2 or later, and must support Server Name Identification (SNI).
+    #   For viewers and CloudFront to use HTTP/2, viewers must support
+    #   TLSv1.2 or later, and must support Server Name Indication (SNI).
     #
-    #   In general, configuring CloudFront to communicate with viewers using
-    #   HTTP/2 reduces latency. You can improve performance by optimizing
-    #   for HTTP/2. For more information, do an Internet search for "http/2
-    #   optimization."
+    #   For viewers and CloudFront to use HTTP/3, viewers must support
+    #   TLSv1.3 and Server Name Indication (SNI). CloudFront supports HTTP/3
+    #   connection migration to allow the viewer to switch networks without
+    #   losing connection. For more information about connection migration,
+    #   see [Connection Migration][1] at RFC 9000. For more information
+    #   about supported TLSv1.3 ciphers, see [Supported protocols and
+    #   ciphers between viewers and CloudFront][2].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc9000.html#name-connection-migration
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html
     #   @return [String]
     #
     # @!attribute [rw] is_ipv6_enabled
@@ -5270,7 +5282,7 @@ module Aws::CloudFront
     #             },
     #           },
     #           web_acl_id: "string",
-    #           http_version: "http1.1", # accepts http1.1, http2
+    #           http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #           is_ipv6_enabled: false,
     #         },
     #         tags: { # required
@@ -11674,6 +11686,10 @@ module Aws::CloudFront
     #             },
     #           ],
     #         },
+    #         server_timing_headers_config: {
+    #           enabled: false, # required
+    #           sampling_rate: 1.0,
+    #         },
     #       }
     #
     # @!attribute [rw] comment
@@ -11702,6 +11718,11 @@ module Aws::CloudFront
     #   A configuration for a set of custom HTTP response headers.
     #   @return [Types::ResponseHeadersPolicyCustomHeadersConfig]
     #
+    # @!attribute [rw] server_timing_headers_config
+    #   A configuration for enabling the `Server-Timing` header in HTTP
+    #   responses sent from CloudFront.
+    #   @return [Types::ResponseHeadersPolicyServerTimingHeadersConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ResponseHeadersPolicyConfig AWS API Documentation
     #
     class ResponseHeadersPolicyConfig < Struct.new(
@@ -11709,7 +11730,8 @@ module Aws::CloudFront
       :name,
       :cors_config,
       :security_headers_config,
-      :custom_headers_config)
+      :custom_headers_config,
+      :server_timing_headers_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12266,6 +12288,60 @@ module Aws::CloudFront
       :content_security_policy,
       :content_type_options,
       :strict_transport_security)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A configuration for enabling the `Server-Timing` header in HTTP
+    # responses sent from CloudFront. CloudFront adds this header to HTTP
+    # responses that it sends in response to requests that match a cache
+    # behavior that's associated with this response headers policy.
+    #
+    # You can use the `Server-Timing` header to view metrics that can help
+    # you gain insights about the behavior and performance of CloudFront.
+    # For example, you can see which cache layer served a cache hit, or the
+    # first byte latency from the origin when there was a cache miss. You
+    # can use the metrics in the `Server-Timing` header to troubleshoot
+    # issues or test the efficiency of your CloudFront configuration. For
+    # more information, see [Server-Timing header][1] in the *Amazon
+    # CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-response-headers-policies.html#server-timing-header
+    #
+    # @note When making an API call, you may pass ResponseHeadersPolicyServerTimingHeadersConfig
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         sampling_rate: 1.0,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   A Boolean that determines whether CloudFront adds the
+    #   `Server-Timing` header to HTTP responses that it sends in response
+    #   to requests that match a cache behavior that's associated with this
+    #   response headers policy.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] sampling_rate
+    #   A number 0–100 (inclusive) that specifies the percentage of
+    #   responses that you want CloudFront to add the `Server-Timing` header
+    #   to. When you set the sampling rate to 100, CloudFront adds the
+    #   `Server-Timing` header to the HTTP response for every request that
+    #   matches the cache behavior that this response headers policy is
+    #   attached to. When you set it to 50, CloudFront adds the header to
+    #   50% of the responses for requests that match the cache behavior. You
+    #   can set the sampling rate to any number 0–100 with up to four
+    #   decimal places.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ResponseHeadersPolicyServerTimingHeadersConfig AWS API Documentation
+    #
+    class ResponseHeadersPolicyServerTimingHeadersConfig < Struct.new(
+      :enabled,
+      :sampling_rate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13279,6 +13355,27 @@ module Aws::CloudFront
       :function_error_message,
       :function_output)
       SENSITIVE = [:function_execution_logs, :function_error_message, :function_output]
+      include Aws::Structure
+    end
+
+    # The length of the `Content-Security-Policy` header value in the
+    # response headers policy exceeds the maximum.
+    #
+    # For more information, see [Quotas][1] (formerly known as limits) in
+    # the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooLongCSPInResponseHeadersPolicy AWS API Documentation
+    #
+    class TooLongCSPInResponseHeadersPolicy < Struct.new(
+      :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14583,7 +14680,7 @@ module Aws::CloudFront
     #             },
     #           },
     #           web_acl_id: "string",
-    #           http_version: "http1.1", # accepts http1.1, http2
+    #           http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #           is_ipv6_enabled: false,
     #         },
     #         id: "string", # required
@@ -15167,6 +15264,10 @@ module Aws::CloudFront
     #                 override: false, # required
     #               },
     #             ],
+    #           },
+    #           server_timing_headers_config: {
+    #             enabled: false, # required
+    #             sampling_rate: 1.0,
     #           },
     #         },
     #         id: "string", # required

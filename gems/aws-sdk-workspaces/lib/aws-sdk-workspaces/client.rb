@@ -881,6 +881,67 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Creates a new WorkSpace image from an existing WorkSpace.
+    #
+    # @option params [required, String] :name
+    #   The name of the new WorkSpace image.
+    #
+    # @option params [required, String] :description
+    #   The description of the new WorkSpace image.
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the source WorkSpace
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags that you want to add to the new WorkSpace image. To add tags
+    #   when you're creating the image, you must create an IAM policy that
+    #   grants your IAM user permission to use `workspaces:CreateTags`.
+    #
+    # @return [Types::CreateWorkspaceImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorkspaceImageResult#image_id #image_id} => String
+    #   * {Types::CreateWorkspaceImageResult#name #name} => String
+    #   * {Types::CreateWorkspaceImageResult#description #description} => String
+    #   * {Types::CreateWorkspaceImageResult#operating_system #operating_system} => Types::OperatingSystem
+    #   * {Types::CreateWorkspaceImageResult#state #state} => String
+    #   * {Types::CreateWorkspaceImageResult#required_tenancy #required_tenancy} => String
+    #   * {Types::CreateWorkspaceImageResult#created #created} => Time
+    #   * {Types::CreateWorkspaceImageResult#owner_account_id #owner_account_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_workspace_image({
+    #     name: "WorkspaceImageName", # required
+    #     description: "WorkspaceImageDescription", # required
+    #     workspace_id: "WorkspaceId", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.operating_system.type #=> String, one of "WINDOWS", "LINUX"
+    #   resp.state #=> String, one of "AVAILABLE", "PENDING", "ERROR"
+    #   resp.required_tenancy #=> String, one of "DEFAULT", "DEDICATED"
+    #   resp.created #=> Time
+    #   resp.owner_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceImage AWS API Documentation
+    #
+    # @overload create_workspace_image(params = {})
+    # @param [Hash] params ({})
+    def create_workspace_image(params = {}, options = {})
+      req = build_request(:create_workspace_image, params)
+      req.send_request(options)
+    end
+
     # Creates one or more WorkSpaces.
     #
     # This operation is asynchronous and returns before the WorkSpaces are
@@ -1756,6 +1817,9 @@ module Aws::WorkSpaces
     #   resp.directories[0].selfservice_permissions.change_compute_type #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].selfservice_permissions.switch_running_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].selfservice_permissions.rebuild_workspace #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].saml_properties.status #=> String, one of "DISABLED", "ENABLED", "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"
+    #   resp.directories[0].saml_properties.user_access_url #=> String
+    #   resp.directories[0].saml_properties.relay_state_parameter_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectories AWS API Documentation
@@ -2276,14 +2340,9 @@ module Aws::WorkSpaces
     #   specify a value that ends in `_WSP`. To use PCoIP, specify a value
     #   that does not end in `_WSP`.
     #
-    #   For non-GPU-enabled images (bundles other than Graphics.g4dn,
-    #   GraphicsPro.g4dn, Graphics, or GraphicsPro), specify `BYOL_REGULAR` or
-    #   `BYOL_REGULAR_WSP`, depending on the protocol.
-    #
-    #   <note markdown="1"> Use `BYOL_GRAPHICS_G4DN` ingestion for both Graphics.g4dn and
-    #   GraphicsPro.g4dn.
-    #
-    #    </note>
+    #   For non-GPU-enabled bundles (bundles other than Graphics or
+    #   GraphicsPro), specify `BYOL_REGULAR` or `BYOL_REGULAR_WSP`, depending
+    #   on the protocol.
     #
     # @option params [required, String] :image_name
     #   The name of the WorkSpace image.
@@ -2300,12 +2359,8 @@ module Aws::WorkSpaces
     #   subscribing to Office for BYOL images, see [ Bring Your Own Windows
     #   Desktop Licenses][1].
     #
-    #   <note markdown="1"> * Although this parameter is an array, only one item is allowed at
-    #     this time
-    #
-    #   * Microsoft Office 2016 application subscription through AWS is
-    #     currently not supported for Graphics.g4dn Bring Your Own License
-    #     (BYOL) images
+    #   <note markdown="1"> Although this parameter is an array, only one item is allowed at this
+    #   time.
     #
     #    </note>
     #
@@ -2506,6 +2561,51 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def modify_client_properties(params = {}, options = {})
       req = build_request(:modify_client_properties, params)
+      req.send_request(options)
+    end
+
+    # Modifies multiple properties related to SAML 2.0 authentication,
+    # including the enablement status, user access URL, and relay state
+    # parameter name that are used for configuring federation with an SAML
+    # 2.0 identity provider.
+    #
+    # @option params [required, String] :resource_id
+    #   The directory identifier for which you want to configure SAML
+    #   properties.
+    #
+    # @option params [Types::SamlProperties] :saml_properties
+    #   The properties for configuring SAML 2.0 authentication.
+    #
+    # @option params [Array<String>] :properties_to_delete
+    #   The SAML properties to delete as part of your request.
+    #
+    #   Specify one of the following options:
+    #
+    #   * `SAML_PROPERTIES_USER_ACCESS_URL` to delete the user access URL.
+    #
+    #   * `SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME` to delete the relay
+    #     state parameter name.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_saml_properties({
+    #     resource_id: "DirectoryId", # required
+    #     saml_properties: {
+    #       status: "DISABLED", # accepts DISABLED, ENABLED, ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK
+    #       user_access_url: "SamlUserAccessUrl",
+    #       relay_state_parameter_name: "NonEmptyString",
+    #     },
+    #     properties_to_delete: ["SAML_PROPERTIES_USER_ACCESS_URL"], # accepts SAML_PROPERTIES_USER_ACCESS_URL, SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifySamlProperties AWS API Documentation
+    #
+    # @overload modify_saml_properties(params = {})
+    # @param [Hash] params ({})
+    def modify_saml_properties(params = {}, options = {})
+      req = build_request(:modify_saml_properties, params)
       req.send_request(options)
     end
 
@@ -3305,7 +3405,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

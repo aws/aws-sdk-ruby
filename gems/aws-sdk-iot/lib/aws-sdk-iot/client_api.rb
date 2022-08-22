@@ -162,6 +162,7 @@ module Aws::IoT
     BillingGroupProperties = Shapes::StructureShape.new(name: 'BillingGroupProperties')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanKey = Shapes::BooleanShape.new(name: 'BooleanKey')
+    BooleanWrapperObject = Shapes::BooleanShape.new(name: 'BooleanWrapperObject')
     Bucket = Shapes::StructureShape.new(name: 'Bucket')
     BucketKeyValue = Shapes::StringShape.new(name: 'BucketKeyValue')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
@@ -597,6 +598,7 @@ module Aws::IoT
     IndexNotReadyException = Shapes::StructureShape.new(name: 'IndexNotReadyException')
     IndexSchema = Shapes::StringShape.new(name: 'IndexSchema')
     IndexStatus = Shapes::StringShape.new(name: 'IndexStatus')
+    IndexingFilter = Shapes::StructureShape.new(name: 'IndexingFilter')
     InlineDocument = Shapes::StringShape.new(name: 'InlineDocument')
     InputName = Shapes::StringShape.new(name: 'InputName')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
@@ -817,6 +819,7 @@ module Aws::IoT
     MqttPassword = Shapes::BlobShape.new(name: 'MqttPassword')
     MqttUsername = Shapes::StringShape.new(name: 'MqttUsername')
     NamedShadowIndexingMode = Shapes::StringShape.new(name: 'NamedShadowIndexingMode')
+    NamedShadowNamesFilter = Shapes::ListShape.new(name: 'NamedShadowNamesFilter')
     NamespaceId = Shapes::StringShape.new(name: 'NamespaceId')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonCompliantChecksCount = Shapes::IntegerShape.new(name: 'NonCompliantChecksCount')
@@ -1022,6 +1025,7 @@ module Aws::IoT
     SetLoggingOptionsRequest = Shapes::StructureShape.new(name: 'SetLoggingOptionsRequest')
     SetV2LoggingLevelRequest = Shapes::StructureShape.new(name: 'SetV2LoggingLevelRequest')
     SetV2LoggingOptionsRequest = Shapes::StructureShape.new(name: 'SetV2LoggingOptionsRequest')
+    ShadowName = Shapes::StringShape.new(name: 'ShadowName')
     SigV4Authorization = Shapes::StructureShape.new(name: 'SigV4Authorization')
     Signature = Shapes::BlobShape.new(name: 'Signature')
     SignatureAlgorithm = Shapes::StringShape.new(name: 'SignatureAlgorithm')
@@ -1100,6 +1104,7 @@ module Aws::IoT
     TemplateBody = Shapes::StringShape.new(name: 'TemplateBody')
     TemplateDescription = Shapes::StringShape.new(name: 'TemplateDescription')
     TemplateName = Shapes::StringShape.new(name: 'TemplateName')
+    TemplateType = Shapes::StringShape.new(name: 'TemplateType')
     TemplateVersionId = Shapes::IntegerShape.new(name: 'TemplateVersionId')
     TermsAggregation = Shapes::StructureShape.new(name: 'TermsAggregation')
     TestAuthorizationRequest = Shapes::StructureShape.new(name: 'TestAuthorizationRequest')
@@ -1640,6 +1645,7 @@ module Aws::IoT
     CACertificateDescription.add_member(:customer_version, Shapes::ShapeRef.new(shape: CustomerVersion, location_name: "customerVersion"))
     CACertificateDescription.add_member(:generation_id, Shapes::ShapeRef.new(shape: GenerationId, location_name: "generationId"))
     CACertificateDescription.add_member(:validity, Shapes::ShapeRef.new(shape: CertificateValidity, location_name: "validity"))
+    CACertificateDescription.add_member(:certificate_mode, Shapes::ShapeRef.new(shape: CertificateMode, location_name: "certificateMode"))
     CACertificateDescription.struct_class = Types::CACertificateDescription
 
     CACertificates.member = Shapes::ShapeRef.new(shape: CACertificate)
@@ -1999,6 +2005,7 @@ module Aws::IoT
     CreateProvisioningTemplateRequest.add_member(:provisioning_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "provisioningRoleArn"))
     CreateProvisioningTemplateRequest.add_member(:pre_provisioning_hook, Shapes::ShapeRef.new(shape: ProvisioningHook, location_name: "preProvisioningHook"))
     CreateProvisioningTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateProvisioningTemplateRequest.add_member(:type, Shapes::ShapeRef.new(shape: TemplateType, location_name: "type"))
     CreateProvisioningTemplateRequest.struct_class = Types::CreateProvisioningTemplateRequest
 
     CreateProvisioningTemplateResponse.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "templateArn"))
@@ -2516,6 +2523,7 @@ module Aws::IoT
     DescribeProvisioningTemplateResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "enabled"))
     DescribeProvisioningTemplateResponse.add_member(:provisioning_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "provisioningRoleArn"))
     DescribeProvisioningTemplateResponse.add_member(:pre_provisioning_hook, Shapes::ShapeRef.new(shape: ProvisioningHook, location_name: "preProvisioningHook"))
+    DescribeProvisioningTemplateResponse.add_member(:type, Shapes::ShapeRef.new(shape: TemplateType, location_name: "type"))
     DescribeProvisioningTemplateResponse.struct_class = Types::DescribeProvisioningTemplateResponse
 
     DescribeProvisioningTemplateVersionRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location: "uri", location_name: "templateName"))
@@ -2961,6 +2969,9 @@ module Aws::IoT
     IndexNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     IndexNotReadyException.struct_class = Types::IndexNotReadyException
 
+    IndexingFilter.add_member(:named_shadow_names, Shapes::ShapeRef.new(shape: NamedShadowNamesFilter, location_name: "namedShadowNames"))
+    IndexingFilter.struct_class = Types::IndexingFilter
+
     InternalException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     InternalException.struct_class = Types::InternalException
 
@@ -3022,6 +3033,7 @@ module Aws::IoT
     Job.add_member(:job_template_arn, Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "jobTemplateArn"))
     Job.add_member(:job_executions_retry_config, Shapes::ShapeRef.new(shape: JobExecutionsRetryConfig, location_name: "jobExecutionsRetryConfig"))
     Job.add_member(:document_parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "documentParameters"))
+    Job.add_member(:is_concurrent, Shapes::ShapeRef.new(shape: BooleanWrapperObject, location_name: "isConcurrent"))
     Job.struct_class = Types::Job
 
     JobExecution.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
@@ -3086,6 +3098,7 @@ module Aws::IoT
     JobSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateType, location_name: "createdAt"))
     JobSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "lastUpdatedAt"))
     JobSummary.add_member(:completed_at, Shapes::ShapeRef.new(shape: DateType, location_name: "completedAt"))
+    JobSummary.add_member(:is_concurrent, Shapes::ShapeRef.new(shape: BooleanWrapperObject, location_name: "isConcurrent"))
     JobSummary.struct_class = Types::JobSummary
 
     JobSummaryList.member = Shapes::ShapeRef.new(shape: JobSummary)
@@ -3228,6 +3241,7 @@ module Aws::IoT
     ListCACertificatesRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location: "querystring", location_name: "pageSize"))
     ListCACertificatesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location: "querystring", location_name: "marker"))
     ListCACertificatesRequest.add_member(:ascending_order, Shapes::ShapeRef.new(shape: AscendingOrder, location: "querystring", location_name: "isAscendingOrder"))
+    ListCACertificatesRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location: "querystring", location_name: "templateName"))
     ListCACertificatesRequest.struct_class = Types::ListCACertificatesRequest
 
     ListCACertificatesResponse.add_member(:certificates, Shapes::ShapeRef.new(shape: CACertificates, location_name: "certificates"))
@@ -3759,6 +3773,8 @@ module Aws::IoT
     MqttContext.add_member(:client_id, Shapes::ShapeRef.new(shape: MqttClientId, location_name: "clientId"))
     MqttContext.struct_class = Types::MqttContext
 
+    NamedShadowNamesFilter.member = Shapes::ShapeRef.new(shape: ShadowName)
+
     NonCompliantResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     NonCompliantResource.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier"))
     NonCompliantResource.add_member(:additional_info, Shapes::ShapeRef.new(shape: StringMap, location_name: "additionalInfo"))
@@ -3882,6 +3898,7 @@ module Aws::IoT
     ProvisioningTemplateSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "creationDate"))
     ProvisioningTemplateSummary.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "lastModifiedDate"))
     ProvisioningTemplateSummary.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "enabled"))
+    ProvisioningTemplateSummary.add_member(:type, Shapes::ShapeRef.new(shape: TemplateType, location_name: "type"))
     ProvisioningTemplateSummary.struct_class = Types::ProvisioningTemplateSummary
 
     ProvisioningTemplateVersionListing.member = Shapes::ShapeRef.new(shape: ProvisioningTemplateVersionSummary)
@@ -3923,11 +3940,12 @@ module Aws::IoT
     ReasonForNonComplianceCodes.member = Shapes::ShapeRef.new(shape: ReasonForNonComplianceCode)
 
     RegisterCACertificateRequest.add_member(:ca_certificate, Shapes::ShapeRef.new(shape: CertificatePem, required: true, location_name: "caCertificate"))
-    RegisterCACertificateRequest.add_member(:verification_certificate, Shapes::ShapeRef.new(shape: CertificatePem, required: true, location_name: "verificationCertificate"))
+    RegisterCACertificateRequest.add_member(:verification_certificate, Shapes::ShapeRef.new(shape: CertificatePem, location_name: "verificationCertificate"))
     RegisterCACertificateRequest.add_member(:set_as_active, Shapes::ShapeRef.new(shape: SetAsActive, location: "querystring", location_name: "setAsActive"))
     RegisterCACertificateRequest.add_member(:allow_auto_registration, Shapes::ShapeRef.new(shape: AllowAutoRegistration, location: "querystring", location_name: "allowAutoRegistration"))
     RegisterCACertificateRequest.add_member(:registration_config, Shapes::ShapeRef.new(shape: RegistrationConfig, location_name: "registrationConfig"))
     RegisterCACertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    RegisterCACertificateRequest.add_member(:certificate_mode, Shapes::ShapeRef.new(shape: CertificateMode, location_name: "certificateMode"))
     RegisterCACertificateRequest.struct_class = Types::RegisterCACertificateRequest
 
     RegisterCACertificateResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
@@ -3965,6 +3983,7 @@ module Aws::IoT
 
     RegistrationConfig.add_member(:template_body, Shapes::ShapeRef.new(shape: TemplateBody, location_name: "templateBody"))
     RegistrationConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    RegistrationConfig.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "templateName"))
     RegistrationConfig.struct_class = Types::RegistrationConfig
 
     RejectCertificateTransferRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "certificateId"))
@@ -4406,6 +4425,7 @@ module Aws::IoT
     ThingIndexingConfiguration.add_member(:named_shadow_indexing_mode, Shapes::ShapeRef.new(shape: NamedShadowIndexingMode, location_name: "namedShadowIndexingMode"))
     ThingIndexingConfiguration.add_member(:managed_fields, Shapes::ShapeRef.new(shape: Fields, location_name: "managedFields"))
     ThingIndexingConfiguration.add_member(:custom_fields, Shapes::ShapeRef.new(shape: Fields, location_name: "customFields"))
+    ThingIndexingConfiguration.add_member(:filter, Shapes::ShapeRef.new(shape: IndexingFilter, location_name: "filter"))
     ThingIndexingConfiguration.struct_class = Types::ThingIndexingConfiguration
 
     ThingNameList.member = Shapes::ShapeRef.new(shape: ThingName)
@@ -5017,6 +5037,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:cancel_job_execution, Seahorse::Model::Operation.new.tap do |o|
@@ -7640,6 +7661,7 @@ module Aws::IoT
         o.http_request_uri = "/cacertificate"
         o.input = Shapes::ShapeRef.new(shape: RegisterCACertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: RegisterCACertificateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: RegistrationCodeValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)

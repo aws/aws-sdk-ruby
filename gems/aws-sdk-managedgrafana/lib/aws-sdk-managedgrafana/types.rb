@@ -213,6 +213,70 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateWorkspaceApiKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         key_name: "ApiKeyName", # required
+    #         key_role: "String", # required
+    #         seconds_to_live: 1, # required
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] key_name
+    #   Specifies the name of the key to create. Key names must be unique to
+    #   the workspace.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_role
+    #   Specifies the permission level of the key.
+    #
+    #   Valid Values: `VIEWER` \| `EDITOR` \| `ADMIN`
+    #   @return [String]
+    #
+    # @!attribute [rw] seconds_to_live
+    #   Specifies the time in seconds until the key expires. Keys can be
+    #   valid for up to 30 days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace in which to create an API key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceApiKeyRequest AWS API Documentation
+    #
+    class CreateWorkspaceApiKeyRequest < Struct.new(
+      :key_name,
+      :key_role,
+      :seconds_to_live,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key
+    #   The key token that was created. Use this value as a bearer token to
+    #   authenticate HTTP requests to the workspace.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the key that was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace that the key is valid for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceApiKeyResponse AWS API Documentation
+    #
+    class CreateWorkspaceApiKeyResponse < Struct.new(
+      :key,
+      :key_name,
+      :workspace_id)
+      SENSITIVE = [:key]
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateWorkspaceRequest
     #   data as a hash:
     #
@@ -373,6 +437,48 @@ module Aws::ManagedGrafana
     #
     class CreateWorkspaceResponse < Struct.new(
       :workspace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteWorkspaceApiKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         key_name: "ApiKeyName", # required
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] key_name
+    #   The name of the API key to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspaceApiKeyRequest AWS API Documentation
+    #
+    class DeleteWorkspaceApiKeyRequest < Struct.new(
+      :key_name,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_name
+    #   The name of the API key that was deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace where the key was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspaceApiKeyResponse AWS API Documentation
+    #
+    class DeleteWorkspaceApiKeyResponse < Struct.new(
+      :key_name,
+      :workspace_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1041,7 +1147,7 @@ module Aws::ManagedGrafana
     #
     #       {
     #         action: "ADD", # required, accepts ADD, REVOKE
-    #         role: "ADMIN", # required, accepts ADMIN, EDITOR
+    #         role: "ADMIN", # required, accepts ADMIN, EDITOR, VIEWER
     #         users: [ # required
     #           {
     #             id: "SsoId", # required
@@ -1081,7 +1187,7 @@ module Aws::ManagedGrafana
     #         update_instruction_batch: [ # required
     #           {
     #             action: "ADD", # required, accepts ADD, REVOKE
-    #             role: "ADMIN", # required, accepts ADMIN, EDITOR
+    #             role: "ADMIN", # required, accepts ADMIN, EDITOR, VIEWER
     #             users: [ # required
     #               {
     #                 id: "SsoId", # required

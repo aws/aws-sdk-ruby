@@ -1023,6 +1023,53 @@ module Aws::AppRegistry
       req.send_request(options)
     end
 
+    # Lists the details of all attribute groups associated with a specific
+    # application. The results display in pages.
+    #
+    # @option params [required, String] :application
+    #   The name or ID of the application.
+    #
+    # @option params [String] :next_token
+    #   This token retrieves the next page of results after a previous API
+    #   call.
+    #
+    # @option params [Integer] :max_results
+    #   The upper bound of the number of results to return. The value cannot
+    #   exceed 25. If you omit this parameter, it defaults to 25. This value
+    #   is optional.
+    #
+    # @return [Types::ListAttributeGroupsForApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAttributeGroupsForApplicationResponse#attribute_groups_details #attribute_groups_details} => Array&lt;Types::AttributeGroupDetails&gt;
+    #   * {Types::ListAttributeGroupsForApplicationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_attribute_groups_for_application({
+    #     application: "ApplicationSpecifier", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attribute_groups_details #=> Array
+    #   resp.attribute_groups_details[0].id #=> String
+    #   resp.attribute_groups_details[0].arn #=> String
+    #   resp.attribute_groups_details[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ListAttributeGroupsForApplication AWS API Documentation
+    #
+    # @overload list_attribute_groups_for_application(params = {})
+    # @param [Hash] params ({})
+    def list_attribute_groups_for_application(params = {}, options = {})
+      req = build_request(:list_attribute_groups_for_application, params)
+      req.send_request(options)
+    end
+
     # Lists all of the tags on the resource.
     #
     # @option params [required, String] :resource_arn
@@ -1163,8 +1210,9 @@ module Aws::AppRegistry
     #   The name or ID of the application that will be updated.
     #
     # @option params [String] :name
-    #   The new name of the application. The name must be unique in the region
-    #   in which you are updating the application.
+    #   Deprecated: The new name of the application. The name must be unique
+    #   in the region in which you are updating the application. Please do not
+    #   use this field as we have stopped supporting name updates.
     #
     # @option params [String] :description
     #   The new description of the application.
@@ -1208,8 +1256,10 @@ module Aws::AppRegistry
     #   describe the application.
     #
     # @option params [String] :name
-    #   The new name of the attribute group. The name must be unique in the
-    #   region in which you are updating the attribute group.
+    #   Deprecated: The new name of the attribute group. The name must be
+    #   unique in the region in which you are updating the attribute group.
+    #   Please do not use this field as we have stopped supporting name
+    #   updates.
     #
     # @option params [String] :description
     #   The description of the attribute group that the user provides.
@@ -1265,7 +1315,7 @@ module Aws::AppRegistry
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appregistry'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2022-06-28)
+------------------
+
+* Feature - Release new API GetExternalDataViewAccessDetails
+
+1.16.0 (2022-06-15)
+------------------
+
+* Feature - This release adds a new set of APIs, GetPermissionGroup, DisassociateUserFromPermissionGroup, AssociateUserToPermissionGroup, ListPermissionGroupsByUser, ListUsersByPermissionGroup.
+
+1.15.0 (2022-05-12)
+------------------
+
+* Feature - We've now deprecated CreateSnapshot permission for creating a data view, instead use CreateDataView permission.
+
 1.14.0 (2022-02-28)
 ------------------
 

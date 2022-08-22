@@ -33,11 +33,11 @@ module Aws::WAFV2
     end
 
     # Inspect all of the elements that WAF has parsed and extracted from the
-    # web request JSON body that are within the JsonBody `MatchScope`. This
-    # is used with the FieldToMatch option `JsonBody`.
+    # web request component that you've identified in your FieldToMatch
+    # specifications.
     #
-    # This is used only to indicate the web request component for WAF to
-    # inspect, in the FieldToMatch specification.
+    # This is used only in the FieldToMatch specification for some web
+    # request component types.
     #
     # JSON specification: `"All": \{\}`
     #
@@ -47,10 +47,10 @@ module Aws::WAFV2
     #
     class All < Aws::EmptyStructure; end
 
-    # All query arguments of a web request.
+    # Inspect all query arguments of the web request.
     #
-    # This is used only to indicate the web request component for WAF to
-    # inspect, in the FieldToMatch specification.
+    # This is used only in the FieldToMatch specification for some web
+    # request component types.
     #
     # JSON specification: `"AllQueryArguments": \{\}`
     #
@@ -127,6 +127,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -138,6 +139,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -163,6 +185,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -174,6 +197,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -182,6 +226,7 @@ module Aws::WAFV2
     #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
+    #               sensitivity_level: "LOW", # accepts LOW, HIGH
     #             },
     #             xss_match_statement: {
     #               field_to_match: { # required
@@ -198,6 +243,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -209,6 +255,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -233,6 +300,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -244,6 +312,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -256,7 +345,7 @@ module Aws::WAFV2
     #               ],
     #             },
     #             geo_match_statement: {
-    #               country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #               country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #               forwarded_ip_config: {
     #                 header_name: "ForwardedIPHeaderName", # required
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -294,6 +383,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -305,6 +395,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -385,6 +496,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -396,6 +508,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -450,6 +583,9 @@ module Aws::WAFV2
     #
     #   * For an AppSync GraphQL API:
     #     `arn:aws:appsync:region:account-id:apis/GraphQLApiId `
+    #
+    #   * For an Amazon Cognito user pool:
+    #     `arn:aws:cognito-idp:region:account-id:userpool/user-pool-id `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AssociateWebACLRequest AWS API Documentation
@@ -508,26 +644,58 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The body of a web request. This immediately follows the request
-    # headers.
+    # Inspect the body of the web request. The body immediately follows the
+    # request headers.
     #
-    # This is used only to indicate the web request component for WAF to
-    # inspect, in the FieldToMatch specification.
+    # This is used to indicate the web request component to inspect, in the
+    # FieldToMatch specification.
     #
-    # JSON specification: `"Body": \{\}`
+    # @note When making an API call, you may pass Body
+    #   data as a hash:
     #
-    # @api private
+    #       {
+    #         oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #       }
+    #
+    # @!attribute [rw] oversize_handling
+    #   What WAF should do if the body is larger than WAF can inspect. WAF
+    #   does not support inspecting the entire contents of the body of a web
+    #   request when the body exceeds 8 KB (8192 bytes). Only the first 8 KB
+    #   of the request body are forwarded to WAF by the underlying host
+    #   service.
+    #
+    #   The options for oversize handling are the following:
+    #
+    #   * `CONTINUE` - Inspect the body normally, according to the rule
+    #     inspection criteria.
+    #
+    #   * `MATCH` - Treat the web request as matching the rule statement.
+    #     WAF applies the rule action to the request.
+    #
+    #   * `NO_MATCH` - Treat the web request as not matching the rule
+    #     statement.
+    #
+    #   You can combine the `MATCH` or `NO_MATCH` settings for oversize
+    #   handling with your rule and web ACL action settings, so that you
+    #   block any request whose body is over 8 KB.
+    #
+    #   Default: `CONTINUE`
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Body AWS API Documentation
     #
-    class Body < Aws::EmptyStructure; end
+    class Body < Struct.new(
+      :oversize_handling)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A rule statement that defines a string match search for WAF to apply
     # to web requests. The byte match statement provides the bytes to search
     # for, the location in requests that you want WAF to search, and other
     # settings. The bytes to search for are typically a string that
     # corresponds with ASCII characters. In the WAF console and the
-    # developer guide, this is refered to as a string match statement.
+    # developer guide, this is called a string match statement.
     #
     # @note When making an API call, you may pass ByteMatchStatement
     #   data as a hash:
@@ -548,6 +716,7 @@ module Aws::WAFV2
     #           query_string: {
     #           },
     #           body: {
+    #             oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #           },
     #           method: {
     #           },
@@ -559,6 +728,27 @@ module Aws::WAFV2
     #             },
     #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #             invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #             oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #           },
+    #           headers: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_headers: ["FieldToMatchData"],
+    #               excluded_headers: ["FieldToMatchData"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #           },
+    #           cookies: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_cookies: ["SingleCookieName"],
+    #               excluded_cookies: ["SingleCookieName"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #           },
     #         },
     #         text_transformations: [ # required
@@ -605,8 +795,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] field_to_match
-    #   The part of a web request that you want WAF to inspect. For more
-    #   information, see FieldToMatch.
+    #   The part of the web request that you want WAF to inspect.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] text_transformations
@@ -619,7 +808,7 @@ module Aws::WAFV2
     #   @return [Array<Types::TextTransformation>]
     #
     # @!attribute [rw] positional_constraint
-    #   The area within the portion of a web request that you want WAF to
+    #   The area within the portion of the web request that you want WAF to
     #   search for `SearchString`. Valid values include the following:
     #
     #   **CONTAINS**
@@ -698,9 +887,6 @@ module Aws::WAFV2
     #
     # This action option is available for rules. It isn't available for web
     # ACL default actions.
-    #
-    # This is used in the context of other settings, for example to specify
-    # values for RuleAction and web ACL DefaultAction.
     #
     # @note When making an API call, you may pass CaptchaAction
     #   data as a hash:
@@ -817,6 +1003,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -828,6 +1015,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -853,6 +1061,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -864,6 +1073,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -872,6 +1102,7 @@ module Aws::WAFV2
     #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
+    #                 sensitivity_level: "LOW", # accepts LOW, HIGH
     #               },
     #               xss_match_statement: {
     #                 field_to_match: { # required
@@ -888,6 +1119,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -899,6 +1131,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -923,6 +1176,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -934,6 +1188,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -946,7 +1221,7 @@ module Aws::WAFV2
     #                 ],
     #               },
     #               geo_match_statement: {
-    #                 country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #                 country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #                 forwarded_ip_config: {
     #                   header_name: "ForwardedIPHeaderName", # required
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -984,6 +1259,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -995,6 +1271,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -1079,6 +1376,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -1090,6 +1388,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -1180,8 +1499,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1233,11 +1552,16 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] action_condition
-    #   A single action condition.
+    #   A single action condition. This is the action setting that a log
+    #   record must contain in order to meet the condition.
     #   @return [Types::ActionCondition]
     #
     # @!attribute [rw] label_name_condition
-    #   A single label name condition.
+    #   A single label name condition. This is the fully qualified label
+    #   name that a log record must contain in order to meet the condition.
+    #   Fully qualified labels have a prefix, optional namespaces, and label
+    #   name. The prefix identifies the rule group or web ACL context of the
+    #   rule that added the label.
     #   @return [Types::LabelNameCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Condition AWS API Documentation
@@ -1245,6 +1569,118 @@ module Aws::WAFV2
     class Condition < Struct.new(
       :action_condition,
       :label_name_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter to use to identify the subset of cookies to inspect in a
+    # web request.
+    #
+    # You must specify exactly one setting: either `All`, `IncludedCookies`,
+    # or `ExcludedCookies`.
+    #
+    # Example JSON: `"MatchPattern": \{ "IncludedCookies":
+    # \{"KeyToInclude1", "KeyToInclude2", "KeyToInclude3"\} \}`
+    #
+    # @note When making an API call, you may pass CookieMatchPattern
+    #   data as a hash:
+    #
+    #       {
+    #         all: {
+    #         },
+    #         included_cookies: ["SingleCookieName"],
+    #         excluded_cookies: ["SingleCookieName"],
+    #       }
+    #
+    # @!attribute [rw] all
+    #   Inspect all cookies.
+    #   @return [Types::All]
+    #
+    # @!attribute [rw] included_cookies
+    #   Inspect only the cookies that have a key that matches one of the
+    #   strings specified here.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_cookies
+    #   Inspect only the cookies whose keys don't match any of the strings
+    #   specified here.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CookieMatchPattern AWS API Documentation
+    #
+    class CookieMatchPattern < Struct.new(
+      :all,
+      :included_cookies,
+      :excluded_cookies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Inspect the cookies in the web request. You can specify the parts of
+    # the cookies to inspect and you can narrow the set of cookies to
+    # inspect by including or excluding specific keys.
+    #
+    # This is used to indicate the web request component to inspect, in the
+    # FieldToMatch specification.
+    #
+    # Example JSON: `"Cookies": \{ "MatchPattern": \{ "All": \{\} \},
+    # "MatchScope": "KEY", "OversizeHandling": "MATCH" \}`
+    #
+    # @note When making an API call, you may pass Cookies
+    #   data as a hash:
+    #
+    #       {
+    #         match_pattern: { # required
+    #           all: {
+    #           },
+    #           included_cookies: ["SingleCookieName"],
+    #           excluded_cookies: ["SingleCookieName"],
+    #         },
+    #         match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #         oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #       }
+    #
+    # @!attribute [rw] match_pattern
+    #   The filter to use to identify the subset of cookies to inspect in a
+    #   web request.
+    #
+    #   You must specify exactly one setting: either `All`,
+    #   `IncludedCookies`, or `ExcludedCookies`.
+    #
+    #   Example JSON: `"MatchPattern": \{ "IncludedCookies":
+    #   \{"KeyToInclude1", "KeyToInclude2", "KeyToInclude3"\} \}`
+    #   @return [Types::CookieMatchPattern]
+    #
+    # @!attribute [rw] match_scope
+    #   The parts of the cookies to inspect with the rule inspection
+    #   criteria. If you specify `All`, WAF inspects both keys and values.
+    #   @return [String]
+    #
+    # @!attribute [rw] oversize_handling
+    #   What WAF should do if the cookies of the request are larger than WAF
+    #   can inspect. WAF does not support inspecting the entire contents of
+    #   request cookies when they exceed 8 KB (8192 bytes) or 200 total
+    #   cookies. The underlying host service forwards a maximum of 200
+    #   cookies and at most 8 KB of cookie contents to WAF.
+    #
+    #   The options for oversize handling are the following:
+    #
+    #   * `CONTINUE` - Inspect the cookies normally, according to the rule
+    #     inspection criteria.
+    #
+    #   * `MATCH` - Treat the web request as matching the rule statement.
+    #     WAF applies the rule action to the request.
+    #
+    #   * `NO_MATCH` - Treat the web request as not matching the rule
+    #     statement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Cookies AWS API Documentation
+    #
+    class Cookies < Struct.new(
+      :match_pattern,
+      :match_scope,
+      :oversize_handling)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1315,8 +1751,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1441,8 +1877,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1522,6 +1958,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -1533,6 +1970,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -1558,6 +2016,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -1569,6 +2028,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -1577,6 +2057,7 @@ module Aws::WAFV2
     #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
+    #                 sensitivity_level: "LOW", # accepts LOW, HIGH
     #               },
     #               xss_match_statement: {
     #                 field_to_match: { # required
@@ -1593,6 +2074,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -1604,6 +2086,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -1628,6 +2131,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -1639,6 +2143,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -1651,7 +2176,7 @@ module Aws::WAFV2
     #                 ],
     #               },
     #               geo_match_statement: {
-    #                 country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #                 country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #                 forwarded_ip_config: {
     #                   header_name: "ForwardedIPHeaderName", # required
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -1689,6 +2214,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -1700,6 +2226,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -1784,6 +2331,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -1795,6 +2343,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -1907,8 +2476,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2061,6 +2630,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -2072,6 +2642,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -2097,6 +2688,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -2108,6 +2700,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -2116,6 +2729,7 @@ module Aws::WAFV2
     #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
+    #                 sensitivity_level: "LOW", # accepts LOW, HIGH
     #               },
     #               xss_match_statement: {
     #                 field_to_match: { # required
@@ -2132,6 +2746,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -2143,6 +2758,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -2167,6 +2803,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -2178,6 +2815,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -2190,7 +2848,7 @@ module Aws::WAFV2
     #                 ],
     #               },
     #               geo_match_statement: {
-    #                 country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #                 country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #                 forwarded_ip_config: {
     #                   header_name: "ForwardedIPHeaderName", # required
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -2228,6 +2886,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -2239,6 +2898,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -2323,6 +3003,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -2334,6 +3015,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -2451,8 +3153,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2658,7 +3360,7 @@ module Aws::WAFV2
     #   The HTTP status code to return to the client.
     #
     #   For a list of status codes that you can use in your custom
-    #   reqponses, see [Supported status codes for custom response][1] in
+    #   responses, see [Supported status codes for custom response][1] in
     #   the [WAF Developer Guide][2].
     #
     #
@@ -2863,8 +3565,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2976,8 +3678,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3039,8 +3741,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3102,8 +3804,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3170,8 +3872,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3295,6 +3997,9 @@ module Aws::WAFV2
     #
     #   * For an AppSync GraphQL API:
     #     `arn:aws:appsync:region:account-id:apis/GraphQLApiId `
+    #
+    #   * For an Amazon Cognito user pool:
+    #     `arn:aws:cognito-idp:region:account-id:userpool/user-pool-id `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DisassociateWebACLRequest AWS API Documentation
@@ -3334,14 +4039,14 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The part of a web request that you want WAF to inspect. Include the
+    # The part of the web request that you want WAF to inspect. Include the
     # single `FieldToMatch` type that you want to inspect, with additional
     # specifications as needed, according to the type. You specify a single
     # request component in `FieldToMatch` for each rule statement that
-    # requires it. To inspect more than one component of a web request,
+    # requires it. To inspect more than one component of the web request,
     # create a separate rule statement for each component.
     #
-    # JSON specification for a `QueryString` field to match:
+    # Example JSON for a `QueryString` field to match:
     #
     # ` "FieldToMatch": \{ "QueryString": \{\} \}`
     #
@@ -3366,6 +4071,7 @@ module Aws::WAFV2
     #         query_string: {
     #         },
     #         body: {
+    #           oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #         },
     #         method: {
     #         },
@@ -3377,6 +4083,27 @@ module Aws::WAFV2
     #           },
     #           match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #           invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #           oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #         },
+    #         headers: {
+    #           match_pattern: { # required
+    #             all: {
+    #             },
+    #             included_headers: ["FieldToMatchData"],
+    #             excluded_headers: ["FieldToMatchData"],
+    #           },
+    #           match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #           oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #         },
+    #         cookies: {
+    #           match_pattern: { # required
+    #             all: {
+    #             },
+    #             included_cookies: ["SingleCookieName"],
+    #             excluded_cookies: ["SingleCookieName"],
+    #           },
+    #           match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #           oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #         },
     #       }
     #
@@ -3386,15 +4113,15 @@ module Aws::WAFV2
     #   sensitive.
     #
     #   Example JSON: `"SingleHeader": \{ "Name": "haystack" \}`
+    #
+    #   Alternately, you can filter and inspect all headers with the
+    #   `Headers` `FieldToMatch` setting.
     #   @return [Types::SingleHeader]
     #
     # @!attribute [rw] single_query_argument
     #   Inspect a single query argument. Provide the name of the query
     #   argument to inspect, such as *UserName* or *SalesRegion*. The name
     #   can be up to 30 characters long and isn't case sensitive.
-    #
-    #   This is used only to indicate the web request component for WAF to
-    #   inspect, in the FieldToMatch specification.
     #
     #   Example JSON: `"SingleQueryArgument": \{ "Name": "myArgument" \}`
     #   @return [Types::SingleQueryArgument]
@@ -3404,8 +4131,8 @@ module Aws::WAFV2
     #   @return [Types::AllQueryArguments]
     #
     # @!attribute [rw] uri_path
-    #   Inspect the request URI path. This is the part of a web request that
-    #   identifies a resource, for example, `/images/daily-ad.jpg`.
+    #   Inspect the request URI path. This is the part of the web request
+    #   that identifies a resource, for example, `/images/daily-ad.jpg`.
     #   @return [Types::UriPath]
     #
     # @!attribute [rw] query_string
@@ -3419,15 +4146,10 @@ module Aws::WAFV2
     #   contains any additional data that you want to send to your web
     #   server as the HTTP request body, such as data from a form.
     #
-    #   Note that only the first 8 KB (8192 bytes) of the request body are
-    #   forwarded to WAF for inspection by the underlying host service. If
-    #   you don't need to inspect more than 8 KB, you can guarantee that
-    #   you don't allow additional bytes in by combining a statement that
-    #   inspects the body of the web request, such as ByteMatchStatement or
-    #   RegexPatternSetReferenceStatement, with a SizeConstraintStatement
-    #   that enforces an 8 KB size limit on the body of the request. WAF
-    #   doesn't support inspecting the entire contents of web requests
-    #   whose bodies exceed the 8 KB limit.
+    #   Only the first 8 KB (8192 bytes) of the request body are forwarded
+    #   to WAF for inspection by the underlying host service. For
+    #   information about how to handle oversized request bodies, see the
+    #   `Body` object configuration.
     #   @return [Types::Body]
     #
     # @!attribute [rw] method
@@ -3441,16 +4163,37 @@ module Aws::WAFV2
     #   contains any additional data that you want to send to your web
     #   server as the HTTP request body, such as data from a form.
     #
-    #   Note that only the first 8 KB (8192 bytes) of the request body are
-    #   forwarded to WAF for inspection by the underlying host service. If
-    #   you don't need to inspect more than 8 KB, you can guarantee that
-    #   you don't allow additional bytes in by combining a statement that
-    #   inspects the body of the web request, such as ByteMatchStatement or
-    #   RegexPatternSetReferenceStatement, with a SizeConstraintStatement
-    #   that enforces an 8 KB size limit on the body of the request. WAF
-    #   doesn't support inspecting the entire contents of web requests
-    #   whose bodies exceed the 8 KB limit.
+    #   Only the first 8 KB (8192 bytes) of the request body are forwarded
+    #   to WAF for inspection by the underlying host service. For
+    #   information about how to handle oversized request bodies, see the
+    #   `JsonBody` object configuration.
     #   @return [Types::JsonBody]
+    #
+    # @!attribute [rw] headers
+    #   Inspect the request headers. You must configure scope and pattern
+    #   matching filters in the `Headers` object, to define the set of
+    #   headers to and the parts of the headers that WAF inspects.
+    #
+    #   Only the first 8 KB (8192 bytes) of a request's headers and only
+    #   the first 200 headers are forwarded to WAF for inspection by the
+    #   underlying host service. You must configure how to handle any
+    #   oversize header content in the `Headers` object. WAF applies the
+    #   pattern matching filters to the headers that it receives from the
+    #   underlying host service.
+    #   @return [Types::Headers]
+    #
+    # @!attribute [rw] cookies
+    #   Inspect the request cookies. You must configure scope and pattern
+    #   matching filters in the `Cookies` object, to define the set of
+    #   cookies and the parts of the cookies that WAF inspects.
+    #
+    #   Only the first 8 KB (8192 bytes) of a request's cookies and only
+    #   the first 200 cookies are forwarded to WAF for inspection by the
+    #   underlying host service. You must configure how to handle any
+    #   oversize cookie content in the `Cookies` object. WAF applies the
+    #   pattern matching filters to the cookies that it receives from the
+    #   underlying host service.
+    #   @return [Types::Cookies]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/FieldToMatch AWS API Documentation
     #
@@ -3462,7 +4205,9 @@ module Aws::WAFV2
       :query_string,
       :body,
       :method,
-      :json_body)
+      :json_body,
+      :headers,
+      :cookies)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3710,7 +4455,7 @@ module Aws::WAFV2
     #   data as a hash:
     #
     #       {
-    #         country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #         country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #         forwarded_ip_config: {
     #           header_name: "ForwardedIPHeaderName", # required
     #           fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -3761,8 +4506,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3865,8 +4610,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4003,8 +4748,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4085,8 +4830,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4155,8 +4900,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4239,8 +4984,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4320,7 +5065,23 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN (Amazon Resource Name) of the resource.
+    #   The Amazon Resource Name (ARN) of the resource whose web ACL you
+    #   want to retrieve.
+    #
+    #   The ARN must be in one of the following formats:
+    #
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
+    #
+    #   * For an Amazon API Gateway REST API:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
+    #
+    #   * For an AppSync GraphQL API:
+    #     `arn:aws:appsync:region:account-id:apis/GraphQLApiId `
+    #
+    #   * For an Amazon Cognito user pool:
+    #     `arn:aws:cognito-idp:region:account-id:userpool/user-pool-id `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetWebACLForResourceRequest AWS API Documentation
@@ -4361,8 +5122,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4506,6 +5267,121 @@ module Aws::WAFV2
       :method,
       :http_version,
       :headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter to use to identify the subset of headers to inspect in a
+    # web request.
+    #
+    # You must specify exactly one setting: either `All`, `IncludedHeaders`,
+    # or `ExcludedHeaders`.
+    #
+    # Example JSON: `"MatchPattern": \{ "ExcludedHeaders":
+    # \{"KeyToExclude1", "KeyToExclude2"\} \}`
+    #
+    # @note When making an API call, you may pass HeaderMatchPattern
+    #   data as a hash:
+    #
+    #       {
+    #         all: {
+    #         },
+    #         included_headers: ["FieldToMatchData"],
+    #         excluded_headers: ["FieldToMatchData"],
+    #       }
+    #
+    # @!attribute [rw] all
+    #   Inspect all headers.
+    #   @return [Types::All]
+    #
+    # @!attribute [rw] included_headers
+    #   Inspect only the headers that have a key that matches one of the
+    #   strings specified here.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_headers
+    #   Inspect only the headers whose keys don't match any of the strings
+    #   specified here.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/HeaderMatchPattern AWS API Documentation
+    #
+    class HeaderMatchPattern < Struct.new(
+      :all,
+      :included_headers,
+      :excluded_headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Inspect all headers in the web request. You can specify the parts of
+    # the headers to inspect and you can narrow the set of headers to
+    # inspect by including or excluding specific keys.
+    #
+    # This is used to indicate the web request component to inspect, in the
+    # FieldToMatch specification.
+    #
+    # If you want to inspect just the value of a single header, use the
+    # `SingleHeader` `FieldToMatch` setting instead.
+    #
+    # Example JSON: `"Headers": \{ "MatchPattern": \{ "All": \{\} \},
+    # "MatchScope": "KEY", "OversizeHandling": "MATCH" \}`
+    #
+    # @note When making an API call, you may pass Headers
+    #   data as a hash:
+    #
+    #       {
+    #         match_pattern: { # required
+    #           all: {
+    #           },
+    #           included_headers: ["FieldToMatchData"],
+    #           excluded_headers: ["FieldToMatchData"],
+    #         },
+    #         match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #         oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #       }
+    #
+    # @!attribute [rw] match_pattern
+    #   The filter to use to identify the subset of headers to inspect in a
+    #   web request.
+    #
+    #   You must specify exactly one setting: either `All`,
+    #   `IncludedHeaders`, or `ExcludedHeaders`.
+    #
+    #   Example JSON: `"MatchPattern": \{ "ExcludedHeaders":
+    #   \{"KeyToExclude1", "KeyToExclude2"\} \}`
+    #   @return [Types::HeaderMatchPattern]
+    #
+    # @!attribute [rw] match_scope
+    #   The parts of the headers to match with the rule inspection criteria.
+    #   If you specify `All`, WAF inspects both keys and values.
+    #   @return [String]
+    #
+    # @!attribute [rw] oversize_handling
+    #   What WAF should do if the headers of the request are larger than WAF
+    #   can inspect. WAF does not support inspecting the entire contents of
+    #   request headers when they exceed 8 KB (8192 bytes) or 200 total
+    #   headers. The underlying host service forwards a maximum of 200
+    #   headers and at most 8 KB of header contents to WAF.
+    #
+    #   The options for oversize handling are the following:
+    #
+    #   * `CONTINUE` - Inspect the headers normally, according to the rule
+    #     inspection criteria.
+    #
+    #   * `MATCH` - Treat the web request as matching the rule statement.
+    #     WAF applies the rule action to the request.
+    #
+    #   * `NO_MATCH` - Treat the web request as not matching the rule
+    #     statement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Headers AWS API Documentation
+    #
+    class Headers < Struct.new(
+      :match_pattern,
+      :match_scope,
+      :oversize_handling)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4806,9 +5682,11 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The body of a web request, inspected as JSON. The body immediately
-    # follows the request headers. This is used in the FieldToMatch
-    # specification.
+    # Inspect the body of the web request as JSON. The body immediately
+    # follows the request headers.
+    #
+    # This is used to indicate the web request component to inspect, in the
+    # FieldToMatch specification.
     #
     # Use the specifications in this object to indicate which parts of the
     # JSON body to inspect using the rule's inspection criteria. WAF
@@ -4829,6 +5707,7 @@ module Aws::WAFV2
     #         },
     #         match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #         invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #         oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #       }
     #
     # @!attribute [rw] match_pattern
@@ -4873,12 +5752,38 @@ module Aws::WAFV2
     #   * Extra colons: `\{"key1"::"value1","key2""value2"\}`
     #   @return [String]
     #
+    # @!attribute [rw] oversize_handling
+    #   What WAF should do if the body is larger than WAF can inspect. WAF
+    #   does not support inspecting the entire contents of the body of a web
+    #   request when the body exceeds 8 KB (8192 bytes). Only the first 8 KB
+    #   of the request body are forwarded to WAF by the underlying host
+    #   service.
+    #
+    #   The options for oversize handling are the following:
+    #
+    #   * `CONTINUE` - Inspect the body normally, according to the rule
+    #     inspection criteria.
+    #
+    #   * `MATCH` - Treat the web request as matching the rule statement.
+    #     WAF applies the rule action to the request.
+    #
+    #   * `NO_MATCH` - Treat the web request as not matching the rule
+    #     statement.
+    #
+    #   You can combine the `MATCH` or `NO_MATCH` settings for oversize
+    #   handling with your rule and web ACL action settings, so that you
+    #   block any request whose body is over 8 KB.
+    #
+    #   Default: `CONTINUE`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/JsonBody AWS API Documentation
     #
     class JsonBody < Struct.new(
       :match_pattern,
       :match_scope,
-      :invalid_fallback_behavior)
+      :invalid_fallback_behavior,
+      :oversize_handling)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5081,8 +5986,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -5159,8 +6064,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -5228,8 +6133,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -5299,8 +6204,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -5368,8 +6273,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -5497,8 +6402,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -5559,7 +6464,7 @@ module Aws::WAFV2
     #
     #       {
     #         web_acl_arn: "ResourceArn", # required
-    #         resource_type: "APPLICATION_LOAD_BALANCER", # accepts APPLICATION_LOAD_BALANCER, API_GATEWAY, APPSYNC
+    #         resource_type: "APPLICATION_LOAD_BALANCER", # accepts APPLICATION_LOAD_BALANCER, API_GATEWAY, APPSYNC, COGNITO_USER_POOL
     #       }
     #
     # @!attribute [rw] web_acl_arn
@@ -5569,7 +6474,8 @@ module Aws::WAFV2
     # @!attribute [rw] resource_type
     #   Used for web ACLs that are scoped for regional applications. A
     #   regional application can be an Application Load Balancer (ALB), an
-    #   Amazon API Gateway REST API, or an AppSync GraphQL API.
+    #   Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
+    #   Cognito user pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListResourcesForWebACLRequest AWS API Documentation
@@ -5606,8 +6512,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -5734,8 +6640,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -5849,6 +6755,7 @@ module Aws::WAFV2
     #             query_string: {
     #             },
     #             body: {
+    #               oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #             },
     #             method: {
     #             },
@@ -5860,6 +6767,27 @@ module Aws::WAFV2
     #               },
     #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #               invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #             },
+    #             headers: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_headers: ["FieldToMatchData"],
+    #                 excluded_headers: ["FieldToMatchData"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #             },
+    #             cookies: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_cookies: ["SingleCookieName"],
+    #                 excluded_cookies: ["SingleCookieName"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #             },
     #           },
     #         ],
@@ -5996,6 +6924,8 @@ module Aws::WAFV2
     # provide the following individual configuration objects: `LoginPath`,
     # `PasswordField`, `PayloadType` and `UsernameField`.
     #
+    # For example specifications, see the examples section of CreateWebACL.
+    #
     # @note When making an API call, you may pass ManagedRuleGroupConfig
     #   data as a hash:
     #
@@ -6078,6 +7008,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6089,6 +7020,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -6114,6 +7066,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6125,6 +7078,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -6133,6 +7107,7 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #             sensitivity_level: "LOW", # accepts LOW, HIGH
     #           },
     #           xss_match_statement: {
     #             field_to_match: { # required
@@ -6149,6 +7124,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6160,6 +7136,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -6184,6 +7181,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6195,6 +7193,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -6207,7 +7226,7 @@ module Aws::WAFV2
     #             ],
     #           },
     #           geo_match_statement: {
-    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #             forwarded_ip_config: {
     #               header_name: "ForwardedIPHeaderName", # required
     #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -6245,6 +7264,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6256,6 +7276,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -6340,6 +7381,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6351,6 +7393,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -6730,11 +7793,11 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The HTTP method of a web request. The method indicates the type of
-    # operation that the request is asking the origin to perform.
+    # Inspect the HTTP method of the web request. The method indicates the
+    # type of operation that the request is asking the origin to perform.
     #
-    # This is used only to indicate the web request component for WAF to
-    # inspect, in the FieldToMatch specification.
+    # This is used only in the FieldToMatch specification for some web
+    # request component types.
     #
     # JSON specification: `"Method": \{\}`
     #
@@ -6823,6 +7886,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6834,6 +7898,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -6859,6 +7944,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6870,6 +7956,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -6878,6 +7985,7 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #             sensitivity_level: "LOW", # accepts LOW, HIGH
     #           },
     #           xss_match_statement: {
     #             field_to_match: { # required
@@ -6894,6 +8002,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6905,6 +8014,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -6929,6 +8059,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6940,6 +8071,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -6952,7 +8104,7 @@ module Aws::WAFV2
     #             ],
     #           },
     #           geo_match_statement: {
-    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #             forwarded_ip_config: {
     #               header_name: "ForwardedIPHeaderName", # required
     #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -6990,6 +8142,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -7001,6 +8154,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -7085,6 +8259,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -7096,6 +8271,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -7146,6 +8342,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -7157,6 +8354,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -7182,6 +8400,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -7193,6 +8412,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -7201,6 +8441,7 @@ module Aws::WAFV2
     #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
+    #               sensitivity_level: "LOW", # accepts LOW, HIGH
     #             },
     #             xss_match_statement: {
     #               field_to_match: { # required
@@ -7217,6 +8458,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -7228,6 +8470,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -7252,6 +8515,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -7263,6 +8527,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -7275,7 +8560,7 @@ module Aws::WAFV2
     #               ],
     #             },
     #             geo_match_statement: {
-    #               country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #               country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #               forwarded_ip_config: {
     #                 header_name: "ForwardedIPHeaderName", # required
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -7313,6 +8598,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -7324,6 +8610,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -7404,6 +8711,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -7415,6 +8723,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -7543,6 +8872,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -7554,6 +8884,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #           ],
@@ -7630,8 +8981,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -7756,11 +9107,11 @@ module Aws::WAFV2
     #
     class PutPermissionPolicyResponse < Aws::EmptyStructure; end
 
-    # The query string of a web request. This is the part of a URL that
-    # appears after a `?` character, if any.
+    # Inspect the query string of the web request. This is the part of a URL
+    # that appears after a `?` character, if any.
     #
-    # This is used only to indicate the web request component for WAF to
-    # inspect, in the FieldToMatch specification.
+    # This is used only in the FieldToMatch specification for some web
+    # request component types.
     #
     # JSON specification: `"QueryString": \{\}`
     #
@@ -7802,11 +9153,11 @@ module Aws::WAFV2
     #   the string BadBot.
     #
     # In this rate-based rule, you also define a rate limit. For this
-    # example, the rate limit is 1,000. Requests that meet both of the
-    # conditions in the statements are counted. If the count exceeds 1,000
+    # example, the rate limit is 1,000. Requests that meet the criteria of
+    # both of the nested statements are counted. If the count exceeds 1,000
     # requests per five minutes, the rule action triggers. Requests that do
-    # not meet both conditions are not counted towards the rate limit and
-    # are not affected by this rule.
+    # not meet the criteria of both of the nested statements are not counted
+    # towards the rate limit and are not affected by this rule.
     #
     # You cannot nest a `RateBasedStatement` inside another statement, for
     # example inside a `NotStatement` or `OrStatement`. You can define a
@@ -7835,6 +9186,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -7846,6 +9198,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -7871,6 +9244,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -7882,6 +9256,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -7890,6 +9285,7 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #             sensitivity_level: "LOW", # accepts LOW, HIGH
     #           },
     #           xss_match_statement: {
     #             field_to_match: { # required
@@ -7906,6 +9302,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -7917,6 +9314,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -7941,6 +9359,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -7952,6 +9371,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -7964,7 +9404,7 @@ module Aws::WAFV2
     #             ],
     #           },
     #           geo_match_statement: {
-    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #             forwarded_ip_config: {
     #               header_name: "ForwardedIPHeaderName", # required
     #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -8002,6 +9442,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -8013,6 +9454,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -8097,6 +9559,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -8108,6 +9571,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -8239,6 +9723,7 @@ module Aws::WAFV2
     #           query_string: {
     #           },
     #           body: {
+    #             oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #           },
     #           method: {
     #           },
@@ -8250,6 +9735,27 @@ module Aws::WAFV2
     #             },
     #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #             invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #             oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #           },
+    #           headers: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_headers: ["FieldToMatchData"],
+    #               excluded_headers: ["FieldToMatchData"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #           },
+    #           cookies: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_cookies: ["SingleCookieName"],
+    #               excluded_cookies: ["SingleCookieName"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #           },
     #         },
     #         text_transformations: [ # required
@@ -8265,8 +9771,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] field_to_match
-    #   The part of a web request that you want WAF to inspect. For more
-    #   information, see FieldToMatch.
+    #   The part of the web request that you want WAF to inspect.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] text_transformations
@@ -8360,6 +9865,7 @@ module Aws::WAFV2
     #           query_string: {
     #           },
     #           body: {
+    #             oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #           },
     #           method: {
     #           },
@@ -8371,6 +9877,27 @@ module Aws::WAFV2
     #             },
     #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #             invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #             oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #           },
+    #           headers: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_headers: ["FieldToMatchData"],
+    #               excluded_headers: ["FieldToMatchData"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #           },
+    #           cookies: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_cookies: ["SingleCookieName"],
+    #               excluded_cookies: ["SingleCookieName"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #           },
     #         },
     #         text_transformations: [ # required
@@ -8387,8 +9914,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] field_to_match
-    #   The part of a web request that you want WAF to inspect. For more
-    #   information, see FieldToMatch.
+    #   The part of the web request that you want WAF to inspect.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] text_transformations
@@ -8506,6 +10032,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -8517,6 +10044,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -8542,6 +10090,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -8553,6 +10102,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -8561,6 +10131,7 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #             sensitivity_level: "LOW", # accepts LOW, HIGH
     #           },
     #           xss_match_statement: {
     #             field_to_match: { # required
@@ -8577,6 +10148,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -8588,6 +10160,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -8612,6 +10205,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -8623,6 +10217,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -8635,7 +10250,7 @@ module Aws::WAFV2
     #             ],
     #           },
     #           geo_match_statement: {
-    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #             forwarded_ip_config: {
     #               header_name: "ForwardedIPHeaderName", # required
     #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -8673,6 +10288,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -8684,6 +10300,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -8768,6 +10405,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -8779,6 +10417,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -9364,11 +11023,14 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # One of the headers in a web request, identified by name, for example,
-    # `User-Agent` or `Referer`. This setting isn't case sensitive.
+    # Inspect one of the headers in the web request, identified by name, for
+    # example, `User-Agent` or `Referer`. The name isn't case sensitive.
     #
-    # This is used only to indicate the web request component for WAF to
-    # inspect, in the FieldToMatch specification.
+    # You can filter and inspect all headers with the `FieldToMatch` setting
+    # `Headers`.
+    #
+    # This is used to indicate the web request component to inspect, in the
+    # FieldToMatch specification.
     #
     # Example JSON: `"SingleHeader": \{ "Name": "haystack" \}`
     #
@@ -9391,9 +11053,11 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # One query argument in a web request, identified by name, for example
-    # *UserName* or *SalesRegion*. The name can be up to 30 characters long
-    # and isn't case sensitive.
+    # Inspect one query argument in the web request, identified by name, for
+    # example *UserName* or *SalesRegion*. The name isn't case sensitive.
+    #
+    # This is used to indicate the web request component to inspect, in the
+    # FieldToMatch specification.
     #
     # Example JSON: `"SingleQueryArgument": \{ "Name": "myArgument" \}`
     #
@@ -9423,8 +11087,8 @@ module Aws::WAFV2
     #
     # If you configure WAF to inspect the request body, WAF inspects only
     # the first 8192 bytes (8 KB). If the request body for your web requests
-    # never exceeds 8192 bytes, you can create a size constraint condition
-    # and block requests that have a request body greater than 8192 bytes.
+    # never exceeds 8192 bytes, you could use a size constraint statement to
+    # block requests that have a request body greater than 8192 bytes.
     #
     # If you choose URI for the value of Part of the request to filter on,
     # the slash (/) in the URI counts as one character. For example, the URI
@@ -9448,6 +11112,7 @@ module Aws::WAFV2
     #           query_string: {
     #           },
     #           body: {
+    #             oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #           },
     #           method: {
     #           },
@@ -9459,6 +11124,27 @@ module Aws::WAFV2
     #             },
     #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #             invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #             oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #           },
+    #           headers: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_headers: ["FieldToMatchData"],
+    #               excluded_headers: ["FieldToMatchData"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #           },
+    #           cookies: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_cookies: ["SingleCookieName"],
+    #               excluded_cookies: ["SingleCookieName"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #           },
     #         },
     #         comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -9472,8 +11158,7 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] field_to_match
-    #   The part of a web request that you want WAF to inspect. For more
-    #   information, see FieldToMatch.
+    #   The part of the web request that you want WAF to inspect.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] comparison_operator
@@ -9505,14 +11190,9 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Attackers sometimes insert malicious SQL code into web requests in an
-    # effort to extract data from your database. To allow or block web
-    # requests that appear to contain malicious SQL code, create one or more
-    # SQL injection match conditions. An SQL injection match condition
-    # identifies the part of web requests, such as the URI or the query
-    # string, that you want WAF to inspect. Later in the process, when you
-    # create a web ACL, you specify whether to allow or block requests that
-    # appear to contain malicious SQL code.
+    # A rule statement that inspects for malicious SQL code. Attackers
+    # insert malicious SQL code into web requests to do things like modify
+    # your database or extract data from it.
     #
     # @note When making an API call, you may pass SqliMatchStatement
     #   data as a hash:
@@ -9532,6 +11212,7 @@ module Aws::WAFV2
     #           query_string: {
     #           },
     #           body: {
+    #             oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #           },
     #           method: {
     #           },
@@ -9543,6 +11224,27 @@ module Aws::WAFV2
     #             },
     #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #             invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #             oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #           },
+    #           headers: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_headers: ["FieldToMatchData"],
+    #               excluded_headers: ["FieldToMatchData"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #           },
+    #           cookies: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_cookies: ["SingleCookieName"],
+    #               excluded_cookies: ["SingleCookieName"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #           },
     #         },
     #         text_transformations: [ # required
@@ -9551,11 +11253,11 @@ module Aws::WAFV2
     #             type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #           },
     #         ],
+    #         sensitivity_level: "LOW", # accepts LOW, HIGH
     #       }
     #
     # @!attribute [rw] field_to_match
-    #   The part of a web request that you want WAF to inspect. For more
-    #   information, see FieldToMatch.
+    #   The part of the web request that you want WAF to inspect.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] text_transformations
@@ -9567,17 +11269,41 @@ module Aws::WAFV2
     #   setting, before inspecting the content for a match.
     #   @return [Array<Types::TextTransformation>]
     #
+    # @!attribute [rw] sensitivity_level
+    #   The sensitivity that you want WAF to use to inspect for SQL
+    #   injection attacks.
+    #
+    #   `HIGH` detects more attacks, but might generate more false
+    #   positives, especially if your web requests frequently contain
+    #   unusual strings. For information about identifying and mitigating
+    #   false positives, see [Testing and tuning][1] in the *WAF Developer
+    #   Guide*.
+    #
+    #   `LOW` is generally a better choice for resources that already have
+    #   other protections against SQL injection attacks or that have a low
+    #   tolerance for false positives.
+    #
+    #   Default: `LOW`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-testing.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/SqliMatchStatement AWS API Documentation
     #
     class SqliMatchStatement < Struct.new(
       :field_to_match,
-      :text_transformations)
+      :text_transformations,
+      :sensitivity_level)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The processing guidance for a Rule, used by WAF to determine whether a
     # web request matches the rule.
+    #
+    # For example specifications, see the examples section of CreateWebACL.
     #
     # @note When making an API call, you may pass Statement
     #   data as a hash:
@@ -9599,6 +11325,7 @@ module Aws::WAFV2
     #             query_string: {
     #             },
     #             body: {
+    #               oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #             },
     #             method: {
     #             },
@@ -9610,6 +11337,27 @@ module Aws::WAFV2
     #               },
     #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #               invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #             },
+    #             headers: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_headers: ["FieldToMatchData"],
+    #                 excluded_headers: ["FieldToMatchData"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #             },
+    #             cookies: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_cookies: ["SingleCookieName"],
+    #                 excluded_cookies: ["SingleCookieName"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #             },
     #           },
     #           text_transformations: [ # required
@@ -9635,6 +11383,7 @@ module Aws::WAFV2
     #             query_string: {
     #             },
     #             body: {
+    #               oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #             },
     #             method: {
     #             },
@@ -9646,6 +11395,27 @@ module Aws::WAFV2
     #               },
     #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #               invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #             },
+    #             headers: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_headers: ["FieldToMatchData"],
+    #                 excluded_headers: ["FieldToMatchData"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #             },
+    #             cookies: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_cookies: ["SingleCookieName"],
+    #                 excluded_cookies: ["SingleCookieName"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #             },
     #           },
     #           text_transformations: [ # required
@@ -9654,6 +11424,7 @@ module Aws::WAFV2
     #               type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #             },
     #           ],
+    #           sensitivity_level: "LOW", # accepts LOW, HIGH
     #         },
     #         xss_match_statement: {
     #           field_to_match: { # required
@@ -9670,6 +11441,7 @@ module Aws::WAFV2
     #             query_string: {
     #             },
     #             body: {
+    #               oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #             },
     #             method: {
     #             },
@@ -9681,6 +11453,27 @@ module Aws::WAFV2
     #               },
     #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #               invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #             },
+    #             headers: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_headers: ["FieldToMatchData"],
+    #                 excluded_headers: ["FieldToMatchData"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #             },
+    #             cookies: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_cookies: ["SingleCookieName"],
+    #                 excluded_cookies: ["SingleCookieName"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #             },
     #           },
     #           text_transformations: [ # required
@@ -9705,6 +11498,7 @@ module Aws::WAFV2
     #             query_string: {
     #             },
     #             body: {
+    #               oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #             },
     #             method: {
     #             },
@@ -9716,6 +11510,27 @@ module Aws::WAFV2
     #               },
     #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #               invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #             },
+    #             headers: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_headers: ["FieldToMatchData"],
+    #                 excluded_headers: ["FieldToMatchData"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #             },
+    #             cookies: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_cookies: ["SingleCookieName"],
+    #                 excluded_cookies: ["SingleCookieName"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #             },
     #           },
     #           comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -9728,7 +11543,7 @@ module Aws::WAFV2
     #           ],
     #         },
     #         geo_match_statement: {
-    #           country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #           country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #           forwarded_ip_config: {
     #             header_name: "ForwardedIPHeaderName", # required
     #             fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -9766,6 +11581,7 @@ module Aws::WAFV2
     #             query_string: {
     #             },
     #             body: {
+    #               oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #             },
     #             method: {
     #             },
@@ -9777,6 +11593,27 @@ module Aws::WAFV2
     #               },
     #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #               invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #             },
+    #             headers: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_headers: ["FieldToMatchData"],
+    #                 excluded_headers: ["FieldToMatchData"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #             },
+    #             cookies: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_cookies: ["SingleCookieName"],
+    #                 excluded_cookies: ["SingleCookieName"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #             },
     #           },
     #           text_transformations: [ # required
@@ -9806,6 +11643,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -9817,6 +11655,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -9842,6 +11701,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -9853,6 +11713,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -9861,6 +11742,7 @@ module Aws::WAFV2
     #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
+    #               sensitivity_level: "LOW", # accepts LOW, HIGH
     #             },
     #             xss_match_statement: {
     #               field_to_match: { # required
@@ -9877,6 +11759,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -9888,6 +11771,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -9912,6 +11816,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -9923,6 +11828,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -9935,7 +11861,7 @@ module Aws::WAFV2
     #               ],
     #             },
     #             geo_match_statement: {
-    #               country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #               country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #               forwarded_ip_config: {
     #                 header_name: "ForwardedIPHeaderName", # required
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -9973,6 +11899,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -9984,6 +11911,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -10060,6 +12008,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -10071,6 +12020,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -10105,6 +12075,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -10116,6 +12087,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -10141,6 +12133,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -10152,6 +12145,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -10160,6 +12174,7 @@ module Aws::WAFV2
     #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
+    #                 sensitivity_level: "LOW", # accepts LOW, HIGH
     #               },
     #               xss_match_statement: {
     #                 field_to_match: { # required
@@ -10176,6 +12191,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -10187,6 +12203,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -10211,6 +12248,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -10222,6 +12260,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -10234,7 +12293,7 @@ module Aws::WAFV2
     #                 ],
     #               },
     #               geo_match_statement: {
-    #                 country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #                 country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #                 forwarded_ip_config: {
     #                   header_name: "ForwardedIPHeaderName", # required
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -10272,6 +12331,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -10283,6 +12343,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -10361,6 +12442,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -10372,6 +12454,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -10403,6 +12506,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -10414,6 +12518,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -10439,6 +12564,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -10450,6 +12576,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -10458,6 +12605,7 @@ module Aws::WAFV2
     #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
+    #                 sensitivity_level: "LOW", # accepts LOW, HIGH
     #               },
     #               xss_match_statement: {
     #                 field_to_match: { # required
@@ -10474,6 +12622,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -10485,6 +12634,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -10509,6 +12679,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -10520,6 +12691,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -10532,7 +12724,7 @@ module Aws::WAFV2
     #                 ],
     #               },
     #               geo_match_statement: {
-    #                 country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #                 country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #                 forwarded_ip_config: {
     #                   header_name: "ForwardedIPHeaderName", # required
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -10570,6 +12762,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -10581,6 +12774,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -10659,6 +12873,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -10670,6 +12885,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -10700,6 +12936,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -10711,6 +12948,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -10736,6 +12994,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -10747,6 +13006,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -10755,6 +13035,7 @@ module Aws::WAFV2
     #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
+    #               sensitivity_level: "LOW", # accepts LOW, HIGH
     #             },
     #             xss_match_statement: {
     #               field_to_match: { # required
@@ -10771,6 +13052,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -10782,6 +13064,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -10806,6 +13109,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -10817,6 +13121,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -10829,7 +13154,7 @@ module Aws::WAFV2
     #               ],
     #             },
     #             geo_match_statement: {
-    #               country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #               country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #               forwarded_ip_config: {
     #                 header_name: "ForwardedIPHeaderName", # required
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -10867,6 +13192,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -10878,6 +13204,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -10960,6 +13307,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -10971,6 +13319,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -11008,6 +13377,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -11019,6 +13389,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -11044,6 +13435,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -11055,6 +13447,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -11063,6 +13476,7 @@ module Aws::WAFV2
     #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                 },
     #               ],
+    #               sensitivity_level: "LOW", # accepts LOW, HIGH
     #             },
     #             xss_match_statement: {
     #               field_to_match: { # required
@@ -11079,6 +13493,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -11090,6 +13505,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -11114,6 +13550,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -11125,6 +13562,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -11137,7 +13595,7 @@ module Aws::WAFV2
     #               ],
     #             },
     #             geo_match_statement: {
-    #               country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #               country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #               forwarded_ip_config: {
     #                 header_name: "ForwardedIPHeaderName", # required
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -11175,6 +13633,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -11186,6 +13645,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -11248,6 +13728,7 @@ module Aws::WAFV2
     #                 query_string: {
     #                 },
     #                 body: {
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #                 method: {
     #                 },
@@ -11259,6 +13740,27 @@ module Aws::WAFV2
     #                   },
     #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 headers: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_headers: ["FieldToMatchData"],
+    #                     excluded_headers: ["FieldToMatchData"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                 },
+    #                 cookies: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_cookies: ["SingleCookieName"],
+    #                     excluded_cookies: ["SingleCookieName"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -11302,6 +13804,7 @@ module Aws::WAFV2
     #             query_string: {
     #             },
     #             body: {
+    #               oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #             },
     #             method: {
     #             },
@@ -11313,6 +13816,27 @@ module Aws::WAFV2
     #               },
     #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #               invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #             },
+    #             headers: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_headers: ["FieldToMatchData"],
+    #                 excluded_headers: ["FieldToMatchData"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #             },
+    #             cookies: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_cookies: ["SingleCookieName"],
+    #                 excluded_cookies: ["SingleCookieName"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #             },
     #           },
     #           text_transformations: [ # required
@@ -11330,29 +13854,20 @@ module Aws::WAFV2
     #   search for, the location in requests that you want WAF to search,
     #   and other settings. The bytes to search for are typically a string
     #   that corresponds with ASCII characters. In the WAF console and the
-    #   developer guide, this is refered to as a string match statement.
+    #   developer guide, this is called a string match statement.
     #   @return [Types::ByteMatchStatement]
     #
     # @!attribute [rw] sqli_match_statement
-    #   Attackers sometimes insert malicious SQL code into web requests in
-    #   an effort to extract data from your database. To allow or block web
-    #   requests that appear to contain malicious SQL code, create one or
-    #   more SQL injection match conditions. An SQL injection match
-    #   condition identifies the part of web requests, such as the URI or
-    #   the query string, that you want WAF to inspect. Later in the
-    #   process, when you create a web ACL, you specify whether to allow or
-    #   block requests that appear to contain malicious SQL code.
+    #   A rule statement that inspects for malicious SQL code. Attackers
+    #   insert malicious SQL code into web requests to do things like modify
+    #   your database or extract data from it.
     #   @return [Types::SqliMatchStatement]
     #
     # @!attribute [rw] xss_match_statement
-    #   A rule statement that defines a cross-site scripting (XSS) match
-    #   search for WAF to apply to web requests. XSS attacks are those where
-    #   the attacker uses vulnerabilities in a benign website as a vehicle
-    #   to inject malicious client-site scripts into other legitimate web
-    #   browsers. The XSS match statement provides the location in requests
-    #   that you want WAF to search and text transformations to use on the
-    #   search area before WAF searches for character sequences that are
-    #   likely to be malicious strings.
+    #   A rule statement that inspects for cross-site scripting (XSS)
+    #   attacks. In XSS attacks, the attacker uses vulnerabilities in a
+    #   benign website as a vehicle to inject malicious client-site scripts
+    #   into other legitimate web browsers.
     #   @return [Types::XssMatchStatement]
     #
     # @!attribute [rw] size_constraint_statement
@@ -11364,8 +13879,8 @@ module Aws::WAFV2
     #
     #   If you configure WAF to inspect the request body, WAF inspects only
     #   the first 8192 bytes (8 KB). If the request body for your web
-    #   requests never exceeds 8192 bytes, you can create a size constraint
-    #   condition and block requests that have a request body greater than
+    #   requests never exceeds 8192 bytes, you could use a size constraint
+    #   statement to block requests that have a request body greater than
     #   8192 bytes.
     #
     #   If you choose URI for the value of Part of the request to filter on,
@@ -11449,11 +13964,12 @@ module Aws::WAFV2
     #     for the string BadBot.
     #
     #   In this rate-based rule, you also define a rate limit. For this
-    #   example, the rate limit is 1,000. Requests that meet both of the
-    #   conditions in the statements are counted. If the count exceeds 1,000
-    #   requests per five minutes, the rule action triggers. Requests that
-    #   do not meet both conditions are not counted towards the rate limit
-    #   and are not affected by this rule.
+    #   example, the rate limit is 1,000. Requests that meet the criteria of
+    #   both of the nested statements are counted. If the count exceeds
+    #   1,000 requests per five minutes, the rule action triggers. Requests
+    #   that do not meet the criteria of both of the nested statements are
+    #   not counted towards the rate limit and are not affected by this
+    #   rule.
     #
     #   You cannot nest a `RateBasedStatement` inside another statement, for
     #   example inside a `NotStatement` or `OrStatement`. You can define a
@@ -11892,8 +14408,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -12022,8 +14538,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -12136,8 +14652,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -12229,6 +14745,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -12240,6 +14757,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -12265,6 +14803,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -12276,6 +14815,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -12284,6 +14844,7 @@ module Aws::WAFV2
     #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
+    #                 sensitivity_level: "LOW", # accepts LOW, HIGH
     #               },
     #               xss_match_statement: {
     #                 field_to_match: { # required
@@ -12300,6 +14861,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -12311,6 +14873,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -12335,6 +14918,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -12346,6 +14930,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -12358,7 +14963,7 @@ module Aws::WAFV2
     #                 ],
     #               },
     #               geo_match_statement: {
-    #                 country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #                 country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #                 forwarded_ip_config: {
     #                   header_name: "ForwardedIPHeaderName", # required
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -12396,6 +15001,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -12407,6 +15013,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -12491,6 +15118,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -12502,6 +15130,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -12609,8 +15258,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -12758,6 +15407,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -12769,6 +15419,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -12794,6 +15465,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -12805,6 +15477,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -12813,6 +15506,7 @@ module Aws::WAFV2
     #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #                   },
     #                 ],
+    #                 sensitivity_level: "LOW", # accepts LOW, HIGH
     #               },
     #               xss_match_statement: {
     #                 field_to_match: { # required
@@ -12829,6 +15523,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -12840,6 +15535,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -12864,6 +15580,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -12875,6 +15592,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -12887,7 +15625,7 @@ module Aws::WAFV2
     #                 ],
     #               },
     #               geo_match_statement: {
-    #                 country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #                 country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #                 forwarded_ip_config: {
     #                   header_name: "ForwardedIPHeaderName", # required
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -12925,6 +15663,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -12936,6 +15675,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -13020,6 +15780,7 @@ module Aws::WAFV2
     #                   query_string: {
     #                   },
     #                   body: {
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                   method: {
     #                   },
@@ -13031,6 +15792,27 @@ module Aws::WAFV2
     #                     },
     #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                     oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   headers: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_headers: ["FieldToMatchData"],
+    #                       excluded_headers: ["FieldToMatchData"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #                   },
+    #                   cookies: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_cookies: ["SingleCookieName"],
+    #                       excluded_cookies: ["SingleCookieName"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -13143,8 +15925,8 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether this is for an Amazon CloudFront distribution or
     #   for a regional application. A regional application can be an
-    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
-    #   an AppSync GraphQL API.
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, or an Amazon Cognito user pool.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -13252,12 +16034,12 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The path component of the URI of a web request. This is the part of a
-    # web request that identifies a resource. For example,
+    # Inspect the path component of the URI of the web request. This is the
+    # part of the web request that identifies a resource. For example,
     # `/images/daily-ad.jpg`.
     #
-    # This is used only to indicate the web request component for WAF to
-    # inspect, in the FieldToMatch specification.
+    # This is used only in the FieldToMatch specification for some web
+    # request component types.
     #
     # JSON specification: `"UriPath": \{\}`
     #
@@ -13362,8 +16144,8 @@ module Aws::WAFV2
     #   A name of the Amazon CloudWatch metric. The name can contain only
     #   the characters: A-Z, a-z, 0-9, - (hyphen), and \_ (underscore). The
     #   name can be from one to 128 characters long. It can't contain
-    #   whitespace or metric names reserved for WAF, for example "All" and
-    #   "Default\_Action."
+    #   whitespace or metric names reserved for WAF, for example `All` and
+    #   `Default_Action`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/VisibilityConfig AWS API Documentation
@@ -13385,6 +16167,31 @@ module Aws::WAFV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFAssociatedItemException AWS API Documentation
     #
     class WAFAssociatedItemException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The operation failed because you are inspecting the web request body,
+    # headers, or cookies without specifying how to handle oversize
+    # components. Rules that inspect the body must either provide an
+    # `OversizeHandling` configuration or they must be preceded by a
+    # `SizeConstraintStatement` that blocks the body content from being too
+    # large. Rules that inspect the headers or cookies must provide an
+    # `OversizeHandling` configuration.
+    #
+    # Provide the handling configuration and retry your operation.
+    #
+    # Alternately, you can suppress this warning by adding the following tag
+    # to the resource that you provide to this operation: `Tag`
+    # (key:`WAF:OversizeFieldsHandlingConstraintOptOut`, value:`true`).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFConfigurationWarningException AWS API Documentation
+    #
+    class WAFConfigurationWarningException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -13669,8 +16476,9 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # WAF couldn’t retrieve the resource that you requested. Retry your
-    # request.
+    # WAF couldn’t retrieve a resource that you specified for this
+    # operation. Verify the resources that you are specifying in your
+    # request parameters and then retry the operation.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -13691,8 +16499,8 @@ module Aws::WAFV2
     # combination of the types Rule, RuleGroup, and managed rule group. You
     # can associate a web ACL with one or more Amazon Web Services resources
     # to protect. The resources can be an Amazon CloudFront distribution, an
-    # Amazon API Gateway REST API, an Application Load Balancer, or an
-    # AppSync GraphQL API.
+    # Amazon API Gateway REST API, an Application Load Balancer, an AppSync
+    # GraphQL API, or an Amazon Cognito user pool.
     #
     # @!attribute [rw] name
     #   The name of the web ACL. You cannot change the name of a web ACL
@@ -13890,14 +16698,10 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # A rule statement that defines a cross-site scripting (XSS) match
-    # search for WAF to apply to web requests. XSS attacks are those where
-    # the attacker uses vulnerabilities in a benign website as a vehicle to
-    # inject malicious client-site scripts into other legitimate web
-    # browsers. The XSS match statement provides the location in requests
-    # that you want WAF to search and text transformations to use on the
-    # search area before WAF searches for character sequences that are
-    # likely to be malicious strings.
+    # A rule statement that inspects for cross-site scripting (XSS) attacks.
+    # In XSS attacks, the attacker uses vulnerabilities in a benign website
+    # as a vehicle to inject malicious client-site scripts into other
+    # legitimate web browsers.
     #
     # @note When making an API call, you may pass XssMatchStatement
     #   data as a hash:
@@ -13917,6 +16721,7 @@ module Aws::WAFV2
     #           query_string: {
     #           },
     #           body: {
+    #             oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #           },
     #           method: {
     #           },
@@ -13928,6 +16733,27 @@ module Aws::WAFV2
     #             },
     #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #             invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #             oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #           },
+    #           headers: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_headers: ["FieldToMatchData"],
+    #               excluded_headers: ["FieldToMatchData"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #           },
+    #           cookies: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_cookies: ["SingleCookieName"],
+    #               excluded_cookies: ["SingleCookieName"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #           },
     #         },
     #         text_transformations: [ # required
@@ -13939,8 +16765,7 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] field_to_match
-    #   The part of a web request that you want WAF to inspect. For more
-    #   information, see FieldToMatch.
+    #   The part of the web request that you want WAF to inspect.
     #   @return [Types::FieldToMatch]
     #
     # @!attribute [rw] text_transformations

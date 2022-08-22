@@ -104,6 +104,54 @@ module Aws::Outposts
       include Aws::Structure
     end
 
+    # Information about hardware assets.
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] rack_id
+    #   The rack ID of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_type
+    #   The type of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_attributes
+    #   Information about compute hardware assets.
+    #   @return [Types::ComputeAttributes]
+    #
+    # @!attribute [rw] asset_location
+    #   The position of an asset in a rack.
+    #   @return [Types::AssetLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/AssetInfo AWS API Documentation
+    #
+    class AssetInfo < Struct.new(
+      :asset_id,
+      :rack_id,
+      :asset_type,
+      :compute_attributes,
+      :asset_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the position of the asset in a rack.
+    #
+    # @!attribute [rw] rack_elevation
+    #   The position of an asset in a rack measured in rack units.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/AssetLocation AWS API Documentation
+    #
+    class AssetLocation < Struct.new(
+      :rack_elevation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelOrderInput
     #   data as a hash:
     #
@@ -172,6 +220,20 @@ module Aws::Outposts
       include Aws::Structure
     end
 
+    # Information about compute hardware assets.
+    #
+    # @!attribute [rw] host_id
+    #   The host ID of any Dedicated Hosts on the asset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ComputeAttributes AWS API Documentation
+    #
+    class ComputeAttributes < Struct.new(
+      :host_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Updating or deleting this resource can cause an inconsistent state.
     #
     # @!attribute [rw] message
@@ -191,6 +253,45 @@ module Aws::Outposts
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a connection.
+    #
+    # @!attribute [rw] client_public_key
+    #   The public key of the client.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_public_key
+    #   The public key of the server.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_endpoint
+    #   The endpoint for the server.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_tunnel_address
+    #   The client tunnel address.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_tunnel_address
+    #   The server tunnel address.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_ips
+    #   The allowed IP addresses.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ConnectionDetails AWS API Documentation
+    #
+    class ConnectionDetails < Struct.new(
+      :client_public_key,
+      :server_public_key,
+      :server_endpoint,
+      :client_tunnel_address,
+      :server_tunnel_address,
+      :allowed_ips)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -274,6 +375,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
@@ -442,6 +551,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteOutpostInput AWS API Documentation
@@ -465,6 +582,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteSiteInput AWS API Documentation
@@ -534,6 +659,42 @@ module Aws::Outposts
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connection_id: "ConnectionId", # required
+    #       }
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the connection you request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetConnectionRequest AWS API Documentation
+    #
+    class GetConnectionRequest < Struct.new(
+      :connection_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_id
+    #   The ID of the connection you receive.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_details
+    #   Information about a connection.
+    #   @return [Types::ConnectionDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetConnectionResponse AWS API Documentation
+    #
+    class GetConnectionResponse < Struct.new(
+      :connection_id,
+      :connection_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetOrderInput
     #   data as a hash:
     #
@@ -574,6 +735,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpostInput AWS API Documentation
@@ -595,6 +764,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -625,6 +802,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] outpost_id
     #   The ID of the Outpost.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
@@ -664,6 +849,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] address_type
@@ -710,6 +903,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetSiteInput AWS API Documentation
@@ -777,13 +978,42 @@ module Aws::Outposts
     #   The status of the line item.
     #   @return [String]
     #
+    # @!attribute [rw] shipment_information
+    #   Information about a line item shipment.
+    #   @return [Types::ShipmentInformation]
+    #
+    # @!attribute [rw] asset_information_list
+    #   Information about assets.
+    #   @return [Array<Types::LineItemAssetInformation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/LineItem AWS API Documentation
     #
     class LineItem < Struct.new(
       :catalog_item_id,
       :line_item_id,
       :quantity,
-      :status)
+      :status,
+      :shipment_information,
+      :asset_information_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a line item asset.
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_address_list
+    #   MAC addresses of the asset.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/LineItemAssetInformation AWS API Documentation
+    #
+    class LineItemAssetInformation < Struct.new(
+      :asset_id,
+      :mac_address_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -811,6 +1041,64 @@ module Aws::Outposts
     class LineItemRequest < Struct.new(
       :catalog_item_id,
       :quantity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAssetsInput
+    #   data as a hash:
+    #
+    #       {
+    #         outpost_identifier: "OutpostIdentifier", # required
+    #         host_id_filter: ["HostId"],
+    #         max_results: 1,
+    #         next_token: "Token",
+    #       }
+    #
+    # @!attribute [rw] outpost_identifier
+    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_id_filter
+    #   A filter for the host ID of Dedicated Hosts on the Outpost.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for
+    #   a filter, the values are joined with an `OR`, and the request
+    #   returns all results that match any of the specified values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListAssetsInput AWS API Documentation
+    #
+    class ListAssetsInput < Struct.new(
+      :outpost_identifier,
+      :host_id_filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assets
+    #   Information about hardware assets.
+    #   @return [Array<Types::AssetInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListAssetsOutput AWS API Documentation
+    #
+    class ListAssetsOutput < Struct.new(
+      :assets,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1411,6 +1699,25 @@ module Aws::Outposts
       include Aws::Structure
     end
 
+    # Information about a line item shipment.
+    #
+    # @!attribute [rw] shipment_tracking_number
+    #   The tracking number of the shipment.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipment_carrier
+    #   The carrier of the shipment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ShipmentInformation AWS API Documentation
+    #
+    class ShipmentInformation < Struct.new(
+      :shipment_tracking_number,
+      :shipment_carrier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a site.
     #
     # @!attribute [rw] site_id
@@ -1473,6 +1780,60 @@ module Aws::Outposts
       :operating_address_state_or_region,
       :operating_address_city,
       :rack_physical_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         device_serial_number: "DeviceSerialNumber", # required
+    #         asset_id: "AssetId", # required
+    #         client_public_key: "WireGuardPublicKey", # required
+    #         network_interface_device_index: 1, # required
+    #       }
+    #
+    # @!attribute [rw] device_serial_number
+    #   The serial number of the dongle.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the Outpost server.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_public_key
+    #   The public key of the client.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_device_index
+    #   The device index of the network interface on the Outpost server.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/StartConnectionRequest AWS API Documentation
+    #
+    class StartConnectionRequest < Struct.new(
+      :device_serial_number,
+      :asset_id,
+      :client_public_key,
+      :network_interface_device_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_id
+    #   The ID of the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] underlay_ip_address
+    #   The underlay IP address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/StartConnectionResponse AWS API Documentation
+    #
+    class StartConnectionResponse < Struct.new(
+      :connection_id,
+      :underlay_ip_address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1549,6 +1910,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1609,6 +1978,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] address_type
@@ -1658,6 +2035,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1713,6 +2098,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] power_draw_kva

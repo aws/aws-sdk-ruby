@@ -102,7 +102,8 @@ module Aws::CloudWatch
       data[:state_reason_data]
     end
 
-    # The time stamp of the last update to the alarm state.
+    # Tracks the timestamp of any state update, even if `StateValue`
+    # doesn't change.
     # @return [Time]
     def state_updated_timestamp
       data[:state_updated_timestamp]
@@ -112,6 +113,63 @@ module Aws::CloudWatch
     # @return [String]
     def state_value
       data[:state_value]
+    end
+
+    # The timestamp of the last change to the alarm's `StateValue`.
+    # @return [Time]
+    def state_transitioned_timestamp
+      data[:state_transitioned_timestamp]
+    end
+
+    # When the value is `ALARM`, it means that the actions are suppressed
+    # because the suppressor alarm is in `ALARM` When the value is
+    # `WaitPeriod`, it means that the actions are suppressed because the
+    # composite alarm is waiting for the suppressor alarm to go into into
+    # the `ALARM` state. The maximum waiting time is as specified in
+    # `ActionsSuppressorWaitPeriod`. After this time, the composite alarm
+    # performs its actions. When the value is `ExtensionPeriod`, it means
+    # that the actions are suppressed because the composite alarm is waiting
+    # after the suppressor alarm went out of the `ALARM` state. The maximum
+    # waiting time is as specified in `ActionsSuppressorExtensionPeriod`.
+    # After this time, the composite alarm performs its actions.
+    # @return [String]
+    def actions_suppressed_by
+      data[:actions_suppressed_by]
+    end
+
+    # Captures the reason for action suppression.
+    # @return [String]
+    def actions_suppressed_reason
+      data[:actions_suppressed_reason]
+    end
+
+    # Actions will be suppressed if the suppressor alarm is in the `ALARM`
+    # state. `ActionsSuppressor` can be an AlarmName or an Amazon Resource
+    # Name (ARN) from an existing alarm.
+    # @return [String]
+    def actions_suppressor
+      data[:actions_suppressor]
+    end
+
+    # The maximum time in seconds that the composite alarm waits for the
+    # suppressor alarm to go into the `ALARM` state. After this time, the
+    # composite alarm performs its actions.
+    #
+    # `WaitPeriod` is required only when `ActionsSuppressor` is specified.
+    # @return [Integer]
+    def actions_suppressor_wait_period
+      data[:actions_suppressor_wait_period]
+    end
+
+    # The maximum time in seconds that the composite alarm waits after
+    # suppressor alarm goes out of the `ALARM` state. After this time, the
+    # composite alarm performs its actions.
+    #
+    # `ExtensionPeriod` is required only when `ActionsSuppressor` is
+    # specified.
+    # @return [Integer]
+    def actions_suppressor_extension_period
+      data[:actions_suppressor_extension_period]
     end
 
     # @!endgroup

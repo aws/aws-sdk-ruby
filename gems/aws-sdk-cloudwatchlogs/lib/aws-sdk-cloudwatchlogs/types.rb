@@ -95,9 +95,9 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] to
-    #   The end time of the range for the request, expreswatchlogsdocused as
-    #   the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events
-    #   with a timestamp later than this time are not exported.
+    #   The end time of the range for the request, expressed as the number
+    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a
+    #   timestamp later than this time are not exported.
     #   @return [Integer]
     #
     # @!attribute [rw] destination
@@ -559,7 +559,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_groups
     #   The log groups.
     #
-    #   If the `retentionInDays` value if not included for a log group, then
+    #   If the `retentionInDays` value is not included for a log group, then
     #   that log group is set to have its events never expire.
     #   @return [Array<Types::LogGroup>]
     #
@@ -1614,7 +1614,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] retention_in_days
     #   The number of days to retain the log events in the specified log
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150,
-    #   180, 365, 400, 545, 731, 1827, and 3653.
+    #   180, 365, 400, 545, 731, 1827, 2192, 2557, 2922, 3288, and 3653.
     #
     #   To set a log group to never have log events expire, use
     #   [DeleteRetentionPolicy][1].
@@ -1910,7 +1910,8 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # Multiple requests to update the same resource were in conflict.
+    # Multiple concurrent requests to update the same resource were in
+    # conflict.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/OperationAbortedException AWS API Documentation
     #
@@ -2313,7 +2314,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] retention_in_days
     #   The number of days to retain the log events in the specified log
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150,
-    #   180, 365, 400, 545, 731, 1827, and 3653.
+    #   180, 365, 400, 545, 731, 1827, 2192, 2557, 2922, 3288, and 3653.
     #
     #   To set a log group to never have log events expire, use
     #   [DeleteRetentionPolicy][1].

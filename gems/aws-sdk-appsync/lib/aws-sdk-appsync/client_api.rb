@@ -44,6 +44,7 @@ module Aws::AppSync
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     ConflictDetectionType = Shapes::StringShape.new(name: 'ConflictDetectionType')
     ConflictHandlerType = Shapes::StringShape.new(name: 'ConflictHandlerType')
+    Context = Shapes::StringShape.new(name: 'Context')
     CreateApiCacheRequest = Shapes::StructureShape.new(name: 'CreateApiCacheRequest')
     CreateApiCacheResponse = Shapes::StructureShape.new(name: 'CreateApiCacheResponse')
     CreateApiKeyRequest = Shapes::StructureShape.new(name: 'CreateApiKeyRequest')
@@ -89,7 +90,11 @@ module Aws::AppSync
     DomainNameConfigs = Shapes::ListShape.new(name: 'DomainNameConfigs')
     DynamodbDataSourceConfig = Shapes::StructureShape.new(name: 'DynamodbDataSourceConfig')
     ElasticsearchDataSourceConfig = Shapes::StructureShape.new(name: 'ElasticsearchDataSourceConfig')
+    ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    EvaluateMappingTemplateRequest = Shapes::StructureShape.new(name: 'EvaluateMappingTemplateRequest')
+    EvaluateMappingTemplateResponse = Shapes::StructureShape.new(name: 'EvaluateMappingTemplateResponse')
+    EvaluationResult = Shapes::StringShape.new(name: 'EvaluationResult')
     FieldLogLevel = Shapes::StringShape.new(name: 'FieldLogLevel')
     FlushApiCacheRequest = Shapes::StructureShape.new(name: 'FlushApiCacheRequest')
     FlushApiCacheResponse = Shapes::StructureShape.new(name: 'FlushApiCacheResponse')
@@ -175,6 +180,7 @@ module Aws::AppSync
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Template = Shapes::StringShape.new(name: 'Template')
     Type = Shapes::StructureShape.new(name: 'Type')
     TypeDefinitionFormat = Shapes::StringShape.new(name: 'TypeDefinitionFormat')
     TypeList = Shapes::ListShape.new(name: 'TypeList')
@@ -259,7 +265,7 @@ module Aws::AppSync
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
 
-    CachingConfig.add_member(:ttl, Shapes::ShapeRef.new(shape: Long, location_name: "ttl"))
+    CachingConfig.add_member(:ttl, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "ttl"))
     CachingConfig.add_member(:caching_keys, Shapes::ShapeRef.new(shape: CachingKeys, location_name: "cachingKeys"))
     CachingConfig.struct_class = Types::CachingConfig
 
@@ -458,6 +464,17 @@ module Aws::AppSync
     ElasticsearchDataSourceConfig.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, required: true, location_name: "endpoint"))
     ElasticsearchDataSourceConfig.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsRegion"))
     ElasticsearchDataSourceConfig.struct_class = Types::ElasticsearchDataSourceConfig
+
+    ErrorDetail.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ErrorDetail.struct_class = Types::ErrorDetail
+
+    EvaluateMappingTemplateRequest.add_member(:template, Shapes::ShapeRef.new(shape: Template, required: true, location_name: "template"))
+    EvaluateMappingTemplateRequest.add_member(:context, Shapes::ShapeRef.new(shape: Context, required: true, location_name: "context"))
+    EvaluateMappingTemplateRequest.struct_class = Types::EvaluateMappingTemplateRequest
+
+    EvaluateMappingTemplateResponse.add_member(:evaluation_result, Shapes::ShapeRef.new(shape: EvaluationResult, location_name: "evaluationResult"))
+    EvaluateMappingTemplateResponse.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "error"))
+    EvaluateMappingTemplateResponse.struct_class = Types::EvaluateMappingTemplateResponse
 
     FlushApiCacheRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     FlushApiCacheRequest.struct_class = Types::FlushApiCacheRequest
@@ -1111,6 +1128,17 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:evaluate_mapping_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EvaluateMappingTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/dataplane-evaluatetemplate"
+        o.input = Shapes::ShapeRef.new(shape: EvaluateMappingTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: EvaluateMappingTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:flush_api_cache, Seahorse::Model::Operation.new.tap do |o|

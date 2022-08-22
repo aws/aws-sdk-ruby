@@ -66,7 +66,7 @@ module Aws
             key: 'test.txt',
             expires_in: 86_400
           )
-          expect(actual_url).to eq(expected_url)
+          expect(CGI.parse(actual_url)).to eq(CGI.parse(expected_url))
         end
 
         it 'can sign with a given time' do
@@ -75,12 +75,14 @@ module Aws
             bucket: 'examplebucket',
             key: 'test.txt',
             expires_in: 86_400,
-            time: Time.utc(1969, 4, 20)
+            time: Time.utc(2022, 02, 22)
           )
-          expect(actual_url).to include('&X-Amz-Date=19690420T000000Z')
+          expect(actual_url).to include('&X-Amz-Date=20220222T000000Z')
         end
 
         it 'can sign with additional whitelisted headers' do
+          skip("CRT does not support whitelisting user-agent") if Aws::Sigv4::Signer.use_crt?
+
           actual_url = subject.presigned_url(
             :get_object,
             bucket: 'examplebucket',
@@ -189,7 +191,7 @@ module Aws
             key: 'test.txt',
             expires_in: 86_400
           )
-          expect(actual_url).to eq(expected_url)
+          expect(CGI.parse(actual_url)).to eq(CGI.parse(expected_url))
         end
 
         it 'can sign with a given time' do
@@ -198,12 +200,14 @@ module Aws
             bucket: 'examplebucket',
             key: 'test.txt',
             expires_in: 86_400,
-            time: Time.utc(1969, 4, 20)
+            time: Time.utc(2022, 02, 22)
           )
-          expect(actual_url).to include('&X-Amz-Date=19690420T000000Z')
+          expect(actual_url).to include('&X-Amz-Date=20220222T000000Z')
         end
 
         it 'can sign with additional whitelisted headers' do
+          skip("CRT is unable to whitelist user-agent") if Aws::Sigv4::Signer.use_crt?
+
           actual_url, = subject.presigned_request(
             :get_object,
             bucket: 'examplebucket',

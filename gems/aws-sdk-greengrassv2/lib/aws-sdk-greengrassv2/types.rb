@@ -255,30 +255,59 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # Contains the status of a component in the IoT Greengrass service.
+    # Contains the status of a component version in the IoT Greengrass
+    # service.
     #
     # @!attribute [rw] component_state
-    #   The state of the component.
+    #   The state of the component version.
     #   @return [String]
     #
     # @!attribute [rw] message
     #   A message that communicates details, such as errors, about the
-    #   status of the component.
+    #   status of the component version.
     #   @return [String]
     #
     # @!attribute [rw] errors
-    #   A dictionary of errors that communicate why the component is in an
-    #   error state. For example, if IoT Greengrass can't access an
-    #   artifact for the component, then `errors` contains the artifact's
-    #   URI as a key, and the error message as the value for that key.
+    #   A dictionary of errors that communicate why the component version is
+    #   in an error state. For example, if IoT Greengrass can't access an
+    #   artifact for the component version, then `errors` contains the
+    #   artifact's URI as a key, and the error message as the value for
+    #   that key.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] vendor_guidance
+    #   The vendor guidance state for the component version. This state
+    #   indicates whether the component version has any issues that you
+    #   should consider before you deploy it. The vendor guidance state can
+    #   be:
+    #
+    #   * `ACTIVE` – This component version is available and recommended for
+    #     use.
+    #
+    #   * `DISCONTINUED` – This component version has been discontinued by
+    #     its publisher. You can deploy this component version, but we
+    #     recommend that you use a different version of this component.
+    #
+    #   * `DELETED` – This component version has been deleted by its
+    #     publisher, so you can't deploy it. If you have any existing
+    #     deployments that specify this component version, those deployments
+    #     will fail.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor_guidance_message
+    #   A message that communicates details about the vendor guidance state
+    #   of the component version. This message communicates why a component
+    #   version is discontinued or deleted.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CloudComponentStatus AWS API Documentation
     #
     class CloudComponentStatus < Struct.new(
       :component_state,
       :message,
-      :errors)
+      :errors,
+      :vendor_guidance,
+      :vendor_guidance_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1173,6 +1202,25 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteDeploymentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         deployment_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] deployment_id
+    #   The ID of the deployment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DeleteDeploymentRequest AWS API Documentation
+    #
+    class DeleteDeploymentRequest < Struct.new(
+      :deployment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a deployment.
     #
     # @!attribute [rw] target_arn
@@ -1727,7 +1775,7 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] arn
     #   The [ARN][1] of the component version. Specify the ARN of a public
-    #   component version.
+    #   or a Lambda component version.
     #
     #
     #
@@ -2845,7 +2893,7 @@ module Aws::GreengrassV2
     #       }
     #
     # @!attribute [rw] arn
-    #   The [ARN][1] of the component version.
+    #   The [ARN][1] of the component.
     #
     #
     #
@@ -2951,8 +2999,10 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] thing_group_arn
     #   The [ARN][1] of the IoT thing group by which to filter. If you
-    #   specify this parameter, the list includes only core devices that are
-    #   members of this thing group.
+    #   specify this parameter, the list includes only core devices that
+    #   have successfully deployed a deployment that targets the thing
+    #   group. When you remove a core device from a thing group, the list
+    #   continues to include that core device.
     #
     #
     #
@@ -3233,13 +3283,13 @@ module Aws::GreengrassV2
     #   data as a hash:
     #
     #       {
-    #         platform: { # required
+    #         platform: {
     #           name: "NonEmptyString",
     #           attributes: {
     #             "NonEmptyString" => "NonEmptyString",
     #           },
     #         },
-    #         component_candidates: [ # required
+    #         component_candidates: [
     #           {
     #             component_name: "ComponentNameString",
     #             component_version: "ComponentVersionString",
@@ -3304,13 +3354,40 @@ module Aws::GreengrassV2
     #   The recipe of the component version.
     #   @return [String]
     #
+    # @!attribute [rw] vendor_guidance
+    #   The vendor guidance state for the component version. This state
+    #   indicates whether the component version has any issues that you
+    #   should consider before you deploy it. The vendor guidance state can
+    #   be:
+    #
+    #   * `ACTIVE` – This component version is available and recommended for
+    #     use.
+    #
+    #   * `DISCONTINUED` – This component version has been discontinued by
+    #     its publisher. You can deploy this component version, but we
+    #     recommend that you use a different version of this component.
+    #
+    #   * `DELETED` – This component version has been deleted by its
+    #     publisher, so you can't deploy it. If you have any existing
+    #     deployments that specify this component version, those deployments
+    #     will fail.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that communicates details about the vendor guidance state
+    #   of the component version. This message communicates why a component
+    #   version is discontinued or deleted.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ResolvedComponentVersion AWS API Documentation
     #
     class ResolvedComponentVersion < Struct.new(
       :arn,
       :component_name,
       :component_version,
-      :recipe)
+      :recipe,
+      :vendor_guidance,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

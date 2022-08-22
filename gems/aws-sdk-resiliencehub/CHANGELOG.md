@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2022-05-16)
+------------------
+
+* Feature - In this release, we are introducing support for Amazon Elastic Container Service, Amazon Route 53, AWS Elastic Disaster Recovery, AWS Backup in addition to the existing supported Services.  This release also supports Terraform file input from S3 and scheduling daily assessments
+
 1.4.0 (2022-02-24)
 ------------------
 

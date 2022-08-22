@@ -631,7 +631,7 @@ module Aws::WorkSpacesWeb
     #
     #     * `MetadataFile` OR `MetadataURL`
     #
-    #     * `IDPSignout` *optional*
+    #     * `IDPSignout` (boolean) *optional*
     #
     # @option params [required, String] :identity_provider_name
     #   The identity provider name.
@@ -879,9 +879,18 @@ module Aws::WorkSpacesWeb
     #   Specifies whether the user can copy text from the streaming session to
     #   the local device.
     #
+    # @option params [Integer] :disconnect_timeout_in_minutes
+    #   The amount of time that a streaming session remains active after users
+    #   disconnect.
+    #
     # @option params [required, String] :download_allowed
     #   Specifies whether the user can download files from the streaming
     #   session to the local device.
+    #
+    # @option params [Integer] :idle_disconnect_timeout_in_minutes
+    #   The amount of time that users can be idle (inactive) before they are
+    #   disconnected from their streaming session and the disconnect timeout
+    #   interval begins.
     #
     # @option params [required, String] :paste_allowed
     #   Specifies whether the user can paste text from the local device to the
@@ -907,7 +916,9 @@ module Aws::WorkSpacesWeb
     #   resp = client.create_user_settings({
     #     client_token: "ClientToken",
     #     copy_allowed: "Disabled", # required, accepts Disabled, Enabled
+    #     disconnect_timeout_in_minutes: 1,
     #     download_allowed: "Disabled", # required, accepts Disabled, Enabled
+    #     idle_disconnect_timeout_in_minutes: 1,
     #     paste_allowed: "Disabled", # required, accepts Disabled, Enabled
     #     print_allowed: "Disabled", # required, accepts Disabled, Enabled
     #     tags: [
@@ -1408,7 +1419,9 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings.associated_portal_arns #=> Array
     #   resp.user_settings.associated_portal_arns[0] #=> String
     #   resp.user_settings.copy_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings.download_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.idle_disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings.paste_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.print_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.upload_allowed #=> String, one of "Disabled", "Enabled"
@@ -1736,7 +1749,9 @@ module Aws::WorkSpacesWeb
     #   resp.next_token #=> String
     #   resp.user_settings #=> Array
     #   resp.user_settings[0].copy_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings[0].disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings[0].download_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings[0].idle_disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings[0].paste_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings[0].print_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings[0].upload_allowed #=> String, one of "Disabled", "Enabled"
@@ -1891,7 +1906,68 @@ module Aws::WorkSpacesWeb
     #   The ARN of the identity provider.
     #
     # @option params [Hash<String,String>] :identity_provider_details
-    #   The details of the identity provider.
+    #   The details of the identity provider. The following list describes the
+    #   provider detail keys for each identity provider type.
+    #
+    #   * For Google and Login with Amazon:
+    #
+    #     * `client_id`
+    #
+    #     * `client_secret`
+    #
+    #     * `authorize_scopes`
+    #
+    #   * For Facebook:
+    #
+    #     * `client_id`
+    #
+    #     * `client_secret`
+    #
+    #     * `authorize_scopes`
+    #
+    #     * `api_version`
+    #
+    #   * For Sign in with Apple:
+    #
+    #     * `client_id`
+    #
+    #     * `team_id`
+    #
+    #     * `key_id`
+    #
+    #     * `private_key`
+    #
+    #     * `authorize_scopes`
+    #
+    #   * For OIDC providers:
+    #
+    #     * `client_id`
+    #
+    #     * `client_secret`
+    #
+    #     * `attributes_request_method`
+    #
+    #     * `oidc_issuer`
+    #
+    #     * `authorize_scopes`
+    #
+    #     * `authorize_url` *if not available from discovery URL specified by
+    #       `oidc_issuer` key*
+    #
+    #     * `token_url` *if not available from discovery URL specified by
+    #       `oidc_issuer` key*
+    #
+    #     * `attributes_url` *if not available from discovery URL specified by
+    #       `oidc_issuer` key*
+    #
+    #     * `jwks_uri` *if not available from discovery URL specified by
+    #       `oidc_issuer` key*
+    #
+    #   * For SAML providers:
+    #
+    #     * `MetadataFile` OR `MetadataURL`
+    #
+    #     * `IDPSignout` (boolean) *optional*
     #
     # @option params [String] :identity_provider_name
     #   The name of the identity provider.
@@ -2109,9 +2185,18 @@ module Aws::WorkSpacesWeb
     #   Specifies whether the user can copy text from the streaming session to
     #   the local device.
     #
+    # @option params [Integer] :disconnect_timeout_in_minutes
+    #   The amount of time that a streaming session remains active after users
+    #   disconnect.
+    #
     # @option params [String] :download_allowed
     #   Specifies whether the user can download files from the streaming
     #   session to the local device.
+    #
+    # @option params [Integer] :idle_disconnect_timeout_in_minutes
+    #   The amount of time that users can be idle (inactive) before they are
+    #   disconnected from their streaming session and the disconnect timeout
+    #   interval begins.
     #
     # @option params [String] :paste_allowed
     #   Specifies whether the user can paste text from the local device to the
@@ -2136,7 +2221,9 @@ module Aws::WorkSpacesWeb
     #   resp = client.update_user_settings({
     #     client_token: "ClientToken",
     #     copy_allowed: "Disabled", # accepts Disabled, Enabled
+    #     disconnect_timeout_in_minutes: 1,
     #     download_allowed: "Disabled", # accepts Disabled, Enabled
+    #     idle_disconnect_timeout_in_minutes: 1,
     #     paste_allowed: "Disabled", # accepts Disabled, Enabled
     #     print_allowed: "Disabled", # accepts Disabled, Enabled
     #     upload_allowed: "Disabled", # accepts Disabled, Enabled
@@ -2148,7 +2235,9 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings.associated_portal_arns #=> Array
     #   resp.user_settings.associated_portal_arns[0] #=> String
     #   resp.user_settings.copy_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings.download_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.idle_disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings.paste_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.print_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.upload_allowed #=> String, one of "Disabled", "Enabled"
@@ -2176,7 +2265,7 @@ module Aws::WorkSpacesWeb
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

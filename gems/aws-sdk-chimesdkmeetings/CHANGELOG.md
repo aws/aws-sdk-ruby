@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2022-08-04)
+------------------
+
+* Feature - Adds support for Tags on Amazon Chime SDK WebRTC sessions
+
+1.13.0 (2022-07-07)
+------------------
+
+* Feature - Adds support for AppKeys and TenantIds in Amazon Chime SDK WebRTC sessions
+
+1.12.0 (2022-06-09)
+------------------
+
+* Feature - Adds support for live transcription in AWS GovCloud (US) Regions.
+
+1.11.0 (2022-06-01)
+------------------
+
+* Feature - Adds support for centrally controlling each participant's ability to send and receive audio, video and screen share within a WebRTC session.  Attendee capabilities can be specified when the attendee is created and updated during the session with the new BatchUpdateAttendeeCapabilitiesExcept API.
+
+1.10.0 (2022-04-22)
+------------------
+
+* Feature - Include additional exceptions types.
+
 1.9.0 (2022-03-21)
 ------------------
 

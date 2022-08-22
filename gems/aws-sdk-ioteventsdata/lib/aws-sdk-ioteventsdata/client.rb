@@ -389,6 +389,48 @@ module Aws::IoTEventsData
       req.send_request(options)
     end
 
+    # Deletes one or more detectors that were created. When a detector is
+    # deleted, its state will be cleared and the detector will be removed
+    # from the list of detectors. The deleted detector will no longer appear
+    # if referenced in the [ListDetectors][1] API call.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_ListDetectors.html
+    #
+    # @option params [required, Array<Types::DeleteDetectorRequest>] :detectors
+    #   The list of one or more detectors to be deleted.
+    #
+    # @return [Types::BatchDeleteDetectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteDetectorResponse#batch_delete_detector_error_entries #batch_delete_detector_error_entries} => Array&lt;Types::BatchDeleteDetectorErrorEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_detector({
+    #     detectors: [ # required
+    #       {
+    #         message_id: "MessageId", # required
+    #         detector_model_name: "DetectorModelName", # required
+    #         key_value: "KeyValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.batch_delete_detector_error_entries #=> Array
+    #   resp.batch_delete_detector_error_entries[0].message_id #=> String
+    #   resp.batch_delete_detector_error_entries[0].error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "InternalFailureException", "ServiceUnavailableException", "ThrottlingException"
+    #   resp.batch_delete_detector_error_entries[0].error_message #=> String
+    #
+    # @overload batch_delete_detector(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_detector(params = {}, options = {})
+      req = build_request(:batch_delete_detector, params)
+      req.send_request(options)
+    end
+
     # Disables one or more alarms. The alarms change to the `DISABLED` state
     # after you disable them.
     #
@@ -838,7 +880,7 @@ module Aws::IoTEventsData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ioteventsdata'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3,6 +3,7 @@
   "service": "<p>The Amazon Chime SDK meetings APIs in this section allow software developers to create Amazon Chime SDK meetings, set the AWS Regions for meetings, create and manage users, and send and receive meeting notifications. For more information about the meeting APIs, see <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Meetings.html\">Amazon Chime SDK meetings</a>.</p>",
   "operations": {
     "BatchCreateAttendee": "<p>Creates up to 100 attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>",
+    "BatchUpdateAttendeeCapabilitiesExcept": "<p>Updates <code>AttendeeCapabilities</code> except the capabilities listed in an <code>ExcludedAttendeeIds</code> table.</p> <note> <p>You use the capabilities with a set of values that control what the capabilities can do, such as <code>SendReceive</code> data. For more information about those values, see .</p> </note> <p>When using capabilities, be aware of these corner cases:</p> <ul> <li> <p>You can't set <code>content</code> capabilities to <code>SendReceive</code> or <code>Receive</code> unless you also set <code>video</code> capabilities to <code>SendReceive</code> or <code>Receive</code>. If you don't set the <code>video</code> capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your <code>video</code> capability to receive and you set your <code>content</code> capability to not receive.</p> </li> <li> <p>When you change an <code>audio</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.</p> </li> <li> <p>When you change a <code>video</code> or <code>content</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , and if the attendee turned on their video or content streams, remote attendess can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.</p> </li> </ul>",
     "CreateAttendee": "<p> Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. </p>",
     "CreateMeeting": "<p>Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html\">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime Developer Guide</i>. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. </p>",
     "CreateMeetingWithAttendees": "<p> Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html\">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime Developer Guide</i>. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. </p>",
@@ -11,10 +12,25 @@
     "GetAttendee": "<p> Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. </p>",
     "GetMeeting": "<p>Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>",
     "ListAttendees": "<p> Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. </p>",
+    "ListTagsForResource": "<p>Returns a list of the tags available for the specified resource.</p>",
     "StartMeetingTranscription": "<p>Starts transcription for the specified <code>meetingId</code>.</p>",
-    "StopMeetingTranscription": "<p>Stops transcription for the specified <code>meetingId</code>.</p>"
+    "StopMeetingTranscription": "<p>Stops transcription for the specified <code>meetingId</code>.</p>",
+    "TagResource": "<p>The resource that supports tags.</p>",
+    "UntagResource": "<p>Removes the specified tags from the specified resources. When you specify a tag key, the action removes both that key and its associated value. The operation succeeds even if you attempt to remove tags from a resource that were already removed. Note the following:</p> <ul> <li> <p>To remove tags from a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for removing tags. For more information, see the documentation for the service whose resource you want to untag.</p> </li> <li> <p>You can only tag resources that are located in the specified AWS Region for the calling AWS account.</p> </li> </ul> <p> <b>Minimum permissions</b> </p> <p>In addition to the <code>tag:UntagResources</code> permission required by this operation, you must also have the remove tags permission defined by the service that created the resource. For example, to remove the tags from an Amazon EC2 instance using the <code>UntagResources</code> operation, you must have both of the following permissions:</p> <p> <code>tag:UntagResource</code> </p> <p> <code>ChimeSDKMeetings:DeleteTags</code> </p>",
+    "UpdateAttendeeCapabilities": "<p>The capabilties that you want to update.</p> <note> <p>You use the capabilities with a set of values that control what the capabilities can do, such as <code>SendReceive</code> data. For more information about those values, see .</p> </note> <p>When using capabilities, be aware of these corner cases:</p> <ul> <li> <p>You can't set <code>content</code> capabilities to <code>SendReceive</code> or <code>Receive</code> unless you also set <code>video</code> capabilities to <code>SendReceive</code> or <code>Receive</code>. If you don't set the <code>video</code> capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your <code>video</code> capability to receive and you set your <code>content</code> capability to not receive.</p> </li> <li> <p>When you change an <code>audio</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.</p> </li> <li> <p>When you change a <code>video</code> or <code>content</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , and if the attendee turned on their video or content streams, remote attendess can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.</p> </li> </ul>"
   },
   "shapes": {
+    "AmazonResourceName": {
+      "base": null,
+      "refs": {
+        "ListTagsForResourceRequest$ResourceARN": "<p>The ARN of the resource.</p>",
+        "Meeting$MeetingArn": "<p>The ARN of the meeting.</p>",
+        "ResourceNotFoundException$ResourceName": "<p>The name of the resource that couldn't be found.</p>",
+        "TagResourceRequest$ResourceARN": "<p>The ARN of the resource.</p>",
+        "TooManyTagsException$ResourceName": "<p>The name of the resource that received too many tags.</p>",
+        "UntagResourceRequest$ResourceARN": "<p>The ARN of the resource that you're removing tags from.</p>"
+      }
+    },
     "Arn": {
       "base": null,
       "refs": {
@@ -28,7 +44,30 @@
       "refs": {
         "AttendeeList$member": null,
         "CreateAttendeeResponse$Attendee": "<p>The attendee information, including attendee ID and join token.</p>",
-        "GetAttendeeResponse$Attendee": "<p>The Amazon Chime SDK attendee information.</p>"
+        "GetAttendeeResponse$Attendee": "<p>The Amazon Chime SDK attendee information.</p>",
+        "UpdateAttendeeCapabilitiesResponse$Attendee": "<p>The updated attendee data.</p>"
+      }
+    },
+    "AttendeeCapabilities": {
+      "base": "<p>The media capabilities of an attendee: audio, video, or content. </p> <note> <p>You use the capabilities with a set of values that control what the capabilities can do, such as <code>SendReceive</code> data. For more information about those values, see .</p> </note> <p>When using capabilities, be aware of these corner cases:</p> <ul> <li> <p>You can't set <code>content</code> capabilities to <code>SendReceive</code> or <code>Receive</code> unless you also set <code>video</code> capabilities to <code>SendReceive</code> or <code>Receive</code>. If you don't set the <code>video</code> capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your <code>video</code> capability to receive and you set your <code>content</code> capability to not receive.</p> </li> <li> <p>When you change an <code>audio</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.</p> </li> <li> <p>When you change a <code>video</code> or <code>content</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , and if the attendee turned on their video or content streams, remote attendess can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.</p> </li> </ul>",
+      "refs": {
+        "Attendee$Capabilities": "<p>The capabilities assigned to an attendee: audio, video, or content.</p> <note> <p>You use the capabilities with a set of values that control what the capabilities can do, such as <code>SendReceive</code> data. For more information about those values, see .</p> </note> <p>When using capabilities, be aware of these corner cases:</p> <ul> <li> <p>You can't set <code>content</code> capabilities to <code>SendReceive</code> or <code>Receive</code> unless you also set <code>video</code> capabilities to <code>SendReceive</code> or <code>Receive</code>. If you don't set the <code>video</code> capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your <code>video</code> capability to receive and you set your <code>content</code> capability to not receive.</p> </li> <li> <p>When you change an <code>audio</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.</p> </li> <li> <p>When you change a <code>video</code> or <code>content</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , and if the attendee turned on their video or content streams, remote attendess can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.</p> </li> </ul>",
+        "BatchUpdateAttendeeCapabilitiesExceptRequest$Capabilities": "<p>The capabilities (<code>audio</code>, <code>video</code>, or <code>content</code>) that you want to update.</p>",
+        "CreateAttendeeRequest$Capabilities": "<p>The capabilities (<code>audio</code>, <code>video</code>, or <code>content</code>) that you want to grant an attendee. If you don't specify capabilities, all users have send and receive capabilities on all media channels by default.</p> <note> <p>You use the capabilities with a set of values that control what the capabilities can do, such as <code>SendReceive</code> data. For more information about those values, see .</p> </note> <p>When using capabilities, be aware of these corner cases:</p> <ul> <li> <p>You can't set <code>content</code> capabilities to <code>SendReceive</code> or <code>Receive</code> unless you also set <code>video</code> capabilities to <code>SendReceive</code> or <code>Receive</code>. If you don't set the <code>video</code> capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your <code>video</code> capability to receive and you set your <code>content</code> capability to not receive.</p> </li> <li> <p>When you change an <code>audio</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.</p> </li> <li> <p>When you change a <code>video</code> or <code>content</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , and if the attendee turned on their video or content streams, remote attendess can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.</p> </li> </ul>",
+        "CreateAttendeeRequestItem$Capabilities": "<p>A list of one or more capabilities.</p>",
+        "UpdateAttendeeCapabilitiesRequest$Capabilities": "<p>The capabilties that you want to update.</p>"
+      }
+    },
+    "AttendeeIdItem": {
+      "base": "<p>A structure that contains one or more attendee IDs.</p>",
+      "refs": {
+        "AttendeeIdsList$member": null
+      }
+    },
+    "AttendeeIdsList": {
+      "base": null,
+      "refs": {
+        "BatchUpdateAttendeeCapabilitiesExceptRequest$ExcludedAttendeeIds": "<p>The <code>AttendeeIDs</code> that you want to exclude from one or more capabilities.</p>"
       }
     },
     "AttendeeList": {
@@ -67,6 +106,11 @@
       "refs": {
       }
     },
+    "BatchUpdateAttendeeCapabilitiesExceptRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
     "Boolean": {
       "base": null,
       "refs": {
@@ -79,6 +123,11 @@
       "refs": {
         "CreateMeetingRequest$ClientRequestToken": "<p>The unique identifier for the client request. Use a different token for different meetings.</p>",
         "CreateMeetingWithAttendeesRequest$ClientRequestToken": "<p>The unique identifier for the client request. Use a different token for different meetings.</p>"
+      }
+    },
+    "ConflictException": {
+      "base": "<p>Multiple instances of the same request have been made simultaneously.</p>",
+      "refs": {
       }
     },
     "CreateAttendeeError": {
@@ -207,7 +256,9 @@
       "base": null,
       "refs": {
         "Attendee$AttendeeId": "<p>The Amazon Chime SDK attendee ID.</p>",
+        "AttendeeIdItem$AttendeeId": "<p>A list of one or more attendee IDs.</p>",
         "BatchCreateAttendeeRequest$MeetingId": "<p>The Amazon Chime SDK ID of the meeting to which you're adding attendees.</p>",
+        "BatchUpdateAttendeeCapabilitiesExceptRequest$MeetingId": "<p>The ID of the meeting associated with the update request.</p>",
         "CreateAttendeeRequest$MeetingId": "<p>The unique ID of the meeting.</p>",
         "DeleteAttendeeRequest$MeetingId": "<p>The Amazon Chime SDK meeting ID.</p>",
         "DeleteAttendeeRequest$AttendeeId": "<p>The Amazon Chime SDK attendee ID.</p>",
@@ -218,7 +269,9 @@
         "ListAttendeesRequest$MeetingId": "<p>The Amazon Chime SDK meeting ID.</p>",
         "Meeting$MeetingId": "<p>The Amazon Chime SDK meeting ID.</p>",
         "StartMeetingTranscriptionRequest$MeetingId": "<p>The unique ID of the meeting being transcribed.</p>",
-        "StopMeetingTranscriptionRequest$MeetingId": "<p>The unique ID of the meeting for which you stop transcription.</p>"
+        "StopMeetingTranscriptionRequest$MeetingId": "<p>The unique ID of the meeting for which you stop transcription.</p>",
+        "UpdateAttendeeCapabilitiesRequest$MeetingId": "<p>The ID of the meeting associated with the update request.</p>",
+        "UpdateAttendeeCapabilitiesRequest$AttendeeId": "<p>The ID of the attendee associated with the update request.</p>"
       }
     },
     "JoinTokenString": {
@@ -240,6 +293,24 @@
     "ListAttendeesResponse": {
       "base": null,
       "refs": {
+      }
+    },
+    "ListTagsForResourceRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "MediaCapabilities": {
+      "base": null,
+      "refs": {
+        "AttendeeCapabilities$Audio": "<p>The audio capability assigned to an attendee.</p>",
+        "AttendeeCapabilities$Video": "<p>The video capability assigned to an attendee.</p>",
+        "AttendeeCapabilities$Content": "<p>The content capability assigned to an attendee.</p>"
       }
     },
     "MediaPlacement": {
@@ -298,6 +369,11 @@
         "Meeting$PrimaryMeetingId": "<p>When specified, replicates the media from the primary meeting to this meeting.</p>"
       }
     },
+    "ResourceNotFoundException": {
+      "base": "<p>The resource that you want to tag couldn't be found.</p>",
+      "refs": {
+      }
+    },
     "ResultMax": {
       "base": null,
       "refs": {
@@ -308,6 +384,11 @@
       "base": null,
       "refs": {
         "ServiceUnavailableException$RetryAfterSeconds": "<p>The number of seconds the caller should wait before retrying.</p>"
+      }
+    },
+    "ServiceFailureException": {
+      "base": "<p>The service encountered an unexpected error.</p>",
+      "refs": {
       }
     },
     "ServiceUnavailableException": {
@@ -331,6 +412,9 @@
         "BadRequestException$Code": null,
         "BadRequestException$Message": null,
         "BadRequestException$RequestId": "<p>The request id associated with the call responsible for the exception.</p>",
+        "ConflictException$Code": null,
+        "ConflictException$Message": null,
+        "ConflictException$RequestId": "<p>The ID of the request involved in the conflict.</p>",
         "CreateAttendeeError$ErrorCode": "<p>The error code.</p>",
         "CreateAttendeeError$ErrorMessage": "<p>The error message.</p>",
         "EngineTranscribeMedicalSettings$VocabularyName": "<p>The name of the vocabulary passed to Amazon Transcribe Medical.</p>",
@@ -354,16 +438,96 @@
         "MediaPlacement$EventIngestionUrl": "<p>The event ingestion URL.</p>",
         "NotFoundException$Code": null,
         "NotFoundException$Message": null,
-        "NotFoundException$RequestId": "<p>The request id associated with the call responsible for the exception.</p>",
+        "NotFoundException$RequestId": "<p>The request ID associated with the call responsible for the exception.</p>",
+        "ResourceNotFoundException$Code": null,
+        "ResourceNotFoundException$Message": null,
+        "ResourceNotFoundException$RequestId": "<p>The ID of the resource that couldn't be found.</p>",
+        "ServiceFailureException$Code": null,
+        "ServiceFailureException$Message": null,
+        "ServiceFailureException$RequestId": "<p>The ID of the failed request.</p>",
         "ServiceUnavailableException$Code": null,
         "ServiceUnavailableException$Message": null,
         "ServiceUnavailableException$RequestId": "<p>The request id associated with the call responsible for the exception.</p>",
+        "ThrottlingException$Code": null,
+        "ThrottlingException$Message": null,
+        "ThrottlingException$RequestId": "<p>The ID of the request that exceeded the throttling limit.</p>",
+        "TooManyTagsException$Code": null,
+        "TooManyTagsException$Message": null,
+        "TooManyTagsException$RequestId": "<p>The ID of the request that contains too many tags.</p>",
         "UnauthorizedException$Code": null,
         "UnauthorizedException$Message": null,
         "UnauthorizedException$RequestId": "<p>The request id associated with the call responsible for the exception.</p>",
         "UnprocessableEntityException$Code": null,
         "UnprocessableEntityException$Message": null,
         "UnprocessableEntityException$RequestId": "<p>The request id associated with the call responsible for the exception.</p>"
+      }
+    },
+    "Tag": {
+      "base": "<p>A key-value pair that you define.</p>",
+      "refs": {
+        "TagList$member": null
+      }
+    },
+    "TagKey": {
+      "base": null,
+      "refs": {
+        "Tag$Key": "<p>The tag's key.</p>",
+        "TagKeyList$member": null
+      }
+    },
+    "TagKeyList": {
+      "base": null,
+      "refs": {
+        "UntagResourceRequest$TagKeys": "<p>The tag keys being removed from the resources.</p>"
+      }
+    },
+    "TagList": {
+      "base": null,
+      "refs": {
+        "CreateMeetingRequest$Tags": "<p>Applies one or more tags to an Amazon Chime SDK meeting. Note the following:</p> <ul> <li> <p>Not all resources have tags. For a list of services with resources that support tagging using this operation, see <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html\">Services that support the Resource Groups Tagging API</a>. If the resource doesn't yet support this operation, the resource's service might support tagging using its own API operations. For more information, refer to the documentation for that service.</p> </li> <li> <p>Each resource can have up to 50 tags. For other limits, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions\">Tag Naming and Usage Conventions</a> in the <i>AWS General Reference</i>.</p> </li> <li> <p>You can only tag resources that are located in the specified AWS Region for the AWS account.</p> </li> <li> <p>To add tags to a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for adding tags. For more information, see the documentation for each service.</p> </li> </ul> <important> <p>Do not store personally identifiable information (PII) or other confidential or sensitive information in tags. We use tags to provide you with billing and administration services. Tags are not intended to be used for private or sensitive data.</p> </important> <p> <b>Minimum permissions</b> </p> <p> In addition to the <code>tag:TagResources </code>permission required by this operation, you must also have the tagging permission defined by the service that created the resource. For example, to tag a <code>ChimeSDKMeetings</code> instance using the <code>TagResources</code> operation, you must have both of the following permissions:</p> <p> <code>tag:TagResources</code> </p> <p> <code>ChimeSDKMeetings:CreateTags</code> </p> <note> <p>Some services might have specific requirements for tagging some resources. For example, to tag an Amazon S3 bucket, you must also have the <code>s3:GetBucketTagging</code> permission. If the expected minimum permissions don't work, check the documentation for that service's tagging APIs for more information.</p> </note>",
+        "CreateMeetingWithAttendeesRequest$Tags": "<p>The tags in the request.</p>",
+        "ListTagsForResourceResponse$Tags": "<p>The tags requested for the specified resource.</p>",
+        "TagResourceRequest$Tags": "<p>Lists the requested tags.</p>"
+      }
+    },
+    "TagResourceRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "TagResourceResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "TagValue": {
+      "base": null,
+      "refs": {
+        "Tag$Value": "<p>The tag's value.</p>"
+      }
+    },
+    "TenantId": {
+      "base": null,
+      "refs": {
+        "TenantIdList$member": null
+      }
+    },
+    "TenantIdList": {
+      "base": null,
+      "refs": {
+        "CreateMeetingRequest$TenantIds": "<p>A consistent and opaque identifier, created and maintained by the builder to represent a segment of their users.</p>",
+        "CreateMeetingWithAttendeesRequest$TenantIds": "<p>A consistent and opaque identifier, created and maintained by the builder to represent a segment of their users.</p>",
+        "Meeting$TenantIds": "<p>Array of strings.</p>"
+      }
+    },
+    "ThrottlingException": {
+      "base": "<p>The number of customer requests exceeds the request rate limit.</p>",
+      "refs": {
+      }
+    },
+    "TooManyTagsException": {
+      "base": "<p>Too many tags were added to the specified resource.</p>",
+      "refs": {
       }
     },
     "TranscribeContentIdentificationType": {
@@ -412,7 +576,7 @@
     "TranscribeMedicalRegion": {
       "base": null,
       "refs": {
-        "EngineTranscribeMedicalSettings$Region": "<p>The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the meeting's Region.</p>"
+        "EngineTranscribeMedicalSettings$Region": "<p>The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the meeting's Region. </p>"
       }
     },
     "TranscribeMedicalSpecialty": {
@@ -464,6 +628,26 @@
     },
     "UnprocessableEntityException": {
       "base": "<p>The request was well-formed but was unable to be followed due to semantic errors.</p>",
+      "refs": {
+      }
+    },
+    "UntagResourceRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UntagResourceResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateAttendeeCapabilitiesRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateAttendeeCapabilitiesResponse": {
+      "base": null,
       "refs": {
       }
     }

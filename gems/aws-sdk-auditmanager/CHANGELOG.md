@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2022-07-27)
+------------------
+
+* Feature - This release adds an exceeded quota exception to several APIs. We added a ServiceQuotaExceededException for the following operations: CreateAssessment, CreateControl, CreateAssessmentFramework, and UpdateAssessmentStatus.
+
+1.25.0 (2022-06-07)
+------------------
+
+* Feature - This release introduces 2 updates to the Audit Manager API. The roleType and roleArn attributes are now required when you use the CreateAssessment or UpdateAssessment operation. We also added a throttling exception to the RegisterAccount API operation.
+
+1.24.0 (2022-04-28)
+------------------
+
+* Feature - This release adds documentation updates for Audit Manager. We provided examples of how to use the Custom_ prefix for the keywordValue attribute. We also provided more details about the DeleteAssessmentReport operation.
+
 1.23.0 (2022-03-31)
 ------------------
 

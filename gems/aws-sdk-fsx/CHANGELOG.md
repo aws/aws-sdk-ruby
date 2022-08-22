@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2022-07-29)
+------------------
+
+* Feature - Documentation updates for Amazon FSx
+
+1.56.0 (2022-05-25)
+------------------
+
+* Feature - This release adds root squash support to FSx for Lustre to restrict root level access from clients by mapping root users to a less-privileged user/group with limited permissions.
+
 1.55.0 (2022-04-13)
 ------------------
 

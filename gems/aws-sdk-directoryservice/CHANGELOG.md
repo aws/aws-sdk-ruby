@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2022-06-20)
+------------------
+
+* Feature - This release adds support for describing and updating AWS Managed Microsoft AD settings
+
 1.49.0 (2022-02-24)
 ------------------
 

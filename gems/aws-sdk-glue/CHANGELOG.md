@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2022-08-11)
+------------------
+
+* Feature - Add support for Python 3.9 AWS Glue Python Shell jobs
+
+1.117.0 (2022-08-08)
+------------------
+
+* Feature - Add an option to run non-urgent or non-time sensitive Glue Jobs on spare capacity
+
+1.116.0 (2022-07-19)
+------------------
+
+* Feature - Documentation updates for AWS Glue Job Timeout and Autoscaling
+
+1.115.0 (2022-07-14)
+------------------
+
+* Feature - This release adds an additional worker type for Glue Streaming jobs.
+
+1.114.0 (2022-06-30)
+------------------
+
+* Feature - This release adds tag as an input of CreateDatabase
+
+1.113.0 (2022-06-24)
+------------------
+
+* Feature - This release enables the new ListCrawls API for viewing the AWS Glue Crawler run history.
+
+1.112.0 (2022-05-17)
+------------------
+
+* Feature - This release adds a new optional parameter called codeGenNodeConfiguration to CRUD job APIs that allows users to manage visual jobs via APIs. The updated CreateJob and UpdateJob will create jobs that can be viewed in Glue Studio as a visual graph. GetJob can be used to get codeGenNodeConfiguration.
+
+1.111.0 (2022-04-26)
+------------------
+
+* Feature - This release adds documentation for the APIs to create, read, delete, list, and batch read of AWS Glue custom patterns, and for Lake Formation configuration settings in the AWS Glue crawler.
+
+1.110.0 (2022-04-21)
+------------------
+
+* Feature - This release adds APIs to create, read, delete, list, and batch read of Glue custom entity types
+
 1.109.0 (2022-04-14)
 ------------------
 

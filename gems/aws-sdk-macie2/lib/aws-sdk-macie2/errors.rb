@@ -33,6 +33,7 @@ module Aws::Macie2
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
+  # * {UnprocessableEntityException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -121,6 +122,21 @@ module Aws::Macie2
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Macie2::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class UnprocessableEntityException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Macie2::Types::UnprocessableEntityException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

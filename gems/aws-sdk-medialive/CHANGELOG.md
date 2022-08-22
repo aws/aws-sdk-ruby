@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2022-07-22)
+------------------
+
+* Feature - Link devices now support remote rebooting. Link devices now support maintenance windows. Maintenance windows allow a Link device to install software updates without stopping the MediaLive channel. The channel will experience a brief loss of input from the device while updates are installed.
+
+1.87.0 (2022-06-29)
+------------------
+
+* Feature - This release adds support for automatic renewal of MediaLive reservations at the end of each reservation term. Automatic renewal is optional. This release also adds support for labelling accessibility-focused audio and caption tracks in HLS outputs.
+
 1.86.0 (2022-03-28)
 ------------------
 

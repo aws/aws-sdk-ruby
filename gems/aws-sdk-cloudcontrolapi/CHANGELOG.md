@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2022-05-09)
+------------------
+
+* Feature - SDK release for Cloud Control API to include paginators for Python SDK.
+
 1.7.0 (2022-03-31)
 ------------------
 

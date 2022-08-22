@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2022-07-26)
+------------------
+
+* Feature - Amazon GuardDuty introduces a new Malware Protection feature that triggers malware scan on selected EC2 instance resources, after the service detects a potentially malicious activity.
+
+1.58.0 (2022-06-15)
+------------------
+
+* Feature - Adds finding fields available from GuardDuty Console. Adds FreeTrial related operations. Deprecates the use of various APIs related to Master Accounts and Replace them with Administrator Accounts.
+
+1.57.0 (2022-04-28)
+------------------
+
+* Feature - Documentation update for API description.
+
 1.56.0 (2022-02-24)
 ------------------
 

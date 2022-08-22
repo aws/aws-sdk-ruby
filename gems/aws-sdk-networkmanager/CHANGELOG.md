@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2022-08-18)
+------------------
+
+* Feature - Add TransitGatewayPeeringAttachmentId property to TransitGatewayPeering Model
+
+1.24.0 (2022-07-12)
+------------------
+
+* Feature - This release adds general availability API support for AWS Cloud WAN.
+
+1.23.0 (2022-05-24)
+------------------
+
+* Feature - This release adds Multi Account API support for a TGW Global Network, to enable and disable AWSServiceAccess with AwsOrganizations for Network Manager service and dependency CloudFormation StackSets service.
+
 1.22.0 (2022-02-24)
 ------------------
 

@@ -362,7 +362,13 @@ module Aws::CustomerProfiles
     #   The unique identifier of a customer profile.
     #
     # @option params [required, String] :key_name
-    #   A searchable identifier of a customer profile.
+    #   A searchable identifier of a customer profile. The predefined keys you
+    #   can use include: \_account, \_profileId, \_assetId, \_caseId,
+    #   \_orderId, \_fullName, \_phone, \_email, \_ctrContactId,
+    #   \_marketoLeadId, \_salesforceAccountId, \_salesforceContactId,
+    #   \_salesforceAssetId, \_zendeskUserId, \_zendeskExternalId,
+    #   \_zendeskTicketId, \_serviceNowSystemId, \_serviceNowIncidentId,
+    #   \_segmentUserId, \_shopifyCustomerId, \_shopifyOrderId.
     #
     # @option params [required, Array<String>] :values
     #   A list of key values.
@@ -492,6 +498,7 @@ module Aws::CustomerProfiles
     #           conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
     #           source_name: "string1To255",
     #         },
+    #         min_allowed_confidence_score_for_merging: 1.0,
     #       },
     #       exporting_config: {
     #         s3_exporting: {
@@ -520,6 +527,7 @@ module Aws::CustomerProfiles
     #   resp.matching.auto_merging.consolidation.matching_attributes_list[0][0] #=> String
     #   resp.matching.auto_merging.conflict_resolution.conflict_resolving_model #=> String, one of "RECENCY", "SOURCE"
     #   resp.matching.auto_merging.conflict_resolution.source_name #=> String
+    #   resp.matching.auto_merging.min_allowed_confidence_score_for_merging #=> Float
     #   resp.matching.exporting_config.s3_exporting.s3_bucket_name #=> String
     #   resp.matching.exporting_config.s3_exporting.s3_key_name #=> String
     #   resp.created_at #=> Time
@@ -1095,6 +1103,10 @@ module Aws::CustomerProfiles
     #   How the auto-merging process should resolve conflicts between
     #   different profiles.
     #
+    # @option params [Float] :min_allowed_confidence_score_for_merging
+    #   Minimum confidence score required for profiles within a matching group
+    #   to be merged during the auto-merge process.
+    #
     # @return [Types::GetAutoMergingPreviewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAutoMergingPreviewResponse#domain_name #domain_name} => String
@@ -1115,6 +1127,7 @@ module Aws::CustomerProfiles
     #       conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
     #       source_name: "string1To255",
     #     },
+    #     min_allowed_confidence_score_for_merging: 1.0,
     #   })
     #
     # @example Response structure
@@ -1175,6 +1188,7 @@ module Aws::CustomerProfiles
     #   resp.matching.auto_merging.consolidation.matching_attributes_list[0][0] #=> String
     #   resp.matching.auto_merging.conflict_resolution.conflict_resolving_model #=> String, one of "RECENCY", "SOURCE"
     #   resp.matching.auto_merging.conflict_resolution.source_name #=> String
+    #   resp.matching.auto_merging.min_allowed_confidence_score_for_merging #=> Float
     #   resp.matching.exporting_config.s3_exporting.s3_bucket_name #=> String
     #   resp.matching.exporting_config.s3_exporting.s3_key_name #=> String
     #   resp.created_at #=> Time
@@ -1245,6 +1259,7 @@ module Aws::CustomerProfiles
     #   resp.auto_merging.consolidation.matching_attributes_list[0][0] #=> String
     #   resp.auto_merging.conflict_resolution.conflict_resolving_model #=> String, one of "RECENCY", "SOURCE"
     #   resp.auto_merging.conflict_resolution.source_name #=> String
+    #   resp.auto_merging.min_allowed_confidence_score_for_merging #=> Float
     #   resp.exporting_location.s3_exporting.s3_bucket_name #=> String
     #   resp.exporting_location.s3_exporting.s3_key_name #=> String
     #   resp.job_stats.number_of_profiles_reviewed #=> Integer
@@ -2362,7 +2377,14 @@ module Aws::CustomerProfiles
     #   Description of the profile object type.
     #
     # @option params [String] :template_id
-    #   A unique identifier for the object template.
+    #   A unique identifier for the object template. For some attributes in
+    #   the request, the service will use the default value from the object
+    #   template when TemplateId is present. If these attributes are present
+    #   in the request, the service may return a `BadRequestException`. These
+    #   attributes include: AllowProfileCreation,
+    #   SourceLastUpdatedTimestampFormat, Fields, and Keys. For example, if
+    #   AllowProfileCreation is set to true when TemplateId is set, the
+    #   service may return a `BadRequestException`.
     #
     # @option params [Integer] :expiration_days
     #   The number of days until the data in the object expires.
@@ -2747,6 +2769,7 @@ module Aws::CustomerProfiles
     #           conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
     #           source_name: "string1To255",
     #         },
+    #         min_allowed_confidence_score_for_merging: 1.0,
     #       },
     #       exporting_config: {
     #         s3_exporting: {
@@ -2775,6 +2798,7 @@ module Aws::CustomerProfiles
     #   resp.matching.auto_merging.consolidation.matching_attributes_list[0][0] #=> String
     #   resp.matching.auto_merging.conflict_resolution.conflict_resolving_model #=> String, one of "RECENCY", "SOURCE"
     #   resp.matching.auto_merging.conflict_resolution.source_name #=> String
+    #   resp.matching.auto_merging.min_allowed_confidence_score_for_merging #=> Float
     #   resp.matching.exporting_config.s3_exporting.s3_bucket_name #=> String
     #   resp.matching.exporting_config.s3_exporting.s3_key_name #=> String
     #   resp.created_at #=> Time
@@ -2974,7 +2998,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

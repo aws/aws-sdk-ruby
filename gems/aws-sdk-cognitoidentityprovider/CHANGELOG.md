@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2022-08-18)
+------------------
+
+* Feature - This change is being made simply to fix the public documentation based on the models. We have included the PasswordChange and ResendCode events, along with the Pass, Fail and InProgress status. We have removed the Success and Failure status which are never returned by our APIs.
+
+1.68.0 (2022-08-03)
+------------------
+
+* Feature - Add a new exception type, ForbiddenException, that is returned when request is not allowed
+
+1.67.0 (2022-05-31)
+------------------
+
+* Feature - Amazon Cognito now supports IP Address propagation for all unauthenticated APIs (e.g. SignUp, ForgotPassword).
+
+1.66.0 (2022-05-24)
+------------------
+
+* Feature - Amazon Cognito now supports requiring attribute verification (ex. email and phone number) before update.
+
 1.65.0 (2022-03-15)
 ------------------
 

@@ -600,6 +600,38 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Associates a flow with a phone number claimed to your Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :phone_number_id
+    #   A unique identifier for the phone number.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_flow_id
+    #   The identifier of the flow.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_phone_number_contact_flow({
+    #     phone_number_id: "PhoneNumberId", # required
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_id: "ContactFlowId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociatePhoneNumberContactFlow AWS API Documentation
+    #
+    # @overload associate_phone_number_contact_flow(params = {})
+    # @param [Hash] params ({})
+    def associate_phone_number_contact_flow(params = {}, options = {})
+      req = build_request(:associate_phone_number_contact_flow, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -710,6 +742,62 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Claims an available phone number to your Amazon Connect instance.
+    #
+    # @option params [required, String] :target_arn
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances that phone
+    #   numbers are claimed to.
+    #
+    # @option params [required, String] :phone_number
+    #   The phone number you want to claim. Phone numbers are formatted `[+]
+    #   [country code] [subscriber number including area code]`.
+    #
+    # @option params [String] :phone_number_description
+    #   The description of the phone number.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::ClaimPhoneNumberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ClaimPhoneNumberResponse#phone_number_id #phone_number_id} => String
+    #   * {Types::ClaimPhoneNumberResponse#phone_number_arn #phone_number_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.claim_phone_number({
+    #     target_arn: "ARN", # required
+    #     phone_number: "PhoneNumber", # required
+    #     phone_number_description: "PhoneNumberDescription",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.phone_number_id #=> String
+    #   resp.phone_number_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ClaimPhoneNumber AWS API Documentation
+    #
+    # @overload claim_phone_number(params = {})
+    # @param [Hash] params ({})
+    def claim_phone_number(params = {}, options = {})
+      req = build_request(:claim_phone_number, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -733,6 +821,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateAgentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -766,10 +856,10 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Creates a contact flow for the specified Amazon Connect instance.
+    # Creates a flow for the specified Amazon Connect instance.
     #
-    # You can also create and update contact flows using the [Amazon Connect
-    # Flow language][1].
+    # You can also create and update flows using the [Amazon Connect Flow
+    # language][1].
     #
     #
     #
@@ -779,25 +869,26 @@ module Aws::Connect
     #   The identifier of the Amazon Connect instance.
     #
     # @option params [required, String] :name
-    #   The name of the contact flow.
+    #   The name of the flow.
     #
     # @option params [required, String] :type
-    #   The type of the contact flow. For descriptions of the available types,
-    #   see [Choose a Contact Flow Type][1] in the *Amazon Connect
-    #   Administrator Guide*.
+    #   The type of the flow. For descriptions of the available types, see
+    #   [Choose a flow type][1] in the *Amazon Connect Administrator Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types
     #
     # @option params [String] :description
-    #   The description of the contact flow.
+    #   The description of the flow.
     #
     # @option params [required, String] :content
-    #   The content of the contact flow.
+    #   The content of the flow.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateContactFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -831,24 +922,25 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Creates a contact flow module for the specified Amazon Connect
-    # instance.
+    # Creates a flow module for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :name
-    #   The name of the contact flow module.
+    #   The name of the flow module.
     #
     # @option params [String] :description
-    #   The description of the contact flow module.
+    #   The description of the flow module.
     #
     # @option params [required, String] :content
-    #   The content of the contact flow module.
+    #   The content of the flow module.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -913,6 +1005,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateHoursOfOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1034,6 +1128,11 @@ module Aws::Connect
     # @option params [required, String] :integration_arn
     #   The Amazon Resource Name (ARN) of the integration.
     #
+    #   <note markdown="1"> When integrating with Amazon Pinpoint, the Amazon Connect and Amazon
+    #   Pinpoint instances must be in the same account.
+    #
+    #    </note>
+    #
     # @option params [String] :source_application_url
     #   The URL for the external application. This field is only required for
     #   the EVENT integration type.
@@ -1048,6 +1147,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateIntegrationAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1112,6 +1213,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1168,6 +1271,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateQuickConnectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1238,7 +1343,9 @@ module Aws::Connect
     #   for this routing profile.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateRoutingProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1307,6 +1414,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1339,6 +1448,118 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Creates a new task template in the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the task template.
+    #
+    # @option params [String] :description
+    #   The description of the task template.
+    #
+    # @option params [String] :contact_flow_id
+    #   The identifier of the flow that runs by default when a task is created
+    #   by referencing this template.
+    #
+    # @option params [Types::TaskTemplateConstraints] :constraints
+    #   Constraints that are applicable to the fields listed.
+    #
+    # @option params [Types::TaskTemplateDefaults] :defaults
+    #   The default values for fields when a task is created by referencing
+    #   this template.
+    #
+    # @option params [String] :status
+    #   Marks a template as `ACTIVE` or `INACTIVE` for a task to refer to it.
+    #   Tasks can only be created from `ACTIVE` templates. If a template is
+    #   marked as `INACTIVE`, then a task that refers to this template cannot
+    #   be created.
+    #
+    # @option params [required, Array<Types::TaskTemplateField>] :fields
+    #   Fields that are part of the template.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateTaskTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTaskTemplateResponse#id #id} => String
+    #   * {Types::CreateTaskTemplateResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_task_template({
+    #     instance_id: "InstanceId", # required
+    #     name: "TaskTemplateName", # required
+    #     description: "TaskTemplateDescription",
+    #     contact_flow_id: "ContactFlowId",
+    #     constraints: {
+    #       required_fields: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #         },
+    #       ],
+    #       read_only_fields: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #         },
+    #       ],
+    #       invisible_fields: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     defaults: {
+    #       default_field_values: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #           default_value: "TaskTemplateFieldValue",
+    #         },
+    #       ],
+    #     },
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     fields: [ # required
+    #       {
+    #         id: { # required
+    #           name: "TaskTemplateFieldName",
+    #         },
+    #         description: "TaskTemplateFieldDescription",
+    #         type: "NAME", # accepts NAME, DESCRIPTION, SCHEDULED_TIME, QUICK_CONNECT, URL, NUMBER, TEXT, TEXT_AREA, DATE_TIME, BOOLEAN, SINGLE_SELECT, EMAIL
+    #         single_select_options: ["TaskTemplateSingleSelectOption"],
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateTaskTemplate AWS API Documentation
+    #
+    # @overload create_task_template(params = {})
+    # @param [Hash] params ({})
+    def create_task_template(params = {}, options = {})
+      req = build_request(:create_task_template, params)
+      req.send_request(options)
+    end
+
     # Creates a use case for an integration association.
     #
     # @option params [required, String] :instance_id
@@ -1354,6 +1575,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateUseCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1439,7 +1662,9 @@ module Aws::Connect
     #   instanceId in the ARN of the instance.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1502,6 +1727,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateUserHierarchyGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1577,6 +1804,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1612,14 +1841,14 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Deletes a contact flow for the specified Amazon Connect instance.
+    # Deletes a flow for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :contact_flow_id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1639,14 +1868,14 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Deletes the specified contact flow module.
+    # Deletes the specified flow module.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :contact_flow_module_id
-    #   The identifier of the contact flow module.
+    #   The identifier of the flow module.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1812,6 +2041,33 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_security_profile(params = {}, options = {})
       req = build_request(:delete_security_profile, params)
+      req.send_request(options)
+    end
+
+    # Deletes the task template.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :task_template_id
+    #   A unique identifier for the task template.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_task_template({
+    #     instance_id: "InstanceId", # required
+    #     task_template_id: "TaskTemplateId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteTaskTemplate AWS API Documentation
+    #
+    # @overload delete_task_template(params = {})
+    # @param [Hash] params ({})
+    def delete_task_template(params = {}, options = {})
+      req = build_request(:delete_task_template, params)
       req.send_request(options)
     end
 
@@ -2044,10 +2300,10 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Describes the specified contact flow.
+    # Describes the specified flow.
     #
-    # You can also create and update contact flows using the [Amazon Connect
-    # Flow language][1].
+    # You can also create and update flows using the [Amazon Connect Flow
+    # language][1].
     #
     #
     #
@@ -2057,7 +2313,7 @@ module Aws::Connect
     #   The identifier of the Amazon Connect instance.
     #
     # @option params [required, String] :contact_flow_id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #
     # @return [Types::DescribeContactFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2091,14 +2347,14 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Describes the specified contact flow module.
+    # Describes the specified flow module.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :contact_flow_module_id
-    #   The identifier of the contact flow module.
+    #   The identifier of the flow module.
     #
     # @return [Types::DescribeContactFlowModuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2248,12 +2504,12 @@ module Aws::Connect
     #
     #   resp = client.describe_instance_attribute({
     #     instance_id: "InstanceId", # required
-    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE
+    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND
     #   })
     #
     # @example Response structure
     #
-    #   resp.attribute.attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE"
+    #   resp.attribute.attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND"
     #   resp.attribute.value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstanceAttribute AWS API Documentation
@@ -2315,6 +2571,45 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_instance_storage_config(params = {}, options = {})
       req = build_request(:describe_instance_storage_config, params)
+      req.send_request(options)
+    end
+
+    # Gets details and status of a phone number that’s claimed to your
+    # Amazon Connect instance
+    #
+    # @option params [required, String] :phone_number_id
+    #   A unique identifier for the phone number.
+    #
+    # @return [Types::DescribePhoneNumberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePhoneNumberResponse#claimed_phone_number_summary #claimed_phone_number_summary} => Types::ClaimedPhoneNumberSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_phone_number({
+    #     phone_number_id: "PhoneNumberId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.claimed_phone_number_summary.phone_number_id #=> String
+    #   resp.claimed_phone_number_summary.phone_number_arn #=> String
+    #   resp.claimed_phone_number_summary.phone_number #=> String
+    #   resp.claimed_phone_number_summary.phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.claimed_phone_number_summary.phone_number_type #=> String, one of "TOLL_FREE", "DID"
+    #   resp.claimed_phone_number_summary.phone_number_description #=> String
+    #   resp.claimed_phone_number_summary.target_arn #=> String
+    #   resp.claimed_phone_number_summary.tags #=> Hash
+    #   resp.claimed_phone_number_summary.tags["TagKey"] #=> String
+    #   resp.claimed_phone_number_summary.phone_number_status.status #=> String, one of "CLAIMED", "IN_PROGRESS", "FAILED"
+    #   resp.claimed_phone_number_summary.phone_number_status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePhoneNumber AWS API Documentation
+    #
+    # @overload describe_phone_number(params = {})
+    # @param [Hash] params ({})
+    def describe_phone_number(params = {}, options = {})
+      req = build_request(:describe_phone_number, params)
       req.send_request(options)
     end
 
@@ -2795,7 +3090,7 @@ module Aws::Connect
     # change.
     #
     # Remove the Lambda function from the dropdown options available in the
-    # relevant contact flow blocks.
+    # relevant flow blocks.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -2855,6 +3150,34 @@ module Aws::Connect
     # @param [Hash] params ({})
     def disassociate_lex_bot(params = {}, options = {})
       req = build_request(:disassociate_lex_bot, params)
+      req.send_request(options)
+    end
+
+    # Removes the flow association from a phone number claimed to your
+    # Amazon Connect instance, if a flow association exists.
+    #
+    # @option params [required, String] :phone_number_id
+    #   A unique identifier for the phone number.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_phone_number_contact_flow({
+    #     phone_number_id: "PhoneNumberId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociatePhoneNumberContactFlow AWS API Documentation
+    #
+    # @overload disassociate_phone_number_contact_flow(params = {})
+    # @param [Hash] params ({})
+    def disassociate_phone_number_contact_flow(params = {}, options = {})
+      req = build_request(:disassociate_phone_number_contact_flow, params)
       req.send_request(options)
     end
 
@@ -3196,6 +3519,92 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Gets the real-time active user data from the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, Types::UserDataFilters] :filters
+    #   Filters up to 100 `Queues`, or up to 9 `ContactStates`. The user data
+    #   is retrieved only for those users who are associated with the queues
+    #   and have contacts that are in the specified `ContactState`.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::GetCurrentUserDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCurrentUserDataResponse#next_token #next_token} => String
+    #   * {Types::GetCurrentUserDataResponse#user_data_list #user_data_list} => Array&lt;Types::UserData&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_current_user_data({
+    #     instance_id: "InstanceId", # required
+    #     filters: { # required
+    #       queues: ["QueueId"],
+    #       contact_filter: {
+    #         contact_states: ["INCOMING"], # accepts INCOMING, PENDING, CONNECTING, CONNECTED, CONNECTED_ONHOLD, MISSED, ERROR, ENDED, REJECTED
+    #       },
+    #     },
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.user_data_list #=> Array
+    #   resp.user_data_list[0].user.id #=> String
+    #   resp.user_data_list[0].user.arn #=> String
+    #   resp.user_data_list[0].routing_profile.id #=> String
+    #   resp.user_data_list[0].routing_profile.arn #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_one.id #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_one.arn #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_two.id #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_two.arn #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_three.id #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_three.arn #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_four.id #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_four.arn #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_five.id #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_five.arn #=> String
+    #   resp.user_data_list[0].status.status_start_timestamp #=> Time
+    #   resp.user_data_list[0].status.status_arn #=> String
+    #   resp.user_data_list[0].available_slots_by_channel #=> Hash
+    #   resp.user_data_list[0].available_slots_by_channel["Channel"] #=> Integer
+    #   resp.user_data_list[0].max_slots_by_channel #=> Hash
+    #   resp.user_data_list[0].max_slots_by_channel["Channel"] #=> Integer
+    #   resp.user_data_list[0].active_slots_by_channel #=> Hash
+    #   resp.user_data_list[0].active_slots_by_channel["Channel"] #=> Integer
+    #   resp.user_data_list[0].contacts #=> Array
+    #   resp.user_data_list[0].contacts[0].contact_id #=> String
+    #   resp.user_data_list[0].contacts[0].channel #=> String, one of "VOICE", "CHAT", "TASK"
+    #   resp.user_data_list[0].contacts[0].initiation_method #=> String, one of "INBOUND", "OUTBOUND", "TRANSFER", "QUEUE_TRANSFER", "CALLBACK", "API"
+    #   resp.user_data_list[0].contacts[0].agent_contact_state #=> String, one of "INCOMING", "PENDING", "CONNECTING", "CONNECTED", "CONNECTED_ONHOLD", "MISSED", "ERROR", "ENDED", "REJECTED"
+    #   resp.user_data_list[0].contacts[0].state_start_timestamp #=> Time
+    #   resp.user_data_list[0].contacts[0].connected_to_agent_timestamp #=> Time
+    #   resp.user_data_list[0].contacts[0].queue.id #=> String
+    #   resp.user_data_list[0].contacts[0].queue.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentUserData AWS API Documentation
+    #
+    # @overload get_current_user_data(params = {})
+    # @param [Hash] params ({})
+    def get_current_user_data(params = {}, options = {})
+      req = build_request(:get_current_user_data, params)
+      req.send_request(options)
+    end
+
     # Retrieves a token for federation.
     #
     # <note markdown="1"> This API doesn't support root users. If you try to invoke
@@ -3526,6 +3935,82 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Gets details about a specific task template in the specified Amazon
+    # Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :task_template_id
+    #   A unique identifier for the task template.
+    #
+    # @option params [String] :snapshot_version
+    #   The system generated version of a task template that is associated
+    #   with a task, when the task is created.
+    #
+    # @return [Types::GetTaskTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTaskTemplateResponse#instance_id #instance_id} => String
+    #   * {Types::GetTaskTemplateResponse#id #id} => String
+    #   * {Types::GetTaskTemplateResponse#arn #arn} => String
+    #   * {Types::GetTaskTemplateResponse#name #name} => String
+    #   * {Types::GetTaskTemplateResponse#description #description} => String
+    #   * {Types::GetTaskTemplateResponse#contact_flow_id #contact_flow_id} => String
+    #   * {Types::GetTaskTemplateResponse#constraints #constraints} => Types::TaskTemplateConstraints
+    #   * {Types::GetTaskTemplateResponse#defaults #defaults} => Types::TaskTemplateDefaults
+    #   * {Types::GetTaskTemplateResponse#fields #fields} => Array&lt;Types::TaskTemplateField&gt;
+    #   * {Types::GetTaskTemplateResponse#status #status} => String
+    #   * {Types::GetTaskTemplateResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetTaskTemplateResponse#created_time #created_time} => Time
+    #   * {Types::GetTaskTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_task_template({
+    #     instance_id: "InstanceId", # required
+    #     task_template_id: "TaskTemplateId", # required
+    #     snapshot_version: "SnapshotVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.contact_flow_id #=> String
+    #   resp.constraints.required_fields #=> Array
+    #   resp.constraints.required_fields[0].id.name #=> String
+    #   resp.constraints.read_only_fields #=> Array
+    #   resp.constraints.read_only_fields[0].id.name #=> String
+    #   resp.constraints.invisible_fields #=> Array
+    #   resp.constraints.invisible_fields[0].id.name #=> String
+    #   resp.defaults.default_field_values #=> Array
+    #   resp.defaults.default_field_values[0].id.name #=> String
+    #   resp.defaults.default_field_values[0].default_value #=> String
+    #   resp.fields #=> Array
+    #   resp.fields[0].id.name #=> String
+    #   resp.fields[0].description #=> String
+    #   resp.fields[0].type #=> String, one of "NAME", "DESCRIPTION", "SCHEDULED_TIME", "QUICK_CONNECT", "URL", "NUMBER", "TEXT", "TEXT_AREA", "DATE_TIME", "BOOLEAN", "SINGLE_SELECT", "EMAIL"
+    #   resp.fields[0].single_select_options #=> Array
+    #   resp.fields[0].single_select_options[0] #=> String
+    #   resp.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.last_modified_time #=> Time
+    #   resp.created_time #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTaskTemplate AWS API Documentation
+    #
+    # @overload get_task_template(params = {})
+    # @param [Hash] params ({})
+    def get_task_template(params = {}, options = {})
+      req = build_request(:get_task_template, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -3682,8 +4167,8 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Provides information about the contact flow modules for the specified
-    # Amazon Connect instance.
+    # Provides information about the flow modules for the specified Amazon
+    # Connect instance.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -3698,7 +4183,7 @@ module Aws::Connect
     #   The maximum number of results to return per page.
     #
     # @option params [String] :contact_flow_module_state
-    #   The state of the contact flow module.
+    #   The state of the flow module.
     #
     # @return [Types::ListContactFlowModulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3734,14 +4219,14 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Provides information about the contact flows for the specified Amazon
-    # Connect instance.
+    # Provides information about the flows for the specified Amazon Connect
+    # instance.
     #
-    # You can also create and update contact flows using the [Amazon Connect
-    # Flow language][1].
+    # You can also create and update flows using the [Amazon Connect Flow
+    # language][1].
     #
-    # For more information about contact flows, see [Contact Flows][2] in
-    # the *Amazon Connect Administrator Guide*.
+    # For more information about flows, see [Flows][2] in the *Amazon
+    # Connect Administrator Guide*.
     #
     #
     #
@@ -3753,7 +4238,7 @@ module Aws::Connect
     #   instanceId in the ARN of the instance.
     #
     # @option params [Array<String>] :contact_flow_types
-    #   The type of contact flow.
+    #   The type of flow.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -3761,7 +4246,8 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #
     # @return [Types::ListContactFlowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3834,7 +4320,7 @@ module Aws::Connect
     #   resp = client.list_contact_references({
     #     instance_id: "InstanceId", # required
     #     contact_id: "ContactId", # required
-    #     reference_types: ["URL"], # required, accepts URL, ATTACHMENT
+    #     reference_types: ["URL"], # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
     #     next_token: "NextToken",
     #   })
     #
@@ -3846,6 +4332,14 @@ module Aws::Connect
     #   resp.reference_summary_list[0].attachment.name #=> String
     #   resp.reference_summary_list[0].attachment.value #=> String
     #   resp.reference_summary_list[0].attachment.status #=> String, one of "APPROVED", "REJECTED"
+    #   resp.reference_summary_list[0].string.name #=> String
+    #   resp.reference_summary_list[0].string.value #=> String
+    #   resp.reference_summary_list[0].number.name #=> String
+    #   resp.reference_summary_list[0].number.value #=> String
+    #   resp.reference_summary_list[0].date.name #=> String
+    #   resp.reference_summary_list[0].date.value #=> String
+    #   resp.reference_summary_list[0].email.name #=> String
+    #   resp.reference_summary_list[0].email.value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactReferences AWS API Documentation
@@ -3935,7 +4429,8 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #
     # @return [Types::ListHoursOfOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4005,7 +4500,7 @@ module Aws::Connect
     # @example Response structure
     #
     #   resp.attributes #=> Array
-    #   resp.attributes[0].attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE"
+    #   resp.attributes[0].attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND"
     #   resp.attributes[0].value #=> String
     #   resp.next_token #=> String
     #
@@ -4194,7 +4689,7 @@ module Aws::Connect
     # change.
     #
     # Returns a paginated list of all Lambda functions that display in the
-    # dropdown options in the relevant contact flow blocks.
+    # dropdown options in the relevant flow blocks.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -4315,7 +4810,8 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #
     # @return [Types::ListPhoneNumbersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4353,6 +4849,78 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists phone numbers claimed to your Amazon Connect instance.
+    #
+    # For more information about phone numbers, see [Set Up Phone Numbers
+    # for Your Contact Center][1] in the *Amazon Connect Administrator
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html
+    #
+    # @option params [String] :target_arn
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances that phone
+    #   numbers are claimed to. If `TargetArn` input is not provided, this API
+    #   lists numbers claimed to all the Amazon Connect instances belonging to
+    #   your account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Array<String>] :phone_number_country_codes
+    #   The ISO country code.
+    #
+    # @option params [Array<String>] :phone_number_types
+    #   The type of phone number.
+    #
+    # @option params [String] :phone_number_prefix
+    #   The prefix of the phone number. If provided, it must contain `+` as
+    #   part of the country code.
+    #
+    # @return [Types::ListPhoneNumbersV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPhoneNumbersV2Response#next_token #next_token} => String
+    #   * {Types::ListPhoneNumbersV2Response#list_phone_numbers_summary_list #list_phone_numbers_summary_list} => Array&lt;Types::ListPhoneNumbersSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_phone_numbers_v2({
+    #     target_arn: "ARN",
+    #     max_results: 1,
+    #     next_token: "LargeNextToken",
+    #     phone_number_country_codes: ["AF"], # accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
+    #     phone_number_types: ["TOLL_FREE"], # accepts TOLL_FREE, DID
+    #     phone_number_prefix: "PhoneNumberPrefix",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.list_phone_numbers_summary_list #=> Array
+    #   resp.list_phone_numbers_summary_list[0].phone_number_id #=> String
+    #   resp.list_phone_numbers_summary_list[0].phone_number_arn #=> String
+    #   resp.list_phone_numbers_summary_list[0].phone_number #=> String
+    #   resp.list_phone_numbers_summary_list[0].phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.list_phone_numbers_summary_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID"
+    #   resp.list_phone_numbers_summary_list[0].target_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersV2 AWS API Documentation
+    #
+    # @overload list_phone_numbers_v2(params = {})
+    # @param [Hash] params ({})
+    def list_phone_numbers_v2(params = {}, options = {})
+      req = build_request(:list_phone_numbers_v2, params)
+      req.send_request(options)
+    end
+
     # Provides information about the prompts for the specified Amazon
     # Connect instance.
     #
@@ -4365,7 +4933,8 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #
     # @return [Types::ListPromptsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4417,7 +4986,8 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #
     # @return [Types::ListQueueQuickConnectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4481,7 +5051,8 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #
     # @return [Types::ListQueuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4530,7 +5101,8 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #
     # @option params [Array<String>] :quick_connect_types
     #   The type of quick connect. In the Amazon Connect console, when you
@@ -4587,7 +5159,8 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #
     # @return [Types::ListRoutingProfileQueuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4647,7 +5220,8 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #
     # @return [Types::ListRoutingProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4802,7 +5376,8 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #
     # @return [Types::ListSecurityProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4869,6 +5444,72 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Lists task templates for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    #   It is not expected that you set this because the value returned in the
+    #   previous response is always null.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    #   It is not expected that you set this.
+    #
+    # @option params [String] :status
+    #   Marks a template as `ACTIVE` or `INACTIVE` for a task to refer to it.
+    #   Tasks can only be created from `ACTIVE` templates. If a template is
+    #   marked as `INACTIVE`, then a task that refers to this template cannot
+    #   be created.
+    #
+    # @option params [String] :name
+    #   The name of the task template.
+    #
+    # @return [Types::ListTaskTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTaskTemplatesResponse#task_templates #task_templates} => Array&lt;Types::TaskTemplateMetadata&gt;
+    #   * {Types::ListTaskTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_task_templates({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     name: "TaskTemplateName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_templates #=> Array
+    #   resp.task_templates[0].id #=> String
+    #   resp.task_templates[0].arn #=> String
+    #   resp.task_templates[0].name #=> String
+    #   resp.task_templates[0].description #=> String
+    #   resp.task_templates[0].status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.task_templates[0].last_modified_time #=> Time
+    #   resp.task_templates[0].created_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTaskTemplates AWS API Documentation
+    #
+    # @overload list_task_templates(params = {})
+    # @param [Hash] params ({})
+    def list_task_templates(params = {}, options = {})
+      req = build_request(:list_task_templates, params)
       req.send_request(options)
     end
 
@@ -4942,7 +5583,8 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #
     # @return [Types::ListUserHierarchyGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4989,7 +5631,8 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
     #
     # @return [Types::ListUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5020,6 +5663,78 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_users(params = {}, options = {})
       req = build_request(:list_users, params)
+      req.send_request(options)
+    end
+
+    # Changes the current status of a user or agent in Amazon Connect. If
+    # the agent is currently handling a contact, this sets the agent's next
+    # status.
+    #
+    # For more information, see [Agent status][1] and [Set your next
+    # status][2] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-agent-status.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/set-next-status.html
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :agent_status_id
+    #   The identifier of the agent status.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_user_status({
+    #     user_id: "UserId", # required
+    #     instance_id: "InstanceId", # required
+    #     agent_status_id: "AgentStatusId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PutUserStatus AWS API Documentation
+    #
+    # @overload put_user_status(params = {})
+    # @param [Hash] params ({})
+    def put_user_status(params = {}, options = {})
+      req = build_request(:put_user_status, params)
+      req.send_request(options)
+    end
+
+    # Releases a phone number previously claimed to an Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :phone_number_id
+    #   A unique identifier for the phone number.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.release_phone_number({
+    #     phone_number_id: "PhoneNumberId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReleasePhoneNumber AWS API Documentation
+    #
+    # @overload release_phone_number(params = {})
+    # @param [Hash] params ({})
+    def release_phone_number(params = {}, options = {})
+      req = build_request(:release_phone_number, params)
       req.send_request(options)
     end
 
@@ -5055,6 +5770,277 @@ module Aws::Connect
     # @param [Hash] params ({})
     def resume_contact_recording(params = {}, options = {})
       req = build_request(:resume_contact_recording, params)
+      req.send_request(options)
+    end
+
+    # Searches for available phone numbers that you can claim to your Amazon
+    # Connect instance.
+    #
+    # @option params [required, String] :target_arn
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances that phone
+    #   numbers are claimed to.
+    #
+    # @option params [required, String] :phone_number_country_code
+    #   The ISO country code.
+    #
+    # @option params [required, String] :phone_number_type
+    #   The type of phone number.
+    #
+    # @option params [String] :phone_number_prefix
+    #   The prefix of the phone number. If provided, it must contain `+` as
+    #   part of the country code.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::SearchAvailablePhoneNumbersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchAvailablePhoneNumbersResponse#next_token #next_token} => String
+    #   * {Types::SearchAvailablePhoneNumbersResponse#available_numbers_list #available_numbers_list} => Array&lt;Types::AvailableNumberSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_available_phone_numbers({
+    #     target_arn: "ARN", # required
+    #     phone_number_country_code: "AF", # required, accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
+    #     phone_number_type: "TOLL_FREE", # required, accepts TOLL_FREE, DID
+    #     phone_number_prefix: "PhoneNumberPrefix",
+    #     max_results: 1,
+    #     next_token: "LargeNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.available_numbers_list #=> Array
+    #   resp.available_numbers_list[0].phone_number #=> String
+    #   resp.available_numbers_list[0].phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.available_numbers_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchAvailablePhoneNumbers AWS API Documentation
+    #
+    # @overload search_available_phone_numbers(params = {})
+    # @param [Hash] params ({})
+    def search_available_phone_numbers(params = {}, options = {})
+      req = build_request(:search_available_phone_numbers, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Searches security profiles in an Amazon Connect instance, with
+    # optional filtering.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::SecurityProfileSearchCriteria] :search_criteria
+    #   The search criteria to be used to return security profiles.
+    #
+    # @option params [Types::SecurityProfilesSearchFilter] :search_filter
+    #   Filters to be applied to search results.
+    #
+    # @return [Types::SearchSecurityProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchSecurityProfilesResponse#security_profiles #security_profiles} => Array&lt;Types::SecurityProfileSearchSummary&gt;
+    #   * {Types::SearchSecurityProfilesResponse#next_token #next_token} => String
+    #   * {Types::SearchSecurityProfilesResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_security_profiles({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive SecurityProfileSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive SecurityProfileSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #     search_filter: {
+    #       tag_filter: {
+    #         or_conditions: [
+    #           [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         ],
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_profiles #=> Array
+    #   resp.security_profiles[0].id #=> String
+    #   resp.security_profiles[0].organization_resource_id #=> String
+    #   resp.security_profiles[0].arn #=> String
+    #   resp.security_profiles[0].security_profile_name #=> String
+    #   resp.security_profiles[0].description #=> String
+    #   resp.security_profiles[0].tags #=> Hash
+    #   resp.security_profiles[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchSecurityProfiles AWS API Documentation
+    #
+    # @overload search_security_profiles(params = {})
+    # @param [Hash] params ({})
+    def search_security_profiles(params = {}, options = {})
+      req = build_request(:search_security_profiles, params)
+      req.send_request(options)
+    end
+
+    # Searches users in an Amazon Connect instance, with optional filtering.
+    #
+    # @option params [String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::UserSearchFilter] :search_filter
+    #   Filters to be applied to search results.
+    #
+    # @option params [Types::UserSearchCriteria] :search_criteria
+    #   The search criteria to be used to return users.
+    #
+    # @return [Types::SearchUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchUsersResponse#users #users} => Array&lt;Types::UserSearchSummary&gt;
+    #   * {Types::SearchUsersResponse#next_token #next_token} => String
+    #   * {Types::SearchUsersResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_users({
+    #     instance_id: "InstanceId",
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_filter: {
+    #       tag_filter: {
+    #         or_conditions: [
+    #           [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         ],
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive UserSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive UserSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #       hierarchy_group_condition: {
+    #         value: "String",
+    #         hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.users #=> Array
+    #   resp.users[0].arn #=> String
+    #   resp.users[0].directory_user_id #=> String
+    #   resp.users[0].hierarchy_group_id #=> String
+    #   resp.users[0].id #=> String
+    #   resp.users[0].identity_info.first_name #=> String
+    #   resp.users[0].identity_info.last_name #=> String
+    #   resp.users[0].phone_config.phone_type #=> String, one of "SOFT_PHONE", "DESK_PHONE"
+    #   resp.users[0].phone_config.auto_accept #=> Boolean
+    #   resp.users[0].phone_config.after_contact_work_time_limit #=> Integer
+    #   resp.users[0].phone_config.desk_phone_number #=> String
+    #   resp.users[0].routing_profile_id #=> String
+    #   resp.users[0].security_profile_ids #=> Array
+    #   resp.users[0].security_profile_ids[0] #=> String
+    #   resp.users[0].tags #=> Hash
+    #   resp.users[0].tags["TagKey"] #=> String
+    #   resp.users[0].username #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchUsers AWS API Documentation
+    #
+    # @overload search_users(params = {})
+    # @param [Hash] params ({})
+    def search_users(params = {}, options = {})
+      req = build_request(:search_users, params)
       req.send_request(options)
     end
 
@@ -5127,10 +6113,10 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Initiates a contact flow to start a new chat for the customer.
-    # Response of this API provides a token required to obtain credentials
-    # from the [CreateParticipantConnection][1] API in the Amazon Connect
-    # Participant Service.
+    # Initiates a flow to start a new chat for the customer. Response of
+    # this API provides a token required to obtain credentials from the
+    # [CreateParticipantConnection][1] API in the Amazon Connect Participant
+    # Service.
     #
     # When a new chat contact is successfully created, clients must
     # subscribe to the participant’s connection for the created chat within
@@ -5165,19 +6151,19 @@ module Aws::Connect
     #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :contact_flow_id
-    #   The identifier of the contact flow for initiating the chat. To see the
+    #   The identifier of the flow for initiating the chat. To see the
     #   ContactFlowId in the Amazon Connect console user interface, on the
-    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
-    #   contact flow. On the contact flow page, under the name of the contact
-    #   flow, choose **Show additional flow information**. The ContactFlowId
-    #   is the last part of the ARN, shown here in bold:
+    #   navigation menu go to **Routing**, **Contact Flows**. Choose the flow.
+    #   On the flow page, under the name of the flow, choose **Show additional
+    #   flow information**. The ContactFlowId is the last part of the ARN,
+    #   shown here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #
     # @option params [Hash<String,String>] :attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes. They can be accessed in contact
-    #   flows just like any other contact attributes.
+    #   standard Amazon Connect attributes. They can be accessed in flows just
+    #   like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
     #   contact. Attribute keys can include only alphanumeric, dash, and
@@ -5364,14 +6350,14 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Places an outbound call to a contact, and then initiates the contact
-    # flow. It performs the actions in the contact flow that's specified
-    # (in `ContactFlowId`).
+    # Places an outbound call to a contact, and then initiates the flow. It
+    # performs the actions in the flow that's specified (in
+    # `ContactFlowId`).
     #
     # Agents do not initiate the outbound API, which means that they do not
-    # dial the contact. If the contact flow places an outbound call to a
-    # contact, and then puts the contact in queue, the call is then routed
-    # to the agent, like any other inbound case.
+    # dial the contact. If the flow places an outbound call to a contact,
+    # and then puts the contact in queue, the call is then routed to the
+    # agent, like any other inbound case.
     #
     # There is a 60-second dialing timeout for this operation. If the call
     # is not connected after 60 seconds, it fails.
@@ -5385,25 +6371,25 @@ module Aws::Connect
     #
     # <note markdown="1"> Campaign calls are not allowed by default. Before you can make a call
     # with `TrafficType` = `CAMPAIGN`, you must submit a service quota
-    # increase request. For more information, see [Amazon Connect Service
-    # Quotas][1] in the *Amazon Connect Administrator Guide*.
+    # increase request to the quota [Amazon Connect campaigns][2].
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#outbound-communications-quotas
     #
     # @option params [required, String] :destination_phone_number
     #   The phone number of the customer, in E.164 format.
     #
     # @option params [required, String] :contact_flow_id
-    #   The identifier of the contact flow for the outbound call. To see the
+    #   The identifier of the flow for the outbound call. To see the
     #   ContactFlowId in the Amazon Connect console user interface, on the
-    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
-    #   contact flow. On the contact flow page, under the name of the contact
-    #   flow, choose **Show additional flow information**. The ContactFlowId
-    #   is the last part of the ARN, shown here in bold:
+    #   navigation menu go to **Routing**, **Contact Flows**. Choose the flow.
+    #   On the flow page, under the name of the flow, choose **Show additional
+    #   flow information**. The ContactFlowId is the last part of the ARN,
+    #   shown here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #
@@ -5427,13 +6413,13 @@ module Aws::Connect
     # @option params [String] :queue_id
     #   The queue for the call. If you specify a queue, the phone displayed
     #   for caller ID is the phone number specified in the queue. If you do
-    #   not specify a queue, the queue defined in the contact flow is used. If
-    #   you do not specify a queue, you must specify a source phone number.
+    #   not specify a queue, the queue defined in the flow is used. If you do
+    #   not specify a queue, you must specify a source phone number.
     #
     # @option params [Hash<String,String>] :attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes, and can be accessed in contact
-    #   flows just like any other contact attributes.
+    #   standard Amazon Connect attributes, and can be accessed in flows just
+    #   like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
     #   contact. Attribute keys can include only alphanumeric, dash, and
@@ -5489,7 +6475,7 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Initiates a contact flow to start a new task.
+    # Initiates a flow to start a new task.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -5498,20 +6484,20 @@ module Aws::Connect
     # @option params [String] :previous_contact_id
     #   The identifier of the previous chat, voice, or task contact.
     #
-    # @option params [required, String] :contact_flow_id
-    #   The identifier of the contact flow for initiating the tasks. To see
-    #   the ContactFlowId in the Amazon Connect console user interface, on the
-    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
-    #   contact flow. On the contact flow page, under the name of the contact
-    #   flow, choose **Show additional flow information**. The ContactFlowId
-    #   is the last part of the ARN, shown here in bold:
+    # @option params [String] :contact_flow_id
+    #   The identifier of the flow for initiating the tasks. To see the
+    #   ContactFlowId in the Amazon Connect console user interface, on the
+    #   navigation menu go to **Routing**, **Contact Flows**. Choose the flow.
+    #   On the flow page, under the name of the flow, choose **Show additional
+    #   flow information**. The ContactFlowId is the last part of the ARN,
+    #   shown here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #
     # @option params [Hash<String,String>] :attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes, and can be accessed in contact
-    #   flows just like any other contact attributes.
+    #   standard Amazon Connect attributes, and can be accessed in flows just
+    #   like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
     #   contact. Attribute keys can include only alphanumeric, dash, and
@@ -5538,8 +6524,14 @@ module Aws::Connect
     #
     # @option params [Time,DateTime,Date,Integer,String] :scheduled_time
     #   The timestamp, in Unix Epoch seconds format, at which to start running
-    #   the inbound contact flow. The scheduled time cannot be in the past. It
-    #   must be within up to 6 days in future.
+    #   the inbound flow. The scheduled time cannot be in the past. It must be
+    #   within up to 6 days in future.
+    #
+    # @option params [String] :task_template_id
+    #   A unique identifier for the task template.
+    #
+    # @option params [String] :quick_connect_id
+    #   The identifier for the quick connect.
     #
     # @return [Types::StartTaskContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5550,7 +6542,7 @@ module Aws::Connect
     #   resp = client.start_task_contact({
     #     instance_id: "InstanceId", # required
     #     previous_contact_id: "ContactId",
-    #     contact_flow_id: "ContactFlowId", # required
+    #     contact_flow_id: "ContactFlowId",
     #     attributes: {
     #       "AttributeName" => "AttributeValue",
     #     },
@@ -5558,12 +6550,14 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue", # required
-    #         type: "URL", # required, accepts URL, ATTACHMENT
+    #         type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
     #       },
     #     },
     #     description: "Description",
     #     client_token: "ClientToken",
     #     scheduled_time: Time.now,
+    #     task_template_id: "TaskTemplateId",
+    #     quick_connect_id: "QuickConnectId",
     #   })
     #
     # @example Response structure
@@ -5732,21 +6726,25 @@ module Aws::Connect
 
     # Adds the specified tags to the specified resource.
     #
-    # The supported resource types are users, routing profiles, queues,
-    # quick connects, contact flows, agent status, and hours of operation.
+    # Some of the supported resource types are agents, routing profiles,
+    # queues, quick connects, contact flows, agent statuses, hours of
+    # operation, phone numbers, security profiles, and task templates. For a
+    # complete list, see [Tagging resources in Amazon Connect][1].
     #
     # For sample policies that use tags, see [Amazon Connect Identity-Based
-    # Policy Examples][1] in the *Amazon Connect Administrator Guide*.
+    # Policy Examples][2] in the *Amazon Connect Administrator Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   One or more tags. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -5766,6 +6764,79 @@ module Aws::Connect
     # @param [Hash] params ({})
     def tag_resource(params = {}, options = {})
       req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Transfers contacts from one agent or queue to another agent or queue
+    # at any point after a contact is created. You can transfer a contact to
+    # another queue by providing the flow which orchestrates the contact to
+    # the destination queue. This gives you more control over contact
+    # handling and helps you adhere to the service level agreement (SLA)
+    # guaranteed to your customers.
+    #
+    # Note the following requirements:
+    #
+    # * Transfer is supported for only `TASK` contacts.
+    #
+    # * Do not use both `QueueId` and `UserId` in the same call.
+    #
+    # * The following flow types are supported: Inbound flow, Transfer to
+    #   agent flow, and Transfer to queue flow.
+    #
+    # * The `TransferContact` API can be called only on active contacts.
+    #
+    # * A contact cannot be transferred more than 11 times.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #
+    # @option params [String] :queue_id
+    #   The identifier for the queue.
+    #
+    # @option params [String] :user_id
+    #   The identifier for the user.
+    #
+    # @option params [required, String] :contact_flow_id
+    #   The identifier of the flow.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::TransferContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TransferContactResponse#contact_id #contact_id} => String
+    #   * {Types::TransferContactResponse#contact_arn #contact_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.transfer_contact({
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     queue_id: "QueueId",
+    #     user_id: "AgentResourceId",
+    #     contact_flow_id: "ContactFlowId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_id #=> String
+    #   resp.contact_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TransferContact AWS API Documentation
+    #
+    # @overload transfer_contact(params = {})
+    # @param [Hash] params ({})
+    def transfer_contact(params = {}, options = {})
+      req = build_request(:transfer_contact, params)
       req.send_request(options)
     end
 
@@ -5870,7 +6941,7 @@ module Aws::Connect
     #   The description of the contact.
     #
     # @option params [Hash<String,Types::Reference>] :references
-    #   A formatted URL that is shown to an agent in the Contact Control Panel
+    #   Well-formed data on contact, shown to agents on Contact Control Panel
     #   (CCP).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -5885,7 +6956,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue", # required
-    #         type: "URL", # required, accepts URL, ATTACHMENT
+    #         type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
     #       },
     #     },
     #   })
@@ -5913,18 +6984,10 @@ module Aws::Connect
     # callers.
     #
     # Contact attributes are available in Amazon Connect for 24 months, and
-    # are then deleted. For information about CTR retention and the maximum
-    # size of the CTR attributes section, see [Feature specifications][1] in
-    # the *Amazon Connect Administrator Guide*.
-    #
-    # **Important:** You cannot use the operation to update attributes for
-    # contacts that occurred prior to the release of the API, which was
-    # September 12, 2018. You can update attributes only for contacts that
-    # started after the release of the API. If you attempt to update
-    # attributes for a contact that occurred prior to the release of the
-    # API, a 400 error is returned. This applies also to queued callbacks
-    # that were initiated prior to the release of the API but are still
-    # active in your instance.
+    # are then deleted. For information about contact record retention and
+    # the maximum size of the contact record attributes section, see
+    # [Feature specifications][1] in the *Amazon Connect Administrator
+    # Guide*.
     #
     #
     #
@@ -5940,7 +7003,7 @@ module Aws::Connect
     #
     # @option params [required, Hash<String,String>] :attributes
     #   The Amazon Connect attributes. These attributes can be accessed in
-    #   contact flows just like any other contact attributes.
+    #   flows just like any other contact attributes.
     #
     #   You can have up to 32,768 UTF-8 bytes across all attributes for a
     #   contact. Attribute keys can include only alphanumeric, dash, and
@@ -5967,10 +7030,10 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Updates the specified contact flow.
+    # Updates the specified flow.
     #
-    # You can also create and update contact flows using the [Amazon Connect
-    # Flow language][1].
+    # You can also create and update flows using the [Amazon Connect Flow
+    # language][1].
     #
     #
     #
@@ -5980,12 +7043,12 @@ module Aws::Connect
     #   The identifier of the Amazon Connect instance.
     #
     # @option params [required, String] :contact_flow_id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #
     # @option params [required, String] :content
-    #   The JSON string that represents contact flow’s content. For an
-    #   example, see [Example contact flow in Amazon Connect Flow language][1]
-    #   in the *Amazon Connect Administrator Guide*.
+    #   The JSON string that represents flow's content. For an example, see
+    #   [Example contact flow in Amazon Connect Flow language][1] in the
+    #   *Amazon Connect Administrator Guide*.
     #
     #
     #
@@ -6010,23 +7073,23 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Updates metadata about specified contact flow.
+    # Updates metadata about specified flow.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :contact_flow_id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #
     # @option params [String] :name
-    #   TThe name of the contact flow.
+    #   TThe name of the flow.
     #
     # @option params [String] :description
-    #   The description of the contact flow.
+    #   The description of the flow.
     #
     # @option params [String] :contact_flow_state
-    #   The state of contact flow.
+    #   The state of flow.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6049,7 +7112,7 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Updates specified contact flow module for the specified Amazon Connect
+    # Updates specified flow module for the specified Amazon Connect
     # instance.
     #
     # @option params [required, String] :instance_id
@@ -6057,10 +7120,10 @@ module Aws::Connect
     #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :contact_flow_module_id
-    #   The identifier of the contact flow module.
+    #   The identifier of the flow module.
     #
     # @option params [required, String] :content
-    #   The content of the contact flow module.
+    #   The content of the flow module.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6081,23 +7144,23 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Updates metadata about specified contact flow module.
+    # Updates metadata about specified flow module.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :contact_flow_module_id
-    #   The identifier of the contact flow module.
+    #   The identifier of the flow module.
     #
     # @option params [String] :name
-    #   The name of the contact flow module.
+    #   The name of the flow module.
     #
     # @option params [String] :description
-    #   The description of the contact flow module.
+    #   The description of the flow module.
     #
     # @option params [String] :state
-    #   The state of contact flow module.
+    #   The state of flow module.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6120,10 +7183,10 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # The name of the contact flow.
+    # The name of the flow.
     #
-    # You can also create and update contact flows using the [Amazon Connect
-    # Flow language][1].
+    # You can also create and update flows using the [Amazon Connect Flow
+    # language][1].
     #
     #
     #
@@ -6133,13 +7196,13 @@ module Aws::Connect
     #   The identifier of the Amazon Connect instance.
     #
     # @option params [required, String] :contact_flow_id
-    #   The identifier of the contact flow.
+    #   The identifier of the flow.
     #
     # @option params [String] :name
-    #   The name of the contact flow.
+    #   The name of the flow.
     #
     # @option params [String] :description
-    #   The description of the contact flow.
+    #   The description of the flow.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6173,8 +7236,8 @@ module Aws::Connect
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :scheduled_time
     #   The timestamp, in Unix Epoch seconds format, at which to start running
-    #   the inbound contact flow. The scheduled time cannot be in the past. It
-    #   must be within up to 6 days in future.
+    #   the inbound flow. The scheduled time cannot be in the past. It must be
+    #   within up to 6 days in future.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6280,7 +7343,7 @@ module Aws::Connect
     #
     #   resp = client.update_instance_attribute({
     #     instance_id: "InstanceId", # required
-    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE
+    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND
     #     value: "InstanceAttributeValue", # required
     #   })
     #
@@ -6355,6 +7418,50 @@ module Aws::Connect
     # @param [Hash] params ({})
     def update_instance_storage_config(params = {}, options = {})
       req = build_request(:update_instance_storage_config, params)
+      req.send_request(options)
+    end
+
+    # Updates your claimed phone number from its current Amazon Connect
+    # instance to another Amazon Connect instance in the same Region.
+    #
+    # @option params [required, String] :phone_number_id
+    #   A unique identifier for the phone number.
+    #
+    # @option params [required, String] :target_arn
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances that phone
+    #   numbers are claimed to.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdatePhoneNumberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePhoneNumberResponse#phone_number_id #phone_number_id} => String
+    #   * {Types::UpdatePhoneNumberResponse#phone_number_arn #phone_number_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_phone_number({
+    #     phone_number_id: "PhoneNumberId", # required
+    #     target_arn: "ARN", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.phone_number_id #=> String
+    #   resp.phone_number_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePhoneNumber AWS API Documentation
+    #
+    # @overload update_phone_number(params = {})
+    # @param [Hash] params ({})
+    def update_phone_number(params = {}, options = {})
+      req = build_request(:update_phone_number, params)
       req.send_request(options)
     end
 
@@ -6809,6 +7916,148 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates details about a specific task template in the specified Amazon
+    # Connect instance. This operation does not support partial updates.
+    # Instead it does a full update of template content.
+    #
+    # @option params [required, String] :task_template_id
+    #   A unique identifier for the task template.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :name
+    #   The name of the task template.
+    #
+    # @option params [String] :description
+    #   The description of the task template.
+    #
+    # @option params [String] :contact_flow_id
+    #   The identifier of the flow that runs by default when a task is created
+    #   by referencing this template.
+    #
+    # @option params [Types::TaskTemplateConstraints] :constraints
+    #   Constraints that are applicable to the fields listed.
+    #
+    # @option params [Types::TaskTemplateDefaults] :defaults
+    #   The default values for fields when a task is created by referencing
+    #   this template.
+    #
+    # @option params [String] :status
+    #   Marks a template as `ACTIVE` or `INACTIVE` for a task to refer to it.
+    #   Tasks can only be created from `ACTIVE` templates. If a template is
+    #   marked as `INACTIVE`, then a task that refers to this template cannot
+    #   be created.
+    #
+    # @option params [Array<Types::TaskTemplateField>] :fields
+    #   Fields that are part of the template.
+    #
+    # @return [Types::UpdateTaskTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTaskTemplateResponse#instance_id #instance_id} => String
+    #   * {Types::UpdateTaskTemplateResponse#id #id} => String
+    #   * {Types::UpdateTaskTemplateResponse#arn #arn} => String
+    #   * {Types::UpdateTaskTemplateResponse#name #name} => String
+    #   * {Types::UpdateTaskTemplateResponse#description #description} => String
+    #   * {Types::UpdateTaskTemplateResponse#contact_flow_id #contact_flow_id} => String
+    #   * {Types::UpdateTaskTemplateResponse#constraints #constraints} => Types::TaskTemplateConstraints
+    #   * {Types::UpdateTaskTemplateResponse#defaults #defaults} => Types::TaskTemplateDefaults
+    #   * {Types::UpdateTaskTemplateResponse#fields #fields} => Array&lt;Types::TaskTemplateField&gt;
+    #   * {Types::UpdateTaskTemplateResponse#status #status} => String
+    #   * {Types::UpdateTaskTemplateResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::UpdateTaskTemplateResponse#created_time #created_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_task_template({
+    #     task_template_id: "TaskTemplateId", # required
+    #     instance_id: "InstanceId", # required
+    #     name: "TaskTemplateName",
+    #     description: "TaskTemplateDescription",
+    #     contact_flow_id: "ContactFlowId",
+    #     constraints: {
+    #       required_fields: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #         },
+    #       ],
+    #       read_only_fields: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #         },
+    #       ],
+    #       invisible_fields: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     defaults: {
+    #       default_field_values: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #           default_value: "TaskTemplateFieldValue",
+    #         },
+    #       ],
+    #     },
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     fields: [
+    #       {
+    #         id: { # required
+    #           name: "TaskTemplateFieldName",
+    #         },
+    #         description: "TaskTemplateFieldDescription",
+    #         type: "NAME", # accepts NAME, DESCRIPTION, SCHEDULED_TIME, QUICK_CONNECT, URL, NUMBER, TEXT, TEXT_AREA, DATE_TIME, BOOLEAN, SINGLE_SELECT, EMAIL
+    #         single_select_options: ["TaskTemplateSingleSelectOption"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.contact_flow_id #=> String
+    #   resp.constraints.required_fields #=> Array
+    #   resp.constraints.required_fields[0].id.name #=> String
+    #   resp.constraints.read_only_fields #=> Array
+    #   resp.constraints.read_only_fields[0].id.name #=> String
+    #   resp.constraints.invisible_fields #=> Array
+    #   resp.constraints.invisible_fields[0].id.name #=> String
+    #   resp.defaults.default_field_values #=> Array
+    #   resp.defaults.default_field_values[0].id.name #=> String
+    #   resp.defaults.default_field_values[0].default_value #=> String
+    #   resp.fields #=> Array
+    #   resp.fields[0].id.name #=> String
+    #   resp.fields[0].description #=> String
+    #   resp.fields[0].type #=> String, one of "NAME", "DESCRIPTION", "SCHEDULED_TIME", "QUICK_CONNECT", "URL", "NUMBER", "TEXT", "TEXT_AREA", "DATE_TIME", "BOOLEAN", "SINGLE_SELECT", "EMAIL"
+    #   resp.fields[0].single_select_options #=> Array
+    #   resp.fields[0].single_select_options[0] #=> String
+    #   resp.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.last_modified_time #=> Time
+    #   resp.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateTaskTemplate AWS API Documentation
+    #
+    # @overload update_task_template(params = {})
+    # @param [Hash] params ({})
+    def update_task_template(params = {}, options = {})
+      req = build_request(:update_task_template, params)
+      req.send_request(options)
+    end
+
     # Assigns the specified hierarchy group to the specified user.
     #
     # @option params [String] :hierarchy_group_id
@@ -7073,7 +8322,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

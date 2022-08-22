@@ -148,6 +148,11 @@ module Aws::AppMesh
     HttpScheme = Shapes::StringShape.new(name: 'HttpScheme')
     HttpTimeout = Shapes::StructureShape.new(name: 'HttpTimeout')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
+    IpPreference = Shapes::StringShape.new(name: 'IpPreference')
+    JsonFormat = Shapes::ListShape.new(name: 'JsonFormat')
+    JsonFormatRef = Shapes::StructureShape.new(name: 'JsonFormatRef')
+    JsonKey = Shapes::StringShape.new(name: 'JsonKey')
+    JsonValue = Shapes::StringShape.new(name: 'JsonValue')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListGatewayRoutesInput = Shapes::StructureShape.new(name: 'ListGatewayRoutesInput')
     ListGatewayRoutesLimit = Shapes::IntegerShape.new(name: 'ListGatewayRoutesLimit')
@@ -173,6 +178,7 @@ module Aws::AppMesh
     ListVirtualServicesLimit = Shapes::IntegerShape.new(name: 'ListVirtualServicesLimit')
     ListVirtualServicesOutput = Shapes::StructureShape.new(name: 'ListVirtualServicesOutput')
     Listener = Shapes::StructureShape.new(name: 'Listener')
+    ListenerPort = Shapes::IntegerShape.new(name: 'ListenerPort')
     ListenerTimeout = Shapes::UnionShape.new(name: 'ListenerTimeout')
     ListenerTls = Shapes::StructureShape.new(name: 'ListenerTls')
     ListenerTlsAcmCertificate = Shapes::StructureShape.new(name: 'ListenerTlsAcmCertificate')
@@ -184,6 +190,7 @@ module Aws::AppMesh
     ListenerTlsValidationContextTrust = Shapes::UnionShape.new(name: 'ListenerTlsValidationContextTrust')
     Listeners = Shapes::ListShape.new(name: 'Listeners')
     Logging = Shapes::StructureShape.new(name: 'Logging')
+    LoggingFormat = Shapes::UnionShape.new(name: 'LoggingFormat')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MatchRange = Shapes::StructureShape.new(name: 'MatchRange')
     MaxConnections = Shapes::IntegerShape.new(name: 'MaxConnections')
@@ -193,6 +200,7 @@ module Aws::AppMesh
     MeshData = Shapes::StructureShape.new(name: 'MeshData')
     MeshList = Shapes::ListShape.new(name: 'MeshList')
     MeshRef = Shapes::StructureShape.new(name: 'MeshRef')
+    MeshServiceDiscovery = Shapes::StructureShape.new(name: 'MeshServiceDiscovery')
     MeshSpec = Shapes::StructureShape.new(name: 'MeshSpec')
     MeshStatus = Shapes::StructureShape.new(name: 'MeshStatus')
     MeshStatusCode = Shapes::StringShape.new(name: 'MeshStatusCode')
@@ -240,7 +248,9 @@ module Aws::AppMesh
     TcpRetryPolicyEvents = Shapes::ListShape.new(name: 'TcpRetryPolicyEvents')
     TcpRoute = Shapes::StructureShape.new(name: 'TcpRoute')
     TcpRouteAction = Shapes::StructureShape.new(name: 'TcpRouteAction')
+    TcpRouteMatch = Shapes::StructureShape.new(name: 'TcpRouteMatch')
     TcpTimeout = Shapes::StructureShape.new(name: 'TcpTimeout')
+    TextFormat = Shapes::StringShape.new(name: 'TextFormat')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TlsValidationContext = Shapes::StructureShape.new(name: 'TlsValidationContext')
     TlsValidationContextAcmTrust = Shapes::StructureShape.new(name: 'TlsValidationContextAcmTrust')
@@ -350,6 +360,7 @@ module Aws::AppMesh
     AwsCloudMapInstanceAttributes.member = Shapes::ShapeRef.new(shape: AwsCloudMapInstanceAttribute)
 
     AwsCloudMapServiceDiscovery.add_member(:attributes, Shapes::ShapeRef.new(shape: AwsCloudMapInstanceAttributes, location_name: "attributes"))
+    AwsCloudMapServiceDiscovery.add_member(:ip_preference, Shapes::ShapeRef.new(shape: IpPreference, location_name: "ipPreference"))
     AwsCloudMapServiceDiscovery.add_member(:namespace_name, Shapes::ShapeRef.new(shape: AwsCloudMapName, required: true, location_name: "namespaceName"))
     AwsCloudMapServiceDiscovery.add_member(:service_name, Shapes::ShapeRef.new(shape: AwsCloudMapName, required: true, location_name: "serviceName"))
     AwsCloudMapServiceDiscovery.struct_class = Types::AwsCloudMapServiceDiscovery
@@ -623,6 +634,7 @@ module Aws::AppMesh
     DescribeVirtualServiceOutput[:payload_member] = DescribeVirtualServiceOutput.member(:virtual_service)
 
     DnsServiceDiscovery.add_member(:hostname, Shapes::ShapeRef.new(shape: Hostname, required: true, location_name: "hostname"))
+    DnsServiceDiscovery.add_member(:ip_preference, Shapes::ShapeRef.new(shape: IpPreference, location_name: "ipPreference"))
     DnsServiceDiscovery.add_member(:response_type, Shapes::ShapeRef.new(shape: DnsResponseType, location_name: "responseType"))
     DnsServiceDiscovery.struct_class = Types::DnsServiceDiscovery
 
@@ -633,6 +645,7 @@ module Aws::AppMesh
     EgressFilter.add_member(:type, Shapes::ShapeRef.new(shape: EgressFilterType, required: true, location_name: "type"))
     EgressFilter.struct_class = Types::EgressFilter
 
+    FileAccessLog.add_member(:format, Shapes::ShapeRef.new(shape: LoggingFormat, location_name: "format"))
     FileAccessLog.add_member(:path, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "path"))
     FileAccessLog.struct_class = Types::FileAccessLog
 
@@ -676,6 +689,7 @@ module Aws::AppMesh
     GatewayRouteStatus.add_member(:status, Shapes::ShapeRef.new(shape: GatewayRouteStatusCode, required: true, location_name: "status"))
     GatewayRouteStatus.struct_class = Types::GatewayRouteStatus
 
+    GatewayRouteTarget.add_member(:port, Shapes::ShapeRef.new(shape: ListenerPort, location_name: "port"))
     GatewayRouteTarget.add_member(:virtual_service, Shapes::ShapeRef.new(shape: GatewayRouteVirtualService, required: true, location_name: "virtualService"))
     GatewayRouteTarget.struct_class = Types::GatewayRouteTarget
 
@@ -692,6 +706,7 @@ module Aws::AppMesh
 
     GrpcGatewayRouteMatch.add_member(:hostname, Shapes::ShapeRef.new(shape: GatewayRouteHostnameMatch, location_name: "hostname"))
     GrpcGatewayRouteMatch.add_member(:metadata, Shapes::ShapeRef.new(shape: GrpcGatewayRouteMetadataList, location_name: "metadata"))
+    GrpcGatewayRouteMatch.add_member(:port, Shapes::ShapeRef.new(shape: ListenerPort, location_name: "port"))
     GrpcGatewayRouteMatch.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, location_name: "serviceName"))
     GrpcGatewayRouteMatch.struct_class = Types::GrpcGatewayRouteMatch
 
@@ -739,6 +754,7 @@ module Aws::AppMesh
 
     GrpcRouteMatch.add_member(:metadata, Shapes::ShapeRef.new(shape: GrpcRouteMetadataList, location_name: "metadata"))
     GrpcRouteMatch.add_member(:method_name, Shapes::ShapeRef.new(shape: MethodName, location_name: "methodName"))
+    GrpcRouteMatch.add_member(:port, Shapes::ShapeRef.new(shape: ListenerPort, location_name: "port"))
     GrpcRouteMatch.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, location_name: "serviceName"))
     GrpcRouteMatch.struct_class = Types::GrpcRouteMatch
 
@@ -809,6 +825,7 @@ module Aws::AppMesh
     HttpGatewayRouteMatch.add_member(:hostname, Shapes::ShapeRef.new(shape: GatewayRouteHostnameMatch, location_name: "hostname"))
     HttpGatewayRouteMatch.add_member(:method, Shapes::ShapeRef.new(shape: HttpMethod, location_name: "method"))
     HttpGatewayRouteMatch.add_member(:path, Shapes::ShapeRef.new(shape: HttpPathMatch, location_name: "path"))
+    HttpGatewayRouteMatch.add_member(:port, Shapes::ShapeRef.new(shape: ListenerPort, location_name: "port"))
     HttpGatewayRouteMatch.add_member(:prefix, Shapes::ShapeRef.new(shape: String, location_name: "prefix"))
     HttpGatewayRouteMatch.add_member(:query_parameters, Shapes::ShapeRef.new(shape: HttpQueryParameters, location_name: "queryParameters"))
     HttpGatewayRouteMatch.struct_class = Types::HttpGatewayRouteMatch
@@ -862,6 +879,7 @@ module Aws::AppMesh
     HttpRouteMatch.add_member(:headers, Shapes::ShapeRef.new(shape: HttpRouteHeaders, location_name: "headers"))
     HttpRouteMatch.add_member(:method, Shapes::ShapeRef.new(shape: HttpMethod, location_name: "method"))
     HttpRouteMatch.add_member(:path, Shapes::ShapeRef.new(shape: HttpPathMatch, location_name: "path"))
+    HttpRouteMatch.add_member(:port, Shapes::ShapeRef.new(shape: ListenerPort, location_name: "port"))
     HttpRouteMatch.add_member(:prefix, Shapes::ShapeRef.new(shape: String, location_name: "prefix"))
     HttpRouteMatch.add_member(:query_parameters, Shapes::ShapeRef.new(shape: HttpQueryParameters, location_name: "queryParameters"))
     HttpRouteMatch.add_member(:scheme, Shapes::ShapeRef.new(shape: HttpScheme, location_name: "scheme"))
@@ -873,6 +891,12 @@ module Aws::AppMesh
 
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerErrorException.struct_class = Types::InternalServerErrorException
+
+    JsonFormat.member = Shapes::ShapeRef.new(shape: JsonFormatRef)
+
+    JsonFormatRef.add_member(:key, Shapes::ShapeRef.new(shape: JsonKey, required: true, location_name: "key"))
+    JsonFormatRef.add_member(:value, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "value"))
+    JsonFormatRef.struct_class = Types::JsonFormatRef
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
@@ -1018,6 +1042,14 @@ module Aws::AppMesh
     Logging.add_member(:access_log, Shapes::ShapeRef.new(shape: AccessLog, location_name: "accessLog"))
     Logging.struct_class = Types::Logging
 
+    LoggingFormat.add_member(:json, Shapes::ShapeRef.new(shape: JsonFormat, location_name: "json"))
+    LoggingFormat.add_member(:text, Shapes::ShapeRef.new(shape: TextFormat, location_name: "text"))
+    LoggingFormat.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    LoggingFormat.add_member_subclass(:json, Types::LoggingFormat::Json)
+    LoggingFormat.add_member_subclass(:text, Types::LoggingFormat::Text)
+    LoggingFormat.add_member_subclass(:unknown, Types::LoggingFormat::Unknown)
+    LoggingFormat.struct_class = Types::LoggingFormat
+
     MatchRange.add_member(:end, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "end"))
     MatchRange.add_member(:start, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "start"))
     MatchRange.struct_class = Types::MatchRange
@@ -1039,7 +1071,11 @@ module Aws::AppMesh
     MeshRef.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "version"))
     MeshRef.struct_class = Types::MeshRef
 
+    MeshServiceDiscovery.add_member(:ip_preference, Shapes::ShapeRef.new(shape: IpPreference, location_name: "ipPreference"))
+    MeshServiceDiscovery.struct_class = Types::MeshServiceDiscovery
+
     MeshSpec.add_member(:egress_filter, Shapes::ShapeRef.new(shape: EgressFilter, location_name: "egressFilter"))
+    MeshSpec.add_member(:service_discovery, Shapes::ShapeRef.new(shape: MeshServiceDiscovery, location_name: "serviceDiscovery"))
     MeshSpec.struct_class = Types::MeshSpec
 
     MeshStatus.add_member(:status, Shapes::ShapeRef.new(shape: MeshStatusCode, location_name: "status"))
@@ -1142,11 +1178,15 @@ module Aws::AppMesh
     TcpRetryPolicyEvents.member = Shapes::ShapeRef.new(shape: TcpRetryPolicyEvent)
 
     TcpRoute.add_member(:action, Shapes::ShapeRef.new(shape: TcpRouteAction, required: true, location_name: "action"))
+    TcpRoute.add_member(:match, Shapes::ShapeRef.new(shape: TcpRouteMatch, location_name: "match"))
     TcpRoute.add_member(:timeout, Shapes::ShapeRef.new(shape: TcpTimeout, location_name: "timeout"))
     TcpRoute.struct_class = Types::TcpRoute
 
     TcpRouteAction.add_member(:weighted_targets, Shapes::ShapeRef.new(shape: WeightedTargets, required: true, location_name: "weightedTargets"))
     TcpRouteAction.struct_class = Types::TcpRouteAction
+
+    TcpRouteMatch.add_member(:port, Shapes::ShapeRef.new(shape: ListenerPort, location_name: "port"))
+    TcpRouteMatch.struct_class = Types::TcpRouteMatch
 
     TcpTimeout.add_member(:idle, Shapes::ShapeRef.new(shape: Duration, location_name: "idle"))
     TcpTimeout.struct_class = Types::TcpTimeout
@@ -1315,6 +1355,7 @@ module Aws::AppMesh
     VirtualGatewayData.add_member(:virtual_gateway_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualGatewayName"))
     VirtualGatewayData.struct_class = Types::VirtualGatewayData
 
+    VirtualGatewayFileAccessLog.add_member(:format, Shapes::ShapeRef.new(shape: LoggingFormat, location_name: "format"))
     VirtualGatewayFileAccessLog.add_member(:path, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "path"))
     VirtualGatewayFileAccessLog.struct_class = Types::VirtualGatewayFileAccessLog
 
@@ -1559,6 +1600,7 @@ module Aws::AppMesh
     VirtualServiceStatus.add_member(:status, Shapes::ShapeRef.new(shape: VirtualServiceStatusCode, required: true, location_name: "status"))
     VirtualServiceStatus.struct_class = Types::VirtualServiceStatus
 
+    WeightedTarget.add_member(:port, Shapes::ShapeRef.new(shape: ListenerPort, location_name: "port"))
     WeightedTarget.add_member(:virtual_node, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualNode"))
     WeightedTarget.add_member(:weight, Shapes::ShapeRef.new(shape: PercentInt, required: true, location_name: "weight"))
     WeightedTarget.struct_class = Types::WeightedTarget

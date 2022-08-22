@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2022-08-18)
+------------------
+
+* Feature - Add support for managed Contributor Insights Rules
+
+1.66.0 (2022-08-09)
+------------------
+
+* Feature - Various quota increases related to dimensions and custom metrics
+
+1.65.0 (2022-07-21)
+------------------
+
+* Feature - Adding support for the suppression of Composite Alarm actions
+
 1.64.0 (2022-04-14)
 ------------------
 

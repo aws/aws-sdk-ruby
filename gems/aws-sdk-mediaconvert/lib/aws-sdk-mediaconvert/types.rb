@@ -285,6 +285,49 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Use Allowed renditions to specify a list of possible resolutions in
+    # your ABR stack. * MediaConvert will create an ABR stack exclusively
+    # from the list of resolutions that you specify. * Some resolutions in
+    # the Allowed renditions list may not be included, however you can force
+    # a resolution to be included by setting Required to ENABLED. * You
+    # must specify at least one resolution that is greater than or equal to
+    # any resolutions that you specify in Min top rendition size or Min
+    # bottom rendition size. * If you specify Allowed renditions, you must
+    # not specify a separate rule for Force include renditions.
+    #
+    # @note When making an API call, you may pass AllowedRenditionSize
+    #   data as a hash:
+    #
+    #       {
+    #         height: 1,
+    #         required: "ENABLED", # accepts ENABLED, DISABLED
+    #         width: 1,
+    #       }
+    #
+    # @!attribute [rw] height
+    #   Use Height to define the video resolution height, in pixels, for
+    #   this rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] required
+    #   Set to ENABLED to force a rendition to be included.
+    #   @return [String]
+    #
+    # @!attribute [rw] width
+    #   Use Width to define the video resolution width, in pixels, for this
+    #   rule.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AllowedRenditionSize AWS API Documentation
+    #
+    class AllowedRenditionSize < Struct.new(
+      :height,
+      :required,
+      :width)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Settings for ancillary captions source.
     #
     # @note When making an API call, you may pass AncillarySourceSettings
@@ -921,6 +964,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         audio_duration_correction: "DISABLED", # accepts DISABLED, AUTO, TRACK, FRAME
     #         custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #         default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #         external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
@@ -948,6 +992,26 @@ module Aws::MediaConvert
     #         selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE, HLS_RENDITION_GROUP
     #         tracks: [1],
     #       }
+    #
+    # @!attribute [rw] audio_duration_correction
+    #   Apply audio timing corrections to help synchronize audio and video
+    #   in your output. To apply timing corrections, your input must meet
+    #   the following requirements: * Container: MP4, or MOV, with an
+    #   accurate time-to-sample (STTS) table. * Audio track: AAC. Choose
+    #   from the following audio timing correction settings: * Disabled
+    #   (Default): Apply no correction. * Auto: Recommended for most
+    #   inputs. MediaConvert analyzes the audio timing in your input and
+    #   determines which correction setting to use, if needed. * Track:
+    #   Adjust the duration of each audio frame by a constant amount to
+    #   align the audio track length with STTS duration. Track-level
+    #   correction does not affect pitch, and is recommended for tonal audio
+    #   content such as music. * Frame: Adjust the duration of each audio
+    #   frame by a variable amount to align audio frames with STTS
+    #   timestamps. No corrections are made to already-aligned frames.
+    #   Frame-level correction may affect the pitch of corrected frames, and
+    #   is recommended for atonal audio content such as speech or
+    #   percussion.
+    #   @return [String]
     #
     # @!attribute [rw] custom_language_code
     #   Selects a specific language code from within an audio source, using
@@ -1028,6 +1092,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioSelector AWS API Documentation
     #
     class AudioSelector < Struct.new(
+      :audio_duration_correction,
       :custom_language_code,
       :default_selection,
       :external_audio_file_input,
@@ -1072,6 +1137,123 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Specify one or more Automated ABR rule types. Note: Force include and
+    # Allowed renditions are mutually exclusive.
+    #
+    # @note When making an API call, you may pass AutomatedAbrRule
+    #   data as a hash:
+    #
+    #       {
+    #         allowed_renditions: [
+    #           {
+    #             height: 1,
+    #             required: "ENABLED", # accepts ENABLED, DISABLED
+    #             width: 1,
+    #           },
+    #         ],
+    #         force_include_renditions: [
+    #           {
+    #             height: 1,
+    #             width: 1,
+    #           },
+    #         ],
+    #         min_bottom_rendition_size: {
+    #           height: 1,
+    #           width: 1,
+    #         },
+    #         min_top_rendition_size: {
+    #           height: 1,
+    #           width: 1,
+    #         },
+    #         type: "MIN_TOP_RENDITION_SIZE", # accepts MIN_TOP_RENDITION_SIZE, MIN_BOTTOM_RENDITION_SIZE, FORCE_INCLUDE_RENDITIONS, ALLOWED_RENDITIONS
+    #       }
+    #
+    # @!attribute [rw] allowed_renditions
+    #   When customer adds the allowed renditions rule for auto ABR ladder,
+    #   they are required to add at leat one rendition to allowedRenditions
+    #   list
+    #   @return [Array<Types::AllowedRenditionSize>]
+    #
+    # @!attribute [rw] force_include_renditions
+    #   When customer adds the force include renditions rule for auto ABR
+    #   ladder, they are required to add at leat one rendition to
+    #   forceIncludeRenditions list
+    #   @return [Array<Types::ForceIncludeRenditionSize>]
+    #
+    # @!attribute [rw] min_bottom_rendition_size
+    #   Use Min bottom rendition size to specify a minimum size for the
+    #   lowest resolution in your ABR stack. * The lowest resolution in
+    #   your ABR stack will be equal to or greater than the value that you
+    #   enter. For example: If you specify 640x360 the lowest resolution in
+    #   your ABR stack will be equal to or greater than to 640x360. * If
+    #   you specify a Min top rendition size rule, the value that you
+    #   specify for Min bottom rendition size must be less than, or equal
+    #   to, Min top rendition size.
+    #   @return [Types::MinBottomRenditionSize]
+    #
+    # @!attribute [rw] min_top_rendition_size
+    #   Use Min top rendition size to specify a minimum size for the highest
+    #   resolution in your ABR stack. * The highest resolution in your ABR
+    #   stack will be equal to or greater than the value that you enter. For
+    #   example: If you specify 1280x720 the highest resolution in your ABR
+    #   stack will be equal to or greater than 1280x720. * If you specify a
+    #   value for Max resolution, the value that you specify for Min top
+    #   rendition size must be less than, or equal to, Max resolution.
+    #   @return [Types::MinTopRenditionSize]
+    #
+    # @!attribute [rw] type
+    #   Use Min top rendition size to specify a minimum size for the highest
+    #   resolution in your ABR stack. * The highest resolution in your ABR
+    #   stack will be equal to or greater than the value that you enter. For
+    #   example: If you specify 1280x720 the highest resolution in your ABR
+    #   stack will be equal to or greater than 1280x720. * If you specify a
+    #   value for Max resolution, the value that you specify for Min top
+    #   rendition size must be less than, or equal to, Max resolution. Use
+    #   Min bottom rendition size to specify a minimum size for the lowest
+    #   resolution in your ABR stack. * The lowest resolution in your ABR
+    #   stack will be equal to or greater than the value that you enter. For
+    #   example: If you specify 640x360 the lowest resolution in your ABR
+    #   stack will be equal to or greater than to 640x360. * If you specify
+    #   a Min top rendition size rule, the value that you specify for Min
+    #   bottom rendition size must be less than, or equal to, Min top
+    #   rendition size. Use Force include renditions to specify one or more
+    #   resolutions to include your ABR stack. * (Recommended) To optimize
+    #   automated ABR, specify as few resolutions as possible. * (Required)
+    #   The number of resolutions that you specify must be equal to, or less
+    #   than, the Max renditions setting. * If you specify a Min top
+    #   rendition size rule, specify at least one resolution that is equal
+    #   to, or greater than, Min top rendition size. * If you specify a Min
+    #   bottom rendition size rule, only specify resolutions that are equal
+    #   to, or greater than, Min bottom rendition size. * If you specify a
+    #   Force include renditions rule, do not specify a separate rule for
+    #   Allowed renditions. * Note: The ABR stack may include other
+    #   resolutions that you do not specify here, depending on the Max
+    #   renditions setting. Use Allowed renditions to specify a list of
+    #   possible resolutions in your ABR stack. * (Required) The number of
+    #   resolutions that you specify must be equal to, or greater than, the
+    #   Max renditions setting. * MediaConvert will create an ABR stack
+    #   exclusively from the list of resolutions that you specify. * Some
+    #   resolutions in the Allowed renditions list may not be included,
+    #   however you can force a resolution to be included by setting
+    #   Required to ENABLED. * You must specify at least one resolution
+    #   that is greater than or equal to any resolutions that you specify in
+    #   Min top rendition size or Min bottom rendition size. * If you
+    #   specify Allowed renditions, you must not specify a separate rule for
+    #   Force include renditions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AutomatedAbrRule AWS API Documentation
+    #
+    class AutomatedAbrRule < Struct.new(
+      :allowed_renditions,
+      :force_include_renditions,
+      :min_bottom_rendition_size,
+      :min_top_rendition_size,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Use automated ABR to have MediaConvert set up the renditions in your
     # ABR package for you automatically, based on characteristics of your
     # input video. This feature optimizes video quality while minimizing the
@@ -1084,6 +1266,32 @@ module Aws::MediaConvert
     #         max_abr_bitrate: 1,
     #         max_renditions: 1,
     #         min_abr_bitrate: 1,
+    #         rules: [
+    #           {
+    #             allowed_renditions: [
+    #               {
+    #                 height: 1,
+    #                 required: "ENABLED", # accepts ENABLED, DISABLED
+    #                 width: 1,
+    #               },
+    #             ],
+    #             force_include_renditions: [
+    #               {
+    #                 height: 1,
+    #                 width: 1,
+    #               },
+    #             ],
+    #             min_bottom_rendition_size: {
+    #               height: 1,
+    #               width: 1,
+    #             },
+    #             min_top_rendition_size: {
+    #               height: 1,
+    #               width: 1,
+    #             },
+    #             type: "MIN_TOP_RENDITION_SIZE", # accepts MIN_TOP_RENDITION_SIZE, MIN_BOTTOM_RENDITION_SIZE, FORCE_INCLUDE_RENDITIONS, ALLOWED_RENDITIONS
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] max_abr_bitrate
@@ -1111,12 +1319,21 @@ module Aws::MediaConvert
     #   specify a value, MediaConvert uses 600,000 (600 kb/s) by default.
     #   @return [Integer]
     #
+    # @!attribute [rw] rules
+    #   Optional. Use Automated ABR rules to specify restrictions for the
+    #   rendition sizes MediaConvert will create in your ABR stack. You can
+    #   use these rules if your ABR workflow has specific rendition size
+    #   requirements, but you still want MediaConvert to optimize for video
+    #   quality and overall file size.
+    #   @return [Array<Types::AutomatedAbrRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AutomatedAbrSettings AWS API Documentation
     #
     class AutomatedAbrSettings < Struct.new(
       :max_abr_bitrate,
       :max_renditions,
-      :min_abr_bitrate)
+      :min_abr_bitrate,
+      :rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1132,6 +1349,32 @@ module Aws::MediaConvert
     #           max_abr_bitrate: 1,
     #           max_renditions: 1,
     #           min_abr_bitrate: 1,
+    #           rules: [
+    #             {
+    #               allowed_renditions: [
+    #                 {
+    #                   height: 1,
+    #                   required: "ENABLED", # accepts ENABLED, DISABLED
+    #                   width: 1,
+    #                 },
+    #               ],
+    #               force_include_renditions: [
+    #                 {
+    #                   height: 1,
+    #                   width: 1,
+    #                 },
+    #               ],
+    #               min_bottom_rendition_size: {
+    #                 height: 1,
+    #                 width: 1,
+    #               },
+    #               min_top_rendition_size: {
+    #                 height: 1,
+    #                 width: 1,
+    #               },
+    #               type: "MIN_TOP_RENDITION_SIZE", # accepts MIN_TOP_RENDITION_SIZE, MIN_BOTTOM_RENDITION_SIZE, FORCE_INCLUDE_RENDITIONS, ALLOWED_RENDITIONS
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -1150,7 +1393,7 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Settings for quality-defined variable bitrate encoding with the H.265
+    # Settings for quality-defined variable bitrate encoding with the AV1
     # codec. Use these settings only when you set QVBR for Rate control mode
     # (RateControlMode).
     #
@@ -3241,8 +3484,12 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] klv_metadata
-    #   Applies to CMAF outputs. Use this setting to specify whether the
-    #   service inserts the KLV metadata from the input in this output.
+    #   To include key-length-value metadata in this output: Set KLV
+    #   metadata insertion to Passthrough. MediaConvert reads KLV metadata
+    #   present in your input and writes each instance to a separate event
+    #   message box in the output, according to MISB ST1910.1. To exclude
+    #   this KLV metadata: Set KLV metadata insertion to None or leave
+    #   blank.
     #   @return [String]
     #
     # @!attribute [rw] scte_35_esam
@@ -3647,6 +3894,7 @@ module Aws::MediaConvert
     #               },
     #               audio_selectors: {
     #                 "__string" => {
+    #                   audio_duration_correction: "DISABLED", # accepts DISABLED, AUTO, TRACK, FRAME
     #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #                   external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
@@ -3772,6 +4020,9 @@ module Aws::MediaConvert
     #               supplemental_imps: ["__stringPatternS3ASSETMAPXml"],
     #               timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #               timecode_start: "__stringMin11Max11Pattern01D20305D205D",
+    #               video_generator: {
+    #                 duration: 1,
+    #               },
     #               video_selector: {
     #                 alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
@@ -3791,6 +4042,7 @@ module Aws::MediaConvert
     #                   white_point_x: 1,
     #                   white_point_y: 1,
     #                 },
+    #                 pad_video: "DISABLED", # accepts DISABLED, BLACK
     #                 pid: 1,
     #                 program_number: 1,
     #                 rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -3851,6 +4103,32 @@ module Aws::MediaConvert
     #                   max_abr_bitrate: 1,
     #                   max_renditions: 1,
     #                   min_abr_bitrate: 1,
+    #                   rules: [
+    #                     {
+    #                       allowed_renditions: [
+    #                         {
+    #                           height: 1,
+    #                           required: "ENABLED", # accepts ENABLED, DISABLED
+    #                           width: 1,
+    #                         },
+    #                       ],
+    #                       force_include_renditions: [
+    #                         {
+    #                           height: 1,
+    #                           width: 1,
+    #                         },
+    #                       ],
+    #                       min_bottom_rendition_size: {
+    #                         height: 1,
+    #                         width: 1,
+    #                       },
+    #                       min_top_rendition_size: {
+    #                         height: 1,
+    #                         width: 1,
+    #                       },
+    #                       type: "MIN_TOP_RENDITION_SIZE", # accepts MIN_TOP_RENDITION_SIZE, MIN_BOTTOM_RENDITION_SIZE, FORCE_INCLUDE_RENDITIONS, ALLOWED_RENDITIONS
+    #                     },
+    #                   ],
     #                 },
     #               },
     #               custom_name: "__string",
@@ -4792,7 +5070,8 @@ module Aws::MediaConvert
     #                           max_fall: 1,
     #                         },
     #                         l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                         profile: "PROFILE_5", # accepts PROFILE_5
+    #                         mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                         profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                       },
     #                       hdr_10_plus: {
     #                         mastering_monitor_nits: 1,
@@ -5054,6 +5333,7 @@ module Aws::MediaConvert
     #               },
     #               audio_selectors: {
     #                 "__string" => {
+    #                   audio_duration_correction: "DISABLED", # accepts DISABLED, AUTO, TRACK, FRAME
     #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #                   external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
@@ -5190,6 +5470,7 @@ module Aws::MediaConvert
     #                   white_point_x: 1,
     #                   white_point_y: 1,
     #                 },
+    #                 pad_video: "DISABLED", # accepts DISABLED, BLACK
     #                 pid: 1,
     #                 program_number: 1,
     #                 rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -5250,6 +5531,32 @@ module Aws::MediaConvert
     #                   max_abr_bitrate: 1,
     #                   max_renditions: 1,
     #                   min_abr_bitrate: 1,
+    #                   rules: [
+    #                     {
+    #                       allowed_renditions: [
+    #                         {
+    #                           height: 1,
+    #                           required: "ENABLED", # accepts ENABLED, DISABLED
+    #                           width: 1,
+    #                         },
+    #                       ],
+    #                       force_include_renditions: [
+    #                         {
+    #                           height: 1,
+    #                           width: 1,
+    #                         },
+    #                       ],
+    #                       min_bottom_rendition_size: {
+    #                         height: 1,
+    #                         width: 1,
+    #                       },
+    #                       min_top_rendition_size: {
+    #                         height: 1,
+    #                         width: 1,
+    #                       },
+    #                       type: "MIN_TOP_RENDITION_SIZE", # accepts MIN_TOP_RENDITION_SIZE, MIN_BOTTOM_RENDITION_SIZE, FORCE_INCLUDE_RENDITIONS, ALLOWED_RENDITIONS
+    #                     },
+    #                   ],
     #                 },
     #               },
     #               custom_name: "__string",
@@ -6191,7 +6498,8 @@ module Aws::MediaConvert
     #                           max_fall: 1,
     #                         },
     #                         l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                         profile: "PROFILE_5", # accepts PROFILE_5
+    #                         mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                         profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                       },
     #                       hdr_10_plus: {
     #                         mastering_monitor_nits: 1,
@@ -7045,7 +7353,8 @@ module Aws::MediaConvert
     #                   max_fall: 1,
     #                 },
     #                 l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                 profile: "PROFILE_5", # accepts PROFILE_5
+    #                 mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                 profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #               },
     #               hdr_10_plus: {
     #                 mastering_monitor_nits: 1,
@@ -7908,9 +8217,7 @@ module Aws::MediaConvert
     #
     class DisassociateCertificateResponse < Aws::EmptyStructure; end
 
-    # With AWS Elemental MediaConvert, you can create profile 5 Dolby Vision
-    # outputs from MXF and IMF sources that contain mastering information as
-    # frame-interleaved Dolby Vision metadata.
+    # Create Dolby Vision Profile 5 or Profile 8.1 compatible video output.
     #
     # @note When making an API call, you may pass DolbyVision
     #   data as a hash:
@@ -7921,7 +8228,8 @@ module Aws::MediaConvert
     #           max_fall: 1,
     #         },
     #         l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #         profile: "PROFILE_5", # accepts PROFILE_5
+    #         mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #         profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #       }
     #
     # @!attribute [rw] l6_metadata
@@ -7935,10 +8243,26 @@ module Aws::MediaConvert
     #   Vision MaxCLL and MaxFALL properies.
     #   @return [String]
     #
+    # @!attribute [rw] mapping
+    #   Required when you set Dolby Vision Profile to Profile 8.1. When you
+    #   set Content mapping to None, content mapping is not applied to the
+    #   HDR10-compatible signal. Depending on the source peak nit level,
+    #   clipping might occur on HDR devices without Dolby Vision. When you
+    #   set Content mapping to HDR10 1000, the transcoder creates a 1,000
+    #   nits peak HDR10-compatible signal by applying static content mapping
+    #   to the source. This mode is speed-optimized for PQ10 sources with
+    #   metadata that is created from analysis. For graded Dolby Vision
+    #   content, be aware that creative intent might not be guaranteed with
+    #   extreme 1,000 nits trims.
+    #   @return [String]
+    #
     # @!attribute [rw] profile
-    #   In the current MediaConvert implementation, the Dolby Vision profile
-    #   is always 5 (PROFILE\_5). Therefore, all of your inputs must contain
-    #   Dolby Vision frame interleaved data.
+    #   Required when you enable Dolby Vision. Use Profile 5 to include
+    #   frame-interleaved Dolby Vision metadata in your output. Your input
+    #   must include Dolby Vision metadata or an HDR10 YUV color space. Use
+    #   Profile 8.1 to include frame-interleaved Dolby Vision metadata and
+    #   HDR10 metadata in your output. Your input must include Dolby Vision
+    #   metadata.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DolbyVision AWS API Documentation
@@ -7946,6 +8270,7 @@ module Aws::MediaConvert
     class DolbyVision < Struct.new(
       :l6_metadata,
       :l6_mode,
+      :mapping,
       :profile)
       SENSITIVE = []
       include Aws::Structure
@@ -9306,6 +9631,46 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Use Force include renditions to specify one or more resolutions to
+    # include your ABR stack. * (Recommended) To optimize automated ABR,
+    # specify as few resolutions as possible. * (Required) The number of
+    # resolutions that you specify must be equal to, or less than, the Max
+    # renditions setting. * If you specify a Min top rendition size rule,
+    # specify at least one resolution that is equal to, or greater than, Min
+    # top rendition size. * If you specify a Min bottom rendition size
+    # rule, only specify resolutions that are equal to, or greater than, Min
+    # bottom rendition size. * If you specify a Force include renditions
+    # rule, do not specify a separate rule for Allowed renditions. * Note:
+    # The ABR stack may include other resolutions that you do not specify
+    # here, depending on the Max renditions setting.
+    #
+    # @note When making an API call, you may pass ForceIncludeRenditionSize
+    #   data as a hash:
+    #
+    #       {
+    #         height: 1,
+    #         width: 1,
+    #       }
+    #
+    # @!attribute [rw] height
+    #   Use Height to define the video resolution height, in pixels, for
+    #   this rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] width
+    #   Use Width to define the video resolution width, in pixels, for this
+    #   rule.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ForceIncludeRenditionSize AWS API Documentation
+    #
+    class ForceIncludeRenditionSize < Struct.new(
+      :height,
+      :width)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Required when you set (Codec) under (VideoDescription)>(CodecSettings)
     # to the value FRAME\_CAPTURE.
     #
@@ -9536,7 +9901,7 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Settings for quality-defined variable bitrate encoding with the H.265
+    # Settings for quality-defined variable bitrate encoding with the H.264
     # codec. Use these settings only when you set QVBR for Rate control mode
     # (RateControlMode).
     #
@@ -11694,14 +12059,14 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] accessibility
-    #   Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if
-    #   the ISMC or WebVTT captions track is intended to provide
-    #   accessibility for people who are deaf or hard of hearing. When you
-    #   enable this feature, MediaConvert adds the following attributes
-    #   under EXT-X-MEDIA in the HLS or CMAF manifest for this track:
+    #   Set Accessibility subtitles to Enabled if the ISMC or WebVTT
+    #   captions track is intended to provide accessibility for people who
+    #   are deaf or hard of hearing. When you enable this feature,
+    #   MediaConvert adds the following attributes under EXT-X-MEDIA in the
+    #   HLS or CMAF manifest for this track:
     #   CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
-    #   and AUTOSELECT="YES". Keep the default value, Disabled (DISABLED),
-    #   if the captions track is not intended to provide such accessibility.
+    #   and AUTOSELECT="YES". Keep the default value, Disabled, if the
+    #   captions track is not intended to provide such accessibility.
     #   MediaConvert will not add the above attributes.
     #   @return [String]
     #
@@ -11740,6 +12105,7 @@ module Aws::MediaConvert
     #         },
     #         audio_selectors: {
     #           "__string" => {
+    #             audio_duration_correction: "DISABLED", # accepts DISABLED, AUTO, TRACK, FRAME
     #             custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #             default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #             external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
@@ -11865,6 +12231,9 @@ module Aws::MediaConvert
     #         supplemental_imps: ["__stringPatternS3ASSETMAPXml"],
     #         timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #         timecode_start: "__stringMin11Max11Pattern01D20305D205D",
+    #         video_generator: {
+    #           duration: 1,
+    #         },
     #         video_selector: {
     #           alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #           color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
@@ -11884,6 +12253,7 @@ module Aws::MediaConvert
     #             white_point_x: 1,
     #             white_point_y: 1,
     #           },
+    #           pad_video: "DISABLED", # accepts DISABLED, BLACK
     #           pid: 1,
     #           program_number: 1,
     #           rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -12067,6 +12437,15 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/console/mediaconvert/timecode.
     #   @return [String]
     #
+    # @!attribute [rw] video_generator
+    #   When you include Video generator, MediaConvert creates a video input
+    #   with black frames. Use this setting if you do not have a video input
+    #   or if you want to add black video frames before, or after, other
+    #   inputs. You can specify Video generator, or you can specify an Input
+    #   file, but you cannot specify both. For more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/video-generator.html
+    #   @return [Types::InputVideoGenerator]
+    #
     # @!attribute [rw] video_selector
     #   Input video selectors contain the video settings for the input. Each
     #   of your inputs can have up to one video selector.
@@ -12095,6 +12474,7 @@ module Aws::MediaConvert
       :supplemental_imps,
       :timecode_source,
       :timecode_start,
+      :video_generator,
       :video_selector)
       SENSITIVE = []
       include Aws::Structure
@@ -12214,6 +12594,7 @@ module Aws::MediaConvert
     #         },
     #         audio_selectors: {
     #           "__string" => {
+    #             audio_duration_correction: "DISABLED", # accepts DISABLED, AUTO, TRACK, FRAME
     #             custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #             default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #             external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
@@ -12350,6 +12731,7 @@ module Aws::MediaConvert
     #             white_point_x: 1,
     #             white_point_y: 1,
     #           },
+    #           pad_video: "DISABLED", # accepts DISABLED, BLACK
     #           pid: 1,
     #           program_number: 1,
     #           rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -12531,6 +12913,34 @@ module Aws::MediaConvert
       :timecode_source,
       :timecode_start,
       :video_selector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # When you include Video generator, MediaConvert creates a video input
+    # with black frames. Use this setting if you do not have a video input
+    # or if you want to add black video frames before, or after, other
+    # inputs. You can specify Video generator, or you can specify an Input
+    # file, but you cannot specify both. For more information, see
+    # https://docs.aws.amazon.com/mediaconvert/latest/ug/video-generator.html
+    #
+    # @note When making an API call, you may pass InputVideoGenerator
+    #   data as a hash:
+    #
+    #       {
+    #         duration: 1,
+    #       }
+    #
+    # @!attribute [rw] duration
+    #   Specify an integer value for Black video duration from 50 to
+    #   86400000 to generate a black video input for that many milliseconds.
+    #   Required when you include Video generator.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputVideoGenerator AWS API Documentation
+    #
+    class InputVideoGenerator < Struct.new(
+      :duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12890,6 +13300,7 @@ module Aws::MediaConvert
     #             },
     #             audio_selectors: {
     #               "__string" => {
+    #                 audio_duration_correction: "DISABLED", # accepts DISABLED, AUTO, TRACK, FRAME
     #                 custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                 default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #                 external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
@@ -13015,6 +13426,9 @@ module Aws::MediaConvert
     #             supplemental_imps: ["__stringPatternS3ASSETMAPXml"],
     #             timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #             timecode_start: "__stringMin11Max11Pattern01D20305D205D",
+    #             video_generator: {
+    #               duration: 1,
+    #             },
     #             video_selector: {
     #               alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #               color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
@@ -13034,6 +13448,7 @@ module Aws::MediaConvert
     #                 white_point_x: 1,
     #                 white_point_y: 1,
     #               },
+    #               pad_video: "DISABLED", # accepts DISABLED, BLACK
     #               pid: 1,
     #               program_number: 1,
     #               rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -13094,6 +13509,32 @@ module Aws::MediaConvert
     #                 max_abr_bitrate: 1,
     #                 max_renditions: 1,
     #                 min_abr_bitrate: 1,
+    #                 rules: [
+    #                   {
+    #                     allowed_renditions: [
+    #                       {
+    #                         height: 1,
+    #                         required: "ENABLED", # accepts ENABLED, DISABLED
+    #                         width: 1,
+    #                       },
+    #                     ],
+    #                     force_include_renditions: [
+    #                       {
+    #                         height: 1,
+    #                         width: 1,
+    #                       },
+    #                     ],
+    #                     min_bottom_rendition_size: {
+    #                       height: 1,
+    #                       width: 1,
+    #                     },
+    #                     min_top_rendition_size: {
+    #                       height: 1,
+    #                       width: 1,
+    #                     },
+    #                     type: "MIN_TOP_RENDITION_SIZE", # accepts MIN_TOP_RENDITION_SIZE, MIN_BOTTOM_RENDITION_SIZE, FORCE_INCLUDE_RENDITIONS, ALLOWED_RENDITIONS
+    #                   },
+    #                 ],
     #               },
     #             },
     #             custom_name: "__string",
@@ -14035,7 +14476,8 @@ module Aws::MediaConvert
     #                         max_fall: 1,
     #                       },
     #                       l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                       profile: "PROFILE_5", # accepts PROFILE_5
+    #                       mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                       profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                     },
     #                     hdr_10_plus: {
     #                       mastering_monitor_nits: 1,
@@ -14347,6 +14789,7 @@ module Aws::MediaConvert
     #             },
     #             audio_selectors: {
     #               "__string" => {
+    #                 audio_duration_correction: "DISABLED", # accepts DISABLED, AUTO, TRACK, FRAME
     #                 custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                 default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #                 external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
@@ -14483,6 +14926,7 @@ module Aws::MediaConvert
     #                 white_point_x: 1,
     #                 white_point_y: 1,
     #               },
+    #               pad_video: "DISABLED", # accepts DISABLED, BLACK
     #               pid: 1,
     #               program_number: 1,
     #               rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -14543,6 +14987,32 @@ module Aws::MediaConvert
     #                 max_abr_bitrate: 1,
     #                 max_renditions: 1,
     #                 min_abr_bitrate: 1,
+    #                 rules: [
+    #                   {
+    #                     allowed_renditions: [
+    #                       {
+    #                         height: 1,
+    #                         required: "ENABLED", # accepts ENABLED, DISABLED
+    #                         width: 1,
+    #                       },
+    #                     ],
+    #                     force_include_renditions: [
+    #                       {
+    #                         height: 1,
+    #                         width: 1,
+    #                       },
+    #                     ],
+    #                     min_bottom_rendition_size: {
+    #                       height: 1,
+    #                       width: 1,
+    #                     },
+    #                     min_top_rendition_size: {
+    #                       height: 1,
+    #                       width: 1,
+    #                     },
+    #                     type: "MIN_TOP_RENDITION_SIZE", # accepts MIN_TOP_RENDITION_SIZE, MIN_BOTTOM_RENDITION_SIZE, FORCE_INCLUDE_RENDITIONS, ALLOWED_RENDITIONS
+    #                   },
+    #                 ],
     #               },
     #             },
     #             custom_name: "__string",
@@ -15484,7 +15954,8 @@ module Aws::MediaConvert
     #                         max_fall: 1,
     #                       },
     #                       l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                       profile: "PROFILE_5", # accepts PROFILE_5
+    #                       mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                       profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                     },
     #                     hdr_10_plus: {
     #                       mastering_monitor_nits: 1,
@@ -16356,8 +16827,11 @@ module Aws::MediaConvert
     #   @return [Float]
     #
     # @!attribute [rw] klv_metadata
-    #   Applies to MPEG-TS outputs. Use this setting to specify whether the
-    #   service inserts the KLV metadata from the input in this output.
+    #   To include key-length-value metadata in this output: Set KLV
+    #   metadata insertion to Passthrough. MediaConvert reads KLV metadata
+    #   present in your input and passes it through to the output transport
+    #   stream. To exclude this KLV metadata: Set KLV metadata insertion to
+    #   None or leave blank.
     #   @return [String]
     #
     # @!attribute [rw] max_pcr_interval
@@ -16490,8 +16964,8 @@ module Aws::MediaConvert
     #   @return [Float]
     #
     # @!attribute [rw] timed_metadata_pid
-    #   Specify the packet identifier (PID) for timed metadata in this
-    #   output. Default is 502.
+    #   Packet Identifier (PID) of the ID3 metadata stream in the transport
+    #   stream.
     #   @return [Integer]
     #
     # @!attribute [rw] transport_stream_id
@@ -16727,6 +17201,76 @@ module Aws::MediaConvert
       :timed_metadata_pid,
       :transport_stream_id,
       :video_pid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use Min bottom rendition size to specify a minimum size for the lowest
+    # resolution in your ABR stack. * The lowest resolution in your ABR
+    # stack will be equal to or greater than the value that you enter. For
+    # example: If you specify 640x360 the lowest resolution in your ABR
+    # stack will be equal to or greater than to 640x360. * If you specify a
+    # Min top rendition size rule, the value that you specify for Min bottom
+    # rendition size must be less than, or equal to, Min top rendition size.
+    #
+    # @note When making an API call, you may pass MinBottomRenditionSize
+    #   data as a hash:
+    #
+    #       {
+    #         height: 1,
+    #         width: 1,
+    #       }
+    #
+    # @!attribute [rw] height
+    #   Use Height to define the video resolution height, in pixels, for
+    #   this rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] width
+    #   Use Width to define the video resolution width, in pixels, for this
+    #   rule.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MinBottomRenditionSize AWS API Documentation
+    #
+    class MinBottomRenditionSize < Struct.new(
+      :height,
+      :width)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use Min top rendition size to specify a minimum size for the highest
+    # resolution in your ABR stack. * The highest resolution in your ABR
+    # stack will be equal to or greater than the value that you enter. For
+    # example: If you specify 1280x720 the highest resolution in your ABR
+    # stack will be equal to or greater than 1280x720. * If you specify a
+    # value for Max resolution, the value that you specify for Min top
+    # rendition size must be less than, or equal to, Max resolution.
+    #
+    # @note When making an API call, you may pass MinTopRenditionSize
+    #   data as a hash:
+    #
+    #       {
+    #         height: 1,
+    #         width: 1,
+    #       }
+    #
+    # @!attribute [rw] height
+    #   Use Height to define the video resolution height, in pixels, for
+    #   this rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] width
+    #   Use Width to define the video resolution width, in pixels, for this
+    #   rule.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MinTopRenditionSize AWS API Documentation
+    #
+    class MinTopRenditionSize < Struct.new(
+      :height,
+      :width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17168,8 +17712,12 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] klv_metadata
-    #   Applies to DASH ISO outputs. Use this setting to specify whether the
-    #   service inserts the KLV metadata from the input in this output.
+    #   To include key-length-value metadata in this output: Set KLV
+    #   metadata insertion to Passthrough. MediaConvert reads KLV metadata
+    #   present in your input and writes each instance to a separate event
+    #   message box in the output, according to MISB ST1910.1. To exclude
+    #   this KLV metadata: Set KLV metadata insertion to None or leave
+    #   blank.
     #   @return [String]
     #
     # @!attribute [rw] scte_35_esam
@@ -19045,7 +19593,8 @@ module Aws::MediaConvert
     #                 max_fall: 1,
     #               },
     #               l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #               profile: "PROFILE_5", # accepts PROFILE_5
+    #               mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #               profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #             },
     #             hdr_10_plus: {
     #               mastering_monitor_nits: 1,
@@ -19235,6 +19784,32 @@ module Aws::MediaConvert
     #             max_abr_bitrate: 1,
     #             max_renditions: 1,
     #             min_abr_bitrate: 1,
+    #             rules: [
+    #               {
+    #                 allowed_renditions: [
+    #                   {
+    #                     height: 1,
+    #                     required: "ENABLED", # accepts ENABLED, DISABLED
+    #                     width: 1,
+    #                   },
+    #                 ],
+    #                 force_include_renditions: [
+    #                   {
+    #                     height: 1,
+    #                     width: 1,
+    #                   },
+    #                 ],
+    #                 min_bottom_rendition_size: {
+    #                   height: 1,
+    #                   width: 1,
+    #                 },
+    #                 min_top_rendition_size: {
+    #                   height: 1,
+    #                   width: 1,
+    #                 },
+    #                 type: "MIN_TOP_RENDITION_SIZE", # accepts MIN_TOP_RENDITION_SIZE, MIN_BOTTOM_RENDITION_SIZE, FORCE_INCLUDE_RENDITIONS, ALLOWED_RENDITIONS
+    #               },
+    #             ],
     #           },
     #         },
     #         custom_name: "__string",
@@ -20176,7 +20751,8 @@ module Aws::MediaConvert
     #                     max_fall: 1,
     #                   },
     #                   l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                   profile: "PROFILE_5", # accepts PROFILE_5
+    #                   mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                   profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                 },
     #                 hdr_10_plus: {
     #                   mastering_monitor_nits: 1,
@@ -21432,7 +22008,8 @@ module Aws::MediaConvert
     #                 max_fall: 1,
     #               },
     #               l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #               profile: "PROFILE_5", # accepts PROFILE_5
+    #               mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #               profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #             },
     #             hdr_10_plus: {
     #               mastering_monitor_nits: 1,
@@ -22879,6 +23456,7 @@ module Aws::MediaConvert
     #               },
     #               audio_selectors: {
     #                 "__string" => {
+    #                   audio_duration_correction: "DISABLED", # accepts DISABLED, AUTO, TRACK, FRAME
     #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #                   external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
@@ -23015,6 +23593,7 @@ module Aws::MediaConvert
     #                   white_point_x: 1,
     #                   white_point_y: 1,
     #                 },
+    #                 pad_video: "DISABLED", # accepts DISABLED, BLACK
     #                 pid: 1,
     #                 program_number: 1,
     #                 rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -23075,6 +23654,32 @@ module Aws::MediaConvert
     #                   max_abr_bitrate: 1,
     #                   max_renditions: 1,
     #                   min_abr_bitrate: 1,
+    #                   rules: [
+    #                     {
+    #                       allowed_renditions: [
+    #                         {
+    #                           height: 1,
+    #                           required: "ENABLED", # accepts ENABLED, DISABLED
+    #                           width: 1,
+    #                         },
+    #                       ],
+    #                       force_include_renditions: [
+    #                         {
+    #                           height: 1,
+    #                           width: 1,
+    #                         },
+    #                       ],
+    #                       min_bottom_rendition_size: {
+    #                         height: 1,
+    #                         width: 1,
+    #                       },
+    #                       min_top_rendition_size: {
+    #                         height: 1,
+    #                         width: 1,
+    #                       },
+    #                       type: "MIN_TOP_RENDITION_SIZE", # accepts MIN_TOP_RENDITION_SIZE, MIN_BOTTOM_RENDITION_SIZE, FORCE_INCLUDE_RENDITIONS, ALLOWED_RENDITIONS
+    #                     },
+    #                   ],
     #                 },
     #               },
     #               custom_name: "__string",
@@ -24016,7 +24621,8 @@ module Aws::MediaConvert
     #                           max_fall: 1,
     #                         },
     #                         l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                         profile: "PROFILE_5", # accepts PROFILE_5
+    #                         mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                         profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                       },
     #                       hdr_10_plus: {
     #                         mastering_monitor_nits: 1,
@@ -24857,7 +25463,8 @@ module Aws::MediaConvert
     #                   max_fall: 1,
     #                 },
     #                 l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                 profile: "PROFILE_5", # accepts PROFILE_5
+    #                 mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                 profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #               },
     #               hdr_10_plus: {
     #                 mastering_monitor_nits: 1,
@@ -25864,7 +26471,8 @@ module Aws::MediaConvert
     #               max_fall: 1,
     #             },
     #             l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #             profile: "PROFILE_5", # accepts PROFILE_5
+    #             mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #             profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #           },
     #           hdr_10_plus: {
     #             mastering_monitor_nits: 1,
@@ -26131,7 +26739,8 @@ module Aws::MediaConvert
     #             max_fall: 1,
     #           },
     #           l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #           profile: "PROFILE_5", # accepts PROFILE_5
+    #           mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #           profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #         },
     #         hdr_10_plus: {
     #           mastering_monitor_nits: 1,
@@ -26273,6 +26882,7 @@ module Aws::MediaConvert
     #           white_point_x: 1,
     #           white_point_y: 1,
     #         },
+    #         pad_video: "DISABLED", # accepts DISABLED, BLACK
     #         pid: 1,
     #         program_number: 1,
     #         rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -26343,6 +26953,18 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/console/mediaconvert/hdr.
     #   @return [Types::Hdr10Metadata]
     #
+    # @!attribute [rw] pad_video
+    #   Use this setting if your input has video and audio durations that
+    #   don't align, and your output or player has strict alignment
+    #   requirements. Examples: Input audio track has a delayed start. Input
+    #   video track ends before audio ends. When you set Pad video
+    #   (padVideo) to Black (BLACK), MediaConvert generates black video
+    #   frames so that output video and audio durations match. Black video
+    #   frames are added at the beginning or end, depending on your input.
+    #   To keep the default behavior and not generate black video, set Pad
+    #   video to Disabled (DISABLED) or leave blank.
+    #   @return [String]
+    #
     # @!attribute [rw] pid
     #   Use PID (Pid) to select specific video data from an input file.
     #   Specify this value as an integer; the system automatically converts
@@ -26391,6 +27013,7 @@ module Aws::MediaConvert
       :color_space_usage,
       :embedded_timecode_override,
       :hdr_10_metadata,
+      :pad_video,
       :pid,
       :program_number,
       :rotate,
@@ -26807,14 +27430,14 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] accessibility
-    #   Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if
-    #   the ISMC or WebVTT captions track is intended to provide
-    #   accessibility for people who are deaf or hard of hearing. When you
-    #   enable this feature, MediaConvert adds the following attributes
-    #   under EXT-X-MEDIA in the HLS or CMAF manifest for this track:
+    #   Set Accessibility subtitles to Enabled if the ISMC or WebVTT
+    #   captions track is intended to provide accessibility for people who
+    #   are deaf or hard of hearing. When you enable this feature,
+    #   MediaConvert adds the following attributes under EXT-X-MEDIA in the
+    #   HLS or CMAF manifest for this track:
     #   CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
-    #   and AUTOSELECT="YES". Keep the default value, Disabled (DISABLED),
-    #   if the captions track is not intended to provide such accessibility.
+    #   and AUTOSELECT="YES". Keep the default value, Disabled, if the
+    #   captions track is not intended to provide such accessibility.
     #   MediaConvert will not add the above attributes.
     #   @return [String]
     #

@@ -57,6 +57,9 @@ module Aws::Neptune
   # * {DBUpgradeDependencyFailureFault}
   # * {DomainNotFoundFault}
   # * {EventSubscriptionQuotaExceededFault}
+  # * {GlobalClusterAlreadyExistsFault}
+  # * {GlobalClusterNotFoundFault}
+  # * {GlobalClusterQuotaExceededFault}
   # * {InstanceQuotaExceededFault}
   # * {InsufficientDBClusterCapacityFault}
   # * {InsufficientDBInstanceCapacityFault}
@@ -71,6 +74,7 @@ module Aws::Neptune
   # * {InvalidDBSubnetGroupStateFault}
   # * {InvalidDBSubnetStateFault}
   # * {InvalidEventSubscriptionStateFault}
+  # * {InvalidGlobalClusterStateFault}
   # * {InvalidRestoreFault}
   # * {InvalidSubnet}
   # * {InvalidVPCNetworkStateFault}
@@ -397,6 +401,36 @@ module Aws::Neptune
       end
     end
 
+    class GlobalClusterAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Neptune::Types::GlobalClusterAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class GlobalClusterNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Neptune::Types::GlobalClusterNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class GlobalClusterQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Neptune::Types::GlobalClusterQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InstanceQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -532,6 +566,16 @@ module Aws::Neptune
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Neptune::Types::InvalidEventSubscriptionStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidGlobalClusterStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Neptune::Types::InvalidGlobalClusterStateFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

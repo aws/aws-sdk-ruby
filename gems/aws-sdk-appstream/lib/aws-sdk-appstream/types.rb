@@ -1478,6 +1478,9 @@ module Aws::AppStream
     #           },
     #         ],
     #         embed_host_domains: ["EmbedHostDomain"],
+    #         streaming_experience_settings: {
+    #           preferred_protocol: "TCP", # accepts TCP, UDP
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1551,6 +1554,12 @@ module Aws::AppStream
     #   embedded AppStream 2.0 streaming sessions.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] streaming_experience_settings
+    #   The streaming protocol you want your stack to prefer. This can be
+    #   UDP or TCP. Currently, UDP is only supported in the Windows native
+    #   client.
+    #   @return [Types::StreamingExperienceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
     class CreateStackRequest < Struct.new(
@@ -1564,7 +1573,8 @@ module Aws::AppStream
       :application_settings,
       :tags,
       :access_endpoints,
-      :embed_host_domains)
+      :embed_host_domains,
+      :streaming_experience_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4566,6 +4576,12 @@ module Aws::AppStream
     #   embedded AppStream 2.0 streaming sessions.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] streaming_experience_settings
+    #   The streaming protocol you want your stack to prefer. This can be
+    #   UDP or TCP. Currently, UDP is only supported in the Windows native
+    #   client.
+    #   @return [Types::StreamingExperienceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -4581,7 +4597,8 @@ module Aws::AppStream
       :user_settings,
       :application_settings,
       :access_endpoints,
-      :embed_host_domains)
+      :embed_host_domains,
+      :streaming_experience_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4750,6 +4767,29 @@ module Aws::AppStream
       :connector_type,
       :resource_identifier,
       :domains)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The streaming protocol you want your stack to prefer. This can be UDP
+    # or TCP. Currently, UDP is only supported in the Windows native client.
+    #
+    # @note When making an API call, you may pass StreamingExperienceSettings
+    #   data as a hash:
+    #
+    #       {
+    #         preferred_protocol: "TCP", # accepts TCP, UDP
+    #       }
+    #
+    # @!attribute [rw] preferred_protocol
+    #   The preferred protocol that you want to use while streaming your
+    #   application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StreamingExperienceSettings AWS API Documentation
+    #
+    class StreamingExperienceSettings < Struct.new(
+      :preferred_protocol)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5374,7 +5414,7 @@ module Aws::AppStream
     #         delete_storage_connectors: false,
     #         redirect_url: "RedirectURL",
     #         feedback_url: "FeedbackURL",
-    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS
+    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS, STREAMING_EXPERIENCE_SETTINGS
     #         user_settings: [
     #           {
     #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN
@@ -5392,6 +5432,9 @@ module Aws::AppStream
     #           },
     #         ],
     #         embed_host_domains: ["EmbedHostDomain"],
+    #         streaming_experience_settings: {
+    #           preferred_protocol: "TCP", # accepts TCP, UDP
+    #         },
     #       }
     #
     # @!attribute [rw] display_name
@@ -5453,6 +5496,12 @@ module Aws::AppStream
     #   embedded AppStream 2.0 streaming sessions.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] streaming_experience_settings
+    #   The streaming protocol you want your stack to prefer. This can be
+    #   UDP or TCP. Currently, UDP is only supported in the Windows native
+    #   client.
+    #   @return [Types::StreamingExperienceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
     class UpdateStackRequest < Struct.new(
@@ -5467,7 +5516,8 @@ module Aws::AppStream
       :user_settings,
       :application_settings,
       :access_endpoints,
-      :embed_host_domains)
+      :embed_host_domains,
+      :streaming_experience_settings)
       SENSITIVE = []
       include Aws::Structure
     end

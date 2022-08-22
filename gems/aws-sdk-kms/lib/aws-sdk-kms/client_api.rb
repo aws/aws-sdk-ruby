@@ -249,9 +249,9 @@ module Aws::KMS
     CreateAliasRequest.struct_class = Types::CreateAliasRequest
 
     CreateCustomKeyStoreRequest.add_member(:custom_key_store_name, Shapes::ShapeRef.new(shape: CustomKeyStoreNameType, required: true, location_name: "CustomKeyStoreName"))
-    CreateCustomKeyStoreRequest.add_member(:cloud_hsm_cluster_id, Shapes::ShapeRef.new(shape: CloudHsmClusterIdType, required: true, location_name: "CloudHsmClusterId"))
-    CreateCustomKeyStoreRequest.add_member(:trust_anchor_certificate, Shapes::ShapeRef.new(shape: TrustAnchorCertificateType, required: true, location_name: "TrustAnchorCertificate"))
-    CreateCustomKeyStoreRequest.add_member(:key_store_password, Shapes::ShapeRef.new(shape: KeyStorePasswordType, required: true, location_name: "KeyStorePassword"))
+    CreateCustomKeyStoreRequest.add_member(:cloud_hsm_cluster_id, Shapes::ShapeRef.new(shape: CloudHsmClusterIdType, location_name: "CloudHsmClusterId"))
+    CreateCustomKeyStoreRequest.add_member(:trust_anchor_certificate, Shapes::ShapeRef.new(shape: TrustAnchorCertificateType, location_name: "TrustAnchorCertificate"))
+    CreateCustomKeyStoreRequest.add_member(:key_store_password, Shapes::ShapeRef.new(shape: KeyStorePasswordType, location_name: "KeyStorePassword"))
     CreateCustomKeyStoreRequest.struct_class = Types::CreateCustomKeyStoreRequest
 
     CreateCustomKeyStoreResponse.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, location_name: "CustomKeyStoreId"))
@@ -994,6 +994,13 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o[:pager] = Aws::Pager.new(
+          more_results: "truncated",
+          limit_key: "limit",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_key, Seahorse::Model::Operation.new.tap do |o|
@@ -1352,6 +1359,13 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
+        o[:pager] = Aws::Pager.new(
+          more_results: "truncated",
+          limit_key: "limit",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_retirable_grants, Seahorse::Model::Operation.new.tap do |o|
@@ -1365,6 +1379,13 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o[:pager] = Aws::Pager.new(
+          more_results: "truncated",
+          limit_key: "limit",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:put_key_policy, Seahorse::Model::Operation.new.tap do |o|

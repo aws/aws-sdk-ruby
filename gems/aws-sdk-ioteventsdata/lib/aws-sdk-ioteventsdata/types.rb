@@ -307,6 +307,69 @@ module Aws::IoTEventsData
       include Aws::Structure
     end
 
+    # Contains error messages associated with the deletion request.
+    #
+    # @!attribute [rw] message_id
+    #   The ID of the message that caused the error. (See the value of the
+    #   `"messageId"` in the [detectors][1] object of the
+    #   `DeleteDetectorRequest`.)
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDeleteDetector.html#iotevents-iotevents-data_BatchDeleteDetector-request-detectors
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A message that describes the error.
+    #   @return [String]
+    #
+    class BatchDeleteDetectorErrorEntry < Struct.new(
+      :message_id,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDeleteDetectorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detectors: [ # required
+    #           {
+    #             message_id: "MessageId", # required
+    #             detector_model_name: "DetectorModelName", # required
+    #             key_value: "KeyValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] detectors
+    #   The list of one or more detectors to be deleted.
+    #   @return [Array<Types::DeleteDetectorRequest>]
+    #
+    class BatchDeleteDetectorRequest < Struct.new(
+      :detectors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] batch_delete_detector_error_entries
+    #   A list of errors associated with the request, or an empty array
+    #   (`[]`) if there are no errors. Each error entry contains a
+    #   `messageId` that helps you identify the entry that failed.
+    #   @return [Array<Types::BatchDeleteDetectorErrorEntry>]
+    #
+    class BatchDeleteDetectorResponse < Struct.new(
+      :batch_delete_detector_error_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchDisableAlarmRequest
     #   data as a hash:
     #
@@ -648,6 +711,43 @@ module Aws::IoTEventsData
       :disable_action_configuration,
       :acknowledge_action_configuration,
       :reset_action_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information used to delete the detector model.
+    #
+    # @note When making an API call, you may pass DeleteDetectorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         message_id: "MessageId", # required
+    #         detector_model_name: "DetectorModelName", # required
+    #         key_value: "KeyValue",
+    #       }
+    #
+    # @!attribute [rw] message_id
+    #   The ID to assign to the `DeleteDetectorRequest`. Each `"messageId"`
+    #   must be unique within each batch sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_model_name
+    #   The name of the detector model that was used to create the detector
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_value
+    #   The value of the [key][1] used to identify the detector.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateDetectorModel.html#iotevents-CreateDetectorModel-request-key
+    #   @return [String]
+    #
+    class DeleteDetectorRequest < Struct.new(
+      :message_id,
+      :detector_model_name,
+      :key_value)
       SENSITIVE = []
       include Aws::Structure
     end

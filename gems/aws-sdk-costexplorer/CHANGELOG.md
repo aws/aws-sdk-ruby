@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2022-06-07)
+------------------
+
+* Feature - Added two new APIs to support cost allocation tags operations: ListCostAllocationTags, UpdateCostAllocationTagsStatus.
+
 1.76.0 (2022-03-22)
 ------------------
 

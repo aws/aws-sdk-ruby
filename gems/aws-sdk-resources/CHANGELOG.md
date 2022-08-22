@@ -1,6 +1,70 @@
 Unreleased Changes
 ------------------
 
+3.138.0 (2022-08-11)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-privatenetworks` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-backupstorage` gem.
+
+3.137.0 (2022-08-02)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-licensemanagerusersubscriptions` gem.
+
+3.136.0 (2022-07-05)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-rolesanywhere` gem.
+
+3.135.0 (2022-06-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-connectcampaignservice` gem.
+
+3.134.0 (2022-06-16)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-redshiftserverless` gem.
+
+3.133.1 (2020-06-09)
+------------------
+
+* Issue - Remove dependency on the `aws-sdk-redshiftserverless` gem. This gem will be republished at a later date
+
+3.133.0 (2022-06-08)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-redshiftserverless` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-mainframemodernization` gem.
+
+3.132.0 (2022-05-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-emrserverless` gem.
+
+3.131.1 (2022-05-26)
+------------------
+
+* Issue - Remove dependency on the `aws-sdk-emrserverlesswebservice` gem. This gem will be republished under a different name.
+
+3.131.0 (2022-05-26)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-emrserverlesswebservice` gem.
+
+3.130.0 (2022-04-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-chimesdkmediapipelines` gem.
+
+3.129.0 (2022-04-26)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ivschat` gem.
+
 3.128.0 (2022-03-31)
 ------------------
 

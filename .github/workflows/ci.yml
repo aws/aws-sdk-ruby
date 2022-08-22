@@ -9,14 +9,17 @@ on:
     branches:
       - version-3
 
+permissions:
+  contents: read
+
 jobs:
   test:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         ruby: [2.3, 2.4, 2.5, 2.6, 2.7, '3.0', 3.1, jruby-9.1, jruby-9.2, jruby-9.3]
-        env: [PURE_RUBY, KITCHEN_SINK]
+        env: [PURE_RUBY, KITCHEN_SINK, CRT]
         exclude:
           - ruby: jruby-9.1
             env: KITCHEN_SINK
@@ -24,6 +27,16 @@ jobs:
             env: KITCHEN_SINK
           - ruby: jruby-9.3
             env: KITCHEN_SINK
+          - ruby: 2.3
+            env: CRT
+          - ruby: 2.4
+            env: CRT
+          - ruby: jruby-9.1
+            env: CRT
+          - ruby: jruby-9.2
+            env: CRT
+          - ruby: jruby-9.3
+            env: CRT
 
     steps:
       - name: Setup Ruby
@@ -31,14 +44,14 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup environment
         run: echo "${{ matrix.env }}=1" >> $GITHUB_ENV
 
       - name: Install gems
         run: |
-          echo PURE_RUBY=$PURE_RUBY KITCHEN_SINK=$KITCHEN_SINK
+          echo PURE_RUBY=$PURE_RUBY KITCHEN_SINK=$KITCHEN_SINK CRT=$CRT
           bundle install --without docs repl
 
       - name: SDK Build

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2022-07-15)
+------------------
+
+* Feature - This release adds support for the new segmentation feature.
+
+1.6.0 (2022-05-09)
+------------------
+
+* Feature - Add detail message inside GetExperimentResults API response to indicate experiment result availability
+
 1.5.0 (2022-02-24)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2022-08-08)
+------------------
+
+* Feature - Adds support for Advance Quiet Time in Journeys. Adds RefreshOnSegmentUpdate and WaitForQuietTime to JourneyResponse.
+
 1.67.0 (2022-02-24)
 ------------------
 

@@ -148,6 +148,50 @@ module Aws::WorkMail
     #
     class AssociateMemberToGroupResponse < Aws::EmptyStructure; end
 
+    # List all the `AvailabilityConfiguration`'s for the given WorkMail
+    # organization.
+    #
+    # @!attribute [rw] domain_name
+    #   Displays the domain to which the provider applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_type
+    #   Displays the provider type that applies to this domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] ews_provider
+    #   If `ProviderType` is `EWS`, then this field contains
+    #   `RedactedEwsAvailabilityProvider`. Otherwise, it is not requried.
+    #   @return [Types::RedactedEwsAvailabilityProvider]
+    #
+    # @!attribute [rw] lambda_provider
+    #   If ProviderType is `LAMBDA` then this field contains
+    #   `LambdaAvailabilityProvider`. Otherwise, it is not required.
+    #   @return [Types::LambdaAvailabilityProvider]
+    #
+    # @!attribute [rw] date_created
+    #   The date and time at which the availability configuration was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] date_modified
+    #   The date and time at which the availability configuration was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/AvailabilityConfiguration AWS API Documentation
+    #
+    class AvailabilityConfiguration < Struct.new(
+      :domain_name,
+      :provider_type,
+      :ews_provider,
+      :lambda_provider,
+      :date_created,
+      :date_modified)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # At least one delegate must be associated to the resource to disable
     # automatic replies from the resource.
     #
@@ -257,6 +301,68 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateAliasResponse AWS API Documentation
     #
     class CreateAliasResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass CreateAvailabilityConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "IdempotencyClientToken",
+    #         organization_id: "OrganizationId", # required
+    #         domain_name: "DomainName", # required
+    #         ews_provider: {
+    #           ews_endpoint: "Url", # required
+    #           ews_username: "ExternalUserName", # required
+    #           ews_password: "Password", # required
+    #         },
+    #         lambda_provider: {
+    #           lambda_arn: "LambdaArn", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   An idempotent token that ensures that an API request is executed
+    #   only once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization for which the
+    #   `AvailabilityConfiguration` will be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain to which the provider applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] ews_provider
+    #   Exchange Web Services (EWS) availability provider definition. The
+    #   request must contain exactly one provider definition, either
+    #   `EwsProvider` or `LambdaProvider`.
+    #   @return [Types::EwsAvailabilityProvider]
+    #
+    # @!attribute [rw] lambda_provider
+    #   Lambda availability provider definition. The request must contain
+    #   exactly one provider definition, either `EwsProvider` or
+    #   `LambdaProvider`.
+    #   @return [Types::LambdaAvailabilityProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateAvailabilityConfigurationRequest AWS API Documentation
+    #
+    class CreateAvailabilityConfigurationRequest < Struct.new(
+      :client_token,
+      :organization_id,
+      :domain_name,
+      :ews_provider,
+      :lambda_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateAvailabilityConfigurationResponse AWS API Documentation
+    #
+    class CreateAvailabilityConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CreateGroupRequest
     #   data as a hash:
@@ -661,6 +767,37 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteAliasResponse AWS API Documentation
     #
     class DeleteAliasResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteAvailabilityConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         domain_name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization for which the
+    #   `AvailabilityConfiguration` will be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain for which the `AvailabilityConfiguration` will be
+    #   deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteAvailabilityConfigurationRequest AWS API Documentation
+    #
+    class DeleteAvailabilityConfigurationRequest < Struct.new(
+      :organization_id,
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteAvailabilityConfigurationResponse AWS API Documentation
+    #
+    class DeleteAvailabilityConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteEmailMonitoringConfigurationRequest
     #   data as a hash:
@@ -1722,6 +1859,40 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # Describes an EWS based availability provider. This is only used as
+    # input to the service.
+    #
+    # @note When making an API call, you may pass EwsAvailabilityProvider
+    #   data as a hash:
+    #
+    #       {
+    #         ews_endpoint: "Url", # required
+    #         ews_username: "ExternalUserName", # required
+    #         ews_password: "Password", # required
+    #       }
+    #
+    # @!attribute [rw] ews_endpoint
+    #   The endpoint of the remote EWS server.
+    #   @return [String]
+    #
+    # @!attribute [rw] ews_username
+    #   The username used to authenticate the remote EWS server.
+    #   @return [String]
+    #
+    # @!attribute [rw] ews_password
+    #   The password used to authenticate the remote EWS server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/EwsAvailabilityProvider AWS API Documentation
+    #
+    class EwsAvailabilityProvider < Struct.new(
+      :ews_endpoint,
+      :ews_username,
+      :ews_password)
+      SENSITIVE = [:ews_password]
+      include Aws::Structure
+    end
+
     # The configuration applied to an organization's folders by its
     # retention policy.
     #
@@ -2210,6 +2381,28 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # Describes a Lambda based availability provider.
+    #
+    # @note When making an API call, you may pass LambdaAvailabilityProvider
+    #   data as a hash:
+    #
+    #       {
+    #         lambda_arn: "LambdaArn", # required
+    #       }
+    #
+    # @!attribute [rw] lambda_arn
+    #   The Amazon Resource Name (ARN) of the Lambda that acts as the
+    #   availability provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/LambdaAvailabilityProvider AWS API Documentation
+    #
+    class LambdaAvailabilityProvider < Struct.new(
+      :lambda_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request exceeds the limit of the resource.
     #
     # @!attribute [rw] message
@@ -2305,6 +2498,58 @@ module Aws::WorkMail
     #
     class ListAliasesResponse < Struct.new(
       :aliases,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAvailabilityConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization for which the
+    #   `AvailabilityConfiguration`'s will be listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The first
+    #   call does not require a token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListAvailabilityConfigurationsRequest AWS API Documentation
+    #
+    class ListAvailabilityConfigurationsRequest < Struct.new(
+      :organization_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] availability_configurations
+    #   The list of `AvailabilityConfiguration`'s that exist for the
+    #   specified Amazon WorkMail organization.
+    #   @return [Array<Types::AvailabilityConfiguration>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The value is
+    #   `null` when there are no further results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListAvailabilityConfigurationsResponse AWS API Documentation
+    #
+    class ListAvailabilityConfigurationsResponse < Struct.new(
+      :availability_configurations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3635,6 +3880,26 @@ module Aws::WorkMail
     #
     class PutRetentionPolicyResponse < Aws::EmptyStructure; end
 
+    # Describes an EWS based availability provider when returned from the
+    # service. It does not contain the password of the endpoint.
+    #
+    # @!attribute [rw] ews_endpoint
+    #   The endpoint of the remote EWS server.
+    #   @return [String]
+    #
+    # @!attribute [rw] ews_username
+    #   The username used to authenticate the remote EWS server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/RedactedEwsAvailabilityProvider AWS API Documentation
+    #
+    class RedactedEwsAvailabilityProvider < Struct.new(
+      :ews_endpoint,
+      :ews_username)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RegisterMailDomainRequest
     #   data as a hash:
     #
@@ -3958,6 +4223,71 @@ module Aws::WorkMail
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass TestAvailabilityConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         domain_name: "DomainName",
+    #         ews_provider: {
+    #           ews_endpoint: "Url", # required
+    #           ews_username: "ExternalUserName", # required
+    #           ews_password: "Password", # required
+    #         },
+    #         lambda_provider: {
+    #           lambda_arn: "LambdaArn", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization where the availability provider
+    #   will be tested.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain to which the provider applies. If this field is provided,
+    #   a stored availability provider associated to this domain name will
+    #   be tested.
+    #   @return [String]
+    #
+    # @!attribute [rw] ews_provider
+    #   Describes an EWS based availability provider. This is only used as
+    #   input to the service.
+    #   @return [Types::EwsAvailabilityProvider]
+    #
+    # @!attribute [rw] lambda_provider
+    #   Describes a Lambda based availability provider.
+    #   @return [Types::LambdaAvailabilityProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/TestAvailabilityConfigurationRequest AWS API Documentation
+    #
+    class TestAvailabilityConfigurationRequest < Struct.new(
+      :organization_id,
+      :domain_name,
+      :ews_provider,
+      :lambda_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_passed
+    #   Boolean indicating whether the test passed or failed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] failure_reason
+    #   String containing the reason for a failed test if `TestPassed` is
+    #   false.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/TestAvailabilityConfigurationResponse AWS API Documentation
+    #
+    class TestAvailabilityConfigurationResponse < Struct.new(
+      :test_passed,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource can have up to 50 user-applied tags.
     #
     # @!attribute [rw] message
@@ -4012,6 +4342,61 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateAvailabilityConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         domain_name: "DomainName", # required
+    #         ews_provider: {
+    #           ews_endpoint: "Url", # required
+    #           ews_username: "ExternalUserName", # required
+    #           ews_password: "Password", # required
+    #         },
+    #         lambda_provider: {
+    #           lambda_arn: "LambdaArn", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization for which the
+    #   `AvailabilityConfiguration` will be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain to which the provider applies the availability
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] ews_provider
+    #   The EWS availability provider definition. The request must contain
+    #   exactly one provider definition, either `EwsProvider` or
+    #   `LambdaProvider`. The previously stored provider will be overridden
+    #   by the one provided.
+    #   @return [Types::EwsAvailabilityProvider]
+    #
+    # @!attribute [rw] lambda_provider
+    #   The Lambda availability provider definition. The request must
+    #   contain exactly one provider definition, either `EwsProvider` or
+    #   `LambdaProvider`. The previously stored provider will be overridden
+    #   by the one provided.
+    #   @return [Types::LambdaAvailabilityProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateAvailabilityConfigurationRequest AWS API Documentation
+    #
+    class UpdateAvailabilityConfigurationRequest < Struct.new(
+      :organization_id,
+      :domain_name,
+      :ews_provider,
+      :lambda_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateAvailabilityConfigurationResponse AWS API Documentation
+    #
+    class UpdateAvailabilityConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateDefaultMailDomainRequest
     #   data as a hash:

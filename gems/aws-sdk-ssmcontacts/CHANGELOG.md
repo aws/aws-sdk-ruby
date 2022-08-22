@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2022-05-09)
+------------------
+
+* Feature - Fixed an error in the DescribeEngagement example for AWS Incident Manager.
+
 1.13.0 (2022-02-24)
 ------------------
 

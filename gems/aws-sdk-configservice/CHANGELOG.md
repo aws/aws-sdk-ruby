@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2022-08-04)
+------------------
+
+* Feature - Add resourceType enums for Athena, GlobalAccelerator, Detective and EC2 types
+
+1.81.0 (2022-08-01)
+------------------
+
+* Feature - Documentation update for PutConfigRule and PutOrganizationConfigRule
+
+1.80.0 (2022-07-27)
+------------------
+
+* Feature - This release adds ListConformancePackComplianceScores API to support the new compliance score feature, which provides a percentage of the number of compliant rule-resource combinations in a conformance pack compared to the number of total possible rule-resource combinations in the conformance pack.
+
+1.79.0 (2022-07-14)
+------------------
+
+* Feature - Update ResourceType enum with values for Route53Resolver, Batch, DMS, Workspaces, Stepfunctions, SageMaker, ElasticLoadBalancingV2, MSK types
+
+1.78.0 (2022-07-05)
+------------------
+
+* Feature - Updating documentation service limits
+
 1.77.0 (2022-04-06)
 ------------------
 

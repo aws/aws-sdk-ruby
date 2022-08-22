@@ -77,10 +77,6 @@ module Aws::MWAA
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetList = Shapes::ListShape.new(name: 'SubnetList')
-    SyntheticCreateCliTokenResponseToken = Shapes::StringShape.new(name: 'SyntheticCreateCliTokenResponseToken')
-    SyntheticCreateEnvironmentInputAirflowConfigurationOptions = Shapes::MapShape.new(name: 'SyntheticCreateEnvironmentInputAirflowConfigurationOptions')
-    SyntheticCreateWebLoginTokenResponseToken = Shapes::StringShape.new(name: 'SyntheticCreateWebLoginTokenResponseToken')
-    SyntheticUpdateEnvironmentInputAirflowConfigurationOptions = Shapes::MapShape.new(name: 'SyntheticUpdateEnvironmentInputAirflowConfigurationOptions')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -88,6 +84,7 @@ module Aws::MWAA
     TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    Token = Shapes::StringShape.new(name: 'Token')
     Unit = Shapes::StringShape.new(name: 'Unit')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
@@ -112,11 +109,11 @@ module Aws::MWAA
     CreateCliTokenRequest.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location: "uri", location_name: "Name"))
     CreateCliTokenRequest.struct_class = Types::CreateCliTokenRequest
 
-    CreateCliTokenResponse.add_member(:cli_token, Shapes::ShapeRef.new(shape: SyntheticCreateCliTokenResponseToken, location_name: "CliToken"))
+    CreateCliTokenResponse.add_member(:cli_token, Shapes::ShapeRef.new(shape: Token, location_name: "CliToken"))
     CreateCliTokenResponse.add_member(:web_server_hostname, Shapes::ShapeRef.new(shape: Hostname, location_name: "WebServerHostname"))
     CreateCliTokenResponse.struct_class = Types::CreateCliTokenResponse
 
-    CreateEnvironmentInput.add_member(:airflow_configuration_options, Shapes::ShapeRef.new(shape: SyntheticCreateEnvironmentInputAirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
+    CreateEnvironmentInput.add_member(:airflow_configuration_options, Shapes::ShapeRef.new(shape: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
     CreateEnvironmentInput.add_member(:airflow_version, Shapes::ShapeRef.new(shape: AirflowVersion, location_name: "AirflowVersion"))
     CreateEnvironmentInput.add_member(:dag_s3_path, Shapes::ShapeRef.new(shape: RelativePath, required: true, location_name: "DagS3Path"))
     CreateEnvironmentInput.add_member(:environment_class, Shapes::ShapeRef.new(shape: EnvironmentClass, location_name: "EnvironmentClass"))
@@ -145,7 +142,7 @@ module Aws::MWAA
     CreateWebLoginTokenRequest.struct_class = Types::CreateWebLoginTokenRequest
 
     CreateWebLoginTokenResponse.add_member(:web_server_hostname, Shapes::ShapeRef.new(shape: Hostname, location_name: "WebServerHostname"))
-    CreateWebLoginTokenResponse.add_member(:web_token, Shapes::ShapeRef.new(shape: SyntheticCreateWebLoginTokenResponseToken, location_name: "WebToken"))
+    CreateWebLoginTokenResponse.add_member(:web_token, Shapes::ShapeRef.new(shape: Token, location_name: "WebToken"))
     CreateWebLoginTokenResponse.struct_class = Types::CreateWebLoginTokenResponse
 
     DeleteEnvironmentInput.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location: "uri", location_name: "Name"))
@@ -274,12 +271,6 @@ module Aws::MWAA
 
     SubnetList.member = Shapes::ShapeRef.new(shape: SubnetId)
 
-    SyntheticCreateEnvironmentInputAirflowConfigurationOptions.key = Shapes::ShapeRef.new(shape: ConfigKey)
-    SyntheticCreateEnvironmentInputAirflowConfigurationOptions.value = Shapes::ShapeRef.new(shape: ConfigValue)
-
-    SyntheticUpdateEnvironmentInputAirflowConfigurationOptions.key = Shapes::ShapeRef.new(shape: ConfigKey)
-    SyntheticUpdateEnvironmentInputAirflowConfigurationOptions.value = Shapes::ShapeRef.new(shape: ConfigValue)
-
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
@@ -297,7 +288,7 @@ module Aws::MWAA
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
-    UpdateEnvironmentInput.add_member(:airflow_configuration_options, Shapes::ShapeRef.new(shape: SyntheticUpdateEnvironmentInputAirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
+    UpdateEnvironmentInput.add_member(:airflow_configuration_options, Shapes::ShapeRef.new(shape: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
     UpdateEnvironmentInput.add_member(:airflow_version, Shapes::ShapeRef.new(shape: AirflowVersion, location_name: "AirflowVersion"))
     UpdateEnvironmentInput.add_member(:dag_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "DagS3Path"))
     UpdateEnvironmentInput.add_member(:environment_class, Shapes::ShapeRef.new(shape: EnvironmentClass, location_name: "EnvironmentClass"))

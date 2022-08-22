@@ -1754,7 +1754,7 @@ module Aws::IAM
     # @option params [Integer] :max_session_duration
     #   The maximum session duration (in seconds) that you want to set for the
     #   specified role. If you do not specify a value for this setting, the
-    #   default maximum of one hour is applied. This setting can have a value
+    #   default value of one hour is applied. This setting can have a value
     #   from 1 hour to 12 hours.
     #
     #   Anyone who assumes the role from the or API can use the
@@ -12308,7 +12308,7 @@ module Aws::IAM
     # @option params [Integer] :max_session_duration
     #   The maximum session duration (in seconds) that you want to set for the
     #   specified role. If you do not specify a value for this setting, the
-    #   default maximum of one hour is applied. This setting can have a value
+    #   default value of one hour is applied. This setting can have a value
     #   from 1 hour to 12 hours.
     #
     #   Anyone who assumes the role from the CLI or API can use the
@@ -13225,7 +13225,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

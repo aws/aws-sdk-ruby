@@ -51,8 +51,8 @@ module Aws::ConnectWisdomService
     #     `short_description`, `sys_mod_count`, `workflow_state`, and
     #     `active`.
     #
-    #   Make sure to include additional field(s); these are indexed and used
-    #   to source recommendations.
+    #   Make sure to include additional fields. These fields are indexed and
+    #   used to source recommendations.
     #
     #
     #
@@ -72,7 +72,7 @@ module Aws::ConnectWisdomService
     # Information about the assistant association.
     #
     # @!attribute [rw] assistant_arn
-    #   The Amazon Resource Name (ARN) of the Wisdom assistant
+    #   The Amazon Resource Name (ARN) of the Wisdom assistant.
     #   @return [String]
     #
     # @!attribute [rw] assistant_association_arn
@@ -121,7 +121,7 @@ module Aws::ConnectWisdomService
     # @note AssistantAssociationInputData is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base.
+    #   The identifier of the knowledge base.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/AssistantAssociationInputData AWS API Documentation
@@ -161,7 +161,7 @@ module Aws::ConnectWisdomService
     # Summary information about the assistant association.
     #
     # @!attribute [rw] assistant_arn
-    #   The Amazon Resource Name (ARN) of the Wisdom assistant
+    #   The Amazon Resource Name (ARN) of the Wisdom assistant.
     #   @return [String]
     #
     # @!attribute [rw] assistant_association_arn
@@ -206,7 +206,7 @@ module Aws::ConnectWisdomService
     # The assistant data.
     #
     # @!attribute [rw] assistant_arn
-    #   The Amazon Resource Name (ARN) of the Wisdom assistant
+    #   The Amazon Resource Name (ARN) of the Wisdom assistant.
     #   @return [String]
     #
     # @!attribute [rw] assistant_id
@@ -256,7 +256,7 @@ module Aws::ConnectWisdomService
     # Summary information about the assistant.
     #
     # @!attribute [rw] assistant_arn
-    #   The Amazon Resource Name (ARN) of the Wisdom assistant
+    #   The Amazon Resource Name (ARN) of the Wisdom assistant.
     #   @return [String]
     #
     # @!attribute [rw] assistant_id
@@ -338,7 +338,7 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base.
+    #   The identifier of the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] link_out_uri
@@ -417,7 +417,7 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base.
+    #   The identifier of the knowledge base.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/ContentReference AWS API Documentation
@@ -450,7 +450,7 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base.
+    #   The identifier of the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -661,8 +661,8 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or
-    #   the ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -960,8 +960,8 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or
-    #   the ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/DeleteContentRequest AWS API Documentation
@@ -1041,6 +1041,27 @@ module Aws::ConnectWisdomService
       :highlights,
       :text)
       SENSITIVE = [:text]
+      include Aws::Structure
+    end
+
+    # The feedback to submit to Wisdom.
+    #
+    # @note When making an API call, you may pass FeedbackData
+    #   data as a hash:
+    #
+    #       {
+    #         relevance: "HELPFUL", # required, accepts HELPFUL, NOT_HELPFUL
+    #       }
+    #
+    # @!attribute [rw] relevance
+    #   The relevance of the target this feedback is for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/FeedbackData AWS API Documentation
+    #
+    class FeedbackData < Struct.new(
+      :relevance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1163,8 +1184,8 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or
-    #   the ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/GetContentRequest AWS API Documentation
@@ -1202,8 +1223,8 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or
-    #   the ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/GetContentSummaryRequest AWS API Documentation
@@ -1235,8 +1256,8 @@ module Aws::ConnectWisdomService
     #       }
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or
-    #   the ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/GetKnowledgeBaseRequest AWS API Documentation
@@ -1306,10 +1327,15 @@ module Aws::ConnectWisdomService
     #   The recommendations.
     #   @return [Array<Types::RecommendationData>]
     #
+    # @!attribute [rw] triggers
+    #   The triggers corresponding to recommendations.
+    #   @return [Array<Types::RecommendationTrigger>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/GetRecommendationsResponse AWS API Documentation
     #
     class GetRecommendationsResponse < Struct.new(
-      :recommendations)
+      :recommendations,
+      :triggers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1380,7 +1406,7 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base.
+    #   The identifier of the knowledge base.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/KnowledgeBaseAssociationData AWS API Documentation
@@ -1403,7 +1429,7 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base.
+    #   The identifier of the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_type
@@ -1470,7 +1496,7 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base.
+    #   The identifier of the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_type
@@ -1490,7 +1516,7 @@ module Aws::ConnectWisdomService
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] source_configuration
-    #   \[KEVIN\]
+    #   Configuration information about the external data source.
     #   @return [Types::SourceConfiguration]
     #
     # @!attribute [rw] status
@@ -1626,8 +1652,8 @@ module Aws::ConnectWisdomService
     #       }
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or
-    #   the ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1828,6 +1854,80 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutFeedbackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         assistant_id: "UuidOrArn", # required
+    #         feedback: { # required
+    #           relevance: "HELPFUL", # required, accepts HELPFUL, NOT_HELPFUL
+    #         },
+    #         target_id: "String", # required
+    #         target_type: "RECOMMENDATION", # required, accepts RECOMMENDATION, RESULT
+    #       }
+    #
+    # @!attribute [rw] assistant_id
+    #   The identifier of the Wisdom assistant. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] feedback
+    #   The feedback.
+    #   @return [Types::FeedbackData]
+    #
+    # @!attribute [rw] target_id
+    #   The identifier of a recommendation. or The identifier of the result
+    #   data.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The type of the targetId for which The feedback. is targeted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/PutFeedbackRequest AWS API Documentation
+    #
+    class PutFeedbackRequest < Struct.new(
+      :assistant_id,
+      :feedback,
+      :target_id,
+      :target_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assistant_arn
+    #   The Amazon Resource Name (ARN) of the Wisdom assistant.
+    #   @return [String]
+    #
+    # @!attribute [rw] assistant_id
+    #   The identifier of the Wisdom assistant.
+    #   @return [String]
+    #
+    # @!attribute [rw] feedback
+    #   The feedback.
+    #   @return [Types::FeedbackData]
+    #
+    # @!attribute [rw] target_id
+    #   The identifier of a recommendation. or The identifier of the result
+    #   data.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The type of the targetId for which The feedback. is targeted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/PutFeedbackResponse AWS API Documentation
+    #
+    class PutFeedbackResponse < Struct.new(
+      :assistant_arn,
+      :assistant_id,
+      :feedback,
+      :target_id,
+      :target_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass QueryAssistantRequest
     #   data as a hash:
     #
@@ -1886,6 +1986,20 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
+    # Data associated with the QUERY RecommendationTriggerType.
+    #
+    # @!attribute [rw] text
+    #   The text associated with the recommendation trigger.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/QueryRecommendationTriggerData AWS API Documentation
+    #
+    class QueryRecommendationTriggerData < Struct.new(
+      :text)
+      SENSITIVE = [:text]
+      include Aws::Structure
+    end
+
     # Information about the recommendation.
     #
     # @!attribute [rw] document
@@ -1904,15 +2018,83 @@ module Aws::ConnectWisdomService
     #   The relevance score of the recommendation.
     #   @return [Float]
     #
+    # @!attribute [rw] type
+    #   The type of recommendation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/RecommendationData AWS API Documentation
     #
     class RecommendationData < Struct.new(
       :document,
       :recommendation_id,
       :relevance_level,
-      :relevance_score)
+      :relevance_score,
+      :type)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A recommendation trigger provides context on the event that produced
+    # the referenced recommendations. Recommendations are only referenced in
+    # `recommendationIds` by a single RecommendationTrigger.
+    #
+    # @!attribute [rw] data
+    #   A union type containing information related to the trigger.
+    #   @return [Types::RecommendationTriggerData]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the recommendation trigger.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_ids
+    #   The identifiers of the recommendations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source
+    #   The source of the recommendation trigger.
+    #
+    #   * ISSUE\_DETECTION: The corresponding recommendations were triggered
+    #     by a Contact Lens issue.
+    #
+    #   * RULE\_EVALUATION: The corresponding recommendations were triggered
+    #     by a Contact Lens rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of recommendation trigger.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/RecommendationTrigger AWS API Documentation
+    #
+    class RecommendationTrigger < Struct.new(
+      :data,
+      :id,
+      :recommendation_ids,
+      :source,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A union type containing information related to the trigger.
+    #
+    # @note RecommendationTriggerData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RecommendationTriggerData corresponding to the set member.
+    #
+    # @!attribute [rw] query
+    #   Data associated with the QUERY RecommendationTriggerType.
+    #   @return [Types::QueryRecommendationTriggerData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/RecommendationTriggerData AWS API Documentation
+    #
+    class RecommendationTriggerData < Struct.new(
+      :query,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Query < RecommendationTriggerData; end
+      class Unknown < RecommendationTriggerData; end
     end
 
     # @note When making an API call, you may pass RemoveKnowledgeBaseTemplateUriRequest
@@ -1923,8 +2105,8 @@ module Aws::ConnectWisdomService
     #       }
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or
-    #   the ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/RemoveKnowledgeBaseTemplateUriRequest AWS API Documentation
@@ -2033,8 +2215,8 @@ module Aws::ConnectWisdomService
     #       }
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or
-    #   the ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2184,8 +2366,7 @@ module Aws::ConnectWisdomService
     #
     # @!attribute [rw] kms_key_id
     #   The KMS key. For information about valid ID values, see [Key
-    #   identifiers (KeyId)][1] in the *AWS Key Management Service Developer
-    #   Guide*.
+    #   identifiers (KeyId)][1].
     #
     #
     #
@@ -2253,7 +2434,7 @@ module Aws::ConnectWisdomService
     # Summary information about the session.
     #
     # @!attribute [rw] assistant_arn
-    #   The Amazon Resource Name (ARN) of the Wisdom assistant
+    #   The Amazon Resource Name (ARN) of the Wisdom assistant.
     #   @return [String]
     #
     # @!attribute [rw] assistant_id
@@ -2316,8 +2497,8 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or
-    #   the ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/StartContentUploadRequest AWS API Documentation
@@ -2458,8 +2639,8 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or
-    #   the ARN
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -2538,8 +2719,8 @@ module Aws::ConnectWisdomService
     #       }
     #
     # @!attribute [rw] knowledge_base_id
-    #   The the identifier of the knowledge base. Can be either the ID or
-    #   the ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
     #   @return [String]
     #
     # @!attribute [rw] template_uri
@@ -2567,8 +2748,7 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # The input fails to satisfy the constraints specified by an AWS
-    # service.
+    # The input fails to satisfy the constraints specified by a service.
     #
     # @!attribute [rw] message
     #   @return [String]

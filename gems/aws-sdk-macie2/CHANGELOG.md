@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2022-07-26)
+------------------
+
+* Feature - This release adds support for retrieving (revealing) sample occurrences of sensitive data that Amazon Macie detects and reports in findings.
+
+1.45.0 (2022-04-20)
+------------------
+
+* Feature - Sensitive data findings in Amazon Macie now indicate how Macie found the sensitive data that produced a finding (originType).
+
 1.44.0 (2022-02-24)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2022-06-30)
+------------------
+
+* Feature - This release adds the optional MinAllowedConfidenceScoreForMerging parameter to the CreateDomain, UpdateDomain, and GetAutoMergingPreview APIs in Customer Profiles. This parameter is used as a threshold to influence the profile auto-merging step of the Identity Resolution process.
+
 1.20.0 (2022-02-24)
 ------------------
 

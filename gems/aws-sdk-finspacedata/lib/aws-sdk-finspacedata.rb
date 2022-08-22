@@ -28,7 +28,7 @@ require_relative 'aws-sdk-finspacedata/customizations'
 # structure.
 #
 #     fin_space_data = Aws::FinSpaceData::Client.new
-#     resp = fin_space_data.create_changeset(params)
+#     resp = fin_space_data.associate_user_to_permission_group(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-finspacedata/customizations'
 # @!group service
 module Aws::FinSpaceData
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.17.0'
 
 end

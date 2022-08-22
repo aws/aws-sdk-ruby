@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2022-08-08)
+------------------
+
+* Feature - AWS IoT Wireless release support for sidewalk data reliability.
+
+1.24.0 (2022-07-07)
+------------------
+
+* Feature - Adds 5 APIs: PutPositionConfiguration, GetPositionConfiguration, ListPositionConfigurations, UpdatePosition, GetPosition for the new Positioning Service feature which enables customers to configure solvers to calculate position of LoRaWAN devices, or specify position of LoRaWAN devices & gateways.
+
+1.23.0 (2022-04-27)
+------------------
+
+* Feature - Add list support for event configurations, allow to get and update event configurations by resource type, support LoRaWAN events; Make NetworkAnalyzerConfiguration as a resource, add List, Create, Delete API support; Add FCntStart attribute support for ABP WirelessDevice.
+
 1.22.0 (2022-02-24)
 ------------------
 

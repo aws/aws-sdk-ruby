@@ -15,6 +15,7 @@ module Aws::CloudFormation
 
     AcceptTermsAndConditions = Shapes::BooleanShape.new(name: 'AcceptTermsAndConditions')
     Account = Shapes::StringShape.new(name: 'Account')
+    AccountFilterType = Shapes::StringShape.new(name: 'AccountFilterType')
     AccountGateResult = Shapes::StructureShape.new(name: 'AccountGateResult')
     AccountGateStatus = Shapes::StringShape.new(name: 'AccountGateStatus')
     AccountGateStatusReason = Shapes::StringShape.new(name: 'AccountGateStatusReason')
@@ -392,6 +393,7 @@ module Aws::CloudFormation
     StackSetOperationResultSummaries = Shapes::ListShape.new(name: 'StackSetOperationResultSummaries')
     StackSetOperationResultSummary = Shapes::StructureShape.new(name: 'StackSetOperationResultSummary')
     StackSetOperationStatus = Shapes::StringShape.new(name: 'StackSetOperationStatus')
+    StackSetOperationStatusReason = Shapes::StringShape.new(name: 'StackSetOperationStatusReason')
     StackSetOperationSummaries = Shapes::ListShape.new(name: 'StackSetOperationSummaries')
     StackSetOperationSummary = Shapes::StructureShape.new(name: 'StackSetOperationSummary')
     StackSetStatus = Shapes::StringShape.new(name: 'StackSetStatus')
@@ -704,6 +706,7 @@ module Aws::CloudFormation
     DeploymentTargets.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "Accounts"))
     DeploymentTargets.add_member(:accounts_url, Shapes::ShapeRef.new(shape: AccountsUrl, location_name: "AccountsUrl"))
     DeploymentTargets.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIdList, location_name: "OrganizationalUnitIds"))
+    DeploymentTargets.add_member(:account_filter_type, Shapes::ShapeRef.new(shape: AccountFilterType, location_name: "AccountFilterType"))
     DeploymentTargets.struct_class = Types::DeploymentTargets
 
     DeregisterTypeInput.add_member(:arn, Shapes::ShapeRef.new(shape: PrivateTypeArn, location_name: "Arn"))
@@ -1540,6 +1543,7 @@ module Aws::CloudFormation
     StackSetOperation.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
     StackSetOperation.add_member(:deployment_targets, Shapes::ShapeRef.new(shape: DeploymentTargets, location_name: "DeploymentTargets"))
     StackSetOperation.add_member(:stack_set_drift_detection_details, Shapes::ShapeRef.new(shape: StackSetDriftDetectionDetails, location_name: "StackSetDriftDetectionDetails"))
+    StackSetOperation.add_member(:status_reason, Shapes::ShapeRef.new(shape: StackSetOperationStatusReason, location_name: "StatusReason"))
     StackSetOperation.struct_class = Types::StackSetOperation
 
     StackSetOperationPreferences.add_member(:region_concurrency_type, Shapes::ShapeRef.new(shape: RegionConcurrencyType, location_name: "RegionConcurrencyType"))
@@ -1567,6 +1571,7 @@ module Aws::CloudFormation
     StackSetOperationSummary.add_member(:status, Shapes::ShapeRef.new(shape: StackSetOperationStatus, location_name: "Status"))
     StackSetOperationSummary.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimestamp"))
     StackSetOperationSummary.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
+    StackSetOperationSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: StackSetOperationStatusReason, location_name: "StatusReason"))
     StackSetOperationSummary.struct_class = Types::StackSetOperationSummary
 
     StackSetSummaries.member = Shapes::ShapeRef.new(shape: StackSetSummary)

@@ -770,6 +770,104 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateWorkspaceImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "WorkspaceImageName", # required
+    #         description: "WorkspaceImageDescription", # required
+    #         workspace_id: "WorkspaceId", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the new WorkSpace image.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the new WorkSpace image.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The identifier of the source WorkSpace
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags that you want to add to the new WorkSpace image. To add
+    #   tags when you're creating the image, you must create an IAM policy
+    #   that grants your IAM user permission to use `workspaces:CreateTags`.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceImageRequest AWS API Documentation
+    #
+    class CreateWorkspaceImageRequest < Struct.new(
+      :name,
+      :description,
+      :workspace_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The identifier of the new WorkSpace image.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] operating_system
+    #   The operating system that the image is running.
+    #   @return [Types::OperatingSystem]
+    #
+    # @!attribute [rw] state
+    #   The availability status of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] required_tenancy
+    #   Specifies whether the image is running on dedicated hardware. When
+    #   Bring Your Own License (BYOL) is enabled, this value is set to
+    #   DEDICATED. For more information, see [ Bring Your Own Windows
+    #   Desktop Images.][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.htm
+    #   @return [String]
+    #
+    # @!attribute [rw] created
+    #   The date when the image was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] owner_account_id
+    #   The identifier of the AWS account that owns the image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceImageResult AWS API Documentation
+    #
+    class CreateWorkspaceImageResult < Struct.new(
+      :image_id,
+      :name,
+      :description,
+      :operating_system,
+      :state,
+      :required_tenancy,
+      :created,
+      :owner_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateWorkspacesRequest
     #   data as a hash:
     #
@@ -840,8 +938,8 @@ module Aws::WorkSpaces
     # include sensitive information.
     #
     # @!attribute [rw] logo_url
-    #   The logo URL. This is the link where users can download the logo
-    #   image. The only supported image format is `.png`.
+    #   The logo. The only image format accepted is a binary data object
+    #   that is converted from a `.png` file.
     #   @return [String]
     #
     # @!attribute [rw] support_email
@@ -877,7 +975,10 @@ module Aws::WorkSpaces
     # @!attribute [rw] login_message
     #   The login message. Specified as a key value pair, in which the key
     #   is a locale and the value is the localized message for that locale.
-    #   The only key supported is `en_US`.
+    #   The only key supported is `en_US`. The HTML tags supported include
+    #   the following: `a, b, blockquote, br, cite, code, dd, dl, dt, div,
+    #   em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u,
+    #   ul`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DefaultClientBrandingAttributes AWS API Documentation
@@ -912,8 +1013,8 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] logo
-    #   The logo. This is the link where users can download the logo image.
-    #   The only image format accepted is `.png`.
+    #   The logo. The only image format accepted is a binary data object
+    #   that is converted from a `.png` file.
     #   @return [String]
     #
     # @!attribute [rw] support_email
@@ -949,7 +1050,10 @@ module Aws::WorkSpaces
     # @!attribute [rw] login_message
     #   The login message. Specified as a key value pair, in which the key
     #   is a locale and the value is the localized message for that locale.
-    #   The only key supported is `en_US`.
+    #   The only key supported is `en_US`. The HTML tags supported include
+    #   the following: `a, b, blockquote, br, cite, code, dd, dl, dt, div,
+    #   em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u,
+    #   ul`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DefaultImportClientBrandingAttributes AWS API Documentation
@@ -2327,14 +2431,9 @@ module Aws::WorkSpaces
     #   specify a value that ends in `_WSP`. To use PCoIP, specify a value
     #   that does not end in `_WSP`.
     #
-    #   For non-GPU-enabled images (bundles other than Graphics.g4dn,
-    #   GraphicsPro.g4dn, Graphics, or GraphicsPro), specify `BYOL_REGULAR`
-    #   or `BYOL_REGULAR_WSP`, depending on the protocol.
-    #
-    #   <note markdown="1"> Use `BYOL_GRAPHICS_G4DN` ingestion for both Graphics.g4dn and
-    #   GraphicsPro.g4dn.
-    #
-    #    </note>
+    #   For non-GPU-enabled bundles (bundles other than Graphics or
+    #   GraphicsPro), specify `BYOL_REGULAR` or `BYOL_REGULAR_WSP`,
+    #   depending on the protocol.
     #   @return [String]
     #
     # @!attribute [rw] image_name
@@ -2355,12 +2454,8 @@ module Aws::WorkSpaces
     #   subscribing to Office for BYOL images, see [ Bring Your Own Windows
     #   Desktop Licenses][1].
     #
-    #   <note markdown="1"> * Although this parameter is an array, only one item is allowed at
-    #     this time
-    #
-    #   * Microsoft Office 2016 application subscription through AWS is
-    #     currently not supported for Graphics.g4dn Bring Your Own License
-    #     (BYOL) images
+    #   <note markdown="1"> Although this parameter is an array, only one item is allowed at
+    #   this time.
     #
     #    </note>
     #
@@ -2428,14 +2523,17 @@ module Aws::WorkSpaces
     # include sensitive information.
     #
     # @!attribute [rw] logo_url
-    #   The logo. This is the link where users can download the logo image.
-    #   This is the standard-resolution display that has a 1:1 pixel density
-    #   (or @1x), where one pixel is equal to one point.
+    #   The logo. This is the standard-resolution display that has a 1:1
+    #   pixel density (or @1x), where one pixel is equal to one point. The
+    #   only image format accepted is a binary data object that is converted
+    #   from a `.png` file.
     #   @return [String]
     #
     # @!attribute [rw] logo_2x_url
     #   The @2x version of the logo. This is the higher resolution display
-    #   that offers a scale factor of 2.0 (or @2x).
+    #   that offers a scale factor of 2.0 (or @2x). The only image format
+    #   accepted is a binary data object that is converted from a `.png`
+    #   file.
     #
     #   <note markdown="1"> For more information about iOS image size and resolution, see [Image
     #   Size and Resolution ][1] in the *Apple Human Interface Guidelines*.
@@ -2449,7 +2547,9 @@ module Aws::WorkSpaces
     #
     # @!attribute [rw] logo_3x_url
     #   The @3x version of the logo. This is the higher resolution display
-    #   that offers a scale factor of 3.0 (or @3x).
+    #   that offers a scale factor of 3.0 (or @3x).The only image format
+    #   accepted is a binary data object that is converted from a `.png`
+    #   file.
     #
     #   <note markdown="1"> For more information about iOS image size and resolution, see [Image
     #   Size and Resolution ][1] in the *Apple Human Interface Guidelines*.
@@ -2494,7 +2594,10 @@ module Aws::WorkSpaces
     # @!attribute [rw] login_message
     #   The login message. Specified as a key value pair, in which the key
     #   is a locale and the value is the localized message for that locale.
-    #   The only key supported is `en_US`.
+    #   The only key supported is `en_US`. The HTML tags supported include
+    #   the following: `a, b, blockquote, br, cite, code, dd, dl, dt, div,
+    #   em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u,
+    #   ul`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/IosClientBrandingAttributes AWS API Documentation
@@ -2533,14 +2636,17 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] logo
-    #   The logo. This is the link where users can download the logo image.
-    #   This is the standard-resolution display that has a 1:1 pixel density
-    #   (or @1x), where one pixel is equal to one point.
+    #   The logo. This is the standard-resolution display that has a 1:1
+    #   pixel density (or @1x), where one pixel is equal to one point. The
+    #   only image format accepted is a binary data object that is converted
+    #   from a `.png` file.
     #   @return [String]
     #
     # @!attribute [rw] logo_2x
     #   The @2x version of the logo. This is the higher resolution display
-    #   that offers a scale factor of 2.0 (or @2x).
+    #   that offers a scale factor of 2.0 (or @2x). The only image format
+    #   accepted is a binary data object that is converted from a `.png`
+    #   file.
     #
     #   <note markdown="1"> For more information about iOS image size and resolution, see [Image
     #   Size and Resolution ][1] in the *Apple Human Interface Guidelines*.
@@ -2554,7 +2660,9 @@ module Aws::WorkSpaces
     #
     # @!attribute [rw] logo_3x
     #   The @3x version of the logo. This is the higher resolution display
-    #   that offers a scale factor of 3.0 (or @3x).
+    #   that offers a scale factor of 3.0 (or @3x). The only image format
+    #   accepted is a binary data object that is converted from a `.png`
+    #   file.
     #
     #   <note markdown="1"> For more information about iOS image size and resolution, see [Image
     #   Size and Resolution ][1] in the *Apple Human Interface Guidelines*.
@@ -2599,7 +2707,10 @@ module Aws::WorkSpaces
     # @!attribute [rw] login_message
     #   The login message. Specified as a key value pair, in which the key
     #   is a locale and the value is the localized message for that locale.
-    #   The only key supported is `en_US`.
+    #   The only key supported is `en_US`. The HTML tags supported include
+    #   the following: `a, b, blockquote, br, cite, code, dd, dl, dt, div,
+    #   em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u,
+    #   ul`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/IosImportClientBrandingAttributes AWS API Documentation
@@ -2825,6 +2936,53 @@ module Aws::WorkSpaces
     #
     class ModifyClientPropertiesResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass ModifySamlPropertiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "DirectoryId", # required
+    #         saml_properties: {
+    #           status: "DISABLED", # accepts DISABLED, ENABLED, ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK
+    #           user_access_url: "SamlUserAccessUrl",
+    #           relay_state_parameter_name: "NonEmptyString",
+    #         },
+    #         properties_to_delete: ["SAML_PROPERTIES_USER_ACCESS_URL"], # accepts SAML_PROPERTIES_USER_ACCESS_URL, SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The directory identifier for which you want to configure SAML
+    #   properties.
+    #   @return [String]
+    #
+    # @!attribute [rw] saml_properties
+    #   The properties for configuring SAML 2.0 authentication.
+    #   @return [Types::SamlProperties]
+    #
+    # @!attribute [rw] properties_to_delete
+    #   The SAML properties to delete as part of your request.
+    #
+    #   Specify one of the following options:
+    #
+    #   * `SAML_PROPERTIES_USER_ACCESS_URL` to delete the user access URL.
+    #
+    #   * `SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME` to delete the relay
+    #     state parameter name.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifySamlPropertiesRequest AWS API Documentation
+    #
+    class ModifySamlPropertiesRequest < Struct.new(
+      :resource_id,
+      :saml_properties,
+      :properties_to_delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifySamlPropertiesResult AWS API Documentation
+    #
+    class ModifySamlPropertiesResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass ModifySelfservicePermissionsRequest
     #   data as a hash:
     #
@@ -3030,12 +3188,18 @@ module Aws::WorkSpaces
     # This operation is not supported.
     #
     # @!attribute [rw] message
+    #   The exception error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The exception error reason.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/OperationNotSupportedException AWS API Documentation
     #
     class OperationNotSupportedException < Struct.new(
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3394,6 +3558,68 @@ module Aws::WorkSpaces
     #
     class RootStorage < Struct.new(
       :capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the enablement status, user access URL, and relay state
+    # parameter name that are used for configuring federation with an SAML
+    # 2.0 identity provider.
+    #
+    # @note When making an API call, you may pass SamlProperties
+    #   data as a hash:
+    #
+    #       {
+    #         status: "DISABLED", # accepts DISABLED, ENABLED, ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK
+    #         user_access_url: "SamlUserAccessUrl",
+    #         relay_state_parameter_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] status
+    #   Indicates the status of SAML 2.0 authentication. These statuses
+    #   include the following.
+    #
+    #   * If the setting is `DISABLED`, end users will be directed to login
+    #     with their directory credentials.
+    #
+    #   * If the setting is `ENABLED`, end users will be directed to login
+    #     via the user access URL. Users attempting to connect to WorkSpaces
+    #     from a client application that does not support SAML 2.0
+    #     authentication will not be able to connect.
+    #
+    #   * If the setting is `ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK`, end
+    #     users will be directed to login via the user access URL on
+    #     supported client applications, but will not prevent clients that
+    #     do not support SAML 2.0 authentication from connecting as if SAML
+    #     2.0 authentication was disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_access_url
+    #   The SAML 2.0 identity provider (IdP) user access URL is the URL a
+    #   user would navigate to in their web browser in order to federate
+    #   from the IdP and directly access the application, without any SAML
+    #   2.0 service provider (SP) bindings.
+    #   @return [String]
+    #
+    # @!attribute [rw] relay_state_parameter_name
+    #   The relay state parameter name supported by the SAML 2.0 identity
+    #   provider (IdP). When the end user is redirected to the user access
+    #   URL from the WorkSpaces client application, this relay state
+    #   parameter name is appended as a query parameter to the URL along
+    #   with the relay state endpoint to return the user to the client
+    #   application session.
+    #
+    #   To use SAML 2.0 authentication with WorkSpaces, the IdP must support
+    #   IdP-initiated deep linking for the relay state URL. Consult your IdP
+    #   documentation for more information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/SamlProperties AWS API Documentation
+    #
+    class SamlProperties < Struct.new(
+      :status,
+      :user_access_url,
+      :relay_state_parameter_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4393,6 +4619,12 @@ module Aws::WorkSpaces
     #   directory.
     #   @return [Types::SelfservicePermissions]
     #
+    # @!attribute [rw] saml_properties
+    #   Describes the enablement status, user access URL, and relay state
+    #   parameter name that are used for configuring federation with an SAML
+    #   2.0 identity provider.
+    #   @return [Types::SamlProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceDirectory AWS API Documentation
     #
     class WorkspaceDirectory < Struct.new(
@@ -4411,7 +4643,8 @@ module Aws::WorkSpaces
       :ip_group_ids,
       :workspace_access_properties,
       :tenancy,
-      :selfservice_permissions)
+      :selfservice_permissions,
+      :saml_properties)
       SENSITIVE = []
       include Aws::Structure
     end

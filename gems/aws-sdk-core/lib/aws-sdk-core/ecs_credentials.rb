@@ -4,6 +4,11 @@ require 'time'
 require 'net/http'
 
 module Aws
+  # An auto-refreshing credential provider that loads credentials from
+  # instances running in ECS.
+  #
+  #     ecs_credentials = Aws::ECSCredentials.new(retries: 3)
+  #     ec2 = Aws::EC2::Client.new(credentials: ecs_credentials)
   class ECSCredentials
 
     include CredentialProvider

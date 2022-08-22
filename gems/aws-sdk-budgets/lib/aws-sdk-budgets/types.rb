@@ -216,7 +216,7 @@ module Aws::Budgets
     #           },
     #         },
     #         cost_filters: {
-    #           "GenericString" => ["GenericString"],
+    #           "GenericString" => ["DimensionValue"],
     #         },
     #         cost_types: {
     #           include_tax: false,
@@ -769,7 +769,7 @@ module Aws::Budgets
     #             },
     #           },
     #           cost_filters: {
-    #             "GenericString" => ["GenericString"],
+    #             "GenericString" => ["DimensionValue"],
     #           },
     #           cost_types: {
     #             include_tax: false,
@@ -2225,6 +2225,19 @@ module Aws::Budgets
       include Aws::Structure
     end
 
+    # The number of API requests has exceeded the maximum allowed API
+    # request throttling limit for the account.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The period of time that's covered by a budget. The period has a start
     # date and an end date. The start date must come before the end date.
     # There are no restrictions on the end date.
@@ -2407,7 +2420,7 @@ module Aws::Budgets
     #             },
     #           },
     #           cost_filters: {
-    #             "GenericString" => ["GenericString"],
+    #             "GenericString" => ["DimensionValue"],
     #           },
     #           cost_types: {
     #             include_tax: false,

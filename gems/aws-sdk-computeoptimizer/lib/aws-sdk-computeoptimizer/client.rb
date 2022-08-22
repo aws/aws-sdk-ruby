@@ -379,6 +379,11 @@ module Aws::ComputeOptimizer
     #   option encompasses only instances that are part of an Auto Scaling
     #   group.
     #
+    #   <note markdown="1"> The valid values for this parameter are `Ec2Instance` and
+    #   `AutoScalingGroup`.
+    #
+    #    </note>
+    #
     # @option params [Types::Scope] :scope
     #   An object that describes the scope of the recommendation preference to
     #   delete.
@@ -1715,6 +1720,11 @@ module Aws::ComputeOptimizer
     #   option encompasses only instances that are part of an Auto Scaling
     #   group.
     #
+    #   <note markdown="1"> The valid values for this parameter are `Ec2Instance` and
+    #   `AutoScalingGroup`.
+    #
+    #    </note>
+    #
     # @option params [Types::Scope] :scope
     #   An object that describes the scope of the recommendation preference to
     #   return.
@@ -1870,6 +1880,11 @@ module Aws::ComputeOptimizer
     #   instances that are part of Auto Scaling groups. The `AutoScalingGroup`
     #   option encompasses only instances that are part of an Auto Scaling
     #   group.
+    #
+    #   <note markdown="1"> The valid values for this parameter are `Ec2Instance` and
+    #   `AutoScalingGroup`.
+    #
+    #    </note>
     #
     # @option params [Types::Scope] :scope
     #   An object that describes the scope of the recommendation preference to
@@ -2042,7 +2057,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

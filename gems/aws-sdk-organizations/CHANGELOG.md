@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2022-05-02)
+------------------
+
+* Feature - This release adds the INVALID_PAYMENT_INSTRUMENT as a fail reason and an error message.
+
 1.69.0 (2022-03-29)
 ------------------
 

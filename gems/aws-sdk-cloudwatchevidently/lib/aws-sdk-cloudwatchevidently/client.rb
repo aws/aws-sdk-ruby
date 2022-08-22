@@ -432,6 +432,11 @@ module Aws::CloudWatchEvidently
     # statistical methods, and provides clear recommendations about which
     # variations perform better.
     #
+    # You can optionally specify a `segment` to have the experiment consider
+    # only certain audience types in the experiment, such as using only user
+    # sessions from a certain location or who use a certain internet
+    # browser.
+    #
     # Don't use this operation to update an existing experiment. Instead,
     # use [UpdateExperiment][1].
     #
@@ -475,6 +480,11 @@ module Aws::CloudWatchEvidently
     #
     #   This is represented in thousandths of a percent. For example, specify
     #   10,000 to allocate 10% of the available audience.
+    #
+    # @option params [String] :segment
+    #   Specifies an audience *segment* to use in the experiment. When a
+    #   segment is used in an experiment, only user sessions that match the
+    #   segment pattern are used in the experiment.
     #
     # @option params [Hash<String,String>] :tags
     #   Assigns one or more tags (key-value pairs) to the experiment.
@@ -522,6 +532,7 @@ module Aws::CloudWatchEvidently
     #     project: "ProjectRef", # required
     #     randomization_salt: "RandomizationSalt",
     #     sampling_rate: 1,
+    #     segment: "SegmentRef",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -558,6 +569,7 @@ module Aws::CloudWatchEvidently
     #   resp.experiment.randomization_salt #=> String
     #   resp.experiment.sampling_rate #=> Integer
     #   resp.experiment.schedule.analysis_complete_time #=> Time
+    #   resp.experiment.segment #=> String
     #   resp.experiment.status #=> String, one of "CREATED", "UPDATING", "RUNNING", "COMPLETED", "CANCELLED"
     #   resp.experiment.status_reason #=> String
     #   resp.experiment.tags #=> Hash
@@ -744,7 +756,7 @@ module Aws::CloudWatchEvidently
     #   use a randomization ID to determine which variation the user session
     #   is served. This randomization ID is a combination of the entity ID and
     #   `randomizationSalt`. If you omit `randomizationSalt`, Evidently uses
-    #   the launch name as the `randomizationsSalt`.
+    #   the launch name as the `randomizationSalt`.
     #
     # @option params [Types::ScheduledSplitsLaunchConfig] :scheduled_splits_config
     #   An array of structures that define the traffic allocation percentages
@@ -798,6 +810,15 @@ module Aws::CloudWatchEvidently
     #           group_weights: { # required
     #             "GroupName" => 1,
     #           },
+    #           segment_overrides: [
+    #             {
+    #               evaluation_order: 1, # required
+    #               segment: "SegmentRef", # required
+    #               weights: { # required
+    #                 "GroupName" => 1,
+    #               },
+    #             },
+    #           ],
     #           start_time: Time.now, # required
     #         },
     #       ],
@@ -832,6 +853,11 @@ module Aws::CloudWatchEvidently
     #   resp.launch.scheduled_splits_definition.steps #=> Array
     #   resp.launch.scheduled_splits_definition.steps[0].group_weights #=> Hash
     #   resp.launch.scheduled_splits_definition.steps[0].group_weights["GroupName"] #=> Integer
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides #=> Array
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].evaluation_order #=> Integer
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].segment #=> String
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].weights #=> Hash
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].weights["GroupName"] #=> Integer
     #   resp.launch.scheduled_splits_definition.steps[0].start_time #=> Time
     #   resp.launch.status #=> String, one of "CREATED", "UPDATING", "RUNNING", "COMPLETED", "CANCELLED"
     #   resp.launch.status_reason #=> String
@@ -931,6 +957,86 @@ module Aws::CloudWatchEvidently
     # @param [Hash] params ({})
     def create_project(params = {}, options = {})
       req = build_request(:create_project, params)
+      req.send_request(options)
+    end
+
+    # Use this operation to define a *segment* of your audience. A segment
+    # is a portion of your audience that share one or more characteristics.
+    # Examples could be Chrome browser users, users in Europe, or Firefox
+    # browser users in Europe who also fit other criteria that your
+    # application collects, such as age.
+    #
+    # Using a segment in an experiment limits that experiment to evaluate
+    # only the users who match the segment criteria. Using one or more
+    # segments in a launch allow you to define different traffic splits for
+    # the different audience segments.
+    #
+    #      <p>For more information about segment pattern syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments-syntax.html"> Segment rule pattern syntax</a>.</p> <p>The pattern that you define for a segment is matched against the value of <code>evaluationContext</code>, which is passed into Evidently in the <a href="https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html">EvaluateFeature</a> operation, when Evidently assigns a feature variation to a user.</p>
+    #
+    # @option params [String] :description
+    #   An optional description for this segment.
+    #
+    # @option params [required, String] :name
+    #   A name for the segment.
+    #
+    # @option params [required, String] :pattern
+    #   The pattern to use for the segment. For more information about pattern
+    #   syntax, see [ Segment rule pattern syntax][1].
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments-syntax.html
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Assigns one or more tags (key-value pairs) to the segment.
+    #
+    #   Tags can help you organize and categorize your resources. You can also
+    #   use them to scope user permissions by granting a user permission to
+    #   access or change only resources with certain tag values.
+    #
+    #   Tags don't have any semantic meaning to Amazon Web Services and are
+    #   interpreted strictly as strings of characters.
+    #
+    #        <p>You can associate as many as 50 tags with a segment.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    #
+    # @return [Types::CreateSegmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSegmentResponse#segment #segment} => Types::Segment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_segment({
+    #     description: "Description",
+    #     name: "SegmentName", # required
+    #     pattern: "SegmentPattern", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.segment.arn #=> String
+    #   resp.segment.created_time #=> Time
+    #   resp.segment.description #=> String
+    #   resp.segment.experiment_count #=> Integer
+    #   resp.segment.last_updated_time #=> Time
+    #   resp.segment.launch_count #=> Integer
+    #   resp.segment.name #=> String
+    #   resp.segment.pattern #=> String
+    #   resp.segment.tags #=> Hash
+    #   resp.segment.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/CreateSegment AWS API Documentation
+    #
+    # @overload create_segment(params = {})
+    # @param [Hash] params ({})
+    def create_segment(params = {}, options = {})
+      req = build_request(:create_segment, params)
       req.send_request(options)
     end
 
@@ -1054,6 +1160,30 @@ module Aws::CloudWatchEvidently
       req.send_request(options)
     end
 
+    # Deletes a segment. You can't delete a segment that is being used in a
+    # launch or experiment, even if that launch or experiment is not
+    # currently running.
+    #
+    # @option params [required, String] :segment
+    #   Specifies the segment to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_segment({
+    #     segment: "SegmentRef", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/DeleteSegment AWS API Documentation
+    #
+    # @overload delete_segment(params = {})
+    # @param [Hash] params ({})
+    def delete_segment(params = {}, options = {})
+      req = build_request(:delete_segment, params)
+      req.send_request(options)
+    end
+
     # This operation assigns a feature variation to one given user session.
     # You pass in an `entityID` that represents the user. Evidently then
     # checks the evaluation rules and assigns the variation.
@@ -1062,21 +1192,7 @@ module Aws::CloudWatchEvidently
     # user's `entityID` matches an override rule, the user is served the
     # variation specified by that rule.
     #
-    # Next, if there is a launch of the feature, the user might be assigned
-    # to a variation in the launch. The chance of this depends on the
-    # percentage of users that are allocated to that launch. If the user is
-    # enrolled in the launch, the variation they are served depends on the
-    # allocation of the various feature variations used for the launch.
-    #
-    # If the user is not assigned to a launch, and there is an ongoing
-    # experiment for this feature, the user might be assigned to a variation
-    # in the experiment. The chance of this depends on the percentage of
-    # users that are allocated to that experiment. If the user is enrolled
-    # in the experiment, the variation they are served depends on the
-    # allocation of the various feature variations used for the experiment.
-    #
-    # If the user is not assigned to a launch or experiment, they are served
-    # the default variation.
+    #      <p>If there is a current launch with this feature that uses segment overrides, and if the user session's <code>evaluationContext</code> matches a segment rule defined in a segment override, the configuration in the segment overrides is used. For more information about segments, see <a href="https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html">CreateSegment</a> and <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html">Use segments to focus your audience</a>.</p> <p>If there is a launch with no segment overrides, the user might be assigned to a variation in the launch. The chance of this depends on the percentage of users that are allocated to that launch. If the user is enrolled in the launch, the variation they are served depends on the allocation of the various feature variations used for the launch.</p> <p>If the user is not assigned to a launch, and there is an ongoing experiment for this feature, the user might be assigned to a variation in the experiment. The chance of this depends on the percentage of users that are allocated to that experiment.</p> <p>If the experiment uses a segment, then only user sessions with <code>evaluationContext</code> values that match the segment rule are used in the experiment.</p> <p>If the user is enrolled in the experiment, the variation they are served depends on the allocation of the various feature variations used for the experiment. </p> <p>If the user is not assigned to a launch or experiment, they are served the default variation.</p>
     #
     # @option params [required, String] :entity_id
     #   An internal ID that represents a unique user of the application. This
@@ -1084,13 +1200,21 @@ module Aws::CloudWatchEvidently
     #   feature.
     #
     # @option params [String] :evaluation_context
-    #   A JSON block of attributes that you can optionally pass in. This JSON
-    #   block is included in the evaluation events sent to Evidently from the
-    #   user session.
+    #   A JSON object of attributes that you can optionally pass in as part of
+    #   the evaluation event sent to Evidently from the user session.
+    #   Evidently can use this value to match user sessions with defined
+    #   audience segments. For more information, see [Use segments to focus
+    #   your audience][1].
+    #
+    #        <p>If you include this parameter, the value must be a JSON object. A JSON array is not supported.</p>
     #
     #   **SDK automatically handles json encoding and base64 encoding for you
     #   when the required value (Hash, Array, etc.) is provided according to
     #   the description.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html
     #
     # @option params [required, String] :feature
     #   The name of the feature being evaluated.
@@ -1181,6 +1305,7 @@ module Aws::CloudWatchEvidently
     #   resp.experiment.randomization_salt #=> String
     #   resp.experiment.sampling_rate #=> Integer
     #   resp.experiment.schedule.analysis_complete_time #=> Time
+    #   resp.experiment.segment #=> String
     #   resp.experiment.status #=> String, one of "CREATED", "UPDATING", "RUNNING", "COMPLETED", "CANCELLED"
     #   resp.experiment.status_reason #=> String
     #   resp.experiment.tags #=> Hash
@@ -1201,7 +1326,13 @@ module Aws::CloudWatchEvidently
       req.send_request(options)
     end
 
-    # Retrieves the results of a running or completed experiment.
+    # Retrieves the results of a running or completed experiment. No results
+    # are available until there have been 100 events for each variation and
+    # at least 10 minutes have passed since the start of the experiment.
+    #
+    # Experiment results are available up to 63 days after the start of the
+    # experiment. They are not available after that because of CloudWatch
+    # data retention policies.
     #
     # @option params [String] :base_stat
     #   The statistic used to calculate experiment results. Currently the only
@@ -1209,7 +1340,8 @@ module Aws::CloudWatchEvidently
     #   the statistic.
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_time
-    #   The date and time that the experiment ended, if it is completed.
+    #   The date and time that the experiment ended, if it is completed. This
+    #   must be no longer than 30 days after the experiment start time.
     #
     # @option params [required, String] :experiment
     #   The name of the experiment to retrieve the results of.
@@ -1262,6 +1394,7 @@ module Aws::CloudWatchEvidently
     #
     # @return [Types::GetExperimentResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetExperimentResultsResponse#details #details} => String
     #   * {Types::GetExperimentResultsResponse#reports #reports} => Array&lt;Types::ExperimentReport&gt;
     #   * {Types::GetExperimentResultsResponse#results_data #results_data} => Array&lt;Types::ExperimentResultsData&gt;
     #   * {Types::GetExperimentResultsResponse#timestamps #timestamps} => Array&lt;Time&gt;
@@ -1283,6 +1416,7 @@ module Aws::CloudWatchEvidently
     #
     # @example Response structure
     #
+    #   resp.details #=> String
     #   resp.reports #=> Array
     #   resp.reports[0].content #=> String
     #   resp.reports[0].metric_name #=> String
@@ -1416,6 +1550,11 @@ module Aws::CloudWatchEvidently
     #   resp.launch.scheduled_splits_definition.steps #=> Array
     #   resp.launch.scheduled_splits_definition.steps[0].group_weights #=> Hash
     #   resp.launch.scheduled_splits_definition.steps[0].group_weights["GroupName"] #=> Integer
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides #=> Array
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].evaluation_order #=> Integer
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].segment #=> String
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].weights #=> Hash
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].weights["GroupName"] #=> Integer
     #   resp.launch.scheduled_splits_definition.steps[0].start_time #=> Time
     #   resp.launch.status #=> String, one of "CREATED", "UPDATING", "RUNNING", "COMPLETED", "CANCELLED"
     #   resp.launch.status_reason #=> String
@@ -1481,6 +1620,44 @@ module Aws::CloudWatchEvidently
       req.send_request(options)
     end
 
+    # Returns information about the specified segment. Specify the segment
+    # you want to view by specifying its ARN.
+    #
+    # @option params [required, String] :segment
+    #   The ARN of the segment to return information for.
+    #
+    # @return [Types::GetSegmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSegmentResponse#segment #segment} => Types::Segment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_segment({
+    #     segment: "SegmentRef", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.segment.arn #=> String
+    #   resp.segment.created_time #=> Time
+    #   resp.segment.description #=> String
+    #   resp.segment.experiment_count #=> Integer
+    #   resp.segment.last_updated_time #=> Time
+    #   resp.segment.launch_count #=> Integer
+    #   resp.segment.name #=> String
+    #   resp.segment.pattern #=> String
+    #   resp.segment.tags #=> Hash
+    #   resp.segment.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/GetSegment AWS API Documentation
+    #
+    # @overload get_segment(params = {})
+    # @param [Hash] params ({})
+    def get_segment(params = {}, options = {})
+      req = build_request(:get_segment, params)
+      req.send_request(options)
+    end
+
     # Returns configuration details about all the experiments in the
     # specified project.
     #
@@ -1538,6 +1715,7 @@ module Aws::CloudWatchEvidently
     #   resp.experiments[0].randomization_salt #=> String
     #   resp.experiments[0].sampling_rate #=> Integer
     #   resp.experiments[0].schedule.analysis_complete_time #=> Time
+    #   resp.experiments[0].segment #=> String
     #   resp.experiments[0].status #=> String, one of "CREATED", "UPDATING", "RUNNING", "COMPLETED", "CANCELLED"
     #   resp.experiments[0].status_reason #=> String
     #   resp.experiments[0].tags #=> Hash
@@ -1673,6 +1851,11 @@ module Aws::CloudWatchEvidently
     #   resp.launches[0].scheduled_splits_definition.steps #=> Array
     #   resp.launches[0].scheduled_splits_definition.steps[0].group_weights #=> Hash
     #   resp.launches[0].scheduled_splits_definition.steps[0].group_weights["GroupName"] #=> Integer
+    #   resp.launches[0].scheduled_splits_definition.steps[0].segment_overrides #=> Array
+    #   resp.launches[0].scheduled_splits_definition.steps[0].segment_overrides[0].evaluation_order #=> Integer
+    #   resp.launches[0].scheduled_splits_definition.steps[0].segment_overrides[0].segment #=> String
+    #   resp.launches[0].scheduled_splits_definition.steps[0].segment_overrides[0].weights #=> Hash
+    #   resp.launches[0].scheduled_splits_definition.steps[0].segment_overrides[0].weights["GroupName"] #=> Integer
     #   resp.launches[0].scheduled_splits_definition.steps[0].start_time #=> Time
     #   resp.launches[0].status #=> String, one of "CREATED", "UPDATING", "RUNNING", "COMPLETED", "CANCELLED"
     #   resp.launches[0].status_reason #=> String
@@ -1738,6 +1921,110 @@ module Aws::CloudWatchEvidently
     # @param [Hash] params ({})
     def list_projects(params = {}, options = {})
       req = build_request(:list_projects, params)
+      req.send_request(options)
+    end
+
+    # Use this operation to find which experiments or launches are using a
+    # specified segment.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to include in the response. If you omit
+    #   this, the default of 50 is used.
+    #
+    # @option params [String] :next_token
+    #   The token to use when requesting the next set of results. You received
+    #   this token from a previous `ListSegmentReferences` operation.
+    #
+    # @option params [required, String] :segment
+    #   The ARN of the segment that you want to view information for.
+    #
+    # @option params [required, String] :type
+    #   Specifies whether to return information about launches or experiments
+    #   that use this segment.
+    #
+    # @return [Types::ListSegmentReferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSegmentReferencesResponse#next_token #next_token} => String
+    #   * {Types::ListSegmentReferencesResponse#referenced_by #referenced_by} => Array&lt;Types::RefResource&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_segment_references({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     segment: "SegmentRef", # required
+    #     type: "EXPERIMENT", # required, accepts EXPERIMENT, LAUNCH
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.referenced_by #=> Array
+    #   resp.referenced_by[0].arn #=> String
+    #   resp.referenced_by[0].end_time #=> String
+    #   resp.referenced_by[0].last_updated_on #=> String
+    #   resp.referenced_by[0].name #=> String
+    #   resp.referenced_by[0].start_time #=> String
+    #   resp.referenced_by[0].status #=> String
+    #   resp.referenced_by[0].type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/ListSegmentReferences AWS API Documentation
+    #
+    # @overload list_segment_references(params = {})
+    # @param [Hash] params ({})
+    def list_segment_references(params = {}, options = {})
+      req = build_request(:list_segment_references, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of audience segments that you have created in your
+    # account in this Region.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to include in the response. If you omit
+    #   this, the default of 50 is used.
+    #
+    # @option params [String] :next_token
+    #   The token to use when requesting the next set of results. You received
+    #   this token from a previous `ListSegments` operation.
+    #
+    # @return [Types::ListSegmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSegmentsResponse#next_token #next_token} => String
+    #   * {Types::ListSegmentsResponse#segments #segments} => Array&lt;Types::Segment&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_segments({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.segments #=> Array
+    #   resp.segments[0].arn #=> String
+    #   resp.segments[0].created_time #=> Time
+    #   resp.segments[0].description #=> String
+    #   resp.segments[0].experiment_count #=> Integer
+    #   resp.segments[0].last_updated_time #=> Time
+    #   resp.segments[0].launch_count #=> Integer
+    #   resp.segments[0].name #=> String
+    #   resp.segments[0].pattern #=> String
+    #   resp.segments[0].tags #=> Hash
+    #   resp.segments[0].tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/ListSegments AWS API Documentation
+    #
+    # @overload list_segments(params = {})
+    # @param [Hash] params ({})
+    def list_segments(params = {}, options = {})
+      req = build_request(:list_segments, params)
       req.send_request(options)
     end
 
@@ -1823,7 +2110,8 @@ module Aws::CloudWatchEvidently
     # [1]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateExperiment.html
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :analysis_complete_time
-    #   The date and time to end the experiment.
+    #   The date and time to end the experiment. This must be no more than 30
+    #   days after the experiment starts.
     #
     # @option params [required, String] :experiment
     #   The name of the experiment to start.
@@ -1904,6 +2192,11 @@ module Aws::CloudWatchEvidently
     #   resp.launch.scheduled_splits_definition.steps #=> Array
     #   resp.launch.scheduled_splits_definition.steps[0].group_weights #=> Hash
     #   resp.launch.scheduled_splits_definition.steps[0].group_weights["GroupName"] #=> Integer
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides #=> Array
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].evaluation_order #=> Integer
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].segment #=> String
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].weights #=> Hash
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].weights["GroupName"] #=> Integer
     #   resp.launch.scheduled_splits_definition.steps[0].start_time #=> Time
     #   resp.launch.status #=> String, one of "CREATED", "UPDATING", "RUNNING", "COMPLETED", "CANCELLED"
     #   resp.launch.status_reason #=> String
@@ -2061,6 +2354,53 @@ module Aws::CloudWatchEvidently
       req.send_request(options)
     end
 
+    # Use this operation to test a rules pattern that you plan to use to
+    # create an audience segment. For more information about segments, see
+    # [CreateSegment][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html
+    #
+    # @option params [required, String] :pattern
+    #   The pattern to test.
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
+    # @option params [required, String] :payload
+    #   A sample `evaluationContext` JSON block to test against the specified
+    #   pattern.
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
+    # @return [Types::TestSegmentPatternResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TestSegmentPatternResponse#match #match} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_segment_pattern({
+    #     pattern: "SegmentPattern", # required
+    #     payload: "JsonValue", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.match #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/TestSegmentPattern AWS API Documentation
+    #
+    # @overload test_segment_pattern(params = {})
+    # @param [Hash] params ({})
+    def test_segment_pattern(params = {}, options = {})
+      req = build_request(:test_segment_pattern, params)
+      req.send_request(options)
+    end
+
     # Removes one or more tags from the specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -2125,6 +2465,10 @@ module Aws::CloudWatchEvidently
     #   entity ID and `randomizationSalt`. If you omit `randomizationSalt`,
     #   Evidently uses the experiment name as the `randomizationSalt`.
     #
+    # @option params [Boolean] :remove_segment
+    #   Removes a segment from being used in an experiment. You can't use
+    #   this parameter if the experiment is currently running.
+    #
     # @option params [Integer] :sampling_rate
     #   The portion of the available audience that you want to allocate to
     #   this experiment, in thousandths of a percent. The available audience
@@ -2133,6 +2477,12 @@ module Aws::CloudWatchEvidently
     #
     #   This is represented in thousandths of a percent. For example, specify
     #   20,000 to allocate 20% of the available audience.
+    #
+    # @option params [String] :segment
+    #   Adds an audience *segment* to an experiment. When a segment is used in
+    #   an experiment, only user sessions that match the segment pattern are
+    #   used in the experiment. You can't use this parameter if the
+    #   experiment is currently running.
     #
     # @option params [Array<Types::TreatmentConfig>] :treatments
     #   An array of structures that define the variations being tested in the
@@ -2167,7 +2517,9 @@ module Aws::CloudWatchEvidently
     #     },
     #     project: "ProjectRef", # required
     #     randomization_salt: "RandomizationSalt",
+    #     remove_segment: false,
     #     sampling_rate: 1,
+    #     segment: "SegmentRef",
     #     treatments: [
     #       {
     #         description: "Description",
@@ -2201,6 +2553,7 @@ module Aws::CloudWatchEvidently
     #   resp.experiment.randomization_salt #=> String
     #   resp.experiment.sampling_rate #=> Integer
     #   resp.experiment.schedule.analysis_complete_time #=> Time
+    #   resp.experiment.segment #=> String
     #   resp.experiment.status #=> String, one of "CREATED", "UPDATING", "RUNNING", "COMPLETED", "CANCELLED"
     #   resp.experiment.status_reason #=> String
     #   resp.experiment.tags #=> Hash
@@ -2410,6 +2763,15 @@ module Aws::CloudWatchEvidently
     #           group_weights: { # required
     #             "GroupName" => 1,
     #           },
+    #           segment_overrides: [
+    #             {
+    #               evaluation_order: 1, # required
+    #               segment: "SegmentRef", # required
+    #               weights: { # required
+    #                 "GroupName" => 1,
+    #               },
+    #             },
+    #           ],
     #           start_time: Time.now, # required
     #         },
     #       ],
@@ -2441,6 +2803,11 @@ module Aws::CloudWatchEvidently
     #   resp.launch.scheduled_splits_definition.steps #=> Array
     #   resp.launch.scheduled_splits_definition.steps[0].group_weights #=> Hash
     #   resp.launch.scheduled_splits_definition.steps[0].group_weights["GroupName"] #=> Integer
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides #=> Array
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].evaluation_order #=> Integer
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].segment #=> String
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].weights #=> Hash
+    #   resp.launch.scheduled_splits_definition.steps[0].segment_overrides[0].weights["GroupName"] #=> Integer
     #   resp.launch.scheduled_splits_definition.steps[0].start_time #=> Time
     #   resp.launch.status #=> String, one of "CREATED", "UPDATING", "RUNNING", "COMPLETED", "CANCELLED"
     #   resp.launch.status_reason #=> String
@@ -2597,7 +2964,7 @@ module Aws::CloudWatchEvidently
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevidently'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

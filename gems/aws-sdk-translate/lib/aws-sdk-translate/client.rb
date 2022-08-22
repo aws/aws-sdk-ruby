@@ -595,12 +595,12 @@ module Aws::Translate
     #   The data format of the custom terminology being retrieved.
     #
     #   If you don't specify this parameter, Amazon Translate returns a file
-    #   that has the same format as the file that was imported to create the
+    #   with the same format as the file that was imported to create the
     #   terminology.
     #
     #   If you specify this parameter when you retrieve a multi-directional
-    #   terminology resource, you must specify the same format as that of the
-    #   input file that was imported to create it. Otherwise, Amazon Translate
+    #   terminology resource, you must specify the same format as the input
+    #   file that was imported to create it. Otherwise, Amazon Translate
     #   throws an error.
     #
     # @return [Types::GetTerminologyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -648,17 +648,16 @@ module Aws::Translate
       req.send_request(options)
     end
 
-    # Creates or updates a custom terminology, depending on whether or not
-    # one already exists for the given terminology name. Importing a
-    # terminology with the same name as an existing one will merge the
-    # terminologies based on the chosen merge strategy. Currently, the only
-    # supported merge strategy is OVERWRITE, and so the imported terminology
-    # will overwrite an existing terminology of the same name.
+    # Creates or updates a custom terminology, depending on whether one
+    # already exists for the given terminology name. Importing a terminology
+    # with the same name as an existing one will merge the terminologies
+    # based on the chosen merge strategy. The only supported merge strategy
+    # is OVERWRITE, where the imported terminology overwrites the existing
+    # terminology of the same name.
     #
     # If you import a terminology that overwrites an existing one, the new
-    # terminology take up to 10 minutes to fully propagate and be available
-    # for use in a translation due to cache policies with the DataPlane
-    # service that performs the translations.
+    # terminology takes up to 10 minutes to fully propagate. After that,
+    # translations have access to the new terminology.
     #
     # @option params [required, String] :name
     #   The name of the custom terminology being imported.
@@ -727,6 +726,53 @@ module Aws::Translate
     # @param [Hash] params ({})
     def import_terminology(params = {}, options = {})
       req = build_request(:import_terminology, params)
+      req.send_request(options)
+    end
+
+    # Provides a list of languages (RFC-5646 codes and names) that Amazon
+    # Translate supports.
+    #
+    # @option params [String] :display_language_code
+    #   The language code for the language to use to display the language
+    #   names in the response. The language code is `en` by default.
+    #
+    # @option params [String] :next_token
+    #   Include the NextToken value to fetch the next group of supported
+    #   languages.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each response.
+    #
+    # @return [Types::ListLanguagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLanguagesResponse#languages #languages} => Array&lt;Types::Language&gt;
+    #   * {Types::ListLanguagesResponse#display_language_code #display_language_code} => String
+    #   * {Types::ListLanguagesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_languages({
+    #     display_language_code: "de", # accepts de, en, es, fr, it, ja, ko, pt, zh, zh-TW
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.languages #=> Array
+    #   resp.languages[0].language_name #=> String
+    #   resp.languages[0].language_code #=> String
+    #   resp.display_language_code #=> String, one of "de", "en", "es", "fr", "it", "ja", "ko", "pt", "zh", "zh-TW"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListLanguages AWS API Documentation
+    #
+    # @overload list_languages(params = {})
+    # @param [Hash] params ({})
+    def list_languages(params = {}, options = {})
+      req = build_request(:list_languages, params)
       req.send_request(options)
     end
 
@@ -931,7 +977,7 @@ module Aws::Translate
     #   The name of the batch translation job to be performed.
     #
     # @option params [required, Types::InputDataConfig] :input_data_config
-    #   Specifies the format and S3 location of the input documents for the
+    #   Specifies the format and location of the input documents for the
     #   translation job.
     #
     # @option params [required, Types::OutputDataConfig] :output_data_config
@@ -988,15 +1034,16 @@ module Aws::Translate
     #   [1]: http://aws.amazon.com/translate/pricing/
     #
     # @option params [required, String] :client_token
-    #   A unique identifier for the request. This token is auto-generated when
-    #   using the Amazon Translate SDK.
+    #   A unique identifier for the request. This token is generated for you
+    #   when using the Amazon Translate SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Types::TranslationSettings] :settings
     #   Settings to configure your translation output, including the option to
-    #   mask profane words and phrases.
+    #   mask profane words and phrases. `StartTextTranslationJob` does not
+    #   support the formality setting.
     #
     # @return [Types::StartTextTranslationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1108,6 +1155,12 @@ module Aws::Translate
     #   specify `auto`, Amazon Translate will call [Amazon Comprehend][1] to
     #   determine the source language.
     #
+    #   <note markdown="1"> If you specify `auto`, you must send the `TranslateText` request in a
+    #   region that supports Amazon Comprehend. Otherwise, the request returns
+    #   an error indicating that autodetect is not supported.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html
@@ -1118,7 +1171,8 @@ module Aws::Translate
     #
     # @option params [Types::TranslationSettings] :settings
     #   Settings to configure your translation output, including the option to
-    #   mask profane words and phrases.
+    #   set the formality level of the output text and the option to mask
+    #   profane words and phrases.
     #
     # @return [Types::TranslateTextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1231,7 +1285,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

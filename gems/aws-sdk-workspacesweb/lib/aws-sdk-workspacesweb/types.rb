@@ -216,7 +216,7 @@ module Aws::WorkSpacesWeb
       :associated_portal_arns,
       :browser_policy,
       :browser_settings_arn)
-      SENSITIVE = []
+      SENSITIVE = [:browser_policy]
       include Aws::Structure
     end
 
@@ -389,7 +389,7 @@ module Aws::WorkSpacesWeb
       :client_token,
       :customer_managed_key,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:browser_policy]
       include Aws::Structure
     end
 
@@ -495,7 +495,7 @@ module Aws::WorkSpacesWeb
     #
     #     * `MetadataFile` OR `MetadataURL`
     #
-    #     * `IDPSignout` *optional*
+    #     * `IDPSignout` (boolean) *optional*
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] identity_provider_name
@@ -518,7 +518,7 @@ module Aws::WorkSpacesWeb
       :identity_provider_name,
       :identity_provider_type,
       :portal_arn)
-      SENSITIVE = []
+      SENSITIVE = [:identity_provider_details, :identity_provider_name]
       include Aws::Structure
     end
 
@@ -667,7 +667,7 @@ module Aws::WorkSpacesWeb
       :customer_managed_key,
       :display_name,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:display_name]
       include Aws::Structure
     end
 
@@ -754,7 +754,9 @@ module Aws::WorkSpacesWeb
     #       {
     #         client_token: "ClientToken",
     #         copy_allowed: "Disabled", # required, accepts Disabled, Enabled
+    #         disconnect_timeout_in_minutes: 1,
     #         download_allowed: "Disabled", # required, accepts Disabled, Enabled
+    #         idle_disconnect_timeout_in_minutes: 1,
     #         paste_allowed: "Disabled", # required, accepts Disabled, Enabled
     #         print_allowed: "Disabled", # required, accepts Disabled, Enabled
     #         tags: [
@@ -786,10 +788,21 @@ module Aws::WorkSpacesWeb
     #   to the local device.
     #   @return [String]
     #
+    # @!attribute [rw] disconnect_timeout_in_minutes
+    #   The amount of time that a streaming session remains active after
+    #   users disconnect.
+    #   @return [Integer]
+    #
     # @!attribute [rw] download_allowed
     #   Specifies whether the user can download files from the streaming
     #   session to the local device.
     #   @return [String]
+    #
+    # @!attribute [rw] idle_disconnect_timeout_in_minutes
+    #   The amount of time that users can be idle (inactive) before they are
+    #   disconnected from their streaming session and the disconnect timeout
+    #   interval begins.
+    #   @return [Integer]
     #
     # @!attribute [rw] paste_allowed
     #   Specifies whether the user can paste text from the local device to
@@ -815,7 +828,9 @@ module Aws::WorkSpacesWeb
     class CreateUserSettingsRequest < Struct.new(
       :client_token,
       :copy_allowed,
+      :disconnect_timeout_in_minutes,
       :download_allowed,
+      :idle_disconnect_timeout_in_minutes,
       :paste_allowed,
       :print_allowed,
       :tags,
@@ -1416,7 +1431,7 @@ module Aws::WorkSpacesWeb
       :identity_provider_details,
       :identity_provider_name,
       :identity_provider_type)
-      SENSITIVE = []
+      SENSITIVE = [:identity_provider_details, :identity_provider_name]
       include Aws::Structure
     end
 
@@ -1440,7 +1455,7 @@ module Aws::WorkSpacesWeb
       :identity_provider_arn,
       :identity_provider_name,
       :identity_provider_type)
-      SENSITIVE = []
+      SENSITIVE = [:identity_provider_name]
       include Aws::Structure
     end
 
@@ -1945,7 +1960,7 @@ module Aws::WorkSpacesWeb
       :status_reason,
       :trust_store_arn,
       :user_settings_arn)
-      SENSITIVE = []
+      SENSITIVE = [:display_name]
       include Aws::Structure
     end
 
@@ -2012,7 +2027,7 @@ module Aws::WorkSpacesWeb
       :renderer_type,
       :trust_store_arn,
       :user_settings_arn)
-      SENSITIVE = []
+      SENSITIVE = [:display_name]
       include Aws::Structure
     end
 
@@ -2095,7 +2110,7 @@ module Aws::WorkSpacesWeb
     class Tag < Struct.new(
       :key,
       :value)
-      SENSITIVE = []
+      SENSITIVE = [:key, :value]
       include Aws::Structure
     end
 
@@ -2302,7 +2317,7 @@ module Aws::WorkSpacesWeb
       :browser_policy,
       :browser_settings_arn,
       :client_token)
-      SENSITIVE = []
+      SENSITIVE = [:browser_policy]
       include Aws::Structure
     end
 
@@ -2350,7 +2365,68 @@ module Aws::WorkSpacesWeb
     #   @return [String]
     #
     # @!attribute [rw] identity_provider_details
-    #   The details of the identity provider.
+    #   The details of the identity provider. The following list describes
+    #   the provider detail keys for each identity provider type.
+    #
+    #   * For Google and Login with Amazon:
+    #
+    #     * `client_id`
+    #
+    #     * `client_secret`
+    #
+    #     * `authorize_scopes`
+    #
+    #   * For Facebook:
+    #
+    #     * `client_id`
+    #
+    #     * `client_secret`
+    #
+    #     * `authorize_scopes`
+    #
+    #     * `api_version`
+    #
+    #   * For Sign in with Apple:
+    #
+    #     * `client_id`
+    #
+    #     * `team_id`
+    #
+    #     * `key_id`
+    #
+    #     * `private_key`
+    #
+    #     * `authorize_scopes`
+    #
+    #   * For OIDC providers:
+    #
+    #     * `client_id`
+    #
+    #     * `client_secret`
+    #
+    #     * `attributes_request_method`
+    #
+    #     * `oidc_issuer`
+    #
+    #     * `authorize_scopes`
+    #
+    #     * `authorize_url` *if not available from discovery URL specified
+    #       by `oidc_issuer` key*
+    #
+    #     * `token_url` *if not available from discovery URL specified by
+    #       `oidc_issuer` key*
+    #
+    #     * `attributes_url` *if not available from discovery URL specified
+    #       by `oidc_issuer` key*
+    #
+    #     * `jwks_uri` *if not available from discovery URL specified by
+    #       `oidc_issuer` key*
+    #
+    #   * For SAML providers:
+    #
+    #     * `MetadataFile` OR `MetadataURL`
+    #
+    #     * `IDPSignout` (boolean) *optional*
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] identity_provider_name
@@ -2369,7 +2445,7 @@ module Aws::WorkSpacesWeb
       :identity_provider_details,
       :identity_provider_name,
       :identity_provider_type)
-      SENSITIVE = []
+      SENSITIVE = [:identity_provider_details, :identity_provider_name]
       include Aws::Structure
     end
 
@@ -2475,7 +2551,7 @@ module Aws::WorkSpacesWeb
     class UpdatePortalRequest < Struct.new(
       :display_name,
       :portal_arn)
-      SENSITIVE = []
+      SENSITIVE = [:display_name]
       include Aws::Structure
     end
 
@@ -2556,7 +2632,9 @@ module Aws::WorkSpacesWeb
     #       {
     #         client_token: "ClientToken",
     #         copy_allowed: "Disabled", # accepts Disabled, Enabled
+    #         disconnect_timeout_in_minutes: 1,
     #         download_allowed: "Disabled", # accepts Disabled, Enabled
+    #         idle_disconnect_timeout_in_minutes: 1,
     #         paste_allowed: "Disabled", # accepts Disabled, Enabled
     #         print_allowed: "Disabled", # accepts Disabled, Enabled
     #         upload_allowed: "Disabled", # accepts Disabled, Enabled
@@ -2582,10 +2660,21 @@ module Aws::WorkSpacesWeb
     #   to the local device.
     #   @return [String]
     #
+    # @!attribute [rw] disconnect_timeout_in_minutes
+    #   The amount of time that a streaming session remains active after
+    #   users disconnect.
+    #   @return [Integer]
+    #
     # @!attribute [rw] download_allowed
     #   Specifies whether the user can download files from the streaming
     #   session to the local device.
     #   @return [String]
+    #
+    # @!attribute [rw] idle_disconnect_timeout_in_minutes
+    #   The amount of time that users can be idle (inactive) before they are
+    #   disconnected from their streaming session and the disconnect timeout
+    #   interval begins.
+    #   @return [Integer]
     #
     # @!attribute [rw] paste_allowed
     #   Specifies whether the user can paste text from the local device to
@@ -2610,7 +2699,9 @@ module Aws::WorkSpacesWeb
     class UpdateUserSettingsRequest < Struct.new(
       :client_token,
       :copy_allowed,
+      :disconnect_timeout_in_minutes,
       :download_allowed,
+      :idle_disconnect_timeout_in_minutes,
       :paste_allowed,
       :print_allowed,
       :upload_allowed,
@@ -2645,10 +2736,21 @@ module Aws::WorkSpacesWeb
     #   to the local device.
     #   @return [String]
     #
+    # @!attribute [rw] disconnect_timeout_in_minutes
+    #   The amount of time that a streaming session remains active after
+    #   users disconnect.
+    #   @return [Integer]
+    #
     # @!attribute [rw] download_allowed
     #   Specifies whether the user can download files from the streaming
     #   session to the local device.
     #   @return [String]
+    #
+    # @!attribute [rw] idle_disconnect_timeout_in_minutes
+    #   The amount of time that users can be idle (inactive) before they are
+    #   disconnected from their streaming session and the disconnect timeout
+    #   interval begins.
+    #   @return [Integer]
     #
     # @!attribute [rw] paste_allowed
     #   Specifies whether the user can paste text from the local device to
@@ -2673,7 +2775,9 @@ module Aws::WorkSpacesWeb
     class UserSettings < Struct.new(
       :associated_portal_arns,
       :copy_allowed,
+      :disconnect_timeout_in_minutes,
       :download_allowed,
+      :idle_disconnect_timeout_in_minutes,
       :paste_allowed,
       :print_allowed,
       :upload_allowed,
@@ -2689,10 +2793,21 @@ module Aws::WorkSpacesWeb
     #   to the local device.
     #   @return [String]
     #
+    # @!attribute [rw] disconnect_timeout_in_minutes
+    #   The amount of time that a streaming session remains active after
+    #   users disconnect.
+    #   @return [Integer]
+    #
     # @!attribute [rw] download_allowed
     #   Specifies whether the user can download files from the streaming
     #   session to the local device.
     #   @return [String]
+    #
+    # @!attribute [rw] idle_disconnect_timeout_in_minutes
+    #   The amount of time that users can be idle (inactive) before they are
+    #   disconnected from their streaming session and the disconnect timeout
+    #   interval begins.
+    #   @return [Integer]
     #
     # @!attribute [rw] paste_allowed
     #   Specifies whether the user can paste text from the local device to
@@ -2716,7 +2831,9 @@ module Aws::WorkSpacesWeb
     #
     class UserSettingsSummary < Struct.new(
       :copy_allowed,
+      :disconnect_timeout_in_minutes,
       :download_allowed,
+      :idle_disconnect_timeout_in_minutes,
       :paste_allowed,
       :print_allowed,
       :upload_allowed,

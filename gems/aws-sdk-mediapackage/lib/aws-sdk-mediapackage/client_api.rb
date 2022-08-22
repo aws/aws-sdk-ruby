@@ -258,6 +258,7 @@ module Aws::MediaPackage
     DashPackage.add_member(:ad_triggers, Shapes::ShapeRef.new(shape: AdTriggers, location_name: "adTriggers"))
     DashPackage.add_member(:ads_on_delivery_restrictions, Shapes::ShapeRef.new(shape: AdsOnDeliveryRestrictions, location_name: "adsOnDeliveryRestrictions"))
     DashPackage.add_member(:encryption, Shapes::ShapeRef.new(shape: DashEncryption, location_name: "encryption"))
+    DashPackage.add_member(:include_iframe_only_stream, Shapes::ShapeRef.new(shape: __boolean, location_name: "includeIframeOnlyStream"))
     DashPackage.add_member(:manifest_layout, Shapes::ShapeRef.new(shape: ManifestLayout, location_name: "manifestLayout"))
     DashPackage.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "manifestWindowSeconds"))
     DashPackage.add_member(:min_buffer_time_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "minBufferTimeSeconds"))

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2022-08-08)
+------------------
+
+* Feature - Documentation updates to reflect service rename - AWS IAM Identity Center (successor to AWS Single Sign-On)
+
+1.17.0 (2022-07-18)
+------------------
+
+* Feature - AWS SSO now supports attaching customer managed policies and a permissions boundary to your permission sets. This release adds new API operations to manage and view the customer managed policies and the permissions boundary for a given permission set.
+
 1.16.0 (2022-02-24)
 ------------------
 

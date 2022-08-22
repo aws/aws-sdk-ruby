@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2022-06-21)
+------------------
+
+* Feature - Amazon ECS UpdateService now supports the following parameters: PlacementStrategies, PlacementConstraints and CapacityProviderStrategy.
+
 1.99.0 (2022-03-22)
 ------------------
 

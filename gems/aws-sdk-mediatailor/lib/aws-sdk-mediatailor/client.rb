@@ -424,6 +424,9 @@ module Aws::MediaTailor
     # @option params [Hash<String,String>] :tags
     #   The tags to assign to the channel.
     #
+    # @option params [String] :tier
+    #   The tier of the channel.
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#arn #arn} => String
@@ -435,6 +438,7 @@ module Aws::MediaTailor
     #   * {Types::CreateChannelResponse#outputs #outputs} => Array&lt;Types::ResponseOutputItem&gt;
     #   * {Types::CreateChannelResponse#playback_mode #playback_mode} => String
     #   * {Types::CreateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateChannelResponse#tier #tier} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -463,6 +467,7 @@ module Aws::MediaTailor
     #     tags: {
     #       "__string" => "__string",
     #     },
+    #     tier: "BASIC", # accepts BASIC, STANDARD
     #   })
     #
     # @example Response structure
@@ -486,6 +491,7 @@ module Aws::MediaTailor
     #   resp.playback_mode #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
+    #   resp.tier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateChannel AWS API Documentation
     #
@@ -493,6 +499,68 @@ module Aws::MediaTailor
     # @param [Hash] params ({})
     def create_channel(params = {}, options = {})
       req = build_request(:create_channel, params)
+      req.send_request(options)
+    end
+
+    # Creates name for a specific live source in a source location.
+    #
+    # @option params [required, Array<Types::HttpPackageConfiguration>] :http_package_configurations
+    #   A list of HTTP package configuration parameters for this live source.
+    #
+    # @option params [required, String] :live_source_name
+    #
+    # @option params [required, String] :source_location_name
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to assign to the live source.
+    #
+    # @return [Types::CreateLiveSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLiveSourceResponse#arn #arn} => String
+    #   * {Types::CreateLiveSourceResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateLiveSourceResponse#http_package_configurations #http_package_configurations} => Array&lt;Types::HttpPackageConfiguration&gt;
+    #   * {Types::CreateLiveSourceResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::CreateLiveSourceResponse#live_source_name #live_source_name} => String
+    #   * {Types::CreateLiveSourceResponse#source_location_name #source_location_name} => String
+    #   * {Types::CreateLiveSourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_live_source({
+    #     http_package_configurations: [ # required
+    #       {
+    #         path: "__string", # required
+    #         source_group: "__string", # required
+    #         type: "DASH", # required, accepts DASH, HLS
+    #       },
+    #     ],
+    #     live_source_name: "__string", # required
+    #     source_location_name: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.http_package_configurations #=> Array
+    #   resp.http_package_configurations[0].path #=> String
+    #   resp.http_package_configurations[0].source_group #=> String
+    #   resp.http_package_configurations[0].type #=> String, one of "DASH", "HLS"
+    #   resp.last_modified_time #=> Time
+    #   resp.live_source_name #=> String
+    #   resp.source_location_name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateLiveSource AWS API Documentation
+    #
+    # @overload create_live_source(params = {})
+    # @param [Hash] params ({})
+    def create_live_source(params = {}, options = {})
+      req = build_request(:create_live_source, params)
       req.send_request(options)
     end
 
@@ -589,6 +657,9 @@ module Aws::MediaTailor
     #
     # @option params [required, String] :channel_name
     #
+    # @option params [String] :live_source_name
+    #   The name of the LiveSource for this Program.
+    #
     # @option params [required, String] :program_name
     #
     # @option params [required, Types::ScheduleConfiguration] :schedule_configuration
@@ -597,7 +668,7 @@ module Aws::MediaTailor
     # @option params [required, String] :source_location_name
     #   The name of the source location.
     #
-    # @option params [required, String] :vod_source_name
+    # @option params [String] :vod_source_name
     #   The name that's used to refer to a VOD source.
     #
     # @return [Types::CreateProgramResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -606,6 +677,7 @@ module Aws::MediaTailor
     #   * {Types::CreateProgramResponse#arn #arn} => String
     #   * {Types::CreateProgramResponse#channel_name #channel_name} => String
     #   * {Types::CreateProgramResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateProgramResponse#live_source_name #live_source_name} => String
     #   * {Types::CreateProgramResponse#program_name #program_name} => String
     #   * {Types::CreateProgramResponse#scheduled_start_time #scheduled_start_time} => Time
     #   * {Types::CreateProgramResponse#source_location_name #source_location_name} => String
@@ -631,9 +703,11 @@ module Aws::MediaTailor
     #       },
     #     ],
     #     channel_name: "__string", # required
+    #     live_source_name: "__string",
     #     program_name: "__string", # required
     #     schedule_configuration: { # required
     #       transition: { # required
+    #         duration_millis: 1,
     #         relative_position: "BEFORE_PROGRAM", # required, accepts BEFORE_PROGRAM, AFTER_PROGRAM
     #         relative_program: "__string",
     #         scheduled_start_time_millis: 1,
@@ -641,7 +715,7 @@ module Aws::MediaTailor
     #       },
     #     },
     #     source_location_name: "__string", # required
-    #     vod_source_name: "__string", # required
+    #     vod_source_name: "__string",
     #   })
     #
     # @example Response structure
@@ -658,6 +732,7 @@ module Aws::MediaTailor
     #   resp.arn #=> String
     #   resp.channel_name #=> String
     #   resp.creation_time #=> Time
+    #   resp.live_source_name #=> String
     #   resp.program_name #=> String
     #   resp.scheduled_start_time #=> Time
     #   resp.source_location_name #=> String
@@ -685,7 +760,8 @@ module Aws::MediaTailor
     #   The source's HTTP package configurations.
     #
     # @option params [Array<Types::SegmentDeliveryConfiguration>] :segment_delivery_configurations
-    #   An array of segment delivery configurations for this source location.
+    #   A list of the segment delivery configurations associated with this
+    #   resource.
     #
     # @option params [required, String] :source_location_name
     #
@@ -763,7 +839,7 @@ module Aws::MediaTailor
     # Creates name for a specific VOD source in a source location.
     #
     # @option params [required, Array<Types::HttpPackageConfiguration>] :http_package_configurations
-    #   An array of HTTP package configuration parameters for this VOD source.
+    #   A list of HTTP package configuration parameters for this VOD source.
     #
     # @option params [required, String] :source_location_name
     #
@@ -861,6 +937,30 @@ module Aws::MediaTailor
     # @param [Hash] params ({})
     def delete_channel_policy(params = {}, options = {})
       req = build_request(:delete_channel_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes a specific live source in a specific source location.
+    #
+    # @option params [required, String] :live_source_name
+    #
+    # @option params [required, String] :source_location_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_live_source({
+    #     live_source_name: "__string", # required
+    #     source_location_name: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteLiveSource AWS API Documentation
+    #
+    # @overload delete_live_source(params = {})
+    # @param [Hash] params ({})
+    def delete_live_source(params = {}, options = {})
+      req = build_request(:delete_live_source, params)
       req.send_request(options)
     end
 
@@ -995,6 +1095,7 @@ module Aws::MediaTailor
     #   * {Types::DescribeChannelResponse#outputs #outputs} => Array&lt;Types::ResponseOutputItem&gt;
     #   * {Types::DescribeChannelResponse#playback_mode #playback_mode} => String
     #   * {Types::DescribeChannelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeChannelResponse#tier #tier} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1023,6 +1124,7 @@ module Aws::MediaTailor
     #   resp.playback_mode #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
+    #   resp.tier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeChannel AWS API Documentation
     #
@@ -1030,6 +1132,53 @@ module Aws::MediaTailor
     # @param [Hash] params ({})
     def describe_channel(params = {}, options = {})
       req = build_request(:describe_channel, params)
+      req.send_request(options)
+    end
+
+    # Provides details about a specific live source in a specific source
+    # location.
+    #
+    # @option params [required, String] :live_source_name
+    #
+    # @option params [required, String] :source_location_name
+    #
+    # @return [Types::DescribeLiveSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLiveSourceResponse#arn #arn} => String
+    #   * {Types::DescribeLiveSourceResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeLiveSourceResponse#http_package_configurations #http_package_configurations} => Array&lt;Types::HttpPackageConfiguration&gt;
+    #   * {Types::DescribeLiveSourceResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeLiveSourceResponse#live_source_name #live_source_name} => String
+    #   * {Types::DescribeLiveSourceResponse#source_location_name #source_location_name} => String
+    #   * {Types::DescribeLiveSourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_live_source({
+    #     live_source_name: "__string", # required
+    #     source_location_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.http_package_configurations #=> Array
+    #   resp.http_package_configurations[0].path #=> String
+    #   resp.http_package_configurations[0].source_group #=> String
+    #   resp.http_package_configurations[0].type #=> String, one of "DASH", "HLS"
+    #   resp.last_modified_time #=> Time
+    #   resp.live_source_name #=> String
+    #   resp.source_location_name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeLiveSource AWS API Documentation
+    #
+    # @overload describe_live_source(params = {})
+    # @param [Hash] params ({})
+    def describe_live_source(params = {}, options = {})
+      req = build_request(:describe_live_source, params)
       req.send_request(options)
     end
 
@@ -1045,6 +1194,7 @@ module Aws::MediaTailor
     #   * {Types::DescribeProgramResponse#arn #arn} => String
     #   * {Types::DescribeProgramResponse#channel_name #channel_name} => String
     #   * {Types::DescribeProgramResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeProgramResponse#live_source_name #live_source_name} => String
     #   * {Types::DescribeProgramResponse#program_name #program_name} => String
     #   * {Types::DescribeProgramResponse#scheduled_start_time #scheduled_start_time} => Time
     #   * {Types::DescribeProgramResponse#source_location_name #source_location_name} => String
@@ -1071,6 +1221,7 @@ module Aws::MediaTailor
     #   resp.arn #=> String
     #   resp.channel_name #=> String
     #   resp.creation_time #=> Time
+    #   resp.live_source_name #=> String
     #   resp.program_name #=> String
     #   resp.scheduled_start_time #=> Time
     #   resp.source_location_name #=> String
@@ -1241,6 +1392,7 @@ module Aws::MediaTailor
     #   resp.items[0].approximate_start_time #=> Time
     #   resp.items[0].arn #=> String
     #   resp.items[0].channel_name #=> String
+    #   resp.items[0].live_source_name #=> String
     #   resp.items[0].program_name #=> String
     #   resp.items[0].schedule_ad_breaks #=> Array
     #   resp.items[0].schedule_ad_breaks[0].approximate_duration_seconds #=> Integer
@@ -1467,6 +1619,7 @@ module Aws::MediaTailor
     #   resp.items[0].playback_mode #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["__string"] #=> String
+    #   resp.items[0].tier #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListChannels AWS API Documentation
@@ -1475,6 +1628,54 @@ module Aws::MediaTailor
     # @param [Hash] params ({})
     def list_channels(params = {}, options = {})
       req = build_request(:list_channels, params)
+      req.send_request(options)
+    end
+
+    # lists all the live sources in a source location.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [required, String] :source_location_name
+    #
+    # @return [Types::ListLiveSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLiveSourcesResponse#items #items} => Array&lt;Types::LiveSource&gt;
+    #   * {Types::ListLiveSourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_live_sources({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     source_location_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].creation_time #=> Time
+    #   resp.items[0].http_package_configurations #=> Array
+    #   resp.items[0].http_package_configurations[0].path #=> String
+    #   resp.items[0].http_package_configurations[0].source_group #=> String
+    #   resp.items[0].http_package_configurations[0].type #=> String, one of "DASH", "HLS"
+    #   resp.items[0].last_modified_time #=> Time
+    #   resp.items[0].live_source_name #=> String
+    #   resp.items[0].source_location_name #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["__string"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListLiveSources AWS API Documentation
+    #
+    # @overload list_live_sources(params = {})
+    # @param [Hash] params ({})
+    def list_live_sources(params = {}, options = {})
+      req = build_request(:list_live_sources, params)
       req.send_request(options)
     end
 
@@ -2081,6 +2282,7 @@ module Aws::MediaTailor
     #   * {Types::UpdateChannelResponse#outputs #outputs} => Array&lt;Types::ResponseOutputItem&gt;
     #   * {Types::UpdateChannelResponse#playback_mode #playback_mode} => String
     #   * {Types::UpdateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateChannelResponse#tier #tier} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2128,6 +2330,7 @@ module Aws::MediaTailor
     #   resp.playback_mode #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
+    #   resp.tier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateChannel AWS API Documentation
     #
@@ -2135,6 +2338,63 @@ module Aws::MediaTailor
     # @param [Hash] params ({})
     def update_channel(params = {}, options = {})
       req = build_request(:update_channel, params)
+      req.send_request(options)
+    end
+
+    # Updates a specific live source in a specific source location.
+    #
+    # @option params [required, Array<Types::HttpPackageConfiguration>] :http_package_configurations
+    #   A list of HTTP package configurations for the live source on this
+    #   account.
+    #
+    # @option params [required, String] :live_source_name
+    #
+    # @option params [required, String] :source_location_name
+    #
+    # @return [Types::UpdateLiveSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLiveSourceResponse#arn #arn} => String
+    #   * {Types::UpdateLiveSourceResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateLiveSourceResponse#http_package_configurations #http_package_configurations} => Array&lt;Types::HttpPackageConfiguration&gt;
+    #   * {Types::UpdateLiveSourceResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::UpdateLiveSourceResponse#live_source_name #live_source_name} => String
+    #   * {Types::UpdateLiveSourceResponse#source_location_name #source_location_name} => String
+    #   * {Types::UpdateLiveSourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_live_source({
+    #     http_package_configurations: [ # required
+    #       {
+    #         path: "__string", # required
+    #         source_group: "__string", # required
+    #         type: "DASH", # required, accepts DASH, HLS
+    #       },
+    #     ],
+    #     live_source_name: "__string", # required
+    #     source_location_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.http_package_configurations #=> Array
+    #   resp.http_package_configurations[0].path #=> String
+    #   resp.http_package_configurations[0].source_group #=> String
+    #   resp.http_package_configurations[0].type #=> String, one of "DASH", "HLS"
+    #   resp.last_modified_time #=> Time
+    #   resp.live_source_name #=> String
+    #   resp.source_location_name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateLiveSource AWS API Documentation
+    #
+    # @overload update_live_source(params = {})
+    # @param [Hash] params ({})
+    def update_live_source(params = {}, options = {})
+      req = build_request(:update_live_source, params)
       req.send_request(options)
     end
 
@@ -2151,7 +2411,8 @@ module Aws::MediaTailor
     #   The HTTP configuration for the source location.
     #
     # @option params [Array<Types::SegmentDeliveryConfiguration>] :segment_delivery_configurations
-    #   An array of segment delivery configurations for this source location.
+    #   A list of the segment delivery configurations associated with this
+    #   resource.
     #
     # @option params [required, String] :source_location_name
     #
@@ -2223,7 +2484,7 @@ module Aws::MediaTailor
     # Updates a specific VOD source in a specific source location.
     #
     # @option params [required, Array<Types::HttpPackageConfiguration>] :http_package_configurations
-    #   An array of HTTP package configurations for the VOD source on this
+    #   A list of HTTP package configurations for the VOD source on this
     #   account.
     #
     # @option params [required, String] :source_location_name
@@ -2290,7 +2551,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

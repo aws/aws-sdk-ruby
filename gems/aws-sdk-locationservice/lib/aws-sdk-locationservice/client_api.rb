@@ -74,6 +74,7 @@ module Aws::LocationService
     CalculateRouteSummaryDistanceDouble = Shapes::FloatShape.new(name: 'CalculateRouteSummaryDistanceDouble')
     CalculateRouteSummaryDurationSecondsDouble = Shapes::FloatShape.new(name: 'CalculateRouteSummaryDurationSecondsDouble')
     CalculateRouteTruckModeOptions = Shapes::StructureShape.new(name: 'CalculateRouteTruckModeOptions')
+    Circle = Shapes::StructureShape.new(name: 'Circle')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
     CountryCodeList = Shapes::ListShape.new(name: 'CountryCodeList')
@@ -164,6 +165,7 @@ module Aws::LocationService
     ListGeofenceResponseEntry = Shapes::StructureShape.new(name: 'ListGeofenceResponseEntry')
     ListGeofenceResponseEntryList = Shapes::ListShape.new(name: 'ListGeofenceResponseEntryList')
     ListGeofencesRequest = Shapes::StructureShape.new(name: 'ListGeofencesRequest')
+    ListGeofencesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListGeofencesRequestMaxResultsInteger')
     ListGeofencesResponse = Shapes::StructureShape.new(name: 'ListGeofencesResponse')
     ListMapsRequest = Shapes::StructureShape.new(name: 'ListMapsRequest')
     ListMapsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListMapsRequestMaxResultsInteger')
@@ -229,11 +231,14 @@ module Aws::LocationService
     SearchPlaceIndexForPositionSummary = Shapes::StructureShape.new(name: 'SearchPlaceIndexForPositionSummary')
     SearchPlaceIndexForSuggestionsRequest = Shapes::StructureShape.new(name: 'SearchPlaceIndexForSuggestionsRequest')
     SearchPlaceIndexForSuggestionsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'SearchPlaceIndexForSuggestionsRequestMaxResultsInteger')
+    SearchPlaceIndexForSuggestionsRequestTextString = Shapes::StringShape.new(name: 'SearchPlaceIndexForSuggestionsRequestTextString')
     SearchPlaceIndexForSuggestionsResponse = Shapes::StructureShape.new(name: 'SearchPlaceIndexForSuggestionsResponse')
     SearchPlaceIndexForSuggestionsSummary = Shapes::StructureShape.new(name: 'SearchPlaceIndexForSuggestionsSummary')
     SearchPlaceIndexForTextRequest = Shapes::StructureShape.new(name: 'SearchPlaceIndexForTextRequest')
+    SearchPlaceIndexForTextRequestTextString = Shapes::StringShape.new(name: 'SearchPlaceIndexForTextRequestTextString')
     SearchPlaceIndexForTextResponse = Shapes::StructureShape.new(name: 'SearchPlaceIndexForTextResponse')
     SearchPlaceIndexForTextSummary = Shapes::StructureShape.new(name: 'SearchPlaceIndexForTextSummary')
+    SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Step = Shapes::StructureShape.new(name: 'Step')
     StepDistanceDouble = Shapes::FloatShape.new(name: 'StepDistanceDouble')
@@ -241,10 +246,6 @@ module Aws::LocationService
     StepGeometryOffsetInteger = Shapes::IntegerShape.new(name: 'StepGeometryOffsetInteger')
     StepList = Shapes::ListShape.new(name: 'StepList')
     String = Shapes::StringShape.new(name: 'String')
-    SyntheticSearchPlaceIndexForSuggestionsRequestString = Shapes::StringShape.new(name: 'SyntheticSearchPlaceIndexForSuggestionsRequestString')
-    SyntheticSearchPlaceIndexForSuggestionsSummaryString = Shapes::StringShape.new(name: 'SyntheticSearchPlaceIndexForSuggestionsSummaryString')
-    SyntheticSearchPlaceIndexForTextRequestString = Shapes::StringShape.new(name: 'SyntheticSearchPlaceIndexForTextRequestString')
-    SyntheticSearchPlaceIndexForTextSummaryString = Shapes::StringShape.new(name: 'SyntheticSearchPlaceIndexForTextSummaryString')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -469,6 +470,10 @@ module Aws::LocationService
     CalculateRouteTruckModeOptions.add_member(:weight, Shapes::ShapeRef.new(shape: TruckWeight, location_name: "Weight"))
     CalculateRouteTruckModeOptions.struct_class = Types::CalculateRouteTruckModeOptions
 
+    Circle.add_member(:center, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "Center"))
+    Circle.add_member(:radius, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "Radius"))
+    Circle.struct_class = Types::Circle
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
@@ -659,6 +664,7 @@ module Aws::LocationService
 
     DisassociateTrackerConsumerResponse.struct_class = Types::DisassociateTrackerConsumerResponse
 
+    GeofenceGeometry.add_member(:circle, Shapes::ShapeRef.new(shape: Circle, location_name: "Circle"))
     GeofenceGeometry.add_member(:polygon, Shapes::ShapeRef.new(shape: LinearRings, location_name: "Polygon"))
     GeofenceGeometry.struct_class = Types::GeofenceGeometry
 
@@ -807,6 +813,7 @@ module Aws::LocationService
     ListGeofenceResponseEntryList.member = Shapes::ShapeRef.new(shape: ListGeofenceResponseEntry)
 
     ListGeofencesRequest.add_member(:collection_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "CollectionName"))
+    ListGeofencesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListGeofencesRequestMaxResultsInteger, location_name: "MaxResults"))
     ListGeofencesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListGeofencesRequest.struct_class = Types::ListGeofencesRequest
 
@@ -995,7 +1002,7 @@ module Aws::LocationService
     SearchPlaceIndexForSuggestionsRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "IndexName"))
     SearchPlaceIndexForSuggestionsRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
     SearchPlaceIndexForSuggestionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchPlaceIndexForSuggestionsRequestMaxResultsInteger, location_name: "MaxResults"))
-    SearchPlaceIndexForSuggestionsRequest.add_member(:text, Shapes::ShapeRef.new(shape: SyntheticSearchPlaceIndexForSuggestionsRequestString, required: true, location_name: "Text"))
+    SearchPlaceIndexForSuggestionsRequest.add_member(:text, Shapes::ShapeRef.new(shape: SearchPlaceIndexForSuggestionsRequestTextString, required: true, location_name: "Text"))
     SearchPlaceIndexForSuggestionsRequest.struct_class = Types::SearchPlaceIndexForSuggestionsRequest
 
     SearchPlaceIndexForSuggestionsResponse.add_member(:results, Shapes::ShapeRef.new(shape: SearchForSuggestionsResultList, required: true, location_name: "Results"))
@@ -1008,7 +1015,7 @@ module Aws::LocationService
     SearchPlaceIndexForSuggestionsSummary.add_member(:filter_countries, Shapes::ShapeRef.new(shape: CountryCodeList, location_name: "FilterCountries"))
     SearchPlaceIndexForSuggestionsSummary.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
     SearchPlaceIndexForSuggestionsSummary.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
-    SearchPlaceIndexForSuggestionsSummary.add_member(:text, Shapes::ShapeRef.new(shape: SyntheticSearchPlaceIndexForSuggestionsSummaryString, required: true, location_name: "Text"))
+    SearchPlaceIndexForSuggestionsSummary.add_member(:text, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "Text"))
     SearchPlaceIndexForSuggestionsSummary.struct_class = Types::SearchPlaceIndexForSuggestionsSummary
 
     SearchPlaceIndexForTextRequest.add_member(:bias_position, Shapes::ShapeRef.new(shape: Position, location_name: "BiasPosition"))
@@ -1017,7 +1024,7 @@ module Aws::LocationService
     SearchPlaceIndexForTextRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "IndexName"))
     SearchPlaceIndexForTextRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
     SearchPlaceIndexForTextRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PlaceIndexSearchResultLimit, location_name: "MaxResults"))
-    SearchPlaceIndexForTextRequest.add_member(:text, Shapes::ShapeRef.new(shape: SyntheticSearchPlaceIndexForTextRequestString, required: true, location_name: "Text"))
+    SearchPlaceIndexForTextRequest.add_member(:text, Shapes::ShapeRef.new(shape: SearchPlaceIndexForTextRequestTextString, required: true, location_name: "Text"))
     SearchPlaceIndexForTextRequest.struct_class = Types::SearchPlaceIndexForTextRequest
 
     SearchPlaceIndexForTextResponse.add_member(:results, Shapes::ShapeRef.new(shape: SearchForTextResultList, required: true, location_name: "Results"))
@@ -1031,7 +1038,7 @@ module Aws::LocationService
     SearchPlaceIndexForTextSummary.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
     SearchPlaceIndexForTextSummary.add_member(:max_results, Shapes::ShapeRef.new(shape: PlaceIndexSearchResultLimit, location_name: "MaxResults"))
     SearchPlaceIndexForTextSummary.add_member(:result_b_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "ResultBBox"))
-    SearchPlaceIndexForTextSummary.add_member(:text, Shapes::ShapeRef.new(shape: SyntheticSearchPlaceIndexForTextSummaryString, required: true, location_name: "Text"))
+    SearchPlaceIndexForTextSummary.add_member(:text, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "Text"))
     SearchPlaceIndexForTextSummary.struct_class = Types::SearchPlaceIndexForTextSummary
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -1740,6 +1747,7 @@ module Aws::LocationService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
           tokens: {
             "next_token" => "next_token"
           }

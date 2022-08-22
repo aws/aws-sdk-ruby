@@ -1004,7 +1004,7 @@ module Aws::EKS
     #   default disk size is 20 GiB. If you specify `launchTemplate`, then
     #   don't specify `diskSize`, or the node group deployment will fail. For
     #   more information about using launch templates with Amazon EKS, see
-    #   [Launch template support][1] in the Amazon EKS User Guide.
+    #   [Launch template support][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1015,8 +1015,8 @@ module Aws::EKS
     #   node group. If you specify `launchTemplate`, then don't specify [
     #   `SubnetId` ][1] in your launch template, or the node group deployment
     #   will fail. For more information about using launch templates with
-    #   Amazon EKS, see [Launch template support][2] in the Amazon EKS User
-    #   Guide.
+    #   Amazon EKS, see [Launch template support][2] in the *Amazon EKS User
+    #   Guide*.
     #
     #
     #
@@ -1051,7 +1051,7 @@ module Aws::EKS
     #   you specify `launchTemplate`, and your launch template uses a custom
     #   AMI, then don't specify `amiType`, or the node group deployment will
     #   fail. For more information about using launch templates with Amazon
-    #   EKS, see [Launch template support][1] in the Amazon EKS User Guide.
+    #   EKS, see [Launch template support][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1062,7 +1062,7 @@ module Aws::EKS
     #   you specify `launchTemplate`, then don't specify `remoteAccess`, or
     #   the node group deployment will fail. For more information about using
     #   launch templates with Amazon EKS, see [Launch template support][1] in
-    #   the Amazon EKS User Guide.
+    #   the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1080,11 +1080,11 @@ module Aws::EKS
     #   `launchTemplate`, then don't specify [ `IamInstanceProfile` ][2] in
     #   your launch template, or the node group deployment will fail. For more
     #   information about using launch templates with Amazon EKS, see [Launch
-    #   template support][3] in the Amazon EKS User Guide.
+    #   template support][3] in the *Amazon EKS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html
     #   [3]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #
@@ -1094,6 +1094,11 @@ module Aws::EKS
     #
     # @option params [Array<Types::Taint>] :taints
     #   The Kubernetes taints to be applied to the nodes in the node group.
+    #   For more information, see [Node taints on managed node groups][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
     #
     # @option params [Hash<String,String>] :tags
     #   The metadata to apply to the node group to assist with categorization
@@ -1128,7 +1133,7 @@ module Aws::EKS
     #   launch template uses a custom AMI, then don't specify `version`, or
     #   the node group deployment will fail. For more information about using
     #   launch templates with Amazon EKS, see [Launch template support][1] in
-    #   the Amazon EKS User Guide.
+    #   the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1143,7 +1148,7 @@ module Aws::EKS
     #   template uses a custom AMI, then don't specify `releaseVersion`, or
     #   the node group deployment will fail. For more information about using
     #   launch templates with Amazon EKS, see [Launch template support][2] in
-    #   the Amazon EKS User Guide.
+    #   the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1167,7 +1172,7 @@ module Aws::EKS
     #     disk_size: 1,
     #     subnets: ["String"], # required
     #     instance_types: ["String"],
-    #     ami_type: "AL2_x86_64", # accepts AL2_x86_64, AL2_x86_64_GPU, AL2_ARM_64, CUSTOM, BOTTLEROCKET_ARM_64, BOTTLEROCKET_x86_64
+    #     ami_type: "AL2_x86_64", # accepts AL2_x86_64, AL2_x86_64_GPU, AL2_ARM_64, CUSTOM, BOTTLEROCKET_ARM_64, BOTTLEROCKET_x86_64, BOTTLEROCKET_ARM_64_NVIDIA, BOTTLEROCKET_x86_64_NVIDIA
     #     remote_access: {
     #       ec2_ssh_key: "String",
     #       source_security_groups: ["String"],
@@ -1222,7 +1227,7 @@ module Aws::EKS
     #   resp.nodegroup.remote_access.ec2_ssh_key #=> String
     #   resp.nodegroup.remote_access.source_security_groups #=> Array
     #   resp.nodegroup.remote_access.source_security_groups[0] #=> String
-    #   resp.nodegroup.ami_type #=> String, one of "AL2_x86_64", "AL2_x86_64_GPU", "AL2_ARM_64", "CUSTOM", "BOTTLEROCKET_ARM_64", "BOTTLEROCKET_x86_64"
+    #   resp.nodegroup.ami_type #=> String, one of "AL2_x86_64", "AL2_x86_64_GPU", "AL2_ARM_64", "CUSTOM", "BOTTLEROCKET_ARM_64", "BOTTLEROCKET_x86_64", "BOTTLEROCKET_ARM_64_NVIDIA", "BOTTLEROCKET_x86_64_NVIDIA"
     #   resp.nodegroup.node_role #=> String
     #   resp.nodegroup.labels #=> Hash
     #   resp.nodegroup.labels["labelKey"] #=> String
@@ -1508,7 +1513,7 @@ module Aws::EKS
     #   resp.nodegroup.remote_access.ec2_ssh_key #=> String
     #   resp.nodegroup.remote_access.source_security_groups #=> Array
     #   resp.nodegroup.remote_access.source_security_groups[0] #=> String
-    #   resp.nodegroup.ami_type #=> String, one of "AL2_x86_64", "AL2_x86_64_GPU", "AL2_ARM_64", "CUSTOM", "BOTTLEROCKET_ARM_64", "BOTTLEROCKET_x86_64"
+    #   resp.nodegroup.ami_type #=> String, one of "AL2_x86_64", "AL2_x86_64_GPU", "AL2_ARM_64", "CUSTOM", "BOTTLEROCKET_ARM_64", "BOTTLEROCKET_x86_64", "BOTTLEROCKET_ARM_64_NVIDIA", "BOTTLEROCKET_x86_64_NVIDIA"
     #   resp.nodegroup.node_role #=> String
     #   resp.nodegroup.labels #=> Hash
     #   resp.nodegroup.labels["labelKey"] #=> String
@@ -1999,7 +2004,7 @@ module Aws::EKS
     #   resp.nodegroup.remote_access.ec2_ssh_key #=> String
     #   resp.nodegroup.remote_access.source_security_groups #=> Array
     #   resp.nodegroup.remote_access.source_security_groups[0] #=> String
-    #   resp.nodegroup.ami_type #=> String, one of "AL2_x86_64", "AL2_x86_64_GPU", "AL2_ARM_64", "CUSTOM", "BOTTLEROCKET_ARM_64", "BOTTLEROCKET_x86_64"
+    #   resp.nodegroup.ami_type #=> String, one of "AL2_x86_64", "AL2_x86_64_GPU", "AL2_ARM_64", "CUSTOM", "BOTTLEROCKET_ARM_64", "BOTTLEROCKET_x86_64", "BOTTLEROCKET_ARM_64_NVIDIA", "BOTTLEROCKET_x86_64_NVIDIA"
     #   resp.nodegroup.node_role #=> String
     #   resp.nodegroup.labels #=> Hash
     #   resp.nodegroup.labels["labelKey"] #=> String
@@ -2040,7 +2045,7 @@ module Aws::EKS
     end
 
     # Returns descriptive information about an update against your Amazon
-    # EKS cluster or associated managed node group.
+    # EKS cluster or associated managed node group or Amazon EKS add-on.
     #
     # When the status of the update is `Succeeded`, the update is complete.
     # If an update fails, the status is `Failed`, and an error detail
@@ -2053,11 +2058,13 @@ module Aws::EKS
     #   The ID of the update to describe.
     #
     # @option params [String] :nodegroup_name
-    #   The name of the Amazon EKS node group associated with the update.
+    #   The name of the Amazon EKS node group associated with the update. This
+    #   parameter is required if the update is a node group update.
     #
     # @option params [String] :addon_name
     #   The name of the add-on. The name must match one of the names returned
-    #   by [ `ListAddons` ][1].
+    #   by [ `ListAddons` ][1]. This parameter is required if the update is an
+    #   add-on update.
     #
     #
     #
@@ -3033,7 +3040,12 @@ module Aws::EKS
     #
     # @option params [Types::UpdateTaintsPayload] :taints
     #   The Kubernetes taints to be applied to the nodes in the node group
-    #   after the update.
+    #   after the update. For more information, see [Node taints on managed
+    #   node groups][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
     #
     # @option params [Types::NodegroupScalingConfig] :scaling_config
     #   The scaling configuration details for the Auto Scaling group after the
@@ -3162,7 +3174,7 @@ module Aws::EKS
     #   specify `launchTemplate`, and your launch template uses a custom AMI,
     #   then don't specify `version`, or the node group update will fail. For
     #   more information about using launch templates with Amazon EKS, see
-    #   [Launch template support][1] in the Amazon EKS User Guide.
+    #   [Launch template support][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -3176,8 +3188,8 @@ module Aws::EKS
     #   Guide*. If you specify `launchTemplate`, and your launch template uses
     #   a custom AMI, then don't specify `releaseVersion`, or the node group
     #   update will fail. For more information about using launch templates
-    #   with Amazon EKS, see [Launch template support][2] in the Amazon EKS
-    #   User Guide.
+    #   with Amazon EKS, see [Launch template support][2] in the *Amazon EKS
+    #   User Guide*.
     #
     #
     #
@@ -3260,7 +3272,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

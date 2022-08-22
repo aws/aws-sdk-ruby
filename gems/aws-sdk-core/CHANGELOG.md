@@ -3,6 +3,52 @@ Unreleased Changes
 
 * Feature - Moved functionality from `aws-sdk-ssoidc` into core.
 
+3.132.0 (2022-08-08)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.131.6 (2022-08-03)
+------------------
+
+* Issue - Fix typo in `RecursionDetection`, change amz to amzn in header and env name.
+
+3.131.5 (2022-07-28)
+------------------
+
+* Issue - Fix `to_json` usage in nested hashes by defining `as_json` (#2733).
+
+3.131.4 (2022-07-27)
+------------------
+
+* Issue - Fix `to_json` usage on pageable responses when using Rails (#2733).
+* Issue - Use `expand_path` on credential/config paths in SharedConfig (#2735).
+
+3.131.3 (2022-07-18)
+------------------
+
+* Issue - Add support for serializing shapes on the body with `jsonvalue` members.
+
+3.131.2 (2022-06-20)
+------------------
+
+* Issue - Populate context :request_id for XML error responses.
+
+3.131.1 (2022-05-20)
+------------------
+
+* Issue - Bump the minimum version of `jmespath` dependency.
+
+3.131.0 (2022-05-16)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.130.2 (2022-04-22)
+------------------
+
+* Issue - Don't pass `:before_refresh` to Client constructors in RefreshingCredential implementations (#2690).
+
 3.130.1 (2022-04-12)
 ------------------
 
@@ -47,7 +93,7 @@ Unreleased Changes
 3.126.2 (2022-02-16)
 ------------------
 
-* Issue - Add a before_refresh callback to AssumeRoleCredentials (#2529). 
+* Issue - Add a before_refresh callback to AssumeRoleCredentials (#2529).
 * Issue - Raise a `NoSuchProfileError` when config and credentials files don't exist.
 
 3.126.1 (2022-02-14)

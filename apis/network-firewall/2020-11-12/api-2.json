@@ -408,6 +408,23 @@
         {"shape":"InvalidTokenException"}
       ]
     },
+    "UpdateFirewallEncryptionConfiguration":{
+      "name":"UpdateFirewallEncryptionConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateFirewallEncryptionConfigurationRequest"},
+      "output":{"shape":"UpdateFirewallEncryptionConfigurationResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InvalidTokenException"},
+        {"shape":"ResourceOwnerCheckException"}
+      ]
+    },
     "UpdateFirewallPolicy":{
       "name":"UpdateFirewallPolicy",
       "http":{
@@ -589,12 +606,32 @@
       "member":{"shape":"AzSubnet"}
     },
     "Boolean":{"type":"boolean"},
+    "CIDRCount":{
+      "type":"integer",
+      "max":1000000,
+      "min":0
+    },
+    "CIDRSummary":{
+      "type":"structure",
+      "members":{
+        "AvailableCIDRCount":{"shape":"CIDRCount"},
+        "UtilizedCIDRCount":{"shape":"CIDRCount"},
+        "IPSetReferences":{"shape":"IPSetMetadataMap"}
+      }
+    },
+    "CapacityUsageSummary":{
+      "type":"structure",
+      "members":{
+        "CIDRs":{"shape":"CIDRSummary"}
+      }
+    },
     "CollectionMember_String":{"type":"string"},
     "ConfigurationSyncState":{
       "type":"string",
       "enum":[
         "PENDING",
-        "IN_SYNC"
+        "IN_SYNC",
+        "CAPACITY_CONSTRAINED"
       ]
     },
     "CreateFirewallPolicyRequest":{
@@ -608,7 +645,8 @@
         "FirewallPolicy":{"shape":"FirewallPolicy"},
         "Description":{"shape":"Description"},
         "Tags":{"shape":"TagList"},
-        "DryRun":{"shape":"Boolean"}
+        "DryRun":{"shape":"Boolean"},
+        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"}
       }
     },
     "CreateFirewallPolicyResponse":{
@@ -639,7 +677,8 @@
         "SubnetChangeProtection":{"shape":"Boolean"},
         "FirewallPolicyChangeProtection":{"shape":"Boolean"},
         "Description":{"shape":"Description"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"}
       }
     },
     "CreateFirewallResponse":{
@@ -664,7 +703,9 @@
         "Description":{"shape":"Description"},
         "Capacity":{"shape":"RuleCapacity"},
         "Tags":{"shape":"TagList"},
-        "DryRun":{"shape":"Boolean"}
+        "DryRun":{"shape":"Boolean"},
+        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"},
+        "SourceMetadata":{"shape":"SourceMetadata"}
       }
     },
     "CreateRuleGroupResponse":{
@@ -829,7 +870,8 @@
         "Description":{"shape":"Description"},
         "Type":{"shape":"RuleGroupType"},
         "Capacity":{"shape":"RuleCapacity"},
-        "StatefulRuleOptions":{"shape":"StatefulRuleOptions"}
+        "StatefulRuleOptions":{"shape":"StatefulRuleOptions"},
+        "LastModifiedTime":{"shape":"LastUpdateTime"}
       }
     },
     "DescribeRuleGroupRequest":{
@@ -901,6 +943,21 @@
         "UpdateToken":{"shape":"UpdateToken"}
       }
     },
+    "EncryptionConfiguration":{
+      "type":"structure",
+      "required":["Type"],
+      "members":{
+        "KeyId":{"shape":"KeyId"},
+        "Type":{"shape":"EncryptionType"}
+      }
+    },
+    "EncryptionType":{
+      "type":"string",
+      "enum":[
+        "CUSTOMER_KMS",
+        "AWS_OWNED_KMS_KEY"
+      ]
+    },
     "EndpointId":{"type":"string"},
     "ErrorMessage":{"type":"string"},
     "Firewall":{
@@ -922,7 +979,8 @@
         "FirewallPolicyChangeProtection":{"shape":"Boolean"},
         "Description":{"shape":"Description"},
         "FirewallId":{"shape":"ResourceId"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"}
       }
     },
     "FirewallMetadata":{
@@ -975,7 +1033,9 @@
         "Tags":{"shape":"TagList"},
         "ConsumedStatelessRuleCapacity":{"shape":"RuleCapacity"},
         "ConsumedStatefulRuleCapacity":{"shape":"RuleCapacity"},
-        "NumberOfAssociations":{"shape":"NumberOfAssociations"}
+        "NumberOfAssociations":{"shape":"NumberOfAssociations"},
+        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"},
+        "LastModifiedTime":{"shape":"LastUpdateTime"}
       }
     },
     "FirewallStatus":{
@@ -987,7 +1047,8 @@
       "members":{
         "Status":{"shape":"FirewallStatusValue"},
         "ConfigurationSyncStateSummary":{"shape":"ConfigurationSyncState"},
-        "SyncStates":{"shape":"SyncStates"}
+        "SyncStates":{"shape":"SyncStates"},
+        "CapacityUsageSummary":{"shape":"CapacityUsageSummary"}
       }
     },
     "FirewallStatusValue":{
@@ -1051,6 +1112,35 @@
         "Definition":{"shape":"VariableDefinitionList"}
       }
     },
+    "IPSetArn":{"type":"string"},
+    "IPSetMetadata":{
+      "type":"structure",
+      "members":{
+        "ResolvedCIDRCount":{"shape":"CIDRCount"}
+      }
+    },
+    "IPSetMetadataMap":{
+      "type":"map",
+      "key":{"shape":"IPSetArn"},
+      "value":{"shape":"IPSetMetadata"}
+    },
+    "IPSetReference":{
+      "type":"structure",
+      "members":{
+        "ReferenceArn":{"shape":"ResourceArn"}
+      }
+    },
+    "IPSetReferenceMap":{
+      "type":"map",
+      "key":{"shape":"IPSetReferenceName"},
+      "value":{"shape":"IPSetReference"}
+    },
+    "IPSetReferenceName":{
+      "type":"string",
+      "max":32,
+      "min":1,
+      "pattern":"^[A-Za-z][A-Za-z0-9_]*$"
+    },
     "IPSets":{
       "type":"map",
       "key":{"shape":"RuleVariableName"},
@@ -1100,12 +1190,19 @@
       },
       "exception":true
     },
+    "KeyId":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":".*\\S.*"
+    },
     "Keyword":{
       "type":"string",
       "max":128,
       "min":1,
       "pattern":".*"
     },
+    "LastUpdateTime":{"type":"timestamp"},
     "LimitExceededException":{
       "type":"structure",
       "members":{
@@ -1147,7 +1244,9 @@
       "members":{
         "NextToken":{"shape":"PaginationToken"},
         "MaxResults":{"shape":"PaginationMaxResults"},
-        "Scope":{"shape":"ResourceManagedStatus"}
+        "Scope":{"shape":"ResourceManagedStatus"},
+        "ManagedType":{"shape":"ResourceManagedType"},
+        "Type":{"shape":"RuleGroupType"}
       }
     },
     "ListRuleGroupsResponse":{
@@ -1265,7 +1364,8 @@
       "type":"string",
       "enum":[
         "PENDING",
-        "IN_SYNC"
+        "IN_SYNC",
+        "CAPACITY_CONSTRAINED"
       ]
     },
     "PolicyString":{
@@ -1348,6 +1448,12 @@
       "members":{
       }
     },
+    "ReferenceSets":{
+      "type":"structure",
+      "members":{
+        "IPSetReferences":{"shape":"IPSetReferenceMap"}
+      }
+    },
     "ResourceArn":{
       "type":"string",
       "max":256,
@@ -1365,6 +1471,13 @@
       "enum":[
         "MANAGED",
         "ACCOUNT"
+      ]
+    },
+    "ResourceManagedType":{
+      "type":"string",
+      "enum":[
+        "AWS_MANAGED_THREAT_SIGNATURES",
+        "AWS_MANAGED_DOMAIN_LISTS"
       ]
     },
     "ResourceName":{
@@ -1411,6 +1524,7 @@
       "required":["RulesSource"],
       "members":{
         "RuleVariables":{"shape":"RuleVariables"},
+        "ReferenceSets":{"shape":"ReferenceSets"},
         "RulesSource":{"shape":"RulesSource"},
         "StatefulRuleOptions":{"shape":"StatefulRuleOptions"}
       }
@@ -1439,7 +1553,11 @@
         "RuleGroupStatus":{"shape":"ResourceStatus"},
         "Tags":{"shape":"TagList"},
         "ConsumedCapacity":{"shape":"RuleCapacity"},
-        "NumberOfAssociations":{"shape":"NumberOfAssociations"}
+        "NumberOfAssociations":{"shape":"NumberOfAssociations"},
+        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"},
+        "SourceMetadata":{"shape":"SourceMetadata"},
+        "SnsTopic":{"shape":"ResourceArn"},
+        "LastModifiedTime":{"shape":"LastUpdateTime"}
       }
     },
     "RuleGroupType":{
@@ -1531,6 +1649,13 @@
       "max":1024,
       "min":1,
       "pattern":"^.*$"
+    },
+    "SourceMetadata":{
+      "type":"structure",
+      "members":{
+        "SourceArn":{"shape":"ResourceArn"},
+        "SourceUpdateToken":{"shape":"UpdateToken"}
+      }
     },
     "StatefulAction":{
       "type":"string",
@@ -1855,6 +1980,24 @@
         "UpdateToken":{"shape":"UpdateToken"}
       }
     },
+    "UpdateFirewallEncryptionConfigurationRequest":{
+      "type":"structure",
+      "members":{
+        "UpdateToken":{"shape":"UpdateToken"},
+        "FirewallArn":{"shape":"ResourceArn"},
+        "FirewallName":{"shape":"ResourceName"},
+        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"}
+      }
+    },
+    "UpdateFirewallEncryptionConfigurationResponse":{
+      "type":"structure",
+      "members":{
+        "FirewallArn":{"shape":"ResourceArn"},
+        "FirewallName":{"shape":"ResourceName"},
+        "UpdateToken":{"shape":"UpdateToken"},
+        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"}
+      }
+    },
     "UpdateFirewallPolicyChangeProtectionRequest":{
       "type":"structure",
       "required":["FirewallPolicyChangeProtection"],
@@ -1886,7 +2029,8 @@
         "FirewallPolicyName":{"shape":"ResourceName"},
         "FirewallPolicy":{"shape":"FirewallPolicy"},
         "Description":{"shape":"Description"},
-        "DryRun":{"shape":"Boolean"}
+        "DryRun":{"shape":"Boolean"},
+        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"}
       }
     },
     "UpdateFirewallPolicyResponse":{
@@ -1927,7 +2071,9 @@
         "Rules":{"shape":"RulesString"},
         "Type":{"shape":"RuleGroupType"},
         "Description":{"shape":"Description"},
-        "DryRun":{"shape":"Boolean"}
+        "DryRun":{"shape":"Boolean"},
+        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"},
+        "SourceMetadata":{"shape":"SourceMetadata"}
       }
     },
     "UpdateRuleGroupResponse":{

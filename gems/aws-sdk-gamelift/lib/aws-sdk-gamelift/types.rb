@@ -166,16 +166,16 @@ module Aws::GameLift
     end
 
     # Temporary access credentials used for uploading game build files to
-    # Amazon Web Services. They are valid for a limited time. If they expire
+    # Amazon GameLift. They are valid for a limited time. If they expire
     # before you upload your game build, get a new set by calling
     # RequestUploadCredentials.
     #
     # @!attribute [rw] access_key_id
-    #   Temporary key allowing access to the Amazon Web Services S3 account.
+    #   Temporary key allowing access to the Amazon GameLift S3 account.
     #   @return [String]
     #
     # @!attribute [rw] secret_access_key
-    #   Temporary secret key allowing access to the Amazon Web Services S3
+    #   Temporary secret key allowing access to the Amazon GameLift S3
     #   account.
     #   @return [String]
     #
@@ -505,12 +505,12 @@ module Aws::GameLift
     #   this parameter only when creating a build with files stored in an
     #   Amazon S3 bucket that you own. The storage location must specify an
     #   Amazon S3 bucket name and key. The location must also specify a role
-    #   ARN that you set up to allow Amazon Web Services to access your
-    #   Amazon S3 bucket. The S3 bucket and your new build must be in the
-    #   same Region.
+    #   ARN that you set up to allow Amazon GameLift to access your Amazon
+    #   S3 bucket. The S3 bucket and your new build must be in the same
+    #   Region.
     #
     #   If a `StorageLocation` is specified, the size of your file can be
-    #   found in your Amazon S3 bucket. Amazon Web Services will report a
+    #   found in your Amazon S3 bucket. Amazon GameLift will report a
     #   `SizeOnDisk` of 0.
     #   @return [Types::S3Location]
     #
@@ -563,8 +563,8 @@ module Aws::GameLift
     #   This element is returned only when the operation is called without a
     #   storage location. It contains credentials to use when you are
     #   uploading a build file to an Amazon S3 bucket that is owned by
-    #   Amazon Web Services. Credentials have a limited life span. To
-    #   refresh these credentials, call RequestUploadCredentials.
+    #   Amazon GameLift. Credentials have a limited life span. To refresh
+    #   these credentials, call RequestUploadCredentials.
     #   @return [Types::AwsCredentials]
     #
     # @!attribute [rw] storage_location
@@ -1009,7 +1009,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name ([ARN][1]) for an IAM role that allows
-    #   Amazon Web Services to access your Amazon EC2 Auto Scaling groups.
+    #   Amazon GameLift to access your Amazon EC2 Auto Scaling groups.
     #
     #
     #
@@ -1814,10 +1814,10 @@ module Aws::GameLift
     #
     # @!attribute [rw] player_data_map
     #   Map of string pairs, each specifying a player ID and a set of
-    #   developer-defined information related to the player. Amazon Web
-    #   Services does not use this data, so it can be formatted as needed
-    #   for use in the game. Any player data strings for player IDs that are
-    #   not included in the `PlayerIds` parameter are ignored.
+    #   developer-defined information related to the player. Amazon GameLift
+    #   does not use this data, so it can be formatted as needed for use in
+    #   the game. Any player data strings for player IDs that are not
+    #   included in the `PlayerIds` parameter are ignored.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreatePlayerSessionsInput AWS API Documentation
@@ -1882,12 +1882,12 @@ module Aws::GameLift
     #   The location of the Amazon S3 bucket where a zipped file containing
     #   your Realtime scripts is stored. The storage location must specify
     #   the Amazon S3 bucket name, the zip file name (the "key"), and a
-    #   role ARN that allows Amazon Web Services to access the Amazon S3
-    #   storage location. The S3 bucket must be in the same Region where you
-    #   want to create a new script. By default, Amazon Web Services uploads
-    #   the latest version of the zip file; if you have S3 object versioning
-    #   turned on, you can use the `ObjectVersion` parameter to specify an
-    #   earlier version.
+    #   role ARN that allows Amazon GameLift to access the Amazon S3 storage
+    #   location. The S3 bucket must be in the same Region where you want to
+    #   create a new script. By default, Amazon GameLift uploads the latest
+    #   version of the zip file; if you have S3 object versioning turned on,
+    #   you can use the `ObjectVersion` parameter to specify an earlier
+    #   version.
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] zip_file
@@ -1936,7 +1936,7 @@ module Aws::GameLift
     #   storage location reflects the information that was provided in the
     #   *CreateScript* request; (2) If the script file was uploaded from a
     #   local zip file, the storage location reflects an S3 location
-    #   controls by the Amazon Web Services service.
+    #   controls by the Amazon GameLift service.
     #   @return [Types::Script]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateScriptOutput AWS API Documentation
@@ -2013,15 +2013,15 @@ module Aws::GameLift
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet. You can use either the fleet ID
-    #   or ARN value. This tells Amazon Web Services which GameLift VPC to
-    #   peer with.
+    #   or ARN value. This tells Amazon GameLift which GameLift VPC to peer
+    #   with.
     #   @return [String]
     #
     # @!attribute [rw] peer_vpc_aws_account_id
     #   A unique identifier for the Amazon Web Services account with the VPC
-    #   that you want to peer your Amazon Web Services fleet with. You can
-    #   find your Account ID in the Amazon Web Services Management Console
-    #   under account settings.
+    #   that you want to peer your Amazon GameLift fleet with. You can find
+    #   your Account ID in the Amazon Web Services Management Console under
+    #   account settings.
     #   @return [String]
     #
     # @!attribute [rw] peer_vpc_id
@@ -5006,7 +5006,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name ([ARN][1]) for an IAM role that allows
-    #   Amazon Web Services to access your Amazon EC2 Auto Scaling groups.
+    #   Amazon GameLift to access your Amazon EC2 Auto Scaling groups.
     #
     #
     #
@@ -6247,18 +6247,16 @@ module Aws::GameLift
     # @!attribute [rw] from_port
     #   A starting value for a range of allowed port numbers.
     #
-    #   For fleets using Linux builds, only port 22, 443, 1026-60000 are
-    #   valid. For fleets using Windows builds, only port 443, 1026-60000
-    #   are valid.
+    #   For fleets using Windows and Linux builds, only ports 1026-60000 are
+    #   valid.
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
     #   An ending value for a range of allowed port numbers. Port numbers
     #   are end-inclusive. This value must be higher than `FromPort`.
     #
-    #   For fleets using Linux builds, only port 22, 443, 1026-60000 are
-    #   valid. For fleets using Windows builds, only port 443, 1026-60000
-    #   are valid.
+    #   For fleets using Windows and Linux builds, only ports 1026-60000 are
+    #   valid.
     #   @return [Integer]
     #
     # @!attribute [rw] ip_range
@@ -6285,10 +6283,10 @@ module Aws::GameLift
     # **This data type is used with the GameLift FleetIQ and game server
     # groups.**
     #
-    # An Amazon EC2 launch template that contains configuration settings and
-    # game server code to be deployed to all instances in a game server
-    # group. The launch template is specified when creating a new game
-    # server group with CreateGameServerGroup.
+    # An Amazon Elastic Compute Cloud launch template that contains
+    # configuration settings and game server code to be deployed to all
+    # instances in a game server group. The launch template is specified
+    # when creating a new game server group with CreateGameServerGroup.
     #
     # @note When making an API call, you may pass LaunchTemplateSpecification
     #   data as a hash:
@@ -6309,9 +6307,9 @@ module Aws::GameLift
     #
     # @!attribute [rw] version
     #   The version of the Amazon EC2 launch template to use. If no version
-    #   is specified, the default version will be used. With Amazon Elastic
-    #   Compute Cloud, you can specify a default version for a launch
-    #   template. If none is set, the default is the first version created.
+    #   is specified, the default version will be used. With Amazon EC2, you
+    #   can specify a default version for a launch template. If none is set,
+    #   the default is the first version created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/LaunchTemplateSpecification AWS API Documentation
@@ -7565,9 +7563,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   Port number for the game session. To connect to a Amazon Web
-    #   Services server process, an app needs both the IP address and port
-    #   number.
+    #   Port number for the game session. To connect to a Amazon GameLift
+    #   server process, an app needs both the IP address and port number.
     #   @return [Integer]
     #
     # @!attribute [rw] player_data
@@ -7729,10 +7726,9 @@ module Aws::GameLift
     #   @return [Integer]
     #
     # @!attribute [rw] metric_name
-    #   Name of the Amazon Web Services-defined metric that is used to
-    #   trigger a scaling adjustment. For detailed descriptions of fleet
-    #   metrics, see [Monitor Amazon Web Services with Amazon
-    #   CloudWatch][1].
+    #   Name of the Amazon GameLift-defined metric that is used to trigger a
+    #   scaling adjustment. For detailed descriptions of fleet metrics, see
+    #   [Monitor Amazon GameLift with Amazon CloudWatch][1].
     #
     #   * **ActivatingGameSessions** -- Game sessions in the process of
     #     being created.
@@ -8172,8 +8168,8 @@ module Aws::GameLift
     end
 
     # The location in Amazon S3 where build or script files are stored for
-    # access by Amazon Web Services. This location is specified in
-    # CreateBuild, CreateScript, and UpdateScript requests.
+    # access by Amazon GameLift. This location is specified in CreateBuild,
+    # CreateScript, and UpdateScript requests.
     #
     # @note When making an API call, you may pass S3Location
     #   data as a hash:
@@ -8201,7 +8197,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name ([ARN][1]) for an IAM role that allows
-    #   Amazon Web Services to access the S3 bucket.
+    #   Amazon GameLift to access the S3 bucket.
     #
     #
     #
@@ -8210,10 +8206,10 @@ module Aws::GameLift
     #
     # @!attribute [rw] object_version
     #   The version of the file, if object versioning is turned on for the
-    #   bucket. Amazon Web Services uses this information when retrieving
-    #   files from an S3 bucket that you own. Use this parameter to specify
-    #   a specific version of the file. If not set, the latest version of
-    #   the file is retrieved.
+    #   bucket. Amazon GameLift uses this information when retrieving files
+    #   from an S3 bucket that you own. Use this parameter to specify a
+    #   specific version of the file. If not set, the latest version of the
+    #   file is retrieved.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/S3Location AWS API Documentation
@@ -8323,10 +8319,9 @@ module Aws::GameLift
     #   @return [Integer]
     #
     # @!attribute [rw] metric_name
-    #   Name of the Amazon Web Services-defined metric that is used to
-    #   trigger a scaling adjustment. For detailed descriptions of fleet
-    #   metrics, see [Monitor Amazon Web Services with Amazon
-    #   CloudWatch][1].
+    #   Name of the Amazon GameLift-defined metric that is used to trigger a
+    #   scaling adjustment. For detailed descriptions of fleet metrics, see
+    #   [Monitor Amazon GameLift with Amazon CloudWatch][1].
     #
     #   * **ActivatingGameSessions** -- Game sessions in the process of
     #     being created.
@@ -8466,7 +8461,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] storage_location
     #   The location in Amazon S3 where build or script files are stored for
-    #   access by Amazon Web Services. This location is specified in
+    #   access by Amazon GameLift. This location is specified in
     #   CreateBuild, CreateScript, and UpdateScript requests.
     #   @return [Types::S3Location]
     #
@@ -8886,9 +8881,9 @@ module Aws::GameLift
     #
     # @!attribute [rw] ticket_id
     #   A unique identifier for a matchmaking ticket. If no ticket ID is
-    #   specified here, Amazon Web Services will generate one in the form of
-    #   a UUID. Use this identifier to track the match backfill ticket
-    #   status and retrieve match results.
+    #   specified here, Amazon GameLift will generate one in the form of a
+    #   UUID. Use this identifier to track the match backfill ticket status
+    #   and retrieve match results.
     #   @return [String]
     #
     # @!attribute [rw] configuration_name
@@ -8979,9 +8974,9 @@ module Aws::GameLift
     #
     # @!attribute [rw] ticket_id
     #   A unique identifier for a matchmaking ticket. If no ticket ID is
-    #   specified here, Amazon Web Services will generate one in the form of
-    #   a UUID. Use this identifier to track the matchmaking ticket status
-    #   and retrieve match results.
+    #   specified here, Amazon GameLift will generate one in the form of a
+    #   UUID. Use this identifier to track the matchmaking ticket status and
+    #   retrieve match results.
     #   @return [String]
     #
     # @!attribute [rw] configuration_name
@@ -9300,10 +9295,9 @@ module Aws::GameLift
     # Settings for a target-based scaling policy (see ScalingPolicy. A
     # target-based policy tracks a particular fleet metric specifies a
     # target value for the metric. As player usage changes, the policy
-    # triggers Amazon Web Services to adjust capacity so that the metric
-    # returns to the target value. The target configuration specifies
-    # settings as needed for the target based policy, including the target
-    # value.
+    # triggers Amazon GameLift to adjust capacity so that the metric returns
+    # to the target value. The target configuration specifies settings as
+    # needed for the target based policy, including the target value.
     #
     # **Related actions**
     #
@@ -9818,7 +9812,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name ([ARN][1]) for an IAM role that allows
-    #   Amazon Web Services to access your Amazon EC2 Auto Scaling groups.
+    #   Amazon GameLift to access your Amazon EC2 Auto Scaling groups.
     #
     #
     #
@@ -10443,12 +10437,12 @@ module Aws::GameLift
     #   The location of the Amazon S3 bucket where a zipped file containing
     #   your Realtime scripts is stored. The storage location must specify
     #   the Amazon S3 bucket name, the zip file name (the "key"), and a
-    #   role ARN that allows Amazon Web Services to access the Amazon S3
-    #   storage location. The S3 bucket must be in the same Region where you
-    #   want to create a new script. By default, Amazon Web Services uploads
-    #   the latest version of the zip file; if you have S3 object versioning
-    #   turned on, you can use the `ObjectVersion` parameter to specify an
-    #   earlier version.
+    #   role ARN that allows Amazon GameLift to access the Amazon S3 storage
+    #   location. The S3 bucket must be in the same Region where you want to
+    #   create a new script. By default, Amazon GameLift uploads the latest
+    #   version of the zip file; if you have S3 object versioning turned on,
+    #   you can use the `ObjectVersion` parameter to specify an earlier
+    #   version.
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] zip_file
@@ -10481,7 +10475,7 @@ module Aws::GameLift
     #   storage location reflects the information that was provided in the
     #   *CreateScript* request; (2) If the script file was uploaded from a
     #   local zip file, the storage location reflects an S3 location
-    #   controls by the Amazon Web Services service.
+    #   controls by the Amazon GameLift service.
     #   @return [Types::Script]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateScriptOutput AWS API Documentation
@@ -10529,7 +10523,7 @@ module Aws::GameLift
     end
 
     # Represents an authorization for a VPC peering connection between the
-    # VPC for an Amazon Web Services fleet and another VPC on an account you
+    # VPC for an Amazon GameLift fleet and another VPC on an account you
     # have access to. This authorization must exist and be valid for the
     # peering connection to be established. Authorizations are valid for 24
     # hours after they are issued.
@@ -10592,7 +10586,7 @@ module Aws::GameLift
     end
 
     # Represents a peering connection between a VPC on one of your Amazon
-    # Web Services accounts and the VPC for your Amazon Web Services fleets.
+    # Web Services accounts and the VPC for your Amazon GameLift fleets.
     # This record may be for an active peering connection or a pending
     # connection that has not yet been established.
     #
@@ -10609,7 +10603,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet. This ID determines the ID of the
-    #   Amazon Web Services VPC for your fleet.
+    #   Amazon GameLift VPC for your fleet.
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
@@ -10653,10 +10647,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_lift_vpc_id
-    #   A unique identifier for the VPC that contains the Amazon Web
-    #   Services fleet for this connection. This VPC is managed by Amazon
-    #   Web Services and does not appear in your Amazon Web Services
-    #   account.
+    #   A unique identifier for the VPC that contains the Amazon GameLift
+    #   fleet for this connection. This VPC is managed by Amazon GameLift
+    #   and does not appear in your Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/VpcPeeringConnection AWS API Documentation

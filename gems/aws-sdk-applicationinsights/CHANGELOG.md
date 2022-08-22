@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2022-06-02)
+------------------
+
+* Feature - Provide Account Level onboarding support through CFN/CLI
+
 1.30.0 (2022-02-24)
 ------------------
 

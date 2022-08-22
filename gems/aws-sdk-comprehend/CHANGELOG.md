@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2022-05-20)
+------------------
+
+* Feature - Comprehend releases 14 new entity types for DetectPiiEntities and ContainsPiiEntities APIs.
+
 1.60.0 (2022-03-09)
 ------------------
 

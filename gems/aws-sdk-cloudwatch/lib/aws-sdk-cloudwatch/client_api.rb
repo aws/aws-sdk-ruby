@@ -16,6 +16,8 @@ module Aws::CloudWatch
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     ActionPrefix = Shapes::StringShape.new(name: 'ActionPrefix')
     ActionsEnabled = Shapes::BooleanShape.new(name: 'ActionsEnabled')
+    ActionsSuppressedBy = Shapes::StringShape.new(name: 'ActionsSuppressedBy')
+    ActionsSuppressedReason = Shapes::StringShape.new(name: 'ActionsSuppressedReason')
     AlarmArn = Shapes::StringShape.new(name: 'AlarmArn')
     AlarmDescription = Shapes::StringShape.new(name: 'AlarmDescription')
     AlarmHistoryItem = Shapes::StructureShape.new(name: 'AlarmHistoryItem')
@@ -131,6 +133,7 @@ module Aws::CloudWatch
     InsightRuleContributorKeys = Shapes::ListShape.new(name: 'InsightRuleContributorKeys')
     InsightRuleContributors = Shapes::ListShape.new(name: 'InsightRuleContributors')
     InsightRuleDefinition = Shapes::StringShape.new(name: 'InsightRuleDefinition')
+    InsightRuleIsManaged = Shapes::BooleanShape.new(name: 'InsightRuleIsManaged')
     InsightRuleMaxResults = Shapes::IntegerShape.new(name: 'InsightRuleMaxResults')
     InsightRuleMetricDatapoint = Shapes::StructureShape.new(name: 'InsightRuleMetricDatapoint')
     InsightRuleMetricDatapoints = Shapes::ListShape.new(name: 'InsightRuleMetricDatapoints')
@@ -156,6 +159,8 @@ module Aws::CloudWatch
     LimitExceededFault = Shapes::StructureShape.new(name: 'LimitExceededFault')
     ListDashboardsInput = Shapes::StructureShape.new(name: 'ListDashboardsInput')
     ListDashboardsOutput = Shapes::StructureShape.new(name: 'ListDashboardsOutput')
+    ListManagedInsightRulesInput = Shapes::StructureShape.new(name: 'ListManagedInsightRulesInput')
+    ListManagedInsightRulesOutput = Shapes::StructureShape.new(name: 'ListManagedInsightRulesOutput')
     ListMetricStreamsInput = Shapes::StructureShape.new(name: 'ListMetricStreamsInput')
     ListMetricStreamsMaxResults = Shapes::IntegerShape.new(name: 'ListMetricStreamsMaxResults')
     ListMetricStreamsOutput = Shapes::StructureShape.new(name: 'ListMetricStreamsOutput')
@@ -163,6 +168,11 @@ module Aws::CloudWatch
     ListMetricsOutput = Shapes::StructureShape.new(name: 'ListMetricsOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
+    ManagedRule = Shapes::StructureShape.new(name: 'ManagedRule')
+    ManagedRuleDescription = Shapes::StructureShape.new(name: 'ManagedRuleDescription')
+    ManagedRuleDescriptions = Shapes::ListShape.new(name: 'ManagedRuleDescriptions')
+    ManagedRuleState = Shapes::StructureShape.new(name: 'ManagedRuleState')
+    ManagedRules = Shapes::ListShape.new(name: 'ManagedRules')
     MaxRecords = Shapes::IntegerShape.new(name: 'MaxRecords')
     MaxReturnedResultsCount = Shapes::IntegerShape.new(name: 'MaxReturnedResultsCount')
     Message = Shapes::StringShape.new(name: 'Message')
@@ -215,6 +225,8 @@ module Aws::CloudWatch
     PutDashboardOutput = Shapes::StructureShape.new(name: 'PutDashboardOutput')
     PutInsightRuleInput = Shapes::StructureShape.new(name: 'PutInsightRuleInput')
     PutInsightRuleOutput = Shapes::StructureShape.new(name: 'PutInsightRuleOutput')
+    PutManagedInsightRulesInput = Shapes::StructureShape.new(name: 'PutManagedInsightRulesInput')
+    PutManagedInsightRulesOutput = Shapes::StructureShape.new(name: 'PutManagedInsightRulesOutput')
     PutMetricAlarmInput = Shapes::StructureShape.new(name: 'PutMetricAlarmInput')
     PutMetricDataInput = Shapes::StructureShape.new(name: 'PutMetricDataInput')
     PutMetricStreamInput = Shapes::StructureShape.new(name: 'PutMetricStreamInput')
@@ -246,6 +258,7 @@ module Aws::CloudWatch
     StopMetricStreamsInput = Shapes::StructureShape.new(name: 'StopMetricStreamsInput')
     StopMetricStreamsOutput = Shapes::StructureShape.new(name: 'StopMetricStreamsOutput')
     StorageResolution = Shapes::IntegerShape.new(name: 'StorageResolution')
+    SuppressorPeriod = Shapes::IntegerShape.new(name: 'SuppressorPeriod')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -253,6 +266,7 @@ module Aws::CloudWatch
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TemplateName = Shapes::StringShape.new(name: 'TemplateName')
     Threshold = Shapes::FloatShape.new(name: 'Threshold')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Timestamps = Shapes::ListShape.new(name: 'Timestamps')
@@ -310,6 +324,12 @@ module Aws::CloudWatch
     CompositeAlarm.add_member(:state_reason_data, Shapes::ShapeRef.new(shape: StateReasonData, location_name: "StateReasonData"))
     CompositeAlarm.add_member(:state_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StateUpdatedTimestamp"))
     CompositeAlarm.add_member(:state_value, Shapes::ShapeRef.new(shape: StateValue, location_name: "StateValue"))
+    CompositeAlarm.add_member(:state_transitioned_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StateTransitionedTimestamp"))
+    CompositeAlarm.add_member(:actions_suppressed_by, Shapes::ShapeRef.new(shape: ActionsSuppressedBy, location_name: "ActionsSuppressedBy"))
+    CompositeAlarm.add_member(:actions_suppressed_reason, Shapes::ShapeRef.new(shape: ActionsSuppressedReason, location_name: "ActionsSuppressedReason"))
+    CompositeAlarm.add_member(:actions_suppressor, Shapes::ShapeRef.new(shape: AlarmArn, location_name: "ActionsSuppressor"))
+    CompositeAlarm.add_member(:actions_suppressor_wait_period, Shapes::ShapeRef.new(shape: SuppressorPeriod, location_name: "ActionsSuppressorWaitPeriod"))
+    CompositeAlarm.add_member(:actions_suppressor_extension_period, Shapes::ShapeRef.new(shape: SuppressorPeriod, location_name: "ActionsSuppressorExtensionPeriod"))
     CompositeAlarm.struct_class = Types::CompositeAlarm
 
     CompositeAlarms.member = Shapes::ShapeRef.new(shape: CompositeAlarm)
@@ -562,6 +582,7 @@ module Aws::CloudWatch
     InsightRule.add_member(:state, Shapes::ShapeRef.new(shape: InsightRuleState, required: true, location_name: "State"))
     InsightRule.add_member(:schema, Shapes::ShapeRef.new(shape: InsightRuleSchema, required: true, location_name: "Schema"))
     InsightRule.add_member(:definition, Shapes::ShapeRef.new(shape: InsightRuleDefinition, required: true, location_name: "Definition"))
+    InsightRule.add_member(:managed_rule, Shapes::ShapeRef.new(shape: InsightRuleIsManaged, location_name: "ManagedRule"))
     InsightRule.struct_class = Types::InsightRule
 
     InsightRuleContributor.add_member(:keys, Shapes::ShapeRef.new(shape: InsightRuleContributorKeys, required: true, location_name: "Keys"))
@@ -630,6 +651,15 @@ module Aws::CloudWatch
     ListDashboardsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDashboardsOutput.struct_class = Types::ListDashboardsOutput
 
+    ListManagedInsightRulesInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ListManagedInsightRulesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListManagedInsightRulesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: InsightRuleMaxResults, location_name: "MaxResults"))
+    ListManagedInsightRulesInput.struct_class = Types::ListManagedInsightRulesInput
+
+    ListManagedInsightRulesOutput.add_member(:managed_rules, Shapes::ShapeRef.new(shape: ManagedRuleDescriptions, location_name: "ManagedRules"))
+    ListManagedInsightRulesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListManagedInsightRulesOutput.struct_class = Types::ListManagedInsightRulesOutput
+
     ListMetricStreamsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListMetricStreamsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMetricStreamsMaxResults, location_name: "MaxResults"))
     ListMetricStreamsInput.struct_class = Types::ListMetricStreamsInput
@@ -654,6 +684,24 @@ module Aws::CloudWatch
 
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
+    ManagedRule.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "TemplateName"))
+    ManagedRule.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ManagedRule.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ManagedRule.struct_class = Types::ManagedRule
+
+    ManagedRuleDescription.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "TemplateName"))
+    ManagedRuleDescription.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceARN"))
+    ManagedRuleDescription.add_member(:rule_state, Shapes::ShapeRef.new(shape: ManagedRuleState, location_name: "RuleState"))
+    ManagedRuleDescription.struct_class = Types::ManagedRuleDescription
+
+    ManagedRuleDescriptions.member = Shapes::ShapeRef.new(shape: ManagedRuleDescription)
+
+    ManagedRuleState.add_member(:rule_name, Shapes::ShapeRef.new(shape: InsightRuleName, required: true, location_name: "RuleName"))
+    ManagedRuleState.add_member(:state, Shapes::ShapeRef.new(shape: InsightRuleState, required: true, location_name: "State"))
+    ManagedRuleState.struct_class = Types::ManagedRuleState
+
+    ManagedRules.member = Shapes::ShapeRef.new(shape: ManagedRule)
 
     MessageData.add_member(:code, Shapes::ShapeRef.new(shape: MessageDataCode, location_name: "Code"))
     MessageData.add_member(:value, Shapes::ShapeRef.new(shape: MessageDataValue, location_name: "Value"))
@@ -802,6 +850,9 @@ module Aws::CloudWatch
     PutCompositeAlarmInput.add_member(:insufficient_data_actions, Shapes::ShapeRef.new(shape: ResourceList, location_name: "InsufficientDataActions"))
     PutCompositeAlarmInput.add_member(:ok_actions, Shapes::ShapeRef.new(shape: ResourceList, location_name: "OKActions"))
     PutCompositeAlarmInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    PutCompositeAlarmInput.add_member(:actions_suppressor, Shapes::ShapeRef.new(shape: AlarmArn, location_name: "ActionsSuppressor"))
+    PutCompositeAlarmInput.add_member(:actions_suppressor_wait_period, Shapes::ShapeRef.new(shape: SuppressorPeriod, location_name: "ActionsSuppressorWaitPeriod"))
+    PutCompositeAlarmInput.add_member(:actions_suppressor_extension_period, Shapes::ShapeRef.new(shape: SuppressorPeriod, location_name: "ActionsSuppressorExtensionPeriod"))
     PutCompositeAlarmInput.struct_class = Types::PutCompositeAlarmInput
 
     PutDashboardInput.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: DashboardName, required: true, location_name: "DashboardName"))
@@ -818,6 +869,12 @@ module Aws::CloudWatch
     PutInsightRuleInput.struct_class = Types::PutInsightRuleInput
 
     PutInsightRuleOutput.struct_class = Types::PutInsightRuleOutput
+
+    PutManagedInsightRulesInput.add_member(:managed_rules, Shapes::ShapeRef.new(shape: ManagedRules, required: true, location_name: "ManagedRules"))
+    PutManagedInsightRulesInput.struct_class = Types::PutManagedInsightRulesInput
+
+    PutManagedInsightRulesOutput.add_member(:failures, Shapes::ShapeRef.new(shape: BatchFailures, location_name: "Failures"))
+    PutManagedInsightRulesOutput.struct_class = Types::PutManagedInsightRulesOutput
 
     PutMetricAlarmInput.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, required: true, location_name: "AlarmName"))
     PutMetricAlarmInput.add_member(:alarm_description, Shapes::ShapeRef.new(shape: AlarmDescription, location_name: "AlarmDescription"))
@@ -1047,6 +1104,12 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_insight_rules, Seahorse::Model::Operation.new.tap do |o|
@@ -1186,6 +1249,23 @@ module Aws::CloudWatch
         )
       end)
 
+      api.add_operation(:list_managed_insight_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListManagedInsightRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListManagedInsightRulesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListManagedInsightRulesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_metric_streams, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListMetricStreams"
         o.http_method = "POST"
@@ -1271,6 +1351,16 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:put_managed_insight_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutManagedInsightRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutManagedInsightRulesInput)
+        o.output = Shapes::ShapeRef.new(shape: PutManagedInsightRulesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
       end)
 
       api.add_operation(:put_metric_alarm, Seahorse::Model::Operation.new.tap do |o|

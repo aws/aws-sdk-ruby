@@ -490,6 +490,60 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Creates an `AvailabilityConfiguration` for the given WorkMail
+    # organization and domain.
+    #
+    # @option params [String] :client_token
+    #   An idempotent token that ensures that an API request is executed only
+    #   once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization for which the
+    #   `AvailabilityConfiguration` will be created.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain to which the provider applies.
+    #
+    # @option params [Types::EwsAvailabilityProvider] :ews_provider
+    #   Exchange Web Services (EWS) availability provider definition. The
+    #   request must contain exactly one provider definition, either
+    #   `EwsProvider` or `LambdaProvider`.
+    #
+    # @option params [Types::LambdaAvailabilityProvider] :lambda_provider
+    #   Lambda availability provider definition. The request must contain
+    #   exactly one provider definition, either `EwsProvider` or
+    #   `LambdaProvider`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_availability_configuration({
+    #     client_token: "IdempotencyClientToken",
+    #     organization_id: "OrganizationId", # required
+    #     domain_name: "DomainName", # required
+    #     ews_provider: {
+    #       ews_endpoint: "Url", # required
+    #       ews_username: "ExternalUserName", # required
+    #       ews_password: "Password", # required
+    #     },
+    #     lambda_provider: {
+    #       lambda_arn: "LambdaArn", # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateAvailabilityConfiguration AWS API Documentation
+    #
+    # @overload create_availability_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_availability_configuration(params = {}, options = {})
+      req = build_request(:create_availability_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates a group that can be used in Amazon WorkMail by calling the
     # RegisterToWorkMail operation.
     #
@@ -836,6 +890,34 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def delete_alias(params = {}, options = {})
       req = build_request(:delete_alias, params)
+      req.send_request(options)
+    end
+
+    # Deletes the `AvailabilityConfiguration` for the given WorkMail
+    # organization and domain.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization for which the
+    #   `AvailabilityConfiguration` will be deleted.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain for which the `AvailabilityConfiguration` will be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_availability_configuration({
+    #     organization_id: "OrganizationId", # required
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteAvailabilityConfiguration AWS API Documentation
+    #
+    # @overload delete_availability_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_availability_configuration(params = {}, options = {})
+      req = build_request(:delete_availability_configuration, params)
       req.send_request(options)
     end
 
@@ -1919,6 +2001,56 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # List all the `AvailabilityConfiguration`'s for the given WorkMail
+    # organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization for which the
+    #   `AvailabilityConfiguration`'s will be listed.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results. The first call
+    #   does not require a token.
+    #
+    # @return [Types::ListAvailabilityConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAvailabilityConfigurationsResponse#availability_configurations #availability_configurations} => Array&lt;Types::AvailabilityConfiguration&gt;
+    #   * {Types::ListAvailabilityConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_availability_configurations({
+    #     organization_id: "OrganizationId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.availability_configurations #=> Array
+    #   resp.availability_configurations[0].domain_name #=> String
+    #   resp.availability_configurations[0].provider_type #=> String, one of "EWS", "LAMBDA"
+    #   resp.availability_configurations[0].ews_provider.ews_endpoint #=> String
+    #   resp.availability_configurations[0].ews_provider.ews_username #=> String
+    #   resp.availability_configurations[0].lambda_provider.lambda_arn #=> String
+    #   resp.availability_configurations[0].date_created #=> Time
+    #   resp.availability_configurations[0].date_modified #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListAvailabilityConfigurations AWS API Documentation
+    #
+    # @overload list_availability_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_availability_configurations(params = {}, options = {})
+      req = build_request(:list_availability_configurations, params)
+      req.send_request(options)
+    end
+
     # Returns an overview of the members of a group. Users and groups can be
     # members of a group.
     #
@@ -2975,6 +3107,70 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Performs a test on an availability provider to ensure that access is
+    # allowed. For EWS, it verifies the provided credentials can be used to
+    # successfully log in. For Lambda, it verifies that the Lambda function
+    # can be invoked and that the resource access policy was configured to
+    # deny anonymous access. An anonymous invocation is one done without
+    # providing either a `SourceArn` or `SourceAccount` header.
+    #
+    # <note markdown="1"> The request must contain either one provider definition (`EwsProvider`
+    # or `LambdaProvider`) or the `DomainName` parameter. If the
+    # `DomainName` parameter is provided, the configuration stored under the
+    # `DomainName` will be tested.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization where the availability provider will
+    #   be tested.
+    #
+    # @option params [String] :domain_name
+    #   The domain to which the provider applies. If this field is provided, a
+    #   stored availability provider associated to this domain name will be
+    #   tested.
+    #
+    # @option params [Types::EwsAvailabilityProvider] :ews_provider
+    #   Describes an EWS based availability provider. This is only used as
+    #   input to the service.
+    #
+    # @option params [Types::LambdaAvailabilityProvider] :lambda_provider
+    #   Describes a Lambda based availability provider.
+    #
+    # @return [Types::TestAvailabilityConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TestAvailabilityConfigurationResponse#test_passed #test_passed} => Boolean
+    #   * {Types::TestAvailabilityConfigurationResponse#failure_reason #failure_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_availability_configuration({
+    #     organization_id: "OrganizationId", # required
+    #     domain_name: "DomainName",
+    #     ews_provider: {
+    #       ews_endpoint: "Url", # required
+    #       ews_username: "ExternalUserName", # required
+    #       ews_password: "Password", # required
+    #     },
+    #     lambda_provider: {
+    #       lambda_arn: "LambdaArn", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_passed #=> Boolean
+    #   resp.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/TestAvailabilityConfiguration AWS API Documentation
+    #
+    # @overload test_availability_configuration(params = {})
+    # @param [Hash] params ({})
+    def test_availability_configuration(params = {}, options = {})
+      req = build_request(:test_availability_configuration, params)
+      req.send_request(options)
+    end
+
     # Untags the specified tags from the specified Amazon WorkMail
     # organization resource.
     #
@@ -2999,6 +3195,55 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing `AvailabilityConfiguration` for the given WorkMail
+    # organization and domain.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization for which the
+    #   `AvailabilityConfiguration` will be updated.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain to which the provider applies the availability
+    #   configuration.
+    #
+    # @option params [Types::EwsAvailabilityProvider] :ews_provider
+    #   The EWS availability provider definition. The request must contain
+    #   exactly one provider definition, either `EwsProvider` or
+    #   `LambdaProvider`. The previously stored provider will be overridden by
+    #   the one provided.
+    #
+    # @option params [Types::LambdaAvailabilityProvider] :lambda_provider
+    #   The Lambda availability provider definition. The request must contain
+    #   exactly one provider definition, either `EwsProvider` or
+    #   `LambdaProvider`. The previously stored provider will be overridden by
+    #   the one provided.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_availability_configuration({
+    #     organization_id: "OrganizationId", # required
+    #     domain_name: "DomainName", # required
+    #     ews_provider: {
+    #       ews_endpoint: "Url", # required
+    #       ews_username: "ExternalUserName", # required
+    #       ews_password: "Password", # required
+    #     },
+    #     lambda_provider: {
+    #       lambda_arn: "LambdaArn", # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateAvailabilityConfiguration AWS API Documentation
+    #
+    # @overload update_availability_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_availability_configuration(params = {}, options = {})
+      req = build_request(:update_availability_configuration, params)
       req.send_request(options)
     end
 
@@ -3226,7 +3471,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

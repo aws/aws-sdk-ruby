@@ -69,6 +69,8 @@ module Aws::RDS
   #
   # | waiter_name                   | params                                 | :delay   | :max_attempts |
   # | ----------------------------- | -------------------------------------- | -------- | ------------- |
+  # | db_cluster_available          | {Client#describe_db_clusters}          | 30       | 60            |
+  # | db_cluster_deleted            | {Client#describe_db_clusters}          | 30       | 60            |
   # | db_cluster_snapshot_available | {Client#describe_db_cluster_snapshots} | 30       | 60            |
   # | db_cluster_snapshot_deleted   | {Client#describe_db_cluster_snapshots} | 30       | 60            |
   # | db_instance_available         | {Client#describe_db_instances}         | 30       | 60            |
@@ -77,6 +79,141 @@ module Aws::RDS
   # | db_snapshot_deleted           | {Client#describe_db_snapshots}         | 30       | 60            |
   #
   module Waiters
+
+    class DBClusterAvailable
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_db_clusters,
+            acceptors: [
+              {
+                "expected" => "available",
+                "matcher" => "pathAll",
+                "state" => "success",
+                "argument" => "db_clusters[].status"
+              },
+              {
+                "expected" => "deleted",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_clusters[].status"
+              },
+              {
+                "expected" => "deleting",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_clusters[].status"
+              },
+              {
+                "expected" => "failed",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_clusters[].status"
+              },
+              {
+                "expected" => "incompatible-restore",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_clusters[].status"
+              },
+              {
+                "expected" => "incompatible-parameters",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_clusters[].status"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_db_clusters)
+      # @return (see Client#describe_db_clusters)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class DBClusterDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_db_clusters,
+            acceptors: [
+              {
+                "expected" => true,
+                "matcher" => "path",
+                "state" => "success",
+                "argument" => "length(db_clusters) == `0`"
+              },
+              {
+                "expected" => "DBClusterNotFoundFault",
+                "matcher" => "error",
+                "state" => "success"
+              },
+              {
+                "expected" => "creating",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_clusters[].status"
+              },
+              {
+                "expected" => "modifying",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_clusters[].status"
+              },
+              {
+                "expected" => "rebooting",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_clusters[].status"
+              },
+              {
+                "expected" => "resetting-master-credentials",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_clusters[].status"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_db_clusters)
+      # @return (see Client#describe_db_clusters)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
 
     class DBClusterSnapshotAvailable
 

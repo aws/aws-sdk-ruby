@@ -27,6 +27,10 @@ module Aws::IoTEventsData
     BatchAcknowledgeAlarmResponse = Shapes::StructureShape.new(name: 'BatchAcknowledgeAlarmResponse')
     BatchAlarmActionErrorEntries = Shapes::ListShape.new(name: 'BatchAlarmActionErrorEntries')
     BatchAlarmActionErrorEntry = Shapes::StructureShape.new(name: 'BatchAlarmActionErrorEntry')
+    BatchDeleteDetectorErrorEntries = Shapes::ListShape.new(name: 'BatchDeleteDetectorErrorEntries')
+    BatchDeleteDetectorErrorEntry = Shapes::StructureShape.new(name: 'BatchDeleteDetectorErrorEntry')
+    BatchDeleteDetectorRequest = Shapes::StructureShape.new(name: 'BatchDeleteDetectorRequest')
+    BatchDeleteDetectorResponse = Shapes::StructureShape.new(name: 'BatchDeleteDetectorResponse')
     BatchDisableAlarmRequest = Shapes::StructureShape.new(name: 'BatchDisableAlarmRequest')
     BatchDisableAlarmResponse = Shapes::StructureShape.new(name: 'BatchDisableAlarmResponse')
     BatchEnableAlarmRequest = Shapes::StructureShape.new(name: 'BatchEnableAlarmRequest')
@@ -46,6 +50,8 @@ module Aws::IoTEventsData
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     CustomerAction = Shapes::StructureShape.new(name: 'CustomerAction')
     CustomerActionName = Shapes::StringShape.new(name: 'CustomerActionName')
+    DeleteDetectorRequest = Shapes::StructureShape.new(name: 'DeleteDetectorRequest')
+    DeleteDetectorRequests = Shapes::ListShape.new(name: 'DeleteDetectorRequests')
     DescribeAlarmRequest = Shapes::StructureShape.new(name: 'DescribeAlarmRequest')
     DescribeAlarmResponse = Shapes::StructureShape.new(name: 'DescribeAlarmResponse')
     DescribeDetectorRequest = Shapes::StructureShape.new(name: 'DescribeDetectorRequest')
@@ -170,6 +176,19 @@ module Aws::IoTEventsData
     BatchAlarmActionErrorEntry.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
     BatchAlarmActionErrorEntry.struct_class = Types::BatchAlarmActionErrorEntry
 
+    BatchDeleteDetectorErrorEntries.member = Shapes::ShapeRef.new(shape: BatchDeleteDetectorErrorEntry)
+
+    BatchDeleteDetectorErrorEntry.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "messageId"))
+    BatchDeleteDetectorErrorEntry.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
+    BatchDeleteDetectorErrorEntry.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    BatchDeleteDetectorErrorEntry.struct_class = Types::BatchDeleteDetectorErrorEntry
+
+    BatchDeleteDetectorRequest.add_member(:detectors, Shapes::ShapeRef.new(shape: DeleteDetectorRequests, required: true, location_name: "detectors"))
+    BatchDeleteDetectorRequest.struct_class = Types::BatchDeleteDetectorRequest
+
+    BatchDeleteDetectorResponse.add_member(:batch_delete_detector_error_entries, Shapes::ShapeRef.new(shape: BatchDeleteDetectorErrorEntries, location_name: "batchDeleteDetectorErrorEntries"))
+    BatchDeleteDetectorResponse.struct_class = Types::BatchDeleteDetectorResponse
+
     BatchDisableAlarmRequest.add_member(:disable_action_requests, Shapes::ShapeRef.new(shape: DisableAlarmActionRequests, required: true, location_name: "disableActionRequests"))
     BatchDisableAlarmRequest.struct_class = Types::BatchDisableAlarmRequest
 
@@ -227,6 +246,13 @@ module Aws::IoTEventsData
     CustomerAction.add_member(:acknowledge_action_configuration, Shapes::ShapeRef.new(shape: AcknowledgeActionConfiguration, location_name: "acknowledgeActionConfiguration"))
     CustomerAction.add_member(:reset_action_configuration, Shapes::ShapeRef.new(shape: ResetActionConfiguration, location_name: "resetActionConfiguration"))
     CustomerAction.struct_class = Types::CustomerAction
+
+    DeleteDetectorRequest.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location_name: "messageId"))
+    DeleteDetectorRequest.add_member(:detector_model_name, Shapes::ShapeRef.new(shape: DetectorModelName, required: true, location_name: "detectorModelName"))
+    DeleteDetectorRequest.add_member(:key_value, Shapes::ShapeRef.new(shape: KeyValue, location_name: "keyValue"))
+    DeleteDetectorRequest.struct_class = Types::DeleteDetectorRequest
+
+    DeleteDetectorRequests.member = Shapes::ShapeRef.new(shape: DeleteDetectorRequest)
 
     DescribeAlarmRequest.add_member(:alarm_model_name, Shapes::ShapeRef.new(shape: AlarmModelName, required: true, location: "uri", location_name: "alarmModelName"))
     DescribeAlarmRequest.add_member(:key_value, Shapes::ShapeRef.new(shape: KeyValue, location: "querystring", location_name: "keyValue"))
@@ -434,6 +460,18 @@ module Aws::IoTEventsData
         o.http_request_uri = "/alarms/acknowledge"
         o.input = Shapes::ShapeRef.new(shape: BatchAcknowledgeAlarmRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchAcknowledgeAlarmResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:batch_delete_detector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDeleteDetector"
+        o.http_method = "POST"
+        o.http_request_uri = "/detectors/delete"
+        o.input = Shapes::ShapeRef.new(shape: BatchDeleteDetectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDeleteDetectorResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)

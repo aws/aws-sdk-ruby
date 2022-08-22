@@ -13,6 +13,7 @@ module Aws::RDSDataService
 
     include Seahorse::Model
 
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArrayOfArray = Shapes::ListShape.new(name: 'ArrayOfArray')
     ArrayValue = Shapes::UnionShape.new(name: 'ArrayValue')
@@ -44,16 +45,19 @@ module Aws::RDSDataService
     Field = Shapes::UnionShape.new(name: 'Field')
     FieldList = Shapes::ListShape.new(name: 'FieldList')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
+    FormattedSqlRecords = Shapes::StringShape.new(name: 'FormattedSqlRecords')
     Id = Shapes::StringShape.new(name: 'Id')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     Long = Shapes::IntegerShape.new(name: 'Long')
     LongArray = Shapes::ListShape.new(name: 'LongArray')
+    LongReturnType = Shapes::StringShape.new(name: 'LongReturnType')
     Metadata = Shapes::ListShape.new(name: 'Metadata')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     Record = Shapes::StructureShape.new(name: 'Record')
     Records = Shapes::ListShape.new(name: 'Records')
+    RecordsFormatType = Shapes::StringShape.new(name: 'RecordsFormatType')
     RecordsUpdated = Shapes::IntegerShape.new(name: 'RecordsUpdated')
     ResultFrame = Shapes::StructureShape.new(name: 'ResultFrame')
     ResultSetMetadata = Shapes::StructureShape.new(name: 'ResultSetMetadata')
@@ -78,6 +82,9 @@ module Aws::RDSDataService
     UpdateResult = Shapes::StructureShape.new(name: 'UpdateResult')
     UpdateResults = Shapes::ListShape.new(name: 'UpdateResults')
     Value = Shapes::UnionShape.new(name: 'Value')
+
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
 
     ArrayOfArray.member = Shapes::ShapeRef.new(shape: ArrayValue)
 
@@ -161,6 +168,7 @@ module Aws::RDSDataService
 
     ExecuteStatementRequest.add_member(:continue_after_timeout, Shapes::ShapeRef.new(shape: Boolean, location_name: "continueAfterTimeout"))
     ExecuteStatementRequest.add_member(:database, Shapes::ShapeRef.new(shape: DbName, location_name: "database"))
+    ExecuteStatementRequest.add_member(:format_records_as, Shapes::ShapeRef.new(shape: RecordsFormatType, location_name: "formatRecordsAs"))
     ExecuteStatementRequest.add_member(:include_result_metadata, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeResultMetadata"))
     ExecuteStatementRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: SqlParametersList, location_name: "parameters"))
     ExecuteStatementRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
@@ -172,6 +180,7 @@ module Aws::RDSDataService
     ExecuteStatementRequest.struct_class = Types::ExecuteStatementRequest
 
     ExecuteStatementResponse.add_member(:column_metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "columnMetadata"))
+    ExecuteStatementResponse.add_member(:formatted_records, Shapes::ShapeRef.new(shape: FormattedSqlRecords, location_name: "formattedRecords"))
     ExecuteStatementResponse.add_member(:generated_fields, Shapes::ShapeRef.new(shape: FieldList, location_name: "generatedFields"))
     ExecuteStatementResponse.add_member(:number_of_records_updated, Shapes::ShapeRef.new(shape: RecordsUpdated, location_name: "numberOfRecordsUpdated"))
     ExecuteStatementResponse.add_member(:records, Shapes::ShapeRef.new(shape: SqlRecords, location_name: "records"))
@@ -223,6 +232,7 @@ module Aws::RDSDataService
     ResultSetMetadata.struct_class = Types::ResultSetMetadata
 
     ResultSetOptions.add_member(:decimal_return_type, Shapes::ShapeRef.new(shape: DecimalReturnType, location_name: "decimalReturnType"))
+    ResultSetOptions.add_member(:long_return_type, Shapes::ShapeRef.new(shape: LongReturnType, location_name: "longReturnType"))
     ResultSetOptions.struct_class = Types::ResultSetOptions
 
     RollbackTransactionRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
@@ -316,6 +326,7 @@ module Aws::RDSDataService
         o.http_request_uri = "/BatchExecute"
         o.input = Shapes::ShapeRef.new(shape: BatchExecuteStatementRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchExecuteStatementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: StatementTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
@@ -329,6 +340,7 @@ module Aws::RDSDataService
         o.http_request_uri = "/BeginTransaction"
         o.input = Shapes::ShapeRef.new(shape: BeginTransactionRequest)
         o.output = Shapes::ShapeRef.new(shape: BeginTransactionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: StatementTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
@@ -342,6 +354,7 @@ module Aws::RDSDataService
         o.http_request_uri = "/CommitTransaction"
         o.input = Shapes::ShapeRef.new(shape: CommitTransactionRequest)
         o.output = Shapes::ShapeRef.new(shape: CommitTransactionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: StatementTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
@@ -357,6 +370,7 @@ module Aws::RDSDataService
         o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ExecuteSqlRequest)
         o.output = Shapes::ShapeRef.new(shape: ExecuteSqlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -369,6 +383,7 @@ module Aws::RDSDataService
         o.http_request_uri = "/Execute"
         o.input = Shapes::ShapeRef.new(shape: ExecuteStatementRequest)
         o.output = Shapes::ShapeRef.new(shape: ExecuteStatementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: StatementTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
@@ -382,6 +397,7 @@ module Aws::RDSDataService
         o.http_request_uri = "/RollbackTransaction"
         o.input = Shapes::ShapeRef.new(shape: RollbackTransactionRequest)
         o.output = Shapes::ShapeRef.new(shape: RollbackTransactionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: StatementTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)

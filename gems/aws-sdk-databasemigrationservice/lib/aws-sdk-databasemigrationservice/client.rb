@@ -570,7 +570,8 @@ module Aws::DatabaseMigrationService
     #
     # @option params [String] :database_name
     #   The name of the endpoint database. For a MySQL source or target
-    #   endpoint, do not specify DatabaseName.
+    #   endpoint, do not specify DatabaseName. To migrate to a specific
+    #   database, use this setting and `targetDbType`.
     #
     # @option params [String] :extra_connection_attributes
     #   Additional attributes associated with the connection. Each attribute
@@ -906,6 +907,8 @@ module Aws::DatabaseMigrationService
     #       max_file_size: 1,
     #       rfc_4180: false,
     #       date_partition_timezone: "String",
+    #       add_trailing_padding_character: false,
+    #       expected_bucket_owner: "String",
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -964,6 +967,7 @@ module Aws::DatabaseMigrationService
     #       endpoint_uri: "String", # required
     #       full_load_error_percentage: 1,
     #       error_retry_duration: 1,
+    #       use_new_mapping_type: false,
     #     },
     #     neptune_settings: {
     #       service_access_role_arn: "String",
@@ -1025,6 +1029,7 @@ module Aws::DatabaseMigrationService
     #       plugin_name: "no-preference", # accepts no-preference, test-decoding, pglogical
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       trim_space_in_char: false,
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -1083,6 +1088,7 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_secret_id: "String",
     #       secrets_manager_oracle_asm_access_role_arn: "String",
     #       secrets_manager_oracle_asm_secret_id: "String",
+    #       trim_space_in_char: false,
     #     },
     #     sybase_settings: {
     #       database_name: "String",
@@ -1108,6 +1114,7 @@ module Aws::DatabaseMigrationService
     #       use_third_party_backup_device: false,
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       trim_space_in_char: false,
     #     },
     #     ibm_db_2_settings: {
     #       database_name: "String",
@@ -1220,6 +1227,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.max_file_size #=> Integer
     #   resp.endpoint.s3_settings.rfc_4180 #=> Boolean
     #   resp.endpoint.s3_settings.date_partition_timezone #=> String
+    #   resp.endpoint.s3_settings.add_trailing_padding_character #=> Boolean
+    #   resp.endpoint.s3_settings.expected_bucket_owner #=> String
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -1268,6 +1277,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
     #   resp.endpoint.elasticsearch_settings.error_retry_duration #=> Integer
+    #   resp.endpoint.elasticsearch_settings.use_new_mapping_type #=> Boolean
     #   resp.endpoint.neptune_settings.service_access_role_arn #=> String
     #   resp.endpoint.neptune_settings.s3_bucket_name #=> String
     #   resp.endpoint.neptune_settings.s3_bucket_folder #=> String
@@ -1323,6 +1333,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.plugin_name #=> String, one of "no-preference", "test-decoding", "pglogical"
     #   resp.endpoint.postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.postgre_sql_settings.trim_space_in_char #=> Boolean
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -1378,6 +1389,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
+    #   resp.endpoint.oracle_settings.trim_space_in_char #=> Boolean
     #   resp.endpoint.sybase_settings.database_name #=> String
     #   resp.endpoint.sybase_settings.password #=> String
     #   resp.endpoint.sybase_settings.port #=> Integer
@@ -1399,6 +1411,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.microsoft_sql_server_settings.use_third_party_backup_device #=> Boolean
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.trim_space_in_char #=> Boolean
     #   resp.endpoint.ibm_db_2_settings.database_name #=> String
     #   resp.endpoint.ibm_db_2_settings.password #=> String
     #   resp.endpoint.ibm_db_2_settings.port #=> Integer
@@ -1558,6 +1571,57 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def create_event_subscription(params = {}, options = {})
       req = build_request(:create_event_subscription, params)
+      req.send_request(options)
+    end
+
+    # Creates a Fleet Advisor collector using the specified parameters.
+    #
+    # @option params [required, String] :collector_name
+    #   The name of your Fleet Advisor collector (for example,
+    #   `sample-collector`).
+    #
+    # @option params [String] :description
+    #   A summary description of your Fleet Advisor collector.
+    #
+    # @option params [required, String] :service_access_role_arn
+    #   The IAM role that grants permissions to access the specified Amazon S3
+    #   bucket.
+    #
+    # @option params [required, String] :s3_bucket_name
+    #   The Amazon S3 bucket that the Fleet Advisor collector uses to store
+    #   inventory metadata.
+    #
+    # @return [Types::CreateFleetAdvisorCollectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFleetAdvisorCollectorResponse#collector_referenced_id #collector_referenced_id} => String
+    #   * {Types::CreateFleetAdvisorCollectorResponse#collector_name #collector_name} => String
+    #   * {Types::CreateFleetAdvisorCollectorResponse#description #description} => String
+    #   * {Types::CreateFleetAdvisorCollectorResponse#service_access_role_arn #service_access_role_arn} => String
+    #   * {Types::CreateFleetAdvisorCollectorResponse#s3_bucket_name #s3_bucket_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_fleet_advisor_collector({
+    #     collector_name: "String", # required
+    #     description: "String",
+    #     service_access_role_arn: "String", # required
+    #     s3_bucket_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collector_referenced_id #=> String
+    #   resp.collector_name #=> String
+    #   resp.description #=> String
+    #   resp.service_access_role_arn #=> String
+    #   resp.s3_bucket_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateFleetAdvisorCollector AWS API Documentation
+    #
+    # @overload create_fleet_advisor_collector(params = {})
+    # @param [Hash] params ({})
+    def create_fleet_advisor_collector(params = {}, options = {})
+      req = build_request(:create_fleet_advisor_collector, params)
       req.send_request(options)
     end
 
@@ -2375,6 +2439,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.max_file_size #=> Integer
     #   resp.endpoint.s3_settings.rfc_4180 #=> Boolean
     #   resp.endpoint.s3_settings.date_partition_timezone #=> String
+    #   resp.endpoint.s3_settings.add_trailing_padding_character #=> Boolean
+    #   resp.endpoint.s3_settings.expected_bucket_owner #=> String
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -2423,6 +2489,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
     #   resp.endpoint.elasticsearch_settings.error_retry_duration #=> Integer
+    #   resp.endpoint.elasticsearch_settings.use_new_mapping_type #=> Boolean
     #   resp.endpoint.neptune_settings.service_access_role_arn #=> String
     #   resp.endpoint.neptune_settings.s3_bucket_name #=> String
     #   resp.endpoint.neptune_settings.s3_bucket_folder #=> String
@@ -2478,6 +2545,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.plugin_name #=> String, one of "no-preference", "test-decoding", "pglogical"
     #   resp.endpoint.postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.postgre_sql_settings.trim_space_in_char #=> Boolean
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -2533,6 +2601,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
+    #   resp.endpoint.oracle_settings.trim_space_in_char #=> Boolean
     #   resp.endpoint.sybase_settings.database_name #=> String
     #   resp.endpoint.sybase_settings.password #=> String
     #   resp.endpoint.sybase_settings.port #=> Integer
@@ -2554,6 +2623,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.microsoft_sql_server_settings.use_third_party_backup_device #=> Boolean
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.trim_space_in_char #=> Boolean
     #   resp.endpoint.ibm_db_2_settings.database_name #=> String
     #   resp.endpoint.ibm_db_2_settings.password #=> String
     #   resp.endpoint.ibm_db_2_settings.port #=> Integer
@@ -2641,6 +2711,57 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def delete_event_subscription(params = {}, options = {})
       req = build_request(:delete_event_subscription, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified Fleet Advisor collector.
+    #
+    # @option params [required, String] :collector_referenced_id
+    #   The reference ID of the Fleet Advisor collector to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_fleet_advisor_collector({
+    #     collector_referenced_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteFleetAdvisorCollector AWS API Documentation
+    #
+    # @overload delete_fleet_advisor_collector(params = {})
+    # @param [Hash] params ({})
+    def delete_fleet_advisor_collector(params = {}, options = {})
+      req = build_request(:delete_fleet_advisor_collector, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified Fleet Advisor collector databases.
+    #
+    # @option params [required, Array<String>] :database_ids
+    #   The IDs of the Fleet Advisor collector databases to delete.
+    #
+    # @return [Types::DeleteFleetAdvisorDatabasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFleetAdvisorDatabasesResponse#database_ids #database_ids} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_fleet_advisor_databases({
+    #     database_ids: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.database_ids #=> Array
+    #   resp.database_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteFleetAdvisorDatabases AWS API Documentation
+    #
+    # @overload delete_fleet_advisor_databases(params = {})
+    # @param [Hash] params ({})
+    def delete_fleet_advisor_databases(params = {}, options = {})
+      req = build_request(:delete_fleet_advisor_databases, params)
       req.send_request(options)
     end
 
@@ -3557,6 +3678,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].s3_settings.max_file_size #=> Integer
     #   resp.endpoints[0].s3_settings.rfc_4180 #=> Boolean
     #   resp.endpoints[0].s3_settings.date_partition_timezone #=> String
+    #   resp.endpoints[0].s3_settings.add_trailing_padding_character #=> Boolean
+    #   resp.endpoints[0].s3_settings.expected_bucket_owner #=> String
     #   resp.endpoints[0].dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].dms_transfer_settings.bucket_name #=> String
     #   resp.endpoints[0].mongo_db_settings.username #=> String
@@ -3605,6 +3728,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoints[0].elasticsearch_settings.full_load_error_percentage #=> Integer
     #   resp.endpoints[0].elasticsearch_settings.error_retry_duration #=> Integer
+    #   resp.endpoints[0].elasticsearch_settings.use_new_mapping_type #=> Boolean
     #   resp.endpoints[0].neptune_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].neptune_settings.s3_bucket_name #=> String
     #   resp.endpoints[0].neptune_settings.s3_bucket_folder #=> String
@@ -3660,6 +3784,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].postgre_sql_settings.plugin_name #=> String, one of "no-preference", "test-decoding", "pglogical"
     #   resp.endpoints[0].postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].postgre_sql_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoints[0].postgre_sql_settings.trim_space_in_char #=> Boolean
     #   resp.endpoints[0].my_sql_settings.after_connect_script #=> String
     #   resp.endpoints[0].my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoints[0].my_sql_settings.database_name #=> String
@@ -3715,6 +3840,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].oracle_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
     #   resp.endpoints[0].oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
+    #   resp.endpoints[0].oracle_settings.trim_space_in_char #=> Boolean
     #   resp.endpoints[0].sybase_settings.database_name #=> String
     #   resp.endpoints[0].sybase_settings.password #=> String
     #   resp.endpoints[0].sybase_settings.port #=> Integer
@@ -3736,6 +3862,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].microsoft_sql_server_settings.use_third_party_backup_device #=> Boolean
     #   resp.endpoints[0].microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].microsoft_sql_server_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoints[0].microsoft_sql_server_settings.trim_space_in_char #=> Boolean
     #   resp.endpoints[0].ibm_db_2_settings.database_name #=> String
     #   resp.endpoints[0].ibm_db_2_settings.password #=> String
     #   resp.endpoints[0].ibm_db_2_settings.port #=> Integer
@@ -4010,6 +4137,359 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def describe_events(params = {}, options = {})
       req = build_request(:describe_events, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the Fleet Advisor collectors in your account.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   If you specify any of the following filters, the output includes
+    #   information for only those collectors that meet the filter criteria:
+    #
+    #   * `collector-referenced-id` – The ID of the collector agent, for
+    #     example `d4610ac5-e323-4ad9-bc50-eaf7249dfe9d`.
+    #
+    #   * `collector-name` – The name of the collector agent.
+    #
+    #   An example is: `describe-fleet-advisor-collectors --filter
+    #   Name="collector-referenced-id",Values="d4610ac5-e323-4ad9-bc50-eaf7249dfe9d"`
+    #
+    # @option params [Integer] :max_records
+    #   Sets the maximum number of records returned in the response.
+    #
+    # @option params [String] :next_token
+    #   If `NextToken` is returned by a previous response, there are more
+    #   results available. The value of `NextToken` is a unique pagination
+    #   token for each page. Make the call again using the returned token to
+    #   retrieve the next page. Keep all other arguments unchanged.
+    #
+    # @return [Types::DescribeFleetAdvisorCollectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFleetAdvisorCollectorsResponse#collectors #collectors} => Array&lt;Types::CollectorResponse&gt;
+    #   * {Types::DescribeFleetAdvisorCollectorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_fleet_advisor_collectors({
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collectors #=> Array
+    #   resp.collectors[0].collector_referenced_id #=> String
+    #   resp.collectors[0].collector_name #=> String
+    #   resp.collectors[0].collector_version #=> String
+    #   resp.collectors[0].version_status #=> String, one of "UP_TO_DATE", "OUTDATED", "UNSUPPORTED"
+    #   resp.collectors[0].description #=> String
+    #   resp.collectors[0].s3_bucket_name #=> String
+    #   resp.collectors[0].service_access_role_arn #=> String
+    #   resp.collectors[0].collector_health_check.collector_status #=> String, one of "UNREGISTERED", "ACTIVE"
+    #   resp.collectors[0].collector_health_check.local_collector_s3_access #=> Boolean
+    #   resp.collectors[0].collector_health_check.web_collector_s3_access #=> Boolean
+    #   resp.collectors[0].collector_health_check.web_collector_granted_role_based_access #=> Boolean
+    #   resp.collectors[0].last_data_received #=> String
+    #   resp.collectors[0].registered_date #=> String
+    #   resp.collectors[0].created_date #=> String
+    #   resp.collectors[0].modified_date #=> String
+    #   resp.collectors[0].inventory_data.number_of_databases #=> Integer
+    #   resp.collectors[0].inventory_data.number_of_schemas #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeFleetAdvisorCollectors AWS API Documentation
+    #
+    # @overload describe_fleet_advisor_collectors(params = {})
+    # @param [Hash] params ({})
+    def describe_fleet_advisor_collectors(params = {}, options = {})
+      req = build_request(:describe_fleet_advisor_collectors, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of Fleet Advisor databases in your account.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   If you specify any of the following filters, the output includes
+    #   information for only those databases that meet the filter criteria:
+    #
+    #   * `database-id` – The ID of the database.
+    #
+    #   * `database-name` – The name of the database.
+    #
+    #   * `database-engine` – The name of the database engine.
+    #
+    #   * `server-ip-address` – The IP address of the database server.
+    #
+    #   * `database-ip-address` – The IP address of the database.
+    #
+    #   * `collector-name` – The name of the associated Fleet Advisor
+    #     collector.
+    #
+    #   An example is: `describe-fleet-advisor-databases --filter
+    #   Name="database-id",Values="45"`
+    #
+    # @option params [Integer] :max_records
+    #   Sets the maximum number of records returned in the response.
+    #
+    # @option params [String] :next_token
+    #   If `NextToken` is returned by a previous response, there are more
+    #   results available. The value of `NextToken` is a unique pagination
+    #   token for each page. Make the call again using the returned token to
+    #   retrieve the next page. Keep all other arguments unchanged.
+    #
+    # @return [Types::DescribeFleetAdvisorDatabasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFleetAdvisorDatabasesResponse#databases #databases} => Array&lt;Types::DatabaseResponse&gt;
+    #   * {Types::DescribeFleetAdvisorDatabasesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_fleet_advisor_databases({
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.databases #=> Array
+    #   resp.databases[0].database_id #=> String
+    #   resp.databases[0].database_name #=> String
+    #   resp.databases[0].ip_address #=> String
+    #   resp.databases[0].number_of_schemas #=> Integer
+    #   resp.databases[0].server.server_id #=> String
+    #   resp.databases[0].server.ip_address #=> String
+    #   resp.databases[0].server.server_name #=> String
+    #   resp.databases[0].software_details.engine #=> String
+    #   resp.databases[0].software_details.engine_version #=> String
+    #   resp.databases[0].software_details.engine_edition #=> String
+    #   resp.databases[0].software_details.service_pack #=> String
+    #   resp.databases[0].software_details.support_level #=> String
+    #   resp.databases[0].software_details.os_architecture #=> Integer
+    #   resp.databases[0].software_details.tooltip #=> String
+    #   resp.databases[0].collectors #=> Array
+    #   resp.databases[0].collectors[0].collector_referenced_id #=> String
+    #   resp.databases[0].collectors[0].collector_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeFleetAdvisorDatabases AWS API Documentation
+    #
+    # @overload describe_fleet_advisor_databases(params = {})
+    # @param [Hash] params ({})
+    def describe_fleet_advisor_databases(params = {}, options = {})
+      req = build_request(:describe_fleet_advisor_databases, params)
+      req.send_request(options)
+    end
+
+    # Provides descriptions of large-scale assessment (LSA) analyses
+    # produced by your Fleet Advisor collectors.
+    #
+    # @option params [Integer] :max_records
+    #   Sets the maximum number of records returned in the response.
+    #
+    # @option params [String] :next_token
+    #   If `NextToken` is returned by a previous response, there are more
+    #   results available. The value of `NextToken` is a unique pagination
+    #   token for each page. Make the call again using the returned token to
+    #   retrieve the next page. Keep all other arguments unchanged.
+    #
+    # @return [Types::DescribeFleetAdvisorLsaAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFleetAdvisorLsaAnalysisResponse#analysis #analysis} => Array&lt;Types::FleetAdvisorLsaAnalysisResponse&gt;
+    #   * {Types::DescribeFleetAdvisorLsaAnalysisResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_fleet_advisor_lsa_analysis({
+    #     max_records: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis #=> Array
+    #   resp.analysis[0].lsa_analysis_id #=> String
+    #   resp.analysis[0].status #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeFleetAdvisorLsaAnalysis AWS API Documentation
+    #
+    # @overload describe_fleet_advisor_lsa_analysis(params = {})
+    # @param [Hash] params ({})
+    def describe_fleet_advisor_lsa_analysis(params = {}, options = {})
+      req = build_request(:describe_fleet_advisor_lsa_analysis, params)
+      req.send_request(options)
+    end
+
+    # Provides descriptions of the schemas discovered by your Fleet Advisor
+    # collectors.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   If you specify any of the following filters, the output includes
+    #   information for only those schema objects that meet the filter
+    #   criteria:
+    #
+    #   * `schema-id` – The ID of the schema, for example
+    #     `d4610ac5-e323-4ad9-bc50-eaf7249dfe9d`.
+    #
+    #   ^
+    #
+    #   Example: `describe-fleet-advisor-schema-object-summary --filter
+    #   Name="schema-id",Values="50"`
+    #
+    # @option params [Integer] :max_records
+    #   Sets the maximum number of records returned in the response.
+    #
+    # @option params [String] :next_token
+    #   If `NextToken` is returned by a previous response, there are more
+    #   results available. The value of `NextToken` is a unique pagination
+    #   token for each page. Make the call again using the returned token to
+    #   retrieve the next page. Keep all other arguments unchanged.
+    #
+    # @return [Types::DescribeFleetAdvisorSchemaObjectSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFleetAdvisorSchemaObjectSummaryResponse#fleet_advisor_schema_objects #fleet_advisor_schema_objects} => Array&lt;Types::FleetAdvisorSchemaObjectResponse&gt;
+    #   * {Types::DescribeFleetAdvisorSchemaObjectSummaryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_fleet_advisor_schema_object_summary({
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fleet_advisor_schema_objects #=> Array
+    #   resp.fleet_advisor_schema_objects[0].schema_id #=> String
+    #   resp.fleet_advisor_schema_objects[0].object_type #=> String
+    #   resp.fleet_advisor_schema_objects[0].number_of_objects #=> Integer
+    #   resp.fleet_advisor_schema_objects[0].code_line_count #=> Integer
+    #   resp.fleet_advisor_schema_objects[0].code_size #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeFleetAdvisorSchemaObjectSummary AWS API Documentation
+    #
+    # @overload describe_fleet_advisor_schema_object_summary(params = {})
+    # @param [Hash] params ({})
+    def describe_fleet_advisor_schema_object_summary(params = {}, options = {})
+      req = build_request(:describe_fleet_advisor_schema_object_summary, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of schemas detected by Fleet Advisor Collectors in your
+    # account.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   If you specify any of the following filters, the output includes
+    #   information for only those schemas that meet the filter criteria:
+    #
+    #   * `complexity` – The schema's complexity, for example `Simple`.
+    #
+    #   * `database-id` – The ID of the schema's database.
+    #
+    #   * `database-ip-address` – The IP address of the schema's database.
+    #
+    #   * `database-name` – The name of the schema's database.
+    #
+    #   * `database-engine` – The name of the schema database's engine.
+    #
+    #   * `original-schema-name` – The name of the schema's database's main
+    #     schema.
+    #
+    #   * `schema-id` – The ID of the schema, for example `15`.
+    #
+    #   * `schema-name` – The name of the schema.
+    #
+    #   * `server-ip-address` – The IP address of the schema database's
+    #     server.
+    #
+    #   An example is: `describe-fleet-advisor-schemas --filter
+    #   Name="schema-id",Values="50"`
+    #
+    # @option params [Integer] :max_records
+    #   Sets the maximum number of records returned in the response.
+    #
+    # @option params [String] :next_token
+    #   If `NextToken` is returned by a previous response, there are more
+    #   results available. The value of `NextToken` is a unique pagination
+    #   token for each page. Make the call again using the returned token to
+    #   retrieve the next page. Keep all other arguments unchanged.
+    #
+    # @return [Types::DescribeFleetAdvisorSchemasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFleetAdvisorSchemasResponse#fleet_advisor_schemas #fleet_advisor_schemas} => Array&lt;Types::SchemaResponse&gt;
+    #   * {Types::DescribeFleetAdvisorSchemasResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_fleet_advisor_schemas({
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fleet_advisor_schemas #=> Array
+    #   resp.fleet_advisor_schemas[0].code_line_count #=> Integer
+    #   resp.fleet_advisor_schemas[0].code_size #=> Integer
+    #   resp.fleet_advisor_schemas[0].complexity #=> String
+    #   resp.fleet_advisor_schemas[0].server.server_id #=> String
+    #   resp.fleet_advisor_schemas[0].server.ip_address #=> String
+    #   resp.fleet_advisor_schemas[0].server.server_name #=> String
+    #   resp.fleet_advisor_schemas[0].database_instance.database_id #=> String
+    #   resp.fleet_advisor_schemas[0].database_instance.database_name #=> String
+    #   resp.fleet_advisor_schemas[0].database_instance.database_ip_address #=> String
+    #   resp.fleet_advisor_schemas[0].database_instance.database_engine #=> String
+    #   resp.fleet_advisor_schemas[0].schema_id #=> String
+    #   resp.fleet_advisor_schemas[0].schema_name #=> String
+    #   resp.fleet_advisor_schemas[0].original_schema.schema_id #=> String
+    #   resp.fleet_advisor_schemas[0].original_schema.schema_name #=> String
+    #   resp.fleet_advisor_schemas[0].original_schema.database_id #=> String
+    #   resp.fleet_advisor_schemas[0].original_schema.database_name #=> String
+    #   resp.fleet_advisor_schemas[0].original_schema.database_ip_address #=> String
+    #   resp.fleet_advisor_schemas[0].similarity #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeFleetAdvisorSchemas AWS API Documentation
+    #
+    # @overload describe_fleet_advisor_schemas(params = {})
+    # @param [Hash] params ({})
+    def describe_fleet_advisor_schemas(params = {}, options = {})
+      req = build_request(:describe_fleet_advisor_schemas, params)
       req.send_request(options)
     end
 
@@ -5484,6 +5964,8 @@ module Aws::DatabaseMigrationService
     #       max_file_size: 1,
     #       rfc_4180: false,
     #       date_partition_timezone: "String",
+    #       add_trailing_padding_character: false,
+    #       expected_bucket_owner: "String",
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -5542,6 +6024,7 @@ module Aws::DatabaseMigrationService
     #       endpoint_uri: "String", # required
     #       full_load_error_percentage: 1,
     #       error_retry_duration: 1,
+    #       use_new_mapping_type: false,
     #     },
     #     neptune_settings: {
     #       service_access_role_arn: "String",
@@ -5603,6 +6086,7 @@ module Aws::DatabaseMigrationService
     #       plugin_name: "no-preference", # accepts no-preference, test-decoding, pglogical
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       trim_space_in_char: false,
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -5661,6 +6145,7 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_secret_id: "String",
     #       secrets_manager_oracle_asm_access_role_arn: "String",
     #       secrets_manager_oracle_asm_secret_id: "String",
+    #       trim_space_in_char: false,
     #     },
     #     sybase_settings: {
     #       database_name: "String",
@@ -5686,6 +6171,7 @@ module Aws::DatabaseMigrationService
     #       use_third_party_backup_device: false,
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       trim_space_in_char: false,
     #     },
     #     ibm_db_2_settings: {
     #       database_name: "String",
@@ -5798,6 +6284,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.max_file_size #=> Integer
     #   resp.endpoint.s3_settings.rfc_4180 #=> Boolean
     #   resp.endpoint.s3_settings.date_partition_timezone #=> String
+    #   resp.endpoint.s3_settings.add_trailing_padding_character #=> Boolean
+    #   resp.endpoint.s3_settings.expected_bucket_owner #=> String
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -5846,6 +6334,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
     #   resp.endpoint.elasticsearch_settings.error_retry_duration #=> Integer
+    #   resp.endpoint.elasticsearch_settings.use_new_mapping_type #=> Boolean
     #   resp.endpoint.neptune_settings.service_access_role_arn #=> String
     #   resp.endpoint.neptune_settings.s3_bucket_name #=> String
     #   resp.endpoint.neptune_settings.s3_bucket_folder #=> String
@@ -5901,6 +6390,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.plugin_name #=> String, one of "no-preference", "test-decoding", "pglogical"
     #   resp.endpoint.postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.postgre_sql_settings.trim_space_in_char #=> Boolean
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -5956,6 +6446,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
+    #   resp.endpoint.oracle_settings.trim_space_in_char #=> Boolean
     #   resp.endpoint.sybase_settings.database_name #=> String
     #   resp.endpoint.sybase_settings.password #=> String
     #   resp.endpoint.sybase_settings.port #=> Integer
@@ -5977,6 +6468,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.microsoft_sql_server_settings.use_third_party_backup_device #=> Boolean
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.trim_space_in_char #=> Boolean
     #   resp.endpoint.ibm_db_2_settings.database_name #=> String
     #   resp.endpoint.ibm_db_2_settings.password #=> String
     #   resp.endpoint.ibm_db_2_settings.port #=> Integer
@@ -6842,6 +7334,28 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Runs large-scale assessment (LSA) analysis on every Fleet Advisor
+    # collector in your account.
+    #
+    # @return [Types::RunFleetAdvisorLsaAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RunFleetAdvisorLsaAnalysisResponse#lsa_analysis_id #lsa_analysis_id} => String
+    #   * {Types::RunFleetAdvisorLsaAnalysisResponse#status #status} => String
+    #
+    # @example Response structure
+    #
+    #   resp.lsa_analysis_id #=> String
+    #   resp.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RunFleetAdvisorLsaAnalysis AWS API Documentation
+    #
+    # @overload run_fleet_advisor_lsa_analysis(params = {})
+    # @param [Hash] params ({})
+    def run_fleet_advisor_lsa_analysis(params = {}, options = {})
+      req = build_request(:run_fleet_advisor_lsa_analysis, params)
+      req.send_request(options)
+    end
+
     # Starts the replication task.
     #
     # For more information about DMS tasks, see [Working with Migration
@@ -7325,6 +7839,55 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Migrates 10 active and enabled Amazon SNS subscriptions at a time and
+    # converts them to corresponding Amazon EventBridge rules. By default,
+    # this operation migrates subscriptions only when all your replication
+    # instance versions are 3.4.6 or higher. If any replication instances
+    # are from versions earlier than 3.4.6, the operation raises an error
+    # and tells you to upgrade these instances to version 3.4.6 or higher.
+    # To enable migration regardless of version, set the `Force` option to
+    # true. However, if you don't upgrade instances earlier than version
+    # 3.4.6, some types of events might not be available when you use Amazon
+    # EventBridge.
+    #
+    # To call this operation, make sure that you have certain permissions
+    # added to your user account. For more information, see [Migrating event
+    # subscriptions to Amazon EventBridge][1] in the *Amazon Web Services
+    # Database Migration Service User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html#CHAP_Events-migrate-to-eventbridge
+    #
+    # @option params [Boolean] :force_move
+    #   When set to true, this operation migrates DMS subscriptions for Amazon
+    #   SNS notifications no matter what your replication instance version is.
+    #   If not set or set to false, this operation runs only when all your
+    #   replication instances are from DMS version 3.4.6 or higher.
+    #
+    # @return [Types::UpdateSubscriptionsToEventBridgeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSubscriptionsToEventBridgeResponse#result #result} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_subscriptions_to_event_bridge({
+    #     force_move: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/UpdateSubscriptionsToEventBridge AWS API Documentation
+    #
+    # @overload update_subscriptions_to_event_bridge(params = {})
+    # @param [Hash] params ({})
+    def update_subscriptions_to_event_bridge(params = {}, options = {})
+      req = build_request(:update_subscriptions_to_event_bridge, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -7338,7 +7901,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

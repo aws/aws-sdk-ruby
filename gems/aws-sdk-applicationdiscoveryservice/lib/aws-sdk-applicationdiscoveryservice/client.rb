@@ -391,11 +391,11 @@ module Aws::ApplicationDiscoveryService
     # Each import task has a number of records that can identify servers or
     # applications.
     #
-    # AWS Application Discovery Service has built-in matching logic that
-    # will identify when discovered servers match existing entries that
-    # you've previously discovered, the information for the
-    # already-existing discovered server is updated. When you delete an
-    # import task that contains records that were used to match, the
+    # Amazon Web Services Application Discovery Service has built-in
+    # matching logic that will identify when discovered servers match
+    # existing entries that you've previously discovered, the information
+    # for the already-existing discovered server is updated. When you delete
+    # an import task that contains records that were used to match, the
     # information in those matched records that comes from the deleted
     # records will also be deleted.
     #
@@ -441,8 +441,8 @@ module Aws::ApplicationDiscoveryService
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_application({
-    #     name: "String", # required
-    #     description: "String",
+    #     name: "ApplicationName", # required
+    #     description: "ApplicationDescription",
     #   })
     #
     # @example Response structure
@@ -459,6 +459,8 @@ module Aws::ApplicationDiscoveryService
     # Creates one or more tags for configuration items. Tags are metadata
     # that help you categorize IT assets. This API accepts a list of
     # multiple configuration items.
+    #
+    # Do not store sensitive information (like personal data) in tags.
     #
     # @option params [required, Array<String>] :configuration_ids
     #   A list of configuration items that you want to tag.
@@ -553,7 +555,8 @@ module Aws::ApplicationDiscoveryService
     # @option params [Array<String>] :agent_ids
     #   The agent or the Connector IDs for which you want information. If you
     #   specify no IDs, the system returns information about all
-    #   agents/Connectors associated with your AWS user account.
+    #   agents/Connectors associated with your Amazon Web Services user
+    #   account.
     #
     # @option params [Array<Types::Filter>] :filters
     #   You can filter the request using various logical operators and a
@@ -635,8 +638,8 @@ module Aws::ApplicationDiscoveryService
     # number of network cards, etc.
     #
     #  For a complete list of outputs for each asset type, see [Using the
-    # DescribeConfigurations Action][1] in the *AWS Application Discovery
-    # Service User Guide*.
+    # DescribeConfigurations Action][1] in the *Amazon Web Services
+    # Application Discovery Service User Guide*.
     #
     #  </note>
     #
@@ -721,7 +724,7 @@ module Aws::ApplicationDiscoveryService
     end
 
     # `DescribeExportConfigurations` is deprecated. Use
-    # [DescribeImportTasks][1], instead.
+    # [DescribeExportTasks][1], instead.
     #
     #
     #
@@ -1024,6 +1027,8 @@ module Aws::ApplicationDiscoveryService
     #   * {Types::GetDiscoverySummaryResponse#servers_mappedto_tags #servers_mappedto_tags} => Integer
     #   * {Types::GetDiscoverySummaryResponse#agent_summary #agent_summary} => Types::CustomerAgentInfo
     #   * {Types::GetDiscoverySummaryResponse#connector_summary #connector_summary} => Types::CustomerConnectorInfo
+    #   * {Types::GetDiscoverySummaryResponse#me_collector_summary #me_collector_summary} => Types::CustomerMeCollectorInfo
+    #   * {Types::GetDiscoverySummaryResponse#agentless_collector_summary #agentless_collector_summary} => Types::CustomerAgentlessCollectorInfo
     #
     # @example Response structure
     #
@@ -1045,6 +1050,20 @@ module Aws::ApplicationDiscoveryService
     #   resp.connector_summary.unhealthy_connectors #=> Integer
     #   resp.connector_summary.total_connectors #=> Integer
     #   resp.connector_summary.unknown_connectors #=> Integer
+    #   resp.me_collector_summary.active_me_collectors #=> Integer
+    #   resp.me_collector_summary.healthy_me_collectors #=> Integer
+    #   resp.me_collector_summary.deny_listed_me_collectors #=> Integer
+    #   resp.me_collector_summary.shutdown_me_collectors #=> Integer
+    #   resp.me_collector_summary.unhealthy_me_collectors #=> Integer
+    #   resp.me_collector_summary.total_me_collectors #=> Integer
+    #   resp.me_collector_summary.unknown_me_collectors #=> Integer
+    #   resp.agentless_collector_summary.active_agentless_collectors #=> Integer
+    #   resp.agentless_collector_summary.healthy_agentless_collectors #=> Integer
+    #   resp.agentless_collector_summary.deny_listed_agentless_collectors #=> Integer
+    #   resp.agentless_collector_summary.shutdown_agentless_collectors #=> Integer
+    #   resp.agentless_collector_summary.unhealthy_agentless_collectors #=> Integer
+    #   resp.agentless_collector_summary.total_agentless_collectors #=> Integer
+    #   resp.agentless_collector_summary.unknown_agentless_collectors #=> Integer
     #
     # @overload get_discovery_summary(params = {})
     # @param [Hash] params ({})
@@ -1068,7 +1087,7 @@ module Aws::ApplicationDiscoveryService
     #
     #   For a complete list of filter options and guidance about using them
     #   with this action, see [Using the ListConfigurations Action][1] in the
-    #   *AWS Application Discovery Service User Guide*.
+    #   *Amazon Web Services Application Discovery Service User Guide*.
     #
     #
     #
@@ -1087,8 +1106,8 @@ module Aws::ApplicationDiscoveryService
     # @option params [Array<Types::OrderByElement>] :order_by
     #   Certain filter criteria return output that can be sorted in ascending
     #   or descending order. For a list of output characteristics for each
-    #   filter, see [Using the ListConfigurations Action][1] in the *AWS
-    #   Application Discovery Service User Guide*.
+    #   filter, see [Using the ListConfigurations Action][1] in the *Amazon
+    #   Web Services Application Discovery Service User Guide*.
     #
     #
     #
@@ -1114,7 +1133,7 @@ module Aws::ApplicationDiscoveryService
     #     next_token: "NextToken",
     #     order_by: [
     #       {
-    #         field_name: "String", # required
+    #         field_name: "OrderByElementFieldName", # required
     #         sort_order: "ASC", # accepts ASC, DESC
     #       },
     #     ],
@@ -1224,12 +1243,13 @@ module Aws::ApplicationDiscoveryService
     # @option params [required, Array<String>] :agent_ids
     #   The IDs of the agents or connectors from which to start collecting
     #   data. If you send a request to an agent/connector ID that you do not
-    #   have permission to contact, according to your AWS account, the service
-    #   does not throw an exception. Instead, it returns the error in the
-    #   *Description* field. If you send a request to multiple
-    #   agents/connectors and you do not have permission to contact some of
-    #   those agents/connectors, the system does not throw an exception.
-    #   Instead, the system shows `Failed` in the *Description* field.
+    #   have permission to contact, according to your Amazon Web Services
+    #   account, the service does not throw an exception. Instead, it returns
+    #   the error in the *Description* field. If you send a request to
+    #   multiple agents/connectors and you do not have permission to contact
+    #   some of those agents/connectors, the system does not throw an
+    #   exception. Instead, the system shows `Failed` in the *Description*
+    #   field.
     #
     # @return [Types::StartDataCollectionByAgentIdsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1265,9 +1285,9 @@ module Aws::ApplicationDiscoveryService
     # concurrently running exports.
     #
     # If you do not include an `agentIds` filter, summary data is exported
-    # that includes both AWS Agentless Discovery Connector data and summary
-    # data from AWS Discovery Agents. Export of summary data is limited to
-    # two exports per day.
+    # that includes both Amazon Web Services Agentless Discovery Connector
+    # data and summary data from Amazon Web Services Discovery Agents.
+    # Export of summary data is limited to two exports per day.
     #
     # @option params [Array<String>] :export_data_format
     #   The file format for the returned export data. Default value is `CSV`.
@@ -1322,41 +1342,42 @@ module Aws::ApplicationDiscoveryService
     end
 
     # Starts an import task, which allows you to import details of your
-    # on-premises environment directly into AWS Migration Hub without having
-    # to use the Application Discovery Service (ADS) tools such as the
-    # Discovery Connector or Discovery Agent. This gives you the option to
-    # perform migration assessment and planning directly from your imported
-    # data, including the ability to group your devices as applications and
-    # track their migration status.
+    # on-premises environment directly into Amazon Web Services Migration
+    # Hub without having to use the Application Discovery Service (ADS)
+    # tools such as the Discovery Connector or Discovery Agent. This gives
+    # you the option to perform migration assessment and planning directly
+    # from your imported data, including the ability to group your devices
+    # as applications and track their migration status.
     #
     # To start an import request, do this:
     #
     # 1.  Download the specially formatted comma separated value (CSV)
     #     import template, which you can find here:
-    #     [https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import\_template.csv][1].
+    #     [https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import\_template.csv][1].
     #
     # 2.  Fill out the template with your server and application data.
     #
     # 3.  Upload your import file to an Amazon S3 bucket, and make a note of
     #     it's Object URL. Your import file must be in the CSV format.
     #
-    # 4.  Use the console or the `StartImportTask` command with the AWS CLI
-    #     or one of the AWS SDKs to import the records from your file.
+    # 4.  Use the console or the `StartImportTask` command with the Amazon
+    #     Web Services CLI or one of the Amazon Web Services SDKs to import
+    #     the records from your file.
     #
     # For more information, including step-by-step procedures, see
-    # [Migration Hub Import][2] in the *AWS Application Discovery Service
-    # User Guide*.
+    # [Migration Hub Import][2] in the *Amazon Web Services Application
+    # Discovery Service User Guide*.
     #
     # <note markdown="1"> There are limits to the number of import tasks you can create (and
-    # delete) in an AWS account. For more information, see [AWS Application
-    # Discovery Service Limits][3] in the *AWS Application Discovery Service
-    # User Guide*.
+    # delete) in an Amazon Web Services account. For more information, see
+    # [Amazon Web Services Application Discovery Service Limits][3] in the
+    # *Amazon Web Services Application Discovery Service User Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv
+    # [1]: https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv
     # [2]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-import.html
     # [3]: https://docs.aws.amazon.com/application-discovery/latest/userguide/ads_service_limits.html
     #
@@ -1381,8 +1402,8 @@ module Aws::ApplicationDiscoveryService
     # @option params [required, String] :import_url
     #   The URL for your import file that you've uploaded to Amazon S3.
     #
-    #   <note markdown="1"> If you're using the AWS CLI, this URL is structured as follows:
-    #   `s3://BucketName/ImportFileName.CSV`
+    #   <note markdown="1"> If you're using the Amazon Web Services CLI, this URL is structured
+    #   as follows: `s3://BucketName/ImportFileName.CSV`
     #
     #    </note>
     #
@@ -1497,8 +1518,8 @@ module Aws::ApplicationDiscoveryService
     #
     #   resp = client.update_application({
     #     configuration_id: "ApplicationId", # required
-    #     name: "String",
-    #     description: "String",
+    #     name: "ApplicationName",
+    #     description: "ApplicationDescription",
     #   })
     #
     # @overload update_application(params = {})
@@ -1521,7 +1542,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

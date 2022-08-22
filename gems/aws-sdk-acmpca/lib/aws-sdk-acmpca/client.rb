@@ -426,9 +426,15 @@ module Aws::ACMPCA
     #
     #   Default: FIPS\_140\_2\_LEVEL\_3\_OR\_HIGHER
     #
-    #   Note: `FIPS_140_2_LEVEL_3_OR_HIGHER` is not supported in Region
-    #   ap-northeast-3. When creating a CA in the ap-northeast-3, you must
-    #   provide `FIPS_140_2_LEVEL_2_OR_HIGHER` as the argument for
+    #   *Note:* `FIPS_140_2_LEVEL_3_OR_HIGHER` is not supported in the
+    #   following Regions:
+    #
+    #   * ap-northeast-3
+    #
+    #   * ap-southeast-3
+    #
+    #   When creating a CA in these Regions, you must provide
+    #   `FIPS_140_2_LEVEL_2_OR_HIGHER` as the argument for
     #   `KeyStorageSecurityStandard`. Failure to do this results in an
     #   `InvalidArgsException` with the message, "A certificate authority
     #   cannot be created in this region with the specified security
@@ -2466,7 +2472,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

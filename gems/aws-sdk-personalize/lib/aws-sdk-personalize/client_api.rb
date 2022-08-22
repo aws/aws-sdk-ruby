@@ -163,6 +163,7 @@ module Aws::Personalize
     HPOResourceConfig = Shapes::StructureShape.new(name: 'HPOResourceConfig')
     HyperParameterRanges = Shapes::StructureShape.new(name: 'HyperParameterRanges')
     HyperParameters = Shapes::MapShape.new(name: 'HyperParameters')
+    ImportMode = Shapes::StringShape.new(name: 'ImportMode')
     IngestionMode = Shapes::StringShape.new(name: 'IngestionMode')
     IntegerHyperParameterRange = Shapes::StructureShape.new(name: 'IntegerHyperParameterRange')
     IntegerHyperParameterRanges = Shapes::ListShape.new(name: 'IntegerHyperParameterRanges')
@@ -475,6 +476,7 @@ module Aws::Personalize
     CreateDatasetImportJobRequest.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "dataSource"))
     CreateDatasetImportJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateDatasetImportJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateDatasetImportJobRequest.add_member(:import_mode, Shapes::ShapeRef.new(shape: ImportMode, location_name: "importMode"))
     CreateDatasetImportJobRequest.struct_class = Types::CreateDatasetImportJobRequest
 
     CreateDatasetImportJobResponse.add_member(:dataset_import_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetImportJobArn"))
@@ -616,6 +618,7 @@ module Aws::Personalize
     DatasetImportJob.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     DatasetImportJob.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     DatasetImportJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    DatasetImportJob.add_member(:import_mode, Shapes::ShapeRef.new(shape: ImportMode, location_name: "importMode"))
     DatasetImportJob.struct_class = Types::DatasetImportJob
 
     DatasetImportJobSummary.add_member(:dataset_import_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetImportJobArn"))
@@ -624,6 +627,7 @@ module Aws::Personalize
     DatasetImportJobSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     DatasetImportJobSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     DatasetImportJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    DatasetImportJobSummary.add_member(:import_mode, Shapes::ShapeRef.new(shape: ImportMode, location_name: "importMode"))
     DatasetImportJobSummary.struct_class = Types::DatasetImportJobSummary
 
     DatasetImportJobs.member = Shapes::ShapeRef.new(shape: DatasetImportJobSummary)
@@ -1069,6 +1073,7 @@ module Aws::Personalize
     Recommender.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     Recommender.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
     Recommender.add_member(:latest_recommender_update, Shapes::ShapeRef.new(shape: RecommenderUpdateSummary, location_name: "latestRecommenderUpdate"))
+    Recommender.add_member(:model_metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "modelMetrics"))
     Recommender.struct_class = Types::Recommender
 
     RecommenderConfig.add_member(:item_exploration_config, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "itemExplorationConfig"))
@@ -1382,6 +1387,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 

@@ -46,6 +46,19 @@ module Aws
           expect(creds.client).to be(client)
         end
 
+        it 'excludes before_refresh from client construction' do
+          expect(CognitoIdentity::Client).to receive(:new)
+                                               .with({region: 'us-east-1', credentials: false})
+                                               .and_return(client)
+
+          creds = CognitoIdentityCredentials.new(
+            identity_id: identity_id,
+            region: 'us-east-1',
+            before_refresh: proc { }
+          )
+          expect(creds.client).to be(client)
+        end
+
         it 'raises an argument error when identity_pool_id and identity_id are missing' do
           expect { CognitoIdentityCredentials.new }.to raise_error(ArgumentError)
         end

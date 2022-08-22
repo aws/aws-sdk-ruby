@@ -258,6 +258,7 @@ module Aws::AuditManager
     Scope = Shapes::StructureShape.new(name: 'Scope')
     ServiceMetadata = Shapes::StructureShape.new(name: 'ServiceMetadata')
     ServiceMetadataList = Shapes::ListShape.new(name: 'ServiceMetadataList')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SettingAttribute = Shapes::StringShape.new(name: 'SettingAttribute')
     Settings = Shapes::StructureShape.new(name: 'Settings')
     ShareRequestAction = Shapes::StringShape.new(name: 'ShareRequestAction')
@@ -281,6 +282,7 @@ module Aws::AuditManager
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TestingInformation = Shapes::StringShape.new(name: 'TestingInformation')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampUUID = Shapes::StringShape.new(name: 'TimestampUUID')
     Token = Shapes::StringShape.new(name: 'Token')
@@ -1135,8 +1137,8 @@ module Aws::AuditManager
 
     Resources.member = Shapes::ShapeRef.new(shape: Resource)
 
-    Role.add_member(:role_type, Shapes::ShapeRef.new(shape: RoleType, location_name: "roleType"))
-    Role.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamArn, location_name: "roleArn"))
+    Role.add_member(:role_type, Shapes::ShapeRef.new(shape: RoleType, required: true, location_name: "roleType"))
+    Role.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamArn, required: true, location_name: "roleArn"))
     Role.struct_class = Types::Role
 
     Roles.member = Shapes::ShapeRef.new(shape: Role)
@@ -1152,6 +1154,9 @@ module Aws::AuditManager
     ServiceMetadata.struct_class = Types::ServiceMetadata
 
     ServiceMetadataList.member = Shapes::ShapeRef.new(shape: ServiceMetadata)
+
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     Settings.add_member(:is_aws_org_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isAwsOrgEnabled"))
     Settings.add_member(:sns_topic, Shapes::ShapeRef.new(shape: SNSTopic, location_name: "snsTopic"))
@@ -1183,6 +1188,9 @@ module Aws::AuditManager
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
 
     URL.add_member(:hyperlink_name, Shapes::ShapeRef.new(shape: HyperlinkName, location_name: "hyperlinkName"))
     URL.add_member(:link, Shapes::ShapeRef.new(shape: UrlLink, location_name: "link"))
@@ -1400,6 +1408,7 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_assessment_framework, Seahorse::Model::Operation.new.tap do |o|
@@ -1412,6 +1421,7 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_assessment_report, Seahorse::Model::Operation.new.tap do |o|
@@ -1436,6 +1446,7 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:delete_assessment, Seahorse::Model::Operation.new.tap do |o|
@@ -1971,6 +1982,7 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:register_organization_admin_account, Seahorse::Model::Operation.new.tap do |o|
@@ -2089,6 +2101,7 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:update_control, Seahorse::Model::Operation.new.tap do |o|

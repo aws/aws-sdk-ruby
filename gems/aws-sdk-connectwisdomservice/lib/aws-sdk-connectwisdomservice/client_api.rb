@@ -59,6 +59,7 @@ module Aws::ConnectWisdomService
     Description = Shapes::StringShape.new(name: 'Description')
     Document = Shapes::StructureShape.new(name: 'Document')
     DocumentText = Shapes::StructureShape.new(name: 'DocumentText')
+    FeedbackData = Shapes::StructureShape.new(name: 'FeedbackData')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterField = Shapes::StringShape.new(name: 'FilterField')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
@@ -109,13 +110,23 @@ module Aws::ConnectWisdomService
     NotifyRecommendationsReceivedResponse = Shapes::StructureShape.new(name: 'NotifyRecommendationsReceivedResponse')
     ObjectFieldsList = Shapes::ListShape.new(name: 'ObjectFieldsList')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
+    PutFeedbackRequest = Shapes::StructureShape.new(name: 'PutFeedbackRequest')
+    PutFeedbackResponse = Shapes::StructureShape.new(name: 'PutFeedbackResponse')
     QueryAssistantRequest = Shapes::StructureShape.new(name: 'QueryAssistantRequest')
     QueryAssistantResponse = Shapes::StructureShape.new(name: 'QueryAssistantResponse')
+    QueryRecommendationTriggerData = Shapes::StructureShape.new(name: 'QueryRecommendationTriggerData')
     QueryResultsList = Shapes::ListShape.new(name: 'QueryResultsList')
     QueryText = Shapes::StringShape.new(name: 'QueryText')
     RecommendationData = Shapes::StructureShape.new(name: 'RecommendationData')
     RecommendationIdList = Shapes::ListShape.new(name: 'RecommendationIdList')
     RecommendationList = Shapes::ListShape.new(name: 'RecommendationList')
+    RecommendationSourceType = Shapes::StringShape.new(name: 'RecommendationSourceType')
+    RecommendationTrigger = Shapes::StructureShape.new(name: 'RecommendationTrigger')
+    RecommendationTriggerData = Shapes::UnionShape.new(name: 'RecommendationTriggerData')
+    RecommendationTriggerList = Shapes::ListShape.new(name: 'RecommendationTriggerList')
+    RecommendationTriggerType = Shapes::StringShape.new(name: 'RecommendationTriggerType')
+    RecommendationType = Shapes::StringShape.new(name: 'RecommendationType')
+    Relevance = Shapes::StringShape.new(name: 'Relevance')
     RelevanceLevel = Shapes::StringShape.new(name: 'RelevanceLevel')
     RelevanceScore = Shapes::FloatShape.new(name: 'RelevanceScore')
     RemoveKnowledgeBaseTemplateUriRequest = Shapes::StructureShape.new(name: 'RemoveKnowledgeBaseTemplateUriRequest')
@@ -128,6 +139,7 @@ module Aws::ConnectWisdomService
     SearchExpression = Shapes::StructureShape.new(name: 'SearchExpression')
     SearchSessionsRequest = Shapes::StructureShape.new(name: 'SearchSessionsRequest')
     SearchSessionsResponse = Shapes::StructureShape.new(name: 'SearchSessionsResponse')
+    SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'ServerSideEncryptionConfiguration')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionData = Shapes::StructureShape.new(name: 'SessionData')
@@ -137,9 +149,6 @@ module Aws::ConnectWisdomService
     StartContentUploadRequest = Shapes::StructureShape.new(name: 'StartContentUploadRequest')
     StartContentUploadResponse = Shapes::StructureShape.new(name: 'StartContentUploadResponse')
     String = Shapes::StringShape.new(name: 'String')
-    SyntheticContentDataUrl = Shapes::StringShape.new(name: 'SyntheticContentDataUrl')
-    SyntheticDocumentTextString = Shapes::StringShape.new(name: 'SyntheticDocumentTextString')
-    SyntheticStartContentUploadResponseUrl = Shapes::StringShape.new(name: 'SyntheticStartContentUploadResponseUrl')
     SyntheticTimestamp_epoch_seconds = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_epoch_seconds', timestampFormat: "unixTimestamp")
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -147,6 +156,7 @@ module Aws::ConnectWisdomService
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    TargetType = Shapes::StringShape.new(name: 'TargetType')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -155,6 +165,7 @@ module Aws::ConnectWisdomService
     UpdateKnowledgeBaseTemplateUriRequest = Shapes::StructureShape.new(name: 'UpdateKnowledgeBaseTemplateUriRequest')
     UpdateKnowledgeBaseTemplateUriResponse = Shapes::StructureShape.new(name: 'UpdateKnowledgeBaseTemplateUriResponse')
     Uri = Shapes::StringShape.new(name: 'Uri')
+    Url = Shapes::StringShape.new(name: 'Url')
     Uuid = Shapes::StringShape.new(name: 'Uuid')
     UuidOrArn = Shapes::StringShape.new(name: 'UuidOrArn')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -236,7 +247,7 @@ module Aws::ConnectWisdomService
     ContentData.add_member(:status, Shapes::ShapeRef.new(shape: ContentStatus, required: true, location_name: "status"))
     ContentData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ContentData.add_member(:title, Shapes::ShapeRef.new(shape: ContentTitle, required: true, location_name: "title"))
-    ContentData.add_member(:url, Shapes::ShapeRef.new(shape: SyntheticContentDataUrl, required: true, location_name: "url"))
+    ContentData.add_member(:url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "url"))
     ContentData.add_member(:url_expiry, Shapes::ShapeRef.new(shape: SyntheticTimestamp_epoch_seconds, required: true, location_name: "urlExpiry"))
     ContentData.struct_class = Types::ContentData
 
@@ -349,8 +360,11 @@ module Aws::ConnectWisdomService
     Document.struct_class = Types::Document
 
     DocumentText.add_member(:highlights, Shapes::ShapeRef.new(shape: Highlights, location_name: "highlights"))
-    DocumentText.add_member(:text, Shapes::ShapeRef.new(shape: SyntheticDocumentTextString, location_name: "text"))
+    DocumentText.add_member(:text, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "text"))
     DocumentText.struct_class = Types::DocumentText
+
+    FeedbackData.add_member(:relevance, Shapes::ShapeRef.new(shape: Relevance, required: true, location_name: "relevance"))
+    FeedbackData.struct_class = Types::FeedbackData
 
     Filter.add_member(:field, Shapes::ShapeRef.new(shape: FilterField, required: true, location_name: "field"))
     Filter.add_member(:operator, Shapes::ShapeRef.new(shape: FilterOperator, required: true, location_name: "operator"))
@@ -399,6 +413,7 @@ module Aws::ConnectWisdomService
     GetRecommendationsRequest.struct_class = Types::GetRecommendationsRequest
 
     GetRecommendationsResponse.add_member(:recommendations, Shapes::ShapeRef.new(shape: RecommendationList, required: true, location_name: "recommendations"))
+    GetRecommendationsResponse.add_member(:triggers, Shapes::ShapeRef.new(shape: RecommendationTriggerList, location_name: "triggers"))
     GetRecommendationsResponse.struct_class = Types::GetRecommendationsResponse
 
     GetSessionRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
@@ -508,6 +523,19 @@ module Aws::ConnectWisdomService
     PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     PreconditionFailedException.struct_class = Types::PreconditionFailedException
 
+    PutFeedbackRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    PutFeedbackRequest.add_member(:feedback, Shapes::ShapeRef.new(shape: FeedbackData, required: true, location_name: "feedback"))
+    PutFeedbackRequest.add_member(:target_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetId"))
+    PutFeedbackRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, required: true, location_name: "targetType"))
+    PutFeedbackRequest.struct_class = Types::PutFeedbackRequest
+
+    PutFeedbackResponse.add_member(:assistant_arn, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location_name: "assistantArn"))
+    PutFeedbackResponse.add_member(:assistant_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "assistantId"))
+    PutFeedbackResponse.add_member(:feedback, Shapes::ShapeRef.new(shape: FeedbackData, required: true, location_name: "feedback"))
+    PutFeedbackResponse.add_member(:target_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "targetId"))
+    PutFeedbackResponse.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, required: true, location_name: "targetType"))
+    PutFeedbackResponse.struct_class = Types::PutFeedbackResponse
+
     QueryAssistantRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     QueryAssistantRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     QueryAssistantRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -518,17 +546,36 @@ module Aws::ConnectWisdomService
     QueryAssistantResponse.add_member(:results, Shapes::ShapeRef.new(shape: QueryResultsList, required: true, location_name: "results"))
     QueryAssistantResponse.struct_class = Types::QueryAssistantResponse
 
+    QueryRecommendationTriggerData.add_member(:text, Shapes::ShapeRef.new(shape: QueryText, location_name: "text"))
+    QueryRecommendationTriggerData.struct_class = Types::QueryRecommendationTriggerData
+
     QueryResultsList.member = Shapes::ShapeRef.new(shape: ResultData)
 
     RecommendationData.add_member(:document, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "document"))
     RecommendationData.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "recommendationId"))
     RecommendationData.add_member(:relevance_level, Shapes::ShapeRef.new(shape: RelevanceLevel, location_name: "relevanceLevel"))
     RecommendationData.add_member(:relevance_score, Shapes::ShapeRef.new(shape: RelevanceScore, location_name: "relevanceScore"))
+    RecommendationData.add_member(:type, Shapes::ShapeRef.new(shape: RecommendationType, location_name: "type"))
     RecommendationData.struct_class = Types::RecommendationData
 
     RecommendationIdList.member = Shapes::ShapeRef.new(shape: String)
 
     RecommendationList.member = Shapes::ShapeRef.new(shape: RecommendationData)
+
+    RecommendationTrigger.add_member(:data, Shapes::ShapeRef.new(shape: RecommendationTriggerData, required: true, location_name: "data"))
+    RecommendationTrigger.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
+    RecommendationTrigger.add_member(:recommendation_ids, Shapes::ShapeRef.new(shape: RecommendationIdList, required: true, location_name: "recommendationIds"))
+    RecommendationTrigger.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSourceType, required: true, location_name: "source"))
+    RecommendationTrigger.add_member(:type, Shapes::ShapeRef.new(shape: RecommendationTriggerType, required: true, location_name: "type"))
+    RecommendationTrigger.struct_class = Types::RecommendationTrigger
+
+    RecommendationTriggerData.add_member(:query, Shapes::ShapeRef.new(shape: QueryRecommendationTriggerData, location_name: "query"))
+    RecommendationTriggerData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RecommendationTriggerData.add_member_subclass(:query, Types::RecommendationTriggerData::Query)
+    RecommendationTriggerData.add_member_subclass(:unknown, Types::RecommendationTriggerData::Unknown)
+    RecommendationTriggerData.struct_class = Types::RecommendationTriggerData
+
+    RecommendationTriggerList.member = Shapes::ShapeRef.new(shape: RecommendationTrigger)
 
     RemoveKnowledgeBaseTemplateUriRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
     RemoveKnowledgeBaseTemplateUriRequest.struct_class = Types::RemoveKnowledgeBaseTemplateUriRequest
@@ -603,7 +650,7 @@ module Aws::ConnectWisdomService
 
     StartContentUploadResponse.add_member(:headers_to_include, Shapes::ShapeRef.new(shape: Headers, required: true, location_name: "headersToInclude"))
     StartContentUploadResponse.add_member(:upload_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "uploadId"))
-    StartContentUploadResponse.add_member(:url, Shapes::ShapeRef.new(shape: SyntheticStartContentUploadResponseUrl, required: true, location_name: "url"))
+    StartContentUploadResponse.add_member(:url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "url"))
     StartContentUploadResponse.add_member(:url_expiry, Shapes::ShapeRef.new(shape: SyntheticTimestamp_epoch_seconds, required: true, location_name: "urlExpiry"))
     StartContentUploadResponse.struct_class = Types::StartContentUploadResponse
 
@@ -770,6 +817,7 @@ module Aws::ConnectWisdomService
         o.input = Shapes::ShapeRef.new(shape: DeleteKnowledgeBaseRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteKnowledgeBaseResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -932,6 +980,17 @@ module Aws::ConnectWisdomService
         o.http_request_uri = "/assistants/{assistantId}/sessions/{sessionId}/recommendations/notify"
         o.input = Shapes::ShapeRef.new(shape: NotifyRecommendationsReceivedRequest)
         o.output = Shapes::ShapeRef.new(shape: NotifyRecommendationsReceivedResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:put_feedback, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutFeedback"
+        o.http_method = "PUT"
+        o.http_request_uri = "/assistants/{assistantId}/feedback"
+        o.input = Shapes::ShapeRef.new(shape: PutFeedbackRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutFeedbackResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

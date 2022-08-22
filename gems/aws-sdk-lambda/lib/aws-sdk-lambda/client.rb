@@ -696,7 +696,7 @@ module Aws::Lambda
     end
 
     # Creates a mapping between an event source and an Lambda function.
-    # Lambda reads items from the event source and triggers the function.
+    # Lambda reads items from the event source and invokes the function.
     #
     # For details about how to configure different event sources, see the
     # following topics.
@@ -713,7 +713,7 @@ module Aws::Lambda
     #
     # * [ Apache Kafka][6]
     #
-    # The following error handling options are only available for stream
+    # The following error handling options are available only for stream
     # sources (DynamoDB and Kinesis):
     #
     # * `BisectBatchOnFunctionError` - If the function returns an error,
@@ -808,7 +808,7 @@ module Aws::Lambda
     #
     #   * **Amazon Kinesis** - Default 100. Max 10,000.
     #
-    #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
+    #   * **Amazon DynamoDB Streams** - Default 100. Max 10,000.
     #
     #   * **Amazon Simple Queue Service** - Default 10. For standard queues
     #     the max is 10,000. For FIFO queues the max is 10.
@@ -816,7 +816,7 @@ module Aws::Lambda
     #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
     #     10,000.
     #
-    #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
+    #   * **Self-managed Apache Kafka** - Default 100. Max 10,000.
     #
     #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
     #
@@ -846,7 +846,7 @@ module Aws::Lambda
     # @option params [String] :starting_position
     #   The position in a stream from which to start reading. Required for
     #   Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources.
-    #   `AT_TIMESTAMP` is only supported for Amazon Kinesis streams.
+    #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams.
     #
     # @option params [Time,DateTime,Date,Integer,String] :starting_position_timestamp
     #   With `StartingPosition` set to `AT_TIMESTAMP`, the time from which to
@@ -867,11 +867,11 @@ module Aws::Lambda
     # @option params [Integer] :maximum_retry_attempts
     #   (Streams only) Discard records after the specified number of retries.
     #   The default value is infinite (-1). When set to infinite (-1), failed
-    #   records will be retried until the record expires.
+    #   records are retried until the record expires.
     #
     # @option params [Integer] :tumbling_window_in_seconds
     #   (Streams only) The duration in seconds of a processing window. The
-    #   range is between 1 second up to 900 seconds.
+    #   range is between 1 second and 900 seconds.
     #
     # @option params [Array<String>] :topics
     #   The name of the Kafka topic.
@@ -884,11 +884,19 @@ module Aws::Lambda
     #   secure your event source.
     #
     # @option params [Types::SelfManagedEventSource] :self_managed_event_source
-    #   The Self-Managed Apache Kafka cluster to send records.
+    #   The self-managed Apache Kafka cluster to receive records from.
     #
     # @option params [Array<String>] :function_response_types
     #   (Streams and Amazon SQS) A list of current response type enums applied
     #   to the event source mapping.
+    #
+    # @option params [Types::AmazonManagedKafkaEventSourceConfig] :amazon_managed_kafka_event_source_config
+    #   Specific configuration settings for an Amazon Managed Streaming for
+    #   Apache Kafka (Amazon MSK) event source.
+    #
+    # @option params [Types::SelfManagedKafkaEventSourceConfig] :self_managed_kafka_event_source_config
+    #   Specific configuration settings for a self-managed Apache Kafka event
+    #   source.
     #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -915,6 +923,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
     #   * {Types::EventSourceMappingConfiguration#tumbling_window_in_seconds #tumbling_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#function_response_types #function_response_types} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#amazon_managed_kafka_event_source_config #amazon_managed_kafka_event_source_config} => Types::AmazonManagedKafkaEventSourceConfig
+    #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -960,6 +970,12 @@ module Aws::Lambda
     #       },
     #     },
     #     function_response_types: ["ReportBatchItemFailures"], # accepts ReportBatchItemFailures
+    #     amazon_managed_kafka_event_source_config: {
+    #       consumer_group_id: "URI",
+    #     },
+    #     self_managed_kafka_event_source_config: {
+    #       consumer_group_id: "URI",
+    #     },
     #   })
     #
     # @example Response structure
@@ -996,6 +1012,8 @@ module Aws::Lambda
     #   resp.tumbling_window_in_seconds #=> Integer
     #   resp.function_response_types #=> Array
     #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
+    #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMapping AWS API Documentation
     #
@@ -1265,7 +1283,7 @@ module Aws::Lambda
     #
     #   resp = client.create_function({
     #     function_name: "FunctionName", # required
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     role: "RoleArn", # required
     #     handler: "Handler",
     #     code: { # required
@@ -1322,7 +1340,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -1577,6 +1595,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
     #   * {Types::EventSourceMappingConfiguration#tumbling_window_in_seconds #tumbling_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#function_response_types #function_response_types} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#amazon_managed_kafka_event_source_config #amazon_managed_kafka_event_source_config} => Types::AmazonManagedKafkaEventSourceConfig
+    #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -1618,6 +1638,8 @@ module Aws::Lambda
     #   resp.tumbling_window_in_seconds #=> Integer
     #   resp.function_response_types #=> Array
     #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
+    #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMapping AWS API Documentation
     #
@@ -2053,6 +2075,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
     #   * {Types::EventSourceMappingConfiguration#tumbling_window_in_seconds #tumbling_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#function_response_types #function_response_types} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#amazon_managed_kafka_event_source_config #amazon_managed_kafka_event_source_config} => Types::AmazonManagedKafkaEventSourceConfig
+    #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -2094,6 +2118,8 @@ module Aws::Lambda
     #   resp.tumbling_window_in_seconds #=> Integer
     #   resp.function_response_types #=> Array
     #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
+    #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMapping AWS API Documentation
     #
@@ -2148,7 +2174,7 @@ module Aws::Lambda
     #
     #   resp.configuration.function_name #=> String
     #   resp.configuration.function_arn #=> String
-    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.configuration.role #=> String
     #   resp.configuration.handler #=> String
     #   resp.configuration.code_size #=> Integer
@@ -2382,7 +2408,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -2616,7 +2642,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.license_info #=> String
     #   resp.compatible_architectures #=> Array
     #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -2671,7 +2697,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.license_info #=> String
     #   resp.compatible_architectures #=> Array
     #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -2869,7 +2895,8 @@ module Aws::Lambda
     # for long connections with timeout or keep-alive settings.
     #
     # This operation requires permission for the [lambda:InvokeFunction][8]
-    # action.
+    # action. For details on how to set up permissions for cross-account
+    # invocations, see [Granting function access to other accounts][9].
     #
     #
     #
@@ -2881,6 +2908,7 @@ module Aws::Lambda
     # [6]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq
     # [7]: https://docs.aws.amazon.com/lambda/latest/dg/limits.html
     # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html
+    # [9]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function, version, or alias.
@@ -3134,7 +3162,7 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Lists event source mappings. Specify an `EventSourceArn` to only show
+    # Lists event source mappings. Specify an `EventSourceArn` to show only
     # event source mappings for a single event source.
     #
     # @option params [String] :event_source_arn
@@ -3228,6 +3256,8 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].tumbling_window_in_seconds #=> Integer
     #   resp.event_source_mappings[0].function_response_types #=> Array
     #   resp.event_source_mappings[0].function_response_types[0] #=> String, one of "ReportBatchItemFailures"
+    #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.consumer_group_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappings AWS API Documentation
     #
@@ -3427,7 +3457,7 @@ module Aws::Lambda
     #   resp.functions #=> Array
     #   resp.functions[0].function_name #=> String
     #   resp.functions[0].function_arn #=> String
-    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.functions[0].role #=> String
     #   resp.functions[0].handler #=> String
     #   resp.functions[0].code_size #=> Integer
@@ -3572,7 +3602,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_layer_versions({
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     layer_name: "LayerName", # required
     #     marker: "String",
     #     max_items: 1,
@@ -3588,7 +3618,7 @@ module Aws::Lambda
     #   resp.layer_versions[0].description #=> String
     #   resp.layer_versions[0].created_date #=> Time
     #   resp.layer_versions[0].compatible_runtimes #=> Array
-    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.layer_versions[0].license_info #=> String
     #   resp.layer_versions[0].compatible_architectures #=> Array
     #   resp.layer_versions[0].compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -3640,7 +3670,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_layers({
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     marker: "String",
     #     max_items: 1,
     #     compatible_architecture: "x86_64", # accepts x86_64, arm64
@@ -3657,7 +3687,7 @@ module Aws::Lambda
     #   resp.layers[0].latest_matching_version.description #=> String
     #   resp.layers[0].latest_matching_version.created_date #=> Time
     #   resp.layers[0].latest_matching_version.compatible_runtimes #=> Array
-    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.layers[0].latest_matching_version.license_info #=> String
     #   resp.layers[0].latest_matching_version.compatible_architectures #=> Array
     #   resp.layers[0].latest_matching_version.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -3819,7 +3849,7 @@ module Aws::Lambda
     #   resp.versions #=> Array
     #   resp.versions[0].function_name #=> String
     #   resp.versions[0].function_arn #=> String
-    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.versions[0].role #=> String
     #   resp.versions[0].handler #=> String
     #   resp.versions[0].code_size #=> Integer
@@ -3952,7 +3982,7 @@ module Aws::Lambda
     #       s3_object_version: "S3ObjectVersion",
     #       zip_file: "data",
     #     },
-    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     license_info: "LicenseInfo",
     #     compatible_architectures: ["x86_64"], # accepts x86_64, arm64
     #   })
@@ -3970,7 +4000,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.license_info #=> String
     #   resp.compatible_architectures #=> Array
     #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -4080,7 +4110,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -4733,7 +4763,7 @@ module Aws::Lambda
     #
     # * [ Apache Kafka][6]
     #
-    # The following error handling options are only available for stream
+    # The following error handling options are available only for stream
     # sources (DynamoDB and Kinesis):
     #
     # * `BisectBatchOnFunctionError` - If the function returns an error,
@@ -4818,7 +4848,7 @@ module Aws::Lambda
     #
     #   * **Amazon Kinesis** - Default 100. Max 10,000.
     #
-    #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
+    #   * **Amazon DynamoDB Streams** - Default 100. Max 10,000.
     #
     #   * **Amazon Simple Queue Service** - Default 10. For standard queues
     #     the max is 10,000. For FIFO queues the max is 10.
@@ -4826,7 +4856,7 @@ module Aws::Lambda
     #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
     #     10,000.
     #
-    #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
+    #   * **Self-managed Apache Kafka** - Default 100. Max 10,000.
     #
     #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
     #
@@ -4864,7 +4894,7 @@ module Aws::Lambda
     # @option params [Integer] :maximum_retry_attempts
     #   (Streams only) Discard records after the specified number of retries.
     #   The default value is infinite (-1). When set to infinite (-1), failed
-    #   records will be retried until the record expires.
+    #   records are retried until the record expires.
     #
     # @option params [Integer] :parallelization_factor
     #   (Streams only) The number of batches to process from each shard
@@ -4876,7 +4906,7 @@ module Aws::Lambda
     #
     # @option params [Integer] :tumbling_window_in_seconds
     #   (Streams only) The duration in seconds of a processing window. The
-    #   range is between 1 second up to 900 seconds.
+    #   range is between 1 second and 900 seconds.
     #
     # @option params [Array<String>] :function_response_types
     #   (Streams and Amazon SQS) A list of current response type enums applied
@@ -4907,6 +4937,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
     #   * {Types::EventSourceMappingConfiguration#tumbling_window_in_seconds #tumbling_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#function_response_types #function_response_types} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#amazon_managed_kafka_event_source_config #amazon_managed_kafka_event_source_config} => Types::AmazonManagedKafkaEventSourceConfig
+    #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -4979,6 +5011,8 @@ module Aws::Lambda
     #   resp.tumbling_window_in_seconds #=> Integer
     #   resp.function_response_types #=> Array
     #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
+    #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMapping AWS API Documentation
     #
@@ -5133,7 +5167,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -5396,7 +5430,7 @@ module Aws::Lambda
     #         "EnvironmentVariableName" => "EnvironmentVariableValue",
     #       },
     #     },
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     dead_letter_config: {
     #       target_arn: "ResourceArn",
     #     },
@@ -5426,7 +5460,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -5682,7 +5716,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

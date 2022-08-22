@@ -28,7 +28,7 @@ require_relative 'aws-sdk-synthetics/customizations'
 # structure.
 #
 #     synthetics = Aws::Synthetics::Client.new
-#     resp = synthetics.create_canary(params)
+#     resp = synthetics.associate_resource(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-synthetics/customizations'
 # @!group service
 module Aws::Synthetics
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.28.0'
 
 end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2022-05-03)
+------------------
+
+* Feature - Add support for GetImages API  for retrieving images from a video stream
+
 1.43.0 (2022-02-24)
 ------------------
 

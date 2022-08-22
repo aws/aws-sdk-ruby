@@ -122,6 +122,7 @@ module Aws::RDS
   # * {InvalidSubnet}
   # * {InvalidVPCNetworkStateFault}
   # * {KMSKeyNotAccessibleFault}
+  # * {NetworkTypeNotSupported}
   # * {OptionGroupAlreadyExistsFault}
   # * {OptionGroupNotFoundFault}
   # * {OptionGroupQuotaExceededFault}
@@ -1096,6 +1097,16 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::KMSKeyNotAccessibleFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class NetworkTypeNotSupported < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::NetworkTypeNotSupported] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2022-07-11)
+------------------
+
+* Feature - This release adds a new --snapshot-arn field for describe-cluster-snapshots, describe-node-configuration-options, restore-from-cluster-snapshot, authorize-snapshot-acsess, and revoke-snapshot-acsess APIs. It allows customers to give a Redshift snapshot ARN or a Redshift Serverless ARN as input.
+
+1.83.0 (2022-06-08)
+------------------
+
+* Feature - Adds new API GetClusterCredentialsWithIAM to return temporary credentials.
+
+1.82.0 (2022-05-06)
+------------------
+
+* Feature - Introduces new field 'LoadSampleData' in CreateCluster operation. Customers can now specify 'LoadSampleData' option during creation of a cluster, which results in loading of sample data in the cluster that is created.
+
 1.81.0 (2022-04-19)
 ------------------
 

@@ -347,16 +347,18 @@ module Aws
             headers: {
               'Foo' => 'foo',
               'Bar' => 'bar  bar',
-              'Bar2' => '"bar  bar"',
+              'Bar2' => '"bar bar"',
               'Content-Length' => 9,
               'X-Amz-Date' => '20120101T112233Z',
             },
             body: StringIO.new('http-body')
           )
-          expect(signature.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/REGION/SERVICE/aws4_request, SignedHeaders=bar;bar2;foo;host;x-amz-content-sha256;x-amz-date, Signature=4a7d3e06d1950eb64a3daa1becaa8ba030d9099858516cb2fa4533fab4e8937d')
+          expect(signature.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/REGION/SERVICE/aws4_request, SignedHeaders=bar;bar2;foo;host;x-amz-content-sha256;x-amz-date, Signature=4bae5054b2e035212a0eb42339a957809a8c9428e628fd4b92e5a295d0fa6e5b')
         end
 
         it 'escapes path for the canonical request by default' do
+          skip("CRT does not provide canonical request") if Signer.use_crt?
+
           signature = Signer.new(options).sign_request(
             http_method: 'GET',
             url: 'https://domain.com/foo%bar'
@@ -365,6 +367,8 @@ module Aws
         end
 
         it 'escapes path for the canonical request if :uri_escape_path is true' do
+          skip("CRT does not provide canonical request") if Signer.use_crt?
+
           options[:uri_escape_path] = true
           signature = Signer.new(options).sign_request(
             http_method: 'GET',
@@ -374,6 +378,8 @@ module Aws
         end
 
         it 'does not escape path for the canonical request if :uri_escape_path is false' do
+          skip("CRT does not provide canonical request") if Signer.use_crt?
+
           options[:uri_escape_path] = false
           signature = Signer.new(options).sign_request(
             http_method: 'GET',
@@ -408,6 +414,8 @@ module Aws
       end
 
       context ':canonical_request' do
+
+        before { skip("CRT Signer does not expose canonical request") if Signer.use_crt? }
 
         it 'lower-cases and sort all header keys except authorization' do
           signature = Signer.new(options).sign_request(

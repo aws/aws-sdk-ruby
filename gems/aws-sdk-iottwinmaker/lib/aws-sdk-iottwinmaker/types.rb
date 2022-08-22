@@ -1733,7 +1733,14 @@ module Aws::IoTTwinMaker
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   Timestamp represented in ISO 8601 format
+    #   The ISO8601 DateTime of the latest property value to return.
+    #
+    #   For more information about the ISO8601 DateTime format, see the data
+    #   type [PropertyValue][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/roci/latest/roci-api/API_PropertyValue.html
     #   @return [String]
     #
     # @!attribute [rw] entity_id
@@ -1770,7 +1777,14 @@ module Aws::IoTTwinMaker
     #   @return [Time]
     #
     # @!attribute [rw] start_time
-    #   Timestamp represented in ISO 8601 format
+    #   The ISO8601 DateTime of the earliest property value to return.
+    #
+    #   For more information about the ISO8601 DateTime format, see the data
+    #   type [PropertyValue][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/roci/latest/roci-api/API_PropertyValue.html
     #   @return [String]
     #
     # @!attribute [rw] workspace_id
@@ -2052,6 +2066,10 @@ module Aws::IoTTwinMaker
 
     # An object that filters items in a list of component types.
     #
+    # <note markdown="1"> Only one object is accepted as a valid input.
+    #
+    #  </note>
+    #
     # @note ListComponentTypesFilter is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] extends_from
@@ -2199,6 +2217,10 @@ module Aws::IoTTwinMaker
     #
     # @!attribute [rw] filters
     #   A list of objects that filter the request.
+    #
+    #   <note markdown="1"> Only one object is accepted as a valid input.
+    #
+    #    </note>
     #   @return [Array<Types::ListEntitiesFilter>]
     #
     # @!attribute [rw] max_results
@@ -2804,7 +2826,32 @@ module Aws::IoTTwinMaker
     #       }
     #
     # @!attribute [rw] time
-    #   Timestamp represented in ISO 8601 format
+    #   ISO8601 DateTime of a value for a time series property.
+    #
+    #   The time for when the property value was recorded in ISO 8601
+    #   format: *YYYY-MM-DDThh:mm:ss\[.SSSSSSSSS\]\[Z/±HH:mm\]*.
+    #
+    #   * *\[YYYY\]*\: year
+    #
+    #   * *\[MM\]*\: month
+    #
+    #   * *\[DD\]*\: day
+    #
+    #   * *\[hh\]*\: hour
+    #
+    #   * *\[mm\]*\: minute
+    #
+    #   * *\[ss\]*\: seconds
+    #
+    #   * *\[.SSSSSSSSS\]*\: additional precision, where precedence is
+    #     maintained. For example: \[.573123\] is equal to 573123000
+    #     nanoseconds.
+    #
+    #   * *Z*\: default timezone UTC
+    #
+    #   * *± HH:mm*\: time zone offset in Hours and Minutes.
+    #
+    #   *Required sub-fields*\: YYYY-MM-DDThh:mm:ss and \[Z/±HH:mm\]
     #   @return [String]
     #
     # @!attribute [rw] timestamp
@@ -2824,7 +2871,12 @@ module Aws::IoTTwinMaker
     end
 
     # An object that specifies information about time series property
-    # values.
+    # values. This object is used and consumed by the
+    # [BatchPutPropertyValues][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_BatchPutPropertyValues.html
     #
     # @note When making an API call, you may pass PropertyValueEntry
     #   data as a hash:

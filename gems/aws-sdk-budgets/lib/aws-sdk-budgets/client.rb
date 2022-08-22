@@ -404,7 +404,7 @@ module Aws::Budgets
     #         },
     #       },
     #       cost_filters: {
-    #         "GenericString" => ["GenericString"],
+    #         "GenericString" => ["DimensionValue"],
     #       },
     #       cost_types: {
     #         include_tax: false,
@@ -1584,7 +1584,7 @@ module Aws::Budgets
     #         },
     #       },
     #       cost_filters: {
-    #         "GenericString" => ["GenericString"],
+    #         "GenericString" => ["DimensionValue"],
     #       },
     #       cost_types: {
     #         include_tax: false,
@@ -1882,7 +1882,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

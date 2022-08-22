@@ -887,9 +887,15 @@ module Aws::ACMPCA
     #
     #   Default: FIPS\_140\_2\_LEVEL\_3\_OR\_HIGHER
     #
-    #   Note: `FIPS_140_2_LEVEL_3_OR_HIGHER` is not supported in Region
-    #   ap-northeast-3. When creating a CA in the ap-northeast-3, you must
-    #   provide `FIPS_140_2_LEVEL_2_OR_HIGHER` as the argument for
+    #   *Note:* `FIPS_140_2_LEVEL_3_OR_HIGHER` is not supported in the
+    #   following Regions:
+    #
+    #   * ap-northeast-3
+    #
+    #   * ap-southeast-3
+    #
+    #   When creating a CA in these Regions, you must provide
+    #   `FIPS_140_2_LEVEL_2_OR_HIGHER` as the argument for
     #   `KeyStorageSecurityStandard`. Failure to do this results in an
     #   `InvalidArgsException` with the message, "A certificate authority
     #   cannot be created in this region with the specified security
@@ -1721,15 +1727,9 @@ module Aws::ACMPCA
     #   the critical flag. For more information, see the [Global OID
     #   reference database.][1]
     #
-    #   <note markdown="1"> The OID value of a [CustomExtension][2] must not match the OID of a
-    #   predefined extension.
-    #
-    #    </note>
-    #
     #
     #
     #   [1]: https://oidref.com/2.5.29
-    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CustomExtension.html
     #   @return [Array<Types::CustomExtension>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/Extensions AWS API Documentation

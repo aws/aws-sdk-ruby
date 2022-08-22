@@ -24,6 +24,26 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # The choice level additional resources.
+    #
+    # @!attribute [rw] type
+    #   Type of additional resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The URLs for additional resources, either helpful resources or
+    #   improvement plans. Up to five additional URLs can be specified.
+    #   @return [Array<Types::ChoiceContent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AdditionalResources AWS API Documentation
+    #
+    class AdditionalResources < Struct.new(
+      :type,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An answer of the question.
     #
     # @!attribute [rw] question_id
@@ -221,6 +241,12 @@ module Aws::WellArchitected
     #   The choice level improvement plan.
     #   @return [Types::ChoiceContent]
     #
+    # @!attribute [rw] additional_resources
+    #   The additional resources for a choice. A choice can have up to two
+    #   additional resources: one of type `HELPFUL_RESOURCE`, one of type
+    #   `IMPROVEMENT_PLAN`, or both.
+    #   @return [Array<Types::AdditionalResources>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Choice AWS API Documentation
     #
     class Choice < Struct.new(
@@ -228,7 +254,8 @@ module Aws::WellArchitected
       :title,
       :description,
       :helpful_resource,
-      :improvement_plan)
+      :improvement_plan,
+      :additional_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -402,7 +429,14 @@ module Aws::WellArchitected
     #       }
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -463,7 +497,14 @@ module Aws::WellArchitected
     #       }
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -608,7 +649,7 @@ module Aws::WellArchitected
     #         non_aws_regions: ["WorkloadNonAwsRegion"],
     #         pillar_priorities: ["PillarId"],
     #         architectural_design: "WorkloadArchitecturalDesign",
-    #         review_owner: "WorkloadReviewOwner", # required
+    #         review_owner: "WorkloadReviewOwner",
     #         industry_type: "WorkloadIndustryType",
     #         industry: "WorkloadIndustry",
     #         lenses: ["LensAlias"], # required
@@ -888,7 +929,14 @@ module Aws::WellArchitected
     #       }
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -939,7 +987,14 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1102,7 +1157,14 @@ module Aws::WellArchitected
     #       }
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1150,7 +1212,14 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1190,7 +1259,14 @@ module Aws::WellArchitected
     #   @return [Integer]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1224,7 +1300,14 @@ module Aws::WellArchitected
     #       }
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1271,7 +1354,14 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1336,7 +1426,14 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1394,7 +1491,14 @@ module Aws::WellArchitected
     #       }
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1418,7 +1522,14 @@ module Aws::WellArchitected
     end
 
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1555,7 +1666,14 @@ module Aws::WellArchitected
     #       }
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1697,6 +1815,10 @@ module Aws::WellArchitected
     #   The ID assigned to the share invitation.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the lens.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Lens AWS API Documentation
     #
     class Lens < Struct.new(
@@ -1705,7 +1827,8 @@ module Aws::WellArchitected
       :name,
       :description,
       :owner,
-      :share_invitation_id)
+      :share_invitation_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1713,7 +1836,14 @@ module Aws::WellArchitected
     # A lens review of a question.
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1775,7 +1905,14 @@ module Aws::WellArchitected
     # A report of a lens review.
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1803,7 +1940,14 @@ module Aws::WellArchitected
     # A lens review summary of a workload.
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1862,12 +2006,17 @@ module Aws::WellArchitected
     #   The status of a workload share.
     #   @return [String]
     #
+    # @!attribute [rw] status_message
+    #   Optional message to compliment the Status field.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/LensShareSummary AWS API Documentation
     #
     class LensShareSummary < Struct.new(
       :share_id,
       :shared_with,
-      :status)
+      :status,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1879,7 +2028,14 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1949,7 +2105,14 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1999,7 +2162,14 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -2051,7 +2221,14 @@ module Aws::WellArchitected
     #   @return [Integer]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -2101,7 +2278,14 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -2153,7 +2337,14 @@ module Aws::WellArchitected
     #   @return [Integer]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -2265,10 +2456,18 @@ module Aws::WellArchitected
     #         shared_with_prefix: "SharedWithPrefix",
     #         next_token: "NextToken",
     #         max_results: 1,
+    #         status: "ACCEPTED", # accepts ACCEPTED, REJECTED, PENDING, REVOKED, EXPIRED, ASSOCIATING, ASSOCIATED, FAILED
     #       }
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -2286,13 +2485,18 @@ module Aws::WellArchitected
     #   The maximum number of results to return for this request.
     #   @return [Integer]
     #
+    # @!attribute [rw] status
+    #   The status of a workload share.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListLensSharesInput AWS API Documentation
     #
     class ListLensSharesInput < Struct.new(
       :lens_alias,
       :shared_with_prefix,
       :next_token,
-      :max_results)
+      :max_results,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2593,6 +2797,7 @@ module Aws::WellArchitected
     #         shared_with_prefix: "SharedWithPrefix",
     #         next_token: "NextToken",
     #         max_results: 1,
+    #         status: "ACCEPTED", # accepts ACCEPTED, REJECTED, PENDING, REVOKED, EXPIRED, ASSOCIATING, ASSOCIATED, FAILED
     #       }
     #
     # @!attribute [rw] workload_id
@@ -2613,13 +2818,18 @@ module Aws::WellArchitected
     #   The maximum number of results to return for this request.
     #   @return [Integer]
     #
+    # @!attribute [rw] status
+    #   The status of a workload share.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListWorkloadSharesInput AWS API Documentation
     #
     class ListWorkloadSharesInput < Struct.new(
       :workload_id,
       :shared_with_prefix,
       :next_token,
-      :max_results)
+      :max_results,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2948,7 +3158,14 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -3142,7 +3359,14 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -3197,7 +3421,14 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -3217,6 +3448,25 @@ module Aws::WellArchitected
       :lens_alias,
       :lens_arn,
       :answer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateGlobalSettingsInput
+    #   data as a hash:
+    #
+    #       {
+    #         organization_sharing_status: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] organization_sharing_status
+    #   The status of organization sharing settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateGlobalSettingsInput AWS API Documentation
+    #
+    class UpdateGlobalSettingsInput < Struct.new(
+      :organization_sharing_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3241,7 +3491,14 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -3586,7 +3843,14 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] lens_alias
-    #   The alias of the lens, for example, `serverless`.
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -3949,13 +4213,18 @@ module Aws::WellArchitected
     #   The status of a workload share.
     #   @return [String]
     #
+    # @!attribute [rw] status_message
+    #   Optional message to compliment the Status field.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/WorkloadShareSummary AWS API Documentation
     #
     class WorkloadShareSummary < Struct.new(
       :share_id,
       :shared_with,
       :permission_type,
-      :status)
+      :status,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end

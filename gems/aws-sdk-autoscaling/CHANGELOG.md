@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2022-07-25)
+------------------
+
+* Feature - Documentation update for Amazon EC2 Auto Scaling.
+
 1.79.0 (2022-04-19)
 ------------------
 

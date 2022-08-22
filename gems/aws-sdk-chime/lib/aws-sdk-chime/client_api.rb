@@ -20,6 +20,7 @@ module Aws::Chime
     AccountSettings = Shapes::StructureShape.new(name: 'AccountSettings')
     AccountStatus = Shapes::StringShape.new(name: 'AccountStatus')
     AccountType = Shapes::StringShape.new(name: 'AccountType')
+    Address = Shapes::StructureShape.new(name: 'Address')
     AlexaForBusinessMetadata = Shapes::StructureShape.new(name: 'AlexaForBusinessMetadata')
     Alpha2CountryCode = Shapes::StringShape.new(name: 'Alpha2CountryCode')
     AppInstance = Shapes::StructureShape.new(name: 'AppInstance')
@@ -85,6 +86,8 @@ module Aws::Chime
     CallingNameStatus = Shapes::StringShape.new(name: 'CallingNameStatus')
     CallingRegion = Shapes::StringShape.new(name: 'CallingRegion')
     CallingRegionList = Shapes::ListShape.new(name: 'CallingRegionList')
+    CandidateAddress = Shapes::StructureShape.new(name: 'CandidateAddress')
+    CandidateAddressList = Shapes::ListShape.new(name: 'CandidateAddressList')
     Capability = Shapes::StringShape.new(name: 'Capability')
     CapabilityList = Shapes::ListShape.new(name: 'CapabilityList')
     Channel = Shapes::StructureShape.new(name: 'Channel')
@@ -514,6 +517,7 @@ module Aws::Chime
     SelectedVideoStreams = Shapes::StructureShape.new(name: 'SelectedVideoStreams')
     SendChannelMessageRequest = Shapes::StructureShape.new(name: 'SendChannelMessageRequest')
     SendChannelMessageResponse = Shapes::StructureShape.new(name: 'SendChannelMessageResponse')
+    SensitiveNonEmptyString = Shapes::StringShape.new(name: 'SensitiveNonEmptyString')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     SensitiveStringList = Shapes::ListShape.new(name: 'SensitiveStringList')
     ServiceFailureException = Shapes::StructureShape.new(name: 'ServiceFailureException')
@@ -635,6 +639,9 @@ module Aws::Chime
     UserName = Shapes::StringShape.new(name: 'UserName')
     UserSettings = Shapes::StructureShape.new(name: 'UserSettings')
     UserType = Shapes::StringShape.new(name: 'UserType')
+    ValidateE911AddressRequest = Shapes::StructureShape.new(name: 'ValidateE911AddressRequest')
+    ValidateE911AddressResponse = Shapes::StructureShape.new(name: 'ValidateE911AddressResponse')
+    ValidationResult = Shapes::IntegerShape.new(name: 'ValidationResult')
     VideoArtifactsConfiguration = Shapes::StructureShape.new(name: 'VideoArtifactsConfiguration')
     VideoMuxType = Shapes::StringShape.new(name: 'VideoMuxType')
     VoiceConnector = Shapes::StructureShape.new(name: 'VoiceConnector')
@@ -669,6 +676,18 @@ module Aws::Chime
     AccountSettings.add_member(:disable_remote_control, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableRemoteControl"))
     AccountSettings.add_member(:enable_dial_out, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableDialOut"))
     AccountSettings.struct_class = Types::AccountSettings
+
+    Address.add_member(:street_name, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "streetName"))
+    Address.add_member(:street_suffix, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "streetSuffix"))
+    Address.add_member(:post_directional, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "postDirectional"))
+    Address.add_member(:pre_directional, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "preDirectional"))
+    Address.add_member(:street_number, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "streetNumber"))
+    Address.add_member(:city, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "city"))
+    Address.add_member(:state, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "state"))
+    Address.add_member(:postal_code, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "postalCode"))
+    Address.add_member(:postal_code_plus_4, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "postalCodePlus4"))
+    Address.add_member(:country, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "country"))
+    Address.struct_class = Types::Address
 
     AlexaForBusinessMetadata.add_member(:is_alexa_for_business_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsAlexaForBusinessEnabled"))
     AlexaForBusinessMetadata.add_member(:alexa_for_business_room_arn, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "AlexaForBusinessRoomArn"))
@@ -870,6 +889,17 @@ module Aws::Chime
     BusinessCallingSettings.struct_class = Types::BusinessCallingSettings
 
     CallingRegionList.member = Shapes::ShapeRef.new(shape: CallingRegion)
+
+    CandidateAddress.add_member(:street_info, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "streetInfo"))
+    CandidateAddress.add_member(:street_number, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "streetNumber"))
+    CandidateAddress.add_member(:city, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "city"))
+    CandidateAddress.add_member(:state, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "state"))
+    CandidateAddress.add_member(:postal_code, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "postalCode"))
+    CandidateAddress.add_member(:postal_code_plus_4, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "postalCodePlus4"))
+    CandidateAddress.add_member(:country, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "country"))
+    CandidateAddress.struct_class = Types::CandidateAddress
+
+    CandidateAddressList.member = Shapes::ShapeRef.new(shape: CandidateAddress)
 
     CapabilityList.member = Shapes::ShapeRef.new(shape: Capability)
 
@@ -2710,6 +2740,21 @@ module Aws::Chime
 
     UserSettings.add_member(:telephony, Shapes::ShapeRef.new(shape: TelephonySettings, required: true, location_name: "Telephony"))
     UserSettings.struct_class = Types::UserSettings
+
+    ValidateE911AddressRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AwsAccountId"))
+    ValidateE911AddressRequest.add_member(:street_number, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "StreetNumber"))
+    ValidateE911AddressRequest.add_member(:street_info, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "StreetInfo"))
+    ValidateE911AddressRequest.add_member(:city, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "City"))
+    ValidateE911AddressRequest.add_member(:state, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "State"))
+    ValidateE911AddressRequest.add_member(:country, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "Country"))
+    ValidateE911AddressRequest.add_member(:postal_code, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "PostalCode"))
+    ValidateE911AddressRequest.struct_class = Types::ValidateE911AddressRequest
+
+    ValidateE911AddressResponse.add_member(:validation_result, Shapes::ShapeRef.new(shape: ValidationResult, location_name: "ValidationResult"))
+    ValidateE911AddressResponse.add_member(:address_external_id, Shapes::ShapeRef.new(shape: String, location_name: "AddressExternalId"))
+    ValidateE911AddressResponse.add_member(:address, Shapes::ShapeRef.new(shape: Address, location_name: "Address"))
+    ValidateE911AddressResponse.add_member(:candidate_address_list, Shapes::ShapeRef.new(shape: CandidateAddressList, location_name: "CandidateAddressList"))
+    ValidateE911AddressResponse.struct_class = Types::ValidateE911AddressResponse
 
     VideoArtifactsConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ArtifactsState, required: true, location_name: "State"))
     VideoArtifactsConfiguration.add_member(:mux_type, Shapes::ShapeRef.new(shape: VideoMuxType, location_name: "MuxType"))
@@ -5908,6 +5953,21 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:validate_e911_address, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ValidateE911Address"
+        o.http_method = "POST"
+        o.http_request_uri = "/emergency-calling/address"
+        o.input = Shapes::ShapeRef.new(shape: ValidateE911AddressRequest)
+        o.output = Shapes::ShapeRef.new(shape: ValidateE911AddressResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)

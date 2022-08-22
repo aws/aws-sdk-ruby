@@ -361,23 +361,46 @@ module Aws::TranscribeService
 
     # @!group API Operations
 
-    # Creates a call analytics category. Amazon Transcribe applies the
-    # conditions specified by your call analytics categories to your call
-    # analytics jobs. For each analytics category, you must create between 1
-    # and 20 rules. For example, you can create a 'greeting' category with
-    # a rule that flags calls in which your agent does not use a specified
-    # phrase (for example: "Please note this call may be recorded.") in
-    # the first 15 seconds of the call. When you start a call analytics job,
-    # Amazon Transcribe applies all your existing call analytics categories
-    # to that job.
+    # Creates a new Call Analytics category.
+    #
+    # All categories are automatically applied to your Call Analytics jobs.
+    # Note that in order to apply your categories to your jobs, you must
+    # create them before submitting your job request, as categories cannot
+    # be applied retroactively.
+    #
+    # Call Analytics categories are composed of rules. For each category,
+    # you must create between 1 and 20 rules. Rules can include these
+    # parameters: , , , and .
+    #
+    # To update an existing category, see .
+    #
+    # To learn more about:
+    #
+    # * Call Analytics categories, see [Creating categories][1]
+    #
+    # * Using rules, see [Rule criteria][2] and refer to the data type
+    #
+    # * Call Analytics, see [Analyzing call center audio with Call
+    #   Analytics][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html
+    # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules
+    # [3]: https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html
     #
     # @option params [required, String] :category_name
-    #   A unique name, chosen by you, for your call analytics category. For
-    #   example, `sentiment-positive-last30seconds`.
+    #   A unique name, chosen by you, for your Call Analytics category. It's
+    #   helpful to use a detailed naming system that will make sense to you in
+    #   the future. For example, it's better to use
+    #   `sentiment-positive-last30seconds` for a category over a generic name
+    #   like `test-category`.
+    #
+    #   Category names are case sensitive.
     #
     # @option params [required, Array<Types::Rule>] :rules
-    #   Rules make up a call analytics category. When creating a call
-    #   analytics category, you must create between 1 and 20 rules for your
+    #   Rules define a Call Analytics category. When creating a new Call
+    #   Analytics category, you must create between 1 and 20 rules for that
     #   category. For each rule, you specify a filter you want applied to the
     #   attributes of a call. For example, you can choose a sentiment filter
     #   that detects if a customer's sentiment was positive during the last
@@ -527,17 +550,45 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Creates a new custom language model. When creating a new language
-    # model, you must specify if you want a Wideband (audio sample rates
-    # over 16,000 Hz) or Narrowband (audio sample rates under 16,000 Hz)
-    # base model. You then include the S3 URI location of your training and
-    # tuning files, the language for the model, a unique name, and any tags
-    # you want associated with your model.
+    # Creates a new custom language model.
+    #
+    # When creating a new language model, you must specify:
+    #
+    # * If you want a Wideband (audio sample rates over 16,000 Hz) or
+    #   Narrowband (audio sample rates under 16,000 Hz) base model
+    #
+    # * The location of your training and tuning files (this must be an
+    #   Amazon S3 URI)
+    #
+    # * The language of your model
+    #
+    # * A unique name for your model
+    #
+    # For more information, see [Custom language models][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html
     #
     # @option params [required, String] :language_code
-    #   The language of your custom language model; note that the language
-    #   code you select must match the language of your training and tuning
-    #   data.
+    #   The language code that represents the language of your model. Each
+    #   language model must contain terms in only one language, and the
+    #   language you select for your model must match the language of your
+    #   training and tuning data.
+    #
+    #   For a list of supported languages and their associated language codes,
+    #   refer to the [Supported languages][1] table. Note that U.S. English
+    #   (`en-US`) is the only language supported with Amazon Transcribe
+    #   Medical.
+    #
+    #   A custom language model can only be used to transcribe files in the
+    #   same language as the model. For example, if you create a language
+    #   model using US English (`en-US`), you can only apply this model to
+    #   files that contain English audio.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
     #
     # @option params [required, String] :base_model_name
     #   The Amazon Transcribe standard language model, or base model, used to
@@ -549,21 +600,37 @@ module Aws::TranscribeService
     #   less than 16,000 Hz, choose `NarrowBand`.
     #
     # @option params [required, String] :model_name
-    #   The name of your new custom language model.
+    #   A unique name, chosen by you, for your custom language model.
     #
     #   This name is case sensitive, cannot contain spaces, and must be unique
-    #   within an Amazon Web Services account. If you try to create a language
-    #   model with the same name as a previous language model, you get a
-    #   `ConflictException` error.
+    #   within an Amazon Web Services account. If you try to create a new
+    #   language model with the same name as an existing language model, you
+    #   get a `ConflictException` error.
     #
     # @option params [required, Types::InputDataConfig] :input_data_config
-    #   Contains your data access role ARN (Amazon Resource Name) and the
-    #   Amazon S3 locations of your training (`S3Uri`) and tuning
-    #   (`TuningDataS3Uri`) data.
+    #   Contains the Amazon S3 location of the training data you want to use
+    #   to create a new custom language model, and permissions to access this
+    #   location.
+    #
+    #   When using `InputDataConfig`, you must include these sub-parameters:
+    #   `S3Uri`, which is the Amazon S3 location of your training data, and
+    #   `DataAccessRoleArn`, which is the Amazon Resource Name (ARN) of the
+    #   role that has permission to access your specified Amazon S3 location.
+    #   You can optionally include `TuningDataS3Uri`, which is the Amazon S3
+    #   location of your tuning data. If you specify different Amazon S3
+    #   locations for training and tuning data, the ARN you use must have
+    #   permissions to access both locations.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Optionally add tags, each in the form of a key:value pair, to your new
-    #   language model. See also: .
+    #   Adds one or more custom tags, each in the form of a key:value pair, to
+    #   a new custom language model at the time you create this new model.
+    #
+    #   To learn more about using tags with Amazon Transcribe, refer to
+    #   [Tagging resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
     #
     # @return [Types::CreateLanguageModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -613,44 +680,48 @@ module Aws::TranscribeService
 
     # Creates a new custom medical vocabulary.
     #
-    # When creating a new medical vocabulary, you must upload a text file
-    # that contains your new entries, phrases, and terms into an S3 bucket.
-    # Note that this differs from , where you can include a list of terms
-    # within your request using the `Phrases` flag, as
+    # Prior to creating a new medical vocabulary, you must first upload a
+    # text file that contains your new entries, phrases, and terms into an
+    # Amazon S3 bucket. Note that this differs from , where you can include
+    # a list of terms within your request using the `Phrases` flag;
     # `CreateMedicalVocabulary` does not support the `Phrases` flag.
     #
-    # For more information on creating a custom vocabulary text file, see
-    # [Creating a custom vocabulary][1].
+    # Each language has a character set that contains all allowed characters
+    # for that specific language. If you use unsupported characters, your
+    # vocabulary request fails. Refer to [Character Sets for Custom
+    # Vocabularies][1] to get the character set for your language.
+    #
+    # For more information, see [Creating a custom vocabulary][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary-create.html
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
+    # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary-create.html
     #
     # @option params [required, String] :vocabulary_name
-    #   The name of your new vocabulary.
+    #   A unique name, chosen by you, for your new custom medical vocabulary.
     #
     #   This name is case sensitive, cannot contain spaces, and must be unique
-    #   within an Amazon Web Services account. If you try to create a
-    #   vocabulary with the same name as a previous vocabulary, you get a
-    #   `ConflictException` error.
+    #   within an Amazon Web Services account. If you try to create a new
+    #   medical vocabulary with the same name as an existing medical
+    #   vocabulary, you get a `ConflictException` error.
     #
     # @option params [required, String] :language_code
     #   The language code that represents the language of the entries in your
-    #   custom vocabulary. Note that U.S. English (`en-US`) is the only
-    #   language supported with Amazon Transcribe Medical.
+    #   custom vocabulary. US English (`en-US`) is the only language supported
+    #   with Amazon Transcribe Medical.
     #
     # @option params [required, String] :vocabulary_file_uri
     #   The Amazon S3 location (URI) of the text file that contains your
-    #   custom vocabulary. The URI must be in the same Amazon Web Services
-    #   Region as the resource that you're calling.
+    #   custom medical vocabulary. The URI must be in the same Amazon Web
+    #   Services Region as the resource you're calling.
     #
     #   Here's an example URI path:
-    #
-    #   `https://s3.us-east-1.amazonaws.com/my-s3-bucket/my-vocab-file.txt`
+    #   `s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt`
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Adds one or more tags, each in the form of a key:value pair, to a new
-    #   medical vocabulary at the time you create the new vocabulary.
+    #   Adds one or more custom tags, each in the form of a key:value pair, to
+    #   a new medical vocabulary at the time you create this new vocabulary.
     #
     #   To learn more about using tags with Amazon Transcribe, refer to
     #   [Tagging resources][1].
@@ -671,7 +742,7 @@ module Aws::TranscribeService
     #
     #   resp = client.create_medical_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #     vocabulary_file_uri: "Uri", # required
     #     tags: [
     #       {
@@ -684,7 +755,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -700,57 +771,88 @@ module Aws::TranscribeService
 
     # Creates a new custom vocabulary.
     #
-    # When creating a new medical vocabulary, you can either upload a text
-    # file that contains your new entries, phrases, and terms into an S3
-    # bucket or include a list of terms directly in your request using the
-    # `Phrases` flag.
+    # When creating a new vocabulary, you can either upload a text file that
+    # contains your new entries, phrases, and terms into an Amazon S3 bucket
+    # and include the URI in your request, or you can include a list of
+    # terms directly in your request using the `Phrases` flag.
     #
-    # For more information on creating a custom vocabulary, see [Creating a
-    # custom vocabulary][1].
+    # Each language has a character set that contains all allowed characters
+    # for that specific language. If you use unsupported characters, your
+    # vocabulary request fails. Refer to [Character Sets for Custom
+    # Vocabularies][1] to get the character set for your language.
+    #
+    # For more information, see [Creating a custom vocabulary][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary-create.html
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
+    # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary-create.html
     #
     # @option params [required, String] :vocabulary_name
-    #   The name of your new vocabulary.
+    #   A unique name, chosen by you, for your new custom vocabulary.
     #
     #   This name is case sensitive, cannot contain spaces, and must be unique
-    #   within an Amazon Web Services account. If you try to create a
-    #   vocabulary with the same name as a previous vocabulary, you get a
+    #   within an Amazon Web Services account. If you try to create a new
+    #   vocabulary with the same name as an existing vocabulary, you get a
     #   `ConflictException` error.
     #
     # @option params [required, String] :language_code
     #   The language code that represents the language of the entries in your
     #   custom vocabulary. Each vocabulary must contain terms in only one
-    #   language. For a list of languages and their corresponding language
-    #   codes, see [Supported languages][1].
+    #   language.
+    #
+    #   A custom vocabulary can only be used to transcribe files in the same
+    #   language as the vocabulary. For example, if you create a vocabulary
+    #   using US English (`en-US`), you can only apply this vocabulary to
+    #   files that contain English audio.
+    #
+    #   For a list of supported languages and their associated language codes,
+    #   refer to the [Supported languages][1] table.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
     #
     # @option params [Array<String>] :phrases
-    #   Use this flag to include a list of terms within your request.
+    #   Use this parameter if you want to create your vocabulary by including
+    #   all desired terms, as comma-separated values, within your request. The
+    #   other option for creating your vocabulary is to save your entries in a
+    #   text file and upload them to an Amazon S3 bucket, then specify the
+    #   location of your file using the `VocabularyFileUri` parameter.
     #
     #   Note that if you include `Phrases` in your request, you cannot use
     #   `VocabularyFileUri`; you must choose one or the other.
     #
+    #   Each language has a character set that contains all allowed characters
+    #   for that specific language. If you use unsupported characters, your
+    #   vocabulary filter request fails. Refer to [Character Sets for Custom
+    #   Vocabularies][1] to get the character set for your language.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
+    #
     # @option params [String] :vocabulary_file_uri
-    #   The S3 location of the text file that contains your custom vocabulary.
-    #   The URI must be located in the same region as the API endpoint you're
-    #   calling.
+    #   The Amazon S3 location of the text file that contains your custom
+    #   vocabulary. The URI must be located in the same Amazon Web Services
+    #   Region as the resource you're calling.
     #
     #   Here's an example URI path:
-    #
-    #   `https://s3.us-east-1.amazonaws.com/my-s3-bucket/my-vocab-file.txt`
+    #   `s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt`
     #
     #   Note that if you include `VocabularyFileUri` in your request, you
     #   cannot use the `Phrases` flag; you must choose one or the other.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Adds one or more tags, each in the form of a key:value pair, to a new
-    #   custom vocabulary at the time you create this new vocabulary.
+    #   Adds one or more custom tags, each in the form of a key:value pair, to
+    #   a new custom vocabulary at the time you create this new vocabulary.
+    #
+    #   To learn more about using tags with Amazon Transcribe, refer to
+    #   [Tagging resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
     #
     # @return [Types::CreateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -764,7 +866,7 @@ module Aws::TranscribeService
     #
     #   resp = client.create_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
     #     tags: [
@@ -778,7 +880,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -792,53 +894,91 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Creates a new vocabulary filter that you can use to filter words from
-    # your transcription output. For example, you can use this operation to
-    # remove profanity from your transcript.
+    # Creates a new custom vocabulary filter.
+    #
+    # You can use vocabulary filters to mask, delete, or flag specific words
+    # from your transcript. Vocabulary filters are commonly used to mask
+    # profanity in transcripts.
+    #
+    # Each language has a character set that contains all allowed characters
+    # for that specific language. If you use unsupported characters, your
+    # vocabulary filter request fails. Refer to [Character Sets for Custom
+    # Vocabularies][1] to get the character set for your language.
+    #
+    # For more information, see [Using vocabulary filtering with unwanted
+    # words][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
+    # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html
     #
     # @option params [required, String] :vocabulary_filter_name
-    #   The name of your new vocabulary filter.
+    #   A unique name, chosen by you, for your new custom vocabulary filter.
     #
     #   This name is case sensitive, cannot contain spaces, and must be unique
-    #   within an Amazon Web Services account. If you try to create a
-    #   vocabulary filter with the same name as a previous vocabulary filter,
+    #   within an Amazon Web Services account. If you try to create a new
+    #   vocabulary filter with the same name as an existing vocabulary filter,
     #   you get a `ConflictException` error.
     #
     # @option params [required, String] :language_code
-    #   The language code of the words in the vocabulary filter. All words in
-    #   the filter must be in the same language. The vocabulary filter can
-    #   only be used with transcription jobs in the specified language.
+    #   The language code that represents the language of the entries in your
+    #   vocabulary filter. Each vocabulary filter must contain terms in only
+    #   one language.
+    #
+    #   A vocabulary filter can only be used to transcribe files in the same
+    #   language as the filter. For example, if you create a vocabulary filter
+    #   using US English (`en-US`), you can only apply this filter to files
+    #   that contain English audio.
+    #
+    #   For a list of supported languages and their associated language codes,
+    #   refer to the [Supported languages][1] table.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
     #
     # @option params [Array<String>] :words
-    #   The words you want in your vocabulary filter. Only use characters
-    #   specified in the [Character sets][1] for the language you're
-    #   transcribing.
+    #   Use this parameter if you want to create your vocabulary filter by
+    #   including all desired terms, as comma-separated values, within your
+    #   request. The other option for creating your vocabulary filter is to
+    #   save your entries in a text file and upload them to an Amazon S3
+    #   bucket, then specify the location of your file using the
+    #   `VocabularyFilterFileUri` parameter.
     #
     #   Note that if you include `Words` in your request, you cannot use
     #   `VocabularyFilterFileUri`; you must choose one or the other.
+    #
+    #   Each language has a character set that contains all allowed characters
+    #   for that specific language. If you use unsupported characters, your
+    #   vocabulary filter request fails. Refer to [Character Sets for Custom
+    #   Vocabularies][1] to get the character set for your language.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
     #
     # @option params [String] :vocabulary_filter_file_uri
-    #   The Amazon S3 location of a text file used as input to create the
-    #   vocabulary filter. Only use characters from the character set defined
-    #   for custom vocabularies. For a list of character sets, see [Character
-    #   Sets for Custom Vocabularies][1].
+    #   The Amazon S3 location of the text file that contains your custom
+    #   vocabulary filter terms. The URI must be located in the same Amazon
+    #   Web Services Region as the resource you're calling.
     #
-    #   Your vocabulary filter file must be less than 50 KB in size.
+    #   Here's an example URI path:
+    #   `s3://DOC-EXAMPLE-BUCKET/my-vocab-filter-file.txt`
     #
     #   Note that if you include `VocabularyFilterFileUri` in your request,
     #   you cannot use `Words`; you must choose one or the other.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
-    #
     # @option params [Array<Types::Tag>] :tags
-    #   Adds one or more tags, each in the form of a key:value pair, to a new
-    #   vocabulary filter at the time you create this new vocabulary filter.
+    #   Adds one or more custom tags, each in the form of a key:value pair, to
+    #   a new custom vocabulary filter at the time you create this new filter.
+    #
+    #   To learn more about using tags with Amazon Transcribe, refer to
+    #   [Tagging resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
     #
     # @return [Types::CreateVocabularyFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -850,7 +990,7 @@ module Aws::TranscribeService
     #
     #   resp = client.create_vocabulary_filter({
     #     vocabulary_filter_name: "VocabularyFilterName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #     words: ["Word"],
     #     vocabulary_filter_file_uri: "Uri",
     #     tags: [
@@ -864,7 +1004,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_filter_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyFilter AWS API Documentation
@@ -876,12 +1016,13 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Deletes a call analytics category. To use this operation, specify the
-    # name of the category you want to delete using `CategoryName`.
+    # Deletes a Call Analytics category. To use this operation, specify the
+    # name of the category you want to delete using `CategoryName`. Category
+    # names are case sensitive.
     #
     # @option params [required, String] :category_name
-    #   The name of the call analytics category you want to delete. Category
-    #   names are case-sensitive.
+    #   The name of the Call Analytics category you want to delete. Category
+    #   names are case sensitive.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -900,12 +1041,13 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Deletes a call analytics job. To use this operation, specify the name
-    # of the job you want to delete using `CallAnalyticsJobName`.
+    # Deletes a Call Analytics job. To use this operation, specify the name
+    # of the job you want to delete using `CallAnalyticsJobName`. Job names
+    # are case sensitive.
     #
     # @option params [required, String] :call_analytics_job_name
-    #   The name of the call analytics job you want to delete. Job names are
-    #   case-sensitive.
+    #   The name of the Call Analytics job you want to delete. Job names are
+    #   case sensitive.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -926,10 +1068,11 @@ module Aws::TranscribeService
 
     # Deletes a custom language model. To use this operation, specify the
     # name of the language model you want to delete using `ModelName`.
+    # Language model names are case sensitive.
     #
     # @option params [required, String] :model_name
-    #   The name of the model you want to delete. Model names are
-    #   case-sensitive.
+    #   The name of the custom language model you want to delete. Model names
+    #   are case sensitive.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -948,13 +1091,13 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Deletes a medical transcription job, along with any related
-    # information. To use this operation, specify the name of the job you
-    # want to delete using `MedicalTranscriptionJobName`.
+    # Deletes a medical transcription job. To use this operation, specify
+    # the name of the job you want to delete using
+    # `MedicalTranscriptionJobName`. Job names are case sensitive.
     #
     # @option params [required, String] :medical_transcription_job_name
     #   The name of the medical transcription job you want to delete. Job
-    #   names are case-sensitive.
+    #   names are case sensitive.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -975,10 +1118,11 @@ module Aws::TranscribeService
 
     # Deletes a custom medical vocabulary. To use this operation, specify
     # the name of the vocabulary you want to delete using `VocabularyName`.
+    # Vocabulary names are case sensitive.
     #
     # @option params [required, String] :vocabulary_name
-    #   The name of the vocabulary that you want to delete. Vocabulary names
-    #   are case-sensitive.
+    #   The name of the custom medical vocabulary you want to delete.
+    #   Vocabulary names are case sensitive.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -997,13 +1141,13 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Deletes a transcription job, along with any related information. To
-    # use this operation, specify the name of the job you want to delete
-    # using `TranscriptionJobName`.
+    # Deletes a transcription job. To use this operation, specify the name
+    # of the job you want to delete using `TranscriptionJobName`. Job names
+    # are case sensitive.
     #
     # @option params [required, String] :transcription_job_name
     #   The name of the transcription job you want to delete. Job names are
-    #   case-sensitive.
+    #   case sensitive.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1024,10 +1168,11 @@ module Aws::TranscribeService
 
     # Deletes a custom vocabulary. To use this operation, specify the name
     # of the vocabulary you want to delete using `VocabularyName`.
+    # Vocabulary names are case sensitive.
     #
     # @option params [required, String] :vocabulary_name
-    #   The name of the vocabulary you want to delete. Vocabulary names are
-    #   case-sensitive.
+    #   The name of the custom vocabulary you want to delete. Vocabulary names
+    #   are case sensitive.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1048,11 +1193,11 @@ module Aws::TranscribeService
 
     # Deletes a vocabulary filter. To use this operation, specify the name
     # of the vocabulary filter you want to delete using
-    # `VocabularyFilterName`.
+    # `VocabularyFilterName`. Vocabulary filter names are case sensitive.
     #
     # @option params [required, String] :vocabulary_filter_name
-    #   The name of the vocabulary filter you want to delete. Vocabulary
-    #   filter names are case-sensitive.
+    #   The name of the custom vocabulary filter you want to delete.
+    #   Vocabulary filter names are case sensitive.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1071,8 +1216,7 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Provides information about a specific custom language model in your
-    # Amazon Web Services account.
+    # Provides information about the specified custom language model.
     #
     # This operation also shows if the base language model you used to
     # create your custom language model has been updated. If Amazon
@@ -1080,12 +1224,14 @@ module Aws::TranscribeService
     # language model using the updated base model.
     #
     # If you tried to create a new custom language model and the request
-    # wasn't successful, you can use this operation to help identify the
-    # reason.
+    # wasn't successful, you can use `DescribeLanguageModel` to help
+    # identify the reason for this failure.
+    #
+    # To get a list of your custom language models, use the operation.
     #
     # @option params [required, String] :model_name
-    #   The name of the custom language model you want described. Model names
-    #   are case-sensitive.
+    #   The name of the custom language model you want information about.
+    #   Model names are case sensitive.
     #
     # @return [Types::DescribeLanguageModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1120,11 +1266,13 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Retrieves information about a call analytics category.
+    # Provides information about the specified Call Analytics category.
+    #
+    # To get a list of your Call Analytics categories, use the operation.
     #
     # @option params [required, String] :category_name
-    #   The name of the category you want information about. Category names
-    #   are case sensitive.
+    #   The name of the Call Analytics category you want information about.
+    #   Category names are case sensitive.
     #
     # @return [Types::GetCallAnalyticsCategoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1198,18 +1346,27 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Retrieves information about a call analytics job.
+    # Provides information about the specified Call Analytics job.
     #
-    # To view the job's status, refer to the `CallAnalyticsJobStatus`
-    # field. If the status is `COMPLETED`, the job is finished. You can then
-    # find your transcript at the URI specified in the `TranscriptFileUri`
-    # field. If you enabled personally identifiable information (PII)
-    # redaction, the redacted transcript appears in the
-    # `RedactedTranscriptFileUri` field.
+    # To view the job's status, refer to `CallAnalyticsJobStatus`. If the
+    # status is `COMPLETED`, the job is finished. You can find your
+    # completed transcript at the URI specified in `TranscriptFileUri`. If
+    # the status is `FAILED`, `FailureReason` provides details on why your
+    # transcription job failed.
+    #
+    # If you enabled personally identifiable information (PII) redaction,
+    # the redacted transcript appears at the location specified in
+    # `RedactedTranscriptFileUri`.
+    #
+    # If you chose to redact the audio in your media file, you can find your
+    # redacted media file at the location specified in
+    # `RedactedMediaFileUri`.
+    #
+    # To get a list of your Call Analytics jobs, use the operation.
     #
     # @option params [required, String] :call_analytics_job_name
-    #   The name of the analytics job you want information about. This value
-    #   is case sensitive.
+    #   The name of the Call Analytics job you want information about. Job
+    #   names are case sensitive.
     #
     # @return [Types::GetCallAnalyticsJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1225,7 +1382,7 @@ module Aws::TranscribeService
     #
     #   resp.call_analytics_job.call_analytics_job_name #=> String
     #   resp.call_analytics_job.call_analytics_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.call_analytics_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.call_analytics_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.call_analytics_job.media_sample_rate_hertz #=> Integer
     #   resp.call_analytics_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
     #   resp.call_analytics_job.media.media_file_uri #=> String
@@ -1247,7 +1404,7 @@ module Aws::TranscribeService
     #   resp.call_analytics_job.settings.content_redaction.pii_entity_types #=> Array
     #   resp.call_analytics_job.settings.content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"
     #   resp.call_analytics_job.settings.language_options #=> Array
-    #   resp.call_analytics_job.settings.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.call_analytics_job.settings.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.call_analytics_job.settings.language_id_settings #=> Hash
     #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].vocabulary_name #=> String
     #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].vocabulary_filter_name #=> String
@@ -1265,16 +1422,19 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Retrieves information about a medical transcription job.
+    # Provides information about the specified medical transcription job.
     #
-    # To view the job's status, refer to the `TranscriptionJobStatus`
-    # field. If the status is `COMPLETED`, the job is finished. You can then
-    # find your transcript at the URI specified in the `TranscriptFileUri`
-    # field.
+    # To view the status of the specified medical transcription job, check
+    # the `TranscriptionJobStatus` field. If the status is `COMPLETED`, the
+    # job is finished and you can find the results at the location specified
+    # in `TranscriptFileUri`. If the status is `FAILED`, `FailureReason`
+    # provides details on why your transcription job failed.
+    #
+    # To get a list of your medical transcription jobs, use the operation.
     #
     # @option params [required, String] :medical_transcription_job_name
     #   The name of the medical transcription job you want information about.
-    #   This value is case sensitive.
+    #   Job names are case sensitive.
     #
     # @return [Types::GetMedicalTranscriptionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1290,7 +1450,7 @@ module Aws::TranscribeService
     #
     #   resp.medical_transcription_job.medical_transcription_job_name #=> String
     #   resp.medical_transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.medical_transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.medical_transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
     #   resp.medical_transcription_job.media.media_file_uri #=> String
@@ -1322,11 +1482,18 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Retrieves information about a medical vocabulary.
+    # Provides information about the specified custom medical vocabulary.
+    #
+    # To view the status of the specified medical vocabulary, check the
+    # `VocabularyState` field. If the status is `READY`, your vocabulary is
+    # available to use. If the status is `FAILED`, `FailureReason` provides
+    # details on why your vocabulary failed.
+    #
+    # To get a list of your custom medical vocabularies, use the operation.
     #
     # @option params [required, String] :vocabulary_name
-    #   The name of the medical vocabulary you want information about. This
-    #   value is case sensitive.
+    #   The name of the custom medical vocabulary you want information about.
+    #   Vocabulary names are case sensitive.
     #
     # @return [Types::GetMedicalVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1346,7 +1513,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -1361,15 +1528,22 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Returns information about a transcription job. To see the status of
-    # the job, check the `TranscriptionJobStatus` field. If the status is
-    # `COMPLETED`, the job is finished and you can find the results at the
-    # location specified in the `TranscriptFileUri` field. If you enable
-    # content redaction, the redacted transcript appears in
-    # `RedactedTranscriptFileUri`.
+    # Provides information about the specified transcription job.
+    #
+    # To view the status of the specified transcription job, check the
+    # `TranscriptionJobStatus` field. If the status is `COMPLETED`, the job
+    # is finished and you can find the results at the location specified in
+    # `TranscriptFileUri`. If the status is `FAILED`, `FailureReason`
+    # provides details on why your transcription job failed.
+    #
+    # If you enabled content redaction, the redacted transcript can be found
+    # at the location specified in `RedactedTranscriptFileUri`.
+    #
+    # To get a list of your transcription jobs, use the operation.
     #
     # @option params [required, String] :transcription_job_name
-    #   The name of the job.
+    #   The name of the transcription job you want information about. Job
+    #   names are case sensitive.
     #
     # @return [Types::GetTranscriptionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1385,7 +1559,7 @@ module Aws::TranscribeService
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
     #   resp.transcription_job.media.media_file_uri #=> String
@@ -1412,9 +1586,13 @@ module Aws::TranscribeService
     #   resp.transcription_job.content_redaction.pii_entity_types #=> Array
     #   resp.transcription_job.content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"
     #   resp.transcription_job.identify_language #=> Boolean
+    #   resp.transcription_job.identify_multiple_languages #=> Boolean
     #   resp.transcription_job.language_options #=> Array
-    #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.transcription_job.identified_language_score #=> Float
+    #   resp.transcription_job.language_codes #=> Array
+    #   resp.transcription_job.language_codes[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.transcription_job.language_codes[0].duration_in_seconds #=> Float
     #   resp.transcription_job.tags #=> Array
     #   resp.transcription_job.tags[0].key #=> String
     #   resp.transcription_job.tags[0].value #=> String
@@ -1437,11 +1615,18 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Gets information about a vocabulary.
+    # Provides information about the specified custom vocabulary.
+    #
+    # To view the status of the specified vocabulary, check the
+    # `VocabularyState` field. If the status is `READY`, your vocabulary is
+    # available to use. If the status is `FAILED`, `FailureReason` provides
+    # details on why your vocabulary failed.
+    #
+    # To get a list of your custom vocabularies, use the operation.
     #
     # @option params [required, String] :vocabulary_name
-    #   The name of the vocabulary to return information about. The name is
-    #   case sensitive.
+    #   The name of the custom vocabulary you want information about.
+    #   Vocabulary names are case sensitive.
     #
     # @return [Types::GetVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1461,7 +1646,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -1476,10 +1661,18 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Returns information about a vocabulary filter.
+    # Provides information about the specified custom vocabulary filter.
+    #
+    # To view the status of the specified vocabulary filter, check the
+    # `VocabularyState` field. If the status is `READY`, your vocabulary is
+    # available to use. If the status is `FAILED`, `FailureReason` provides
+    # details on why your vocabulary filter failed.
+    #
+    # To get a list of your custom vocabulary filters, use the operation.
     #
     # @option params [required, String] :vocabulary_filter_name
-    #   The name of the vocabulary filter for which to return information.
+    #   The name of the custom vocabulary filter you want information about.
+    #   Vocabulary filter names are case sensitive.
     #
     # @return [Types::GetVocabularyFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1497,7 +1690,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_filter_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.last_modified_time #=> Time
     #   resp.download_uri #=> String
     #
@@ -1510,20 +1703,24 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Provides more information about the call analytics categories that
-    # you've created. You can use the information in this list to find a
-    # specific category. You can then use the operation to get more
-    # information about it.
+    # Provides a list of Call Analytics categories, including all rules that
+    # make up each category.
+    #
+    # To get detailed information about a specific Call Analytics category,
+    # use the operation.
     #
     # @option params [String] :next_token
-    #   When included, `NextToken`fetches the next set of categories if the
-    #   result of the previous request was truncated.
+    #   If your `ListCallAnalyticsCategories` request returns more results
+    #   than can be displayed, `NextToken` is displayed in the response with
+    #   an associated string. To get the next page of results, copy this
+    #   string and repeat your request, including `NextToken` with the value
+    #   of the copied string. Repeat as needed to view all your results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of categories to return in each page of results. If
-    #   there are fewer results than the value you specify, only the actual
-    #   results are returned. If you do not specify a value, the default of 5
-    #   is used.
+    #   The maximum number of Call Analytics categories to return in each page
+    #   of results. If there are fewer results than the value you specify,
+    #   only the actual results are returned. If you don't specify a value, a
+    #   default of 5 is used.
     #
     # @return [Types::ListCallAnalyticsCategoriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1603,27 +1800,33 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # List call analytics jobs with a specified status or substring that
-    # matches their names.
+    # Provides a list of Call Analytics jobs that match the specified
+    # criteria. If no criteria are specified, all Call Analytics jobs are
+    # returned.
+    #
+    # To get detailed information about a specific Call Analytics job, use
+    # the operation.
     #
     # @option params [String] :status
-    #   When specified, returns only call analytics jobs with the specified
-    #   status. Jobs are ordered by creation date, with the most recent jobs
-    #   returned first. If you don't specify a status, Amazon Transcribe
-    #   returns all analytics jobs ordered by creation date.
+    #   Returns only Call Analytics jobs with the specified status. Jobs are
+    #   ordered by creation date, with the newest job first. If you don't
+    #   include `Status`, all Call Analytics jobs are returned.
     #
     # @option params [String] :job_name_contains
-    #   When specified, the jobs returned in the list are limited to jobs
-    #   whose name contains the specified string.
+    #   Returns only the Call Analytics jobs that contain the specified
+    #   string. The search is not case sensitive.
     #
     # @option params [String] :next_token
-    #   If you receive a truncated result in the previous request of , include
-    #   `NextToken` to fetch the next set of jobs.
+    #   If your `ListCallAnalyticsJobs` request returns more results than can
+    #   be displayed, `NextToken` is displayed in the response with an
+    #   associated string. To get the next page of results, copy this string
+    #   and repeat your request, including `NextToken` with the value of the
+    #   copied string. Repeat as needed to view all your results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of call analytics jobs to return in each page of
+    #   The maximum number of Call Analytics jobs to return in each page of
     #   results. If there are fewer results than the value you specify, only
-    #   the actual results are returned. If you do not specify a value, the
+    #   the actual results are returned. If you don't specify a value, a
     #   default of 5 is used.
     #
     # @return [Types::ListCallAnalyticsJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1652,7 +1855,7 @@ module Aws::TranscribeService
     #   resp.call_analytics_job_summaries[0].creation_time #=> Time
     #   resp.call_analytics_job_summaries[0].start_time #=> Time
     #   resp.call_analytics_job_summaries[0].completion_time #=> Time
-    #   resp.call_analytics_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.call_analytics_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.call_analytics_job_summaries[0].call_analytics_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.call_analytics_job_summaries[0].failure_reason #=> String
     #
@@ -1665,29 +1868,34 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Provides more information about the custom language models you've
-    # created. You can use the information in this list to find a specific
-    # custom language model. You can then use the operation to get more
-    # information about it.
+    # Provides a list of custom language models that match the specified
+    # criteria. If no criteria are specified, all language models are
+    # returned.
+    #
+    # To get detailed information about a specific custom language model,
+    # use the operation.
     #
     # @option params [String] :status_equals
-    #   When specified, returns only custom language models with the specified
-    #   status. Language models are ordered by creation date, with the newest
-    #   models first. If you don't specify a status, Amazon Transcribe
-    #   returns all custom language models ordered by date.
+    #   Returns only custom language models with the specified status.
+    #   Language models are ordered by creation date, with the newest model
+    #   first. If you don't include `StatusEquals`, all custom language
+    #   models are returned.
     #
     # @option params [String] :name_contains
-    #   When specified, the custom language model names returned contain the
-    #   substring you've specified.
+    #   Returns only the custom language models that contain the specified
+    #   string. The search is not case sensitive.
     #
     # @option params [String] :next_token
-    #   When included, fetches the next set of jobs if the result of the
-    #   previous request was truncated.
+    #   If your `ListLanguageModels` request returns more results than can be
+    #   displayed, `NextToken` is displayed in the response with an associated
+    #   string. To get the next page of results, copy this string and repeat
+    #   your request, including `NextToken` with the value of the copied
+    #   string. Repeat as needed to view all your results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of language models to return in each page of
+    #   The maximum number of custom language models to return in each page of
     #   results. If there are fewer results than the value you specify, only
-    #   the actual results are returned. If you do not specify a value, the
+    #   the actual results are returned. If you don't specify a value, a
     #   default of 5 is used.
     #
     # @return [Types::ListLanguageModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1731,29 +1939,34 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Lists medical transcription jobs with a specified status or substring
-    # that matches their names.
+    # Provides a list of medical transcription jobs that match the specified
+    # criteria. If no criteria are specified, all medical transcription jobs
+    # are returned.
+    #
+    # To get detailed information about a specific medical transcription
+    # job, use the operation.
     #
     # @option params [String] :status
-    #   When specified, returns only medical transcription jobs with the
-    #   specified status. Jobs are ordered by creation date, with the newest
-    #   jobs returned first. If you don't specify a status, Amazon Transcribe
-    #   Medical returns all transcription jobs ordered by creation date.
+    #   Returns only medical transcription jobs with the specified status.
+    #   Jobs are ordered by creation date, with the newest job first. If you
+    #   don't include `Status`, all medical transcription jobs are returned.
     #
     # @option params [String] :job_name_contains
-    #   When specified, the jobs returned in the list are limited to jobs
-    #   whose name contains the specified string.
+    #   Returns only the medical transcription jobs that contain the specified
+    #   string. The search is not case sensitive.
     #
     # @option params [String] :next_token
-    #   If you a receive a truncated result in the previous request of
-    #   `ListMedicalTranscriptionJobs`, include `NextToken` to fetch the next
-    #   set of jobs.
+    #   If your `ListMedicalTranscriptionJobs` request returns more results
+    #   than can be displayed, `NextToken` is displayed in the response with
+    #   an associated string. To get the next page of results, copy this
+    #   string and repeat your request, including `NextToken` with the value
+    #   of the copied string. Repeat as needed to view all your results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of medical transcription jobs to return in each
     #   page of results. If there are fewer results than the value you
-    #   specify, only the actual results are returned. If you do not specify a
-    #   value, the default of 5 is used.
+    #   specify, only the actual results are returned. If you don't specify a
+    #   value, a default of 5 is used.
     #
     # @return [Types::ListMedicalTranscriptionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1781,7 +1994,7 @@ module Aws::TranscribeService
     #   resp.medical_transcription_job_summaries[0].creation_time #=> Time
     #   resp.medical_transcription_job_summaries[0].start_time #=> Time
     #   resp.medical_transcription_job_summaries[0].completion_time #=> Time
-    #   resp.medical_transcription_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.medical_transcription_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.medical_transcription_job_summaries[0].transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.medical_transcription_job_summaries[0].failure_reason #=> String
     #   resp.medical_transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
@@ -1798,30 +2011,35 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Returns a list of vocabularies that match the specified criteria. If
-    # you don't enter a value in any of the request parameters, returns the
-    # entire list of vocabularies.
+    # Provides a list of custom medical vocabularies that match the
+    # specified criteria. If no criteria are specified, all custom medical
+    # vocabularies are returned.
+    #
+    # To get detailed information about a specific custom medical
+    # vocabulary, use the operation.
     #
     # @option params [String] :next_token
-    #   If the result of your previous request to `ListMedicalVocabularies`
-    #   was truncated, include the `NextToken` to fetch the next set of
-    #   vocabularies.
+    #   If your `ListMedicalVocabularies` request returns more results than
+    #   can be displayed, `NextToken` is displayed in the response with an
+    #   associated string. To get the next page of results, copy this string
+    #   and repeat your request, including `NextToken` with the value of the
+    #   copied string. Repeat as needed to view all your results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of vocabularies to return in each page of results.
-    #   If there are fewer results than the value you specify, only the actual
-    #   results are returned. If you do not specify a value, the default of 5
-    #   is used.
+    #   The maximum number of custom medical vocabularies to return in each
+    #   page of results. If there are fewer results than the value you
+    #   specify, only the actual results are returned. If you don't specify a
+    #   value, a default of 5 is used.
     #
     # @option params [String] :state_equals
-    #   When specified, returns only vocabularies with the `VocabularyState`
-    #   equal to the specified vocabulary state. Use this field to see which
-    #   vocabularies are ready for your medical transcription jobs.
+    #   Returns only custom medical vocabularies with the specified state.
+    #   Vocabularies are ordered by creation date, with the newest vocabulary
+    #   first. If you don't include `StateEquals`, all custom medical
+    #   vocabularies are returned.
     #
     # @option params [String] :name_contains
-    #   Returns vocabularies whose names contain the specified string. The
-    #   search is not case sensitive. `ListMedicalVocabularies` returns both
-    #   "`vocabularyname`" and "`VocabularyName`".
+    #   Returns only the custom medical vocabularies that contain the
+    #   specified string. The search is not case sensitive.
     #
     # @return [Types::ListMedicalVocabulariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1846,7 +2064,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabularies #=> Array
     #   resp.vocabularies[0].vocabulary_name #=> String
-    #   resp.vocabularies[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.vocabularies[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.vocabularies[0].last_modified_time #=> Time
     #   resp.vocabularies[0].vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -1859,15 +2077,24 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Lists all tags associated with a given transcription job, vocabulary,
-    # or resource.
+    # Lists all tags associated with the specified transcription job,
+    # vocabulary, model, or resource.
+    #
+    # To learn more about using tags with Amazon Transcribe, refer to
+    # [Tagging resources][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
     #
     # @option params [required, String] :resource_arn
-    #   Lists all tags associated with a given Amazon Resource Name (ARN).
-    #   ARNs have the format
-    #   `arn:partition:service:region:account-id:resource-type/resource-id`
-    #   (for example,
-    #   `arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name`).
+    #   Returns a list of all tags associated with the specified Amazon
+    #   Resource Name (ARN). ARNs have the format
+    #   `arn:partition:service:region:account-id:resource-type/resource-id`.
+    #
+    #   For example,
+    #   `arn:aws:transcribe:us-west-2:account-id:transcription-job/transcription-job-name`.
+    #
     #   Valid values for `resource-type` are: `transcription-job`,
     #   `medical-transcription-job`, `vocabulary`, `medical-vocabulary`,
     #   `vocabulary-filter`, and `language-model`.
@@ -1899,26 +2126,34 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Lists transcription jobs with the specified status.
+    # Provides a list of transcription jobs that match the specified
+    # criteria. If no criteria are specified, all transcription jobs are
+    # returned.
+    #
+    # To get detailed information about a specific transcription job, use
+    # the operation.
     #
     # @option params [String] :status
-    #   When specified, returns only transcription jobs with the specified
-    #   status. Jobs are ordered by creation date, with the newest jobs
-    #   returned first. If you don’t specify a status, Amazon Transcribe
-    #   returns all transcription jobs ordered by creation date.
+    #   Returns only transcription jobs with the specified status. Jobs are
+    #   ordered by creation date, with the newest job first. If you don't
+    #   include `Status`, all transcription jobs are returned.
     #
     # @option params [String] :job_name_contains
-    #   When specified, the jobs returned in the list are limited to jobs
-    #   whose name contains the specified string.
+    #   Returns only the transcription jobs that contain the specified string.
+    #   The search is not case sensitive.
     #
     # @option params [String] :next_token
-    #   If the result of the previous request to `ListTranscriptionJobs` is
-    #   truncated, include the `NextToken` to fetch the next set of jobs.
+    #   If your `ListTranscriptionJobs` request returns more results than can
+    #   be displayed, `NextToken` is displayed in the response with an
+    #   associated string. To get the next page of results, copy this string
+    #   and repeat your request, including `NextToken` with the value of the
+    #   copied string. Repeat as needed to view all your results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of jobs to return in each page of results. If there
-    #   are fewer results than the value you specify, only the actual results
-    #   are returned. If you do not specify a value, the default of 5 is used.
+    #   The maximum number of transcription jobs to return in each page of
+    #   results. If there are fewer results than the value you specify, only
+    #   the actual results are returned. If you don't specify a value, a
+    #   default of 5 is used.
     #
     # @return [Types::ListTranscriptionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1946,7 +2181,7 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].creation_time #=> Time
     #   resp.transcription_job_summaries[0].start_time #=> Time
     #   resp.transcription_job_summaries[0].completion_time #=> Time
-    #   resp.transcription_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.transcription_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.transcription_job_summaries[0].transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job_summaries[0].failure_reason #=> String
     #   resp.transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
@@ -1956,7 +2191,11 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"
     #   resp.transcription_job_summaries[0].model_settings.language_model_name #=> String
     #   resp.transcription_job_summaries[0].identify_language #=> Boolean
+    #   resp.transcription_job_summaries[0].identify_multiple_languages #=> Boolean
     #   resp.transcription_job_summaries[0].identified_language_score #=> Float
+    #   resp.transcription_job_summaries[0].language_codes #=> Array
+    #   resp.transcription_job_summaries[0].language_codes[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.transcription_job_summaries[0].language_codes[0].duration_in_seconds #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTranscriptionJobs AWS API Documentation
     #
@@ -1967,28 +2206,35 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Returns a list of vocabularies that match the specified criteria. If
-    # no criteria are specified, returns the entire list of vocabularies.
+    # Provides a list of custom vocabularies that match the specified
+    # criteria. If no criteria are specified, all custom vocabularies are
+    # returned.
+    #
+    # To get detailed information about a specific custom vocabulary, use
+    # the operation.
     #
     # @option params [String] :next_token
-    #   If the result of the previous request to `ListVocabularies` was
-    #   truncated, include the `NextToken` to fetch the next set of jobs.
+    #   If your `ListVocabularies` request returns more results than can be
+    #   displayed, `NextToken` is displayed in the response with an associated
+    #   string. To get the next page of results, copy this string and repeat
+    #   your request, including `NextToken` with the value of the copied
+    #   string. Repeat as needed to view all your results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of vocabularies to return in each page of results.
-    #   If there are fewer results than the value you specify, only the actual
-    #   results are returned. If you do not specify a value, the default of 5
-    #   is used.
+    #   The maximum number of custom vocabularies to return in each page of
+    #   results. If there are fewer results than the value you specify, only
+    #   the actual results are returned. If you don't specify a value, a
+    #   default of 5 is used.
     #
     # @option params [String] :state_equals
-    #   When specified, only returns vocabularies with the `VocabularyState`
-    #   field equal to the specified state.
+    #   Returns only custom vocabularies with the specified state.
+    #   Vocabularies are ordered by creation date, with the newest vocabulary
+    #   first. If you don't include `StateEquals`, all custom medical
+    #   vocabularies are returned.
     #
     # @option params [String] :name_contains
-    #   When specified, the vocabularies returned in the list are limited to
-    #   vocabularies whose name contains the specified string. The search is
-    #   not case sensitive, `ListVocabularies` returns both "vocabularyname"
-    #   and "VocabularyName" in the response list.
+    #   Returns only the custom vocabularies that contain the specified
+    #   string. The search is not case sensitive.
     #
     # @return [Types::ListVocabulariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2013,7 +2259,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabularies #=> Array
     #   resp.vocabularies[0].vocabulary_name #=> String
-    #   resp.vocabularies[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.vocabularies[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.vocabularies[0].last_modified_time #=> Time
     #   resp.vocabularies[0].vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -2026,22 +2272,29 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Gets information about vocabulary filters.
+    # Provides a list of custom vocabulary filters that match the specified
+    # criteria. If no criteria are specified, all custom vocabularies are
+    # returned.
+    #
+    # To get detailed information about a specific custom vocabulary filter,
+    # use the operation.
     #
     # @option params [String] :next_token
-    #   If the result of the previous request to `ListVocabularyFilters` was
-    #   truncated, include the `NextToken` to fetch the next set of
-    #   collections.
+    #   If your `ListVocabularyFilters` request returns more results than can
+    #   be displayed, `NextToken` is displayed in the response with an
+    #   associated string. To get the next page of results, copy this string
+    #   and repeat your request, including `NextToken` with the value of the
+    #   copied string. Repeat as needed to view all your results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of filters to return in each page of results. If
-    #   there are fewer results than the value you specify, only the actual
-    #   results are returned. If you do not specify a value, the default of 5
-    #   is used.
+    #   The maximum number of custom vocabulary filters to return in each page
+    #   of results. If there are fewer results than the value you specify,
+    #   only the actual results are returned. If you don't specify a value, a
+    #   default of 5 is used.
     #
     # @option params [String] :name_contains
-    #   Filters the response so that it only contains vocabulary filters whose
-    #   name contains the specified string.
+    #   Returns only the custom vocabulary filters that contain the specified
+    #   string. The search is not case sensitive.
     #
     # @return [Types::ListVocabularyFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2063,7 +2316,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabulary_filters #=> Array
     #   resp.vocabulary_filters[0].vocabulary_filter_name #=> String
-    #   resp.vocabulary_filters[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.vocabulary_filters[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.vocabulary_filters[0].last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabularyFilters AWS API Documentation
@@ -2075,102 +2328,161 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Starts an asynchronous analytics job that not only transcribes the
-    # audio recording of a caller and agent, but also returns additional
-    # insights. These insights include how quickly or loudly the caller or
-    # agent was speaking. To retrieve additional insights with your
-    # analytics jobs, create categories. A category is a way to classify
-    # analytics jobs based on attributes, such as a customer's sentiment or
-    # a particular phrase being used during the call. For more information,
-    # see the operation.
+    # Transcribes the audio from a customer service call and applies any
+    # additional Request Parameters you choose to include in your request.
+    #
+    # In addition to many of the standard transcription features, Call
+    # Analytics provides you with call characteristics, call summarization,
+    # speaker sentiment, and optional redaction of your text transcript and
+    # your audio file. You can also apply custom categories to flag
+    # specified conditions. To learn more about these features and insights,
+    # refer to [Analyzing call center audio with Call Analytics][1].
+    #
+    # If you want to apply categories to your Call Analytics job, you must
+    # create them before submitting your job request. Categories cannot be
+    # retroactively applied to a job. To create a new category, use the
+    # operation. To learn more about Call Analytics categories, see
+    # [Creating categories][2].
+    #
+    # To make a `StartCallAnalyticsJob` request, you must first upload your
+    # media file into an Amazon S3 bucket; you can then specify the Amazon
+    # S3 location of the file using the `Media` parameter.
+    #
+    # You must include the following parameters in your
+    # `StartCallAnalyticsJob` request:
+    #
+    # * `region`\: The Amazon Web Services Region where you are making your
+    #   request. For a list of Amazon Web Services Regions supported with
+    #   Amazon Transcribe, refer to [Amazon Transcribe endpoints and
+    #   quotas][3].
+    #
+    # * `CallAnalyticsJobName`\: A custom name you create for your
+    #   transcription job that is unique within your Amazon Web Services
+    #   account.
+    #
+    # * `DataAccessRoleArn`\: The Amazon Resource Name (ARN) of an IAM role
+    #   that has permissions to access the Amazon S3 bucket that contains
+    #   your input files.
+    #
+    # * `Media` (`MediaFileUri` or `RedactedMediaFileUri`): The Amazon S3
+    #   location of your media file.
+    #
+    # <note markdown="1"> With Call Analytics, you can redact the audio contained in your media
+    # file by including `RedactedMediaFileUri`, instead of `MediaFileUri`,
+    # to specify the location of your input audio. If you choose to redact
+    # your audio, you can find your redacted media at the location specified
+    # in the `RedactedMediaFileUri` field of your response.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html
+    # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html
+    # [3]: https://docs.aws.amazon.com/general/latest/gr/transcribe.html
     #
     # @option params [required, String] :call_analytics_job_name
-    #   The name of the call analytics job. You can't use the string "." or
-    #   ".." by themselves as the job name. The name must also be unique
-    #   within an Amazon Web Services account. If you try to create a call
-    #   analytics job with the same name as a previous call analytics job, you
-    #   get a `ConflictException` error.
+    #   A unique name, chosen by you, for your Call Analytics job.
+    #
+    #   This name is case sensitive, cannot contain spaces, and must be unique
+    #   within an Amazon Web Services account. If you try to create a new job
+    #   with the same name as an existing job, you get a `ConflictException`
+    #   error.
     #
     # @option params [required, Types::Media] :media
-    #   Describes the input media file in a transcription request.
+    #   Describes the Amazon S3 location of the media file you want to use in
+    #   your request.
     #
     # @option params [String] :output_location
-    #   The Amazon S3 location where the output of the call analytics job is
-    #   stored. You can provide the following location types to store the
-    #   output of call analytics job:
+    #   The Amazon S3 location where you want your Call Analytics
+    #   transcription output stored. You can use any of the following formats
+    #   to specify the output location:
     #
-    #   * s3://DOC-EXAMPLE-BUCKET1
+    #   1.  s3://DOC-EXAMPLE-BUCKET
     #
-    #     If you specify a bucket, Amazon Transcribe saves the output of the
-    #     analytics job as a JSON file at the root level of the bucket.
+    #   2.  s3://DOC-EXAMPLE-BUCKET/my-output-folder/
     #
-    #   * s3://DOC-EXAMPLE-BUCKET1/folder/
+    #   3.  s3://DOC-EXAMPLE-BUCKET/my-output-folder/my-call-analytics-job.json
     #
-    #     f you specify a path, Amazon Transcribe saves the output of the
-    #     analytics job as
-    #     s3://DOC-EXAMPLE-BUCKET1/folder/your-transcription-job-name.json.
+    #   Unless you specify a file name (option 3), the name of your output
+    #   file has a default value that matches the name you specified for your
+    #   transcription job using the `CallAnalyticsJobName` parameter.
     #
-    #     If you specify a folder, you must provide a trailing slash.
-    #
-    #   * s3://DOC-EXAMPLE-BUCKET1/folder/filename.json.
-    #
-    #     If you provide a path that has the filename specified, Amazon
-    #     Transcribe saves the output of the analytics job as
-    #     s3://DOC-EXAMPLEBUCKET1/folder/filename.json.
-    #
-    #   You can specify an Amazon Web Services Key Management Service (KMS)
-    #   key to encrypt the output of our analytics job using the
+    #   You can specify a KMS key to encrypt your output using the
     #   `OutputEncryptionKMSKeyId` parameter. If you don't specify a KMS key,
     #   Amazon Transcribe uses the default Amazon S3 key for server-side
-    #   encryption of the analytics job output that is placed in your S3
-    #   bucket.
+    #   encryption.
+    #
+    #   If you don't specify `OutputLocation`, your transcript is placed in a
+    #   service-managed Amazon S3 bucket and you are provided with a URI to
+    #   access your transcript.
     #
     # @option params [String] :output_encryption_kms_key_id
-    #   The Amazon Resource Name (ARN) of the Amazon Web Services Key
-    #   Management Service key used to encrypt the output of the call
-    #   analytics job. The user calling the operation must have permission to
-    #   use the specified KMS key.
+    #   The KMS key you want to use to encrypt your Call Analytics output.
     #
-    #   You use either of the following to identify an Amazon Web Services KMS
-    #   key in the current account:
+    #   If using a key located in the **current** Amazon Web Services account,
+    #   you can specify your KMS key in one of four ways:
     #
-    #   * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+    #   1.  Use the KMS key ID itself. For example,
+    #       `1234abcd-12ab-34cd-56ef-1234567890ab`.
     #
-    #   * KMS Key Alias: "alias/ExampleAlias"
+    #   2.  Use an alias for the KMS key ID. For example,
+    #       `alias/ExampleAlias`.
     #
-    #   You can use either of the following to identify a KMS key in the
-    #   current account or another account:
+    #   3.  Use the Amazon Resource Name (ARN) for the KMS key ID. For
+    #       example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
     #
-    #   * Amazon Resource Name (ARN) of a KMS key in the current account or
-    #     another account: "arn:aws:kms:region:account
-    #     ID:key/1234abcd-12ab-34cd-56ef1234567890ab"
+    #   4.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
     #
-    #   * ARN of a KMS Key Alias:
-    #     "arn:aws:kms:region:accountID:alias/ExampleAlias"
+    #   If using a key located in a **different** Amazon Web Services account
+    #   than the current Amazon Web Services account, you can specify your KMS
+    #   key in one of two ways:
     #
-    #   If you don't specify an encryption key, the output of the call
-    #   analytics job is encrypted with the default Amazon S3 key (SSE-S3).
+    #   1.  Use the ARN for the KMS key ID. For example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   2.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
+    #
+    #   If you don't specify an encryption key, your output is encrypted with
+    #   the default Amazon S3 key (SSE-S3).
     #
     #   If you specify a KMS key to encrypt your output, you must also specify
-    #   an output location in the `OutputLocation` parameter.
+    #   an output location using the `OutputLocation` parameter.
     #
-    # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of a role that has access to the S3
-    #   bucket that contains your input files. Amazon Transcribe assumes this
-    #   role to read queued audio files. If you have specified an output S3
-    #   bucket for your transcription results, this role should have access to
-    #   the output bucket as well.
+    #   Note that the user making the request must have permission to use the
+    #   specified KMS key.
+    #
+    # @option params [String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has permissions to
+    #   access the Amazon S3 bucket that contains your input files. If the
+    #   role you specify doesn’t have the appropriate permissions to access
+    #   the specified Amazon S3 location, your request fails.
+    #
+    #   IAM role ARNs have the format
+    #   `arn:partition:iam::account:role/role-name-with-path`. For example:
+    #   `arn:aws:iam::111122223333:role/Admin`.
+    #
+    #   For more information, see [IAM ARNs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
     #
     # @option params [Types::CallAnalyticsJobSettings] :settings
-    #   A `Settings` object that provides optional settings for a call
-    #   analytics job.
+    #   Specify additional optional settings in your request, including
+    #   content redaction; allows you to apply custom language models,
+    #   vocabulary filters, and custom vocabularies to your Call Analytics
+    #   job.
     #
     # @option params [Array<Types::ChannelDefinition>] :channel_definitions
-    #   When you start a call analytics job, you must pass an array that maps
-    #   the agent and the customer to specific audio channels. The values you
-    #   can assign to a channel are 0 and 1. The agent and the customer must
-    #   each have their own channel. You can't assign more than one channel
-    #   to an agent or customer.
+    #   Allows you to specify which speaker is on which channel. For example,
+    #   if your agent is the first participant to speak, you would set
+    #   `ChannelId` to `0` (to indicate the first channel) and
+    #   `ParticipantRole` to `AGENT` (to indicate that it's the agent
+    #   speaking).
     #
     # @return [Types::StartCallAnalyticsJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2186,7 +2498,7 @@ module Aws::TranscribeService
     #     },
     #     output_location: "Uri",
     #     output_encryption_kms_key_id: "KMSKeyId",
-    #     data_access_role_arn: "DataAccessRoleArn", # required
+    #     data_access_role_arn: "DataAccessRoleArn",
     #     settings: {
     #       vocabulary_name: "VocabularyName",
     #       vocabulary_filter_name: "VocabularyFilterName",
@@ -2197,7 +2509,7 @@ module Aws::TranscribeService
     #         redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
     #         pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, ALL
     #       },
-    #       language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #       language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #       language_id_settings: {
     #         "af-ZA" => {
     #           vocabulary_name: "VocabularyName",
@@ -2218,7 +2530,7 @@ module Aws::TranscribeService
     #
     #   resp.call_analytics_job.call_analytics_job_name #=> String
     #   resp.call_analytics_job.call_analytics_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.call_analytics_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.call_analytics_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.call_analytics_job.media_sample_rate_hertz #=> Integer
     #   resp.call_analytics_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
     #   resp.call_analytics_job.media.media_file_uri #=> String
@@ -2240,7 +2552,7 @@ module Aws::TranscribeService
     #   resp.call_analytics_job.settings.content_redaction.pii_entity_types #=> Array
     #   resp.call_analytics_job.settings.content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"
     #   resp.call_analytics_job.settings.language_options #=> Array
-    #   resp.call_analytics_job.settings.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.call_analytics_job.settings.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.call_analytics_job.settings.language_id_settings #=> Hash
     #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].vocabulary_name #=> String
     #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].vocabulary_filter_name #=> String
@@ -2258,134 +2570,236 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Starts a batch job to transcribe medical speech to text.
+    # Transcribes the audio from a medical dictation or conversation and
+    # applies any additional Request Parameters you choose to include in
+    # your request.
+    #
+    # In addition to many of the standard transcription features, Amazon
+    # Transcribe Medical provides you with a robust medical vocabulary and,
+    # optionally, content identification, which adds flags to personal
+    # health information (PHI). To learn more about these features, refer to
+    # [How Amazon Transcribe Medical works][1].
+    #
+    # To make a `StartMedicalTranscriptionJob` request, you must first
+    # upload your media file into an Amazon S3 bucket; you can then specify
+    # the S3 location of the file using the `Media` parameter.
+    #
+    # You must include the following parameters in your
+    # `StartMedicalTranscriptionJob` request:
+    #
+    # * `region`\: The Amazon Web Services Region where you are making your
+    #   request. For a list of Amazon Web Services Regions supported with
+    #   Amazon Transcribe, refer to [Amazon Transcribe endpoints and
+    #   quotas][2].
+    #
+    # * `MedicalTranscriptionJobName`\: A custom name you create for your
+    #   transcription job that is unique within your Amazon Web Services
+    #   account.
+    #
+    # * `Media` (`MediaFileUri`): The Amazon S3 location of your media file.
+    #
+    # * `LanguageCode`\: This must be `en-US`.
+    #
+    # * `OutputBucketName`\: The Amazon S3 bucket where you want your
+    #   transcript stored. If you want your output stored in a sub-folder of
+    #   this bucket, you must also include `OutputKey`.
+    #
+    # * `Specialty`\: This must be `PRIMARYCARE`.
+    #
+    # * `Type`\: Choose whether your audio is a conversation or a dictation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works-med.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/transcribe.html
     #
     # @option params [required, String] :medical_transcription_job_name
-    #   The name of the medical transcription job. You can't use the strings
-    #   "`.`" or "`..`" by themselves as the job name. The name must also
-    #   be unique within an Amazon Web Services account. If you try to create
-    #   a medical transcription job with the same name as a previous medical
-    #   transcription job, you get a `ConflictException` error.
+    #   A unique name, chosen by you, for your medical transcription job. The
+    #   name you specify is also used as the default name of your
+    #   transcription output file. If you want to specify a different name for
+    #   your transcription output, use the `OutputKey` parameter.
+    #
+    #   This name is case sensitive, cannot contain spaces, and must be unique
+    #   within an Amazon Web Services account. If you try to create a new job
+    #   with the same name as an existing job, you get a `ConflictException`
+    #   error.
     #
     # @option params [required, String] :language_code
-    #   The language code for the language spoken in the input media file. US
-    #   English (en-US) is the valid value for medical transcription jobs. Any
-    #   other value you enter for language code results in a
-    #   `BadRequestException` error.
+    #   The language code that represents the language spoken in the input
+    #   media file. US English (`en-US`) is the only valid value for medical
+    #   transcription jobs. Any other value you enter for language code
+    #   results in a `BadRequestException` error.
     #
     # @option params [Integer] :media_sample_rate_hertz
-    #   The sample rate, in Hertz, of the audio track in the input media file.
+    #   The sample rate, in Hertz, of the audio track in your input media
+    #   file.
     #
-    #   If you do not specify the media sample rate, Amazon Transcribe Medical
-    #   determines the sample rate. If you specify the sample rate, it must
-    #   match the rate detected by Amazon Transcribe Medical. In most cases,
-    #   you should leave the `MediaSampleRateHertz` field blank and let Amazon
-    #   Transcribe Medical determine the sample rate.
+    #   If you don't specify the media sample rate, Amazon Transcribe Medical
+    #   determines it for you. If you specify the sample rate, it must match
+    #   the rate detected by Amazon Transcribe Medical; if there's a mismatch
+    #   between the value you specify and the value detected, your job fails.
+    #   Therefore, in most cases, it's advised to omit `MediaSampleRateHertz`
+    #   and let Amazon Transcribe Medical determine the sample rate.
     #
     # @option params [String] :media_format
-    #   The audio format of the input media file.
+    #   Specify the format of your input media file.
     #
     # @option params [required, Types::Media] :media
-    #   Describes the input media file in a transcription request.
+    #   Describes the Amazon S3 location of the media file you want to use in
+    #   your request.
     #
     # @option params [required, String] :output_bucket_name
-    #   The Amazon S3 location where the transcription is stored.
+    #   The name of the Amazon S3 bucket where you want your medical
+    #   transcription output stored. Do not include the `S3://` prefix of the
+    #   specified bucket.
     #
-    #   You must set `OutputBucketName` for Amazon Transcribe Medical to store
-    #   the transcription results. Your transcript appears in the S3 location
-    #   you specify. When you call the GetMedicalTranscriptionJob, the
-    #   operation returns this location in the `TranscriptFileUri` field. The
-    #   S3 bucket must have permissions that allow Amazon Transcribe Medical
-    #   to put files in the bucket. For more information, see [Permissions
-    #   Required for IAM User Roles][1].
+    #   If you want your output to go to a sub-folder of this bucket, specify
+    #   it using the `OutputKey` parameter; `OutputBucketName` only accepts
+    #   the name of a bucket.
     #
-    #   You can specify an Amazon Web Services Key Management Service (KMS)
-    #   key to encrypt the output of your transcription using the
-    #   `OutputEncryptionKMSKeyId` parameter. If you don't specify a KMS key,
-    #   Amazon Transcribe Medical uses the default Amazon S3 key for
-    #   server-side encryption of transcripts that are placed in your S3
-    #   bucket.
+    #   For example, if you want your output stored in
+    #   `S3://DOC-EXAMPLE-BUCKET`, set `OutputBucketName` to
+    #   `DOC-EXAMPLE-BUCKET`. However, if you want your output stored in
+    #   `S3://DOC-EXAMPLE-BUCKET/test-files/`, set `OutputBucketName` to
+    #   `DOC-EXAMPLE-BUCKET` and `OutputKey` to `test-files/`.
+    #
+    #   Note that Amazon Transcribe must have permission to use the specified
+    #   location. You can change Amazon S3 permissions using the [Amazon Web
+    #   Services Management Console][1]. See also [Permissions Required for
+    #   IAM User Roles][2].
+    #
+    #   If you don't specify `OutputBucketName`, your transcript is placed in
+    #   a service-managed Amazon S3 bucket and you are provided with a URI to
+    #   access your transcript.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
+    #   [1]: https://console.aws.amazon.com/s3
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
     #
     # @option params [String] :output_key
-    #   You can specify a location in an Amazon S3 bucket to store the output
-    #   of your medical transcription job.
+    #   Use in combination with `OutputBucketName` to specify the output
+    #   location of your transcript and, optionally, a unique name for your
+    #   output file. The default name for your transcription output is the
+    #   same as the name you specified for your medical transcription job
+    #   (`MedicalTranscriptionJobName`).
     #
-    #   If you don't specify an output key, Amazon Transcribe Medical stores
-    #   the output of your transcription job in the Amazon S3 bucket you
-    #   specified. By default, the object key is
-    #   "your-transcription-job-name.json".
+    #   Here are some examples of how you can use `OutputKey`\:
     #
-    #   You can use output keys to specify the Amazon S3 prefix and file name
-    #   of the transcription output. For example, specifying the Amazon S3
-    #   prefix, "folder1/folder2/", as an output key would lead to the
-    #   output being stored as
-    #   "folder1/folder2/your-transcription-job-name.json". If you specify
-    #   "my-other-job-name.json" as the output key, the object key is
-    #   changed to "my-other-job-name.json". You can use an output key to
-    #   change both the prefix and the file name, for example
-    #   "folder/my-other-job-name.json".
+    #   * If you specify 'DOC-EXAMPLE-BUCKET' as the `OutputBucketName` and
+    #     'my-transcript.json' as the `OutputKey`, your transcription output
+    #     path is `s3://DOC-EXAMPLE-BUCKET/my-transcript.json`.
     #
-    #   If you specify an output key, you must also specify an S3 bucket in
-    #   the `OutputBucketName` parameter.
+    #   * If you specify 'my-first-transcription' as the
+    #     `MedicalTranscriptionJobName`, 'DOC-EXAMPLE-BUCKET' as the
+    #     `OutputBucketName`, and 'my-transcript' as the `OutputKey`, your
+    #     transcription output path is
+    #     `s3://DOC-EXAMPLE-BUCKET/my-transcript/my-first-transcription.json`.
+    #
+    #   * If you specify 'DOC-EXAMPLE-BUCKET' as the `OutputBucketName` and
+    #     'test-files/my-transcript.json' as the `OutputKey`, your
+    #     transcription output path is
+    #     `s3://DOC-EXAMPLE-BUCKET/test-files/my-transcript.json`.
+    #
+    #   * If you specify 'my-first-transcription' as the
+    #     `MedicalTranscriptionJobName`, 'DOC-EXAMPLE-BUCKET' as the
+    #     `OutputBucketName`, and 'test-files/my-transcript' as the
+    #     `OutputKey`, your transcription output path is
+    #     `s3://DOC-EXAMPLE-BUCKET/test-files/my-transcript/my-first-transcription.json`.
+    #
+    #   If you specify the name of an Amazon S3 bucket sub-folder that
+    #   doesn't exist, one is created for you.
     #
     # @option params [String] :output_encryption_kms_key_id
-    #   The Amazon Resource Name (ARN) of the Amazon Web Services Key
-    #   Management Service (KMS) key used to encrypt the output of the
-    #   transcription job. The user calling the StartMedicalTranscriptionJob
-    #   operation must have permission to use the specified KMS key.
+    #   The KMS key you want to use to encrypt your medical transcription
+    #   output.
     #
-    #   You use either of the following to identify a KMS key in the current
-    #   account:
+    #   If using a key located in the **current** Amazon Web Services account,
+    #   you can specify your KMS key in one of four ways:
     #
-    #   * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+    #   1.  Use the KMS key ID itself. For example,
+    #       `1234abcd-12ab-34cd-56ef-1234567890ab`.
     #
-    #   * KMS Key Alias: "alias/ExampleAlias"
+    #   2.  Use an alias for the KMS key ID. For example,
+    #       `alias/ExampleAlias`.
     #
-    #   You can use either of the following to identify a KMS key in the
-    #   current account or another account:
+    #   3.  Use the Amazon Resource Name (ARN) for the KMS key ID. For
+    #       example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
     #
-    #   * Amazon Resource Name (ARN) of a KMS key in the current account or
-    #     another account:
-    #     "arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+    #   4.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
     #
-    #   * ARN of a KMS Key Alias: "arn:aws:kms:region:account
-    #     ID:alias/ExampleAlias"
+    #   If using a key located in a **different** Amazon Web Services account
+    #   than the current Amazon Web Services account, you can specify your KMS
+    #   key in one of two ways:
     #
-    #   If you don't specify an encryption key, the output of the medical
-    #   transcription job is encrypted with the default Amazon S3 key
-    #   (SSE-S3).
+    #   1.  Use the ARN for the KMS key ID. For example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   2.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
+    #
+    #   If you don't specify an encryption key, your output is encrypted with
+    #   the default Amazon S3 key (SSE-S3).
     #
     #   If you specify a KMS key to encrypt your output, you must also specify
-    #   an output location in the `OutputBucketName` parameter.
+    #   an output location using the `OutputLocation` parameter.
+    #
+    #   Note that the user making the request must have permission to use the
+    #   specified KMS key.
     #
     # @option params [Hash<String,String>] :kms_encryption_context
     #   A map of plain text, non-secret key:value pairs, known as encryption
     #   context pairs, that provide an added layer of security for your data.
+    #   For more information, see [KMS encryption context][1] and [Asymmetric
+    #   keys in KMS][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/symmetric-asymmetric.html
     #
     # @option params [Types::MedicalTranscriptionSetting] :settings
-    #   Optional settings for the medical transcription job.
+    #   Specify additional optional settings in your request, including
+    #   channel identification, alternative transcriptions, and speaker
+    #   labeling; allows you to apply custom vocabularies to your
+    #   transcription job.
     #
     # @option params [String] :content_identification_type
-    #   You can configure Amazon Transcribe Medical to label content in the
-    #   transcription output. If you specify `PHI`, Amazon Transcribe Medical
-    #   labels the personal health information (PHI) that it identifies in the
-    #   transcription output.
+    #   Labels all personal health information (PHI) identified in your
+    #   transcript. For more information, see [Identifying personal health
+    #   information (PHI) in a transcription][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/phi-id.html
     #
     # @option params [required, String] :specialty
-    #   The medical specialty of any clinician speaking in the input media.
+    #   Specify the predominant medical specialty represented in your media.
+    #   For batch transcriptions, `PRIMARYCARE` is the only valid value. If
+    #   you require additional specialties, refer to .
     #
     # @option params [required, String] :type
-    #   The type of speech in the input audio. `CONVERSATION` refers to
-    #   conversations between two or more speakers, e.g., a conversations
-    #   between doctors and patients. `DICTATION` refers to single-speaker
-    #   dictated speech, such as clinical notes.
+    #   Specify whether your input media contains only one person
+    #   (`DICTATION`) or contains a conversation between two people
+    #   (`CONVERSATION`).
+    #
+    #   For example, `DICTATION` could be used for a medical professional
+    #   wanting to transcribe voice memos; `CONVERSATION` could be used for
+    #   transcribing the doctor-patient dialogue during the patient's office
+    #   visit.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Add tags to an Amazon Transcribe Medical transcription job.
+    #   Adds one or more custom tags, each in the form of a key:value pair, to
+    #   a new medical transcription job at the time you start this new job.
+    #
+    #   To learn more about using tags with Amazon Transcribe, refer to
+    #   [Tagging resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
     #
     # @return [Types::StartMedicalTranscriptionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2395,7 +2809,7 @@ module Aws::TranscribeService
     #
     #   resp = client.start_medical_transcription_job({
     #     medical_transcription_job_name: "TranscriptionJobName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #     media_sample_rate_hertz: 1,
     #     media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
     #     media: { # required
@@ -2431,7 +2845,7 @@ module Aws::TranscribeService
     #
     #   resp.medical_transcription_job.medical_transcription_job_name #=> String
     #   resp.medical_transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.medical_transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.medical_transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
     #   resp.medical_transcription_job.media.media_file_uri #=> String
@@ -2463,167 +2877,347 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Starts an asynchronous job to transcribe speech to text.
+    # Transcribes the audio from a media file and applies any additional
+    # Request Parameters you choose to include in your request.
+    #
+    # To make a `StartTranscriptionJob` request, you must first upload your
+    # media file into an Amazon S3 bucket; you can then specify the Amazon
+    # S3 location of the file using the `Media` parameter.
+    #
+    # You must include the following parameters in your
+    # `StartTranscriptionJob` request:
+    #
+    # * `region`\: The Amazon Web Services Region where you are making your
+    #   request. For a list of Amazon Web Services Regions supported with
+    #   Amazon Transcribe, refer to [Amazon Transcribe endpoints and
+    #   quotas][1].
+    #
+    # * `TranscriptionJobName`\: A custom name you create for your
+    #   transcription job that is unique within your Amazon Web Services
+    #   account.
+    #
+    # * `Media` (`MediaFileUri`): The Amazon S3 location of your media file.
+    #
+    # * One of `LanguageCode`, `IdentifyLanguage`, or
+    #   `IdentifyMultipleLanguages`\: If you know the language of your media
+    #   file, specify it using the `LanguageCode` parameter; you can find
+    #   all valid language codes in the [Supported languages][2] table. If
+    #   you don't know the languages spoken in your media, use either
+    #   `IdentifyLanguage` or `IdentifyMultipleLanguages` and let Amazon
+    #   Transcribe identify the languages for you.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/transcribe.html
+    # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
     #
     # @option params [required, String] :transcription_job_name
-    #   The name of the job. You can't use the strings "`.`" or "`..`" by
-    #   themselves as the job name. The name must also be unique within an
-    #   Amazon Web Services account. If you try to create a transcription job
-    #   with the same name as a previous transcription job, you get a
-    #   `ConflictException` error.
+    #   A unique name, chosen by you, for your transcription job. The name you
+    #   specify is also used as the default name of your transcription output
+    #   file. If you want to specify a different name for your transcription
+    #   output, use the `OutputKey` parameter.
+    #
+    #   This name is case sensitive, cannot contain spaces, and must be unique
+    #   within an Amazon Web Services account. If you try to create a new job
+    #   with the same name as an existing job, you get a `ConflictException`
+    #   error.
     #
     # @option params [String] :language_code
-    #   The language code for the language used in the input media file. You
-    #   must include either `LanguageCode` or `IdentifyLanguage` in your
-    #   request.
+    #   The language code that represents the language spoken in the input
+    #   media file.
     #
-    #   To transcribe speech in Modern Standard Arabic (ar-SA), your audio or
-    #   video file must be encoded at a sample rate of 16,000 Hz or higher.
+    #   If you're unsure of the language spoken in your media file, consider
+    #   using `IdentifyLanguage` or `IdentifyMultipleLanguages` to enable
+    #   automatic language identification.
+    #
+    #   Note that you must include one of `LanguageCode`, `IdentifyLanguage`,
+    #   or `IdentifyMultipleLanguages` in your request. If you include more
+    #   than one of these parameters, your transcription job fails.
+    #
+    #   For a list of supported languages and their associated language codes,
+    #   refer to the [Supported languages][1] table.
+    #
+    #   <note markdown="1"> To transcribe speech in Modern Standard Arabic (`ar-SA`), your media
+    #   file must be encoded at a sample rate of 16,000 Hz or higher.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
     #
     # @option params [Integer] :media_sample_rate_hertz
-    #   The sample rate, in Hertz, of the audio track in the input media file.
+    #   The sample rate, in Hertz, of the audio track in your input media
+    #   file.
     #
-    #   If you do not specify the media sample rate, Amazon Transcribe
-    #   determines the sample rate. If you specify the sample rate, it must
-    #   match the sample rate detected by Amazon Transcribe. In most cases,
-    #   you should leave the `MediaSampleRateHertz` field blank and let Amazon
-    #   Transcribe determine the sample rate.
+    #   If you don't specify the media sample rate, Amazon Transcribe
+    #   determines it for you. If you specify the sample rate, it must match
+    #   the rate detected by Amazon Transcribe; if there's a mismatch between
+    #   the value you specify and the value detected, your job fails.
+    #   Therefore, in most cases, it's advised to omit `MediaSampleRateHertz`
+    #   and let Amazon Transcribe determine the sample rate.
     #
     # @option params [String] :media_format
-    #   The format of the input media file.
+    #   Specify the format of your input media file.
     #
     # @option params [required, Types::Media] :media
-    #   An object that describes the input media for a transcription job.
+    #   Describes the Amazon S3 location of the media file you want to use in
+    #   your request.
     #
     # @option params [String] :output_bucket_name
-    #   The location where the transcription is stored.
+    #   The name of the Amazon S3 bucket where you want your transcription
+    #   output stored. Do not include the `S3://` prefix of the specified
+    #   bucket.
     #
-    #   If you set the `OutputBucketName`, Amazon Transcribe puts the
-    #   transcript in the specified S3 bucket. When you call the
-    #   GetTranscriptionJob operation, the operation returns this location in
-    #   the `TranscriptFileUri` field. If you enable content redaction, the
-    #   redacted transcript appears in `RedactedTranscriptFileUri`. If you
-    #   enable content redaction and choose to output an unredacted
-    #   transcript, that transcript's location still appears in the
-    #   `TranscriptFileUri`. The S3 bucket must have permissions that allow
-    #   Amazon Transcribe to put files in the bucket. For more information,
-    #   see [Permissions Required for IAM User Roles][1].
+    #   If you want your output to go to a sub-folder of this bucket, specify
+    #   it using the `OutputKey` parameter; `OutputBucketName` only accepts
+    #   the name of a bucket.
     #
-    #   You can specify an Amazon Web Services Key Management Service (KMS)
-    #   key to encrypt the output of your transcription using the
-    #   `OutputEncryptionKMSKeyId` parameter. If you don't specify a KMS key,
-    #   Amazon Transcribe uses the default Amazon S3 key for server-side
-    #   encryption of transcripts that are placed in your S3 bucket.
+    #   For example, if you want your output stored in
+    #   `S3://DOC-EXAMPLE-BUCKET`, set `OutputBucketName` to
+    #   `DOC-EXAMPLE-BUCKET`. However, if you want your output stored in
+    #   `S3://DOC-EXAMPLE-BUCKET/test-files/`, set `OutputBucketName` to
+    #   `DOC-EXAMPLE-BUCKET` and `OutputKey` to `test-files/`.
     #
-    #   If you don't set the `OutputBucketName`, Amazon Transcribe generates
-    #   a pre-signed URL, a shareable URL that provides secure access to your
-    #   transcription, and returns it in the `TranscriptFileUri` field. Use
-    #   this URL to download the transcription.
+    #   Note that Amazon Transcribe must have permission to use the specified
+    #   location. You can change Amazon S3 permissions using the [Amazon Web
+    #   Services Management Console][1]. See also [Permissions Required for
+    #   IAM User Roles][2].
     #
+    #   If you don't specify `OutputBucketName`, your transcript is placed in
+    #   a service-managed Amazon S3 bucket and you are provided with a URI to
+    #   access your transcript.
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
+    #
+    #   [1]: https://console.aws.amazon.com/s3
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
     #
     # @option params [String] :output_key
-    #   You can specify a location in an Amazon S3 bucket to store the output
-    #   of your transcription job.
+    #   Use in combination with `OutputBucketName` to specify the output
+    #   location of your transcript and, optionally, a unique name for your
+    #   output file. The default name for your transcription output is the
+    #   same as the name you specified for your transcription job
+    #   (`TranscriptionJobName`).
     #
-    #   If you don't specify an output key, Amazon Transcribe stores the
-    #   output of your transcription job in the Amazon S3 bucket you
-    #   specified. By default, the object key is
-    #   "your-transcription-job-name.json".
+    #   Here are some examples of how you can use `OutputKey`\:
     #
-    #   You can use output keys to specify the Amazon S3 prefix and file name
-    #   of the transcription output. For example, specifying the Amazon S3
-    #   prefix, "folder1/folder2/", as an output key would lead to the
-    #   output being stored as
-    #   "folder1/folder2/your-transcription-job-name.json". If you specify
-    #   "my-other-job-name.json" as the output key, the object key is
-    #   changed to "my-other-job-name.json". You can use an output key to
-    #   change both the prefix and the file name, for example
-    #   "folder/my-other-job-name.json".
+    #   * If you specify 'DOC-EXAMPLE-BUCKET' as the `OutputBucketName` and
+    #     'my-transcript.json' as the `OutputKey`, your transcription output
+    #     path is `s3://DOC-EXAMPLE-BUCKET/my-transcript.json`.
     #
-    #   If you specify an output key, you must also specify an S3 bucket in
-    #   the `OutputBucketName` parameter.
+    #   * If you specify 'my-first-transcription' as the
+    #     `TranscriptionJobName`, 'DOC-EXAMPLE-BUCKET' as the
+    #     `OutputBucketName`, and 'my-transcript' as the `OutputKey`, your
+    #     transcription output path is
+    #     `s3://DOC-EXAMPLE-BUCKET/my-transcript/my-first-transcription.json`.
+    #
+    #   * If you specify 'DOC-EXAMPLE-BUCKET' as the `OutputBucketName` and
+    #     'test-files/my-transcript.json' as the `OutputKey`, your
+    #     transcription output path is
+    #     `s3://DOC-EXAMPLE-BUCKET/test-files/my-transcript.json`.
+    #
+    #   * If you specify 'my-first-transcription' as the
+    #     `TranscriptionJobName`, 'DOC-EXAMPLE-BUCKET' as the
+    #     `OutputBucketName`, and 'test-files/my-transcript' as the
+    #     `OutputKey`, your transcription output path is
+    #     `s3://DOC-EXAMPLE-BUCKET/test-files/my-transcript/my-first-transcription.json`.
+    #
+    #   If you specify the name of an Amazon S3 bucket sub-folder that
+    #   doesn't exist, one is created for you.
     #
     # @option params [String] :output_encryption_kms_key_id
-    #   The Amazon Resource Name (ARN) of the Amazon Web Services Key
-    #   Management Service (KMS) key used to encrypt the output of the
-    #   transcription job. The user calling the `StartTranscriptionJob`
-    #   operation must have permission to use the specified KMS key.
+    #   The KMS key you want to use to encrypt your transcription output.
     #
-    #   You can use either of the following to identify a KMS key in the
-    #   current account:
+    #   If using a key located in the **current** Amazon Web Services account,
+    #   you can specify your KMS key in one of four ways:
     #
-    #   * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+    #   1.  Use the KMS key ID itself. For example,
+    #       `1234abcd-12ab-34cd-56ef-1234567890ab`.
     #
-    #   * KMS Key Alias: "alias/ExampleAlias"
+    #   2.  Use an alias for the KMS key ID. For example,
+    #       `alias/ExampleAlias`.
     #
-    #   You can use either of the following to identify a KMS key in the
-    #   current account or another account:
+    #   3.  Use the Amazon Resource Name (ARN) for the KMS key ID. For
+    #       example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
     #
-    #   * Amazon Resource Name (ARN) of a KMS Key:
-    #     "arn:aws:kms:region:account
-    #     ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+    #   4.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
     #
-    #   * ARN of a KMS Key Alias:
-    #     "arn:aws:kms:region:account-ID:alias/ExampleAlias"
+    #   If using a key located in a **different** Amazon Web Services account
+    #   than the current Amazon Web Services account, you can specify your KMS
+    #   key in one of two ways:
     #
-    #   If you don't specify an encryption key, the output of the
-    #   transcription job is encrypted with the default Amazon S3 key
-    #   (SSE-S3).
+    #   1.  Use the ARN for the KMS key ID. For example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   2.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
+    #
+    #   If you don't specify an encryption key, your output is encrypted with
+    #   the default Amazon S3 key (SSE-S3).
     #
     #   If you specify a KMS key to encrypt your output, you must also specify
-    #   an output location in the `OutputBucketName` parameter.
+    #   an output location using the `OutputLocation` parameter.
+    #
+    #   Note that the user making the request must have permission to use the
+    #   specified KMS key.
     #
     # @option params [Hash<String,String>] :kms_encryption_context
     #   A map of plain text, non-secret key:value pairs, known as encryption
     #   context pairs, that provide an added layer of security for your data.
+    #   For more information, see [KMS encryption context][1] and [Asymmetric
+    #   keys in KMS][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/symmetric-asymmetric.html
     #
     # @option params [Types::Settings] :settings
-    #   A `Settings` object that provides optional settings for a
-    #   transcription job.
+    #   Specify additional optional settings in your request, including
+    #   channel identification, alternative transcriptions, speaker labeling;
+    #   allows you to apply custom vocabularies and vocabulary filters.
+    #
+    #   If you want to include a custom vocabulary or a custom vocabulary
+    #   filter (or both) with your request but **do not** want to use
+    #   automatic language identification, use `Settings` with the
+    #   `VocabularyName` or `VocabularyFilterName` (or both) sub-parameter.
+    #
+    #   If you're using automatic language identification with your request
+    #   and want to include a custom language model, a custom vocabulary, or a
+    #   custom vocabulary filter, use instead the ` parameter with the
+    #   LanguageModelName, VocabularyName or VocabularyFilterName
+    #   sub-parameters.</p>
+    #   `
     #
     # @option params [Types::ModelSettings] :model_settings
-    #   Choose the custom language model you use for your transcription job in
-    #   this parameter.
+    #   Specify the custom language model you want to include with your
+    #   transcription job. If you include `ModelSettings` in your request, you
+    #   must include the `LanguageModelName` sub-parameter.
+    #
+    #   For more information, see [Custom language models][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html
     #
     # @option params [Types::JobExecutionSettings] :job_execution_settings
-    #   Provides information about how a transcription job is executed. Use
-    #   this field to indicate that the job can be queued for deferred
-    #   execution if the concurrency limit is reached and there are no slots
-    #   available to immediately run the job.
+    #   Allows you to control how your transcription job is processed.
+    #   Currently, the only `JobExecutionSettings` modification you can choose
+    #   is enabling job queueing using the `AllowDeferredExecution`
+    #   sub-parameter.
+    #
+    #   If you include `JobExecutionSettings` in your request, you must also
+    #   include the sub-parameters: `AllowDeferredExecution` and
+    #   `DataAccessRoleArn`.
     #
     # @option params [Types::ContentRedaction] :content_redaction
-    #   An object that contains the request parameters for content redaction.
+    #   Allows you to redact or flag specified personally identifiable
+    #   information (PII) in your transcript. If you use `ContentRedaction`,
+    #   you must also include the sub-parameters: `PiiEntityTypes`,
+    #   `RedactionOutput`, and `RedactionType`.
     #
     # @option params [Boolean] :identify_language
-    #   Set this field to `true` to enable automatic language identification.
-    #   Automatic language identification is disabled by default. You receive
-    #   a `BadRequestException` error if you enter a value for a
-    #   `LanguageCode`.
-    #
-    #   You must include either `LanguageCode` or `IdentifyLanguage` in your
+    #   Enables automatic language identification in your transcription job
     #   request.
     #
-    # @option params [Array<String>] :language_options
-    #   An object containing a list of languages that might be present in your
-    #   collection of audio files. Automatic language identification chooses a
-    #   language that best matches the source audio from that list.
+    #   If you include `IdentifyLanguage`, you can optionally include a list
+    #   of language codes, using `LanguageOptions`, that you think may be
+    #   present in your media file. Including language options can improve
+    #   transcription accuracy.
     #
-    #   To transcribe speech in Modern Standard Arabic (ar-SA), your audio or
-    #   video file must be encoded at a sample rate of 16,000 Hz or higher.
+    #   If you want to apply a custom language model, a custom vocabulary, or
+    #   a custom vocabulary filter to your automatic language identification
+    #   request, include `LanguageIdSettings` with the relevant sub-parameters
+    #   (`VocabularyName`, `LanguageModelName`, and `VocabularyFilterName`).
+    #
+    #   Note that you must include one of `LanguageCode`, `IdentifyLanguage`,
+    #   or `IdentifyMultipleLanguages` in your request. If you include more
+    #   than one of these parameters, your transcription job fails.
+    #
+    # @option params [Boolean] :identify_multiple_languages
+    #   Enables automatic multi-language identification in your transcription
+    #   job request. Use this parameter if your media file contains more than
+    #   one language.
+    #
+    #   If you include `IdentifyMultipleLanguages`, you can optionally include
+    #   a list of language codes, using `LanguageOptions`, that you think may
+    #   be present in your media file. Including language options can improve
+    #   transcription accuracy.
+    #
+    #   If you want to apply a custom vocabulary or a custom vocabulary filter
+    #   to your automatic language identification request, include
+    #   `LanguageIdSettings` with the relevant sub-parameters
+    #   (`VocabularyName` and `VocabularyFilterName`).
+    #
+    #   Note that you must include one of `LanguageCode`, `IdentifyLanguage`,
+    #   or `IdentifyMultipleLanguages` in your request. If you include more
+    #   than one of these parameters, your transcription job fails.
+    #
+    # @option params [Array<String>] :language_options
+    #   You can specify two or more language codes that represent the
+    #   languages you think may be present in your media; including more than
+    #   five is not recommended. If you're unsure what languages are present,
+    #   do not include this parameter.
+    #
+    #   If you include `LanguageOptions` in your request, you must also
+    #   include `IdentifyLanguage`.
+    #
+    #   For more information, refer to [Supported languages][1].
+    #
+    #   To transcribe speech in Modern Standard Arabic (`ar-SA`), your media
+    #   file must be encoded at a sample rate of 16,000 Hz or higher.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
     #
     # @option params [Types::Subtitles] :subtitles
-    #   Add subtitles to your batch transcription job.
+    #   Produces subtitle files for your input media. You can specify WebVTT
+    #   (*.vtt) and SubRip (*.srt) formats.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Add tags to an Amazon Transcribe transcription job.
+    #   Adds one or more custom tags, each in the form of a key:value pair, to
+    #   a new transcription job at the time you start this new job.
+    #
+    #   To learn more about using tags with Amazon Transcribe, refer to
+    #   [Tagging resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
     #
     # @option params [Hash<String,Types::LanguageIdSettings>] :language_id_settings
-    #   The language identification settings associated with your
-    #   transcription job. These settings include `VocabularyName`,
-    #   `VocabularyFilterName`, and `LanguageModelName`.
+    #   If using automatic language identification (`IdentifyLanguage`) in
+    #   your request and you want to apply a custom language model, a custom
+    #   vocabulary, or a custom vocabulary filter, include
+    #   `LanguageIdSettings` with the relevant sub-parameters
+    #   (`VocabularyName`, `LanguageModelName`, and `VocabularyFilterName`).
+    #
+    #   You can specify two or more language codes that represent the
+    #   languages you think may be present in your media; including more than
+    #   five is not recommended. Each language code you include can have an
+    #   associated custom language model, custom vocabulary, and custom
+    #   vocabulary filter. The languages you specify must match the languages
+    #   of the specified custom language models, custom vocabularies, and
+    #   custom vocabulary filters.
+    #
+    #   To include language options using `IdentifyLanguage` **without**
+    #   including a custom language model, a custom vocabulary, or a custom
+    #   vocabulary filter, use `LanguageOptions` instead of
+    #   `LanguageIdSettings`. Including language options can improve the
+    #   accuracy of automatic language identification.
+    #
+    #   If you want to include a custom language model with your request but
+    #   **do not** want to use automatic language identification, use instead
+    #   the ` parameter with the LanguageModelName sub-parameter.</p> If you
+    #   want to include a custom vocabulary or a custom vocabulary filter (or
+    #   both) with your request but do not want to use automatic language
+    #   identification, use instead the  parameter with the VocabularyName or
+    #   VocabularyFilterName (or both) sub-parameter.</p>
+    #   `
     #
     # @return [Types::StartTranscriptionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2633,7 +3227,7 @@ module Aws::TranscribeService
     #
     #   resp = client.start_transcription_job({
     #     transcription_job_name: "TranscriptionJobName", # required
-    #     language_code: "af-ZA", # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #     language_code: "af-ZA", # accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #     media_sample_rate_hertz: 1,
     #     media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
     #     media: { # required
@@ -2669,7 +3263,8 @@ module Aws::TranscribeService
     #       pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, ALL
     #     },
     #     identify_language: false,
-    #     language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #     identify_multiple_languages: false,
+    #     language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #     subtitles: {
     #       formats: ["vtt"], # accepts vtt, srt
     #       output_start_index: 1,
@@ -2693,7 +3288,7 @@ module Aws::TranscribeService
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
     #   resp.transcription_job.media.media_file_uri #=> String
@@ -2720,9 +3315,13 @@ module Aws::TranscribeService
     #   resp.transcription_job.content_redaction.pii_entity_types #=> Array
     #   resp.transcription_job.content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"
     #   resp.transcription_job.identify_language #=> Boolean
+    #   resp.transcription_job.identify_multiple_languages #=> Boolean
     #   resp.transcription_job.language_options #=> Array
-    #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.transcription_job.identified_language_score #=> Float
+    #   resp.transcription_job.language_codes #=> Array
+    #   resp.transcription_job.language_codes[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.transcription_job.language_codes[0].duration_in_seconds #=> Float
     #   resp.transcription_job.tags #=> Array
     #   resp.transcription_job.tags[0].key #=> String
     #   resp.transcription_job.tags[0].value #=> String
@@ -2745,20 +3344,38 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Tags an Amazon Transcribe resource with the given list of tags.
+    # Adds one or more custom tags, each in the form of a key:value pair, to
+    # the specified resource.
+    #
+    # To learn more about using tags with Amazon Transcribe, refer to
+    # [Tagging resources][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Transcribe resource you
-    #   want to tag. ARNs have the format
-    #   `arn:partition:service:region:account-id:resource-type/resource-id`
-    #   (for example,
-    #   `arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name`).
+    #   The Amazon Resource Name (ARN) of the resource you want to tag. ARNs
+    #   have the format
+    #   `arn:partition:service:region:account-id:resource-type/resource-id`.
+    #
+    #   For example,
+    #   `arn:aws:transcribe:us-west-2:account-id:transcription-job/transcription-job-name`.
+    #
     #   Valid values for `resource-type` are: `transcription-job`,
     #   `medical-transcription-job`, `vocabulary`, `medical-vocabulary`,
     #   `vocabulary-filter`, and `language-model`.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tags you are assigning to a given Amazon Transcribe resource.
+    #   Adds one or more custom tags, each in the form of a key:value pair, to
+    #   the specified resource.
+    #
+    #   To learn more about using tags with Amazon Transcribe, refer to
+    #   [Tagging resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2783,21 +3400,27 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Removes specified tags from a specified Amazon Transcribe resource.
+    # Removes the specified tags from the specified Amazon Transcribe
+    # resource.
+    #
+    # If you include `UntagResource` in your request, you must also include
+    # `ResourceArn` and `TagKeys`.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon Transcribe resource you
     #   want to remove tags from. ARNs have the format
-    #   `arn:partition:service:region:account-id:resource-type/resource-id`
-    #   (for example,
-    #   `arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name`).
+    #   `arn:partition:service:region:account-id:resource-type/resource-id`.
+    #
+    #   For example,
+    #   `arn:aws:transcribe:us-west-2:account-id:transcription-job/transcription-job-name`.
+    #
     #   Valid values for `resource-type` are: `transcription-job`,
     #   `medical-transcription-job`, `vocabulary`, `medical-vocabulary`,
     #   `vocabulary-filter`, and `language-model`.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   A list of tag keys you want to remove from a specified Amazon
-    #   Transcribe resource.
+    #   Removes the specified tag keys from the specified Amazon Transcribe
+    #   resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2817,19 +3440,21 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Updates the call analytics category with new values. The
-    # `UpdateCallAnalyticsCategory` operation overwrites all of the existing
-    # information with the values that you provide in the request.
+    # Updates the specified Call Analytics category with new rules. Note
+    # that the `UpdateCallAnalyticsCategory` operation overwrites all
+    # existing rules contained in the specified category. You cannot append
+    # additional rules onto an existing category.
+    #
+    # To create a new category, see .
     #
     # @option params [required, String] :category_name
-    #   The name of the analytics category to update. The name is case
-    #   sensitive. If you try to update a call analytics category with the
-    #   same name as a previous category you will receive a
-    #   `ConflictException` error.
+    #   The name of the Call Analytics category you want to update. Category
+    #   names are case sensitive.
     #
     # @option params [required, Array<Types::Rule>] :rules
-    #   The rules used for the updated analytics category. The rules that you
-    #   provide in this field replace the ones that are currently being used.
+    #   The rules used for the updated Call Analytics category. The rules you
+    #   provide in this field replace the ones that are currently being used
+    #   in the specified category.
     #
     # @return [Types::UpdateCallAnalyticsCategoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2975,43 +3600,26 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Updates a vocabulary with new values that you provide in a different
-    # text file from the one you used to create the vocabulary. The
-    # `UpdateMedicalVocabulary` operation overwrites all of the existing
-    # information with the values that you provide in the request.
+    # Updates an existing custom medical vocabulary with new values. This
+    # operation overwrites all existing information with your new values;
+    # you cannot append new terms onto an existing vocabulary.
     #
     # @option params [required, String] :vocabulary_name
-    #   The name of the vocabulary to update. The name is case sensitive. If
-    #   you try to update a vocabulary with the same name as a vocabulary
-    #   you've already made, you get a `ConflictException` error.
+    #   The name of the custom medical vocabulary you want to update.
+    #   Vocabulary names are case sensitive.
     #
     # @option params [required, String] :language_code
-    #   The language code of the language used for the entries in the updated
-    #   vocabulary. U.S. English (en-US) is the only valid language code in
-    #   Amazon Transcribe Medical.
+    #   The language code that represents the language of the entries in the
+    #   custom vocabulary you want to update. US English (`en-US`) is the only
+    #   language supported with Amazon Transcribe Medical.
     #
-    # @option params [String] :vocabulary_file_uri
-    #   The location in Amazon S3 of the text file that contains your custom
-    #   vocabulary. The URI must be in the same Amazon Web Services Region as
-    #   the resource that you are calling. The following is the format for a
-    #   URI:
+    # @option params [required, String] :vocabulary_file_uri
+    #   The Amazon S3 location of the text file that contains your custom
+    #   medical vocabulary. The URI must be located in the same Amazon Web
+    #   Services Region as the resource you're calling.
     #
-    #   `https://s3.aws-region.amazonaws.com/bucket-name/keyprefix/objectkey`
-    #
-    #   For example:
-    #
-    #   `https://s3.us-east-1.amazonaws.com/DOC-EXAMPLE-BUCKET/vocab.txt`
-    #
-    #   For more information about Amazon S3 object names, see [Object
-    #   Keys][1] in the *Amazon S3 Developer Guide*.
-    #
-    #   For more information about custom vocabularies in Amazon Transcribe
-    #   Medical, see [Medical Custom Vocabularies][2].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-med.html
+    #   Here's an example URI path:
+    #   `s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt`
     #
     # @return [Types::UpdateMedicalVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3024,14 +3632,14 @@ module Aws::TranscribeService
     #
     #   resp = client.update_medical_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
-    #     vocabulary_file_uri: "Uri",
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #     vocabulary_file_uri: "Uri", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.last_modified_time #=> Time
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -3044,47 +3652,60 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Updates an existing vocabulary with new values. The `UpdateVocabulary`
-    # operation overwrites all of the existing information with the values
-    # that you provide in the request.
+    # Updates an existing custom vocabulary with new values. This operation
+    # overwrites all existing information with your new values; you cannot
+    # append new terms onto an existing vocabulary.
     #
     # @option params [required, String] :vocabulary_name
-    #   The name of the vocabulary to update. The name is case sensitive. If
-    #   you try to update a vocabulary with the same name as a previous
-    #   vocabulary you will receive a `ConflictException` error.
+    #   The name of the custom vocabulary you want to update. Vocabulary names
+    #   are case sensitive.
     #
     # @option params [required, String] :language_code
-    #   The language code of the vocabulary entries. For a list of languages
-    #   and their corresponding language codes, see [Supported languages][1].
+    #   The language code that represents the language of the entries in the
+    #   custom vocabulary you want to update. Each vocabulary must contain
+    #   terms in only one language.
+    #
+    #   A custom vocabulary can only be used to transcribe files in the same
+    #   language as the vocabulary. For example, if you create a vocabulary
+    #   using US English (`en-US`), you can only apply this vocabulary to
+    #   files that contain English audio.
+    #
+    #   For a list of supported languages and their associated language codes,
+    #   refer to the [Supported languages][1] table.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
     #
     # @option params [Array<String>] :phrases
-    #   An array of strings containing the vocabulary entries.
+    #   Use this parameter if you want to update your vocabulary by including
+    #   all desired terms, as comma-separated values, within your request. The
+    #   other option for updating your vocabulary is to save your entries in a
+    #   text file and upload them to an Amazon S3 bucket, then specify the
+    #   location of your file using the `VocabularyFileUri` parameter.
+    #
+    #   Note that if you include `Phrases` in your request, you cannot use
+    #   `VocabularyFileUri`; you must choose one or the other.
+    #
+    #   Each language has a character set that contains all allowed characters
+    #   for that specific language. If you use unsupported characters, your
+    #   vocabulary filter request fails. Refer to [Character Sets for Custom
+    #   Vocabularies][1] to get the character set for your language.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
     #
     # @option params [String] :vocabulary_file_uri
-    #   The S3 location of the text file that contains the definition of the
-    #   custom vocabulary. The URI must be in the same region as the API
-    #   endpoint that you are calling. The general form is:
+    #   The Amazon S3 location of the text file that contains your custom
+    #   vocabulary. The URI must be located in the same Amazon Web Services
+    #   Region as the resource you're calling.
     #
-    #   `https://s3.aws-region.amazonaws.com/bucket-name/keyprefix/objectkey`
+    #   Here's an example URI path:
+    #   `s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt`
     #
-    #   For example:
-    #
-    #   `https://s3.us-east-1.amazonaws.com/DOC-EXAMPLE-BUCKET/vocab.txt`
-    #
-    #   For more information about S3 object names, see [Object Keys][1] in
-    #   the *Amazon S3 Developer Guide*.
-    #
-    #   For more information about custom vocabularies, see [Custom
-    #   Vocabularies][2].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
+    #   Note that if you include `VocabularyFileUri` in your request, you
+    #   cannot use the `Phrases` flag; you must choose one or the other.
     #
     # @return [Types::UpdateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3097,7 +3718,7 @@ module Aws::TranscribeService
     #
     #   resp = client.update_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
     #   })
@@ -3105,7 +3726,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.last_modified_time #=> Time
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -3118,40 +3739,44 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Updates a vocabulary filter with a new list of filtered words.
+    # Updates an existing custom vocabulary filter with a new list of words.
+    # The new list you provide overwrites all previous entries; you cannot
+    # append new terms onto an existing vocabulary filter.
     #
     # @option params [required, String] :vocabulary_filter_name
-    #   The name of the vocabulary filter to update. If you try to update a
-    #   vocabulary filter with the same name as another vocabulary filter, you
-    #   get a `ConflictException` error.
+    #   The name of the custom vocabulary filter you want to update.
+    #   Vocabulary filter names are case sensitive.
     #
     # @option params [Array<String>] :words
-    #   The words to use in the vocabulary filter. Only use characters from
-    #   the character set defined for custom vocabularies. For a list of
-    #   character sets, see [Character Sets for Custom Vocabularies][1].
+    #   Use this parameter if you want to update your vocabulary filter by
+    #   including all desired terms, as comma-separated values, within your
+    #   request. The other option for updating your vocabulary filter is to
+    #   save your entries in a text file and upload them to an Amazon S3
+    #   bucket, then specify the location of your file using the
+    #   `VocabularyFilterFileUri` parameter.
     #
-    #   If you provide a list of words in the `Words` parameter, you can't
-    #   use the `VocabularyFilterFileUri` parameter.
+    #   Note that if you include `Words` in your request, you cannot use
+    #   `VocabularyFilterFileUri`; you must choose one or the other.
+    #
+    #   Each language has a character set that contains all allowed characters
+    #   for that specific language. If you use unsupported characters, your
+    #   vocabulary filter request fails. Refer to [Character Sets for Custom
+    #   Vocabularies][1] to get the character set for your language.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
     #
     # @option params [String] :vocabulary_filter_file_uri
-    #   The Amazon S3 location of a text file used as input to create the
-    #   vocabulary filter. Only use characters from the character set defined
-    #   for custom vocabularies. For a list of character sets, see [Character
-    #   Sets for Custom Vocabularies][1].
+    #   The Amazon S3 location of the text file that contains your custom
+    #   vocabulary filter terms. The URI must be located in the same Amazon
+    #   Web Services Region as the resource you're calling.
     #
-    #   The specified file must be less than 50 KB of UTF-8 characters.
+    #   Here's an example URI path:
+    #   `s3://DOC-EXAMPLE-BUCKET/my-vocab-filter-file.txt`
     #
-    #   If you provide the location of a list of words in the
-    #   `VocabularyFilterFileUri` parameter, you can't use the `Words`
-    #   parameter.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
+    #   Note that if you include `VocabularyFilterFileUri` in your request,
+    #   you cannot use `Words`; you must choose one or the other.
     #
     # @return [Types::UpdateVocabularyFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3170,7 +3795,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_filter_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyFilter AWS API Documentation
@@ -3195,7 +3820,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

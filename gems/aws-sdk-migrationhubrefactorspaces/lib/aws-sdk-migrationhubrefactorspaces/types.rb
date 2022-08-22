@@ -520,6 +520,9 @@ module Aws::MigrationHubRefactorSpaces
     #       {
     #         application_identifier: "ApplicationId", # required
     #         client_token: "ClientToken",
+    #         default_route: {
+    #           activation_state: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #         },
     #         environment_identifier: "EnvironmentId", # required
     #         route_type: "DEFAULT", # required, accepts DEFAULT, URI_PATH
     #         service_identifier: "ServiceId", # required
@@ -527,7 +530,7 @@ module Aws::MigrationHubRefactorSpaces
     #           "TagMapKeyString" => "TagMapValueString",
     #         },
     #         uri_path_route: {
-    #           activation_state: "ACTIVE", # required, accepts ACTIVE
+    #           activation_state: "ACTIVE", # required, accepts ACTIVE, INACTIVE
     #           include_child_paths: false,
     #           methods: ["DELETE"], # accepts DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT
     #           source_path: "UriPath", # required
@@ -545,6 +548,10 @@ module Aws::MigrationHubRefactorSpaces
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
+    #
+    # @!attribute [rw] default_route
+    #   Configuration for the default route type.
+    #   @return [Types::DefaultRouteInput]
     #
     # @!attribute [rw] environment_identifier
     #   The ID of the environment in which the route is created.
@@ -578,6 +585,7 @@ module Aws::MigrationHubRefactorSpaces
     class CreateRouteRequest < Struct.new(
       :application_identifier,
       :client_token,
+      :default_route,
       :environment_identifier,
       :route_type,
       :service_identifier,
@@ -633,7 +641,9 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The current state of the route.
+    #   The current state of the route. Activation state only allows
+    #   `ACTIVE` or `INACTIVE` as user inputs. `FAILED` is a route state
+    #   that is system generated.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -643,7 +653,7 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] uri_path_route
-    #   onfiguration for the URI path route type.
+    #   Configuration for the URI path route type.
     #   @return [Types::UriPathRouteInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migration-hub-refactor-spaces-2021-10-26/CreateRouteResponse AWS API Documentation
@@ -838,6 +848,28 @@ module Aws::MigrationHubRefactorSpaces
       :url_endpoint,
       :vpc_id)
       SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # The configuration for the default route type.
+    #
+    # @note When making an API call, you may pass DefaultRouteInput
+    #   data as a hash:
+    #
+    #       {
+    #         activation_state: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #       }
+    #
+    # @!attribute [rw] activation_state
+    #   If set to `ACTIVE`, traffic is forwarded to this route’s service
+    #   after the route is created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migration-hub-refactor-spaces-2021-10-26/DefaultRouteInput AWS API Documentation
+    #
+    class DefaultRouteInput < Struct.new(
+      :activation_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2432,7 +2464,7 @@ module Aws::MigrationHubRefactorSpaces
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2511,21 +2543,105 @@ module Aws::MigrationHubRefactorSpaces
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateRouteRequest
+    #   data as a hash:
+    #
+    #       {
+    #         activation_state: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #         application_identifier: "ApplicationId", # required
+    #         environment_identifier: "EnvironmentId", # required
+    #         route_identifier: "RouteId", # required
+    #       }
+    #
+    # @!attribute [rw] activation_state
+    #   If set to `ACTIVE`, traffic is forwarded to this route’s service
+    #   after the route is updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_identifier
+    #   The ID of the application within which the route is being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The ID of the environment in which the route is being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_identifier
+    #   The unique identifier of the route to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migration-hub-refactor-spaces-2021-10-26/UpdateRouteRequest AWS API Documentation
+    #
+    class UpdateRouteRequest < Struct.new(
+      :activation_state,
+      :application_identifier,
+      :environment_identifier,
+      :route_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   The ID of the application in which the route is being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the route. The format for this ARN
+    #   is
+    #   `arn:aws:refactor-spaces:region:account-id:resource-type/resource-id
+    #   `. For more information about ARNs, see [ Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   A timestamp that indicates when the route was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] route_id
+    #   The unique identifier of the route.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_id
+    #   The ID of service in which the route was created. Traffic that
+    #   matches this route is forwarded to this service.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the route.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migration-hub-refactor-spaces-2021-10-26/UpdateRouteResponse AWS API Documentation
+    #
+    class UpdateRouteResponse < Struct.new(
+      :application_id,
+      :arn,
+      :last_updated_time,
+      :route_id,
+      :service_id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for the URI path route type.
     #
     # @note When making an API call, you may pass UriPathRouteInput
     #   data as a hash:
     #
     #       {
-    #         activation_state: "ACTIVE", # required, accepts ACTIVE
+    #         activation_state: "ACTIVE", # required, accepts ACTIVE, INACTIVE
     #         include_child_paths: false,
     #         methods: ["DELETE"], # accepts DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT
     #         source_path: "UriPath", # required
     #       }
     #
     # @!attribute [rw] activation_state
-    #   Indicates whether traffic is forwarded to this route’s service after
-    #   the route is created.
+    #   If set to `ACTIVE`, traffic is forwarded to this route’s service
+    #   after the route is created.
     #   @return [String]
     #
     # @!attribute [rw] include_child_paths

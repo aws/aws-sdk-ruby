@@ -459,6 +459,12 @@ module Aws::DLM
     #       parameters: {
     #         exclude_boot_volume: false,
     #         no_reboot: false,
+    #         exclude_data_volume_tags: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           },
+    #         ],
     #       },
     #       event_source: {
     #         type: "MANAGED_CWE", # required, accepts MANAGED_CWE
@@ -663,6 +669,9 @@ module Aws::DLM
     #   resp.policy.policy_details.schedules[0].deprecate_rule.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
     #   resp.policy.policy_details.parameters.exclude_boot_volume #=> Boolean
     #   resp.policy.policy_details.parameters.no_reboot #=> Boolean
+    #   resp.policy.policy_details.parameters.exclude_data_volume_tags #=> Array
+    #   resp.policy.policy_details.parameters.exclude_data_volume_tags[0].key #=> String
+    #   resp.policy.policy_details.parameters.exclude_data_volume_tags[0].value #=> String
     #   resp.policy.policy_details.event_source.type #=> String, one of "MANAGED_CWE"
     #   resp.policy.policy_details.event_source.parameters.event_type #=> String, one of "shareSnapshot"
     #   resp.policy.policy_details.event_source.parameters.snapshot_owner #=> Array
@@ -878,6 +887,12 @@ module Aws::DLM
     #       parameters: {
     #         exclude_boot_volume: false,
     #         no_reboot: false,
+    #         exclude_data_volume_tags: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           },
+    #         ],
     #       },
     #       event_source: {
     #         type: "MANAGED_CWE", # required, accepts MANAGED_CWE
@@ -930,7 +945,7 @@ module Aws::DLM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

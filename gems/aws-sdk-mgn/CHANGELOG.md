@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2022-06-23)
+------------------
+
+* Feature - New and modified APIs for the Post-Migration Framework
+
+1.13.0 (2022-04-20)
+------------------
+
+* Feature - Removed required annotation from input fields in Describe operations requests. Added quotaValue to ServiceQuotaExceededException
+
 1.12.0 (2022-03-01)
 ------------------
 

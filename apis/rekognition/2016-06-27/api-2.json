@@ -31,6 +31,26 @@
         {"shape":"InvalidImageFormatException"}
       ]
     },
+    "CopyProjectVersion":{
+      "name":"CopyProjectVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CopyProjectVersionRequest"},
+      "output":{"shape":"CopyProjectVersionResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ProvisionedThroughputExceededException"},
+        {"shape":"ResourceInUseException"}
+      ]
+    },
     "CreateCollection":{
       "name":"CreateCollection",
       "http":{
@@ -195,6 +215,24 @@
         {"shape":"InternalServerError"},
         {"shape":"ThrottlingException"},
         {"shape":"ProvisionedThroughputExceededException"}
+      ]
+    },
+    "DeleteProjectPolicy":{
+      "name":"DeleteProjectPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteProjectPolicyRequest"},
+      "output":{"shape":"DeleteProjectPolicyResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ProvisionedThroughputExceededException"},
+        {"shape":"InvalidPolicyRevisionIdException"}
       ]
     },
     "DeleteProjectVersion":{
@@ -713,6 +751,24 @@
         {"shape":"ResourceNotFoundException"}
       ]
     },
+    "ListProjectPolicies":{
+      "name":"ListProjectPolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListProjectPoliciesRequest"},
+      "output":{"shape":"ListProjectPoliciesResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ProvisionedThroughputExceededException"},
+        {"shape":"InvalidPaginationTokenException"}
+      ]
+    },
     "ListStreamProcessors":{
       "name":"ListStreamProcessors",
       "http":{
@@ -745,6 +801,28 @@
         {"shape":"InternalServerError"},
         {"shape":"ThrottlingException"},
         {"shape":"ProvisionedThroughputExceededException"}
+      ]
+    },
+    "PutProjectPolicy":{
+      "name":"PutProjectPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutProjectPolicyRequest"},
+      "output":{"shape":"PutProjectPolicyResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidPolicyRevisionIdException"},
+        {"shape":"MalformedPolicyDocumentException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ProvisionedThroughputExceededException"},
+        {"shape":"LimitExceededException"}
       ]
     },
     "RecognizeCelebrities":{
@@ -1099,6 +1177,23 @@
         {"shape":"ResourceInUseException"},
         {"shape":"ResourceNotFoundException"}
       ]
+    },
+    "UpdateStreamProcessor":{
+      "name":"UpdateStreamProcessor",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateStreamProcessorRequest"},
+      "output":{"shape":"UpdateStreamProcessorResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ProvisionedThroughputExceededException"}
+      ]
     }
   },
   "shapes":{
@@ -1318,6 +1413,28 @@
         "Confidence":{"shape":"Percent"}
       }
     },
+    "ConnectedHomeLabel":{"type":"string"},
+    "ConnectedHomeLabels":{
+      "type":"list",
+      "member":{"shape":"ConnectedHomeLabel"},
+      "max":128,
+      "min":1
+    },
+    "ConnectedHomeSettings":{
+      "type":"structure",
+      "required":["Labels"],
+      "members":{
+        "Labels":{"shape":"ConnectedHomeLabels"},
+        "MinConfidence":{"shape":"Percent"}
+      }
+    },
+    "ConnectedHomeSettingsForUpdate":{
+      "type":"structure",
+      "members":{
+        "Labels":{"shape":"ConnectedHomeLabels"},
+        "MinConfidence":{"shape":"Percent"}
+      }
+    },
     "ContentClassifier":{
       "type":"string",
       "enum":[
@@ -1347,6 +1464,31 @@
         "NAME",
         "TIMESTAMP"
       ]
+    },
+    "CopyProjectVersionRequest":{
+      "type":"structure",
+      "required":[
+        "SourceProjectArn",
+        "SourceProjectVersionArn",
+        "DestinationProjectArn",
+        "VersionName",
+        "OutputConfig"
+      ],
+      "members":{
+        "SourceProjectArn":{"shape":"ProjectArn"},
+        "SourceProjectVersionArn":{"shape":"ProjectVersionArn"},
+        "DestinationProjectArn":{"shape":"ProjectArn"},
+        "VersionName":{"shape":"VersionName"},
+        "OutputConfig":{"shape":"OutputConfig"},
+        "Tags":{"shape":"TagMap"},
+        "KmsKeyId":{"shape":"KmsKeyId"}
+      }
+    },
+    "CopyProjectVersionResponse":{
+      "type":"structure",
+      "members":{
+        "ProjectVersionArn":{"shape":"ProjectVersionArn"}
+      }
     },
     "CoversBodyPart":{
       "type":"structure",
@@ -1440,7 +1582,11 @@
         "Name":{"shape":"StreamProcessorName"},
         "Settings":{"shape":"StreamProcessorSettings"},
         "RoleArn":{"shape":"RoleArn"},
-        "Tags":{"shape":"TagMap"}
+        "Tags":{"shape":"TagMap"},
+        "NotificationChannel":{"shape":"StreamProcessorNotificationChannel"},
+        "KmsKeyId":{"shape":"KmsKeyId"},
+        "RegionsOfInterest":{"shape":"RegionsOfInterest"},
+        "DataSharingPreference":{"shape":"StreamProcessorDataSharingPreference"}
       }
     },
     "CreateStreamProcessorResponse":{
@@ -1631,6 +1777,23 @@
         "DeletedFaces":{"shape":"FaceIdList"}
       }
     },
+    "DeleteProjectPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "ProjectArn",
+        "PolicyName"
+      ],
+      "members":{
+        "ProjectArn":{"shape":"ProjectArn"},
+        "PolicyName":{"shape":"ProjectPolicyName"},
+        "PolicyRevisionId":{"shape":"ProjectPolicyRevisionId"}
+      }
+    },
+    "DeleteProjectPolicyResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteProjectRequest":{
       "type":"structure",
       "required":["ProjectArn"],
@@ -1749,7 +1912,11 @@
         "Input":{"shape":"StreamProcessorInput"},
         "Output":{"shape":"StreamProcessorOutput"},
         "RoleArn":{"shape":"RoleArn"},
-        "Settings":{"shape":"StreamProcessorSettings"}
+        "Settings":{"shape":"StreamProcessorSettings"},
+        "NotificationChannel":{"shape":"StreamProcessorNotificationChannel"},
+        "KmsKeyId":{"shape":"KmsKeyId"},
+        "RegionsOfInterest":{"shape":"RegionsOfInterest"},
+        "DataSharingPreference":{"shape":"StreamProcessorDataSharingPreference"}
       }
     },
     "DetectCustomLabelsRequest":{
@@ -2443,6 +2610,12 @@
       },
       "exception":true
     },
+    "InvalidPolicyRevisionIdException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true
+    },
     "InvalidS3ObjectException":{
       "type":"structure",
       "members":{
@@ -2480,6 +2653,19 @@
       "type":"structure",
       "members":{
         "Arn":{"shape":"KinesisVideoArn"}
+      }
+    },
+    "KinesisVideoStreamFragmentNumber":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^[0-9]+$"
+    },
+    "KinesisVideoStreamStartSelector":{
+      "type":"structure",
+      "members":{
+        "ProducerTimestamp":{"shape":"ULong"},
+        "FragmentNumber":{"shape":"KinesisVideoStreamFragmentNumber"}
       }
     },
     "KmsKeyId":{
@@ -2665,6 +2851,27 @@
         "FaceModelVersion":{"shape":"String"}
       }
     },
+    "ListProjectPoliciesPageSize":{
+      "type":"integer",
+      "max":5,
+      "min":1
+    },
+    "ListProjectPoliciesRequest":{
+      "type":"structure",
+      "required":["ProjectArn"],
+      "members":{
+        "ProjectArn":{"shape":"ProjectArn"},
+        "NextToken":{"shape":"ExtendedPaginationToken"},
+        "MaxResults":{"shape":"ListProjectPoliciesPageSize"}
+      }
+    },
+    "ListProjectPoliciesResponse":{
+      "type":"structure",
+      "members":{
+        "ProjectPolicies":{"shape":"ProjectPolicies"},
+        "NextToken":{"shape":"ExtendedPaginationToken"}
+      }
+    },
     "ListStreamProcessorsRequest":{
       "type":"structure",
       "members":{
@@ -2691,6 +2898,17 @@
       "members":{
         "Tags":{"shape":"TagMap"}
       }
+    },
+    "MalformedPolicyDocumentException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true
+    },
+    "MaxDurationInSecondsULong":{
+      "type":"long",
+      "max":120,
+      "min":1
     },
     "MaxFaces":{
       "type":"integer",
@@ -2881,6 +3099,38 @@
       "max":10,
       "min":1
     },
+    "ProjectPolicies":{
+      "type":"list",
+      "member":{"shape":"ProjectPolicy"}
+    },
+    "ProjectPolicy":{
+      "type":"structure",
+      "members":{
+        "ProjectArn":{"shape":"ProjectArn"},
+        "PolicyName":{"shape":"ProjectPolicyName"},
+        "PolicyRevisionId":{"shape":"ProjectPolicyRevisionId"},
+        "PolicyDocument":{"shape":"ProjectPolicyDocument"},
+        "CreationTimestamp":{"shape":"DateTime"},
+        "LastUpdatedTimestamp":{"shape":"DateTime"}
+      }
+    },
+    "ProjectPolicyDocument":{
+      "type":"string",
+      "max":2000,
+      "min":1,
+      "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+    },
+    "ProjectPolicyName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_.\\-]+"
+    },
+    "ProjectPolicyRevisionId":{
+      "type":"string",
+      "max":64,
+      "pattern":"[0-9A-Fa-f]+"
+    },
     "ProjectStatus":{
       "type":"string",
       "enum":[
@@ -2910,7 +3160,9 @@
         "TestingDataResult":{"shape":"TestingDataResult"},
         "EvaluationResult":{"shape":"EvaluationResult"},
         "ManifestSummary":{"shape":"GroundTruthManifest"},
-        "KmsKeyId":{"shape":"KmsKeyId"}
+        "KmsKeyId":{"shape":"KmsKeyId"},
+        "MaxInferenceUnits":{"shape":"InferenceUnits"},
+        "SourceProjectVersionArn":{"shape":"ProjectVersionArn"}
       }
     },
     "ProjectVersionDescriptions":{
@@ -2928,7 +3180,10 @@
         "FAILED",
         "STOPPING",
         "STOPPED",
-        "DELETING"
+        "DELETING",
+        "COPYING_IN_PROGRESS",
+        "COPYING_COMPLETED",
+        "COPYING_FAILED"
       ]
     },
     "ProjectVersionsPageSize":{
@@ -3003,6 +3258,26 @@
       },
       "exception":true
     },
+    "PutProjectPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "ProjectArn",
+        "PolicyName",
+        "PolicyDocument"
+      ],
+      "members":{
+        "ProjectArn":{"shape":"ProjectArn"},
+        "PolicyName":{"shape":"ProjectPolicyName"},
+        "PolicyRevisionId":{"shape":"ProjectPolicyRevisionId"},
+        "PolicyDocument":{"shape":"ProjectPolicyDocument"}
+      }
+    },
+    "PutProjectPolicyResponse":{
+      "type":"structure",
+      "members":{
+        "PolicyRevisionId":{"shape":"ProjectPolicyRevisionId"}
+      }
+    },
     "QualityFilter":{
       "type":"string",
       "enum":[
@@ -3053,7 +3328,8 @@
     "RegionOfInterest":{
       "type":"structure",
       "members":{
-        "BoundingBox":{"shape":"BoundingBox"}
+        "BoundingBox":{"shape":"BoundingBox"},
+        "Polygon":{"shape":"Polygon"}
       }
     },
     "RegionsOfInterest":{
@@ -3104,6 +3380,13 @@
       "max":255,
       "min":3,
       "pattern":"[0-9A-Za-z\\.\\-_]*"
+    },
+    "S3Destination":{
+      "type":"structure",
+      "members":{
+        "Bucket":{"shape":"S3Bucket"},
+        "KeyPrefix":{"shape":"S3KeyPrefix"}
+      }
     },
     "S3KeyPrefix":{
       "type":"string",
@@ -3356,7 +3639,8 @@
       ],
       "members":{
         "ProjectVersionArn":{"shape":"ProjectVersionArn"},
-        "MinInferenceUnits":{"shape":"InferenceUnits"}
+        "MinInferenceUnits":{"shape":"InferenceUnits"},
+        "MaxInferenceUnits":{"shape":"InferenceUnits"}
       }
     },
     "StartProjectVersionResponse":{
@@ -3403,14 +3687,18 @@
       "type":"structure",
       "required":["Name"],
       "members":{
-        "Name":{"shape":"StreamProcessorName"}
+        "Name":{"shape":"StreamProcessorName"},
+        "StartSelector":{"shape":"StreamProcessingStartSelector"},
+        "StopSelector":{"shape":"StreamProcessingStopSelector"}
       }
     },
     "StartStreamProcessorResponse":{
       "type":"structure",
       "members":{
+        "SessionId":{"shape":"StartStreamProcessorSessionId"}
       }
     },
+    "StartStreamProcessorSessionId":{"type":"string"},
     "StartTechnicalCueDetectionFilter":{
       "type":"structure",
       "members":{
@@ -3468,6 +3756,18 @@
       "members":{
       }
     },
+    "StreamProcessingStartSelector":{
+      "type":"structure",
+      "members":{
+        "KVSStreamStartSelector":{"shape":"KinesisVideoStreamStartSelector"}
+      }
+    },
+    "StreamProcessingStopSelector":{
+      "type":"structure",
+      "members":{
+        "MaxDurationInSeconds":{"shape":"MaxDurationInSecondsULong"}
+      }
+    },
     "StreamProcessor":{
       "type":"structure",
       "members":{
@@ -3478,6 +3778,13 @@
     "StreamProcessorArn":{
       "type":"string",
       "pattern":"(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:streamprocessor\\/.+$)"
+    },
+    "StreamProcessorDataSharingPreference":{
+      "type":"structure",
+      "required":["OptIn"],
+      "members":{
+        "OptIn":{"shape":"Boolean"}
+      }
     },
     "StreamProcessorInput":{
       "type":"structure",
@@ -3495,16 +3802,42 @@
       "min":1,
       "pattern":"[a-zA-Z0-9_.\\-]+"
     },
+    "StreamProcessorNotificationChannel":{
+      "type":"structure",
+      "required":["SNSTopicArn"],
+      "members":{
+        "SNSTopicArn":{"shape":"SNSTopicArn"}
+      }
+    },
     "StreamProcessorOutput":{
       "type":"structure",
       "members":{
-        "KinesisDataStream":{"shape":"KinesisDataStream"}
+        "KinesisDataStream":{"shape":"KinesisDataStream"},
+        "S3Destination":{"shape":"S3Destination"}
       }
+    },
+    "StreamProcessorParameterToDelete":{
+      "type":"string",
+      "enum":[
+        "ConnectedHomeMinConfidence",
+        "RegionsOfInterest"
+      ]
+    },
+    "StreamProcessorParametersToDelete":{
+      "type":"list",
+      "member":{"shape":"StreamProcessorParameterToDelete"}
     },
     "StreamProcessorSettings":{
       "type":"structure",
       "members":{
-        "FaceSearch":{"shape":"FaceSearchSettings"}
+        "FaceSearch":{"shape":"FaceSearchSettings"},
+        "ConnectedHome":{"shape":"ConnectedHomeSettings"}
+      }
+    },
+    "StreamProcessorSettingsForUpdate":{
+      "type":"structure",
+      "members":{
+        "ConnectedHomeForUpdate":{"shape":"ConnectedHomeSettingsForUpdate"}
       }
     },
     "StreamProcessorStatus":{
@@ -3514,7 +3847,8 @@
         "STARTING",
         "RUNNING",
         "FAILED",
-        "STOPPING"
+        "STOPPING",
+        "UPDATING"
       ]
     },
     "String":{"type":"string"},
@@ -3709,6 +4043,22 @@
       }
     },
     "UpdateDatasetEntriesResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateStreamProcessorRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"StreamProcessorName"},
+        "SettingsForUpdate":{"shape":"StreamProcessorSettingsForUpdate"},
+        "RegionsOfInterestForUpdate":{"shape":"RegionsOfInterest"},
+        "DataSharingPreferenceForUpdate":{"shape":"StreamProcessorDataSharingPreference"},
+        "ParametersToDelete":{"shape":"StreamProcessorParametersToDelete"}
+      }
+    },
+    "UpdateStreamProcessorResponse":{
       "type":"structure",
       "members":{
       }

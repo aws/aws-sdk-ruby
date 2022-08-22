@@ -1662,19 +1662,6 @@ module Aws::S3
     #   * {Types::CreateBucketOutput#location #location} => String
     #
     #
-    # @example Example: To create a bucket 
-    #
-    #   # The following example creates a bucket.
-    #
-    #   resp = client.create_bucket({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     location: "/examplebucket", 
-    #   }
-    #
     # @example Example: To create a bucket in a specific region
     #
     #   # The following example creates a bucket. The request specifies an AWS region where to create the bucket.
@@ -1689,6 +1676,19 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     location: "http://examplebucket.<Region>.s3.amazonaws.com/", 
+    #   }
+    #
+    # @example Example: To create a bucket 
+    #
+    #   # The following example creates a bucket.
+    #
+    #   resp = client.create_bucket({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location: "/examplebucket", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -3109,15 +3109,6 @@ module Aws::S3
     #   * {Types::DeleteObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To delete an object (from a non-versioned bucket)
-    #
-    #   # The following example deletes an object from a non-versioned bucket.
-    #
-    #   resp = client.delete_object({
-    #     bucket: "ExampleBucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
     # @example Example: To delete an object
     #
     #   # The following example deletes an object from an S3 bucket.
@@ -3130,6 +3121,15 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #   }
+    #
+    # @example Example: To delete an object (from a non-versioned bucket)
+    #
+    #   # The following example deletes an object from a non-versioned bucket.
+    #
+    #   resp = client.delete_object({
+    #     bucket: "ExampleBucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -6582,27 +6582,6 @@ module Aws::S3
     #   * {Types::GetObjectTaggingOutput#tag_set #tag_set} => Array&lt;Types::Tag&gt;
     #
     #
-    # @example Example: To retrieve tag set of a specific object version
-    #
-    #   # The following example retrieves tag set of an object. The request specifies object version.
-    #
-    #   resp = client.get_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     tag_set: [
-    #       {
-    #         key: "Key1", 
-    #         value: "Value1", 
-    #       }, 
-    #     ], 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   }
-    #
     # @example Example: To retrieve tag set of an object
     #
     #   # The following example retrieves tag set of an object.
@@ -6625,6 +6604,27 @@ module Aws::S3
     #       }, 
     #     ], 
     #     version_id: "null", 
+    #   }
+    #
+    # @example Example: To retrieve tag set of a specific object version
+    #
+    #   # The following example retrieves tag set of an object. The request specifies object version.
+    #
+    #   resp = client.get_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_set: [
+    #       {
+    #         key: "Key1", 
+    #         value: "Value1", 
+    #       }, 
+    #     ], 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -7817,48 +7817,6 @@ module Aws::S3
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list in-progress multipart uploads on a bucket
-    #
-    #   # The following example lists in-progress multipart uploads on a specific bucket.
-    #
-    #   resp = client.list_multipart_uploads({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     uploads: [
-    #       {
-    #         initiated: Time.parse("2014-05-01T05:40:58.000Z"), 
-    #         initiator: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         key: "JavaFile", 
-    #         owner: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         storage_class: "STANDARD", 
-    #         upload_id: "examplelUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--", 
-    #       }, 
-    #       {
-    #         initiated: Time.parse("2014-05-01T05:41:27.000Z"), 
-    #         initiator: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         key: "JavaFile", 
-    #         owner: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         storage_class: "STANDARD", 
-    #         upload_id: "examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Example: List next set of multipart uploads when previous result is truncated
     #
     #   # The following example specifies the upload-id-marker and key-marker from previous truncated response to retrieve next
@@ -7908,6 +7866,48 @@ module Aws::S3
     #         }, 
     #         storage_class: "STANDARD", 
     #         upload_id: "b7tZSqIlo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To list in-progress multipart uploads on a bucket
+    #
+    #   # The following example lists in-progress multipart uploads on a specific bucket.
+    #
+    #   resp = client.list_multipart_uploads({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     uploads: [
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:40:58.000Z"), 
+    #         initiator: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "examplelUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--", 
+    #       }, 
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:41:27.000Z"), 
+    #         initiator: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
     #       }, 
     #     ], 
     #   }
@@ -10028,7 +10028,9 @@ module Aws::S3
     #
     # You specify the lifecycle configuration in your request body. The
     # lifecycle configuration is specified as XML consisting of one or more
-    # rules. Each rule consists of the following:
+    # rules. An Amazon S3 Lifecycle configuration can have up to 1,000
+    # rules. This limit is not adjustable. Each rule consists of the
+    # following:
     #
     # * Filter identifying a subset of objects to which the rule applies.
     #   The filter can be based on a key name prefix, object tags, or a
@@ -12161,62 +12163,6 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To upload an object and specify optional tags
-    #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
-    #   }
-    #
-    # @example Example: To upload an object and specify canned ACL.
-    #
-    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
-    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     acl: "authenticated-read", 
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
-    #   }
-    #
-    # @example Example: To upload an object and specify server-side encryption and object tags
-    #
-    #   # The following example uploads and object. The request specifies the optional server-side encryption option. The request
-    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     server_side_encryption: "AES256", 
-    #     tagging: "key1=value1&key2=value2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
-    #   }
-    #
     # @example Example: To create an object.
     #
     #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
@@ -12250,6 +12196,45 @@ module Aws::S3
     #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
+    # @example Example: To upload object and specify user-defined metadata
+    #
+    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
+    #   # enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     metadata: {
+    #       "metadata1" => "value1", 
+    #       "metadata2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
+    #   }
+    #
+    # @example Example: To upload an object and specify optional tags
+    #
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "c:\\HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #   }
+    #
     # @example Example: To upload an object (specify optional headers)
     #
     #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
@@ -12270,25 +12255,42 @@ module Aws::S3
     #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
     #   }
     #
-    # @example Example: To upload object and specify user-defined metadata
+    # @example Example: To upload an object and specify server-side encryption and object tags
     #
-    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
-    #   # enabled, S3 returns version ID in response.
+    #   # The following example uploads and object. The request specifies the optional server-side encryption option. The request
+    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
     #     body: "filetoupload", 
     #     bucket: "examplebucket", 
     #     key: "exampleobject", 
-    #     metadata: {
-    #       "metadata1" => "value1", 
-    #       "metadata2" => "value2", 
-    #     }, 
+    #     server_side_encryption: "AES256", 
+    #     tagging: "key1=value1&key2=value2", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
+    #   }
+    #
+    # @example Example: To upload an object and specify canned ACL.
+    #
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
+    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     acl: "authenticated-read", 
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
     #   }
     #
     # @example Streaming a file from disk
@@ -14230,9 +14232,11 @@ module Aws::S3
     # number uniquely identifies a part and also defines its position within
     # the object being created. If you upload a new part using the same part
     # number that was used with a previous part, the previously uploaded
-    # part is overwritten. Each part must be at least 5 MB in size, except
-    # the last part. There is no size limit on the last part of your
-    # multipart upload.
+    # part is overwritten.
+    #
+    # For information about maximum and minimum part sizes and other
+    # multipart upload specifications, see [Multipart upload limits][3] in
+    # the *Amazon S3 User Guide*.
     #
     # To ensure that data is not corrupted when traversing the network,
     # specify the `Content-MD5` header in the upload part request. Amazon S3
@@ -14243,7 +14247,7 @@ module Aws::S3
     # Web Services S3 uses the `x-amz-content-sha256` header as a checksum
     # instead of `Content-MD5`. For more information see [Authenticating
     # Requests: Using the Authorization Header (Amazon Web Services
-    # Signature Version 4)][3].
+    # Signature Version 4)][4].
     #
     # **Note:** After you initiate multipart upload and upload one or more
     # parts, you must either complete or abort multipart upload in order to
@@ -14252,10 +14256,10 @@ module Aws::S3
     # parts storage and stops charging you for the parts storage.
     #
     # For more information on multipart uploads, go to [Multipart Upload
-    # Overview][4] in the <i>Amazon S3 User Guide </i>.
+    # Overview][5] in the <i>Amazon S3 User Guide </i>.
     #
     # For information on the permissions required to use the multipart
-    # upload API, go to [Multipart Upload and Permissions][5] in the *Amazon
+    # upload API, go to [Multipart Upload and Permissions][6] in the *Amazon
     # S3 User Guide*.
     #
     # You can optionally request server-side encryption where Amazon S3
@@ -14266,7 +14270,7 @@ module Aws::S3
     # encryption key, the request headers you provide in the request must
     # match the headers you used in the request to initiate the upload by
     # using [CreateMultipartUpload][2]. For more information, go to [Using
-    # Server-Side Encryption][6] in the *Amazon S3 User Guide*.
+    # Server-Side Encryption][7] in the *Amazon S3 User Guide*.
     #
     # Server-side encryption is supported by the S3 Multipart Upload
     # actions. Unless you are using a customer-provided encryption key, you
@@ -14302,26 +14306,27 @@ module Aws::S3
     #
     # * [CreateMultipartUpload][2]
     #
-    # * [CompleteMultipartUpload][7]
+    # * [CompleteMultipartUpload][8]
     #
-    # * [AbortMultipartUpload][8]
+    # * [AbortMultipartUpload][9]
     #
-    # * [ListParts][9]
+    # * [ListParts][10]
     #
-    # * [ListMultipartUploads][10]
+    # * [ListMultipartUploads][11]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-auth-using-authorization-header.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
-    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-auth-using-authorization-header.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
     #
     # @option params [String, StringIO, File] :body
     #   Object data.
@@ -14551,9 +14556,9 @@ module Aws::S3
     # `x-amz-copy-source` in your request and a byte range by adding the
     # request header `x-amz-copy-source-range` in your request.
     #
-    # The minimum allowable part size for a multipart upload is 5 MB. For
-    # more information about multipart upload limits, go to [Quick Facts][1]
-    # in the *Amazon S3 User Guide*.
+    # For information about maximum and minimum part sizes and other
+    # multipart upload specifications, see [Multipart upload limits][1] in
+    # the *Amazon S3 User Guide*.
     #
     # <note markdown="1"> Instead of using an existing object as part data, you might use the
     # [UploadPart][2] action and provide data in your request.
@@ -14664,7 +14669,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/qfacts.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
@@ -15332,7 +15337,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

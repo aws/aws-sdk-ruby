@@ -259,6 +259,40 @@
         {"shape":"InternalServerException"}
       ]
     },
+    "CreateTransitGatewayPeering":{
+      "name":"CreateTransitGatewayPeering",
+      "http":{
+        "method":"POST",
+        "requestUri":"/transit-gateway-peerings"
+      },
+      "input":{"shape":"CreateTransitGatewayPeeringRequest"},
+      "output":{"shape":"CreateTransitGatewayPeeringResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
+    "CreateTransitGatewayRouteTableAttachment":{
+      "name":"CreateTransitGatewayRouteTableAttachment",
+      "http":{
+        "method":"POST",
+        "requestUri":"/transit-gateway-route-table-attachments"
+      },
+      "input":{"shape":"CreateTransitGatewayRouteTableAttachmentRequest"},
+      "output":{"shape":"CreateTransitGatewayRouteTableAttachmentResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "CreateVpcAttachment":{
       "name":"CreateVpcAttachment",
       "http":{
@@ -403,6 +437,23 @@
       },
       "input":{"shape":"DeleteLinkRequest"},
       "output":{"shape":"DeleteLinkResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
+    "DeletePeering":{
+      "name":"DeletePeering",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/peerings/{peeringId}"
+      },
+      "input":{"shape":"DeletePeeringRequest"},
+      "output":{"shape":"DeletePeeringResponse"},
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
@@ -636,6 +687,22 @@
       },
       "input":{"shape":"GetCoreNetworkRequest"},
       "output":{"shape":"GetCoreNetworkResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
+    "GetCoreNetworkChangeEvents":{
+      "name":"GetCoreNetworkChangeEvents",
+      "http":{
+        "method":"GET",
+        "requestUri":"/core-networks/{coreNetworkId}/core-network-change-events/{policyVersionId}"
+      },
+      "input":{"shape":"GetCoreNetworkChangeEventsRequest"},
+      "output":{"shape":"GetCoreNetworkChangeEventsResponse"},
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
@@ -900,6 +967,22 @@
         {"shape":"InternalServerException"}
       ]
     },
+    "GetTransitGatewayPeering":{
+      "name":"GetTransitGatewayPeering",
+      "http":{
+        "method":"GET",
+        "requestUri":"/transit-gateway-peerings/{peeringId}"
+      },
+      "input":{"shape":"GetTransitGatewayPeeringRequest"},
+      "output":{"shape":"GetTransitGatewayPeeringResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "GetTransitGatewayRegistrations":{
       "name":"GetTransitGatewayRegistrations",
       "http":{
@@ -908,6 +991,22 @@
       },
       "input":{"shape":"GetTransitGatewayRegistrationsRequest"},
       "output":{"shape":"GetTransitGatewayRegistrationsResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
+    "GetTransitGatewayRouteTableAttachment":{
+      "name":"GetTransitGatewayRouteTableAttachment",
+      "http":{
+        "method":"GET",
+        "requestUri":"/transit-gateway-route-table-attachments/{attachmentId}"
+      },
+      "input":{"shape":"GetTransitGatewayRouteTableAttachmentRequest"},
+      "output":{"shape":"GetTransitGatewayRouteTableAttachmentResponse"},
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
@@ -986,6 +1085,30 @@
       },
       "input":{"shape":"ListCoreNetworksRequest"},
       "output":{"shape":"ListCoreNetworksResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
+    "ListOrganizationServiceAccessStatus":{
+      "name":"ListOrganizationServiceAccessStatus",
+      "http":{
+        "method":"GET",
+        "requestUri":"/organizations/service-access"
+      },
+      "input":{"shape":"ListOrganizationServiceAccessStatusRequest"},
+      "output":{"shape":"ListOrganizationServiceAccessStatusResponse"}
+    },
+    "ListPeerings":{
+      "name":"ListPeerings",
+      "http":{
+        "method":"GET",
+        "requestUri":"/peerings"
+      },
+      "input":{"shape":"ListPeeringsRequest"},
+      "output":{"shape":"ListPeeringsResponse"},
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
@@ -1093,6 +1216,23 @@
         {"shape":"ThrottlingException"},
         {"shape":"InternalServerException"},
         {"shape":"ConflictException"}
+      ]
+    },
+    "StartOrganizationServiceAccessUpdate":{
+      "name":"StartOrganizationServiceAccessUpdate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/organizations/service-access"
+      },
+      "input":{"shape":"StartOrganizationServiceAccessUpdateRequest"},
+      "output":{"shape":"StartOrganizationServiceAccessUpdateResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ConflictException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
       ]
     },
     "StartRouteAnalysis":{
@@ -1289,7 +1429,8 @@
     "AWSAccountId":{
       "type":"string",
       "max":12,
-      "min":12
+      "min":12,
+      "pattern":"[\\s\\S]*"
     },
     "AWSLocation":{
       "type":"structure",
@@ -1323,6 +1464,27 @@
       },
       "error":{"httpStatusCode":403},
       "exception":true
+    },
+    "AccountId":{
+      "type":"string",
+      "max":50,
+      "min":0
+    },
+    "AccountStatus":{
+      "type":"structure",
+      "members":{
+        "AccountId":{"shape":"AccountId"},
+        "SLRDeploymentStatus":{"shape":"SLRDeploymentStatus"}
+      }
+    },
+    "AccountStatusList":{
+      "type":"list",
+      "member":{"shape":"AccountStatus"}
+    },
+    "Action":{
+      "type":"string",
+      "max":50,
+      "min":0
     },
     "AssociateConnectPeerRequest":{
       "type":"structure",
@@ -1467,7 +1629,8 @@
       "enum":[
         "CONNECT",
         "SITE_TO_SITE_VPN",
-        "VPC"
+        "VPC",
+        "TRANSIT_GATEWAY_ROUTE_TABLE"
       ]
     },
     "Bandwidth":{
@@ -1503,6 +1666,15 @@
         "OUT_OF_DATE"
       ]
     },
+    "ChangeStatus":{
+      "type":"string",
+      "enum":[
+        "NOT_STARTED",
+        "IN_PROGRESS",
+        "COMPLETE",
+        "FAILED"
+      ]
+    },
     "ChangeType":{
       "type":"string",
       "enum":[
@@ -1510,13 +1682,18 @@
         "CORE_NETWORK_EDGE",
         "ATTACHMENT_MAPPING",
         "ATTACHMENT_ROUTE_PROPAGATION",
-        "ATTACHMENT_ROUTE_STATIC"
+        "ATTACHMENT_ROUTE_STATIC",
+        "CORE_NETWORK_CONFIGURATION",
+        "SEGMENTS_CONFIGURATION",
+        "SEGMENT_ACTIONS_CONFIGURATION",
+        "ATTACHMENT_POLICIES_CONFIGURATION"
       ]
     },
     "ClientToken":{
       "type":"string",
       "max":256,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "ConflictException":{
       "type":"structure",
@@ -1660,7 +1837,8 @@
     "ConnectionArn":{
       "type":"string",
       "max":500,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "ConnectionHealth":{
       "type":"structure",
@@ -1673,7 +1851,8 @@
     "ConnectionId":{
       "type":"string",
       "max":50,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "ConnectionIdList":{
       "type":"list",
@@ -1709,7 +1888,8 @@
     "ConstrainedString":{
       "type":"string",
       "max":256,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "ConstrainedStringList":{
       "type":"list",
@@ -1732,7 +1912,8 @@
     "CoreNetworkArn":{
       "type":"string",
       "max":500,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "CoreNetworkChange":{
       "type":"structure",
@@ -1741,7 +1922,32 @@
         "Action":{"shape":"ChangeAction"},
         "Identifier":{"shape":"ConstrainedString"},
         "PreviousValues":{"shape":"CoreNetworkChangeValues"},
-        "NewValues":{"shape":"CoreNetworkChangeValues"}
+        "NewValues":{"shape":"CoreNetworkChangeValues"},
+        "IdentifierPath":{"shape":"ConstrainedString"}
+      }
+    },
+    "CoreNetworkChangeEvent":{
+      "type":"structure",
+      "members":{
+        "Type":{"shape":"ChangeType"},
+        "Action":{"shape":"ChangeAction"},
+        "IdentifierPath":{"shape":"ConstrainedString"},
+        "EventTime":{"shape":"DateTime"},
+        "Status":{"shape":"ChangeStatus"},
+        "Values":{"shape":"CoreNetworkChangeEventValues"}
+      }
+    },
+    "CoreNetworkChangeEventList":{
+      "type":"list",
+      "member":{"shape":"CoreNetworkChangeEvent"}
+    },
+    "CoreNetworkChangeEventValues":{
+      "type":"structure",
+      "members":{
+        "EdgeLocation":{"shape":"ExternalRegionCode"},
+        "SegmentName":{"shape":"ConstrainedString"},
+        "AttachmentId":{"shape":"AttachmentId"},
+        "Cidr":{"shape":"ConstrainedString"}
       }
     },
     "CoreNetworkChangeList":{
@@ -1801,7 +2007,12 @@
         "LATEST"
       ]
     },
-    "CoreNetworkPolicyDocument":{"type":"string"},
+    "CoreNetworkPolicyDocument":{
+      "type":"string",
+      "max":10000000,
+      "min":0,
+      "pattern":"[\\s\\S]*"
+    },
     "CoreNetworkPolicyError":{
       "type":"structure",
       "required":[
@@ -2095,6 +2306,50 @@
         "SiteToSiteVpnAttachment":{"shape":"SiteToSiteVpnAttachment"}
       }
     },
+    "CreateTransitGatewayPeeringRequest":{
+      "type":"structure",
+      "required":[
+        "CoreNetworkId",
+        "TransitGatewayArn"
+      ],
+      "members":{
+        "CoreNetworkId":{"shape":"CoreNetworkId"},
+        "TransitGatewayArn":{"shape":"TransitGatewayArn"},
+        "Tags":{"shape":"TagList"},
+        "ClientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreateTransitGatewayPeeringResponse":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayPeering":{"shape":"TransitGatewayPeering"}
+      }
+    },
+    "CreateTransitGatewayRouteTableAttachmentRequest":{
+      "type":"structure",
+      "required":[
+        "PeeringId",
+        "TransitGatewayRouteTableArn"
+      ],
+      "members":{
+        "PeeringId":{"shape":"PeeringId"},
+        "TransitGatewayRouteTableArn":{"shape":"TransitGatewayRouteTableArn"},
+        "Tags":{"shape":"TagList"},
+        "ClientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreateTransitGatewayRouteTableAttachmentResponse":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayRouteTableAttachment":{"shape":"TransitGatewayRouteTableAttachment"}
+      }
+    },
     "CreateVpcAttachmentRequest":{
       "type":"structure",
       "required":[
@@ -2123,7 +2378,8 @@
     "CustomerGatewayArn":{
       "type":"string",
       "max":500,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "CustomerGatewayArnList":{
       "type":"list",
@@ -2321,6 +2577,23 @@
         "Link":{"shape":"Link"}
       }
     },
+    "DeletePeeringRequest":{
+      "type":"structure",
+      "required":["PeeringId"],
+      "members":{
+        "PeeringId":{
+          "shape":"PeeringId",
+          "location":"uri",
+          "locationName":"peeringId"
+        }
+      }
+    },
+    "DeletePeeringResponse":{
+      "type":"structure",
+      "members":{
+        "Peering":{"shape":"Peering"}
+      }
+    },
     "DeleteResourcePolicyRequest":{
       "type":"structure",
       "required":["ResourceArn"],
@@ -2436,12 +2709,14 @@
     "DeviceArn":{
       "type":"string",
       "max":500,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "DeviceId":{
       "type":"string",
       "max":50,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "DeviceIdList":{
       "type":"list",
@@ -2600,7 +2875,8 @@
     "ExternalRegionCode":{
       "type":"string",
       "max":63,
-      "min":1
+      "min":1,
+      "pattern":"[\\s\\S]*"
     },
     "ExternalRegionCodeList":{
       "type":"list",
@@ -2727,6 +3003,42 @@
       "type":"structure",
       "members":{
         "Connections":{"shape":"ConnectionList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "GetCoreNetworkChangeEventsRequest":{
+      "type":"structure",
+      "required":[
+        "CoreNetworkId",
+        "PolicyVersionId"
+      ],
+      "members":{
+        "CoreNetworkId":{
+          "shape":"CoreNetworkId",
+          "location":"uri",
+          "locationName":"coreNetworkId"
+        },
+        "PolicyVersionId":{
+          "shape":"Integer",
+          "location":"uri",
+          "locationName":"policyVersionId"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "GetCoreNetworkChangeEventsResponse":{
+      "type":"structure",
+      "members":{
+        "CoreNetworkChangeEvents":{"shape":"CoreNetworkChangeEventList"},
         "NextToken":{"shape":"NextToken"}
       }
     },
@@ -3335,6 +3647,23 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "GetTransitGatewayPeeringRequest":{
+      "type":"structure",
+      "required":["PeeringId"],
+      "members":{
+        "PeeringId":{
+          "shape":"PeeringId",
+          "location":"uri",
+          "locationName":"peeringId"
+        }
+      }
+    },
+    "GetTransitGatewayPeeringResponse":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayPeering":{"shape":"TransitGatewayPeering"}
+      }
+    },
     "GetTransitGatewayRegistrationsRequest":{
       "type":"structure",
       "required":["GlobalNetworkId"],
@@ -3368,6 +3697,23 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "GetTransitGatewayRouteTableAttachmentRequest":{
+      "type":"structure",
+      "required":["AttachmentId"],
+      "members":{
+        "AttachmentId":{
+          "shape":"AttachmentId",
+          "location":"uri",
+          "locationName":"attachmentId"
+        }
+      }
+    },
+    "GetTransitGatewayRouteTableAttachmentResponse":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayRouteTableAttachment":{"shape":"TransitGatewayRouteTableAttachment"}
+      }
+    },
     "GetVpcAttachmentRequest":{
       "type":"structure",
       "required":["AttachmentId"],
@@ -3399,12 +3745,14 @@
     "GlobalNetworkArn":{
       "type":"string",
       "max":500,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "GlobalNetworkId":{
       "type":"string",
       "max":50,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "GlobalNetworkIdList":{
       "type":"list",
@@ -3426,7 +3774,8 @@
     "IPAddress":{
       "type":"string",
       "max":50,
-      "min":1
+      "min":1,
+      "pattern":"[\\s\\S]*"
     },
     "Integer":{"type":"integer"},
     "InternalServerException":{
@@ -3463,7 +3812,8 @@
     "LinkArn":{
       "type":"string",
       "max":500,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "LinkAssociation":{
       "type":"structure",
@@ -3490,7 +3840,8 @@
     "LinkId":{
       "type":"string",
       "max":50,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "LinkIdList":{
       "type":"list",
@@ -3633,6 +3984,70 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "ListOrganizationServiceAccessStatusRequest":{
+      "type":"structure",
+      "members":{
+        "MaxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "ListOrganizationServiceAccessStatusResponse":{
+      "type":"structure",
+      "members":{
+        "OrganizationStatus":{"shape":"OrganizationStatus"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListPeeringsRequest":{
+      "type":"structure",
+      "members":{
+        "CoreNetworkId":{
+          "shape":"CoreNetworkId",
+          "location":"querystring",
+          "locationName":"coreNetworkId"
+        },
+        "PeeringType":{
+          "shape":"PeeringType",
+          "location":"querystring",
+          "locationName":"peeringType"
+        },
+        "EdgeLocation":{
+          "shape":"ExternalRegionCode",
+          "location":"querystring",
+          "locationName":"edgeLocation"
+        },
+        "State":{
+          "shape":"PeeringState",
+          "location":"querystring",
+          "locationName":"state"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "ListPeeringsResponse":{
+      "type":"structure",
+      "members":{
+        "Peerings":{"shape":"PeeringList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
     "ListTagsForResourceRequest":{
       "type":"structure",
       "required":["ResourceArn"],
@@ -3762,7 +4177,28 @@
     "NextToken":{
       "type":"string",
       "max":2048,
+      "min":0,
+      "pattern":"[\\s\\S]*"
+    },
+    "OrganizationAwsServiceAccessStatus":{
+      "type":"string",
+      "max":50,
       "min":0
+    },
+    "OrganizationId":{
+      "type":"string",
+      "max":50,
+      "min":0,
+      "pattern":"^o-([0-9a-f]{8,17})$"
+    },
+    "OrganizationStatus":{
+      "type":"structure",
+      "members":{
+        "OrganizationId":{"shape":"OrganizationId"},
+        "OrganizationAwsServiceAccessStatus":{"shape":"OrganizationAwsServiceAccessStatus"},
+        "SLRDeploymentStatus":{"shape":"SLRDeploymentStatus"},
+        "AccountStatusList":{"shape":"AccountStatusList"}
+      }
     },
     "PathComponent":{
       "type":"structure",
@@ -3775,6 +4211,44 @@
     "PathComponentList":{
       "type":"list",
       "member":{"shape":"PathComponent"}
+    },
+    "Peering":{
+      "type":"structure",
+      "members":{
+        "CoreNetworkId":{"shape":"CoreNetworkId"},
+        "CoreNetworkArn":{"shape":"CoreNetworkArn"},
+        "PeeringId":{"shape":"PeeringId"},
+        "OwnerAccountId":{"shape":"AWSAccountId"},
+        "PeeringType":{"shape":"PeeringType"},
+        "State":{"shape":"PeeringState"},
+        "EdgeLocation":{"shape":"ExternalRegionCode"},
+        "ResourceArn":{"shape":"ResourceArn"},
+        "Tags":{"shape":"TagList"},
+        "CreatedAt":{"shape":"DateTime"}
+      }
+    },
+    "PeeringId":{
+      "type":"string",
+      "max":50,
+      "min":0,
+      "pattern":"^peering-([0-9a-f]{8,17})$"
+    },
+    "PeeringList":{
+      "type":"list",
+      "member":{"shape":"Peering"}
+    },
+    "PeeringState":{
+      "type":"string",
+      "enum":[
+        "CREATING",
+        "FAILED",
+        "AVAILABLE",
+        "DELETING"
+      ]
+    },
+    "PeeringType":{
+      "type":"string",
+      "enum":["TRANSIT_GATEWAY"]
     },
     "ProposedSegmentChange":{
       "type":"structure",
@@ -3837,13 +4311,23 @@
       "members":{
       }
     },
-    "ReasonContextKey":{"type":"string"},
+    "ReasonContextKey":{
+      "type":"string",
+      "max":10000000,
+      "min":0,
+      "pattern":"[\\s\\S]*"
+    },
     "ReasonContextMap":{
       "type":"map",
       "key":{"shape":"ReasonContextKey"},
       "value":{"shape":"ReasonContextValue"}
     },
-    "ReasonContextValue":{"type":"string"},
+    "ReasonContextValue":{
+      "type":"string",
+      "max":10000000,
+      "min":0,
+      "pattern":"[\\s\\S]*"
+    },
     "RegisterTransitGatewayRequest":{
       "type":"structure",
       "required":[
@@ -3896,7 +4380,8 @@
     "ResourceArn":{
       "type":"string",
       "max":1500,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "ResourceNotFoundException":{
       "type":"structure",
@@ -3914,7 +4399,12 @@
       "error":{"httpStatusCode":404},
       "exception":true
     },
-    "ResourcePolicyDocument":{"type":"string"},
+    "ResourcePolicyDocument":{
+      "type":"string",
+      "max":10000000,
+      "min":0,
+      "pattern":"[\\s\\S]*"
+    },
     "RestoreCoreNetworkPolicyVersionRequest":{
       "type":"structure",
       "required":[
@@ -4054,7 +4544,17 @@
       "type":"list",
       "member":{"shape":"RouteType"}
     },
-    "ServerSideString":{"type":"string"},
+    "SLRDeploymentStatus":{
+      "type":"string",
+      "max":50,
+      "min":0
+    },
+    "ServerSideString":{
+      "type":"string",
+      "max":10000000,
+      "min":0,
+      "pattern":"[\\s\\S]*"
+    },
     "ServiceQuotaExceededException":{
       "type":"structure",
       "required":[
@@ -4088,12 +4588,14 @@
     "SiteArn":{
       "type":"string",
       "max":500,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "SiteId":{
       "type":"string",
       "max":50,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "SiteIdList":{
       "type":"list",
@@ -4117,6 +4619,19 @@
       "members":{
         "Attachment":{"shape":"Attachment"},
         "VpnConnectionArn":{"shape":"VpnConnectionArn"}
+      }
+    },
+    "StartOrganizationServiceAccessUpdateRequest":{
+      "type":"structure",
+      "required":["Action"],
+      "members":{
+        "Action":{"shape":"Action"}
+      }
+    },
+    "StartOrganizationServiceAccessUpdateResponse":{
+      "type":"structure",
+      "members":{
+        "OrganizationStatus":{"shape":"OrganizationStatus"}
       }
     },
     "StartRouteAnalysisRequest":{
@@ -4148,7 +4663,7 @@
       "type":"string",
       "max":500,
       "min":0,
-      "pattern":"^arn:[^:]{1,63}:ec2:[^:]{0,63}:[^:]{0,63}:subnet\\/subnet-[0-9a-f]{8,17}$"
+      "pattern":"^arn:[^:]{1,63}:ec2:[^:]{0,63}:[^:]{0,63}:subnet\\/subnet-[0-9a-f]{8,17}$|^$"
     },
     "SubnetArnList":{
       "type":"list",
@@ -4161,7 +4676,12 @@
         "Value":{"shape":"TagValue"}
       }
     },
-    "TagKey":{"type":"string"},
+    "TagKey":{
+      "type":"string",
+      "max":10000000,
+      "min":0,
+      "pattern":"[\\s\\S]*"
+    },
     "TagKeyList":{
       "type":"list",
       "member":{"shape":"TagKey"}
@@ -4190,7 +4710,12 @@
       "members":{
       }
     },
-    "TagValue":{"type":"string"},
+    "TagValue":{
+      "type":"string",
+      "max":10000000,
+      "min":0,
+      "pattern":"[\\s\\S]*"
+    },
     "ThrottlingException":{
       "type":"structure",
       "required":["Message"],
@@ -4208,7 +4733,8 @@
     "TransitGatewayArn":{
       "type":"string",
       "max":500,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "TransitGatewayArnList":{
       "type":"list",
@@ -4217,17 +4743,20 @@
     "TransitGatewayAttachmentArn":{
       "type":"string",
       "max":500,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "TransitGatewayAttachmentId":{
       "type":"string",
       "max":50,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "TransitGatewayConnectPeerArn":{
       "type":"string",
       "max":500,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
     },
     "TransitGatewayConnectPeerArnList":{
       "type":"list",
@@ -4255,6 +4784,20 @@
         "DELETING",
         "DELETED"
       ]
+    },
+    "TransitGatewayPeering":{
+      "type":"structure",
+      "members":{
+        "Peering":{"shape":"Peering"},
+        "TransitGatewayArn":{"shape":"TransitGatewayArn"},
+        "TransitGatewayPeeringAttachmentId":{"shape":"TransitGatewayPeeringAttachmentId"}
+      }
+    },
+    "TransitGatewayPeeringAttachmentId":{
+      "type":"string",
+      "max":50,
+      "min":0,
+      "pattern":"^tgw-attach-([0-9a-f]{8,17})$"
     },
     "TransitGatewayRegistration":{
       "type":"structure",
@@ -4288,7 +4831,16 @@
     "TransitGatewayRouteTableArn":{
       "type":"string",
       "max":500,
-      "min":0
+      "min":0,
+      "pattern":"[\\s\\S]*"
+    },
+    "TransitGatewayRouteTableAttachment":{
+      "type":"structure",
+      "members":{
+        "Attachment":{"shape":"Attachment"},
+        "PeeringId":{"shape":"PeeringId"},
+        "TransitGatewayRouteTableArn":{"shape":"TransitGatewayRouteTableArn"}
+      }
     },
     "TunnelProtocol":{
       "type":"string",

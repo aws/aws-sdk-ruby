@@ -3,25 +3,20 @@
 require 'set'
 
 module Aws
-
-  # An auto-refreshing credential provider that works by assuming
-  # a role via {Aws::STS::Client#assume_role}.
+  # An auto-refreshing credential provider that assumes a role via
+  # {Aws::STS::Client#assume_role}.
   #
   #     role_credentials = Aws::AssumeRoleCredentials.new(
   #       client: Aws::STS::Client.new(...),
   #       role_arn: "linked::account::arn",
   #       role_session_name: "session-name"
   #     )
-  #
   #     ec2 = Aws::EC2::Client.new(credentials: role_credentials)
   #
-  # If you omit `:client` option, a new {STS::Client} object will be
-  # constructed.
+  # If you omit `:client` option, a new {Aws::STS::Client} object will be
+  # constructed with additional options that were provided.
   #
-  # The AssumeRoleCredentials also provides a `before_refresh` callback
-  # that can be used to help manage refreshing tokens.
-  # `before_refresh` is called when AWS credentials are required and need
-  # to be refreshed and it is called with the AssumeRoleCredentials object.
+  # @see Aws::STS::Client#assume_role
   class AssumeRoleCredentials
 
     include CredentialProvider
@@ -49,7 +44,7 @@ module Aws
       options.each_pair do |key, value|
         if self.class.assume_role_options.include?(key)
           @assume_role_params[key] = value
-        else
+        elsif !CLIENT_EXCLUDE_OPTIONS.include?(key)
           client_opts[key] = value
         end
       end

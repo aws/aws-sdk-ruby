@@ -1087,13 +1087,21 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] paths
-    #   (Optional) The path or paths on the Amazon FSx file system to use
-    #   when the data repository task is processed. The default path is the
-    #   file system root directory. The paths you provide need to be
-    #   relative to the mount point of the file system. If the mount point
-    #   is `/mnt/fsx` and `/mnt/fsx/path1` is a directory or file on the
-    #   file system you want to export, then the path to provide is `path1`.
-    #   If a path that you provide isn't valid, the task fails.
+    #   A list of paths for the data repository task to use when the task is
+    #   processed. If a path that you provide isn't valid, the task fails.
+    #
+    #   * For export tasks, the list contains paths on the Amazon FSx file
+    #     system from which the files are exported to the Amazon S3 bucket.
+    #     The default path is the file system root directory. The paths you
+    #     provide need to be relative to the mount point of the file system.
+    #     If the mount point is `/mnt/fsx` and `/mnt/fsx/path1` is a
+    #     directory or file on the file system you want to export, then the
+    #     path to provide is `path1`.
+    #
+    #   * For import tasks, the list contains paths in the Amazon S3 bucket
+    #     from which POSIX metadata changes are imported to the Amazon FSx
+    #     file system. The path can be an S3 bucket or prefix in the format
+    #     `s3://myBucket/myPrefix` (where `myPrefix` is optional).
     #   @return [Array<String>]
     #
     # @!attribute [rw] file_system_id
@@ -1207,6 +1215,10 @@ module Aws::FSx
     #           log_configuration: {
     #             level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
     #             destination: "GeneralARN",
+    #           },
+    #           root_squash_configuration: {
+    #             root_squash: "LustreRootSquash",
+    #             no_squash_nids: ["LustreNoSquashNid"],
     #           },
     #         },
     #         storage_type: "SSD", # accepts SSD, HDD
@@ -1446,6 +1458,10 @@ module Aws::FSx
     #         log_configuration: {
     #           level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
     #           destination: "GeneralARN",
+    #         },
+    #         root_squash_configuration: {
+    #           root_squash: "LustreRootSquash",
+    #           no_squash_nids: ["LustreNoSquashNid"],
     #         },
     #       }
     #
@@ -1693,6 +1709,13 @@ module Aws::FSx
     #   system to Amazon CloudWatch Logs.
     #   @return [Types::LustreLogCreateConfiguration]
     #
+    # @!attribute [rw] root_squash_configuration
+    #   The Lustre root squash configuration used when creating an Amazon
+    #   FSx for Lustre file system. When enabled, root squash restricts
+    #   root-level access from clients that try to access your file system
+    #   as a root user.
+    #   @return [Types::LustreRootSquashConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreConfiguration AWS API Documentation
     #
     class CreateFileSystemLustreConfiguration < Struct.new(
@@ -1708,7 +1731,8 @@ module Aws::FSx
       :copy_tags_to_backups,
       :drive_cache_type,
       :data_compression_type,
-      :log_configuration)
+      :log_configuration,
+      :root_squash_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1758,12 +1782,11 @@ module Aws::FSx
     #   * `SINGLE_AZ_1` - A file system configured for Single-AZ redundancy.
     #
     #   For information about the use cases for Multi-AZ and Single-AZ
-    #   deployments, refer to [Choosing Multi-AZ or Single-AZ file system
-    #   deployment][1].
+    #   deployments, refer to [Choosing a file system deployment type][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-AZ.html
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ip_address_range
@@ -1901,13 +1924,13 @@ module Aws::FSx
     #   @return [Boolean]
     #
     # @!attribute [rw] copy_tags_to_volumes
-    #   A Boolean value indicating whether tags for the volume should be
-    #   copied to snapshots. This value defaults to `false`. If it's set to
-    #   `true`, all tags for the volume are copied to snapshots where the
-    #   user doesn't specify tags. If this value is `true`, and you specify
-    #   one or more tags, only the specified tags are copied to snapshots.
-    #   If you specify one or more tags when creating the snapshot, no tags
-    #   are copied from the volume, regardless of this value.
+    #   A Boolean value indicating whether tags for the file system should
+    #   be copied to volumes. This value defaults to `false`. If it's set
+    #   to `true`, all tags for the file system are copied to volumes where
+    #   the user doesn't specify tags. If this value is `true`, and you
+    #   specify one or more tags, only the specified tags are copied to
+    #   volumes. If you specify one or more tags when creating the volume,
+    #   no tags are copied from the file system, regardless of this value.
     #   @return [Boolean]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -2036,6 +2059,10 @@ module Aws::FSx
     #           log_configuration: {
     #             level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
     #             destination: "GeneralARN",
+    #           },
+    #           root_squash_configuration: {
+    #             root_squash: "LustreRootSquash",
+    #             no_squash_nids: ["LustreNoSquashNid"],
     #           },
     #         },
     #         ontap_configuration: {
@@ -5639,8 +5666,8 @@ module Aws::FSx
     #
     # @!attribute [rw] weekly_maintenance_start_time
     #   The preferred start time to perform weekly maintenance, formatted
-    #   d:HH:MM in the UTC time zone. Here, d is the weekday number, from 1
-    #   through 7, beginning with Monday and ending with Sunday.
+    #   d:HH:MM in the UTC time zone. Here, `d` is the weekday number, from
+    #   1 through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
     # @!attribute [rw] data_repository_configuration
@@ -5755,6 +5782,12 @@ module Aws::FSx
     #   log events for your file system to Amazon CloudWatch Logs.
     #   @return [Types::LustreLogConfiguration]
     #
+    # @!attribute [rw] root_squash_configuration
+    #   The Lustre root squash configuration for an Amazon FSx for Lustre
+    #   file system. When enabled, root squash restricts root-level access
+    #   from clients that try to access your file system as a root user.
+    #   @return [Types::LustreRootSquashConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreFileSystemConfiguration AWS API Documentation
     #
     class LustreFileSystemConfiguration < Struct.new(
@@ -5768,7 +5801,8 @@ module Aws::FSx
       :copy_tags_to_backups,
       :drive_cache_type,
       :data_compression_type,
-      :log_configuration)
+      :log_configuration,
+      :root_squash_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5882,6 +5916,68 @@ module Aws::FSx
     class LustreLogCreateConfiguration < Struct.new(
       :level,
       :destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for Lustre root squash used to restrict root-level
+    # access from clients that try to access your FSx for Lustre file system
+    # as root. Use the `RootSquash` parameter to enable root squash. To
+    # learn more about Lustre root squash, see [Lustre root squash][1].
+    #
+    # You can also use the `NoSquashNids` parameter to provide an array of
+    # clients who are not affected by the root squash setting. These clients
+    # will access the file system as root, with unrestricted privileges.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/root-squash.html
+    #
+    # @note When making an API call, you may pass LustreRootSquashConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         root_squash: "LustreRootSquash",
+    #         no_squash_nids: ["LustreNoSquashNid"],
+    #       }
+    #
+    # @!attribute [rw] root_squash
+    #   You enable root squash by setting a user ID (UID) and group ID (GID)
+    #   for the file system in the format `UID:GID` (for example,
+    #   `365534:65534`). The UID and GID values can range from `0` to
+    #   `4294967294`\:
+    #
+    #   * A non-zero value for UID and GID enables root squash. The UID and
+    #     GID values can be different, but each must be a non-zero value.
+    #
+    #   * A value of `0` (zero) for UID and GID indicates root, and
+    #     therefore disables root squash.
+    #
+    #   When root squash is enabled, the user ID and group ID of a root user
+    #   accessing the file system are re-mapped to the UID and GID you
+    #   provide.
+    #   @return [String]
+    #
+    # @!attribute [rw] no_squash_nids
+    #   When root squash is enabled, you can optionally specify an array of
+    #   NIDs of clients for which root squash does not apply. A client NID
+    #   is a Lustre Network Identifier used to uniquely identify a client.
+    #   You can specify the NID as either a single address or a range of
+    #   addresses:
+    #
+    #   * A single address is described in standard Lustre NID format by
+    #     specifying the client’s IP address followed by the Lustre network
+    #     ID (for example, `10.0.1.6@tcp`).
+    #
+    #   * An address range is described using a dash to separate the range
+    #     (for example, `10.0.[2-10].[1-255]@tcp`).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreRootSquashConfiguration AWS API Documentation
+    #
+    class LustreRootSquashConfiguration < Struct.new(
+      :root_squash,
+      :no_squash_nids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7604,6 +7700,10 @@ module Aws::FSx
     #           level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
     #           destination: "GeneralARN",
     #         },
+    #         root_squash_configuration: {
+    #           root_squash: "LustreRootSquash",
+    #           no_squash_nids: ["LustreNoSquashNid"],
+    #         },
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -7681,6 +7781,13 @@ module Aws::FSx
     #   system to Amazon CloudWatch Logs.
     #   @return [Types::LustreLogCreateConfiguration]
     #
+    # @!attribute [rw] root_squash_configuration
+    #   The Lustre root squash configuration used when updating an Amazon
+    #   FSx for Lustre file system. When enabled, root squash restricts
+    #   root-level access from clients that try to access your file system
+    #   as a root user.
+    #   @return [Types::LustreRootSquashConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemLustreConfiguration AWS API Documentation
     #
     class UpdateFileSystemLustreConfiguration < Struct.new(
@@ -7689,7 +7796,8 @@ module Aws::FSx
       :automatic_backup_retention_days,
       :auto_import_policy,
       :data_compression_type,
-      :log_configuration)
+      :log_configuration,
+      :root_squash_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7904,6 +8012,10 @@ module Aws::FSx
     #           log_configuration: {
     #             level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
     #             destination: "GeneralARN",
+    #           },
+    #           root_squash_configuration: {
+    #             root_squash: "LustreRootSquash",
+    #             no_squash_nids: ["LustreNoSquashNid"],
     #           },
     #         },
     #         ontap_configuration: {

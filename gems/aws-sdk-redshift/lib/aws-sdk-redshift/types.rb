@@ -385,13 +385,19 @@ module Aws::Redshift
     #   data as a hash:
     #
     #       {
-    #         snapshot_identifier: "String", # required
+    #         snapshot_identifier: "String",
+    #         snapshot_arn: "String",
     #         snapshot_cluster_identifier: "String",
     #         account_with_restore_access: "String", # required
     #       }
     #
     # @!attribute [rw] snapshot_identifier
     #   The identifier of the snapshot the account is authorized to restore.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot to authorize access
+    #   to.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_cluster_identifier
@@ -413,6 +419,7 @@ module Aws::Redshift
     #
     class AuthorizeSnapshotAccessMessage < Struct.new(
       :snapshot_identifier,
+      :snapshot_arn,
       :snapshot_cluster_identifier,
       :account_with_restore_access)
       SENSITIVE = []
@@ -1001,7 +1008,7 @@ module Aws::Redshift
     #   A database user name that is authorized to log on to the database
     #   `DbName` using the password `DbPassword`. If the specified DbUser
     #   exists in the database, the new user name has the same database
-    #   privileges as the the user named in DbUser. By default, the user is
+    #   permissions as the the user named in DbUser. By default, the user is
     #   added to PUBLIC. If the `DbGroups` parameter is specifed, `DbUser`
     #   is added to the listed groups for any sessions created using these
     #   credentials.
@@ -1074,6 +1081,37 @@ module Aws::Redshift
       :marker,
       :cluster_db_revisions)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_user
+    #   A database user name that you provide when you connect to a
+    #   database. The database user is mapped 1:1 to the source IAM
+    #   identity.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_password
+    #   A temporary password that you provide when you connect to a
+    #   database.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration
+    #   The time (UTC) when the temporary password expires. After this
+    #   timestamp, a log in with the temporary password fails.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_refresh_time
+    #   Reserved for future use.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterExtendedCredentials AWS API Documentation
+    #
+    class ClusterExtendedCredentials < Struct.new(
+      :db_user,
+      :db_password,
+      :expiration,
+      :next_refresh_time)
+      SENSITIVE = [:db_password]
       include Aws::Structure
     end
 
@@ -1880,6 +1918,7 @@ module Aws::Redshift
     #         availability_zone_relocation: false,
     #         aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
     #         default_iam_role_arn: "String",
+    #         load_sample_data: "String",
     #       }
     #
     # @!attribute [rw] db_name
@@ -1991,8 +2030,8 @@ module Aws::Redshift
     #
     #   * Must contain one number.
     #
-    #   * Can be any printable ASCII character (ASCII code 33-126) except '
-    #     (single quote), " (double quote), \\, /, or @.
+    #   * Can be any printable ASCII character (ASCII code 33-126) except
+    #     `'` (single quote), `"` (double quote), ``, `/`, or `@`.
     #   @return [String]
     #
     # @!attribute [rw] cluster_security_groups
@@ -2175,7 +2214,9 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] elastic_ip
-    #   The Elastic IP (EIP) address for the cluster.
+    #   The Elastic IP (EIP) address for the cluster. You don't have to
+    #   specify the EIP for a publicly accessible cluster with
+    #   AvailabilityZoneRelocation turned on.
     #
     #   Constraints: The cluster must be provisioned in EC2-VPC and
     #   publicly-accessible through an Internet gateway. For more
@@ -2265,6 +2306,11 @@ module Aws::Redshift
     #   default for the cluster when the cluster was created.
     #   @return [String]
     #
+    # @!attribute [rw] load_sample_data
+    #   A flag that specifies whether to load sample data once the cluster
+    #   is created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
     #
     class CreateClusterMessage < Struct.new(
@@ -2300,7 +2346,8 @@ module Aws::Redshift
       :snapshot_schedule_identifier,
       :availability_zone_relocation,
       :aqua_configuration_status,
-      :default_iam_role_arn)
+      :default_iam_role_arn,
+      :load_sample_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3252,7 +3299,7 @@ module Aws::Redshift
     #
     # @!attribute [rw] data_share_associations
     #   A value that specifies when the datashare has an association between
-    #   a producer and data consumers.
+    #   producer and data consumers.
     #   @return [Array<Types::DataShareAssociation>]
     #
     # @!attribute [rw] managed_by
@@ -4172,6 +4219,7 @@ module Aws::Redshift
     #       {
     #         cluster_identifier: "String",
     #         snapshot_identifier: "String",
+    #         snapshot_arn: "String",
     #         snapshot_type: "String",
     #         start_time: Time.now,
     #         end_time: Time.now,
@@ -4197,6 +4245,11 @@ module Aws::Redshift
     # @!attribute [rw] snapshot_identifier
     #   The snapshot identifier of the snapshot about which to return
     #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to describe cluster snapshots.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_type
@@ -4310,6 +4363,7 @@ module Aws::Redshift
     class DescribeClusterSnapshotsMessage < Struct.new(
       :cluster_identifier,
       :snapshot_identifier,
+      :snapshot_arn,
       :snapshot_type,
       :start_time,
       :end_time,
@@ -5337,6 +5391,7 @@ module Aws::Redshift
     #         action_type: "restore-cluster", # required, accepts restore-cluster, recommend-node-config, resize-cluster
     #         cluster_identifier: "String",
     #         snapshot_identifier: "String",
+    #         snapshot_arn: "String",
     #         owner_account: "String",
     #         filters: [
     #           {
@@ -5366,6 +5421,11 @@ module Aws::Redshift
     # @!attribute [rw] snapshot_identifier
     #   The identifier of the snapshot to evaluate for possible node
     #   configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to describe node configuration.
     #   @return [String]
     #
     # @!attribute [rw] owner_account
@@ -5406,6 +5466,7 @@ module Aws::Redshift
       :action_type,
       :cluster_identifier,
       :snapshot_identifier,
+      :snapshot_arn,
       :owner_account,
       :filters,
       :marker,
@@ -7031,7 +7092,7 @@ module Aws::Redshift
     #
     # @!attribute [rw] cluster_identifier
     #   The unique identifier of the cluster that contains the database for
-    #   which your are requesting credentials. This parameter is case
+    #   which you are requesting credentials. This parameter is case
     #   sensitive.
     #   @return [String]
     #
@@ -7083,6 +7144,43 @@ module Aws::Redshift
       :duration_seconds,
       :auto_create,
       :db_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetClusterCredentialsWithIAMMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_name: "String",
+    #         cluster_identifier: "String", # required
+    #         duration_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] db_name
+    #   The name of the database for which you are requesting credentials.
+    #   If the database name is specified, the IAM policy must allow access
+    #   to the resource `dbname` for the specified database name. If the
+    #   database name is not specified, access to all databases is allowed.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier of the cluster that contains the database for
+    #   which you are requesting credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration_seconds
+    #   The number of seconds until the returned temporary password expires.
+    #
+    #   Range: 900-3600. Default: 900.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetClusterCredentialsWithIAMMessage AWS API Documentation
+    #
+    class GetClusterCredentialsWithIAMMessage < Struct.new(
+      :db_name,
+      :cluster_identifier,
+      :duration_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8138,8 +8236,8 @@ module Aws::Redshift
     #
     #   * Must contain one number.
     #
-    #   * Can be any printable ASCII character (ASCII code 33-126) except '
-    #     (single quote), " (double quote), \\, /, or @.
+    #   * Can be any printable ASCII character (ASCII code 33-126) except
+    #     `'` (single quote), `"` (double quote), ``, `/`, or `@`.
     #   @return [String]
     #
     # @!attribute [rw] cluster_parameter_group_name
@@ -10098,7 +10196,8 @@ module Aws::Redshift
     #
     #       {
     #         cluster_identifier: "String", # required
-    #         snapshot_identifier: "String", # required
+    #         snapshot_identifier: "String",
+    #         snapshot_arn: "String",
     #         snapshot_cluster_identifier: "String",
     #         port: 1,
     #         availability_zone: "String",
@@ -10154,6 +10253,11 @@ module Aws::Redshift
     #   parameter isn't case sensitive.
     #
     #   Example: `my-snapshot-id`
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to restore from a cluster.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_cluster_identifier
@@ -10217,7 +10321,9 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] elastic_ip
-    #   The elastic IP (EIP) address for the cluster.
+    #   The elastic IP (EIP) address for the cluster. You don't have to
+    #   specify the EIP for a publicly accessible cluster with
+    #   AvailabilityZoneRelocation turned on.
     #   @return [String]
     #
     # @!attribute [rw] cluster_parameter_group_name
@@ -10430,6 +10536,7 @@ module Aws::Redshift
     class RestoreFromClusterSnapshotMessage < Struct.new(
       :cluster_identifier,
       :snapshot_identifier,
+      :snapshot_arn,
       :snapshot_cluster_identifier,
       :port,
       :availability_zone,
@@ -10780,7 +10887,8 @@ module Aws::Redshift
     #   data as a hash:
     #
     #       {
-    #         snapshot_identifier: "String", # required
+    #         snapshot_identifier: "String",
+    #         snapshot_arn: "String",
     #         snapshot_cluster_identifier: "String",
     #         account_with_restore_access: "String", # required
     #       }
@@ -10788,6 +10896,11 @@ module Aws::Redshift
     # @!attribute [rw] snapshot_identifier
     #   The identifier of the snapshot that the account can no longer
     #   access.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot associated with the
+    #   message to revoke access.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_cluster_identifier
@@ -10806,6 +10919,7 @@ module Aws::Redshift
     #
     class RevokeSnapshotAccessMessage < Struct.new(
       :snapshot_identifier,
+      :snapshot_arn,
       :snapshot_cluster_identifier,
       :account_with_restore_access)
       SENSITIVE = []

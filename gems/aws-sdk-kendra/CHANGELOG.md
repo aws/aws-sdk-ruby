@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2022-08-19)
+------------------
+
+* Feature - This release adds support for a new authentication type - Personal Access Token (PAT) for confluence server.
+
+1.56.0 (2022-08-17)
+------------------
+
+* Feature - This release adds Zendesk connector (which allows you to specify Zendesk SAAS platform as data source), Proxy Support for Sharepoint and Confluence Server (which allows you to specify the proxy configuration if proxy is required to connect to your Sharepoint/Confluence Server as data source).
+
+1.55.0 (2022-07-21)
+------------------
+
+* Feature - Amazon Kendra now provides Oauth2 support for SharePoint Online. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html
+
+1.54.0 (2022-07-14)
+------------------
+
+* Feature - This release adds AccessControlConfigurations which allow you to redefine your document level access control without the need for content re-indexing.
+
+1.53.0 (2022-06-30)
+------------------
+
+* Feature - Amazon Kendra now provides a data source connector for alfresco
+
+1.52.0 (2022-06-02)
+------------------
+
+* Feature - Amazon Kendra now provides a data source connector for GitHub. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html
+
+1.51.0 (2022-05-12)
+------------------
+
+* Feature - Amazon Kendra now provides a data source connector for Jira. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html
+
+1.50.0 (2022-05-05)
+------------------
+
+* Feature - AWS Kendra now supports hierarchical facets for a query. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/filtering.html
+
 1.49.0 (2022-04-19)
 ------------------
 

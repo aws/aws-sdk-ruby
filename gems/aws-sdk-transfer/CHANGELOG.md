@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2022-07-26)
+------------------
+
+* Feature - AWS Transfer Family now supports Applicability Statement 2 (AS2), a network protocol used for the secure and reliable transfer of critical Business-to-Business (B2B) data over the public internet using HTTP/HTTPS as the transport mechanism.
+
+1.56.0 (2022-06-22)
+------------------
+
+* Feature - Until today, the service supported only RSA host keys and user keys. Now with this launch, Transfer Family has expanded the support for ECDSA and ED25519 host keys and user keys, enabling customers to support a broader set of clients by choosing RSA, ECDSA, and ED25519 host and user keys.
+
+1.55.0 (2022-05-18)
+------------------
+
+* Feature - AWS Transfer Family now supports SetStat server configuration option, which provides the ability to ignore SetStat command issued by file transfer clients, enabling customers to upload files without any errors.
+
+1.54.0 (2022-05-12)
+------------------
+
+* Feature - AWS Transfer Family now accepts ECDSA keys for server host keys
+
 1.53.0 (2022-04-19)
 ------------------
 

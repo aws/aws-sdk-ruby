@@ -432,6 +432,7 @@ module Aws::PersonalizeRuntime
     #   resp.personalized_ranking #=> Array
     #   resp.personalized_ranking[0].item_id #=> String
     #   resp.personalized_ranking[0].score #=> Float
+    #   resp.personalized_ranking[0].promotion_name #=> String
     #   resp.recommendation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRanking AWS API Documentation
@@ -513,7 +514,8 @@ module Aws::PersonalizeRuntime
     #   Amazon Personalize doesn't use that portion of the expression to
     #   filter recommendations.
     #
-    #   For more information, see [Filtering Recommendations][1].
+    #   For more information, see [Filtering recommendations and user
+    #   segments][1].
     #
     #
     #
@@ -523,6 +525,11 @@ module Aws::PersonalizeRuntime
     #   The Amazon Resource Name (ARN) of the recommender to use to get
     #   recommendations. Provide a recommender ARN if you created a Domain
     #   dataset group with a recommender for a domain use case.
+    #
+    # @option params [Array<Types::Promotion>] :promotions
+    #   The promotions to apply to the recommendation request. A promotion
+    #   defines additional business rules that apply to a configurable subset
+    #   of recommended items.
     #
     # @return [Types::GetRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -544,6 +551,16 @@ module Aws::PersonalizeRuntime
     #       "FilterAttributeName" => "FilterAttributeValue",
     #     },
     #     recommender_arn: "Arn",
+    #     promotions: [
+    #       {
+    #         name: "Name",
+    #         percent_promoted_items: 1,
+    #         filter_arn: "Arn",
+    #         filter_values: {
+    #           "FilterAttributeName" => "FilterAttributeValue",
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -551,6 +568,7 @@ module Aws::PersonalizeRuntime
     #   resp.item_list #=> Array
     #   resp.item_list[0].item_id #=> String
     #   resp.item_list[0].score #=> Float
+    #   resp.item_list[0].promotion_name #=> String
     #   resp.recommendation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendations AWS API Documentation
@@ -575,7 +593,7 @@ module Aws::PersonalizeRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalizeruntime'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -98,6 +98,11 @@ module Aws::Detective
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def resources
+        @data[:resources]
+      end
     end
 
     class TooManyRequestsException < ServiceError
@@ -127,6 +132,16 @@ module Aws::Detective
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def error_code
+        @data[:error_code]
+      end
+
+      # @return [String]
+      def error_code_reason
+        @data[:error_code_reason]
       end
     end
 

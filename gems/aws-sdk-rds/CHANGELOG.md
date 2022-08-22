@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.153.0 (2022-08-17)
+------------------
+
+* Feature - Adds support for Internet Protocol Version 6 (IPv6) for RDS Aurora database clusters.
+
+1.152.0 (2022-08-12)
+------------------
+
+* Feature - Adds support for RDS Custom to DBInstanceClass in ModifyDBInstance
+
+1.151.0 (2022-07-26)
+------------------
+
+* Feature - Adds support for using RDS Proxies with RDS for MariaDB databases.
+
+1.150.0 (2022-07-22)
+------------------
+
+* Feature - This release adds the "ModifyActivityStream" API with support for audit policy state locking and unlocking.
+
+1.149.0 (2022-07-21)
+------------------
+
+* Feature - Adds support for creating an RDS Proxy for an RDS for MariaDB database.
+
+1.148.0 (2022-07-05)
+------------------
+
+* Feature - Adds waiters support for DBCluster.
+
+1.147.0 (2022-07-01)
+------------------
+
+* Feature - Adds support for additional retention periods to Performance Insights.
+
+1.146.0 (2022-05-06)
+------------------
+
+* Feature - Various documentation improvements.
+
+1.145.0 (2022-04-29)
+------------------
+
+* Feature - Feature - Adds support for Internet Protocol Version 6 (IPv6) on RDS database instances.
+
+1.144.0 (2022-04-20)
+------------------
+
+* Feature - Added a new cluster-level attribute to set the capacity range for Aurora Serverless v2 instances.
+
 1.143.0 (2022-04-15)
 ------------------
 

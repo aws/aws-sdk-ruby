@@ -361,7 +361,7 @@ module Aws::SSM
 
     # @!group API Operations
 
-    # Adds or overwrites one or more tags for the specified resource. Tags
+    # Adds or overwrites one or more tags for the specified resource. *Tags*
     # are metadata that you can assign to your automations, documents,
     # managed nodes, maintenance windows, Parameter Store parameters, and
     # patch baselines. Tags enable you to categorize your resources in
@@ -894,6 +894,10 @@ module Aws::SSM
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
     #
+    # @option params [Array<Hash>] :target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps can't be specified together.
+    #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -939,6 +943,11 @@ module Aws::SSM
     #       },
     #     ],
     #     schedule_offset: 1,
+    #     target_maps: [
+    #       {
+    #         "TargetMapKey" => ["TargetMapValue"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -989,6 +998,10 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.target_maps #=> Array
+    #   resp.association_description.target_maps[0] #=> Hash
+    #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation AWS API Documentation
     #
@@ -1062,6 +1075,11 @@ module Aws::SSM
     #           },
     #         ],
     #         schedule_offset: 1,
+    #         target_maps: [
+    #           {
+    #             "TargetMapKey" => ["TargetMapValue"],
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -1115,6 +1133,10 @@ module Aws::SSM
     #   resp.successful[0].target_locations[0].target_location_max_errors #=> String
     #   resp.successful[0].target_locations[0].execution_role_name #=> String
     #   resp.successful[0].schedule_offset #=> Integer
+    #   resp.successful[0].target_maps #=> Array
+    #   resp.successful[0].target_maps[0] #=> Hash
+    #   resp.successful[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.successful[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.failed #=> Array
     #   resp.failed[0].entry.name #=> String
     #   resp.failed[0].entry.instance_id #=> String
@@ -1148,6 +1170,10 @@ module Aws::SSM
     #   resp.failed[0].entry.target_locations[0].target_location_max_errors #=> String
     #   resp.failed[0].entry.target_locations[0].execution_role_name #=> String
     #   resp.failed[0].entry.schedule_offset #=> Integer
+    #   resp.failed[0].entry.target_maps #=> Array
+    #   resp.failed[0].entry.target_maps[0] #=> Hash
+    #   resp.failed[0].entry.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.failed[0].entry.target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.failed[0].message #=> String
     #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
     #
@@ -1228,9 +1254,8 @@ module Aws::SSM
     #
     # @option params [String] :version_name
     #   An optional field specifying the version of the artifact you are
-    #   creating with the document. For example, "Release 12, Update 6".
-    #   This value is unique across all versions of a document, and can't be
-    #   changed.
+    #   creating with the document. For example, `Release12.1`. This value is
+    #   unique across all versions of a document, and can't be changed.
     #
     # @option params [String] :document_type
     #   The type of document to create.
@@ -2641,6 +2666,10 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.target_maps #=> Array
+    #   resp.association_description.target_maps[0] #=> Hash
+    #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation AWS API Documentation
     #
@@ -2878,6 +2907,10 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].runbooks[0].targets[0].key #=> String
     #   resp.automation_execution_metadata_list[0].runbooks[0].targets[0].values #=> Array
     #   resp.automation_execution_metadata_list[0].runbooks[0].targets[0].values[0] #=> String
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_maps #=> Array
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_maps[0] #=> Hash
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.automation_execution_metadata_list[0].runbooks[0].max_concurrency #=> String
     #   resp.automation_execution_metadata_list[0].runbooks[0].max_errors #=> String
     #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations #=> Array
@@ -5136,6 +5169,10 @@ module Aws::SSM
     #   resp.automation_execution.runbooks[0].targets[0].key #=> String
     #   resp.automation_execution.runbooks[0].targets[0].values #=> Array
     #   resp.automation_execution.runbooks[0].targets[0].values[0] #=> String
+    #   resp.automation_execution.runbooks[0].target_maps #=> Array
+    #   resp.automation_execution.runbooks[0].target_maps[0] #=> Hash
+    #   resp.automation_execution.runbooks[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.automation_execution.runbooks[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.automation_execution.runbooks[0].max_concurrency #=> String
     #   resp.automation_execution.runbooks[0].max_errors #=> String
     #   resp.automation_execution.runbooks[0].target_locations #=> Array
@@ -5242,20 +5279,18 @@ module Aws::SSM
     #   Manager.
     #
     # @option params [String] :plugin_name
-    #   The name of the plugin for which you want detailed results. If the
-    #   document contains only one plugin, you can omit the name and details
-    #   for that plugin. If the document contains more than one plugin, you
-    #   must specify the name of the plugin for which you want to view
-    #   details.
-    #
-    #   Plugin names are also referred to as *step names* in Systems Manager
-    #   documents (SSM documents). For example, `aws:RunShellScript` is a
-    #   plugin.
+    #   The name of the step for which you want detailed results. If the
+    #   document contains only one step, you can omit the name and details for
+    #   that step. If the document contains more than one step, you must
+    #   specify the name of the step for which you want to view details. Be
+    #   sure to specify the name of the step, not the name of a plugin like
+    #   `aws:RunShellScript`.
     #
     #   To find the `PluginName`, check the document content and find the name
-    #   of the plugin. Alternatively, use ListCommandInvocations with the
-    #   `CommandId` and `Details` parameters. The `PluginName` is the `Name`
-    #   attribute of the `CommandPlugin` object in the `CommandPlugins` list.
+    #   of the step you want details for. Alternatively, use
+    #   ListCommandInvocations with the `CommandId` and `Details` parameters.
+    #   The `PluginName` is the `Name` attribute of the `CommandPlugin` object
+    #   in the `CommandPlugins` list.
     #
     # @return [Types::GetCommandInvocationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6672,11 +6707,13 @@ module Aws::SSM
     #
     #   * `/ssm/documents/console/public-sharing-permission`
     #
+    #   * `/ssm/managed-instance/activation-tier`
+    #
+    #   * `/ssm/opsinsights/opscenter`
+    #
     #   * `/ssm/parameter-store/default-parameter-tier`
     #
     #   * `/ssm/parameter-store/high-throughput-enabled`
-    #
-    #   * `/ssm/managed-instance/activation-tier`
     #
     # @return [Types::GetServiceSettingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6843,6 +6880,10 @@ module Aws::SSM
     #   resp.association_versions[0].target_locations[0].target_location_max_errors #=> String
     #   resp.association_versions[0].target_locations[0].execution_role_name #=> String
     #   resp.association_versions[0].schedule_offset #=> Integer
+    #   resp.association_versions[0].target_maps #=> Array
+    #   resp.association_versions[0].target_maps[0] #=> Hash
+    #   resp.association_versions[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.association_versions[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions AWS API Documentation
@@ -6920,6 +6961,10 @@ module Aws::SSM
     #   resp.associations[0].schedule_expression #=> String
     #   resp.associations[0].association_name #=> String
     #   resp.associations[0].schedule_offset #=> Integer
+    #   resp.associations[0].target_maps #=> Array
+    #   resp.associations[0].target_maps[0] #=> Hash
+    #   resp.associations[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.associations[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociations AWS API Documentation
@@ -7993,7 +8038,7 @@ module Aws::SSM
     # * Status: The status of the compliance item. For example, `approved`
     #   for patches, or `Failed` for associations.
     #
-    # * Severity: A patch severity. For example, `critical`.
+    # * Severity: A patch severity. For example, `Critical`.
     #
     # * DocumentName: An SSM document name. For example,
     #   `AWS-RunPatchBaseline`.
@@ -8959,11 +9004,13 @@ module Aws::SSM
     #
     #   * `/ssm/documents/console/public-sharing-permission`
     #
+    #   * `/ssm/managed-instance/activation-tier`
+    #
+    #   * `/ssm/opsinsights/opscenter`
+    #
     #   * `/ssm/parameter-store/default-parameter-tier`
     #
     #   * `/ssm/parameter-store/high-throughput-enabled`
-    #
-    #   * `/ssm/managed-instance/activation-tier`
     #
     # @return [Types::ResetServiceSettingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9604,6 +9651,11 @@ module Aws::SSM
     #             values: ["TargetValue"],
     #           },
     #         ],
+    #         target_maps: [
+    #           {
+    #             "TargetMapKey" => ["TargetMapValue"],
+    #           },
+    #         ],
     #         max_concurrency: "MaxConcurrency",
     #         max_errors: "MaxErrors",
     #         target_locations: [
@@ -9664,11 +9716,17 @@ module Aws::SSM
     #   The managed node to connect to for the session.
     #
     # @option params [String] :document_name
-    #   The name of the SSM document to define the parameters and plugin
-    #   settings for the session. For example, `SSM-SessionManagerRunShell`.
-    #   You can call the GetDocument API to verify the document exists before
-    #   attempting to start a session. If no document name is provided, a
-    #   shell to the managed node is launched by default.
+    #   The name of the SSM document you want to use to define the type of
+    #   session, input parameters, or preferences for the session. For
+    #   example, `SSM-SessionManagerRunShell`. You can call the GetDocument
+    #   API to verify the document exists before attempting to start a
+    #   session. If no document name is provided, a shell to the managed node
+    #   is launched by default. For more information, see [Start a session][1]
+    #   in the *Amazon Web Services Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html
     #
     # @option params [String] :reason
     #   The reason for connecting to the instance. This value is included in
@@ -10009,6 +10067,10 @@ module Aws::SSM
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
     #
+    # @option params [Array<Hash>] :target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps can't be specified together.
+    #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -10055,6 +10117,11 @@ module Aws::SSM
     #       },
     #     ],
     #     schedule_offset: 1,
+    #     target_maps: [
+    #       {
+    #         "TargetMapKey" => ["TargetMapValue"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -10105,6 +10172,10 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.target_maps #=> Array
+    #   resp.association_description.target_maps[0] #=> Hash
+    #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation AWS API Documentation
     #
@@ -10197,6 +10268,10 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.target_maps #=> Array
+    #   resp.association_description.target_maps[0] #=> Hash
+    #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus AWS API Documentation
     #
@@ -11503,22 +11578,17 @@ module Aws::SSM
     #
     #   * `/ssm/documents/console/public-sharing-permission`
     #
+    #   * `/ssm/managed-instance/activation-tier`
+    #
+    #   * `/ssm/opsinsights/opscenter`
+    #
     #   * `/ssm/parameter-store/default-parameter-tier`
     #
     #   * `/ssm/parameter-store/high-throughput-enabled`
     #
-    #   * `/ssm/managed-instance/activation-tier`
-    #
     # @option params [required, String] :setting_value
     #   The new value to specify for the service setting. The following list
     #   specifies the available values for each setting.
-    #
-    #   * `/ssm/parameter-store/default-parameter-tier`\: `Standard`,
-    #     `Advanced`, `Intelligent-Tiering`
-    #
-    #   * `/ssm/parameter-store/high-throughput-enabled`\: `true` or `false`
-    #
-    #   * `/ssm/managed-instance/activation-tier`\: `true` or `false`
     #
     #   * `/ssm/automation/customer-script-log-destination`\: `CloudWatch`
     #
@@ -11529,6 +11599,13 @@ module Aws::SSM
     #     `Disable`
     #
     #   * `/ssm/managed-instance/activation-tier`\: `standard` or `advanced`
+    #
+    #   * `/ssm/opsinsights/opscenter`\: `Enabled` or `Disabled`
+    #
+    #   * `/ssm/parameter-store/default-parameter-tier`\: `Standard`,
+    #     `Advanced`, `Intelligent-Tiering`
+    #
+    #   * `/ssm/parameter-store/high-throughput-enabled`\: `true` or `false`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -11561,7 +11638,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.135.0'
+      context[:gem_version] = '1.138.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

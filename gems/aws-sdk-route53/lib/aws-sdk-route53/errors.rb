@@ -27,6 +27,10 @@ module Aws::Route53
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {CidrBlockInUseException}
+  # * {CidrCollectionAlreadyExistsException}
+  # * {CidrCollectionInUseException}
+  # * {CidrCollectionVersionMismatchException}
   # * {ConcurrentModification}
   # * {ConflictingDomainExists}
   # * {ConflictingTypes}
@@ -64,6 +68,8 @@ module Aws::Route53
   # * {LastVPCAssociation}
   # * {LimitsExceeded}
   # * {NoSuchChange}
+  # * {NoSuchCidrCollectionException}
+  # * {NoSuchCidrLocationException}
   # * {NoSuchCloudWatchLogsLogGroup}
   # * {NoSuchDelegationSet}
   # * {NoSuchGeoLocation}
@@ -96,6 +102,66 @@ module Aws::Route53
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class CidrBlockInUseException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::CidrBlockInUseException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class CidrCollectionAlreadyExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::CidrCollectionAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class CidrCollectionInUseException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::CidrCollectionInUseException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class CidrCollectionVersionMismatchException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::CidrCollectionVersionMismatchException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class ConcurrentModification < ServiceError
 
@@ -647,6 +713,36 @@ module Aws::Route53
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Route53::Types::NoSuchChange] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class NoSuchCidrCollectionException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::NoSuchCidrCollectionException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class NoSuchCidrLocationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::NoSuchCidrLocationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2022-05-04)
+------------------
+
+* Feature - This release introduces a new API RotateTunnelAccessToken that allow revoking the existing tokens and generate new tokens
+
 1.20.0 (2022-02-24)
 ------------------
 

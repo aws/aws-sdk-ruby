@@ -278,8 +278,7 @@ module Aws::AuditManager
     # @!attribute [rw] evidence_by_type_configuration_data_count
     #   The number of evidence that falls under the configuration data
     #   category. This evidence is collected from configuration snapshots of
-    #   other Amazon Web Services services such as Amazon EC2, Amazon S3, or
-    #   IAM.
+    #   other Amazon Web Services such as Amazon EC2, Amazon S3, or IAM.
     #   @return [Integer]
     #
     # @!attribute [rw] evidence_by_type_manual_count
@@ -1463,6 +1462,25 @@ module Aws::AuditManager
     # @!attribute [rw] source_keyword
     #   The keyword to search for in CloudTrail logs, Config rules, Security
     #   Hub checks, and Amazon Web Services API names.
+    #
+    #   To learn more about the supported keywords that you can use when
+    #   mapping a control data source, see the following pages in the *Audit
+    #   Manager User Guide*\:
+    #
+    #   * [Config rules supported by Audit Manager][1]
+    #
+    #   * [Security Hub controls supported by Audit Manager][2]
+    #
+    #   * [API calls supported by Audit Manager][3]
+    #
+    #   * [CloudTrail event names supported by Audit Manager][4]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html
+    #   [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html
+    #   [3]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html
+    #   [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html
     #   @return [Types::SourceKeyword]
     #
     # @!attribute [rw] source_frequency
@@ -1747,8 +1765,8 @@ module Aws::AuditManager
     #         },
     #         roles: [ # required
     #           {
-    #             role_type: "PROCESS_OWNER", # accepts PROCESS_OWNER, RESOURCE_OWNER
-    #             role_arn: "IamArn",
+    #             role_type: "PROCESS_OWNER", # required, accepts PROCESS_OWNER, RESOURCE_OWNER
+    #             role_arn: "IamArn", # required
     #           },
     #         ],
     #         framework_id: "UUID", # required
@@ -1858,6 +1876,25 @@ module Aws::AuditManager
     # @!attribute [rw] source_keyword
     #   The keyword to search for in CloudTrail logs, Config rules, Security
     #   Hub checks, and Amazon Web Services API names.
+    #
+    #   To learn more about the supported keywords that you can use when
+    #   mapping a control data source, see the following pages in the *Audit
+    #   Manager User Guide*\:
+    #
+    #   * [Config rules supported by Audit Manager][1]
+    #
+    #   * [Security Hub controls supported by Audit Manager][2]
+    #
+    #   * [API calls supported by Audit Manager][3]
+    #
+    #   * [CloudTrail event names supported by Audit Manager][4]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html
+    #   [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html
+    #   [3]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html
+    #   [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html
     #   @return [Types::SourceKeyword]
     #
     # @!attribute [rw] source_frequency
@@ -4174,8 +4211,8 @@ module Aws::AuditManager
     #   data as a hash:
     #
     #       {
-    #         role_type: "PROCESS_OWNER", # accepts PROCESS_OWNER, RESOURCE_OWNER
-    #         role_arn: "IamArn",
+    #         role_type: "PROCESS_OWNER", # required, accepts PROCESS_OWNER, RESOURCE_OWNER
+    #         role_arn: "IamArn", # required
     #       }
     #
     # @!attribute [rw] role_type
@@ -4274,6 +4311,28 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
+    # You've reached your account quota for this resource type. To perform
+    # the requested action, delete some existing resources or [request a
+    # quota increase][1] from the Service Quotas console. For a list of
+    # Audit Manager service quotas, see [Quotas and restrictions for Audit
+    # Manager][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+    # [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The settings object that holds all supported Audit Manager settings.
     #
     # @!attribute [rw] is_aws_org_enabled
@@ -4312,6 +4371,25 @@ module Aws::AuditManager
     # The keyword to search for in CloudTrail logs, Config rules, Security
     # Hub checks, and Amazon Web Services API names.
     #
+    # To learn more about the supported keywords that you can use when
+    # mapping a control data source, see the following pages in the *Audit
+    # Manager User Guide*\:
+    #
+    # * [Config rules supported by Audit Manager][1]
+    #
+    # * [Security Hub controls supported by Audit Manager][2]
+    #
+    # * [API calls supported by Audit Manager][3]
+    #
+    # * [CloudTrail event names supported by Audit Manager][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html
+    # [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html
+    # [3]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html
+    # [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html
+    #
     # @note When making an API call, you may pass SourceKeyword
     #   data as a hash:
     #
@@ -4321,13 +4399,61 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] keyword_input_type
-    #   The method of input for the keyword.
+    #   The input method for the keyword.
     #   @return [String]
     #
     # @!attribute [rw] keyword_value
-    #   The value of the keyword that's used to search CloudTrail logs,
-    #   Config rules, Security Hub checks, and Amazon Web Services API names
-    #   when mapping a control data source.
+    #   The value of the keyword that's used when mapping a control data
+    #   source. For example, this can be a CloudTrail event name, a rule
+    #   name for Config, a Security Hub control, or the name of an Amazon
+    #   Web Services API call.
+    #
+    #   If you’re mapping a data source to a rule in Config, the
+    #   `keywordValue` that you specify depends on the type of rule:
+    #
+    #   * For [managed rules][1], you can use the rule identifier as the
+    #     `keywordValue`. You can find the rule identifier from the [list of
+    #     Config managed rules][2].
+    #
+    #     * Managed rule name: [s3-bucket-acl-prohibited][3]
+    #
+    #       `keywordValue`\: `S3_BUCKET_ACL_PROHIBITED`
+    #
+    #   * For [custom rules][4], you form the `keywordValue` by adding the
+    #     `Custom_` prefix to the rule name. This prefix distinguishes the
+    #     rule from a managed rule.
+    #
+    #     * Custom rule name: my-custom-config-rule
+    #
+    #       `keywordValue`\: `Custom_my-custom-config-rule`
+    #
+    #   * For [service-linked rules][5], you form the `keywordValue` by
+    #     adding the `Custom_` prefix to the rule name. In addition, you
+    #     remove the suffix ID that appears at the end of the rule name.
+    #
+    #     * Service-linked rule name:
+    #       CustomRuleForAccount-conformance-pack-szsm1uv0w
+    #
+    #       `keywordValue`\: `Custom_CustomRuleForAccount-conformance-pack`
+    #
+    #     * Service-linked rule name:
+    #       securityhub-api-gw-cache-encrypted-101104e1
+    #
+    #       `keywordValue`\: `Custom_securityhub-api-gw-cache-encrypted`
+    #
+    #     * Service-linked rule name:
+    #       OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba
+    #
+    #       `keywordValue`\:
+    #       `Custom_OrgConfigRule-s3-bucket-versioning-enabled`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html
+    #   [2]: https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html
+    #   [3]: https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html
+    #   [4]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html
+    #   [5]: https://docs.aws.amazon.com/config/latest/developerguide/service-linked-awsconfig-rules.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/SourceKeyword AWS API Documentation
@@ -4419,6 +4545,19 @@ module Aws::AuditManager
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The request was denied due to request throttling.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Short for uniform resource locator. A URL is used as a unique
     # identifier to locate a resource on the internet.
@@ -4751,8 +4890,8 @@ module Aws::AuditManager
     #         },
     #         roles: [
     #           {
-    #             role_type: "PROCESS_OWNER", # accepts PROCESS_OWNER, RESOURCE_OWNER
-    #             role_arn: "IamArn",
+    #             role_type: "PROCESS_OWNER", # required, accepts PROCESS_OWNER, RESOURCE_OWNER
+    #             role_arn: "IamArn", # required
     #           },
     #         ],
     #       }
@@ -4940,8 +5079,8 @@ module Aws::AuditManager
     #         },
     #         default_process_owners: [
     #           {
-    #             role_type: "PROCESS_OWNER", # accepts PROCESS_OWNER, RESOURCE_OWNER
-    #             role_arn: "IamArn",
+    #             role_type: "PROCESS_OWNER", # required, accepts PROCESS_OWNER, RESOURCE_OWNER
+    #             role_arn: "IamArn", # required
     #           },
     #         ],
     #         kms_key: "KmsKey",

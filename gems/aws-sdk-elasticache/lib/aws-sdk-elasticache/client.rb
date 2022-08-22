@@ -715,6 +715,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
+    #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigration AWS API Documentation
     #
@@ -1080,7 +1081,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are still
+    #       supported but creation of new clusters is not supported for these
+    #       types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -1092,7 +1095,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are still
+    #       supported but creation of new clusters is not supported for these
+    #       types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -1119,7 +1124,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are still
+    #       supported but creation of new clusters is not supported for these
+    #       types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -1304,6 +1311,15 @@ module Aws::ElastiCache
     # @option params [Array<Types::LogDeliveryConfigurationRequest>] :log_delivery_configurations
     #   Specifies the destination, format and type of the logs.
     #
+    # @option params [Boolean] :transit_encryption_enabled
+    #   A flag that enables in-transit encryption when set to true. You cannot
+    #   modify the value of `TransitEncryptionEnabled` after the cluster is
+    #   created. To enable in-transit encryption on a cluster you must set
+    #   `TransitEncryptionEnabled` to true when you create a cluster.
+    #
+    #   **Required:** Only available when creating a cache cluster in an
+    #   Amazon VPC using Memcached version `1.6.12` or later.
+    #
     # @return [Types::CreateCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCacheClusterResult#cache_cluster #cache_cluster} => Types::CacheCluster
@@ -1447,6 +1463,7 @@ module Aws::ElastiCache
     #         enabled: false,
     #       },
     #     ],
+    #     transit_encryption_enabled: false,
     #   })
     #
     # @example Response structure
@@ -2081,7 +2098,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are still
+    #       supported but creation of new clusters is not supported for these
+    #       types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -2093,7 +2112,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are still
+    #       supported but creation of new clusters is not supported for these
+    #       types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -2130,7 +2151,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are still
+    #       supported but creation of new clusters is not supported for these
+    #       types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -2615,6 +2638,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
+    #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup AWS API Documentation
     #
@@ -3208,6 +3232,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
+    #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseReplicaCount AWS API Documentation
     #
@@ -3697,6 +3722,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
+    #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup AWS API Documentation
     #
@@ -6312,6 +6338,7 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].log_delivery_configurations[0].message #=> String
     #   resp.replication_groups[0].replication_group_create_time #=> Time
     #   resp.replication_groups[0].data_tiering #=> String, one of "enabled", "disabled"
+    #   resp.replication_groups[0].auto_minor_version_upgrade #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -6379,7 +6406,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are still
+    #       supported but creation of new clusters is not supported for these
+    #       types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -6391,7 +6420,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are still
+    #       supported but creation of new clusters is not supported for these
+    #       types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -6428,7 +6459,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are still
+    #       supported but creation of new clusters is not supported for these
+    #       types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -6595,7 +6628,9 @@ module Aws::ElastiCache
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are still
+    #       supported but creation of new clusters is not supported for these
+    #       types.)
     #
     #       **T1 node types:** `cache.t1.micro`
     #
@@ -6607,7 +6642,9 @@ module Aws::ElastiCache
     #
     #   * Compute optimized:
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are still
+    #       supported but creation of new clusters is not supported for these
+    #       types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
@@ -6644,7 +6681,9 @@ module Aws::ElastiCache
     #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
     #       `cache.r4.16xlarge`
     #
-    #     * Previous generation: (not recommended)
+    #     * Previous generation: (not recommended. Existing clusters are still
+    #       supported but creation of new clusters is not supported for these
+    #       types.)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
@@ -7839,6 +7878,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
+    #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseReplicaCount AWS API Documentation
     #
@@ -9141,6 +9181,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
+    #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup AWS API Documentation
     #
@@ -9285,6 +9326,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
+    #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfiguration AWS API Documentation
     #
@@ -10034,6 +10076,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
+    #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigration AWS API Documentation
     #
@@ -10192,6 +10235,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
+    #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover AWS API Documentation
     #
@@ -10215,7 +10259,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

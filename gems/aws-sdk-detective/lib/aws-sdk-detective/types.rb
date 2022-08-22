@@ -89,6 +89,89 @@ module Aws::Detective
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchGetGraphMemberDatasourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         graph_arn: "GraphArn", # required
+    #         account_ids: ["AccountId"], # required
+    #       }
+    #
+    # @!attribute [rw] graph_arn
+    #   The ARN of the behavior graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_ids
+    #   The list of Amazon Web Services accounts to get data source package
+    #   information on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/BatchGetGraphMemberDatasourcesRequest AWS API Documentation
+    #
+    class BatchGetGraphMemberDatasourcesRequest < Struct.new(
+      :graph_arn,
+      :account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] member_datasources
+    #   Details on the status of data source packages for members of the
+    #   behavior graph.
+    #   @return [Array<Types::MembershipDatasources>]
+    #
+    # @!attribute [rw] unprocessed_accounts
+    #   Accounts that data source package information could not be retrieved
+    #   for.
+    #   @return [Array<Types::UnprocessedAccount>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/BatchGetGraphMemberDatasourcesResponse AWS API Documentation
+    #
+    class BatchGetGraphMemberDatasourcesResponse < Struct.new(
+      :member_datasources,
+      :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchGetMembershipDatasourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         graph_arns: ["GraphArn"], # required
+    #       }
+    #
+    # @!attribute [rw] graph_arns
+    #   The ARN of the behavior graph.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/BatchGetMembershipDatasourcesRequest AWS API Documentation
+    #
+    class BatchGetMembershipDatasourcesRequest < Struct.new(
+      :graph_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_datasources
+    #   Details on the data source package history for an member of the
+    #   behavior graph.
+    #   @return [Array<Types::MembershipDatasources>]
+    #
+    # @!attribute [rw] unprocessed_graphs
+    #   Graphs that data source package information could not be retrieved
+    #   for.
+    #   @return [Array<Types::UnprocessedGraph>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/BatchGetMembershipDatasourcesResponse AWS API Documentation
+    #
+    class BatchGetMembershipDatasourcesResponse < Struct.new(
+      :membership_datasources,
+      :unprocessed_graphs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request attempted an invalid action.
     #
     # @!attribute [rw] message
@@ -211,6 +294,50 @@ module Aws::Detective
     class CreateMembersResponse < Struct.new(
       :members,
       :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the data source packages ingested by your behavior
+    # graph.
+    #
+    # @!attribute [rw] datasource_package_ingest_state
+    #   Details on which data source packages are ingested for a member
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_ingest_state_change
+    #   The date a data source package was enabled for this account
+    #   @return [Hash<String,Types::TimestampForCollection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/DatasourcePackageIngestDetail AWS API Documentation
+    #
+    class DatasourcePackageIngestDetail < Struct.new(
+      :datasource_package_ingest_state,
+      :last_ingest_state_change)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information on the usage of a data source package in the behavior
+    # graph.
+    #
+    # @!attribute [rw] volume_usage_in_bytes
+    #   Total volume of data in bytes per day ingested for a given data
+    #   source package.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_usage_update_time
+    #   The data and time when the member account data volume was last
+    #   updated. The value is an ISO8601 formatted string. For example,
+    #   `2021-08-18T16:35:56.284Z`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/DatasourcePackageUsageInfo AWS API Documentation
+    #
+    class DatasourcePackageUsageInfo < Struct.new(
+      :volume_usage_in_bytes,
+      :volume_usage_update_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -445,6 +572,58 @@ module Aws::Detective
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListDatasourcePackagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         graph_arn: "GraphArn", # required
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] graph_arn
+    #   The ARN of the behavior graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   For requests to get the next page of results, the pagination token
+    #   that was returned with the previous set of results. The initial
+    #   request does not include a pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListDatasourcePackagesRequest AWS API Documentation
+    #
+    class ListDatasourcePackagesRequest < Struct.new(
+      :graph_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] datasource_packages
+    #   Details on the data source packages active in the behavior graph.
+    #   @return [Hash<String,Types::DatasourcePackageIngestDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   For requests to get the next page of results, the pagination token
+    #   that was returned with the previous set of results. The initial
+    #   request does not include a pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListDatasourcePackagesResponse AWS API Documentation
+    #
+    class ListDatasourcePackagesResponse < Struct.new(
+      :datasource_packages,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListGraphsRequest
     #   data as a hash:
     #
@@ -634,7 +813,7 @@ module Aws::Detective
     end
 
     # @!attribute [rw] administrators
-    #   The list of delegated administrator accounts.
+    #   The list of Detective administrator accounts.
     #   @return [Array<Types::Administrator>]
     #
     # @!attribute [rw] next_token
@@ -816,6 +995,15 @@ module Aws::Detective
     #   `INVITATION`.
     #   @return [String]
     #
+    # @!attribute [rw] volume_usage_by_datasource_package
+    #   Details on the volume of usage for each data source package in a
+    #   behavior graph.
+    #   @return [Hash<String,Types::DatasourcePackageUsageInfo>]
+    #
+    # @!attribute [rw] datasource_package_ingest_states
+    #   The state of a data source package for the behavior graph.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/MemberDetail AWS API Documentation
     #
     class MemberDetail < Struct.new(
@@ -832,7 +1020,33 @@ module Aws::Detective
       :volume_usage_updated_time,
       :percent_of_graph_utilization,
       :percent_of_graph_utilization_updated_time,
-      :invitation_type)
+      :invitation_type,
+      :volume_usage_by_datasource_package,
+      :datasource_package_ingest_states)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details on data source packages for members of the behavior graph.
+    #
+    # @!attribute [rw] account_id
+    #   The account identifier of the Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] graph_arn
+    #   The ARN of the organization behavior graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] datasource_package_ingest_history
+    #   Details on when a data source package was added to a behavior graph.
+    #   @return [Hash<String,Hash<String,Types::TimestampForCollection>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/MembershipDatasources AWS API Documentation
+    #
+    class MembershipDatasources < Struct.new(
+      :account_id,
+      :graph_arn,
+      :datasource_package_ingest_history)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -888,10 +1102,15 @@ module Aws::Detective
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] resources
+    #   The type of resource that has exceeded the service quota.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ServiceQuotaExceededException AWS API Documentation
     #
     class ServiceQuotaExceededException < Struct.new(
-      :message)
+      :message,
+      :resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -958,6 +1177,22 @@ module Aws::Detective
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # Details on when data collection began for a source package.
+    #
+    # @!attribute [rw] timestamp
+    #   The data and time when data collection began for a source package.
+    #   The value is an ISO8601 formatted string. For example,
+    #   `2021-08-18T16:35:56.284Z`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/TimestampForCollection AWS API Documentation
+    #
+    class TimestampForCollection < Struct.new(
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request cannot be completed because too many other requests are
     # occurring at the same time.
     #
@@ -993,6 +1228,26 @@ module Aws::Detective
       include Aws::Structure
     end
 
+    # Behavior graphs that could not be processed in the request.
+    #
+    # @!attribute [rw] graph_arn
+    #   The ARN of the organization behavior graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason data source package information could not be processed
+    #   for a behavior graph.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/UnprocessedGraph AWS API Documentation
+    #
+    class UnprocessedGraph < Struct.new(
+      :graph_arn,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -1022,6 +1277,31 @@ module Aws::Detective
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateDatasourcePackagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         graph_arn: "GraphArn", # required
+    #         datasource_packages: ["DETECTIVE_CORE"], # required, accepts DETECTIVE_CORE, EKS_AUDIT
+    #       }
+    #
+    # @!attribute [rw] graph_arn
+    #   The ARN of the behavior graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] datasource_packages
+    #   The data source package start for the behavior graph.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/UpdateDatasourcePackagesRequest AWS API Documentation
+    #
+    class UpdateDatasourcePackagesRequest < Struct.new(
+      :graph_arn,
+      :datasource_packages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateOrganizationConfigurationRequest
     #   data as a hash:
@@ -1054,10 +1334,20 @@ module Aws::Detective
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] error_code
+    #   The error code associated with the validation failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code_reason
+    #   An explanation of why validation failed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :message)
+      :message,
+      :error_code,
+      :error_code_reason)
       SENSITIVE = []
       include Aws::Structure
     end

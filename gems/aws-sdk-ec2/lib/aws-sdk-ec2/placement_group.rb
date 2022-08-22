@@ -72,6 +72,13 @@ module Aws::EC2
       data[:group_arn]
     end
 
+    # The spread level for the placement group. *Only* Outpost placement
+    # groups can be spread across hosts.
+    # @return [String]
+    def spread_level
+      data[:spread_level]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -264,6 +271,9 @@ module Aws::EC2
     #     (`attaching` \| `attached` \| `detaching` \| `detached`).
     #
     #   * `block-device-mapping.volume-id` - The volume ID of the EBS volume.
+    #
+    #   * `capacity-reservation-id` - The ID of the Capacity Reservation into
+    #     which the instance was launched.
     #
     #   * `client-token` - The idempotency token you provided when you
     #     launched the instance.

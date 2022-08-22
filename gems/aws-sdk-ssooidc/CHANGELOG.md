@@ -1,9 +1,15 @@
 Unreleased Changes
 ------------------
 
-1.20.0 (2022-04-20)
+1.21.0 (2022-08-22)
 ------------------
 * Feature - `aws-sdk-ssooidc` has been moved into `aws-sdk-core`.
+
+
+1.20.0 (2022-08-08)
+------------------
+
+* Feature - Documentation updates to reflect service rename - AWS IAM Identity Center (successor to AWS Single Sign-On)
 
 1.19.0 (2022-02-24)
 ------------------

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2022-08-16)
+------------------
+
+* Feature - Documentation updates for Service Catalog
+
+1.71.0 (2022-05-16)
+------------------
+
+* Feature - Updated the descriptions for the ListAcceptedPortfolioShares API description and the PortfolioShareType parameters.
+
 1.70.0 (2022-04-04)
 ------------------
 

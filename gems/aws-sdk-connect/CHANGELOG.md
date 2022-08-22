@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2022-08-19)
+------------------
+
+* Feature - This release adds SearchSecurityProfiles API which can be used to search for Security Profile resources within a Connect Instance.
+
+1.74.0 (2022-06-17)
+------------------
+
+* Feature - This release updates these APIs: UpdateInstanceAttribute, DescribeInstanceAttribute and ListInstanceAttributes. You can use it to programmatically enable/disable High volume outbound communications using attribute type HIGH_VOLUME_OUTBOUND on the specified Amazon Connect instance.
+
+1.73.0 (2022-06-06)
+------------------
+
+* Feature - This release adds a new API, GetCurrentUserData, which returns real-time details about users' current activity.
+
+1.72.0 (2022-06-02)
+------------------
+
+* Feature - This release adds the following features: 1) New APIs to manage (create, list, update) task template resources, 2) Updates to startTaskContact API to support task templates, and 3) new TransferContact API to programmatically transfer in-progress tasks via a contact flow.
+
+1.71.0 (2022-04-28)
+------------------
+
+* Feature - This release introduces an API for changing the current agent status of a user in Connect.
+
+1.70.0 (2022-04-25)
+------------------
+
+* Feature - This release adds SearchUsers API which can be used to search for users with a Connect Instance
+
+1.69.0 (2022-04-20)
+------------------
+
+* Feature - This release adds APIs to search, claim, release, list, update, and describe phone numbers. You can also use them to associate and disassociate contact flows to phone numbers.
+
 1.68.0 (2022-04-01)
 ------------------
 

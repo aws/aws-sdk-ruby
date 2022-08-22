@@ -74,6 +74,11 @@ module Aws::DataSync
       def error_code
         @data[:error_code]
       end
+
+      # @return [String]
+      def datasync_error_code
+        @data[:datasync_error_code]
+      end
     end
 
   end

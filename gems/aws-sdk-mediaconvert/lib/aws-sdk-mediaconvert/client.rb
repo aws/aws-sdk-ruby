@@ -528,6 +528,7 @@ module Aws::MediaConvert
     #           },
     #           audio_selectors: {
     #             "__string" => {
+    #               audio_duration_correction: "DISABLED", # accepts DISABLED, AUTO, TRACK, FRAME
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #               external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
@@ -653,6 +654,9 @@ module Aws::MediaConvert
     #           supplemental_imps: ["__stringPatternS3ASSETMAPXml"],
     #           timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #           timecode_start: "__stringMin11Max11Pattern01D20305D205D",
+    #           video_generator: {
+    #             duration: 1,
+    #           },
     #           video_selector: {
     #             alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #             color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
@@ -672,6 +676,7 @@ module Aws::MediaConvert
     #               white_point_x: 1,
     #               white_point_y: 1,
     #             },
+    #             pad_video: "DISABLED", # accepts DISABLED, BLACK
     #             pid: 1,
     #             program_number: 1,
     #             rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -732,6 +737,32 @@ module Aws::MediaConvert
     #               max_abr_bitrate: 1,
     #               max_renditions: 1,
     #               min_abr_bitrate: 1,
+    #               rules: [
+    #                 {
+    #                   allowed_renditions: [
+    #                     {
+    #                       height: 1,
+    #                       required: "ENABLED", # accepts ENABLED, DISABLED
+    #                       width: 1,
+    #                     },
+    #                   ],
+    #                   force_include_renditions: [
+    #                     {
+    #                       height: 1,
+    #                       width: 1,
+    #                     },
+    #                   ],
+    #                   min_bottom_rendition_size: {
+    #                     height: 1,
+    #                     width: 1,
+    #                   },
+    #                   min_top_rendition_size: {
+    #                     height: 1,
+    #                     width: 1,
+    #                   },
+    #                   type: "MIN_TOP_RENDITION_SIZE", # accepts MIN_TOP_RENDITION_SIZE, MIN_BOTTOM_RENDITION_SIZE, FORCE_INCLUDE_RENDITIONS, ALLOWED_RENDITIONS
+    #                 },
+    #               ],
     #             },
     #           },
     #           custom_name: "__string",
@@ -1673,7 +1704,8 @@ module Aws::MediaConvert
     #                       max_fall: 1,
     #                     },
     #                     l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                     profile: "PROFILE_5", # accepts PROFILE_5
+    #                     mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                     profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                   },
     #                   hdr_10_plus: {
     #                     mastering_monitor_nits: 1,
@@ -1805,6 +1837,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job.settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job.settings.inputs[0].audio_selectors["__string"].audio_duration_correction #=> String, one of "DISABLED", "AUTO", "TRACK", "FRAME"
     #   resp.job.settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job.settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job.settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
@@ -1889,6 +1922,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].supplemental_imps[0] #=> String
     #   resp.job.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.job.settings.inputs[0].timecode_start #=> String
+    #   resp.job.settings.inputs[0].video_generator.duration #=> Integer
     #   resp.job.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
@@ -1905,6 +1939,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job.settings.inputs[0].video_selector.pad_video #=> String, one of "DISABLED", "BLACK"
     #   resp.job.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job.settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
@@ -1947,6 +1982,19 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
     #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
     #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules #=> Array
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions #=> Array
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].required #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions #=> Array
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].type #=> String, one of "MIN_TOP_RENDITION_SIZE", "MIN_BOTTOM_RENDITION_SIZE", "FORCE_INCLUDE_RENDITIONS", "ALLOWED_RENDITIONS"
     #   resp.job.settings.output_groups[0].custom_name #=> String
     #   resp.job.settings.output_groups[0].name #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -2660,7 +2708,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -2819,6 +2868,7 @@ module Aws::MediaConvert
     #           },
     #           audio_selectors: {
     #             "__string" => {
+    #               audio_duration_correction: "DISABLED", # accepts DISABLED, AUTO, TRACK, FRAME
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #               external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
@@ -2955,6 +3005,7 @@ module Aws::MediaConvert
     #               white_point_x: 1,
     #               white_point_y: 1,
     #             },
+    #             pad_video: "DISABLED", # accepts DISABLED, BLACK
     #             pid: 1,
     #             program_number: 1,
     #             rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -3015,6 +3066,32 @@ module Aws::MediaConvert
     #               max_abr_bitrate: 1,
     #               max_renditions: 1,
     #               min_abr_bitrate: 1,
+    #               rules: [
+    #                 {
+    #                   allowed_renditions: [
+    #                     {
+    #                       height: 1,
+    #                       required: "ENABLED", # accepts ENABLED, DISABLED
+    #                       width: 1,
+    #                     },
+    #                   ],
+    #                   force_include_renditions: [
+    #                     {
+    #                       height: 1,
+    #                       width: 1,
+    #                     },
+    #                   ],
+    #                   min_bottom_rendition_size: {
+    #                     height: 1,
+    #                     width: 1,
+    #                   },
+    #                   min_top_rendition_size: {
+    #                     height: 1,
+    #                     width: 1,
+    #                   },
+    #                   type: "MIN_TOP_RENDITION_SIZE", # accepts MIN_TOP_RENDITION_SIZE, MIN_BOTTOM_RENDITION_SIZE, FORCE_INCLUDE_RENDITIONS, ALLOWED_RENDITIONS
+    #                 },
+    #               ],
     #             },
     #           },
     #           custom_name: "__string",
@@ -3956,7 +4033,8 @@ module Aws::MediaConvert
     #                       max_fall: 1,
     #                     },
     #                     l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                     profile: "PROFILE_5", # accepts PROFILE_5
+    #                     mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                     profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                   },
     #                   hdr_10_plus: {
     #                     mastering_monitor_nits: 1,
@@ -4065,6 +4143,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job_template.settings.inputs[0].audio_selectors["__string"].audio_duration_correction #=> String, one of "DISABLED", "AUTO", "TRACK", "FRAME"
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
@@ -4158,6 +4237,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job_template.settings.inputs[0].video_selector.pad_video #=> String, one of "DISABLED", "BLACK"
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
@@ -4200,6 +4280,19 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].required #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].type #=> String, one of "MIN_TOP_RENDITION_SIZE", "MIN_BOTTOM_RENDITION_SIZE", "FORCE_INCLUDE_RENDITIONS", "ALLOWED_RENDITIONS"
     #   resp.job_template.settings.output_groups[0].custom_name #=> String
     #   resp.job_template.settings.output_groups[0].name #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -4913,7 +5006,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -5666,7 +5760,8 @@ module Aws::MediaConvert
     #               max_fall: 1,
     #             },
     #             l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #             profile: "PROFILE_5", # accepts PROFILE_5
+    #             mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #             profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #           },
     #           hdr_10_plus: {
     #             mastering_monitor_nits: 1,
@@ -6269,7 +6364,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -6605,6 +6701,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job.settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job.settings.inputs[0].audio_selectors["__string"].audio_duration_correction #=> String, one of "DISABLED", "AUTO", "TRACK", "FRAME"
     #   resp.job.settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job.settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job.settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
@@ -6689,6 +6786,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].supplemental_imps[0] #=> String
     #   resp.job.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.job.settings.inputs[0].timecode_start #=> String
+    #   resp.job.settings.inputs[0].video_generator.duration #=> Integer
     #   resp.job.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
@@ -6705,6 +6803,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job.settings.inputs[0].video_selector.pad_video #=> String, one of "DISABLED", "BLACK"
     #   resp.job.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job.settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
@@ -6747,6 +6846,19 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
     #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
     #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules #=> Array
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions #=> Array
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].required #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions #=> Array
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].type #=> String, one of "MIN_TOP_RENDITION_SIZE", "MIN_BOTTOM_RENDITION_SIZE", "FORCE_INCLUDE_RENDITIONS", "ALLOWED_RENDITIONS"
     #   resp.job.settings.output_groups[0].custom_name #=> String
     #   resp.job.settings.output_groups[0].name #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -7460,7 +7572,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -7560,6 +7673,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job_template.settings.inputs[0].audio_selectors["__string"].audio_duration_correction #=> String, one of "DISABLED", "AUTO", "TRACK", "FRAME"
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
@@ -7653,6 +7767,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job_template.settings.inputs[0].video_selector.pad_video #=> String, one of "DISABLED", "BLACK"
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
@@ -7695,6 +7810,19 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].required #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].type #=> String, one of "MIN_TOP_RENDITION_SIZE", "MIN_BOTTOM_RENDITION_SIZE", "FORCE_INCLUDE_RENDITIONS", "ALLOWED_RENDITIONS"
     #   resp.job_template.settings.output_groups[0].custom_name #=> String
     #   resp.job_template.settings.output_groups[0].name #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -8408,7 +8536,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -9036,7 +9165,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -9195,6 +9325,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job_templates[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job_templates[0].settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job_templates[0].settings.inputs[0].audio_selectors["__string"].audio_duration_correction #=> String, one of "DISABLED", "AUTO", "TRACK", "FRAME"
     #   resp.job_templates[0].settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job_templates[0].settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job_templates[0].settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
@@ -9288,6 +9419,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].video_selector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].video_selector.pad_video #=> String, one of "DISABLED", "BLACK"
     #   resp.job_templates[0].settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
@@ -9330,6 +9462,19 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].height #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].required #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].width #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].height #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].width #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.height #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.width #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.height #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.width #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].type #=> String, one of "MIN_TOP_RENDITION_SIZE", "MIN_BOTTOM_RENDITION_SIZE", "FORCE_INCLUDE_RENDITIONS", "ALLOWED_RENDITIONS"
     #   resp.job_templates[0].settings.output_groups[0].custom_name #=> String
     #   resp.job_templates[0].settings.output_groups[0].name #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -10043,7 +10188,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -10186,6 +10332,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.jobs[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.jobs[0].settings.inputs[0].audio_selectors #=> Hash
+    #   resp.jobs[0].settings.inputs[0].audio_selectors["__string"].audio_duration_correction #=> String, one of "DISABLED", "AUTO", "TRACK", "FRAME"
     #   resp.jobs[0].settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.jobs[0].settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.jobs[0].settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
@@ -10270,6 +10417,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].supplemental_imps[0] #=> String
     #   resp.jobs[0].settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.jobs[0].settings.inputs[0].timecode_start #=> String
+    #   resp.jobs[0].settings.inputs[0].video_generator.duration #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.jobs[0].settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.jobs[0].settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
@@ -10286,6 +10434,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].video_selector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.jobs[0].settings.inputs[0].video_selector.pad_video #=> String, one of "DISABLED", "BLACK"
     #   resp.jobs[0].settings.inputs[0].video_selector.pid #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
@@ -10328,6 +10477,19 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
     #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules #=> Array
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions #=> Array
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].height #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].required #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].width #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions #=> Array
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].height #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].width #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.height #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.width #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.height #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.width #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].type #=> String, one of "MIN_TOP_RENDITION_SIZE", "MIN_BOTTOM_RENDITION_SIZE", "FORCE_INCLUDE_RENDITIONS", "ALLOWED_RENDITIONS"
     #   resp.jobs[0].settings.output_groups[0].custom_name #=> String
     #   resp.jobs[0].settings.output_groups[0].name #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -11041,7 +11203,8 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -11686,7 +11849,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.presets[0].settings.video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -12019,6 +12183,7 @@ module Aws::MediaConvert
     #           },
     #           audio_selectors: {
     #             "__string" => {
+    #               audio_duration_correction: "DISABLED", # accepts DISABLED, AUTO, TRACK, FRAME
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #               external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
@@ -12155,6 +12320,7 @@ module Aws::MediaConvert
     #               white_point_x: 1,
     #               white_point_y: 1,
     #             },
+    #             pad_video: "DISABLED", # accepts DISABLED, BLACK
     #             pid: 1,
     #             program_number: 1,
     #             rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -12215,6 +12381,32 @@ module Aws::MediaConvert
     #               max_abr_bitrate: 1,
     #               max_renditions: 1,
     #               min_abr_bitrate: 1,
+    #               rules: [
+    #                 {
+    #                   allowed_renditions: [
+    #                     {
+    #                       height: 1,
+    #                       required: "ENABLED", # accepts ENABLED, DISABLED
+    #                       width: 1,
+    #                     },
+    #                   ],
+    #                   force_include_renditions: [
+    #                     {
+    #                       height: 1,
+    #                       width: 1,
+    #                     },
+    #                   ],
+    #                   min_bottom_rendition_size: {
+    #                     height: 1,
+    #                     width: 1,
+    #                   },
+    #                   min_top_rendition_size: {
+    #                     height: 1,
+    #                     width: 1,
+    #                   },
+    #                   type: "MIN_TOP_RENDITION_SIZE", # accepts MIN_TOP_RENDITION_SIZE, MIN_BOTTOM_RENDITION_SIZE, FORCE_INCLUDE_RENDITIONS, ALLOWED_RENDITIONS
+    #                 },
+    #               ],
     #             },
     #           },
     #           custom_name: "__string",
@@ -13156,7 +13348,8 @@ module Aws::MediaConvert
     #                       max_fall: 1,
     #                     },
     #                     l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                     profile: "PROFILE_5", # accepts PROFILE_5
+    #                     mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                     profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                   },
     #                   hdr_10_plus: {
     #                     mastering_monitor_nits: 1,
@@ -13262,6 +13455,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job_template.settings.inputs[0].audio_selectors["__string"].audio_duration_correction #=> String, one of "DISABLED", "AUTO", "TRACK", "FRAME"
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
@@ -13355,6 +13549,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job_template.settings.inputs[0].video_selector.pad_video #=> String, one of "DISABLED", "BLACK"
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
@@ -13397,6 +13592,19 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].required #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].type #=> String, one of "MIN_TOP_RENDITION_SIZE", "MIN_BOTTOM_RENDITION_SIZE", "FORCE_INCLUDE_RENDITIONS", "ALLOWED_RENDITIONS"
     #   resp.job_template.settings.output_groups[0].custom_name #=> String
     #   resp.job_template.settings.output_groups[0].name #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -14110,7 +14318,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -14857,7 +15066,8 @@ module Aws::MediaConvert
     #               max_fall: 1,
     #             },
     #             l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #             profile: "PROFILE_5", # accepts PROFILE_5
+    #             mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #             profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #           },
     #           hdr_10_plus: {
     #             mastering_monitor_nits: 1,
@@ -15457,7 +15667,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -15581,7 +15792,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

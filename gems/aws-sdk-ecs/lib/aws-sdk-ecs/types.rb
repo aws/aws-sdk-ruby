@@ -506,11 +506,13 @@ module Aws::ECS
     # simultaneously.
     #
     # @!attribute [rw] cluster_arn
-    #   The Amazon Resource Name (ARN) that identifies the cluster. The ARN
-    #   contains the `arn:aws:ecs` namespace, followed by the Region of the
-    #   cluster, the Amazon Web Services account ID of the cluster owner,
-    #   the `cluster` namespace, and then the cluster name. For example,
-    #   `arn:aws:ecs:region:012345678910:cluster/test`.
+    #   The Amazon Resource Name (ARN) that identifies the cluster. For more
+    #   information about the ARN format, see [Amazon Resource Name
+    #   (ARN)][1] in the *Amazon ECS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids
     #   @return [String]
     #
     # @!attribute [rw] cluster_name
@@ -642,8 +644,8 @@ module Aws::ECS
     #
     # @!attribute [rw] attachments
     #   The resources attached to a cluster. When using a capacity provider
-    #   with a cluster, the Auto Scaling plan that's created is returned as
-    #   a cluster attachment.
+    #   with a cluster, the capacity provider and associated resources are
+    #   returned as cluster attachments.
     #   @return [Array<Types::Attachment>]
     #
     # @!attribute [rw] attachments_status
@@ -653,8 +655,6 @@ module Aws::ECS
     #   UPDATE\_IN\_PROGRESS
     #
     #   : The available capacity providers for the cluster are updating.
-    #     This occurs when the Auto Scaling plan is provisioning or
-    #     deprovisioning.
     #
     #   UPDATE\_COMPLETE
     #
@@ -1184,12 +1184,12 @@ module Aws::ECS
     #   container is placed. Otherwise, the value of `memory` is used.
     #
     #   The Docker 20.10.0 or later daemon reserves a minimum of 6 MiB of
-    #   memory for a container, so you should not specify fewer than 6 MiB
-    #   of memory for your containers.
+    #   memory for a container. So, don't specify less than 6 MiB of memory
+    #   for your containers.
     #
     #   The Docker 19.03.13-ce or earlier daemon reserves a minimum of 4 MiB
-    #   of memory for a container, so you should not specify fewer than 4
-    #   MiB of memory for your containers.
+    #   of memory for a container. So, don't specify less than 4 MiB of
+    #   memory for your containers.
     #
     #
     #
@@ -2073,16 +2073,17 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # An EC2 instance that's running the Amazon ECS agent and has been
-    # registered with a cluster.
+    # An Amazon EC2 or External instance that's running the Amazon ECS
+    # agent and has been registered with a cluster.
     #
     # @!attribute [rw] container_instance_arn
-    #   The Amazon Resource Name (ARN) of the container instance. The ARN
-    #   contains the `arn:aws:ecs` namespace, followed by the Region of the
-    #   container instance, the Amazon Web Services account ID of the
-    #   container instance owner, the `container-instance` namespace, and
-    #   then the container instance ID. For example,
-    #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
+    #   The Amazon Resource Name (ARN) of the container instance. For more
+    #   information about the ARN format, see [Amazon Resource Name
+    #   (ARN)][1] in the *Amazon ECS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids
     #   @return [String]
     #
     # @!attribute [rw] ec2_instance_id
@@ -2156,7 +2157,7 @@ module Aws::ECS
     #   tasks. The `DRAINING` indicates that new tasks aren't placed on the
     #   container instance and any service tasks running on the container
     #   instance are removed if possible. For more information, see
-    #   [Container Instance Draining][1] in the *Amazon Elastic Container
+    #   [Container instance draining][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
     #
@@ -2170,9 +2171,9 @@ module Aws::ECS
     #
     # @!attribute [rw] agent_connected
     #   This parameter returns `true` if the agent is connected to Amazon
-    #   ECS. Registered instances with an agent that may be unhealthy or
-    #   stopped return `false`. Only instances connected to an agent can
-    #   accept placement requests.
+    #   ECS. An instance with an agent that may be unhealthy or stopped
+    #   return `false`. Only instances connected to an agent can accept task
+    #   placement requests.
     #   @return [Boolean]
     #
     # @!attribute [rw] running_tasks_count
@@ -2202,8 +2203,8 @@ module Aws::ECS
     #   @return [Time]
     #
     # @!attribute [rw] attachments
-    #   The resources attached to a container instance, such as elastic
-    #   network interfaces.
+    #   The resources attached to a container instance, such as an elastic
+    #   network interface.
     #   @return [Array<Types::Attachment>]
     #
     # @!attribute [rw] tags
@@ -2789,7 +2790,7 @@ module Aws::ECS
     #
     # @!attribute [rw] load_balancers
     #   A load balancer object representing the load balancers to use with
-    #   your service. For more information, see [Service Load Balancing][1]
+    #   your service. For more information, see [Service load balancing][1]
     #   in the *Amazon Elastic Container Service Developer Guide*.
     #
     #   If the service uses the rolling update (`ECS`) deployment controller
@@ -3091,8 +3092,8 @@ module Aws::ECS
     #
     # @!attribute [rw] enable_ecs_managed_tags
     #   Specifies whether to turn on Amazon ECS managed tags for the tasks
-    #   within the service. For more information, see [Tagging Your Amazon
-    #   ECS Resources][1] in the *Amazon Elastic Container Service Developer
+    #   within the service. For more information, see [Tagging your Amazon
+    #   ECS resources][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     #
@@ -3254,7 +3255,7 @@ module Aws::ECS
     #
     # @!attribute [rw] service_registries
     #   The details of the service discovery registries to assign to this
-    #   task set. For more information, see [Service Discovery][1].
+    #   task set. For more information, see [Service discovery][1].
     #
     #
     #
@@ -3263,7 +3264,7 @@ module Aws::ECS
     #
     # @!attribute [rw] launch_type
     #   The launch type that new tasks in the task set uses. For more
-    #   information, see [Amazon ECS Launch Types][1] in the *Amazon Elastic
+    #   information, see [Amazon ECS launch types][1] in the *Amazon Elastic
     #   Container Service Developer Guide*.
     #
     #   If a `launchType` is specified, the `capacityProviderStrategy`
@@ -3880,54 +3881,83 @@ module Aws::ECS
     #
     # @!attribute [rw] maximum_percent
     #   If a service is using the rolling update (`ECS`) deployment type,
-    #   the **maximum percent** parameter represents an upper limit on the
-    #   number of tasks in a service that are allowed in the `RUNNING` or
-    #   `PENDING` state during a deployment, as a percentage of the desired
-    #   number of tasks (rounded down to the nearest integer), and while any
-    #   container instances are in the `DRAINING` state if the service
-    #   contains tasks using the EC2 launch type. This parameter enables you
-    #   to define the deployment batch size. For example, if your service
-    #   has a desired number of four tasks and a maximum percent value of
-    #   200%, the scheduler may start four new tasks before stopping the
-    #   four older tasks (provided that the cluster resources required to do
-    #   this are available). The default value for maximum percent is 200%.
+    #   the `maximumPercent` parameter represents an upper limit on the
+    #   number of your service's tasks that are allowed in the `RUNNING` or
+    #   `PENDING` state during a deployment, as a percentage of the
+    #   `desiredCount` (rounded down to the nearest integer). This parameter
+    #   enables you to define the deployment batch size. For example, if
+    #   your service is using the `REPLICA` service scheduler and has a
+    #   `desiredCount` of four tasks and a `maximumPercent` value of 200%,
+    #   the scheduler may start four new tasks before stopping the four
+    #   older tasks (provided that the cluster resources required to do this
+    #   are available). The default `maximumPercent` value for a service
+    #   using the `REPLICA` service scheduler is 200%.
     #
-    #   If a service is using the blue/green (`CODE_DEPLOY`) or `EXTERNAL`
-    #   deployment types and tasks that use the EC2 launch type, the
-    #   **maximum percent** value is set to the default value and is used to
-    #   define the upper limit on the number of the tasks in the service
-    #   that remain in the `RUNNING` state while the container instances are
-    #   in the `DRAINING` state. If the tasks in the service use the Fargate
-    #   launch type, the maximum percent value is not used, although it is
-    #   returned when describing your service.
+    #   If a service is using either the blue/green (`CODE_DEPLOY`) or
+    #   `EXTERNAL` deployment types and tasks that use the EC2 launch type,
+    #   the **maximum percent** value is set to the default value and is
+    #   used to define the upper limit on the number of the tasks in the
+    #   service that remain in the `RUNNING` state while the container
+    #   instances are in the `DRAINING` state. If the tasks in the service
+    #   use the Fargate launch type, the maximum percent value is not used,
+    #   although it is returned when describing your service.
     #   @return [Integer]
     #
     # @!attribute [rw] minimum_healthy_percent
     #   If a service is using the rolling update (`ECS`) deployment type,
-    #   the **minimum healthy percent** represents a lower limit on the
-    #   number of tasks in a service that must remain in the `RUNNING` state
-    #   during a deployment, as a percentage of the desired number of tasks
-    #   (rounded up to the nearest integer), and while any container
-    #   instances are in the `DRAINING` state if the service contains tasks
-    #   using the EC2 launch type. This parameter enables you to deploy
+    #   the `minimumHealthyPercent` represents a lower limit on the number
+    #   of your service's tasks that must remain in the `RUNNING` state
+    #   during a deployment, as a percentage of the `desiredCount` (rounded
+    #   up to the nearest integer). This parameter enables you to deploy
     #   without using additional cluster capacity. For example, if your
-    #   service has a desired number of four tasks and a minimum healthy
-    #   percent of 50%, the scheduler may stop two existing tasks to free up
-    #   cluster capacity before starting two new tasks. Tasks for services
-    #   that *do not* use a load balancer are considered healthy if they're
-    #   in the `RUNNING` state; tasks for services that *do* use a load
-    #   balancer are considered healthy if they're in the `RUNNING` state
-    #   and they're reported as healthy by the load balancer. The default
-    #   value for minimum healthy percent is 100%.
+    #   service has a `desiredCount` of four tasks and a
+    #   `minimumHealthyPercent` of 50%, the service scheduler may stop two
+    #   existing tasks to free up cluster capacity before starting two new
+    #   tasks.
     #
-    #   If a service is using the blue/green (`CODE_DEPLOY`) or `EXTERNAL`
-    #   deployment types and tasks that use the EC2 launch type, the
-    #   **minimum healthy percent** value is set to the default value and is
-    #   used to define the lower limit on the number of the tasks in the
-    #   service that remain in the `RUNNING` state while the container
-    #   instances are in the `DRAINING` state. If the tasks in the service
-    #   use the Fargate launch type, the minimum healthy percent value is
-    #   not used, although it is returned when describing your service.
+    #   For services that *do not* use a load balancer, the following should
+    #   be noted:
+    #
+    #   * A service is considered healthy if all essential containers within
+    #     the tasks in the service pass their health checks.
+    #
+    #   * If a task has no essential containers with a health check defined,
+    #     the service scheduler will wait for 40 seconds after a task
+    #     reaches a `RUNNING` state before the task is counted towards the
+    #     minimum healthy percent total.
+    #
+    #   * If a task has one or more essential containers with a health check
+    #     defined, the service scheduler will wait for the task to reach a
+    #     healthy status before counting it towards the minimum healthy
+    #     percent total. A task is considered healthy when all essential
+    #     containers within the task have passed their health checks. The
+    #     amount of time the service scheduler can wait for is determined by
+    #     the container health check settings.
+    #
+    #   For services are that *do* use a load balancer, the following should
+    #   be noted:
+    #
+    #   * If a task has no essential containers with a health check defined,
+    #     the service scheduler will wait for the load balancer target group
+    #     health check to return a healthy status before counting the task
+    #     towards the minimum healthy percent total.
+    #
+    #   * If a task has an essential container with a health check defined,
+    #     the service scheduler will wait for both the task to reach a
+    #     healthy status and the load balancer target group health check to
+    #     return a healthy status before counting the task towards the
+    #     minimum healthy percent total.
+    #
+    #   If a service is using either the blue/green (`CODE_DEPLOY`) or
+    #   `EXTERNAL` deployment types and is running tasks that use the EC2
+    #   launch type, the **minimum healthy percent** value is set to the
+    #   default value and is used to define the lower limit on the number of
+    #   the tasks in the service that remain in the `RUNNING` state while
+    #   the container instances are in the `DRAINING` state. If a service is
+    #   using either the blue/green (`CODE_DEPLOY`) or `EXTERNAL` deployment
+    #   types and is running tasks that use the Fargate launch type, the
+    #   minimum healthy percent value is not used, although it is returned
+    #   when describing your service.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentConfiguration AWS API Documentation
@@ -3941,7 +3971,7 @@ module Aws::ECS
     end
 
     # The deployment controller to use for the service. For more
-    # information, see [Amazon ECS Deployment Types][1] in the *Amazon
+    # information, see [Amazon ECS deployment types][1] in the *Amazon
     # Elastic Container Service Developer Guide*.
     #
     #
@@ -4008,11 +4038,12 @@ module Aws::ECS
     #
     # @!attribute [rw] container_instance
     #   The container instance ID or full ARN of the container instance to
-    #   deregister. The ARN contains the `arn:aws:ecs` namespace, followed
-    #   by the Region of the container instance, the Amazon Web Services
-    #   account ID of the container instance owner, the `container-instance`
-    #   namespace, and then the container instance ID. For example,
-    #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
+    #   deregister. For more information about the ARN format, see [Amazon
+    #   Resource Name (ARN)][1] in the *Amazon ECS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids
     #   @return [String]
     #
     # @!attribute [rw] force
@@ -4578,12 +4609,13 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] container_instance
-    #   The container instance ID or full ARN of the container instance. The
-    #   ARN contains the `arn:aws:ecs` namespace, followed by the Region of
-    #   the container instance, the Amazon Web Services account ID of the
-    #   container instance owner, the `container-instance` namespace, and
-    #   then the container instance ID. For example,
-    #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
+    #   The container instance ID or full ARN of the container instance. For
+    #   more information about the ARN format, see [Amazon Resource Name
+    #   (ARN)][1] in the *Amazon ECS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids
     #   @return [String]
     #
     # @!attribute [rw] cluster
@@ -4729,7 +4761,7 @@ module Aws::ECS
     #   will enforce the path set on the EFS access point. If an access
     #   point is used, transit encryption must be enabled in the
     #   `EFSVolumeConfiguration`. For more information, see [Working with
-    #   Amazon EFS Access Points][1] in the *Amazon Elastic File System User
+    #   Amazon EFS access points][1] in the *Amazon Elastic File System User
     #   Guide*.
     #
     #
@@ -4743,7 +4775,7 @@ module Aws::ECS
     #   enabled, transit encryption must be enabled in the
     #   `EFSVolumeConfiguration`. If this parameter is omitted, the default
     #   value of `DISABLED` is used. For more information, see [Using Amazon
-    #   EFS Access Points][1] in the *Amazon Elastic Container Service
+    #   EFS access points][1] in the *Amazon Elastic Container Service
     #   Developer Guide*.
     #
     #
@@ -4762,7 +4794,7 @@ module Aws::ECS
 
     # This parameter is specified when you're using an Amazon Elastic File
     # System file system for task storage. For more information, see [Amazon
-    # EFS Volumes][1] in the *Amazon Elastic Container Service Developer
+    # EFS volumes][1] in the *Amazon Elastic Container Service Developer
     # Guide*.
     #
     #
@@ -4803,7 +4835,7 @@ module Aws::ECS
     #   between the Amazon ECS host and the Amazon EFS server. Transit
     #   encryption must be enabled if Amazon EFS IAM authorization is used.
     #   If this parameter is omitted, the default value of `DISABLED` is
-    #   used. For more information, see [Encrypting Data in Transit][1] in
+    #   used. For more information, see [Encrypting data in transit][1] in
     #   the *Amazon Elastic File System User Guide*.
     #
     #
@@ -4815,8 +4847,8 @@ module Aws::ECS
     #   The port to use when sending encrypted data between the Amazon ECS
     #   host and the Amazon EFS server. If you do not specify a transit
     #   encryption port, it will use the port selection strategy that the
-    #   Amazon EFS mount helper uses. For more information, see [EFS Mount
-    #   Helper][1] in the *Amazon Elastic File System User Guide*.
+    #   Amazon EFS mount helper uses. For more information, see [EFS mount
+    #   helper][1] in the *Amazon Elastic File System User Guide*.
     #
     #
     #
@@ -5133,8 +5165,8 @@ module Aws::ECS
 
     # The authorization configuration details for Amazon FSx for Windows
     # File Server file system. See
-    # [FSxWindowsFileServerVolumeConfiguration][1] in the *Amazon Elastic
-    # Container Service API Reference*.
+    # [FSxWindowsFileServerVolumeConfiguration][1] in the *Amazon ECS API
+    # Reference*.
     #
     # For more information and the input format, see [Amazon FSx for Windows
     # File Server Volumes][2] in the *Amazon Elastic Container Service
@@ -5157,7 +5189,7 @@ module Aws::ECS
     #   The authorization credential option to use. The authorization
     #   credential options can be provided using either the Amazon Resource
     #   Name (ARN) of an Secrets Manager secret or SSM Parameter Store
-    #   parameter. The ARNs refer to the stored credentials.
+    #   parameter. The ARN refers to the stored credentials.
     #   @return [String]
     #
     # @!attribute [rw] domain
@@ -5183,7 +5215,7 @@ module Aws::ECS
     # File Server][1] file system for task storage.
     #
     # For more information and the input format, see [Amazon FSx for Windows
-    # File Server Volumes][2] in the *Amazon Elastic Container Service
+    # File Server volumes][2] in the *Amazon Elastic Container Service
     # Developer Guide*.
     #
     #
@@ -5258,7 +5290,7 @@ module Aws::ECS
 
     # The FireLens configuration for the container. This is used to specify
     # and configure a log router for container logs. For more information,
-    # see [Custom Log Routing][1] in the *Amazon Elastic Container Service
+    # see [Custom log routing][1] in the *Amazon Elastic Container Service
     # Developer Guide*.
     #
     #
@@ -5287,8 +5319,8 @@ module Aws::ECS
     #   cluster, and container instance details to the log event. If
     #   specified, the syntax to use is
     #   `"options":\{"enable-ecs-log-metadata":"true|false","config-file-type:"s3|file","config-file-value":"arn:aws:s3:::mybucket/fluent.conf|filepath"\}`.
-    #   For more information, see [Creating a Task Definition that Uses a
-    #   FireLens Configuration][1] in the *Amazon Elastic Container Service
+    #   For more information, see [Creating a task definition that uses a
+    #   FireLens configuration][1] in the *Amazon Elastic Container Service
     #   Developer Guide*.
     #
     #   <note markdown="1"> Tasks hosted on Fargate only support the `file` configuration file
@@ -5361,11 +5393,11 @@ module Aws::ECS
     #
     # * Container health checks require version 1.17.0 or greater of the
     #   Amazon ECS container agent. For more information, see [Updating the
-    #   Amazon ECS Container Agent][1].
+    #   Amazon ECS container agent][1].
     #
     # * Container health checks are supported for Fargate tasks if you're
-    #   using platform version 1.1.0 or greater. For more information, see
-    #   [Fargate Platform Versions][2].
+    #   using platform version `1.1.0` or greater. For more information, see
+    #   [Fargate platform versions][2].
     #
     # * Container health checks aren't supported for tasks that are part of
     #   a service that's configured to use a Classic Load Balancer.
@@ -6692,8 +6724,8 @@ module Aws::ECS
     # update the Elastic Load Balancing configuration.
     #
     # A service-linked role is required for services that use multiple
-    # target groups. For more information, see [Service-linked roles][1] in
-    # the *Amazon Elastic Container Service Developer Guide*.
+    # target groups. For more information, see [Using service-linked
+    # roles][1] in the *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
@@ -6719,12 +6751,12 @@ module Aws::ECS
     #
     #   For services using the `ECS` deployment controller, you can specify
     #   one or multiple target groups. For more information, see
-    #   [Registering Multiple Target Groups with a Service][1] in the
+    #   [Registering multiple target groups with a service][1] in the
     #   *Amazon Elastic Container Service Developer Guide*.
     #
     #   For services using the `CODE_DEPLOY` deployment controller, you're
     #   required to define two target groups for the load balancer. For more
-    #   information, see [Blue/Green Deployment with CodeDeploy][2] in the
+    #   information, see [Blue/green deployment with CodeDeploy][2] in the
     #   *Amazon Elastic Container Service Developer Guide*.
     #
     #   If your service's task definition uses the `awsvpc` network mode,
@@ -6878,7 +6910,7 @@ module Aws::ECS
     #
     # @!attribute [rw] secret_options
     #   The secrets to pass to the log configuration. For more information,
-    #   see [Specifying Sensitive Data][1] in the *Amazon Elastic Container
+    #   see [Specifying sensitive data][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
     #
@@ -6973,7 +7005,7 @@ module Aws::ECS
     # scale-out actions of the Auto Scaling group. Amazon ECS manages a
     # target tracking scaling policy using an Amazon ECS managed CloudWatch
     # metric with the specified `targetCapacity` value as the target value
-    # for the metric. For more information, see [Using Managed Scaling][1]
+    # for the metric. For more information, see [Using managed scaling][1]
     # in the *Amazon Elastic Container Service Developer Guide*.
     #
     # If managed scaling is disabled, the user must manage the scaling of
@@ -7192,7 +7224,7 @@ module Aws::ECS
     class NoUpdateAvailableException < Aws::EmptyStructure; end
 
     # An object representing a constraint on task placement. For more
-    # information, see [Task Placement Constraints][1] in the *Amazon
+    # information, see [Task placement constraints][1] in the *Amazon
     # Elastic Container Service Developer Guide*.
     #
     # <note markdown="1"> If you're using the Fargate launch type, task placement constraints
@@ -7241,7 +7273,7 @@ module Aws::ECS
     end
 
     # The task placement strategy for a task or service. For more
-    # information, see [Task Placement Strategies][1] in the *Amazon Elastic
+    # information, see [Task placement strategies][1] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
     #
@@ -9031,7 +9063,7 @@ module Aws::ECS
     #
     #   You can run your Linux tasks on an ARM-based platform by setting the
     #   value to `ARM64`. This option is avaiable for tasks that run on
-    #   Linuc Amazon EC2 instance or Linux containers on Fargate.
+    #   Linux Amazon EC2 instance or Linux containers on Fargate.
     #   @return [String]
     #
     # @!attribute [rw] operating_system_family
@@ -9086,7 +9118,7 @@ module Aws::ECS
     # * To reference sensitive information in the log configuration of a
     #   container, use the `secretOptions` container definition parameter.
     #
-    # For more information, see [Specifying Sensitive Data][1] in the
+    # For more information, see [Specifying sensitive data][1] in the
     # *Amazon Elastic Container Service Developer Guide*.
     #
     #
@@ -9154,11 +9186,13 @@ module Aws::ECS
     # Details on a service within a cluster
     #
     # @!attribute [rw] service_arn
-    #   The ARN that identifies the service. The ARN contains the
-    #   `arn:aws:ecs` namespace, followed by the Region of the service, the
-    #   Amazon Web Services account ID of the service owner, the `service`
-    #   namespace, and then the service name. For example,
-    #   `arn:aws:ecs:region:012345678910:service/my-service`.
+    #   The ARN that identifies the service. For more information about the
+    #   ARN format, see [Amazon Resource Name (ARN)][1] in the *Amazon ECS
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids
     #   @return [String]
     #
     # @!attribute [rw] service_name

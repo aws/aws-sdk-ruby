@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2022-07-27)
+------------------
+
+* Feature - Amazon Polly adds new English and Hindi voice - Kajal. Kajal is available as Neural voice only.
+
+1.56.0 (2022-06-28)
+------------------
+
+* Feature - Add 4 new neural voices - Pedro (es-US), Liam (fr-CA), Daniel (de-DE) and Arthur (en-GB).
+
 1.55.0 (2022-04-19)
 ------------------
 

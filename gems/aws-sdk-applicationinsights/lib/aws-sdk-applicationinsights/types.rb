@@ -107,9 +107,12 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] auto_config_enabled
+    #   Indicates whether auto-configuration is turned on for this
+    #   application.
     #   @return [Boolean]
     #
     # @!attribute [rw] discovery_type
+    #   The method used by Application Insights to onboard your resources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ApplicationInfo AWS API Documentation
@@ -198,6 +201,7 @@ module Aws::ApplicationInsights
     #         ],
     #         auto_config_enabled: false,
     #         auto_create: false,
+    #         grouping_type: "ACCOUNT_BASED", # accepts ACCOUNT_BASED
     #       }
     #
     # @!attribute [rw] resource_group_name
@@ -228,10 +232,21 @@ module Aws::ApplicationInsights
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] auto_config_enabled
+    #   Indicates whether Application Insights automatically configures
+    #   unmonitored resources in the resource group.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_create
+    #   Configures all of the resources in the resource group by applying
+    #   the recommended configurations.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] grouping_type
+    #   Application Insights can create applications based on a resource
+    #   group or on an account. To create an account-based application using
+    #   all of the resources in the account, set this parameter to
+    #   `ACCOUNT_BASED`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateApplicationRequest AWS API Documentation
     #
@@ -242,7 +257,8 @@ module Aws::ApplicationInsights
       :ops_item_sns_topic_arn,
       :tags,
       :auto_config_enabled,
-      :auto_create)
+      :auto_create,
+      :grouping_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -501,9 +517,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   The tier of the application component. Supported tiers include
-    #   `DOT_NET_CORE`, `DOT_NET_WORKER`, `DOT_NET_WEB`, `SQL_SERVER`, and
-    #   `DEFAULT`.
+    #   The tier of the application component.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeComponentConfigurationRecommendationRequest AWS API Documentation
@@ -1111,6 +1125,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] component_name
+    #   The name of the component.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListProblemsRequest AWS API Documentation
@@ -1136,6 +1151,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] resource_group_name
+    #   The name of the resource group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListProblemsResponse AWS API Documentation
@@ -1519,9 +1535,12 @@ module Aws::ApplicationInsights
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] recurring_count
+    #   The number of times that the same problem reoccurred after the first
+    #   time it was resolved.
     #   @return [Integer]
     #
     # @!attribute [rw] last_recurrence_time
+    #   The last time that the problem reoccurred after its last resolution.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/Problem AWS API Documentation
@@ -1782,6 +1801,7 @@ module Aws::ApplicationInsights
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_config_enabled
+    #   Turns auto-configuration on or off.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateApplicationRequest AWS API Documentation
@@ -1834,9 +1854,7 @@ module Aws::ApplicationInsights
     #   @return [Boolean]
     #
     # @!attribute [rw] tier
-    #   The tier of the application component. Supported tiers include
-    #   `DOT_NET_WORKER`, `DOT_NET_WEB`, `DOT_NET_CORE`, `SQL_SERVER`, and
-    #   `DEFAULT`.
+    #   The tier of the application component.
     #   @return [String]
     #
     # @!attribute [rw] component_configuration
@@ -1855,6 +1873,8 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] auto_config_enabled
+    #   Automatically configures the component by applying the recommended
+    #   configurations.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateComponentConfigurationRequest AWS API Documentation

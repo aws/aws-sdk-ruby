@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2022-07-21)
+------------------
+
+* Feature - Enable copy-on-write restore type
+
 1.42.0 (2022-04-07)
 ------------------
 

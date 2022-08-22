@@ -606,6 +606,135 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Copies a version of an Amazon Rekognition Custom Labels model from a
+    # source project to a destination project. The source and destination
+    # projects can be in different AWS accounts but must be in the same AWS
+    # Region. You can't copy a model to another AWS service.
+    #
+    # To copy a model version to a different AWS account, you need to create
+    # a resource-based policy known as a *project policy*. You attach the
+    # project policy to the source project by calling PutProjectPolicy. The
+    # project policy gives permission to copy the model version from a
+    # trusting AWS account to a trusted account.
+    #
+    # For more information creating and attaching a project policy, see
+    # Attaching a project policy (SDK) in the *Amazon Rekognition Custom
+    # Labels Developer Guide*.
+    #
+    # If you are copying a model version to a project in the same AWS
+    # account, you don't need to create a project policy.
+    #
+    # <note markdown="1"> To copy a model, the destination project, source project, and source
+    # model version must already exist.
+    #
+    #  </note>
+    #
+    # Copying a model version takes a while to complete. To get the current
+    # status, call DescribeProjectVersions and check the value of `Status`
+    # in the ProjectVersionDescription object. The copy operation has
+    # finished when the value of `Status` is `COPYING_COMPLETED`.
+    #
+    # @option params [required, String] :source_project_arn
+    #   The ARN of the source project in the trusting AWS account.
+    #
+    # @option params [required, String] :source_project_version_arn
+    #   The ARN of the model version in the source project that you want to
+    #   copy to a destination project.
+    #
+    # @option params [required, String] :destination_project_arn
+    #   The ARN of the project in the trusted AWS account that you want to
+    #   copy the model version to.
+    #
+    # @option params [required, String] :version_name
+    #   A name for the version of the model that's copied to the destination
+    #   project.
+    #
+    # @option params [required, Types::OutputConfig] :output_config
+    #   The S3 bucket and folder location where the training output for the
+    #   source model version is placed.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value tags to assign to the model version.
+    #
+    # @option params [String] :kms_key_id
+    #   The identifier for your AWS Key Management Service key (AWS KMS key).
+    #   You can supply the Amazon Resource Name (ARN) of your KMS key, the ID
+    #   of your KMS key, an alias for your KMS key, or an alias ARN. The key
+    #   is used to encrypt training results and manifest files written to the
+    #   output Amazon S3 bucket (`OutputConfig`).
+    #
+    #   If you choose to use your own KMS key, you need the following
+    #   permissions on the KMS key.
+    #
+    #   * kms:CreateGrant
+    #
+    #   * kms:DescribeKey
+    #
+    #   * kms:GenerateDataKey
+    #
+    #   * kms:Decrypt
+    #
+    #   If you don't specify a value for `KmsKeyId`, images copied into the
+    #   service are encrypted using a key that AWS owns and manages.
+    #
+    # @return [Types::CopyProjectVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CopyProjectVersionResponse#project_version_arn #project_version_arn} => String
+    #
+    #
+    # @example Example: CopyProjectVersion
+    #
+    #   # This operation copies a version of an Amazon Rekognition Custom Labels model from a source project to a destination
+    #   # project.
+    #
+    #   resp = client.copy_project_version({
+    #     destination_project_arn: "arn:aws:rekognition:us-east-1:555555555555:project/DestinationProject/1656705098765", 
+    #     kms_key_id: "arn:1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #     output_config: {
+    #       s3_bucket: "bucket-name", 
+    #       s3_key_prefix: "path_to_folder", 
+    #     }, 
+    #     source_project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/SourceProject/16565123456", 
+    #     source_project_version_arn: "arn:aws:rekognition:us-east-1:111122223333:project/SourceProject/version/model_1/1656611123456", 
+    #     tags: {
+    #       "key1" => "val1", 
+    #     }, 
+    #     version_name: "DestinationVersionName_cross_account", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     project_version_arn: "arn:aws:rekognition:us-east-1:555555555555:project/DestinationProject/version/DestinationVersionName_cross_account/16567050987651", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_project_version({
+    #     source_project_arn: "ProjectArn", # required
+    #     source_project_version_arn: "ProjectVersionArn", # required
+    #     destination_project_arn: "ProjectArn", # required
+    #     version_name: "VersionName", # required
+    #     output_config: { # required
+    #       s3_bucket: "S3Bucket",
+    #       s3_key_prefix: "S3KeyPrefix",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     kms_key_id: "KmsKeyId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.project_version_arn #=> String
+    #
+    # @overload copy_project_version(params = {})
+    # @param [Hash] params ({})
+    def copy_project_version(params = {}, options = {})
+      req = build_request(:copy_project_version, params)
+      req.send_request(options)
+    end
+
     # Creates a collection in an AWS Region. You can add faces to the
     # collection using the IndexFaces operation.
     #
@@ -791,7 +920,7 @@ module Aws::Rekognition
     # project. For more information, see Creating training and test dataset
     # in the *Amazon Rekognition Custom Labels Developer Guide*.
     #
-    # <note markdown="1"> You can train a modelin a project that doesn't have associated
+    # <note markdown="1"> You can train a model in a project that doesn't have associated
     # datasets by specifying manifest files in the `TrainingData` and
     # `TestingData` fields.
     #
@@ -930,23 +1059,36 @@ module Aws::Rekognition
     end
 
     # Creates an Amazon Rekognition stream processor that you can use to
-    # detect and recognize faces in a streaming video.
+    # detect and recognize faces or to detect labels in a streaming video.
     #
     # Amazon Rekognition Video is a consumer of live video from Amazon
-    # Kinesis Video Streams. Amazon Rekognition Video sends analysis results
-    # to Amazon Kinesis Data Streams.
+    # Kinesis Video Streams. There are two different settings for stream
+    # processors in Amazon Rekognition: detecting faces and detecting
+    # labels.
     #
-    # You provide as input a Kinesis video stream (`Input`) and a Kinesis
-    # data stream (`Output`) stream. You also specify the face recognition
-    # criteria in `Settings`. For example, the collection containing faces
-    # that you want to recognize. Use `Name` to assign an identifier for the
-    # stream processor. You use `Name` to manage the stream processor. For
-    # example, you can start processing the source video by calling
-    # StartStreamProcessor with the `Name` field.
+    # * If you are creating a stream processor for detecting faces, you
+    #   provide as input a Kinesis video stream (`Input`) and a Kinesis data
+    #   stream (`Output`) stream. You also specify the face recognition
+    #   criteria in `Settings`. For example, the collection containing faces
+    #   that you want to recognize. After you have finished analyzing a
+    #   streaming video, use StopStreamProcessor to stop processing.
     #
-    # After you have finished analyzing a streaming video, use
-    # StopStreamProcessor to stop processing. You can delete the stream
-    # processor by calling DeleteStreamProcessor.
+    # * If you are creating a stream processor to detect labels, you provide
+    #   as input a Kinesis video stream (`Input`), Amazon S3 bucket
+    #   information (`Output`), and an Amazon SNS topic ARN
+    #   (`NotificationChannel`). You can also provide a KMS key ID to
+    #   encrypt the data sent to your Amazon S3 bucket. You specify what you
+    #   want to detect in `ConnectedHomeSettings`, such as people, packages
+    #   and people, or pets, people, and packages. You can also specify
+    #   where in the frame you want Amazon Rekognition to monitor with
+    #   `RegionsOfInterest`. When you run the StartStreamProcessor operation
+    #   on a label detection stream processor, you input start and stop
+    #   information to determine the length of the processing time.
+    #
+    # Use `Name` to assign an identifier for the stream processor. You use
+    # `Name` to manage the stream processor. For example, you can start
+    # processing the source video by calling StartStreamProcessor with the
+    # `Name` field.
     #
     # This operation requires permissions to perform the
     # `rekognition:CreateStreamProcessor` action. If you want to tag your
@@ -956,30 +1098,78 @@ module Aws::Rekognition
     # @option params [required, Types::StreamProcessorInput] :input
     #   Kinesis video stream stream that provides the source streaming video.
     #   If you are using the AWS CLI, the parameter name is
-    #   `StreamProcessorInput`.
+    #   `StreamProcessorInput`. This is required for both face search and
+    #   label detection stream processors.
     #
     # @option params [required, Types::StreamProcessorOutput] :output
-    #   Kinesis data stream stream to which Amazon Rekognition Video puts the
-    #   analysis results. If you are using the AWS CLI, the parameter name is
-    #   `StreamProcessorOutput`.
+    #   Kinesis data stream stream or Amazon S3 bucket location to which
+    #   Amazon Rekognition Video puts the analysis results. If you are using
+    #   the AWS CLI, the parameter name is `StreamProcessorOutput`. This must
+    #   be a S3Destination of an Amazon S3 bucket that you own for a label
+    #   detection stream processor or a Kinesis data stream ARN for a face
+    #   search stream processor.
     #
     # @option params [required, String] :name
     #   An identifier you assign to the stream processor. You can use `Name`
     #   to manage the stream processor. For example, you can get the current
     #   status of the stream processor by calling DescribeStreamProcessor.
-    #   `Name` is idempotent.
+    #   `Name` is idempotent. This is required for both face search and label
+    #   detection stream processors.
     #
     # @option params [required, Types::StreamProcessorSettings] :settings
-    #   Face recognition input parameters to be used by the stream processor.
-    #   Includes the collection to use for face recognition and the face
-    #   attributes to detect.
+    #   Input parameters used in a streaming video analyzed by a stream
+    #   processor. You can use `FaceSearch` to recognize faces in a streaming
+    #   video, or you can use `ConnectedHome` to detect labels.
     #
     # @option params [required, String] :role_arn
-    #   ARN of the IAM role that allows access to the stream processor.
+    #   The Amazon Resource Number (ARN) of the IAM role that allows access to
+    #   the stream processor. The IAM role provides Rekognition read
+    #   permissions for a Kinesis stream. It also provides write permissions
+    #   to an Amazon S3 bucket and Amazon Simple Notification Service topic
+    #   for a label detection stream processor. This is required for both face
+    #   search and label detection stream processors.
     #
     # @option params [Hash<String,String>] :tags
     #   A set of tags (key-value pairs) that you want to attach to the stream
     #   processor.
+    #
+    # @option params [Types::StreamProcessorNotificationChannel] :notification_channel
+    #   The Amazon Simple Notification Service topic to which Amazon
+    #   Rekognition publishes the object detection results and completion
+    #   status of a video analysis operation.
+    #
+    #   Amazon Rekognition publishes a notification the first time an object
+    #   of interest or a person is detected in the video stream. For example,
+    #   if Amazon Rekognition detects a person at second 2, a pet at second 4,
+    #   and a person again at second 5, Amazon Rekognition sends 2 object
+    #   class detected notifications, one for a person at second 2 and one for
+    #   a pet at second 4.
+    #
+    #   Amazon Rekognition also publishes an an end-of-session notification
+    #   with a summary when the stream processing session is complete.
+    #
+    # @option params [String] :kms_key_id
+    #   The identifier for your AWS Key Management Service key (AWS KMS key).
+    #   This is an optional parameter for label detection stream processors
+    #   and should not be used to create a face search stream processor. You
+    #   can supply the Amazon Resource Name (ARN) of your KMS key, the ID of
+    #   your KMS key, an alias for your KMS key, or an alias ARN. The key is
+    #   used to encrypt results and data published to your Amazon S3 bucket,
+    #   which includes image frames and hero images. Your source images are
+    #   unaffected.
+    #
+    # @option params [Array<Types::RegionOfInterest>] :regions_of_interest
+    #   Specifies locations in the frames where Amazon Rekognition checks for
+    #   objects or people. You can specify up to 10 regions of interest, and
+    #   each region has either a polygon or a bounding box. This is an
+    #   optional parameter for label detection stream processors and should
+    #   not be used to create a face search stream processor.
+    #
+    # @option params [Types::StreamProcessorDataSharingPreference] :data_sharing_preference
+    #   Shows whether you are sharing data with Rekognition to improve model
+    #   performance. You can choose this option at the account level or on a
+    #   per-stream basis. Note that if you opt out at the account level this
+    #   setting is ignored on individual streams.
     #
     # @return [Types::CreateStreamProcessorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -997,6 +1187,10 @@ module Aws::Rekognition
     #       kinesis_data_stream: {
     #         arn: "KinesisDataArn",
     #       },
+    #       s3_destination: {
+    #         bucket: "S3Bucket",
+    #         key_prefix: "S3KeyPrefix",
+    #       },
     #     },
     #     name: "StreamProcessorName", # required
     #     settings: { # required
@@ -1004,10 +1198,37 @@ module Aws::Rekognition
     #         collection_id: "CollectionId",
     #         face_match_threshold: 1.0,
     #       },
+    #       connected_home: {
+    #         labels: ["ConnectedHomeLabel"], # required
+    #         min_confidence: 1.0,
+    #       },
     #     },
     #     role_arn: "RoleArn", # required
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     notification_channel: {
+    #       sns_topic_arn: "SNSTopicArn", # required
+    #     },
+    #     kms_key_id: "KmsKeyId",
+    #     regions_of_interest: [
+    #       {
+    #         bounding_box: {
+    #           width: 1.0,
+    #           height: 1.0,
+    #           left: 1.0,
+    #           top: 1.0,
+    #         },
+    #         polygon: [
+    #           {
+    #             x: 1.0,
+    #             y: 1.0,
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     data_sharing_preference: {
+    #       opt_in: false, # required
     #     },
     #   })
     #
@@ -1023,11 +1244,15 @@ module Aws::Rekognition
     end
 
     # Deletes the specified collection. Note that this operation removes all
-    # faces in the collection. For an example, see
-    # delete-collection-procedure.
+    # faces in the collection. For an example, see [Deleting a
+    # collection][1].
     #
     # This operation requires permissions to perform the
     # `rekognition:DeleteCollection` action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/delete-collection-procedure.html
     #
     # @option params [required, String] :collection_id
     #   ID of the collection to delete.
@@ -1159,7 +1384,9 @@ module Aws::Rekognition
     #
     # `DeleteProject` is an asynchronous operation. To check if the project
     # is deleted, call DescribeProjects. The project is deleted when the
-    # project no longer appears in the response.
+    # project no longer appears in the response. Be aware that deleting a
+    # given project will also delete any `ProjectPolicies` associated with
+    # that project.
     #
     # This operation requires permissions to perform the
     # `rekognition:DeleteProject` action.
@@ -1185,6 +1412,54 @@ module Aws::Rekognition
     # @param [Hash] params ({})
     def delete_project(params = {}, options = {})
       req = build_request(:delete_project, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing project policy.
+    #
+    # To get a list of project policies attached to a project, call
+    # ListProjectPolicies. To attach a project policy to a project, call
+    # PutProjectPolicy.
+    #
+    # @option params [required, String] :project_arn
+    #   The Amazon Resource Name (ARN) of the project that the project policy
+    #   you want to delete is attached to.
+    #
+    # @option params [required, String] :policy_name
+    #   The name of the policy that you want to delete.
+    #
+    # @option params [String] :policy_revision_id
+    #   The ID of the project policy revision that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: DeleteProjectPolicy
+    #
+    #   # This operation deletes a revision of an existing project policy from an Amazon Rekognition Custom Labels project.
+    #
+    #   resp = client.delete_project_policy({
+    #     policy_name: "testPolicy1", 
+    #     policy_revision_id: "3b274c25e9203a56a99e00e3ff205fbc", 
+    #     project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/SourceProject/1656557123456", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_project_policy({
+    #     project_arn: "ProjectArn", # required
+    #     policy_name: "ProjectPolicyName", # required
+    #     policy_revision_id: "ProjectPolicyRevisionId",
+    #   })
+    #
+    # @overload delete_project_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_project_policy(params = {}, options = {})
+      req = build_request(:delete_project_policy, params)
       req.send_request(options)
     end
 
@@ -1214,7 +1489,7 @@ module Aws::Rekognition
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING"
+    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED"
     #
     # @overload delete_project_version(params = {})
     # @param [Hash] params ({})
@@ -1380,7 +1655,7 @@ module Aws::Rekognition
     #   resp.project_version_descriptions[0].project_version_arn #=> String
     #   resp.project_version_descriptions[0].creation_timestamp #=> Time
     #   resp.project_version_descriptions[0].min_inference_units #=> Integer
-    #   resp.project_version_descriptions[0].status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING"
+    #   resp.project_version_descriptions[0].status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED"
     #   resp.project_version_descriptions[0].status_message #=> String
     #   resp.project_version_descriptions[0].billable_training_time_in_seconds #=> Integer
     #   resp.project_version_descriptions[0].training_end_timestamp #=> Time
@@ -1420,6 +1695,8 @@ module Aws::Rekognition
     #   resp.project_version_descriptions[0].manifest_summary.s3_object.name #=> String
     #   resp.project_version_descriptions[0].manifest_summary.s3_object.version #=> String
     #   resp.project_version_descriptions[0].kms_key_id #=> String
+    #   resp.project_version_descriptions[0].max_inference_units #=> Integer
+    #   resp.project_version_descriptions[0].source_project_version_arn #=> String
     #   resp.next_token #=> String
     #
     #
@@ -1514,6 +1791,10 @@ module Aws::Rekognition
     #   * {Types::DescribeStreamProcessorResponse#output #output} => Types::StreamProcessorOutput
     #   * {Types::DescribeStreamProcessorResponse#role_arn #role_arn} => String
     #   * {Types::DescribeStreamProcessorResponse#settings #settings} => Types::StreamProcessorSettings
+    #   * {Types::DescribeStreamProcessorResponse#notification_channel #notification_channel} => Types::StreamProcessorNotificationChannel
+    #   * {Types::DescribeStreamProcessorResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::DescribeStreamProcessorResponse#regions_of_interest #regions_of_interest} => Array&lt;Types::RegionOfInterest&gt;
+    #   * {Types::DescribeStreamProcessorResponse#data_sharing_preference #data_sharing_preference} => Types::StreamProcessorDataSharingPreference
     #
     # @example Request syntax with placeholder values
     #
@@ -1525,15 +1806,31 @@ module Aws::Rekognition
     #
     #   resp.name #=> String
     #   resp.stream_processor_arn #=> String
-    #   resp.status #=> String, one of "STOPPED", "STARTING", "RUNNING", "FAILED", "STOPPING"
+    #   resp.status #=> String, one of "STOPPED", "STARTING", "RUNNING", "FAILED", "STOPPING", "UPDATING"
     #   resp.status_message #=> String
     #   resp.creation_timestamp #=> Time
     #   resp.last_update_timestamp #=> Time
     #   resp.input.kinesis_video_stream.arn #=> String
     #   resp.output.kinesis_data_stream.arn #=> String
+    #   resp.output.s3_destination.bucket #=> String
+    #   resp.output.s3_destination.key_prefix #=> String
     #   resp.role_arn #=> String
     #   resp.settings.face_search.collection_id #=> String
     #   resp.settings.face_search.face_match_threshold #=> Float
+    #   resp.settings.connected_home.labels #=> Array
+    #   resp.settings.connected_home.labels[0] #=> String
+    #   resp.settings.connected_home.min_confidence #=> Float
+    #   resp.notification_channel.sns_topic_arn #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.regions_of_interest #=> Array
+    #   resp.regions_of_interest[0].bounding_box.width #=> Float
+    #   resp.regions_of_interest[0].bounding_box.height #=> Float
+    #   resp.regions_of_interest[0].bounding_box.left #=> Float
+    #   resp.regions_of_interest[0].bounding_box.top #=> Float
+    #   resp.regions_of_interest[0].polygon #=> Array
+    #   resp.regions_of_interest[0].polygon[0].x #=> Float
+    #   resp.regions_of_interest[0].polygon[0].y #=> Float
+    #   resp.data_sharing_preference.opt_in #=> Boolean
     #
     # @overload describe_stream_processor(params = {})
     # @param [Hash] params ({})
@@ -1616,8 +1913,9 @@ module Aws::Rekognition
     #   using the S3Object property.
     #
     #   For Amazon Rekognition to process an S3 object, the user must have
-    #   permission to access the S3 object. For more information, see Resource
-    #   Based Policies in the Amazon Rekognition Developer Guide.
+    #   permission to access the S3 object. For more information, see How
+    #   Amazon Rekognition works with IAM in the Amazon Rekognition Developer
+    #   Guide.
     #
     # @option params [Integer] :max_results
     #   Maximum number of results you want the service to return in the
@@ -1859,7 +2157,7 @@ module Aws::Rekognition
     # events like wedding, graduation, and birthday party; and concepts like
     # landscape, evening, and nature.
     #
-    # For an example, see Analyzing Images Stored in an Amazon S3 Bucket in
+    # For an example, see Analyzing images stored in an Amazon S3 bucket in
     # the Amazon Rekognition Developer Guide.
     #
     # <note markdown="1"> `DetectLabels` does not support the detection of activities. However,
@@ -2256,7 +2554,7 @@ module Aws::Rekognition
     # To be detected, text must be within +/- 90 degrees orientation of the
     # horizontal axis.
     #
-    # For more information, see DetectText in the Amazon Rekognition
+    # For more information, see Detecting text in the Amazon Rekognition
     # Developer Guide.
     #
     # @option params [required, Types::Image] :image
@@ -2303,6 +2601,12 @@ module Aws::Rekognition
     #             left: 1.0,
     #             top: 1.0,
     #           },
+    #           polygon: [
+    #             {
+    #               x: 1.0,
+    #               y: 1.0,
+    #             },
+    #           ],
     #         },
     #       ],
     #     },
@@ -2381,7 +2685,7 @@ module Aws::Rekognition
     # an array of URLs. If there is no additional information about the
     # celebrity, this list is empty.
     #
-    # For more information, see Recognizing Celebrities in an Image in the
+    # For more information, see Getting information about a celebrity in the
     # Amazon Rekognition Developer Guide.
     #
     # This operation requires permissions to perform the
@@ -2617,7 +2921,7 @@ module Aws::Rekognition
     # and populate the `NextToken` request parameter with the value of
     # `NextToken` returned from the previous call to `GetContentModeration`.
     #
-    # For more information, see Content moderation in the Amazon Rekognition
+    # For more information, see moderating content in the Amazon Rekognition
     # Developer Guide.
     #
     #
@@ -3244,7 +3548,7 @@ module Aws::Rekognition
     # the `NextToken` request parameter with the token value returned from
     # the previous call to `GetSegmentDetection`.
     #
-    # For more information, see Detecting Video Segments in Stored Video in
+    # For more information, see Detecting video segments in stored video in
     # the Amazon Rekognition Developer Guide.
     #
     # @option params [required, String] :job_id
@@ -3436,7 +3740,7 @@ module Aws::Rekognition
     # search operations using the SearchFaces and SearchFacesByImage
     # operations.
     #
-    # For more information, see Adding Faces to a Collection in the Amazon
+    # For more information, see Adding faces to a collection in the Amazon
     # Rekognition Developer Guide.
     #
     # To get the number of faces in a collection, call DescribeCollection.
@@ -3517,9 +3821,9 @@ module Aws::Rekognition
     # `detectionAttributes` parameter), Amazon Rekognition returns detailed
     # facial attributes, such as facial landmarks (for example, location of
     # eye and mouth) and other facial attributes. If you provide the same
-    # image, specify the same collection, use the same external ID, and use
-    # the same model version in the `IndexFaces` operation, Amazon
-    # Rekognition doesn't save duplicate face metadata.
+    # image, specify the same collection, and use the same external ID in
+    # the `IndexFaces` operation, Amazon Rekognition doesn't save duplicate
+    # face metadata.
     #
     #
     #
@@ -3860,7 +4164,7 @@ module Aws::Rekognition
     # truncated, the response also provides a `NextToken` that you can use
     # in the subsequent request to fetch the next set of collection IDs.
     #
-    # For an example, see Listing Collections in the Amazon Rekognition
+    # For an example, see Listing collections in the Amazon Rekognition
     # Developer Guide.
     #
     # This operation requires permissions to perform the
@@ -4262,6 +4566,85 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Gets a list of the project policies attached to a project.
+    #
+    # To attach a project policy to a project, call PutProjectPolicy. To
+    # remove a project policy from a project, call DeleteProjectPolicy.
+    #
+    # @option params [required, String] :project_arn
+    #   The ARN of the project for which you want to list the project
+    #   policies.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more results
+    #   to retrieve), Amazon Rekognition Custom Labels returns a pagination
+    #   token in the response. You can use this pagination token to retrieve
+    #   the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 5. If you specify a value greater
+    #   than 5, a ValidationException error occurs. The default value is 5.
+    #
+    # @return [Types::ListProjectPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProjectPoliciesResponse#project_policies #project_policies} => Array&lt;Types::ProjectPolicy&gt;
+    #   * {Types::ListProjectPoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: ListProjectPolicies
+    #
+    #   # This operation lists the project policies that are attached to an Amazon Rekognition Custom Labels project.
+    #
+    #   resp = client.list_project_policies({
+    #     max_results: 5, 
+    #     next_token: "", 
+    #     project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-sdk-project/1656557051929", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "", 
+    #     project_policies: [
+    #       {
+    #         creation_timestamp: Time.parse("2022-07-01T11:51:27.086000-07:00"), 
+    #         last_updated_timestamp: Time.parse("2022-07-01T11:51:27.086000-07:00"), 
+    #         policy_document: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Statemented1\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111122223333:root\"},\"Action\":\"rekognition:CopyProjectVersion\",\"Resource\":\"*\"}]}", 
+    #         policy_name: "testPolicy", 
+    #         policy_revision_id: "3b274c25e9203a56a99e00e3ff205fbc", 
+    #         project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-sdk-project/1656557051929", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_project_policies({
+    #     project_arn: "ProjectArn", # required
+    #     next_token: "ExtendedPaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.project_policies #=> Array
+    #   resp.project_policies[0].project_arn #=> String
+    #   resp.project_policies[0].policy_name #=> String
+    #   resp.project_policies[0].policy_revision_id #=> String
+    #   resp.project_policies[0].policy_document #=> String
+    #   resp.project_policies[0].creation_timestamp #=> Time
+    #   resp.project_policies[0].last_updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_project_policies(params = {})
+    # @param [Hash] params ({})
+    def list_project_policies(params = {}, options = {})
+      req = build_request(:list_project_policies, params)
+      req.send_request(options)
+    end
+
     # Gets a list of stream processors that you have created with
     # CreateStreamProcessor.
     #
@@ -4294,7 +4677,7 @@ module Aws::Rekognition
     #   resp.next_token #=> String
     #   resp.stream_processors #=> Array
     #   resp.stream_processors[0].name #=> String
-    #   resp.stream_processors[0].status #=> String, one of "STOPPED", "STARTING", "RUNNING", "FAILED", "STOPPING"
+    #   resp.stream_processors[0].status #=> String, one of "STOPPED", "STARTING", "RUNNING", "FAILED", "STOPPING", "UPDATING"
     #
     # @overload list_stream_processors(params = {})
     # @param [Hash] params ({})
@@ -4335,8 +4718,94 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Attaches a project policy to a Amazon Rekognition Custom Labels
+    # project in a trusting AWS account. A project policy specifies that a
+    # trusted AWS account can copy a model version from a trusting AWS
+    # account to a project in the trusted AWS account. To copy a model
+    # version you use the CopyProjectVersion operation.
+    #
+    # For more information about the format of a project policy document,
+    # see Attaching a project policy (SDK) in the *Amazon Rekognition Custom
+    # Labels Developer Guide*.
+    #
+    # The response from `PutProjectPolicy` is a revision ID for the project
+    # policy. You can attach multiple project policies to a project. You can
+    # also update an existing project policy by specifying the policy
+    # revision ID of the existing policy.
+    #
+    # To remove a project policy from a project, call DeleteProjectPolicy.
+    # To get a list of project policies attached to a project, call
+    # ListProjectPolicies.
+    #
+    # You copy a model version by calling CopyProjectVersion.
+    #
+    # @option params [required, String] :project_arn
+    #   The Amazon Resource Name (ARN) of the project that the project policy
+    #   is attached to.
+    #
+    # @option params [required, String] :policy_name
+    #   A name for the policy.
+    #
+    # @option params [String] :policy_revision_id
+    #   The revision ID for the Project Policy. Each time you modify a policy,
+    #   Amazon Rekognition Custom Labels generates and assigns a new
+    #   `PolicyRevisionId` and then deletes the previous version of the
+    #   policy.
+    #
+    # @option params [required, String] :policy_document
+    #   A resource policy to add to the model. The policy is a JSON structure
+    #   that contains one or more statements that define the policy. The
+    #   policy must follow the IAM syntax. For more information about the
+    #   contents of a JSON policy document, see [IAM JSON policy
+    #   reference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #
+    # @return [Types::PutProjectPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutProjectPolicyResponse#policy_revision_id #policy_revision_id} => String
+    #
+    #
+    # @example Example: PutProjectPolicy
+    #
+    #   # This operation attaches a project policy to a Amazon Rekognition Custom Labels project in a trusting AWS account.
+    #
+    #   resp = client.put_project_policy({
+    #     policy_document: "'{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"ALLOW\",\"Principal\":{\"AWS\":\"principal\"},\"Action\":\"rekognition:CopyProjectVersion\",\"Resource\":\"arn:aws:rekognition:us-east-1:123456789012:project/my-sdk-project/version/DestinationVersionName/1627045542080\"}]}'", 
+    #     policy_name: "SamplePolicy", 
+    #     policy_revision_id: "0123456789abcdef", 
+    #     project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-sdk-project/1656557051929", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy_revision_id: "0123456789abcdef", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_project_policy({
+    #     project_arn: "ProjectArn", # required
+    #     policy_name: "ProjectPolicyName", # required
+    #     policy_revision_id: "ProjectPolicyRevisionId",
+    #     policy_document: "ProjectPolicyDocument", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_revision_id #=> String
+    #
+    # @overload put_project_policy(params = {})
+    # @param [Hash] params ({})
+    def put_project_policy(params = {}, options = {})
+      req = build_request(:put_project_policy, params)
+      req.send_request(options)
+    end
+
     # Returns an array of celebrities recognized in the input image. For
-    # more information, see Recognizing Celebrities in the Amazon
+    # more information, see Recognizing celebrities in the Amazon
     # Rekognition Developer Guide.
     #
     # `RecognizeCelebrities` returns the 64 largest faces in the image. It
@@ -4364,7 +4833,7 @@ module Aws::Rekognition
     # to call Amazon Rekognition operations, passing image bytes is not
     # supported. The image must be either a PNG or JPEG formatted file.
     #
-    # For an example, see Recognizing Celebrities in an Image in the Amazon
+    # For an example, see Recognizing celebrities in an image in the Amazon
     # Rekognition Developer Guide.
     #
     # This operation requires permissions to perform the
@@ -4474,7 +4943,7 @@ module Aws::Rekognition
     # `confidence` value for each face match, indicating the confidence that
     # the specific face matches the input face.
     #
-    # For an example, see Searching for a Face Using Its Face ID in the
+    # For an example, see Searching for a face using its face ID in the
     # Amazon Rekognition Developer Guide.
     #
     # This operation requires permissions to perform the
@@ -4792,7 +5261,7 @@ module Aws::Rekognition
     # identifier (`JobId`) from the initial call to
     # `StartCelebrityRecognition`.
     #
-    # For more information, see Recognizing Celebrities in the Amazon
+    # For more information, see Recognizing celebrities in the Amazon
     # Rekognition Developer Guide.
     #
     # @option params [required, Types::Video] :video
@@ -4868,7 +5337,7 @@ module Aws::Rekognition
     # call GetContentModeration and pass the job identifier (`JobId`) from
     # the initial call to `StartContentModeration`.
     #
-    # For more information, see Content moderation in the Amazon Rekognition
+    # For more information, see Moderating content in the Amazon Rekognition
     # Developer Guide.
     #
     #
@@ -4956,7 +5425,7 @@ module Aws::Rekognition
     # pass the job identifier (`JobId`) from the initial call to
     # `StartFaceDetection`.
     #
-    # For more information, see Detecting Faces in a Stored Video in the
+    # For more information, see Detecting faces in a stored video in the
     # Amazon Rekognition Developer Guide.
     #
     # @option params [required, Types::Video] :video
@@ -5037,7 +5506,11 @@ module Aws::Rekognition
     # status value published to the Amazon SNS topic is `SUCCEEDED`. If so,
     # call GetFaceSearch and pass the job identifier (`JobId`) from the
     # initial call to `StartFaceSearch`. For more information, see
-    # procedure-person-search-videos.
+    # [Searching stored videos for faces][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/procedure-person-search-videos.html
     #
     # @option params [required, Types::Video] :video
     #   The video you want to search. The video must be stored in an Amazon S3
@@ -5275,6 +5748,9 @@ module Aws::Rekognition
     #
     #  </note>
     #
+    # For more information, see *Running a trained Amazon Rekognition Custom
+    # Labels model* in the Amazon Rekognition Custom Labels Guide.
+    #
     # This operation requires permissions to perform the
     # `rekognition:StartProjectVersion` action.
     #
@@ -5284,10 +5760,20 @@ module Aws::Rekognition
     #
     # @option params [required, Integer] :min_inference_units
     #   The minimum number of inference units to use. A single inference unit
-    #   represents 1 hour of processing and can support up to 5 Transaction
-    #   Pers Second (TPS). Use a higher number to increase the TPS throughput
-    #   of your model. You are charged for the number of inference units that
-    #   you use.
+    #   represents 1 hour of processing.
+    #
+    #   For information about the number of transactions per second (TPS) that
+    #   an inference unit can support, see *Running a trained Amazon
+    #   Rekognition Custom Labels model* in the Amazon Rekognition Custom
+    #   Labels Guide.
+    #
+    #   Use a higher number to increase the TPS throughput of your model. You
+    #   are charged for the number of inference units that you use.
+    #
+    # @option params [Integer] :max_inference_units
+    #   The maximum number of inference units to use for auto-scaling the
+    #   model. If you don't specify a value, Amazon Rekognition Custom Labels
+    #   doesn't auto-scale the model.
     #
     # @return [Types::StartProjectVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5298,11 +5784,12 @@ module Aws::Rekognition
     #   resp = client.start_project_version({
     #     project_version_arn: "ProjectVersionArn", # required
     #     min_inference_units: 1, # required
+    #     max_inference_units: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING"
+    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED"
     #
     # @overload start_project_version(params = {})
     # @param [Hash] params ({})
@@ -5333,7 +5820,7 @@ module Aws::Rekognition
     # `SUCCEEDED`. if so, call GetSegmentDetection and pass the job
     # identifier (`JobId`) from the initial call to `StartSegmentDetection`.
     #
-    # For more information, see Detecting Video Segments in Stored Video in
+    # For more information, see Detecting video segments in stored video in
     # the Amazon Rekognition Developer Guide.
     #
     # @option params [required, Types::Video] :video
@@ -5419,16 +5906,54 @@ module Aws::Rekognition
     # stream processor to start, use the value of the `Name` field specified
     # in the call to `CreateStreamProcessor`.
     #
+    # If you are using a label detection stream processor to detect labels,
+    # you need to provide a `Start selector` and a `Stop selector` to
+    # determine the length of the stream processing time.
+    #
     # @option params [required, String] :name
     #   The name of the stream processor to start processing.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [Types::StreamProcessingStartSelector] :start_selector
+    #   Specifies the starting point in the Kinesis stream to start
+    #   processing. You can use the producer timestamp or the fragment number.
+    #   For more information, see [Fragment][1].
+    #
+    #   This is a required parameter for label detection stream processors and
+    #   should not be used to start a face search stream processor.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_reader_Fragment.html
+    #
+    # @option params [Types::StreamProcessingStopSelector] :stop_selector
+    #   Specifies when to stop processing the stream. You can specify a
+    #   maximum amount of time to process the video.
+    #
+    #   This is a required parameter for label detection stream processors and
+    #   should not be used to start a face search stream processor.
+    #
+    # @return [Types::StartStreamProcessorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartStreamProcessorResponse#session_id #session_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_stream_processor({
     #     name: "StreamProcessorName", # required
+    #     start_selector: {
+    #       kvs_stream_start_selector: {
+    #         producer_timestamp: 1,
+    #         fragment_number: "KinesisVideoStreamFragmentNumber",
+    #       },
+    #     },
+    #     stop_selector: {
+    #       max_duration_in_seconds: 1,
+    #     },
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
     #
     # @overload start_stream_processor(params = {})
     # @param [Hash] params ({})
@@ -5467,15 +5992,17 @@ module Aws::Rekognition
     # @option params [Types::NotificationChannel] :notification_channel
     #   The Amazon Simple Notification Service topic to which Amazon
     #   Rekognition publishes the completion status of a video analysis
-    #   operation. For more information, see api-video. Note that the Amazon
-    #   SNS topic must have a topic name that begins with *AmazonRekognition*
-    #   if you are using the AmazonRekognitionServiceRole permissions policy
-    #   to access the topic. For more information, see [Giving access to
-    #   multiple Amazon SNS topics][1].
+    #   operation. For more information, see [Calling Amazon Rekognition Video
+    #   operations][1]. Note that the Amazon SNS topic must have a topic name
+    #   that begins with *AmazonRekognition* if you are using the
+    #   AmazonRekognitionServiceRole permissions policy to access the topic.
+    #   For more information, see [Giving access to multiple Amazon SNS
+    #   topics][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics
+    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video.html
+    #   [2]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics
     #
     # @option params [String] :job_tag
     #   An identifier returned in the completion status published by your
@@ -5521,6 +6048,12 @@ module Aws::Rekognition
     #             left: 1.0,
     #             top: 1.0,
     #           },
+    #           polygon: [
+    #             {
+    #               x: 1.0,
+    #               y: 1.0,
+    #             },
+    #           ],
     #         },
     #       ],
     #     },
@@ -5559,7 +6092,7 @@ module Aws::Rekognition
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING"
+    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED"
     #
     # @overload stop_project_version(params = {})
     # @param [Hash] params ({})
@@ -5709,6 +6242,72 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Allows you to update a stream processor. You can change some settings
+    # and regions of interest and delete certain parameters.
+    #
+    # @option params [required, String] :name
+    #   Name of the stream processor that you want to update.
+    #
+    # @option params [Types::StreamProcessorSettingsForUpdate] :settings_for_update
+    #   The stream processor settings that you want to update. Label detection
+    #   settings can be updated to detect different labels with a different
+    #   minimum confidence.
+    #
+    # @option params [Array<Types::RegionOfInterest>] :regions_of_interest_for_update
+    #   Specifies locations in the frames where Amazon Rekognition checks for
+    #   objects or people. This is an optional parameter for label detection
+    #   stream processors.
+    #
+    # @option params [Types::StreamProcessorDataSharingPreference] :data_sharing_preference_for_update
+    #   Shows whether you are sharing data with Rekognition to improve model
+    #   performance. You can choose this option at the account level or on a
+    #   per-stream basis. Note that if you opt out at the account level this
+    #   setting is ignored on individual streams.
+    #
+    # @option params [Array<String>] :parameters_to_delete
+    #   A list of parameters you want to delete from the stream processor.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_stream_processor({
+    #     name: "StreamProcessorName", # required
+    #     settings_for_update: {
+    #       connected_home_for_update: {
+    #         labels: ["ConnectedHomeLabel"],
+    #         min_confidence: 1.0,
+    #       },
+    #     },
+    #     regions_of_interest_for_update: [
+    #       {
+    #         bounding_box: {
+    #           width: 1.0,
+    #           height: 1.0,
+    #           left: 1.0,
+    #           top: 1.0,
+    #         },
+    #         polygon: [
+    #           {
+    #             x: 1.0,
+    #             y: 1.0,
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     data_sharing_preference_for_update: {
+    #       opt_in: false, # required
+    #     },
+    #     parameters_to_delete: ["ConnectedHomeMinConfidence"], # accepts ConnectedHomeMinConfidence, RegionsOfInterest
+    #   })
+    #
+    # @overload update_stream_processor(params = {})
+    # @param [Hash] params ({})
+    def update_stream_processor(params = {}, options = {})
+      req = build_request(:update_stream_processor, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5722,7 +6321,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

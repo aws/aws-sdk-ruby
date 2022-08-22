@@ -820,6 +820,8 @@ module Aws::Backup
     ListBackupJobsInput.add_member(:by_created_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "createdAfter"))
     ListBackupJobsInput.add_member(:by_resource_type, Shapes::ShapeRef.new(shape: ResourceType, location: "querystring", location_name: "resourceType"))
     ListBackupJobsInput.add_member(:by_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "accountId"))
+    ListBackupJobsInput.add_member(:by_complete_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeAfter"))
+    ListBackupJobsInput.add_member(:by_complete_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeBefore"))
     ListBackupJobsInput.struct_class = Types::ListBackupJobsInput
 
     ListBackupJobsOutput.add_member(:backup_jobs, Shapes::ShapeRef.new(shape: BackupJobsList, location_name: "BackupJobs"))
@@ -878,6 +880,8 @@ module Aws::Backup
     ListCopyJobsInput.add_member(:by_resource_type, Shapes::ShapeRef.new(shape: ResourceType, location: "querystring", location_name: "resourceType"))
     ListCopyJobsInput.add_member(:by_destination_vault_arn, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "destinationVaultArn"))
     ListCopyJobsInput.add_member(:by_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "accountId"))
+    ListCopyJobsInput.add_member(:by_complete_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeBefore"))
+    ListCopyJobsInput.add_member(:by_complete_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeAfter"))
     ListCopyJobsInput.struct_class = Types::ListCopyJobsInput
 
     ListCopyJobsOutput.add_member(:copy_jobs, Shapes::ShapeRef.new(shape: CopyJobsList, location_name: "CopyJobs"))
@@ -951,6 +955,8 @@ module Aws::Backup
     ListRestoreJobsInput.add_member(:by_created_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "createdBefore"))
     ListRestoreJobsInput.add_member(:by_created_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "createdAfter"))
     ListRestoreJobsInput.add_member(:by_status, Shapes::ShapeRef.new(shape: RestoreJobStatus, location: "querystring", location_name: "status"))
+    ListRestoreJobsInput.add_member(:by_complete_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeBefore"))
+    ListRestoreJobsInput.add_member(:by_complete_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeAfter"))
     ListRestoreJobsInput.struct_class = Types::ListRestoreJobsInput
 
     ListRestoreJobsOutput.add_member(:restore_jobs, Shapes::ShapeRef.new(shape: RestoreJobsList, location_name: "RestoreJobs"))
@@ -1153,7 +1159,7 @@ module Aws::Backup
 
     StartRestoreJobInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "RecoveryPointArn"))
     StartRestoreJobInput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, required: true, location_name: "Metadata"))
-    StartRestoreJobInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "IamRoleArn"))
+    StartRestoreJobInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IamRoleArn"))
     StartRestoreJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken"))
     StartRestoreJobInput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     StartRestoreJobInput.struct_class = Types::StartRestoreJobInput

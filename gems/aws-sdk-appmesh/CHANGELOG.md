@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2022-08-17)
+------------------
+
+* Feature - AWS App Mesh release to support Multiple Listener and Access Log Format feature
+
+1.46.0 (2022-05-18)
+------------------
+
+* Feature - This release updates the existing Create and Update APIs for meshes and virtual nodes by adding a new IP preference field. This new IP preference field can be used to control the IP versions being used with the mesh and allows for IPv6 support within App Mesh.
+
 1.45.0 (2022-02-24)
 ------------------
 

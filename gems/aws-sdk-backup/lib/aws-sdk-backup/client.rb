@@ -2046,6 +2046,14 @@ module Aws::Backup
     #   If used from an Organizations management account, passing `*` returns
     #   all jobs across the organization.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_after
+    #   Returns only backup jobs completed after a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_before
+    #   Returns only backup jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #
     # @return [Types::ListBackupJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListBackupJobsOutput#backup_jobs #backup_jobs} => Array&lt;Types::BackupJob&gt;
@@ -2065,6 +2073,8 @@ module Aws::Backup
     #     by_created_after: Time.now,
     #     by_resource_type: "ResourceType",
     #     by_account_id: "AccountId",
+    #     by_complete_after: Time.now,
+    #     by_complete_before: Time.now,
     #   })
     #
     # @example Response structure
@@ -2423,6 +2433,14 @@ module Aws::Backup
     #   The account ID to list the jobs from. Returns only copy jobs
     #   associated with the specified account ID.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_before
+    #   Returns only copy jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_after
+    #   Returns only copy jobs completed after a date expressed in Unix format
+    #   and Coordinated Universal Time (UTC).
+    #
     # @return [Types::ListCopyJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCopyJobsOutput#copy_jobs #copy_jobs} => Array&lt;Types::CopyJob&gt;
@@ -2442,6 +2460,8 @@ module Aws::Backup
     #     by_resource_type: "ResourceType",
     #     by_destination_vault_arn: "string",
     #     by_account_id: "AccountId",
+    #     by_complete_before: Time.now,
+    #     by_complete_after: Time.now,
     #   })
     #
     # @example Response structure
@@ -2879,6 +2899,14 @@ module Aws::Backup
     # @option params [String] :by_status
     #   Returns only restore jobs associated with the specified job status.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_before
+    #   Returns only copy jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_after
+    #   Returns only copy jobs completed after a date expressed in Unix format
+    #   and Coordinated Universal Time (UTC).
+    #
     # @return [Types::ListRestoreJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRestoreJobsOutput#restore_jobs #restore_jobs} => Array&lt;Types::RestoreJobsListMember&gt;
@@ -2895,6 +2923,8 @@ module Aws::Backup
     #     by_created_before: Time.now,
     #     by_created_after: Time.now,
     #     by_status: "PENDING", # accepts PENDING, RUNNING, COMPLETED, ABORTED, FAILED
+    #     by_complete_before: Time.now,
+    #     by_complete_after: Time.now,
     #   })
     #
     # @example Response structure
@@ -3215,11 +3245,10 @@ module Aws::Backup
     #   “transition to cold after days” setting cannot be changed after a
     #   backup has been transitioned to cold.
     #
-    #   Only resource types that support full Backup management can transition
-    #   their backups to cold storage. Those resource types are listed in the
-    #   "Full Backup management" section of the [ Feature availability by
-    #   resource][1] table. Backup ignores this expression for other resource
-    #   types.
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
+    #   availability by resource][1] table. Backup ignores this expression for
+    #   other resource types.
     #
     #
     #
@@ -3321,11 +3350,10 @@ module Aws::Backup
     #   days” setting. The “transition to cold after days” setting cannot be
     #   changed after a backup has been transitioned to cold.
     #
-    #   Only resource types that support full Backup management can transition
-    #   their backups to cold storage. Those resource types are listed in the
-    #   "Full Backup management" section of the [ Feature availability by
-    #   resource][1] table. Backup ignores this expression for other resource
-    #   types.
+    #   Resource types that are able to be transitioned to cold storage are
+    #   listed in the "Lifecycle to cold storage" section of the [ Feature
+    #   availability by resource][1] table. Backup ignores this expression for
+    #   other resource types.
     #
     #
     #
@@ -3449,7 +3477,7 @@ module Aws::Backup
     #     directories rather than the entire file system. This parameter is
     #     optional. For example, `"itemsToRestore":"["/my.test"]"`.
     #
-    # @option params [required, String] :iam_role_arn
+    # @option params [String] :iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Backup uses to
     #   create the target recovery point; for example,
     #   `arn:aws:iam::123456789012:role/S3Access`.
@@ -3499,7 +3527,7 @@ module Aws::Backup
     #     metadata: { # required
     #       "MetadataKey" => "MetadataValue",
     #     },
-    #     iam_role_arn: "IAMRoleArn", # required
+    #     iam_role_arn: "IAMRoleArn",
     #     idempotency_token: "string",
     #     resource_type: "ResourceType",
     #   })
@@ -3796,11 +3824,10 @@ module Aws::Backup
     # “transition to cold after days” setting cannot be changed after a
     # backup has been transitioned to cold.
     #
-    # Only resource types that support full Backup management can transition
-    # their backups to cold storage. Those resource types are listed in the
-    # "Full Backup management" section of the [ Feature availability by
-    # resource][1] table. Backup ignores this expression for other resource
-    # types.
+    # Resource types that are able to be transitioned to cold storage are
+    # listed in the "Lifecycle to cold storage" section of the [ Feature
+    # availability by resource][1] table. Backup ignores this expression for
+    # other resource types.
     #
     # This operation does not support continuous backups.
     #
@@ -4000,7 +4027,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

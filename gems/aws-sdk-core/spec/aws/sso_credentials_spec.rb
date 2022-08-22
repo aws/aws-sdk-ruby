@@ -75,6 +75,17 @@ module Aws
         expect(creds.client).to be(client)
       end
 
+      it 'excludes before_refresh from client construction' do
+        expect(SSO::Client).to receive(:new)
+                                 .with({region: sso_region, credentials: nil})
+                                 .and_return(client)
+
+        mock_token_file(sso_start_url, cached_token)
+
+        creds = SSOCredentials.new(sso_opts.merge(before_refresh: proc {}))
+        expect(creds.client).to be(client)
+      end
+
       it 'raises an argument error when arguments are missing' do
         expect { SSOCredentials.new }.to raise_error(
           ArgumentError, /Missing required keys/

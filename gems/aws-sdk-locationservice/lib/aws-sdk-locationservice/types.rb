@@ -380,6 +380,10 @@ module Aws::LocationService
     #           {
     #             geofence_id: "Id", # required
     #             geometry: { # required
+    #               circle: {
+    #                 center: [1.0], # required
+    #                 radius: 1.0, # required
+    #               },
     #               polygon: [
     #                 [
     #                   [1.0],
@@ -415,6 +419,10 @@ module Aws::LocationService
     #       {
     #         geofence_id: "Id", # required
     #         geometry: { # required
+    #           circle: {
+    #             center: [1.0], # required
+    #             radius: 1.0, # required
+    #           },
     #           polygon: [
     #             [
     #               [1.0],
@@ -429,10 +437,11 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] geometry
-    #   Contains the polygon details to specify the position of the
-    #   geofence.
+    #   Contains the details of the position of the geofence. Can be either
+    #   a polygon or a circle. Including both will return a validation
+    #   error.
     #
-    #   <note markdown="1"> Each [geofence polygon][1] can have a maximum of 1,000 vertices.
+    #   <note markdown="1"> Each [ geofence polygon][1] can have a maximum of 1,000 vertices.
     #
     #    </note>
     #
@@ -939,8 +948,8 @@ module Aws::LocationService
     #   @return [Boolean]
     #
     # @!attribute [rw] departure_position
-    #   The start position for the route. Defined in [WGS 84][1] format:
-    #   `[longitude, latitude]`.
+    #   The start position for the route. Defined in [World Geodetic System
+    #   (WGS 84)][1] format: `[longitude, latitude]`.
     #
     #   * For example, `[-123.115, 49.285]`
     #
@@ -957,7 +966,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
+    #   [1]: https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #   @return [Array<Float>]
     #
@@ -982,8 +991,8 @@ module Aws::LocationService
     #   @return [Time]
     #
     # @!attribute [rw] destination_position
-    #   The finish position for the route. Defined in [WGS 84][1] format:
-    #   `[longitude, latitude]`.
+    #   The finish position for the route. Defined in [World Geodetic System
+    #   (WGS 84)][1] format: `[longitude, latitude]`.
     #
     #   * For example, `[-122.339, 47.615]`
     #
@@ -998,7 +1007,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
+    #   [1]: https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #   @return [Array<Float>]
     #
@@ -1019,7 +1028,8 @@ module Aws::LocationService
     #
     # @!attribute [rw] travel_mode
     #   Specifies the mode of transport when calculating a route. Used in
-    #   estimating the speed of travel and road compatibility.
+    #   estimating the speed of travel and road compatibility. You can
+    #   choose `Car`, `Truck`, or `Walking` as options for the `TravelMode`.
     #
     #   The `TravelMode` you specify also determines how you specify route
     #   preferences:
@@ -1263,6 +1273,39 @@ module Aws::LocationService
       :dimensions,
       :weight)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A circle on the earth, as defined by a center point and a radius.
+    #
+    # @note When making an API call, you may pass Circle
+    #   data as a hash:
+    #
+    #       {
+    #         center: [1.0], # required
+    #         radius: 1.0, # required
+    #       }
+    #
+    # @!attribute [rw] center
+    #   A single point geometry, specifying the center of the circle, using
+    #   [WGS 84][1] coordinates, in the form `[longitude, latitude]`.
+    #
+    #
+    #
+    #   [1]: https://gisgeography.com/wgs84-world-geodetic-system/
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] radius
+    #   The radius of the circle in meters. Must be greater than zero and no
+    #   larger than 100,000 (100 kilometers).
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/Circle AWS API Documentation
+    #
+    class Circle < Struct.new(
+      :center,
+      :radius)
+      SENSITIVE = [:center]
       include Aws::Structure
     end
 
@@ -2745,6 +2788,10 @@ module Aws::LocationService
 
     # Contains the geofence geometry details.
     #
+    # A geofence geometry is made up of either a polygon or a circle. Can be
+    # either a polygon or a circle. Including both will return a validation
+    # error.
+    #
     # <note markdown="1"> Amazon Location doesn't currently support polygons with holes,
     # multipolygons, polygons that are wound clockwise, or that cross the
     # antimeridian.
@@ -2755,12 +2802,20 @@ module Aws::LocationService
     #   data as a hash:
     #
     #       {
+    #         circle: {
+    #           center: [1.0], # required
+    #           radius: 1.0, # required
+    #         },
     #         polygon: [
     #           [
     #             [1.0],
     #           ],
     #         ],
     #       }
+    #
+    # @!attribute [rw] circle
+    #   A circle on the earth, as defined by a center point and a radius.
+    #   @return [Types::Circle]
     #
     # @!attribute [rw] polygon
     #   An array of 1 or more linear rings. A linear ring is an array of 4
@@ -2775,13 +2830,16 @@ module Aws::LocationService
     #   side is the polygon's exterior. Inner rings must list their
     #   vertices in clockwise order, where the left side is the polygon's
     #   interior.
+    #
+    #   A geofence polygon can consist of between 4 and 1,000 vertices.
     #   @return [Array<Array<Array<Float>>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GeofenceGeometry AWS API Documentation
     #
     class GeofenceGeometry < Struct.new(
+      :circle,
       :polygon)
-      SENSITIVE = []
+      SENSITIVE = [:circle]
       include Aws::Structure
     end
 
@@ -2998,7 +3056,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] geometry
-    #   Contains the geofence geometry details describing a polygon.
+    #   Contains the geofence geometry details describing a polygon or a
+    #   circle.
     #   @return [Types::GeofenceGeometry]
     #
     # @!attribute [rw] status
@@ -3070,7 +3129,7 @@ module Aws::LocationService
     #
     #   Valid font stacks for [HERE Technologies][2] styles:
     #
-    #   * VectorHereBerlin – `Fira GO Regular` \| `Fira GO Bold`
+    #   * VectorHereContrast – `Fira GO Regular` \| `Fira GO Bold`
     #
     #   * VectorHereExplore, VectorHereExploreTruck – `Firo GO Italic` \|
     #     `Fira GO Map` \| `Fira GO Map Bold` \| `Noto Sans CJK JP Bold` \|
@@ -3614,7 +3673,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] geometry
-    #   Contains the geofence geometry details describing a polygon.
+    #   Contains the geofence geometry details describing a polygon or a
+    #   circle.
     #   @return [Types::GeofenceGeometry]
     #
     # @!attribute [rw] status
@@ -3658,12 +3718,20 @@ module Aws::LocationService
     #
     #       {
     #         collection_name: "ResourceName", # required
+    #         max_results: 1,
     #         next_token: "Token",
     #       }
     #
     # @!attribute [rw] collection_name
     #   The name of the geofence collection storing the list of geofences.
     #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   An optional limit for the number of geofences returned in a single
+    #   call.
+    #
+    #   Default value: `100`
+    #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   The pagination token specifying which page of results to return in
@@ -3677,6 +3745,7 @@ module Aws::LocationService
     #
     class ListGeofencesRequest < Struct.new(
       :collection_name,
+      :max_results,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4279,8 +4348,9 @@ module Aws::LocationService
     #
     #   Valid [HERE Technologies map styles][2]\:
     #
-    #   * `VectorHereBerlin` – The HERE Berlin map style is a high contrast
-    #     detailed base map of the world that blends 3D and 2D rendering.
+    #   * `VectorHereContrast` – The HERE Contrast (Berlin) map style is a
+    #     high contrast detailed base map of the world that blends 3D and 2D
+    #     rendering.
     #
     #   * `VectorHereExplore` – A default HERE map style containing a
     #     neutral, global map and its features including roads, buildings,
@@ -4291,6 +4361,12 @@ module Aws::LocationService
     #     restrictions and attributes (e.g. width / height / HAZMAT)
     #     symbolized with highlighted segments and icons on top of HERE
     #     Explore to support use cases within transport and logistics.
+    #
+    #   <note markdown="1"> The `VectorHereContrast` style has been renamed from
+    #   `VectorHereBerlin`. `VectorHereBerlin` has been deprecated, but will
+    #   continue to work in applications that use it.
+    #
+    #    </note>
     #
     #
     #
@@ -4308,6 +4384,9 @@ module Aws::LocationService
 
     # Contains details about addresses or points of interest that match the
     # search criteria.
+    #
+    # Not all details are included with all responses. Some details may only
+    # be returned by specific data partners.
     #
     # @!attribute [rw] address_number
     #   The numerical portion of an address, such as a building number.
@@ -4449,6 +4528,10 @@ module Aws::LocationService
     #         collection_name: "ResourceName", # required
     #         geofence_id: "Id", # required
     #         geometry: { # required
+    #           circle: {
+    #             center: [1.0], # required
+    #             radius: 1.0, # required
+    #           },
     #           polygon: [
     #             [
     #               [1.0],
@@ -4466,10 +4549,11 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] geometry
-    #   Contains the polygon details to specify the position of the
-    #   geofence.
+    #   Contains the details to specify the position of the geofence. Can be
+    #   either a polygon or a circle. Including both will return a
+    #   validation error.
     #
-    #   <note markdown="1"> Each [geofence polygon][1] can have a maximum of 1,000 vertices.
+    #   <note markdown="1"> Each [ geofence polygon][1] can have a maximum of 1,000 vertices.
     #
     #    </note>
     #
@@ -4713,10 +4797,21 @@ module Aws::LocationService
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
     #
-    #   This setting affects the languages used in the results. It does not
-    #   change which results are returned. If the language is not specified,
-    #   or not supported for a particular result, the partner automatically
-    #   chooses a language for the result.
+    #   This setting affects the languages used in the results, but not the
+    #   results themselves. If no language is specified, or not supported
+    #   for a particular result, the partner automatically chooses a
+    #   language for the result.
+    #
+    #   For an example, we'll use the Greek language. You search for a
+    #   location around Athens, Greece, with the `language` parameter set to
+    #   `en`. The `city` in the results will most likely be returned as
+    #   `Athens`.
+    #
+    #   If you set the `language` parameter to `el`, for Greek, then the
+    #   `city` in the results will more likely be returned as `Αθήνα`.
+    #
+    #   If the data provider does not have a value for Greek, the result
+    #   will be in a language that the provider does support.
     #
     #
     #
@@ -4832,7 +4927,7 @@ module Aws::LocationService
     #         index_name: "ResourceName", # required
     #         language: "LanguageTag",
     #         max_results: 1,
-    #         text: "SyntheticSearchPlaceIndexForSuggestionsRequestString", # required
+    #         text: "SearchPlaceIndexForSuggestionsRequestTextString", # required
     #       }
     #
     # @!attribute [rw] bias_position
@@ -4896,12 +4991,20 @@ module Aws::LocationService
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
     #
-    #   This setting affects the languages used in the results. It does not
-    #   change which results are returned. If the language is not specified,
-    #   or not supported for a particular result, the partner automatically
-    #   chooses a language for the result.
+    #   This setting affects the languages used in the results. If no
+    #   language is specified, or not supported for a particular result, the
+    #   partner automatically chooses a language for the result.
     #
-    #   Used only when the partner selected is Here.
+    #   For an example, we'll use the Greek language. You search for
+    #   `Athens, Gr` to get suggestions with the `language` parameter set to
+    #   `en`. The results found will most likely be returned as `Athens,
+    #   Greece`.
+    #
+    #   If you set the `language` parameter to `el`, for Greek, then the
+    #   result found will more likely be returned as `Αθήνα, Ελλάδα`.
+    #
+    #   If the data provider does not have a value for Greek, the result
+    #   will be in a language that the provider does support.
     #
     #
     #
@@ -5036,7 +5139,7 @@ module Aws::LocationService
     #         index_name: "ResourceName", # required
     #         language: "LanguageTag",
     #         max_results: 1,
-    #         text: "SyntheticSearchPlaceIndexForTextRequestString", # required
+    #         text: "SearchPlaceIndexForTextRequestTextString", # required
     #       }
     #
     # @!attribute [rw] bias_position
@@ -5100,10 +5203,20 @@ module Aws::LocationService
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
     #
-    #   This setting affects the languages used in the results. It does not
-    #   change which results are returned. If the language is not specified,
-    #   or not supported for a particular result, the partner automatically
-    #   chooses a language for the result.
+    #   This setting affects the languages used in the results, but not the
+    #   results themselves. If no language is specified, or not supported
+    #   for a particular result, the partner automatically chooses a
+    #   language for the result.
+    #
+    #   For an example, we'll use the Greek language. You search for
+    #   `Athens, Greece`, with the `language` parameter set to `en`. The
+    #   result found will most likely be returned as `Athens`.
+    #
+    #   If you set the `language` parameter to `el`, for Greek, then the
+    #   result found will more likely be returned as `Αθήνα`.
+    #
+    #   If the data provider does not have a value for Greek, the result
+    #   will be in a language that the provider does support.
     #
     #
     #
@@ -5139,6 +5252,9 @@ module Aws::LocationService
     # @!attribute [rw] results
     #   A list of Places matching the input text. Each result contains
     #   additional information about the specific point of interest.
+    #
+    #   Not all response properties are included with all responses. Some
+    #   properties may only be returned by specific data partners.
     #   @return [Array<Types::SearchForTextResult>]
     #
     # @!attribute [rw] summary
@@ -5422,6 +5538,11 @@ module Aws::LocationService
     #   * For example, `4.5`.
     #
     #   ^
+    #
+    #   <note markdown="1"> For routes calculated with a HERE resource, this value must be
+    #   between 0 and 50 meters.
+    #
+    #    </note>
     #   @return [Float]
     #
     # @!attribute [rw] length
@@ -5430,6 +5551,11 @@ module Aws::LocationService
     #   * For example, `15.5`.
     #
     #   ^
+    #
+    #   <note markdown="1"> For routes calculated with a HERE resource, this value must be
+    #   between 0 and 300 meters.
+    #
+    #    </note>
     #   @return [Float]
     #
     # @!attribute [rw] unit
@@ -5444,6 +5570,11 @@ module Aws::LocationService
     #   * For example, `4.5`.
     #
     #   ^
+    #
+    #   <note markdown="1"> For routes calculated with a HERE resource, this value must be
+    #   between 0 and 50 meters.
+    #
+    #    </note>
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/TruckDimensions AWS API Documentation

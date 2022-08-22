@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2022-08-09)
+------------------
+
+* Feature - Fix bug with parsing ISO-8601 CreationTime in Java SDK in DescribeHumanLoop
+
 1.22.0 (2022-02-24)
 ------------------
 

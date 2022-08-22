@@ -1957,7 +1957,8 @@
         "OutpostMode":{"shape":"OutpostMode"},
         "PreferredOutpostArn":{"shape":"String"},
         "PreferredOutpostArns":{"shape":"PreferredOutpostArnList"},
-        "LogDeliveryConfigurations":{"shape":"LogDeliveryConfigurationRequestList"}
+        "LogDeliveryConfigurations":{"shape":"LogDeliveryConfigurationRequestList"},
+        "TransitEncryptionEnabled":{"shape":"BooleanOptional"}
       }
     },
     "CreateCacheClusterResult":{
@@ -3686,7 +3687,8 @@
         "UserGroupIds":{"shape":"UserGroupIdList"},
         "LogDeliveryConfigurations":{"shape":"LogDeliveryConfigurationList"},
         "ReplicationGroupCreateTime":{"shape":"TStamp"},
-        "DataTiering":{"shape":"DataTieringStatus"}
+        "DataTiering":{"shape":"DataTieringStatus"},
+        "AutoMinorVersionUpgrade":{"shape":"Boolean"}
       },
       "wrapper":true
     },

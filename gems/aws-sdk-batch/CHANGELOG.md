@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2022-05-18)
+------------------
+
+* Feature - Documentation updates for AWS Batch.
+
 1.61.0 (2022-04-14)
 ------------------
 

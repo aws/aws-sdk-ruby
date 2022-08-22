@@ -351,12 +351,11 @@ module Aws::AppConfig
 
     # @!group API Operations
 
-    # Creates an application. An application in AppConfig is a logical unit
-    # of code that provides capabilities for your customers. For example, an
-    # application can be a microservice that runs on Amazon EC2 instances, a
-    # mobile application installed by your users, a serverless application
-    # using Amazon API Gateway and Lambda, or any system you run on behalf
-    # of others.
+    # Creates an application. In AppConfig, an application is simply an
+    # organizational construct like a folder. This organizational construct
+    # has a relationship with some unit of executable code. For example, you
+    # could create an application called MyMobileApp to organize and manage
+    # configuration data for a mobile application installed by your users.
     #
     # @option params [required, String] :name
     #   A name for the application.
@@ -528,7 +527,7 @@ module Aws::AppConfig
     #
     #   resp = client.create_configuration_profile({
     #     application_id: "Id", # required
-    #     name: "Name", # required
+    #     name: "LongName", # required
     #     description: "Description",
     #     location_uri: "Uri", # required
     #     retrieval_role_arn: "RoleArn",
@@ -582,9 +581,18 @@ module Aws::AppConfig
     #   Total amount of time for a deployment to last.
     #
     # @option params [Integer] :final_bake_time_in_minutes
-    #   The amount of time AppConfig monitors for alarms before considering
-    #   the deployment to be complete and no longer eligible for automatic
-    #   roll back.
+    #   Specifies the amount of time AppConfig monitors for Amazon CloudWatch
+    #   alarms after the configuration has been deployed to 100% of its
+    #   targets, before considering the deployment to be complete. If an alarm
+    #   is triggered during this time, AppConfig rolls back the deployment.
+    #   You must configure permissions for AppConfig to roll back based on
+    #   CloudWatch alarms. For more information, see [Configuring permissions
+    #   for rollback based on Amazon CloudWatch alarms][1] in the *AppConfig
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/getting-started-with-appconfig-cloudwatch-alarms-permissions.html
     #
     # @option params [required, Float] :growth_factor
     #   The percentage of targets to receive a deployed configuration during
@@ -619,7 +627,7 @@ module Aws::AppConfig
     #   targets, 4% of the targets, 8% of the targets, and continues until the
     #   configuration has been deployed to all targets.
     #
-    # @option params [required, String] :replicate_to
+    # @option params [String] :replicate_to
     #   Save the deployment strategy to a Systems Manager (SSM) document.
     #
     # @option params [Hash<String,String>] :tags
@@ -672,7 +680,7 @@ module Aws::AppConfig
     #     final_bake_time_in_minutes: 1,
     #     growth_factor: 1.0, # required
     #     growth_type: "LINEAR", # accepts LINEAR, EXPONENTIAL
-    #     replicate_to: "NONE", # required, accepts NONE, SSM_DOCUMENT
+    #     replicate_to: "NONE", # accepts NONE, SSM_DOCUMENT
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -699,14 +707,13 @@ module Aws::AppConfig
     end
 
     # Creates an environment. For each application, you define one or more
-    # environments. An environment is a logical deployment group of
-    # AppConfig targets, such as applications in a `Beta` or `Production`
-    # environment. You can also define environments for application
-    # subcomponents such as the `Web`, `Mobile` and `Back-end` components
-    # for your application. You can configure Amazon CloudWatch alarms for
-    # each environment. The system monitors alarms during a configuration
-    # deployment. If an alarm is triggered, the system rolls back the
-    # configuration.
+    # environments. An environment is a deployment group of AppConfig
+    # targets, such as applications in a `Beta` or `Production` environment.
+    # You can also define environments for application subcomponents such as
+    # the `Web`, `Mobile` and `Back-end` components for your application.
+    # You can configure Amazon CloudWatch alarms for each environment. The
+    # system monitors alarms during a configuration deployment. If an alarm
+    # is triggered, the system rolls back the configuration.
     #
     # @option params [required, String] :application_id
     #   The application ID.
@@ -787,6 +794,191 @@ module Aws::AppConfig
     # @param [Hash] params ({})
     def create_environment(params = {}, options = {})
       req = build_request(:create_environment, params)
+      req.send_request(options)
+    end
+
+    # Creates an AppConfig extension. An extension augments your ability to
+    # inject logic or behavior at different points during the AppConfig
+    # workflow of creating or deploying a configuration.
+    #
+    # You can create your own extensions or use the Amazon Web
+    # Services-authored extensions provided by AppConfig. For most
+    # use-cases, to create your own extension, you must create an Lambda
+    # function to perform any computation and processing defined in the
+    # extension. For more information about extensions, see [Working with
+    # AppConfig extensions][1] in the *AppConfig User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html
+    #
+    # @option params [required, String] :name
+    #   A name for the extension. Each extension name in your account must be
+    #   unique. Extension versions use the same name.
+    #
+    # @option params [String] :description
+    #   Information about the extension.
+    #
+    # @option params [required, Hash<String,Array>] :actions
+    #   The actions defined in the extension.
+    #
+    # @option params [Hash<String,Types::Parameter>] :parameters
+    #   The parameters accepted by the extension. You specify parameter values
+    #   when you associate the extension to an AppConfig resource by using the
+    #   `CreateExtensionAssociation` API action. For Lambda extension actions,
+    #   these parameters are included in the Lambda request object.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Adds one or more tags for the specified extension. Tags are metadata
+    #   that help you categorize resources in different ways, for example, by
+    #   purpose, owner, or environment. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    # @option params [Integer] :latest_version_number
+    #   You can omit this field when you create an extension. When you create
+    #   a new version, specify the most recent current version number. For
+    #   example, you create version 3, enter 2 for this field.
+    #
+    # @return [Types::Extension] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Extension#id #id} => String
+    #   * {Types::Extension#name #name} => String
+    #   * {Types::Extension#version_number #version_number} => Integer
+    #   * {Types::Extension#arn #arn} => String
+    #   * {Types::Extension#description #description} => String
+    #   * {Types::Extension#actions #actions} => Hash&lt;String,Array&lt;Types::Action&gt;&gt;
+    #   * {Types::Extension#parameters #parameters} => Hash&lt;String,Types::Parameter&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_extension({
+    #     name: "Name", # required
+    #     description: "Description",
+    #     actions: { # required
+    #       "PRE_CREATE_HOSTED_CONFIGURATION_VERSION" => [
+    #         {
+    #           name: "Name",
+    #           description: "Description",
+    #           uri: "Uri",
+    #           role_arn: "Arn",
+    #         },
+    #       ],
+    #     },
+    #     parameters: {
+    #       "Name" => {
+    #         description: "Description",
+    #         required: false,
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     latest_version_number: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.version_number #=> Integer
+    #   resp.arn #=> String
+    #   resp.description #=> String
+    #   resp.actions #=> Hash
+    #   resp.actions["ActionPoint"] #=> Array
+    #   resp.actions["ActionPoint"][0].name #=> String
+    #   resp.actions["ActionPoint"][0].description #=> String
+    #   resp.actions["ActionPoint"][0].uri #=> String
+    #   resp.actions["ActionPoint"][0].role_arn #=> String
+    #   resp.parameters #=> Hash
+    #   resp.parameters["Name"].description #=> String
+    #   resp.parameters["Name"].required #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateExtension AWS API Documentation
+    #
+    # @overload create_extension(params = {})
+    # @param [Hash] params ({})
+    def create_extension(params = {}, options = {})
+      req = build_request(:create_extension, params)
+      req.send_request(options)
+    end
+
+    # When you create an extension or configure an Amazon Web
+    # Services-authored extension, you associate the extension with an
+    # AppConfig application, environment, or configuration profile. For
+    # example, you can choose to run the `AppConfig deployment events to
+    # Amazon SNS` Amazon Web Services-authored extension and receive
+    # notifications on an Amazon SNS topic anytime a configuration
+    # deployment is started for a specific application. Defining which
+    # extension to associate with an AppConfig resource is called an
+    # *extension association*. An extension association is a specified
+    # relationship between an extension and an AppConfig resource, such as
+    # an application or a configuration profile. For more information about
+    # extensions and associations, see [Working with AppConfig
+    # extensions][1] in the *AppConfig User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html
+    #
+    # @option params [required, String] :extension_identifier
+    #   The name, the ID, or the Amazon Resource Name (ARN) of the extension.
+    #
+    # @option params [Integer] :extension_version_number
+    #   The version number of the extension. If not specified, AppConfig uses
+    #   the maximum version of the extension.
+    #
+    # @option params [required, String] :resource_identifier
+    #   The ARN of an application, configuration profile, or environment.
+    #
+    # @option params [Hash<String,String>] :parameters
+    #   The parameter names and values defined in the extensions. Extension
+    #   parameters marked `Required` must be entered for this field.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Adds one or more tags for the specified extension association. Tags
+    #   are metadata that help you categorize resources in different ways, for
+    #   example, by purpose, owner, or environment. Each tag consists of a key
+    #   and an optional value, both of which you define.
+    #
+    # @return [Types::ExtensionAssociation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExtensionAssociation#id #id} => String
+    #   * {Types::ExtensionAssociation#extension_arn #extension_arn} => String
+    #   * {Types::ExtensionAssociation#resource_arn #resource_arn} => String
+    #   * {Types::ExtensionAssociation#arn #arn} => String
+    #   * {Types::ExtensionAssociation#parameters #parameters} => Hash&lt;String,String&gt;
+    #   * {Types::ExtensionAssociation#extension_version_number #extension_version_number} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_extension_association({
+    #     extension_identifier: "Identifier", # required
+    #     extension_version_number: 1,
+    #     resource_identifier: "Identifier", # required
+    #     parameters: {
+    #       "Name" => "StringWithLengthBetween1And2048",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.extension_arn #=> String
+    #   resp.resource_arn #=> String
+    #   resp.arn #=> String
+    #   resp.parameters #=> Hash
+    #   resp.parameters["Name"] #=> String
+    #   resp.extension_version_number #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateExtensionAssociation AWS API Documentation
+    #
+    # @overload create_extension_association(params = {})
+    # @param [Hash] params ({})
+    def create_extension_association(params = {}, options = {})
+      req = build_request(:create_extension_association, params)
       req.send_request(options)
     end
 
@@ -1017,6 +1209,58 @@ module Aws::AppConfig
     # @param [Hash] params ({})
     def delete_environment(params = {}, options = {})
       req = build_request(:delete_environment, params)
+      req.send_request(options)
+    end
+
+    # Deletes an AppConfig extension. You must delete all associations to an
+    # extension before you delete the extension.
+    #
+    # @option params [required, String] :extension_identifier
+    #   The name, ID, or Amazon Resource Name (ARN) of the extension you want
+    #   to delete.
+    #
+    # @option params [Integer] :version_number
+    #   A specific version of an extension to delete. If omitted, the highest
+    #   version is deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_extension({
+    #     extension_identifier: "Identifier", # required
+    #     version_number: 1,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteExtension AWS API Documentation
+    #
+    # @overload delete_extension(params = {})
+    # @param [Hash] params ({})
+    def delete_extension(params = {}, options = {})
+      req = build_request(:delete_extension, params)
+      req.send_request(options)
+    end
+
+    # Deletes an extension association. This action doesn't delete
+    # extensions defined in the association.
+    #
+    # @option params [required, String] :extension_association_id
+    #   The ID of the extension association to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_extension_association({
+    #     extension_association_id: "Id", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteExtensionAssociation AWS API Documentation
+    #
+    # @overload delete_extension_association(params = {})
+    # @param [Hash] params ({})
+    def delete_extension_association(params = {}, options = {})
+      req = build_request(:delete_extension_association, params)
       req.send_request(options)
     end
 
@@ -1340,6 +1584,7 @@ module Aws::AppConfig
     #   * {Types::Deployment#percentage_complete #percentage_complete} => Float
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
+    #   * {Types::Deployment#applied_extensions #applied_extensions} => Array&lt;Types::AppliedExtension&gt;
     #
     #
     # @example Example: To retrieve deployment details
@@ -1445,10 +1690,24 @@ module Aws::AppConfig
     #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED"
     #   resp.event_log[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
     #   resp.event_log[0].description #=> String
+    #   resp.event_log[0].action_invocations #=> Array
+    #   resp.event_log[0].action_invocations[0].extension_identifier #=> String
+    #   resp.event_log[0].action_invocations[0].action_name #=> String
+    #   resp.event_log[0].action_invocations[0].uri #=> String
+    #   resp.event_log[0].action_invocations[0].role_arn #=> String
+    #   resp.event_log[0].action_invocations[0].error_message #=> String
+    #   resp.event_log[0].action_invocations[0].error_code #=> String
+    #   resp.event_log[0].action_invocations[0].invocation_id #=> String
     #   resp.event_log[0].occurred_at #=> Time
     #   resp.percentage_complete #=> Float
     #   resp.started_at #=> Time
     #   resp.completed_at #=> Time
+    #   resp.applied_extensions #=> Array
+    #   resp.applied_extensions[0].extension_id #=> String
+    #   resp.applied_extensions[0].extension_association_id #=> String
+    #   resp.applied_extensions[0].version_number #=> Integer
+    #   resp.applied_extensions[0].parameters #=> Hash
+    #   resp.applied_extensions[0].parameters["Name"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetDeployment AWS API Documentation
     #
@@ -1527,12 +1786,11 @@ module Aws::AppConfig
     end
 
     # Retrieves information about an environment. An environment is a
-    # logical deployment group of AppConfig applications, such as
-    # applications in a `Production` environment or in an `EU_Region`
-    # environment. Each configuration deployment targets an environment. You
-    # can enable one or more Amazon CloudWatch alarms for an environment. If
-    # an alarm is triggered during a deployment, AppConfig roles back the
-    # configuration.
+    # deployment group of AppConfig applications, such as applications in a
+    # `Production` environment or in an `EU_Region` environment. Each
+    # configuration deployment targets an environment. You can enable one or
+    # more Amazon CloudWatch alarms for an environment. If an alarm is
+    # triggered during a deployment, AppConfig roles back the configuration.
     #
     # @option params [required, String] :application_id
     #   The ID of the application that includes the environment you want to
@@ -1592,6 +1850,103 @@ module Aws::AppConfig
     # @param [Hash] params ({})
     def get_environment(params = {}, options = {})
       req = build_request(:get_environment, params)
+      req.send_request(options)
+    end
+
+    # Returns information about an AppConfig extension.
+    #
+    # @option params [required, String] :extension_identifier
+    #   The name, the ID, or the Amazon Resource Name (ARN) of the extension.
+    #
+    # @option params [Integer] :version_number
+    #   The extension version number. If no version number was defined,
+    #   AppConfig uses the highest version.
+    #
+    # @return [Types::Extension] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Extension#id #id} => String
+    #   * {Types::Extension#name #name} => String
+    #   * {Types::Extension#version_number #version_number} => Integer
+    #   * {Types::Extension#arn #arn} => String
+    #   * {Types::Extension#description #description} => String
+    #   * {Types::Extension#actions #actions} => Hash&lt;String,Array&lt;Types::Action&gt;&gt;
+    #   * {Types::Extension#parameters #parameters} => Hash&lt;String,Types::Parameter&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_extension({
+    #     extension_identifier: "Identifier", # required
+    #     version_number: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.version_number #=> Integer
+    #   resp.arn #=> String
+    #   resp.description #=> String
+    #   resp.actions #=> Hash
+    #   resp.actions["ActionPoint"] #=> Array
+    #   resp.actions["ActionPoint"][0].name #=> String
+    #   resp.actions["ActionPoint"][0].description #=> String
+    #   resp.actions["ActionPoint"][0].uri #=> String
+    #   resp.actions["ActionPoint"][0].role_arn #=> String
+    #   resp.parameters #=> Hash
+    #   resp.parameters["Name"].description #=> String
+    #   resp.parameters["Name"].required #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetExtension AWS API Documentation
+    #
+    # @overload get_extension(params = {})
+    # @param [Hash] params ({})
+    def get_extension(params = {}, options = {})
+      req = build_request(:get_extension, params)
+      req.send_request(options)
+    end
+
+    # Returns information about an AppConfig extension association. For more
+    # information about extensions and associations, see [Working with
+    # AppConfig extensions][1] in the *AppConfig User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html
+    #
+    # @option params [required, String] :extension_association_id
+    #   The extension association ID to get.
+    #
+    # @return [Types::ExtensionAssociation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExtensionAssociation#id #id} => String
+    #   * {Types::ExtensionAssociation#extension_arn #extension_arn} => String
+    #   * {Types::ExtensionAssociation#resource_arn #resource_arn} => String
+    #   * {Types::ExtensionAssociation#arn #arn} => String
+    #   * {Types::ExtensionAssociation#parameters #parameters} => Hash&lt;String,String&gt;
+    #   * {Types::ExtensionAssociation#extension_version_number #extension_version_number} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_extension_association({
+    #     extension_association_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.extension_arn #=> String
+    #   resp.resource_arn #=> String
+    #   resp.arn #=> String
+    #   resp.parameters #=> Hash
+    #   resp.parameters["Name"] #=> String
+    #   resp.extension_version_number #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetExtensionAssociation AWS API Documentation
+    #
+    # @overload get_extension_association(params = {})
+    # @param [Hash] params ({})
+    def get_extension_association(params = {}, options = {})
+      req = build_request(:get_extension_association, params)
       req.send_request(options)
     end
 
@@ -2042,6 +2397,120 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
+    # Lists all AppConfig extension associations in the account. For more
+    # information about extensions and associations, see [Working with
+    # AppConfig extensions][1] in the *AppConfig User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html
+    #
+    # @option params [String] :resource_identifier
+    #   The ARN of an application, configuration profile, or environment.
+    #
+    # @option params [String] :extension_identifier
+    #   The name, the ID, or the Amazon Resource Name (ARN) of the extension.
+    #
+    # @option params [Integer] :extension_version_number
+    #   The version number for the extension defined in the association.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results or pass null to get the first set of results.
+    #
+    # @return [Types::ExtensionAssociations] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExtensionAssociations#items #items} => Array&lt;Types::ExtensionAssociationSummary&gt;
+    #   * {Types::ExtensionAssociations#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_extension_associations({
+    #     resource_identifier: "Arn",
+    #     extension_identifier: "Identifier",
+    #     extension_version_number: 1,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].extension_arn #=> String
+    #   resp.items[0].resource_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListExtensionAssociations AWS API Documentation
+    #
+    # @overload list_extension_associations(params = {})
+    # @param [Hash] params ({})
+    def list_extension_associations(params = {}, options = {})
+      req = build_request(:list_extension_associations, params)
+      req.send_request(options)
+    end
+
+    # Lists all custom and Amazon Web Services-authored AppConfig extensions
+    # in the account. For more information about extensions, see [Working
+    # with AppConfig extensions][1] in the *AppConfig User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @option params [String] :name
+    #   The extension name.
+    #
+    # @return [Types::Extensions] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Extensions#items #items} => Array&lt;Types::ExtensionSummary&gt;
+    #   * {Types::Extensions#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_extensions({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     name: "QueryName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].version_number #=> Integer
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListExtensions AWS API Documentation
+    #
+    # @overload list_extensions(params = {})
+    # @param [Hash] params ({})
+    def list_extensions(params = {}, options = {})
+      req = build_request(:list_extensions, params)
+      req.send_request(options)
+    end
+
     # Lists configurations stored in the AppConfig hosted configuration
     # store by version.
     #
@@ -2208,6 +2677,7 @@ module Aws::AppConfig
     #   * {Types::Deployment#percentage_complete #percentage_complete} => Float
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
+    #   * {Types::Deployment#applied_extensions #applied_extensions} => Array&lt;Types::AppliedExtension&gt;
     #
     #
     # @example Example: To start a configuration deployment
@@ -2287,10 +2757,24 @@ module Aws::AppConfig
     #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED"
     #   resp.event_log[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
     #   resp.event_log[0].description #=> String
+    #   resp.event_log[0].action_invocations #=> Array
+    #   resp.event_log[0].action_invocations[0].extension_identifier #=> String
+    #   resp.event_log[0].action_invocations[0].action_name #=> String
+    #   resp.event_log[0].action_invocations[0].uri #=> String
+    #   resp.event_log[0].action_invocations[0].role_arn #=> String
+    #   resp.event_log[0].action_invocations[0].error_message #=> String
+    #   resp.event_log[0].action_invocations[0].error_code #=> String
+    #   resp.event_log[0].action_invocations[0].invocation_id #=> String
     #   resp.event_log[0].occurred_at #=> Time
     #   resp.percentage_complete #=> Float
     #   resp.started_at #=> Time
     #   resp.completed_at #=> Time
+    #   resp.applied_extensions #=> Array
+    #   resp.applied_extensions[0].extension_id #=> String
+    #   resp.applied_extensions[0].extension_association_id #=> String
+    #   resp.applied_extensions[0].version_number #=> Integer
+    #   resp.applied_extensions[0].parameters #=> Hash
+    #   resp.applied_extensions[0].parameters["Name"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StartDeployment AWS API Documentation
     #
@@ -2334,6 +2818,7 @@ module Aws::AppConfig
     #   * {Types::Deployment#percentage_complete #percentage_complete} => Float
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
+    #   * {Types::Deployment#applied_extensions #applied_extensions} => Array&lt;Types::AppliedExtension&gt;
     #
     #
     # @example Example: To stop configuration deployment
@@ -2383,10 +2868,24 @@ module Aws::AppConfig
     #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED"
     #   resp.event_log[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
     #   resp.event_log[0].description #=> String
+    #   resp.event_log[0].action_invocations #=> Array
+    #   resp.event_log[0].action_invocations[0].extension_identifier #=> String
+    #   resp.event_log[0].action_invocations[0].action_name #=> String
+    #   resp.event_log[0].action_invocations[0].uri #=> String
+    #   resp.event_log[0].action_invocations[0].role_arn #=> String
+    #   resp.event_log[0].action_invocations[0].error_message #=> String
+    #   resp.event_log[0].action_invocations[0].error_code #=> String
+    #   resp.event_log[0].action_invocations[0].invocation_id #=> String
     #   resp.event_log[0].occurred_at #=> Time
     #   resp.percentage_complete #=> Float
     #   resp.started_at #=> Time
     #   resp.completed_at #=> Time
+    #   resp.applied_extensions #=> Array
+    #   resp.applied_extensions[0].extension_id #=> String
+    #   resp.applied_extensions[0].extension_association_id #=> String
+    #   resp.applied_extensions[0].version_number #=> Integer
+    #   resp.applied_extensions[0].parameters #=> Hash
+    #   resp.applied_extensions[0].parameters["Name"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StopDeployment AWS API Documentation
     #
@@ -2823,6 +3322,140 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
+    # Updates an AppConfig extension. For more information about extensions,
+    # see [Working with AppConfig extensions][1] in the *AppConfig User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html
+    #
+    # @option params [required, String] :extension_identifier
+    #   The name, the ID, or the Amazon Resource Name (ARN) of the extension.
+    #
+    # @option params [String] :description
+    #   Information about the extension.
+    #
+    # @option params [Hash<String,Array>] :actions
+    #   The actions defined in the extension.
+    #
+    # @option params [Hash<String,Types::Parameter>] :parameters
+    #   One or more parameters for the actions called by the extension.
+    #
+    # @option params [Integer] :version_number
+    #   The extension version number.
+    #
+    # @return [Types::Extension] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Extension#id #id} => String
+    #   * {Types::Extension#name #name} => String
+    #   * {Types::Extension#version_number #version_number} => Integer
+    #   * {Types::Extension#arn #arn} => String
+    #   * {Types::Extension#description #description} => String
+    #   * {Types::Extension#actions #actions} => Hash&lt;String,Array&lt;Types::Action&gt;&gt;
+    #   * {Types::Extension#parameters #parameters} => Hash&lt;String,Types::Parameter&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_extension({
+    #     extension_identifier: "Identifier", # required
+    #     description: "Description",
+    #     actions: {
+    #       "PRE_CREATE_HOSTED_CONFIGURATION_VERSION" => [
+    #         {
+    #           name: "Name",
+    #           description: "Description",
+    #           uri: "Uri",
+    #           role_arn: "Arn",
+    #         },
+    #       ],
+    #     },
+    #     parameters: {
+    #       "Name" => {
+    #         description: "Description",
+    #         required: false,
+    #       },
+    #     },
+    #     version_number: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.version_number #=> Integer
+    #   resp.arn #=> String
+    #   resp.description #=> String
+    #   resp.actions #=> Hash
+    #   resp.actions["ActionPoint"] #=> Array
+    #   resp.actions["ActionPoint"][0].name #=> String
+    #   resp.actions["ActionPoint"][0].description #=> String
+    #   resp.actions["ActionPoint"][0].uri #=> String
+    #   resp.actions["ActionPoint"][0].role_arn #=> String
+    #   resp.parameters #=> Hash
+    #   resp.parameters["Name"].description #=> String
+    #   resp.parameters["Name"].required #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateExtension AWS API Documentation
+    #
+    # @overload update_extension(params = {})
+    # @param [Hash] params ({})
+    def update_extension(params = {}, options = {})
+      req = build_request(:update_extension, params)
+      req.send_request(options)
+    end
+
+    # Updates an association. For more information about extensions and
+    # associations, see [Working with AppConfig extensions][1] in the
+    # *AppConfig User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html
+    #
+    # @option params [required, String] :extension_association_id
+    #   The system-generated ID for the association.
+    #
+    # @option params [Hash<String,String>] :parameters
+    #   The parameter names and values defined in the extension.
+    #
+    # @return [Types::ExtensionAssociation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExtensionAssociation#id #id} => String
+    #   * {Types::ExtensionAssociation#extension_arn #extension_arn} => String
+    #   * {Types::ExtensionAssociation#resource_arn #resource_arn} => String
+    #   * {Types::ExtensionAssociation#arn #arn} => String
+    #   * {Types::ExtensionAssociation#parameters #parameters} => Hash&lt;String,String&gt;
+    #   * {Types::ExtensionAssociation#extension_version_number #extension_version_number} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_extension_association({
+    #     extension_association_id: "Id", # required
+    #     parameters: {
+    #       "Name" => "StringWithLengthBetween1And2048",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.extension_arn #=> String
+    #   resp.resource_arn #=> String
+    #   resp.arn #=> String
+    #   resp.parameters #=> Hash
+    #   resp.parameters["Name"] #=> String
+    #   resp.extension_version_number #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateExtensionAssociation AWS API Documentation
+    #
+    # @overload update_extension_association(params = {})
+    # @param [Hash] params ({})
+    def update_extension_association(params = {}, options = {})
+      req = build_request(:update_extension_association, params)
+      req.send_request(options)
+    end
+
     # Uses the validators in a configuration profile to validate a
     # configuration.
     #
@@ -2878,7 +3511,7 @@ module Aws::AppConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -985,6 +985,7 @@ module Aws::DocDB
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
@@ -1217,6 +1218,10 @@ module Aws::DocDB
     # @option params [required, String] :db_cluster_identifier
     #   The identifier of the cluster that the instance will belong to.
     #
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   A value that indicates whether to copy tags from the DB instance to
+    #   snapshots of the DB instance. By default, tags are not copied.
+    #
     # @option params [Integer] :promotion_tier
     #   A value that specifies the order in which an Amazon DocumentDB replica
     #   is promoted to the primary instance after a failure of the existing
@@ -1267,6 +1272,7 @@ module Aws::DocDB
     #       },
     #     ],
     #     db_cluster_identifier: "String", # required
+    #     copy_tags_to_snapshot: false,
     #     promotion_tier: 1,
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
@@ -1329,6 +1335,7 @@ module Aws::DocDB
     #   resp.db_instance.kms_key_id #=> String
     #   resp.db_instance.dbi_resource_id #=> String
     #   resp.db_instance.ca_certificate_identifier #=> String
+    #   resp.db_instance.copy_tags_to_snapshot #=> Boolean
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
@@ -1710,6 +1717,7 @@ module Aws::DocDB
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
@@ -1887,6 +1895,7 @@ module Aws::DocDB
     #   resp.db_instance.kms_key_id #=> String
     #   resp.db_instance.dbi_resource_id #=> String
     #   resp.db_instance.ca_certificate_identifier #=> String
+    #   resp.db_instance.copy_tags_to_snapshot #=> Boolean
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
@@ -2549,6 +2558,7 @@ module Aws::DocDB
     #   resp.db_clusters[0].associated_roles #=> Array
     #   resp.db_clusters[0].associated_roles[0].role_arn #=> String
     #   resp.db_clusters[0].associated_roles[0].status #=> String
+    #   resp.db_clusters[0].clone_group_id #=> String
     #   resp.db_clusters[0].cluster_create_time #=> Time
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports[0] #=> String
@@ -2791,6 +2801,7 @@ module Aws::DocDB
     #   resp.db_instances[0].kms_key_id #=> String
     #   resp.db_instances[0].dbi_resource_id #=> String
     #   resp.db_instances[0].ca_certificate_identifier #=> String
+    #   resp.db_instances[0].copy_tags_to_snapshot #=> Boolean
     #   resp.db_instances[0].promotion_tier #=> Integer
     #   resp.db_instances[0].db_instance_arn #=> String
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports #=> Array
@@ -3508,6 +3519,7 @@ module Aws::DocDB
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
@@ -3754,6 +3766,7 @@ module Aws::DocDB
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
@@ -3991,6 +4004,10 @@ module Aws::DocDB
     #   Indicates the certificate that needs to be associated with the
     #   instance.
     #
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   A value that indicates whether to copy all tags from the DB instance
+    #   to snapshots of the DB instance. By default, tags are not copied.
+    #
     # @option params [Integer] :promotion_tier
     #   A value that specifies the order in which an Amazon DocumentDB replica
     #   is promoted to the primary instance after a failure of the existing
@@ -4035,6 +4052,7 @@ module Aws::DocDB
     #     auto_minor_version_upgrade: false,
     #     new_db_instance_identifier: "String",
     #     ca_certificate_identifier: "String",
+    #     copy_tags_to_snapshot: false,
     #     promotion_tier: 1,
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
@@ -4097,6 +4115,7 @@ module Aws::DocDB
     #   resp.db_instance.kms_key_id #=> String
     #   resp.db_instance.dbi_resource_id #=> String
     #   resp.db_instance.ca_certificate_identifier #=> String
+    #   resp.db_instance.copy_tags_to_snapshot #=> Boolean
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
@@ -4393,6 +4412,7 @@ module Aws::DocDB
     #   resp.db_instance.kms_key_id #=> String
     #   resp.db_instance.dbi_resource_id #=> String
     #   resp.db_instance.ca_certificate_identifier #=> String
+    #   resp.db_instance.copy_tags_to_snapshot #=> Boolean
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
@@ -4766,6 +4786,7 @@ module Aws::DocDB
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
@@ -4797,6 +4818,22 @@ module Aws::DocDB
     #   * The first character must be a letter.
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #
+    # @option params [String] :restore_type
+    #   The type of restore to be performed. You can specify one of the
+    #   following values:
+    #
+    #   * `full-copy` - The new DB cluster is restored as a full copy of the
+    #     source DB cluster.
+    #
+    #   * `copy-on-write` - The new DB cluster is restored as a clone of the
+    #     source DB cluster.
+    #
+    #   Constraints: You can't specify `copy-on-write` if the engine version
+    #   of the source DB cluster is earlier than 1.11.
+    #
+    #   If you don't specify a `RestoreType` value, then the new DB cluster
+    #   is restored as a full copy of the source DB cluster.
     #
     # @option params [required, String] :source_db_cluster_identifier
     #   The identifier of the source cluster from which to restore.
@@ -4902,6 +4939,7 @@ module Aws::DocDB
     #
     #   resp = client.restore_db_cluster_to_point_in_time({
     #     db_cluster_identifier: "String", # required
+    #     restore_type: "String",
     #     source_db_cluster_identifier: "String", # required
     #     restore_to_time: Time.now,
     #     use_latest_restorable_time: false,
@@ -4959,6 +4997,7 @@ module Aws::DocDB
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
@@ -5035,6 +5074,7 @@ module Aws::DocDB
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
@@ -5111,6 +5151,7 @@ module Aws::DocDB
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
@@ -5138,7 +5179,7 @@ module Aws::DocDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

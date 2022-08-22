@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2022-07-21)
+------------------
+
+* Feature - This feature allows customers to retrieve runtime statistics for completed queries
+
+1.55.0 (2022-07-14)
+------------------
+
+* Feature - This release updates data types that contain either QueryExecutionId, NamedQueryId or ExpectedBucketOwner. Ids must be between 1 and 128 characters and contain only non-whitespace characters. ExpectedBucketOwner must be 12-digit string.
+
+1.54.0 (2022-06-30)
+------------------
+
+* Feature - This feature introduces the API support for Athena's parameterized query and BatchGetPreparedStatement API.
+
 1.53.0 (2022-04-15)
 ------------------
 

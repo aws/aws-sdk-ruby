@@ -32,6 +32,14 @@ module Aws::CostExplorer
     Attributes = Shapes::MapShape.new(name: 'Attributes')
     BillExpirationException = Shapes::StructureShape.new(name: 'BillExpirationException')
     Context = Shapes::StringShape.new(name: 'Context')
+    CostAllocationTag = Shapes::StructureShape.new(name: 'CostAllocationTag')
+    CostAllocationTagKeyList = Shapes::ListShape.new(name: 'CostAllocationTagKeyList')
+    CostAllocationTagList = Shapes::ListShape.new(name: 'CostAllocationTagList')
+    CostAllocationTagStatus = Shapes::StringShape.new(name: 'CostAllocationTagStatus')
+    CostAllocationTagStatusEntry = Shapes::StructureShape.new(name: 'CostAllocationTagStatusEntry')
+    CostAllocationTagStatusList = Shapes::ListShape.new(name: 'CostAllocationTagStatusList')
+    CostAllocationTagType = Shapes::StringShape.new(name: 'CostAllocationTagType')
+    CostAllocationTagsMaxResults = Shapes::IntegerShape.new(name: 'CostAllocationTagsMaxResults')
     CostCategory = Shapes::StructureShape.new(name: 'CostCategory')
     CostCategoryInheritedValueDimension = Shapes::StructureShape.new(name: 'CostCategoryInheritedValueDimension')
     CostCategoryInheritedValueDimensionName = Shapes::StringShape.new(name: 'CostCategoryInheritedValueDimensionName')
@@ -157,6 +165,8 @@ module Aws::CostExplorer
     Key = Shapes::StringShape.new(name: 'Key')
     Keys = Shapes::ListShape.new(name: 'Keys')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListCostAllocationTagsRequest = Shapes::StructureShape.new(name: 'ListCostAllocationTagsRequest')
+    ListCostAllocationTagsResponse = Shapes::StructureShape.new(name: 'ListCostAllocationTagsResponse')
     ListCostCategoryDefinitionsRequest = Shapes::StructureShape.new(name: 'ListCostCategoryDefinitionsRequest')
     ListCostCategoryDefinitionsResponse = Shapes::StructureShape.new(name: 'ListCostCategoryDefinitionsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -298,6 +308,10 @@ module Aws::CostExplorer
     UpdateAnomalyMonitorResponse = Shapes::StructureShape.new(name: 'UpdateAnomalyMonitorResponse')
     UpdateAnomalySubscriptionRequest = Shapes::StructureShape.new(name: 'UpdateAnomalySubscriptionRequest')
     UpdateAnomalySubscriptionResponse = Shapes::StructureShape.new(name: 'UpdateAnomalySubscriptionResponse')
+    UpdateCostAllocationTagsStatusError = Shapes::StructureShape.new(name: 'UpdateCostAllocationTagsStatusError')
+    UpdateCostAllocationTagsStatusErrors = Shapes::ListShape.new(name: 'UpdateCostAllocationTagsStatusErrors')
+    UpdateCostAllocationTagsStatusRequest = Shapes::StructureShape.new(name: 'UpdateCostAllocationTagsStatusRequest')
+    UpdateCostAllocationTagsStatusResponse = Shapes::StructureShape.new(name: 'UpdateCostAllocationTagsStatusResponse')
     UpdateCostCategoryDefinitionRequest = Shapes::StructureShape.new(name: 'UpdateCostCategoryDefinitionRequest')
     UpdateCostCategoryDefinitionResponse = Shapes::StructureShape.new(name: 'UpdateCostCategoryDefinitionResponse')
     UtilizationByTime = Shapes::StructureShape.new(name: 'UtilizationByTime')
@@ -359,6 +373,21 @@ module Aws::CostExplorer
 
     BillExpirationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     BillExpirationException.struct_class = Types::BillExpirationException
+
+    CostAllocationTag.add_member(:tag_key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "TagKey"))
+    CostAllocationTag.add_member(:type, Shapes::ShapeRef.new(shape: CostAllocationTagType, required: true, location_name: "Type"))
+    CostAllocationTag.add_member(:status, Shapes::ShapeRef.new(shape: CostAllocationTagStatus, required: true, location_name: "Status"))
+    CostAllocationTag.struct_class = Types::CostAllocationTag
+
+    CostAllocationTagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    CostAllocationTagList.member = Shapes::ShapeRef.new(shape: CostAllocationTag)
+
+    CostAllocationTagStatusEntry.add_member(:tag_key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "TagKey"))
+    CostAllocationTagStatusEntry.add_member(:status, Shapes::ShapeRef.new(shape: CostAllocationTagStatus, required: true, location_name: "Status"))
+    CostAllocationTagStatusEntry.struct_class = Types::CostAllocationTagStatusEntry
+
+    CostAllocationTagStatusList.member = Shapes::ShapeRef.new(shape: CostAllocationTagStatusEntry)
 
     CostCategory.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CostCategoryArn"))
     CostCategory.add_member(:effective_start, Shapes::ShapeRef.new(shape: ZonedDateTime, required: true, location_name: "EffectiveStart"))
@@ -887,6 +916,17 @@ module Aws::CostExplorer
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListCostAllocationTagsRequest.add_member(:status, Shapes::ShapeRef.new(shape: CostAllocationTagStatus, location_name: "Status"))
+    ListCostAllocationTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: CostAllocationTagKeyList, location_name: "TagKeys"))
+    ListCostAllocationTagsRequest.add_member(:type, Shapes::ShapeRef.new(shape: CostAllocationTagType, location_name: "Type"))
+    ListCostAllocationTagsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
+    ListCostAllocationTagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostAllocationTagsMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListCostAllocationTagsRequest.struct_class = Types::ListCostAllocationTagsRequest
+
+    ListCostAllocationTagsResponse.add_member(:cost_allocation_tags, Shapes::ShapeRef.new(shape: CostAllocationTagList, location_name: "CostAllocationTags"))
+    ListCostAllocationTagsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
+    ListCostAllocationTagsResponse.struct_class = Types::ListCostAllocationTagsResponse
+
     ListCostCategoryDefinitionsRequest.add_member(:effective_on, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveOn"))
     ListCostCategoryDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
     ListCostCategoryDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostCategoryMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -1285,6 +1325,19 @@ module Aws::CostExplorer
     UpdateAnomalySubscriptionResponse.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubscriptionArn"))
     UpdateAnomalySubscriptionResponse.struct_class = Types::UpdateAnomalySubscriptionResponse
 
+    UpdateCostAllocationTagsStatusError.add_member(:tag_key, Shapes::ShapeRef.new(shape: TagKey, location_name: "TagKey"))
+    UpdateCostAllocationTagsStatusError.add_member(:code, Shapes::ShapeRef.new(shape: GenericString, location_name: "Code"))
+    UpdateCostAllocationTagsStatusError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UpdateCostAllocationTagsStatusError.struct_class = Types::UpdateCostAllocationTagsStatusError
+
+    UpdateCostAllocationTagsStatusErrors.member = Shapes::ShapeRef.new(shape: UpdateCostAllocationTagsStatusError)
+
+    UpdateCostAllocationTagsStatusRequest.add_member(:cost_allocation_tags_status, Shapes::ShapeRef.new(shape: CostAllocationTagStatusList, required: true, location_name: "CostAllocationTagsStatus"))
+    UpdateCostAllocationTagsStatusRequest.struct_class = Types::UpdateCostAllocationTagsStatusRequest
+
+    UpdateCostAllocationTagsStatusResponse.add_member(:errors, Shapes::ShapeRef.new(shape: UpdateCostAllocationTagsStatusErrors, location_name: "Errors"))
+    UpdateCostAllocationTagsStatusResponse.struct_class = Types::UpdateCostAllocationTagsStatusResponse
+
     UpdateCostCategoryDefinitionRequest.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CostCategoryArn"))
     UpdateCostCategoryDefinitionRequest.add_member(:rule_version, Shapes::ShapeRef.new(shape: CostCategoryRuleVersion, required: true, location_name: "RuleVersion"))
     UpdateCostCategoryDefinitionRequest.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
@@ -1609,6 +1662,22 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: UnresolvableUsageUnitException)
       end)
 
+      api.add_operation(:list_cost_allocation_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCostAllocationTags"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCostAllocationTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCostAllocationTagsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_cost_category_definitions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListCostCategoryDefinitions"
         o.http_method = "POST"
@@ -1683,6 +1752,15 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnknownMonitorException)
         o.errors << Shapes::ShapeRef.new(shape: UnknownSubscriptionException)
+      end)
+
+      api.add_operation(:update_cost_allocation_tags_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCostAllocationTagsStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCostAllocationTagsStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCostAllocationTagsStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:update_cost_category_definition, Seahorse::Model::Operation.new.tap do |o|

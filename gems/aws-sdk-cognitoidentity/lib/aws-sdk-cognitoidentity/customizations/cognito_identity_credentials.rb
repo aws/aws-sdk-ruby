@@ -87,13 +87,16 @@ module Aws
         @logins = options.delete(:logins) || {}
         @async_refresh = false
 
+        client_opts = {}
+        options.each_pair { |k,v| client_opts[k] = v unless CLIENT_EXCLUDE_OPTIONS.include?(k) }
+
         if !@identity_pool_id && !@identity_id
           raise ArgumentError,
                 'Must provide either identity_pool_id or identity_id'
         end
 
         @client = options[:client] || CognitoIdentity::Client.new(
-          options.merge(credentials: false)
+          client_opts.merge(credentials: false)
         )
         super
       end

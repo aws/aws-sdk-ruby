@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2022-04-25)
+------------------
+
+* Feature - Documentation updates for Amazon GameLift.
+
 1.56.0 (2022-03-02)
 ------------------
 

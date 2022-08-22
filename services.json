@@ -96,6 +96,9 @@
   "BackupGateway": {
     "models": "backup-gateway/2021-01-01"
   },
+  "BackupStorage": {
+    "models": "backupstorage/2018-04-10"
+  },
   "Batch": {
     "models": "batch/2016-08-10"
   },
@@ -113,6 +116,9 @@
   },
   "ChimeSDKIdentity": {
     "models": "chime-sdk-identity/2021-04-20"
+  },
+  "ChimeSDKMediaPipelines": {
+    "models": "chime-sdk-media-pipelines/2021-07-15"
   },
   "ChimeSDKMeetings": {
     "models": "chime-sdk-meetings/2021-07-15"
@@ -229,6 +235,9 @@
   "Connect": {
     "models": "connect/2017-08-08"
   },
+  "ConnectCampaignService": {
+    "models": "connectcampaigns/2021-01-30"
+  },
   "ConnectContactLens": {
     "models": "connect-contact-lens/2020-08-21"
   },
@@ -339,6 +348,9 @@
   },
   "EMRContainers": {
     "models": "emr-containers/2020-10-01"
+  },
+  "EMRServerless": {
+    "models": "emr-serverless/2021-07-13"
   },
   "ElastiCache": {
     "models": "elasticache/2015-02-02"
@@ -511,6 +523,9 @@
   "IoTWireless": {
     "models": "iotwireless/2020-11-22"
   },
+  "Ivschat": {
+    "models": "ivschat/2020-07-14"
+  },
   "KMS": {
     "models": "kms/2014-11-01"
   },
@@ -571,6 +586,9 @@
   "LicenseManager": {
     "models": "license-manager/2018-08-01"
   },
+  "LicenseManagerUserSubscriptions": {
+    "models": "license-manager-user-subscriptions/2018-05-10"
+  },
   "Lightsail": {
     "models": "lightsail/2016-11-28"
   },
@@ -606,6 +624,9 @@
   },
   "Macie2": {
     "models": "macie2/2020-01-01"
+  },
+  "MainframeModernization": {
+    "models": "m2/2021-04-28"
   },
   "ManagedBlockchain": {
     "models": "managedblockchain/2018-09-24"
@@ -733,6 +754,9 @@
   "Pricing": {
     "models": "pricing/2017-10-15"
   },
+  "PrivateNetworks": {
+    "models": "privatenetworks/2021-12-03"
+  },
   "PrometheusService": {
     "models": "amp/2020-08-01"
   },
@@ -772,6 +796,9 @@
   "RedshiftDataAPIService": {
     "models": "redshift-data/2019-12-20"
   },
+  "RedshiftServerless": {
+    "models": "redshift-serverless/2021-04-21"
+  },
   "Rekognition": {
     "models": "rekognition/2016-06-27"
   },
@@ -786,6 +813,9 @@
   },
   "RoboMaker": {
     "models": "robomaker/2018-06-29"
+  },
+  "RolesAnywhere": {
+    "models": "rolesanywhere/2018-05-10"
   },
   "Route53": {
     "models": "route53/2013-04-01",

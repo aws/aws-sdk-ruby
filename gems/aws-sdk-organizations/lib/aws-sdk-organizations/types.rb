@@ -511,11 +511,23 @@ module Aws::Organizations
     #   integrated with Organizations. You can designate only a member
     #   account as a delegated administrator.
     #
+    # * CANNOT\_CLOSE\_MANAGEMENT\_ACCOUNT: You attempted to close the
+    #   management account. To close the management account for the
+    #   organization, you must first either remove or close all member
+    #   accounts in the organization. Follow standard account closure
+    #   process using root credentials.​
+    #
     # * CANNOT\_REMOVE\_DELEGATED\_ADMINISTRATOR\_FROM\_ORG: You attempted
     #   to remove an account that is registered as a delegated administrator
     #   for a service integrated with your organization. To complete this
     #   operation, you must first deregister this account as a delegated
     #   administrator.
+    #
+    # * CLOSE\_ACCOUNT\_QUOTA\_EXCEEDED: You have exceeded close account
+    #   quota for the past 30 days.
+    #
+    # * CLOSE\_ACCOUNT\_REQUESTS\_LIMIT\_EXCEEDED: You attempted to exceed
+    #   the number of accounts that you can close at a time. ​
     #
     # * CREATE\_ORGANIZATION\_IN\_BILLING\_MODE\_UNSUPPORTED\_REGION: To
     #   create an organization in the specified region, you must enable all
@@ -533,6 +545,12 @@ module Aws::Organizations
     #
     # * HANDSHAKE\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed the number
     #   of handshakes that you can send in one day.
+    #
+    # * INVALID\_PAYMENT\_INSTRUMENT: You cannot remove an account because
+    #   no supported payment method is associated with the account. Amazon
+    #   Web Services does not support cards issued by financial institutions
+    #   in Russia or Belarus. For more information, see [Managing your
+    #   Amazon Web Services payments][3].
     #
     # * MASTER\_ACCOUNT\_ADDRESS\_DOES\_NOT\_MATCH\_MARKETPLACE: To create
     #   an account in this organization, you first must migrate the
@@ -554,13 +572,13 @@ module Aws::Organizations
     # * MASTER\_ACCOUNT\_NOT\_GOVCLOUD\_ENABLED: To complete this operation,
     #   the management account must have an associated account in the Amazon
     #   Web Services GovCloud (US-West) Region. For more information, see
-    #   [Organizations][3] in the *Amazon Web Services GovCloud User Guide.*
+    #   [Organizations][4] in the *Amazon Web Services GovCloud User Guide.*
     #
     # * MASTER\_ACCOUNT\_PAYMENT\_INSTRUMENT\_REQUIRED: To create an
     #   organization with this management account, you first must associate
     #   a valid payment instrument, such as a credit card, with the account.
     #   Follow the steps at [To leave an organization when all required
-    #   account information has not yet been provided][4] in the
+    #   account information has not yet been provided][5] in the
     #   *Organizations User Guide.*
     #
     # * MAX\_DELEGATED\_ADMINISTRATORS\_FOR\_SERVICE\_LIMIT\_EXCEEDED: You
@@ -578,7 +596,7 @@ module Aws::Organizations
     #   operation with this member account, you first must associate a valid
     #   payment instrument, such as a credit card, with the account. Follow
     #   the steps at [To leave an organization when all required account
-    #   information has not yet been provided][4] in the *Organizations User
+    #   information has not yet been provided][5] in the *Organizations User
     #   Guide.*
     #
     # * MIN\_POLICY\_TYPE\_ATTACHMENT\_LIMIT\_EXCEEDED: You attempted to
@@ -620,8 +638,9 @@ module Aws::Organizations
     #
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#orgs_manage_accounts_remove-from-master
     # [2]: https://docs.aws.amazon.com/support/home#/
-    # [3]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html
-    # [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    # [3]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-general.html
+    # [4]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html
+    # [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -881,6 +900,13 @@ module Aws::Organizations
     #   * INVALID\_EMAIL: The account could not be created because the email
     #     address you provided is not valid.
     #
+    #   * INVALID\_PAYMENT\_INSTRUMENT: The Amazon Web Services account that
+    #     owns your organization does not have a supported payment method
+    #     associated with the account. Amazon Web Services does not support
+    #     cards issued by financial institutions in Russia or Belarus. For
+    #     more information, see [Managing your Amazon Web Services
+    #     payments][1].
+    #
     #   * INTERNAL\_FAILURE: The account could not be created because of an
     #     internal failure. Try again later. If the problem persists,
     #     contact Amazon Web Services Customer Support.
@@ -898,6 +924,10 @@ module Aws::Organizations
     #   * UNKNOWN\_BUSINESS\_VALIDATION: The Amazon Web Services account
     #     that owns your organization has an unknown issue with business
     #     license validation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-general.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountStatus AWS API Documentation
@@ -984,6 +1014,10 @@ module Aws::Organizations
     #
     # @!attribute [rw] account_name
     #   The friendly name of the member account.
+    #
+    #   The account name can consist of only the characters
+    #   \[a-z\],\[A-Z\],\[0-9\], hyphen (-), or dot (.) You can't separate
+    #   characters with a dash (–).
     #   @return [String]
     #
     # @!attribute [rw] role_name

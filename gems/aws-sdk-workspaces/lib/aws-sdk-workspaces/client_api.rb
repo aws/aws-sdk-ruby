@@ -77,6 +77,8 @@ module Aws::WorkSpaces
     CreateUpdatedWorkspaceImageResult = Shapes::StructureShape.new(name: 'CreateUpdatedWorkspaceImageResult')
     CreateWorkspaceBundleRequest = Shapes::StructureShape.new(name: 'CreateWorkspaceBundleRequest')
     CreateWorkspaceBundleResult = Shapes::StructureShape.new(name: 'CreateWorkspaceBundleResult')
+    CreateWorkspaceImageRequest = Shapes::StructureShape.new(name: 'CreateWorkspaceImageRequest')
+    CreateWorkspaceImageResult = Shapes::StructureShape.new(name: 'CreateWorkspaceImageResult')
     CreateWorkspacesRequest = Shapes::StructureShape.new(name: 'CreateWorkspacesRequest')
     CreateWorkspacesResult = Shapes::StructureShape.new(name: 'CreateWorkspacesResult')
     DedicatedTenancyCidrRangeList = Shapes::ListShape.new(name: 'DedicatedTenancyCidrRangeList')
@@ -89,6 +91,8 @@ module Aws::WorkSpaces
     DefaultLogo = Shapes::BlobShape.new(name: 'DefaultLogo')
     DefaultOu = Shapes::StringShape.new(name: 'DefaultOu')
     DefaultWorkspaceCreationProperties = Shapes::StructureShape.new(name: 'DefaultWorkspaceCreationProperties')
+    DeletableSamlPropertiesList = Shapes::ListShape.new(name: 'DeletableSamlPropertiesList')
+    DeletableSamlProperty = Shapes::StringShape.new(name: 'DeletableSamlProperty')
     DeleteClientBrandingRequest = Shapes::StructureShape.new(name: 'DeleteClientBrandingRequest')
     DeleteClientBrandingResult = Shapes::StructureShape.new(name: 'DeleteClientBrandingResult')
     DeleteConnectClientAddInRequest = Shapes::StructureShape.new(name: 'DeleteConnectClientAddInRequest')
@@ -149,6 +153,7 @@ module Aws::WorkSpaces
     DnsIpAddresses = Shapes::ListShape.new(name: 'DnsIpAddresses')
     Ec2ImageId = Shapes::StringShape.new(name: 'Ec2ImageId')
     ErrorType = Shapes::StringShape.new(name: 'ErrorType')
+    ExceptionErrorCode = Shapes::StringShape.new(name: 'ExceptionErrorCode')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     FailedCreateWorkspaceRequest = Shapes::StructureShape.new(name: 'FailedCreateWorkspaceRequest')
     FailedCreateWorkspaceRequests = Shapes::ListShape.new(name: 'FailedCreateWorkspaceRequests')
@@ -198,6 +203,8 @@ module Aws::WorkSpaces
     ModifyAccountResult = Shapes::StructureShape.new(name: 'ModifyAccountResult')
     ModifyClientPropertiesRequest = Shapes::StructureShape.new(name: 'ModifyClientPropertiesRequest')
     ModifyClientPropertiesResult = Shapes::StructureShape.new(name: 'ModifyClientPropertiesResult')
+    ModifySamlPropertiesRequest = Shapes::StructureShape.new(name: 'ModifySamlPropertiesRequest')
+    ModifySamlPropertiesResult = Shapes::StructureShape.new(name: 'ModifySamlPropertiesResult')
     ModifySelfservicePermissionsRequest = Shapes::StructureShape.new(name: 'ModifySelfservicePermissionsRequest')
     ModifySelfservicePermissionsResult = Shapes::StructureShape.new(name: 'ModifySelfservicePermissionsResult')
     ModifyWorkspaceAccessPropertiesRequest = Shapes::StructureShape.new(name: 'ModifyWorkspaceAccessPropertiesRequest')
@@ -242,6 +249,9 @@ module Aws::WorkSpaces
     RootVolumeSizeGib = Shapes::IntegerShape.new(name: 'RootVolumeSizeGib')
     RunningMode = Shapes::StringShape.new(name: 'RunningMode')
     RunningModeAutoStopTimeoutInMinutes = Shapes::IntegerShape.new(name: 'RunningModeAutoStopTimeoutInMinutes')
+    SamlProperties = Shapes::StructureShape.new(name: 'SamlProperties')
+    SamlStatusEnum = Shapes::StringShape.new(name: 'SamlStatusEnum')
+    SamlUserAccessUrl = Shapes::StringShape.new(name: 'SamlUserAccessUrl')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SelfservicePermissions = Shapes::StructureShape.new(name: 'SelfservicePermissions')
     Snapshot = Shapes::StructureShape.new(name: 'Snapshot')
@@ -465,6 +475,22 @@ module Aws::WorkSpaces
     CreateWorkspaceBundleResult.add_member(:workspace_bundle, Shapes::ShapeRef.new(shape: WorkspaceBundle, location_name: "WorkspaceBundle"))
     CreateWorkspaceBundleResult.struct_class = Types::CreateWorkspaceBundleResult
 
+    CreateWorkspaceImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: WorkspaceImageName, required: true, location_name: "Name"))
+    CreateWorkspaceImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: WorkspaceImageDescription, required: true, location_name: "Description"))
+    CreateWorkspaceImageRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "WorkspaceId"))
+    CreateWorkspaceImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateWorkspaceImageRequest.struct_class = Types::CreateWorkspaceImageRequest
+
+    CreateWorkspaceImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))
+    CreateWorkspaceImageResult.add_member(:name, Shapes::ShapeRef.new(shape: WorkspaceImageName, location_name: "Name"))
+    CreateWorkspaceImageResult.add_member(:description, Shapes::ShapeRef.new(shape: WorkspaceImageDescription, location_name: "Description"))
+    CreateWorkspaceImageResult.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
+    CreateWorkspaceImageResult.add_member(:state, Shapes::ShapeRef.new(shape: WorkspaceImageState, location_name: "State"))
+    CreateWorkspaceImageResult.add_member(:required_tenancy, Shapes::ShapeRef.new(shape: WorkspaceImageRequiredTenancy, location_name: "RequiredTenancy"))
+    CreateWorkspaceImageResult.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Created"))
+    CreateWorkspaceImageResult.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "OwnerAccountId"))
+    CreateWorkspaceImageResult.struct_class = Types::CreateWorkspaceImageResult
+
     CreateWorkspacesRequest.add_member(:workspaces, Shapes::ShapeRef.new(shape: WorkspaceRequestList, required: true, location_name: "Workspaces"))
     CreateWorkspacesRequest.struct_class = Types::CreateWorkspacesRequest
 
@@ -495,6 +521,8 @@ module Aws::WorkSpaces
     DefaultWorkspaceCreationProperties.add_member(:user_enabled_as_local_administrator, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UserEnabledAsLocalAdministrator"))
     DefaultWorkspaceCreationProperties.add_member(:enable_maintenance_mode, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableMaintenanceMode"))
     DefaultWorkspaceCreationProperties.struct_class = Types::DefaultWorkspaceCreationProperties
+
+    DeletableSamlPropertiesList.member = Shapes::ShapeRef.new(shape: DeletableSamlProperty)
 
     DeleteClientBrandingRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "ResourceId"))
     DeleteClientBrandingRequest.add_member(:platforms, Shapes::ShapeRef.new(shape: ClientDeviceTypeList, required: true, location_name: "Platforms"))
@@ -822,6 +850,13 @@ module Aws::WorkSpaces
 
     ModifyClientPropertiesResult.struct_class = Types::ModifyClientPropertiesResult
 
+    ModifySamlPropertiesRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "ResourceId"))
+    ModifySamlPropertiesRequest.add_member(:saml_properties, Shapes::ShapeRef.new(shape: SamlProperties, location_name: "SamlProperties"))
+    ModifySamlPropertiesRequest.add_member(:properties_to_delete, Shapes::ShapeRef.new(shape: DeletableSamlPropertiesList, location_name: "PropertiesToDelete"))
+    ModifySamlPropertiesRequest.struct_class = Types::ModifySamlPropertiesRequest
+
+    ModifySamlPropertiesResult.struct_class = Types::ModifySamlPropertiesResult
+
     ModifySelfservicePermissionsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "ResourceId"))
     ModifySelfservicePermissionsRequest.add_member(:selfservice_permissions, Shapes::ShapeRef.new(shape: SelfservicePermissions, required: true, location_name: "SelfservicePermissions"))
     ModifySelfservicePermissionsRequest.struct_class = Types::ModifySelfservicePermissionsRequest
@@ -859,6 +894,7 @@ module Aws::WorkSpaces
     OperationInProgressException.struct_class = Types::OperationInProgressException
 
     OperationNotSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    OperationNotSupportedException.add_member(:reason, Shapes::ShapeRef.new(shape: ExceptionErrorCode, location_name: "reason"))
     OperationNotSupportedException.struct_class = Types::OperationNotSupportedException
 
     RebootRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "WorkspaceId"))
@@ -928,6 +964,11 @@ module Aws::WorkSpaces
 
     RootStorage.add_member(:capacity, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Capacity"))
     RootStorage.struct_class = Types::RootStorage
+
+    SamlProperties.add_member(:status, Shapes::ShapeRef.new(shape: SamlStatusEnum, location_name: "Status"))
+    SamlProperties.add_member(:user_access_url, Shapes::ShapeRef.new(shape: SamlUserAccessUrl, location_name: "UserAccessUrl"))
+    SamlProperties.add_member(:relay_state_parameter_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RelayStateParameterName"))
+    SamlProperties.struct_class = Types::SamlProperties
 
     SelfservicePermissions.add_member(:restart_workspace, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "RestartWorkspace"))
     SelfservicePermissions.add_member(:increase_volume_size, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "IncreaseVolumeSize"))
@@ -1101,6 +1142,7 @@ module Aws::WorkSpaces
     WorkspaceDirectory.add_member(:workspace_access_properties, Shapes::ShapeRef.new(shape: WorkspaceAccessProperties, location_name: "WorkspaceAccessProperties"))
     WorkspaceDirectory.add_member(:tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "Tenancy"))
     WorkspaceDirectory.add_member(:selfservice_permissions, Shapes::ShapeRef.new(shape: SelfservicePermissions, location_name: "SelfservicePermissions"))
+    WorkspaceDirectory.add_member(:saml_properties, Shapes::ShapeRef.new(shape: SamlProperties, location_name: "SamlProperties"))
     WorkspaceDirectory.struct_class = Types::WorkspaceDirectory
 
     WorkspaceIdList.member = Shapes::ShapeRef.new(shape: WorkspaceId)
@@ -1306,6 +1348,21 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_workspace_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWorkspaceImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateWorkspaceImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateWorkspaceImageResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
       end)
 
       api.add_operation(:create_workspaces, Seahorse::Model::Operation.new.tap do |o|
@@ -1622,6 +1679,7 @@ module Aws::WorkSpaces
         o.output = Shapes::ShapeRef.new(shape: ImportClientBrandingResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -1685,6 +1743,18 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:modify_saml_properties, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifySamlProperties"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifySamlPropertiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifySamlPropertiesResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:modify_selfservice_permissions, Seahorse::Model::Operation.new.tap do |o|

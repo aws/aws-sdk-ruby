@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2022-08-15)
+------------------
+
+* Feature - This release introduces a new API PutFeedback that allows submitting feedback to Wisdom on content relevance.
+
+1.7.0 (2022-04-21)
+------------------
+
+* Feature - This release updates the GetRecommendations API to include a trigger event list for classifying and grouping recommendations.
+
 1.6.0 (2022-02-24)
 ------------------
 

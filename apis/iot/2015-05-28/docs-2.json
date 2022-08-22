@@ -7,7 +7,7 @@
     "AddThingToThingGroup": "<p>Adds a thing to a thing group.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AddThingToThingGroup</a> action.</p>",
     "AssociateTargetsWithJob": "<p>Associates a group with a continuous job. The following criteria must be met: </p> <ul> <li> <p>The job must have been created with the <code>targetSelection</code> field set to \"CONTINUOUS\".</p> </li> <li> <p>The job status must currently be \"IN_PROGRESS\".</p> </li> <li> <p>The total number of targets associated with a job must not exceed 100.</p> </li> </ul> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AssociateTargetsWithJob</a> action.</p>",
     "AttachPolicy": "<p>Attaches the specified policy to the specified principal (certificate or other credential).</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachPolicy</a> action.</p>",
-    "AttachPrincipalPolicy": "<p>Attaches the specified policy to the specified principal (certificate or other credential).</p> <p> <b>Note:</b> This action is deprecated. Please use <a>AttachPolicy</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachPrincipalPolicy</a> action.</p>",
+    "AttachPrincipalPolicy": "<p>Attaches the specified policy to the specified principal (certificate or other credential).</p> <p> <b>Note:</b> This action is deprecated and works as expected for backward compatibility, but we won't add enhancements. Use <a>AttachPolicy</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachPrincipalPolicy</a> action.</p>",
     "AttachSecurityProfile": "<p>Associates a Device Defender security profile with a thing group or this account. Each thing group or account can have up to five security profiles associated with it.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachSecurityProfile</a> action.</p>",
     "AttachThingPrincipal": "<p>Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachThingPrincipal</a> action.</p>",
     "CancelAuditMitigationActionsTask": "<p>Cancels a mitigation action task that is in progress. If the task is not in progress, an InvalidRequestException occurs.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CancelAuditMitigationActionsTask</a> action.</p>",
@@ -35,8 +35,8 @@
     "CreatePolicy": "<p>Creates an IoT policy.</p> <p>The created policy is the default version for the policy. This operation creates a policy version with a version identifier of <b>1</b> and sets <b>1</b> as the policy's default version.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreatePolicy</a> action.</p>",
     "CreatePolicyVersion": "<p>Creates a new version of the specified IoT policy. To update a policy, create a new policy version. A managed policy can have up to five versions. If the policy has five versions, you must use <a>DeletePolicyVersion</a> to delete an existing version before you create a new one.</p> <p>Optionally, you can set the new version as the policy's default version. The default version is the operative version (that is, the version that is in effect for the certificates to which the policy is attached).</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreatePolicyVersion</a> action.</p>",
     "CreateProvisioningClaim": "<p>Creates a provisioning claim.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateProvisioningClaim</a> action.</p>",
-    "CreateProvisioningTemplate": "<p>Creates a fleet provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateProvisioningTemplate</a> action.</p>",
-    "CreateProvisioningTemplateVersion": "<p>Creates a new version of a fleet provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateProvisioningTemplateVersion</a> action.</p>",
+    "CreateProvisioningTemplate": "<p>Creates a provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateProvisioningTemplate</a> action.</p>",
+    "CreateProvisioningTemplateVersion": "<p>Creates a new version of a provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateProvisioningTemplateVersion</a> action.</p>",
     "CreateRoleAlias": "<p>Creates a role alias.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateRoleAlias</a> action.</p>",
     "CreateScheduledAudit": "<p>Creates a scheduled audit that is run at a specified time interval.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateScheduledAudit</a> action.</p>",
     "CreateSecurityProfile": "<p>Creates a Device Defender security profile.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateSecurityProfile</a> action.</p>",
@@ -64,8 +64,8 @@
     "DeleteOTAUpdate": "<p>Delete an OTA update.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteOTAUpdate</a> action.</p>",
     "DeletePolicy": "<p>Deletes the specified policy.</p> <p>A policy cannot be deleted if it has non-default versions or it is attached to any certificate.</p> <p>To delete a policy, use the <a>DeletePolicyVersion</a> action to delete all non-default versions of the policy; use the <a>DetachPolicy</a> action to detach the policy from any certificate; and then use the DeletePolicy action to delete the policy.</p> <p>When a policy is deleted using DeletePolicy, its default version is deleted with it.</p> <note> <p>Because of the distributed nature of Amazon Web Services, it can take up to five minutes after a policy is detached before it's ready to be deleted.</p> </note> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeletePolicy</a> action.</p>",
     "DeletePolicyVersion": "<p>Deletes the specified version of the specified policy. You cannot delete the default version of a policy using this action. To delete the default version of a policy, use <a>DeletePolicy</a>. To find out which version of a policy is marked as the default version, use ListPolicyVersions.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeletePolicyVersion</a> action.</p>",
-    "DeleteProvisioningTemplate": "<p>Deletes a fleet provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteProvisioningTemplate</a> action.</p>",
-    "DeleteProvisioningTemplateVersion": "<p>Deletes a fleet provisioning template version.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteProvisioningTemplateVersion</a> action.</p>",
+    "DeleteProvisioningTemplate": "<p>Deletes a provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteProvisioningTemplate</a> action.</p>",
+    "DeleteProvisioningTemplateVersion": "<p>Deletes a provisioning template version.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteProvisioningTemplateVersion</a> action.</p>",
     "DeleteRegistrationCode": "<p>Deletes a CA certificate registration code.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteRegistrationCode</a> action.</p>",
     "DeleteRoleAlias": "<p>Deletes a role alias</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteRoleAlias</a> action.</p>",
     "DeleteScheduledAudit": "<p>Deletes a scheduled audit.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteScheduledAudit</a> action.</p>",
@@ -101,8 +101,8 @@
     "DescribeJobTemplate": "<p>Returns information about a job template.</p>",
     "DescribeManagedJobTemplate": "<p>View details of a managed job template.</p>",
     "DescribeMitigationAction": "<p>Gets information about a mitigation action.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeMitigationAction</a> action.</p>",
-    "DescribeProvisioningTemplate": "<p>Returns information about a fleet provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeProvisioningTemplate</a> action.</p>",
-    "DescribeProvisioningTemplateVersion": "<p>Returns information about a fleet provisioning template version.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeProvisioningTemplateVersion</a> action.</p>",
+    "DescribeProvisioningTemplate": "<p>Returns information about a provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeProvisioningTemplate</a> action.</p>",
+    "DescribeProvisioningTemplateVersion": "<p>Returns information about a provisioning template version.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeProvisioningTemplateVersion</a> action.</p>",
     "DescribeRoleAlias": "<p>Describes a role alias.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeRoleAlias</a> action.</p>",
     "DescribeScheduledAudit": "<p>Gets information about a scheduled audit.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeScheduledAudit</a> action.</p>",
     "DescribeSecurityProfile": "<p>Gets information about a Device Defender security profile.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeSecurityProfile</a> action.</p>",
@@ -112,7 +112,7 @@
     "DescribeThingRegistrationTask": "<p>Describes a bulk thing provisioning task.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeThingRegistrationTask</a> action.</p>",
     "DescribeThingType": "<p>Gets information about the specified thing type.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeThingType</a> action.</p>",
     "DetachPolicy": "<p>Detaches a policy from the specified target.</p> <note> <p>Because of the distributed nature of Amazon Web Services, it can take up to five minutes after a policy is detached before it's ready to be deleted.</p> </note> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DetachPolicy</a> action.</p>",
-    "DetachPrincipalPolicy": "<p>Removes the specified policy from the specified certificate.</p> <note> <p>This action is deprecated. Please use <a>DetachPolicy</a> instead.</p> </note> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DetachPrincipalPolicy</a> action.</p>",
+    "DetachPrincipalPolicy": "<p>Removes the specified policy from the specified certificate.</p> <p> <b>Note:</b> This action is deprecated and works as expected for backward compatibility, but we won't add enhancements. Use <a>DetachPolicy</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DetachPrincipalPolicy</a> action.</p>",
     "DetachSecurityProfile": "<p>Disassociates a Device Defender security profile from a thing group or from this account.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DetachSecurityProfile</a> action.</p>",
     "DetachThingPrincipal": "<p>Detaches the specified principal from the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.</p> <note> <p>This call is asynchronous. It might take several seconds for the detachment to propagate.</p> </note> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DetachThingPrincipal</a> action.</p>",
     "DisableTopicRule": "<p>Disables the rule.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DisableTopicRule</a> action.</p>",
@@ -162,12 +162,12 @@
     "ListOTAUpdates": "<p>Lists OTA updates.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListOTAUpdates</a> action.</p>",
     "ListOutgoingCertificates": "<p>Lists certificates that are being transferred but not yet accepted.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListOutgoingCertificates</a> action.</p>",
     "ListPolicies": "<p>Lists your policies.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPolicies</a> action.</p>",
-    "ListPolicyPrincipals": "<p>Lists the principals associated with the specified policy.</p> <p> <b>Note:</b> This action is deprecated. Please use <a>ListTargetsForPolicy</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPolicyPrincipals</a> action.</p>",
+    "ListPolicyPrincipals": "<p>Lists the principals associated with the specified policy.</p> <p> <b>Note:</b> This action is deprecated and works as expected for backward compatibility, but we won't add enhancements. Use <a>ListTargetsForPolicy</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPolicyPrincipals</a> action.</p>",
     "ListPolicyVersions": "<p>Lists the versions of the specified policy and identifies the default version.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPolicyVersions</a> action.</p>",
-    "ListPrincipalPolicies": "<p>Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in <a href=\"https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax\">AmazonCognito Identity format</a>.</p> <p> <b>Note:</b> This action is deprecated. Please use <a>ListAttachedPolicies</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPrincipalPolicies</a> action.</p>",
+    "ListPrincipalPolicies": "<p>Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in <a href=\"https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax\">AmazonCognito Identity format</a>.</p> <p> <b>Note:</b> This action is deprecated and works as expected for backward compatibility, but we won't add enhancements. Use <a>ListAttachedPolicies</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPrincipalPolicies</a> action.</p>",
     "ListPrincipalThings": "<p>Lists the things associated with the specified principal. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. </p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPrincipalThings</a> action.</p>",
-    "ListProvisioningTemplateVersions": "<p>A list of fleet provisioning template versions.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListProvisioningTemplateVersions</a> action.</p>",
-    "ListProvisioningTemplates": "<p>Lists the fleet provisioning templates in your Amazon Web Services account.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListProvisioningTemplates</a> action.</p>",
+    "ListProvisioningTemplateVersions": "<p>A list of provisioning template versions.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListProvisioningTemplateVersions</a> action.</p>",
+    "ListProvisioningTemplates": "<p>Lists the provisioning templates in your Amazon Web Services account.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListProvisioningTemplates</a> action.</p>",
     "ListRoleAliases": "<p>Lists the role aliases registered in your account.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListRoleAliases</a> action.</p>",
     "ListScheduledAudits": "<p>Lists all of your scheduled audits.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListScheduledAudits</a> action.</p>",
     "ListSecurityProfiles": "<p>Lists the Device Defender security profiles you've created. You can filter security profiles by dimension or custom metric.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListSecurityProfiles</a> action.</p> <note> <p> <code>dimensionName</code> and <code>metricName</code> cannot be used in the same request.</p> </note>",
@@ -190,8 +190,8 @@
     "ListV2LoggingLevels": "<p>Lists logging levels.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListV2LoggingLevels</a> action.</p>",
     "ListViolationEvents": "<p>Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior, or thing (device).</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListViolationEvents</a> action.</p>",
     "PutVerificationStateOnViolation": "<p>Set a verification state and provide a description of that verification state on a violation (detect alarm).</p>",
-    "RegisterCACertificate": "<p>Registers a CA certificate with IoT. This CA certificate can then be used to sign device certificates, which can be then registered with IoT. You can register up to 10 CA certificates per Amazon Web Services account that have the same subject field. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the <a>RegisterCertificate</a> action.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RegisterCACertificate</a> action.</p>",
-    "RegisterCertificate": "<p>Registers a device certificate with IoT. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RegisterCertificate</a> action.</p>",
+    "RegisterCACertificate": "<p>Registers a CA certificate with Amazon Web Services IoT Core. There is no limit to the number of CA certificates you can register in your Amazon Web Services account. You can register up to 10 CA certificates with the same <code>CA subject field</code> per Amazon Web Services account.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RegisterCACertificate</a> action.</p>",
+    "RegisterCertificate": "<p>Registers a device certificate with IoT in the same <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode\">certificate mode</a> as the signing CA. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RegisterCertificate</a> action.</p>",
     "RegisterCertificateWithoutCA": "<p>Register a certificate that does not have a certificate authority (CA). For supported certificates, consult <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms\"> Certificate signing algorithms supported by IoT</a>. </p>",
     "RegisterThing": "<p>Provisions a thing in the device registry. RegisterThing calls other IoT control plane APIs. These calls might exceed your account level <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_iot\"> IoT Throttling Limits</a> and cause throttle errors. Please contact <a href=\"https://console.aws.amazon.com/support/home\">Amazon Web Services Customer Support</a> to raise your throttling limits if necessary.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RegisterThing</a> action.</p>",
     "RejectCertificateTransfer": "<p>Rejects a pending certificate transfer. After IoT rejects a certificate transfer, the certificate status changes from <b>PENDING_TRANSFER</b> to <b>INACTIVE</b>.</p> <p>To check for pending certificate transfers, call <a>ListCertificates</a> to enumerate your certificates.</p> <p>This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source's account in the INACTIVE state.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RejectCertificateTransfer</a> action.</p>",
@@ -229,7 +229,7 @@
     "UpdateIndexingConfiguration": "<p>Updates the search configuration.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateIndexingConfiguration</a> action.</p>",
     "UpdateJob": "<p>Updates supported fields of the specified job.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateJob</a> action.</p>",
     "UpdateMitigationAction": "<p>Updates the definition for the specified mitigation action.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateMitigationAction</a> action.</p>",
-    "UpdateProvisioningTemplate": "<p>Updates a fleet provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateProvisioningTemplate</a> action.</p>",
+    "UpdateProvisioningTemplate": "<p>Updates a provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateProvisioningTemplate</a> action.</p>",
     "UpdateRoleAlias": "<p>Updates a role alias.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateRoleAlias</a> action.</p>",
     "UpdateScheduledAudit": "<p>Updates a scheduled audit, including which checks are performed and how often the audit takes place.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateScheduledAudit</a> action.</p>",
     "UpdateSecurityProfile": "<p>Updates a Device Defender security profile.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateSecurityProfile</a> action.</p>",
@@ -1311,6 +1311,13 @@
         "CreateAuthorizerRequest$signingDisabled": "<p>Specifies whether IoT validates the token signature in an authorization request.</p>"
       }
     },
+    "BooleanWrapperObject": {
+      "base": null,
+      "refs": {
+        "Job$isConcurrent": "<p>Indicates whether a job is concurrent. Will be true when a job is rolling out new job executions or canceling previously created executions, otherwise false.</p>",
+        "JobSummary$isConcurrent": "<p>Indicates whether a job is concurrent. Will be true when a job is rolling out new job executions or canceling previously created executions, otherwise false.</p>"
+      }
+    },
     "Bucket": {
       "base": "<p>A count of documents that meets a specific aggregation criteria.</p>",
       "refs": {
@@ -1514,8 +1521,10 @@
     "CertificateMode": {
       "base": null,
       "refs": {
-        "Certificate$certificateMode": "<p>The mode of the certificate.</p>",
-        "CertificateDescription$certificateMode": "<p>The mode of the certificate.</p>"
+        "CACertificateDescription$certificateMode": "<p>The mode of the CA. </p> <p>All the device certificates that are registered using this CA will be registered in the same mode as the CA. For more information about certificate mode for device certificates, see <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode\">certificate mode</a>.</p>",
+        "Certificate$certificateMode": "<p>The mode of the certificate.</p> <p> <code>DEFAULT</code>: A certificate in <code>DEFAULT</code> mode is either generated by Amazon Web Services IoT Core or registered with an issuer certificate authority (CA) in <code>DEFAULT</code> mode. Devices with certificates in <code>DEFAULT</code> mode aren't required to send the Server Name Indication (SNI) extension when connecting to Amazon Web Services IoT Core. However, to use features such as custom domains and VPC endpoints, we recommend that you use the SNI extension when connecting to Amazon Web Services IoT Core.</p> <p> <code>SNI_ONLY</code>: A certificate in <code>SNI_ONLY</code> mode is registered without an issuer CA. Devices with certificates in <code>SNI_ONLY</code> mode must send the SNI extension when connecting to Amazon Web Services IoT Core. </p>",
+        "CertificateDescription$certificateMode": "<p>The mode of the certificate.</p> <p> <code>DEFAULT</code>: A certificate in <code>DEFAULT</code> mode is either generated by Amazon Web Services IoT Core or registered with an issuer certificate authority (CA) in <code>DEFAULT</code> mode. Devices with certificates in <code>DEFAULT</code> mode aren't required to send the Server Name Indication (SNI) extension when connecting to Amazon Web Services IoT Core. However, to use features such as custom domains and VPC endpoints, we recommend that you use the SNI extension when connecting to Amazon Web Services IoT Core.</p> <p> <code>SNI_ONLY</code>: A certificate in <code>SNI_ONLY</code> mode is registered without an issuer CA. Devices with certificates in <code>SNI_ONLY</code> mode must send the SNI extension when connecting to Amazon Web Services IoT Core. </p> <p>For more information about the value for SNI extension, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html\">Transport security in IoT</a>.</p>",
+        "RegisterCACertificateRequest$certificateMode": "<p>Describes the certificate mode in which the Certificate Authority (CA) will be registered. If the <code>verificationCertificate</code> field is not provided, set <code>certificateMode</code> to be <code>SNI_ONLY</code>. If the <code>verificationCertificate</code> field is provided, set <code>certificateMode</code> to be <code>DEFAULT</code>. When <code>certificateMode</code> is not provided, it defaults to <code>DEFAULT</code>. All the device certificates that are registered using this CA will be registered in the same certificate mode as the CA. For more information about certificate mode for device certificates, see <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode\"> certificate mode</a>. </p>"
       }
     },
     "CertificateName": {
@@ -1539,7 +1548,7 @@
         "CreateKeysAndCertificateResponse$certificatePem": "<p>The certificate data, in PEM format.</p>",
         "CreateProvisioningClaimResponse$certificatePem": "<p>The provisioning claim certificate.</p>",
         "RegisterCACertificateRequest$caCertificate": "<p>The CA certificate.</p>",
-        "RegisterCACertificateRequest$verificationCertificate": "<p>The private key verification certificate.</p>",
+        "RegisterCACertificateRequest$verificationCertificate": "<p>The private key verification certificate. If <code>certificateMode</code> is <code>SNI_ONLY</code>, the <code>verificationCertificate</code> field must be empty. If <code>certificateMode</code> is <code>DEFAULT</code> or not provided, the <code>verificationCertificate</code> field must not be empty. </p>",
         "RegisterCertificateRequest$certificatePem": "<p>The certificate data, in PEM format.</p>",
         "RegisterCertificateRequest$caCertificatePem": "<p>The CA certificate used to sign the device certificate being registered.</p>",
         "RegisterCertificateWithoutCARequest$certificatePem": "<p>The certificate data, in PEM format.</p>",
@@ -2145,9 +2154,9 @@
         "CreateProvisioningClaimResponse$expiration": "<p>The provisioning claim expiration time.</p>",
         "DescribeDomainConfigurationResponse$lastStatusChangeDate": "<p>The date and time the domain configuration's status was last changed.</p>",
         "DescribeJobTemplateResponse$createdAt": "<p>The time, in seconds since the epoch, when the job template was created.</p>",
-        "DescribeProvisioningTemplateResponse$creationDate": "<p>The date when the fleet provisioning template was created.</p>",
-        "DescribeProvisioningTemplateResponse$lastModifiedDate": "<p>The date when the fleet provisioning template was last modified.</p>",
-        "DescribeProvisioningTemplateVersionResponse$creationDate": "<p>The date when the fleet provisioning template version was created.</p>",
+        "DescribeProvisioningTemplateResponse$creationDate": "<p>The date when the provisioning template was created.</p>",
+        "DescribeProvisioningTemplateResponse$lastModifiedDate": "<p>The date when the provisioning template was last modified.</p>",
+        "DescribeProvisioningTemplateVersionResponse$creationDate": "<p>The date when the provisioning template version was created.</p>",
         "GetPolicyResponse$creationDate": "<p>The date the policy was created.</p>",
         "GetPolicyResponse$lastModifiedDate": "<p>The date the policy was last modified.</p>",
         "GetPolicyVersionResponse$creationDate": "<p>The date the policy was created.</p>",
@@ -2171,9 +2180,9 @@
         "OutgoingCertificate$transferDate": "<p>The date the transfer was initiated.</p>",
         "OutgoingCertificate$creationDate": "<p>The certificate creation date.</p>",
         "PolicyVersion$createDate": "<p>The date and time the policy was created.</p>",
-        "ProvisioningTemplateSummary$creationDate": "<p>The date when the fleet provisioning template summary was created.</p>",
-        "ProvisioningTemplateSummary$lastModifiedDate": "<p>The date when the fleet provisioning template summary was last modified.</p>",
-        "ProvisioningTemplateVersionSummary$creationDate": "<p>The date when the fleet provisioning template version was created</p>",
+        "ProvisioningTemplateSummary$creationDate": "<p>The date when the provisioning template summary was created.</p>",
+        "ProvisioningTemplateSummary$lastModifiedDate": "<p>The date when the provisioning template summary was last modified.</p>",
+        "ProvisioningTemplateVersionSummary$creationDate": "<p>The date when the provisioning template version was created</p>",
         "RoleAliasDescription$creationDate": "<p>The UNIX timestamp of when the role alias was created.</p>",
         "RoleAliasDescription$lastModifiedDate": "<p>The UNIX timestamp of when the role alias was last modified.</p>",
         "StreamInfo$createdAt": "<p>The date when the stream was created.</p>",
@@ -3086,7 +3095,7 @@
       }
     },
     "DocumentParameter": {
-      "base": "<p>A map of key-value pairs containing the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.</p>",
+      "base": "<p>A map of key-value pairs containing the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.</p> <note> <p> <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them.</p> </note>",
       "refs": {
         "DocumentParameters$member": null
       }
@@ -3094,7 +3103,7 @@
     "DocumentParameters": {
       "base": null,
       "refs": {
-        "DescribeManagedJobTemplateResponse$documentParameters": "<p>A map of key-value pairs that you can use as guidance to specify the inputs for creating a job from a managed template.</p>"
+        "DescribeManagedJobTemplateResponse$documentParameters": "<p>A map of key-value pairs that you can use as guidance to specify the inputs for creating a job from a managed template.</p> <note> <p> <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them.</p> </note>"
       }
     },
     "DomainConfigurationArn": {
@@ -3254,10 +3263,10 @@
         "AuditCheckConfiguration$enabled": "<p>True if this audit check is enabled for this account.</p>",
         "AuditNotificationTarget$enabled": "<p>True if notifications to the target are enabled.</p>",
         "Configuration$Enabled": "<p>True to enable the configuration.</p>",
-        "CreateProvisioningTemplateRequest$enabled": "<p>True to enable the fleet provisioning template, otherwise false.</p>",
-        "DescribeProvisioningTemplateResponse$enabled": "<p>True if the fleet provisioning template is enabled, otherwise false.</p>",
+        "CreateProvisioningTemplateRequest$enabled": "<p>True to enable the provisioning template, otherwise false.</p>",
+        "DescribeProvisioningTemplateResponse$enabled": "<p>True if the provisioning template is enabled, otherwise false.</p>",
         "ProvisioningTemplateSummary$enabled": "<p>True if the fleet provision template is enabled, otherwise false.</p>",
-        "UpdateProvisioningTemplateRequest$enabled": "<p>True to enable the fleet provisioning template, otherwise false.</p>"
+        "UpdateProvisioningTemplateRequest$enabled": "<p>True to enable the provisioning template, otherwise false.</p>"
       }
     },
     "EndpointAddress": {
@@ -3760,7 +3769,7 @@
     "HashAlgorithm": {
       "base": null,
       "refs": {
-        "CustomCodeSigning$hashAlgorithm": "<p>The hash algorithm used to code sign the file.</p>"
+        "CustomCodeSigning$hashAlgorithm": "<p>The hash algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses <code>SHA256</code> or <code>SHA1</code>, so you can pass either of them based on which was used for generating the signature.</p>"
       }
     },
     "HashKeyField": {
@@ -3932,6 +3941,12 @@
         "DescribeIndexResponse$indexStatus": "<p>The index status.</p>"
       }
     },
+    "IndexingFilter": {
+      "base": "<p>Provides additional filters for specific data sources. Named shadow is the only data source that currently supports and requires a filter. To add named shadows to your fleet indexing configuration, set <code>namedShadowIndexingMode</code> to be <code>ON</code> and specify your shadow names in <code>filter</code>.</p>",
+      "refs": {
+        "ThingIndexingConfiguration$filter": "<p>Provides additional filters for specific data sources. Named shadow is the only data source that currently supports and requires a filter. To add named shadows to your fleet indexing configuration, set <code>namedShadowIndexingMode</code> to be <code>ON</code> and specify your shadow names in <code>filter</code>.</p>"
+      }
+    },
     "InlineDocument": {
       "base": null,
       "refs": {
@@ -4012,11 +4027,11 @@
       "base": null,
       "refs": {
         "CreatePolicyVersionResponse$isDefaultVersion": "<p>Specifies whether the policy version is the default.</p>",
-        "CreateProvisioningTemplateVersionResponse$isDefaultVersion": "<p>True if the fleet provisioning template version is the default version, otherwise false.</p>",
-        "DescribeProvisioningTemplateVersionResponse$isDefaultVersion": "<p>True if the fleet provisioning template version is the default version.</p>",
+        "CreateProvisioningTemplateVersionResponse$isDefaultVersion": "<p>True if the provisioning template version is the default version, otherwise false.</p>",
+        "DescribeProvisioningTemplateVersionResponse$isDefaultVersion": "<p>True if the provisioning template version is the default version.</p>",
         "GetPolicyVersionResponse$isDefaultVersion": "<p>Specifies whether the policy version is the default.</p>",
         "PolicyVersion$isDefaultVersion": "<p>Specifies whether the policy version is the default.</p>",
-        "ProvisioningTemplateVersionSummary$isDefaultVersion": "<p>True if the fleet provisioning template version is the default version, otherwise false.</p>"
+        "ProvisioningTemplateVersionSummary$isDefaultVersion": "<p>True if the provisioning template version is the default version, otherwise false.</p>"
       }
     },
     "IsDisabled": {
@@ -5326,6 +5341,12 @@
         "ThingIndexingConfiguration$namedShadowIndexingMode": "<p>Named shadow indexing mode. Valid values are:</p> <ul> <li> <p>ON – Your thing index contains named shadow. To enable thing named shadow indexing, <i>namedShadowIndexingMode</i> must not be set to OFF.</p> </li> <li> <p>OFF - Named shadow indexing is disabled.</p> </li> </ul> <p>For more information about Shadows, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-device-shadows.html\">IoT Device Shadow service.</a> </p>"
       }
     },
+    "NamedShadowNamesFilter": {
+      "base": null,
+      "refs": {
+        "IndexingFilter$namedShadowNames": "<p>The shadow names that you select to index. The default maximum number of shadow names for indexing is 10. To increase the limit, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits\">Amazon Web Services IoT Device Management Quotas</a> in the <i>Amazon Web Services General Reference</i>. </p>"
+      }
+    },
     "NamespaceId": {
       "base": null,
       "refs": {
@@ -5649,8 +5670,8 @@
     "ParameterMap": {
       "base": null,
       "refs": {
-        "CreateJobRequest$documentParameters": "<p>Parameters of a managed template that you can specify to create the job document.</p>",
-        "Job$documentParameters": "<p>A key-value map that pairs the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.</p>"
+        "CreateJobRequest$documentParameters": "<p>Parameters of an Amazon Web Services managed template that you can specify to create the job document.</p> <note> <p> <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them.</p> </note>",
+        "Job$documentParameters": "<p>A key-value map that pairs the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.</p> <note> <p> <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them.</p> </note>"
       }
     },
     "ParameterValue": {
@@ -5968,11 +5989,11 @@
     "ProvisioningTemplateListing": {
       "base": null,
       "refs": {
-        "ListProvisioningTemplatesResponse$templates": "<p>A list of fleet provisioning templates</p>"
+        "ListProvisioningTemplatesResponse$templates": "<p>A list of provisioning templates</p>"
       }
     },
     "ProvisioningTemplateSummary": {
-      "base": "<p>A summary of information about a fleet provisioning template.</p>",
+      "base": "<p>A summary of information about a provisioning template.</p>",
       "refs": {
         "ProvisioningTemplateListing$member": null
       }
@@ -5980,7 +6001,7 @@
     "ProvisioningTemplateVersionListing": {
       "base": null,
       "refs": {
-        "ListProvisioningTemplateVersionsResponse$versions": "<p>The list of fleet provisioning template versions.</p>"
+        "ListProvisioningTemplateVersionsResponse$versions": "<p>The list of provisioning template versions.</p>"
       }
     },
     "ProvisioningTemplateVersionSummary": {
@@ -6062,7 +6083,7 @@
         "GetCardinalityRequest$queryString": "<p>The search query string.</p>",
         "GetPercentilesRequest$queryString": "<p>The search query string.</p>",
         "GetStatisticsRequest$queryString": "<p>The query used to search. You can specify \"*\" for the query string to get the count of all indexed things in your Amazon Web Services account.</p>",
-        "SearchIndexRequest$queryString": "<p>The search query string.</p>",
+        "SearchIndexRequest$queryString": "<p>The search query string. For more information about the search query syntax, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html\">Query syntax</a>.</p>",
         "UpdateDynamicThingGroupRequest$queryString": "<p>The dynamic thing group search query string to update.</p>",
         "UpdateFleetMetricRequest$queryString": "<p>The search query string.</p>"
       }
@@ -6491,7 +6512,7 @@
         "AuditNotificationTarget$roleArn": "<p>The ARN of the role that grants permission to send notifications to the target.</p>",
         "CreateMitigationActionRequest$roleArn": "<p>The ARN of the IAM role that is used to apply the mitigation action.</p>",
         "CreateOTAUpdateRequest$roleArn": "<p>The IAM role that grants Amazon Web Services IoT Core access to the Amazon S3, IoT jobs and Amazon Web Services Code Signing resources to create an OTA update job.</p>",
-        "CreateProvisioningTemplateRequest$provisioningRoleArn": "<p>The role ARN for the role associated with the fleet provisioning template. This IoT role grants permission to provision a device.</p>",
+        "CreateProvisioningTemplateRequest$provisioningRoleArn": "<p>The role ARN for the role associated with the provisioning template. This IoT role grants permission to provision a device.</p>",
         "CreateRoleAliasRequest$roleArn": "<p>The role ARN.</p>",
         "CreateStreamRequest$roleArn": "<p>An IAM role that allows the IoT service principal to access your S3 files.</p>",
         "DescribeAccountAuditConfigurationResponse$roleArn": "<p>The ARN of the role that grants permission to IoT to access information about your devices, policies, certificates, and other items as required when performing an audit.</p> <p>On the first call to <code>UpdateAccountAuditConfiguration</code>, this parameter is required.</p>",
@@ -6500,7 +6521,7 @@
         "DescribeThingRegistrationTaskResponse$roleArn": "<p>The role ARN that grants access to the input file bucket.</p>",
         "EnableIoTLoggingParams$roleArnForLogging": "<p>The Amazon Resource Name (ARN) of the IAM role used for logging.</p>",
         "MitigationAction$roleArn": "<p>The IAM role ARN used to apply this mitigation action.</p>",
-        "PresignedUrlConfig$roleArn": "<p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p>",
+        "PresignedUrlConfig$roleArn": "<p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p> <important> <p>For information about addressing the confused deputy problem, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html\">cross-service confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p> </important>",
         "RegistrationConfig$roleArn": "<p>The ARN of the role.</p>",
         "ResourceIdentifier$iamRoleArn": "<p>The ARN of the IAM role that has overly permissive actions.</p>",
         "RoleAliasDescription$roleArn": "<p>The role ARN.</p>",
@@ -6880,6 +6901,12 @@
       "refs": {
       }
     },
+    "ShadowName": {
+      "base": null,
+      "refs": {
+        "NamedShadowNamesFilter$member": null
+      }
+    },
     "SigV4Authorization": {
       "base": "<p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 signing process</a>.</p>",
       "refs": {
@@ -6895,7 +6922,7 @@
     "SignatureAlgorithm": {
       "base": null,
       "refs": {
-        "CustomCodeSigning$signatureAlgorithm": "<p>The signature algorithm used to code sign the file.</p>"
+        "CustomCodeSigning$signatureAlgorithm": "<p>The signature algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses <code>ECDSA</code> or <code>RSA</code>, so you can pass either of them based on which was used for generating the signature.</p>"
       }
     },
     "SigningJobId": {
@@ -7282,7 +7309,7 @@
         "CreateMitigationActionRequest$tags": "<p>Metadata that can be used to manage the mitigation action.</p>",
         "CreateOTAUpdateRequest$tags": "<p>Metadata which can be used to manage updates.</p>",
         "CreatePolicyRequest$tags": "<p>Metadata which can be used to manage the policy.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>",
-        "CreateProvisioningTemplateRequest$tags": "<p>Metadata which can be used to manage the fleet provisioning template.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>",
+        "CreateProvisioningTemplateRequest$tags": "<p>Metadata which can be used to manage the provisioning template.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>",
         "CreateRoleAliasRequest$tags": "<p>Metadata which can be used to manage the role alias.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>",
         "CreateScheduledAuditRequest$tags": "<p>Metadata that can be used to manage the scheduled audit.</p>",
         "CreateSecurityProfileRequest$tags": "<p>Metadata that can be used to manage the security profile.</p>",
@@ -7336,11 +7363,11 @@
     "TargetSelection": {
       "base": null,
       "refs": {
-        "CreateJobRequest$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.</p>",
+        "CreateJobRequest$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.</p> <note> <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created.</p> </note>",
         "CreateOTAUpdateRequest$targetSelection": "<p>Specifies whether the update will continue to run (CONTINUOUS), or will be complete after all the things specified as targets have completed the update (SNAPSHOT). If continuous, the update may also be run on a thing when a change is detected in a target. For example, an update will run on a thing when the thing is added to a target group, even after the update was completed by all things originally in the group. Valid values: CONTINUOUS | SNAPSHOT.</p>",
-        "Job$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a device when the thing representing the device is added to a target group, even after the job was completed by all things originally in the group. </p>",
-        "JobSummary$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.</p>",
-        "ListJobsRequest$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group. </p>",
+        "Job$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a device when the thing representing the device is added to a target group, even after the job was completed by all things originally in the group. </p> <note> <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created.</p> </note>",
+        "JobSummary$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.</p> <note> <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created.</p> </note>",
+        "ListJobsRequest$targetSelection": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group. </p> <note> <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created.</p> </note>",
         "OTAUpdateInfo$targetSelection": "<p>Specifies whether the OTA update will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the OTA update (SNAPSHOT). If continuous, the OTA update may also be run on a thing when a change is detected in a target. For example, an OTA update will run on a thing when the thing is added to a target group, even after the OTA update was completed by all things originally in the group. </p>"
       }
     },
@@ -7396,17 +7423,17 @@
       "refs": {
         "CreateProvisioningTemplateResponse$templateArn": "<p>The ARN that identifies the provisioning template.</p>",
         "CreateProvisioningTemplateVersionResponse$templateArn": "<p>The ARN that identifies the provisioning template.</p>",
-        "DescribeProvisioningTemplateResponse$templateArn": "<p>The ARN of the fleet provisioning template.</p>",
-        "ProvisioningTemplateSummary$templateArn": "<p>The ARN of the fleet provisioning template.</p>"
+        "DescribeProvisioningTemplateResponse$templateArn": "<p>The ARN of the provisioning template.</p>",
+        "ProvisioningTemplateSummary$templateArn": "<p>The ARN of the provisioning template.</p>"
       }
     },
     "TemplateBody": {
       "base": null,
       "refs": {
-        "CreateProvisioningTemplateRequest$templateBody": "<p>The JSON formatted contents of the fleet provisioning template.</p>",
-        "CreateProvisioningTemplateVersionRequest$templateBody": "<p>The JSON formatted contents of the fleet provisioning template.</p>",
-        "DescribeProvisioningTemplateResponse$templateBody": "<p>The JSON formatted contents of the fleet provisioning template.</p>",
-        "DescribeProvisioningTemplateVersionResponse$templateBody": "<p>The JSON formatted contents of the fleet provisioning template version.</p>",
+        "CreateProvisioningTemplateRequest$templateBody": "<p>The JSON formatted contents of the provisioning template.</p>",
+        "CreateProvisioningTemplateVersionRequest$templateBody": "<p>The JSON formatted contents of the provisioning template.</p>",
+        "DescribeProvisioningTemplateResponse$templateBody": "<p>The JSON formatted contents of the provisioning template.</p>",
+        "DescribeProvisioningTemplateVersionResponse$templateBody": "<p>The JSON formatted contents of the provisioning template version.</p>",
         "DescribeThingRegistrationTaskResponse$templateBody": "<p>The task's template.</p>",
         "RegisterThingRequest$templateBody": "<p>The provisioning template. See <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/provision-w-cert.html\">Provisioning Devices That Have Device Certificates</a> for more information.</p>",
         "RegistrationConfig$templateBody": "<p>The template body.</p>",
@@ -7416,39 +7443,49 @@
     "TemplateDescription": {
       "base": null,
       "refs": {
-        "CreateProvisioningTemplateRequest$description": "<p>The description of the fleet provisioning template.</p>",
-        "DescribeProvisioningTemplateResponse$description": "<p>The description of the fleet provisioning template.</p>",
-        "ProvisioningTemplateSummary$description": "<p>The description of the fleet provisioning template.</p>",
-        "UpdateProvisioningTemplateRequest$description": "<p>The description of the fleet provisioning template.</p>"
+        "CreateProvisioningTemplateRequest$description": "<p>The description of the provisioning template.</p>",
+        "DescribeProvisioningTemplateResponse$description": "<p>The description of the provisioning template.</p>",
+        "ProvisioningTemplateSummary$description": "<p>The description of the provisioning template.</p>",
+        "UpdateProvisioningTemplateRequest$description": "<p>The description of the provisioning template.</p>"
       }
     },
     "TemplateName": {
       "base": null,
       "refs": {
         "CreateProvisioningClaimRequest$templateName": "<p>The name of the provisioning template to use.</p>",
-        "CreateProvisioningTemplateRequest$templateName": "<p>The name of the fleet provisioning template.</p>",
-        "CreateProvisioningTemplateResponse$templateName": "<p>The name of the fleet provisioning template.</p>",
-        "CreateProvisioningTemplateVersionRequest$templateName": "<p>The name of the fleet provisioning template.</p>",
-        "CreateProvisioningTemplateVersionResponse$templateName": "<p>The name of the fleet provisioning template.</p>",
+        "CreateProvisioningTemplateRequest$templateName": "<p>The name of the provisioning template.</p>",
+        "CreateProvisioningTemplateResponse$templateName": "<p>The name of the provisioning template.</p>",
+        "CreateProvisioningTemplateVersionRequest$templateName": "<p>The name of the provisioning template.</p>",
+        "CreateProvisioningTemplateVersionResponse$templateName": "<p>The name of the provisioning template.</p>",
         "DeleteProvisioningTemplateRequest$templateName": "<p>The name of the fleet provision template to delete.</p>",
-        "DeleteProvisioningTemplateVersionRequest$templateName": "<p>The name of the fleet provisioning template version to delete.</p>",
-        "DescribeProvisioningTemplateRequest$templateName": "<p>The name of the fleet provisioning template.</p>",
-        "DescribeProvisioningTemplateResponse$templateName": "<p>The name of the fleet provisioning template.</p>",
+        "DeleteProvisioningTemplateVersionRequest$templateName": "<p>The name of the provisioning template version to delete.</p>",
+        "DescribeProvisioningTemplateRequest$templateName": "<p>The name of the provisioning template.</p>",
+        "DescribeProvisioningTemplateResponse$templateName": "<p>The name of the provisioning template.</p>",
         "DescribeProvisioningTemplateVersionRequest$templateName": "<p>The template name.</p>",
-        "ListProvisioningTemplateVersionsRequest$templateName": "<p>The name of the fleet provisioning template.</p>",
-        "ProvisioningTemplateSummary$templateName": "<p>The name of the fleet provisioning template.</p>",
-        "UpdateProvisioningTemplateRequest$templateName": "<p>The name of the fleet provisioning template.</p>"
+        "ListCACertificatesRequest$templateName": "<p>The name of the provisioning template.</p>",
+        "ListProvisioningTemplateVersionsRequest$templateName": "<p>The name of the provisioning template.</p>",
+        "ProvisioningTemplateSummary$templateName": "<p>The name of the provisioning template.</p>",
+        "RegistrationConfig$templateName": "<p>The name of the provisioning template.</p>",
+        "UpdateProvisioningTemplateRequest$templateName": "<p>The name of the provisioning template.</p>"
+      }
+    },
+    "TemplateType": {
+      "base": null,
+      "refs": {
+        "CreateProvisioningTemplateRequest$type": "<p>The type you define in a provisioning template. You can create a template with only one type. You can't change the template type after its creation. The default value is <code>FLEET_PROVISIONING</code>. For more information about provisioning template, see: <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html\">Provisioning template</a>. </p>",
+        "DescribeProvisioningTemplateResponse$type": "<p>The type you define in a provisioning template. You can create a template with only one type. You can't change the template type after its creation. The default value is <code>FLEET_PROVISIONING</code>. For more information about provisioning template, see: <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html\">Provisioning template</a>. </p>",
+        "ProvisioningTemplateSummary$type": "<p>The type you define in a provisioning template. You can create a template with only one type. You can't change the template type after its creation. The default value is <code>FLEET_PROVISIONING</code>. For more information about provisioning template, see: <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html\">Provisioning template</a>. </p>"
       }
     },
     "TemplateVersionId": {
       "base": null,
       "refs": {
-        "CreateProvisioningTemplateResponse$defaultVersionId": "<p>The default version of the fleet provisioning template.</p>",
-        "CreateProvisioningTemplateVersionResponse$versionId": "<p>The version of the fleet provisioning template.</p>",
-        "DeleteProvisioningTemplateVersionRequest$versionId": "<p>The fleet provisioning template version ID to delete.</p>",
+        "CreateProvisioningTemplateResponse$defaultVersionId": "<p>The default version of the provisioning template.</p>",
+        "CreateProvisioningTemplateVersionResponse$versionId": "<p>The version of the provisioning template.</p>",
+        "DeleteProvisioningTemplateVersionRequest$versionId": "<p>The provisioning template version ID to delete.</p>",
         "DescribeProvisioningTemplateResponse$defaultVersionId": "<p>The default fleet template version ID.</p>",
-        "DescribeProvisioningTemplateVersionRequest$versionId": "<p>The fleet provisioning template version ID.</p>",
-        "DescribeProvisioningTemplateVersionResponse$versionId": "<p>The fleet provisioning template version ID.</p>",
+        "DescribeProvisioningTemplateVersionRequest$versionId": "<p>The provisioning template version ID.</p>",
+        "DescribeProvisioningTemplateVersionResponse$versionId": "<p>The provisioning template version ID.</p>",
         "ProvisioningTemplateVersionSummary$versionId": "<p>The ID of the fleet privisioning template version.</p>",
         "UpdateProvisioningTemplateRequest$defaultVersionId": "<p>The ID of the default provisioning template version.</p>"
       }

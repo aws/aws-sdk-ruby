@@ -40,6 +40,7 @@ module Aws::Connect
   # * {InvalidRequestException}
   # * {LimitExceededException}
   # * {OutboundContactNotPermittedException}
+  # * {PropertyValidationException}
   # * {ResourceConflictException}
   # * {ResourceInUseException}
   # * {ResourceNotFoundException}
@@ -245,6 +246,26 @@ module Aws::Connect
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class PropertyValidationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Connect::Types::PropertyValidationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def property_list
+        @data[:property_list]
       end
     end
 

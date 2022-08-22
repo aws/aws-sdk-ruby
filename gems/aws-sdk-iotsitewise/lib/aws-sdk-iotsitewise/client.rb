@@ -524,6 +524,240 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Gets aggregated values (for example, average, minimum, and maximum)
+    # for one or more asset properties. For more information, see [Querying
+    # aggregates][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates
+    #
+    # @option params [required, Array<Types::BatchGetAssetPropertyAggregatesEntry>] :entries
+    #   The list of asset property aggregate entries for the batch get
+    #   request. You can specify up to 16 entries per request.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each paginated request. A
+    #   result set is returned in the two cases, whichever occurs first.
+    #
+    #   * The size of the result set is less than 1 MB.
+    #
+    #   * The number of data points in the result set is less than the value
+    #     of `maxResults`. The maximum value of `maxResults` is 4000.
+    #
+    # @return [Types::BatchGetAssetPropertyAggregatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetAssetPropertyAggregatesResponse#error_entries #error_entries} => Array&lt;Types::BatchGetAssetPropertyAggregatesErrorEntry&gt;
+    #   * {Types::BatchGetAssetPropertyAggregatesResponse#success_entries #success_entries} => Array&lt;Types::BatchGetAssetPropertyAggregatesSuccessEntry&gt;
+    #   * {Types::BatchGetAssetPropertyAggregatesResponse#skipped_entries #skipped_entries} => Array&lt;Types::BatchGetAssetPropertyAggregatesSkippedEntry&gt;
+    #   * {Types::BatchGetAssetPropertyAggregatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_asset_property_aggregates({
+    #     entries: [ # required
+    #       {
+    #         entry_id: "EntryId", # required
+    #         asset_id: "ID",
+    #         property_id: "ID",
+    #         property_alias: "AssetPropertyAlias",
+    #         aggregate_types: ["AVERAGE"], # required, accepts AVERAGE, COUNT, MAXIMUM, MINIMUM, SUM, STANDARD_DEVIATION
+    #         resolution: "Resolution", # required
+    #         start_date: Time.now, # required
+    #         end_date: Time.now, # required
+    #         qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
+    #         time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.error_entries #=> Array
+    #   resp.error_entries[0].error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "AccessDeniedException"
+    #   resp.error_entries[0].error_message #=> String
+    #   resp.error_entries[0].entry_id #=> String
+    #   resp.success_entries #=> Array
+    #   resp.success_entries[0].entry_id #=> String
+    #   resp.success_entries[0].aggregated_values #=> Array
+    #   resp.success_entries[0].aggregated_values[0].timestamp #=> Time
+    #   resp.success_entries[0].aggregated_values[0].quality #=> String, one of "GOOD", "BAD", "UNCERTAIN"
+    #   resp.success_entries[0].aggregated_values[0].value.average #=> Float
+    #   resp.success_entries[0].aggregated_values[0].value.count #=> Float
+    #   resp.success_entries[0].aggregated_values[0].value.maximum #=> Float
+    #   resp.success_entries[0].aggregated_values[0].value.minimum #=> Float
+    #   resp.success_entries[0].aggregated_values[0].value.sum #=> Float
+    #   resp.success_entries[0].aggregated_values[0].value.standard_deviation #=> Float
+    #   resp.skipped_entries #=> Array
+    #   resp.skipped_entries[0].entry_id #=> String
+    #   resp.skipped_entries[0].completion_status #=> String, one of "SUCCESS", "ERROR"
+    #   resp.skipped_entries[0].error_info.error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "AccessDeniedException"
+    #   resp.skipped_entries[0].error_info.error_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload batch_get_asset_property_aggregates(params = {})
+    # @param [Hash] params ({})
+    def batch_get_asset_property_aggregates(params = {}, options = {})
+      req = build_request(:batch_get_asset_property_aggregates, params)
+      req.send_request(options)
+    end
+
+    # Gets the current value for one or more asset properties. For more
+    # information, see [Querying current values][1] in the *IoT SiteWise
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values
+    #
+    # @option params [required, Array<Types::BatchGetAssetPropertyValueEntry>] :entries
+    #   The list of asset property value entries for the batch get request.
+    #   You can specify up to 16 entries per request.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @return [Types::BatchGetAssetPropertyValueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetAssetPropertyValueResponse#error_entries #error_entries} => Array&lt;Types::BatchGetAssetPropertyValueErrorEntry&gt;
+    #   * {Types::BatchGetAssetPropertyValueResponse#success_entries #success_entries} => Array&lt;Types::BatchGetAssetPropertyValueSuccessEntry&gt;
+    #   * {Types::BatchGetAssetPropertyValueResponse#skipped_entries #skipped_entries} => Array&lt;Types::BatchGetAssetPropertyValueSkippedEntry&gt;
+    #   * {Types::BatchGetAssetPropertyValueResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_asset_property_value({
+    #     entries: [ # required
+    #       {
+    #         entry_id: "EntryId", # required
+    #         asset_id: "ID",
+    #         property_id: "ID",
+    #         property_alias: "AssetPropertyAlias",
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.error_entries #=> Array
+    #   resp.error_entries[0].error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "AccessDeniedException"
+    #   resp.error_entries[0].error_message #=> String
+    #   resp.error_entries[0].entry_id #=> String
+    #   resp.success_entries #=> Array
+    #   resp.success_entries[0].entry_id #=> String
+    #   resp.success_entries[0].asset_property_value.value.string_value #=> String
+    #   resp.success_entries[0].asset_property_value.value.integer_value #=> Integer
+    #   resp.success_entries[0].asset_property_value.value.double_value #=> Float
+    #   resp.success_entries[0].asset_property_value.value.boolean_value #=> Boolean
+    #   resp.success_entries[0].asset_property_value.timestamp.time_in_seconds #=> Integer
+    #   resp.success_entries[0].asset_property_value.timestamp.offset_in_nanos #=> Integer
+    #   resp.success_entries[0].asset_property_value.quality #=> String, one of "GOOD", "BAD", "UNCERTAIN"
+    #   resp.skipped_entries #=> Array
+    #   resp.skipped_entries[0].entry_id #=> String
+    #   resp.skipped_entries[0].completion_status #=> String, one of "SUCCESS", "ERROR"
+    #   resp.skipped_entries[0].error_info.error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "AccessDeniedException"
+    #   resp.skipped_entries[0].error_info.error_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload batch_get_asset_property_value(params = {})
+    # @param [Hash] params ({})
+    def batch_get_asset_property_value(params = {}, options = {})
+      req = build_request(:batch_get_asset_property_value, params)
+      req.send_request(options)
+    end
+
+    # Gets the historical values for one or more asset properties. For more
+    # information, see [Querying historical values][1] in the *IoT SiteWise
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values
+    #
+    # @option params [required, Array<Types::BatchGetAssetPropertyValueHistoryEntry>] :entries
+    #   The list of asset property historical value entries for the batch get
+    #   request. You can specify up to 16 entries per request.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each paginated request. A
+    #   result set is returned in the two cases, whichever occurs first.
+    #
+    #   * The size of the result set is less than 1 MB.
+    #
+    #   * The number of data points in the result set is less than the value
+    #     of `maxResults`. The maximum value of `maxResults` is 4000.
+    #
+    # @return [Types::BatchGetAssetPropertyValueHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetAssetPropertyValueHistoryResponse#error_entries #error_entries} => Array&lt;Types::BatchGetAssetPropertyValueHistoryErrorEntry&gt;
+    #   * {Types::BatchGetAssetPropertyValueHistoryResponse#success_entries #success_entries} => Array&lt;Types::BatchGetAssetPropertyValueHistorySuccessEntry&gt;
+    #   * {Types::BatchGetAssetPropertyValueHistoryResponse#skipped_entries #skipped_entries} => Array&lt;Types::BatchGetAssetPropertyValueHistorySkippedEntry&gt;
+    #   * {Types::BatchGetAssetPropertyValueHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_asset_property_value_history({
+    #     entries: [ # required
+    #       {
+    #         entry_id: "EntryId", # required
+    #         asset_id: "ID",
+    #         property_id: "ID",
+    #         property_alias: "AssetPropertyAlias",
+    #         start_date: Time.now,
+    #         end_date: Time.now,
+    #         qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
+    #         time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.error_entries #=> Array
+    #   resp.error_entries[0].error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "AccessDeniedException"
+    #   resp.error_entries[0].error_message #=> String
+    #   resp.error_entries[0].entry_id #=> String
+    #   resp.success_entries #=> Array
+    #   resp.success_entries[0].entry_id #=> String
+    #   resp.success_entries[0].asset_property_value_history #=> Array
+    #   resp.success_entries[0].asset_property_value_history[0].value.string_value #=> String
+    #   resp.success_entries[0].asset_property_value_history[0].value.integer_value #=> Integer
+    #   resp.success_entries[0].asset_property_value_history[0].value.double_value #=> Float
+    #   resp.success_entries[0].asset_property_value_history[0].value.boolean_value #=> Boolean
+    #   resp.success_entries[0].asset_property_value_history[0].timestamp.time_in_seconds #=> Integer
+    #   resp.success_entries[0].asset_property_value_history[0].timestamp.offset_in_nanos #=> Integer
+    #   resp.success_entries[0].asset_property_value_history[0].quality #=> String, one of "GOOD", "BAD", "UNCERTAIN"
+    #   resp.skipped_entries #=> Array
+    #   resp.skipped_entries[0].entry_id #=> String
+    #   resp.skipped_entries[0].completion_status #=> String, one of "SUCCESS", "ERROR"
+    #   resp.skipped_entries[0].error_info.error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "AccessDeniedException"
+    #   resp.skipped_entries[0].error_info.error_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload batch_get_asset_property_value_history(params = {})
+    # @param [Hash] params ({})
+    def batch_get_asset_property_value_history(params = {}, options = {})
+      req = build_request(:batch_get_asset_property_value_history, params)
+      req.send_request(options)
+    end
+
     # Sends a list of asset property values to IoT SiteWise. Each value is a
     # timestamp-quality-value (TQV) data point. For more information, see
     # [Ingesting data using the API][1] in the *IoT SiteWise User Guide*.
@@ -725,6 +959,9 @@ module Aws::IoTSiteWise
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
     #
+    # @option params [String] :asset_description
+    #   A description for the asset.
+    #
     # @return [Types::CreateAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssetResponse#asset_id #asset_id} => String
@@ -740,6 +977,7 @@ module Aws::IoTSiteWise
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     asset_description: "Description",
     #   })
     #
     # @example Response structure
@@ -990,6 +1228,91 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def create_asset_model(params = {}, options = {})
       req = build_request(:create_asset_model, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This API operation is in preview release for IoT SiteWise and is
+    # subject to change. We recommend that you use this operation only with
+    # test data, and not in production environments.
+    #
+    #  </note>
+    #
+    # Defines a job to ingest data to IoT SiteWise from Amazon S3. For more
+    # information, see [Create a bulk import job (CLI)][1] in the *Amazon
+    # Simple Storage Service User Guide*.
+    #
+    # You must enable IoT SiteWise to export data to Amazon S3 before you
+    # create a bulk import job. For more information about how to configure
+    # storage settings, see [PutStorageConfiguration][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/CreateBulkImportJob.html
+    # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_PutStorageConfiguration.html
+    #
+    # @option params [required, String] :job_name
+    #   The unique name that helps identify the job request.
+    #
+    # @option params [required, String] :job_role_arn
+    #   The [ARN][1] of the IAM role that allows IoT SiteWise to read Amazon
+    #   S3 data.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [required, Array<Types::File>] :files
+    #   The files in the specified Amazon S3 bucket that contain your data.
+    #
+    # @option params [required, Types::ErrorReportLocation] :error_report_location
+    #   The Amazon S3 destination where errors associated with the job
+    #   creation request are saved.
+    #
+    # @option params [required, Types::JobConfiguration] :job_configuration
+    #   Contains the configuration information of a job, such as the file
+    #   format used to save data in Amazon S3.
+    #
+    # @return [Types::CreateBulkImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBulkImportJobResponse#job_id #job_id} => String
+    #   * {Types::CreateBulkImportJobResponse#job_name #job_name} => String
+    #   * {Types::CreateBulkImportJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_bulk_import_job({
+    #     job_name: "Name", # required
+    #     job_role_arn: "ARN", # required
+    #     files: [ # required
+    #       {
+    #         bucket: "Bucket", # required
+    #         key: "String", # required
+    #         version_id: "String",
+    #       },
+    #     ],
+    #     error_report_location: { # required
+    #       bucket: "Bucket", # required
+    #       prefix: "String", # required
+    #     },
+    #     job_configuration: { # required
+    #       file_format: { # required
+    #         csv: {
+    #           column_names: ["ALIAS"], # accepts ALIAS, ASSET_ID, PROPERTY_ID, DATA_TYPE, TIMESTAMP_SECONDS, TIMESTAMP_NANO_OFFSET, QUALITY, VALUE
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_name #=> String
+    #   resp.job_status #=> String, one of "PENDING", "CANCELLED", "RUNNING", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
+    #
+    # @overload create_bulk_import_job(params = {})
+    # @param [Hash] params ({})
+    def create_bulk_import_job(params = {}, options = {})
+      req = build_request(:create_bulk_import_job, params)
       req.send_request(options)
     end
 
@@ -1688,6 +2011,7 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeAssetResponse#asset_creation_date #asset_creation_date} => Time
     #   * {Types::DescribeAssetResponse#asset_last_update_date #asset_last_update_date} => Time
     #   * {Types::DescribeAssetResponse#asset_status #asset_status} => Types::AssetStatus
+    #   * {Types::DescribeAssetResponse#asset_description #asset_description} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1734,6 +2058,7 @@ module Aws::IoTSiteWise
     #   resp.asset_status.error.details #=> Array
     #   resp.asset_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
     #   resp.asset_status.error.details[0].message #=> String
+    #   resp.asset_description #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1951,6 +2276,65 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def describe_asset_property(params = {}, options = {})
       req = build_request(:describe_asset_property, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This API operation is in preview release for IoT SiteWise and is
+    # subject to change. We recommend that you use this operation only with
+    # test data, and not in production environments.
+    #
+    #  </note>
+    #
+    # Retrieves information about a bulk import job request. For more
+    # information, see [Describe a bulk import job (CLI)][1] in the *Amazon
+    # Simple Storage Service User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the job.
+    #
+    # @return [Types::DescribeBulkImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBulkImportJobResponse#job_id #job_id} => String
+    #   * {Types::DescribeBulkImportJobResponse#job_name #job_name} => String
+    #   * {Types::DescribeBulkImportJobResponse#job_status #job_status} => String
+    #   * {Types::DescribeBulkImportJobResponse#job_role_arn #job_role_arn} => String
+    #   * {Types::DescribeBulkImportJobResponse#files #files} => Array&lt;Types::File&gt;
+    #   * {Types::DescribeBulkImportJobResponse#error_report_location #error_report_location} => Types::ErrorReportLocation
+    #   * {Types::DescribeBulkImportJobResponse#job_configuration #job_configuration} => Types::JobConfiguration
+    #   * {Types::DescribeBulkImportJobResponse#job_creation_date #job_creation_date} => Time
+    #   * {Types::DescribeBulkImportJobResponse#job_last_update_date #job_last_update_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_bulk_import_job({
+    #     job_id: "ID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_name #=> String
+    #   resp.job_status #=> String, one of "PENDING", "CANCELLED", "RUNNING", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
+    #   resp.job_role_arn #=> String
+    #   resp.files #=> Array
+    #   resp.files[0].bucket #=> String
+    #   resp.files[0].key #=> String
+    #   resp.files[0].version_id #=> String
+    #   resp.error_report_location.bucket #=> String
+    #   resp.error_report_location.prefix #=> String
+    #   resp.job_configuration.file_format.csv.column_names #=> Array
+    #   resp.job_configuration.file_format.csv.column_names[0] #=> String, one of "ALIAS", "ASSET_ID", "PROPERTY_ID", "DATA_TYPE", "TIMESTAMP_SECONDS", "TIMESTAMP_NANO_OFFSET", "QUALITY", "VALUE"
+    #   resp.job_creation_date #=> Time
+    #   resp.job_last_update_date #=> Time
+    #
+    # @overload describe_bulk_import_job(params = {})
+    # @param [Hash] params ({})
+    def describe_bulk_import_job(params = {}, options = {})
+      req = build_request(:describe_bulk_import_job, params)
       req.send_request(options)
     end
 
@@ -3101,6 +3485,7 @@ module Aws::IoTSiteWise
     #   resp.asset_summaries[0].hierarchies #=> Array
     #   resp.asset_summaries[0].hierarchies[0].id #=> String
     #   resp.asset_summaries[0].hierarchies[0].name #=> String
+    #   resp.asset_summaries[0].description #=> String
     #   resp.next_token #=> String
     #
     # @overload list_assets(params = {})
@@ -3192,12 +3577,67 @@ module Aws::IoTSiteWise
     #   resp.asset_summaries[0].hierarchies #=> Array
     #   resp.asset_summaries[0].hierarchies[0].id #=> String
     #   resp.asset_summaries[0].hierarchies[0].name #=> String
+    #   resp.asset_summaries[0].description #=> String
     #   resp.next_token #=> String
     #
     # @overload list_associated_assets(params = {})
     # @param [Hash] params ({})
     def list_associated_assets(params = {}, options = {})
       req = build_request(:list_associated_assets, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This API operation is in preview release for IoT SiteWise and is
+    # subject to change. We recommend that you use this operation only with
+    # test data, and not in production environments.
+    #
+    #  </note>
+    #
+    # Retrieves a paginated list of bulk import job requests. For more
+    # information, see [List bulk import jobs (CLI)][1] in the *Amazon
+    # Simple Storage Service User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ListBulkImportJobs.html
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each paginated request.
+    #
+    # @option params [String] :filter
+    #   You can use a filter to select the bulk import jobs that you want to
+    #   retrieve.
+    #
+    # @return [Types::ListBulkImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBulkImportJobsResponse#job_summaries #job_summaries} => Array&lt;Types::JobSummary&gt;
+    #   * {Types::ListBulkImportJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bulk_import_jobs({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filter: "ALL", # accepts ALL, PENDING, RUNNING, CANCELLED, FAILED, COMPLETED_WITH_FAILURES, COMPLETED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_summaries #=> Array
+    #   resp.job_summaries[0].id #=> String
+    #   resp.job_summaries[0].name #=> String
+    #   resp.job_summaries[0].status #=> String, one of "PENDING", "CANCELLED", "RUNNING", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
+    #   resp.next_token #=> String
+    #
+    # @overload list_bulk_import_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_bulk_import_jobs(params = {}, options = {})
+      req = build_request(:list_bulk_import_jobs, params)
       req.send_request(options)
     end
 
@@ -3592,7 +4032,7 @@ module Aws::IoTSiteWise
     #     hot tier. The hot tier is a service-managed database.
     #
     #   * `MULTI_LAYER_STORAGE` – IoT SiteWise saves your data in both the
-    #     cold tier and the cold tier. The cold tier is a customer-managed
+    #     cold tier and the hot tier. The cold tier is a customer-managed
     #     Amazon S3 bucket.
     #
     # @option params [Types::MultiLayerStorage] :multi_layer_storage
@@ -3820,6 +4260,9 @@ module Aws::IoTSiteWise
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :asset_description
+    #   A description for the asset.
+    #
     # @return [Types::UpdateAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssetResponse#asset_status #asset_status} => Types::AssetStatus
@@ -3830,6 +4273,7 @@ module Aws::IoTSiteWise
     #     asset_id: "ID", # required
     #     asset_name: "Name", # required
     #     client_token: "ClientToken",
+    #     asset_description: "Description",
     #   })
     #
     # @example Response structure
@@ -4429,7 +4873,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

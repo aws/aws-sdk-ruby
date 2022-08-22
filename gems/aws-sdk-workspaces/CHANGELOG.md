@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2022-08-01)
+------------------
+
+* Feature - This release introduces ModifySamlProperties, a new API that allows control of SAML properties associated with a WorkSpaces directory. The DescribeWorkspaceDirectories API will now additionally return SAML properties in its responses.
+
+1.71.0 (2022-07-27)
+------------------
+
+* Feature - Added CreateWorkspaceImage API to create a new WorkSpace image from an existing WorkSpace.
+
+1.70.0 (2022-07-19)
+------------------
+
+* Feature - Increased the character limit of the login message from 850 to 2000 characters.
+
+1.69.0 (2022-06-15)
+------------------
+
+* Feature - Added new field "reason" to OperationNotSupportedException. Receiving this exception in the DeregisterWorkspaceDirectory API will now return a reason giving more context on the failure.
+
+1.68.0 (2022-05-12)
+------------------
+
+* Feature - Increased the character limit of the login message from 600 to 850 characters.
+
 1.67.0 (2022-04-11)
 ------------------
 

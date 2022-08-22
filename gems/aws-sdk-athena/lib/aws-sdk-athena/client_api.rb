@@ -16,8 +16,11 @@ module Aws::Athena
     AclConfiguration = Shapes::StructureShape.new(name: 'AclConfiguration')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AthenaError = Shapes::StructureShape.new(name: 'AthenaError')
+    AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     BatchGetNamedQueryInput = Shapes::StructureShape.new(name: 'BatchGetNamedQueryInput')
     BatchGetNamedQueryOutput = Shapes::StructureShape.new(name: 'BatchGetNamedQueryOutput')
+    BatchGetPreparedStatementInput = Shapes::StructureShape.new(name: 'BatchGetPreparedStatementInput')
+    BatchGetPreparedStatementOutput = Shapes::StructureShape.new(name: 'BatchGetPreparedStatementOutput')
     BatchGetQueryExecutionInput = Shapes::StructureShape.new(name: 'BatchGetQueryExecutionInput')
     BatchGetQueryExecutionOutput = Shapes::StructureShape.new(name: 'BatchGetQueryExecutionOutput')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -64,6 +67,8 @@ module Aws::Athena
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorType = Shapes::IntegerShape.new(name: 'ErrorType')
+    ExecutionParameter = Shapes::StringShape.new(name: 'ExecutionParameter')
+    ExecutionParameters = Shapes::ListShape.new(name: 'ExecutionParameters')
     ExpressionString = Shapes::StringShape.new(name: 'ExpressionString')
     GetDataCatalogInput = Shapes::StructureShape.new(name: 'GetDataCatalogInput')
     GetDataCatalogOutput = Shapes::StructureShape.new(name: 'GetDataCatalogOutput')
@@ -77,6 +82,8 @@ module Aws::Athena
     GetQueryExecutionOutput = Shapes::StructureShape.new(name: 'GetQueryExecutionOutput')
     GetQueryResultsInput = Shapes::StructureShape.new(name: 'GetQueryResultsInput')
     GetQueryResultsOutput = Shapes::StructureShape.new(name: 'GetQueryResultsOutput')
+    GetQueryRuntimeStatisticsInput = Shapes::StructureShape.new(name: 'GetQueryRuntimeStatisticsInput')
+    GetQueryRuntimeStatisticsOutput = Shapes::StructureShape.new(name: 'GetQueryRuntimeStatisticsOutput')
     GetTableMetadataInput = Shapes::StructureShape.new(name: 'GetTableMetadataInput')
     GetTableMetadataOutput = Shapes::StructureShape.new(name: 'GetTableMetadataOutput')
     GetWorkGroupInput = Shapes::StructureShape.new(name: 'GetWorkGroupInput')
@@ -125,6 +132,8 @@ module Aws::Athena
     ParametersMap = Shapes::MapShape.new(name: 'ParametersMap')
     ParametersMapValue = Shapes::StringShape.new(name: 'ParametersMapValue')
     PreparedStatement = Shapes::StructureShape.new(name: 'PreparedStatement')
+    PreparedStatementDetailsList = Shapes::ListShape.new(name: 'PreparedStatementDetailsList')
+    PreparedStatementNameList = Shapes::ListShape.new(name: 'PreparedStatementNameList')
     PreparedStatementSummary = Shapes::StructureShape.new(name: 'PreparedStatementSummary')
     PreparedStatementsList = Shapes::ListShape.new(name: 'PreparedStatementsList')
     QueryExecution = Shapes::StructureShape.new(name: 'QueryExecution')
@@ -135,10 +144,18 @@ module Aws::Athena
     QueryExecutionState = Shapes::StringShape.new(name: 'QueryExecutionState')
     QueryExecutionStatistics = Shapes::StructureShape.new(name: 'QueryExecutionStatistics')
     QueryExecutionStatus = Shapes::StructureShape.new(name: 'QueryExecutionStatus')
+    QueryRuntimeStatistics = Shapes::StructureShape.new(name: 'QueryRuntimeStatistics')
+    QueryRuntimeStatisticsRows = Shapes::StructureShape.new(name: 'QueryRuntimeStatisticsRows')
+    QueryRuntimeStatisticsTimeline = Shapes::StructureShape.new(name: 'QueryRuntimeStatisticsTimeline')
+    QueryStage = Shapes::StructureShape.new(name: 'QueryStage')
+    QueryStagePlanNode = Shapes::StructureShape.new(name: 'QueryStagePlanNode')
+    QueryStagePlanNodes = Shapes::ListShape.new(name: 'QueryStagePlanNodes')
+    QueryStages = Shapes::ListShape.new(name: 'QueryStages')
     QueryString = Shapes::StringShape.new(name: 'QueryString')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResultConfiguration = Shapes::StructureShape.new(name: 'ResultConfiguration')
     ResultConfigurationUpdates = Shapes::StructureShape.new(name: 'ResultConfigurationUpdates')
+    ResultOutputLocation = Shapes::StringShape.new(name: 'ResultOutputLocation')
     ResultSet = Shapes::StructureShape.new(name: 'ResultSet')
     ResultSetMetadata = Shapes::StructureShape.new(name: 'ResultSetMetadata')
     Row = Shapes::StructureShape.new(name: 'Row')
@@ -151,6 +168,7 @@ module Aws::Athena
     StopQueryExecutionInput = Shapes::StructureShape.new(name: 'StopQueryExecutionInput')
     StopQueryExecutionOutput = Shapes::StructureShape.new(name: 'StopQueryExecutionOutput')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
     TableMetadata = Shapes::StructureShape.new(name: 'TableMetadata')
     TableMetadataList = Shapes::ListShape.new(name: 'TableMetadataList')
     TableTypeString = Shapes::StringShape.new(name: 'TableTypeString')
@@ -168,6 +186,8 @@ module Aws::Athena
     TypeString = Shapes::StringShape.new(name: 'TypeString')
     UnprocessedNamedQueryId = Shapes::StructureShape.new(name: 'UnprocessedNamedQueryId')
     UnprocessedNamedQueryIdList = Shapes::ListShape.new(name: 'UnprocessedNamedQueryIdList')
+    UnprocessedPreparedStatementName = Shapes::StructureShape.new(name: 'UnprocessedPreparedStatementName')
+    UnprocessedPreparedStatementNameList = Shapes::ListShape.new(name: 'UnprocessedPreparedStatementNameList')
     UnprocessedQueryExecutionId = Shapes::StructureShape.new(name: 'UnprocessedQueryExecutionId')
     UnprocessedQueryExecutionIdList = Shapes::ListShape.new(name: 'UnprocessedQueryExecutionIdList')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
@@ -206,6 +226,14 @@ module Aws::Athena
     BatchGetNamedQueryOutput.add_member(:named_queries, Shapes::ShapeRef.new(shape: NamedQueryList, location_name: "NamedQueries"))
     BatchGetNamedQueryOutput.add_member(:unprocessed_named_query_ids, Shapes::ShapeRef.new(shape: UnprocessedNamedQueryIdList, location_name: "UnprocessedNamedQueryIds"))
     BatchGetNamedQueryOutput.struct_class = Types::BatchGetNamedQueryOutput
+
+    BatchGetPreparedStatementInput.add_member(:prepared_statement_names, Shapes::ShapeRef.new(shape: PreparedStatementNameList, required: true, location_name: "PreparedStatementNames"))
+    BatchGetPreparedStatementInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
+    BatchGetPreparedStatementInput.struct_class = Types::BatchGetPreparedStatementInput
+
+    BatchGetPreparedStatementOutput.add_member(:prepared_statements, Shapes::ShapeRef.new(shape: PreparedStatementDetailsList, location_name: "PreparedStatements"))
+    BatchGetPreparedStatementOutput.add_member(:unprocessed_prepared_statement_names, Shapes::ShapeRef.new(shape: UnprocessedPreparedStatementNameList, location_name: "UnprocessedPreparedStatementNames"))
+    BatchGetPreparedStatementOutput.struct_class = Types::BatchGetPreparedStatementOutput
 
     BatchGetQueryExecutionInput.add_member(:query_execution_ids, Shapes::ShapeRef.new(shape: QueryExecutionIdList, required: true, location_name: "QueryExecutionIds"))
     BatchGetQueryExecutionInput.struct_class = Types::BatchGetQueryExecutionInput
@@ -325,6 +353,8 @@ module Aws::Athena
 
     EngineVersionsList.member = Shapes::ShapeRef.new(shape: EngineVersion)
 
+    ExecutionParameters.member = Shapes::ShapeRef.new(shape: ExecutionParameter)
+
     GetDataCatalogInput.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
     GetDataCatalogInput.struct_class = Types::GetDataCatalogInput
 
@@ -366,6 +396,12 @@ module Aws::Athena
     GetQueryResultsOutput.add_member(:result_set, Shapes::ShapeRef.new(shape: ResultSet, location_name: "ResultSet"))
     GetQueryResultsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetQueryResultsOutput.struct_class = Types::GetQueryResultsOutput
+
+    GetQueryRuntimeStatisticsInput.add_member(:query_execution_id, Shapes::ShapeRef.new(shape: QueryExecutionId, required: true, location_name: "QueryExecutionId"))
+    GetQueryRuntimeStatisticsInput.struct_class = Types::GetQueryRuntimeStatisticsInput
+
+    GetQueryRuntimeStatisticsOutput.add_member(:query_runtime_statistics, Shapes::ShapeRef.new(shape: QueryRuntimeStatistics, location_name: "QueryRuntimeStatistics"))
+    GetQueryRuntimeStatisticsOutput.struct_class = Types::GetQueryRuntimeStatisticsOutput
 
     GetTableMetadataInput.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "CatalogName"))
     GetTableMetadataInput.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -493,6 +529,10 @@ module Aws::Athena
     PreparedStatement.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastModifiedTime"))
     PreparedStatement.struct_class = Types::PreparedStatement
 
+    PreparedStatementDetailsList.member = Shapes::ShapeRef.new(shape: PreparedStatement)
+
+    PreparedStatementNameList.member = Shapes::ShapeRef.new(shape: StatementName)
+
     PreparedStatementSummary.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, location_name: "StatementName"))
     PreparedStatementSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastModifiedTime"))
     PreparedStatementSummary.struct_class = Types::PreparedStatementSummary
@@ -508,6 +548,7 @@ module Aws::Athena
     QueryExecution.add_member(:statistics, Shapes::ShapeRef.new(shape: QueryExecutionStatistics, location_name: "Statistics"))
     QueryExecution.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
     QueryExecution.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
+    QueryExecution.add_member(:execution_parameters, Shapes::ShapeRef.new(shape: ExecutionParameters, location_name: "ExecutionParameters"))
     QueryExecution.struct_class = Types::QueryExecution
 
     QueryExecutionContext.add_member(:database, Shapes::ShapeRef.new(shape: DatabaseString, location_name: "Database"))
@@ -534,21 +575,60 @@ module Aws::Athena
     QueryExecutionStatus.add_member(:athena_error, Shapes::ShapeRef.new(shape: AthenaError, location_name: "AthenaError"))
     QueryExecutionStatus.struct_class = Types::QueryExecutionStatus
 
+    QueryRuntimeStatistics.add_member(:timeline, Shapes::ShapeRef.new(shape: QueryRuntimeStatisticsTimeline, location_name: "Timeline"))
+    QueryRuntimeStatistics.add_member(:rows, Shapes::ShapeRef.new(shape: QueryRuntimeStatisticsRows, location_name: "Rows"))
+    QueryRuntimeStatistics.add_member(:output_stage, Shapes::ShapeRef.new(shape: QueryStage, location_name: "OutputStage"))
+    QueryRuntimeStatistics.struct_class = Types::QueryRuntimeStatistics
+
+    QueryRuntimeStatisticsRows.add_member(:input_rows, Shapes::ShapeRef.new(shape: Long, location_name: "InputRows"))
+    QueryRuntimeStatisticsRows.add_member(:input_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "InputBytes"))
+    QueryRuntimeStatisticsRows.add_member(:output_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "OutputBytes"))
+    QueryRuntimeStatisticsRows.add_member(:output_rows, Shapes::ShapeRef.new(shape: Long, location_name: "OutputRows"))
+    QueryRuntimeStatisticsRows.struct_class = Types::QueryRuntimeStatisticsRows
+
+    QueryRuntimeStatisticsTimeline.add_member(:query_queue_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "QueryQueueTimeInMillis"))
+    QueryRuntimeStatisticsTimeline.add_member(:query_planning_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "QueryPlanningTimeInMillis"))
+    QueryRuntimeStatisticsTimeline.add_member(:engine_execution_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "EngineExecutionTimeInMillis"))
+    QueryRuntimeStatisticsTimeline.add_member(:service_processing_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "ServiceProcessingTimeInMillis"))
+    QueryRuntimeStatisticsTimeline.add_member(:total_execution_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "TotalExecutionTimeInMillis"))
+    QueryRuntimeStatisticsTimeline.struct_class = Types::QueryRuntimeStatisticsTimeline
+
+    QueryStage.add_member(:stage_id, Shapes::ShapeRef.new(shape: Long, location_name: "StageId"))
+    QueryStage.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "State"))
+    QueryStage.add_member(:output_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "OutputBytes"))
+    QueryStage.add_member(:output_rows, Shapes::ShapeRef.new(shape: Long, location_name: "OutputRows"))
+    QueryStage.add_member(:input_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "InputBytes"))
+    QueryStage.add_member(:input_rows, Shapes::ShapeRef.new(shape: Long, location_name: "InputRows"))
+    QueryStage.add_member(:execution_time, Shapes::ShapeRef.new(shape: Long, location_name: "ExecutionTime"))
+    QueryStage.add_member(:query_stage_plan, Shapes::ShapeRef.new(shape: QueryStagePlanNode, location_name: "QueryStagePlan"))
+    QueryStage.add_member(:sub_stages, Shapes::ShapeRef.new(shape: QueryStages, location_name: "SubStages"))
+    QueryStage.struct_class = Types::QueryStage
+
+    QueryStagePlanNode.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    QueryStagePlanNode.add_member(:identifier, Shapes::ShapeRef.new(shape: String, location_name: "Identifier"))
+    QueryStagePlanNode.add_member(:children, Shapes::ShapeRef.new(shape: QueryStagePlanNodes, location_name: "Children"))
+    QueryStagePlanNode.add_member(:remote_sources, Shapes::ShapeRef.new(shape: StringList, location_name: "RemoteSources"))
+    QueryStagePlanNode.struct_class = Types::QueryStagePlanNode
+
+    QueryStagePlanNodes.member = Shapes::ShapeRef.new(shape: QueryStagePlanNode)
+
+    QueryStages.member = Shapes::ShapeRef.new(shape: QueryStage)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    ResultConfiguration.add_member(:output_location, Shapes::ShapeRef.new(shape: String, location_name: "OutputLocation"))
+    ResultConfiguration.add_member(:output_location, Shapes::ShapeRef.new(shape: ResultOutputLocation, location_name: "OutputLocation"))
     ResultConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
-    ResultConfiguration.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedBucketOwner"))
+    ResultConfiguration.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "ExpectedBucketOwner"))
     ResultConfiguration.add_member(:acl_configuration, Shapes::ShapeRef.new(shape: AclConfiguration, location_name: "AclConfiguration"))
     ResultConfiguration.struct_class = Types::ResultConfiguration
 
-    ResultConfigurationUpdates.add_member(:output_location, Shapes::ShapeRef.new(shape: String, location_name: "OutputLocation"))
+    ResultConfigurationUpdates.add_member(:output_location, Shapes::ShapeRef.new(shape: ResultOutputLocation, location_name: "OutputLocation"))
     ResultConfigurationUpdates.add_member(:remove_output_location, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveOutputLocation"))
     ResultConfigurationUpdates.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     ResultConfigurationUpdates.add_member(:remove_encryption_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveEncryptionConfiguration"))
-    ResultConfigurationUpdates.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedBucketOwner"))
+    ResultConfigurationUpdates.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "ExpectedBucketOwner"))
     ResultConfigurationUpdates.add_member(:remove_expected_bucket_owner, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveExpectedBucketOwner"))
     ResultConfigurationUpdates.add_member(:acl_configuration, Shapes::ShapeRef.new(shape: AclConfiguration, location_name: "AclConfiguration"))
     ResultConfigurationUpdates.add_member(:remove_acl_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveAclConfiguration"))
@@ -571,6 +651,7 @@ module Aws::Athena
     StartQueryExecutionInput.add_member(:query_execution_context, Shapes::ShapeRef.new(shape: QueryExecutionContext, location_name: "QueryExecutionContext"))
     StartQueryExecutionInput.add_member(:result_configuration, Shapes::ShapeRef.new(shape: ResultConfiguration, location_name: "ResultConfiguration"))
     StartQueryExecutionInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
+    StartQueryExecutionInput.add_member(:execution_parameters, Shapes::ShapeRef.new(shape: ExecutionParameters, location_name: "ExecutionParameters"))
     StartQueryExecutionInput.struct_class = Types::StartQueryExecutionInput
 
     StartQueryExecutionOutput.add_member(:query_execution_id, Shapes::ShapeRef.new(shape: QueryExecutionId, location_name: "QueryExecutionId"))
@@ -580,6 +661,8 @@ module Aws::Athena
     StopQueryExecutionInput.struct_class = Types::StopQueryExecutionInput
 
     StopQueryExecutionOutput.struct_class = Types::StopQueryExecutionOutput
+
+    StringList.member = Shapes::ShapeRef.new(shape: String)
 
     TableMetadata.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     TableMetadata.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTime"))
@@ -616,6 +699,13 @@ module Aws::Athena
     UnprocessedNamedQueryId.struct_class = Types::UnprocessedNamedQueryId
 
     UnprocessedNamedQueryIdList.member = Shapes::ShapeRef.new(shape: UnprocessedNamedQueryId)
+
+    UnprocessedPreparedStatementName.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, location_name: "StatementName"))
+    UnprocessedPreparedStatementName.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    UnprocessedPreparedStatementName.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    UnprocessedPreparedStatementName.struct_class = Types::UnprocessedPreparedStatementName
+
+    UnprocessedPreparedStatementNameList.member = Shapes::ShapeRef.new(shape: UnprocessedPreparedStatementName)
 
     UnprocessedQueryExecutionId.add_member(:query_execution_id, Shapes::ShapeRef.new(shape: QueryExecutionId, location_name: "QueryExecutionId"))
     UnprocessedQueryExecutionId.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
@@ -721,6 +811,16 @@ module Aws::Athena
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: BatchGetNamedQueryInput)
         o.output = Shapes::ShapeRef.new(shape: BatchGetNamedQueryOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:batch_get_prepared_statement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetPreparedStatement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetPreparedStatementInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetPreparedStatementOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
@@ -884,6 +984,16 @@ module Aws::Athena
         )
       end)
 
+      api.add_operation(:get_query_runtime_statistics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetQueryRuntimeStatistics"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetQueryRuntimeStatisticsInput)
+        o.output = Shapes::ShapeRef.new(shape: GetQueryRuntimeStatisticsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
       api.add_operation(:get_table_metadata, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTableMetadata"
         o.http_method = "POST"
@@ -946,6 +1056,12 @@ module Aws::Athena
         o.output = Shapes::ShapeRef.new(shape: ListEngineVersionsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_named_queries, Seahorse::Model::Operation.new.tap do |o|

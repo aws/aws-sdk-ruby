@@ -29,8 +29,12 @@ module Aws::PersonalizeRuntime
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     ItemID = Shapes::StringShape.new(name: 'ItemID')
     ItemList = Shapes::ListShape.new(name: 'ItemList')
+    Name = Shapes::StringShape.new(name: 'Name')
     NumResults = Shapes::IntegerShape.new(name: 'NumResults')
+    PercentPromotedItems = Shapes::IntegerShape.new(name: 'PercentPromotedItems')
     PredictedItem = Shapes::StructureShape.new(name: 'PredictedItem')
+    Promotion = Shapes::StructureShape.new(name: 'Promotion')
+    PromotionList = Shapes::ListShape.new(name: 'PromotionList')
     RecommendationID = Shapes::StringShape.new(name: 'RecommendationID')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     Score = Shapes::FloatShape.new(name: 'Score')
@@ -62,6 +66,7 @@ module Aws::PersonalizeRuntime
     GetRecommendationsRequest.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
     GetRecommendationsRequest.add_member(:filter_values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "filterValues"))
     GetRecommendationsRequest.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recommenderArn"))
+    GetRecommendationsRequest.add_member(:promotions, Shapes::ShapeRef.new(shape: PromotionList, location_name: "promotions"))
     GetRecommendationsRequest.struct_class = Types::GetRecommendationsRequest
 
     GetRecommendationsResponse.add_member(:item_list, Shapes::ShapeRef.new(shape: ItemList, location_name: "itemList"))
@@ -77,7 +82,16 @@ module Aws::PersonalizeRuntime
 
     PredictedItem.add_member(:item_id, Shapes::ShapeRef.new(shape: ItemID, location_name: "itemId"))
     PredictedItem.add_member(:score, Shapes::ShapeRef.new(shape: Score, location_name: "score"))
+    PredictedItem.add_member(:promotion_name, Shapes::ShapeRef.new(shape: Name, location_name: "promotionName"))
     PredictedItem.struct_class = Types::PredictedItem
+
+    Promotion.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    Promotion.add_member(:percent_promoted_items, Shapes::ShapeRef.new(shape: PercentPromotedItems, location_name: "percentPromotedItems"))
+    Promotion.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
+    Promotion.add_member(:filter_values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "filterValues"))
+    Promotion.struct_class = Types::Promotion
+
+    PromotionList.member = Shapes::ShapeRef.new(shape: Promotion)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException

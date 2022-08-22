@@ -453,8 +453,8 @@ module Aws::AutoScaling
     # @option options [Boolean] :force_delete
     #   Specifies that the group is to be deleted along with all instances
     #   associated with the group, without waiting for all instances to be
-    #   terminated. This parameter also deletes any outstanding lifecycle
-    #   actions associated with the group.
+    #   terminated. This action also deletes any outstanding lifecycle actions
+    #   associated with the group.
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -496,7 +496,9 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :metrics
-    #   Specifies one or more of the following metrics:
+    #   Identifies the metrics to disable.
+    #
+    #   You can specify one or more of the following metrics:
     #
     #   * `GroupMinSize`
     #
@@ -538,7 +540,14 @@ module Aws::AutoScaling
     #
     #   * `GroupAndWarmPoolTotalCapacity`
     #
-    #   If you omit this parameter, all metrics are disabled.
+    #   If you omit this property, all metrics are disabled.
+    #
+    #   For more information, see [Auto Scaling group metrics][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics
     # @return [EmptyStructure]
     def disable_metrics_collection(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -554,8 +563,9 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :metrics
-    #   Specifies which group-level metrics to start collecting. You can
-    #   specify one or more of the following metrics:
+    #   Identifies the metrics to enable.
+    #
+    #   You can specify one or more of the following metrics:
     #
     #   * `GroupMinSize`
     #
@@ -573,9 +583,6 @@ module Aws::AutoScaling
     #
     #   * `GroupTotalInstances`
     #
-    #   The instance weighting feature supports the following additional
-    #   metrics:
-    #
     #   * `GroupInServiceCapacity`
     #
     #   * `GroupPendingCapacity`
@@ -585,8 +592,6 @@ module Aws::AutoScaling
     #   * `GroupTerminatingCapacity`
     #
     #   * `GroupTotalCapacity`
-    #
-    #   The warm pools feature supports the following additional metrics:
     #
     #   * `WarmPoolDesiredCapacity`
     #
@@ -602,10 +607,18 @@ module Aws::AutoScaling
     #
     #   * `GroupAndWarmPoolTotalCapacity`
     #
-    #   If you omit this parameter, all metrics are enabled.
+    #   If you specify `Granularity` and don't specify any metrics, all
+    #   metrics are enabled.
+    #
+    #   For more information, see [Auto Scaling group metrics][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics
     # @option options [required, String] :granularity
-    #   The granularity to associate with the metrics to collect. The only
-    #   valid value is `1Minute`.
+    #   The frequency at which Amazon EC2 Auto Scaling sends aggregated data
+    #   to CloudWatch. The only valid value is `1Minute`.
     # @return [EmptyStructure]
     def enable_metrics_collection(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -865,7 +878,7 @@ module Aws::AutoScaling
     #   * `ALBRequestCountPerTarget`
     #
     #   If you specify `ALBRequestCountPerTarget` for the metric, you must
-    #   specify the `ResourceLabel` parameter with the
+    #   specify the `ResourceLabel` property with the
     #   `PredefinedMetricSpecification`.
     #
     #   For more information, see [TargetTrackingConfiguration][1] in the
@@ -927,20 +940,18 @@ module Aws::AutoScaling
     # @option options [required, String] :scheduled_action_name
     #   The name of this scaling action.
     # @option options [Time,DateTime,Date,Integer,String] :time
-    #   This parameter is no longer used.
+    #   This property is no longer used.
     # @option options [Time,DateTime,Date,Integer,String] :start_time
     #   The date and time for this action to start, in YYYY-MM-DDThh:mm:ssZ
     #   format in UTC/GMT only and in quotes (for example,
-    #   `"2019-06-01T00:00:00Z"`).
+    #   `"2021-06-01T00:00:00Z"`).
     #
     #   If you specify `Recurrence` and `StartTime`, Amazon EC2 Auto Scaling
     #   performs the action at this time, and then performs the action based
     #   on the specified recurrence.
-    #
-    #   If you try to schedule your action in the past, Amazon EC2 Auto
-    #   Scaling returns an error message.
     # @option options [Time,DateTime,Date,Integer,String] :end_time
-    #   The date and time for the recurring schedule to end, in UTC.
+    #   The date and time for the recurring schedule to end, in UTC. For
+    #   example, `"2021-06-01T00:00:00Z"`.
     # @option options [String] :recurrence
     #   The recurring schedule for this action. This format consists of five
     #   fields separated by white spaces: \[Minute\] \[Hour\]
@@ -965,6 +976,11 @@ module Aws::AutoScaling
     #   after the scheduled action runs and the capacity it attempts to
     #   maintain. It can scale beyond this capacity if you add more scaling
     #   conditions.
+    #
+    #   <note markdown="1"> You must specify at least one of the following properties: `MaxSize`,
+    #   `MinSize`, or `DesiredCapacity`.
+    #
+    #    </note>
     # @option options [String] :time_zone
     #   Specifies the time zone for a cron expression. If a time zone is not
     #   provided, UTC is used by default.
@@ -1014,7 +1030,7 @@ module Aws::AutoScaling
     #
     #   * `ScheduledActions`
     #
-    #   If you omit this parameter, all processes are specified.
+    #   If you omit this property, all processes are specified.
     # @return [EmptyStructure]
     def resume_processes(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -1073,7 +1089,7 @@ module Aws::AutoScaling
     #
     #   * `ScheduledActions`
     #
-    #   If you omit this parameter, all processes are specified.
+    #   If you omit this property, all processes are specified.
     # @return [EmptyStructure]
     def suspend_processes(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -1266,18 +1282,21 @@ module Aws::AutoScaling
     # @option options [String] :vpc_zone_identifier
     #   A comma-separated list of subnet IDs for a virtual private cloud
     #   (VPC). If you specify `VPCZoneIdentifier` with `AvailabilityZones`,
-    #   the subnets that you specify for this parameter must reside in those
-    #   Availability Zones.
+    #   the subnets that you specify must reside in those Availability Zones.
     # @option options [Array<String>] :termination_policies
     #   A policy or a list of policies that are used to select the instances
     #   to terminate. The policies are executed in the order that you list
-    #   them. For more information, see [Controlling which Auto Scaling
-    #   instances terminate during scale in][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   them. For more information, see [Work with Amazon EC2 Auto Scaling
+    #   termination policies][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   Valid values: `Default` \| `AllocationStrategy` \|
+    #   `ClosestToNextInstanceHour` \| `NewestInstance` \| `OldestInstance` \|
+    #   `OldestLaunchConfiguration` \| `OldestLaunchTemplate` \|
+    #   `arn:aws:lambda:region:account-id:function:my-function:my-alias`
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html
     # @option options [Boolean] :new_instances_protected_from_scale_in
     #   Indicates whether newly launched instances are protected from
     #   termination by Amazon EC2 Auto Scaling when scaling in. For more
@@ -1310,8 +1329,8 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
     # @option options [Boolean] :capacity_rebalance
     #   Enables or disables Capacity Rebalancing. For more information, see
-    #   [Amazon EC2 Auto Scaling Capacity Rebalancing][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   [Use Capacity Rebalancing to handle Amazon EC2 Spot Interruptions][1]
+    #   in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -1377,7 +1396,7 @@ module Aws::AutoScaling
     # @param [Hash] options ({})
     # @option options [Array<String>] :activity_ids
     #   The activity IDs of the desired scaling activities. If you omit this
-    #   parameter, all activities for the past six weeks are described. If
+    #   property, all activities for the past six weeks are described. If
     #   unknown activities are requested, they are ignored with no error. If
     #   you specify an Auto Scaling group, the results are limited to that
     #   group.
@@ -1449,7 +1468,7 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :lifecycle_hook_names
-    #   The names of one or more lifecycle hooks. If you omit this parameter,
+    #   The names of one or more lifecycle hooks. If you omit this property,
     #   all lifecycle hooks are described.
     # @return [LifecycleHook::Collection]
     def lifecycle_hooks(options = {})
@@ -1546,7 +1565,7 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :policy_names
-    #   The names of one or more policies. If you omit this parameter, all
+    #   The names of one or more policies. If you omit this property, all
     #   policies are described. If a group name is provided, the results are
     #   limited to that group. If you specify an unknown policy name, it is
     #   ignored with no error.
@@ -1584,17 +1603,17 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :scheduled_action_names
-    #   The names of one or more scheduled actions. If you omit this
-    #   parameter, all scheduled actions are described. If you specify an
-    #   unknown scheduled action, it is ignored with no error.
+    #   The names of one or more scheduled actions. If you omit this property,
+    #   all scheduled actions are described. If you specify an unknown
+    #   scheduled action, it is ignored with no error.
     #
     #   Array Members: Maximum number of 50 actions.
     # @option options [Time,DateTime,Date,Integer,String] :start_time
     #   The earliest scheduled start time to return. If scheduled action names
-    #   are provided, this parameter is ignored.
+    #   are provided, this property is ignored.
     # @option options [Time,DateTime,Date,Integer,String] :end_time
     #   The latest scheduled start time to return. If scheduled action names
-    #   are provided, this parameter is ignored.
+    #   are provided, this property is ignored.
     # @return [ScheduledAction::Collection]
     def scheduled_actions(options = {})
       batches = Enumerator.new do |y|

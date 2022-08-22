@@ -1002,8 +1002,10 @@ module Aws::Personalize
     # bucket, see [Giving Amazon Personalize Access to Amazon S3
     # Resources][1].
     #
-    # The dataset import job replaces any existing data in the dataset that
-    # you imported in bulk.
+    # By default, a dataset import job replaces any existing data in the
+    # dataset that you imported in bulk. To add new records without
+    # replacing existing data, specify INCREMENTAL for the import mode in
+    # the CreateDatasetImportJob operation.
     #
     # **Status**
     #
@@ -1058,6 +1060,18 @@ module Aws::Personalize
     #
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
     #
+    # @option params [String] :import_mode
+    #   Specify how to add the new records to an existing dataset. The default
+    #   import mode is `FULL`. If you haven't imported bulk records into the
+    #   dataset previously, you can only specify `FULL`.
+    #
+    #   * Specify `FULL` to overwrite all existing bulk data in your dataset.
+    #     Data you imported individually is not replaced.
+    #
+    #   * Specify `INCREMENTAL` to append the new records to the existing data
+    #     in your dataset. Amazon Personalize replaces any record with the
+    #     same ID with the new one.
+    #
     # @return [Types::CreateDatasetImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDatasetImportJobResponse#dataset_import_job_arn #dataset_import_job_arn} => String
@@ -1077,6 +1091,7 @@ module Aws::Personalize
     #         tag_value: "TagValue", # required
     #       },
     #     ],
+    #     import_mode: "FULL", # accepts FULL, INCREMENTAL
     #   })
     #
     # @example Response structure
@@ -1281,6 +1296,9 @@ module Aws::Personalize
     #
     # * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
     #   FAILED
+    #
+    # * STOP PENDING &gt; STOP IN\_PROGRESS &gt; INACTIVE &gt; START PENDING
+    #   &gt; START IN\_PROGRESS &gt; ACTIVE
     #
     # * DELETE PENDING &gt; DELETE IN\_PROGRESS
     #
@@ -2330,6 +2348,7 @@ module Aws::Personalize
     #   resp.dataset_import_job.creation_date_time #=> Time
     #   resp.dataset_import_job.last_updated_date_time #=> Time
     #   resp.dataset_import_job.failure_reason #=> String
+    #   resp.dataset_import_job.import_mode #=> String, one of "FULL", "INCREMENTAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDatasetImportJob AWS API Documentation
     #
@@ -2515,10 +2534,16 @@ module Aws::Personalize
     # * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
     #   FAILED
     #
+    # * STOP PENDING &gt; STOP IN\_PROGRESS &gt; INACTIVE &gt; START PENDING
+    #   &gt; START IN\_PROGRESS &gt; ACTIVE
+    #
     # * DELETE PENDING &gt; DELETE IN\_PROGRESS
     #
     # When the `status` is `CREATE FAILED`, the response includes the
     # `failureReason` key, which describes why.
+    #
+    # The `modelMetrics` key is null when the recommender is being created
+    # or deleted.
     #
     # For more information on recommenders, see [CreateRecommender][1].
     #
@@ -2559,6 +2584,8 @@ module Aws::Personalize
     #   resp.recommender.latest_recommender_update.last_updated_date_time #=> Time
     #   resp.recommender.latest_recommender_update.status #=> String
     #   resp.recommender.latest_recommender_update.failure_reason #=> String
+    #   resp.recommender.model_metrics #=> Hash
+    #   resp.recommender.model_metrics["MetricName"] #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeRecommender AWS API Documentation
     #
@@ -3106,6 +3133,7 @@ module Aws::Personalize
     #   resp.dataset_import_jobs[0].creation_date_time #=> Time
     #   resp.dataset_import_jobs[0].last_updated_date_time #=> Time
     #   resp.dataset_import_jobs[0].failure_reason #=> String
+    #   resp.dataset_import_jobs[0].import_mode #=> String, one of "FULL", "INCREMENTAL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListDatasetImportJobs AWS API Documentation
@@ -3851,7 +3879,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

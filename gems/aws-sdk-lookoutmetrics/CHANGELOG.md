@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2022-08-19)
+------------------
+
+* Feature - This release is to make GetDataQualityMetrics API publicly available.
+
+1.20.0 (2022-06-14)
+------------------
+
+* Feature - Adding filters to Alert and adding new UpdateAlert API.
+
+1.19.0 (2022-05-31)
+------------------
+
+* Feature - Adding backtest mode to detectors using the Cloudwatch data source.
+
+1.18.0 (2022-05-25)
+------------------
+
+* Feature - Adding AthenaSourceConfig for MetricSet APIs to support Athena as a data source.
+
+1.17.0 (2022-05-19)
+------------------
+
+* Feature - In this release we added SnsFormat to SNSConfiguration to support human readable alert.
+
+1.16.0 (2022-04-21)
+------------------
+
+* Feature - Added DetectMetricSetConfig API for detecting configuration required for creating metric set from provided S3 data source.
+
 1.15.0 (2022-02-24)
 ------------------
 

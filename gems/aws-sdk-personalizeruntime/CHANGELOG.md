@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2022-08-12)
+------------------
+
+* Feature - This release provides support for promotions in AWS Personalize runtime.
+
 1.32.0 (2022-02-24)
 ------------------
 

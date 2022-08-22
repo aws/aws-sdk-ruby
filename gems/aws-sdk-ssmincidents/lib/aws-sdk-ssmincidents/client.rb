@@ -440,6 +440,11 @@ module Aws::SSMIncidents
     #         ssm_automation: {
     #           document_name: "SsmAutomationDocumentNameString", # required
     #           document_version: "SsmAutomationDocumentVersionString",
+    #           dynamic_parameters: {
+    #             "DynamicSsmParametersKeyString" => {
+    #               variable: "INCIDENT_RECORD_ARN", # accepts INCIDENT_RECORD_ARN, INVOLVED_RESOURCES
+    #             },
+    #           },
     #           parameters: {
     #             "SsmParametersKeyString" => ["SsmParameterValuesMemberString"],
     #           },
@@ -459,6 +464,9 @@ module Aws::SSMIncidents
     #     incident_template: { # required
     #       dedupe_string: "DedupeString",
     #       impact: 1, # required
+    #       incident_tags: {
+    #         "TagKey" => "TagValue",
+    #       },
     #       notification_targets: [
     #         {
     #           sns_topic_arn: "Arn",
@@ -500,8 +508,7 @@ module Aws::SSMIncidents
     #   not need to pass this option.**
     #
     # @option params [required, String] :event_data
-    #   A short description of the event as a valid JSON string. There is no
-    #   other schema imposed.
+    #   A short description of the event.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :event_time
     #   The time that the event occurred.
@@ -835,6 +842,8 @@ module Aws::SSMIncidents
     #   resp.actions #=> Array
     #   resp.actions[0].ssm_automation.document_name #=> String
     #   resp.actions[0].ssm_automation.document_version #=> String
+    #   resp.actions[0].ssm_automation.dynamic_parameters #=> Hash
+    #   resp.actions[0].ssm_automation.dynamic_parameters["DynamicSsmParametersKeyString"].variable #=> String, one of "INCIDENT_RECORD_ARN", "INVOLVED_RESOURCES"
     #   resp.actions[0].ssm_automation.parameters #=> Hash
     #   resp.actions[0].ssm_automation.parameters["SsmParametersKeyString"] #=> Array
     #   resp.actions[0].ssm_automation.parameters["SsmParametersKeyString"][0] #=> String
@@ -848,6 +857,8 @@ module Aws::SSMIncidents
     #   resp.engagements[0] #=> String
     #   resp.incident_template.dedupe_string #=> String
     #   resp.incident_template.impact #=> Integer
+    #   resp.incident_template.incident_tags #=> Hash
+    #   resp.incident_template.incident_tags["TagKey"] #=> String
     #   resp.incident_template.notification_targets #=> Array
     #   resp.incident_template.notification_targets[0].sns_topic_arn #=> String
     #   resp.incident_template.summary #=> String
@@ -1017,7 +1028,7 @@ module Aws::SSMIncidents
     #
     #   resp.next_token #=> String
     #   resp.related_items #=> Array
-    #   resp.related_items[0].identifier.type #=> String, one of "ANALYSIS", "INCIDENT", "METRIC", "PARENT", "ATTACHMENT", "OTHER", "AUTOMATION"
+    #   resp.related_items[0].identifier.type #=> String, one of "ANALYSIS", "INCIDENT", "METRIC", "PARENT", "ATTACHMENT", "OTHER", "AUTOMATION", "INVOLVED_RESOURCE"
     #   resp.related_items[0].identifier.value.arn #=> String
     #   resp.related_items[0].identifier.value.metric_definition #=> String
     #   resp.related_items[0].identifier.value.url #=> String
@@ -1224,7 +1235,14 @@ module Aws::SSMIncidents
       req.send_request(options)
     end
 
-    # Adds a resource policy to the specified response plan.
+    # Adds a resource policy to the specified response plan. The resource
+    # policy is used to share the response plan using Resource Access
+    # Manager (RAM). For more information about cross-account sharing, see
+    # [Setting up cross-account functionality][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/incident-manager/latest/userguide/xa.html
     #
     # @option params [required, String] :policy
     #   Details of the resource policy.
@@ -1317,7 +1335,7 @@ module Aws::SSMIncidents
     #     related_items: [
     #       {
     #         identifier: { # required
-    #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION
+    #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE
     #           value: { # required
     #             arn: "Arn",
     #             metric_definition: "MetricDefinition",
@@ -1561,7 +1579,7 @@ module Aws::SSMIncidents
     #     related_items_update: { # required
     #       item_to_add: {
     #         identifier: { # required
-    #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION
+    #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE
     #           value: { # required
     #             arn: "Arn",
     #             metric_definition: "MetricDefinition",
@@ -1571,7 +1589,7 @@ module Aws::SSMIncidents
     #         title: "RelatedItemTitleString",
     #       },
     #       item_to_remove: {
-    #         type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION
+    #         type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE
     #         value: { # required
     #           arn: "Arn",
     #           metric_definition: "MetricDefinition",
@@ -1693,6 +1711,11 @@ module Aws::SSMIncidents
     #   A brief summary of the incident. This typically contains what has
     #   happened, what's currently happening, and next steps.
     #
+    # @option params [Hash<String,String>] :incident_template_tags
+    #   Tags to apply to an incident when calling the `StartIncident` API
+    #   action. To call this action, you must also have permission to call the
+    #   `TagResource` API action for the incident record resource.
+    #
     # @option params [String] :incident_template_title
     #   The short format name of the incident. The title can't contain
     #   spaces.
@@ -1707,6 +1730,11 @@ module Aws::SSMIncidents
     #         ssm_automation: {
     #           document_name: "SsmAutomationDocumentNameString", # required
     #           document_version: "SsmAutomationDocumentVersionString",
+    #           dynamic_parameters: {
+    #             "DynamicSsmParametersKeyString" => {
+    #               variable: "INCIDENT_RECORD_ARN", # accepts INCIDENT_RECORD_ARN, INVOLVED_RESOURCES
+    #             },
+    #           },
     #           parameters: {
     #             "SsmParametersKeyString" => ["SsmParameterValuesMemberString"],
     #           },
@@ -1732,6 +1760,9 @@ module Aws::SSMIncidents
     #       },
     #     ],
     #     incident_template_summary: "IncidentSummary",
+    #     incident_template_tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #     incident_template_title: "IncidentTitle",
     #   })
     #
@@ -1806,7 +1837,7 @@ module Aws::SSMIncidents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmincidents'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

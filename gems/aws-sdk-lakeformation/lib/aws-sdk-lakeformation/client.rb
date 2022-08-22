@@ -450,6 +450,73 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
+    # Allows a caller to assume an IAM role decorated as the SAML user
+    # specified in the SAML assertion included in the request. This
+    # decoration allows Lake Formation to enforce access policies against
+    # the SAML users and groups. This API operation requires SAML federation
+    # setup in the caller’s account as it can only be called with valid SAML
+    # assertions. Lake Formation does not scope down the permission of the
+    # assumed role. All permissions attached to the role via the SAML
+    # federation setup will be included in the role session.
+    #
+    # This decorated role is expected to access data in Amazon S3 by getting
+    # temporary access from Lake Formation which is authorized via the
+    # virtual API `GetDataAccess`. Therefore, all SAML roles that can be
+    # assumed via `AssumeDecoratedRoleWithSAML` must at a minimum include
+    # `lakeformation:GetDataAccess` in their role policies. A typical IAM
+    # policy attached to such a role would look as follows:
+    #
+    # @option params [required, String] :saml_assertion
+    #   A SAML assertion consisting of an assertion statement for the user who
+    #   needs temporary credentials. This must match the SAML assertion that
+    #   was issued to IAM. This must be Base64 encoded.
+    #
+    # @option params [required, String] :role_arn
+    #   The role that represents an IAM principal whose scope down policy
+    #   allows it to call credential vending APIs such as
+    #   `GetTemporaryTableCredentials`. The caller must also have iam:PassRole
+    #   permission on this role.
+    #
+    # @option params [required, String] :principal_arn
+    #   The Amazon Resource Name (ARN) of the SAML provider in IAM that
+    #   describes the IdP.
+    #
+    # @option params [Integer] :duration_seconds
+    #   The time period, between 900 and 43,200 seconds, for the timeout of
+    #   the temporary credentials.
+    #
+    # @return [Types::AssumeDecoratedRoleWithSAMLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssumeDecoratedRoleWithSAMLResponse#access_key_id #access_key_id} => String
+    #   * {Types::AssumeDecoratedRoleWithSAMLResponse#secret_access_key #secret_access_key} => String
+    #   * {Types::AssumeDecoratedRoleWithSAMLResponse#session_token #session_token} => String
+    #   * {Types::AssumeDecoratedRoleWithSAMLResponse#expiration #expiration} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.assume_decorated_role_with_saml({
+    #     saml_assertion: "SAMLAssertionString", # required
+    #     role_arn: "IAMRoleArn", # required
+    #     principal_arn: "IAMSAMLProviderArn", # required
+    #     duration_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_key_id #=> String
+    #   resp.secret_access_key #=> String
+    #   resp.session_token #=> String
+    #   resp.expiration #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/AssumeDecoratedRoleWithSAML AWS API Documentation
+    #
+    # @overload assume_decorated_role_with_saml(params = {})
+    # @param [Hash] params ({})
+    def assume_decorated_role_with_saml(params = {}, options = {})
+      req = build_request(:assume_decorated_role_with_saml, params)
+      req.send_request(options)
+    end
+
     # Batch operation to grant permissions to the principal.
     #
     # @option params [String] :catalog_id
@@ -868,13 +935,12 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
-    # Deletes the specified LF-tag key name. If the attribute key does not
-    # exist or the LF-tag does not exist, then the operation will not do
-    # anything. If the attribute key exists, then the operation checks if
-    # any resources are tagged with this attribute key, if yes, the API
-    # throws a 400 Exception with the message "Delete not allowed" as the
-    # LF-tag key is still attached with resources. You can consider
-    # untagging resources with this LF-tag key.
+    # Deletes the specified LF-tag given a key name. If the input parameter
+    # tag key was not found, then the operation will throw an exception.
+    # When you delete an LF-tag, the `LFTagPolicy` attached to the LF-tag
+    # becomes invalid. If the deleted LF-tag was still assigned to any
+    # resource, the tag policy attach to the deleted LF-tag will no longer
+    # be applied to the resource.
     #
     # @option params [String] :catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
@@ -3018,7 +3084,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

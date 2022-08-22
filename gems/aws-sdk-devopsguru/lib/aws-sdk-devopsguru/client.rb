@@ -1026,6 +1026,7 @@ module Aws::DevOpsGuru
     # @example Response structure
     #
     #   resp.service_integration.ops_center.opt_in_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service_integration.logs_anomaly_detection.opt_in_status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeServiceIntegration AWS API Documentation
     #
@@ -1328,6 +1329,64 @@ module Aws::DevOpsGuru
       req.send_request(options)
     end
 
+    # Returns the list of log groups that contain log anomalies.
+    #
+    # @option params [required, String] :insight_id
+    #   The ID of the insight containing the log groups.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #
+    # @return [Types::ListAnomalousLogGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAnomalousLogGroupsResponse#insight_id #insight_id} => String
+    #   * {Types::ListAnomalousLogGroupsResponse#anomalous_log_groups #anomalous_log_groups} => Array&lt;Types::AnomalousLogGroup&gt;
+    #   * {Types::ListAnomalousLogGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_anomalous_log_groups({
+    #     insight_id: "InsightId", # required
+    #     max_results: 1,
+    #     next_token: "UuidNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.insight_id #=> String
+    #   resp.anomalous_log_groups #=> Array
+    #   resp.anomalous_log_groups[0].log_group_name #=> String
+    #   resp.anomalous_log_groups[0].impact_start_time #=> Time
+    #   resp.anomalous_log_groups[0].impact_end_time #=> Time
+    #   resp.anomalous_log_groups[0].number_of_log_lines_scanned #=> Integer
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases #=> Array
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes #=> Array
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes[0].log_stream_name #=> String
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes[0].log_anomaly_type #=> String, one of "KEYWORD", "KEYWORD_TOKEN", "FORMAT", "HTTP_CODE", "BLOCK_FORMAT", "NUMERICAL_POINT", "NUMERICAL_NAN", "NEW_FIELD_NAME"
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes[0].log_anomaly_token #=> String
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes[0].log_event_id #=> String
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes[0].explanation #=> String
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes[0].number_of_log_lines_occurrences #=> Integer
+    #   resp.anomalous_log_groups[0].log_anomaly_showcases[0].log_anomaly_classes[0].log_event_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListAnomalousLogGroups AWS API Documentation
+    #
+    # @overload list_anomalous_log_groups(params = {})
+    # @param [Hash] params ({})
+    def list_anomalous_log_groups(params = {}, options = {})
+      req = build_request(:list_anomalous_log_groups, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the events emitted by the resources that are
     # evaluated by DevOps Guru. You can use filters to specify which events
     # are returned.
@@ -1510,6 +1569,57 @@ module Aws::DevOpsGuru
     # @param [Hash] params ({})
     def list_insights(params = {}, options = {})
       req = build_request(:list_insights, params)
+      req.send_request(options)
+    end
+
+    # Returns the list of all log groups that are being monitored and tagged
+    # by DevOps Guru.
+    #
+    # @option params [required, Types::ListMonitoredResourcesFilters] :filters
+    #   Filters to determine which monitored resources you want to retrieve.
+    #   You can filter by resource type or resource permission status.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #
+    # @return [Types::ListMonitoredResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMonitoredResourcesResponse#monitored_resource_identifiers #monitored_resource_identifiers} => Array&lt;Types::MonitoredResourceIdentifier&gt;
+    #   * {Types::ListMonitoredResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_monitored_resources({
+    #     filters: { # required
+    #       resource_permission: "FULL_PERMISSION", # required, accepts FULL_PERMISSION, MISSING_PERMISSION
+    #       resource_type_filters: ["LOG_GROUPS"], # required, accepts LOG_GROUPS
+    #     },
+    #     max_results: 1,
+    #     next_token: "UuidNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitored_resource_identifiers #=> Array
+    #   resp.monitored_resource_identifiers[0].monitored_resource_name #=> String
+    #   resp.monitored_resource_identifiers[0].type #=> String
+    #   resp.monitored_resource_identifiers[0].resource_permission #=> String, one of "FULL_PERMISSION", "MISSING_PERMISSION"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListMonitoredResources AWS API Documentation
+    #
+    # @overload list_monitored_resources(params = {})
+    # @param [Hash] params ({})
+    def list_monitored_resources(params = {}, options = {})
+      req = build_request(:list_monitored_resources, params)
       req.send_request(options)
     end
 
@@ -2147,6 +2257,9 @@ module Aws::DevOpsGuru
     #       ops_center: {
     #         opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
     #       },
+    #       logs_anomaly_detection: {
+    #         opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
     #     },
     #   })
     #
@@ -2172,7 +2285,7 @@ module Aws::DevOpsGuru
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devopsguru'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

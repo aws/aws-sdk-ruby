@@ -37,6 +37,7 @@ module Aws::IoTDeviceAdvisor
     GroupResultList = Shapes::ListShape.new(name: 'GroupResultList')
     IntendedForQualificationBoolean = Shapes::BooleanShape.new(name: 'IntendedForQualificationBoolean')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    IsLongDurationTestBoolean = Shapes::BooleanShape.new(name: 'IsLongDurationTestBoolean')
     ListSuiteDefinitionsRequest = Shapes::StructureShape.new(name: 'ListSuiteDefinitionsRequest')
     ListSuiteDefinitionsResponse = Shapes::StructureShape.new(name: 'ListSuiteDefinitionsResponse')
     ListSuiteRunsRequest = Shapes::StructureShape.new(name: 'ListSuiteRunsRequest')
@@ -47,6 +48,7 @@ module Aws::IoTDeviceAdvisor
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Message = Shapes::StringShape.new(name: 'Message')
     ParallelRun = Shapes::BooleanShape.new(name: 'ParallelRun')
+    Protocol = Shapes::StringShape.new(name: 'Protocol')
     QualificationReportDownloadUrl = Shapes::StringShape.new(name: 'QualificationReportDownloadUrl')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RootGroup = Shapes::StringShape.new(name: 'RootGroup')
@@ -68,6 +70,7 @@ module Aws::IoTDeviceAdvisor
     SuiteRunResultCount = Shapes::IntegerShape.new(name: 'SuiteRunResultCount')
     SuiteRunStatus = Shapes::StringShape.new(name: 'SuiteRunStatus')
     SuiteRunsList = Shapes::ListShape.new(name: 'SuiteRunsList')
+    SystemMessage = Shapes::StringShape.new(name: 'SystemMessage')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -75,6 +78,11 @@ module Aws::IoTDeviceAdvisor
     TestCaseDefinitionName = Shapes::StringShape.new(name: 'TestCaseDefinitionName')
     TestCaseRun = Shapes::StructureShape.new(name: 'TestCaseRun')
     TestCaseRuns = Shapes::ListShape.new(name: 'TestCaseRuns')
+    TestCaseScenario = Shapes::StructureShape.new(name: 'TestCaseScenario')
+    TestCaseScenarioId = Shapes::StringShape.new(name: 'TestCaseScenarioId')
+    TestCaseScenarioStatus = Shapes::StringShape.new(name: 'TestCaseScenarioStatus')
+    TestCaseScenarioType = Shapes::StringShape.new(name: 'TestCaseScenarioType')
+    TestCaseScenariosList = Shapes::ListShape.new(name: 'TestCaseScenariosList')
     TestResult = Shapes::StructureShape.new(name: 'TestResult')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
@@ -214,14 +222,18 @@ module Aws::IoTDeviceAdvisor
     SuiteDefinitionConfiguration.add_member(:suite_definition_name, Shapes::ShapeRef.new(shape: SuiteDefinitionName, location_name: "suiteDefinitionName"))
     SuiteDefinitionConfiguration.add_member(:devices, Shapes::ShapeRef.new(shape: DeviceUnderTestList, location_name: "devices"))
     SuiteDefinitionConfiguration.add_member(:intended_for_qualification, Shapes::ShapeRef.new(shape: IntendedForQualificationBoolean, location_name: "intendedForQualification"))
+    SuiteDefinitionConfiguration.add_member(:is_long_duration_test, Shapes::ShapeRef.new(shape: IsLongDurationTestBoolean, location_name: "isLongDurationTest"))
     SuiteDefinitionConfiguration.add_member(:root_group, Shapes::ShapeRef.new(shape: RootGroup, location_name: "rootGroup"))
     SuiteDefinitionConfiguration.add_member(:device_permission_role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "devicePermissionRoleArn"))
+    SuiteDefinitionConfiguration.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol"))
     SuiteDefinitionConfiguration.struct_class = Types::SuiteDefinitionConfiguration
 
     SuiteDefinitionInformation.add_member(:suite_definition_id, Shapes::ShapeRef.new(shape: UUID, location_name: "suiteDefinitionId"))
     SuiteDefinitionInformation.add_member(:suite_definition_name, Shapes::ShapeRef.new(shape: SuiteDefinitionName, location_name: "suiteDefinitionName"))
     SuiteDefinitionInformation.add_member(:default_devices, Shapes::ShapeRef.new(shape: DeviceUnderTestList, location_name: "defaultDevices"))
     SuiteDefinitionInformation.add_member(:intended_for_qualification, Shapes::ShapeRef.new(shape: IntendedForQualificationBoolean, location_name: "intendedForQualification"))
+    SuiteDefinitionInformation.add_member(:is_long_duration_test, Shapes::ShapeRef.new(shape: IsLongDurationTestBoolean, location_name: "isLongDurationTest"))
+    SuiteDefinitionInformation.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol"))
     SuiteDefinitionInformation.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     SuiteDefinitionInformation.struct_class = Types::SuiteDefinitionInformation
 
@@ -266,9 +278,19 @@ module Aws::IoTDeviceAdvisor
     TestCaseRun.add_member(:log_url, Shapes::ShapeRef.new(shape: LogUrl, location_name: "logUrl"))
     TestCaseRun.add_member(:warnings, Shapes::ShapeRef.new(shape: Warnings, location_name: "warnings"))
     TestCaseRun.add_member(:failure, Shapes::ShapeRef.new(shape: Failure, location_name: "failure"))
+    TestCaseRun.add_member(:test_scenarios, Shapes::ShapeRef.new(shape: TestCaseScenariosList, location_name: "testScenarios"))
     TestCaseRun.struct_class = Types::TestCaseRun
 
     TestCaseRuns.member = Shapes::ShapeRef.new(shape: TestCaseRun)
+
+    TestCaseScenario.add_member(:test_case_scenario_id, Shapes::ShapeRef.new(shape: TestCaseScenarioId, location_name: "testCaseScenarioId"))
+    TestCaseScenario.add_member(:test_case_scenario_type, Shapes::ShapeRef.new(shape: TestCaseScenarioType, location_name: "testCaseScenarioType"))
+    TestCaseScenario.add_member(:status, Shapes::ShapeRef.new(shape: TestCaseScenarioStatus, location_name: "status"))
+    TestCaseScenario.add_member(:failure, Shapes::ShapeRef.new(shape: Failure, location_name: "failure"))
+    TestCaseScenario.add_member(:system_message, Shapes::ShapeRef.new(shape: SystemMessage, location_name: "systemMessage"))
+    TestCaseScenario.struct_class = Types::TestCaseScenario
+
+    TestCaseScenariosList.member = Shapes::ShapeRef.new(shape: TestCaseScenario)
 
     TestResult.add_member(:groups, Shapes::ShapeRef.new(shape: GroupResultList, location_name: "groups"))
     TestResult.struct_class = Types::TestResult

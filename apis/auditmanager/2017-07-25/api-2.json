@@ -114,7 +114,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
-        {"shape":"InternalServerException"}
+        {"shape":"InternalServerException"},
+        {"shape":"ServiceQuotaExceededException"}
       ]
     },
     "CreateAssessmentFramework":{
@@ -129,7 +130,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
-        {"shape":"InternalServerException"}
+        {"shape":"InternalServerException"},
+        {"shape":"ServiceQuotaExceededException"}
       ]
     },
     "CreateAssessmentReport":{
@@ -159,7 +161,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
-        {"shape":"InternalServerException"}
+        {"shape":"InternalServerException"},
+        {"shape":"ServiceQuotaExceededException"}
       ]
     },
     "DeleteAssessment":{
@@ -712,7 +715,8 @@
         {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
         {"shape":"InternalServerException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "RegisterOrganizationAdminAccount":{
@@ -860,7 +864,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
-        {"shape":"InternalServerException"}
+        {"shape":"InternalServerException"},
+        {"shape":"ServiceQuotaExceededException"}
       ]
     },
     "UpdateControl":{
@@ -3024,6 +3029,10 @@
     },
     "Role":{
       "type":"structure",
+      "required":[
+        "roleType",
+        "roleArn"
+      ],
       "members":{
         "roleType":{"shape":"RoleType"},
         "roleArn":{"shape":"IamArn"}
@@ -3071,6 +3080,15 @@
     "ServiceMetadataList":{
       "type":"list",
       "member":{"shape":"ServiceMetadata"}
+    },
+    "ServiceQuotaExceededException":{
+      "type":"structure",
+      "required":["message"],
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":402},
+      "exception":true
     },
     "SettingAttribute":{
       "type":"string",
@@ -3252,6 +3270,15 @@
       "type":"string",
       "max":1000,
       "pattern":"^[\\w\\W\\s\\S]*$"
+    },
+    "ThrottlingException":{
+      "type":"structure",
+      "required":["message"],
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
     },
     "Timestamp":{"type":"timestamp"},
     "TimestampUUID":{

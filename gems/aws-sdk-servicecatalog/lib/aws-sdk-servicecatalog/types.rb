@@ -689,7 +689,7 @@ module Aws::ServiceCatalog
     #     You also cannot have more than one `STACKSET` constraint on a
     #     product and portfolio.
     #
-    #     Products with a `STACKSET` constraint will launch an AWS
+    #     Products with a `STACKSET` constraint will launch an
     #     CloudFormation stack set.
     #
     #   TEMPLATE
@@ -876,15 +876,15 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID. For example, `123456789012`.
+    #   The Amazon Web Services account ID. For example, `123456789012`.
     #   @return [String]
     #
     # @!attribute [rw] organization_node
-    #   The organization node to whom you are going to share. If
-    #   `OrganizationNode` is passed in, `PortfolioShare` will be created
-    #   for the node an ListOrganizationPortfolioAccessd its children (when
-    #   applies), and a `PortfolioShareToken` will be returned in the output
-    #   in order for the administrator to monitor the status of the
+    #   The organization node to whom you are going to share. When you pass
+    #   `OrganizationNode`, it creates `PortfolioShare` for all of the
+    #   Amazon Web Services accounts that are associated to the
+    #   `OrganizationNode`. The output returns a `PortfolioShareToken`,
+    #   which enables the administrator to monitor the status of the
     #   `PortfolioShare` creation process.
     #   @return [Types::OrganizationNode]
     #
@@ -1115,8 +1115,8 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] provisioned_product_name
     #   A user-friendly name for the provisioned product. This value must be
-    #   unique for the AWS account and cannot be updated after the product
-    #   is provisioned.
+    #   unique for the Amazon Web Services account and cannot be updated
+    #   after the product is provisioned.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
@@ -1261,12 +1261,13 @@ module Aws::ServiceCatalog
     #   not both. Keys accepted: \[ `LoadTemplateFromURL`,
     #   `ImportFromPhysicalId` \].
     #
-    #   The URL of the CloudFormation template in Amazon S3, in JSON format.
+    #   The URL of the CloudFormation template in Amazon S3, Amazon Web
+    #   Services CodeCommit, or GitHub in JSON format.
     #
     #   `LoadTemplateFromURL`
     #
-    #   Use the URL of the CloudFormation template in Amazon S3 in JSON
-    #   format.
+    #   Use the URL of the CloudFormation template in Amazon S3, Amazon Web
+    #   Services CodeCommit, or GitHub in JSON format.
     #
     #   `ImportFromPhysicalId`
     #
@@ -1315,16 +1316,16 @@ module Aws::ServiceCatalog
     #
     #   Name
     #
-    #   : The name of the AWS Systems Manager document (SSM document). For
-    #     example, `AWS-RestartEC2Instance`.
+    #   : The name of the Amazon Web Services Systems Manager document (SSM
+    #     document). For example, `AWS-RestartEC2Instance`.
     #
     #     If you are using a shared SSM document, you must provide the ARN
     #     instead of the name.
     #
     #   Version
     #
-    #   : The AWS Systems Manager automation document version. For example,
-    #     `"Version": "1"`
+    #   : The Amazon Web Services Systems Manager automation document
+    #     version. For example, `"Version": "1"`
     #
     #   AssumeRole
     #
@@ -1526,7 +1527,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID.
+    #   The Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] organization_node
@@ -1616,7 +1617,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] ignore_errors
-    #   If set to true, AWS Service Catalog stops managing the specified
+    #   If set to true, Service Catalog stops managing the specified
     #   provisioned product even if it cannot delete the underlying
     #   resources.
     #   @return [Boolean]
@@ -2417,7 +2418,8 @@ module Aws::ServiceCatalog
     #   @return [Types::ProvisioningArtifactDetail]
     #
     # @!attribute [rw] info
-    #   The URL of the CloudFormation template in Amazon S3.
+    #   The URL of the CloudFormation template in Amazon S3, Amazon Web
+    #   Services CodeCommit, or GitHub in JSON format.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status
@@ -2522,7 +2524,7 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] provisioning_artifact_preferences
     #   An object that contains information about preferences, such as
-    #   regions and accounts, for the provisioning artifact.
+    #   Regions and accounts, for the provisioning artifact.
     #   @return [Types::ProvisioningArtifactPreferences]
     #
     # @!attribute [rw] provisioning_artifact_outputs
@@ -3054,10 +3056,10 @@ module Aws::ServiceCatalog
     # @!attribute [rw] parameters
     #   A map of all self-service action parameters and their values. If a
     #   provided parameter is of a special type, such as `TARGET`, the
-    #   provided value will override the default value generated by AWS
-    #   Service Catalog. If the parameters field is not provided, no
-    #   additional parameters are passed and default values will be used for
-    #   any special parameters such as `TARGET`.
+    #   provided value will override the default value generated by Service
+    #   Catalog. If the parameters field is not provided, no additional
+    #   parameters are passed and default values will be used for any
+    #   special parameters such as `TARGET`.
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductServiceActionInput AWS API Documentation
@@ -3277,8 +3279,8 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] provisioned_product_name
     #   The user-friendly name of the provisioned product. The value must be
-    #   unique for the AWS account. The name cannot be updated after the
-    #   product is provisioned.
+    #   unique for the Amazon Web Services account. The name cannot be
+    #   updated after the product is provisioned.
     #   @return [String]
     #
     # @!attribute [rw] physical_id
@@ -3368,7 +3370,7 @@ module Aws::ServiceCatalog
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] name
-    #   The name of the portfolio to which the user was assigned.
+    #   The name of the portfolio that contains the product.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/LaunchPathSummary AWS API Documentation
@@ -3423,12 +3425,14 @@ module Aws::ServiceCatalog
     #   The type of shared portfolios to list. The default is to list
     #   imported portfolios.
     #
-    #   * `AWS_ORGANIZATIONS` - List portfolios shared by the management
-    #     account of your organization
+    #   * `AWS_ORGANIZATIONS` - List portfolios accepted and shared via
+    #     organizational sharing by the management account or delegated
+    #     administrator of your organization.
     #
-    #   * `AWS_SERVICECATALOG` - List default portfolios
+    #   * `AWS_SERVICECATALOG` - Deprecated type.
     #
-    #   * `IMPORTED` - List imported portfolios
+    #   * `IMPORTED` - List imported portfolios that have been accepted and
+    #     shared through account-to-account sharing.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioSharesInput AWS API Documentation
@@ -3781,7 +3785,8 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] account_ids
-    #   Information about the AWS accounts with access to the portfolio.
+    #   Information about the Amazon Web Services accounts with access to
+    #   the portfolio.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_page_token
@@ -4884,7 +4889,7 @@ module Aws::ServiceCatalog
     # @!attribute [rw] type
     #   The product type. Contact the product administrator for the
     #   significance of this value. If this value is `MARKETPLACE`, the
-    #   product was created by AWS Marketplace.
+    #   product was created by Amazon Web Services Marketplace.
     #   @return [String]
     #
     # @!attribute [rw] distributor
@@ -5009,8 +5014,8 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] provisioned_product_name
     #   A user-friendly name for the provisioned product. This value must be
-    #   unique for the AWS account and cannot be updated after the product
-    #   is provisioned.
+    #   unique for the Amazon Web Services account and cannot be updated
+    #   after the product is provisioned.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_parameters
@@ -5529,11 +5534,12 @@ module Aws::ServiceCatalog
     # @!attribute [rw] type
     #   The type of provisioning artifact.
     #
-    #   * `CLOUD_FORMATION_TEMPLATE` - AWS CloudFormation template
+    #   * `CLOUD_FORMATION_TEMPLATE` - CloudFormation template
     #
-    #   * `MARKETPLACE_AMI` - AWS Marketplace AMI
+    #   * `MARKETPLACE_AMI` - Amazon Web Services Marketplace AMI
     #
-    #   * `MARKETPLACE_CAR` - AWS Marketplace Clusters and AWS Resources
+    #   * `MARKETPLACE_CAR` - Amazon Web Services Marketplace Clusters and
+    #     Amazon Web Services Resources
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -5628,16 +5634,16 @@ module Aws::ServiceCatalog
     # `UpdateProvisioningPreferences`.
     #
     # For more information on maximum concurrent accounts and failure
-    # tolerance, see [Stack set operation options][1] in the *AWS
-    # CloudFormation User Guide*.
+    # tolerance, see [Stack set operation options][1] in the *CloudFormation
+    # User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
     #
     # @!attribute [rw] stack_set_accounts
-    #   One or more AWS accounts where stack instances are deployed from the
-    #   stack set. These accounts can be scoped in
+    #   One or more Amazon Web Services accounts where stack instances are
+    #   deployed from the stack set. These accounts can be scoped in
     #   `ProvisioningPreferences$StackSetAccounts` and
     #   `UpdateProvisioningPreferences$StackSetAccounts`.
     #
@@ -5645,8 +5651,8 @@ module Aws::ServiceCatalog
     #   @return [Array<String>]
     #
     # @!attribute [rw] stack_set_regions
-    #   One or more AWS Regions where stack instances are deployed from the
-    #   stack set. These regions can be scoped in
+    #   One or more Amazon Web Services Regions where stack instances are
+    #   deployed from the stack set. These Regions can be scoped in
     #   `ProvisioningPreferences$StackSetRegions` and
     #   `UpdateProvisioningPreferences$StackSetRegions`.
     #
@@ -5693,8 +5699,9 @@ module Aws::ServiceCatalog
     #   not both. Keys accepted: \[ `LoadTemplateFromURL`,
     #   `ImportFromPhysicalId` \]
     #
-    #   The URL of the CloudFormation template in Amazon S3. Specify the URL
-    #   in JSON format as follows:
+    #   The URL of the CloudFormation template in Amazon S3, Amazon Web
+    #   Services CodeCommit, or GitHub in JSON format. Specify the URL in
+    #   JSON format as follows:
     #
     #   `"LoadTemplateFromURL":
     #   "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."`
@@ -5709,16 +5716,17 @@ module Aws::ServiceCatalog
     # @!attribute [rw] type
     #   The type of provisioning artifact.
     #
-    #   * `CLOUD_FORMATION_TEMPLATE` - AWS CloudFormation template
+    #   * `CLOUD_FORMATION_TEMPLATE` - CloudFormation template
     #
-    #   * `MARKETPLACE_AMI` - AWS Marketplace AMI
+    #   * `MARKETPLACE_AMI` - Amazon Web Services Marketplace AMI
     #
-    #   * `MARKETPLACE_CAR` - AWS Marketplace Clusters and AWS Resources
+    #   * `MARKETPLACE_CAR` - Amazon Web Services Marketplace Clusters and
+    #     Amazon Web Services Resources
     #   @return [String]
     #
     # @!attribute [rw] disable_template_validation
-    #   If set to true, AWS Service Catalog stops validating the specified
-    #   provisioning artifact even if it is invalid.
+    #   If set to true, Amazon Web Services Service Catalog stops validating
+    #   the specified provisioning artifact even if it is invalid.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactProperties AWS API Documentation
@@ -5753,8 +5761,8 @@ module Aws::ServiceCatalog
     #   @return [Time]
     #
     # @!attribute [rw] provisioning_artifact_metadata
-    #   The metadata for the provisioning artifact. This is used with AWS
-    #   Marketplace products.
+    #   The metadata for the provisioning artifact. This is used with Amazon
+    #   Web Services Marketplace products.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactSummary AWS API Documentation
@@ -5821,14 +5829,14 @@ module Aws::ServiceCatalog
     # provisioned product. Not all preferences are applicable to all
     # provisioned product type
     #
-    # One or more AWS accounts that will have access to the provisioned
-    # product.
+    # One or more Amazon Web Services accounts that will have access to the
+    # provisioned product.
     #
     # Applicable only to a `CFN_STACKSET` provisioned product type.
     #
-    # The AWS accounts specified should be within the list of accounts in
-    # the `STACKSET` constraint. To get the list of accounts in the
-    # `STACKSET` constraint, use the `DescribeProvisioningParameters`
+    # The Amazon Web Services accounts specified should be within the list
+    # of accounts in the `STACKSET` constraint. To get the list of accounts
+    # in the `STACKSET` constraint, use the `DescribeProvisioningParameters`
     # operation.
     #
     # If no values are specified, the default value is all accounts from the
@@ -5847,8 +5855,8 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] stack_set_accounts
-    #   One or more AWS accounts where the provisioned product will be
-    #   available.
+    #   One or more Amazon Web Services accounts where the provisioned
+    #   product will be available.
     #
     #   Applicable only to a `CFN_STACKSET` provisioned product type.
     #
@@ -5862,24 +5870,24 @@ module Aws::ServiceCatalog
     #   @return [Array<String>]
     #
     # @!attribute [rw] stack_set_regions
-    #   One or more AWS Regions where the provisioned product will be
-    #   available.
+    #   One or more Amazon Web Services Regions where the provisioned
+    #   product will be available.
     #
     #   Applicable only to a `CFN_STACKSET` provisioned product type.
     #
-    #   The specified regions should be within the list of regions from the
-    #   `STACKSET` constraint. To get the list of regions in the `STACKSET`
+    #   The specified Regions should be within the list of Regions from the
+    #   `STACKSET` constraint. To get the list of Regions in the `STACKSET`
     #   constraint, use the `DescribeProvisioningParameters` operation.
     #
-    #   If no values are specified, the default value is all regions from
+    #   If no values are specified, the default value is all Regions from
     #   the `STACKSET` constraint.
     #   @return [Array<String>]
     #
     # @!attribute [rw] stack_set_failure_tolerance_count
-    #   The number of accounts, per region, for which this operation can
-    #   fail before AWS Service Catalog stops the operation in that region.
-    #   If the operation is stopped in a region, AWS Service Catalog
-    #   doesn't attempt the operation in any subsequent regions.
+    #   The number of accounts, per Region, for which this operation can
+    #   fail before Service Catalog stops the operation in that Region. If
+    #   the operation is stopped in a Region, Service Catalog doesn't
+    #   attempt the operation in any subsequent Regions.
     #
     #   Applicable only to a `CFN_STACKSET` provisioned product type.
     #
@@ -5890,14 +5898,13 @@ module Aws::ServiceCatalog
     #   @return [Integer]
     #
     # @!attribute [rw] stack_set_failure_tolerance_percentage
-    #   The percentage of accounts, per region, for which this stack
-    #   operation can fail before AWS Service Catalog stops the operation in
-    #   that region. If the operation is stopped in a region, AWS Service
-    #   Catalog doesn't attempt the operation in any subsequent regions.
+    #   The percentage of accounts, per Region, for which this stack
+    #   operation can fail before Service Catalog stops the operation in
+    #   that Region. If the operation is stopped in a Region, Service
+    #   Catalog doesn't attempt the operation in any subsequent Regions.
     #
     #   When calculating the number of accounts based on the specified
-    #   percentage, AWS Service Catalog rounds down to the next whole
-    #   number.
+    #   percentage, Service Catalog rounds down to the next whole number.
     #
     #   Applicable only to a `CFN_STACKSET` provisioned product type.
     #
@@ -5927,10 +5934,9 @@ module Aws::ServiceCatalog
     #   operation at one time.
     #
     #   When calculating the number of accounts based on the specified
-    #   percentage, AWS Service Catalog rounds down to the next whole
-    #   number. This is true except in cases where rounding down would
-    #   result is zero. In this case, AWS Service Catalog sets the number as
-    #   `1` instead.
+    #   percentage, Service Catalog rounds down to the next whole number.
+    #   This is true except in cases where rounding down would result is
+    #   zero. In this case, Service Catalog sets the number as `1` instead.
     #
     #   Note that this setting lets you specify the maximum for operations.
     #   For large deployments, under certain circumstances the actual number
@@ -6791,9 +6797,9 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # An AWS CloudFormation stack, in a specific account and region, that's
+    # An CloudFormation stack, in a specific account and Region, that's
     # part of a stack set operation. A stack instance is a reference to an
-    # attempted or actual stack in a given account within a given region. A
+    # attempted or actual stack in a given account within a given Region. A
     # stack instance can exist without a stack—for example, if the stack
     # couldn't be created for some reason. A stack instance is associated
     # with only one stack set. Each stack instance contains the ID of its
@@ -6801,13 +6807,13 @@ module Aws::ServiceCatalog
     # stack status.
     #
     # @!attribute [rw] account
-    #   The name of the AWS account that the stack instance is associated
-    #   with.
+    #   The name of the Amazon Web Services account that the stack instance
+    #   is associated with.
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The name of the AWS region that the stack instance is associated
-    #   with.
+    #   The name of the Amazon Web Services Region that the stack instance
+    #   is associated with.
     #   @return [String]
     #
     # @!attribute [rw] stack_instance_status
@@ -6887,7 +6893,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The AWS account Id of the owner account that created the TagOption.
+    #   The Amazon Web Services account Id of the owner account that created
+    #   the TagOption.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TagOptionDetail AWS API Documentation
@@ -6903,9 +6910,9 @@ module Aws::ServiceCatalog
     end
 
     # An operation requiring TagOptions failed because the TagOptions
-    # migration process has not been performed for this account. Please use
-    # the AWS console to perform the migration process before retrying the
-    # operation.
+    # migration process has not been performed for this account. Use the
+    # Amazon Web Services Management Console to perform the migration
+    # process before retrying the operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TagOptionNotMigratedException AWS API Documentation
     #
@@ -6964,7 +6971,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] ignore_errors
-    #   If set to true, AWS Service Catalog stops managing the specified
+    #   If set to true, Service Catalog stops managing the specified
     #   provisioned product even if it cannot delete the underlying
     #   resources.
     #   @return [Boolean]
@@ -7103,7 +7110,7 @@ module Aws::ServiceCatalog
     #     You also cannot have more than one `STACKSET` constraint on a
     #     product and portfolio.
     #
-    #     Products with a `STACKSET` constraint will launch an AWS
+    #     Products with a `STACKSET` constraint will launch an
     #     CloudFormation stack set.
     #
     #   TEMPLATE
@@ -7262,8 +7269,9 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS Account Id of the recipient account. This field is required
-    #   when updating an external account to account type share.
+    #   The Amazon Web Services account Id of the recipient account. This
+    #   field is required when updating an external account to account type
+    #   share.
     #   @return [String]
     #
     # @!attribute [rw] organization_node
@@ -7595,18 +7603,19 @@ module Aws::ServiceCatalog
     #   `ExecuteProvisionedProductServiceAction`. Only a role ARN is valid.
     #   A user ARN is invalid.
     #
-    #   The `OWNER` key accepts user ARNs and role ARNs. The owner is the
-    #   user that has permission to see, update, terminate, and execute
-    #   service actions in the provisioned product.
+    #   The `OWNER` key accepts IAM user ARNs, IAM role ARNs, and STS
+    #   assumed-role ARNs. The owner is the user that has permission to see,
+    #   update, terminate, and execute service actions in the provisioned
+    #   product.
     #
     #   The administrator can change the owner of a provisioned product to
-    #   another IAM user within the same account. Both end user owners and
-    #   administrators can see ownership history of the provisioned product
-    #   using the `ListRecordHistory` API. The new owner can describe all
-    #   past records for the provisioned product using the `DescribeRecord`
-    #   API. The previous owner can no longer use `DescribeRecord`, but can
-    #   still see the product's history from when he was an owner using
-    #   `ListRecordHistory`.
+    #   another IAM or STS entity within the same account. Both end user
+    #   owners and administrators can see ownership history of the
+    #   provisioned product using the `ListRecordHistory` API. The new owner
+    #   can describe all past records for the provisioned product using the
+    #   `DescribeRecord` API. The previous owner can no longer use
+    #   `DescribeRecord`, but can still see the product's history from when
+    #   he was an owner using `ListRecordHistory`.
     #
     #   If a provisioned product ownership is assigned to an end user, they
     #   can see and perform any action through the API or Service Catalog
@@ -7741,7 +7750,8 @@ module Aws::ServiceCatalog
     #   @return [Types::ProvisioningArtifactDetail]
     #
     # @!attribute [rw] info
-    #   The URL of the CloudFormation template in Amazon S3.
+    #   The URL of the CloudFormation template in Amazon S3, Amazon Web
+    #   Services CodeCommit, or GitHub in JSON format.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status
@@ -7810,39 +7820,39 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] stack_set_accounts
-    #   One or more AWS accounts that will have access to the provisioned
-    #   product.
+    #   One or more Amazon Web Services accounts that will have access to
+    #   the provisioned product.
     #
     #   Applicable only to a `CFN_STACKSET` provisioned product type.
     #
-    #   The AWS accounts specified should be within the list of accounts in
-    #   the `STACKSET` constraint. To get the list of accounts in the
-    #   `STACKSET` constraint, use the `DescribeProvisioningParameters`
-    #   operation.
+    #   The Amazon Web Services accounts specified should be within the list
+    #   of accounts in the `STACKSET` constraint. To get the list of
+    #   accounts in the `STACKSET` constraint, use the
+    #   `DescribeProvisioningParameters` operation.
     #
     #   If no values are specified, the default value is all accounts from
     #   the `STACKSET` constraint.
     #   @return [Array<String>]
     #
     # @!attribute [rw] stack_set_regions
-    #   One or more AWS Regions where the provisioned product will be
-    #   available.
+    #   One or more Amazon Web Services Regions where the provisioned
+    #   product will be available.
     #
     #   Applicable only to a `CFN_STACKSET` provisioned product type.
     #
-    #   The specified regions should be within the list of regions from the
-    #   `STACKSET` constraint. To get the list of regions in the `STACKSET`
+    #   The specified Regions should be within the list of Regions from the
+    #   `STACKSET` constraint. To get the list of Regions in the `STACKSET`
     #   constraint, use the `DescribeProvisioningParameters` operation.
     #
-    #   If no values are specified, the default value is all regions from
+    #   If no values are specified, the default value is all Regions from
     #   the `STACKSET` constraint.
     #   @return [Array<String>]
     #
     # @!attribute [rw] stack_set_failure_tolerance_count
-    #   The number of accounts, per region, for which this operation can
-    #   fail before AWS Service Catalog stops the operation in that region.
-    #   If the operation is stopped in a region, AWS Service Catalog
-    #   doesn't attempt the operation in any subsequent regions.
+    #   The number of accounts, per Region, for which this operation can
+    #   fail before Service Catalog stops the operation in that Region. If
+    #   the operation is stopped in a Region, Service Catalog doesn't
+    #   attempt the operation in any subsequent Regions.
     #
     #   Applicable only to a `CFN_STACKSET` provisioned product type.
     #
@@ -7853,14 +7863,13 @@ module Aws::ServiceCatalog
     #   @return [Integer]
     #
     # @!attribute [rw] stack_set_failure_tolerance_percentage
-    #   The percentage of accounts, per region, for which this stack
-    #   operation can fail before AWS Service Catalog stops the operation in
-    #   that region. If the operation is stopped in a region, AWS Service
-    #   Catalog doesn't attempt the operation in any subsequent regions.
+    #   The percentage of accounts, per Region, for which this stack
+    #   operation can fail before Service Catalog stops the operation in
+    #   that Region. If the operation is stopped in a Region, Service
+    #   Catalog doesn't attempt the operation in any subsequent Regions.
     #
     #   When calculating the number of accounts based on the specified
-    #   percentage, AWS Service Catalog rounds down to the next whole
-    #   number.
+    #   percentage, Service Catalog rounds down to the next whole number.
     #
     #   Applicable only to a `CFN_STACKSET` provisioned product type.
     #
@@ -7890,10 +7899,9 @@ module Aws::ServiceCatalog
     #   operation at one time.
     #
     #   When calculating the number of accounts based on the specified
-    #   percentage, AWS Service Catalog rounds down to the next whole
-    #   number. This is true except in cases where rounding down would
-    #   result is zero. In this case, AWS Service Catalog sets the number as
-    #   `1` instead.
+    #   percentage, Service Catalog rounds down to the next whole number.
+    #   This is true except in cases where rounding down would result is
+    #   zero. In this case, Service Catalog sets the number as `1` instead.
     #
     #   Note that this setting lets you specify the maximum for operations.
     #   For large deployments, under certain circumstances the actual number
@@ -7907,9 +7915,9 @@ module Aws::ServiceCatalog
     #   @return [Integer]
     #
     # @!attribute [rw] stack_set_operation_type
-    #   Determines what action AWS Service Catalog performs to a stack set
-    #   or a stack instance represented by the provisioned product. The
-    #   default value is `UPDATE` if nothing is specified.
+    #   Determines what action Service Catalog performs to a stack set or a
+    #   stack instance represented by the provisioned product. The default
+    #   value is `UPDATE` if nothing is specified.
     #
     #   Applicable only to a `CFN_STACKSET` provisioned product type.
     #
@@ -7917,7 +7925,7 @@ module Aws::ServiceCatalog
     #
     #   : Creates a new stack instance in the stack set represented by the
     #     provisioned product. In this case, only new stack instances are
-    #     created based on accounts and regions; if new ProductId or
+    #     created based on accounts and Regions; if new ProductId or
     #     ProvisioningArtifactID are passed, they will be ignored.
     #
     #   UPDATE
