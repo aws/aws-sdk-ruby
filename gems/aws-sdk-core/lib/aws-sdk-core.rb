@@ -99,6 +99,7 @@ require_relative 'aws-sdk-sts'
 
 # aws-sdk-sso is included to support Aws::SSOCredentials
 require_relative 'aws-sdk-sso'
+require_relative 'aws-sdk-ssooidc'
 
 module Aws
 

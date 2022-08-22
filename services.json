@@ -923,7 +923,8 @@
     "models": "sso-admin/2020-07-20"
   },
   "SSOOIDC": {
-    "models": "sso-oidc/2019-06-10"
+    "models": "sso-oidc/2019-06-10",
+    "gemName": "aws-sdk-core"
   },
   "STS": {
     "models": "sts/2011-06-15",

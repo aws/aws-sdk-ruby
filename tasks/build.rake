@@ -53,3 +53,17 @@ task 'build:aws-sdk-sso' do
   writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/lib")
   writer.write_files(files)
 end
+
+# Aws::SSOOIDC is generated directly into the `aws-sdk-core` gem.
+# Only building source, but not gemspecs, version file, etc.
+task 'build:aws-sdk-ssooidc' do
+  ssooidc = BuildTools::Services.service('ssooidc')
+  generator = AwsSdkCodeGenerator::CodeBuilder.new(
+    aws_sdk_core_lib_path: $CORE_LIB,
+    service: ssooidc,
+    client_examples: BuildTools.load_client_examples('ssooidc'),
+    )
+  files = generator.source_files(prefix: 'aws-sdk-ssooidc')
+  writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/lib")
+  writer.write_files(files)
+end
