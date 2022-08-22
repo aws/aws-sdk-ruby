@@ -24,7 +24,7 @@ module Aws
     # Removing the token from the default inspect string.
     # @api private
     def inspect
-      "#<#{self.class.name} token=[FILTERED]> expiration=#{expiration}"
+      "#<#{self.class.name} token=[FILTERED]> expiration=#{expiration}>"
     end
 
   end
