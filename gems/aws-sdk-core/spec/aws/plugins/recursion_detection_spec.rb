@@ -89,12 +89,14 @@ module Aws
         end
 
         context 'X_AMX_TRACE_ID with invalid characters' do
-          let(:env_trace_id) { "invalid header" + 31.chr }
+          (0..31).each do |char|
+            let(:env_trace_id) { "invalid header" + char.chr }
 
-          it 'validates the trace-id and raises an error' do
-            expect do
-              client.operation_with_trace_id
-            end.to raise_error(ArgumentError)
+            it "validates the trace-id with #{char} and raises an error" do
+              expect do
+                client.operation_with_trace_id
+              end.to raise_error(ArgumentError)
+            end
           end
         end
       end
