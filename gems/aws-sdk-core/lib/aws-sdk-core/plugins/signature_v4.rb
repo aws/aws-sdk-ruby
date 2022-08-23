@@ -7,6 +7,8 @@ module Aws
     # @api private
     class SignatureV4 < Seahorse::Client::Plugin
 
+      V4_AUTH = %w[v4 v4-unsigned-payload v4-unsigned-body]
+
       option(:sigv4_signer) do |cfg|
         SignatureV4.build_signer(cfg)
       end
@@ -32,13 +34,16 @@ module Aws
       end
 
       option(:unsigned_operations) do |cfg|
-        cfg.api.operation_names.inject([]) do |unsigned, operation_name|
-          if cfg.api.operation(operation_name)['authtype'] == 'none' ||
-             cfg.api.operation(operation_name)['authtype'] == 'custom'
-            # Unsign requests that has custom apigateway authorizer as well
-            unsigned << operation_name
-          else
-            unsigned
+        if cfg.api.metadata['signatureVersion'] == 'v4'
+          # select operations where authtype is set and is not v4
+          cfg.api.operation_names.select do |o|
+            cfg.api.operation(o)['authtype'] && !V4_AUTH.include?(cfg.api.operation(o)['authtype'])
+          end
+        else # service is not v4 auth
+          # select all operations where authtype is not v4
+          # (includes operations with no explicit authtype)
+          cfg.api.operation_names.select do |o|
+            !V4_AUTH.include?(cfg.api.operation(o)['authtype'])
           end
         end
       end
