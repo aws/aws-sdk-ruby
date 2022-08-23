@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.154.0 (2022-08-23)
+------------------
+
+* Feature - RDS for Oracle supports Oracle Data Guard switchover and read replica backups.
+
 1.153.0 (2022-08-17)
 ------------------
 

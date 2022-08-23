@@ -9194,6 +9194,20 @@ module Aws::RDS
     #   Universal Time (UTC). Doesn't change when the snapshot is copied.
     #   @return [Time]
     #
+    # @!attribute [rw] snapshot_database_time
+    #   The timestamp of the most recent transaction applied to the database
+    #   that you're backing up. Thus, if you restore a snapshot,
+    #   SnapshotDatabaseTime is the most recent transaction in the restored
+    #   DB instance. In contrast, originalSnapshotCreateTime specifies the
+    #   system time that the snapshot completed.
+    #
+    #   If you back up a read replica, you can determine the replica lag by
+    #   comparing SnapshotDatabaseTime with originalSnapshotCreateTime. For
+    #   example, if originalSnapshotCreateTime is two hours later than
+    #   SnapshotDatabaseTime, then the replica lag is two hours. ***
+    #   REVIEWERS 7/27: Switchover
+    #   @return [Time]
+    #
     # @!attribute [rw] snapshot_target
     #   Specifies where manual snapshots are stored: Amazon Web Services
     #   Outposts or the Amazon Web Services Region.
@@ -9232,6 +9246,7 @@ module Aws::RDS
       :dbi_resource_id,
       :tag_list,
       :original_snapshot_create_time,
+      :snapshot_database_time,
       :snapshot_target)
       SENSITIVE = []
       include Aws::Structure
@@ -23998,6 +24013,53 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SubscriptionNotFoundFault AWS API Documentation
     #
     class SubscriptionNotFoundFault < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass SwitchoverReadReplicaMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_instance_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   The DB instance identifier of the current standby database. This
+    #   value is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identiﬁer of an existing Oracle read replica DB
+    #     instance.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplicaMessage AWS API Documentation
+    #
+    class SwitchoverReadReplicaMessage < Struct.new(
+      :db_instance_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_instance
+    #   Contains the details of an Amazon RDS DB instance.
+    #
+    #   This data type is used as a response element in the operations
+    #   `CreateDBInstance`, `CreateDBInstanceReadReplica`,
+    #   `DeleteDBInstance`, `DescribeDBInstances`, `ModifyDBInstance`,
+    #   `PromoteReadReplica`, `RebootDBInstance`,
+    #   `RestoreDBInstanceFromDBSnapshot`, `RestoreDBInstanceFromS3`,
+    #   `RestoreDBInstanceToPointInTime`, `StartDBInstance`, and
+    #   `StopDBInstance`.
+    #   @return [Types::DBInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplicaResult AWS API Documentation
+    #
+    class SwitchoverReadReplicaResult < Struct.new(
+      :db_instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Metadata assigned to an Amazon RDS resource consisting of a key-value
     # pair.

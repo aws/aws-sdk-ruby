@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.134.0 (2022-08-23)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Feature - Add support for Bearer Token Authentication and TokenProviders.
 * Issue - Validate that `_X_AMZN_TRACE_ID` ENV value contains only valid, non-control characters.
 

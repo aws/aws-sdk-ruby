@@ -460,6 +460,12 @@ module Aws::SSOAdmin
     #
     #  </note>
     #
+    # <note markdown="1"> After a successful response, call
+    # `DescribeAccountAssignmentCreationStatus` to describe the status of an
+    # assignment creation request.
+    #
+    #  </note>
+    #
     # @option params [required, String] :instance_arn
     #   The ARN of the Amazon Web Services SSO instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -531,6 +537,12 @@ module Aws::SSOAdmin
     # process. For more information about ABAC, see [Attribute-Based Access
     # Control](/singlesignon/latest/userguide/abac.html) in the *Amazon Web
     # Services SSO User Guide*.
+    #
+    # <note markdown="1"> After a successful response, call
+    # `DescribeInstanceAccessControlAttributeConfiguration` to validate that
+    # `InstanceAccessControlAttributeConfiguration` was created.
+    #
+    #  </note>
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the Amazon Web Services SSO instance under which the
@@ -645,6 +657,12 @@ module Aws::SSOAdmin
 
     # Deletes a principal's access from a specified Amazon Web Services
     # account using a specified permission set.
+    #
+    # <note markdown="1"> After a successful response, call
+    # `DescribeAccountAssignmentCreationStatus` to describe the status of an
+    # assignment deletion request.
+    #
+    #  </note>
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the Amazon Web Services SSO instance under which the
@@ -2062,7 +2080,7 @@ module Aws::SSOAdmin
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
