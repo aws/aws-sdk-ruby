@@ -54,14 +54,18 @@ module Aws
 
       # aws.partition(value: string) Option<Partition>
       def self.aws_partition(value)
-        partition = Aws::Partitions.find { |p| p.region?(value) }
+        partition =
+          Aws::Partitions.find { |p| p.region?(value) } ||
+          Aws::Partitions.find { |p| value.match(p.region_regex) } ||
+          Aws::Partitions.find { |p| p.name == 'aws' }
+
         return nil unless partition
 
         metadata = partition.metadata
         {
           'name' => metadata.name,
           'dnsSuffix' => metadata.dns_suffix,
-          'dnsDualStackSuffix' => metadata.dns_dualstack_suffix,
+          'dualStackDnsSuffix' => metadata.dualstack_dns_suffix,
           'supportsFIPS' => metadata.supports_fips,
           'supportsDualStack' => metadata.supports_dualstack
         }

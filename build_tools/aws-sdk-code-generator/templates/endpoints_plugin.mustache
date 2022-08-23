@@ -33,9 +33,11 @@ module {{module_name}}
 
           context.http_request.endpoint = endpoint.url
           endpoint.headers.each do |key, val|
-            context.http_request.headers[key] = val.join(',')
+            context.http_request.headers[key] = val.first # TODO: multi-value
           end
-          context[:auth_schemes] = endpoint.properties['authSchemes']
+          context[:auth_scheme] = Aws::Endpoints.resolve_auth_scheme(
+            endpoint, context
+          )
 
           @handler.call(context)
         end

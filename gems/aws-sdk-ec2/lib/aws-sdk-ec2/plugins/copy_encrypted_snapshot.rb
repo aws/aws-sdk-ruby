@@ -33,25 +33,27 @@ module Aws
             param_list.set('Action', 'CopySnapshot')
             param_list.set('DestinationRegion', context.config.region)
             param_list.set('Version', context.config.api.version)
-            Aws::Query::EC2ParamBuilder.new(param_list).apply(context.operation.input, params)
+            Aws::Query::EC2ParamBuilder.new(param_list).apply(
+              context.operation.input, params
+            )
+
+            endpoint_params = Aws::EC2::EndpointParameters.new(
+              region: params[:source_region],
+              use_dual_stack: context.config.use_dualstack_endpoint,
+              use_fips: context.config.use_fips_endpoint,
+            )
+            endpoint = EndpointProvider.new.resolve_endpoint(endpoint_params)
+            auth_scheme = Aws::Endpoints.resolve_auth_scheme(endpoint, context)
 
             signer = Aws::Sigv4::Signer.new(
-              service: 'ec2',
-              region: params[:source_region],
+              service: auth_scheme['signingName'] || 'ec2',
+              region: auth_scheme['signingRegion'] || params[:source_region],
               credentials_provider: context.config.credentials
             )
-            url = Aws::Partitions::EndpointProvider.resolve(
-              signer.region, 'ec2', 'regional',
-              {
-                dualstack: context.config.use_dualstack_endpoint,
-                fips: context.config.use_fips_endpoint
-              }
-            )
-            url += "?#{param_list.to_s}"
 
             signer.presign_url(
               http_method: 'GET',
-              url: url,
+              url: "#{endpoint.url}?#{param_list}",
               body: '',
               expires_in: 3600
             ).to_s

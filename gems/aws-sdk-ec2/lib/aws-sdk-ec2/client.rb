@@ -85,6 +85,7 @@ module Aws::EC2
     add_plugin(Aws::Plugins::Protocols::EC2)
     add_plugin(Aws::EC2::Plugins::CopyEncryptedSnapshot)
     add_plugin(Aws::EC2::Plugins::RegionValidation)
+    add_plugin(Aws::EC2::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -303,6 +304,9 @@ module Aws::EC2
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::EC2::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::EC2::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.

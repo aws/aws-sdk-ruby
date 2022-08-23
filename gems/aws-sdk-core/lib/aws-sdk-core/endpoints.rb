@@ -12,3 +12,40 @@ require_relative 'endpoints/rule_set'
 require_relative 'endpoints/templater'
 require_relative 'endpoints/tree_rule'
 require_relative 'endpoints/url'
+
+module Aws
+  module Endpoints
+    SUPPORTED_AUTH_TYPES = %w[sigv4 sigv4a none].freeze
+
+    class << self
+      def resolve_auth_scheme(endpoint, context)
+        if (auth_schemes = endpoint.properties['authSchemes'])
+          auth_scheme = auth_schemes.find do |scheme|
+            SUPPORTED_AUTH_TYPES.include?(scheme['name'])
+          end
+          raise 'No supported auth scheme for this endpoint.' unless auth_scheme
+
+          auth_scheme
+        else
+          case resolve_api_authtype(context)
+          when 'v4'
+            { 'name' => 'sigv4' }
+          when 's3v4'
+            { 'name' => 'sigv4', 'disableDoubleEncoding' => true }
+          when 'bearer'
+            { 'name' => 'bearer' }
+          when 'none'
+            { 'name' => 'none' }
+          end
+        end
+      end
+
+      private
+
+      def resolve_api_authtype(context)
+        cfg.api.operation(context.operation_name)['authtype'] ||
+          cfg.api.metadata['signatureVersion']
+      end
+    end
+  end
+end

@@ -7,14 +7,14 @@ module Aws
     class Metadata
       # @option options [required, String] :name
       # @option options [required, String] :dns_suffix
-      # @option options [required, String] :dns_dualstack_suffix
+      # @option options [required, String] :dualstack_dns_suffix
       # @option options [required, Boolean] :supports_fips
       # @option options [required, Boolean] :supports_dualstack
       # @api private
       def initialize(options = {})
         @name = options[:name]
         @dns_suffix = options[:dns_suffix]
-        @dns_dualstack_suffix = options[:dns_dualstack_suffix]
+        @dualstack_dns_suffix = options[:dualstack_dns_suffix]
         @supports_fips = options[:supports_fips]
         @supports_dualstack = options[:supports_dualstack]
       end
@@ -27,7 +27,7 @@ module Aws
 
       # @return [String] The Dual-Stack DNS suffix for endpoints
       #   in this partition.
-      attr_reader :dns_dualstack_suffix
+      attr_reader :dualstack_dns_suffix
 
       # @return [Boolean] Whether this partition supports FIPS endpoints.
       attr_reader :supports_fips
