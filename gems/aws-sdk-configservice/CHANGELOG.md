@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2022-08-24)
+------------------
+
+* Feature - AWS Config now supports ConformancePackTemplate documents in SSM Docs for the deployment and update of conformance packs.
+
 1.82.0 (2022-08-04)
 ------------------
 

@@ -547,9 +547,18 @@ module Aws::Transfer
     #   A `BaseDirectory` example is `/DOC-EXAMPLE-BUCKET/home/mydirectory `.
     #
     # @option params [required, String] :access_role
-    #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) role that grants access to at least the `HomeDirectory` of your
-    #   users' Amazon S3 buckets.
+    #   With AS2, you can send files by calling `StartFileTransfer` and
+    #   specifying the file paths in the request parameter, `SendFilePaths`.
+    #   We use the file’s parent directory (for example, for
+    #   `--send-file-paths /bucket/dir/file.txt`, parent directory is
+    #   `/bucket/dir/`) to temporarily store a processed AS2 message file,
+    #   store the MDN when we receive them from the partner, and write a final
+    #   JSON file containing relevant metadata of the transmission. So, the
+    #   `AccessRole` needs to provide read and write access to the parent
+    #   directory of the file location used in the `StartFileTransfer`
+    #   request. Additionally, you need to provide read and write access to
+    #   the parent directory of the files that you intend to send with
+    #   `StartFileTransfer`.
     #
     # @option params [String] :status
     #   The status of the agreement. The agreement can be either `ACTIVE` or
@@ -672,10 +681,10 @@ module Aws::Transfer
     # partner and the AS2 process.
     #
     # @option params [required, String] :as_2_id
-    #   The `As2Id` is the *AS2-name*, as defined in the defined in the [RFC
-    #   4130][1]. For inbound transfers, this is the `AS2-From` header for the
-    #   AS2 messages sent from the partner. For outbound connectors, this is
-    #   the `AS2-To` header for the AS2 messages sent to the partner using the
+    #   The `As2Id` is the *AS2-name*, as defined in the [RFC 4130][1]. For
+    #   inbound transfers, this is the `AS2-From` header for the AS2 messages
+    #   sent from the partner. For outbound connectors, this is the `AS2-To`
+    #   header for the AS2 messages sent to the partner using the
     #   `StartFileTransfer` API operation. This ID cannot include spaces.
     #
     #
@@ -3307,10 +3316,13 @@ module Aws::Transfer
     #   inactive agreement or the reverse.
     #
     # @option params [String] :local_profile_id
+    #   A unique identifier for the AS2 local profile.
+    #
     #   To change the local profile identifier, provide a new value here.
     #
     # @option params [String] :partner_profile_id
-    #   To change the partner profile identifier, provide a new value here.
+    #   A unique identifier for the partner profile. To change the partner
+    #   profile identifier, provide a new value here.
     #
     # @option params [String] :base_directory
     #   To change the landing directory (folder) for files that are
@@ -3318,9 +3330,18 @@ module Aws::Transfer
     #   example, `/DOC-EXAMPLE-BUCKET/home/mydirectory `.
     #
     # @option params [String] :access_role
-    #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) role that grants access to at least the `HomeDirectory` of your
-    #   users' Amazon S3 buckets.
+    #   With AS2, you can send files by calling `StartFileTransfer` and
+    #   specifying the file paths in the request parameter, `SendFilePaths`.
+    #   We use the file’s parent directory (for example, for
+    #   `--send-file-paths /bucket/dir/file.txt`, parent directory is
+    #   `/bucket/dir/`) to temporarily store a processed AS2 message file,
+    #   store the MDN when we receive them from the partner, and write a final
+    #   JSON file containing relevant metadata of the transmission. So, the
+    #   `AccessRole` needs to provide read and write access to the parent
+    #   directory of the file location used in the `StartFileTransfer`
+    #   request. Additionally, you need to provide read and write access to
+    #   the parent directory of the files that you intend to send with
+    #   `StartFileTransfer`.
     #
     # @return [Types::UpdateAgreementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3672,28 +3693,34 @@ module Aws::Transfer
     #   transfer protocol client can connect to your server's endpoint. The
     #   available protocols are:
     #
-    #   * Secure Shell (SSH) File Transfer Protocol (SFTP): File transfer over
-    #     SSH
+    #   * `SFTP` (Secure Shell (SSH) File Transfer Protocol): File transfer
+    #     over SSH
     #
-    #   * File Transfer Protocol Secure (FTPS): File transfer with TLS
+    #   * `FTPS` (File Transfer Protocol Secure): File transfer with TLS
     #     encryption
     #
-    #   * File Transfer Protocol (FTP): Unencrypted file transfer
+    #   * `FTP` (File Transfer Protocol): Unencrypted file transfer
     #
-    #   <note markdown="1"> If you select `FTPS`, you must choose a certificate stored in Amazon
-    #   Web ServicesCertificate Manager (ACM) which will be used to identify
-    #   your server when clients connect to it over FTPS.
+    #   * `AS2` (Applicability Statement 2): used for transporting structured
+    #     business-to-business data
     #
-    #    If `Protocol` includes either `FTP` or `FTPS`, then the `EndpointType`
-    #   must be `VPC` and the `IdentityProviderType` must be
-    #   `AWS_DIRECTORY_SERVICE` or `API_GATEWAY`.
+    #   <note markdown="1"> * If you select `FTPS`, you must choose a certificate stored in
+    #     Certificate Manager (ACM) which is used to identify your server when
+    #     clients connect to it over FTPS.
     #
-    #    If `Protocol` includes `FTP`, then `AddressAllocationIds` cannot be
-    #   associated.
+    #   * If `Protocol` includes either `FTP` or `FTPS`, then the
+    #     `EndpointType` must be `VPC` and the `IdentityProviderType` must be
+    #     `AWS_DIRECTORY_SERVICE` or `API_GATEWAY`.
     #
-    #    If `Protocol` is set only to `SFTP`, the `EndpointType` can be set to
-    #   `PUBLIC` and the `IdentityProviderType` can be set to
-    #   `SERVICE_MANAGED`.
+    #   * If `Protocol` includes `FTP`, then `AddressAllocationIds` cannot be
+    #     associated.
+    #
+    #   * If `Protocol` is set only to `SFTP`, the `EndpointType` can be set
+    #     to `PUBLIC` and the `IdentityProviderType` can be set to
+    #     `SERVICE_MANAGED`.
+    #
+    #   * If `Protocol` includes `AS2`, then the `EndpointType` must be `VPC`,
+    #     and domain must be Amazon S3.
     #
     #    </note>
     #
@@ -3931,7 +3958,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

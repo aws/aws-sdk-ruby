@@ -47,10 +47,12 @@ module Aws::CloudFront
   # * {FunctionSizeLimitExceeded}
   # * {IllegalDelete}
   # * {IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior}
+  # * {IllegalOriginAccessConfiguration}
   # * {IllegalUpdate}
   # * {InconsistentQuantities}
   # * {InvalidArgument}
   # * {InvalidDefaultRootObject}
+  # * {InvalidDomainNameForOriginAccessControl}
   # * {InvalidErrorCode}
   # * {InvalidForwardCookies}
   # * {InvalidFunctionAssociation}
@@ -61,6 +63,7 @@ module Aws::CloudFront
   # * {InvalidLocationCode}
   # * {InvalidMinimumProtocolVersion}
   # * {InvalidOrigin}
+  # * {InvalidOriginAccessControl}
   # * {InvalidOriginAccessIdentity}
   # * {InvalidOriginKeepaliveTimeout}
   # * {InvalidOriginReadTimeout}
@@ -75,6 +78,7 @@ module Aws::CloudFront
   # * {InvalidWebACLId}
   # * {KeyGroupAlreadyExists}
   # * {MissingBody}
+  # * {MonitoringSubscriptionAlreadyExists}
   # * {NoSuchCachePolicy}
   # * {NoSuchCloudFrontOriginAccessIdentity}
   # * {NoSuchDistribution}
@@ -82,13 +86,17 @@ module Aws::CloudFront
   # * {NoSuchFieldLevelEncryptionProfile}
   # * {NoSuchFunctionExists}
   # * {NoSuchInvalidation}
+  # * {NoSuchMonitoringSubscription}
   # * {NoSuchOrigin}
+  # * {NoSuchOriginAccessControl}
   # * {NoSuchOriginRequestPolicy}
   # * {NoSuchPublicKey}
   # * {NoSuchRealtimeLogConfig}
   # * {NoSuchResource}
   # * {NoSuchResponseHeadersPolicy}
   # * {NoSuchStreamingDistribution}
+  # * {OriginAccessControlAlreadyExists}
+  # * {OriginAccessControlInUse}
   # * {OriginRequestPolicyAlreadyExists}
   # * {OriginRequestPolicyInUse}
   # * {PreconditionFailed}
@@ -118,6 +126,7 @@ module Aws::CloudFront
   # * {TooManyDistributionsAssociatedToCachePolicy}
   # * {TooManyDistributionsAssociatedToFieldLevelEncryptionConfig}
   # * {TooManyDistributionsAssociatedToKeyGroup}
+  # * {TooManyDistributionsAssociatedToOriginAccessControl}
   # * {TooManyDistributionsAssociatedToOriginRequestPolicy}
   # * {TooManyDistributionsAssociatedToResponseHeadersPolicy}
   # * {TooManyDistributionsWithFunctionAssociations}
@@ -138,6 +147,7 @@ module Aws::CloudFront
   # * {TooManyKeyGroups}
   # * {TooManyKeyGroupsAssociatedToDistribution}
   # * {TooManyLambdaFunctionAssociations}
+  # * {TooManyOriginAccessControls}
   # * {TooManyOriginCustomHeaders}
   # * {TooManyOriginGroupsPerDistribution}
   # * {TooManyOriginRequestPolicies}
@@ -462,6 +472,21 @@ module Aws::CloudFront
       end
     end
 
+    class IllegalOriginAccessConfiguration < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::IllegalOriginAccessConfiguration] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class IllegalUpdate < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -512,6 +537,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::InvalidDefaultRootObject] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidDomainNameForOriginAccessControl < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::InvalidDomainNameForOriginAccessControl] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -662,6 +702,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::InvalidOrigin] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidOriginAccessControl < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::InvalidOriginAccessControl] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -882,6 +937,21 @@ module Aws::CloudFront
       end
     end
 
+    class MonitoringSubscriptionAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::MonitoringSubscriptionAlreadyExists] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class NoSuchCachePolicy < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -987,11 +1057,41 @@ module Aws::CloudFront
       end
     end
 
+    class NoSuchMonitoringSubscription < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::NoSuchMonitoringSubscription] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class NoSuchOrigin < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::NoSuchOrigin] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class NoSuchOriginAccessControl < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::NoSuchOriginAccessControl] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -1082,6 +1182,36 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::NoSuchStreamingDistribution] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class OriginAccessControlAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::OriginAccessControlAlreadyExists] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class OriginAccessControlInUse < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::OriginAccessControlInUse] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -1527,6 +1657,21 @@ module Aws::CloudFront
       end
     end
 
+    class TooManyDistributionsAssociatedToOriginAccessControl < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooManyDistributionsAssociatedToOriginAccessControl] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class TooManyDistributionsAssociatedToOriginRequestPolicy < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1817,6 +1962,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::TooManyLambdaFunctionAssociations] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyOriginAccessControls < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooManyOriginAccessControls] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

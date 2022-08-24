@@ -1755,12 +1755,19 @@ module Aws::ConfigService
     #   @return [Array<Types::ConformancePackInputParameter>]
     #
     # @!attribute [rw] last_update_requested_time
-    #   Last time when conformation pack update was requested.
+    #   The last time a conformation pack update was requested.
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Amazon Web Services service that created the conformance pack.
+    #   The Amazon Web Services service that created the conformance pack.
     #   @return [String]
+    #
+    # @!attribute [rw] template_ssm_document_details
+    #   An object that contains the name or Amazon Resource Name (ARN) of
+    #   the Amazon Web Services Systems Manager document (SSM document) and
+    #   the version of the SSM document that is used to create a conformance
+    #   pack.
+    #   @return [Types::TemplateSSMDocumentDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackDetail AWS API Documentation
     #
@@ -1772,7 +1779,8 @@ module Aws::ConfigService
       :delivery_s3_key_prefix,
       :conformance_pack_input_parameters,
       :last_update_requested_time,
-      :created_by)
+      :created_by,
+      :template_ssm_document_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5265,7 +5273,7 @@ module Aws::ConfigService
     #
     #   * To call IAM `GetRole` action or create a service-linked role.
     #
-    #   * To read Amazon S3 bucket.
+    #   * To read Amazon S3 bucket or call SSM:GetDocument.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/InsufficientPermissionsException AWS API Documentation
     #
@@ -7056,17 +7064,21 @@ module Aws::ConfigService
     #             parameter_value: "ParameterValue", # required
     #           },
     #         ],
+    #         template_ssm_document_details: {
+    #           document_name: "SSMDocumentName", # required
+    #           document_version: "SSMDocumentVersion",
+    #         },
     #       }
     #
     # @!attribute [rw] conformance_pack_name
-    #   Name of the conformance pack you want to create.
+    #   The unique name of the conformance pack you want to deploy.
     #   @return [String]
     #
     # @!attribute [rw] template_s3_uri
-    #   Location of file containing the template body
-    #   (`s3://bucketname/prefix`). The uri must point to the conformance
-    #   pack template (max size: 300 KB) that is located in an Amazon S3
-    #   bucket in the same region as the conformance pack.
+    #   The location of the file containing the template body
+    #   (`s3://bucketname/prefix`). The uri must point to a conformance pack
+    #   template (max size: 300 KB) that is located in an Amazon S3 bucket
+    #   in the same region as the conformance pack.
     #
     #   <note markdown="1"> You must have access to read Amazon S3 bucket.
     #
@@ -7074,12 +7086,12 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] template_body
-    #   A string containing full conformance pack template body. Structure
-    #   containing the template body with a minimum length of 1 byte and a
-    #   maximum length of 51,200 bytes.
+    #   A string containing the full conformance pack template body. The
+    #   structure containing the template body has a minimum length of 1
+    #   byte and a maximum length of 51,200 bytes.
     #
     #   <note markdown="1"> You can only use a YAML template with two resource types: Config
-    #   rule (`AWS::Config::ConfigRule`) and a remediation action
+    #   rule (`AWS::Config::ConfigRule`) and remediation action
     #   (`AWS::Config::RemediationConfiguration`).
     #
     #    </note>
@@ -7106,6 +7118,13 @@ module Aws::ConfigService
     #   A list of `ConformancePackInputParameter` objects.
     #   @return [Array<Types::ConformancePackInputParameter>]
     #
+    # @!attribute [rw] template_ssm_document_details
+    #   An object of type `TemplateSSMDocumentDetails`, which contains the
+    #   name or the Amazon Resource Name (ARN) of the Amazon Web Services
+    #   Systems Manager document (SSM document) and the version of the SSM
+    #   document that is used to create a conformance pack.
+    #   @return [Types::TemplateSSMDocumentDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConformancePackRequest AWS API Documentation
     #
     class PutConformancePackRequest < Struct.new(
@@ -7114,7 +7133,8 @@ module Aws::ConfigService
       :template_body,
       :delivery_s3_bucket,
       :delivery_s3_key_prefix,
-      :conformance_pack_input_parameters)
+      :conformance_pack_input_parameters,
+      :template_ssm_document_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9164,6 +9184,54 @@ module Aws::ConfigService
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This API allows you to create a conformance pack template with an
+    # Amazon Web Services Systems Manager document (SSM document). To deploy
+    # a conformance pack using an SSM document, you first create an SSM
+    # document with conformance pack content, and then provide the
+    # `DocumentName` (and optionally `DocumentVersion`) in the
+    # [PutConformancePack API][1].
+    #
+    # The `TemplateSSMDocumentDetails` object contains the name of the SSM
+    # document and the version of the SSM document.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutConformancePack.html
+    #
+    # @note When making an API call, you may pass TemplateSSMDocumentDetails
+    #   data as a hash:
+    #
+    #       {
+    #         document_name: "SSMDocumentName", # required
+    #         document_version: "SSMDocumentVersion",
+    #       }
+    #
+    # @!attribute [rw] document_name
+    #   The name or Amazon Resource Name (ARN) of the SSM document to use to
+    #   create a conformance pack. If you use the Document Name, Config
+    #   checks only your account and region for the SSM document. If you
+    #   want to use an SSM document from another region or account, you must
+    #   provide the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_version
+    #   The version of the SSM document to use to create a conformance pack.
+    #   By default, Config uses the latest version.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/TemplateSSMDocumentDetails AWS API Documentation
+    #
+    class TemplateSSMDocumentDetails < Struct.new(
+      :document_name,
+      :document_version)
       SENSITIVE = []
       include Aws::Structure
     end

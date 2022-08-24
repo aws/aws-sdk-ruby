@@ -4652,9 +4652,9 @@ module Aws::QuickSight
     end
 
     # Generates an embed URL that you can use to embed an Amazon QuickSight
-    # dashboard in your website, without having to register any reader
-    # users. Before you use this action, make sure that you have configured
-    # the dashboards and permissions.
+    # dashboard or visual in your website, without having to register any
+    # reader users. Before you use this action, make sure that you have
+    # configured the dashboards and permissions.
     #
     # The following rules apply to the generated URL:
     #
@@ -4756,6 +4756,13 @@ module Aws::QuickSight
     #       dashboard: {
     #         initial_dashboard_id: "RestrictiveResourceId", # required
     #       },
+    #       dashboard_visual: {
+    #         initial_dashboard_visual_id: { # required
+    #           dashboard_id: "RestrictiveResourceId", # required
+    #           sheet_id: "RestrictiveResourceId", # required
+    #           visual_id: "RestrictiveResourceId", # required
+    #         },
+    #       },
     #     },
     #     allowed_domains: ["String"],
     #   })
@@ -4822,7 +4829,8 @@ module Aws::QuickSight
     #
     # @option params [required, Types::RegisteredUserEmbeddingExperienceConfiguration] :experience_configuration
     #   The experience you are embedding. For registered users, you can embed
-    #   Amazon QuickSight dashboards or the entire Amazon QuickSight console.
+    #   Amazon QuickSight dashboards, Amazon QuickSight visuals, the Amazon
+    #   QuickSight Q search bar, or the entire Amazon QuickSight console.
     #
     # @option params [Array<String>] :allowed_domains
     #   The domains that you want to add to the allow list for access to the
@@ -4857,6 +4865,13 @@ module Aws::QuickSight
     #       },
     #       q_search_bar: {
     #         initial_topic_id: "RestrictiveResourceId",
+    #       },
+    #       dashboard_visual: {
+    #         initial_dashboard_visual_id: { # required
+    #           dashboard_id: "RestrictiveResourceId", # required
+    #           sheet_id: "RestrictiveResourceId", # required
+    #           visual_id: "RestrictiveResourceId", # required
+    #         },
     #       },
     #     },
     #     allowed_domains: ["String"],
@@ -9089,7 +9104,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

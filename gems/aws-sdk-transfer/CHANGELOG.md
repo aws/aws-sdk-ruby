@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2022-08-24)
+------------------
+
+* Feature - Documentation updates for AWS Transfer Family
+
 1.57.0 (2022-07-26)
 ------------------
 

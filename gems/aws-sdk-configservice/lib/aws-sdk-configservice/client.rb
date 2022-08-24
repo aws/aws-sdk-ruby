@@ -1805,6 +1805,8 @@ module Aws::ConfigService
     #   resp.conformance_pack_details[0].conformance_pack_input_parameters[0].parameter_value #=> String
     #   resp.conformance_pack_details[0].last_update_requested_time #=> Time
     #   resp.conformance_pack_details[0].created_by #=> String
+    #   resp.conformance_pack_details[0].template_ssm_document_details.document_name #=> String
+    #   resp.conformance_pack_details[0].template_ssm_document_details.document_version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePacks AWS API Documentation
@@ -4180,9 +4182,8 @@ module Aws::ConfigService
     # `AWSServiceRoleForConfigConforms` in your account. The service-linked
     # role is created only when the role does not exist in your account.
     #
-    # <note markdown="1"> You must specify either the `TemplateS3Uri` or the `TemplateBody`
-    # parameter, but not both. If you provide both Config uses the
-    # `TemplateS3Uri` parameter and ignores the `TemplateBody` parameter.
+    # <note markdown="1"> You must specify one and only one of the`TemplateS3Uri`,
+    # `TemplateBody` or `TemplateSSMDocumentDetails` parameters.
     #
     #  </note>
     #
@@ -4191,11 +4192,11 @@ module Aws::ConfigService
     # [1]: https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html
     #
     # @option params [required, String] :conformance_pack_name
-    #   Name of the conformance pack you want to create.
+    #   The unique name of the conformance pack you want to deploy.
     #
     # @option params [String] :template_s3_uri
-    #   Location of file containing the template body
-    #   (`s3://bucketname/prefix`). The uri must point to the conformance pack
+    #   The location of the file containing the template body
+    #   (`s3://bucketname/prefix`). The uri must point to a conformance pack
     #   template (max size: 300 KB) that is located in an Amazon S3 bucket in
     #   the same region as the conformance pack.
     #
@@ -4204,12 +4205,12 @@ module Aws::ConfigService
     #    </note>
     #
     # @option params [String] :template_body
-    #   A string containing full conformance pack template body. Structure
-    #   containing the template body with a minimum length of 1 byte and a
-    #   maximum length of 51,200 bytes.
+    #   A string containing the full conformance pack template body. The
+    #   structure containing the template body has a minimum length of 1 byte
+    #   and a maximum length of 51,200 bytes.
     #
     #   <note markdown="1"> You can only use a YAML template with two resource types: Config rule
-    #   (`AWS::Config::ConfigRule`) and a remediation action
+    #   (`AWS::Config::ConfigRule`) and remediation action
     #   (`AWS::Config::RemediationConfiguration`).
     #
     #    </note>
@@ -4232,6 +4233,12 @@ module Aws::ConfigService
     # @option params [Array<Types::ConformancePackInputParameter>] :conformance_pack_input_parameters
     #   A list of `ConformancePackInputParameter` objects.
     #
+    # @option params [Types::TemplateSSMDocumentDetails] :template_ssm_document_details
+    #   An object of type `TemplateSSMDocumentDetails`, which contains the
+    #   name or the Amazon Resource Name (ARN) of the Amazon Web Services
+    #   Systems Manager document (SSM document) and the version of the SSM
+    #   document that is used to create a conformance pack.
+    #
     # @return [Types::PutConformancePackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutConformancePackResponse#conformance_pack_arn #conformance_pack_arn} => String
@@ -4250,6 +4257,10 @@ module Aws::ConfigService
     #         parameter_value: "ParameterValue", # required
     #       },
     #     ],
+    #     template_ssm_document_details: {
+    #       document_name: "SSMDocumentName", # required
+    #       document_version: "SSMDocumentVersion",
+    #     },
     #   })
     #
     # @example Response structure
@@ -5385,7 +5396,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

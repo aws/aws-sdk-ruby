@@ -484,6 +484,39 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The experience that you are embedding. You can use this object to
+    # generate a url that embeds a visual into your application.
+    #
+    # @note When making an API call, you may pass AnonymousUserDashboardVisualEmbeddingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         initial_dashboard_visual_id: { # required
+    #           dashboard_id: "RestrictiveResourceId", # required
+    #           sheet_id: "RestrictiveResourceId", # required
+    #           visual_id: "RestrictiveResourceId", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] initial_dashboard_visual_id
+    #   The visual ID for the visual that you want the user to see. This ID
+    #   is included in the output URL. When the URL in response is accessed,
+    #   Amazon QuickSight renders this visual.
+    #
+    #   The Amazon Resource Name (ARN) of the dashboard that the visual
+    #   belongs to must be included in the `AuthorizedResourceArns`
+    #   parameter. Otherwise, the request will fail with
+    #   `InvalidParameterValueException`.
+    #   @return [Types::DashboardVisualId]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnonymousUserDashboardVisualEmbeddingConfiguration AWS API Documentation
+    #
+    class AnonymousUserDashboardVisualEmbeddingConfiguration < Struct.new(
+      :initial_dashboard_visual_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The type of experience you want to embed. For anonymous users, you can
     # embed Amazon QuickSight dashboards.
     #
@@ -494,6 +527,13 @@ module Aws::QuickSight
     #         dashboard: {
     #           initial_dashboard_id: "RestrictiveResourceId", # required
     #         },
+    #         dashboard_visual: {
+    #           initial_dashboard_visual_id: { # required
+    #             dashboard_id: "RestrictiveResourceId", # required
+    #             sheet_id: "RestrictiveResourceId", # required
+    #             visual_id: "RestrictiveResourceId", # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] dashboard
@@ -501,10 +541,16 @@ module Aws::QuickSight
     #   dashboards.
     #   @return [Types::AnonymousUserDashboardEmbeddingConfiguration]
     #
+    # @!attribute [rw] dashboard_visual
+    #   The type of embedding experience. In this case, Amazon QuickSight
+    #   visuals.
+    #   @return [Types::AnonymousUserDashboardVisualEmbeddingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnonymousUserEmbeddingExperienceConfiguration AWS API Documentation
     #
     class AnonymousUserEmbeddingExperienceConfiguration < Struct.new(
-      :dashboard)
+      :dashboard,
+      :dashboard_visual)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3789,6 +3835,61 @@ module Aws::QuickSight
       :status,
       :source_entity_arn,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the following elements:
+    #
+    # * The `DashboardId` of the dashboard that has the visual that you want
+    #   to embed.
+    #
+    # * The `SheetId` of the sheet that has the visual that you want to
+    #   embed.
+    #
+    # * The `VisualId` of the visual that you want to embed.
+    #
+    # The `DashboardId`, `SheetId`, and `VisualId` can be found in the `IDs
+    # for developers` section of the `Embed visual` pane of the visual's
+    # on-visual menu of the Amazon QuickSight console. You can also get the
+    # `DashboardId` with a `ListDashboards` API operation.
+    #
+    # @note When making an API call, you may pass DashboardVisualId
+    #   data as a hash:
+    #
+    #       {
+    #         dashboard_id: "RestrictiveResourceId", # required
+    #         sheet_id: "RestrictiveResourceId", # required
+    #         visual_id: "RestrictiveResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] dashboard_id
+    #   The ID of the dashboard that has the visual that you want to embed.
+    #   The `DashboardId` can be found in the `IDs for developers` section
+    #   of the `Embed visual` pane of the visual's on-visual menu of the
+    #   Amazon QuickSight console. You can also get the `DashboardId` with a
+    #   `ListDashboards` API operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] sheet_id
+    #   The ID of the sheet that the has visual that you want to embed. The
+    #   `SheetId` can be found in the `IDs for developers` section of the
+    #   `Embed visual` pane of the visual's on-visual menu of the Amazon
+    #   QuickSight console.
+    #   @return [String]
+    #
+    # @!attribute [rw] visual_id
+    #   The ID of the visual that you want to embed. The `VisualID` can be
+    #   found in the `IDs for developers` section of the `Embed visual` pane
+    #   of the visual's on-visual menu of the Amazon QuickSight console.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardVisualId AWS API Documentation
+    #
+    class DashboardVisualId < Struct.new(
+      :dashboard_id,
+      :sheet_id,
+      :visual_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7394,6 +7495,13 @@ module Aws::QuickSight
     #           dashboard: {
     #             initial_dashboard_id: "RestrictiveResourceId", # required
     #           },
+    #           dashboard_visual: {
+    #             initial_dashboard_visual_id: { # required
+    #               dashboard_id: "RestrictiveResourceId", # required
+    #               sheet_id: "RestrictiveResourceId", # required
+    #               visual_id: "RestrictiveResourceId", # required
+    #             },
+    #           },
     #         },
     #         allowed_domains: ["String"],
     #       }
@@ -7508,6 +7616,13 @@ module Aws::QuickSight
     #           q_search_bar: {
     #             initial_topic_id: "RestrictiveResourceId",
     #           },
+    #           dashboard_visual: {
+    #             initial_dashboard_visual_id: { # required
+    #               dashboard_id: "RestrictiveResourceId", # required
+    #               sheet_id: "RestrictiveResourceId", # required
+    #               visual_id: "RestrictiveResourceId", # required
+    #             },
+    #           },
     #         },
     #         allowed_domains: ["String"],
     #       }
@@ -7528,7 +7643,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] experience_configuration
     #   The experience you are embedding. For registered users, you can
-    #   embed Amazon QuickSight dashboards or the entire Amazon QuickSight
+    #   embed Amazon QuickSight dashboards, Amazon QuickSight visuals, the
+    #   Amazon QuickSight Q search bar, or the entire Amazon QuickSight
     #   console.
     #   @return [Types::RegisteredUserEmbeddingExperienceConfiguration]
     #
@@ -7558,7 +7674,8 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] embed_url
-    #   The embed URL for the Amazon QuickSight dashboard or console.
+    #   The embed URL for the Amazon QuickSight dashboard, visual, Q search
+    #   bar, or console.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -10751,6 +10868,39 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The experience that you are embedding. You can use this object to
+    # generate a url that embeds a visual into your application.
+    #
+    # @note When making an API call, you may pass RegisteredUserDashboardVisualEmbeddingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         initial_dashboard_visual_id: { # required
+    #           dashboard_id: "RestrictiveResourceId", # required
+    #           sheet_id: "RestrictiveResourceId", # required
+    #           visual_id: "RestrictiveResourceId", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] initial_dashboard_visual_id
+    #   The visual ID for the visual that you want the user to embed. This
+    #   ID is included in the output URL. When the URL in response is
+    #   accessed, Amazon QuickSight renders this visual.
+    #
+    #   The Amazon Resource Name (ARN) of the dashboard that the visual
+    #   belongs to must be included in the `AuthorizedResourceArns`
+    #   parameter. Otherwise, the request will fail with
+    #   `InvalidParameterValueException`.
+    #   @return [Types::DashboardVisualId]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserDashboardVisualEmbeddingConfiguration AWS API Documentation
+    #
+    class RegisteredUserDashboardVisualEmbeddingConfiguration < Struct.new(
+      :initial_dashboard_visual_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The type of experience you want to embed. For registered users, you
     # can embed Amazon QuickSight dashboards or the Amazon QuickSight
     # console.
@@ -10773,6 +10923,13 @@ module Aws::QuickSight
     #         },
     #         q_search_bar: {
     #           initial_topic_id: "RestrictiveResourceId",
+    #         },
+    #         dashboard_visual: {
+    #           initial_dashboard_visual_id: { # required
+    #             dashboard_id: "RestrictiveResourceId", # required
+    #             sheet_id: "RestrictiveResourceId", # required
+    #             visual_id: "RestrictiveResourceId", # required
+    #           },
     #         },
     #       }
     #
@@ -10826,12 +10983,18 @@ module Aws::QuickSight
     #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html
     #   @return [Types::RegisteredUserQSearchBarEmbeddingConfiguration]
     #
+    # @!attribute [rw] dashboard_visual
+    #   The type of embedding experience. In this case, Amazon QuickSight
+    #   visuals.
+    #   @return [Types::RegisteredUserDashboardVisualEmbeddingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserEmbeddingExperienceConfiguration AWS API Documentation
     #
     class RegisteredUserEmbeddingExperienceConfiguration < Struct.new(
       :dashboard,
       :quick_sight_console,
-      :q_search_bar)
+      :q_search_bar,
+      :dashboard_visual)
       SENSITIVE = []
       include Aws::Structure
     end

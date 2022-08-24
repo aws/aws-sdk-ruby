@@ -42,15 +42,16 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] local_profile_id
-    #   A unique identifier for the AS2 process.
+    #   A unique identifier for the AS2 local profile.
     #   @return [String]
     #
     # @!attribute [rw] partner_profile_id
-    #   A unique identifier for the partner for the connector.
+    #   A unique identifier for the partner profile for the connector.
     #   @return [String]
     #
     # @!attribute [rw] message_subject
-    #   A short description to help identify the connector.
+    #   Used as the `Subject` HTTP header attribute in AS2 messages that are
+    #   being sent with the connector.
     #   @return [String]
     #
     # @!attribute [rw] compression
@@ -62,12 +63,17 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] signing_algorithm
-    #   The algorithm that is used to sign the AS2 transfers for this
-    #   partner profile.
+    #   The algorithm that is used to sign the AS2 messages sent with the
+    #   connector.
     #   @return [String]
     #
     # @!attribute [rw] mdn_signing_algorithm
     #   The signing algorithm for the MDN response.
+    #
+    #   <note markdown="1"> If set to DEFAULT (or not set at all), the value for
+    #   `SigningAlogorithm` is used.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] mdn_response
@@ -390,9 +396,18 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] access_role
-    #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) role that grants access to at least the `HomeDirectory` of
-    #   your users' Amazon S3 buckets.
+    #   With AS2, you can send files by calling `StartFileTransfer` and
+    #   specifying the file paths in the request parameter, `SendFilePaths`.
+    #   We use the file’s parent directory (for example, for
+    #   `--send-file-paths /bucket/dir/file.txt`, parent directory is
+    #   `/bucket/dir/`) to temporarily store a processed AS2 message file,
+    #   store the MDN when we receive them from the partner, and write a
+    #   final JSON file containing relevant metadata of the transmission.
+    #   So, the `AccessRole` needs to provide read and write access to the
+    #   parent directory of the file location used in the
+    #   `StartFileTransfer` request. Additionally, you need to provide read
+    #   and write access to the parent directory of the files that you
+    #   intend to send with `StartFileTransfer`.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -534,12 +549,11 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] as_2_id
-    #   The `As2Id` is the *AS2-name*, as defined in the defined in the [RFC
-    #   4130][1]. For inbound transfers, this is the `AS2-From` header for
-    #   the AS2 messages sent from the partner. For outbound connectors,
-    #   this is the `AS2-To` header for the AS2 messages sent to the partner
-    #   using the `StartFileTransfer` API operation. This ID cannot include
-    #   spaces.
+    #   The `As2Id` is the *AS2-name*, as defined in the [RFC 4130][1]. For
+    #   inbound transfers, this is the `AS2-From` header for the AS2
+    #   messages sent from the partner. For outbound connectors, this is the
+    #   `AS2-To` header for the AS2 messages sent to the partner using the
+    #   `StartFileTransfer` API operation. This ID cannot include spaces.
     #
     #
     #
@@ -2081,11 +2095,11 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] local_profile_id
-    #   A unique identifier for the AS2 process.
+    #   A unique identifier for the AS2 local profile.
     #   @return [String]
     #
     # @!attribute [rw] partner_profile_id
-    #   A unique identifier for the partner in the agreement.
+    #   A unique identifier for the partner profile used in the agreement.
     #   @return [String]
     #
     # @!attribute [rw] base_directory
@@ -2094,9 +2108,18 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] access_role
-    #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) role that grants access to at least the `HomeDirectory` of
-    #   your users' Amazon S3 buckets.
+    #   With AS2, you can send files by calling `StartFileTransfer` and
+    #   specifying the file paths in the request parameter, `SendFilePaths`.
+    #   We use the file’s parent directory (for example, for
+    #   `--send-file-paths /bucket/dir/file.txt`, parent directory is
+    #   `/bucket/dir/`) to temporarily store a processed AS2 message file,
+    #   store the MDN when we receive them from the partner, and write a
+    #   final JSON file containing relevant metadata of the transmission.
+    #   So, the `AccessRole` needs to provide read and write access to the
+    #   parent directory of the file location used in the
+    #   `StartFileTransfer` request. Additionally, you need to provide read
+    #   and write access to the parent directory of the files that you
+    #   intend to send with `StartFileTransfer`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2344,7 +2367,15 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] as_2_id
-    #   The unique identifier for the AS2 process.
+    #   The `As2Id` is the *AS2-name*, as defined in the [RFC 4130][1]. For
+    #   inbound transfers, this is the `AS2-From` header for the AS2
+    #   messages sent from the partner. For outbound connectors, this is the
+    #   `AS2-To` header for the AS2 messages sent to the partner using the
+    #   `StartFileTransfer` API operation. This ID cannot include spaces.
+    #
+    #
+    #
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc4130
     #   @return [String]
     #
     # @!attribute [rw] certificate_ids
@@ -2437,9 +2468,27 @@ module Aws::Transfer
     # @!attribute [rw] protocol_details
     #   The protocol settings that are configured for your server.
     #
-    #   Use the `PassiveIp` parameter to indicate passive mode. Enter a
-    #   single IPv4 address, such as the public IP address of a firewall,
-    #   router, or load balancer.
+    #   * To indicate passive mode (for FTP and FTPS protocols), use the
+    #     `PassiveIp` parameter. Enter a single dotted-quad IPv4 address,
+    #     such as the external IP address of a firewall, router, or load
+    #     balancer.
+    #
+    #   * To ignore the error that is generated when the client attempts to
+    #     use the `SETSTAT` command on a file that you are uploading to an
+    #     Amazon S3 bucket, use the `SetStatOption` parameter. To have the
+    #     Transfer Family server ignore the `SETSTAT` command and upload
+    #     files without needing to make any changes to your SFTP client, set
+    #     the value to `ENABLE_NO_OP`. If you set the `SetStatOption`
+    #     parameter to `ENABLE_NO_OP`, Transfer Family generates a log entry
+    #     to Amazon CloudWatch Logs, so that you can determine when the
+    #     client is making a `SETSTAT` call.
+    #
+    #   * To determine whether your Transfer Family server resumes recent,
+    #     negotiated sessions through a unique session ID, use the
+    #     `TlsSessionResumptionMode` parameter.
+    #
+    #   * `As2Transports` indicates the transport method for the AS2
+    #     messages. Currently, only HTTP is supported.
     #   @return [Types::ProtocolDetails]
     #
     # @!attribute [rw] domain
@@ -2537,6 +2586,29 @@ module Aws::Transfer
     #     encryption
     #
     #   * `FTP` (File Transfer Protocol): Unencrypted file transfer
+    #
+    #   * `AS2` (Applicability Statement 2): used for transporting
+    #     structured business-to-business data
+    #
+    #   <note markdown="1"> * If you select `FTPS`, you must choose a certificate stored in
+    #     Certificate Manager (ACM) which is used to identify your server
+    #     when clients connect to it over FTPS.
+    #
+    #   * If `Protocol` includes either `FTP` or `FTPS`, then the
+    #     `EndpointType` must be `VPC` and the `IdentityProviderType` must
+    #     be `AWS_DIRECTORY_SERVICE` or `API_GATEWAY`.
+    #
+    #   * If `Protocol` includes `FTP`, then `AddressAllocationIds` cannot
+    #     be associated.
+    #
+    #   * If `Protocol` is set only to `SFTP`, the `EndpointType` can be set
+    #     to `PUBLIC` and the `IdentityProviderType` can be set to
+    #     `SERVICE_MANAGED`.
+    #
+    #   * If `Protocol` includes `AS2`, then the `EndpointType` must be
+    #     `VPC`, and domain must be Amazon S3.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_policy_name
@@ -4006,11 +4078,11 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] local_profile_id
-    #   A unique identifier for the AS2 process.
+    #   A unique identifier for the AS2 local profile.
     #   @return [String]
     #
     # @!attribute [rw] partner_profile_id
-    #   A unique identifier for the partner process.
+    #   A unique identifier for the partner profile.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListedAgreement AWS API Documentation
@@ -4153,7 +4225,15 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] as_2_id
-    #   The unique identifier for the AS2 process.
+    #   The `As2Id` is the *AS2-name*, as defined in the [RFC 4130][1]. For
+    #   inbound transfers, this is the `AS2-From` header for the AS2
+    #   messages sent from the partner. For outbound connectors, this is the
+    #   `AS2-To` header for the AS2 messages sent to the partner using the
+    #   `StartFileTransfer` API operation. This ID cannot include spaces.
+    #
+    #
+    #
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc4130
     #   @return [String]
     #
     # @!attribute [rw] profile_type
@@ -5306,11 +5386,14 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] local_profile_id
+    #   A unique identifier for the AS2 local profile.
+    #
     #   To change the local profile identifier, provide a new value here.
     #   @return [String]
     #
     # @!attribute [rw] partner_profile_id
-    #   To change the partner profile identifier, provide a new value here.
+    #   A unique identifier for the partner profile. To change the partner
+    #   profile identifier, provide a new value here.
     #   @return [String]
     #
     # @!attribute [rw] base_directory
@@ -5320,9 +5403,18 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] access_role
-    #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) role that grants access to at least the `HomeDirectory` of
-    #   your users' Amazon S3 buckets.
+    #   With AS2, you can send files by calling `StartFileTransfer` and
+    #   specifying the file paths in the request parameter, `SendFilePaths`.
+    #   We use the file’s parent directory (for example, for
+    #   `--send-file-paths /bucket/dir/file.txt`, parent directory is
+    #   `/bucket/dir/`) to temporarily store a processed AS2 message file,
+    #   store the MDN when we receive them from the partner, and write a
+    #   final JSON file containing relevant metadata of the transmission.
+    #   So, the `AccessRole` needs to provide read and write access to the
+    #   parent directory of the file location used in the
+    #   `StartFileTransfer` request. Additionally, you need to provide read
+    #   and write access to the parent directory of the files that you
+    #   intend to send with `StartFileTransfer`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateAgreementRequest AWS API Documentation
@@ -5744,28 +5836,34 @@ module Aws::Transfer
     #   file transfer protocol client can connect to your server's
     #   endpoint. The available protocols are:
     #
-    #   * Secure Shell (SSH) File Transfer Protocol (SFTP): File transfer
+    #   * `SFTP` (Secure Shell (SSH) File Transfer Protocol): File transfer
     #     over SSH
     #
-    #   * File Transfer Protocol Secure (FTPS): File transfer with TLS
+    #   * `FTPS` (File Transfer Protocol Secure): File transfer with TLS
     #     encryption
     #
-    #   * File Transfer Protocol (FTP): Unencrypted file transfer
+    #   * `FTP` (File Transfer Protocol): Unencrypted file transfer
     #
-    #   <note markdown="1"> If you select `FTPS`, you must choose a certificate stored in Amazon
-    #   Web ServicesCertificate Manager (ACM) which will be used to identify
-    #   your server when clients connect to it over FTPS.
+    #   * `AS2` (Applicability Statement 2): used for transporting
+    #     structured business-to-business data
     #
-    #    If `Protocol` includes either `FTP` or `FTPS`, then the
-    #   `EndpointType` must be `VPC` and the `IdentityProviderType` must be
-    #   `AWS_DIRECTORY_SERVICE` or `API_GATEWAY`.
+    #   <note markdown="1"> * If you select `FTPS`, you must choose a certificate stored in
+    #     Certificate Manager (ACM) which is used to identify your server
+    #     when clients connect to it over FTPS.
     #
-    #    If `Protocol` includes `FTP`, then `AddressAllocationIds` cannot be
-    #   associated.
+    #   * If `Protocol` includes either `FTP` or `FTPS`, then the
+    #     `EndpointType` must be `VPC` and the `IdentityProviderType` must
+    #     be `AWS_DIRECTORY_SERVICE` or `API_GATEWAY`.
     #
-    #    If `Protocol` is set only to `SFTP`, the `EndpointType` can be set
-    #   to `PUBLIC` and the `IdentityProviderType` can be set to
-    #   `SERVICE_MANAGED`.
+    #   * If `Protocol` includes `FTP`, then `AddressAllocationIds` cannot
+    #     be associated.
+    #
+    #   * If `Protocol` is set only to `SFTP`, the `EndpointType` can be set
+    #     to `PUBLIC` and the `IdentityProviderType` can be set to
+    #     `SERVICE_MANAGED`.
+    #
+    #   * If `Protocol` includes `AS2`, then the `EndpointType` must be
+    #     `VPC`, and domain must be Amazon S3.
     #
     #    </note>
     #   @return [Array<String>]

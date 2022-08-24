@@ -626,6 +626,7 @@ module Aws::CloudFront
     #               enabled: false, # required
     #               origin_shield_region: "OriginShieldRegion",
     #             },
+    #             origin_access_control_id: "string",
     #           },
     #         ],
     #       },
@@ -886,6 +887,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
+    #   resp.distribution.distribution_config.origins.items[0].origin_access_control_id #=> String
     #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
     #   resp.distribution.distribution_config.origin_groups.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
@@ -1090,6 +1092,7 @@ module Aws::CloudFront
     #                 enabled: false, # required
     #                 origin_shield_region: "OriginShieldRegion",
     #               },
+    #               origin_access_control_id: "string",
     #             },
     #           ],
     #         },
@@ -1359,6 +1362,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
+    #   resp.distribution.distribution_config.origins.items[0].origin_access_control_id #=> String
     #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
     #   resp.distribution.distribution_config.origin_groups.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
@@ -1858,6 +1862,64 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Creates a new origin access control in CloudFront. After you create an
+    # origin access control, you can add it to an origin in a CloudFront
+    # distribution so that CloudFront sends authenticated (signed) requests
+    # to the origin.
+    #
+    # For an Amazon S3 origin, this makes it possible to block public access
+    # to the Amazon S3 bucket so that viewers (users) can access the content
+    # in the bucket only through CloudFront.
+    #
+    # For more information about using a CloudFront origin access control,
+    # see [Restricting access to an Amazon S3 origin][1] in the *Amazon
+    # CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html
+    #
+    # @option params [required, Types::OriginAccessControlConfig] :origin_access_control_config
+    #   Contains the origin access control.
+    #
+    # @return [Types::CreateOriginAccessControlResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateOriginAccessControlResult#origin_access_control #origin_access_control} => Types::OriginAccessControl
+    #   * {Types::CreateOriginAccessControlResult#location #location} => String
+    #   * {Types::CreateOriginAccessControlResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_origin_access_control({
+    #     origin_access_control_config: { # required
+    #       name: "string", # required
+    #       description: "string", # required
+    #       signing_protocol: "sigv4", # required, accepts sigv4
+    #       signing_behavior: "never", # required, accepts never, always, no-override
+    #       origin_access_control_origin_type: "s3", # required, accepts s3
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.origin_access_control.id #=> String
+    #   resp.origin_access_control.origin_access_control_config.name #=> String
+    #   resp.origin_access_control.origin_access_control_config.description #=> String
+    #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
+    #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
+    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3"
+    #   resp.location #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateOriginAccessControl AWS API Documentation
+    #
+    # @overload create_origin_access_control(params = {})
+    # @param [Hash] params ({})
+    def create_origin_access_control(params = {}, options = {})
+      req = build_request(:create_origin_access_control, params)
+      req.send_request(options)
+    end
+
     # Creates an origin request policy.
     #
     # After you create an origin request policy, you can attach it to one or
@@ -2162,6 +2224,10 @@ module Aws::CloudFront
     #           access_control_max_age_sec: 1, # required
     #         },
     #       },
+    #       server_timing_headers_config: {
+    #         enabled: false, # required
+    #         sampling_rate: 1.0,
+    #       },
     #       custom_headers_config: {
     #         quantity: 1, # required
     #         items: [
@@ -2171,10 +2237,6 @@ module Aws::CloudFront
     #             override: false, # required
     #           },
     #         ],
-    #       },
-    #       server_timing_headers_config: {
-    #         enabled: false, # required
-    #         sampling_rate: 1.0,
     #       },
     #     },
     #   })
@@ -2215,13 +2277,13 @@ module Aws::CloudFront
     #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.include_subdomains #=> Boolean
     #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.preload #=> Boolean
     #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.access_control_max_age_sec #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.enabled #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.sampling_rate #=> Float
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.quantity #=> Integer
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items #=> Array
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
-    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.enabled #=> Boolean
-    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.sampling_rate #=> Float
     #   resp.location #=> String
     #   resp.etag #=> String
     #
@@ -2659,6 +2721,38 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def delete_monitoring_subscription(params = {}, options = {})
       req = build_request(:delete_monitoring_subscription, params)
+      req.send_request(options)
+    end
+
+    # Deletes a CloudFront origin access control.
+    #
+    # You cannot delete an origin access control if it's in use. First,
+    # update all distributions to remove the origin access control from all
+    # origins, then delete the origin access control.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the origin access control that you are
+    #   deleting.
+    #
+    # @option params [String] :if_match
+    #   The current version (`ETag` value) of the origin access control that
+    #   you are deleting.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_origin_access_control({
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteOriginAccessControl AWS API Documentation
+    #
+    # @overload delete_origin_access_control(params = {})
+    # @param [Hash] params ({})
+    def delete_origin_access_control(params = {}, options = {})
+      req = build_request(:delete_origin_access_control, params)
       req.send_request(options)
     end
 
@@ -3177,6 +3271,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
+    #   resp.distribution.distribution_config.origins.items[0].origin_access_control_id #=> String
     #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
     #   resp.distribution.distribution_config.origin_groups.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
@@ -3373,6 +3468,7 @@ module Aws::CloudFront
     #   resp.distribution_config.origins.items[0].connection_timeout #=> Integer
     #   resp.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
+    #   resp.distribution_config.origins.items[0].origin_access_control_id #=> String
     #   resp.distribution_config.origin_groups.quantity #=> Integer
     #   resp.distribution_config.origin_groups.items #=> Array
     #   resp.distribution_config.origin_groups.items[0].id #=> String
@@ -3882,6 +3978,75 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Gets a CloudFront origin access control.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the origin access control.
+    #
+    # @return [Types::GetOriginAccessControlResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOriginAccessControlResult#origin_access_control #origin_access_control} => Types::OriginAccessControl
+    #   * {Types::GetOriginAccessControlResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_origin_access_control({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.origin_access_control.id #=> String
+    #   resp.origin_access_control.origin_access_control_config.name #=> String
+    #   resp.origin_access_control.origin_access_control_config.description #=> String
+    #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
+    #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
+    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3"
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginAccessControl AWS API Documentation
+    #
+    # @overload get_origin_access_control(params = {})
+    # @param [Hash] params ({})
+    def get_origin_access_control(params = {}, options = {})
+      req = build_request(:get_origin_access_control, params)
+      req.send_request(options)
+    end
+
+    # Gets a CloudFront origin access control.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the origin access control.
+    #
+    # @return [Types::GetOriginAccessControlConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOriginAccessControlConfigResult#origin_access_control_config #origin_access_control_config} => Types::OriginAccessControlConfig
+    #   * {Types::GetOriginAccessControlConfigResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_origin_access_control_config({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.origin_access_control_config.name #=> String
+    #   resp.origin_access_control_config.description #=> String
+    #   resp.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
+    #   resp.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
+    #   resp.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3"
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginAccessControlConfig AWS API Documentation
+    #
+    # @overload get_origin_access_control_config(params = {})
+    # @param [Hash] params ({})
+    def get_origin_access_control_config(params = {}, options = {})
+      req = build_request(:get_origin_access_control_config, params)
+      req.send_request(options)
+    end
+
     # Gets an origin request policy, including the following metadata:
     #
     # * The policy’s identifier.
@@ -4178,13 +4343,13 @@ module Aws::CloudFront
     #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.include_subdomains #=> Boolean
     #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.preload #=> Boolean
     #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.access_control_max_age_sec #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.enabled #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.sampling_rate #=> Float
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.quantity #=> Integer
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items #=> Array
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
-    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.enabled #=> Boolean
-    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.sampling_rate #=> Float
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetResponseHeadersPolicy AWS API Documentation
@@ -4259,13 +4424,13 @@ module Aws::CloudFront
     #   resp.response_headers_policy_config.security_headers_config.strict_transport_security.include_subdomains #=> Boolean
     #   resp.response_headers_policy_config.security_headers_config.strict_transport_security.preload #=> Boolean
     #   resp.response_headers_policy_config.security_headers_config.strict_transport_security.access_control_max_age_sec #=> Integer
+    #   resp.response_headers_policy_config.server_timing_headers_config.enabled #=> Boolean
+    #   resp.response_headers_policy_config.server_timing_headers_config.sampling_rate #=> Float
     #   resp.response_headers_policy_config.custom_headers_config.quantity #=> Integer
     #   resp.response_headers_policy_config.custom_headers_config.items #=> Array
     #   resp.response_headers_policy_config.custom_headers_config.items[0].header #=> String
     #   resp.response_headers_policy_config.custom_headers_config.items[0].value #=> String
     #   resp.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
-    #   resp.response_headers_policy_config.server_timing_headers_config.enabled #=> Boolean
-    #   resp.response_headers_policy_config.server_timing_headers_config.sampling_rate #=> Float
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetResponseHeadersPolicyConfig AWS API Documentation
@@ -4664,6 +4829,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.origin_shield_region #=> String
+    #   resp.distribution_list.items[0].origins.items[0].origin_access_control_id #=> String
     #   resp.distribution_list.items[0].origin_groups.quantity #=> Integer
     #   resp.distribution_list.items[0].origin_groups.items #=> Array
     #   resp.distribution_list.items[0].origin_groups.items[0].id #=> String
@@ -5053,6 +5219,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.origin_shield_region #=> String
+    #   resp.distribution_list.items[0].origins.items[0].origin_access_control_id #=> String
     #   resp.distribution_list.items[0].origin_groups.quantity #=> Integer
     #   resp.distribution_list.items[0].origin_groups.items #=> Array
     #   resp.distribution_list.items[0].origin_groups.items[0].id #=> String
@@ -5319,6 +5486,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.origin_shield_region #=> String
+    #   resp.distribution_list.items[0].origins.items[0].origin_access_control_id #=> String
     #   resp.distribution_list.items[0].origin_groups.quantity #=> Integer
     #   resp.distribution_list.items[0].origin_groups.items #=> Array
     #   resp.distribution_list.items[0].origin_groups.items[0].id #=> String
@@ -5736,6 +5904,62 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Gets the list of CloudFront origin access controls in this Amazon Web
+    # Services account.
+    #
+    # You can optionally specify the maximum number of items to receive in
+    # the response. If the total number of items in the list exceeds the
+    # maximum that you specify, or the default maximum, the response is
+    # paginated. To get the next page of items, send another request that
+    # specifies the `NextMarker` value from the current response as the
+    # `Marker` value in the next request.
+    #
+    # @option params [String] :marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of origin access controls. The response includes the items
+    #   in the list that occur after the marker. To get the next page of the
+    #   list, set this field's value to the value of `NextMarker` from the
+    #   current page's response.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of origin access controls that you want in the
+    #   response.
+    #
+    # @return [Types::ListOriginAccessControlsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOriginAccessControlsResult#origin_access_control_list #origin_access_control_list} => Types::OriginAccessControlList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_origin_access_controls({
+    #     marker: "string",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.origin_access_control_list.marker #=> String
+    #   resp.origin_access_control_list.next_marker #=> String
+    #   resp.origin_access_control_list.max_items #=> Integer
+    #   resp.origin_access_control_list.is_truncated #=> Boolean
+    #   resp.origin_access_control_list.quantity #=> Integer
+    #   resp.origin_access_control_list.items #=> Array
+    #   resp.origin_access_control_list.items[0].id #=> String
+    #   resp.origin_access_control_list.items[0].description #=> String
+    #   resp.origin_access_control_list.items[0].name #=> String
+    #   resp.origin_access_control_list.items[0].signing_protocol #=> String, one of "sigv4"
+    #   resp.origin_access_control_list.items[0].signing_behavior #=> String, one of "never", "always", "no-override"
+    #   resp.origin_access_control_list.items[0].origin_access_control_origin_type #=> String, one of "s3"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListOriginAccessControls AWS API Documentation
+    #
+    # @overload list_origin_access_controls(params = {})
+    # @param [Hash] params ({})
+    def list_origin_access_controls(params = {}, options = {})
+      req = build_request(:list_origin_access_controls, params)
+      req.send_request(options)
+    end
+
     # Gets a list of origin request policies.
     #
     # You can optionally apply a filter to return only the managed policies
@@ -6004,13 +6228,13 @@ module Aws::CloudFront
     #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.include_subdomains #=> Boolean
     #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.preload #=> Boolean
     #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.access_control_max_age_sec #=> Integer
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.server_timing_headers_config.enabled #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.server_timing_headers_config.sampling_rate #=> Float
     #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.quantity #=> Integer
     #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.items #=> Array
     #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
     #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
     #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
-    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.server_timing_headers_config.enabled #=> Boolean
-    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.server_timing_headers_config.sampling_rate #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListResponseHeadersPolicies AWS API Documentation
     #
@@ -6586,6 +6810,7 @@ module Aws::CloudFront
     #               enabled: false, # required
     #               origin_shield_region: "OriginShieldRegion",
     #             },
+    #             origin_access_control_id: "string",
     #           },
     #         ],
     #       },
@@ -6848,6 +7073,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
+    #   resp.distribution.distribution_config.origins.items[0].origin_access_control_id #=> String
     #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
     #   resp.distribution.distribution_config.origin_groups.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
@@ -7268,6 +7494,57 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Updates a CloudFront origin access control.
+    #
+    # @option params [required, Types::OriginAccessControlConfig] :origin_access_control_config
+    #   An origin access control.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the origin access control that you are
+    #   updating.
+    #
+    # @option params [String] :if_match
+    #   The current version (`ETag` value) of the origin access control that
+    #   you are updating.
+    #
+    # @return [Types::UpdateOriginAccessControlResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateOriginAccessControlResult#origin_access_control #origin_access_control} => Types::OriginAccessControl
+    #   * {Types::UpdateOriginAccessControlResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_origin_access_control({
+    #     origin_access_control_config: { # required
+    #       name: "string", # required
+    #       description: "string", # required
+    #       signing_protocol: "sigv4", # required, accepts sigv4
+    #       signing_behavior: "never", # required, accepts never, always, no-override
+    #       origin_access_control_origin_type: "s3", # required, accepts s3
+    #     },
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.origin_access_control.id #=> String
+    #   resp.origin_access_control.origin_access_control_config.name #=> String
+    #   resp.origin_access_control.origin_access_control_config.description #=> String
+    #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
+    #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
+    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3"
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateOriginAccessControl AWS API Documentation
+    #
+    # @overload update_origin_access_control(params = {})
+    # @param [Hash] params ({})
+    def update_origin_access_control(params = {}, options = {})
+      req = build_request(:update_origin_access_control, params)
+      req.send_request(options)
+    end
+
     # Updates an origin request policy configuration.
     #
     # When you update an origin request policy configuration, all the fields
@@ -7592,6 +7869,10 @@ module Aws::CloudFront
     #           access_control_max_age_sec: 1, # required
     #         },
     #       },
+    #       server_timing_headers_config: {
+    #         enabled: false, # required
+    #         sampling_rate: 1.0,
+    #       },
     #       custom_headers_config: {
     #         quantity: 1, # required
     #         items: [
@@ -7601,10 +7882,6 @@ module Aws::CloudFront
     #             override: false, # required
     #           },
     #         ],
-    #       },
-    #       server_timing_headers_config: {
-    #         enabled: false, # required
-    #         sampling_rate: 1.0,
     #       },
     #     },
     #     id: "string", # required
@@ -7647,13 +7924,13 @@ module Aws::CloudFront
     #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.include_subdomains #=> Boolean
     #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.preload #=> Boolean
     #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.access_control_max_age_sec #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.enabled #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.sampling_rate #=> Float
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.quantity #=> Integer
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items #=> Array
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
     #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
-    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.enabled #=> Boolean
-    #   resp.response_headers_policy.response_headers_policy_config.server_timing_headers_config.sampling_rate #=> Float
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateResponseHeadersPolicy AWS API Documentation
@@ -7768,7 +8045,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

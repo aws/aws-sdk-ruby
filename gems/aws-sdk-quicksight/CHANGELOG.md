@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2022-08-24)
+------------------
+
+* Feature - Added a new optional property DashboardVisual under ExperienceConfiguration parameter of GenerateEmbedUrlForAnonymousUser and GenerateEmbedUrlForRegisteredUser API operations. This supports embedding of specific visuals in QuickSight dashboards.
+
 1.67.0 (2022-08-08)
 ------------------
 
