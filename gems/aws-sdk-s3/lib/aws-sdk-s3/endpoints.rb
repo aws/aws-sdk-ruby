@@ -26,8 +26,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -48,8 +49,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -70,8 +72,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -92,8 +95,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: true,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -114,8 +118,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -136,8 +141,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -158,8 +164,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -180,8 +187,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -202,8 +210,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -224,8 +233,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -246,8 +256,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -268,8 +279,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -290,8 +302,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -312,8 +325,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -334,8 +348,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -356,8 +371,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -378,8 +394,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -400,8 +417,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -422,8 +440,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -444,8 +463,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -466,8 +486,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -488,8 +509,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -510,8 +532,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -532,8 +555,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -554,8 +578,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -576,8 +601,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -598,8 +624,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -620,8 +647,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -642,8 +670,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -664,8 +693,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -686,8 +716,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -708,8 +739,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -730,8 +762,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -752,8 +785,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -774,8 +808,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -796,8 +831,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -818,8 +854,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -840,8 +877,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -862,8 +900,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -884,8 +923,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -906,8 +946,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -928,8 +969,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -950,8 +992,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -972,8 +1015,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -994,8 +1038,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1016,8 +1061,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1038,8 +1084,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1060,8 +1107,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1082,8 +1130,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1104,8 +1153,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1126,8 +1176,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1148,8 +1199,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1170,8 +1222,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1192,8 +1245,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1214,8 +1268,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1236,8 +1291,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1258,8 +1314,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1280,8 +1337,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1302,8 +1360,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1324,8 +1383,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1346,8 +1406,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1368,8 +1429,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1390,8 +1452,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1412,8 +1475,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1434,8 +1498,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1456,8 +1521,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1478,8 +1544,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1500,8 +1567,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1522,8 +1590,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1544,8 +1613,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1566,8 +1636,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1588,8 +1659,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1610,8 +1682,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1632,8 +1705,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1654,8 +1728,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1676,8 +1751,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1698,8 +1774,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1720,8 +1797,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1742,8 +1820,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1764,8 +1843,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1786,8 +1866,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1808,8 +1889,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1830,8 +1912,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1852,8 +1935,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1874,8 +1958,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1896,8 +1981,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1918,8 +2004,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1940,8 +2027,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1962,8 +2050,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -1984,8 +2073,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -2006,8 +2096,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -2028,8 +2119,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -2050,8 +2142,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -2072,8 +2165,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -2094,8 +2188,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -2116,8 +2211,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: nil,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end
@@ -2138,8 +2234,9 @@ module Aws::S3
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           snow_endpoint_url: nil,
+          use_object_lambda_endpoint: true,
           disable_access_points: nil,
-          disable_mrap: nil,
+          disable_multi_region_access_points: nil,
           use_arn_region: context.config.s3_use_arn_region,
         )
       end

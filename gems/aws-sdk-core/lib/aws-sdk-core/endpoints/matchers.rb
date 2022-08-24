@@ -97,10 +97,7 @@ module Aws
           return labels.all? { |l| valid_host_label?(l) }
         end
 
-        value.size < 64 &&
-          value =~ /^[a-z0-9][a-z0-9.-]+[a-z0-9]$/ &&
-          value !~ /(\d+\.){3}\d+/ &&
-          value !~ /[.-]{2}/
+        value =~ /\A(?!-)[a-zA-Z0-9-]{1,63}(?<!-)\z/
       end
 
       # uriEncode(value: string) string

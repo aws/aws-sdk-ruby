@@ -66,10 +66,7 @@
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUT.html",
       "alias":"PutBucket",
       "staticContextParams":{
-        "DisableAccessPoints":{
-          "type":"boolean",
-          "value":"true"
-        }
+        "DisableAccessPoints":{"value":true}
       }
     },
     "CreateMultipartUpload":{
@@ -1082,6 +1079,9 @@
       "authtype":"v4-unsigned-body",
       "endpoint":{
         "hostPrefix":"{RequestRoute}."
+      },
+      "staticContextParams":{
+        "UseObjectLambdaEndpoint":{"value":true}
       }
     }
   },
@@ -8539,16 +8539,24 @@
   },
   "clientContextParams":{
     "Accelerate":{
-      "documentation":"Enables the usage of the S3 Transfer Acceleration endpoints.",
+      "documentation":"Enables this client to use S3 Transfer Acceleration endpoints.",
+      "type":"boolean"
+    },
+    "DisableMultiRegionAccessPoints":{
+      "documentation":"Disables this client's usage of Multi-Region Access Points.",
       "type":"boolean"
     },
     "ForcePathStyle":{
-      "documentation":"Allows you to enable the S3 client to use path-style addressing for buckets.",
+      "documentation":"Forces this client to use path-style addressing for buckets.",
       "type":"boolean"
     },
     "SnowEndpointUrl":{
-      "documentation":"Allows you to configure the S3 Snowball endpoint.",
+      "documentation":"Configures this client to use the provided S3 Snowball endpoint.",
       "type":"string"
+    },
+    "UseArnRegion":{
+      "documentation":"Enables this client to use an ARN's region when constructing an endpoint instead of the client's configured region.",
+      "type":"boolean"
     }
   }
 }

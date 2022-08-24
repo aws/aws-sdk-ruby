@@ -4,18 +4,21 @@
         "Region": {
             "builtIn": "AWS::Region",
             "required": true,
+            "documentation": "The AWS region used to dispatch the request.",
             "type": "String"
         },
         "UseDualStack": {
             "builtIn": "AWS::UseDualStack",
             "required": true,
             "default": false,
+            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
             "type": "Boolean"
         },
         "UseFIPS": {
             "builtIn": "AWS::UseFIPS",
             "required": true,
             "default": false,
+            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
             "type": "Boolean"
         }
     },
@@ -99,8 +102,8 @@
                                         "properties": {
                                             "authSchemes": [
                                                 {
-                                                    "signingName": "ec2",
                                                     "name": "sigv4",
+                                                    "signingName": "ec2",
                                                     "signingRegion": "{Region}"
                                                 }
                                             ]
@@ -179,8 +182,8 @@
                                                 "properties": {
                                                     "authSchemes": [
                                                         {
-                                                            "signingName": "ec2",
                                                             "name": "sigv4",
+                                                            "signingName": "ec2",
                                                             "signingRegion": "{Region}"
                                                         }
                                                     ]
@@ -196,8 +199,8 @@
                                                 "properties": {
                                                     "authSchemes": [
                                                         {
-                                                            "signingName": "ec2",
                                                             "name": "sigv4",
+                                                            "signingName": "ec2",
                                                             "signingRegion": "{Region}"
                                                         }
                                                     ]
@@ -258,8 +261,8 @@
                                         "properties": {
                                             "authSchemes": [
                                                 {
-                                                    "signingName": "ec2",
                                                     "name": "sigv4",
+                                                    "signingName": "ec2",
                                                     "signingRegion": "{Region}"
                                                 }
                                             ]
@@ -284,8 +287,8 @@
                         "properties": {
                             "authSchemes": [
                                 {
-                                    "signingName": "ec2",
                                     "name": "sigv4",
+                                    "signingName": "ec2",
                                     "signingRegion": "{Region}"
                                 }
                             ]

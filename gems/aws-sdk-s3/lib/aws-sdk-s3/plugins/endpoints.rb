@@ -25,17 +25,27 @@ module Aws::S3
       option(
         :use_accelerate_endpoint,
         doc_type: 'Boolean',
-        docstring: "Enables the usage of the S3 Transfer Acceleration endpoints.")
+        docstring: "Enables this client to use S3 Transfer Acceleration endpoints.")
+
+      option(
+        :disable_multi_region_access_points,
+        doc_type: 'Boolean',
+        docstring: "Disables this client&#39;s usage of Multi-Region Access Points.")
 
       option(
         :force_path_style,
         doc_type: 'Boolean',
-        docstring: "Allows you to enable the S3 client to use path-style addressing for buckets.")
+        docstring: "Forces this client to use path-style addressing for buckets.")
 
       option(
         :snow_endpoint_url,
         doc_type: 'String',
-        docstring: "Allows you to configure the S3 Snowball endpoint.")
+        docstring: "Configures this client to use the provided S3 Snowball endpoint.")
+
+      option(
+        :s3_use_arn_region,
+        doc_type: 'Boolean',
+        docstring: "Enables this client to use an ARN&#39;s region when constructing an endpoint instead of the client&#39;s configured region.")
 
       # @api private
       class Handler < Seahorse::Client::Handler

@@ -16,8 +16,8 @@
         {
             "documentation": "Invalid access point ARN: Not S3",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:not-s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-east-1",
                 "Accelerate": false
@@ -30,8 +30,8 @@
         {
             "documentation": "Invalid access point ARN: invalid resource",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint:more-data",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-east-1",
                 "Accelerate": false
@@ -44,8 +44,8 @@
         {
             "documentation": "Invalid access point ARN: invalid no ap name",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-east-1",
                 "Accelerate": false
@@ -58,38 +58,38 @@
         {
             "documentation": "Invalid access point ARN: AccountId is invalid",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456_789012:accesspoint:apname",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-east-1",
                 "Accelerate": false
             },
             "expect": {
-                "error": "Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: 123456_789012"
+                "error": "Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: `123456_789012`"
             },
             "operationInputs": []
         },
         {
             "documentation": "Invalid access point ARN: access point name is invalid",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:ap_name",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-east-1",
                 "Accelerate": false
             },
             "expect": {
-                "error": "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: ap_name"
+                "error": "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: `ap_name`"
             },
             "operationInputs": []
         },
         {
             "documentation": "Access points (disable access points explicitly false)",
             "params": {
-                "UseFIPS": false,
-                "DisableAccessPoints": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "UseFIPS": false,
                 "UseDualStack": false,
+                "DisableAccessPoints": false,
                 "Region": "us-east-1",
                 "Accelerate": false
             },
@@ -99,9 +99,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -114,8 +114,8 @@
         {
             "documentation": "Access points: partition does not support FIPS",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "arn:aws:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                "UseFIPS": true,
                 "UseDualStack": false,
                 "Region": "cn-north-1",
                 "Accelerate": false
@@ -128,10 +128,10 @@
         {
             "documentation": "Bucket region is invalid",
             "params": {
-                "UseFIPS": false,
-                "DisableAccessPoints": false,
                 "Bucket": "arn:aws:s3:us-west -2:123456789012:accesspoint:myendpoint",
+                "UseFIPS": false,
                 "UseDualStack": false,
+                "DisableAccessPoints": false,
                 "Region": "us-east-1",
                 "Accelerate": false
             },
@@ -143,10 +143,10 @@
         {
             "documentation": "Access points when Access points explicitly disabled (used for CreateBucket)",
             "params": {
-                "UseFIPS": false,
-                "DisableAccessPoints": true,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "UseFIPS": false,
                 "UseDualStack": false,
+                "DisableAccessPoints": true,
                 "Region": "us-east-1",
                 "Accelerate": false
             },
@@ -169,8 +169,8 @@
         {
             "documentation": "S3 outposts vanilla test",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-west-2",
                 "Accelerate": false
@@ -181,9 +181,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3-outposts",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -196,8 +196,8 @@
         {
             "documentation": "S3 outposts vanilla test (disable access points explicitly set)",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-west-2",
                 "Accelerate": false
@@ -208,9 +208,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3-outposts",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -223,8 +223,8 @@
         {
             "documentation": "S3 outposts does not support dualstack",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports",
+                "UseFIPS": false,
                 "UseDualStack": true,
                 "Region": "us-east-1",
                 "Accelerate": false
@@ -237,8 +237,8 @@
         {
             "documentation": "S3 outposts does not support fips",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports",
+                "UseFIPS": true,
                 "UseDualStack": false,
                 "Region": "us-east-1",
                 "Accelerate": false
@@ -251,8 +251,8 @@
         {
             "documentation": "S3 outposts does not support accelerate",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-east-1",
                 "Accelerate": true
@@ -265,10 +265,10 @@
         {
             "documentation": "missing arn type",
             "params": {
-                "UseFIPS": false,
-                "DisableAccessPoints": true,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:",
+                "UseFIPS": false,
                 "UseDualStack": false,
+                "DisableAccessPoints": true,
                 "Region": "us-east-1",
                 "Accelerate": false
             },
@@ -281,13 +281,13 @@
             "documentation": "SDK::Host + access point + Dualstack is an error",
             "params": {
                 "Endpoint": "https://beta.example.com",
-                "UseFIPS": false,
                 "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
-                "UseDualStack": true,
-                "Accelerate": false,
-                "Region": "cn-north-1",
                 "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "Region": "cn-north-1"
             },
             "expect": {
                 "error": "DualStack cannot be combined with a Host override (PrivateLink)"
@@ -297,10 +297,10 @@
         {
             "documentation": "Access point ARN with FIPS & Dualstack",
             "params": {
-                "UseFIPS": true,
-                "DisableAccessPoints": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "UseFIPS": true,
                 "UseDualStack": true,
+                "DisableAccessPoints": false,
                 "Region": "us-east-1",
                 "Accelerate": false
             },
@@ -310,9 +310,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -325,10 +325,10 @@
         {
             "documentation": "Access point ARN with Dualstack",
             "params": {
-                "UseFIPS": false,
-                "DisableAccessPoints": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "UseFIPS": false,
                 "UseDualStack": true,
+                "DisableAccessPoints": false,
                 "Region": "us-east-1",
                 "Accelerate": false
             },
@@ -338,9 +338,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -353,11 +353,11 @@
         {
             "documentation": "vanilla MRAP",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-                "DisableMRAP": false,
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-east-1",
+                "DisableMultiRegionAccessPoints": false,
                 "Accelerate": false
             },
             "expect": {
@@ -366,9 +366,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4a",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4a",
                                 "signingRegionSet": [
                                     "*"
                                 ]
@@ -383,11 +383,11 @@
         {
             "documentation": "MRAP does not support FIPS",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-                "DisableMRAP": false,
+                "UseFIPS": true,
                 "UseDualStack": false,
                 "Region": "us-east-1",
+                "DisableMultiRegionAccessPoints": false,
                 "Accelerate": false
             },
             "expect": {
@@ -398,11 +398,11 @@
         {
             "documentation": "MRAP does not support DualStack",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-                "DisableMRAP": false,
+                "UseFIPS": false,
                 "UseDualStack": true,
                 "Region": "us-east-1",
+                "DisableMultiRegionAccessPoints": false,
                 "Accelerate": false
             },
             "expect": {
@@ -413,11 +413,11 @@
         {
             "documentation": "MRAP does not support S3 Accelerate",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-                "DisableMRAP": false,
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-east-1",
+                "DisableMultiRegionAccessPoints": false,
                 "Accelerate": true
             },
             "expect": {
@@ -428,11 +428,11 @@
         {
             "documentation": "MRAP explicitly disabled",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-                "DisableMRAP": true,
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-east-1",
+                "DisableMultiRegionAccessPoints": true,
                 "Accelerate": false
             },
             "expect": {
@@ -443,12 +443,12 @@
         {
             "documentation": "Dual-stack endpoint with path-style forced",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucketname",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "UseDualStack": true,
                 "Region": "us-west-2",
-                "Accelerate": false,
-                "ForcePathStyle": true
+                "Accelerate": false
             },
             "expect": {
                 "endpoint": {
@@ -456,9 +456,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -472,12 +472,12 @@
             "documentation": "Dual-stack endpoint + SDK::Host is error",
             "params": {
                 "Endpoint": "https://abc.com",
-                "UseFIPS": false,
                 "Bucket": "bucketname",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "UseDualStack": true,
                 "Region": "us-west-2",
-                "Accelerate": false,
-                "ForcePathStyle": true
+                "Accelerate": false
             },
             "expect": {
                 "error": "Cannot set dual-stack in combination with a custom endpoint."
@@ -487,12 +487,12 @@
         {
             "documentation": "path style + ARN bucket",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "error": "Path-style addressing cannot be used with ARN buckets"
@@ -502,8 +502,8 @@
         {
             "documentation": "implicit path style bucket + dualstack",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "99_ab",
+                "UseFIPS": false,
                 "UseDualStack": true,
                 "Accelerate": false,
                 "Region": "us-west-2"
@@ -514,9 +514,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -530,8 +530,8 @@
             "documentation": "implicit path style bucket + dualstack",
             "params": {
                 "Endpoint": "http://abc.com",
-                "UseFIPS": false,
                 "Bucket": "99_ab",
+                "UseFIPS": false,
                 "UseDualStack": true,
                 "Accelerate": false,
                 "Region": "us-west-2"
@@ -544,8 +544,8 @@
         {
             "documentation": "don't allow URL injections in the bucket",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "example.com#",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-west-2",
                 "Accelerate": false
@@ -556,9 +556,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -572,8 +572,8 @@
             "documentation": "scheme is respected",
             "params": {
                 "Endpoint": "http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": false,
                 "Bucket": "99_ab",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Accelerate": false,
                 "Region": "af-south-1"
@@ -584,9 +584,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -600,8 +600,8 @@
             "documentation": "scheme is respected (virtual addressing)",
             "params": {
                 "Endpoint": "http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/foo",
-                "UseFIPS": false,
                 "Bucket": "bucketname",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Accelerate": false,
                 "Region": "af-south-1"
@@ -612,9 +612,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -628,8 +628,8 @@
             "documentation": "path style + implicit private link",
             "params": {
                 "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": false,
                 "Bucket": "99_ab",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Accelerate": false,
                 "Region": "af-south-1"
@@ -640,9 +640,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -656,8 +656,8 @@
             "documentation": "invalid Endpoint override",
             "params": {
                 "Endpoint": "abcde://nota#url",
-                "UseFIPS": false,
                 "Bucket": "bucketname",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Accelerate": false,
                 "Region": "af-south-1"
@@ -671,8 +671,8 @@
             "documentation": "using an IPv4 address forces path style",
             "params": {
                 "Endpoint": "https://123.123.0.1",
-                "UseFIPS": false,
                 "Bucket": "bucketname",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Accelerate": false,
                 "Region": "af-south-1"
@@ -683,9 +683,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -699,14 +699,14 @@
             "documentation": "vanilla access point arn with region mismatch and UseArnRegion=false",
             "params": {
                 "UseArnRegion": false,
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"
@@ -716,14 +716,14 @@
         {
             "documentation": "vanilla access point arn with region mismatch and UseArnRegion unset",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "us-east-1",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "us-east-1"
             },
             "expect": {
                 "endpoint": {
@@ -731,9 +731,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -747,14 +747,14 @@
             "documentation": "vanilla access point arn with region mismatch and UseArnRegion=true",
             "params": {
                 "UseArnRegion": true,
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "us-east-1",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "us-east-1"
             },
             "expect": {
                 "endpoint": {
@@ -762,9 +762,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -778,14 +778,14 @@
             "documentation": "outposts arn with region mismatch and UseArnRegion=false",
             "params": {
                 "UseArnRegion": false,
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"
@@ -797,14 +797,14 @@
             "params": {
                 "Endpoint": "https://example.com",
                 "UseArnRegion": false,
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"
@@ -815,14 +815,14 @@
             "documentation": "outposts arn with region mismatch and UseArnRegion=true",
             "params": {
                 "UseArnRegion": true,
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -830,9 +830,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3-outposts",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-east-1"
                             }
                         ]
@@ -845,14 +845,14 @@
         {
             "documentation": "outposts arn with region mismatch and UseArnRegion unset",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -860,9 +860,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3-outposts",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-east-1"
                             }
                         ]
@@ -873,17 +873,51 @@
             "operationInputs": []
         },
         {
+            "documentation": "subdomains are not allowed in virtual buckets",
+            "params": {
+                "Bucket": "bucket.name",
+                "Region": "us-east-1"
+            },
+            "expect": {
+                "endpoint": {
+                    "url": "https://s3.us-east-1.amazonaws.com/bucket.name",
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-east-1"
+                            }
+                        ]
+                    },
+                    "headers": {}
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "no region set",
+            "params": {
+                "Bucket": "bucket-name"
+            },
+            "expect": {
+                "error": "A region must be set when sending requests to S3."
+            },
+            "operationInputs": []
+        },
+        {
             "documentation": "outposts arn with partition mismatch and UseArnRegion=true",
             "params": {
                 "UseArnRegion": true,
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -891,9 +925,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3-outposts",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "cn-north-1"
                             }
                         ]
@@ -906,13 +940,13 @@
         {
             "documentation": "vanilla virtual addressing@us-west-2",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -920,9 +954,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -935,13 +969,13 @@
         {
             "documentation": "virtual addressing + dualstack@us-west-2",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": true,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -949,9 +983,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -964,13 +998,13 @@
         {
             "documentation": "accelerate + dualstack@us-west-2",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": true,
                 "Accelerate": true,
-                "Region": "us-west-2",
-                "ForcePathStyle": false
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -978,9 +1012,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -993,13 +1027,13 @@
         {
             "documentation": "accelerate (dualstack=false)@us-west-2",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": true,
-                "Region": "us-west-2",
-                "ForcePathStyle": false
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -1007,9 +1041,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -1022,13 +1056,13 @@
         {
             "documentation": "virtual addressing + fips@us-west-2",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": true,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -1036,9 +1070,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -1051,13 +1085,13 @@
         {
             "documentation": "virtual addressing + dualstack + fips@us-west-2",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": true,
                 "___key": "key",
                 "UseDualStack": true,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -1065,9 +1099,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -1080,13 +1114,13 @@
         {
             "documentation": "accelerate + fips = error@us-west-2",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": true,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": true,
-                "Region": "us-west-2",
-                "ForcePathStyle": false
+                "Region": "us-west-2"
             },
             "expect": {
                 "error": "Accelerate cannot be used with FIPS"
@@ -1096,13 +1130,13 @@
         {
             "documentation": "vanilla virtual addressing@cn-north-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "cn-north-1",
-                "ForcePathStyle": false
+                "Region": "cn-north-1"
             },
             "expect": {
                 "endpoint": {
@@ -1110,9 +1144,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "cn-north-1"
                             }
                         ]
@@ -1125,13 +1159,13 @@
         {
             "documentation": "virtual addressing + dualstack@cn-north-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": true,
                 "Accelerate": false,
-                "Region": "cn-north-1",
-                "ForcePathStyle": false
+                "Region": "cn-north-1"
             },
             "expect": {
                 "endpoint": {
@@ -1139,9 +1173,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "cn-north-1"
                             }
                         ]
@@ -1154,12 +1188,12 @@
         {
             "documentation": "accelerate (dualstack=false)@cn-north-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Accelerate": true,
-                "Region": "cn-north-1",
-                "ForcePathStyle": false
+                "Region": "cn-north-1"
             },
             "expect": {
                 "error": "S3 Accelerate cannot be used in this region"
@@ -1169,12 +1203,12 @@
         {
             "documentation": "virtual addressing + fips@cn-north-1",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": true,
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "cn-north-1",
-                "ForcePathStyle": false
+                "Region": "cn-north-1"
             },
             "expect": {
                 "error": "Partition does not support FIPS"
@@ -1184,13 +1218,13 @@
         {
             "documentation": "vanilla virtual addressing@af-south-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": false
+                "Region": "af-south-1"
             },
             "expect": {
                 "endpoint": {
@@ -1198,9 +1232,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -1213,13 +1247,13 @@
         {
             "documentation": "virtual addressing + dualstack@af-south-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": true,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": false
+                "Region": "af-south-1"
             },
             "expect": {
                 "endpoint": {
@@ -1227,9 +1261,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -1242,13 +1276,13 @@
         {
             "documentation": "accelerate + dualstack@af-south-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": true,
                 "Accelerate": true,
-                "Region": "af-south-1",
-                "ForcePathStyle": false
+                "Region": "af-south-1"
             },
             "expect": {
                 "endpoint": {
@@ -1256,9 +1290,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -1271,13 +1305,13 @@
         {
             "documentation": "accelerate (dualstack=false)@af-south-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": true,
-                "Region": "af-south-1",
-                "ForcePathStyle": false
+                "Region": "af-south-1"
             },
             "expect": {
                 "endpoint": {
@@ -1285,9 +1319,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -1300,13 +1334,13 @@
         {
             "documentation": "virtual addressing + fips@af-south-1",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": true,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": false
+                "Region": "af-south-1"
             },
             "expect": {
                 "endpoint": {
@@ -1314,9 +1348,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -1329,13 +1363,13 @@
         {
             "documentation": "virtual addressing + dualstack + fips@af-south-1",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": true,
                 "___key": "key",
                 "UseDualStack": true,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": false
+                "Region": "af-south-1"
             },
             "expect": {
                 "endpoint": {
@@ -1343,9 +1377,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -1358,13 +1392,13 @@
         {
             "documentation": "accelerate + fips = error@af-south-1",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": true,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": true,
-                "Region": "af-south-1",
-                "ForcePathStyle": false
+                "Region": "af-south-1"
             },
             "expect": {
                 "error": "Accelerate cannot be used with FIPS"
@@ -1374,13 +1408,13 @@
         {
             "documentation": "vanilla path style@us-west-2",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -1388,9 +1422,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -1403,13 +1437,13 @@
         {
             "documentation": "path style + fips@us-west-2",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": true,
+                "UseFIPS": true,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "error": "Path-style addressing cannot be used with FIPS"
@@ -1419,13 +1453,13 @@
         {
             "documentation": "path style + accelerate = error@us-west-2",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": true,
-                "Region": "us-west-2",
-                "ForcePathStyle": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "error": "Path-style addressing cannot be used with S3 Accelerate"
@@ -1435,13 +1469,13 @@
         {
             "documentation": "path style + dualstack@us-west-2",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": true,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -1449,9 +1483,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -1464,14 +1498,14 @@
         {
             "documentation": "path style + arn is error@us-west-2",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": true,
-                "RequiresAccountId": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "error": "Path-style addressing cannot be used with ARN buckets"
@@ -1481,13 +1515,13 @@
         {
             "documentation": "path style + invalid host label@us-west-2",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "99a_b",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -1495,9 +1529,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -1510,8 +1544,8 @@
         {
             "documentation": "no path style + invalid host label@us-west-2",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "99a_b",
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
@@ -1523,9 +1557,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -1538,13 +1572,13 @@
         {
             "documentation": "vanilla path style@cn-north-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "cn-north-1",
-                "ForcePathStyle": true
+                "Region": "cn-north-1"
             },
             "expect": {
                 "endpoint": {
@@ -1552,9 +1586,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "cn-north-1"
                             }
                         ]
@@ -1567,13 +1601,13 @@
         {
             "documentation": "path style + fips@cn-north-1",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": true,
+                "UseFIPS": true,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "cn-north-1",
-                "ForcePathStyle": true
+                "Region": "cn-north-1"
             },
             "expect": {
                 "error": "Path-style addressing cannot be used with FIPS"
@@ -1583,13 +1617,13 @@
         {
             "documentation": "path style + accelerate = error@cn-north-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": true,
-                "Region": "cn-north-1",
-                "ForcePathStyle": true
+                "Region": "cn-north-1"
             },
             "expect": {
                 "error": "Path-style addressing cannot be used with S3 Accelerate"
@@ -1599,13 +1633,13 @@
         {
             "documentation": "path style + dualstack@cn-north-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": true,
                 "Accelerate": false,
-                "Region": "cn-north-1",
-                "ForcePathStyle": true
+                "Region": "cn-north-1"
             },
             "expect": {
                 "endpoint": {
@@ -1613,9 +1647,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "cn-north-1"
                             }
                         ]
@@ -1628,14 +1662,14 @@
         {
             "documentation": "path style + arn is error@cn-north-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "cn-north-1",
-                "ForcePathStyle": true,
-                "RequiresAccountId": true
+                "Region": "cn-north-1"
             },
             "expect": {
                 "error": "Path-style addressing cannot be used with ARN buckets"
@@ -1645,13 +1679,13 @@
         {
             "documentation": "path style + invalid host label@cn-north-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "99a_b",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "cn-north-1",
-                "ForcePathStyle": true
+                "Region": "cn-north-1"
             },
             "expect": {
                 "endpoint": {
@@ -1659,9 +1693,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "cn-north-1"
                             }
                         ]
@@ -1674,8 +1708,8 @@
         {
             "documentation": "no path style + invalid host label@cn-north-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "99a_b",
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
@@ -1687,9 +1721,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "cn-north-1"
                             }
                         ]
@@ -1702,13 +1736,13 @@
         {
             "documentation": "vanilla path style@af-south-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": true
+                "Region": "af-south-1"
             },
             "expect": {
                 "endpoint": {
@@ -1716,9 +1750,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -1731,13 +1765,13 @@
         {
             "documentation": "path style + fips@af-south-1",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": true,
+                "UseFIPS": true,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": true
+                "Region": "af-south-1"
             },
             "expect": {
                 "error": "Path-style addressing cannot be used with FIPS"
@@ -1747,13 +1781,13 @@
         {
             "documentation": "path style + accelerate = error@af-south-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": true,
-                "Region": "af-south-1",
-                "ForcePathStyle": true
+                "Region": "af-south-1"
             },
             "expect": {
                 "error": "Path-style addressing cannot be used with S3 Accelerate"
@@ -1763,13 +1797,13 @@
         {
             "documentation": "path style + dualstack@af-south-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": true,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": true
+                "Region": "af-south-1"
             },
             "expect": {
                 "endpoint": {
@@ -1777,9 +1811,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -1792,14 +1826,14 @@
         {
             "documentation": "path style + arn is error@af-south-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": true,
-                "RequiresAccountId": true
+                "Region": "af-south-1"
             },
             "expect": {
                 "error": "Path-style addressing cannot be used with ARN buckets"
@@ -1809,13 +1843,13 @@
         {
             "documentation": "path style + invalid host label@af-south-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "99a_b",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": true
+                "Region": "af-south-1"
             },
             "expect": {
                 "endpoint": {
@@ -1823,9 +1857,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -1838,8 +1872,8 @@
         {
             "documentation": "no path style + invalid host label@af-south-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "99a_b",
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
@@ -1851,9 +1885,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -1867,13 +1901,13 @@
             "documentation": "virtual addressing + private link@us-west-2",
             "params": {
                 "Endpoint": "http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -1881,9 +1915,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -1897,13 +1931,13 @@
             "documentation": "path style + private link@us-west-2",
             "params": {
                 "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -1911,9 +1945,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -1927,13 +1961,13 @@
             "documentation": "SDK::Host + FIPS@us-west-2",
             "params": {
                 "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": true,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": true,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false
+                "Region": "us-west-2"
             },
             "expect": {
                 "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
@@ -1944,13 +1978,13 @@
             "documentation": "SDK::Host + DualStack@us-west-2",
             "params": {
                 "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": true,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false
+                "Region": "us-west-2"
             },
             "expect": {
                 "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
@@ -1961,13 +1995,13 @@
             "documentation": "SDK::HOST + accelerate@us-west-2",
             "params": {
                 "Endpoint": "http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": true,
-                "Region": "us-west-2",
-                "ForcePathStyle": false
+                "Region": "us-west-2"
             },
             "expect": {
                 "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
@@ -1978,14 +2012,14 @@
             "documentation": "SDK::Host + access point ARN@us-west-2",
             "params": {
                 "Endpoint": "https://beta.example.com",
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -1993,9 +2027,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -2009,13 +2043,13 @@
             "documentation": "virtual addressing + private link@cn-north-1",
             "params": {
                 "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "cn-north-1",
-                "ForcePathStyle": false
+                "Region": "cn-north-1"
             },
             "expect": {
                 "endpoint": {
@@ -2023,9 +2057,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "cn-north-1"
                             }
                         ]
@@ -2039,13 +2073,13 @@
             "documentation": "path style + private link@cn-north-1",
             "params": {
                 "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "cn-north-1",
-                "ForcePathStyle": true
+                "Region": "cn-north-1"
             },
             "expect": {
                 "endpoint": {
@@ -2053,9 +2087,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "cn-north-1"
                             }
                         ]
@@ -2069,12 +2103,12 @@
             "documentation": "SDK::Host + FIPS@cn-north-1",
             "params": {
                 "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": true,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": true,
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "cn-north-1",
-                "ForcePathStyle": false
+                "Region": "cn-north-1"
             },
             "expect": {
                 "error": "Partition does not support FIPS"
@@ -2085,13 +2119,13 @@
             "documentation": "SDK::Host + DualStack@cn-north-1",
             "params": {
                 "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": true,
                 "Accelerate": false,
-                "Region": "cn-north-1",
-                "ForcePathStyle": false
+                "Region": "cn-north-1"
             },
             "expect": {
                 "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
@@ -2102,12 +2136,12 @@
             "documentation": "SDK::HOST + accelerate@cn-north-1",
             "params": {
                 "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Accelerate": true,
-                "Region": "cn-north-1",
-                "ForcePathStyle": false
+                "Region": "cn-north-1"
             },
             "expect": {
                 "error": "S3 Accelerate cannot be used in this region"
@@ -2118,14 +2152,14 @@
             "documentation": "SDK::Host + access point ARN@cn-north-1",
             "params": {
                 "Endpoint": "https://beta.example.com",
-                "UseFIPS": false,
                 "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "cn-north-1",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "cn-north-1"
             },
             "expect": {
                 "endpoint": {
@@ -2133,9 +2167,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "cn-north-1"
                             }
                         ]
@@ -2149,13 +2183,13 @@
             "documentation": "virtual addressing + private link@af-south-1",
             "params": {
                 "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": false
+                "Region": "af-south-1"
             },
             "expect": {
                 "endpoint": {
@@ -2163,9 +2197,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -2179,13 +2213,13 @@
             "documentation": "path style + private link@af-south-1",
             "params": {
                 "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": true,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": true
+                "Region": "af-south-1"
             },
             "expect": {
                 "endpoint": {
@@ -2193,9 +2227,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -2209,13 +2243,13 @@
             "documentation": "SDK::Host + FIPS@af-south-1",
             "params": {
                 "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": true,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": true,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": false
+                "Region": "af-south-1"
             },
             "expect": {
                 "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
@@ -2226,13 +2260,13 @@
             "documentation": "SDK::Host + DualStack@af-south-1",
             "params": {
                 "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": true,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": false
+                "Region": "af-south-1"
             },
             "expect": {
                 "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
@@ -2243,13 +2277,13 @@
             "documentation": "SDK::HOST + accelerate@af-south-1",
             "params": {
                 "Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                "UseFIPS": false,
                 "Bucket": "bucket-name",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
                 "Accelerate": true,
-                "Region": "af-south-1",
-                "ForcePathStyle": false
+                "Region": "af-south-1"
             },
             "expect": {
                 "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
@@ -2260,14 +2294,14 @@
             "documentation": "SDK::Host + access point ARN@af-south-1",
             "params": {
                 "Endpoint": "https://beta.example.com",
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "af-south-1"
             },
             "expect": {
                 "endpoint": {
@@ -2275,9 +2309,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -2290,14 +2324,14 @@
         {
             "documentation": "vanilla access point arn@us-west-2",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -2305,9 +2339,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -2320,14 +2354,14 @@
         {
             "documentation": "access point arn + FIPS@us-west-2",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": true,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -2335,9 +2369,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -2350,14 +2384,14 @@
         {
             "documentation": "access point arn + accelerate = error@us-west-2",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": true,
-                "Region": "us-west-2",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "error": "Access Points do not support S3 Accelerate"
@@ -2367,14 +2401,14 @@
         {
             "documentation": "access point arn + FIPS + DualStack@us-west-2",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": true,
                 "___key": "key",
                 "UseDualStack": true,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "us-west-2",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "us-west-2"
             },
             "expect": {
                 "endpoint": {
@@ -2382,9 +2416,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-2"
                             }
                         ]
@@ -2397,14 +2431,14 @@
         {
             "documentation": "vanilla access point arn@cn-north-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "cn-north-1",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "cn-north-1"
             },
             "expect": {
                 "endpoint": {
@@ -2412,9 +2446,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "cn-north-1"
                             }
                         ]
@@ -2427,13 +2461,13 @@
         {
             "documentation": "access point arn + FIPS@cn-north-1",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
-                "UseDualStack": false,
-                "Accelerate": false,
-                "Region": "cn-north-1",
                 "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "Region": "cn-north-1"
             },
             "expect": {
                 "error": "Partition does not support FIPS"
@@ -2443,14 +2477,14 @@
         {
             "documentation": "access point arn + accelerate = error@cn-north-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": true,
-                "Region": "cn-north-1",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "cn-north-1"
             },
             "expect": {
                 "error": "Access Points do not support S3 Accelerate"
@@ -2460,13 +2494,13 @@
         {
             "documentation": "access point arn + FIPS + DualStack@cn-north-1",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
-                "UseDualStack": true,
-                "Accelerate": false,
-                "Region": "cn-north-1",
                 "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "UseFIPS": true,
+                "UseDualStack": true,
+                "RequiresAccountId": true,
+                "Accelerate": false,
+                "Region": "cn-north-1"
             },
             "expect": {
                 "error": "Partition does not support FIPS"
@@ -2476,14 +2510,14 @@
         {
             "documentation": "vanilla access point arn@af-south-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "af-south-1"
             },
             "expect": {
                 "endpoint": {
@@ -2491,9 +2525,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -2506,14 +2540,14 @@
         {
             "documentation": "access point arn + FIPS@af-south-1",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": true,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "af-south-1"
             },
             "expect": {
                 "endpoint": {
@@ -2521,9 +2555,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -2536,14 +2570,14 @@
         {
             "documentation": "access point arn + accelerate = error@af-south-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": false,
                 "___key": "key",
                 "UseDualStack": false,
+                "RequiresAccountId": true,
                 "Accelerate": true,
-                "Region": "af-south-1",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "af-south-1"
             },
             "expect": {
                 "error": "Access Points do not support S3 Accelerate"
@@ -2553,14 +2587,14 @@
         {
             "documentation": "access point arn + FIPS + DualStack@af-south-1",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
+                "ForcePathStyle": false,
+                "UseFIPS": true,
                 "___key": "key",
                 "UseDualStack": true,
+                "RequiresAccountId": true,
                 "Accelerate": false,
-                "Region": "af-south-1",
-                "ForcePathStyle": false,
-                "RequiresAccountId": true
+                "Region": "af-south-1"
             },
             "expect": {
                 "endpoint": {
@@ -2568,9 +2602,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "af-south-1"
                             }
                         ]
@@ -2583,8 +2617,8 @@
         {
             "documentation": "S3 Outposts Abba Real Outpost Prod us-west-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-west-1",
                 "Accelerate": false
@@ -2595,9 +2629,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3-outposts",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-west-1"
                             }
                         ]
@@ -2610,8 +2644,8 @@
         {
             "documentation": "S3 Outposts Abba Real Outpost Prod ap-east-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "ap-east-1",
                 "Accelerate": false
@@ -2622,9 +2656,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3-outposts",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "ap-east-1"
                             }
                         ]
@@ -2637,8 +2671,8 @@
         {
             "documentation": "S3 Outposts Abba Ec2 Outpost Prod us-east-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-east-1",
                 "Accelerate": false
@@ -2649,9 +2683,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3-outposts",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-east-1"
                             }
                         ]
@@ -2664,8 +2698,8 @@
         {
             "documentation": "S3 Outposts Abba Ec2 Outpost Prod me-south-1",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "me-south-1",
                 "Accelerate": false
@@ -2676,9 +2710,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3-outposts",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "me-south-1"
                             }
                         ]
@@ -2692,8 +2726,8 @@
             "documentation": "S3 Outposts Abba Real Outpost Beta",
             "params": {
                 "Endpoint": "https://beta.us-east-1.seaport.aws.a2z.com",
-                "UseFIPS": false,
                 "Bucket": "test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-east-1",
                 "Accelerate": false
@@ -2704,9 +2738,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3-outposts",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-east-1"
                             }
                         ]
@@ -2720,8 +2754,8 @@
             "documentation": "S3 Outposts Abba Ec2 Outpost Beta",
             "params": {
                 "Endpoint": "https://beta.us-east-1.seaport.aws.a2z.com",
-                "UseFIPS": false,
                 "Bucket": "161743052723-e00000136899934034jeahy1t8gpzpbwjj8kb7beta0--op-s3",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-east-1",
                 "Accelerate": false
@@ -2732,9 +2766,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3-outposts",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "us-east-1"
                             }
                         ]
@@ -2747,8 +2781,8 @@
         {
             "documentation": "S3 Outposts Abba - No endpoint set for beta",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-east-1",
                 "Accelerate": false
@@ -2761,8 +2795,8 @@
         {
             "documentation": "S3 Outposts Abba Invalid hardware type",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "test-accessp-h0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-east-1",
                 "Accelerate": false
@@ -2775,8 +2809,8 @@
         {
             "documentation": "S3 Outposts Abba Special character in Outpost Arn",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "test-accessp-o00000754%1d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "us-east-1",
                 "Accelerate": false
@@ -2789,12 +2823,12 @@
         {
             "documentation": "S3 Outposts Snow with bucket",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucketName",
+                "SnowEndpointUrl": "http://10.0.1.12:433",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "snow",
-                "Accelerate": false,
-                "SnowEndpointUrl": "http://10.0.1.12:433"
+                "Accelerate": false
             },
             "expect": {
                 "endpoint": {
@@ -2802,9 +2836,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3-snow",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "snow"
                             }
                         ]
@@ -2817,11 +2851,11 @@
         {
             "documentation": "S3 Outposts Snow without bucket",
             "params": {
+                "SnowEndpointUrl": "https://10.0.1.12:433",
                 "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "snow",
-                "Accelerate": false,
-                "SnowEndpointUrl": "https://10.0.1.12:433"
+                "Accelerate": false
             },
             "expect": {
                 "endpoint": {
@@ -2829,9 +2863,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3-snow",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "snow"
                             }
                         ]
@@ -2844,12 +2878,12 @@
         {
             "documentation": "S3 Outposts Snow no port",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucketName",
+                "SnowEndpointUrl": "http://10.0.1.12",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "snow",
-                "Accelerate": false,
-                "SnowEndpointUrl": "http://10.0.1.12"
+                "Accelerate": false
             },
             "expect": {
                 "endpoint": {
@@ -2857,9 +2891,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3-snow",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "snow"
                             }
                         ]
@@ -2872,12 +2906,12 @@
         {
             "documentation": "S3 Outposts Snow dns endpoint",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucketName",
+                "SnowEndpointUrl": "https://amazonaws.com",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "snow",
-                "Accelerate": false,
-                "SnowEndpointUrl": "https://amazonaws.com"
+                "Accelerate": false
             },
             "expect": {
                 "endpoint": {
@@ -2885,9 +2919,9 @@
                     "properties": {
                         "authSchemes": [
                             {
+                                "name": "sigv4",
                                 "signingName": "s3-snow",
                                 "disableDoubleEncoding": true,
-                                "name": "sigv4",
                                 "signingRegion": "snow"
                             }
                         ]
@@ -2900,11 +2934,11 @@
         {
             "documentation": "S3 Outposts Snow invalid url",
             "params": {
+                "SnowEndpointUrl": "invalid.url",
                 "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "snow",
-                "Accelerate": false,
-                "SnowEndpointUrl": "invalid.url"
+                "Accelerate": false
             },
             "expect": {
                 "error": "Snow endpoint url was not a valid url"
@@ -2914,8 +2948,8 @@
         {
             "documentation": "S3 Outposts Snow no snow endpoint",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucketName",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "snow",
                 "Accelerate": false
@@ -2928,12 +2962,12 @@
         {
             "documentation": "S3 Outposts Snow FIPS enabled",
             "params": {
-                "UseFIPS": true,
                 "Bucket": "bucketName",
+                "SnowEndpointUrl": "https://10.0.1.12:433",
+                "UseFIPS": true,
                 "UseDualStack": false,
                 "Region": "snow",
-                "Accelerate": false,
-                "SnowEndpointUrl": "https://10.0.1.12:433"
+                "Accelerate": false
             },
             "expect": {
                 "error": "S3 Snow does not support FIPS"
@@ -2943,12 +2977,12 @@
         {
             "documentation": "S3 Outposts Snow Dual-stack enabled",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucketName",
+                "SnowEndpointUrl": "https://10.0.1.12:433",
+                "UseFIPS": false,
                 "UseDualStack": true,
                 "Region": "snow",
-                "Accelerate": false,
-                "SnowEndpointUrl": "https://10.0.1.12:433"
+                "Accelerate": false
             },
             "expect": {
                 "error": "S3 Snow does not support Dual-stack"
@@ -2958,15 +2992,701 @@
         {
             "documentation": "S3 Outposts Snow Accelerate enabled",
             "params": {
-                "UseFIPS": false,
                 "Bucket": "bucketName",
+                "SnowEndpointUrl": "https://10.0.1.12:433",
+                "UseFIPS": false,
                 "UseDualStack": false,
                 "Region": "snow",
-                "Accelerate": true,
-                "SnowEndpointUrl": "https://10.0.1.12:433"
+                "Accelerate": true
             },
             "expect": {
                 "error": "S3 Snow does not support S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda @us-east-1",
+            "params": {
+                "UseArnRegion": false,
+                "Bucket": "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-east-1",
+                "Accelerate": false
+            },
+            "expect": {
+                "endpoint": {
+                    "url": "https://mybanner-123456789012.s3-object-lambda.us-east-1.amazonaws.com",
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3-object-lambda",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-east-1"
+                            }
+                        ]
+                    },
+                    "headers": {}
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda @us-west-2",
+            "params": {
+                "UseArnRegion": false,
+                "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint/mybanner",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "endpoint": {
+                    "url": "https://mybanner-123456789012.s3-object-lambda.us-west-2.amazonaws.com",
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3-object-lambda",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-west-2"
+                            }
+                        ]
+                    },
+                    "headers": {}
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda, colon resource deliminator @us-west-2",
+            "params": {
+                "UseArnRegion": false,
+                "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint:mybanner",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "endpoint": {
+                    "url": "https://mybanner-123456789012.s3-object-lambda.us-west-2.amazonaws.com",
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3-object-lambda",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-west-2"
+                            }
+                        ]
+                    },
+                    "headers": {}
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda @us-east-1, client region us-west-2, useArnRegion=true",
+            "params": {
+                "UseArnRegion": true,
+                "Bucket": "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "endpoint": {
+                    "url": "https://mybanner-123456789012.s3-object-lambda.us-east-1.amazonaws.com",
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3-object-lambda",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-east-1"
+                            }
+                        ]
+                    },
+                    "headers": {}
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda @us-east-1, client region s3-external-1, useArnRegion=true",
+            "params": {
+                "UseArnRegion": true,
+                "Bucket": "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "s3-external-1",
+                "Accelerate": false
+            },
+            "expect": {
+                "endpoint": {
+                    "url": "https://mybanner-123456789012.s3-object-lambda.us-east-1.amazonaws.com",
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3-object-lambda",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-east-1"
+                            }
+                        ]
+                    },
+                    "headers": {}
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda @us-east-1, client region s3-external-1, useArnRegion=false",
+            "params": {
+                "UseArnRegion": false,
+                "Bucket": "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "s3-external-1",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `s3-external-1` and UseArnRegion is `false`"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda @us-east-1, client region aws-global, useArnRegion=true",
+            "params": {
+                "UseArnRegion": true,
+                "Bucket": "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "aws-global",
+                "Accelerate": false
+            },
+            "expect": {
+                "endpoint": {
+                    "url": "https://mybanner-123456789012.s3-object-lambda.us-east-1.amazonaws.com",
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3-object-lambda",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-east-1"
+                            }
+                        ]
+                    },
+                    "headers": {}
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda @us-east-1, client region aws-global, useArnRegion=false",
+            "params": {
+                "UseArnRegion": false,
+                "Bucket": "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "aws-global",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `aws-global` and UseArnRegion is `false`"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda @cn-north-1, client region us-west-2 (cross partition), useArnRegion=true",
+            "params": {
+                "UseArnRegion": true,
+                "Bucket": "arn:aws-cn:s3-object-lambda:cn-north-1:123456789012:accesspoint/mybanner",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "aws-global",
+                "Accelerate": false
+            },
+            "expect": {
+                "endpoint": {
+                    "url": "https://mybanner-123456789012.s3-object-lambda.cn-north-1.amazonaws.com.cn",
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3-object-lambda",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "cn-north-1"
+                            }
+                        ]
+                    },
+                    "headers": {}
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda with dualstack",
+            "params": {
+                "UseArnRegion": false,
+                "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint/mybanner",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "S3 Object Lambda does not support Dual-stack"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda @us-gov-east-1",
+            "params": {
+                "UseArnRegion": false,
+                "Bucket": "arn:aws-us-gov:s3-object-lambda:us-gov-east-1:123456789012:accesspoint/mybanner",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-gov-east-1",
+                "Accelerate": false
+            },
+            "expect": {
+                "endpoint": {
+                    "url": "https://mybanner-123456789012.s3-object-lambda.us-gov-east-1.amazonaws.com",
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3-object-lambda",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-gov-east-1"
+                            }
+                        ]
+                    },
+                    "headers": {}
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda @us-gov-east-1, with fips",
+            "params": {
+                "UseArnRegion": false,
+                "Bucket": "arn:aws-us-gov:s3-object-lambda:us-gov-east-1:123456789012:accesspoint/mybanner",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Region": "us-gov-east-1",
+                "Accelerate": false
+            },
+            "expect": {
+                "endpoint": {
+                    "url": "https://mybanner-123456789012.s3-object-lambda-fips.us-gov-east-1.amazonaws.com",
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3-object-lambda",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-gov-east-1"
+                            }
+                        ]
+                    },
+                    "headers": {}
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda @cn-north-1, with fips",
+            "params": {
+                "UseArnRegion": false,
+                "Bucket": "arn:aws-cn:s3-object-lambda:cn-north-1:123456789012:accesspoint/mybanner",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Region": "cn-north-1",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Partition does not support FIPS"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda with accelerate",
+            "params": {
+                "UseArnRegion": false,
+                "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint/mybanner",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": true
+            },
+            "expect": {
+                "error": "S3 Object Lambda does not support S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda with invalid arn - bad service and someresource",
+            "params": {
+                "UseArnRegion": false,
+                "Bucket": "arn:aws:sqs:us-west-2:123456789012:someresource",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid ARN: Unrecognized format: arn:aws:sqs:us-west-2:123456789012:someresource (type: someresource)"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda with invalid arn - invalid resource",
+            "params": {
+                "UseArnRegion": false,
+                "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:bucket_name:mybucket",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid ARN: Object Lambda ARNs only support `accesspoint` arn types, but found: `bucket_name`"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda with invalid arn - missing region",
+            "params": {
+                "UseArnRegion": false,
+                "Bucket": "arn:aws:s3-object-lambda::123456789012:accesspoint/mybanner",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid ARN: bucket ARN is missing a region"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda with invalid arn - fips in region",
+            "params": {
+                "UseArnRegion": true,
+                "Bucket": "arn:aws-us-gov:s3-object-lambda:fips-us-gov-west-1:123456789012:accesspoint/myendpoint",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Could not load partition for ARN region `fips-us-gov-west-1`"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda with invalid arn - fips in region",
+            "params": {
+                "UseArnRegion": true,
+                "Bucket": "arn:aws-us-gov:s3-object-lambda:us-gov-west-1-fips:123456789012:accesspoint/myendpoint",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Could not load partition for ARN region `us-gov-west-1-fips`"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda with invalid arn - missing account-id",
+            "params": {
+                "UseArnRegion": true,
+                "Bucket": "arn:aws:s3-object-lambda:us-west-2::accesspoint/mybanner",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid ARN: Missing account id"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda with invalid arn - account id contains invalid characters",
+            "params": {
+                "UseArnRegion": true,
+                "Bucket": "arn:aws:s3-object-lambda:us-west-2:123.45678.9012:accesspoint:mybucket",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: `123.45678.9012`"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda with invalid arn - missing access point name",
+            "params": {
+                "UseArnRegion": true,
+                "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid ARN: Expected a resource of the format `accesspoint:<accesspoint name>` but no name was provided"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda with invalid arn - access point name contains invalid character: *",
+            "params": {
+                "UseArnRegion": true,
+                "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint:*",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: `*`"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda with invalid arn - access point name contains invalid character: .",
+            "params": {
+                "UseArnRegion": true,
+                "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint:my.bucket",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: `my.bucket`"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda with invalid arn - access point name contains sub resources",
+            "params": {
+                "UseArnRegion": true,
+                "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint:mybucket:object:foo",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "error": "Invalid ARN: The ARN may only contain a single resource component after `accesspoint`."
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "object lambda with custom endpoint",
+            "params": {
+                "UseArnRegion": false,
+                "Endpoint": "https://my-endpoint.com",
+                "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint/mybanner",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Region": "us-west-2",
+                "Accelerate": false
+            },
+            "expect": {
+                "endpoint": {
+                    "url": "https://mybanner-123456789012.my-endpoint.com",
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3-object-lambda",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-west-2"
+                            }
+                        ]
+                    },
+                    "headers": {}
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "WriteGetObjectResponse @ us-west-2",
+            "params": {
+                "UseObjectLambdaEndpoint": true,
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Accelerate": false,
+                "Region": "us-west-2"
+            },
+            "expect": {
+                "endpoint": {
+                    "url": "https://s3-object-lambda.us-west-2.amazonaws.com",
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3-object-lambda",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-west-2"
+                            }
+                        ]
+                    },
+                    "headers": {}
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "WriteGetObjectResponse with custom endpoint",
+            "params": {
+                "Endpoint": "https://my-endpoint.com",
+                "UseObjectLambdaEndpoint": true,
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Accelerate": false,
+                "Region": "us-west-2"
+            },
+            "expect": {
+                "endpoint": {
+                    "url": "https://my-endpoint.com",
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3-object-lambda",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-west-2"
+                            }
+                        ]
+                    },
+                    "headers": {}
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "WriteGetObjectResponse @ us-east-1",
+            "params": {
+                "UseObjectLambdaEndpoint": true,
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Accelerate": false,
+                "Region": "us-east-1"
+            },
+            "expect": {
+                "endpoint": {
+                    "url": "https://s3-object-lambda.us-east-1.amazonaws.com",
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3-object-lambda",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-east-1"
+                            }
+                        ]
+                    },
+                    "headers": {}
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "WriteGetObjectResponse with fips",
+            "params": {
+                "UseObjectLambdaEndpoint": true,
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Accelerate": false,
+                "Region": "us-east-1"
+            },
+            "expect": {
+                "endpoint": {
+                    "url": "https://s3-object-lambda-fips.us-east-1.amazonaws.com",
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3-object-lambda",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-east-1"
+                            }
+                        ]
+                    },
+                    "headers": {}
+                }
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "WriteGetObjectResponse with dualstack",
+            "params": {
+                "UseObjectLambdaEndpoint": true,
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Accelerate": false,
+                "Region": "us-east-1"
+            },
+            "expect": {
+                "error": "S3 Object Lambda does not support Dual-stack"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "WriteGetObjectResponse with accelerate",
+            "params": {
+                "UseObjectLambdaEndpoint": true,
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Accelerate": true,
+                "Region": "us-east-1"
+            },
+            "expect": {
+                "error": "S3 Object Lambda does not support S3 Accelerate"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "WriteGetObjectResponse with fips in CN",
+            "params": {
+                "UseObjectLambdaEndpoint": true,
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Accelerate": false,
+                "Region": "cn-north-1"
+            },
+            "expect": {
+                "error": "Partition does not support FIPS"
+            },
+            "operationInputs": []
+        },
+        {
+            "documentation": "WriteGetObjectResponse with invalid partition",
+            "params": {
+                "UseObjectLambdaEndpoint": true,
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Accelerate": false,
+                "Region": "fake-partition"
+            },
+            "expect": {
+                "error": "A valid partition could not be determined"
             },
             "operationInputs": []
         }
