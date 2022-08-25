@@ -865,6 +865,11 @@ module Aws::Panorama
     #   The device's description.
     #   @return [String]
     #
+    # @!attribute [rw] device_aggregated_status
+    #   A device's aggregated status. Including the device's connection
+    #   status, provisioning status, and lease status.
+    #   @return [String]
+    #
     # @!attribute [rw] device_connection_status
     #   The device's connection status.
     #   @return [String]
@@ -876,6 +881,11 @@ module Aws::Panorama
     # @!attribute [rw] latest_alternate_software
     #   The most recent beta software release.
     #   @return [String]
+    #
+    # @!attribute [rw] latest_device_job
+    #   A device's latest job. Includes the target image version, and the
+    #   job status.
+    #   @return [Types::LatestDeviceJob]
     #
     # @!attribute [rw] latest_software
     #   The latest software version available for the device.
@@ -919,9 +929,11 @@ module Aws::Panorama
       :current_networking_status,
       :current_software,
       :description,
+      :device_aggregated_status,
       :device_connection_status,
       :device_id,
       :latest_alternate_software,
+      :latest_device_job,
       :latest_software,
       :lease_expiration_time,
       :name,
@@ -1373,6 +1385,19 @@ module Aws::Panorama
     #   When the device was created.
     #   @return [Time]
     #
+    # @!attribute [rw] current_software
+    #   A device's current software.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_aggregated_status
+    #   A device's aggregated status. Including the device's connection
+    #   status, provisioning status, and lease status.
+    #   @return [String]
+    #
     # @!attribute [rw] device_id
     #   The device's ID.
     #   @return [String]
@@ -1380,6 +1405,11 @@ module Aws::Panorama
     # @!attribute [rw] last_updated_time
     #   When the device was updated.
     #   @return [Time]
+    #
+    # @!attribute [rw] latest_device_job
+    #   A device's latest job. Includes the target image version, and the
+    #   update job status.
+    #   @return [Types::LatestDeviceJob]
     #
     # @!attribute [rw] lease_expiration_time
     #   The device's lease expiration time.
@@ -1393,16 +1423,30 @@ module Aws::Panorama
     #   The device's provisioning status.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The device's tags.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] type
+    #   The device's type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/Device AWS API Documentation
     #
     class Device < Struct.new(
       :brand,
       :created_time,
+      :current_software,
+      :description,
+      :device_aggregated_status,
       :device_id,
       :last_updated_time,
+      :latest_device_job,
       :lease_expiration_time,
       :name,
-      :provisioning_status)
+      :provisioning_status,
+      :tags,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1578,6 +1622,25 @@ module Aws::Panorama
     class JobResourceTags < Struct.new(
       :resource_type,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about the latest device job.
+    #
+    # @!attribute [rw] image_version
+    #   The target version of the device software.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the latest device job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/LatestDeviceJob AWS API Documentation
+    #
+    class LatestDeviceJob < Struct.new(
+      :image_version,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1791,24 +1854,50 @@ module Aws::Panorama
     #   data as a hash:
     #
     #       {
+    #         device_aggregated_status_filter: "ERROR", # accepts ERROR, AWAITING_PROVISIONING, PENDING, FAILED, DELETING, ONLINE, OFFLINE, LEASE_EXPIRED, UPDATE_NEEDED
     #         max_results: 1,
+    #         name_filter: "NameFilter",
     #         next_token: "NextToken",
+    #         sort_by: "DEVICE_ID", # accepts DEVICE_ID, CREATED_TIME, NAME, DEVICE_AGGREGATED_STATUS
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       }
+    #
+    # @!attribute [rw] device_aggregated_status_filter
+    #   Filter based on a device's status.
+    #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of devices to return in one page of results.
     #   @return [Integer]
+    #
+    # @!attribute [rw] name_filter
+    #   Filter based on device's name. Prefixes supported.
+    #   @return [String]
     #
     # @!attribute [rw] next_token
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
     #   @return [String]
     #
+    # @!attribute [rw] sort_by
+    #   The target column to be sorted on. Default column sort is
+    #   CREATED\_TIME.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sorting order for the returned list. SortOrder is DESCENDING by
+    #   default based on CREATED\_TIME. Otherwise, SortOrder is ASCENDING.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/ListDevicesRequest AWS API Documentation
     #
     class ListDevicesRequest < Struct.new(
+      :device_aggregated_status_filter,
       :max_results,
-      :next_token)
+      :name_filter,
+      :next_token,
+      :sort_by,
+      :sort_order)
       SENSITIVE = []
       include Aws::Structure
     end

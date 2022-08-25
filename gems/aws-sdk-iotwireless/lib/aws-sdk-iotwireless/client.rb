@@ -1113,6 +1113,10 @@ module Aws::IoTWireless
     #       ],
     #       net_id_filters: ["NetId"],
     #       sub_bands: [1],
+    #       beaconing: {
+    #         data_rate: 1,
+    #         frequencies: [1],
+    #       },
     #     },
     #     tags: [
     #       {
@@ -2371,6 +2375,9 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.net_id_filters[0] #=> String
     #   resp.lo_ra_wan.sub_bands #=> Array
     #   resp.lo_ra_wan.sub_bands[0] #=> Integer
+    #   resp.lo_ra_wan.beaconing.data_rate #=> Integer
+    #   resp.lo_ra_wan.beaconing.frequencies #=> Array
+    #   resp.lo_ra_wan.beaconing.frequencies[0] #=> Integer
     #   resp.arn #=> String
     #   resp.thing_name #=> String
     #   resp.thing_arn #=> String
@@ -2961,6 +2968,11 @@ module Aws::IoTWireless
     #   resp.downlink_queue_messages_list[0].transmit_mode #=> Integer
     #   resp.downlink_queue_messages_list[0].received_at #=> String
     #   resp.downlink_queue_messages_list[0].lo_ra_wan.f_port #=> Integer
+    #   resp.downlink_queue_messages_list[0].lo_ra_wan.participating_gateways.downlink_mode #=> String, one of "SEQUENTIAL", "CONCURRENT", "USING_UPLINK_GATEWAY"
+    #   resp.downlink_queue_messages_list[0].lo_ra_wan.participating_gateways.gateway_list #=> Array
+    #   resp.downlink_queue_messages_list[0].lo_ra_wan.participating_gateways.gateway_list[0].gateway_id #=> String
+    #   resp.downlink_queue_messages_list[0].lo_ra_wan.participating_gateways.gateway_list[0].downlink_frequency #=> Integer
+    #   resp.downlink_queue_messages_list[0].lo_ra_wan.participating_gateways.transmission_interval #=> Integer
     #
     # @overload list_queued_messages(params = {})
     # @param [Hash] params ({})
@@ -3204,6 +3216,9 @@ module Aws::IoTWireless
     #   resp.wireless_gateway_list[0].lo_ra_wan.net_id_filters[0] #=> String
     #   resp.wireless_gateway_list[0].lo_ra_wan.sub_bands #=> Array
     #   resp.wireless_gateway_list[0].lo_ra_wan.sub_bands[0] #=> Integer
+    #   resp.wireless_gateway_list[0].lo_ra_wan.beaconing.data_rate #=> Integer
+    #   resp.wireless_gateway_list[0].lo_ra_wan.beaconing.frequencies #=> Array
+    #   resp.wireless_gateway_list[0].lo_ra_wan.beaconing.frequencies[0] #=> Integer
     #   resp.wireless_gateway_list[0].last_uplink_received_at #=> String
     #
     # @overload list_wireless_gateways(params = {})
@@ -3396,6 +3411,16 @@ module Aws::IoTWireless
     #     wireless_metadata: {
     #       lo_ra_wan: {
     #         f_port: 1,
+    #         participating_gateways: {
+    #           downlink_mode: "SEQUENTIAL", # required, accepts SEQUENTIAL, CONCURRENT, USING_UPLINK_GATEWAY
+    #           gateway_list: [ # required
+    #             {
+    #               gateway_id: "WirelessGatewayId", # required
+    #               downlink_frequency: 1, # required
+    #             },
+    #           ],
+    #           transmission_interval: 1, # required
+    #         },
     #       },
     #       sidewalk: {
     #         seq: 1,
@@ -4146,7 +4171,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

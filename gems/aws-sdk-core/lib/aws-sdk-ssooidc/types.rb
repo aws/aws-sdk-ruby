@@ -52,7 +52,7 @@ module Aws::SSOOIDC
     #         client_id: "ClientId", # required
     #         client_secret: "ClientSecret", # required
     #         grant_type: "GrantType", # required
-    #         device_code: "DeviceCode", # required
+    #         device_code: "DeviceCode",
     #         code: "AuthCode",
     #         refresh_token: "RefreshToken",
     #         scope: ["Scope"],
@@ -70,14 +70,8 @@ module Aws::SSOOIDC
     #   @return [String]
     #
     # @!attribute [rw] grant_type
-    #   Supports grant types for the authorization code, refresh token, and
-    #   device code request. For device code requests, specify the following
-    #   value:
-    #
-    #   `urn:ietf:params:oauth:grant-type:device_code `
-    #
-    #   For information about how to obtain the device code, see the
-    #   StartDeviceAuthorization topic.
+    #   Supports grant types for authorization code, refresh token, and
+    #   device code request.
     #   @return [String]
     #
     # @!attribute [rw] device_code
@@ -94,18 +88,9 @@ module Aws::SSOOIDC
     #   @return [String]
     #
     # @!attribute [rw] refresh_token
-    #   Currently, `refreshToken` is not yet implemented and is not
-    #   supported. For more information about the features and limitations
-    #   of the current Amazon Web Services SSO OIDC implementation, see
-    #   *Considerations for Using this Guide* in the [Amazon Web Services
-    #   SSO OIDC API Reference][1].
-    #
     #   The token used to obtain an access token in the event that the
-    #   access token is invalid or expired.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html
+    #   access token is invalid or expired. This token is not issued by the
+    #   service.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -136,8 +121,7 @@ module Aws::SSOOIDC
     end
 
     # @!attribute [rw] access_token
-    #   An opaque token to access Amazon Web Services SSO resources assigned
-    #   to a user.
+    #   An opaque token to access AWS SSO resources assigned to a user.
     #   @return [String]
     #
     # @!attribute [rw] token_type
@@ -150,33 +134,13 @@ module Aws::SSOOIDC
     #   @return [Integer]
     #
     # @!attribute [rw] refresh_token
-    #   Currently, `refreshToken` is not yet implemented and is not
-    #   supported. For more information about the features and limitations
-    #   of the current Amazon Web Services SSO OIDC implementation, see
-    #   *Considerations for Using this Guide* in the [Amazon Web Services
-    #   SSO OIDC API Reference][1].
-    #
     #   A token that, if present, can be used to refresh a previously issued
     #   access token that might have expired.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html
     #   @return [String]
     #
     # @!attribute [rw] id_token
-    #   Currently, `idToken` is not yet implemented and is not supported.
-    #   For more information about the features and limitations of the
-    #   current Amazon Web Services SSO OIDC implementation, see
-    #   *Considerations for Using this Guide* in the [Amazon Web Services
-    #   SSO OIDC API Reference][1].
-    #
     #   The identifier of the user that associated with the access token, if
     #   present.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-oidc-2019-06-10/CreateTokenResponse AWS API Documentation
@@ -421,8 +385,8 @@ module Aws::SSOOIDC
     #
     # @!attribute [rw] client_id
     #   The unique identifier string for the client that is registered with
-    #   Amazon Web Services SSO. This value should come from the persisted
-    #   result of the RegisterClient API operation.
+    #   AWS SSO. This value should come from the persisted result of the
+    #   RegisterClient API operation.
     #   @return [String]
     #
     # @!attribute [rw] client_secret
@@ -431,9 +395,8 @@ module Aws::SSOOIDC
     #   @return [String]
     #
     # @!attribute [rw] start_url
-    #   The URL for the AWS access portal. For more information, see [Using
-    #   the AWS access portal][1] in the *Amazon Web Services SSO User
-    #   Guide*.
+    #   The URL for the AWS SSO user portal. For more information, see
+    #   [Using the User Portal][1] in the *AWS Single Sign-On User Guide*.
     #
     #
     #

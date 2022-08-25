@@ -833,9 +833,11 @@ module Aws::Panorama
     #   * {Types::DescribeDeviceResponse#current_networking_status #current_networking_status} => Types::NetworkStatus
     #   * {Types::DescribeDeviceResponse#current_software #current_software} => String
     #   * {Types::DescribeDeviceResponse#description #description} => String
+    #   * {Types::DescribeDeviceResponse#device_aggregated_status #device_aggregated_status} => String
     #   * {Types::DescribeDeviceResponse#device_connection_status #device_connection_status} => String
     #   * {Types::DescribeDeviceResponse#device_id #device_id} => String
     #   * {Types::DescribeDeviceResponse#latest_alternate_software #latest_alternate_software} => String
+    #   * {Types::DescribeDeviceResponse#latest_device_job #latest_device_job} => Types::LatestDeviceJob
     #   * {Types::DescribeDeviceResponse#latest_software #latest_software} => String
     #   * {Types::DescribeDeviceResponse#lease_expiration_time #lease_expiration_time} => Time
     #   * {Types::DescribeDeviceResponse#name #name} => String
@@ -870,9 +872,12 @@ module Aws::Panorama
     #   resp.current_networking_status.ntp_status.ntp_server_name #=> String
     #   resp.current_software #=> String
     #   resp.description #=> String
+    #   resp.device_aggregated_status #=> String, one of "ERROR", "AWAITING_PROVISIONING", "PENDING", "FAILED", "DELETING", "ONLINE", "OFFLINE", "LEASE_EXPIRED", "UPDATE_NEEDED"
     #   resp.device_connection_status #=> String, one of "ONLINE", "OFFLINE", "AWAITING_CREDENTIALS", "NOT_AVAILABLE", "ERROR"
     #   resp.device_id #=> String
     #   resp.latest_alternate_software #=> String
+    #   resp.latest_device_job.image_version #=> String
+    #   resp.latest_device_job.status #=> String, one of "PENDING", "IN_PROGRESS", "VERIFYING", "REBOOTING", "DOWNLOADING", "COMPLETED", "FAILED"
     #   resp.latest_software #=> String
     #   resp.lease_expiration_time #=> Time
     #   resp.name #=> String
@@ -1387,12 +1392,26 @@ module Aws::Panorama
 
     # Returns a list of devices.
     #
+    # @option params [String] :device_aggregated_status_filter
+    #   Filter based on a device's status.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of devices to return in one page of results.
+    #
+    # @option params [String] :name_filter
+    #   Filter based on device's name. Prefixes supported.
     #
     # @option params [String] :next_token
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
+    #
+    # @option params [String] :sort_by
+    #   The target column to be sorted on. Default column sort is
+    #   CREATED\_TIME.
+    #
+    # @option params [String] :sort_order
+    #   The sorting order for the returned list. SortOrder is DESCENDING by
+    #   default based on CREATED\_TIME. Otherwise, SortOrder is ASCENDING.
     #
     # @return [Types::ListDevicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1404,8 +1423,12 @@ module Aws::Panorama
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_devices({
+    #     device_aggregated_status_filter: "ERROR", # accepts ERROR, AWAITING_PROVISIONING, PENDING, FAILED, DELETING, ONLINE, OFFLINE, LEASE_EXPIRED, UPDATE_NEEDED
     #     max_results: 1,
+    #     name_filter: "NameFilter",
     #     next_token: "NextToken",
+    #     sort_by: "DEVICE_ID", # accepts DEVICE_ID, CREATED_TIME, NAME, DEVICE_AGGREGATED_STATUS
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #   })
     #
     # @example Response structure
@@ -1413,11 +1436,19 @@ module Aws::Panorama
     #   resp.devices #=> Array
     #   resp.devices[0].brand #=> String, one of "AWS_PANORAMA", "LENOVO"
     #   resp.devices[0].created_time #=> Time
+    #   resp.devices[0].current_software #=> String
+    #   resp.devices[0].description #=> String
+    #   resp.devices[0].device_aggregated_status #=> String, one of "ERROR", "AWAITING_PROVISIONING", "PENDING", "FAILED", "DELETING", "ONLINE", "OFFLINE", "LEASE_EXPIRED", "UPDATE_NEEDED"
     #   resp.devices[0].device_id #=> String
     #   resp.devices[0].last_updated_time #=> Time
+    #   resp.devices[0].latest_device_job.image_version #=> String
+    #   resp.devices[0].latest_device_job.status #=> String, one of "PENDING", "IN_PROGRESS", "VERIFYING", "REBOOTING", "DOWNLOADING", "COMPLETED", "FAILED"
     #   resp.devices[0].lease_expiration_time #=> Time
     #   resp.devices[0].name #=> String
     #   resp.devices[0].provisioning_status #=> String, one of "AWAITING_PROVISIONING", "PENDING", "SUCCEEDED", "FAILED", "ERROR", "DELETING"
+    #   resp.devices[0].tags #=> Hash
+    #   resp.devices[0].tags["TagKey"] #=> String
+    #   resp.devices[0].type #=> String, one of "PANORAMA_APPLIANCE_DEVELOPER_KIT", "PANORAMA_APPLIANCE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/ListDevices AWS API Documentation
@@ -1938,7 +1969,7 @@ module Aws::Panorama
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-panorama'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -353,7 +353,7 @@ module Aws::SSOOIDC
 
     # Creates and returns an access token for the authorized client. The
     # access token issued will be used to fetch short-term credentials for
-    # the assigned roles in the Amazon Web Services account.
+    # the assigned roles in the AWS account.
     #
     # @option params [required, String] :client_id
     #   The unique identifier string for each client. This value should come
@@ -364,16 +364,10 @@ module Aws::SSOOIDC
     #   the persisted result of the RegisterClient API.
     #
     # @option params [required, String] :grant_type
-    #   Supports grant types for the authorization code, refresh token, and
-    #   device code request. For device code requests, specify the following
-    #   value:
+    #   Supports grant types for authorization code, refresh token, and device
+    #   code request.
     #
-    #   `urn:ietf:params:oauth:grant-type:device_code `
-    #
-    #   For information about how to obtain the device code, see the
-    #   StartDeviceAuthorization topic.
-    #
-    # @option params [required, String] :device_code
+    # @option params [String] :device_code
     #   Used only when calling this API for the device code grant type. This
     #   short-term code is used to identify this authentication attempt. This
     #   should come from an in-memory reference to the result of the
@@ -385,18 +379,8 @@ module Aws::SSOOIDC
     #   access to a token.
     #
     # @option params [String] :refresh_token
-    #   Currently, `refreshToken` is not yet implemented and is not supported.
-    #   For more information about the features and limitations of the current
-    #   Amazon Web Services SSO OIDC implementation, see *Considerations for
-    #   Using this Guide* in the [Amazon Web Services SSO OIDC API
-    #   Reference][1].
-    #
     #   The token used to obtain an access token in the event that the access
-    #   token is invalid or expired.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html
+    #   token is invalid or expired. This token is not issued by the service.
     #
     # @option params [Array<String>] :scope
     #   The list of scopes that is defined by the client. Upon authorization,
@@ -422,7 +406,7 @@ module Aws::SSOOIDC
     #     client_id: "ClientId", # required
     #     client_secret: "ClientSecret", # required
     #     grant_type: "GrantType", # required
-    #     device_code: "DeviceCode", # required
+    #     device_code: "DeviceCode",
     #     code: "AuthCode",
     #     refresh_token: "RefreshToken",
     #     scope: ["Scope"],
@@ -446,9 +430,9 @@ module Aws::SSOOIDC
       req.send_request(options)
     end
 
-    # Registers a client with Amazon Web Services SSO. This allows clients
-    # to initiate device authorization. The output should be persisted for
-    # reuse through many authentication requests.
+    # Registers a client with AWS SSO. This allows clients to initiate
+    # device authorization. The output should be persisted for reuse through
+    # many authentication requests.
     #
     # @option params [required, String] :client_name
     #   The friendly name of the client.
@@ -502,16 +486,16 @@ module Aws::SSOOIDC
     #
     # @option params [required, String] :client_id
     #   The unique identifier string for the client that is registered with
-    #   Amazon Web Services SSO. This value should come from the persisted
-    #   result of the RegisterClient API operation.
+    #   AWS SSO. This value should come from the persisted result of the
+    #   RegisterClient API operation.
     #
     # @option params [required, String] :client_secret
     #   A secret string that is generated for the client. This value should
     #   come from the persisted result of the RegisterClient API operation.
     #
     # @option params [required, String] :start_url
-    #   The URL for the AWS access portal. For more information, see [Using
-    #   the AWS access portal][1] in the *Amazon Web Services SSO User Guide*.
+    #   The URL for the AWS SSO user portal. For more information, see [Using
+    #   the User Portal][1] in the *AWS Single Sign-On User Guide*.
     #
     #
     #
@@ -565,7 +549,7 @@ module Aws::SSOOIDC
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.134.0'
+      context[:gem_version] = '3.136.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

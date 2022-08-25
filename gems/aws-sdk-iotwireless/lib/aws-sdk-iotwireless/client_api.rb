@@ -42,6 +42,10 @@ module Aws::IoTWireless
     AssociateWirelessGatewayWithThingResponse = Shapes::StructureShape.new(name: 'AssociateWirelessGatewayWithThingResponse')
     AutoCreateTasks = Shapes::BooleanShape.new(name: 'AutoCreateTasks')
     BatteryLevel = Shapes::StringShape.new(name: 'BatteryLevel')
+    Beaconing = Shapes::StructureShape.new(name: 'Beaconing')
+    BeaconingDataRate = Shapes::IntegerShape.new(name: 'BeaconingDataRate')
+    BeaconingFrequencies = Shapes::ListShape.new(name: 'BeaconingFrequencies')
+    BeaconingFrequency = Shapes::IntegerShape.new(name: 'BeaconingFrequency')
     CancelMulticastGroupSessionRequest = Shapes::StructureShape.new(name: 'CancelMulticastGroupSessionRequest')
     CancelMulticastGroupSessionResponse = Shapes::StructureShape.new(name: 'CancelMulticastGroupSessionResponse')
     CertificateList = Shapes::StructureShape.new(name: 'CertificateList')
@@ -137,6 +141,8 @@ module Aws::IoTWireless
     DlRate = Shapes::IntegerShape.new(name: 'DlRate')
     DlRatePolicy = Shapes::StringShape.new(name: 'DlRatePolicy')
     Double = Shapes::FloatShape.new(name: 'Double')
+    DownlinkFrequency = Shapes::IntegerShape.new(name: 'DownlinkFrequency')
+    DownlinkMode = Shapes::StringShape.new(name: 'DownlinkMode')
     DownlinkQueueMessage = Shapes::StructureShape.new(name: 'DownlinkQueueMessage')
     DownlinkQueueMessagesList = Shapes::ListShape.new(name: 'DownlinkQueueMessagesList')
     DrMax = Shapes::IntegerShape.new(name: 'DrMax')
@@ -169,6 +175,8 @@ module Aws::IoTWireless
     FuotaTaskName = Shapes::StringShape.new(name: 'FuotaTaskName')
     FuotaTaskStatus = Shapes::StringShape.new(name: 'FuotaTaskStatus')
     GatewayEui = Shapes::StringShape.new(name: 'GatewayEui')
+    GatewayList = Shapes::ListShape.new(name: 'GatewayList')
+    GatewayListItem = Shapes::StructureShape.new(name: 'GatewayListItem')
     GenAppKey = Shapes::StringShape.new(name: 'GenAppKey')
     GetDestinationRequest = Shapes::StructureShape.new(name: 'GetDestinationRequest')
     GetDestinationResponse = Shapes::StructureShape.new(name: 'GetDestinationResponse')
@@ -325,6 +333,7 @@ module Aws::IoTWireless
     OtaaV1_0_x = Shapes::StructureShape.new(name: 'OtaaV1_0_x')
     OtaaV1_1 = Shapes::StructureShape.new(name: 'OtaaV1_1')
     PackageVersion = Shapes::StringShape.new(name: 'PackageVersion')
+    ParticipatingGateways = Shapes::StructureShape.new(name: 'ParticipatingGateways')
     PartnerAccountArn = Shapes::StringShape.new(name: 'PartnerAccountArn')
     PartnerAccountId = Shapes::StringShape.new(name: 'PartnerAccountId')
     PartnerType = Shapes::StringShape.new(name: 'PartnerType')
@@ -436,6 +445,7 @@ module Aws::IoTWireless
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TraceContent = Shapes::StructureShape.new(name: 'TraceContent')
+    TransmissionInterval = Shapes::IntegerShape.new(name: 'TransmissionInterval')
     TransmitMode = Shapes::IntegerShape.new(name: 'TransmitMode')
     UlBucketSize = Shapes::IntegerShape.new(name: 'UlBucketSize')
     UlRate = Shapes::IntegerShape.new(name: 'UlRate')
@@ -571,6 +581,12 @@ module Aws::IoTWireless
     AssociateWirelessGatewayWithThingRequest.struct_class = Types::AssociateWirelessGatewayWithThingRequest
 
     AssociateWirelessGatewayWithThingResponse.struct_class = Types::AssociateWirelessGatewayWithThingResponse
+
+    Beaconing.add_member(:data_rate, Shapes::ShapeRef.new(shape: BeaconingDataRate, location_name: "DataRate"))
+    Beaconing.add_member(:frequencies, Shapes::ShapeRef.new(shape: BeaconingFrequencies, location_name: "Frequencies"))
+    Beaconing.struct_class = Types::Beaconing
+
+    BeaconingFrequencies.member = Shapes::ShapeRef.new(shape: BeaconingFrequency)
 
     CancelMulticastGroupSessionRequest.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "Id"))
     CancelMulticastGroupSessionRequest.struct_class = Types::CancelMulticastGroupSessionRequest
@@ -865,6 +881,12 @@ module Aws::IoTWireless
     FuotaTask.struct_class = Types::FuotaTask
 
     FuotaTaskList.member = Shapes::ShapeRef.new(shape: FuotaTask)
+
+    GatewayList.member = Shapes::ShapeRef.new(shape: GatewayListItem)
+
+    GatewayListItem.add_member(:gateway_id, Shapes::ShapeRef.new(shape: WirelessGatewayId, required: true, location_name: "GatewayId"))
+    GatewayListItem.add_member(:downlink_frequency, Shapes::ShapeRef.new(shape: DownlinkFrequency, required: true, location_name: "DownlinkFrequency"))
+    GatewayListItem.struct_class = Types::GatewayListItem
 
     GetDestinationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location: "uri", location_name: "Name"))
     GetDestinationRequest.struct_class = Types::GetDestinationRequest
@@ -1288,6 +1310,7 @@ module Aws::IoTWireless
     LoRaWANGateway.add_member(:join_eui_filters, Shapes::ShapeRef.new(shape: JoinEuiFilters, location_name: "JoinEuiFilters"))
     LoRaWANGateway.add_member(:net_id_filters, Shapes::ShapeRef.new(shape: NetIdFilters, location_name: "NetIdFilters"))
     LoRaWANGateway.add_member(:sub_bands, Shapes::ShapeRef.new(shape: SubBands, location_name: "SubBands"))
+    LoRaWANGateway.add_member(:beaconing, Shapes::ShapeRef.new(shape: Beaconing, location_name: "Beaconing"))
     LoRaWANGateway.struct_class = Types::LoRaWANGateway
 
     LoRaWANGatewayCurrentVersion.add_member(:current_version, Shapes::ShapeRef.new(shape: LoRaWANGatewayVersion, location_name: "CurrentVersion"))
@@ -1355,6 +1378,7 @@ module Aws::IoTWireless
     LoRaWANMulticastSession.struct_class = Types::LoRaWANMulticastSession
 
     LoRaWANSendDataToDevice.add_member(:f_port, Shapes::ShapeRef.new(shape: FPort, location_name: "FPort"))
+    LoRaWANSendDataToDevice.add_member(:participating_gateways, Shapes::ShapeRef.new(shape: ParticipatingGateways, location_name: "ParticipatingGateways"))
     LoRaWANSendDataToDevice.struct_class = Types::LoRaWANSendDataToDevice
 
     LoRaWANServiceProfile.add_member(:add_gw_metadata, Shapes::ShapeRef.new(shape: AddGwMetadata, location_name: "AddGwMetadata"))
@@ -1421,6 +1445,11 @@ module Aws::IoTWireless
     OtaaV1_1.add_member(:nwk_key, Shapes::ShapeRef.new(shape: NwkKey, location_name: "NwkKey"))
     OtaaV1_1.add_member(:join_eui, Shapes::ShapeRef.new(shape: JoinEui, location_name: "JoinEui"))
     OtaaV1_1.struct_class = Types::OtaaV1_1
+
+    ParticipatingGateways.add_member(:downlink_mode, Shapes::ShapeRef.new(shape: DownlinkMode, required: true, location_name: "DownlinkMode"))
+    ParticipatingGateways.add_member(:gateway_list, Shapes::ShapeRef.new(shape: GatewayList, required: true, location_name: "GatewayList"))
+    ParticipatingGateways.add_member(:transmission_interval, Shapes::ShapeRef.new(shape: TransmissionInterval, required: true, location_name: "TransmissionInterval"))
+    ParticipatingGateways.struct_class = Types::ParticipatingGateways
 
     PositionConfigurationItem.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: PositionResourceIdentifier, location_name: "ResourceIdentifier"))
     PositionConfigurationItem.add_member(:resource_type, Shapes::ShapeRef.new(shape: PositionResourceType, location_name: "ResourceType"))

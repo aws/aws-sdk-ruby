@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2022-08-25)
+------------------
+
+* Feature - Support sorting and filtering in ListDevices API, and add more fields to device listings and single device detail
+
 1.7.0 (2022-04-06)
 ------------------
 

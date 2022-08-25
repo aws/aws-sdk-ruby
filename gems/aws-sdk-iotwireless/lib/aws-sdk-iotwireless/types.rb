@@ -329,6 +329,31 @@ module Aws::IoTWireless
 
     class AssociateWirelessGatewayWithThingResponse < Aws::EmptyStructure; end
 
+    # Beaconing parameters for configuring the wireless gateways.
+    #
+    # @note When making an API call, you may pass Beaconing
+    #   data as a hash:
+    #
+    #       {
+    #         data_rate: 1,
+    #         frequencies: [1],
+    #       }
+    #
+    # @!attribute [rw] data_rate
+    #   The data rate for gateways that are sending the beacons.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] frequencies
+    #   The frequency list for the gateways to send the beacons.
+    #   @return [Array<Integer>]
+    #
+    class Beaconing < Struct.new(
+      :data_rate,
+      :frequencies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelMulticastGroupSessionRequest
     #   data as a hash:
     #
@@ -406,8 +431,8 @@ module Aws::IoTWireless
     #   @return [Types::LoRaWANConnectionStatusEventNotificationConfigurations]
     #
     # @!attribute [rw] wireless_gateway_id_event_topic
-    #   Enum to denote whether the wireless gateway ID connection status
-    #   event topic is enabled or disabled.
+    #   Denotes whether the wireless gateway ID connection status event
+    #   topic is enabled or disabled.
     #   @return [String]
     #
     class ConnectionStatusEventConfiguration < Struct.new(
@@ -1048,6 +1073,10 @@ module Aws::IoTWireless
     #           ],
     #           net_id_filters: ["NetId"],
     #           sub_bands: [1],
+    #           beaconing: {
+    #             data_rate: 1,
+    #             frequencies: [1],
+    #           },
     #         },
     #         tags: [
     #           {
@@ -1538,8 +1567,8 @@ module Aws::IoTWireless
     #   @return [Types::SidewalkEventNotificationConfigurations]
     #
     # @!attribute [rw] wireless_device_id_event_topic
-    #   Enum to denote whether the wireless device id device registration
-    #   state event topic is enabled or disabled.
+    #   Denotes whether the wireless device ID device registration state
+    #   event topic is enabled or disabled.
     #   @return [String]
     #
     class DeviceRegistrationStateEventConfiguration < Struct.new(
@@ -1885,6 +1914,34 @@ module Aws::IoTWireless
       :id,
       :arn,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Gateway list item object that specifies the frequency and list of
+    # gateways for which the downlink message should be sent.
+    #
+    # @note When making an API call, you may pass GatewayListItem
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_id: "WirelessGatewayId", # required
+    #         downlink_frequency: 1, # required
+    #       }
+    #
+    # @!attribute [rw] gateway_id
+    #   The ID of the wireless gateways that you want to add to the list of
+    #   gateways when sending downlink messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] downlink_frequency
+    #   The frequency to use for the gateways when sending a downlink
+    #   message to the wireless device.
+    #   @return [Integer]
+    #
+    class GatewayListItem < Struct.new(
+      :gateway_id,
+      :downlink_frequency)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2978,8 +3035,8 @@ module Aws::IoTWireless
     #   @return [Types::LoRaWANJoinEventNotificationConfigurations]
     #
     # @!attribute [rw] wireless_device_id_event_topic
-    #   Enum to denote whether the wireless device id join event topic is
-    #   enabled or disabled.
+    #   Denotes whether the wireless device ID join event topic is enabled
+    #   or disabled.
     #   @return [String]
     #
     class JoinEventConfiguration < Struct.new(
@@ -3708,8 +3765,8 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] gateway_eui_event_topic
-    #   Enum to denote whether the gateway EUI connection status event topic
-    #   is enabled or disabled.
+    #   Denotes whether the gateway EUI connection status event topic is
+    #   enabled or disabled.
     #   @return [String]
     #
     class LoRaWANConnectionStatusEventNotificationConfigurations < Struct.new(
@@ -3729,8 +3786,8 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] wireless_gateway_event_topic
-    #   Enum to denote whether the wireless gateway connection status event
-    #   topic is enabled or disabled.
+    #   Denotes whether the wireless gateway connection status event topic
+    #   is enabled or disabled.
     #   @return [String]
     #
     class LoRaWANConnectionStatusResourceTypeEventConfiguration < Struct.new(
@@ -4048,6 +4105,10 @@ module Aws::IoTWireless
     #         ],
     #         net_id_filters: ["NetId"],
     #         sub_bands: [1],
+    #         beaconing: {
+    #           data_rate: 1,
+    #           frequencies: [1],
+    #         },
     #       }
     #
     # @!attribute [rw] gateway_eui
@@ -4072,12 +4133,18 @@ module Aws::IoTWireless
     #   gateway.
     #   @return [Array<Integer>]
     #
+    # @!attribute [rw] beaconing
+    #   Beaconing object information, which consists of the data rate and
+    #   frequency parameters.
+    #   @return [Types::Beaconing]
+    #
     class LoRaWANGateway < Struct.new(
       :gateway_eui,
       :rf_region,
       :join_eui_filters,
       :net_id_filters,
-      :sub_bands)
+      :sub_bands,
+      :beaconing)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4262,8 +4329,7 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] dev_eui_event_topic
-    #   Enum to denote whether the Dev EUI join event topic is enabled or
-    #   disabled.
+    #   Denotes whether the Dev EUI join event topic is enabled or disabled.
     #   @return [String]
     #
     class LoRaWANJoinEventNotificationConfigurations < Struct.new(
@@ -4282,8 +4348,8 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] wireless_device_event_topic
-    #   Enum to denote whether the wireless device join event topic is
-    #   enabled or disabled.
+    #   Denotes whether the wireless device join event topic is enabled or
+    #   disabled.
     #   @return [String]
     #
     class LoRaWANJoinResourceTypeEventConfiguration < Struct.new(
@@ -4421,14 +4487,31 @@ module Aws::IoTWireless
     #
     #       {
     #         f_port: 1,
+    #         participating_gateways: {
+    #           downlink_mode: "SEQUENTIAL", # required, accepts SEQUENTIAL, CONCURRENT, USING_UPLINK_GATEWAY
+    #           gateway_list: [ # required
+    #             {
+    #               gateway_id: "WirelessGatewayId", # required
+    #               downlink_frequency: 1, # required
+    #             },
+    #           ],
+    #           transmission_interval: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] f_port
     #   The Fport value.
     #   @return [Integer]
     #
+    # @!attribute [rw] participating_gateways
+    #   Choose the gateways that you want to use for the downlink data
+    #   traffic when the wireless device is running in class B or class C
+    #   mode.
+    #   @return [Types::ParticipatingGateways]
+    #
     class LoRaWANSendDataToDevice < Struct.new(
-      :f_port)
+      :f_port,
+      :participating_gateways)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4617,8 +4700,8 @@ module Aws::IoTWireless
     #   @return [Types::SidewalkEventNotificationConfigurations]
     #
     # @!attribute [rw] wireless_device_id_event_topic
-    #   Enum to denote whether the wireless device id device registration
-    #   state event topic is enabled or disabled.
+    #   Denotes whether the wireless device ID device registration state
+    #   event topic is enabled or disabled.
     #   @return [String]
     #
     class MessageDeliveryStatusEventConfiguration < Struct.new(
@@ -4785,6 +4868,48 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # Specify the list of gateways to which you want to send downlink data
+    # traffic when the wireless device is running in class B or class C
+    # mode.
+    #
+    # @note When making an API call, you may pass ParticipatingGateways
+    #   data as a hash:
+    #
+    #       {
+    #         downlink_mode: "SEQUENTIAL", # required, accepts SEQUENTIAL, CONCURRENT, USING_UPLINK_GATEWAY
+    #         gateway_list: [ # required
+    #           {
+    #             gateway_id: "WirelessGatewayId", # required
+    #             downlink_frequency: 1, # required
+    #           },
+    #         ],
+    #         transmission_interval: 1, # required
+    #       }
+    #
+    # @!attribute [rw] downlink_mode
+    #   Indicates whether to send the downlink message in sequential mode or
+    #   concurrent mode, or to use only the chosen gateways from the
+    #   previous uplink message transmission.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_list
+    #   The list of gateways that you want to use for sending the downlink
+    #   data traffic.
+    #   @return [Array<Types::GatewayListItem>]
+    #
+    # @!attribute [rw] transmission_interval
+    #   The duration of time for which AWS IoT Core for LoRaWAN will wait
+    #   before transmitting the payload to the next gateway.
+    #   @return [Integer]
+    #
+    class ParticipatingGateways < Struct.new(
+      :downlink_mode,
+      :gateway_list,
+      :transmission_interval)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The wrapper for a position configuration.
     #
     # @!attribute [rw] resource_identifier
@@ -4899,8 +5024,8 @@ module Aws::IoTWireless
     #   @return [Types::SidewalkEventNotificationConfigurations]
     #
     # @!attribute [rw] wireless_device_id_event_topic
-    #   Enum to denote whether the wireless device id proximity event topic
-    #   is enabled or disabled.
+    #   Denotes whether the wireless device ID proximity event topic is
+    #   enabled or disabled.
     #   @return [String]
     #
     class ProximityEventConfiguration < Struct.new(
@@ -5175,6 +5300,16 @@ module Aws::IoTWireless
     #         wireless_metadata: {
     #           lo_ra_wan: {
     #             f_port: 1,
+    #             participating_gateways: {
+    #               downlink_mode: "SEQUENTIAL", # required, accepts SEQUENTIAL, CONCURRENT, USING_UPLINK_GATEWAY
+    #               gateway_list: [ # required
+    #                 {
+    #                   gateway_id: "WirelessGatewayId", # required
+    #                   downlink_frequency: 1, # required
+    #                 },
+    #               ],
+    #               transmission_interval: 1, # required
+    #             },
     #           },
     #           sidewalk: {
     #             seq: 1,
@@ -5417,7 +5552,7 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] amazon_id_event_topic
-    #   Enum to denote whether amazon id event topic is enabled or disabled.
+    #   Denotes whether the Amazon ID event topic is enabled or disabled.
     #   @return [String]
     #
     class SidewalkEventNotificationConfigurations < Struct.new(
@@ -5464,8 +5599,8 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] wireless_device_event_topic
-    #   Enum to denote whether the wireless device join event topic is
-    #   enabled or disabled.
+    #   Denotes whether the wireless device join event topic is enabled or
+    #   disabled.
     #   @return [String]
     #
     class SidewalkResourceTypeEventConfiguration < Struct.new(
@@ -6795,6 +6930,16 @@ module Aws::IoTWireless
     #       {
     #         lo_ra_wan: {
     #           f_port: 1,
+    #           participating_gateways: {
+    #             downlink_mode: "SEQUENTIAL", # required, accepts SEQUENTIAL, CONCURRENT, USING_UPLINK_GATEWAY
+    #             gateway_list: [ # required
+    #               {
+    #                 gateway_id: "WirelessGatewayId", # required
+    #                 downlink_frequency: 1, # required
+    #               },
+    #             ],
+    #             transmission_interval: 1, # required
+    #           },
     #         },
     #         sidewalk: {
     #           seq: 1,

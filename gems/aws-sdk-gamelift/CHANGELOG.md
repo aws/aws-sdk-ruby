@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2022-08-25)
+------------------
+
+* Feature - This release adds support for eight EC2 local zones as fleet locations; Atlanta, Chicago, Dallas, Denver, Houston, Kansas City (us-east-1-mci-1a), Los Angeles, and Phoenix. It also adds support for C5d, C6a, C6i, and R5d EC2 instance families.
+
 1.57.0 (2022-04-25)
 ------------------
 

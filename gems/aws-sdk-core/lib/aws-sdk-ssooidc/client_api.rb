@@ -63,7 +63,7 @@ module Aws::SSOOIDC
     CreateTokenRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, required: true, location_name: "clientId"))
     CreateTokenRequest.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecret, required: true, location_name: "clientSecret"))
     CreateTokenRequest.add_member(:grant_type, Shapes::ShapeRef.new(shape: GrantType, required: true, location_name: "grantType"))
-    CreateTokenRequest.add_member(:device_code, Shapes::ShapeRef.new(shape: DeviceCode, required: true, location_name: "deviceCode"))
+    CreateTokenRequest.add_member(:device_code, Shapes::ShapeRef.new(shape: DeviceCode, location_name: "deviceCode"))
     CreateTokenRequest.add_member(:code, Shapes::ShapeRef.new(shape: AuthCode, location_name: "code"))
     CreateTokenRequest.add_member(:refresh_token, Shapes::ShapeRef.new(shape: RefreshToken, location_name: "refreshToken"))
     CreateTokenRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scopes, location_name: "scope"))
