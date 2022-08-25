@@ -1,5 +1,4 @@
 {
-  "service": "default-values",
   "testCases": [
     {
       "documentation": "default endpoint",

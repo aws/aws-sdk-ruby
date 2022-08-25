@@ -5,7 +5,7 @@ eventbridge.json
 get-attr-type-inference.json
 minimal-ruleset.json
 parse-arn.json
-valid-ruleset.json
+partition-fn.json
 parse-url.json
 default-values.json
 headers.json

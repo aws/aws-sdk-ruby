@@ -1,5 +1,4 @@
 {
-  "service": "region-override",
   "testCases": [
     {
       "documentation": "local region override",

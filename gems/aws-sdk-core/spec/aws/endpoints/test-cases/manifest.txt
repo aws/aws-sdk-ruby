@@ -9,3 +9,4 @@ valid-hostlabel.json
 substring.json
 uri-encode.json
 fns.json
+partition-fn.json

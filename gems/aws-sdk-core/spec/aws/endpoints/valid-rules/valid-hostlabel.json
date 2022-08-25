@@ -27,9 +27,27 @@
       "type": "endpoint"
     },
     {
+      "documentation": "Template the region into the URI when region is set",
+      "conditions": [
+        {
+          "fn": "isValidHostLabel",
+          "argv": [
+            {
+              "ref": "Region"
+            },
+            true
+          ]
+        }
+      ],
+      "endpoint": {
+        "url": "https://{Region}-subdomains.amazonaws.com"
+      },
+      "type": "endpoint"
+    },
+    {
       "documentation": "Region was not a valid host label",
       "conditions": [],
-      "error": "Region must be set to resolve a valid endpoint",
+      "error": "Invalid hostlabel",
       "type": "error"
     }
   ],

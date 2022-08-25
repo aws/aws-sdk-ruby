@@ -49,7 +49,7 @@ module Aws
             elsif expect['error']
               expect do
                 subject.resolve_endpoint(params)
-              end.to raise_error(RuntimeError, expect['error'])
+              end.to raise_error(ArgumentError, expect['error'])
             end
           end
         end

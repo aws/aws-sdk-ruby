@@ -43,6 +43,8 @@ module Aws
       def self.substring(input, start, stop, reverse)
         return nil if start >= stop || input.size < stop
 
+        return nil if input.chars.any? { |c| c.ord > 127 }
+
         return input[start...stop] unless reverse
 
         r_start = input.size - stop

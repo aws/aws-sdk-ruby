@@ -1,5 +1,4 @@
 {
-  "service": "com.amazonaws#EventBridge",
   "testCases": [
     {
       "documentation": "simple region endpoint",

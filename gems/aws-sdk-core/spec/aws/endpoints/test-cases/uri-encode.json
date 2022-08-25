@@ -1,5 +1,4 @@
 {
-  "service": "uriencode",
   "testCases": [
     {
       "documentation": "uriEncode when the string has nothing to encode returns the input",

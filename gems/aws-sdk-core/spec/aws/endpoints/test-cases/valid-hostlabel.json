@@ -1,5 +1,4 @@
 {
-  "service": "valid-hostlabel",
   "testCases": [
     {
       "documentation": "standard region is a valid hostlabel",
@@ -21,6 +20,26 @@
         "endpoint": {
           "url": "https://3aws4.amazonaws.com"
         }
+      }
+    },
+    {
+      "documentation": "when there are dots, only match if subdomains are allowed",
+      "params": {
+        "Region": "part1.part2"
+      },
+      "expect": {
+        "endpoint": {
+          "url": "https://part1.part2-subdomains.amazonaws.com"
+        }
+      }
+    },
+    {
+      "documentation": "a space is never a valid hostlabel",
+      "params": {
+        "Region": "part1 part2"
+      },
+      "expect": {
+        "error": "Invalid hostlabel"
       }
     }
   ],

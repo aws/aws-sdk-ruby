@@ -1,6 +1,5 @@
 {
   "version": "1.4",
-  "service": "headers",
   "testCases": [
     {
       "documentation": "header set to region",

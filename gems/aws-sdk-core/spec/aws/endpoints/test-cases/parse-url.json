@@ -1,5 +1,4 @@
 {
-  "service": "parse-url",
   "version": "1.4",
   "testCases": [
     {
