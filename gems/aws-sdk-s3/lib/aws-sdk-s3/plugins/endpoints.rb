@@ -30,7 +30,7 @@ module Aws::S3
       option(
         :disable_multi_region_access_points,
         doc_type: 'Boolean',
-        docstring: "Disables this client&#39;s usage of Multi-Region Access Points.")
+        docstring: "Disables this client's usage of Multi-Region Access Points.")
 
       option(
         :force_path_style,
@@ -45,7 +45,7 @@ module Aws::S3
       option(
         :s3_use_arn_region,
         doc_type: 'Boolean',
-        docstring: "Enables this client to use an ARN&#39;s region when constructing an endpoint instead of the client&#39;s configured region.")
+        docstring: "Enables this client to use an ARN's region when constructing an endpoint instead of the client's configured region.")
 
       # @api private
       class Handler < Seahorse::Client::Handler
@@ -53,18 +53,32 @@ module Aws::S3
           params = parameters_for_operation(context)
           endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
-          context.http_request.endpoint = endpoint.url
-          endpoint.headers.each do |key, val|
-            context.http_request.headers[key] = val.first # TODO: multi-value
-          end
-          context[:auth_scheme] = Aws::Endpoints.resolve_auth_scheme(
-            endpoint, context
-          )
+          apply_endpoint_properties(context, endpoint)
+
+          context[:endpoint] = {
+            params: params,
+            endpoint: endpoint,
+            auth_scheme: Aws::Endpoints.resolve_auth_scheme(context, endpoint)
+          }
 
           @handler.call(context)
         end
 
         private
+
+        def apply_endpoint_properties(context, endpoint)
+          context.http_request.endpoint = endpoint.url
+          endpoint.headers.each do |key, val|
+            joined = val
+                       .compact
+                       .map do |s|
+                         (s.include?('"') || s.include?(",")) ?
+                           "\"#{s.gsub('"', '\"')}\"" : s
+                       end
+                       .join(',')
+            context.http_request.headers[key] = joined
+          end
+        end
 
         def parameters_for_operation(context)
           case context.operation_name

@@ -40,8 +40,8 @@ result in cross region requests.
         # endpoint is build:90 (populates the URI for the first time)
         # endpoint pattern is build:10
         def add_handlers(handlers, _config)
-          handlers.add(ARNHandler, step: :validate, priority: 75)
-          handlers.add(UrlHandler)
+          # handlers.add(ARNHandler, step: :validate, priority: 75)
+          # handlers.add(UrlHandler)
         end
 
         # After extracting out any ARN input, resolve a new URL with it.

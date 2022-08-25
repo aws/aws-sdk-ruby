@@ -351,7 +351,7 @@ module Aws::S3
     #     Defaults to `legacy` mode which uses the global endpoint.
     #
     #   @option options [Boolean] :s3_use_arn_region
-    #     Enables this client to use an ARN&#39;s region when constructing an endpoint instead of the client&#39;s configured region.
+    #     Enables this client to use an ARN's region when constructing an endpoint instead of the client's configured region.
     #
     #   @option options [String] :secret_access_key
     #
@@ -365,9 +365,6 @@ module Aws::S3
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
-    #
-    #   @option options [Boolean] :use_accelerate_endpoint
-    #     Enables this client to use S3 Transfer Acceleration endpoints.
     #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
@@ -383,13 +380,16 @@ module Aws::S3
     #     sending the request.
     #
     #   @option options [Boolean] :disable_multi_region_access_points
-    #     Disables this client&#39;s usage of Multi-Region Access Points.
+    #     Disables this client's usage of Multi-Region Access Points.
     #
     #   @option options [Aws::S3::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::S3::EndpointParameters`
     #
     #   @option options [String] :snow_endpoint_url
     #     Configures this client to use the provided S3 Snowball endpoint.
+    #
+    #   @option options [Boolean] :use_accelerate_endpoint
+    #     Enables this client to use S3 Transfer Acceleration endpoints.
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.

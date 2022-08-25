@@ -37,7 +37,7 @@ module Aws
                 else
                   Templater.resolve(@error, parameters, assigns)
                 end
-        RuntimeError.new(error)
+        ArgumentError.new(error)
       end
     end
   end

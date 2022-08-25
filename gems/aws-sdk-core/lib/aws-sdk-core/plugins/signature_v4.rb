@@ -35,8 +35,11 @@ module Aws
 
       class Handler < Seahorse::Client::Handler
         def call(context)
-          if %w[sigv4 sigv4a].include?(context[:auth_scheme]['name'])
-            SignatureV4.apply_signature(context: context)
+          auth_scheme = context[:endpoint][:auth_scheme]
+          if %w[sigv4 sigv4a].include?(auth_scheme['name'])
+            SignatureV4.apply_signature(
+              context: context, auth_scheme: auth_scheme
+            )
           end
           @handler.call(context)
         end
@@ -87,7 +90,7 @@ module Aws
         def apply_signature(options = {})
           context = apply_authtype(options[:context])
           signer = options[:signer] || context.config.sigv4_signer ||
-                   build_signer(context.config, context[:auth_scheme])
+                   build_signer(context.config, options[:auth_scheme])
           req = context.http_request
 
           # in case this request is being re-signed

@@ -9,23 +9,23 @@ module Aws
       # @api private
       class S3Signer < Seahorse::Client::Plugin
         option(:signature_version, 'v4')
-
-        option(:sigv4_signer) do |cfg|
-          S3Signer.build_v4_signer(
-            service: 's3',
-            region: cfg.sigv4_region,
-            credentials: cfg.credentials
-          )
-        end
-
-        option(:sigv4_region) do |cfg|
-          # S3 removes core's signature_v4 plugin that checks for this
-          raise Aws::Errors::MissingRegionError if cfg.region.nil?
-
-          Aws::Partitions::EndpointProvider.signing_region(
-            cfg.region, 's3'
-          )
-        end
+        #
+        # option(:sigv4_signer) do |cfg|
+        #   S3Signer.build_v4_signer(
+        #     service: 's3',
+        #     region: cfg.sigv4_region,
+        #     credentials: cfg.credentials
+        #   )
+        # end
+        #
+        # option(:sigv4_region) do |cfg|
+        #   # S3 removes core's signature_v4 plugin that checks for this
+        #   raise Aws::Errors::MissingRegionError if cfg.region.nil?
+        #
+        #   Aws::Partitions::EndpointProvider.signing_region(
+        #     cfg.region, 's3'
+        #   )
+        # end
 
         def add_handlers(handlers, cfg)
           case cfg.signature_version
@@ -75,26 +75,26 @@ module Aws
                 region: context[:cached_sigv4_region],
                 credentials: context.config.credentials
               )
-            elsif (arn = context.metadata[:s3_arn])
-              if arn[:arn].is_a?(MultiRegionAccessPointARN)
-                signing_region = '*'
-                signing_algorithm = :sigv4a
-              else
-                signing_region = arn[:resolved_region]
-                signing_algorithm = :sigv4
-              end
-              S3Signer.build_v4_signer(
-                service: arn[:arn].service,
-                signing_algorithm: signing_algorithm,
-                region: signing_region,
-                credentials: context.config.credentials
-              )
-            elsif context.operation.name == 'WriteGetObjectResponse'
-              S3Signer.build_v4_signer(
-                service: 's3-object-lambda',
-                region: context.config.sigv4_region,
-                credentials: context.config.credentials
-              )
+            # elsif (arn = context.metadata[:s3_arn])
+            #   if arn[:arn].is_a?(MultiRegionAccessPointARN)
+            #     signing_region = '*'
+            #     signing_algorithm = :sigv4a
+            #   else
+            #     signing_region = arn[:resolved_region]
+            #     signing_algorithm = :sigv4
+            #   end
+            #   S3Signer.build_v4_signer(
+            #     service: arn[:arn].service,
+            #     signing_algorithm: signing_algorithm,
+            #     region: signing_region,
+            #     credentials: context.config.credentials
+            #   )
+            # elsif context.operation.name == 'WriteGetObjectResponse'
+            #   S3Signer.build_v4_signer(
+            #     service: 's3-object-lambda',
+            #     region: context.config.sigv4_region,
+            #     credentials: context.config.credentials
+            #   )
             else
               context.config.sigv4_signer
             end

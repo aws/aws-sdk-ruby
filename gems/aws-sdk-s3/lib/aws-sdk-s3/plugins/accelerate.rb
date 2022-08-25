@@ -9,16 +9,6 @@ module Aws
       # Go here for more information about transfer acceleration:
       # [http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html)
       class Accelerate < Seahorse::Client::Plugin
-        option(
-          :use_accelerate_endpoint,
-          default: false,
-          doc_type: 'Boolean',
-          docstring: <<-DOCS)
-When set to `true`, accelerated bucket endpoints will be used
-for all object operations. You must first enable accelerate for
-each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
-          DOCS
-
         def add_handlers(handlers, config)
           operations = config.api.operation_names - [
             :create_bucket, :list_buckets, :delete_bucket

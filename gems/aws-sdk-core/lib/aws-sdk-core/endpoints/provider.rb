@@ -10,7 +10,7 @@ module Aws
         obj = resolve_rules(parameters)
         if obj.is_a?(Endpoint)
           obj
-        elsif obj.is_a?(RuntimeError)
+        elsif obj.is_a?(ArgumentError)
           raise obj
         else
           raise 'No endpoint could be resolved'

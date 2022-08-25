@@ -11,14 +11,17 @@ module Aws::EC2
   # Endpoint parameters used to influence endpoints per request.
   #
   # @!attribute region
+  #   The AWS region used to dispatch the request.
   #
   #   @return [String]
   #
   # @!attribute use_dual_stack
+  #   When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.
   #
   #   @return [Boolean]
   #
   # @!attribute use_fips
+  #   When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.
   #
   #   @return [Boolean]
   #
