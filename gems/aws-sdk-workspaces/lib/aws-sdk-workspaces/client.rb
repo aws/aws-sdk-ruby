@@ -1817,6 +1817,9 @@ module Aws::WorkSpaces
     #   resp.directories[0].selfservice_permissions.change_compute_type #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].selfservice_permissions.switch_running_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].selfservice_permissions.rebuild_workspace #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].saml_properties.status #=> String, one of "DISABLED", "ENABLED", "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"
+    #   resp.directories[0].saml_properties.user_access_url #=> String
+    #   resp.directories[0].saml_properties.relay_state_parameter_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectories AWS API Documentation
@@ -2558,6 +2561,51 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def modify_client_properties(params = {}, options = {})
       req = build_request(:modify_client_properties, params)
+      req.send_request(options)
+    end
+
+    # Modifies multiple properties related to SAML 2.0 authentication,
+    # including the enablement status, user access URL, and relay state
+    # parameter name that are used for configuring federation with an SAML
+    # 2.0 identity provider.
+    #
+    # @option params [required, String] :resource_id
+    #   The directory identifier for which you want to configure SAML
+    #   properties.
+    #
+    # @option params [Types::SamlProperties] :saml_properties
+    #   The properties for configuring SAML 2.0 authentication.
+    #
+    # @option params [Array<String>] :properties_to_delete
+    #   The SAML properties to delete as part of your request.
+    #
+    #   Specify one of the following options:
+    #
+    #   * `SAML_PROPERTIES_USER_ACCESS_URL` to delete the user access URL.
+    #
+    #   * `SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME` to delete the relay
+    #     state parameter name.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_saml_properties({
+    #     resource_id: "DirectoryId", # required
+    #     saml_properties: {
+    #       status: "DISABLED", # accepts DISABLED, ENABLED, ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK
+    #       user_access_url: "SamlUserAccessUrl",
+    #       relay_state_parameter_name: "NonEmptyString",
+    #     },
+    #     properties_to_delete: ["SAML_PROPERTIES_USER_ACCESS_URL"], # accepts SAML_PROPERTIES_USER_ACCESS_URL, SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifySamlProperties AWS API Documentation
+    #
+    # @overload modify_saml_properties(params = {})
+    # @param [Hash] params ({})
+    def modify_saml_properties(params = {}, options = {})
+      req = build_request(:modify_saml_properties, params)
       req.send_request(options)
     end
 
@@ -3357,7 +3405,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

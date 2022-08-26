@@ -152,7 +152,9 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] kms_key_id
     #   The ARN, key ID, or alias of the KMS key that Secrets Manager uses
-    #   to encrypt the secret value in the secret.
+    #   to encrypt the secret value in the secret. An alias is always
+    #   prefixed by `alias/`, for example `alias/aws/secretsmanager`. For
+    #   more information, see [About aliases][1].
     #
     #   To use a KMS key in a different account, use the key ARN or the
     #   alias ARN.
@@ -166,6 +168,10 @@ module Aws::SecretsManager
     #   credentials calling the API, then you can't use
     #   `aws/secretsmanager` to encrypt the secret, and you must create and
     #   use a customer managed KMS key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/alias-about.html
     #   @return [String]
     #
     # @!attribute [rw] secret_binary
@@ -489,9 +495,10 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ARN of the KMS key that Secrets Manager uses to encrypt the
-    #   secret value. If the secret is encrypted with the Amazon Web
-    #   Services managed key `aws/secretsmanager`, this field is omitted.
+    #   The key ID or alias ARN of the KMS key that Secrets Manager uses to
+    #   encrypt the secret value. If the secret is encrypted with the Amazon
+    #   Web Services managed key `aws/secretsmanager`, this field is
+    #   omitted. Secrets created using the console use an KMS key ID.
     #   @return [String]
     #
     # @!attribute [rw] rotation_enabled
@@ -525,9 +532,8 @@ module Aws::SecretsManager
     #   @return [Time]
     #
     # @!attribute [rw] last_accessed_date
-    #   The last date that the secret value was retrieved. This value does
-    #   not include the time. This field is omitted if the secret has never
-    #   been retrieved.
+    #   The date that the secret was last accessed in the Region. This field
+    #   is omitted if the secret has never been retrieved in the Region.
     #   @return [Time]
     #
     # @!attribute [rw] deleted_date
@@ -578,7 +584,13 @@ module Aws::SecretsManager
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] owning_service
-    #   The name of the service that created this secret.
+    #   The ID of the service that created this secret. For more
+    #   information, see [Secrets managed by other Amazon Web Services
+    #   services][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/service-linked-secrets.html
     #   @return [String]
     #
     # @!attribute [rw] created_date
@@ -1002,6 +1014,14 @@ module Aws::SecretsManager
     # * You tried to enable rotation on a secret that doesn't already have
     #   a Lambda function ARN configured and you didn't include such an ARN
     #   as a parameter in this call.
+    #
+    # * The secret is managed by another service, and you must use that
+    #   service to update it. For more information, see [Secrets managed by
+    #   other Amazon Web Services services][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/service-linked-secrets.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1580,7 +1600,8 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] last_accessed_date
-    #   The date that you last accessed the secret in the Region.
+    #   The date that the secret was last accessed in the Region. This field
+    #   is omitted if the secret has never been retrieved in the Region.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ReplicationStatusType AWS API Documentation
@@ -1912,9 +1933,8 @@ module Aws::SecretsManager
     #   @return [Time]
     #
     # @!attribute [rw] last_accessed_date
-    #   The last date that this secret was accessed. This value is truncated
-    #   to midnight of the date and therefore shows only the date, not the
-    #   time.
+    #   The date that the secret was last accessed in the Region. This field
+    #   is omitted if the secret has never been retrieved in the Region.
     #   @return [Time]
     #
     # @!attribute [rw] deleted_date
@@ -2229,10 +2249,22 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] kms_key_id
     #   The ARN, key ID, or alias of the KMS key that Secrets Manager uses
-    #   to encrypt new secret versions as well as any existing versions the
-    #   staging labels `AWSCURRENT`, `AWSPENDING`, or `AWSPREVIOUS`. For
+    #   to encrypt new secret versions as well as any existing versions with
+    #   the staging labels `AWSCURRENT`, `AWSPENDING`, or `AWSPREVIOUS`. For
     #   more information about versions and staging labels, see [Concepts:
     #   Version][1].
+    #
+    #   A key alias is always prefixed by `alias/`, for example
+    #   `alias/aws/secretsmanager`. For more information, see [About
+    #   aliases][2].
+    #
+    #   If you set this to an empty string, Secrets Manager uses the Amazon
+    #   Web Services managed key `aws/secretsmanager`. If this key doesn't
+    #   already exist in your account, then Secrets Manager creates it for
+    #   you automatically. All users and roles in the Amazon Web Services
+    #   account automatically have access to use `aws/secretsmanager`.
+    #   Creating `aws/secretsmanager` can result in a one-time significant
+    #   delay in returning the result.
     #
     #   You can only use the Amazon Web Services managed key
     #   `aws/secretsmanager` if you call this operation using credentials
@@ -2245,6 +2277,7 @@ module Aws::SecretsManager
     #
     #
     #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/getting-started.html#term_version
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/alias-about.html
     #   @return [String]
     #
     # @!attribute [rw] secret_binary

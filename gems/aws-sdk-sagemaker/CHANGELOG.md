@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2022-08-09)
+------------------
+
+* Feature - Amazon SageMaker Automatic Model Tuning now supports specifying multiple alternate EC2 instance types to make tuning jobs more robust when the preferred instance type is not available due to insufficient capacity.
+
 1.133.0 (2022-07-19)
 ------------------
 

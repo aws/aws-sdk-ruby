@@ -585,7 +585,7 @@ module Aws::IdentityStore
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-identitystore'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

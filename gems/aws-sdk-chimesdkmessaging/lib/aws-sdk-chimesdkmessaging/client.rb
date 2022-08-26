@@ -409,6 +409,14 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #
+    # @option params [String] :sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when creating membership in a SubChannel for a moderator
+    #   in an elastic channel.
+    #
+    #    </note>
+    #
     # @return [Types::BatchCreateChannelMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchCreateChannelMembershipResponse#batch_channel_memberships #batch_channel_memberships} => Types::BatchChannelMemberships
@@ -421,6 +429,7 @@ module Aws::ChimeSDKMessaging
     #     type: "DEFAULT", # accepts DEFAULT, HIDDEN
     #     member_arns: ["ChimeArn"], # required
     #     chime_bearer: "ChimeArn", # required
+    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @example Response structure
@@ -432,6 +441,7 @@ module Aws::ChimeSDKMessaging
     #   resp.batch_channel_memberships.members[0].arn #=> String
     #   resp.batch_channel_memberships.members[0].name #=> String
     #   resp.batch_channel_memberships.channel_arn #=> String
+    #   resp.batch_channel_memberships.sub_channel_id #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].member_arn #=> String
     #   resp.errors[0].error_code #=> String, one of "BadRequest", "Conflict", "Forbidden", "NotFound", "PreconditionFailed", "ResourceLimitExceeded", "ServiceFailure", "AccessDenied", "ServiceUnavailable", "Throttled", "Throttling", "Unauthorized", "Unprocessable", "VoiceConnectorGroupAssociationsExist", "PhoneNumberAssociationsExist"
@@ -500,6 +510,7 @@ module Aws::ChimeSDKMessaging
     #           string_values: ["MessageAttributeStringValue"],
     #         },
     #       },
+    #       sub_channel_id: "SubChannelId",
     #     },
     #   })
     #
@@ -568,6 +579,11 @@ module Aws::ChimeSDKMessaging
     # @option params [Array<String>] :moderator_arns
     #   The ARNs of the channel moderators in the request.
     #
+    # @option params [Types::ElasticChannelConfiguration] :elastic_channel_configuration
+    #   The attributes required to configure and create an elastic channel. An
+    #   elastic channel can support a maximum of 1-million users, excluding
+    #   moderators.
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#channel_arn #channel_arn} => String
@@ -591,6 +607,11 @@ module Aws::ChimeSDKMessaging
     #     channel_id: "ChannelId",
     #     member_arns: ["ChimeArn"],
     #     moderator_arns: ["ChimeArn"],
+    #     elastic_channel_configuration: {
+    #       maximum_sub_channels: 1, # required
+    #       target_memberships_per_sub_channel: 1, # required
+    #       minimum_membership_percentage: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -782,10 +803,19 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #
+    # @option params [String] :sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when creating membership in a SubChannel for a moderator
+    #   in an elastic channel.
+    #
+    #    </note>
+    #
     # @return [Types::CreateChannelMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelMembershipResponse#channel_arn #channel_arn} => String
     #   * {Types::CreateChannelMembershipResponse#member #member} => Types::Identity
+    #   * {Types::CreateChannelMembershipResponse#sub_channel_id #sub_channel_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -794,6 +824,7 @@ module Aws::ChimeSDKMessaging
     #     member_arn: "ChimeArn", # required
     #     type: "DEFAULT", # required, accepts DEFAULT, HIDDEN
     #     chime_bearer: "ChimeArn", # required
+    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @example Response structure
@@ -801,6 +832,7 @@ module Aws::ChimeSDKMessaging
     #   resp.channel_arn #=> String
     #   resp.member.arn #=> String
     #   resp.member.name #=> String
+    #   resp.sub_channel_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/CreateChannelMembership AWS API Documentation
     #
@@ -881,6 +913,9 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #
+    # @option params [String] :sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -888,6 +923,7 @@ module Aws::ChimeSDKMessaging
     #   resp = client.delete_channel({
     #     channel_arn: "ChimeArn", # required
     #     chime_bearer: "ChimeArn", # required
+    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DeleteChannel AWS API Documentation
@@ -984,6 +1020,13 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #
+    # @option params [String] :sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only for use by moderators.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -992,6 +1035,7 @@ module Aws::ChimeSDKMessaging
     #     channel_arn: "ChimeArn", # required
     #     member_arn: "ChimeArn", # required
     #     chime_bearer: "ChimeArn", # required
+    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DeleteChannelMembership AWS API Documentation
@@ -1022,6 +1066,14 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #
+    # @option params [String] :sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when deleting messages in a SubChannel that the user
+    #   belongs to.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1030,6 +1082,7 @@ module Aws::ChimeSDKMessaging
     #     channel_arn: "ChimeArn", # required
     #     message_id: "MessageId", # required
     #     chime_bearer: "ChimeArn", # required
+    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DeleteChannelMessage AWS API Documentation
@@ -1116,6 +1169,9 @@ module Aws::ChimeSDKMessaging
     #   resp.channel.last_message_timestamp #=> Time
     #   resp.channel.last_updated_timestamp #=> Time
     #   resp.channel.channel_flow_arn #=> String
+    #   resp.channel.elastic_channel_configuration.maximum_sub_channels #=> Integer
+    #   resp.channel.elastic_channel_configuration.target_memberships_per_sub_channel #=> Integer
+    #   resp.channel.elastic_channel_configuration.minimum_membership_percentage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DescribeChannel AWS API Documentation
     #
@@ -1228,6 +1284,14 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #
+    # @option params [String] :sub_channel_id
+    #   The ID of the SubChannel in the request. The response contains an
+    #   `ElasticChannelConfiguration` object.
+    #
+    #   <note markdown="1"> Only required to get a user’s SubChannel membership details.
+    #
+    #    </note>
+    #
     # @return [Types::DescribeChannelMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeChannelMembershipResponse#channel_membership #channel_membership} => Types::ChannelMembership
@@ -1238,6 +1302,7 @@ module Aws::ChimeSDKMessaging
     #     channel_arn: "ChimeArn", # required
     #     member_arn: "ChimeArn", # required
     #     chime_bearer: "ChimeArn", # required
+    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @example Response structure
@@ -1250,6 +1315,7 @@ module Aws::ChimeSDKMessaging
     #   resp.channel_membership.channel_arn #=> String
     #   resp.channel_membership.created_timestamp #=> Time
     #   resp.channel_membership.last_updated_timestamp #=> Time
+    #   resp.channel_membership.sub_channel_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DescribeChannelMembership AWS API Documentation
     #
@@ -1300,6 +1366,7 @@ module Aws::ChimeSDKMessaging
     #   resp.channel_membership.channel_summary.last_message_timestamp #=> Time
     #   resp.channel_membership.app_instance_user_membership_summary.type #=> String, one of "DEFAULT", "HIDDEN"
     #   resp.channel_membership.app_instance_user_membership_summary.read_marker_timestamp #=> Time
+    #   resp.channel_membership.app_instance_user_membership_summary.sub_channel_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DescribeChannelMembershipForAppInstanceUser AWS API Documentation
     #
@@ -1509,6 +1576,14 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #
+    # @option params [String] :sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when getting messages in a SubChannel that the user
+    #   belongs to.
+    #
+    #    </note>
+    #
     # @return [Types::GetChannelMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetChannelMessageResponse#channel_message #channel_message} => Types::ChannelMessage
@@ -1519,6 +1594,7 @@ module Aws::ChimeSDKMessaging
     #     channel_arn: "ChimeArn", # required
     #     message_id: "MessageId", # required
     #     chime_bearer: "ChimeArn", # required
+    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @example Response structure
@@ -1540,6 +1616,7 @@ module Aws::ChimeSDKMessaging
     #   resp.channel_message.message_attributes #=> Hash
     #   resp.channel_message.message_attributes["MessageAttributeName"].string_values #=> Array
     #   resp.channel_message.message_attributes["MessageAttributeName"].string_values[0] #=> String
+    #   resp.channel_message.sub_channel_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetChannelMessage AWS API Documentation
     #
@@ -1594,6 +1671,14 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user making the API call.
     #
+    # @option params [String] :sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when getting message status in a SubChannel that the
+    #   user belongs to.
+    #
+    #    </note>
+    #
     # @return [Types::GetChannelMessageStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetChannelMessageStatusResponse#status #status} => Types::ChannelMessageStatusStructure
@@ -1604,6 +1689,7 @@ module Aws::ChimeSDKMessaging
     #     channel_arn: "ChimeArn", # required
     #     message_id: "MessageId", # required
     #     chime_bearer: "ChimeArn", # required
+    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @example Response structure
@@ -1778,6 +1864,14 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #
+    # @option params [String] :sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when listing a user's memberships in a particular
+    #   sub-channel of an elastic channel.
+    #
+    #    </note>
+    #
     # @return [Types::ListChannelMembershipsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListChannelMembershipsResponse#channel_arn #channel_arn} => String
@@ -1794,6 +1888,7 @@ module Aws::ChimeSDKMessaging
     #     max_results: 1,
     #     next_token: "NextToken",
     #     chime_bearer: "ChimeArn", # required
+    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @example Response structure
@@ -1863,6 +1958,7 @@ module Aws::ChimeSDKMessaging
     #   resp.channel_memberships[0].channel_summary.last_message_timestamp #=> Time
     #   resp.channel_memberships[0].app_instance_user_membership_summary.type #=> String, one of "DEFAULT", "HIDDEN"
     #   resp.channel_memberships[0].app_instance_user_membership_summary.read_marker_timestamp #=> Time
+    #   resp.channel_memberships[0].app_instance_user_membership_summary.sub_channel_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListChannelMembershipsForAppInstanceUser AWS API Documentation
@@ -1911,11 +2007,20 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #
+    # @option params [String] :sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when listing the messages in a SubChannel that the user
+    #   belongs to.
+    #
+    #    </note>
+    #
     # @return [Types::ListChannelMessagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListChannelMessagesResponse#channel_arn #channel_arn} => String
     #   * {Types::ListChannelMessagesResponse#next_token #next_token} => String
     #   * {Types::ListChannelMessagesResponse#channel_messages #channel_messages} => Array&lt;Types::ChannelMessageSummary&gt;
+    #   * {Types::ListChannelMessagesResponse#sub_channel_id #sub_channel_id} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1929,6 +2034,7 @@ module Aws::ChimeSDKMessaging
     #     max_results: 1,
     #     next_token: "NextToken",
     #     chime_bearer: "ChimeArn", # required
+    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @example Response structure
@@ -1951,6 +2057,7 @@ module Aws::ChimeSDKMessaging
     #   resp.channel_messages[0].message_attributes #=> Hash
     #   resp.channel_messages[0].message_attributes["MessageAttributeName"].string_values #=> Array
     #   resp.channel_messages[0].message_attributes["MessageAttributeName"].string_values[0] #=> String
+    #   resp.sub_channel_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListChannelMessages AWS API Documentation
     #
@@ -2193,6 +2300,57 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
+    # Lists all the SubChannels in an elastic channel when given a channel
+    # ID. Available only to the app instance admins and channel moderators
+    # of elastic channels.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of elastic channel.
+    #
+    # @option params [required, String] :chime_bearer
+    #   The `AppInstanceUserArn` of the user making the API call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of sub-channels that you want to return.
+    #
+    # @option params [String] :next_token
+    #   The token passed by previous API calls until all requested
+    #   sub-channels are returned.
+    #
+    # @return [Types::ListSubChannelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSubChannelsResponse#channel_arn #channel_arn} => String
+    #   * {Types::ListSubChannelsResponse#sub_channels #sub_channels} => Array&lt;Types::SubChannelSummary&gt;
+    #   * {Types::ListSubChannelsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sub_channels({
+    #     channel_arn: "ChimeArn", # required
+    #     chime_bearer: "ChimeArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.sub_channels #=> Array
+    #   resp.sub_channels[0].sub_channel_id #=> String
+    #   resp.sub_channels[0].membership_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListSubChannels AWS API Documentation
+    #
+    # @overload list_sub_channels(params = {})
+    # @param [Hash] params ({})
+    def list_sub_channels(params = {}, options = {})
+      req = build_request(:list_sub_channels, params)
+      req.send_request(options)
+    end
+
     # Lists the tags applied to an Amazon Chime SDK messaging resource.
     #
     # @option params [required, String] :resource_arn
@@ -2299,10 +2457,14 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #
+    # @option params [String] :sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
     # @return [Types::RedactChannelMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RedactChannelMessageResponse#channel_arn #channel_arn} => String
     #   * {Types::RedactChannelMessageResponse#message_id #message_id} => String
+    #   * {Types::RedactChannelMessageResponse#sub_channel_id #sub_channel_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2310,12 +2472,14 @@ module Aws::ChimeSDKMessaging
     #     channel_arn: "ChimeArn", # required
     #     message_id: "MessageId", # required
     #     chime_bearer: "ChimeArn", # required
+    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @example Response structure
     #
     #   resp.channel_arn #=> String
     #   resp.message_id #=> String
+    #   resp.sub_channel_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/RedactChannelMessage AWS API Documentation
     #
@@ -2430,11 +2594,15 @@ module Aws::ChimeSDKMessaging
     #   The attributes for the message, used for message filtering along with
     #   a `FilterRule` defined in the `PushNotificationPreferences`.
     #
+    # @option params [String] :sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
     # @return [Types::SendChannelMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SendChannelMessageResponse#channel_arn #channel_arn} => String
     #   * {Types::SendChannelMessageResponse#message_id #message_id} => String
     #   * {Types::SendChannelMessageResponse#status #status} => Types::ChannelMessageStatusStructure
+    #   * {Types::SendChannelMessageResponse#sub_channel_id #sub_channel_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2456,6 +2624,7 @@ module Aws::ChimeSDKMessaging
     #         string_values: ["MessageAttributeStringValue"],
     #       },
     #     },
+    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @example Response structure
@@ -2464,6 +2633,7 @@ module Aws::ChimeSDKMessaging
     #   resp.message_id #=> String
     #   resp.status.value #=> String, one of "SENT", "PENDING", "FAILED", "DENIED"
     #   resp.status.detail #=> String
+    #   resp.sub_channel_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/SendChannelMessage AWS API Documentation
     #
@@ -2656,11 +2826,20 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #
+    # @option params [String] :sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when updating messages in a SubChannel that the user
+    #   belongs to.
+    #
+    #    </note>
+    #
     # @return [Types::UpdateChannelMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateChannelMessageResponse#channel_arn #channel_arn} => String
     #   * {Types::UpdateChannelMessageResponse#message_id #message_id} => String
     #   * {Types::UpdateChannelMessageResponse#status #status} => Types::ChannelMessageStatusStructure
+    #   * {Types::UpdateChannelMessageResponse#sub_channel_id #sub_channel_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2670,6 +2849,7 @@ module Aws::ChimeSDKMessaging
     #     content: "Content",
     #     metadata: "Metadata",
     #     chime_bearer: "ChimeArn", # required
+    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @example Response structure
@@ -2678,6 +2858,7 @@ module Aws::ChimeSDKMessaging
     #   resp.message_id #=> String
     #   resp.status.value #=> String, one of "SENT", "PENDING", "FAILED", "DENIED"
     #   resp.status.detail #=> String
+    #   resp.sub_channel_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UpdateChannelMessage AWS API Documentation
     #
@@ -2702,20 +2883,26 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #
+    # @option params [String] :sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
     # @return [Types::UpdateChannelReadMarkerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateChannelReadMarkerResponse#channel_arn #channel_arn} => String
+    #   * {Types::UpdateChannelReadMarkerResponse#sub_channel_id #sub_channel_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_channel_read_marker({
     #     channel_arn: "ChimeArn", # required
     #     chime_bearer: "ChimeArn", # required
+    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @example Response structure
     #
     #   resp.channel_arn #=> String
+    #   resp.sub_channel_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UpdateChannelReadMarker AWS API Documentation
     #
@@ -2739,7 +2926,7 @@ module Aws::ChimeSDKMessaging
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmessaging'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

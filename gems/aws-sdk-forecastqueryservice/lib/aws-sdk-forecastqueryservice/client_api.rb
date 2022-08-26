@@ -25,10 +25,13 @@ module Aws::ForecastQueryService
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    LongArn = Shapes::StringShape.new(name: 'LongArn')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     Predictions = Shapes::MapShape.new(name: 'Predictions')
     QueryForecastRequest = Shapes::StructureShape.new(name: 'QueryForecastRequest')
     QueryForecastResponse = Shapes::StructureShape.new(name: 'QueryForecastResponse')
+    QueryWhatIfForecastRequest = Shapes::StructureShape.new(name: 'QueryWhatIfForecastRequest')
+    QueryWhatIfForecastResponse = Shapes::StructureShape.new(name: 'QueryWhatIfForecastResponse')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
@@ -67,6 +70,16 @@ module Aws::ForecastQueryService
     QueryForecastResponse.add_member(:forecast, Shapes::ShapeRef.new(shape: Forecast, location_name: "Forecast"))
     QueryForecastResponse.struct_class = Types::QueryForecastResponse
 
+    QueryWhatIfForecastRequest.add_member(:what_if_forecast_arn, Shapes::ShapeRef.new(shape: LongArn, required: true, location_name: "WhatIfForecastArn"))
+    QueryWhatIfForecastRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartDate"))
+    QueryWhatIfForecastRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "EndDate"))
+    QueryWhatIfForecastRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, required: true, location_name: "Filters"))
+    QueryWhatIfForecastRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    QueryWhatIfForecastRequest.struct_class = Types::QueryWhatIfForecastRequest
+
+    QueryWhatIfForecastResponse.add_member(:forecast, Shapes::ShapeRef.new(shape: Forecast, location_name: "Forecast"))
+    QueryWhatIfForecastResponse.struct_class = Types::QueryWhatIfForecastResponse
+
     ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceInUseException.struct_class = Types::ResourceInUseException
 
@@ -100,6 +113,19 @@ module Aws::ForecastQueryService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: QueryForecastRequest)
         o.output = Shapes::ShapeRef.new(shape: QueryForecastResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
+      api.add_operation(:query_what_if_forecast, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "QueryWhatIfForecast"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: QueryWhatIfForecastRequest)
+        o.output = Shapes::ShapeRef.new(shape: QueryWhatIfForecastResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)

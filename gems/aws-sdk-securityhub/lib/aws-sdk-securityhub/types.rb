@@ -1491,7 +1491,8 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] health_check_type
-    #   The service to use for the health checks.
+    #   The service to use for the health checks. Valid values are `EC2` or
+    #   `ELB`.
     #   @return [String]
     #
     # @!attribute [rw] health_check_grace_period
@@ -1645,7 +1646,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] on_demand_allocation_strategy
-    #   How to allocate instance types to fulfill On-Demand capacity.
+    #   How to allocate instance types to fulfill On-Demand capacity. The
+    #   valid value is `prioritized`.
     #   @return [String]
     #
     # @!attribute [rw] on_demand_base_capacity
@@ -1659,7 +1661,14 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] spot_allocation_strategy
-    #   How to allocate instances across Spot Instance pools.
+    #   How to allocate instances across Spot Instance pools. Valid values
+    #   are as follows:
+    #
+    #   * `lowest-price`
+    #
+    #   * `capacity-optimized`
+    #
+    #   * `capacity-optimized-prioritized`
     #   @return [String]
     #
     # @!attribute [rw] spot_instance_pools
@@ -1896,7 +1905,19 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
-    #   The volume type.
+    #   The volume type. Valid values are as follows:
+    #
+    #   * `gp2`
+    #
+    #   * `gp3`
+    #
+    #   * `io1`
+    #
+    #   * `sc1`
+    #
+    #   * `st1`
+    #
+    #   * `standard`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails AWS API Documentation
@@ -2137,6 +2158,746 @@ module Aws::SecurityHub
       :http_endpoint,
       :http_put_response_hop_limit,
       :http_tokens)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a list of backup options for each resource type.
+    #
+    # @note When making an API call, you may pass AwsBackupBackupPlanAdvancedBackupSettingsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         backup_options: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         resource_type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] backup_options
+    #   Specifies the backup option for a selected resource. This option is
+    #   only available for Windows Volume Shadow Copy Service (VSS) backup
+    #   jobs. Valid values are as follows:
+    #
+    #   * Set to `WindowsVSS: enabled` to enable the WindowsVSS backup
+    #     option and create a Windows VSS backup.
+    #
+    #   * Set to `WindowsVSS: disabled` to create a regular backup. The
+    #     `WindowsVSS` option is not enabled by default.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] resource_type
+    #   The name of a resource type. The only supported resource type is
+    #   Amazon EC2 instances with Windows VSS.
+    #
+    #   The only valid value is `EC2`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsBackupBackupPlanAdvancedBackupSettingsDetails AWS API Documentation
+    #
+    class AwsBackupBackupPlanAdvancedBackupSettingsDetails < Struct.new(
+      :backup_options,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Backup backup plan and an array of
+    # `BackupRule` objects, each of which specifies a backup rule.
+    #
+    # @note When making an API call, you may pass AwsBackupBackupPlanBackupPlanDetails
+    #   data as a hash:
+    #
+    #       {
+    #         backup_plan_name: "NonEmptyString",
+    #         advanced_backup_settings: [
+    #           {
+    #             backup_options: {
+    #               "NonEmptyString" => "NonEmptyString",
+    #             },
+    #             resource_type: "NonEmptyString",
+    #           },
+    #         ],
+    #         backup_plan_rule: [
+    #           {
+    #             target_backup_vault: "NonEmptyString",
+    #             start_window_minutes: 1,
+    #             schedule_expression: "NonEmptyString",
+    #             rule_name: "NonEmptyString",
+    #             rule_id: "NonEmptyString",
+    #             enable_continuous_backup: false,
+    #             completion_window_minutes: 1,
+    #             copy_actions: [
+    #               {
+    #                 destination_backup_vault_arn: "NonEmptyString",
+    #                 lifecycle: {
+    #                   delete_after_days: 1,
+    #                   move_to_cold_storage_after_days: 1,
+    #                 },
+    #               },
+    #             ],
+    #             lifecycle: {
+    #               delete_after_days: 1,
+    #               move_to_cold_storage_after_days: 1,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] backup_plan_name
+    #   The display name of a backup plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] advanced_backup_settings
+    #   A list of backup options for each resource type.
+    #   @return [Array<Types::AwsBackupBackupPlanAdvancedBackupSettingsDetails>]
+    #
+    # @!attribute [rw] backup_plan_rule
+    #   An array of `BackupRule` objects, each of which specifies a
+    #   scheduled task that is used to back up a selection of resources.
+    #   @return [Array<Types::AwsBackupBackupPlanRuleDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsBackupBackupPlanBackupPlanDetails AWS API Documentation
+    #
+    class AwsBackupBackupPlanBackupPlanDetails < Struct.new(
+      :backup_plan_name,
+      :advanced_backup_settings,
+      :backup_plan_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Backup backup plan and an array of
+    # `BackupRule` objects, each of which specifies a backup rule.
+    #
+    # @note When making an API call, you may pass AwsBackupBackupPlanDetails
+    #   data as a hash:
+    #
+    #       {
+    #         backup_plan: {
+    #           backup_plan_name: "NonEmptyString",
+    #           advanced_backup_settings: [
+    #             {
+    #               backup_options: {
+    #                 "NonEmptyString" => "NonEmptyString",
+    #               },
+    #               resource_type: "NonEmptyString",
+    #             },
+    #           ],
+    #           backup_plan_rule: [
+    #             {
+    #               target_backup_vault: "NonEmptyString",
+    #               start_window_minutes: 1,
+    #               schedule_expression: "NonEmptyString",
+    #               rule_name: "NonEmptyString",
+    #               rule_id: "NonEmptyString",
+    #               enable_continuous_backup: false,
+    #               completion_window_minutes: 1,
+    #               copy_actions: [
+    #                 {
+    #                   destination_backup_vault_arn: "NonEmptyString",
+    #                   lifecycle: {
+    #                     delete_after_days: 1,
+    #                     move_to_cold_storage_after_days: 1,
+    #                   },
+    #                 },
+    #               ],
+    #               lifecycle: {
+    #                 delete_after_days: 1,
+    #                 move_to_cold_storage_after_days: 1,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         backup_plan_arn: "NonEmptyString",
+    #         backup_plan_id: "NonEmptyString",
+    #         version_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] backup_plan
+    #   Uniquely identifies the backup plan to be associated with the
+    #   selection of resources.
+    #   @return [Types::AwsBackupBackupPlanBackupPlanDetails]
+    #
+    # @!attribute [rw] backup_plan_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies the backup
+    #   plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_plan_id
+    #   A unique ID for the backup plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   Unique, randomly generated, Unicode, UTF-8 encoded strings. Version
+    #   IDs cannot be edited.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsBackupBackupPlanDetails AWS API Documentation
+    #
+    class AwsBackupBackupPlanDetails < Struct.new(
+      :backup_plan,
+      :backup_plan_arn,
+      :backup_plan_id,
+      :version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides lifecycle details for the backup plan. A lifecycle defines
+    # when a backup is transitioned to cold storage and when it expires.
+    #
+    # @note When making an API call, you may pass AwsBackupBackupPlanLifecycleDetails
+    #   data as a hash:
+    #
+    #       {
+    #         delete_after_days: 1,
+    #         move_to_cold_storage_after_days: 1,
+    #       }
+    #
+    # @!attribute [rw] delete_after_days
+    #   Specifies the number of days after creation that a recovery point is
+    #   deleted. Must be greater than 90 days plus
+    #   `MoveToColdStorageAfterDays`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] move_to_cold_storage_after_days
+    #   Specifies the number of days after creation that a recovery point is
+    #   moved to cold storage.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsBackupBackupPlanLifecycleDetails AWS API Documentation
+    #
+    class AwsBackupBackupPlanLifecycleDetails < Struct.new(
+      :delete_after_days,
+      :move_to_cold_storage_after_days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array of `CopyAction` objects, which contains the details of the
+    # copy operation.
+    #
+    # @note When making an API call, you may pass AwsBackupBackupPlanRuleCopyActionsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         destination_backup_vault_arn: "NonEmptyString",
+    #         lifecycle: {
+    #           delete_after_days: 1,
+    #           move_to_cold_storage_after_days: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] destination_backup_vault_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies the
+    #   destination backup vault for the copied backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   Defines when a protected resource is transitioned to cold storage
+    #   and when it expires. Backup transitions and expires backups
+    #   automatically according to the lifecycle that you define. If you do
+    #   not specify a lifecycle, Backup applies the lifecycle policy of the
+    #   source backup to the destination backup.
+    #
+    #   Backups transitioned to cold storage must be stored in cold storage
+    #   for a minimum of 90 days.
+    #   @return [Types::AwsBackupBackupPlanLifecycleDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsBackupBackupPlanRuleCopyActionsDetails AWS API Documentation
+    #
+    class AwsBackupBackupPlanRuleCopyActionsDetails < Struct.new(
+      :destination_backup_vault_arn,
+      :lifecycle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an array of `BackupRule` objects, each of which
+    # specifies a scheduled task that is used to back up a selection of
+    # resources.
+    #
+    # @note When making an API call, you may pass AwsBackupBackupPlanRuleDetails
+    #   data as a hash:
+    #
+    #       {
+    #         target_backup_vault: "NonEmptyString",
+    #         start_window_minutes: 1,
+    #         schedule_expression: "NonEmptyString",
+    #         rule_name: "NonEmptyString",
+    #         rule_id: "NonEmptyString",
+    #         enable_continuous_backup: false,
+    #         completion_window_minutes: 1,
+    #         copy_actions: [
+    #           {
+    #             destination_backup_vault_arn: "NonEmptyString",
+    #             lifecycle: {
+    #               delete_after_days: 1,
+    #               move_to_cold_storage_after_days: 1,
+    #             },
+    #           },
+    #         ],
+    #         lifecycle: {
+    #           delete_after_days: 1,
+    #           move_to_cold_storage_after_days: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] target_backup_vault
+    #   The name of a logical container where backups are stored. Backup
+    #   vaults are identified by names that are unique to the Amazon Web
+    #   Services account used to create them and the Amazon Web Services
+    #   Region where they are created. They consist of letters, numbers, and
+    #   hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_window_minutes
+    #   A value in minutes after a backup is scheduled before a job will be
+    #   canceled if it doesn't start successfully.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] schedule_expression
+    #   A cron expression in UTC specifying when Backup initiates a backup
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_name
+    #   A display name for a backup rule. Must contain 1 to 50 alphanumeric
+    #   or '-\_.' characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   Uniquely identifies a rule that is used to schedule the backup of a
+    #   selection of resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_continuous_backup
+    #   Specifies whether Backup creates continuous backups capable of
+    #   point-in-time restore (PITR).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] completion_window_minutes
+    #   A value in minutes after a backup job is successfully started before
+    #   it must be completed, or it is canceled by Backup.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] copy_actions
+    #   An array of `CopyAction` objects, which contains the details of the
+    #   copy operation.
+    #   @return [Array<Types::AwsBackupBackupPlanRuleCopyActionsDetails>]
+    #
+    # @!attribute [rw] lifecycle
+    #   Defines when a protected resource is transitioned to cold storage
+    #   and when it expires. Backup transitions and expires backups
+    #   automatically according to the lifecycle that you define. If you do
+    #   not specify a lifecycle, Backup applies the lifecycle policy of the
+    #   source backup to the destination backup.
+    #
+    #   Backups transitioned to cold storage must be stored in cold storage
+    #   for a minimum of 90 days.
+    #   @return [Types::AwsBackupBackupPlanLifecycleDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsBackupBackupPlanRuleDetails AWS API Documentation
+    #
+    class AwsBackupBackupPlanRuleDetails < Struct.new(
+      :target_backup_vault,
+      :start_window_minutes,
+      :schedule_expression,
+      :rule_name,
+      :rule_id,
+      :enable_continuous_backup,
+      :completion_window_minutes,
+      :copy_actions,
+      :lifecycle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Backup backup vault. In Backup, a backup
+    # vault is a container that stores and organizes your backups.
+    #
+    # @note When making an API call, you may pass AwsBackupBackupVaultDetails
+    #   data as a hash:
+    #
+    #       {
+    #         backup_vault_arn: "NonEmptyString",
+    #         backup_vault_name: "NonEmptyString",
+    #         encryption_key_arn: "NonEmptyString",
+    #         notifications: {
+    #           backup_vault_events: ["NonEmptyString"],
+    #           sns_topic_arn: "NonEmptyString",
+    #         },
+    #         access_policy: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] backup_vault_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies a backup
+    #   vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of a logical container where backups are stored. Backup
+    #   vaults are identified by names that are unique to the Amazon Web
+    #   Services account used to create them and the Amazon Web Services
+    #   Region where they are created. They consist of lowercase letters,
+    #   numbers, and hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key_arn
+    #   The unique ARN associated with the server-side encryption key. You
+    #   can specify a key to encrypt your backups from services that support
+    #   full Backup management. If you do not specify a key, Backup creates
+    #   an KMS key for you by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] notifications
+    #   The Amazon SNS event notifications for the specified backup vault.
+    #   @return [Types::AwsBackupBackupVaultNotificationsDetails]
+    #
+    # @!attribute [rw] access_policy
+    #   A resource-based policy that is used to manage access permissions on
+    #   the target backup vault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsBackupBackupVaultDetails AWS API Documentation
+    #
+    class AwsBackupBackupVaultDetails < Struct.new(
+      :backup_vault_arn,
+      :backup_vault_name,
+      :encryption_key_arn,
+      :notifications,
+      :access_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the Amazon SNS event notifications for the
+    # specified backup vault.
+    #
+    # @note When making an API call, you may pass AwsBackupBackupVaultNotificationsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         backup_vault_events: ["NonEmptyString"],
+    #         sns_topic_arn: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] backup_vault_events
+    #   An array of events that indicate the status of jobs to back up
+    #   resources to the backup vault. The following events are supported:
+    #
+    #   * `BACKUP_JOB_STARTED | BACKUP_JOB_COMPLETED`
+    #
+    #   * `COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL | COPY_JOB_FAILED`
+    #
+    #   * `RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED |
+    #     RECOVERY_POINT_MODIFIED`
+    #
+    #   * `S3_BACKUP_OBJECT_FAILED | S3_RESTORE_OBJECT_FAILED`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] sns_topic_arn
+    #   An ARN that uniquely identifies the Amazon SNS topic for a backup
+    #   vault’s events.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsBackupBackupVaultNotificationsDetails AWS API Documentation
+    #
+    class AwsBackupBackupVaultNotificationsDetails < Struct.new(
+      :backup_vault_events,
+      :sns_topic_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies how long in days before a recovery point transitions to cold
+    # storage or is deleted.
+    #
+    # @note When making an API call, you may pass AwsBackupRecoveryPointCalculatedLifecycleDetails
+    #   data as a hash:
+    #
+    #       {
+    #         delete_at: "NonEmptyString",
+    #         move_to_cold_storage_at: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] delete_at
+    #   Specifies the number of days after creation that a recovery point is
+    #   deleted. Must be greater than 90 days plus
+    #   `MoveToColdStorageAfterDays`.
+    #   @return [String]
+    #
+    # @!attribute [rw] move_to_cold_storage_at
+    #   Specifies the number of days after creation that a recovery point is
+    #   moved to cold storage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsBackupRecoveryPointCalculatedLifecycleDetails AWS API Documentation
+    #
+    class AwsBackupRecoveryPointCalculatedLifecycleDetails < Struct.new(
+      :delete_at,
+      :move_to_cold_storage_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the backup plan and rule that Backup used
+    # to initiate the recovery point backup.
+    #
+    # @note When making an API call, you may pass AwsBackupRecoveryPointCreatedByDetails
+    #   data as a hash:
+    #
+    #       {
+    #         backup_plan_arn: "NonEmptyString",
+    #         backup_plan_id: "NonEmptyString",
+    #         backup_plan_version: "NonEmptyString",
+    #         backup_rule_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] backup_plan_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies a backup
+    #   plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_plan_id
+    #   Uniquely identifies a backup plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_plan_version
+    #   Unique, randomly generated, Unicode, UTF-8 encoded strings that are
+    #   at most 1,024 bytes long. Version IDs cannot be edited.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_rule_id
+    #   Uniquely identifies a rule used to schedule the backup of a
+    #   selection of resources.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsBackupRecoveryPointCreatedByDetails AWS API Documentation
+    #
+    class AwsBackupRecoveryPointCreatedByDetails < Struct.new(
+      :backup_plan_arn,
+      :backup_plan_id,
+      :backup_plan_version,
+      :backup_rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains detailed information about the recovery points stored in an
+    # Backup backup vault. A backup, or recovery point, represents the
+    # content of a resource at a specified time.
+    #
+    # @note When making an API call, you may pass AwsBackupRecoveryPointDetails
+    #   data as a hash:
+    #
+    #       {
+    #         backup_size_in_bytes: 1,
+    #         backup_vault_arn: "NonEmptyString",
+    #         backup_vault_name: "NonEmptyString",
+    #         calculated_lifecycle: {
+    #           delete_at: "NonEmptyString",
+    #           move_to_cold_storage_at: "NonEmptyString",
+    #         },
+    #         completion_date: "NonEmptyString",
+    #         created_by: {
+    #           backup_plan_arn: "NonEmptyString",
+    #           backup_plan_id: "NonEmptyString",
+    #           backup_plan_version: "NonEmptyString",
+    #           backup_rule_id: "NonEmptyString",
+    #         },
+    #         creation_date: "NonEmptyString",
+    #         encryption_key_arn: "NonEmptyString",
+    #         iam_role_arn: "NonEmptyString",
+    #         is_encrypted: false,
+    #         last_restore_time: "NonEmptyString",
+    #         lifecycle: {
+    #           delete_after_days: 1,
+    #           move_to_cold_storage_after_days: 1,
+    #         },
+    #         recovery_point_arn: "NonEmptyString",
+    #         resource_arn: "NonEmptyString",
+    #         resource_type: "NonEmptyString",
+    #         source_backup_vault_arn: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #         status_message: "NonEmptyString",
+    #         storage_class: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] backup_size_in_bytes
+    #   The size, in bytes, of a backup.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] backup_vault_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies a backup
+    #   vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of a logical container where backups are stored. Backup
+    #   vaults are identified by names that are unique to the Amazon Web
+    #   Services account used to create them and the Amazon Web Services
+    #   Region where they are created. They consist of lowercase letters,
+    #   numbers, and hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] calculated_lifecycle
+    #   A `CalculatedLifecycle` object containing `DeleteAt` and
+    #   `MoveToColdStorageAt` timestamps.
+    #   @return [Types::AwsBackupRecoveryPointCalculatedLifecycleDetails]
+    #
+    # @!attribute [rw] completion_date
+    #   The date and time that a job to create a recovery point is
+    #   completed, in Unix format and UTC. The value of `CompletionDate` is
+    #   accurate to milliseconds. For example, the value 1516925490.087
+    #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   Contains identifying information about the creation of a recovery
+    #   point, including the `BackupPlanArn`, `BackupPlanId`,
+    #   `BackupPlanVersion`, and `BackupRuleId` of the backup plan that is
+    #   used to create it.
+    #   @return [Types::AwsBackupRecoveryPointCreatedByDetails]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time a recovery point is created, in Unix format and
+    #   UTC. The value of `CreationDate` is accurate to milliseconds. For
+    #   example, the value 1516925490.087 represents Friday, January 26,
+    #   2018 12:11:30.087 AM.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key_arn
+    #   The ARN for the server-side encryption key that is used to protect
+    #   your backups.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   Specifies the IAM role ARN used to create the target recovery point
+    #   @return [String]
+    #
+    # @!attribute [rw] is_encrypted
+    #   A Boolean value that is returned as `TRUE` if the specified recovery
+    #   point is encrypted, or `FALSE` if the recovery point is not
+    #   encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_restore_time
+    #   The date and time that a recovery point was last restored, in Unix
+    #   format and UTC. The value of `LastRestoreTime` is accurate to
+    #   milliseconds. For example, the value 1516925490.087 represents
+    #   Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle defines when a protected resource is transitioned to
+    #   cold storage and when it expires. Backup transitions and expires
+    #   backups automatically according to the lifecycle that you define
+    #   @return [Types::AwsBackupRecoveryPointLifecycleDetails]
+    #
+    # @!attribute [rw] recovery_point_arn
+    #   An ARN that uniquely identifies a recovery point.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   An ARN that uniquely identifies a resource. The format of the ARN
+    #   depends on the resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of Amazon Web Services resource saved as a recovery point,
+    #   such as an Amazon EBS volume or an Amazon RDS database.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_backup_vault_arn
+    #   The ARN for the backup vault where the recovery point was originally
+    #   copied from. If the recovery point is restored to the same account,
+    #   this value will be null.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A status code specifying the state of the recovery point. Valid
+    #   values are as follows:
+    #
+    #   * `COMPLETED`
+    #
+    #   * `DELETING`
+    #
+    #   * `EXPIRED`
+    #
+    #   * `PARTIAL`
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message explaining the reason of the recovery point deletion
+    #   failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_class
+    #   Specifies the storage class of the recovery point. Valid values are
+    #   as follows:
+    #
+    #   * `COLD`
+    #
+    #   * `DELETED`
+    #
+    #   * `WARM`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsBackupRecoveryPointDetails AWS API Documentation
+    #
+    class AwsBackupRecoveryPointDetails < Struct.new(
+      :backup_size_in_bytes,
+      :backup_vault_arn,
+      :backup_vault_name,
+      :calculated_lifecycle,
+      :completion_date,
+      :created_by,
+      :creation_date,
+      :encryption_key_arn,
+      :iam_role_arn,
+      :is_encrypted,
+      :last_restore_time,
+      :lifecycle,
+      :recovery_point_arn,
+      :resource_arn,
+      :resource_type,
+      :source_backup_vault_arn,
+      :status,
+      :status_message,
+      :storage_class)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an array of Transition objects specifying how long in days
+    # before a recovery point transitions to cold storage or is deleted.
+    #
+    # @note When making an API call, you may pass AwsBackupRecoveryPointLifecycleDetails
+    #   data as a hash:
+    #
+    #       {
+    #         delete_after_days: 1,
+    #         move_to_cold_storage_after_days: 1,
+    #       }
+    #
+    # @!attribute [rw] delete_after_days
+    #   Specifies the number of days after creation that a recovery point is
+    #   deleted. Must be greater than 90 days plus
+    #   `MoveToColdStorageAfterDays`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] move_to_cold_storage_after_days
+    #   Specifies the number of days after creation that a recovery point is
+    #   moved to cold storage.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsBackupRecoveryPointLifecycleDetails AWS API Documentation
+    #
+    class AwsBackupRecoveryPointLifecycleDetails < Struct.new(
+      :delete_after_days,
+      :move_to_cold_storage_after_days)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2598,7 +3359,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] renewal_status_reason
-    #   The reason that a renewal request was unsuccessful.
+    #   The reason that a renewal request was unsuccessful. This attribute
+    #   is used only when `RenewalStatus` is `FAILED`.
     #
     #   Valid values: `NO_AVAILABLE_CONTACTS` \|
     #   `ADDITIONAL_VERIFICATION_REQUIRED` \| `DOMAIN_NOT_ALLOWED` \|
@@ -4776,7 +5538,21 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] table_status
-    #   The current status of the table.
+    #   The current status of the table. Valid values are as follows:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `ARCHIVED`
+    #
+    #   * `ARCHIVING`
+    #
+    #   * `CREATING`
+    #
+    #   * `DELETING`
+    #
+    #   * `INACCESSIBLE_ENCRYPTION_CREDENTIALS`
+    #
+    #   * `UPDATING`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableDetails AWS API Documentation
@@ -4854,6 +5630,14 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] index_status
     #   The current status of the index.
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATING`
+    #
+    #   * `DELETING`
+    #
+    #   * `UPDATING`
     #   @return [String]
     #
     # @!attribute [rw] item_count
@@ -4905,7 +5689,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] key_type
-    #   The type of key used for the key schema attribute.
+    #   The type of key used for the key schema attribute. Valid values are
+    #   `HASH` or `RANGE`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableKeySchema AWS API Documentation
@@ -4983,7 +5768,14 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] projection_type
-    #   The types of attributes that are projected into the index.
+    #   The types of attributes that are projected into the index. Valid
+    #   values are as follows:
+    #
+    #   * `ALL`
+    #
+    #   * `INCLUDE`
+    #
+    #   * `KEYS_ONLY`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableProjection AWS API Documentation
@@ -5122,7 +5914,17 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] replica_status
-    #   The current status of the replica.
+    #   The current status of the replica. Valid values are as follows:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATING`
+    #
+    #   * `CREATION_FAILED`
+    #
+    #   * `DELETING`
+    #
+    #   * `UPDATING`
     #   @return [String]
     #
     # @!attribute [rw] replica_status_description
@@ -6378,7 +7180,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The current state of the subnet.
+    #   The current state of the subnet. Valid values are `available` or
+    #   `pending`.
     #   @return [String]
     #
     # @!attribute [rw] subnet_arn
@@ -6535,7 +7338,17 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The attachment state of the volume.
+    #   The attachment state of the volume. Valid values are as follows:
+    #
+    #   * `attaching`
+    #
+    #   * `attached`
+    #
+    #   * `busy`
+    #
+    #   * `detaching`
+    #
+    #   * `detached`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2VolumeAttachment AWS API Documentation
@@ -6604,7 +7417,19 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The volume state.
+    #   The volume state. Valid values are as follows:
+    #
+    #   * `available`
+    #
+    #   * `creating`
+    #
+    #   * `deleted`
+    #
+    #   * `deleting`
+    #
+    #   * `error`
+    #
+    #   * `in-use`
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -6685,7 +7510,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The current state of the VPC.
+    #   The current state of the VPC. Valid values are `available` or
+    #   `pending`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2VpcDetails AWS API Documentation
@@ -6761,7 +7587,17 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] service_state
-    #   The current state of the service.
+    #   The current state of the service. Valid values are as follows:
+    #
+    #   * `Available`
+    #
+    #   * `Deleted`
+    #
+    #   * `Deleting`
+    #
+    #   * `Failed`
+    #
+    #   * `Pending`
     #   @return [String]
     #
     # @!attribute [rw] service_type
@@ -7055,7 +7891,16 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The current state of the VPN connection.
+    #   The current state of the VPN connection. Valid values are as
+    #   follows:
+    #
+    #   * `available`
+    #
+    #   * `deleted`
+    #
+    #   * `deleting`
+    #
+    #   * `pending`
     #   @return [String]
     #
     # @!attribute [rw] customer_gateway_id
@@ -7356,7 +8201,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the VPN tunnel.
+    #   The status of the VPN tunnel. Valid values are `DOWN` or `UP`.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -7400,7 +8245,13 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] architecture
-    #   The architecture of the image.
+    #   The architecture of the image. Valid values are as follows:
+    #
+    #   * `arm64`
+    #
+    #   * `i386`
+    #
+    #   * `x86_64`
     #   @return [String]
     #
     # @!attribute [rw] image_digest
@@ -7465,7 +8316,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsEcrRepositoryImageScanningConfigurationDetails]
     #
     # @!attribute [rw] image_tag_mutability
-    #   The tag mutability setting for the repository.
+    #   The tag mutability setting for the repository. Valid values are
+    #   `IMMUTABLE` or `MUTABLE`.
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_policy
@@ -7554,11 +8406,11 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the setting.
+    #   The name of the setting. The valid value is `containerInsights`.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the setting.
+    #   The value of the setting. Valid values are `disabled` or `enabled`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsClusterClusterSettingsDetails AWS API Documentation
@@ -8549,7 +9401,15 @@ module Aws::SecurityHub
     # @!attribute [rw] condition
     #   The dependency condition of the dependent container. Indicates the
     #   required status of the dependent container before the current
-    #   container can start.
+    #   container can start. Valid values are as follows:
+    #
+    #   * `COMPLETE`
+    #
+    #   * `HEALTHY`
+    #
+    #   * `SUCCESS`
+    #
+    #   * `START`
     #   @return [String]
     #
     # @!attribute [rw] container_name
@@ -8994,7 +9854,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] type
-    #   The type of environment file.
+    #   The type of environment file. The valid value is `s3`.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -9065,7 +9925,7 @@ module Aws::SecurityHub
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
-    #   The log router to use.
+    #   The log router to use. Valid values are `fluentbit` or `fluentd`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails AWS API Documentation
@@ -9142,12 +10002,37 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] add
     #   The Linux capabilities for the container that are added to the
-    #   default configuration provided by Docker.
+    #   default configuration provided by Docker. Valid values are as
+    #   follows:
+    #
+    #   Valid values: `"ALL"` \| `"AUDIT_CONTROL"` \|` "AUDIT_WRITE"` \|
+    #   `"BLOCK_SUSPEND"` \| `"CHOWN"` \| `"DAC_OVERRIDE"` \|
+    #   `"DAC_READ_SEARCH"` \| `"FOWNER"` \| `"FSETID"` \| `"IPC_LOCK"` \|
+    #   `"IPC_OWNER"` \| `"KILL"` \| `"LEASE"` \| `"LINUX_IMMUTABLE"` \|
+    #   `"MAC_ADMIN"` \|` "MAC_OVERRIDE"` \| `"MKNOD"` \| `"NET_ADMIN"` \|
+    #   `"NET_BIND_SERVICE"` \| `"NET_BROADCAST"` \| `"NET_RAW"` \|
+    #   `"SETFCAP"` \| `"SETGID"` \| `"SETPCAP"` \| `"SETUID"` \|
+    #   `"SYS_ADMIN"` \| `"SYS_BOOT"` \| `"SYS_CHROOT"` \| `"SYS_MODULE"` \|
+    #   `"SYS_NICE"` \| `"SYS_PACCT"` \| `"SYS_PTRACE"` \| `"SYS_RAWIO"` \|
+    #   `"SYS_RESOURCE"` \| `"SYS_TIME"` \| `"SYS_TTY_CONFIG"` \| `"SYSLOG"`
+    #   \| `"WAKE_ALARM"`
     #   @return [Array<String>]
     #
     # @!attribute [rw] drop
     #   The Linux capabilities for the container that are dropped from the
     #   default configuration provided by Docker.
+    #
+    #   Valid values: `"ALL"` \| `"AUDIT_CONTROL"` \|` "AUDIT_WRITE"` \|
+    #   `"BLOCK_SUSPEND"` \| `"CHOWN"` \| `"DAC_OVERRIDE"` \|
+    #   `"DAC_READ_SEARCH"` \| `"FOWNER"` \| `"FSETID"` \| `"IPC_LOCK"` \|
+    #   `"IPC_OWNER"` \| `"KILL"` \| `"LEASE"` \| `"LINUX_IMMUTABLE"` \|
+    #   `"MAC_ADMIN"` \|` "MAC_OVERRIDE"` \| `"MKNOD"` \| `"NET_ADMIN"` \|
+    #   `"NET_BIND_SERVICE"` \| `"NET_BROADCAST"` \| `"NET_RAW"` \|
+    #   `"SETFCAP"` \| `"SETGID"` \| `"SETPCAP"` \| `"SETUID"` \|
+    #   `"SYS_ADMIN"` \| `"SYS_BOOT"` \| `"SYS_CHROOT"` \| `"SYS_MODULE"` \|
+    #   `"SYS_NICE"` \| `"SYS_PACCT"` \| `"SYS_PTRACE"` \| `"SYS_RAWIO"` \|
+    #   `"SYS_RESOURCE"` \| `"SYS_TIME"` \| `"SYS_TTY_CONFIG"` \| `"SYSLOG"`
+    #   \| `"WAKE_ALARM"`
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails AWS API Documentation
@@ -9289,6 +10174,16 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] mount_options
     #   The list of tmpfs volume mount options.
+    #
+    #   Valid values: `"defaults"` \| `"ro"` \| `"rw"` \| `"suid"` \|
+    #   `"nosuid"` \| `"dev"` \| `"nodev"` \|` "exec"` \| `"noexec"` \|
+    #   `"sync"` \| `"async"` \| `"dirsync"` \| `"remount"` \| `"mand"` \|
+    #   `"nomand"` \| `"atime"` \| `"noatime"` \| `"diratime"` \|
+    #   `"nodiratime"` \| `"bind"` \| `"rbind"` \| `"unbindable"` \|
+    #   `"runbindable"` \| `"private"` \| `"rprivate"` \| `"shared"` \|
+    #   `"rshared"` \| `"slave"` \| `"rslave"` \| `"relatime"` \|
+    #   `"norelatime"` \| `"strictatime"` \| `"nostrictatime"` \|` "mode"`
+    #   \| `"uid"` \| `"gid"` \| `"nr_inodes"` \|` "nr_blocks"` \| `"mpol"`
     #   @return [Array<String>]
     #
     # @!attribute [rw] size
@@ -9325,6 +10220,34 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] log_driver
     #   The log driver to use for the container.
+    #
+    #   Valid values on Fargate are as follows:
+    #
+    #   * `awsfirelens`
+    #
+    #   * `awslogs`
+    #
+    #   * `splunk`
+    #
+    #   Valid values on Amazon EC2 are as follows:
+    #
+    #   * `awsfirelens`
+    #
+    #   * `awslogs`
+    #
+    #   * `fluentd`
+    #
+    #   * `gelf`
+    #
+    #   * `journald`
+    #
+    #   * `json-file`
+    #
+    #   * `logentries`
+    #
+    #   * `splunk`
+    #
+    #   * `syslog`
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -9480,7 +10403,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] type
-    #   The type of resource to assign to a container.
+    #   The type of resource to assign to a container. Valid values are
+    #   `GPU` or `InferenceAccelerator`.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -9574,7 +10498,37 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] name
-    #   The type of the ulimit.
+    #   The type of the ulimit. Valid values are as follows:
+    #
+    #   * `core`
+    #
+    #   * `cpu`
+    #
+    #   * `data`
+    #
+    #   * `fsize`
+    #
+    #   * `locks`
+    #
+    #   * `memlock`
+    #
+    #   * `msgqueue`
+    #
+    #   * `nice`
+    #
+    #   * `nofile`
+    #
+    #   * `nproc`
+    #
+    #   * `rss`
+    #
+    #   * `rtprio`
+    #
+    #   * `rttime`
+    #
+    #   * `sigpending`
+    #
+    #   * `stack`
     #   @return [String]
     #
     # @!attribute [rw] soft_limit
@@ -9845,7 +10799,18 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsDetails>]
     #
     # @!attribute [rw] cpu
-    #   The number of CPU units used by the task.
+    #   The number of CPU units used by the task.Valid values are as
+    #   follows:
+    #
+    #   * `256 (.25 vCPU)`
+    #
+    #   * `512 (.5 vCPU)`
+    #
+    #   * `1024 (1 vCPU)`
+    #
+    #   * `2048 (2 vCPU)`
+    #
+    #   * `4096 (4 vCPU)`
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
@@ -9863,19 +10828,47 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsEcsTaskDefinitionInferenceAcceleratorsDetails>]
     #
     # @!attribute [rw] ipc_mode
-    #   The IPC resource namespace to use for the containers in the task.
+    #   The inter-process communication (IPC) resource namespace to use for
+    #   the containers in the task. Valid values are as follows:
+    #
+    #   * `host`
+    #
+    #   * `none`
+    #
+    #   * `task`
     #   @return [String]
     #
     # @!attribute [rw] memory
     #   The amount (in MiB) of memory used by the task.
+    #
+    #   For tasks that are hosted on Amazon EC2, you can provide a
+    #   task-level memory value or a container-level memory value. For tasks
+    #   that are hosted on Fargate, you must use one of the [specified
+    #   values][1] in the <i> <i>Amazon Elastic Container Service Developer
+    #   Guide</i> </i>, which determines your range of supported values for
+    #   the `Cpu` and `Memory` parameters.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size
     #   @return [String]
     #
     # @!attribute [rw] network_mode
     #   The Docker networking mode to use for the containers in the task.
+    #   Valid values are as follows:
+    #
+    #   * `awsvpc`
+    #
+    #   * `bridge`
+    #
+    #   * `host`
+    #
+    #   * `none`
     #   @return [String]
     #
     # @!attribute [rw] pid_mode
-    #   The process namespace to use for the containers in the task.
+    #   The process namespace to use for the containers in the task. Valid
+    #   values are `host` or `task`.
     #   @return [String]
     #
     # @!attribute [rw] placement_constraints
@@ -10145,6 +11138,7 @@ module Aws::SecurityHub
     #   Docker volumes that are scoped to a task are provisioned
     #   automatically when the task starts and destroyed when the task
     #   stops. Docker volumes that are shared persist after the task stops.
+    #   Valid values are `shared` or `task`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails AWS API Documentation
@@ -10626,7 +11620,19 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] cluster_status
-    #   The status of the cluster.
+    #   The status of the cluster. Valid values are as follows:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATING`
+    #
+    #   * `DELETING`
+    #
+    #   * `FAILED`
+    #
+    #   * `PENDING`
+    #
+    #   * `UPDATING`
     #   @return [String]
     #
     # @!attribute [rw] endpoint
@@ -10686,7 +11692,17 @@ module Aws::SecurityHub
     #   @return [Boolean]
     #
     # @!attribute [rw] types
-    #   A list of logging types.
+    #   A list of logging types. Valid values are as follows:
+    #
+    #   * `api`
+    #
+    #   * `audit`
+    #
+    #   * `authenticator`
+    #
+    #   * `controllerManager`
+    #
+    #   * `scheduler`
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEksClusterLoggingClusterLoggingDetails AWS API Documentation
@@ -10850,7 +11866,24 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current operational status of the environment.
+    #   The current operational status of the environment. Valid values are
+    #   as follows:
+    #
+    #   * `Aborting`
+    #
+    #   * `Launching`
+    #
+    #   * `LinkingFrom`
+    #
+    #   * `LinkingTo`
+    #
+    #   * `Ready`
+    #
+    #   * `Terminated`
+    #
+    #   * `Terminating`
+    #
+    #   * `Updating`
     #   @return [String]
     #
     # @!attribute [rw] tier
@@ -10964,11 +11997,13 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the environment tier.
+    #   The name of the environment tier. Valid values are `WebServer` or
+    #   `Worker`.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of environment tier.
+    #   The type of environment tier. Valid values are `Standard` or
+    #   `SQS/HTTP`.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -11206,9 +12241,17 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] dedicated_master_type
     #   The hardware configuration of the computer that hosts the dedicated
-    #   master node. For example, `m3.medium.elasticsearch`. If this
+    #   master node. A sample value is `m3.medium.elasticsearch`. If this
     #   attribute is specified, then `DedicatedMasterEnabled` must be
     #   `true`.
+    #
+    #   For a list of valid values, see [Supported instance types in Amazon
+    #   OpenSearch Service][1] in the *Amazon OpenSearch Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -11218,6 +12261,14 @@ module Aws::SecurityHub
     # @!attribute [rw] instance_type
     #   The instance type for your data nodes. For example,
     #   `m3.medium.elasticsearch`.
+    #
+    #   For a list of valid values, see [Supported instance types in Amazon
+    #   OpenSearch Service][1] in the *Amazon OpenSearch Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html
     #   @return [String]
     #
     # @!attribute [rw] zone_awareness_config
@@ -11432,7 +12483,18 @@ module Aws::SecurityHub
     #   @return [Boolean]
     #
     # @!attribute [rw] update_status
-    #   The status of the service software update.
+    #   The status of the service software update. Valid values are as
+    #   follows:
+    #
+    #   * `COMPLETED`
+    #
+    #   * `ELIGIBLE`
+    #
+    #   * `IN_PROGRESS`
+    #
+    #   * `NOT_ELIGIBLE`
+    #
+    #   * `PENDING_UPDATE`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticsearchDomainServiceSoftwareOptions AWS API Documentation
@@ -13378,7 +14440,17 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] key_state
-    #   The state of the KMS key.
+    #   The state of the KMS key. Valid values are as follows:
+    #
+    #   * `Disabled`
+    #
+    #   * `Enabled`
+    #
+    #   * `PendingDeletion`
+    #
+    #   * `PendingImport`
+    #
+    #   * `Unavailable`
     #   @return [String]
     #
     # @!attribute [rw] origin
@@ -14281,6 +15353,14 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] instance_type
     #   The instance type for your data nodes.
+    #
+    #   For a list of valid values, see [Supported instance types in Amazon
+    #   OpenSearch Service][1] in the *Amazon OpenSearch Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html
     #   @return [String]
     #
     # @!attribute [rw] warm_type
@@ -14331,7 +15411,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] availability_zone_count
     #   The number of Availability Zones that the domain uses. Valid values
-    #   are 2 and 3. The default is 2.
+    #   are `2` or `3`. The default is `2`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails AWS API Documentation
@@ -14756,7 +15836,18 @@ module Aws::SecurityHub
     #   @return [Boolean]
     #
     # @!attribute [rw] update_status
-    #   The status of the service software update.
+    #   The status of the service software update. Valid values are as
+    #   follows:
+    #
+    #   * `COMPLETED`
+    #
+    #   * `ELIGIBLE`
+    #
+    #   * `IN_PROGRESS`
+    #
+    #   * `NOT_ELIGIBLE`
+    #
+    #   * `PENDING_UPDATE`
     #   @return [String]
     #
     # @!attribute [rw] optional_deployment
@@ -14824,7 +15915,13 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] status
     #   The status of the association between the IAM role and the DB
-    #   cluster.
+    #   cluster. Valid values are as follows:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `INVALID`
+    #
+    #   * `PENDING`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbClusterAssociatedRole AWS API Documentation
@@ -14949,7 +16046,14 @@ module Aws::SecurityHub
     #   @return [Boolean]
     #
     # @!attribute [rw] engine
-    #   The name of the database engine to use for this DB cluster.
+    #   The name of the database engine to use for this DB cluster. Valid
+    #   values are as follows:
+    #
+    #   * `aurora`
+    #
+    #   * `aurora-mysql`
+    #
+    #   * `aurora-postgresql`
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -15035,7 +16139,18 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] engine_mode
-    #   The database engine mode of the DB cluster.
+    #   The database engine mode of the DB cluster.Valid values are as
+    #   follows:
+    #
+    #   * `global`
+    #
+    #   * `multimaster`
+    #
+    #   * `parallelquery`
+    #
+    #   * `provisioned`
+    #
+    #   * `serverless`
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
@@ -15048,7 +16163,16 @@ module Aws::SecurityHub
     #   @return [Boolean]
     #
     # @!attribute [rw] activity_stream_status
-    #   The status of the database activity stream.
+    #   The status of the database activity stream. Valid values are as
+    #   follows:
+    #
+    #   * `started`
+    #
+    #   * `starting`
+    #
+    #   * `stopped`
+    #
+    #   * `stopping`
     #   @return [String]
     #
     # @!attribute [rw] copy_tags_to_snapshot
@@ -16211,7 +17335,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the processor feature.
+    #   The name of the processor feature. Valid values are `coreCount` or
+    #   `threadsPerCore`.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -16418,7 +17543,36 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   The name of the database engine to use for this DB instance.
+    #   The name of the database engine to use for this DB instance. Valid
+    #   values are as follows:
+    #
+    #   * `aurora`
+    #
+    #   * `aurora-mysql`
+    #
+    #   * `aurora-postgresql`
+    #
+    #   * `c`
+    #
+    #   * `mariadb`
+    #
+    #   * `mysql`
+    #
+    #   * `oracle-ee`
+    #
+    #   * `oracle-se`
+    #
+    #   * `oracle-se1`
+    #
+    #   * `oracle-se2`
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-web`
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
@@ -16488,7 +17642,14 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] storage_type
-    #   The storage type associated with the DB snapshot.
+    #   The storage type associated with the DB snapshot. Valid values are
+    #   as follows:
+    #
+    #   * `gp2`
+    #
+    #   * `io1`
+    #
+    #   * `standard`
     #   @return [String]
     #
     # @!attribute [rw] tde_credential_arn
@@ -18277,7 +19438,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails]
     #
     # @!attribute [rw] type
-    #   Whether to use `AND` or `OR` to join the operands.
+    #   Whether to use `AND` or `OR` to join the operands. Valid values are
+    #   `LifecycleAndOperator` or `LifecycleOrOperator`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails AWS API Documentation
@@ -18314,7 +19476,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails]
     #
     # @!attribute [rw] type
-    #   The type of filter value.
+    #   The type of filter value. Valid values are
+    #   `LifecyclePrefixPredicate` or `LifecycleTagPredicate`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails AWS API Documentation
@@ -18442,7 +19605,18 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] storage_class
-    #   The storage class to transition the object to.
+    #   The storage class to transition the object to. Valid values are as
+    #   follows:
+    #
+    #   * `DEEP_ARCHIVE`
+    #
+    #   * `GLACIER`
+    #
+    #   * `INTELLIGENT_TIERING`
+    #
+    #   * `ONEZONE_IA`
+    #
+    #   * `STANDARD_IA`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails AWS API Documentation
@@ -18472,7 +19646,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     #
     # @!attribute [rw] status
-    #   The versioning status of the S3 bucket.
+    #   The versioning status of the S3 bucket. Valid values are `Enabled`
+    #   or `Suspended`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketVersioningConfiguration AWS API Documentation
@@ -18790,7 +19965,14 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] type
     #   Indicates the type of notification. Notifications can be generated
-    #   using Lambda functions, Amazon SQS queues or Amazon SNS topics.
+    #   using Lambda functions, Amazon SQS queues, or Amazon SNS topics,
+    #   with corresponding valid values as follows:
+    #
+    #   * `LambdaConfiguration`
+    #
+    #   * `QueueConfiguration`
+    #
+    #   * `TopicConfiguration`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketNotificationConfigurationDetail AWS API Documentation
@@ -18900,6 +20082,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] sse_algorithm
     #   Server-side encryption algorithm to use for the default encryption.
+    #   Valid values are `aws: kms` or `AES256`.
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_id
@@ -19040,8 +20223,9 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] protocol
-    #   The protocol to use when redirecting requests. By default, uses the
-    #   same protocol as the original request.
+    #   The protocol to use when redirecting requests. By default, this
+    #   field uses the same protocol as the original request. Valid values
+    #   are `http` or `https`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketWebsiteConfigurationRedirectTo AWS API Documentation
@@ -19322,10 +20506,9 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Provides consistent format for the contents of the Security
-    # Hub-aggregated findings. `AwsSecurityFinding` format enables you to
-    # share findings between Amazon Web Services security services and
-    # third-party solutions, and security standards checks.
+    # Provides a consistent format for Security Hub findings.
+    # `AwsSecurityFinding` format allows you to share findings between
+    # Amazon Web Services security services and third-party solutions.
     #
     # <note markdown="1"> A finding is a potential security issue generated either by Amazon Web
     # Services services or by the integrated third-party solutions and
@@ -22369,6 +23552,88 @@ module Aws::SecurityHub
     #                   },
     #                 ],
     #               },
+    #               aws_backup_backup_vault: {
+    #                 backup_vault_arn: "NonEmptyString",
+    #                 backup_vault_name: "NonEmptyString",
+    #                 encryption_key_arn: "NonEmptyString",
+    #                 notifications: {
+    #                   backup_vault_events: ["NonEmptyString"],
+    #                   sns_topic_arn: "NonEmptyString",
+    #                 },
+    #                 access_policy: "NonEmptyString",
+    #               },
+    #               aws_backup_backup_plan: {
+    #                 backup_plan: {
+    #                   backup_plan_name: "NonEmptyString",
+    #                   advanced_backup_settings: [
+    #                     {
+    #                       backup_options: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       resource_type: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   backup_plan_rule: [
+    #                     {
+    #                       target_backup_vault: "NonEmptyString",
+    #                       start_window_minutes: 1,
+    #                       schedule_expression: "NonEmptyString",
+    #                       rule_name: "NonEmptyString",
+    #                       rule_id: "NonEmptyString",
+    #                       enable_continuous_backup: false,
+    #                       completion_window_minutes: 1,
+    #                       copy_actions: [
+    #                         {
+    #                           destination_backup_vault_arn: "NonEmptyString",
+    #                           lifecycle: {
+    #                             delete_after_days: 1,
+    #                             move_to_cold_storage_after_days: 1,
+    #                           },
+    #                         },
+    #                       ],
+    #                       lifecycle: {
+    #                         delete_after_days: 1,
+    #                         move_to_cold_storage_after_days: 1,
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #                 backup_plan_arn: "NonEmptyString",
+    #                 backup_plan_id: "NonEmptyString",
+    #                 version_id: "NonEmptyString",
+    #               },
+    #               aws_backup_recovery_point: {
+    #                 backup_size_in_bytes: 1,
+    #                 backup_vault_arn: "NonEmptyString",
+    #                 backup_vault_name: "NonEmptyString",
+    #                 calculated_lifecycle: {
+    #                   delete_at: "NonEmptyString",
+    #                   move_to_cold_storage_at: "NonEmptyString",
+    #                 },
+    #                 completion_date: "NonEmptyString",
+    #                 created_by: {
+    #                   backup_plan_arn: "NonEmptyString",
+    #                   backup_plan_id: "NonEmptyString",
+    #                   backup_plan_version: "NonEmptyString",
+    #                   backup_rule_id: "NonEmptyString",
+    #                 },
+    #                 creation_date: "NonEmptyString",
+    #                 encryption_key_arn: "NonEmptyString",
+    #                 iam_role_arn: "NonEmptyString",
+    #                 is_encrypted: false,
+    #                 last_restore_time: "NonEmptyString",
+    #                 lifecycle: {
+    #                   delete_after_days: 1,
+    #                   move_to_cold_storage_after_days: 1,
+    #                 },
+    #                 recovery_point_arn: "NonEmptyString",
+    #                 resource_arn: "NonEmptyString",
+    #                 resource_type: "NonEmptyString",
+    #                 source_backup_vault_arn: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 status_message: "NonEmptyString",
+    #                 storage_class: "NonEmptyString",
+    #               },
     #             },
     #           },
     #         ],
@@ -22411,6 +23676,8 @@ module Aws::SecurityHub
     #                 architecture: "NonEmptyString",
     #                 package_manager: "NonEmptyString",
     #                 file_path: "NonEmptyString",
+    #                 fixed_in_version: "NonEmptyString",
+    #                 remediation: "NonEmptyString",
     #               },
     #             ],
     #             cvss: [
@@ -22436,6 +23703,7 @@ module Aws::SecurityHub
     #               vendor_updated_at: "NonEmptyString",
     #             },
     #             reference_urls: ["NonEmptyString"],
+    #             fix_available: "YES", # accepts YES, NO, PARTIAL
     #           },
     #         ],
     #         patch_summary: {
@@ -24347,9 +25615,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] status
-    #   The current patch compliance status.
-    #
-    #   The possible status values are:
+    #   The current patch compliance status. Valid values are as follows:
     #
     #   * `COMPLIANT`
     #
@@ -24423,7 +25689,19 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] overall_severity
-    #   The highest severity for the patches.
+    #   The highest severity for the patches. Valid values are as follows:
+    #
+    #   * `CRITICAL`
+    #
+    #   * `HIGH`
+    #
+    #   * `MEDIUM`
+    #
+    #   * `LOW`
+    #
+    #   * `INFORMATIONAL`
+    #
+    #   * `UNSPECIFIED`
     #   @return [String]
     #
     # @!attribute [rw] non_compliant_medium_count
@@ -24640,7 +25918,21 @@ module Aws::SecurityHub
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The type of predicate.
+    #   The type of predicate. Valid values are as follows:
+    #
+    #   * `ByteMatch`
+    #
+    #   * `GeoMatch`
+    #
+    #   * `IPMatch`
+    #
+    #   * `RegexMatch`
+    #
+    #   * `SizeConstraint`
+    #
+    #   * `SqlInjectionMatch`
+    #
+    #   * `XssMatch`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafRateBasedRuleMatchPredicate AWS API Documentation
@@ -24744,7 +26036,21 @@ module Aws::SecurityHub
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The type of predicate.
+    #   The type of predicate. Valid values are as follows:
+    #
+    #   * `ByteMatch`
+    #
+    #   * `GeoMatch`
+    #
+    #   * `IPMatch`
+    #
+    #   * `RegexMatch`
+    #
+    #   * `SizeConstraint`
+    #
+    #   * `SqlInjectionMatch`
+    #
+    #   * `XssMatch`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsWafRegionalRateBasedRuleMatchPredicate AWS API Documentation
@@ -25492,13 +26798,16 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the encryption configuration. When `Status` is
-    #   `UPDATING`, X-Ray might use both the old and new encryption.
+    #   The current status of the encryption configuration. Valid values are
+    #   `ACTIVE` or `UPDATING`.
+    #
+    #   When `Status` is equal to `UPDATING`, X-Ray might use both the old
+    #   and new encryption.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of encryption. `KMS` indicates that the encryption uses KMS
-    #   keys. `NONE` indicates to use the default encryption.
+    #   keys. `NONE` indicates the default encryption.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsXrayEncryptionConfigDetails AWS API Documentation
@@ -28618,6 +29927,88 @@ module Aws::SecurityHub
     #                       },
     #                     ],
     #                   },
+    #                   aws_backup_backup_vault: {
+    #                     backup_vault_arn: "NonEmptyString",
+    #                     backup_vault_name: "NonEmptyString",
+    #                     encryption_key_arn: "NonEmptyString",
+    #                     notifications: {
+    #                       backup_vault_events: ["NonEmptyString"],
+    #                       sns_topic_arn: "NonEmptyString",
+    #                     },
+    #                     access_policy: "NonEmptyString",
+    #                   },
+    #                   aws_backup_backup_plan: {
+    #                     backup_plan: {
+    #                       backup_plan_name: "NonEmptyString",
+    #                       advanced_backup_settings: [
+    #                         {
+    #                           backup_options: {
+    #                             "NonEmptyString" => "NonEmptyString",
+    #                           },
+    #                           resource_type: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       backup_plan_rule: [
+    #                         {
+    #                           target_backup_vault: "NonEmptyString",
+    #                           start_window_minutes: 1,
+    #                           schedule_expression: "NonEmptyString",
+    #                           rule_name: "NonEmptyString",
+    #                           rule_id: "NonEmptyString",
+    #                           enable_continuous_backup: false,
+    #                           completion_window_minutes: 1,
+    #                           copy_actions: [
+    #                             {
+    #                               destination_backup_vault_arn: "NonEmptyString",
+    #                               lifecycle: {
+    #                                 delete_after_days: 1,
+    #                                 move_to_cold_storage_after_days: 1,
+    #                               },
+    #                             },
+    #                           ],
+    #                           lifecycle: {
+    #                             delete_after_days: 1,
+    #                             move_to_cold_storage_after_days: 1,
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                     backup_plan_arn: "NonEmptyString",
+    #                     backup_plan_id: "NonEmptyString",
+    #                     version_id: "NonEmptyString",
+    #                   },
+    #                   aws_backup_recovery_point: {
+    #                     backup_size_in_bytes: 1,
+    #                     backup_vault_arn: "NonEmptyString",
+    #                     backup_vault_name: "NonEmptyString",
+    #                     calculated_lifecycle: {
+    #                       delete_at: "NonEmptyString",
+    #                       move_to_cold_storage_at: "NonEmptyString",
+    #                     },
+    #                     completion_date: "NonEmptyString",
+    #                     created_by: {
+    #                       backup_plan_arn: "NonEmptyString",
+    #                       backup_plan_id: "NonEmptyString",
+    #                       backup_plan_version: "NonEmptyString",
+    #                       backup_rule_id: "NonEmptyString",
+    #                     },
+    #                     creation_date: "NonEmptyString",
+    #                     encryption_key_arn: "NonEmptyString",
+    #                     iam_role_arn: "NonEmptyString",
+    #                     is_encrypted: false,
+    #                     last_restore_time: "NonEmptyString",
+    #                     lifecycle: {
+    #                       delete_after_days: 1,
+    #                       move_to_cold_storage_after_days: 1,
+    #                     },
+    #                     recovery_point_arn: "NonEmptyString",
+    #                     resource_arn: "NonEmptyString",
+    #                     resource_type: "NonEmptyString",
+    #                     source_backup_vault_arn: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                     status_message: "NonEmptyString",
+    #                     storage_class: "NonEmptyString",
+    #                   },
     #                 },
     #               },
     #             ],
@@ -28660,6 +30051,8 @@ module Aws::SecurityHub
     #                     architecture: "NonEmptyString",
     #                     package_manager: "NonEmptyString",
     #                     file_path: "NonEmptyString",
+    #                     fixed_in_version: "NonEmptyString",
+    #                     remediation: "NonEmptyString",
     #                   },
     #                 ],
     #                 cvss: [
@@ -28685,6 +30078,7 @@ module Aws::SecurityHub
     #                   vendor_updated_at: "NonEmptyString",
     #                 },
     #                 reference_urls: ["NonEmptyString"],
+    #                 fix_available: "YES", # accepts YES, NO, PARTIAL
     #               },
     #             ],
     #             patch_summary: {
@@ -29032,28 +30426,32 @@ module Aws::SecurityHub
     # @!attribute [rw] error_code
     #   The code associated with the error. Possible values are:
     #
-    #   * `ConcurrentUpdateError` - Another process or request attempted to
-    #     update the finding while this request was being processed
+    #   * `ConcurrentUpdateError` - Another request attempted to update the
+    #     finding while this request was being processed. This error may
+    #     also occur if you call [ `BatchUpdateFindings` ][1] and [
+    #     `BatchImportFindings` ][2] at the same time.
     #
     #   * `DuplicatedFindingIdentifier` - The request included two or more
-    #     findings with the same `FindingIdentifier`
+    #     findings with the same `FindingIdentifier`.
     #
     #   * `FindingNotFound` - The `FindingIdentifier` included in the
-    #     request did not match an existing finding
+    #     request did not match an existing finding.
     #
     #   * `FindingSizeExceeded` - The finding size was greater than the
-    #     permissible value of 240 KB
+    #     permissible value of 240 KB.
     #
     #   * `InternalFailure` - An internal service failure occurred when
-    #     updating the finding
+    #     updating the finding.
     #
     #   * `InvalidInput` - The finding update contained an invalid value
     #     that did not satisfy the [Amazon Web Services Security Finding
-    #     Format][1] syntax
+    #     Format][3] syntax.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html
+    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html
+    #   [3]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -33207,7 +34605,20 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] cidr_block_state
-    #   Information about the state of the CIDR block.
+    #   Information about the state of the CIDR block. Valid values are as
+    #   follows:
+    #
+    #   * `associating`
+    #
+    #   * `associated`
+    #
+    #   * `disassociating`
+    #
+    #   * `disassociated`
+    #
+    #   * `failed`
+    #
+    #   * `failing`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Ipv6CidrBlockAssociation AWS API Documentation
@@ -37793,6 +39204,88 @@ module Aws::SecurityHub
     #               },
     #             ],
     #           },
+    #           aws_backup_backup_vault: {
+    #             backup_vault_arn: "NonEmptyString",
+    #             backup_vault_name: "NonEmptyString",
+    #             encryption_key_arn: "NonEmptyString",
+    #             notifications: {
+    #               backup_vault_events: ["NonEmptyString"],
+    #               sns_topic_arn: "NonEmptyString",
+    #             },
+    #             access_policy: "NonEmptyString",
+    #           },
+    #           aws_backup_backup_plan: {
+    #             backup_plan: {
+    #               backup_plan_name: "NonEmptyString",
+    #               advanced_backup_settings: [
+    #                 {
+    #                   backup_options: {
+    #                     "NonEmptyString" => "NonEmptyString",
+    #                   },
+    #                   resource_type: "NonEmptyString",
+    #                 },
+    #               ],
+    #               backup_plan_rule: [
+    #                 {
+    #                   target_backup_vault: "NonEmptyString",
+    #                   start_window_minutes: 1,
+    #                   schedule_expression: "NonEmptyString",
+    #                   rule_name: "NonEmptyString",
+    #                   rule_id: "NonEmptyString",
+    #                   enable_continuous_backup: false,
+    #                   completion_window_minutes: 1,
+    #                   copy_actions: [
+    #                     {
+    #                       destination_backup_vault_arn: "NonEmptyString",
+    #                       lifecycle: {
+    #                         delete_after_days: 1,
+    #                         move_to_cold_storage_after_days: 1,
+    #                       },
+    #                     },
+    #                   ],
+    #                   lifecycle: {
+    #                     delete_after_days: 1,
+    #                     move_to_cold_storage_after_days: 1,
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             backup_plan_arn: "NonEmptyString",
+    #             backup_plan_id: "NonEmptyString",
+    #             version_id: "NonEmptyString",
+    #           },
+    #           aws_backup_recovery_point: {
+    #             backup_size_in_bytes: 1,
+    #             backup_vault_arn: "NonEmptyString",
+    #             backup_vault_name: "NonEmptyString",
+    #             calculated_lifecycle: {
+    #               delete_at: "NonEmptyString",
+    #               move_to_cold_storage_at: "NonEmptyString",
+    #             },
+    #             completion_date: "NonEmptyString",
+    #             created_by: {
+    #               backup_plan_arn: "NonEmptyString",
+    #               backup_plan_id: "NonEmptyString",
+    #               backup_plan_version: "NonEmptyString",
+    #               backup_rule_id: "NonEmptyString",
+    #             },
+    #             creation_date: "NonEmptyString",
+    #             encryption_key_arn: "NonEmptyString",
+    #             iam_role_arn: "NonEmptyString",
+    #             is_encrypted: false,
+    #             last_restore_time: "NonEmptyString",
+    #             lifecycle: {
+    #               delete_after_days: 1,
+    #               move_to_cold_storage_after_days: 1,
+    #             },
+    #             recovery_point_arn: "NonEmptyString",
+    #             resource_arn: "NonEmptyString",
+    #             resource_type: "NonEmptyString",
+    #             source_backup_vault_arn: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #             status_message: "NonEmptyString",
+    #             storage_class: "NonEmptyString",
+    #           },
     #         },
     #       }
     #
@@ -40644,6 +42137,88 @@ module Aws::SecurityHub
     #             },
     #           ],
     #         },
+    #         aws_backup_backup_vault: {
+    #           backup_vault_arn: "NonEmptyString",
+    #           backup_vault_name: "NonEmptyString",
+    #           encryption_key_arn: "NonEmptyString",
+    #           notifications: {
+    #             backup_vault_events: ["NonEmptyString"],
+    #             sns_topic_arn: "NonEmptyString",
+    #           },
+    #           access_policy: "NonEmptyString",
+    #         },
+    #         aws_backup_backup_plan: {
+    #           backup_plan: {
+    #             backup_plan_name: "NonEmptyString",
+    #             advanced_backup_settings: [
+    #               {
+    #                 backup_options: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 resource_type: "NonEmptyString",
+    #               },
+    #             ],
+    #             backup_plan_rule: [
+    #               {
+    #                 target_backup_vault: "NonEmptyString",
+    #                 start_window_minutes: 1,
+    #                 schedule_expression: "NonEmptyString",
+    #                 rule_name: "NonEmptyString",
+    #                 rule_id: "NonEmptyString",
+    #                 enable_continuous_backup: false,
+    #                 completion_window_minutes: 1,
+    #                 copy_actions: [
+    #                   {
+    #                     destination_backup_vault_arn: "NonEmptyString",
+    #                     lifecycle: {
+    #                       delete_after_days: 1,
+    #                       move_to_cold_storage_after_days: 1,
+    #                     },
+    #                   },
+    #                 ],
+    #                 lifecycle: {
+    #                   delete_after_days: 1,
+    #                   move_to_cold_storage_after_days: 1,
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           backup_plan_arn: "NonEmptyString",
+    #           backup_plan_id: "NonEmptyString",
+    #           version_id: "NonEmptyString",
+    #         },
+    #         aws_backup_recovery_point: {
+    #           backup_size_in_bytes: 1,
+    #           backup_vault_arn: "NonEmptyString",
+    #           backup_vault_name: "NonEmptyString",
+    #           calculated_lifecycle: {
+    #             delete_at: "NonEmptyString",
+    #             move_to_cold_storage_at: "NonEmptyString",
+    #           },
+    #           completion_date: "NonEmptyString",
+    #           created_by: {
+    #             backup_plan_arn: "NonEmptyString",
+    #             backup_plan_id: "NonEmptyString",
+    #             backup_plan_version: "NonEmptyString",
+    #             backup_rule_id: "NonEmptyString",
+    #           },
+    #           creation_date: "NonEmptyString",
+    #           encryption_key_arn: "NonEmptyString",
+    #           iam_role_arn: "NonEmptyString",
+    #           is_encrypted: false,
+    #           last_restore_time: "NonEmptyString",
+    #           lifecycle: {
+    #             delete_after_days: 1,
+    #             move_to_cold_storage_after_days: 1,
+    #           },
+    #           recovery_point_arn: "NonEmptyString",
+    #           resource_arn: "NonEmptyString",
+    #           resource_type: "NonEmptyString",
+    #           source_backup_vault_arn: "NonEmptyString",
+    #           status: "NonEmptyString",
+    #           status_message: "NonEmptyString",
+    #           storage_class: "NonEmptyString",
+    #         },
     #       }
     #
     # @!attribute [rw] aws_auto_scaling_auto_scaling_group
@@ -40976,6 +42551,18 @@ module Aws::SecurityHub
     #   Details about a task in a cluster.
     #   @return [Types::AwsEcsTaskDetails]
     #
+    # @!attribute [rw] aws_backup_backup_vault
+    #   Provides details about an Backup backup vault.
+    #   @return [Types::AwsBackupBackupVaultDetails]
+    #
+    # @!attribute [rw] aws_backup_backup_plan
+    #   Provides details about an Backup backup plan.
+    #   @return [Types::AwsBackupBackupPlanDetails]
+    #
+    # @!attribute [rw] aws_backup_recovery_point
+    #   Provides details about an Backup backup, or recovery point.
+    #   @return [Types::AwsBackupRecoveryPointDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -41054,7 +42641,10 @@ module Aws::SecurityHub
       :aws_waf_regional_web_acl,
       :aws_waf_rule,
       :aws_waf_rule_group,
-      :aws_ecs_task)
+      :aws_ecs_task,
+      :aws_backup_backup_vault,
+      :aws_backup_backup_plan,
+      :aws_backup_recovery_point)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42354,6 +43944,8 @@ module Aws::SecurityHub
     #         architecture: "NonEmptyString",
     #         package_manager: "NonEmptyString",
     #         file_path: "NonEmptyString",
+    #         fixed_in_version: "NonEmptyString",
+    #         remediation: "NonEmptyString",
     #       }
     #
     # @!attribute [rw] name
@@ -42384,6 +43976,16 @@ module Aws::SecurityHub
     #   The file system path to the package manager inventory file.
     #   @return [String]
     #
+    # @!attribute [rw] fixed_in_version
+    #   The version of the software package in which the vulnerability has
+    #   been resolved.
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation
+    #   Describes the actions a customer can take to resolve the
+    #   vulnerability in the software package.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwarePackage AWS API Documentation
     #
     class SoftwarePackage < Struct.new(
@@ -42393,7 +43995,9 @@ module Aws::SecurityHub
       :release,
       :architecture,
       :package_manager,
-      :file_path)
+      :file_path,
+      :fixed_in_version,
+      :remediation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44682,6 +46286,8 @@ module Aws::SecurityHub
     #             architecture: "NonEmptyString",
     #             package_manager: "NonEmptyString",
     #             file_path: "NonEmptyString",
+    #             fixed_in_version: "NonEmptyString",
+    #             remediation: "NonEmptyString",
     #           },
     #         ],
     #         cvss: [
@@ -44707,6 +46313,7 @@ module Aws::SecurityHub
     #           vendor_updated_at: "NonEmptyString",
     #         },
     #         reference_urls: ["NonEmptyString"],
+    #         fix_available: "YES", # accepts YES, NO, PARTIAL
     #       }
     #
     # @!attribute [rw] id
@@ -44735,6 +46342,22 @@ module Aws::SecurityHub
     #   vulnerability.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] fix_available
+    #   Specifies if all vulnerable packages in a finding have a value for
+    #   `FixedInVersion` and `Remediation`. This field is evaluated for each
+    #   vulnerability `Id` based on the number of vulnerable packages that
+    #   have a value for both `FixedInVersion` and `Remediation`. Valid
+    #   values are as follows:
+    #
+    #   * `YES` if all vulnerable packages have a value for both
+    #     `FixedInVersion` and `Remediation`
+    #
+    #   * `NO` if no vulnerable packages have a value for `FixedInVersion`
+    #     and `Remediation`
+    #
+    #   * `PARTIAL` otherwise
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Vulnerability AWS API Documentation
     #
     class Vulnerability < Struct.new(
@@ -44743,7 +46366,8 @@ module Aws::SecurityHub
       :cvss,
       :related_vulnerabilities,
       :vendor,
-      :reference_urls)
+      :reference_urls,
+      :fix_available)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2022-08-25)
+------------------
+
+* Feature - Documentation change for IVS Chat API Reference. Doc-only update to add a paragraph on ARNs to the Welcome section.
+
+1.3.0 (2022-08-19)
+------------------
+
+* Feature - Documentation Change for IVS Chat API Reference - Doc-only update to change text/description for tags field.
+
 1.2.0 (2022-05-24)
 ------------------
 

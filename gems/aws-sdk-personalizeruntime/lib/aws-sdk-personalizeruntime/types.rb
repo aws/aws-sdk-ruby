@@ -127,6 +127,16 @@ module Aws::PersonalizeRuntime
     #           "FilterAttributeName" => "FilterAttributeValue",
     #         },
     #         recommender_arn: "Arn",
+    #         promotions: [
+    #           {
+    #             name: "Name",
+    #             percent_promoted_items: 1,
+    #             filter_arn: "Arn",
+    #             filter_values: {
+    #               "FilterAttributeName" => "FilterAttributeValue",
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] campaign_arn
@@ -183,7 +193,8 @@ module Aws::PersonalizeRuntime
     #   `filter-values`.In this case, Amazon Personalize doesn't use that
     #   portion of the expression to filter recommendations.
     #
-    #   For more information, see [Filtering Recommendations][1].
+    #   For more information, see [Filtering recommendations and user
+    #   segments][1].
     #
     #
     #
@@ -196,6 +207,12 @@ module Aws::PersonalizeRuntime
     #   dataset group with a recommender for a domain use case.
     #   @return [String]
     #
+    # @!attribute [rw] promotions
+    #   The promotions to apply to the recommendation request. A promotion
+    #   defines additional business rules that apply to a configurable
+    #   subset of recommended items.
+    #   @return [Array<Types::Promotion>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendationsRequest AWS API Documentation
     #
     class GetRecommendationsRequest < Struct.new(
@@ -206,7 +223,8 @@ module Aws::PersonalizeRuntime
       :context,
       :filter_arn,
       :filter_values,
-      :recommender_arn)
+      :recommender_arn,
+      :promotions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -256,11 +274,83 @@ module Aws::PersonalizeRuntime
     #   logic, see how-scores-work.
     #   @return [Float]
     #
+    # @!attribute [rw] promotion_name
+    #   The name of the promotion that included the predicted item.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/PredictedItem AWS API Documentation
     #
     class PredictedItem < Struct.new(
       :item_id,
-      :score)
+      :score,
+      :promotion_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on a promotion. A promotion defines additional
+    # business rules that apply to a configurable subset of recommended
+    # items.
+    #
+    # @note When making an API call, you may pass Promotion
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name",
+    #         percent_promoted_items: 1,
+    #         filter_arn: "Arn",
+    #         filter_values: {
+    #           "FilterAttributeName" => "FilterAttributeValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the promotion.
+    #   @return [String]
+    #
+    # @!attribute [rw] percent_promoted_items
+    #   The percentage of recommended items to apply the promotion to.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter_arn
+    #   The Amazon Resource Name (ARN) of the filter used by the promotion.
+    #   This filter defines the criteria for promoted items. For more
+    #   information, see [Promotion filters][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/promoting-items.html#promotion-filters
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_values
+    #   The values to use when promoting items. For each placeholder
+    #   parameter in your promotion's filter expression, provide the
+    #   parameter name (in matching case) as a key and the filter value(s)
+    #   as the corresponding value. Separate multiple values for one
+    #   parameter with a comma.
+    #
+    #   For filter expressions that use an `INCLUDE` element to include
+    #   items, you must provide values for all parameters that are defined
+    #   in the expression. For filters with expressions that use an
+    #   `EXCLUDE` element to exclude items, you can omit the
+    #   `filter-values`. In this case, Amazon Personalize doesn't use that
+    #   portion of the expression to filter recommendations.
+    #
+    #   For more information on creating filters, see [Filtering
+    #   recommendations and user segments][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/Promotion AWS API Documentation
+    #
+    class Promotion < Struct.new(
+      :name,
+      :percent_promoted_items,
+      :filter_arn,
+      :filter_values)
       SENSITIVE = []
       include Aws::Structure
     end

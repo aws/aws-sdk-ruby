@@ -4131,15 +4131,21 @@ module Aws::ElasticLoadBalancingV2
     #
     #   ^
     #
-    #   The following attributes are supported by both Application Load
-    #   Balancers and Network Load Balancers:
+    #   The following attributes are supported by Application Load
+    #   Balancers, Network Load Balancers, and Gateway Load Balancers:
     #
-    #   * `stickiness.enabled` - Indicates whether sticky sessions are
+    #   * `stickiness.enabled` - Indicates whether target stickiness is
     #     enabled. The value is `true` or `false`. The default is `false`.
     #
-    #   * `stickiness.type` - The type of sticky sessions. The possible
-    #     values are `lb_cookie` and `app_cookie` for Application Load
-    #     Balancers or `source_ip` for Network Load Balancers.
+    #   * `stickiness.type` - Indicates the type of stickiness. The possible
+    #     values are:
+    #
+    #     * `lb_cookie` and `app_cookie` for Application Load Balancers
+    #
+    #     * `source_ip` for Network Load Balancers
+    #
+    #     * `source_ip_dest_ip` and `source_ip_dest_ip_proto` for Gateway
+    #       Load Balancers
     #
     #   The following attributes are supported only if the load balancer is
     #   an Application Load Balancer and the target is an instance or an IP

@@ -553,7 +553,9 @@ module Aws::SecretsManager
     #
     # @option params [String] :kms_key_id
     #   The ARN, key ID, or alias of the KMS key that Secrets Manager uses to
-    #   encrypt the secret value in the secret.
+    #   encrypt the secret value in the secret. An alias is always prefixed by
+    #   `alias/`, for example `alias/aws/secretsmanager`. For more
+    #   information, see [About aliases][1].
     #
     #   To use a KMS key in a different account, use the key ARN or the alias
     #   ARN.
@@ -567,6 +569,10 @@ module Aws::SecretsManager
     #   credentials calling the API, then you can't use `aws/secretsmanager`
     #   to encrypt the secret, and you must create and use a customer managed
     #   KMS key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/alias-about.html
     #
     # @option params [String, StringIO, File] :secret_binary
     #   The binary data to encrypt and store in the new version of the secret.
@@ -1218,18 +1224,23 @@ module Aws::SecretsManager
     # caching. Caching secrets improves speed and reduces your costs. For
     # more information, see [Cache secrets for your applications][1].
     #
+    # To retrieve the previous version of a secret, use `VersionStage` and
+    # specify AWSPREVIOUS. To revert to the previous version of a secret,
+    # call [UpdateSecretVersionStage][2].
+    #
     # <b>Required permissions: </b> `secretsmanager:GetSecretValue`. If the
     # secret is encrypted using a customer-managed key instead of the Amazon
     # Web Services managed key `aws/secretsmanager`, then you also need
     # `kms:Decrypt` permissions for that key. For more information, see [
-    # IAM policy actions for Secrets Manager][2] and [Authentication and
-    # access control in Secrets Manager][3].
+    # IAM policy actions for Secrets Manager][3] and [Authentication and
+    # access control in Secrets Manager][4].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets.html
-    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
-    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    # [2]: https://docs.aws.amazon.com/cli/latest/reference/secretsmanager/update-secret-version-stage.html
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
+    # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to retrieve.
@@ -2456,19 +2467,6 @@ module Aws::SecretsManager
     # version. To remove a version, remove all staging labels from it. See
     # UpdateSecretVersionStage.
     #
-    # If you don't specify an KMS encryption key, Secrets Manager uses the
-    # Amazon Web Services managed key `aws/secretsmanager`. If this key
-    # doesn't already exist in your account, then Secrets Manager creates
-    # it for you automatically. All users and roles in the Amazon Web
-    # Services account automatically have access to use
-    # `aws/secretsmanager`. Creating `aws/secretsmanager` can result in a
-    # one-time significant delay in returning the result.
-    #
-    # If the secret is in a different Amazon Web Services account from the
-    # credentials calling the API, then you can't use `aws/secretsmanager`
-    # to encrypt the secret, and you must create and use a customer managed
-    # key.
-    #
     # <b>Required permissions: </b> `secretsmanager:UpdateSecret`. For more
     # information, see [ IAM policy actions for Secrets Manager][1] and
     # [Authentication and access control in Secrets Manager][2]. If you use
@@ -2518,10 +2516,22 @@ module Aws::SecretsManager
     #
     # @option params [String] :kms_key_id
     #   The ARN, key ID, or alias of the KMS key that Secrets Manager uses to
-    #   encrypt new secret versions as well as any existing versions the
+    #   encrypt new secret versions as well as any existing versions with the
     #   staging labels `AWSCURRENT`, `AWSPENDING`, or `AWSPREVIOUS`. For more
     #   information about versions and staging labels, see [Concepts:
     #   Version][1].
+    #
+    #   A key alias is always prefixed by `alias/`, for example
+    #   `alias/aws/secretsmanager`. For more information, see [About
+    #   aliases][2].
+    #
+    #   If you set this to an empty string, Secrets Manager uses the Amazon
+    #   Web Services managed key `aws/secretsmanager`. If this key doesn't
+    #   already exist in your account, then Secrets Manager creates it for you
+    #   automatically. All users and roles in the Amazon Web Services account
+    #   automatically have access to use `aws/secretsmanager`. Creating
+    #   `aws/secretsmanager` can result in a one-time significant delay in
+    #   returning the result.
     #
     #   You can only use the Amazon Web Services managed key
     #   `aws/secretsmanager` if you call this operation using credentials from
@@ -2534,6 +2544,7 @@ module Aws::SecretsManager
     #
     #
     #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/getting-started.html#term_version
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/alias-about.html
     #
     # @option params [String, StringIO, File] :secret_binary
     #   The binary data to encrypt and store in the new version of the secret.
@@ -2879,7 +2890,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

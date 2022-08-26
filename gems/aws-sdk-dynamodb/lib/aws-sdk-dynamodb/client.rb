@@ -2527,6 +2527,79 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # Represents the properties of the import.
+    #
+    # @option params [required, String] :import_arn
+    #   The Amazon Resource Name (ARN) associated with the table you're
+    #   importing to.
+    #
+    # @return [Types::DescribeImportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImportOutput#import_table_description #import_table_description} => Types::ImportTableDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_import({
+    #     import_arn: "ImportArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_table_description.import_arn #=> String
+    #   resp.import_table_description.import_status #=> String, one of "IN_PROGRESS", "COMPLETED", "CANCELLING", "CANCELLED", "FAILED"
+    #   resp.import_table_description.table_arn #=> String
+    #   resp.import_table_description.table_id #=> String
+    #   resp.import_table_description.client_token #=> String
+    #   resp.import_table_description.s3_bucket_source.s3_bucket_owner #=> String
+    #   resp.import_table_description.s3_bucket_source.s3_bucket #=> String
+    #   resp.import_table_description.s3_bucket_source.s3_key_prefix #=> String
+    #   resp.import_table_description.error_count #=> Integer
+    #   resp.import_table_description.cloud_watch_log_group_arn #=> String
+    #   resp.import_table_description.input_format #=> String, one of "DYNAMODB_JSON", "ION", "CSV"
+    #   resp.import_table_description.input_format_options.csv.delimiter #=> String
+    #   resp.import_table_description.input_format_options.csv.header_list #=> Array
+    #   resp.import_table_description.input_format_options.csv.header_list[0] #=> String
+    #   resp.import_table_description.input_compression_type #=> String, one of "GZIP", "ZSTD", "NONE"
+    #   resp.import_table_description.table_creation_parameters.table_name #=> String
+    #   resp.import_table_description.table_creation_parameters.attribute_definitions #=> Array
+    #   resp.import_table_description.table_creation_parameters.attribute_definitions[0].attribute_name #=> String
+    #   resp.import_table_description.table_creation_parameters.attribute_definitions[0].attribute_type #=> String, one of "S", "N", "B"
+    #   resp.import_table_description.table_creation_parameters.key_schema #=> Array
+    #   resp.import_table_description.table_creation_parameters.key_schema[0].attribute_name #=> String
+    #   resp.import_table_description.table_creation_parameters.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.import_table_description.table_creation_parameters.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.import_table_description.table_creation_parameters.provisioned_throughput.read_capacity_units #=> Integer
+    #   resp.import_table_description.table_creation_parameters.provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.import_table_description.table_creation_parameters.sse_specification.enabled #=> Boolean
+    #   resp.import_table_description.table_creation_parameters.sse_specification.sse_type #=> String, one of "AES256", "KMS"
+    #   resp.import_table_description.table_creation_parameters.sse_specification.kms_master_key_id #=> String
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes #=> Array
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].index_name #=> String
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].key_schema #=> Array
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].key_schema[0].attribute_name #=> String
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].provisioned_throughput.read_capacity_units #=> Integer
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.import_table_description.start_time #=> Time
+    #   resp.import_table_description.end_time #=> Time
+    #   resp.import_table_description.processed_size_bytes #=> Integer
+    #   resp.import_table_description.processed_item_count #=> Integer
+    #   resp.import_table_description.imported_item_count #=> Integer
+    #   resp.import_table_description.failure_code #=> String
+    #   resp.import_table_description.failure_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeImport AWS API Documentation
+    #
+    # @overload describe_import(params = {})
+    # @param [Hash] params ({})
+    def describe_import(params = {}, options = {})
+      req = build_request(:describe_import, params)
+      req.send_request(options)
+    end
+
     # Returns information about the status of Kinesis streaming.
     #
     # @option params [required, String] :table_name
@@ -3251,7 +3324,7 @@ module Aws::DynamoDB
     #
     #   If you submit a request with the same client token but a change in
     #   other parameters within the 8-hour idempotency window, DynamoDB
-    #   returns an `IdempotentParameterMismatch` exception.
+    #   returns an `ImportConflictException`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3527,6 +3600,167 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # Imports table data from an S3 bucket.
+    #
+    # @option params [String] :client_token
+    #   Providing a `ClientToken` makes the call to `ImportTableInput`
+    #   idempotent, meaning that multiple identical calls have the same effect
+    #   as one single call.
+    #
+    #   A client token is valid for 8 hours after the first request that uses
+    #   it is completed. After 8 hours, any request with the same client token
+    #   is treated as a new request. Do not resubmit the same request with the
+    #   same client token for more than 8 hours, or the result might not be
+    #   idempotent.
+    #
+    #   If you submit a request with the same client token but a change in
+    #   other parameters within the 8-hour idempotency window, DynamoDB
+    #   returns an `IdempotentParameterMismatch` exception.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::S3BucketSource] :s3_bucket_source
+    #   The S3 bucket that provides the source for the import.
+    #
+    # @option params [required, String] :input_format
+    #   The format of the source data. Valid values for `ImportFormat` are
+    #   `CSV`, `DYNAMODB_JSON` or `ION`.
+    #
+    # @option params [Types::InputFormatOptions] :input_format_options
+    #   Additional properties that specify how the input is formatted,
+    #
+    # @option params [String] :input_compression_type
+    #   Type of compression to be used on the input coming from the imported
+    #   table.
+    #
+    # @option params [required, Types::TableCreationParameters] :table_creation_parameters
+    #   Parameters for the table to import the data into.
+    #
+    # @return [Types::ImportTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportTableOutput#import_table_description #import_table_description} => Types::ImportTableDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_table({
+    #     client_token: "ClientToken",
+    #     s3_bucket_source: { # required
+    #       s3_bucket_owner: "S3BucketOwner",
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key_prefix: "S3Prefix",
+    #     },
+    #     input_format: "DYNAMODB_JSON", # required, accepts DYNAMODB_JSON, ION, CSV
+    #     input_format_options: {
+    #       csv: {
+    #         delimiter: "CsvDelimiter",
+    #         header_list: ["CsvHeader"],
+    #       },
+    #     },
+    #     input_compression_type: "GZIP", # accepts GZIP, ZSTD, NONE
+    #     table_creation_parameters: { # required
+    #       table_name: "TableName", # required
+    #       attribute_definitions: [ # required
+    #         {
+    #           attribute_name: "KeySchemaAttributeName", # required
+    #           attribute_type: "S", # required, accepts S, N, B
+    #         },
+    #       ],
+    #       key_schema: [ # required
+    #         {
+    #           attribute_name: "KeySchemaAttributeName", # required
+    #           key_type: "HASH", # required, accepts HASH, RANGE
+    #         },
+    #       ],
+    #       billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
+    #       provisioned_throughput: {
+    #         read_capacity_units: 1, # required
+    #         write_capacity_units: 1, # required
+    #       },
+    #       sse_specification: {
+    #         enabled: false,
+    #         sse_type: "AES256", # accepts AES256, KMS
+    #         kms_master_key_id: "KMSMasterKeyId",
+    #       },
+    #       global_secondary_indexes: [
+    #         {
+    #           index_name: "IndexName", # required
+    #           key_schema: [ # required
+    #             {
+    #               attribute_name: "KeySchemaAttributeName", # required
+    #               key_type: "HASH", # required, accepts HASH, RANGE
+    #             },
+    #           ],
+    #           projection: { # required
+    #             projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #             non_key_attributes: ["NonKeyAttributeName"],
+    #           },
+    #           provisioned_throughput: {
+    #             read_capacity_units: 1, # required
+    #             write_capacity_units: 1, # required
+    #           },
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_table_description.import_arn #=> String
+    #   resp.import_table_description.import_status #=> String, one of "IN_PROGRESS", "COMPLETED", "CANCELLING", "CANCELLED", "FAILED"
+    #   resp.import_table_description.table_arn #=> String
+    #   resp.import_table_description.table_id #=> String
+    #   resp.import_table_description.client_token #=> String
+    #   resp.import_table_description.s3_bucket_source.s3_bucket_owner #=> String
+    #   resp.import_table_description.s3_bucket_source.s3_bucket #=> String
+    #   resp.import_table_description.s3_bucket_source.s3_key_prefix #=> String
+    #   resp.import_table_description.error_count #=> Integer
+    #   resp.import_table_description.cloud_watch_log_group_arn #=> String
+    #   resp.import_table_description.input_format #=> String, one of "DYNAMODB_JSON", "ION", "CSV"
+    #   resp.import_table_description.input_format_options.csv.delimiter #=> String
+    #   resp.import_table_description.input_format_options.csv.header_list #=> Array
+    #   resp.import_table_description.input_format_options.csv.header_list[0] #=> String
+    #   resp.import_table_description.input_compression_type #=> String, one of "GZIP", "ZSTD", "NONE"
+    #   resp.import_table_description.table_creation_parameters.table_name #=> String
+    #   resp.import_table_description.table_creation_parameters.attribute_definitions #=> Array
+    #   resp.import_table_description.table_creation_parameters.attribute_definitions[0].attribute_name #=> String
+    #   resp.import_table_description.table_creation_parameters.attribute_definitions[0].attribute_type #=> String, one of "S", "N", "B"
+    #   resp.import_table_description.table_creation_parameters.key_schema #=> Array
+    #   resp.import_table_description.table_creation_parameters.key_schema[0].attribute_name #=> String
+    #   resp.import_table_description.table_creation_parameters.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.import_table_description.table_creation_parameters.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.import_table_description.table_creation_parameters.provisioned_throughput.read_capacity_units #=> Integer
+    #   resp.import_table_description.table_creation_parameters.provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.import_table_description.table_creation_parameters.sse_specification.enabled #=> Boolean
+    #   resp.import_table_description.table_creation_parameters.sse_specification.sse_type #=> String, one of "AES256", "KMS"
+    #   resp.import_table_description.table_creation_parameters.sse_specification.kms_master_key_id #=> String
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes #=> Array
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].index_name #=> String
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].key_schema #=> Array
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].key_schema[0].attribute_name #=> String
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].provisioned_throughput.read_capacity_units #=> Integer
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.import_table_description.start_time #=> Time
+    #   resp.import_table_description.end_time #=> Time
+    #   resp.import_table_description.processed_size_bytes #=> Integer
+    #   resp.import_table_description.processed_item_count #=> Integer
+    #   resp.import_table_description.imported_item_count #=> Integer
+    #   resp.import_table_description.failure_code #=> String
+    #   resp.import_table_description.failure_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ImportTable AWS API Documentation
+    #
+    # @overload import_table(params = {})
+    # @param [Hash] params ({})
+    def import_table(params = {}, options = {})
+      req = build_request(:import_table, params)
+      req.send_request(options)
+    end
+
     # List backups associated with an Amazon Web Services account. To list
     # backups for a given table, specify `TableName`. `ListBackups` returns
     # a paginated list of results with at most 1 MB worth of items in a
@@ -3754,6 +3988,59 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def list_global_tables(params = {}, options = {})
       req = build_request(:list_global_tables, params)
+      req.send_request(options)
+    end
+
+    # Lists completed imports within the past 90 days.
+    #
+    # @option params [String] :table_arn
+    #   The Amazon Resource Name (ARN) associated with the table that was
+    #   imported to.
+    #
+    # @option params [Integer] :page_size
+    #   The number of `ImportSummary `objects returned in a single page.
+    #
+    # @option params [String] :next_token
+    #   An optional string that, if supplied, must be copied from the output
+    #   of a previous call to `ListImports`. When provided in this manner, the
+    #   API fetches the next page of results.
+    #
+    # @return [Types::ListImportsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImportsOutput#import_summary_list #import_summary_list} => Array&lt;Types::ImportSummary&gt;
+    #   * {Types::ListImportsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_imports({
+    #     table_arn: "TableArn",
+    #     page_size: 1,
+    #     next_token: "ImportNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_summary_list #=> Array
+    #   resp.import_summary_list[0].import_arn #=> String
+    #   resp.import_summary_list[0].import_status #=> String, one of "IN_PROGRESS", "COMPLETED", "CANCELLING", "CANCELLED", "FAILED"
+    #   resp.import_summary_list[0].table_arn #=> String
+    #   resp.import_summary_list[0].s3_bucket_source.s3_bucket_owner #=> String
+    #   resp.import_summary_list[0].s3_bucket_source.s3_bucket #=> String
+    #   resp.import_summary_list[0].s3_bucket_source.s3_key_prefix #=> String
+    #   resp.import_summary_list[0].cloud_watch_log_group_arn #=> String
+    #   resp.import_summary_list[0].input_format #=> String, one of "DYNAMODB_JSON", "ION", "CSV"
+    #   resp.import_summary_list[0].start_time #=> Time
+    #   resp.import_summary_list[0].end_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListImports AWS API Documentation
+    #
+    # @overload list_imports(params = {})
+    # @param [Hash] params ({})
+    def list_imports(params = {}, options = {})
+      req = build_request(:list_imports, params)
       req.send_request(options)
     end
 
@@ -7341,7 +7628,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

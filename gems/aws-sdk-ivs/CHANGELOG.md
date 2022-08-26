@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2022-08-24)
+------------------
+
+* Feature - Documentation Change for IVS API Reference - Doc-only update to type field description for CreateChannel and UpdateChannel actions and for Channel data type. Also added Amazon Resource Names (ARNs) paragraph to Welcome section.
+
+1.21.0 (2022-08-12)
+------------------
+
+* Feature - Updates various list api MaxResults ranges
+
 1.20.0 (2022-02-24)
 ------------------
 

@@ -1,0 +1,47 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "endpointPrefix":"svc",
+    "protocol": "rest-json",
+    "signatureVersion":"bearer"
+  },
+  "operations": {
+    "BearerAuth": {
+      "name": "BearerAuth",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {"shape": "Request"}
+    },
+    "NoAuth": {
+      "name": "NoAuth",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {"shape": "Request"},
+      "authtype":"none"
+    },
+    "Sigv4Auth": {
+      "name": "Sigv4Auth",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {"shape": "Request"},
+      "authtype":"v4"
+    }
+  },
+  "shapes": {
+    "Request": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "Value"
+        }
+      }
+    },
+    "Value": {"type": "string"}
+  }
+}

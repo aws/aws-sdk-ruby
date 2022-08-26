@@ -606,6 +606,135 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Copies a version of an Amazon Rekognition Custom Labels model from a
+    # source project to a destination project. The source and destination
+    # projects can be in different AWS accounts but must be in the same AWS
+    # Region. You can't copy a model to another AWS service.
+    #
+    # To copy a model version to a different AWS account, you need to create
+    # a resource-based policy known as a *project policy*. You attach the
+    # project policy to the source project by calling PutProjectPolicy. The
+    # project policy gives permission to copy the model version from a
+    # trusting AWS account to a trusted account.
+    #
+    # For more information creating and attaching a project policy, see
+    # Attaching a project policy (SDK) in the *Amazon Rekognition Custom
+    # Labels Developer Guide*.
+    #
+    # If you are copying a model version to a project in the same AWS
+    # account, you don't need to create a project policy.
+    #
+    # <note markdown="1"> To copy a model, the destination project, source project, and source
+    # model version must already exist.
+    #
+    #  </note>
+    #
+    # Copying a model version takes a while to complete. To get the current
+    # status, call DescribeProjectVersions and check the value of `Status`
+    # in the ProjectVersionDescription object. The copy operation has
+    # finished when the value of `Status` is `COPYING_COMPLETED`.
+    #
+    # @option params [required, String] :source_project_arn
+    #   The ARN of the source project in the trusting AWS account.
+    #
+    # @option params [required, String] :source_project_version_arn
+    #   The ARN of the model version in the source project that you want to
+    #   copy to a destination project.
+    #
+    # @option params [required, String] :destination_project_arn
+    #   The ARN of the project in the trusted AWS account that you want to
+    #   copy the model version to.
+    #
+    # @option params [required, String] :version_name
+    #   A name for the version of the model that's copied to the destination
+    #   project.
+    #
+    # @option params [required, Types::OutputConfig] :output_config
+    #   The S3 bucket and folder location where the training output for the
+    #   source model version is placed.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value tags to assign to the model version.
+    #
+    # @option params [String] :kms_key_id
+    #   The identifier for your AWS Key Management Service key (AWS KMS key).
+    #   You can supply the Amazon Resource Name (ARN) of your KMS key, the ID
+    #   of your KMS key, an alias for your KMS key, or an alias ARN. The key
+    #   is used to encrypt training results and manifest files written to the
+    #   output Amazon S3 bucket (`OutputConfig`).
+    #
+    #   If you choose to use your own KMS key, you need the following
+    #   permissions on the KMS key.
+    #
+    #   * kms:CreateGrant
+    #
+    #   * kms:DescribeKey
+    #
+    #   * kms:GenerateDataKey
+    #
+    #   * kms:Decrypt
+    #
+    #   If you don't specify a value for `KmsKeyId`, images copied into the
+    #   service are encrypted using a key that AWS owns and manages.
+    #
+    # @return [Types::CopyProjectVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CopyProjectVersionResponse#project_version_arn #project_version_arn} => String
+    #
+    #
+    # @example Example: CopyProjectVersion
+    #
+    #   # This operation copies a version of an Amazon Rekognition Custom Labels model from a source project to a destination
+    #   # project.
+    #
+    #   resp = client.copy_project_version({
+    #     destination_project_arn: "arn:aws:rekognition:us-east-1:555555555555:project/DestinationProject/1656705098765", 
+    #     kms_key_id: "arn:1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #     output_config: {
+    #       s3_bucket: "bucket-name", 
+    #       s3_key_prefix: "path_to_folder", 
+    #     }, 
+    #     source_project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/SourceProject/16565123456", 
+    #     source_project_version_arn: "arn:aws:rekognition:us-east-1:111122223333:project/SourceProject/version/model_1/1656611123456", 
+    #     tags: {
+    #       "key1" => "val1", 
+    #     }, 
+    #     version_name: "DestinationVersionName_cross_account", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     project_version_arn: "arn:aws:rekognition:us-east-1:555555555555:project/DestinationProject/version/DestinationVersionName_cross_account/16567050987651", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_project_version({
+    #     source_project_arn: "ProjectArn", # required
+    #     source_project_version_arn: "ProjectVersionArn", # required
+    #     destination_project_arn: "ProjectArn", # required
+    #     version_name: "VersionName", # required
+    #     output_config: { # required
+    #       s3_bucket: "S3Bucket",
+    #       s3_key_prefix: "S3KeyPrefix",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     kms_key_id: "KmsKeyId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.project_version_arn #=> String
+    #
+    # @overload copy_project_version(params = {})
+    # @param [Hash] params ({})
+    def copy_project_version(params = {}, options = {})
+      req = build_request(:copy_project_version, params)
+      req.send_request(options)
+    end
+
     # Creates a collection in an AWS Region. You can add faces to the
     # collection using the IndexFaces operation.
     #
@@ -1255,7 +1384,9 @@ module Aws::Rekognition
     #
     # `DeleteProject` is an asynchronous operation. To check if the project
     # is deleted, call DescribeProjects. The project is deleted when the
-    # project no longer appears in the response.
+    # project no longer appears in the response. Be aware that deleting a
+    # given project will also delete any `ProjectPolicies` associated with
+    # that project.
     #
     # This operation requires permissions to perform the
     # `rekognition:DeleteProject` action.
@@ -1281,6 +1412,54 @@ module Aws::Rekognition
     # @param [Hash] params ({})
     def delete_project(params = {}, options = {})
       req = build_request(:delete_project, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing project policy.
+    #
+    # To get a list of project policies attached to a project, call
+    # ListProjectPolicies. To attach a project policy to a project, call
+    # PutProjectPolicy.
+    #
+    # @option params [required, String] :project_arn
+    #   The Amazon Resource Name (ARN) of the project that the project policy
+    #   you want to delete is attached to.
+    #
+    # @option params [required, String] :policy_name
+    #   The name of the policy that you want to delete.
+    #
+    # @option params [String] :policy_revision_id
+    #   The ID of the project policy revision that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: DeleteProjectPolicy
+    #
+    #   # This operation deletes a revision of an existing project policy from an Amazon Rekognition Custom Labels project.
+    #
+    #   resp = client.delete_project_policy({
+    #     policy_name: "testPolicy1", 
+    #     policy_revision_id: "3b274c25e9203a56a99e00e3ff205fbc", 
+    #     project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/SourceProject/1656557123456", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_project_policy({
+    #     project_arn: "ProjectArn", # required
+    #     policy_name: "ProjectPolicyName", # required
+    #     policy_revision_id: "ProjectPolicyRevisionId",
+    #   })
+    #
+    # @overload delete_project_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_project_policy(params = {}, options = {})
+      req = build_request(:delete_project_policy, params)
       req.send_request(options)
     end
 
@@ -1310,7 +1489,7 @@ module Aws::Rekognition
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING"
+    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED"
     #
     # @overload delete_project_version(params = {})
     # @param [Hash] params ({})
@@ -1476,7 +1655,7 @@ module Aws::Rekognition
     #   resp.project_version_descriptions[0].project_version_arn #=> String
     #   resp.project_version_descriptions[0].creation_timestamp #=> Time
     #   resp.project_version_descriptions[0].min_inference_units #=> Integer
-    #   resp.project_version_descriptions[0].status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING"
+    #   resp.project_version_descriptions[0].status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED"
     #   resp.project_version_descriptions[0].status_message #=> String
     #   resp.project_version_descriptions[0].billable_training_time_in_seconds #=> Integer
     #   resp.project_version_descriptions[0].training_end_timestamp #=> Time
@@ -1517,6 +1696,7 @@ module Aws::Rekognition
     #   resp.project_version_descriptions[0].manifest_summary.s3_object.version #=> String
     #   resp.project_version_descriptions[0].kms_key_id #=> String
     #   resp.project_version_descriptions[0].max_inference_units #=> Integer
+    #   resp.project_version_descriptions[0].source_project_version_arn #=> String
     #   resp.next_token #=> String
     #
     #
@@ -4386,6 +4566,85 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Gets a list of the project policies attached to a project.
+    #
+    # To attach a project policy to a project, call PutProjectPolicy. To
+    # remove a project policy from a project, call DeleteProjectPolicy.
+    #
+    # @option params [required, String] :project_arn
+    #   The ARN of the project for which you want to list the project
+    #   policies.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more results
+    #   to retrieve), Amazon Rekognition Custom Labels returns a pagination
+    #   token in the response. You can use this pagination token to retrieve
+    #   the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 5. If you specify a value greater
+    #   than 5, a ValidationException error occurs. The default value is 5.
+    #
+    # @return [Types::ListProjectPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProjectPoliciesResponse#project_policies #project_policies} => Array&lt;Types::ProjectPolicy&gt;
+    #   * {Types::ListProjectPoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: ListProjectPolicies
+    #
+    #   # This operation lists the project policies that are attached to an Amazon Rekognition Custom Labels project.
+    #
+    #   resp = client.list_project_policies({
+    #     max_results: 5, 
+    #     next_token: "", 
+    #     project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-sdk-project/1656557051929", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "", 
+    #     project_policies: [
+    #       {
+    #         creation_timestamp: Time.parse("2022-07-01T11:51:27.086000-07:00"), 
+    #         last_updated_timestamp: Time.parse("2022-07-01T11:51:27.086000-07:00"), 
+    #         policy_document: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Statemented1\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111122223333:root\"},\"Action\":\"rekognition:CopyProjectVersion\",\"Resource\":\"*\"}]}", 
+    #         policy_name: "testPolicy", 
+    #         policy_revision_id: "3b274c25e9203a56a99e00e3ff205fbc", 
+    #         project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-sdk-project/1656557051929", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_project_policies({
+    #     project_arn: "ProjectArn", # required
+    #     next_token: "ExtendedPaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.project_policies #=> Array
+    #   resp.project_policies[0].project_arn #=> String
+    #   resp.project_policies[0].policy_name #=> String
+    #   resp.project_policies[0].policy_revision_id #=> String
+    #   resp.project_policies[0].policy_document #=> String
+    #   resp.project_policies[0].creation_timestamp #=> Time
+    #   resp.project_policies[0].last_updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_project_policies(params = {})
+    # @param [Hash] params ({})
+    def list_project_policies(params = {}, options = {})
+      req = build_request(:list_project_policies, params)
+      req.send_request(options)
+    end
+
     # Gets a list of stream processors that you have created with
     # CreateStreamProcessor.
     #
@@ -4456,6 +4715,92 @@ module Aws::Rekognition
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Attaches a project policy to a Amazon Rekognition Custom Labels
+    # project in a trusting AWS account. A project policy specifies that a
+    # trusted AWS account can copy a model version from a trusting AWS
+    # account to a project in the trusted AWS account. To copy a model
+    # version you use the CopyProjectVersion operation.
+    #
+    # For more information about the format of a project policy document,
+    # see Attaching a project policy (SDK) in the *Amazon Rekognition Custom
+    # Labels Developer Guide*.
+    #
+    # The response from `PutProjectPolicy` is a revision ID for the project
+    # policy. You can attach multiple project policies to a project. You can
+    # also update an existing project policy by specifying the policy
+    # revision ID of the existing policy.
+    #
+    # To remove a project policy from a project, call DeleteProjectPolicy.
+    # To get a list of project policies attached to a project, call
+    # ListProjectPolicies.
+    #
+    # You copy a model version by calling CopyProjectVersion.
+    #
+    # @option params [required, String] :project_arn
+    #   The Amazon Resource Name (ARN) of the project that the project policy
+    #   is attached to.
+    #
+    # @option params [required, String] :policy_name
+    #   A name for the policy.
+    #
+    # @option params [String] :policy_revision_id
+    #   The revision ID for the Project Policy. Each time you modify a policy,
+    #   Amazon Rekognition Custom Labels generates and assigns a new
+    #   `PolicyRevisionId` and then deletes the previous version of the
+    #   policy.
+    #
+    # @option params [required, String] :policy_document
+    #   A resource policy to add to the model. The policy is a JSON structure
+    #   that contains one or more statements that define the policy. The
+    #   policy must follow the IAM syntax. For more information about the
+    #   contents of a JSON policy document, see [IAM JSON policy
+    #   reference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #
+    # @return [Types::PutProjectPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutProjectPolicyResponse#policy_revision_id #policy_revision_id} => String
+    #
+    #
+    # @example Example: PutProjectPolicy
+    #
+    #   # This operation attaches a project policy to a Amazon Rekognition Custom Labels project in a trusting AWS account.
+    #
+    #   resp = client.put_project_policy({
+    #     policy_document: "'{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"ALLOW\",\"Principal\":{\"AWS\":\"principal\"},\"Action\":\"rekognition:CopyProjectVersion\",\"Resource\":\"arn:aws:rekognition:us-east-1:123456789012:project/my-sdk-project/version/DestinationVersionName/1627045542080\"}]}'", 
+    #     policy_name: "SamplePolicy", 
+    #     policy_revision_id: "0123456789abcdef", 
+    #     project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-sdk-project/1656557051929", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy_revision_id: "0123456789abcdef", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_project_policy({
+    #     project_arn: "ProjectArn", # required
+    #     policy_name: "ProjectPolicyName", # required
+    #     policy_revision_id: "ProjectPolicyRevisionId",
+    #     policy_document: "ProjectPolicyDocument", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_revision_id #=> String
+    #
+    # @overload put_project_policy(params = {})
+    # @param [Hash] params ({})
+    def put_project_policy(params = {}, options = {})
+      req = build_request(:put_project_policy, params)
       req.send_request(options)
     end
 
@@ -5444,7 +5789,7 @@ module Aws::Rekognition
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING"
+    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED"
     #
     # @overload start_project_version(params = {})
     # @param [Hash] params ({})
@@ -5747,7 +6092,7 @@ module Aws::Rekognition
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING"
+    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED"
     #
     # @overload stop_project_version(params = {})
     # @param [Hash] params ({})
@@ -5976,7 +6321,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -932,8 +932,8 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Creates a data source that you want to use with an Amazon Kendra
-    # index.
+    # Creates a data source connector that you want to use with an Amazon
+    # Kendra index.
     #
     # You specify a name, data source connector type and description for
     # your data source. You also specify configuration information for the
@@ -958,8 +958,7 @@ module Aws::Kendra
     # [3]: https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html
     #
     # @option params [required, String] :name
-    #   A unique name for the data source connector. A data source name can't
-    #   be changed without deleting and recreating the data source connector.
+    #   A name for the data source connector.
     #
     # @option params [required, String] :index_id
     #   The identifier of the index you want to use with the data source
@@ -977,6 +976,15 @@ module Aws::Kendra
     #
     #   The `Configuration` parameter is required for all other data sources.
     #
+    # @option params [Types::DataSourceVpcConfiguration] :vpc_configuration
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your data source. For more information, see [Configuring a
+    #   VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
+    #
     # @option params [String] :description
     #   A description for the data source connector.
     #
@@ -992,8 +1000,8 @@ module Aws::Kendra
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access the
-    #   data source connector. For more information, see [IAM Roles for Amazon
-    #   Kendra][1].
+    #   data source and required resources. For more information, see [IAM
+    #   roles for Amazon Kendra][1].
     #
     #   You can't specify the `RoleArn` parameter when the `Type` parameter
     #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
@@ -1051,7 +1059,7 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA, GITHUB, ALFRESCO
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA, GITHUB, ALFRESCO, TEMPLATE
     #     configuration: {
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
@@ -1091,6 +1099,11 @@ module Aws::Kendra
     #           key: "S3ObjectKey", # required
     #         },
     #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
+    #         proxy_configuration: {
+    #           host: "Host", # required
+    #           port: 1, # required
+    #           credentials: "SecretArn",
+    #         },
     #       },
     #       database_configuration: {
     #         database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -1303,6 +1316,12 @@ module Aws::Kendra
     #         },
     #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         proxy_configuration: {
+    #           host: "Host", # required
+    #           port: 1, # required
+    #           credentials: "SecretArn",
+    #         },
+    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, PAT
     #       },
     #       google_drive_configuration: {
     #         secret_arn: "SecretArn", # required
@@ -1666,6 +1685,14 @@ module Aws::Kendra
     #           security_group_ids: ["VpcSecurityGroupId"], # required
     #         },
     #       },
+    #       template_configuration: {
+    #         template: {
+    #         },
+    #       },
+    #     },
+    #     vpc_configuration: {
+    #       subnet_ids: ["SubnetId"], # required
+    #       security_group_ids: ["VpcSecurityGroupId"], # required
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -2303,9 +2330,9 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Deletes an Amazon Kendra data source. An exception is not thrown if
-    # the data source is already being deleted. While the data source is
-    # being deleted, the `Status` field returned by a call to the
+    # Deletes an Amazon Kendra data source connector. An exception is not
+    # thrown if the data source is already being deleted. While the data
+    # source is being deleted, the `Status` field returned by a call to the
     # `DescribeDataSource` API is set to `DELETING`. For more information,
     # see [Deleting Data Sources][1].
     #
@@ -2314,10 +2341,10 @@ module Aws::Kendra
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html
     #
     # @option params [required, String] :id
-    #   The identifier of the data source you want to delete.
+    #   The identifier of the data source connector you want to delete.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index used with the data source.
+    #   The identifier of the index used with the data source connector.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2607,13 +2634,13 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Gets information about an Amazon Kendra data source.
+    # Gets information about an Amazon Kendra data source connector.
     #
     # @option params [required, String] :id
-    #   The identifier of the data source.
+    #   The identifier of the data source connector.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index used with the data source.
+    #   The identifier of the index used with the data source connector.
     #
     # @return [Types::DescribeDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2622,6 +2649,7 @@ module Aws::Kendra
     #   * {Types::DescribeDataSourceResponse#name #name} => String
     #   * {Types::DescribeDataSourceResponse#type #type} => String
     #   * {Types::DescribeDataSourceResponse#configuration #configuration} => Types::DataSourceConfiguration
+    #   * {Types::DescribeDataSourceResponse#vpc_configuration #vpc_configuration} => Types::DataSourceVpcConfiguration
     #   * {Types::DescribeDataSourceResponse#created_at #created_at} => Time
     #   * {Types::DescribeDataSourceResponse#updated_at #updated_at} => Time
     #   * {Types::DescribeDataSourceResponse#description #description} => String
@@ -2644,7 +2672,7 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA", "GITHUB", "ALFRESCO"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA", "GITHUB", "ALFRESCO", "TEMPLATE"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -2677,6 +2705,9 @@ module Aws::Kendra
     #   resp.configuration.share_point_configuration.ssl_certificate_s3_path.bucket #=> String
     #   resp.configuration.share_point_configuration.ssl_certificate_s3_path.key #=> String
     #   resp.configuration.share_point_configuration.authentication_type #=> String, one of "HTTP_BASIC", "OAUTH2"
+    #   resp.configuration.share_point_configuration.proxy_configuration.host #=> String
+    #   resp.configuration.share_point_configuration.proxy_configuration.port #=> Integer
+    #   resp.configuration.share_point_configuration.proxy_configuration.credentials #=> String
     #   resp.configuration.database_configuration.database_engine_type #=> String, one of "RDS_AURORA_MYSQL", "RDS_AURORA_POSTGRESQL", "RDS_MYSQL", "RDS_POSTGRESQL"
     #   resp.configuration.database_configuration.connection_configuration.database_host #=> String
     #   resp.configuration.database_configuration.connection_configuration.database_port #=> Integer
@@ -2818,6 +2849,10 @@ module Aws::Kendra
     #   resp.configuration.confluence_configuration.inclusion_patterns[0] #=> String
     #   resp.configuration.confluence_configuration.exclusion_patterns #=> Array
     #   resp.configuration.confluence_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.confluence_configuration.proxy_configuration.host #=> String
+    #   resp.configuration.confluence_configuration.proxy_configuration.port #=> Integer
+    #   resp.configuration.confluence_configuration.proxy_configuration.credentials #=> String
+    #   resp.configuration.confluence_configuration.authentication_type #=> String, one of "HTTP_BASIC", "PAT"
     #   resp.configuration.google_drive_configuration.secret_arn #=> String
     #   resp.configuration.google_drive_configuration.inclusion_patterns #=> Array
     #   resp.configuration.google_drive_configuration.inclusion_patterns[0] #=> String
@@ -3095,6 +3130,10 @@ module Aws::Kendra
     #   resp.configuration.alfresco_configuration.vpc_configuration.subnet_ids[0] #=> String
     #   resp.configuration.alfresco_configuration.vpc_configuration.security_group_ids #=> Array
     #   resp.configuration.alfresco_configuration.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.vpc_configuration.subnet_ids #=> Array
+    #   resp.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.vpc_configuration.security_group_ids #=> Array
+    #   resp.vpc_configuration.security_group_ids[0] #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.description #=> String
@@ -3869,13 +3908,13 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Gets statistics about synchronizing Amazon Kendra with a data source.
+    # Gets statistics about synchronizing a data source connector.
     #
     # @option params [required, String] :id
-    #   The identifier of the data source.
+    #   The identifier of the data source connector.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index used with the data source.
+    #   The identifier of the index used with the data source connector.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
@@ -3892,8 +3931,8 @@ module Aws::Kendra
     #   limited to jobs between the specified dates.
     #
     # @option params [String] :status_filter
-    #   When specified, only returns synchronization jobs with the `Status`
-    #   field equal to the specified status.
+    #   Only returns synchronization jobs with the `Status` field equal to the
+    #   specified status.
     #
     # @return [Types::ListDataSourceSyncJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3942,19 +3981,20 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Lists the data sources that you have created.
+    # Lists the data source connectors that you have created.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index used with one or more data sources.
+    #   The identifier of the index used with one or more data source
+    #   connectors.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
     #   retrieve), Amazon Kendra returns a pagination token in the response.
     #   You can use this pagination token to retrieve the next set of data
-    #   sources (`DataSourceSummaryItems`).
+    #   source connectors (`DataSourceSummaryItems`).
     #
     # @option params [Integer] :max_results
-    #   The maximum number of data sources to return.
+    #   The maximum number of data source connectors to return.
     #
     # @return [Types::ListDataSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3976,7 +4016,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA", "GITHUB", "ALFRESCO"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA", "GITHUB", "ALFRESCO", "TEMPLATE"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -4898,15 +4938,15 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Starts a synchronization job for a data source. If a synchronization
-    # job is already in progress, Amazon Kendra returns a
+    # Starts a synchronization job for a data source connector. If a
+    # synchronization job is already in progress, Amazon Kendra returns a
     # `ResourceInUseException` exception.
     #
     # @option params [required, String] :id
-    #   The identifier of the data source to synchronize.
+    #   The identifier of the data source connector to synchronize.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with the data source connector.
     #
     # @return [Types::StartDataSourceSyncJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4936,11 +4976,11 @@ module Aws::Kendra
     # a scheduled synchronization job.
     #
     # @option params [required, String] :id
-    #   The identifier of the data source for which to stop the
+    #   The identifier of the data source connector for which to stop the
     #   synchronization jobs.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index that contains the data source.
+    #   The identifier of the index used with the data source connector.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5170,14 +5210,13 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Updates an existing Amazon Kendra data source.
+    # Updates an existing Amazon Kendra data source connector.
     #
     # @option params [required, String] :id
-    #   The identifier of the data source you want to update.
+    #   The identifier of the data source connector you want to update.
     #
     # @option params [String] :name
-    #   A new name for the data source connector. You must first delete the
-    #   data source and re-create it to change the name of the data source.
+    #   A new name for the data source connector.
     #
     # @option params [required, String] :index_id
     #   The identifier of the index used with the data source connector.
@@ -5185,6 +5224,15 @@ module Aws::Kendra
     # @option params [Types::DataSourceConfiguration] :configuration
     #   Configuration information you want to update for the data source
     #   connector.
+    #
+    # @option params [Types::DataSourceVpcConfiguration] :vpc_configuration
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your data source. For more information, see [Configuring a
+    #   VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
     #
     # @option params [String] :description
     #   A new description for the data source connector.
@@ -5194,8 +5242,8 @@ module Aws::Kendra
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access the
-    #   data source. For more information, see [IAM Roles for Amazon
-    #   Kendra][1].
+    #   data source and required resources. For more information, see [IAM
+    #   roles for Amazon Kendra][1].
     #
     #
     #
@@ -5272,6 +5320,11 @@ module Aws::Kendra
     #           key: "S3ObjectKey", # required
     #         },
     #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
+    #         proxy_configuration: {
+    #           host: "Host", # required
+    #           port: 1, # required
+    #           credentials: "SecretArn",
+    #         },
     #       },
     #       database_configuration: {
     #         database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -5484,6 +5537,12 @@ module Aws::Kendra
     #         },
     #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         proxy_configuration: {
+    #           host: "Host", # required
+    #           port: 1, # required
+    #           credentials: "SecretArn",
+    #         },
+    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, PAT
     #       },
     #       google_drive_configuration: {
     #         secret_arn: "SecretArn", # required
@@ -5847,6 +5906,14 @@ module Aws::Kendra
     #           security_group_ids: ["VpcSecurityGroupId"], # required
     #         },
     #       },
+    #       template_configuration: {
+    #         template: {
+    #         },
+    #       },
+    #     },
+    #     vpc_configuration: {
+    #       subnet_ids: ["SubnetId"], # required
+    #       security_group_ids: ["VpcSecurityGroupId"], # required
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -6320,7 +6387,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

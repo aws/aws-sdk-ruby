@@ -6090,11 +6090,16 @@ module Aws::NetworkManager
     #   The ARN of the transit gateway.
     #   @return [String]
     #
+    # @!attribute [rw] transit_gateway_peering_attachment_id
+    #   The ID of the transit gateway peering attachment.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/TransitGatewayPeering AWS API Documentation
     #
     class TransitGatewayPeering < Struct.new(
       :peering,
-      :transit_gateway_arn)
+      :transit_gateway_arn,
+      :transit_gateway_peering_attachment_id)
       SENSITIVE = []
       include Aws::Structure
     end

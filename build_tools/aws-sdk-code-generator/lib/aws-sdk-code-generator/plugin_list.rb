@@ -20,7 +20,7 @@ module AwsSdkCodeGenerator
     def compute_plugins(options)
       plugins = {}
       plugins.update(options[:async_client] ? default_async_plugins : default_plugins)
-      plugins.update(signature_plugins(options.fetch(:signature_version)))
+      plugins.update(signature_plugins(options))
       plugins.update(protocol_plugins(options.fetch(:protocol)))
       plugins.update(options.fetch(:add_plugins))
       options.fetch(:remove_plugins).each do |plugin_name|
@@ -96,15 +96,21 @@ module AwsSdkCodeGenerator
       }[protocol]
     end
 
-    def signature_plugins(signature_version)
-      case signature_version
-      when 'v4'
-        { 'Aws::Plugins::SignatureV4' => "#{core_plugins}/signature_v4.rb" }
-      when 'v2'
-        { 'Aws::Plugins::SignatureV2' => "#{core_plugins}/signature_v2.rb" }
-      else
-        {}
+    def signature_plugins(options)
+      auth_types  = [options.fetch(:signature_version)]
+      auth_types += options[:api]['operations'].map { |_n, o| o['authtype'] }.compact
+      plugins = {}
+      auth_types.each do |auth_type|
+        case auth_type
+        when 'v4'
+          plugins['Aws::Plugins::SignatureV4'] = "#{core_plugins}/signature_v4.rb"
+        when 'v2'
+          plugins['Aws::Plugins::SignatureV2'] = "#{core_plugins}/signature_v2.rb"
+        when 'bearer'
+          plugins['Aws::Plugins::BearerAuthorization'] = "#{core_plugins}/bearer_authorization.rb"
+        end
       end
+      plugins
     end
 
     def core_plugins

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2022-08-24)
+------------------
+
+* Feature - AWS Config now supports ConformancePackTemplate documents in SSM Docs for the deployment and update of conformance packs.
+
+1.82.0 (2022-08-04)
+------------------
+
+* Feature - Add resourceType enums for Athena, GlobalAccelerator, Detective and EC2 types
+
+1.81.0 (2022-08-01)
+------------------
+
+* Feature - Documentation update for PutConfigRule and PutOrganizationConfigRule
+
 1.80.0 (2022-07-27)
 ------------------
 

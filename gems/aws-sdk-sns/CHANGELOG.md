@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2022-08-22)
+------------------
+
+* Feature - Adding SHA256 message verification
+
 1.53.0 (2022-02-24)
 ------------------
 

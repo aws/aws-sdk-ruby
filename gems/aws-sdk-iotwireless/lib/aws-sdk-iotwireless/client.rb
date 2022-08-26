@@ -939,6 +939,8 @@ module Aws::IoTWireless
     #     name: "ServiceProfileName",
     #     lo_ra_wan: {
     #       add_gw_metadata: false,
+    #       dr_min: 1,
+    #       dr_max: 1,
     #     },
     #     tags: [
     #       {
@@ -1111,6 +1113,10 @@ module Aws::IoTWireless
     #       ],
     #       net_id_filters: ["NetId"],
     #       sub_bands: [1],
+    #       beaconing: {
+    #         data_rate: 1,
+    #         frequencies: [1],
+    #       },
     #     },
     #     tags: [
     #       {
@@ -1726,6 +1732,7 @@ module Aws::IoTWireless
     #   * {Types::GetEventConfigurationByResourceTypesResponse#proximity #proximity} => Types::ProximityResourceTypeEventConfiguration
     #   * {Types::GetEventConfigurationByResourceTypesResponse#join #join} => Types::JoinResourceTypeEventConfiguration
     #   * {Types::GetEventConfigurationByResourceTypesResponse#connection_status #connection_status} => Types::ConnectionStatusResourceTypeEventConfiguration
+    #   * {Types::GetEventConfigurationByResourceTypesResponse#message_delivery_status #message_delivery_status} => Types::MessageDeliveryStatusResourceTypeEventConfiguration
     #
     # @example Response structure
     #
@@ -1733,6 +1740,7 @@ module Aws::IoTWireless
     #   resp.proximity.sidewalk.wireless_device_event_topic #=> String, one of "Enabled", "Disabled"
     #   resp.join.lo_ra_wan.wireless_device_event_topic #=> String, one of "Enabled", "Disabled"
     #   resp.connection_status.lo_ra_wan.wireless_gateway_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.message_delivery_status.sidewalk.wireless_device_event_topic #=> String, one of "Enabled", "Disabled"
     #
     # @overload get_event_configuration_by_resource_types(params = {})
     # @param [Hash] params ({})
@@ -2059,6 +2067,7 @@ module Aws::IoTWireless
     #   * {Types::GetResourceEventConfigurationResponse#proximity #proximity} => Types::ProximityEventConfiguration
     #   * {Types::GetResourceEventConfigurationResponse#join #join} => Types::JoinEventConfiguration
     #   * {Types::GetResourceEventConfigurationResponse#connection_status #connection_status} => Types::ConnectionStatusEventConfiguration
+    #   * {Types::GetResourceEventConfigurationResponse#message_delivery_status #message_delivery_status} => Types::MessageDeliveryStatusEventConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -2078,6 +2087,8 @@ module Aws::IoTWireless
     #   resp.join.wireless_device_id_event_topic #=> String, one of "Enabled", "Disabled"
     #   resp.connection_status.lo_ra_wan.gateway_eui_event_topic #=> String, one of "Enabled", "Disabled"
     #   resp.connection_status.wireless_gateway_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.message_delivery_status.sidewalk.amazon_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.message_delivery_status.wireless_device_id_event_topic #=> String, one of "Enabled", "Disabled"
     #
     # @overload get_resource_event_configuration(params = {})
     # @param [Hash] params ({})
@@ -2364,6 +2375,9 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.net_id_filters[0] #=> String
     #   resp.lo_ra_wan.sub_bands #=> Array
     #   resp.lo_ra_wan.sub_bands[0] #=> Integer
+    #   resp.lo_ra_wan.beaconing.data_rate #=> Integer
+    #   resp.lo_ra_wan.beaconing.frequencies #=> Array
+    #   resp.lo_ra_wan.beaconing.frequencies[0] #=> Integer
     #   resp.arn #=> String
     #   resp.thing_name #=> String
     #   resp.thing_arn #=> String
@@ -2661,6 +2675,8 @@ module Aws::IoTWireless
     #   resp.event_configurations_list[0].events.join.wireless_device_id_event_topic #=> String, one of "Enabled", "Disabled"
     #   resp.event_configurations_list[0].events.connection_status.lo_ra_wan.gateway_eui_event_topic #=> String, one of "Enabled", "Disabled"
     #   resp.event_configurations_list[0].events.connection_status.wireless_gateway_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.event_configurations_list[0].events.message_delivery_status.sidewalk.amazon_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.event_configurations_list[0].events.message_delivery_status.wireless_device_id_event_topic #=> String, one of "Enabled", "Disabled"
     #
     # @overload list_event_configurations(params = {})
     # @param [Hash] params ({})
@@ -2952,6 +2968,11 @@ module Aws::IoTWireless
     #   resp.downlink_queue_messages_list[0].transmit_mode #=> Integer
     #   resp.downlink_queue_messages_list[0].received_at #=> String
     #   resp.downlink_queue_messages_list[0].lo_ra_wan.f_port #=> Integer
+    #   resp.downlink_queue_messages_list[0].lo_ra_wan.participating_gateways.downlink_mode #=> String, one of "SEQUENTIAL", "CONCURRENT", "USING_UPLINK_GATEWAY"
+    #   resp.downlink_queue_messages_list[0].lo_ra_wan.participating_gateways.gateway_list #=> Array
+    #   resp.downlink_queue_messages_list[0].lo_ra_wan.participating_gateways.gateway_list[0].gateway_id #=> String
+    #   resp.downlink_queue_messages_list[0].lo_ra_wan.participating_gateways.gateway_list[0].downlink_frequency #=> Integer
+    #   resp.downlink_queue_messages_list[0].lo_ra_wan.participating_gateways.transmission_interval #=> Integer
     #
     # @overload list_queued_messages(params = {})
     # @param [Hash] params ({})
@@ -3195,6 +3216,9 @@ module Aws::IoTWireless
     #   resp.wireless_gateway_list[0].lo_ra_wan.net_id_filters[0] #=> String
     #   resp.wireless_gateway_list[0].lo_ra_wan.sub_bands #=> Array
     #   resp.wireless_gateway_list[0].lo_ra_wan.sub_bands[0] #=> Integer
+    #   resp.wireless_gateway_list[0].lo_ra_wan.beaconing.data_rate #=> Integer
+    #   resp.wireless_gateway_list[0].lo_ra_wan.beaconing.frequencies #=> Array
+    #   resp.wireless_gateway_list[0].lo_ra_wan.beaconing.frequencies[0] #=> Integer
     #   resp.wireless_gateway_list[0].last_uplink_received_at #=> String
     #
     # @overload list_wireless_gateways(params = {})
@@ -3387,10 +3411,21 @@ module Aws::IoTWireless
     #     wireless_metadata: {
     #       lo_ra_wan: {
     #         f_port: 1,
+    #         participating_gateways: {
+    #           downlink_mode: "SEQUENTIAL", # required, accepts SEQUENTIAL, CONCURRENT, USING_UPLINK_GATEWAY
+    #           gateway_list: [ # required
+    #             {
+    #               gateway_id: "WirelessGatewayId", # required
+    #               downlink_frequency: 1, # required
+    #             },
+    #           ],
+    #           transmission_interval: 1, # required
+    #         },
     #       },
     #       sidewalk: {
     #         seq: 1,
     #         message_type: "CUSTOM_COMMAND_ID_NOTIFY", # accepts CUSTOM_COMMAND_ID_NOTIFY, CUSTOM_COMMAND_ID_GET, CUSTOM_COMMAND_ID_SET, CUSTOM_COMMAND_ID_RESP
+    #         ack_mode_retry_duration_secs: 1,
     #       },
     #     },
     #   })
@@ -3668,6 +3703,10 @@ module Aws::IoTWireless
     #   Connection status resource type event configuration object for
     #   enabling and disabling wireless gateway topic.
     #
+    # @option params [Types::MessageDeliveryStatusResourceTypeEventConfiguration] :message_delivery_status
+    #   Message delivery status resource type event configuration object for
+    #   enabling and disabling wireless device topic.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3691,6 +3730,11 @@ module Aws::IoTWireless
     #     connection_status: {
     #       lo_ra_wan: {
     #         wireless_gateway_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       },
+    #     },
+    #     message_delivery_status: {
+    #       sidewalk: {
+    #         wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
     #       },
     #     },
     #   })
@@ -3973,6 +4017,9 @@ module Aws::IoTWireless
     # @option params [Types::ConnectionStatusEventConfiguration] :connection_status
     #   Event configuration for the connection status event.
     #
+    # @option params [Types::MessageDeliveryStatusEventConfiguration] :message_delivery_status
+    #   Event configuration for the message delivery status event.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4004,6 +4051,12 @@ module Aws::IoTWireless
     #         gateway_eui_event_topic: "Enabled", # accepts Enabled, Disabled
     #       },
     #       wireless_gateway_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #     },
+    #     message_delivery_status: {
+    #       sidewalk: {
+    #         amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       },
+    #       wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
     #     },
     #   })
     #
@@ -4118,7 +4171,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

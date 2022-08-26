@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2022-08-25)
+------------------
+
+* Feature - This release includes a new feature for the customers to enable the LoRa gateways to send out beacons for Class B devices and an option to select one or more gateways for Class C devices when sending the LoRaWAN downlink messages.
+
+1.25.0 (2022-08-08)
+------------------
+
+* Feature - AWS IoT Wireless release support for sidewalk data reliability.
+
 1.24.0 (2022-07-07)
 ------------------
 

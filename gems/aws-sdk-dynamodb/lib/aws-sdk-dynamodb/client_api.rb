@@ -74,6 +74,7 @@ module Aws::DynamoDB
     Capacity = Shapes::StructureShape.new(name: 'Capacity')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    CloudWatchLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogGroupArn')
     Code = Shapes::StringShape.new(name: 'Code')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     Condition = Shapes::StructureShape.new(name: 'Condition')
@@ -103,6 +104,10 @@ module Aws::DynamoDB
     CreateReplicationGroupMemberAction = Shapes::StructureShape.new(name: 'CreateReplicationGroupMemberAction')
     CreateTableInput = Shapes::StructureShape.new(name: 'CreateTableInput')
     CreateTableOutput = Shapes::StructureShape.new(name: 'CreateTableOutput')
+    CsvDelimiter = Shapes::StringShape.new(name: 'CsvDelimiter')
+    CsvHeader = Shapes::StringShape.new(name: 'CsvHeader')
+    CsvHeaderList = Shapes::ListShape.new(name: 'CsvHeaderList')
+    CsvOptions = Shapes::StructureShape.new(name: 'CsvOptions')
     Date = Shapes::TimestampShape.new(name: 'Date')
     Delete = Shapes::StructureShape.new(name: 'Delete')
     DeleteBackupInput = Shapes::StructureShape.new(name: 'DeleteBackupInput')
@@ -129,6 +134,8 @@ module Aws::DynamoDB
     DescribeGlobalTableOutput = Shapes::StructureShape.new(name: 'DescribeGlobalTableOutput')
     DescribeGlobalTableSettingsInput = Shapes::StructureShape.new(name: 'DescribeGlobalTableSettingsInput')
     DescribeGlobalTableSettingsOutput = Shapes::StructureShape.new(name: 'DescribeGlobalTableSettingsOutput')
+    DescribeImportInput = Shapes::StructureShape.new(name: 'DescribeImportInput')
+    DescribeImportOutput = Shapes::StructureShape.new(name: 'DescribeImportOutput')
     DescribeKinesisStreamingDestinationInput = Shapes::StructureShape.new(name: 'DescribeKinesisStreamingDestinationInput')
     DescribeKinesisStreamingDestinationOutput = Shapes::StructureShape.new(name: 'DescribeKinesisStreamingDestinationOutput')
     DescribeLimitsInput = Shapes::StructureShape.new(name: 'DescribeLimitsInput')
@@ -144,6 +151,7 @@ module Aws::DynamoDB
     DuplicateItemException = Shapes::StructureShape.new(name: 'DuplicateItemException')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     Endpoints = Shapes::ListShape.new(name: 'Endpoints')
+    ErrorCount = Shapes::IntegerShape.new(name: 'ErrorCount')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExceptionDescription = Shapes::StringShape.new(name: 'ExceptionDescription')
     ExceptionName = Shapes::StringShape.new(name: 'ExceptionName')
@@ -199,9 +207,25 @@ module Aws::DynamoDB
     GlobalTableNotFoundException = Shapes::StructureShape.new(name: 'GlobalTableNotFoundException')
     GlobalTableStatus = Shapes::StringShape.new(name: 'GlobalTableStatus')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
+    ImportArn = Shapes::StringShape.new(name: 'ImportArn')
+    ImportConflictException = Shapes::StructureShape.new(name: 'ImportConflictException')
+    ImportEndTime = Shapes::TimestampShape.new(name: 'ImportEndTime')
+    ImportNextToken = Shapes::StringShape.new(name: 'ImportNextToken')
+    ImportNotFoundException = Shapes::StructureShape.new(name: 'ImportNotFoundException')
+    ImportStartTime = Shapes::TimestampShape.new(name: 'ImportStartTime')
+    ImportStatus = Shapes::StringShape.new(name: 'ImportStatus')
+    ImportSummary = Shapes::StructureShape.new(name: 'ImportSummary')
+    ImportSummaryList = Shapes::ListShape.new(name: 'ImportSummaryList')
+    ImportTableDescription = Shapes::StructureShape.new(name: 'ImportTableDescription')
+    ImportTableInput = Shapes::StructureShape.new(name: 'ImportTableInput')
+    ImportTableOutput = Shapes::StructureShape.new(name: 'ImportTableOutput')
+    ImportedItemCount = Shapes::IntegerShape.new(name: 'ImportedItemCount')
     IndexName = Shapes::StringShape.new(name: 'IndexName')
     IndexNotFoundException = Shapes::StructureShape.new(name: 'IndexNotFoundException')
     IndexStatus = Shapes::StringShape.new(name: 'IndexStatus')
+    InputCompressionType = Shapes::StringShape.new(name: 'InputCompressionType')
+    InputFormat = Shapes::StringShape.new(name: 'InputFormat')
+    InputFormatOptions = Shapes::StructureShape.new(name: 'InputFormatOptions')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerObject = Shapes::IntegerShape.new(name: 'IntegerObject')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
@@ -246,6 +270,9 @@ module Aws::DynamoDB
     ListExportsOutput = Shapes::StructureShape.new(name: 'ListExportsOutput')
     ListGlobalTablesInput = Shapes::StructureShape.new(name: 'ListGlobalTablesInput')
     ListGlobalTablesOutput = Shapes::StructureShape.new(name: 'ListGlobalTablesOutput')
+    ListImportsInput = Shapes::StructureShape.new(name: 'ListImportsInput')
+    ListImportsMaxLimit = Shapes::IntegerShape.new(name: 'ListImportsMaxLimit')
+    ListImportsOutput = Shapes::StructureShape.new(name: 'ListImportsOutput')
     ListTablesInput = Shapes::StructureShape.new(name: 'ListTablesInput')
     ListTablesInputLimit = Shapes::IntegerShape.new(name: 'ListTablesInputLimit')
     ListTablesOutput = Shapes::StructureShape.new(name: 'ListTablesOutput')
@@ -279,6 +306,7 @@ module Aws::DynamoDB
     PositiveIntegerObject = Shapes::IntegerShape.new(name: 'PositiveIntegerObject')
     PositiveLongObject = Shapes::IntegerShape.new(name: 'PositiveLongObject')
     PreparedStatementParameters = Shapes::ListShape.new(name: 'PreparedStatementParameters')
+    ProcessedItemCount = Shapes::IntegerShape.new(name: 'ProcessedItemCount')
     Projection = Shapes::StructureShape.new(name: 'Projection')
     ProjectionExpression = Shapes::StringShape.new(name: 'ProjectionExpression')
     ProjectionType = Shapes::StringShape.new(name: 'ProjectionType')
@@ -343,6 +371,7 @@ module Aws::DynamoDB
     ReturnValuesOnConditionCheckFailure = Shapes::StringShape.new(name: 'ReturnValuesOnConditionCheckFailure')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3BucketOwner = Shapes::StringShape.new(name: 'S3BucketOwner')
+    S3BucketSource = Shapes::StructureShape.new(name: 'S3BucketSource')
     S3Prefix = Shapes::StringShape.new(name: 'S3Prefix')
     S3SseAlgorithm = Shapes::StringShape.new(name: 'S3SseAlgorithm')
     S3SseKmsKeyId = Shapes::StringShape.new(name: 'S3SseKmsKeyId')
@@ -373,6 +402,7 @@ module Aws::DynamoDB
     TableClass = Shapes::StringShape.new(name: 'TableClass')
     TableClassSummary = Shapes::StructureShape.new(name: 'TableClassSummary')
     TableCreationDateTime = Shapes::TimestampShape.new(name: 'TableCreationDateTime')
+    TableCreationParameters = Shapes::StructureShape.new(name: 'TableCreationParameters')
     TableDescription = Shapes::StructureShape.new(name: 'TableDescription')
     TableId = Shapes::StringShape.new(name: 'TableId')
     TableInUseException = Shapes::StructureShape.new(name: 'TableInUseException')
@@ -691,6 +721,12 @@ module Aws::DynamoDB
     CreateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
     CreateTableOutput.struct_class = Types::CreateTableOutput
 
+    CsvHeaderList.member = Shapes::ShapeRef.new(shape: CsvHeader)
+
+    CsvOptions.add_member(:delimiter, Shapes::ShapeRef.new(shape: CsvDelimiter, location_name: "Delimiter"))
+    CsvOptions.add_member(:header_list, Shapes::ShapeRef.new(shape: CsvHeaderList, location_name: "HeaderList"))
+    CsvOptions.struct_class = Types::CsvOptions
+
     Delete.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "Key"))
     Delete.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
     Delete.add_member(:condition_expression, Shapes::ShapeRef.new(shape: ConditionExpression, location_name: "ConditionExpression"))
@@ -787,6 +823,12 @@ module Aws::DynamoDB
     DescribeGlobalTableSettingsOutput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "GlobalTableName"))
     DescribeGlobalTableSettingsOutput.add_member(:replica_settings, Shapes::ShapeRef.new(shape: ReplicaSettingsDescriptionList, location_name: "ReplicaSettings"))
     DescribeGlobalTableSettingsOutput.struct_class = Types::DescribeGlobalTableSettingsOutput
+
+    DescribeImportInput.add_member(:import_arn, Shapes::ShapeRef.new(shape: ImportArn, required: true, location_name: "ImportArn"))
+    DescribeImportInput.struct_class = Types::DescribeImportInput
+
+    DescribeImportOutput.add_member(:import_table_description, Shapes::ShapeRef.new(shape: ImportTableDescription, required: true, location_name: "ImportTableDescription"))
+    DescribeImportOutput.struct_class = Types::DescribeImportOutput
 
     DescribeKinesisStreamingDestinationInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
     DescribeKinesisStreamingDestinationInput.struct_class = Types::DescribeKinesisStreamingDestinationInput
@@ -1012,8 +1054,61 @@ module Aws::DynamoDB
     IdempotentParameterMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
 
+    ImportConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ImportConflictException.struct_class = Types::ImportConflictException
+
+    ImportNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ImportNotFoundException.struct_class = Types::ImportNotFoundException
+
+    ImportSummary.add_member(:import_arn, Shapes::ShapeRef.new(shape: ImportArn, location_name: "ImportArn"))
+    ImportSummary.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "ImportStatus"))
+    ImportSummary.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableArn, location_name: "TableArn"))
+    ImportSummary.add_member(:s3_bucket_source, Shapes::ShapeRef.new(shape: S3BucketSource, location_name: "S3BucketSource"))
+    ImportSummary.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupArn, location_name: "CloudWatchLogGroupArn"))
+    ImportSummary.add_member(:input_format, Shapes::ShapeRef.new(shape: InputFormat, location_name: "InputFormat"))
+    ImportSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: ImportStartTime, location_name: "StartTime"))
+    ImportSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: ImportEndTime, location_name: "EndTime"))
+    ImportSummary.struct_class = Types::ImportSummary
+
+    ImportSummaryList.member = Shapes::ShapeRef.new(shape: ImportSummary)
+
+    ImportTableDescription.add_member(:import_arn, Shapes::ShapeRef.new(shape: ImportArn, location_name: "ImportArn"))
+    ImportTableDescription.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "ImportStatus"))
+    ImportTableDescription.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableArn, location_name: "TableArn"))
+    ImportTableDescription.add_member(:table_id, Shapes::ShapeRef.new(shape: TableId, location_name: "TableId"))
+    ImportTableDescription.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    ImportTableDescription.add_member(:s3_bucket_source, Shapes::ShapeRef.new(shape: S3BucketSource, location_name: "S3BucketSource"))
+    ImportTableDescription.add_member(:error_count, Shapes::ShapeRef.new(shape: ErrorCount, location_name: "ErrorCount"))
+    ImportTableDescription.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupArn, location_name: "CloudWatchLogGroupArn"))
+    ImportTableDescription.add_member(:input_format, Shapes::ShapeRef.new(shape: InputFormat, location_name: "InputFormat"))
+    ImportTableDescription.add_member(:input_format_options, Shapes::ShapeRef.new(shape: InputFormatOptions, location_name: "InputFormatOptions"))
+    ImportTableDescription.add_member(:input_compression_type, Shapes::ShapeRef.new(shape: InputCompressionType, location_name: "InputCompressionType"))
+    ImportTableDescription.add_member(:table_creation_parameters, Shapes::ShapeRef.new(shape: TableCreationParameters, location_name: "TableCreationParameters"))
+    ImportTableDescription.add_member(:start_time, Shapes::ShapeRef.new(shape: ImportStartTime, location_name: "StartTime"))
+    ImportTableDescription.add_member(:end_time, Shapes::ShapeRef.new(shape: ImportEndTime, location_name: "EndTime"))
+    ImportTableDescription.add_member(:processed_size_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "ProcessedSizeBytes"))
+    ImportTableDescription.add_member(:processed_item_count, Shapes::ShapeRef.new(shape: ProcessedItemCount, location_name: "ProcessedItemCount"))
+    ImportTableDescription.add_member(:imported_item_count, Shapes::ShapeRef.new(shape: ImportedItemCount, location_name: "ImportedItemCount"))
+    ImportTableDescription.add_member(:failure_code, Shapes::ShapeRef.new(shape: FailureCode, location_name: "FailureCode"))
+    ImportTableDescription.add_member(:failure_message, Shapes::ShapeRef.new(shape: FailureMessage, location_name: "FailureMessage"))
+    ImportTableDescription.struct_class = Types::ImportTableDescription
+
+    ImportTableInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ImportTableInput.add_member(:s3_bucket_source, Shapes::ShapeRef.new(shape: S3BucketSource, required: true, location_name: "S3BucketSource"))
+    ImportTableInput.add_member(:input_format, Shapes::ShapeRef.new(shape: InputFormat, required: true, location_name: "InputFormat"))
+    ImportTableInput.add_member(:input_format_options, Shapes::ShapeRef.new(shape: InputFormatOptions, location_name: "InputFormatOptions"))
+    ImportTableInput.add_member(:input_compression_type, Shapes::ShapeRef.new(shape: InputCompressionType, location_name: "InputCompressionType"))
+    ImportTableInput.add_member(:table_creation_parameters, Shapes::ShapeRef.new(shape: TableCreationParameters, required: true, location_name: "TableCreationParameters"))
+    ImportTableInput.struct_class = Types::ImportTableInput
+
+    ImportTableOutput.add_member(:import_table_description, Shapes::ShapeRef.new(shape: ImportTableDescription, required: true, location_name: "ImportTableDescription"))
+    ImportTableOutput.struct_class = Types::ImportTableOutput
+
     IndexNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     IndexNotFoundException.struct_class = Types::IndexNotFoundException
+
+    InputFormatOptions.add_member(:csv, Shapes::ShapeRef.new(shape: CsvOptions, location_name: "Csv"))
+    InputFormatOptions.struct_class = Types::InputFormatOptions
 
     InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InternalServerError.struct_class = Types::InternalServerError
@@ -1128,6 +1223,15 @@ module Aws::DynamoDB
     ListGlobalTablesOutput.add_member(:global_tables, Shapes::ShapeRef.new(shape: GlobalTableList, location_name: "GlobalTables"))
     ListGlobalTablesOutput.add_member(:last_evaluated_global_table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "LastEvaluatedGlobalTableName"))
     ListGlobalTablesOutput.struct_class = Types::ListGlobalTablesOutput
+
+    ListImportsInput.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableArn, location_name: "TableArn"))
+    ListImportsInput.add_member(:page_size, Shapes::ShapeRef.new(shape: ListImportsMaxLimit, location_name: "PageSize"))
+    ListImportsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ImportNextToken, location_name: "NextToken"))
+    ListImportsInput.struct_class = Types::ListImportsInput
+
+    ListImportsOutput.add_member(:import_summary_list, Shapes::ShapeRef.new(shape: ImportSummaryList, location_name: "ImportSummaryList"))
+    ListImportsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: ImportNextToken, location_name: "NextToken"))
+    ListImportsOutput.struct_class = Types::ListImportsOutput
 
     ListTablesInput.add_member(:exclusive_start_table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "ExclusiveStartTableName"))
     ListTablesInput.add_member(:limit, Shapes::ShapeRef.new(shape: ListTablesInputLimit, location_name: "Limit"))
@@ -1437,6 +1541,11 @@ module Aws::DynamoDB
     RestoreTableToPointInTimeOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
     RestoreTableToPointInTimeOutput.struct_class = Types::RestoreTableToPointInTimeOutput
 
+    S3BucketSource.add_member(:s3_bucket_owner, Shapes::ShapeRef.new(shape: S3BucketOwner, location_name: "S3BucketOwner"))
+    S3BucketSource.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "S3Bucket"))
+    S3BucketSource.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "S3KeyPrefix"))
+    S3BucketSource.struct_class = Types::S3BucketSource
+
     SSEDescription.add_member(:status, Shapes::ShapeRef.new(shape: SSEStatus, location_name: "Status"))
     SSEDescription.add_member(:sse_type, Shapes::ShapeRef.new(shape: SSEType, location_name: "SSEType"))
     SSEDescription.add_member(:kms_master_key_arn, Shapes::ShapeRef.new(shape: KMSMasterKeyArn, location_name: "KMSMasterKeyArn"))
@@ -1511,6 +1620,15 @@ module Aws::DynamoDB
     TableClassSummary.add_member(:table_class, Shapes::ShapeRef.new(shape: TableClass, location_name: "TableClass"))
     TableClassSummary.add_member(:last_update_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateDateTime"))
     TableClassSummary.struct_class = Types::TableClassSummary
+
+    TableCreationParameters.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
+    TableCreationParameters.add_member(:attribute_definitions, Shapes::ShapeRef.new(shape: AttributeDefinitions, required: true, location_name: "AttributeDefinitions"))
+    TableCreationParameters.add_member(:key_schema, Shapes::ShapeRef.new(shape: KeySchema, required: true, location_name: "KeySchema"))
+    TableCreationParameters.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingMode"))
+    TableCreationParameters.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughput"))
+    TableCreationParameters.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
+    TableCreationParameters.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexes"))
+    TableCreationParameters.struct_class = Types::TableCreationParameters
 
     TableDescription.add_member(:attribute_definitions, Shapes::ShapeRef.new(shape: AttributeDefinitions, location_name: "AttributeDefinitions"))
     TableDescription.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
@@ -1950,6 +2068,15 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_import, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeImport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeImportInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeImportOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ImportNotFoundException)
+      end)
+
       api.add_operation(:describe_kinesis_streaming_destination, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeKinesisStreamingDestination"
         o.http_method = "POST"
@@ -2094,6 +2221,17 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:import_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportTable"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ImportTableInput)
+        o.output = Shapes::ShapeRef.new(shape: ImportTableOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ImportConflictException)
+      end)
+
       api.add_operation(:list_backups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListBackups"
         o.http_method = "POST"
@@ -2146,6 +2284,21 @@ module Aws::DynamoDB
         o.input = Shapes::ShapeRef.new(shape: ListGlobalTablesInput)
         o.output = Shapes::ShapeRef.new(shape: ListGlobalTablesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:list_imports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListImports"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListImportsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListImportsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tables, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2022-08-18)
+------------------
+
+* Feature - Add TransitGatewayPeeringAttachmentId property to TransitGatewayPeering Model
+
 1.24.0 (2022-07-12)
 ------------------
 

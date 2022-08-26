@@ -102,11 +102,16 @@ module Aws::LexModelsV2
     CloudWatchLogGroupLogDestination = Shapes::StructureShape.new(name: 'CloudWatchLogGroupLogDestination')
     CodeHookInterfaceVersion = Shapes::StringShape.new(name: 'CodeHookInterfaceVersion')
     CodeHookSpecification = Shapes::StructureShape.new(name: 'CodeHookSpecification')
+    Condition = Shapes::StructureShape.new(name: 'Condition')
+    ConditionExpression = Shapes::StringShape.new(name: 'ConditionExpression')
     ConditionKey = Shapes::StringShape.new(name: 'ConditionKey')
     ConditionKeyValueMap = Shapes::MapShape.new(name: 'ConditionKeyValueMap')
     ConditionMap = Shapes::MapShape.new(name: 'ConditionMap')
     ConditionOperator = Shapes::StringShape.new(name: 'ConditionOperator')
     ConditionValue = Shapes::StringShape.new(name: 'ConditionValue')
+    ConditionalBranch = Shapes::StructureShape.new(name: 'ConditionalBranch')
+    ConditionalBranches = Shapes::ListShape.new(name: 'ConditionalBranches')
+    ConditionalSpecification = Shapes::StructureShape.new(name: 'ConditionalSpecification')
     ConfidenceThreshold = Shapes::FloatShape.new(name: 'ConfidenceThreshold')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContextTimeToLiveInSeconds = Shapes::IntegerShape.new(name: 'ContextTimeToLiveInSeconds')
@@ -142,6 +147,7 @@ module Aws::LexModelsV2
     CustomVocabularyStatus = Shapes::StringShape.new(name: 'CustomVocabularyStatus')
     DataPrivacy = Shapes::StructureShape.new(name: 'DataPrivacy')
     DateRangeFilter = Shapes::StructureShape.new(name: 'DateRangeFilter')
+    DefaultConditionalBranch = Shapes::StructureShape.new(name: 'DefaultConditionalBranch')
     DeleteBotAliasRequest = Shapes::StructureShape.new(name: 'DeleteBotAliasRequest')
     DeleteBotAliasResponse = Shapes::StructureShape.new(name: 'DeleteBotAliasResponse')
     DeleteBotLocaleRequest = Shapes::StructureShape.new(name: 'DeleteBotLocaleRequest')
@@ -190,9 +196,14 @@ module Aws::LexModelsV2
     DescribeSlotTypeRequest = Shapes::StructureShape.new(name: 'DescribeSlotTypeRequest')
     DescribeSlotTypeResponse = Shapes::StructureShape.new(name: 'DescribeSlotTypeResponse')
     Description = Shapes::StringShape.new(name: 'Description')
+    DialogAction = Shapes::StructureShape.new(name: 'DialogAction')
+    DialogActionType = Shapes::StringShape.new(name: 'DialogActionType')
+    DialogCodeHookInvocationSetting = Shapes::StructureShape.new(name: 'DialogCodeHookInvocationSetting')
     DialogCodeHookSettings = Shapes::StructureShape.new(name: 'DialogCodeHookSettings')
+    DialogState = Shapes::StructureShape.new(name: 'DialogState')
     DraftBotVersion = Shapes::StringShape.new(name: 'DraftBotVersion')
     Effect = Shapes::StringShape.new(name: 'Effect')
+    ElicitationCodeHookInvocationSetting = Shapes::StructureShape.new(name: 'ElicitationCodeHookInvocationSetting')
     EncryptionSetting = Shapes::StructureShape.new(name: 'EncryptionSetting')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExportFilter = Shapes::StructureShape.new(name: 'ExportFilter')
@@ -237,6 +248,7 @@ module Aws::LexModelsV2
     ImportSummary = Shapes::StructureShape.new(name: 'ImportSummary')
     ImportSummaryList = Shapes::ListShape.new(name: 'ImportSummaryList')
     ImportedResourceId = Shapes::StringShape.new(name: 'ImportedResourceId')
+    InitialResponseSetting = Shapes::StructureShape.new(name: 'InitialResponseSetting')
     InputContext = Shapes::StructureShape.new(name: 'InputContext')
     InputContextsList = Shapes::ListShape.new(name: 'InputContextsList')
     IntentClosingSetting = Shapes::StructureShape.new(name: 'IntentClosingSetting')
@@ -245,6 +257,7 @@ module Aws::LexModelsV2
     IntentFilterName = Shapes::StringShape.new(name: 'IntentFilterName')
     IntentFilterOperator = Shapes::StringShape.new(name: 'IntentFilterOperator')
     IntentFilters = Shapes::ListShape.new(name: 'IntentFilters')
+    IntentOverride = Shapes::StructureShape.new(name: 'IntentOverride')
     IntentSignature = Shapes::StringShape.new(name: 'IntentSignature')
     IntentSortAttribute = Shapes::StringShape.new(name: 'IntentSortAttribute')
     IntentSortBy = Shapes::StructureShape.new(name: 'IntentSortBy')
@@ -303,6 +316,7 @@ module Aws::LexModelsV2
     Name = Shapes::StringShape.new(name: 'Name')
     NextIndex = Shapes::IntegerShape.new(name: 'NextIndex')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NumericalBotVersion = Shapes::StringShape.new(name: 'NumericalBotVersion')
     ObfuscationSetting = Shapes::StructureShape.new(name: 'ObfuscationSetting')
     ObfuscationSettingType = Shapes::StringShape.new(name: 'ObfuscationSettingType')
@@ -316,6 +330,7 @@ module Aws::LexModelsV2
     PlainTextMessage = Shapes::StructureShape.new(name: 'PlainTextMessage')
     PlainTextMessageValue = Shapes::StringShape.new(name: 'PlainTextMessageValue')
     Policy = Shapes::StringShape.new(name: 'Policy')
+    PostDialogCodeHookInvocationSpecification = Shapes::StructureShape.new(name: 'PostDialogCodeHookInvocationSpecification')
     PostFulfillmentStatusSpecification = Shapes::StructureShape.new(name: 'PostFulfillmentStatusSpecification')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     PresignedS3Url = Shapes::StringShape.new(name: 'PresignedS3Url')
@@ -358,6 +373,7 @@ module Aws::LexModelsV2
     SessionId = Shapes::StringShape.new(name: 'SessionId')
     SessionTTL = Shapes::IntegerShape.new(name: 'SessionTTL')
     SkipResourceInUseCheck = Shapes::BooleanShape.new(name: 'SkipResourceInUseCheck')
+    SlotCaptureSetting = Shapes::StructureShape.new(name: 'SlotCaptureSetting')
     SlotConstraint = Shapes::StringShape.new(name: 'SlotConstraint')
     SlotDefaultValue = Shapes::StructureShape.new(name: 'SlotDefaultValue')
     SlotDefaultValueList = Shapes::ListShape.new(name: 'SlotDefaultValueList')
@@ -369,6 +385,7 @@ module Aws::LexModelsV2
     SlotFilters = Shapes::ListShape.new(name: 'SlotFilters')
     SlotPrioritiesList = Shapes::ListShape.new(name: 'SlotPrioritiesList')
     SlotPriority = Shapes::StructureShape.new(name: 'SlotPriority')
+    SlotShape = Shapes::StringShape.new(name: 'SlotShape')
     SlotSortAttribute = Shapes::StringShape.new(name: 'SlotSortAttribute')
     SlotSortBy = Shapes::StructureShape.new(name: 'SlotSortBy')
     SlotSummary = Shapes::StructureShape.new(name: 'SlotSummary')
@@ -386,10 +403,14 @@ module Aws::LexModelsV2
     SlotTypeSummaryList = Shapes::ListShape.new(name: 'SlotTypeSummaryList')
     SlotTypeValue = Shapes::StructureShape.new(name: 'SlotTypeValue')
     SlotTypeValues = Shapes::ListShape.new(name: 'SlotTypeValues')
+    SlotValue = Shapes::StructureShape.new(name: 'SlotValue')
     SlotValueElicitationSetting = Shapes::StructureShape.new(name: 'SlotValueElicitationSetting')
+    SlotValueOverride = Shapes::StructureShape.new(name: 'SlotValueOverride')
+    SlotValueOverrideMap = Shapes::MapShape.new(name: 'SlotValueOverrideMap')
     SlotValueRegexFilter = Shapes::StructureShape.new(name: 'SlotValueRegexFilter')
     SlotValueResolutionStrategy = Shapes::StringShape.new(name: 'SlotValueResolutionStrategy')
     SlotValueSelectionSetting = Shapes::StructureShape.new(name: 'SlotValueSelectionSetting')
+    SlotValues = Shapes::ListShape.new(name: 'SlotValues')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StartBotRecommendationRequest = Shapes::StructureShape.new(name: 'StartBotRecommendationRequest')
     StartBotRecommendationResponse = Shapes::StructureShape.new(name: 'StartBotRecommendationResponse')
@@ -398,6 +419,10 @@ module Aws::LexModelsV2
     StillWaitingResponseFrequency = Shapes::IntegerShape.new(name: 'StillWaitingResponseFrequency')
     StillWaitingResponseSpecification = Shapes::StructureShape.new(name: 'StillWaitingResponseSpecification')
     StillWaitingResponseTimeout = Shapes::IntegerShape.new(name: 'StillWaitingResponseTimeout')
+    StopBotRecommendationRequest = Shapes::StructureShape.new(name: 'StopBotRecommendationRequest')
+    StopBotRecommendationResponse = Shapes::StructureShape.new(name: 'StopBotRecommendationResponse')
+    String = Shapes::StringShape.new(name: 'String')
+    StringMap = Shapes::MapShape.new(name: 'StringMap')
     SynonymList = Shapes::ListShape.new(name: 'SynonymList')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -667,11 +692,27 @@ module Aws::LexModelsV2
     CodeHookSpecification.add_member(:lambda_code_hook, Shapes::ShapeRef.new(shape: LambdaCodeHook, required: true, location_name: "lambdaCodeHook"))
     CodeHookSpecification.struct_class = Types::CodeHookSpecification
 
+    Condition.add_member(:expression_string, Shapes::ShapeRef.new(shape: ConditionExpression, required: true, location_name: "expressionString"))
+    Condition.struct_class = Types::Condition
+
     ConditionKeyValueMap.key = Shapes::ShapeRef.new(shape: ConditionKey)
     ConditionKeyValueMap.value = Shapes::ShapeRef.new(shape: ConditionValue)
 
     ConditionMap.key = Shapes::ShapeRef.new(shape: ConditionOperator)
     ConditionMap.value = Shapes::ShapeRef.new(shape: ConditionKeyValueMap)
+
+    ConditionalBranch.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    ConditionalBranch.add_member(:condition, Shapes::ShapeRef.new(shape: Condition, required: true, location_name: "condition"))
+    ConditionalBranch.add_member(:next_step, Shapes::ShapeRef.new(shape: DialogState, required: true, location_name: "nextStep"))
+    ConditionalBranch.add_member(:response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "response"))
+    ConditionalBranch.struct_class = Types::ConditionalBranch
+
+    ConditionalBranches.member = Shapes::ShapeRef.new(shape: ConditionalBranch)
+
+    ConditionalSpecification.add_member(:active, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "active"))
+    ConditionalSpecification.add_member(:conditional_branches, Shapes::ShapeRef.new(shape: ConditionalBranches, required: true, location_name: "conditionalBranches"))
+    ConditionalSpecification.add_member(:default_branch, Shapes::ShapeRef.new(shape: DefaultConditionalBranch, required: true, location_name: "defaultBranch"))
+    ConditionalSpecification.struct_class = Types::ConditionalSpecification
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -782,6 +823,7 @@ module Aws::LexModelsV2
     CreateIntentRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     CreateIntentRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
     CreateIntentRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
+    CreateIntentRequest.add_member(:initial_response_setting, Shapes::ShapeRef.new(shape: InitialResponseSetting, location_name: "initialResponseSetting"))
     CreateIntentRequest.struct_class = Types::CreateIntentRequest
 
     CreateIntentResponse.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, location_name: "intentId"))
@@ -800,6 +842,7 @@ module Aws::LexModelsV2
     CreateIntentResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, location_name: "botVersion"))
     CreateIntentResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
     CreateIntentResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    CreateIntentResponse.add_member(:initial_response_setting, Shapes::ShapeRef.new(shape: InitialResponseSetting, location_name: "initialResponseSetting"))
     CreateIntentResponse.struct_class = Types::CreateIntentResponse
 
     CreateResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
@@ -898,6 +941,10 @@ module Aws::LexModelsV2
     DateRangeFilter.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDateTime"))
     DateRangeFilter.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endDateTime"))
     DateRangeFilter.struct_class = Types::DateRangeFilter
+
+    DefaultConditionalBranch.add_member(:next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "nextStep"))
+    DefaultConditionalBranch.add_member(:response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "response"))
+    DefaultConditionalBranch.struct_class = Types::DefaultConditionalBranch
 
     DeleteBotAliasRequest.add_member(:bot_alias_id, Shapes::ShapeRef.new(shape: BotAliasId, required: true, location: "uri", location_name: "botAliasId"))
     DeleteBotAliasRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
@@ -1161,6 +1208,7 @@ module Aws::LexModelsV2
     DescribeIntentResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
     DescribeIntentResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     DescribeIntentResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    DescribeIntentResponse.add_member(:initial_response_setting, Shapes::ShapeRef.new(shape: InitialResponseSetting, location_name: "initialResponseSetting"))
     DescribeIntentResponse.struct_class = Types::DescribeIntentResponse
 
     DescribeResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
@@ -1213,8 +1261,28 @@ module Aws::LexModelsV2
     DescribeSlotTypeResponse.add_member(:external_source_setting, Shapes::ShapeRef.new(shape: ExternalSourceSetting, location_name: "externalSourceSetting"))
     DescribeSlotTypeResponse.struct_class = Types::DescribeSlotTypeResponse
 
+    DialogAction.add_member(:type, Shapes::ShapeRef.new(shape: DialogActionType, required: true, location_name: "type"))
+    DialogAction.add_member(:slot_to_elicit, Shapes::ShapeRef.new(shape: Name, location_name: "slotToElicit"))
+    DialogAction.add_member(:suppress_next_message, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "suppressNextMessage"))
+    DialogAction.struct_class = Types::DialogAction
+
+    DialogCodeHookInvocationSetting.add_member(:enable_code_hook_invocation, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "enableCodeHookInvocation"))
+    DialogCodeHookInvocationSetting.add_member(:active, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "active"))
+    DialogCodeHookInvocationSetting.add_member(:invocation_label, Shapes::ShapeRef.new(shape: Name, location_name: "invocationLabel"))
+    DialogCodeHookInvocationSetting.add_member(:post_code_hook_specification, Shapes::ShapeRef.new(shape: PostDialogCodeHookInvocationSpecification, required: true, location_name: "postCodeHookSpecification"))
+    DialogCodeHookInvocationSetting.struct_class = Types::DialogCodeHookInvocationSetting
+
     DialogCodeHookSettings.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     DialogCodeHookSettings.struct_class = Types::DialogCodeHookSettings
+
+    DialogState.add_member(:dialog_action, Shapes::ShapeRef.new(shape: DialogAction, location_name: "dialogAction"))
+    DialogState.add_member(:intent, Shapes::ShapeRef.new(shape: IntentOverride, location_name: "intent"))
+    DialogState.add_member(:session_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "sessionAttributes"))
+    DialogState.struct_class = Types::DialogState
+
+    ElicitationCodeHookInvocationSetting.add_member(:enable_code_hook_invocation, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "enableCodeHookInvocation"))
+    ElicitationCodeHookInvocationSetting.add_member(:invocation_label, Shapes::ShapeRef.new(shape: Name, location_name: "invocationLabel"))
+    ElicitationCodeHookInvocationSetting.struct_class = Types::ElicitationCodeHookInvocationSetting
 
     EncryptionSetting.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     EncryptionSetting.add_member(:bot_locale_export_password, Shapes::ShapeRef.new(shape: FilePassword, location_name: "botLocaleExportPassword"))
@@ -1257,6 +1325,7 @@ module Aws::LexModelsV2
     FulfillmentCodeHookSettings.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     FulfillmentCodeHookSettings.add_member(:post_fulfillment_status_specification, Shapes::ShapeRef.new(shape: PostFulfillmentStatusSpecification, location_name: "postFulfillmentStatusSpecification"))
     FulfillmentCodeHookSettings.add_member(:fulfillment_updates_specification, Shapes::ShapeRef.new(shape: FulfillmentUpdatesSpecification, location_name: "fulfillmentUpdatesSpecification"))
+    FulfillmentCodeHookSettings.add_member(:active, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "active"))
     FulfillmentCodeHookSettings.struct_class = Types::FulfillmentCodeHookSettings
 
     FulfillmentStartResponseSpecification.add_member(:delay_in_seconds, Shapes::ShapeRef.new(shape: FulfillmentStartResponseDelay, required: true, location_name: "delayInSeconds"))
@@ -1317,18 +1386,36 @@ module Aws::LexModelsV2
 
     ImportSummaryList.member = Shapes::ShapeRef.new(shape: ImportSummary)
 
+    InitialResponseSetting.add_member(:initial_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "initialResponse"))
+    InitialResponseSetting.add_member(:next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "nextStep"))
+    InitialResponseSetting.add_member(:conditional, Shapes::ShapeRef.new(shape: ConditionalSpecification, location_name: "conditional"))
+    InitialResponseSetting.add_member(:code_hook, Shapes::ShapeRef.new(shape: DialogCodeHookInvocationSetting, location_name: "codeHook"))
+    InitialResponseSetting.struct_class = Types::InitialResponseSetting
+
     InputContext.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     InputContext.struct_class = Types::InputContext
 
     InputContextsList.member = Shapes::ShapeRef.new(shape: InputContext)
 
-    IntentClosingSetting.add_member(:closing_response, Shapes::ShapeRef.new(shape: ResponseSpecification, required: true, location_name: "closingResponse"))
+    IntentClosingSetting.add_member(:closing_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "closingResponse"))
     IntentClosingSetting.add_member(:active, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "active"))
+    IntentClosingSetting.add_member(:next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "nextStep"))
+    IntentClosingSetting.add_member(:conditional, Shapes::ShapeRef.new(shape: ConditionalSpecification, location_name: "conditional"))
     IntentClosingSetting.struct_class = Types::IntentClosingSetting
 
     IntentConfirmationSetting.add_member(:prompt_specification, Shapes::ShapeRef.new(shape: PromptSpecification, required: true, location_name: "promptSpecification"))
-    IntentConfirmationSetting.add_member(:declination_response, Shapes::ShapeRef.new(shape: ResponseSpecification, required: true, location_name: "declinationResponse"))
+    IntentConfirmationSetting.add_member(:declination_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "declinationResponse"))
     IntentConfirmationSetting.add_member(:active, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "active"))
+    IntentConfirmationSetting.add_member(:confirmation_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "confirmationResponse"))
+    IntentConfirmationSetting.add_member(:confirmation_next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "confirmationNextStep"))
+    IntentConfirmationSetting.add_member(:confirmation_conditional, Shapes::ShapeRef.new(shape: ConditionalSpecification, location_name: "confirmationConditional"))
+    IntentConfirmationSetting.add_member(:declination_next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "declinationNextStep"))
+    IntentConfirmationSetting.add_member(:declination_conditional, Shapes::ShapeRef.new(shape: ConditionalSpecification, location_name: "declinationConditional"))
+    IntentConfirmationSetting.add_member(:failure_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "failureResponse"))
+    IntentConfirmationSetting.add_member(:failure_next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "failureNextStep"))
+    IntentConfirmationSetting.add_member(:failure_conditional, Shapes::ShapeRef.new(shape: ConditionalSpecification, location_name: "failureConditional"))
+    IntentConfirmationSetting.add_member(:code_hook, Shapes::ShapeRef.new(shape: DialogCodeHookInvocationSetting, location_name: "codeHook"))
+    IntentConfirmationSetting.add_member(:elicitation_code_hook, Shapes::ShapeRef.new(shape: ElicitationCodeHookInvocationSetting, location_name: "elicitationCodeHook"))
     IntentConfirmationSetting.struct_class = Types::IntentConfirmationSetting
 
     IntentFilter.add_member(:name, Shapes::ShapeRef.new(shape: IntentFilterName, required: true, location_name: "name"))
@@ -1337,6 +1424,10 @@ module Aws::LexModelsV2
     IntentFilter.struct_class = Types::IntentFilter
 
     IntentFilters.member = Shapes::ShapeRef.new(shape: IntentFilter)
+
+    IntentOverride.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    IntentOverride.add_member(:slots, Shapes::ShapeRef.new(shape: SlotValueOverrideMap, location_name: "slots"))
+    IntentOverride.struct_class = Types::IntentOverride
 
     IntentSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: IntentSortAttribute, required: true, location_name: "attribute"))
     IntentSortBy.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "order"))
@@ -1616,9 +1707,26 @@ module Aws::LexModelsV2
     PlainTextMessage.add_member(:value, Shapes::ShapeRef.new(shape: PlainTextMessageValue, required: true, location_name: "value"))
     PlainTextMessage.struct_class = Types::PlainTextMessage
 
+    PostDialogCodeHookInvocationSpecification.add_member(:success_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "successResponse"))
+    PostDialogCodeHookInvocationSpecification.add_member(:success_next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "successNextStep"))
+    PostDialogCodeHookInvocationSpecification.add_member(:success_conditional, Shapes::ShapeRef.new(shape: ConditionalSpecification, location_name: "successConditional"))
+    PostDialogCodeHookInvocationSpecification.add_member(:failure_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "failureResponse"))
+    PostDialogCodeHookInvocationSpecification.add_member(:failure_next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "failureNextStep"))
+    PostDialogCodeHookInvocationSpecification.add_member(:failure_conditional, Shapes::ShapeRef.new(shape: ConditionalSpecification, location_name: "failureConditional"))
+    PostDialogCodeHookInvocationSpecification.add_member(:timeout_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "timeoutResponse"))
+    PostDialogCodeHookInvocationSpecification.add_member(:timeout_next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "timeoutNextStep"))
+    PostDialogCodeHookInvocationSpecification.add_member(:timeout_conditional, Shapes::ShapeRef.new(shape: ConditionalSpecification, location_name: "timeoutConditional"))
+    PostDialogCodeHookInvocationSpecification.struct_class = Types::PostDialogCodeHookInvocationSpecification
+
     PostFulfillmentStatusSpecification.add_member(:success_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "successResponse"))
     PostFulfillmentStatusSpecification.add_member(:failure_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "failureResponse"))
     PostFulfillmentStatusSpecification.add_member(:timeout_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "timeoutResponse"))
+    PostFulfillmentStatusSpecification.add_member(:success_next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "successNextStep"))
+    PostFulfillmentStatusSpecification.add_member(:success_conditional, Shapes::ShapeRef.new(shape: ConditionalSpecification, location_name: "successConditional"))
+    PostFulfillmentStatusSpecification.add_member(:failure_next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "failureNextStep"))
+    PostFulfillmentStatusSpecification.add_member(:failure_conditional, Shapes::ShapeRef.new(shape: ConditionalSpecification, location_name: "failureConditional"))
+    PostFulfillmentStatusSpecification.add_member(:timeout_next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "timeoutNextStep"))
+    PostFulfillmentStatusSpecification.add_member(:timeout_conditional, Shapes::ShapeRef.new(shape: ConditionalSpecification, location_name: "timeoutConditional"))
     PostFulfillmentStatusSpecification.struct_class = Types::PostFulfillmentStatusSpecification
 
     PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
@@ -1704,6 +1812,16 @@ module Aws::LexModelsV2
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    SlotCaptureSetting.add_member(:capture_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "captureResponse"))
+    SlotCaptureSetting.add_member(:capture_next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "captureNextStep"))
+    SlotCaptureSetting.add_member(:capture_conditional, Shapes::ShapeRef.new(shape: ConditionalSpecification, location_name: "captureConditional"))
+    SlotCaptureSetting.add_member(:failure_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "failureResponse"))
+    SlotCaptureSetting.add_member(:failure_next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "failureNextStep"))
+    SlotCaptureSetting.add_member(:failure_conditional, Shapes::ShapeRef.new(shape: ConditionalSpecification, location_name: "failureConditional"))
+    SlotCaptureSetting.add_member(:code_hook, Shapes::ShapeRef.new(shape: DialogCodeHookInvocationSetting, location_name: "codeHook"))
+    SlotCaptureSetting.add_member(:elicitation_code_hook, Shapes::ShapeRef.new(shape: ElicitationCodeHookInvocationSetting, location_name: "elicitationCodeHook"))
+    SlotCaptureSetting.struct_class = Types::SlotCaptureSetting
+
     SlotDefaultValue.add_member(:default_value, Shapes::ShapeRef.new(shape: SlotDefaultValueString, required: true, location_name: "defaultValue"))
     SlotDefaultValue.struct_class = Types::SlotDefaultValue
 
@@ -1770,12 +1888,24 @@ module Aws::LexModelsV2
 
     SlotTypeValues.member = Shapes::ShapeRef.new(shape: SlotTypeValue)
 
+    SlotValue.add_member(:interpreted_value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "interpretedValue"))
+    SlotValue.struct_class = Types::SlotValue
+
     SlotValueElicitationSetting.add_member(:default_value_specification, Shapes::ShapeRef.new(shape: SlotDefaultValueSpecification, location_name: "defaultValueSpecification"))
     SlotValueElicitationSetting.add_member(:slot_constraint, Shapes::ShapeRef.new(shape: SlotConstraint, required: true, location_name: "slotConstraint"))
     SlotValueElicitationSetting.add_member(:prompt_specification, Shapes::ShapeRef.new(shape: PromptSpecification, location_name: "promptSpecification"))
     SlotValueElicitationSetting.add_member(:sample_utterances, Shapes::ShapeRef.new(shape: SampleUtterancesList, location_name: "sampleUtterances"))
     SlotValueElicitationSetting.add_member(:wait_and_continue_specification, Shapes::ShapeRef.new(shape: WaitAndContinueSpecification, location_name: "waitAndContinueSpecification"))
+    SlotValueElicitationSetting.add_member(:slot_capture_setting, Shapes::ShapeRef.new(shape: SlotCaptureSetting, location_name: "slotCaptureSetting"))
     SlotValueElicitationSetting.struct_class = Types::SlotValueElicitationSetting
+
+    SlotValueOverride.add_member(:shape, Shapes::ShapeRef.new(shape: SlotShape, location_name: "shape"))
+    SlotValueOverride.add_member(:value, Shapes::ShapeRef.new(shape: SlotValue, location_name: "value"))
+    SlotValueOverride.add_member(:values, Shapes::ShapeRef.new(shape: SlotValues, location_name: "values"))
+    SlotValueOverride.struct_class = Types::SlotValueOverride
+
+    SlotValueOverrideMap.key = Shapes::ShapeRef.new(shape: Name)
+    SlotValueOverrideMap.value = Shapes::ShapeRef.new(shape: SlotValueOverride)
 
     SlotValueRegexFilter.add_member(:pattern, Shapes::ShapeRef.new(shape: RegexPattern, required: true, location_name: "pattern"))
     SlotValueRegexFilter.struct_class = Types::SlotValueRegexFilter
@@ -1784,6 +1914,8 @@ module Aws::LexModelsV2
     SlotValueSelectionSetting.add_member(:regex_filter, Shapes::ShapeRef.new(shape: SlotValueRegexFilter, location_name: "regexFilter"))
     SlotValueSelectionSetting.add_member(:advanced_recognition_setting, Shapes::ShapeRef.new(shape: AdvancedRecognitionSetting, location_name: "advancedRecognitionSetting"))
     SlotValueSelectionSetting.struct_class = Types::SlotValueSelectionSetting
+
+    SlotValues.member = Shapes::ShapeRef.new(shape: SlotValueOverride)
 
     StartBotRecommendationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     StartBotRecommendationRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
@@ -1820,6 +1952,22 @@ module Aws::LexModelsV2
     StillWaitingResponseSpecification.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: StillWaitingResponseTimeout, required: true, location_name: "timeoutInSeconds"))
     StillWaitingResponseSpecification.add_member(:allow_interrupt, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "allowInterrupt"))
     StillWaitingResponseSpecification.struct_class = Types::StillWaitingResponseSpecification
+
+    StopBotRecommendationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    StopBotRecommendationRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
+    StopBotRecommendationRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
+    StopBotRecommendationRequest.add_member(:bot_recommendation_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botRecommendationId"))
+    StopBotRecommendationRequest.struct_class = Types::StopBotRecommendationRequest
+
+    StopBotRecommendationResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    StopBotRecommendationResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, location_name: "botVersion"))
+    StopBotRecommendationResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
+    StopBotRecommendationResponse.add_member(:bot_recommendation_status, Shapes::ShapeRef.new(shape: BotRecommendationStatus, location_name: "botRecommendationStatus"))
+    StopBotRecommendationResponse.add_member(:bot_recommendation_id, Shapes::ShapeRef.new(shape: Id, location_name: "botRecommendationId"))
+    StopBotRecommendationResponse.struct_class = Types::StopBotRecommendationResponse
+
+    StringMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
+    StringMap.value = Shapes::ShapeRef.new(shape: String)
 
     SynonymList.member = Shapes::ShapeRef.new(shape: SampleValue)
 
@@ -1969,6 +2117,7 @@ module Aws::LexModelsV2
     UpdateIntentRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     UpdateIntentRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
     UpdateIntentRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
+    UpdateIntentRequest.add_member(:initial_response_setting, Shapes::ShapeRef.new(shape: InitialResponseSetting, location_name: "initialResponseSetting"))
     UpdateIntentRequest.struct_class = Types::UpdateIntentRequest
 
     UpdateIntentResponse.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, location_name: "intentId"))
@@ -1989,6 +2138,7 @@ module Aws::LexModelsV2
     UpdateIntentResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
     UpdateIntentResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     UpdateIntentResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    UpdateIntentResponse.add_member(:initial_response_setting, Shapes::ShapeRef.new(shape: InitialResponseSetting, location_name: "initialResponseSetting"))
     UpdateIntentResponse.struct_class = Types::UpdateIntentResponse
 
     UpdateResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
@@ -2883,6 +3033,22 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:stop_bot_recommendation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopBotRecommendation"
+        o.http_method = "PUT"
+        o.http_request_uri = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations/{botRecommendationId}/stopbotrecommendation"
+        o.input = Shapes::ShapeRef.new(shape: StopBotRecommendationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopBotRecommendationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)

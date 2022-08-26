@@ -2674,7 +2674,7 @@ module Aws::RDS
     #   `CreateDBInstance`.
     # @option options [String] :db_instance_class
     #   The new compute and memory capacity of the DB instance, for example
-    #   db.m5.large. Not all DB instance classes are available in all Amazon
+    #   db.m4.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
     #   instance classes][1] in the *Amazon RDS User Guide* or [Aurora DB

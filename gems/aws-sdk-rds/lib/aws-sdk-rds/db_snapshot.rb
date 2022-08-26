@@ -237,6 +237,21 @@ module Aws::RDS
       data[:original_snapshot_create_time]
     end
 
+    # The timestamp of the most recent transaction applied to the database
+    # that you're backing up. Thus, if you restore a snapshot,
+    # SnapshotDatabaseTime is the most recent transaction in the restored DB
+    # instance. In contrast, originalSnapshotCreateTime specifies the system
+    # time that the snapshot completed.
+    #
+    # If you back up a read replica, you can determine the replica lag by
+    # comparing SnapshotDatabaseTime with originalSnapshotCreateTime. For
+    # example, if originalSnapshotCreateTime is two hours later than
+    # SnapshotDatabaseTime, then the replica lag is two hours.
+    # @return [Time]
+    def snapshot_database_time
+      data[:snapshot_database_time]
+    end
+
     # Specifies where manual snapshots are stored: Amazon Web Services
     # Outposts or the Amazon Web Services Region.
     # @return [String]

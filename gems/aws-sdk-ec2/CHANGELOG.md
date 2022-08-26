@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.329.0 (2022-08-22)
+------------------
+
+* Feature - R6a instances are powered by 3rd generation AMD EPYC (Milan) processors delivering all-core turbo frequency of 3.6 GHz. C6id, M6id, and R6id instances are powered by 3rd generation Intel Xeon Scalable processor (Ice Lake) delivering all-core turbo frequency of 3.5 GHz.
+
+1.328.0 (2022-08-18)
+------------------
+
+* Feature - This release adds support for VPN log options , a new feature allowing S2S VPN connections to send IKE activity logs to CloudWatch Logs
+
+1.327.0 (2022-08-10)
+------------------
+
+* Feature - This release adds support for excluding specific data (non-root) volumes from multi-volume snapshot sets created from instances.
+
 1.326.0 (2022-07-29)
 ------------------
 

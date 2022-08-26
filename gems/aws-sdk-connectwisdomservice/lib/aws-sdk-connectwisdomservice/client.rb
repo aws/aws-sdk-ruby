@@ -1475,6 +1475,66 @@ module Aws::ConnectWisdomService
       req.send_request(options)
     end
 
+    # Submits feedback to Wisdom. The feedback is used to improve future
+    # recommendations from [GetRecommendations][1] or results from
+    # [QueryAssistant][2]. Feedback can be resubmitted up to 6 hours after
+    # submission.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetRecommendations.html
+    # [2]: https://docs.aws.amazon.com/wisdom/latest/APIReference/API_QueryAssistant.html
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Wisdom assistant. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #
+    # @option params [required, Types::FeedbackData] :feedback
+    #   The feedback.
+    #
+    # @option params [required, String] :target_id
+    #   The identifier of a recommendation. or The identifier of the result
+    #   data.
+    #
+    # @option params [required, String] :target_type
+    #   The type of the targetId for which The feedback. is targeted.
+    #
+    # @return [Types::PutFeedbackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutFeedbackResponse#assistant_arn #assistant_arn} => String
+    #   * {Types::PutFeedbackResponse#assistant_id #assistant_id} => String
+    #   * {Types::PutFeedbackResponse#feedback #feedback} => Types::FeedbackData
+    #   * {Types::PutFeedbackResponse#target_id #target_id} => String
+    #   * {Types::PutFeedbackResponse#target_type #target_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_feedback({
+    #     assistant_id: "UuidOrArn", # required
+    #     feedback: { # required
+    #       relevance: "HELPFUL", # required, accepts HELPFUL, NOT_HELPFUL
+    #     },
+    #     target_id: "String", # required
+    #     target_type: "RECOMMENDATION", # required, accepts RECOMMENDATION, RESULT
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assistant_arn #=> String
+    #   resp.assistant_id #=> String
+    #   resp.feedback.relevance #=> String, one of "HELPFUL", "NOT_HELPFUL"
+    #   resp.target_id #=> String
+    #   resp.target_type #=> String, one of "RECOMMENDATION", "RESULT"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/PutFeedback AWS API Documentation
+    #
+    # @overload put_feedback(params = {})
+    # @param [Hash] params ({})
+    def put_feedback(params = {}, options = {})
+      req = build_request(:put_feedback, params)
+      req.send_request(options)
+    end
+
     # Performs a manual search against the specified assistant. To retrieve
     # recommendations for an assistant, use [GetRecommendations][1].
     #
@@ -1949,7 +2009,7 @@ module Aws::ConnectWisdomService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectwisdomservice'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -100,7 +100,9 @@ module Aws::AppMesh
     #   @return [Array<Types::AwsCloudMapInstanceAttribute>]
     #
     # @!attribute [rw] ip_preference
-    #   The IP version to use to control traffic within the mesh.
+    #   The preferred IP version that this virtual node uses. Setting the IP
+    #   preference on the virtual node only overrides the IP preference set
+    #   for the mesh on this specific node.
     #   @return [String]
     #
     # @!attribute [rw] namespace_name
@@ -401,6 +403,7 @@ module Aws::AppMesh
     #                 },
     #               },
     #               target: { # required
+    #                 port: 1,
     #                 virtual_service: { # required
     #                   virtual_service_name: "ResourceName", # required
     #                 },
@@ -427,6 +430,7 @@ module Aws::AppMesh
     #                   name: "HeaderName", # required
     #                 },
     #               ],
+    #               port: 1,
     #               service_name: "ServiceName",
     #             },
     #           },
@@ -445,6 +449,7 @@ module Aws::AppMesh
     #                 },
     #               },
     #               target: { # required
+    #                 port: 1,
     #                 virtual_service: { # required
     #                   virtual_service_name: "ResourceName", # required
     #                 },
@@ -476,6 +481,7 @@ module Aws::AppMesh
     #                 exact: "HttpPathExact",
     #                 regex: "HttpPathRegex",
     #               },
+    #               port: 1,
     #               prefix: "String",
     #               query_parameters: [
     #                 {
@@ -502,6 +508,7 @@ module Aws::AppMesh
     #                 },
     #               },
     #               target: { # required
+    #                 port: 1,
     #                 virtual_service: { # required
     #                   virtual_service_name: "ResourceName", # required
     #                 },
@@ -533,6 +540,7 @@ module Aws::AppMesh
     #                 exact: "HttpPathExact",
     #                 regex: "HttpPathRegex",
     #               },
+    #               port: 1,
     #               prefix: "String",
     #               query_parameters: [
     #                 {
@@ -724,6 +732,7 @@ module Aws::AppMesh
     #             action: { # required
     #               weighted_targets: [ # required
     #                 {
+    #                   port: 1,
     #                   virtual_node: "ResourceName", # required
     #                   weight: 1, # required
     #                 },
@@ -747,6 +756,7 @@ module Aws::AppMesh
     #                 },
     #               ],
     #               method_name: "MethodName",
+    #               port: 1,
     #               service_name: "ServiceName",
     #             },
     #             retry_policy: {
@@ -774,6 +784,7 @@ module Aws::AppMesh
     #             action: { # required
     #               weighted_targets: [ # required
     #                 {
+    #                   port: 1,
     #                   virtual_node: "ResourceName", # required
     #                   weight: 1, # required
     #                 },
@@ -801,6 +812,7 @@ module Aws::AppMesh
     #                 exact: "HttpPathExact",
     #                 regex: "HttpPathRegex",
     #               },
+    #               port: 1,
     #               prefix: "String",
     #               query_parameters: [
     #                 {
@@ -836,6 +848,7 @@ module Aws::AppMesh
     #             action: { # required
     #               weighted_targets: [ # required
     #                 {
+    #                   port: 1,
     #                   virtual_node: "ResourceName", # required
     #                   weight: 1, # required
     #                 },
@@ -863,6 +876,7 @@ module Aws::AppMesh
     #                 exact: "HttpPathExact",
     #                 regex: "HttpPathRegex",
     #               },
+    #               port: 1,
     #               prefix: "String",
     #               query_parameters: [
     #                 {
@@ -899,10 +913,14 @@ module Aws::AppMesh
     #             action: { # required
     #               weighted_targets: [ # required
     #                 {
+    #                   port: 1,
     #                   virtual_node: "ResourceName", # required
     #                   weight: 1, # required
     #                 },
     #               ],
+    #             },
+    #             match: {
+    #               port: 1,
     #             },
     #             timeout: {
     #               idle: {
@@ -1103,6 +1121,15 @@ module Aws::AppMesh
     #           logging: {
     #             access_log: {
     #               file: {
+    #                 format: {
+    #                   json: [
+    #                     {
+    #                       key: "JsonKey", # required
+    #                       value: "JsonValue", # required
+    #                     },
+    #                   ],
+    #                   text: "TextFormat",
+    #                 },
     #                 path: "FilePath", # required
     #               },
     #             },
@@ -1386,6 +1413,15 @@ module Aws::AppMesh
     #           logging: {
     #             access_log: {
     #               file: {
+    #                 format: {
+    #                   json: [
+    #                     {
+    #                       key: "JsonKey", # required
+    #                       value: "JsonValue", # required
+    #                     },
+    #                   ],
+    #                   text: "TextFormat",
+    #                 },
     #                 path: "FilePath", # required
     #               },
     #             },
@@ -2485,7 +2521,9 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] ip_preference
-    #   The IP version to use to control traffic within the mesh.
+    #   The preferred IP version that this virtual node uses. Setting the IP
+    #   preference on the virtual node only overrides the IP preference set
+    #   for the mesh on this specific node.
     #   @return [String]
     #
     # @!attribute [rw] response_type
@@ -2561,8 +2599,22 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
+    #         format: {
+    #           json: [
+    #             {
+    #               key: "JsonKey", # required
+    #               value: "JsonValue", # required
+    #             },
+    #           ],
+    #           text: "TextFormat",
+    #         },
     #         path: "FilePath", # required
     #       }
+    #
+    # @!attribute [rw] format
+    #   The specified format for the logs. The format is either
+    #   `json_format` or `text_format`.
+    #   @return [Types::LoggingFormat]
     #
     # @!attribute [rw] path
     #   The file path to write access logs to. You can use `/dev/stdout` to
@@ -2578,6 +2630,7 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/FileAccessLog AWS API Documentation
     #
     class FileAccessLog < Struct.new(
+      :format,
       :path)
       SENSITIVE = []
       include Aws::Structure
@@ -2771,6 +2824,7 @@ module Aws::AppMesh
     #               },
     #             },
     #             target: { # required
+    #               port: 1,
     #               virtual_service: { # required
     #                 virtual_service_name: "ResourceName", # required
     #               },
@@ -2797,6 +2851,7 @@ module Aws::AppMesh
     #                 name: "HeaderName", # required
     #               },
     #             ],
+    #             port: 1,
     #             service_name: "ServiceName",
     #           },
     #         },
@@ -2815,6 +2870,7 @@ module Aws::AppMesh
     #               },
     #             },
     #             target: { # required
+    #               port: 1,
     #               virtual_service: { # required
     #                 virtual_service_name: "ResourceName", # required
     #               },
@@ -2846,6 +2902,7 @@ module Aws::AppMesh
     #               exact: "HttpPathExact",
     #               regex: "HttpPathRegex",
     #             },
+    #             port: 1,
     #             prefix: "String",
     #             query_parameters: [
     #               {
@@ -2872,6 +2929,7 @@ module Aws::AppMesh
     #               },
     #             },
     #             target: { # required
+    #               port: 1,
     #               virtual_service: { # required
     #                 virtual_service_name: "ResourceName", # required
     #               },
@@ -2903,6 +2961,7 @@ module Aws::AppMesh
     #               exact: "HttpPathExact",
     #               regex: "HttpPathRegex",
     #             },
+    #             port: 1,
     #             prefix: "String",
     #             query_parameters: [
     #               {
@@ -2966,10 +3025,15 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
+    #         port: 1,
     #         virtual_service: { # required
     #           virtual_service_name: "ResourceName", # required
     #         },
     #       }
+    #
+    # @!attribute [rw] port
+    #   The port number of the gateway route target.
+    #   @return [Integer]
     #
     # @!attribute [rw] virtual_service
     #   An object that represents a virtual service gateway route target.
@@ -2978,6 +3042,7 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GatewayRouteTarget AWS API Documentation
     #
     class GatewayRouteTarget < Struct.new(
+      :port,
       :virtual_service)
       SENSITIVE = []
       include Aws::Structure
@@ -3018,6 +3083,7 @@ module Aws::AppMesh
     #             },
     #           },
     #           target: { # required
+    #             port: 1,
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
     #             },
@@ -3044,6 +3110,7 @@ module Aws::AppMesh
     #               name: "HeaderName", # required
     #             },
     #           ],
+    #           port: 1,
     #           service_name: "ServiceName",
     #         },
     #       }
@@ -3079,6 +3146,7 @@ module Aws::AppMesh
     #           },
     #         },
     #         target: { # required
+    #           port: 1,
     #           virtual_service: { # required
     #             virtual_service_name: "ResourceName", # required
     #           },
@@ -3130,6 +3198,7 @@ module Aws::AppMesh
     #             name: "HeaderName", # required
     #           },
     #         ],
+    #         port: 1,
     #         service_name: "ServiceName",
     #       }
     #
@@ -3141,6 +3210,10 @@ module Aws::AppMesh
     #   The gateway route metadata to be matched on.
     #   @return [Array<Types::GrpcGatewayRouteMetadata>]
     #
+    # @!attribute [rw] port
+    #   The port number to match from the request.
+    #   @return [Integer]
+    #
     # @!attribute [rw] service_name
     #   The fully qualified domain name for the service to match from the
     #   request.
@@ -3151,6 +3224,7 @@ module Aws::AppMesh
     class GrpcGatewayRouteMatch < Struct.new(
       :hostname,
       :metadata,
+      :port,
       :service_name)
       SENSITIVE = []
       include Aws::Structure
@@ -3350,6 +3424,7 @@ module Aws::AppMesh
     #         action: { # required
     #           weighted_targets: [ # required
     #             {
+    #               port: 1,
     #               virtual_node: "ResourceName", # required
     #               weight: 1, # required
     #             },
@@ -3373,6 +3448,7 @@ module Aws::AppMesh
     #             },
     #           ],
     #           method_name: "MethodName",
+    #           port: 1,
     #           service_name: "ServiceName",
     #         },
     #         retry_policy: {
@@ -3434,6 +3510,7 @@ module Aws::AppMesh
     #       {
     #         weighted_targets: [ # required
     #           {
+    #             port: 1,
     #             virtual_node: "ResourceName", # required
     #             weight: 1, # required
     #           },
@@ -3477,6 +3554,7 @@ module Aws::AppMesh
     #           },
     #         ],
     #         method_name: "MethodName",
+    #         port: 1,
     #         service_name: "ServiceName",
     #       }
     #
@@ -3489,6 +3567,10 @@ module Aws::AppMesh
     #   you must also specify a `serviceName`.
     #   @return [String]
     #
+    # @!attribute [rw] port
+    #   The port number to match on.
+    #   @return [Integer]
+    #
     # @!attribute [rw] service_name
     #   The fully qualified domain name for the service to match from the
     #   request.
@@ -3499,6 +3581,7 @@ module Aws::AppMesh
     class GrpcRouteMatch < Struct.new(
       :metadata,
       :method_name,
+      :port,
       :service_name)
       SENSITIVE = []
       include Aws::Structure
@@ -3776,6 +3859,7 @@ module Aws::AppMesh
     #             },
     #           },
     #           target: { # required
+    #             port: 1,
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
     #             },
@@ -3807,6 +3891,7 @@ module Aws::AppMesh
     #             exact: "HttpPathExact",
     #             regex: "HttpPathRegex",
     #           },
+    #           port: 1,
     #           prefix: "String",
     #           query_parameters: [
     #             {
@@ -3857,6 +3942,7 @@ module Aws::AppMesh
     #           },
     #         },
     #         target: { # required
+    #           port: 1,
     #           virtual_service: { # required
     #             virtual_service_name: "ResourceName", # required
     #           },
@@ -3958,6 +4044,7 @@ module Aws::AppMesh
     #           exact: "HttpPathExact",
     #           regex: "HttpPathRegex",
     #         },
+    #         port: 1,
     #         prefix: "String",
     #         query_parameters: [
     #           {
@@ -3985,6 +4072,10 @@ module Aws::AppMesh
     #   The path to match on.
     #   @return [Types::HttpPathMatch]
     #
+    # @!attribute [rw] port
+    #   The port number to match on.
+    #   @return [Integer]
+    #
     # @!attribute [rw] prefix
     #   Specifies the path to match requests with. This parameter must
     #   always start with `/`, which by itself matches all requests to the
@@ -4005,6 +4096,7 @@ module Aws::AppMesh
       :hostname,
       :method,
       :path,
+      :port,
       :prefix,
       :query_parameters)
       SENSITIVE = []
@@ -4228,6 +4320,7 @@ module Aws::AppMesh
     #         action: { # required
     #           weighted_targets: [ # required
     #             {
+    #               port: 1,
     #               virtual_node: "ResourceName", # required
     #               weight: 1, # required
     #             },
@@ -4255,6 +4348,7 @@ module Aws::AppMesh
     #             exact: "HttpPathExact",
     #             regex: "HttpPathRegex",
     #           },
+    #           port: 1,
     #           prefix: "String",
     #           query_parameters: [
     #             {
@@ -4324,6 +4418,7 @@ module Aws::AppMesh
     #       {
     #         weighted_targets: [ # required
     #           {
+    #             port: 1,
     #             virtual_node: "ResourceName", # required
     #             weight: 1, # required
     #           },
@@ -4415,6 +4510,7 @@ module Aws::AppMesh
     #           exact: "HttpPathExact",
     #           regex: "HttpPathRegex",
     #         },
+    #         port: 1,
     #         prefix: "String",
     #         query_parameters: [
     #           {
@@ -4438,6 +4534,10 @@ module Aws::AppMesh
     # @!attribute [rw] path
     #   The client request path to match on.
     #   @return [Types::HttpPathMatch]
+    #
+    # @!attribute [rw] port
+    #   The port number to match on.
+    #   @return [Integer]
     #
     # @!attribute [rw] prefix
     #   Specifies the path to match requests with. This parameter must
@@ -4463,6 +4563,7 @@ module Aws::AppMesh
       :headers,
       :method,
       :path,
+      :port,
       :prefix,
       :query_parameters,
       :scheme)
@@ -4521,6 +4622,33 @@ module Aws::AppMesh
     #
     class InternalServerErrorException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the key value pairs for the JSON.
+    #
+    # @note When making an API call, you may pass JsonFormatRef
+    #   data as a hash:
+    #
+    #       {
+    #         key: "JsonKey", # required
+    #         value: "JsonValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The specified key for the JSON.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The specified value for the JSON.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/JsonFormatRef AWS API Documentation
+    #
+    class JsonFormatRef < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5658,6 +5786,15 @@ module Aws::AppMesh
     #       {
     #         access_log: {
     #           file: {
+    #             format: {
+    #               json: [
+    #                 {
+    #                   key: "JsonKey", # required
+    #                   value: "JsonValue", # required
+    #                 },
+    #               ],
+    #               text: "TextFormat",
+    #             },
     #             path: "FilePath", # required
     #           },
     #         },
@@ -5673,6 +5810,33 @@ module Aws::AppMesh
       :access_log)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # An object that represents the format for the logs.
+    #
+    # @note LoggingFormat is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note LoggingFormat is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of LoggingFormat corresponding to the set member.
+    #
+    # @!attribute [rw] json
+    #   @return [Array<Types::JsonFormatRef>]
+    #
+    # @!attribute [rw] text
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/LoggingFormat AWS API Documentation
+    #
+    class LoggingFormat < Struct.new(
+      :json,
+      :text,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Json < LoggingFormat; end
+      class Text < LoggingFormat; end
+      class Unknown < LoggingFormat; end
     end
 
     # An object that represents the range of values to match on. The first
@@ -6170,6 +6334,7 @@ module Aws::AppMesh
     #           action: { # required
     #             weighted_targets: [ # required
     #               {
+    #                 port: 1,
     #                 virtual_node: "ResourceName", # required
     #                 weight: 1, # required
     #               },
@@ -6193,6 +6358,7 @@ module Aws::AppMesh
     #               },
     #             ],
     #             method_name: "MethodName",
+    #             port: 1,
     #             service_name: "ServiceName",
     #           },
     #           retry_policy: {
@@ -6220,6 +6386,7 @@ module Aws::AppMesh
     #           action: { # required
     #             weighted_targets: [ # required
     #               {
+    #                 port: 1,
     #                 virtual_node: "ResourceName", # required
     #                 weight: 1, # required
     #               },
@@ -6247,6 +6414,7 @@ module Aws::AppMesh
     #               exact: "HttpPathExact",
     #               regex: "HttpPathRegex",
     #             },
+    #             port: 1,
     #             prefix: "String",
     #             query_parameters: [
     #               {
@@ -6282,6 +6450,7 @@ module Aws::AppMesh
     #           action: { # required
     #             weighted_targets: [ # required
     #               {
+    #                 port: 1,
     #                 virtual_node: "ResourceName", # required
     #                 weight: 1, # required
     #               },
@@ -6309,6 +6478,7 @@ module Aws::AppMesh
     #               exact: "HttpPathExact",
     #               regex: "HttpPathRegex",
     #             },
+    #             port: 1,
     #             prefix: "String",
     #             query_parameters: [
     #               {
@@ -6345,10 +6515,14 @@ module Aws::AppMesh
     #           action: { # required
     #             weighted_targets: [ # required
     #               {
+    #                 port: 1,
     #                 virtual_node: "ResourceName", # required
     #                 weight: 1, # required
     #               },
     #             ],
+    #           },
+    #           match: {
+    #             port: 1,
     #           },
     #           timeout: {
     #             idle: {
@@ -6584,10 +6758,14 @@ module Aws::AppMesh
     #         action: { # required
     #           weighted_targets: [ # required
     #             {
+    #               port: 1,
     #               virtual_node: "ResourceName", # required
     #               weight: 1, # required
     #             },
     #           ],
+    #         },
+    #         match: {
+    #           port: 1,
     #         },
     #         timeout: {
     #           idle: {
@@ -6601,6 +6779,11 @@ module Aws::AppMesh
     #   The action to take if a match is determined.
     #   @return [Types::TcpRouteAction]
     #
+    # @!attribute [rw] match
+    #   An object that represents the criteria for determining a request
+    #   match.
+    #   @return [Types::TcpRouteMatch]
+    #
     # @!attribute [rw] timeout
     #   An object that represents types of timeouts.
     #   @return [Types::TcpTimeout]
@@ -6609,6 +6792,7 @@ module Aws::AppMesh
     #
     class TcpRoute < Struct.new(
       :action,
+      :match,
       :timeout)
       SENSITIVE = []
       include Aws::Structure
@@ -6622,6 +6806,7 @@ module Aws::AppMesh
     #       {
     #         weighted_targets: [ # required
     #           {
+    #             port: 1,
     #             virtual_node: "ResourceName", # required
     #             weight: 1, # required
     #           },
@@ -6637,6 +6822,27 @@ module Aws::AppMesh
     #
     class TcpRouteAction < Struct.new(
       :weighted_targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the TCP route to match.
+    #
+    # @note When making an API call, you may pass TcpRouteMatch
+    #   data as a hash:
+    #
+    #       {
+    #         port: 1,
+    #       }
+    #
+    # @!attribute [rw] port
+    #   The port number to match on.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TcpRouteMatch AWS API Documentation
+    #
+    class TcpRouteMatch < Struct.new(
+      :port)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6694,7 +6900,14 @@ module Aws::AppMesh
     #
     # @!attribute [rw] subject_alternative_names
     #   A reference to an object that represents the SANs for a Transport
-    #   Layer Security (TLS) validation context.
+    #   Layer Security (TLS) validation context. If you don't specify SANs
+    #   on the *terminating* mesh endpoint, the Envoy proxy for that node
+    #   doesn't verify the SAN on a peer client certificate. If you don't
+    #   specify SANs on the *originating* mesh endpoint, the SAN on the
+    #   certificate provided by the terminating endpoint must match the mesh
+    #   endpoint service discovery configuration. Since SPIRE vended
+    #   certificates have a SPIFFE ID as a name, you must set the SAN since
+    #   the name doesn't match the service discovery name.
     #   @return [Types::SubjectAlternativeNames]
     #
     # @!attribute [rw] trust
@@ -6911,6 +7124,7 @@ module Aws::AppMesh
     #                 },
     #               },
     #               target: { # required
+    #                 port: 1,
     #                 virtual_service: { # required
     #                   virtual_service_name: "ResourceName", # required
     #                 },
@@ -6937,6 +7151,7 @@ module Aws::AppMesh
     #                   name: "HeaderName", # required
     #                 },
     #               ],
+    #               port: 1,
     #               service_name: "ServiceName",
     #             },
     #           },
@@ -6955,6 +7170,7 @@ module Aws::AppMesh
     #                 },
     #               },
     #               target: { # required
+    #                 port: 1,
     #                 virtual_service: { # required
     #                   virtual_service_name: "ResourceName", # required
     #                 },
@@ -6986,6 +7202,7 @@ module Aws::AppMesh
     #                 exact: "HttpPathExact",
     #                 regex: "HttpPathRegex",
     #               },
+    #               port: 1,
     #               prefix: "String",
     #               query_parameters: [
     #                 {
@@ -7012,6 +7229,7 @@ module Aws::AppMesh
     #                 },
     #               },
     #               target: { # required
+    #                 port: 1,
     #                 virtual_service: { # required
     #                   virtual_service_name: "ResourceName", # required
     #                 },
@@ -7043,6 +7261,7 @@ module Aws::AppMesh
     #                 exact: "HttpPathExact",
     #                 regex: "HttpPathRegex",
     #               },
+    #               port: 1,
     #               prefix: "String",
     #               query_parameters: [
     #                 {
@@ -7203,6 +7422,7 @@ module Aws::AppMesh
     #             action: { # required
     #               weighted_targets: [ # required
     #                 {
+    #                   port: 1,
     #                   virtual_node: "ResourceName", # required
     #                   weight: 1, # required
     #                 },
@@ -7226,6 +7446,7 @@ module Aws::AppMesh
     #                 },
     #               ],
     #               method_name: "MethodName",
+    #               port: 1,
     #               service_name: "ServiceName",
     #             },
     #             retry_policy: {
@@ -7253,6 +7474,7 @@ module Aws::AppMesh
     #             action: { # required
     #               weighted_targets: [ # required
     #                 {
+    #                   port: 1,
     #                   virtual_node: "ResourceName", # required
     #                   weight: 1, # required
     #                 },
@@ -7280,6 +7502,7 @@ module Aws::AppMesh
     #                 exact: "HttpPathExact",
     #                 regex: "HttpPathRegex",
     #               },
+    #               port: 1,
     #               prefix: "String",
     #               query_parameters: [
     #                 {
@@ -7315,6 +7538,7 @@ module Aws::AppMesh
     #             action: { # required
     #               weighted_targets: [ # required
     #                 {
+    #                   port: 1,
     #                   virtual_node: "ResourceName", # required
     #                   weight: 1, # required
     #                 },
@@ -7342,6 +7566,7 @@ module Aws::AppMesh
     #                 exact: "HttpPathExact",
     #                 regex: "HttpPathRegex",
     #               },
+    #               port: 1,
     #               prefix: "String",
     #               query_parameters: [
     #                 {
@@ -7378,10 +7603,14 @@ module Aws::AppMesh
     #             action: { # required
     #               weighted_targets: [ # required
     #                 {
+    #                   port: 1,
     #                   virtual_node: "ResourceName", # required
     #                   weight: 1, # required
     #                 },
     #               ],
+    #             },
+    #             match: {
+    #               port: 1,
     #             },
     #             timeout: {
     #               idle: {
@@ -7565,6 +7794,15 @@ module Aws::AppMesh
     #           logging: {
     #             access_log: {
     #               file: {
+    #                 format: {
+    #                   json: [
+    #                     {
+    #                       key: "JsonKey", # required
+    #                       value: "JsonValue", # required
+    #                     },
+    #                   ],
+    #                   text: "TextFormat",
+    #                 },
     #                 path: "FilePath", # required
     #               },
     #             },
@@ -7832,6 +8070,15 @@ module Aws::AppMesh
     #           logging: {
     #             access_log: {
     #               file: {
+    #                 format: {
+    #                   json: [
+    #                     {
+    #                       key: "JsonKey", # required
+    #                       value: "JsonValue", # required
+    #                     },
+    #                   ],
+    #                   text: "TextFormat",
+    #                 },
     #                 path: "FilePath", # required
     #               },
     #             },
@@ -8405,8 +8652,22 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
+    #         format: {
+    #           json: [
+    #             {
+    #               key: "JsonKey", # required
+    #               value: "JsonValue", # required
+    #             },
+    #           ],
+    #           text: "TextFormat",
+    #         },
     #         path: "FilePath", # required
     #       }
+    #
+    # @!attribute [rw] format
+    #   The specified format for the virtual gateway access logs. It can be
+    #   either `json_format` or `text_format`.
+    #   @return [Types::LoggingFormat]
     #
     # @!attribute [rw] path
     #   The file path to write access logs to. You can use `/dev/stdout` to
@@ -8420,6 +8681,7 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayFileAccessLog AWS API Documentation
     #
     class VirtualGatewayFileAccessLog < Struct.new(
+      :format,
       :path)
       SENSITIVE = []
       include Aws::Structure
@@ -8942,6 +9204,15 @@ module Aws::AppMesh
     #       {
     #         access_log: {
     #           file: {
+    #             format: {
+    #               json: [
+    #                 {
+    #                   key: "JsonKey", # required
+    #                   value: "JsonValue", # required
+    #                 },
+    #               ],
+    #               text: "TextFormat",
+    #             },
     #             path: "FilePath", # required
     #           },
     #         },
@@ -9157,6 +9428,15 @@ module Aws::AppMesh
     #         logging: {
     #           access_log: {
     #             file: {
+    #               format: {
+    #                 json: [
+    #                   {
+    #                     key: "JsonKey", # required
+    #                     value: "JsonValue", # required
+    #                   },
+    #                 ],
+    #                 text: "TextFormat",
+    #               },
     #               path: "FilePath", # required
     #             },
     #           },
@@ -9799,6 +10079,15 @@ module Aws::AppMesh
     #         logging: {
     #           access_log: {
     #             file: {
+    #               format: {
+    #                 json: [
+    #                   {
+    #                     key: "JsonKey", # required
+    #                     value: "JsonValue", # required
+    #                   },
+    #                 ],
+    #                 text: "TextFormat",
+    #               },
     #               path: "FilePath", # required
     #             },
     #           },
@@ -10333,9 +10622,14 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
+    #         port: 1,
     #         virtual_node: "ResourceName", # required
     #         weight: 1, # required
     #       }
+    #
+    # @!attribute [rw] port
+    #   The targeted port of the weighted object.
+    #   @return [Integer]
     #
     # @!attribute [rw] virtual_node
     #   The virtual node to associate with the weighted target.
@@ -10348,6 +10642,7 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/WeightedTarget AWS API Documentation
     #
     class WeightedTarget < Struct.new(
+      :port,
       :virtual_node,
       :weight)
       SENSITIVE = []

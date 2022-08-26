@@ -22,7 +22,9 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # Object specifying a stream’s audio configuration.
+    # Object specifying a stream’s audio configuration, as set up by the
+    # broadcaster (usually in an encoder). This is part of the
+    # IngestConfiguration object and used for monitoring stream health.
     #
     # @!attribute [rw] channels
     #   Number of audio channels.
@@ -184,6 +186,14 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   See [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits
+    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
@@ -192,15 +202,19 @@ module Aws::IVS
     #   probably will disconnect immediately.* Default: `STANDARD`. Valid
     #   values:
     #
-    #   * `STANDARD`\: Multiple qualities are generated from the original
-    #     input, to automatically give viewers the best experience for their
-    #     devices and network conditions. Resolution can be up to 1080p and
-    #     bitrate can be up to 8.5 Mbps. Audio is transcoded only for
-    #     renditions 360p and below; above that, audio is passed through.
+    #   * `STANDARD`\: Video is transcoded: multiple qualities are generated
+    #     from the original input, to automatically give viewers the best
+    #     experience for their devices and network conditions. Transcoding
+    #     allows higher playback quality across a range of download speeds.
+    #     Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps.
+    #     Audio is transcoded only for renditions 360p and below; above
+    #     that, audio is passed through. This is the default.
     #
-    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
-    #     viewer’s video-quality choice is limited to the original input.
-    #     Resolution can be up to 480p and bitrate can be up to 1.5 Mbps.
+    #   * `BASIC`\: Video is transmuxed: Amazon IVS delivers the original
+    #     input to viewers. The viewer’s video-quality choice is limited to
+    #     the original input. Resolution can be up to 1080p and bitrate can
+    #     be up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions
+    #     between 480p and 1080p.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/Channel AWS API Documentation
@@ -261,6 +275,14 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   See [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits
+    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ChannelSummary AWS API Documentation
@@ -325,6 +347,14 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   See [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits
+    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
@@ -333,15 +363,19 @@ module Aws::IVS
     #   probably will disconnect immediately.* Default: `STANDARD`. Valid
     #   values:
     #
-    #   * `STANDARD`\: Multiple qualities are generated from the original
-    #     input, to automatically give viewers the best experience for their
-    #     devices and network conditions. Resolution can be up to 1080p and
-    #     bitrate can be up to 8.5 Mbps. Audio is transcoded only for
-    #     renditions 360p and below; above that, audio is passed through.
+    #   * `STANDARD`\: Video is transcoded: multiple qualities are generated
+    #     from the original input, to automatically give viewers the best
+    #     experience for their devices and network conditions. Transcoding
+    #     allows higher playback quality across a range of download speeds.
+    #     Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps.
+    #     Audio is transcoded only for renditions 360p and below; above
+    #     that, audio is passed through. This is the default.
     #
-    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
-    #     viewer’s video-quality choice is limited to the original input.
-    #     Resolution can be up to 480p and bitrate can be up to 1.5 Mbps.
+    #   * `BASIC`\: Video is transmuxed: Amazon IVS delivers the original
+    #     input to viewers. The viewer’s video-quality choice is limited to
+    #     the original input. Resolution can be up to 1080p and bitrate can
+    #     be up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions
+    #     between 480p and 1080p.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateChannelRequest AWS API Documentation
@@ -402,6 +436,14 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   See [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits
+    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] thumbnail_configuration
@@ -451,6 +493,14 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   See [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits
+    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateStreamKeyRequest AWS API Documentation
@@ -800,7 +850,14 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Any tags provided with the request are added to the playback key
-    #   pair tags.
+    #   pair tags. See [Tagging Amazon Web Services Resources][1] for more
+    #   information, including restrictions that apply to tags and "Tag
+    #   naming limits and requirements"; Amazon IVS has no service-specific
+    #   constraints beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ImportPlaybackKeyPairRequest AWS API Documentation
@@ -876,7 +933,7 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of channels to return. Default: 50.
+    #   Maximum number of channels to return. Default: 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -922,12 +979,13 @@ module Aws::IVS
     #       }
     #
     # @!attribute [rw] max_results
-    #   The first key pair to retrieve. This is used for pagination; see the
-    #   `nextToken` response field. Default: 50.
+    #   Maximum number of key pairs to return. Default: your service quota
+    #   or 100, whichever is smaller.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Maximum number of key pairs to return.
+    #   The first key pair to retrieve. This is used for pagination; see the
+    #   `nextToken` response field.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListPlaybackKeyPairsRequest AWS API Documentation
@@ -966,7 +1024,8 @@ module Aws::IVS
     #       }
     #
     # @!attribute [rw] max_results
-    #   Maximum number of recording configurations to return. Default: 50.
+    #   Maximum number of recording configurations to return. Default: your
+    #   service quota or 100, whichever is smaller.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1015,7 +1074,7 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of streamKeys to return. Default: 50.
+    #   Maximum number of streamKeys to return. Default: 1.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1065,7 +1124,7 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of streams to return. Default: 50.
+    #   Maximum number of streams to return. Default: 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1117,7 +1176,7 @@ module Aws::IVS
     #   @return [Types::StreamFilters]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of streams to return. Default: 50.
+    #   Maximum number of streams to return. Default: 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1161,7 +1220,8 @@ module Aws::IVS
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource to be retrieved.
+    #   The ARN of the resource to be retrieved. The ARN must be
+    #   URL-encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListTagsForResourceRequest AWS API Documentation
@@ -1211,6 +1271,14 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   See [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits
+    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/PlaybackKeyPair AWS API Documentation
@@ -1236,6 +1304,14 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   See [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits
+    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/PlaybackKeyPairSummary AWS API Documentation
@@ -1297,6 +1373,14 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   See [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits
+    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] thumbnail_configuration
@@ -1341,6 +1425,14 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   See [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits
+    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/RecordingConfigurationSummary AWS API Documentation
@@ -1440,8 +1532,8 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   Time of the stream’s start. This is an ISO 8601 timestamp returned
-    #   as a string.
+    #   Time of the stream’s start. This is an ISO 8601 timestamp; *note
+    #   that this is returned as a string*.
     #   @return [Time]
     #
     # @!attribute [rw] state
@@ -1483,7 +1575,8 @@ module Aws::IVS
     # [1]: https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html
     #
     # @!attribute [rw] event_time
-    #   UTC ISO-8601 formatted timestamp of when the event occurred.
+    #   Time when the event occurred. This is an ISO 8601 timestamp; *note
+    #   that this is returned as a string*.
     #   @return [Time]
     #
     # @!attribute [rw] name
@@ -1537,6 +1630,14 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   See [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits
+    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] value
@@ -1566,6 +1667,14 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   See [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits
+    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StreamKeySummary AWS API Documentation
@@ -1587,8 +1696,9 @@ module Aws::IVS
     #   @return [Types::Channel]
     #
     # @!attribute [rw] end_time
-    #   UTC ISO-8601 formatted timestamp of when the channel went offline.
-    #   For live streams, this is `NULL`.
+    #   Time when the channel went offline. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*. For live streams, this is
+    #   `NULL`.
     #   @return [Time]
     #
     # @!attribute [rw] ingest_configuration
@@ -1600,7 +1710,8 @@ module Aws::IVS
     #   @return [Types::RecordingConfiguration]
     #
     # @!attribute [rw] start_time
-    #   UTC ISO-8601 formatted timestamp of when the channel went live.
+    #   Time when the channel went live. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
     #   @return [Time]
     #
     # @!attribute [rw] stream_id
@@ -1636,8 +1747,9 @@ module Aws::IVS
     # Summary information about a stream session.
     #
     # @!attribute [rw] end_time
-    #   UTC ISO-8601 formatted timestamp of when the channel went offline.
-    #   For live streams, this is `NULL`.
+    #   Time when the channel went offline. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*. For live streams, this is
+    #   `NULL`.
     #   @return [Time]
     #
     # @!attribute [rw] has_error_event
@@ -1645,7 +1757,8 @@ module Aws::IVS
     #   @return [Boolean]
     #
     # @!attribute [rw] start_time
-    #   UTC ISO-8601 formatted timestamp of when the channel went live.
+    #   Time when the channel went live. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
     #   @return [Time]
     #
     # @!attribute [rw] stream_id
@@ -1675,8 +1788,8 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   Time of the stream’s start. This is an ISO 8601 timestamp returned
-    #   as a string.
+    #   Time of the stream’s start. This is an ISO 8601 timestamp; *note
+    #   that this is returned as a string*.
     #   @return [Time]
     #
     # @!attribute [rw] state
@@ -1732,11 +1845,20 @@ module Aws::IVS
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   ARN of the resource for which tags are to be added or updated.
+    #   ARN of the resource for which tags are to be added or updated. The
+    #   ARN must be URL-encoded.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Array of tags to be added or updated.
+    #   Array of tags to be added or updated. See [Tagging Amazon Web
+    #   Services Resources][1] for more information, including restrictions
+    #   that apply to tags and "Tag naming limits and requirements";
+    #   Amazon IVS has no service-specific constraints beyond what is
+    #   documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/TagResourceRequest AWS API Documentation
@@ -1815,11 +1937,19 @@ module Aws::IVS
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   ARN of the resource for which tags are to be removed.
+    #   ARN of the resource for which tags are to be removed. The ARN must
+    #   be URL-encoded.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   Array of tags to be removed.
+    #   Array of tags to be removed. See [Tagging Amazon Web Services
+    #   Resources][1] for more information, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UntagResourceRequest AWS API Documentation
@@ -1877,15 +2007,19 @@ module Aws::IVS
     #   *If you exceed the allowable resolution or bitrate, the stream
     #   probably will disconnect immediately*. Valid values:
     #
-    #   * `STANDARD`\: Multiple qualities are generated from the original
-    #     input, to automatically give viewers the best experience for their
-    #     devices and network conditions. Resolution can be up to 1080p and
-    #     bitrate can be up to 8.5 Mbps. Audio is transcoded only for
-    #     renditions 360p and below; above that, audio is passed through.
+    #   * `STANDARD`\: Video is transcoded: multiple qualities are generated
+    #     from the original input, to automatically give viewers the best
+    #     experience for their devices and network conditions. Transcoding
+    #     allows higher playback quality across a range of download speeds.
+    #     Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps.
+    #     Audio is transcoded only for renditions 360p and below; above
+    #     that, audio is passed through. This is the default.
     #
-    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
-    #     viewer’s video-quality choice is limited to the original input.
-    #     Resolution can be up to 480p and bitrate can be up to 1.5 Mbps.
+    #   * `BASIC`\: Video is transmuxed: Amazon IVS delivers the original
+    #     input to viewers. The viewer’s video-quality choice is limited to
+    #     the original input. Resolution can be up to 1080p and bitrate can
+    #     be up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions
+    #     between 480p and 1080p.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateChannelRequest AWS API Documentation
@@ -1926,7 +2060,9 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # Object specifying a stream’s video configuration.
+    # Object specifying a stream’s video configuration, as set up by the
+    # broadcaster (usually in an encoder). This is part of the
+    # IngestConfiguration object and used for monitoring stream health.
     #
     # @!attribute [rw] avc_level
     #   Indicates the degree of required decoder performance for a profile.

@@ -1657,7 +1657,10 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Creates an Amazon QuickSight group.
+    # Use the `CreateGroup` operation to create a group in Amazon
+    # QuickSight. You can create up to 10,000 groups in a namespace. If you
+    # want to create more than 10,000 groups in a namespace, contact AWS
+    # Support.
     #
     # The permissions resource is
     # `arn:aws:quicksight:<your-region>:<relevant-aws-account-id>:group/default/<group-name>
@@ -4649,9 +4652,9 @@ module Aws::QuickSight
     end
 
     # Generates an embed URL that you can use to embed an Amazon QuickSight
-    # dashboard in your website, without having to register any reader
-    # users. Before you use this action, make sure that you have configured
-    # the dashboards and permissions.
+    # dashboard or visual in your website, without having to register any
+    # reader users. Before you use this action, make sure that you have
+    # configured the dashboards and permissions.
     #
     # The following rules apply to the generated URL:
     #
@@ -4722,14 +4725,13 @@ module Aws::QuickSight
     #   The domains that you want to add to the allow list for access to the
     #   generated URL that is then embedded. This optional parameter overrides
     #   the static domains that are configured in the Manage QuickSight menu
-    #   in the Amazon QuickSight console and instead allows only the domains
+    #   in the Amazon QuickSight console. Instead, it allows only the domains
     #   that you include in this parameter. You can list up to three domains
     #   or subdomains in each API call.
     #
-    #   To include a subdomain, use `*` to include all subdomains under a
-    #   specific domain to the allow list. For example,
-    #   `https://*.sapp.amazon.com,` includes all subdomains under
-    #   `https://sapp.amazon.com`.
+    #   To include all subdomains under a specific domain to the allow list,
+    #   use `*`. For example, `https://*.sapp.amazon.com` includes all
+    #   subdomains under `https://sapp.amazon.com`.
     #
     # @return [Types::GenerateEmbedUrlForAnonymousUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4753,6 +4755,13 @@ module Aws::QuickSight
     #     experience_configuration: { # required
     #       dashboard: {
     #         initial_dashboard_id: "RestrictiveResourceId", # required
+    #       },
+    #       dashboard_visual: {
+    #         initial_dashboard_visual_id: { # required
+    #           dashboard_id: "RestrictiveResourceId", # required
+    #           sheet_id: "RestrictiveResourceId", # required
+    #           visual_id: "RestrictiveResourceId", # required
+    #         },
     #       },
     #     },
     #     allowed_domains: ["String"],
@@ -4820,20 +4829,20 @@ module Aws::QuickSight
     #
     # @option params [required, Types::RegisteredUserEmbeddingExperienceConfiguration] :experience_configuration
     #   The experience you are embedding. For registered users, you can embed
-    #   Amazon QuickSight dashboards or the entire Amazon QuickSight console.
+    #   Amazon QuickSight dashboards, Amazon QuickSight visuals, the Amazon
+    #   QuickSight Q search bar, or the entire Amazon QuickSight console.
     #
     # @option params [Array<String>] :allowed_domains
     #   The domains that you want to add to the allow list for access to the
     #   generated URL that is then embedded. This optional parameter overrides
     #   the static domains that are configured in the Manage QuickSight menu
-    #   in the Amazon QuickSight console and instead allows only the domains
+    #   in the Amazon QuickSight console. Instead, it allows only the domains
     #   that you include in this parameter. You can list up to three domains
     #   or subdomains in each API call.
     #
-    #   To include a subdomain, use `*` to include all subdomains under a
-    #   specific domain to the allow list. For example,
-    #   `https://*.sapp.amazon.com,` includes all subdomains under
-    #   `https://sapp.amazon.com`.
+    #   To include all subdomains under a specific domain to the allow list,
+    #   use `*`. For example, `https://*.sapp.amazon.com` includes all
+    #   subdomains under `https://sapp.amazon.com`.
     #
     # @return [Types::GenerateEmbedUrlForRegisteredUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4857,6 +4866,13 @@ module Aws::QuickSight
     #       q_search_bar: {
     #         initial_topic_id: "RestrictiveResourceId",
     #       },
+    #       dashboard_visual: {
+    #         initial_dashboard_visual_id: { # required
+    #           dashboard_id: "RestrictiveResourceId", # required
+    #           sheet_id: "RestrictiveResourceId", # required
+    #           visual_id: "RestrictiveResourceId", # required
+    #         },
+    #       },
     #     },
     #     allowed_domains: ["String"],
     #   })
@@ -4876,10 +4892,10 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Generates a temporary session URL and authorization code that you can
-    # use to embed an Amazon QuickSight read-only dashboard in your website
-    # or application. Before you use this command, make sure that you have
-    # configured the dashboards and permissions.
+    # Generates a temporary session URL and authorization code(bearer token)
+    # that you can use to embed an Amazon QuickSight read-only dashboard in
+    # your website or application. Before you use this command, make sure
+    # that you have configured the dashboards and permissions.
     #
     # Currently, you can use `GetDashboardEmbedURL` only from the server,
     # not from the user's browser. The following rules apply to the
@@ -4891,9 +4907,12 @@ module Aws::QuickSight
     #
     # * They are valid for 5 minutes after you run this command.
     #
+    # * You are charged only when the URL is used or there is interaction
+    #   with Amazon QuickSight.
+    #
     # * The resulting user session is valid for 15 minutes (default) up to
     #   10 hours (maximum). You can use the optional
-    #   `SessionLifetimeInMinutes` parameter to customi session duration.
+    #   `SessionLifetimeInMinutes` parameter to customize session duration.
     #
     # For more information, see [Embedding Analytics Using
     # GetDashboardEmbedUrl][1] in the *Amazon QuickSight User Guide*.
@@ -5861,13 +5880,21 @@ module Aws::QuickSight
     end
 
     # Lists the namespaces for the specified Amazon Web Services account.
+    # This operation doesn't list deleted namespaces.
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the Amazon Web Services account that contains the Amazon
     #   QuickSight namespaces that you want to list.
     #
     # @option params [String] :next_token
-    #   A pagination token that can be used in a subsequent request.
+    #   A unique pagination token that can be used in a subsequent request.
+    #   You will receive a pagination token in the response body of a previous
+    #   `ListNameSpaces` API call if there is more data that can be returned.
+    #   To receive the data, make another `ListNamespaces` API call with the
+    #   returned token to retrieve the next page of data. Each token is valid
+    #   for 24 hours. If you try to make a `ListNamespaces` API call with an
+    #   expired token, you will receive a `HTTP 400 InvalidNextTokenException`
+    #   error.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
@@ -9077,7 +9104,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

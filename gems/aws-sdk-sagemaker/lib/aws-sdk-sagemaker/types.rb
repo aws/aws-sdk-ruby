@@ -4350,7 +4350,10 @@ module Aws::SageMaker
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kernel_gateway_image_config
-    #   The KernelGatewayImageConfig.
+    #   The KernelGatewayImageConfig. You can only specify one image kernel
+    #   in the AppImageConfig API. This kernel will be shown to users before
+    #   the image starts. Once the image runs, all kernels are visible in
+    #   JupyterLab.
     #   @return [Types::KernelGatewayImageConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppImageConfigRequest AWS API Documentation
@@ -6372,7 +6375,7 @@ module Aws::SageMaker
     #             kms_key_id: "KmsKeyId",
     #             s3_output_path: "S3Uri", # required
     #           },
-    #           resource_config: { # required
+    #           resource_config: {
     #             instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #             instance_count: 1,
     #             volume_size_in_gb: 1, # required
@@ -6398,6 +6401,20 @@ module Aws::SageMaker
     #           },
     #           retry_strategy: {
     #             maximum_retry_attempts: 1, # required
+    #           },
+    #           hyper_parameter_tuning_resource_config: {
+    #             instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #             instance_count: 1,
+    #             volume_size_in_gb: 1,
+    #             volume_kms_key_id: "KmsKeyId",
+    #             allocation_strategy: "Prioritized", # accepts Prioritized
+    #             instance_configs: [
+    #               {
+    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #                 instance_count: 1, # required
+    #                 volume_size_in_gb: 1, # required
+    #               },
+    #             ],
     #           },
     #         },
     #         training_job_definitions: [
@@ -6481,7 +6498,7 @@ module Aws::SageMaker
     #               kms_key_id: "KmsKeyId",
     #               s3_output_path: "S3Uri", # required
     #             },
-    #             resource_config: { # required
+    #             resource_config: {
     #               instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #               instance_count: 1,
     #               volume_size_in_gb: 1, # required
@@ -6507,6 +6524,20 @@ module Aws::SageMaker
     #             },
     #             retry_strategy: {
     #               maximum_retry_attempts: 1, # required
+    #             },
+    #             hyper_parameter_tuning_resource_config: {
+    #               instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #               instance_count: 1,
+    #               volume_size_in_gb: 1,
+    #               volume_kms_key_id: "KmsKeyId",
+    #               allocation_strategy: "Prioritized", # accepts Prioritized
+    #               instance_configs: [
+    #                 {
+    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #                   instance_count: 1, # required
+    #                   volume_size_in_gb: 1, # required
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -21383,7 +21414,7 @@ module Aws::SageMaker
     #           kms_key_id: "KmsKeyId",
     #           s3_output_path: "S3Uri", # required
     #         },
-    #         resource_config: { # required
+    #         resource_config: {
     #           instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
     #           instance_count: 1,
     #           volume_size_in_gb: 1, # required
@@ -21409,6 +21440,20 @@ module Aws::SageMaker
     #         },
     #         retry_strategy: {
     #           maximum_retry_attempts: 1, # required
+    #         },
+    #         hyper_parameter_tuning_resource_config: {
+    #           instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #           instance_count: 1,
+    #           volume_size_in_gb: 1,
+    #           volume_kms_key_id: "KmsKeyId",
+    #           allocation_strategy: "Prioritized", # accepts Prioritized
+    #           instance_configs: [
+    #             {
+    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #               instance_count: 1, # required
+    #               volume_size_in_gb: 1, # required
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -21489,6 +21534,11 @@ module Aws::SageMaker
     #   training data, choose `File` as the `TrainingInputMode` in the
     #   algorithm specification. For distributed training algorithms,
     #   specify an instance count greater than 1.
+    #
+    #   <note markdown="1"> If you want to use hyperparameter optimization with instance type
+    #   flexibility, use `HyperParameterTuningResourceConfig` instead.
+    #
+    #    </note>
     #   @return [Types::ResourceConfig]
     #
     # @!attribute [rw] stopping_condition
@@ -21531,6 +21581,15 @@ module Aws::SageMaker
     #   `InternalServerError`.
     #   @return [Types::RetryStrategy]
     #
+    # @!attribute [rw] hyper_parameter_tuning_resource_config
+    #   The configuration for the hyperparameter tuning resources, including
+    #   the compute instances and storage volumes, used for training jobs
+    #   launched by the tuning job. By default, storage volumes hold model
+    #   artifacts and incremental states. Choose `File` for
+    #   `TrainingInputMode` in the `AlgorithmSpecification`parameter to
+    #   additionally store training data in the storage volume (optional).
+    #   @return [Types::HyperParameterTuningResourceConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTrainingJobDefinition AWS API Documentation
     #
     class HyperParameterTrainingJobDefinition < Struct.new(
@@ -21549,7 +21608,8 @@ module Aws::SageMaker
       :enable_inter_container_traffic_encryption,
       :enable_managed_spot_training,
       :checkpoint_config,
-      :retry_strategy)
+      :retry_strategy,
+      :hyper_parameter_tuning_resource_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21646,6 +21706,60 @@ module Aws::SageMaker
       :failure_reason,
       :final_hyper_parameter_tuning_job_objective_metric,
       :objective_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for hyperparameter tuning resources for use in
+    # training jobs launched by the tuning job. These resources include
+    # compute instances and storage volumes. Specify one or more compute
+    # instance configurations and allocation strategies to select resources
+    # (optional).
+    #
+    # @note When making an API call, you may pass HyperParameterTuningInstanceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #         instance_count: 1, # required
+    #         volume_size_in_gb: 1, # required
+    #       }
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type used for processing of hyperparameter optimization
+    #   jobs. Choose from general purpose (no GPUs) instance types:
+    #   ml.m5.xlarge, ml.m5.2xlarge, and ml.m5.4xlarge or compute optimized
+    #   (no GPUs) instance types: ml.c5.xlarge and ml.c5.2xlarge. For more
+    #   information about instance types, see [instance type
+    #   descriptions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks-available-instance-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances of the type specified by `InstanceType`.
+    #   Choose an instance count larger than 1 for distributed training
+    #   algorithms. See [SageMaker distributed training jobs][1] for more
+    #   information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/data-parallel-use-api.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_size_in_gb
+    #   The volume size in GB of the data to be processed for hyperparameter
+    #   optimization (optional).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningInstanceConfig AWS API Documentation
+    #
+    class HyperParameterTuningInstanceConfig < Struct.new(
+      :instance_type,
+      :instance_count,
+      :volume_size_in_gb)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21939,6 +22053,140 @@ module Aws::SageMaker
     class HyperParameterTuningJobWarmStartConfig < Struct.new(
       :parent_hyper_parameter_tuning_jobs,
       :warm_start_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of resources, including compute instances and
+    # storage volumes for use in training jobs launched by hyperparameter
+    # tuning jobs. Specify one or more instance type and count and the
+    # allocation strategy for instance selection.
+    #
+    # <note markdown="1"> HyperParameterTuningResourceConfig supports all of the capabilities of
+    # ResourceConfig with added functionality for flexible instance
+    # management.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass HyperParameterTuningResourceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #         instance_count: 1,
+    #         volume_size_in_gb: 1,
+    #         volume_kms_key_id: "KmsKeyId",
+    #         allocation_strategy: "Prioritized", # accepts Prioritized
+    #         instance_configs: [
+    #           {
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge
+    #             instance_count: 1, # required
+    #             volume_size_in_gb: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type used to run hyperparameter optimization tuning
+    #   jobs. See [ descriptions of instance types][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/notebooks-available-instance-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of compute instances of type `InstanceType` to use. For
+    #   [distributed training][1], select a value greater than 1.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/data-parallel-use-api.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_size_in_gb
+    #   The volume size in GB for the storage volume to be used in
+    #   processing hyperparameter optimization jobs (optional). These
+    #   volumes store model artifacts, incremental states and optionally,
+    #   scratch space for training algorithms. Do not provide a value for
+    #   this parameter if a value for `InstanceConfigs` is also specified.
+    #
+    #   Some instance types have a fixed total local storage size. If you
+    #   select one of these instances for training, `VolumeSizeInGB` cannot
+    #   be greater than this total size. For a list of instance types with
+    #   local instance storage and their sizes, see [instance store
+    #   volumes][1].
+    #
+    #   <note markdown="1"> SageMaker supports only the [General Purpose SSD (gp2)][2] storage
+    #   volume type.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_kms_key_id
+    #   A key used by AWS Key Management Service to encrypt data on the
+    #   storage volume attached to the compute instances used to run the
+    #   training job. You can use either of the following formats to specify
+    #   a key.
+    #
+    #   KMS Key ID:
+    #
+    #   `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   Amazon Resource Name (ARN) of a AWS KMS key:
+    #
+    #   `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   Some instances use local storage, which use a [hardware module to
+    #   encrypt][1] storage volumes. If you choose one of these instance
+    #   types, you cannot request a `VolumeKmsKeyId`. For a list of instance
+    #   types that use local storage, see [instance store volumes][2]. For
+    #   more information about AWS Key Management Service, see [AWS KMS
+    #   encryption][3] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
+    #   [2]: https://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-kms-permissions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] allocation_strategy
+    #   The strategy that determines the order of preference for resources
+    #   specified in `InstanceConfigs` used in hyperparameter optimization.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_configs
+    #   A list containing the configuration(s) for one or more resources for
+    #   processing hyperparameter jobs. These resources include compute
+    #   instances and storage volumes to use in model training jobs launched
+    #   by hyperparameter tuning jobs. The `AllocationStrategy` controls the
+    #   order in which multiple configurations provided in `InstanceConfigs`
+    #   are used.
+    #
+    #   <note markdown="1"> If you only want to use a single InstanceConfig inside the
+    #   `HyperParameterTuningResourceConfig` API, do not provide a value for
+    #   `InstanceConfigs`. Instead, use `InstanceType`, `VolumeSizeInGB` and
+    #   `InstanceCount`. If you use `InstanceConfigs`, do not provide values
+    #   for `InstanceType`, `VolumeSizeInGB` or `InstanceCount`.
+    #
+    #    </note>
+    #   @return [Array<Types::HyperParameterTuningInstanceConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningResourceConfig AWS API Documentation
+    #
+    class HyperParameterTuningResourceConfig < Struct.new(
+      :instance_type,
+      :instance_count,
+      :volume_size_in_gb,
+      :volume_kms_key_id,
+      :allocation_strategy,
+      :instance_configs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40614,7 +40862,10 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] feature_additions
-    #   A list of the features that you're adding to the feature group.
+    #   Updates the feature group. Updating a feature group is an
+    #   asynchronous operation. When you get an HTTP 200 response, you've
+    #   made a valid request. It takes some time after you've made a valid
+    #   request for Feature Store to update the feature group.
     #   @return [Array<Types::FeatureDefinition>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateFeatureGroupRequest AWS API Documentation
@@ -41355,11 +41606,15 @@ module Aws::SageMaker
     #   An array of key-value pairs. You can use tags to categorize your
     #   Amazon Web Services resources in different ways, for example, by
     #   purpose, owner, or environment. For more information, see [Tagging
-    #   Amazon Web Services Resources][1].
+    #   Amazon Web Services Resources][1]. In addition, the project must
+    #   have tag update constraints set in order to include this parameter
+    #   in the request. For more information, see [Amazon Web Services
+    #   Service Catalog Tag Update Constraints][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [2]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints-resourceupdate.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateProjectInput AWS API Documentation

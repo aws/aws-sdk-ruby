@@ -61,6 +61,8 @@ module Aws::Pinpoint
     ChannelResponse = Shapes::StructureShape.new(name: 'ChannelResponse')
     ChannelType = Shapes::StringShape.new(name: 'ChannelType')
     ChannelsResponse = Shapes::StructureShape.new(name: 'ChannelsResponse')
+    ClosedDays = Shapes::StructureShape.new(name: 'ClosedDays')
+    ClosedDaysRule = Shapes::StructureShape.new(name: 'ClosedDaysRule')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConditionalSplitActivity = Shapes::StructureShape.new(name: 'ConditionalSplitActivity')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -94,6 +96,7 @@ module Aws::Pinpoint
     CreateVoiceTemplateResponse = Shapes::StructureShape.new(name: 'CreateVoiceTemplateResponse')
     CustomDeliveryConfiguration = Shapes::StructureShape.new(name: 'CustomDeliveryConfiguration')
     CustomMessageActivity = Shapes::StructureShape.new(name: 'CustomMessageActivity')
+    DayOfWeek = Shapes::StringShape.new(name: 'DayOfWeek')
     DefaultButtonConfiguration = Shapes::StructureShape.new(name: 'DefaultButtonConfiguration')
     DefaultMessage = Shapes::StructureShape.new(name: 'DefaultMessage')
     DefaultPushNotificationMessage = Shapes::StructureShape.new(name: 'DefaultPushNotificationMessage')
@@ -318,6 +321,7 @@ module Aws::Pinpoint
     ListOfActivityResponse = Shapes::ListShape.new(name: 'ListOfActivityResponse')
     ListOfApplicationResponse = Shapes::ListShape.new(name: 'ListOfApplicationResponse')
     ListOfCampaignResponse = Shapes::ListShape.new(name: 'ListOfCampaignResponse')
+    ListOfClosedDaysRules = Shapes::ListShape.new(name: 'ListOfClosedDaysRules')
     ListOfEndpointBatchItem = Shapes::ListShape.new(name: 'ListOfEndpointBatchItem')
     ListOfEndpointResponse = Shapes::ListShape.new(name: 'ListOfEndpointResponse')
     ListOfExportJobResponse = Shapes::ListShape.new(name: 'ListOfExportJobResponse')
@@ -326,6 +330,7 @@ module Aws::Pinpoint
     ListOfInAppMessageContent = Shapes::ListShape.new(name: 'ListOfInAppMessageContent')
     ListOfJourneyResponse = Shapes::ListShape.new(name: 'ListOfJourneyResponse')
     ListOfMultiConditionalBranch = Shapes::ListShape.new(name: 'ListOfMultiConditionalBranch')
+    ListOfOpenHoursRules = Shapes::ListShape.new(name: 'ListOfOpenHoursRules')
     ListOfRandomSplitEntry = Shapes::ListShape.new(name: 'ListOfRandomSplitEntry')
     ListOfRecommenderConfigurationResponse = Shapes::ListShape.new(name: 'ListOfRecommenderConfigurationResponse')
     ListOfResultRow = Shapes::ListShape.new(name: 'ListOfResultRow')
@@ -358,6 +363,7 @@ module Aws::Pinpoint
     MapOfEventItemResponse = Shapes::MapShape.new(name: 'MapOfEventItemResponse')
     MapOfEventsBatch = Shapes::MapShape.new(name: 'MapOfEventsBatch')
     MapOfItemResponse = Shapes::MapShape.new(name: 'MapOfItemResponse')
+    MapOfListOfOpenHoursRules = Shapes::MapShape.new(name: 'MapOfListOfOpenHoursRules')
     MapOfListOf__string = Shapes::MapShape.new(name: 'MapOfListOf__string')
     MapOfMapOfEndpointMessageResult = Shapes::MapShape.new(name: 'MapOfMapOfEndpointMessageResult')
     MapOfMessageResult = Shapes::MapShape.new(name: 'MapOfMessageResult')
@@ -380,6 +386,8 @@ module Aws::Pinpoint
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     NumberValidateRequest = Shapes::StructureShape.new(name: 'NumberValidateRequest')
     NumberValidateResponse = Shapes::StructureShape.new(name: 'NumberValidateResponse')
+    OpenHours = Shapes::StructureShape.new(name: 'OpenHours')
+    OpenHoursRule = Shapes::StructureShape.new(name: 'OpenHoursRule')
     Operator = Shapes::StringShape.new(name: 'Operator')
     OverrideButtonConfiguration = Shapes::StructureShape.new(name: 'OverrideButtonConfiguration')
     PayloadTooLargeException = Shapes::StructureShape.new(name: 'PayloadTooLargeException')
@@ -914,6 +922,18 @@ module Aws::Pinpoint
 
     ChannelsResponse.add_member(:channels, Shapes::ShapeRef.new(shape: MapOfChannelResponse, required: true, location_name: "Channels"))
     ChannelsResponse.struct_class = Types::ChannelsResponse
+
+    ClosedDays.add_member(:email, Shapes::ShapeRef.new(shape: ListOfClosedDaysRules, location_name: "EMAIL"))
+    ClosedDays.add_member(:sms, Shapes::ShapeRef.new(shape: ListOfClosedDaysRules, location_name: "SMS"))
+    ClosedDays.add_member(:push, Shapes::ShapeRef.new(shape: ListOfClosedDaysRules, location_name: "PUSH"))
+    ClosedDays.add_member(:voice, Shapes::ShapeRef.new(shape: ListOfClosedDaysRules, location_name: "VOICE"))
+    ClosedDays.add_member(:custom, Shapes::ShapeRef.new(shape: ListOfClosedDaysRules, location_name: "CUSTOM"))
+    ClosedDays.struct_class = Types::ClosedDays
+
+    ClosedDaysRule.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    ClosedDaysRule.add_member(:start_date_time, Shapes::ShapeRef.new(shape: __string, location_name: "StartDateTime"))
+    ClosedDaysRule.add_member(:end_date_time, Shapes::ShapeRef.new(shape: __string, location_name: "EndDateTime"))
+    ClosedDaysRule.struct_class = Types::ClosedDaysRule
 
     Condition.add_member(:conditions, Shapes::ShapeRef.new(shape: ListOfSimpleCondition, location_name: "Conditions"))
     Condition.add_member(:operator, Shapes::ShapeRef.new(shape: Operator, location_name: "Operator"))
@@ -2220,7 +2240,12 @@ module Aws::Pinpoint
     JourneyResponse.add_member(:start_condition, Shapes::ShapeRef.new(shape: StartCondition, location_name: "StartCondition"))
     JourneyResponse.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "State"))
     JourneyResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
+    JourneyResponse.add_member(:wait_for_quiet_time, Shapes::ShapeRef.new(shape: __boolean, location_name: "WaitForQuietTime"))
+    JourneyResponse.add_member(:refresh_on_segment_update, Shapes::ShapeRef.new(shape: __boolean, location_name: "RefreshOnSegmentUpdate"))
     JourneyResponse.add_member(:journey_channel_settings, Shapes::ShapeRef.new(shape: JourneyChannelSettings, location_name: "JourneyChannelSettings"))
+    JourneyResponse.add_member(:sending_schedule, Shapes::ShapeRef.new(shape: __boolean, location_name: "SendingSchedule"))
+    JourneyResponse.add_member(:open_hours, Shapes::ShapeRef.new(shape: OpenHours, location_name: "OpenHours"))
+    JourneyResponse.add_member(:closed_days, Shapes::ShapeRef.new(shape: ClosedDays, location_name: "ClosedDays"))
     JourneyResponse.struct_class = Types::JourneyResponse
 
     JourneySMSMessage.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
@@ -2258,6 +2283,8 @@ module Aws::Pinpoint
 
     ListOfCampaignResponse.member = Shapes::ShapeRef.new(shape: CampaignResponse)
 
+    ListOfClosedDaysRules.member = Shapes::ShapeRef.new(shape: ClosedDaysRule)
+
     ListOfEndpointBatchItem.member = Shapes::ShapeRef.new(shape: EndpointBatchItem)
 
     ListOfEndpointResponse.member = Shapes::ShapeRef.new(shape: EndpointResponse)
@@ -2273,6 +2300,8 @@ module Aws::Pinpoint
     ListOfJourneyResponse.member = Shapes::ShapeRef.new(shape: JourneyResponse)
 
     ListOfMultiConditionalBranch.member = Shapes::ShapeRef.new(shape: MultiConditionalBranch)
+
+    ListOfOpenHoursRules.member = Shapes::ShapeRef.new(shape: OpenHoursRule)
 
     ListOfRandomSplitEntry.member = Shapes::ShapeRef.new(shape: RandomSplitEntry)
 
@@ -2367,6 +2396,9 @@ module Aws::Pinpoint
 
     MapOfItemResponse.key = Shapes::ShapeRef.new(shape: __string)
     MapOfItemResponse.value = Shapes::ShapeRef.new(shape: ItemResponse)
+
+    MapOfListOfOpenHoursRules.key = Shapes::ShapeRef.new(shape: DayOfWeek)
+    MapOfListOfOpenHoursRules.value = Shapes::ShapeRef.new(shape: ListOfOpenHoursRules)
 
     MapOfListOf__string.key = Shapes::ShapeRef.new(shape: __string)
     MapOfListOf__string.value = Shapes::ShapeRef.new(shape: ListOf__string)
@@ -2479,6 +2511,17 @@ module Aws::Pinpoint
     NumberValidateResponse.add_member(:timezone, Shapes::ShapeRef.new(shape: __string, location_name: "Timezone"))
     NumberValidateResponse.add_member(:zip_code, Shapes::ShapeRef.new(shape: __string, location_name: "ZipCode"))
     NumberValidateResponse.struct_class = Types::NumberValidateResponse
+
+    OpenHours.add_member(:email, Shapes::ShapeRef.new(shape: MapOfListOfOpenHoursRules, location_name: "EMAIL"))
+    OpenHours.add_member(:sms, Shapes::ShapeRef.new(shape: MapOfListOfOpenHoursRules, location_name: "SMS"))
+    OpenHours.add_member(:push, Shapes::ShapeRef.new(shape: MapOfListOfOpenHoursRules, location_name: "PUSH"))
+    OpenHours.add_member(:voice, Shapes::ShapeRef.new(shape: MapOfListOfOpenHoursRules, location_name: "VOICE"))
+    OpenHours.add_member(:custom, Shapes::ShapeRef.new(shape: MapOfListOfOpenHoursRules, location_name: "CUSTOM"))
+    OpenHours.struct_class = Types::OpenHours
+
+    OpenHoursRule.add_member(:start_time, Shapes::ShapeRef.new(shape: __string, location_name: "StartTime"))
+    OpenHoursRule.add_member(:end_time, Shapes::ShapeRef.new(shape: __string, location_name: "EndTime"))
+    OpenHoursRule.struct_class = Types::OpenHoursRule
 
     OverrideButtonConfiguration.add_member(:button_action, Shapes::ShapeRef.new(shape: ButtonAction, required: true, location_name: "ButtonAction"))
     OverrideButtonConfiguration.add_member(:link, Shapes::ShapeRef.new(shape: __string, location_name: "Link"))
@@ -3325,6 +3368,9 @@ module Aws::Pinpoint
     WriteJourneyRequest.add_member(:wait_for_quiet_time, Shapes::ShapeRef.new(shape: __boolean, location_name: "WaitForQuietTime"))
     WriteJourneyRequest.add_member(:refresh_on_segment_update, Shapes::ShapeRef.new(shape: __boolean, location_name: "RefreshOnSegmentUpdate"))
     WriteJourneyRequest.add_member(:journey_channel_settings, Shapes::ShapeRef.new(shape: JourneyChannelSettings, location_name: "JourneyChannelSettings"))
+    WriteJourneyRequest.add_member(:sending_schedule, Shapes::ShapeRef.new(shape: __boolean, location_name: "SendingSchedule"))
+    WriteJourneyRequest.add_member(:open_hours, Shapes::ShapeRef.new(shape: OpenHours, location_name: "OpenHours"))
+    WriteJourneyRequest.add_member(:closed_days, Shapes::ShapeRef.new(shape: ClosedDays, location_name: "ClosedDays"))
     WriteJourneyRequest.struct_class = Types::WriteJourneyRequest
 
     WriteSegmentRequest.add_member(:dimensions, Shapes::ShapeRef.new(shape: SegmentDimensions, location_name: "Dimensions"))

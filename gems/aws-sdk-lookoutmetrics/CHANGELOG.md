@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2022-08-19)
+------------------
+
+* Feature - This release is to make GetDataQualityMetrics API publicly available.
+
 1.20.0 (2022-06-14)
 ------------------
 

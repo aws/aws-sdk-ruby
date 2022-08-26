@@ -1310,6 +1310,7 @@ module Aws::Personalize
     #             tag_value: "TagValue", # required
     #           },
     #         ],
+    #         import_mode: "FULL", # accepts FULL, INCREMENTAL
     #       }
     #
     # @!attribute [rw] job_name
@@ -1337,6 +1338,19 @@ module Aws::Personalize
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] import_mode
+    #   Specify how to add the new records to an existing dataset. The
+    #   default import mode is `FULL`. If you haven't imported bulk records
+    #   into the dataset previously, you can only specify `FULL`.
+    #
+    #   * Specify `FULL` to overwrite all existing bulk data in your
+    #     dataset. Data you imported individually is not replaced.
+    #
+    #   * Specify `INCREMENTAL` to append the new records to the existing
+    #     data in your dataset. Amazon Personalize replaces any record with
+    #     the same ID with the new one.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDatasetImportJobRequest AWS API Documentation
     #
     class CreateDatasetImportJobRequest < Struct.new(
@@ -1344,7 +1358,8 @@ module Aws::Personalize
       :dataset_arn,
       :data_source,
       :role_arn,
-      :tags)
+      :tags,
+      :import_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2358,6 +2373,11 @@ module Aws::Personalize
     #   If a dataset import job fails, provides the reason why.
     #   @return [String]
     #
+    # @!attribute [rw] import_mode
+    #   The import mode used by the dataset import job to import new
+    #   records.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetImportJob AWS API Documentation
     #
     class DatasetImportJob < Struct.new(
@@ -2369,7 +2389,8 @@ module Aws::Personalize
       :status,
       :creation_date_time,
       :last_updated_date_time,
-      :failure_reason)
+      :failure_reason,
+      :import_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2414,6 +2435,16 @@ module Aws::Personalize
     #   If a dataset import job fails, the reason behind the failure.
     #   @return [String]
     #
+    # @!attribute [rw] import_mode
+    #   The import mode the dataset import job used to update the data in
+    #   the dataset. For more information see [Updating existing bulk
+    #   data][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/updating-existing-bulk-data.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetImportJobSummary AWS API Documentation
     #
     class DatasetImportJobSummary < Struct.new(
@@ -2422,7 +2453,8 @@ module Aws::Personalize
       :status,
       :creation_date_time,
       :last_updated_date_time,
-      :failure_reason)
+      :failure_reason,
+      :import_mode)
       SENSITIVE = []
       include Aws::Structure
     end

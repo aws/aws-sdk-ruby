@@ -73,6 +73,7 @@ module Aws::Panorama
     DescribePackageVersionResponse = Shapes::StructureShape.new(name: 'DescribePackageVersionResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     Device = Shapes::StructureShape.new(name: 'Device')
+    DeviceAggregatedStatus = Shapes::StringShape.new(name: 'DeviceAggregatedStatus')
     DeviceArn = Shapes::StringShape.new(name: 'DeviceArn')
     DeviceBrand = Shapes::StringShape.new(name: 'DeviceBrand')
     DeviceConnectionStatus = Shapes::StringShape.new(name: 'DeviceConnectionStatus')
@@ -106,6 +107,7 @@ module Aws::Panorama
     JobType = Shapes::StringShape.new(name: 'JobType')
     LastUpdatedTime = Shapes::TimestampShape.new(name: 'LastUpdatedTime')
     LatestAlternateSoftware = Shapes::StringShape.new(name: 'LatestAlternateSoftware')
+    LatestDeviceJob = Shapes::StructureShape.new(name: 'LatestDeviceJob')
     LatestSoftware = Shapes::StringShape.new(name: 'LatestSoftware')
     LeaseExpirationTime = Shapes::TimestampShape.new(name: 'LeaseExpirationTime')
     ListApplicationInstanceDependenciesRequest = Shapes::StructureShape.new(name: 'ListApplicationInstanceDependenciesRequest')
@@ -118,6 +120,7 @@ module Aws::Panorama
     ListDevicesJobsResponse = Shapes::StructureShape.new(name: 'ListDevicesJobsResponse')
     ListDevicesRequest = Shapes::StructureShape.new(name: 'ListDevicesRequest')
     ListDevicesResponse = Shapes::StructureShape.new(name: 'ListDevicesResponse')
+    ListDevicesSortBy = Shapes::StringShape.new(name: 'ListDevicesSortBy')
     ListNodeFromTemplateJobsRequest = Shapes::StructureShape.new(name: 'ListNodeFromTemplateJobsRequest')
     ListNodeFromTemplateJobsResponse = Shapes::StructureShape.new(name: 'ListNodeFromTemplateJobsResponse')
     ListNodesRequest = Shapes::StructureShape.new(name: 'ListNodesRequest')
@@ -136,6 +139,7 @@ module Aws::Panorama
     Mask = Shapes::StringShape.new(name: 'Mask')
     MaxConnections = Shapes::IntegerShape.new(name: 'MaxConnections')
     MaxSize25 = Shapes::IntegerShape.new(name: 'MaxSize25')
+    NameFilter = Shapes::StringShape.new(name: 'NameFilter')
     NetworkConnectionStatus = Shapes::StringShape.new(name: 'NetworkConnectionStatus')
     NetworkPayload = Shapes::StructureShape.new(name: 'NetworkPayload')
     NetworkStatus = Shapes::StructureShape.new(name: 'NetworkStatus')
@@ -206,6 +210,7 @@ module Aws::Panorama
     RuntimeRoleArn = Shapes::StringShape.new(name: 'RuntimeRoleArn')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StaticIpConnectionInfo = Shapes::StructureShape.new(name: 'StaticIpConnectionInfo')
     StatusFilter = Shapes::StringShape.new(name: 'StatusFilter')
     StorageLocation = Shapes::StructureShape.new(name: 'StorageLocation')
@@ -400,9 +405,11 @@ module Aws::Panorama
     DescribeDeviceResponse.add_member(:current_networking_status, Shapes::ShapeRef.new(shape: NetworkStatus, location_name: "CurrentNetworkingStatus"))
     DescribeDeviceResponse.add_member(:current_software, Shapes::ShapeRef.new(shape: CurrentSoftware, location_name: "CurrentSoftware"))
     DescribeDeviceResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    DescribeDeviceResponse.add_member(:device_aggregated_status, Shapes::ShapeRef.new(shape: DeviceAggregatedStatus, location_name: "DeviceAggregatedStatus"))
     DescribeDeviceResponse.add_member(:device_connection_status, Shapes::ShapeRef.new(shape: DeviceConnectionStatus, location_name: "DeviceConnectionStatus"))
     DescribeDeviceResponse.add_member(:device_id, Shapes::ShapeRef.new(shape: DeviceId, location_name: "DeviceId"))
     DescribeDeviceResponse.add_member(:latest_alternate_software, Shapes::ShapeRef.new(shape: LatestAlternateSoftware, location_name: "LatestAlternateSoftware"))
+    DescribeDeviceResponse.add_member(:latest_device_job, Shapes::ShapeRef.new(shape: LatestDeviceJob, location_name: "LatestDeviceJob"))
     DescribeDeviceResponse.add_member(:latest_software, Shapes::ShapeRef.new(shape: LatestSoftware, location_name: "LatestSoftware"))
     DescribeDeviceResponse.add_member(:lease_expiration_time, Shapes::ShapeRef.new(shape: LeaseExpirationTime, location_name: "LeaseExpirationTime"))
     DescribeDeviceResponse.add_member(:name, Shapes::ShapeRef.new(shape: DeviceName, location_name: "Name"))
@@ -499,11 +506,17 @@ module Aws::Panorama
 
     Device.add_member(:brand, Shapes::ShapeRef.new(shape: DeviceBrand, location_name: "Brand"))
     Device.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTime, location_name: "CreatedTime"))
+    Device.add_member(:current_software, Shapes::ShapeRef.new(shape: CurrentSoftware, location_name: "CurrentSoftware"))
+    Device.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    Device.add_member(:device_aggregated_status, Shapes::ShapeRef.new(shape: DeviceAggregatedStatus, location_name: "DeviceAggregatedStatus"))
     Device.add_member(:device_id, Shapes::ShapeRef.new(shape: DeviceId, location_name: "DeviceId"))
     Device.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: LastUpdatedTime, location_name: "LastUpdatedTime"))
+    Device.add_member(:latest_device_job, Shapes::ShapeRef.new(shape: LatestDeviceJob, location_name: "LatestDeviceJob"))
     Device.add_member(:lease_expiration_time, Shapes::ShapeRef.new(shape: LeaseExpirationTime, location_name: "LeaseExpirationTime"))
     Device.add_member(:name, Shapes::ShapeRef.new(shape: DeviceName, location_name: "Name"))
     Device.add_member(:provisioning_status, Shapes::ShapeRef.new(shape: DeviceStatus, location_name: "ProvisioningStatus"))
+    Device.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    Device.add_member(:type, Shapes::ShapeRef.new(shape: DeviceType, location_name: "Type"))
     Device.struct_class = Types::Device
 
     DeviceIdList.member = Shapes::ShapeRef.new(shape: DeviceId)
@@ -550,6 +563,10 @@ module Aws::Panorama
 
     JobTagsList.member = Shapes::ShapeRef.new(shape: JobResourceTags)
 
+    LatestDeviceJob.add_member(:image_version, Shapes::ShapeRef.new(shape: ImageVersion, location_name: "ImageVersion"))
+    LatestDeviceJob.add_member(:status, Shapes::ShapeRef.new(shape: UpdateProgress, location_name: "Status"))
+    LatestDeviceJob.struct_class = Types::LatestDeviceJob
+
     ListApplicationInstanceDependenciesRequest.add_member(:application_instance_id, Shapes::ShapeRef.new(shape: ApplicationInstanceId, required: true, location: "uri", location_name: "ApplicationInstanceId"))
     ListApplicationInstanceDependenciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSize25, location: "querystring", location_name: "maxResults"))
     ListApplicationInstanceDependenciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -587,8 +604,12 @@ module Aws::Panorama
     ListDevicesJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDevicesJobsResponse.struct_class = Types::ListDevicesJobsResponse
 
+    ListDevicesRequest.add_member(:device_aggregated_status_filter, Shapes::ShapeRef.new(shape: DeviceAggregatedStatus, location: "querystring", location_name: "DeviceAggregatedStatusFilter"))
     ListDevicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSize25, location: "querystring", location_name: "MaxResults"))
+    ListDevicesRequest.add_member(:name_filter, Shapes::ShapeRef.new(shape: NameFilter, location: "querystring", location_name: "NameFilter"))
     ListDevicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListDevicesRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ListDevicesSortBy, location: "querystring", location_name: "SortBy"))
+    ListDevicesRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "SortOrder"))
     ListDevicesRequest.struct_class = Types::ListDevicesRequest
 
     ListDevicesResponse.add_member(:devices, Shapes::ShapeRef.new(shape: DeviceList, required: true, location_name: "Devices"))

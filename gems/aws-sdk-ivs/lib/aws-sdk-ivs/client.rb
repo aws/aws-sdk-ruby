@@ -452,7 +452,15 @@ module Aws::IVS
     #   disabled).
     #
     # @option params [Hash<String,String>] :tags
-    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`. See
+    #   [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no service-specific constraints beyond
+    #   what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @option params [String] :type
     #   Channel type, which determines the allowable resolution and bitrate.
@@ -460,15 +468,19 @@ module Aws::IVS
     #   probably will disconnect immediately.* Default: `STANDARD`. Valid
     #   values:
     #
-    #   * `STANDARD`\: Multiple qualities are generated from the original
-    #     input, to automatically give viewers the best experience for their
-    #     devices and network conditions. Resolution can be up to 1080p and
-    #     bitrate can be up to 8.5 Mbps. Audio is transcoded only for
-    #     renditions 360p and below; above that, audio is passed through.
+    #   * `STANDARD`\: Video is transcoded: multiple qualities are generated
+    #     from the original input, to automatically give viewers the best
+    #     experience for their devices and network conditions. Transcoding
+    #     allows higher playback quality across a range of download speeds.
+    #     Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps.
+    #     Audio is transcoded only for renditions 360p and below; above that,
+    #     audio is passed through. This is the default.
     #
-    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
-    #     viewer’s video-quality choice is limited to the original input.
-    #     Resolution can be up to 480p and bitrate can be up to 1.5 Mbps.
+    #   * `BASIC`\: Video is transmuxed: Amazon IVS delivers the original
+    #     input to viewers. The viewer’s video-quality choice is limited to
+    #     the original input. Resolution can be up to 1080p and bitrate can be
+    #     up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions between
+    #     480p and 1080p.
     #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -539,7 +551,15 @@ module Aws::IVS
     #   Recording-configuration name. The value does not need to be unique.
     #
     # @option params [Hash<String,String>] :tags
-    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`. See
+    #   [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no service-specific constraints beyond
+    #   what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @option params [Types::ThumbnailConfiguration] :thumbnail_configuration
     #   A complex type that allows you to enable/disable the recording of
@@ -601,7 +621,15 @@ module Aws::IVS
     #   ARN of the channel for which to create the stream key.
     #
     # @option params [Hash<String,String>] :tags
-    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`. See
+    #   [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no service-specific constraints beyond
+    #   what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Types::CreateStreamKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1013,7 +1041,14 @@ module Aws::IVS
     #
     # @option params [Hash<String,String>] :tags
     #   Any tags provided with the request are added to the playback key pair
-    #   tags.
+    #   tags. See [Tagging Amazon Web Services Resources][1] for more
+    #   information, including restrictions that apply to tags and "Tag
+    #   naming limits and requirements"; Amazon IVS has no service-specific
+    #   constraints beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Types::ImportPlaybackKeyPairResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1061,7 +1096,7 @@ module Aws::IVS
     #   recording-configuration ARN.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of channels to return. Default: 50.
+    #   Maximum number of channels to return. Default: 100.
     #
     # @option params [String] :next_token
     #   The first channel to retrieve. This is used for pagination; see the
@@ -1113,11 +1148,12 @@ module Aws::IVS
     # [1]: https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html
     #
     # @option params [Integer] :max_results
-    #   The first key pair to retrieve. This is used for pagination; see the
-    #   `nextToken` response field. Default: 50.
+    #   Maximum number of key pairs to return. Default: your service quota or
+    #   100, whichever is smaller.
     #
     # @option params [String] :next_token
-    #   Maximum number of key pairs to return.
+    #   The first key pair to retrieve. This is used for pagination; see the
+    #   `nextToken` response field.
     #
     # @return [Types::ListPlaybackKeyPairsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1156,7 +1192,8 @@ module Aws::IVS
     # processed.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of recording configurations to return. Default: 50.
+    #   Maximum number of recording configurations to return. Default: your
+    #   service quota or 100, whichever is smaller.
     #
     # @option params [String] :next_token
     #   The first recording configuration to retrieve. This is used for
@@ -1202,7 +1239,7 @@ module Aws::IVS
     #   Channel ARN used to filter the list.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of streamKeys to return. Default: 50.
+    #   Maximum number of streamKeys to return. Default: 1.
     #
     # @option params [String] :next_token
     #   The first stream key to retrieve. This is used for pagination; see the
@@ -1248,7 +1285,7 @@ module Aws::IVS
     #   Channel ARN used to filter the list.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of streams to return. Default: 50.
+    #   Maximum number of streams to return. Default: 100.
     #
     # @option params [String] :next_token
     #   The first stream to retrieve. This is used for pagination; see the
@@ -1294,7 +1331,7 @@ module Aws::IVS
     #   Filters the stream list to match the specified criterion.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of streams to return. Default: 50.
+    #   Maximum number of streams to return. Default: 100.
     #
     # @option params [String] :next_token
     #   The first stream to retrieve. This is used for pagination; see the
@@ -1340,7 +1377,7 @@ module Aws::IVS
     # Gets information about Amazon Web Services tags for the specified ARN.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource to be retrieved.
+    #   The ARN of the resource to be retrieved. The ARN must be URL-encoded.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1436,10 +1473,18 @@ module Aws::IVS
     # specified ARN.
     #
     # @option params [required, String] :resource_arn
-    #   ARN of the resource for which tags are to be added or updated.
+    #   ARN of the resource for which tags are to be added or updated. The ARN
+    #   must be URL-encoded.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   Array of tags to be added or updated.
+    #   Array of tags to be added or updated. See [Tagging Amazon Web Services
+    #   Resources][1] for more information, including restrictions that apply
+    #   to tags and "Tag naming limits and requirements"; Amazon IVS has no
+    #   service-specific constraints beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1464,10 +1509,18 @@ module Aws::IVS
     # Removes tags from the resource with the specified ARN.
     #
     # @option params [required, String] :resource_arn
-    #   ARN of the resource for which tags are to be removed.
+    #   ARN of the resource for which tags are to be removed. The ARN must be
+    #   URL-encoded.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   Array of tags to be removed.
+    #   Array of tags to be removed. See [Tagging Amazon Web Services
+    #   Resources][1] for more information, including restrictions that apply
+    #   to tags and "Tag naming limits and requirements"; Amazon IVS has no
+    #   service-specific constraints beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1516,15 +1569,19 @@ module Aws::IVS
     #   *If you exceed the allowable resolution or bitrate, the stream
     #   probably will disconnect immediately*. Valid values:
     #
-    #   * `STANDARD`\: Multiple qualities are generated from the original
-    #     input, to automatically give viewers the best experience for their
-    #     devices and network conditions. Resolution can be up to 1080p and
-    #     bitrate can be up to 8.5 Mbps. Audio is transcoded only for
-    #     renditions 360p and below; above that, audio is passed through.
+    #   * `STANDARD`\: Video is transcoded: multiple qualities are generated
+    #     from the original input, to automatically give viewers the best
+    #     experience for their devices and network conditions. Transcoding
+    #     allows higher playback quality across a range of download speeds.
+    #     Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps.
+    #     Audio is transcoded only for renditions 360p and below; above that,
+    #     audio is passed through. This is the default.
     #
-    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
-    #     viewer’s video-quality choice is limited to the original input.
-    #     Resolution can be up to 480p and bitrate can be up to 1.5 Mbps.
+    #   * `BASIC`\: Video is transmuxed: Amazon IVS delivers the original
+    #     input to viewers. The viewer’s video-quality choice is limited to
+    #     the original input. Resolution can be up to 1080p and bitrate can be
+    #     up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions between
+    #     480p and 1080p.
     #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1576,7 +1633,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

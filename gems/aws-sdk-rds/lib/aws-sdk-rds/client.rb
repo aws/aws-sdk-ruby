@@ -665,18 +665,28 @@ module Aws::RDS
     # EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either
     # EC2SecurityGroupName or EC2SecurityGroupId for non-VPC).
     #
-    # <note markdown="1"> You can't authorize ingress from an EC2 security group in one Amazon
+    # You can't authorize ingress from an EC2 security group in one Amazon
     # Web Services Region to an Amazon RDS DB instance in another. You
     # can't authorize ingress from a VPC security group in one VPC to an
     # Amazon RDS DB instance in another.
     #
-    #  </note>
-    #
     # For an overview of CIDR ranges, go to the [Wikipedia Tutorial][1].
+    #
+    # <note markdown="1"> EC2-Classic was retired on August 15, 2022. If you haven't migrated
+    # from EC2-Classic to a VPC, we recommend that you migrate as soon as
+    # possible. For more information, see [Migrate from EC2-Classic to a
+    # VPC][2] in the *Amazon EC2 User Guide*, the blog [EC2-Classic
+    # Networking is Retiring – Here’s How to Prepare][3], and [Moving a DB
+    # instance not in a VPC into a VPC][4] in the *Amazon RDS User Guide*.
+    #
+    #  </note>
     #
     #
     #
     # [1]: http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # [3]: http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/
+    # [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html
     #
     # @option params [required, String] :db_security_group_name
     #   The name of the DB security group to add authorization to.
@@ -1633,6 +1643,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
+    #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
@@ -1829,17 +1840,18 @@ module Aws::RDS
     #
     # @option params [required, String] :kms_key_id
     #   The Amazon Web Services KMS key identifier for an encrypted CEV. A
-    #   symmetric KMS key is required for RDS Custom, but optional for Amazon
-    #   RDS.
+    #   symmetric encryption KMS key is required for RDS Custom, but optional
+    #   for Amazon RDS.
     #
-    #   If you have an existing symmetric KMS key in your account, you can use
-    #   it with RDS Custom. No further action is necessary. If you don't
-    #   already have a symmetric KMS key in your account, follow the
-    #   instructions in [ Creating symmetric KMS keys][1] in the *Amazon Web
-    #   Services Key Management Service Developer Guide*.
+    #   If you have an existing symmetric encryption KMS key in your account,
+    #   you can use it with RDS Custom. No further action is necessary. If you
+    #   don't already have a symmetric encryption KMS key in your account,
+    #   follow the instructions in [ Creating a symmetric encryption KMS
+    #   key][1] in the *Amazon Web Services Key Management Service Developer
+    #   Guide*.
     #
-    #   You can choose the same symmetric key when you create a CEV and a DB
-    #   instance, or choose different keys.
+    #   You can choose the same symmetric encryption key when you create a CEV
+    #   and a DB instance, or choose different keys.
     #
     #
     #
@@ -2762,6 +2774,28 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
+    # @option params [String] :network_type
+    #   The network type of the DB cluster.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2860,6 +2894,7 @@ module Aws::RDS
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #     },
+    #     network_type: "String",
     #     source_region: "String",
     #   })
     #
@@ -2967,6 +3002,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -5852,10 +5888,23 @@ module Aws::RDS
     # Creates a new DB security group. DB security groups control access to
     # a DB instance.
     #
-    # <note markdown="1"> A DB security group controls access to EC2-Classic DB instances that
+    # A DB security group controls access to EC2-Classic DB instances that
     # are not in a VPC.
     #
+    # <note markdown="1"> EC2-Classic was retired on August 15, 2022. If you haven't migrated
+    # from EC2-Classic to a VPC, we recommend that you migrate as soon as
+    # possible. For more information, see [Migrate from EC2-Classic to a
+    # VPC][1] in the *Amazon EC2 User Guide*, the blog [EC2-Classic
+    # Networking is Retiring – Here’s How to Prepare][2], and [Moving a DB
+    # instance not in a VPC into a VPC][3] in the *Amazon RDS User Guide*.
+    #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # [2]: http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/
+    # [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html
     #
     # @option params [required, String] :db_security_group_name
     #   The name for the DB security group. This value is stored as a
@@ -6042,6 +6091,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
+    #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
@@ -6165,11 +6215,18 @@ module Aws::RDS
     # `SourceIds`, you are notified of events generated from all RDS sources
     # belonging to your customer account.
     #
-    # <note markdown="1"> RDS event notification is only available for unencrypted SNS topics.
-    # If you specify an encrypted SNS topic, event notifications aren't
-    # sent for the topic.
+    # For more information about subscribing to an event for RDS DB engines,
+    # see [ Subscribing to Amazon RDS event notification][1] in the *Amazon
+    # RDS User Guide*.
     #
-    #  </note>
+    # For more information about subscribing to an event for Aurora DB
+    # engines, see [ Subscribing to Amazon RDS event notification][2] in the
+    # *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.Subscribing.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Events.Subscribing.html
     #
     # @option params [required, String] :subscription_name
     #   The name of the subscription.
@@ -6861,6 +6918,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -7539,10 +7597,23 @@ module Aws::RDS
 
     # Deletes a DB security group.
     #
-    # <note markdown="1"> The specified DB security group must not be associated with any DB
+    # The specified DB security group must not be associated with any DB
     # instances.
     #
+    # <note markdown="1"> EC2-Classic was retired on August 15, 2022. If you haven't migrated
+    # from EC2-Classic to a VPC, we recommend that you migrate as soon as
+    # possible. For more information, see [Migrate from EC2-Classic to a
+    # VPC][1] in the *Amazon EC2 User Guide*, the blog [EC2-Classic
+    # Networking is Retiring – Here’s How to Prepare][2], and [Moving a DB
+    # instance not in a VPC into a VPC][3] in the *Amazon RDS User Guide*.
+    #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # [2]: http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/
+    # [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html
     #
     # @option params [required, String] :db_security_group_name
     #   The name of the DB security group to delete.
@@ -7661,6 +7732,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
+    #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
@@ -8922,6 +8994,7 @@ module Aws::RDS
     #   resp.db_clusters[0].performance_insights_retention_period #=> Integer
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_clusters[0].network_type #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -10161,6 +10234,21 @@ module Aws::RDS
     # `DBSecurityGroupName` is specified, the list will contain only the
     # descriptions of the specified DB security group.
     #
+    # <note markdown="1"> EC2-Classic was retired on August 15, 2022. If you haven't migrated
+    # from EC2-Classic to a VPC, we recommend that you migrate as soon as
+    # possible. For more information, see [Migrate from EC2-Classic to a
+    # VPC][1] in the *Amazon EC2 User Guide*, the blog [EC2-Classic
+    # Networking is Retiring – Here’s How to Prepare][2], and [Moving a DB
+    # instance not in a VPC into a VPC][3] in the *Amazon RDS User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # [2]: http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/
+    # [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html
+    #
     # @option params [String] :db_security_group_name
     #   The name of the DB security group to return details for.
     #
@@ -10505,6 +10593,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].tag_list[0].key #=> String
     #   resp.db_snapshots[0].tag_list[0].value #=> String
     #   resp.db_snapshots[0].original_snapshot_create_time #=> Time
+    #   resp.db_snapshots[0].snapshot_database_time #=> Time
     #   resp.db_snapshots[0].snapshot_target #=> String
     #
     #
@@ -12683,6 +12772,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -13757,6 +13847,28 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
+    # @option params [String] :network_type
+    #   The network type of the DB cluster.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -13832,6 +13944,7 @@ module Aws::RDS
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #     },
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -13938,6 +14051,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -14283,7 +14397,7 @@ module Aws::RDS
     #
     # @option params [String] :db_instance_class
     #   The new compute and memory capacity of the DB instance, for example
-    #   db.m5.large. Not all DB instance classes are available in all Amazon
+    #   db.m4.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
     #   instance classes][1] in the *Amazon RDS User Guide* or [Aurora DB
@@ -15754,6 +15868,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
+    #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
@@ -16677,6 +16792,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -16919,6 +17035,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBCluster AWS API Documentation
     #
@@ -17981,6 +18098,26 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
+    # @option params [String] :network_type
+    #   The network type of the DB cluster.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromS3Result#db_cluster #db_cluster} => Types::DBCluster
@@ -18028,6 +18165,7 @@ module Aws::RDS
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #     },
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -18134,6 +18272,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -18573,6 +18712,28 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
+    # @option params [String] :network_type
+    #   The network type of the DB cluster.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -18639,6 +18800,7 @@ module Aws::RDS
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #     },
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -18745,6 +18907,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -19154,6 +19317,28 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
+    # @option params [String] :network_type
+    #   The network type of the DB cluster.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -19219,6 +19404,7 @@ module Aws::RDS
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #     },
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -19325,6 +19511,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -21448,6 +21635,21 @@ module Aws::RDS
     # (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or
     # EC2SecurityGroupId).
     #
+    # <note markdown="1"> EC2-Classic was retired on August 15, 2022. If you haven't migrated
+    # from EC2-Classic to a VPC, we recommend that you migrate as soon as
+    # possible. For more information, see [Migrate from EC2-Classic to a
+    # VPC][1] in the *Amazon EC2 User Guide*, the blog [EC2-Classic
+    # Networking is Retiring – Here’s How to Prepare][2], and [Moving a DB
+    # instance not in a VPC into a VPC][3] in the *Amazon RDS User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # [2]: http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/
+    # [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html
+    #
     # @option params [required, String] :db_security_group_name
     #   The name of the DB security group to revoke ingress from.
     #
@@ -21735,6 +21937,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -22353,6 +22556,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -22619,6 +22823,183 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Switches over an Oracle standby database in an Oracle Data Guard
+    # environment, making it the new primary database. Issue this command in
+    # the Region that hosts the current standby database.
+    #
+    # @option params [required, String] :db_instance_identifier
+    #   The DB instance identifier of the current standby database. This value
+    #   is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identiﬁer of an existing Oracle read replica DB
+    #     instance.
+    #
+    #   ^
+    #
+    # @return [Types::SwitchoverReadReplicaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SwitchoverReadReplicaResult#db_instance #db_instance} => Types::DBInstance
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.switchover_read_replica({
+    #     db_instance_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_instance.db_instance_identifier #=> String
+    #   resp.db_instance.db_instance_class #=> String
+    #   resp.db_instance.engine #=> String
+    #   resp.db_instance.db_instance_status #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
+    #   resp.db_instance.master_username #=> String
+    #   resp.db_instance.db_name #=> String
+    #   resp.db_instance.endpoint.address #=> String
+    #   resp.db_instance.endpoint.port #=> Integer
+    #   resp.db_instance.endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.allocated_storage #=> Integer
+    #   resp.db_instance.instance_create_time #=> Time
+    #   resp.db_instance.preferred_backup_window #=> String
+    #   resp.db_instance.backup_retention_period #=> Integer
+    #   resp.db_instance.db_security_groups #=> Array
+    #   resp.db_instance.db_security_groups[0].db_security_group_name #=> String
+    #   resp.db_instance.db_security_groups[0].status #=> String
+    #   resp.db_instance.vpc_security_groups #=> Array
+    #   resp.db_instance.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.db_instance.vpc_security_groups[0].status #=> String
+    #   resp.db_instance.db_parameter_groups #=> Array
+    #   resp.db_instance.db_parameter_groups[0].db_parameter_group_name #=> String
+    #   resp.db_instance.db_parameter_groups[0].parameter_apply_status #=> String
+    #   resp.db_instance.availability_zone #=> String
+    #   resp.db_instance.db_subnet_group.db_subnet_group_name #=> String
+    #   resp.db_instance.db_subnet_group.db_subnet_group_description #=> String
+    #   resp.db_instance.db_subnet_group.vpc_id #=> String
+    #   resp.db_instance.db_subnet_group.subnet_group_status #=> String
+    #   resp.db_instance.db_subnet_group.subnets #=> Array
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
+    #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
+    #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.pending_modified_values.db_instance_class #=> String
+    #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.master_user_password #=> String
+    #   resp.db_instance.pending_modified_values.port #=> Integer
+    #   resp.db_instance.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_instance.pending_modified_values.multi_az #=> Boolean
+    #   resp.db_instance.pending_modified_values.engine_version #=> String
+    #   resp.db_instance.pending_modified_values.license_model #=> String
+    #   resp.db_instance.pending_modified_values.iops #=> Integer
+    #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
+    #   resp.db_instance.pending_modified_values.storage_type #=> String
+    #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
+    #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
+    #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
+    #   resp.db_instance.latest_restorable_time #=> Time
+    #   resp.db_instance.multi_az #=> Boolean
+    #   resp.db_instance.engine_version #=> String
+    #   resp.db_instance.auto_minor_version_upgrade #=> Boolean
+    #   resp.db_instance.read_replica_source_db_instance_identifier #=> String
+    #   resp.db_instance.read_replica_db_instance_identifiers #=> Array
+    #   resp.db_instance.read_replica_db_instance_identifiers[0] #=> String
+    #   resp.db_instance.read_replica_db_cluster_identifiers #=> Array
+    #   resp.db_instance.read_replica_db_cluster_identifiers[0] #=> String
+    #   resp.db_instance.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_instance.license_model #=> String
+    #   resp.db_instance.iops #=> Integer
+    #   resp.db_instance.option_group_memberships #=> Array
+    #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
+    #   resp.db_instance.option_group_memberships[0].status #=> String
+    #   resp.db_instance.character_set_name #=> String
+    #   resp.db_instance.nchar_character_set_name #=> String
+    #   resp.db_instance.secondary_availability_zone #=> String
+    #   resp.db_instance.publicly_accessible #=> Boolean
+    #   resp.db_instance.status_infos #=> Array
+    #   resp.db_instance.status_infos[0].status_type #=> String
+    #   resp.db_instance.status_infos[0].normal #=> Boolean
+    #   resp.db_instance.status_infos[0].status #=> String
+    #   resp.db_instance.status_infos[0].message #=> String
+    #   resp.db_instance.storage_type #=> String
+    #   resp.db_instance.tde_credential_arn #=> String
+    #   resp.db_instance.db_instance_port #=> Integer
+    #   resp.db_instance.db_cluster_identifier #=> String
+    #   resp.db_instance.storage_encrypted #=> Boolean
+    #   resp.db_instance.kms_key_id #=> String
+    #   resp.db_instance.dbi_resource_id #=> String
+    #   resp.db_instance.ca_certificate_identifier #=> String
+    #   resp.db_instance.domain_memberships #=> Array
+    #   resp.db_instance.domain_memberships[0].domain #=> String
+    #   resp.db_instance.domain_memberships[0].status #=> String
+    #   resp.db_instance.domain_memberships[0].fqdn #=> String
+    #   resp.db_instance.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_instance.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_instance.monitoring_interval #=> Integer
+    #   resp.db_instance.enhanced_monitoring_resource_arn #=> String
+    #   resp.db_instance.monitoring_role_arn #=> String
+    #   resp.db_instance.promotion_tier #=> Integer
+    #   resp.db_instance.db_instance_arn #=> String
+    #   resp.db_instance.timezone #=> String
+    #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
+    #   resp.db_instance.performance_insights_retention_period #=> Integer
+    #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.associated_roles #=> Array
+    #   resp.db_instance.associated_roles[0].role_arn #=> String
+    #   resp.db_instance.associated_roles[0].feature_name #=> String
+    #   resp.db_instance.associated_roles[0].status #=> String
+    #   resp.db_instance.listener_endpoint.address #=> String
+    #   resp.db_instance.listener_endpoint.port #=> Integer
+    #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.max_allocated_storage #=> Integer
+    #   resp.db_instance.tag_list #=> Array
+    #   resp.db_instance.tag_list[0].key #=> String
+    #   resp.db_instance.tag_list[0].value #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
+    #   resp.db_instance.activity_stream_kms_key_id #=> String
+    #   resp.db_instance.activity_stream_kinesis_stream_name #=> String
+    #   resp.db_instance.activity_stream_mode #=> String, one of "sync", "async"
+    #   resp.db_instance.activity_stream_engine_native_audit_fields_included #=> Boolean
+    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
+    #   resp.db_instance.resume_full_automation_mode_time #=> Time
+    #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
+    #
+    # @overload switchover_read_replica(params = {})
+    # @param [Hash] params ({})
+    def switchover_read_replica(params = {}, options = {})
+      req = build_request(:switchover_read_replica, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -22632,7 +23013,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.151.0'
+      context[:gem_version] = '1.155.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

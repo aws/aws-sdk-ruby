@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2022-08-11)
+------------------
+
+* Feature - Add support for Python 3.9 AWS Glue Python Shell jobs
+
+1.117.0 (2022-08-08)
+------------------
+
+* Feature - Add an option to run non-urgent or non-time sensitive Glue Jobs on spare capacity
+
 1.116.0 (2022-07-19)
 ------------------
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.155.0 (2022-08-26)
+------------------
+
+* Feature - Removes support for RDS Custom from DBInstanceClass in ModifyDBInstance
+
+1.154.0 (2022-08-23)
+------------------
+
+* Feature - RDS for Oracle supports Oracle Data Guard switchover and read replica backups.
+
+1.153.0 (2022-08-17)
+------------------
+
+* Feature - Adds support for Internet Protocol Version 6 (IPv6) for RDS Aurora database clusters.
+
+1.152.0 (2022-08-12)
+------------------
+
+* Feature - Adds support for RDS Custom to DBInstanceClass in ModifyDBInstance
+
 1.151.0 (2022-07-26)
 ------------------
 

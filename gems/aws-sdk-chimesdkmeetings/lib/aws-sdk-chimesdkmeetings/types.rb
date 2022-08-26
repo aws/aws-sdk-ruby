@@ -304,6 +304,7 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     #
     # @!attribute [rw] request_id
+    #   The ID of the request involved in the conflict.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/ConflictException AWS API Documentation
@@ -472,6 +473,12 @@ module Aws::ChimeSDKMeetings
     #         },
     #         primary_meeting_id: "PrimaryMeetingId",
     #         tenant_ids: ["TenantId"],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] client_request_token
@@ -523,6 +530,59 @@ module Aws::ChimeSDKMeetings
     #   builder to represent a segment of their users.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   Applies one or more tags to an Amazon Chime SDK meeting. Note the
+    #   following:
+    #
+    #   * Not all resources have tags. For a list of services with resources
+    #     that support tagging using this operation, see [Services that
+    #     support the Resource Groups Tagging API][1]. If the resource
+    #     doesn't yet support this operation, the resource's service might
+    #     support tagging using its own API operations. For more
+    #     information, refer to the documentation for that service.
+    #
+    #   * Each resource can have up to 50 tags. For other limits, see [Tag
+    #     Naming and Usage Conventions][2] in the *AWS General Reference*.
+    #
+    #   * You can only tag resources that are located in the specified AWS
+    #     Region for the AWS account.
+    #
+    #   * To add tags to a resource, you need the necessary permissions for
+    #     the service that the resource belongs to as well as permissions
+    #     for adding tags. For more information, see the documentation for
+    #     each service.
+    #
+    #   Do not store personally identifiable information (PII) or other
+    #   confidential or sensitive information in tags. We use tags to
+    #   provide you with billing and administration services. Tags are not
+    #   intended to be used for private or sensitive data.
+    #
+    #   **Minimum permissions**
+    #
+    #   In addition to the `tag:TagResources `permission required by this
+    #   operation, you must also have the tagging permission defined by the
+    #   service that created the resource. For example, to tag a
+    #   `ChimeSDKMeetings` instance using the `TagResources` operation, you
+    #   must have both of the following permissions:
+    #
+    #   `tag:TagResources`
+    #
+    #   `ChimeSDKMeetings:CreateTags`
+    #
+    #   <note markdown="1"> Some services might have specific requirements for tagging some
+    #   resources. For example, to tag an Amazon S3 bucket, you must also
+    #   have the `s3:GetBucketTagging` permission. If the expected minimum
+    #   permissions don't work, check the documentation for that service's
+    #   tagging APIs for more information.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateMeetingRequest AWS API Documentation
     #
     class CreateMeetingRequest < Struct.new(
@@ -533,7 +593,8 @@ module Aws::ChimeSDKMeetings
       :notifications_configuration,
       :meeting_features,
       :primary_meeting_id,
-      :tenant_ids)
+      :tenant_ids,
+      :tags)
       SENSITIVE = [:client_request_token, :meeting_host_id, :external_meeting_id]
       include Aws::Structure
     end
@@ -581,6 +642,12 @@ module Aws::ChimeSDKMeetings
     #         ],
     #         primary_meeting_id: "PrimaryMeetingId",
     #         tenant_ids: ["TenantId"],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] client_request_token
@@ -636,6 +703,10 @@ module Aws::ChimeSDKMeetings
     #   builder to represent a segment of their users.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   The tags in the request.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateMeetingWithAttendeesRequest AWS API Documentation
     #
     class CreateMeetingWithAttendeesRequest < Struct.new(
@@ -647,7 +718,8 @@ module Aws::ChimeSDKMeetings
       :notifications_configuration,
       :attendees,
       :primary_meeting_id,
-      :tenant_ids)
+      :tenant_ids,
+      :tags)
       SENSITIVE = [:client_request_token, :meeting_host_id, :external_meeting_id]
       include Aws::Structure
     end
@@ -1059,6 +1131,37 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags requested for the specified resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A set of endpoints used by clients to connect to the media service
     # group for an Amazon Chime SDK meeting.
     #
@@ -1151,6 +1254,10 @@ module Aws::ChimeSDKMeetings
     #   Array of strings.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] meeting_arn
+    #   The ARN of the meeting.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/Meeting AWS API Documentation
     #
     class Meeting < Struct.new(
@@ -1161,7 +1268,8 @@ module Aws::ChimeSDKMeetings
       :media_placement,
       :meeting_features,
       :primary_meeting_id,
-      :tenant_ids)
+      :tenant_ids,
+      :meeting_arn)
       SENSITIVE = [:meeting_host_id, :external_meeting_id]
       include Aws::Structure
     end
@@ -1249,6 +1357,33 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
+    # The resource that you want to tag couldn't be found.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The ID of the resource that couldn't be found.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the resource that couldn't be found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :code,
+      :message,
+      :request_id,
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The service encountered an unexpected error.
     #
     # @!attribute [rw] code
@@ -1258,6 +1393,7 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     #
     # @!attribute [rw] request_id
+    #   The ID of the failed request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/ServiceFailureException AWS API Documentation
@@ -1369,6 +1505,67 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
+    # A key-value pair that you define.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The tag's key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag's value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Lists the requested tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # The number of customer requests exceeds the request rate limit.
     #
     # @!attribute [rw] code
@@ -1378,6 +1575,7 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     #
     # @!attribute [rw] request_id
+    #   The ID of the request that exceeded the throttling limit.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/ThrottlingException AWS API Documentation
@@ -1386,6 +1584,33 @@ module Aws::ChimeSDKMeetings
       :code,
       :message,
       :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Too many tags were added to the specified resource.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The ID of the request that contains too many tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the resource that received too many tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :code,
+      :message,
+      :request_id,
+      :resource_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1489,6 +1714,35 @@ module Aws::ChimeSDKMeetings
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource that you're removing tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys being removed from the resources.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateAttendeeCapabilitiesRequest
     #   data as a hash:

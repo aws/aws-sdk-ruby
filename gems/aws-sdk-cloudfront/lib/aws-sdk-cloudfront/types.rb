@@ -1962,6 +1962,7 @@ module Aws::CloudFront
     #                   enabled: false, # required
     #                   origin_shield_region: "OriginShieldRegion",
     #                 },
+    #                 origin_access_control_id: "string",
     #               },
     #             ],
     #           },
@@ -2168,7 +2169,7 @@ module Aws::CloudFront
     #             },
     #           },
     #           web_acl_id: "string",
-    #           http_version: "http1.1", # accepts http1.1, http2
+    #           http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #           is_ipv6_enabled: false,
     #         },
     #       }
@@ -2260,6 +2261,7 @@ module Aws::CloudFront
     #                     enabled: false, # required
     #                     origin_shield_region: "OriginShieldRegion",
     #                   },
+    #                   origin_access_control_id: "string",
     #                 },
     #               ],
     #             },
@@ -2466,7 +2468,7 @@ module Aws::CloudFront
     #               },
     #             },
     #             web_acl_id: "string",
-    #             http_version: "http1.1", # accepts http1.1, http2
+    #             http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #             is_ipv6_enabled: false,
     #           },
     #           tags: { # required
@@ -2856,6 +2858,54 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateOriginAccessControlRequest
+    #   data as a hash:
+    #
+    #       {
+    #         origin_access_control_config: { # required
+    #           name: "string", # required
+    #           description: "string", # required
+    #           signing_protocol: "sigv4", # required, accepts sigv4
+    #           signing_behavior: "never", # required, accepts never, always, no-override
+    #           origin_access_control_origin_type: "s3", # required, accepts s3
+    #         },
+    #       }
+    #
+    # @!attribute [rw] origin_access_control_config
+    #   Contains the origin access control.
+    #   @return [Types::OriginAccessControlConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateOriginAccessControlRequest AWS API Documentation
+    #
+    class CreateOriginAccessControlRequest < Struct.new(
+      :origin_access_control_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] origin_access_control
+    #   Contains an origin access control.
+    #   @return [Types::OriginAccessControl]
+    #
+    # @!attribute [rw] location
+    #   The URL of the origin access control.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the origin access
+    #   control.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateOriginAccessControlResult AWS API Documentation
+    #
+    class CreateOriginAccessControlResult < Struct.new(
+      :origin_access_control,
+      :location,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateOriginRequestPolicyRequest
     #   data as a hash:
     #
@@ -3092,6 +3142,10 @@ module Aws::CloudFront
     #               access_control_max_age_sec: 1, # required
     #             },
     #           },
+    #           server_timing_headers_config: {
+    #             enabled: false, # required
+    #             sampling_rate: 1.0,
+    #           },
     #           custom_headers_config: {
     #             quantity: 1, # required
     #             items: [
@@ -3101,10 +3155,6 @@ module Aws::CloudFront
     #                 override: false, # required
     #               },
     #             ],
-    #           },
-    #           server_timing_headers_config: {
-    #             enabled: false, # required
-    #             sampling_rate: 1.0,
     #           },
     #         },
     #       }
@@ -4222,6 +4272,33 @@ module Aws::CloudFront
     #
     class DeleteMonitoringSubscriptionResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteOriginAccessControlRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the origin access control that you are
+    #   deleting.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the origin access control that
+    #   you are deleting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteOriginAccessControlRequest AWS API Documentation
+    #
+    class DeleteOriginAccessControlRequest < Struct.new(
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteOriginRequestPolicyRequest
     #   data as a hash:
     #
@@ -4560,6 +4637,7 @@ module Aws::CloudFront
     #                 enabled: false, # required
     #                 origin_shield_region: "OriginShieldRegion",
     #               },
+    #               origin_access_control_id: "string",
     #             },
     #           ],
     #         },
@@ -4766,7 +4844,7 @@ module Aws::CloudFront
     #           },
     #         },
     #         web_acl_id: "string",
-    #         http_version: "http1.1", # accepts http1.1, http2
+    #         http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #         is_ipv6_enabled: false,
     #       }
     #
@@ -4936,18 +5014,26 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] http_version
-    #   (Optional) Specify the maximum HTTP version that you want viewers to
-    #   use to communicate with CloudFront. The default value for new web
-    #   distributions is http2. Viewers that don't support HTTP/2
+    #   (Optional) Specify the maximum HTTP version(s) that you want viewers
+    #   to use to communicate with CloudFront. The default value for new web
+    #   distributions is `http2`. Viewers that don't support HTTP/2
     #   automatically use an earlier HTTP version.
     #
-    #   For viewers and CloudFront to use HTTP/2, viewers must support TLS
-    #   1.2 or later, and must support Server Name Identification (SNI).
+    #   For viewers and CloudFront to use HTTP/2, viewers must support
+    #   TLSv1.2 or later, and must support Server Name Indication (SNI).
     #
-    #   In general, configuring CloudFront to communicate with viewers using
-    #   HTTP/2 reduces latency. You can improve performance by optimizing
-    #   for HTTP/2. For more information, do an Internet search for "http/2
-    #   optimization."
+    #   For viewers and CloudFront to use HTTP/3, viewers must support
+    #   TLSv1.3 and Server Name Indication (SNI). CloudFront supports HTTP/3
+    #   connection migration to allow the viewer to switch networks without
+    #   losing connection. For more information about connection migration,
+    #   see [Connection Migration][1] at RFC 9000. For more information
+    #   about supported TLSv1.3 ciphers, see [Supported protocols and
+    #   ciphers between viewers and CloudFront][2].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc9000.html#name-connection-migration
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html
     #   @return [String]
     #
     # @!attribute [rw] is_ipv6_enabled
@@ -5068,6 +5154,7 @@ module Aws::CloudFront
     #                   enabled: false, # required
     #                   origin_shield_region: "OriginShieldRegion",
     #                 },
+    #                 origin_access_control_id: "string",
     #               },
     #             ],
     #           },
@@ -5274,7 +5361,7 @@ module Aws::CloudFront
     #             },
     #           },
     #           web_acl_id: "string",
-    #           http_version: "http1.1", # accepts http1.1, http2
+    #           http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #           is_ipv6_enabled: false,
     #         },
     #         tags: { # required
@@ -7156,6 +7243,80 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetOriginAccessControlConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the origin access control.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginAccessControlConfigRequest AWS API Documentation
+    #
+    class GetOriginAccessControlConfigRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] origin_access_control_config
+    #   Contains an origin access control.
+    #   @return [Types::OriginAccessControlConfig]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the origin access
+    #   control.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginAccessControlConfigResult AWS API Documentation
+    #
+    class GetOriginAccessControlConfigResult < Struct.new(
+      :origin_access_control_config,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetOriginAccessControlRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the origin access control.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginAccessControlRequest AWS API Documentation
+    #
+    class GetOriginAccessControlRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] origin_access_control
+    #   Contains an origin access control.
+    #   @return [Types::OriginAccessControl]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the origin access
+    #   control.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginAccessControlResult AWS API Documentation
+    #
+    class GetOriginAccessControlResult < Struct.new(
+      :origin_access_control,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetOriginRequestPolicyConfigRequest
     #   data as a hash:
     #
@@ -7571,6 +7732,20 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # An origin cannot contain both an origin access control (OAC) and an
+    # origin access identity (OAI).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/IllegalOriginAccessConfiguration AWS API Documentation
+    #
+    class IllegalOriginAccessConfiguration < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The update contains modifications that are not allowed.
     #
     # @!attribute [rw] message
@@ -7619,6 +7794,20 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidDefaultRootObject AWS API Documentation
     #
     class InvalidDefaultRootObject < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An origin access control is associated with an origin whose domain
+    # name is not supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidDomainNameForOriginAccessControl AWS API Documentation
+    #
+    class InvalidDomainNameForOriginAccessControl < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -7753,6 +7942,19 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidOrigin AWS API Documentation
     #
     class InvalidOrigin < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The origin access control is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidOriginAccessControl AWS API Documentation
+    #
+    class InvalidOriginAccessControl < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -9148,6 +9350,48 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListOriginAccessControlsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "string",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of origin access controls. The response includes the items
+    #   in the list that occur after the marker. To get the next page of the
+    #   list, set this field's value to the value of `NextMarker` from the
+    #   current page's response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of origin access controls that you want in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListOriginAccessControlsRequest AWS API Documentation
+    #
+    class ListOriginAccessControlsRequest < Struct.new(
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] origin_access_control_list
+    #   A list of origin access controls.
+    #   @return [Types::OriginAccessControlList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListOriginAccessControlsResult AWS API Documentation
+    #
+    class ListOriginAccessControlsResult < Struct.new(
+      :origin_access_control_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListOriginRequestPoliciesRequest
     #   data as a hash:
     #
@@ -9515,6 +9759,20 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # A monitoring subscription already exists for the specified
+    # distribution.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/MonitoringSubscriptionAlreadyExists AWS API Documentation
+    #
+    class MonitoringSubscriptionAlreadyExists < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The cache policy does not exist.
     #
     # @!attribute [rw] message
@@ -9606,6 +9864,20 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # A monitoring subscription does not exist for the specified
+    # distribution.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchMonitoringSubscription AWS API Documentation
+    #
+    class NoSuchMonitoringSubscription < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # No origin exists with the specified `Origin Id`.
     #
     # @!attribute [rw] message
@@ -9614,6 +9886,19 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchOrigin AWS API Documentation
     #
     class NoSuchOrigin < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The origin access control does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchOriginAccessControl AWS API Documentation
+    #
+    class NoSuchOriginAccessControl < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -9764,6 +10049,7 @@ module Aws::CloudFront
     #           enabled: false, # required
     #           origin_shield_region: "OriginShieldRegion",
     #         },
+    #         origin_access_control_id: "string",
     #       }
     #
     # @!attribute [rw] id
@@ -9870,6 +10156,17 @@ module Aws::CloudFront
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html
     #   @return [Types::OriginShield]
     #
+    # @!attribute [rw] origin_access_control_id
+    #   The unique identifier of an origin access control for this origin.
+    #
+    #   For more information, see [Restricting access to an Amazon S3
+    #   origin][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Origin AWS API Documentation
     #
     class Origin < Struct.new(
@@ -9881,7 +10178,226 @@ module Aws::CloudFront
       :custom_origin_config,
       :connection_attempts,
       :connection_timeout,
-      :origin_shield)
+      :origin_shield,
+      :origin_access_control_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A CloudFront origin access control.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the origin access control.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_access_control_config
+    #   The origin access control.
+    #   @return [Types::OriginAccessControlConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginAccessControl AWS API Documentation
+    #
+    class OriginAccessControl < Struct.new(
+      :id,
+      :origin_access_control_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An origin access control with the specified parameters already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginAccessControlAlreadyExists AWS API Documentation
+    #
+    class OriginAccessControlAlreadyExists < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A CloudFront origin access control.
+    #
+    # @note When making an API call, you may pass OriginAccessControlConfig
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #         description: "string", # required
+    #         signing_protocol: "sigv4", # required, accepts sigv4
+    #         signing_behavior: "never", # required, accepts never, always, no-override
+    #         origin_access_control_origin_type: "s3", # required, accepts s3
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A name to identify the origin access control.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the origin access control.
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_protocol
+    #   The signing protocol of the origin access control, which determines
+    #   how CloudFront signs (authenticates) requests. The only valid value
+    #   is `sigv4`.
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_behavior
+    #   Specifies which requests CloudFront signs (adds authentication
+    #   information to). Specify `always` for the most common use case. For
+    #   more information, see [origin access control advanced settings][1]
+    #   in the *Amazon CloudFront Developer Guide*.
+    #
+    #   This field can have one of the following values:
+    #
+    #   * `always` – CloudFront signs all origin requests, overwriting the
+    #     `Authorization` header from the viewer request if one exists.
+    #
+    #   * `never` – CloudFront doesn't sign any origin requests. This value
+    #     turns off origin access control for all origins in all
+    #     distributions that use this origin access control.
+    #
+    #   * `no-override` – If the viewer request doesn't contain the
+    #     `Authorization` header, then CloudFront signs the origin request.
+    #     If the viewer request contains the `Authorization` header, then
+    #     CloudFront doesn't sign the origin request and instead passes
+    #     along the `Authorization` header from the viewer request.
+    #     **WARNING: To pass along the `Authorization` header from the
+    #     viewer request, you *must* add the `Authorization` header to an
+    #     [origin request policy][2] for all cache behaviors that use
+    #     origins associated with this origin access control.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_access_control_origin_type
+    #   The type of origin that this origin access control is for. The only
+    #   valid value is `s3`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginAccessControlConfig AWS API Documentation
+    #
+    class OriginAccessControlConfig < Struct.new(
+      :name,
+      :description,
+      :signing_protocol,
+      :signing_behavior,
+      :origin_access_control_origin_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Cannot delete the origin access control because it's in use by one or
+    # more distributions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginAccessControlInUse AWS API Documentation
+    #
+    class OriginAccessControlInUse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of CloudFront origin access controls.
+    #
+    # @!attribute [rw] marker
+    #   The value of the `Marker` field that was provided in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_marker
+    #   If there are more items in the list than are in this response, this
+    #   element is present. It contains the value to use in the `Marker`
+    #   field of another request to continue listing origin access controls.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of origin access controls requested.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] is_truncated
+    #   If there are more items in the list than are in this response, this
+    #   value is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] quantity
+    #   The number of origin access controls returned in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   Contains the origin access controls in the list.
+    #   @return [Array<Types::OriginAccessControlSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginAccessControlList AWS API Documentation
+    #
+    class OriginAccessControlList < Struct.new(
+      :marker,
+      :next_marker,
+      :max_items,
+      :is_truncated,
+      :quantity,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A CloudFront origin access control.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the origin access control.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the origin access control.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A unique name that identifies the origin access control.
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_protocol
+    #   The signing protocol of the origin access control. The signing
+    #   protocol determines how CloudFront signs (authenticates) requests.
+    #   The only valid value is `sigv4`.
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_behavior
+    #   A value that specifies which requests CloudFront signs (adds
+    #   authentication information to). This field can have one of the
+    #   following values:
+    #
+    #   * `never` – CloudFront doesn't sign any origin requests.
+    #
+    #   * `always` – CloudFront signs all origin requests, overwriting the
+    #     `Authorization` header from the viewer request if necessary.
+    #
+    #   * `no-override` – If the viewer request doesn't contain the
+    #     `Authorization` header, CloudFront signs the origin request. If
+    #     the viewer request contains the `Authorization` header, CloudFront
+    #     doesn't sign the origin request, but instead passes along the
+    #     `Authorization` header that it received in the viewer request.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_access_control_origin_type
+    #   The type of origin that this origin access control is for. The only
+    #   valid value is `s3`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginAccessControlSummary AWS API Documentation
+    #
+    class OriginAccessControlSummary < Struct.new(
+      :id,
+      :description,
+      :name,
+      :signing_protocol,
+      :signing_behavior,
+      :origin_access_control_origin_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10580,6 +11096,7 @@ module Aws::CloudFront
     #               enabled: false, # required
     #               origin_shield_region: "OriginShieldRegion",
     #             },
+    #             origin_access_control_id: "string",
     #           },
     #         ],
     #       }
@@ -11668,6 +12185,10 @@ module Aws::CloudFront
     #             access_control_max_age_sec: 1, # required
     #           },
     #         },
+    #         server_timing_headers_config: {
+    #           enabled: false, # required
+    #           sampling_rate: 1.0,
+    #         },
     #         custom_headers_config: {
     #           quantity: 1, # required
     #           items: [
@@ -11677,10 +12198,6 @@ module Aws::CloudFront
     #               override: false, # required
     #             },
     #           ],
-    #         },
-    #         server_timing_headers_config: {
-    #           enabled: false, # required
-    #           sampling_rate: 1.0,
     #         },
     #       }
     #
@@ -11706,14 +12223,14 @@ module Aws::CloudFront
     #   A configuration for a set of security-related HTTP response headers.
     #   @return [Types::ResponseHeadersPolicySecurityHeadersConfig]
     #
-    # @!attribute [rw] custom_headers_config
-    #   A configuration for a set of custom HTTP response headers.
-    #   @return [Types::ResponseHeadersPolicyCustomHeadersConfig]
-    #
     # @!attribute [rw] server_timing_headers_config
     #   A configuration for enabling the `Server-Timing` header in HTTP
     #   responses sent from CloudFront.
     #   @return [Types::ResponseHeadersPolicyServerTimingHeadersConfig]
+    #
+    # @!attribute [rw] custom_headers_config
+    #   A configuration for a set of custom HTTP response headers.
+    #   @return [Types::ResponseHeadersPolicyCustomHeadersConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ResponseHeadersPolicyConfig AWS API Documentation
     #
@@ -11722,8 +12239,8 @@ module Aws::CloudFront
       :name,
       :cors_config,
       :security_headers_config,
-      :custom_headers_config,
-      :server_timing_headers_config)
+      :server_timing_headers_config,
+      :custom_headers_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13583,6 +14100,27 @@ module Aws::CloudFront
     end
 
     # The maximum number of distributions have been associated with the
+    # specified origin access control.
+    #
+    # For more information, see [Quotas][1] (formerly known as limits) in
+    # the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyDistributionsAssociatedToOriginAccessControl AWS API Documentation
+    #
+    class TooManyDistributionsAssociatedToOriginAccessControl < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The maximum number of distributions have been associated with the
     # specified origin request policy. For more information, see [Quotas][1]
     # (formerly known as limits) in the *Amazon CloudFront Developer Guide*.
     #
@@ -13906,6 +14444,27 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyLambdaFunctionAssociations AWS API Documentation
     #
     class TooManyLambdaFunctionAssociations < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of origin access controls in your Amazon Web Services
+    # account exceeds the maximum allowed.
+    #
+    # For more information, see [Quotas][1] (formerly known as limits) in
+    # the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyOriginAccessControls AWS API Documentation
+    #
+    class TooManyOriginAccessControls < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -14466,6 +15025,7 @@ module Aws::CloudFront
     #                   enabled: false, # required
     #                   origin_shield_region: "OriginShieldRegion",
     #                 },
+    #                 origin_access_control_id: "string",
     #               },
     #             ],
     #           },
@@ -14672,7 +15232,7 @@ module Aws::CloudFront
     #             },
     #           },
     #           web_acl_id: "string",
-    #           http_version: "http1.1", # accepts http1.1, http2
+    #           http_version: "http1.1", # accepts http1.1, http2, http3, http2and3
     #           is_ipv6_enabled: false,
     #         },
     #         id: "string", # required
@@ -14985,6 +15545,63 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateOriginAccessControlRequest
+    #   data as a hash:
+    #
+    #       {
+    #         origin_access_control_config: { # required
+    #           name: "string", # required
+    #           description: "string", # required
+    #           signing_protocol: "sigv4", # required, accepts sigv4
+    #           signing_behavior: "never", # required, accepts never, always, no-override
+    #           origin_access_control_origin_type: "s3", # required, accepts s3
+    #         },
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] origin_access_control_config
+    #   An origin access control.
+    #   @return [Types::OriginAccessControlConfig]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the origin access control that you are
+    #   updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the origin access control that
+    #   you are updating.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateOriginAccessControlRequest AWS API Documentation
+    #
+    class UpdateOriginAccessControlRequest < Struct.new(
+      :origin_access_control_config,
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] origin_access_control
+    #   The origin access control after it has been updated.
+    #   @return [Types::OriginAccessControl]
+    #
+    # @!attribute [rw] etag
+    #   The new version of the origin access control after it has been
+    #   updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateOriginAccessControlResult AWS API Documentation
+    #
+    class UpdateOriginAccessControlResult < Struct.new(
+      :origin_access_control,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateOriginRequestPolicyRequest
     #   data as a hash:
     #
@@ -15247,6 +15864,10 @@ module Aws::CloudFront
     #               access_control_max_age_sec: 1, # required
     #             },
     #           },
+    #           server_timing_headers_config: {
+    #             enabled: false, # required
+    #             sampling_rate: 1.0,
+    #           },
     #           custom_headers_config: {
     #             quantity: 1, # required
     #             items: [
@@ -15256,10 +15877,6 @@ module Aws::CloudFront
     #                 override: false, # required
     #               },
     #             ],
-    #           },
-    #           server_timing_headers_config: {
-    #             enabled: false, # required
-    #             sampling_rate: 1.0,
     #           },
     #         },
     #         id: "string", # required

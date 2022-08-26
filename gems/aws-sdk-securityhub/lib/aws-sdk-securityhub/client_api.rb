@@ -67,6 +67,21 @@ module Aws::SecurityHub
     AwsAutoScalingLaunchConfigurationDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingLaunchConfigurationDetails')
     AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails')
     AwsAutoScalingLaunchConfigurationMetadataOptions = Shapes::StructureShape.new(name: 'AwsAutoScalingLaunchConfigurationMetadataOptions')
+    AwsBackupBackupPlanAdvancedBackupSettingsDetails = Shapes::StructureShape.new(name: 'AwsBackupBackupPlanAdvancedBackupSettingsDetails')
+    AwsBackupBackupPlanAdvancedBackupSettingsList = Shapes::ListShape.new(name: 'AwsBackupBackupPlanAdvancedBackupSettingsList')
+    AwsBackupBackupPlanBackupPlanDetails = Shapes::StructureShape.new(name: 'AwsBackupBackupPlanBackupPlanDetails')
+    AwsBackupBackupPlanDetails = Shapes::StructureShape.new(name: 'AwsBackupBackupPlanDetails')
+    AwsBackupBackupPlanLifecycleDetails = Shapes::StructureShape.new(name: 'AwsBackupBackupPlanLifecycleDetails')
+    AwsBackupBackupPlanRuleCopyActionsDetails = Shapes::StructureShape.new(name: 'AwsBackupBackupPlanRuleCopyActionsDetails')
+    AwsBackupBackupPlanRuleCopyActionsList = Shapes::ListShape.new(name: 'AwsBackupBackupPlanRuleCopyActionsList')
+    AwsBackupBackupPlanRuleDetails = Shapes::StructureShape.new(name: 'AwsBackupBackupPlanRuleDetails')
+    AwsBackupBackupPlanRuleList = Shapes::ListShape.new(name: 'AwsBackupBackupPlanRuleList')
+    AwsBackupBackupVaultDetails = Shapes::StructureShape.new(name: 'AwsBackupBackupVaultDetails')
+    AwsBackupBackupVaultNotificationsDetails = Shapes::StructureShape.new(name: 'AwsBackupBackupVaultNotificationsDetails')
+    AwsBackupRecoveryPointCalculatedLifecycleDetails = Shapes::StructureShape.new(name: 'AwsBackupRecoveryPointCalculatedLifecycleDetails')
+    AwsBackupRecoveryPointCreatedByDetails = Shapes::StructureShape.new(name: 'AwsBackupRecoveryPointCreatedByDetails')
+    AwsBackupRecoveryPointDetails = Shapes::StructureShape.new(name: 'AwsBackupRecoveryPointDetails')
+    AwsBackupRecoveryPointLifecycleDetails = Shapes::StructureShape.new(name: 'AwsBackupRecoveryPointLifecycleDetails')
     AwsCertificateManagerCertificateDetails = Shapes::StructureShape.new(name: 'AwsCertificateManagerCertificateDetails')
     AwsCertificateManagerCertificateDomainValidationOption = Shapes::StructureShape.new(name: 'AwsCertificateManagerCertificateDomainValidationOption')
     AwsCertificateManagerCertificateDomainValidationOptions = Shapes::ListShape.new(name: 'AwsCertificateManagerCertificateDomainValidationOptions')
@@ -848,6 +863,7 @@ module Aws::SecurityHub
     VpcInfoIpv6CidrBlockSetList = Shapes::ListShape.new(name: 'VpcInfoIpv6CidrBlockSetList')
     VpcInfoPeeringOptionsDetails = Shapes::StructureShape.new(name: 'VpcInfoPeeringOptionsDetails')
     Vulnerability = Shapes::StructureShape.new(name: 'Vulnerability')
+    VulnerabilityFixAvailable = Shapes::StringShape.new(name: 'VulnerabilityFixAvailable')
     VulnerabilityList = Shapes::ListShape.new(name: 'VulnerabilityList')
     VulnerabilityVendor = Shapes::StructureShape.new(name: 'VulnerabilityVendor')
     WafAction = Shapes::StructureShape.new(name: 'WafAction')
@@ -1132,6 +1148,92 @@ module Aws::SecurityHub
     AwsAutoScalingLaunchConfigurationMetadataOptions.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPutResponseHopLimit"))
     AwsAutoScalingLaunchConfigurationMetadataOptions.add_member(:http_tokens, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HttpTokens"))
     AwsAutoScalingLaunchConfigurationMetadataOptions.struct_class = Types::AwsAutoScalingLaunchConfigurationMetadataOptions
+
+    AwsBackupBackupPlanAdvancedBackupSettingsDetails.add_member(:backup_options, Shapes::ShapeRef.new(shape: FieldMap, location_name: "BackupOptions"))
+    AwsBackupBackupPlanAdvancedBackupSettingsDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceType"))
+    AwsBackupBackupPlanAdvancedBackupSettingsDetails.struct_class = Types::AwsBackupBackupPlanAdvancedBackupSettingsDetails
+
+    AwsBackupBackupPlanAdvancedBackupSettingsList.member = Shapes::ShapeRef.new(shape: AwsBackupBackupPlanAdvancedBackupSettingsDetails)
+
+    AwsBackupBackupPlanBackupPlanDetails.add_member(:backup_plan_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BackupPlanName"))
+    AwsBackupBackupPlanBackupPlanDetails.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AwsBackupBackupPlanAdvancedBackupSettingsList, location_name: "AdvancedBackupSettings"))
+    AwsBackupBackupPlanBackupPlanDetails.add_member(:backup_plan_rule, Shapes::ShapeRef.new(shape: AwsBackupBackupPlanRuleList, location_name: "BackupPlanRule"))
+    AwsBackupBackupPlanBackupPlanDetails.struct_class = Types::AwsBackupBackupPlanBackupPlanDetails
+
+    AwsBackupBackupPlanDetails.add_member(:backup_plan, Shapes::ShapeRef.new(shape: AwsBackupBackupPlanBackupPlanDetails, location_name: "BackupPlan"))
+    AwsBackupBackupPlanDetails.add_member(:backup_plan_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BackupPlanArn"))
+    AwsBackupBackupPlanDetails.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BackupPlanId"))
+    AwsBackupBackupPlanDetails.add_member(:version_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VersionId"))
+    AwsBackupBackupPlanDetails.struct_class = Types::AwsBackupBackupPlanDetails
+
+    AwsBackupBackupPlanLifecycleDetails.add_member(:delete_after_days, Shapes::ShapeRef.new(shape: Long, location_name: "DeleteAfterDays"))
+    AwsBackupBackupPlanLifecycleDetails.add_member(:move_to_cold_storage_after_days, Shapes::ShapeRef.new(shape: Long, location_name: "MoveToColdStorageAfterDays"))
+    AwsBackupBackupPlanLifecycleDetails.struct_class = Types::AwsBackupBackupPlanLifecycleDetails
+
+    AwsBackupBackupPlanRuleCopyActionsDetails.add_member(:destination_backup_vault_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DestinationBackupVaultArn"))
+    AwsBackupBackupPlanRuleCopyActionsDetails.add_member(:lifecycle, Shapes::ShapeRef.new(shape: AwsBackupBackupPlanLifecycleDetails, location_name: "Lifecycle"))
+    AwsBackupBackupPlanRuleCopyActionsDetails.struct_class = Types::AwsBackupBackupPlanRuleCopyActionsDetails
+
+    AwsBackupBackupPlanRuleCopyActionsList.member = Shapes::ShapeRef.new(shape: AwsBackupBackupPlanRuleCopyActionsDetails)
+
+    AwsBackupBackupPlanRuleDetails.add_member(:target_backup_vault, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TargetBackupVault"))
+    AwsBackupBackupPlanRuleDetails.add_member(:start_window_minutes, Shapes::ShapeRef.new(shape: Long, location_name: "StartWindowMinutes"))
+    AwsBackupBackupPlanRuleDetails.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ScheduleExpression"))
+    AwsBackupBackupPlanRuleDetails.add_member(:rule_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RuleName"))
+    AwsBackupBackupPlanRuleDetails.add_member(:rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RuleId"))
+    AwsBackupBackupPlanRuleDetails.add_member(:enable_continuous_backup, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableContinuousBackup"))
+    AwsBackupBackupPlanRuleDetails.add_member(:completion_window_minutes, Shapes::ShapeRef.new(shape: Long, location_name: "CompletionWindowMinutes"))
+    AwsBackupBackupPlanRuleDetails.add_member(:copy_actions, Shapes::ShapeRef.new(shape: AwsBackupBackupPlanRuleCopyActionsList, location_name: "CopyActions"))
+    AwsBackupBackupPlanRuleDetails.add_member(:lifecycle, Shapes::ShapeRef.new(shape: AwsBackupBackupPlanLifecycleDetails, location_name: "Lifecycle"))
+    AwsBackupBackupPlanRuleDetails.struct_class = Types::AwsBackupBackupPlanRuleDetails
+
+    AwsBackupBackupPlanRuleList.member = Shapes::ShapeRef.new(shape: AwsBackupBackupPlanRuleDetails)
+
+    AwsBackupBackupVaultDetails.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BackupVaultArn"))
+    AwsBackupBackupVaultDetails.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BackupVaultName"))
+    AwsBackupBackupVaultDetails.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "EncryptionKeyArn"))
+    AwsBackupBackupVaultDetails.add_member(:notifications, Shapes::ShapeRef.new(shape: AwsBackupBackupVaultNotificationsDetails, location_name: "Notifications"))
+    AwsBackupBackupVaultDetails.add_member(:access_policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AccessPolicy"))
+    AwsBackupBackupVaultDetails.struct_class = Types::AwsBackupBackupVaultDetails
+
+    AwsBackupBackupVaultNotificationsDetails.add_member(:backup_vault_events, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "BackupVaultEvents"))
+    AwsBackupBackupVaultNotificationsDetails.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SnsTopicArn"))
+    AwsBackupBackupVaultNotificationsDetails.struct_class = Types::AwsBackupBackupVaultNotificationsDetails
+
+    AwsBackupRecoveryPointCalculatedLifecycleDetails.add_member(:delete_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DeleteAt"))
+    AwsBackupRecoveryPointCalculatedLifecycleDetails.add_member(:move_to_cold_storage_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MoveToColdStorageAt"))
+    AwsBackupRecoveryPointCalculatedLifecycleDetails.struct_class = Types::AwsBackupRecoveryPointCalculatedLifecycleDetails
+
+    AwsBackupRecoveryPointCreatedByDetails.add_member(:backup_plan_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BackupPlanArn"))
+    AwsBackupRecoveryPointCreatedByDetails.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BackupPlanId"))
+    AwsBackupRecoveryPointCreatedByDetails.add_member(:backup_plan_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BackupPlanVersion"))
+    AwsBackupRecoveryPointCreatedByDetails.add_member(:backup_rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BackupRuleId"))
+    AwsBackupRecoveryPointCreatedByDetails.struct_class = Types::AwsBackupRecoveryPointCreatedByDetails
+
+    AwsBackupRecoveryPointDetails.add_member(:backup_size_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "BackupSizeInBytes"))
+    AwsBackupRecoveryPointDetails.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BackupVaultArn"))
+    AwsBackupRecoveryPointDetails.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BackupVaultName"))
+    AwsBackupRecoveryPointDetails.add_member(:calculated_lifecycle, Shapes::ShapeRef.new(shape: AwsBackupRecoveryPointCalculatedLifecycleDetails, location_name: "CalculatedLifecycle"))
+    AwsBackupRecoveryPointDetails.add_member(:completion_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CompletionDate"))
+    AwsBackupRecoveryPointDetails.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsBackupRecoveryPointCreatedByDetails, location_name: "CreatedBy"))
+    AwsBackupRecoveryPointDetails.add_member(:creation_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreationDate"))
+    AwsBackupRecoveryPointDetails.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "EncryptionKeyArn"))
+    AwsBackupRecoveryPointDetails.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "IamRoleArn"))
+    AwsBackupRecoveryPointDetails.add_member(:is_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsEncrypted"))
+    AwsBackupRecoveryPointDetails.add_member(:last_restore_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LastRestoreTime"))
+    AwsBackupRecoveryPointDetails.add_member(:lifecycle, Shapes::ShapeRef.new(shape: AwsBackupRecoveryPointLifecycleDetails, location_name: "Lifecycle"))
+    AwsBackupRecoveryPointDetails.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RecoveryPointArn"))
+    AwsBackupRecoveryPointDetails.add_member(:resource_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceArn"))
+    AwsBackupRecoveryPointDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceType"))
+    AwsBackupRecoveryPointDetails.add_member(:source_backup_vault_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SourceBackupVaultArn"))
+    AwsBackupRecoveryPointDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsBackupRecoveryPointDetails.add_member(:status_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StatusMessage"))
+    AwsBackupRecoveryPointDetails.add_member(:storage_class, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StorageClass"))
+    AwsBackupRecoveryPointDetails.struct_class = Types::AwsBackupRecoveryPointDetails
+
+    AwsBackupRecoveryPointLifecycleDetails.add_member(:delete_after_days, Shapes::ShapeRef.new(shape: Long, location_name: "DeleteAfterDays"))
+    AwsBackupRecoveryPointLifecycleDetails.add_member(:move_to_cold_storage_after_days, Shapes::ShapeRef.new(shape: Long, location_name: "MoveToColdStorageAfterDays"))
+    AwsBackupRecoveryPointLifecycleDetails.struct_class = Types::AwsBackupRecoveryPointLifecycleDetails
 
     AwsCertificateManagerCertificateDetails.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CertificateAuthorityArn"))
     AwsCertificateManagerCertificateDetails.add_member(:created_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedAt"))
@@ -4577,6 +4679,9 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_waf_rule, Shapes::ShapeRef.new(shape: AwsWafRuleDetails, location_name: "AwsWafRule"))
     ResourceDetails.add_member(:aws_waf_rule_group, Shapes::ShapeRef.new(shape: AwsWafRuleGroupDetails, location_name: "AwsWafRuleGroup"))
     ResourceDetails.add_member(:aws_ecs_task, Shapes::ShapeRef.new(shape: AwsEcsTaskDetails, location_name: "AwsEcsTask"))
+    ResourceDetails.add_member(:aws_backup_backup_vault, Shapes::ShapeRef.new(shape: AwsBackupBackupVaultDetails, location_name: "AwsBackupBackupVault"))
+    ResourceDetails.add_member(:aws_backup_backup_plan, Shapes::ShapeRef.new(shape: AwsBackupBackupPlanDetails, location_name: "AwsBackupBackupPlan"))
+    ResourceDetails.add_member(:aws_backup_recovery_point, Shapes::ShapeRef.new(shape: AwsBackupRecoveryPointDetails, location_name: "AwsBackupRecoveryPoint"))
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)
@@ -4731,6 +4836,8 @@ module Aws::SecurityHub
     SoftwarePackage.add_member(:architecture, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Architecture"))
     SoftwarePackage.add_member(:package_manager, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PackageManager"))
     SoftwarePackage.add_member(:file_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FilePath"))
+    SoftwarePackage.add_member(:fixed_in_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FixedInVersion"))
+    SoftwarePackage.add_member(:remediation, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Remediation"))
     SoftwarePackage.struct_class = Types::SoftwarePackage
 
     SoftwarePackageList.member = Shapes::ShapeRef.new(shape: SoftwarePackage)
@@ -4926,6 +5033,7 @@ module Aws::SecurityHub
     Vulnerability.add_member(:related_vulnerabilities, Shapes::ShapeRef.new(shape: StringList, location_name: "RelatedVulnerabilities"))
     Vulnerability.add_member(:vendor, Shapes::ShapeRef.new(shape: VulnerabilityVendor, location_name: "Vendor"))
     Vulnerability.add_member(:reference_urls, Shapes::ShapeRef.new(shape: StringList, location_name: "ReferenceUrls"))
+    Vulnerability.add_member(:fix_available, Shapes::ShapeRef.new(shape: VulnerabilityFixAvailable, location_name: "FixAvailable"))
     Vulnerability.struct_class = Types::Vulnerability
 
     VulnerabilityList.member = Shapes::ShapeRef.new(shape: Vulnerability)

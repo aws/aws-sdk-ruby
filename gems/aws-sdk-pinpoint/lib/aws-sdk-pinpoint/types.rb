@@ -4565,6 +4565,86 @@ module Aws::Pinpoint
     #             connect_campaign_arn: "__string",
     #             connect_campaign_execution_role_arn: "__string",
     #           },
+    #           sending_schedule: false,
+    #           open_hours: {
+    #             email: {
+    #               "MONDAY" => [
+    #                 {
+    #                   start_time: "__string",
+    #                   end_time: "__string",
+    #                 },
+    #               ],
+    #             },
+    #             sms: {
+    #               "MONDAY" => [
+    #                 {
+    #                   start_time: "__string",
+    #                   end_time: "__string",
+    #                 },
+    #               ],
+    #             },
+    #             push: {
+    #               "MONDAY" => [
+    #                 {
+    #                   start_time: "__string",
+    #                   end_time: "__string",
+    #                 },
+    #               ],
+    #             },
+    #             voice: {
+    #               "MONDAY" => [
+    #                 {
+    #                   start_time: "__string",
+    #                   end_time: "__string",
+    #                 },
+    #               ],
+    #             },
+    #             custom: {
+    #               "MONDAY" => [
+    #                 {
+    #                   start_time: "__string",
+    #                   end_time: "__string",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           closed_days: {
+    #             email: [
+    #               {
+    #                 name: "__string",
+    #                 start_date_time: "__string",
+    #                 end_date_time: "__string",
+    #               },
+    #             ],
+    #             sms: [
+    #               {
+    #                 name: "__string",
+    #                 start_date_time: "__string",
+    #                 end_date_time: "__string",
+    #               },
+    #             ],
+    #             push: [
+    #               {
+    #                 name: "__string",
+    #                 start_date_time: "__string",
+    #                 end_date_time: "__string",
+    #               },
+    #             ],
+    #             voice: [
+    #               {
+    #                 name: "__string",
+    #                 start_date_time: "__string",
+    #                 end_date_time: "__string",
+    #               },
+    #             ],
+    #             custom: [
+    #               {
+    #                 name: "__string",
+    #                 start_date_time: "__string",
+    #                 end_date_time: "__string",
+    #               },
+    #             ],
+    #           },
     #         },
     #       }
     #
@@ -12042,9 +12122,31 @@ module Aws::Pinpoint
     #   This object is not used or supported.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] wait_for_quiet_time
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] refresh_on_segment_update
+    #   @return [Boolean]
+    #
     # @!attribute [rw] journey_channel_settings
     #   Amazon Resource Name (ARN) of the Connect Campaign.
     #   @return [Types::JourneyChannelSettings]
+    #
+    # @!attribute [rw] sending_schedule
+    #   Indicates if journey have Advance Quiet Time (OpenHours and
+    #   ClosedDays). This flag should be set to true in order to allow
+    #   (OpenHours and ClosedDays)
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] open_hours
+    #   The time when journey allow to send messages. QuietTime should be
+    #   configured first and SendingSchedule should be set to true.
+    #   @return [Types::OpenHours]
+    #
+    # @!attribute [rw] closed_days
+    #   The time when journey will stop sending messages. QuietTime should
+    #   be configured first and SendingSchedule should be set to true.
+    #   @return [Types::ClosedDays]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyResponse AWS API Documentation
     #
@@ -12064,7 +12166,12 @@ module Aws::Pinpoint
       :start_condition,
       :state,
       :tags,
-      :journey_channel_settings)
+      :wait_for_quiet_time,
+      :refresh_on_segment_update,
+      :journey_channel_settings,
+      :sending_schedule,
+      :open_hours,
+      :closed_days)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19189,6 +19296,86 @@ module Aws::Pinpoint
     #             connect_campaign_arn: "__string",
     #             connect_campaign_execution_role_arn: "__string",
     #           },
+    #           sending_schedule: false,
+    #           open_hours: {
+    #             email: {
+    #               "MONDAY" => [
+    #                 {
+    #                   start_time: "__string",
+    #                   end_time: "__string",
+    #                 },
+    #               ],
+    #             },
+    #             sms: {
+    #               "MONDAY" => [
+    #                 {
+    #                   start_time: "__string",
+    #                   end_time: "__string",
+    #                 },
+    #               ],
+    #             },
+    #             push: {
+    #               "MONDAY" => [
+    #                 {
+    #                   start_time: "__string",
+    #                   end_time: "__string",
+    #                 },
+    #               ],
+    #             },
+    #             voice: {
+    #               "MONDAY" => [
+    #                 {
+    #                   start_time: "__string",
+    #                   end_time: "__string",
+    #                 },
+    #               ],
+    #             },
+    #             custom: {
+    #               "MONDAY" => [
+    #                 {
+    #                   start_time: "__string",
+    #                   end_time: "__string",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           closed_days: {
+    #             email: [
+    #               {
+    #                 name: "__string",
+    #                 start_date_time: "__string",
+    #                 end_date_time: "__string",
+    #               },
+    #             ],
+    #             sms: [
+    #               {
+    #                 name: "__string",
+    #                 start_date_time: "__string",
+    #                 end_date_time: "__string",
+    #               },
+    #             ],
+    #             push: [
+    #               {
+    #                 name: "__string",
+    #                 start_date_time: "__string",
+    #                 end_date_time: "__string",
+    #               },
+    #             ],
+    #             voice: [
+    #               {
+    #                 name: "__string",
+    #                 start_date_time: "__string",
+    #                 end_date_time: "__string",
+    #               },
+    #             ],
+    #             custom: [
+    #               {
+    #                 name: "__string",
+    #                 start_date_time: "__string",
+    #                 end_date_time: "__string",
+    #               },
+    #             ],
+    #           },
     #         },
     #       }
     #
@@ -21517,6 +21704,86 @@ module Aws::Pinpoint
     #           connect_campaign_arn: "__string",
     #           connect_campaign_execution_role_arn: "__string",
     #         },
+    #         sending_schedule: false,
+    #         open_hours: {
+    #           email: {
+    #             "MONDAY" => [
+    #               {
+    #                 start_time: "__string",
+    #                 end_time: "__string",
+    #               },
+    #             ],
+    #           },
+    #           sms: {
+    #             "MONDAY" => [
+    #               {
+    #                 start_time: "__string",
+    #                 end_time: "__string",
+    #               },
+    #             ],
+    #           },
+    #           push: {
+    #             "MONDAY" => [
+    #               {
+    #                 start_time: "__string",
+    #                 end_time: "__string",
+    #               },
+    #             ],
+    #           },
+    #           voice: {
+    #             "MONDAY" => [
+    #               {
+    #                 start_time: "__string",
+    #                 end_time: "__string",
+    #               },
+    #             ],
+    #           },
+    #           custom: {
+    #             "MONDAY" => [
+    #               {
+    #                 start_time: "__string",
+    #                 end_time: "__string",
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         closed_days: {
+    #           email: [
+    #             {
+    #               name: "__string",
+    #               start_date_time: "__string",
+    #               end_date_time: "__string",
+    #             },
+    #           ],
+    #           sms: [
+    #             {
+    #               name: "__string",
+    #               start_date_time: "__string",
+    #               end_date_time: "__string",
+    #             },
+    #           ],
+    #           push: [
+    #             {
+    #               name: "__string",
+    #               start_date_time: "__string",
+    #               end_date_time: "__string",
+    #             },
+    #           ],
+    #           voice: [
+    #             {
+    #               name: "__string",
+    #               start_date_time: "__string",
+    #               end_date_time: "__string",
+    #             },
+    #           ],
+    #           custom: [
+    #             {
+    #               name: "__string",
+    #               start_date_time: "__string",
+    #               end_date_time: "__string",
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] activities
@@ -21622,6 +21889,22 @@ module Aws::Pinpoint
     #   APIs for dialing.
     #   @return [Types::JourneyChannelSettings]
     #
+    # @!attribute [rw] sending_schedule
+    #   Indicates if journey have Advance Quiet Time (OpenHours and
+    #   ClosedDays). This flag should be set to true in order to allow
+    #   (OpenHours and ClosedDays)
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] open_hours
+    #   The time when journey allow to send messages. QuietTime should be
+    #   configured first and SendingSchedule should be set to true.
+    #   @return [Types::OpenHours]
+    #
+    # @!attribute [rw] closed_days
+    #   The time when journey will stop sending messages. QuietTime should
+    #   be configured first and SendingSchedule should be set to true.
+    #   @return [Types::ClosedDays]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteJourneyRequest AWS API Documentation
     #
     class WriteJourneyRequest < Struct.new(
@@ -21639,7 +21922,10 @@ module Aws::Pinpoint
       :state,
       :wait_for_quiet_time,
       :refresh_on_segment_update,
-      :journey_channel_settings)
+      :journey_channel_settings,
+      :sending_schedule,
+      :open_hours,
+      :closed_days)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22101,6 +22387,222 @@ module Aws::Pinpoint
       :template_configuration,
       :treatment_description,
       :treatment_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Open Hour Rules.
+    #
+    # @note When making an API call, you may pass OpenHoursRule
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: "__string",
+    #         end_time: "__string",
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   Local start time in ISO 8601 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   Local start time in ISO 8601 format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/OpenHoursRule AWS API Documentation
+    #
+    class OpenHoursRule < Struct.new(
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The time when journey allow to send messages. QuietTime should be
+    # configured first and SendingSchedule should be set to true.
+    #
+    # @note When making an API call, you may pass OpenHours
+    #   data as a hash:
+    #
+    #       {
+    #         email: {
+    #           "MONDAY" => [
+    #             {
+    #               start_time: "__string",
+    #               end_time: "__string",
+    #             },
+    #           ],
+    #         },
+    #         sms: {
+    #           "MONDAY" => [
+    #             {
+    #               start_time: "__string",
+    #               end_time: "__string",
+    #             },
+    #           ],
+    #         },
+    #         push: {
+    #           "MONDAY" => [
+    #             {
+    #               start_time: "__string",
+    #               end_time: "__string",
+    #             },
+    #           ],
+    #         },
+    #         voice: {
+    #           "MONDAY" => [
+    #             {
+    #               start_time: "__string",
+    #               end_time: "__string",
+    #             },
+    #           ],
+    #         },
+    #         custom: {
+    #           "MONDAY" => [
+    #             {
+    #               start_time: "__string",
+    #               end_time: "__string",
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] email
+    #   Rules for Email Channel.
+    #   @return [Hash<String,Array<Types::OpenHoursRule>>]
+    #
+    # @!attribute [rw] sms
+    #   Rules for SMS Channel.
+    #   @return [Hash<String,Array<Types::OpenHoursRule>>]
+    #
+    # @!attribute [rw] push
+    #   Rules for Push Channel.
+    #   @return [Hash<String,Array<Types::OpenHoursRule>>]
+    #
+    # @!attribute [rw] voice
+    #   Rules for Email Channel.
+    #   @return [Hash<String,Array<Types::OpenHoursRule>>]
+    #
+    # @!attribute [rw] custom
+    #   Rules for Custom Channel.
+    #   @return [Hash<String,Array<Types::OpenHoursRule>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/OpenHours AWS API Documentation
+    #
+    class OpenHours < Struct.new(
+      :email,
+      :sms,
+      :push,
+      :voice,
+      :custom)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Closed Days Rule. Part of Journey sending schedule.
+    #
+    # @note When making an API call, you may pass ClosedDaysRule
+    #   data as a hash:
+    #
+    #       {
+    #         name: "__string",
+    #         start_date_time: "__string",
+    #         end_date_time: "__string",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date_time
+    #   Start Datetime in ISO 8601 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date_time
+    #   End Datetime in ISO 8601 format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ClosedDaysRule AWS API Documentation
+    #
+    class ClosedDaysRule < Struct.new(
+      :name,
+      :start_date_time,
+      :end_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The time when journey will stop sending messages.
+    #
+    # @note When making an API call, you may pass ClosedDays
+    #   data as a hash:
+    #
+    #       {
+    #         email: [
+    #           {
+    #             name: "__string",
+    #             start_date_time: "__string",
+    #             end_date_time: "__string",
+    #           },
+    #         ],
+    #         sms: [
+    #           {
+    #             name: "__string",
+    #             start_date_time: "__string",
+    #             end_date_time: "__string",
+    #           },
+    #         ],
+    #         push: [
+    #           {
+    #             name: "__string",
+    #             start_date_time: "__string",
+    #             end_date_time: "__string",
+    #           },
+    #         ],
+    #         voice: [
+    #           {
+    #             name: "__string",
+    #             start_date_time: "__string",
+    #             end_date_time: "__string",
+    #           },
+    #         ],
+    #         custom: [
+    #           {
+    #             name: "__string",
+    #             start_date_time: "__string",
+    #             end_date_time: "__string",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] email
+    #   Rules for a Channel.
+    #   @return [Array<Types::ClosedDaysRule>]
+    #
+    # @!attribute [rw] sms
+    #   Rules for a Channel.
+    #   @return [Array<Types::ClosedDaysRule>]
+    #
+    # @!attribute [rw] push
+    #   Rules for a Channel.
+    #   @return [Array<Types::ClosedDaysRule>]
+    #
+    # @!attribute [rw] voice
+    #   Rules for a Channel.
+    #   @return [Array<Types::ClosedDaysRule>]
+    #
+    # @!attribute [rw] custom
+    #   Rules for a Channel.
+    #   @return [Array<Types::ClosedDaysRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ClosedDays AWS API Documentation
+    #
+    class ClosedDays < Struct.new(
+      :email,
+      :sms,
+      :push,
+      :voice,
+      :custom)
       SENSITIVE = []
       include Aws::Structure
     end

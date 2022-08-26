@@ -1916,7 +1916,8 @@
         "DeliveryS3KeyPrefix":{"shape":"DeliveryS3KeyPrefix"},
         "ConformancePackInputParameters":{"shape":"ConformancePackInputParameters"},
         "LastUpdateRequestedTime":{"shape":"Date"},
-        "CreatedBy":{"shape":"StringWithCharLimit256"}
+        "CreatedBy":{"shape":"StringWithCharLimit256"},
+        "TemplateSSMDocumentDetails":{"shape":"TemplateSSMDocumentDetails"}
       }
     },
     "ConformancePackDetailList":{
@@ -3965,7 +3966,8 @@
         "TemplateBody":{"shape":"TemplateBody"},
         "DeliveryS3Bucket":{"shape":"DeliveryS3Bucket"},
         "DeliveryS3KeyPrefix":{"shape":"DeliveryS3KeyPrefix"},
-        "ConformancePackInputParameters":{"shape":"ConformancePackInputParameters"}
+        "ConformancePackInputParameters":{"shape":"ConformancePackInputParameters"},
+        "TemplateSSMDocumentDetails":{"shape":"TemplateSSMDocumentDetails"}
       }
     },
     "PutConformancePackResponse":{
@@ -4583,7 +4585,16 @@
         "AWS::StepFunctions::StateMachine",
         "AWS::Batch::JobQueue",
         "AWS::Batch::ComputeEnvironment",
-        "AWS::AccessAnalyzer::Analyzer"
+        "AWS::AccessAnalyzer::Analyzer",
+        "AWS::Athena::WorkGroup",
+        "AWS::Athena::DataCatalog",
+        "AWS::Detective::Graph",
+        "AWS::GlobalAccelerator::Accelerator",
+        "AWS::GlobalAccelerator::EndpointGroup",
+        "AWS::GlobalAccelerator::Listener",
+        "AWS::EC2::TransitGatewayAttachment",
+        "AWS::EC2::TransitGatewayRouteTable",
+        "AWS::DMS::Certificate"
       ]
     },
     "ResourceTypeList":{
@@ -4658,6 +4669,14 @@
       "type":"integer",
       "max":50,
       "min":0
+    },
+    "SSMDocumentName":{
+      "type":"string",
+      "pattern":"^[a-zA-Z0-9_\\-.:/]{3,200}$"
+    },
+    "SSMDocumentVersion":{
+      "type":"string",
+      "pattern":"([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)"
     },
     "SchemaVersionId":{
       "type":"string",
@@ -4968,6 +4987,14 @@
       "max":1024,
       "min":1,
       "pattern":"s3://.*"
+    },
+    "TemplateSSMDocumentDetails":{
+      "type":"structure",
+      "required":["DocumentName"],
+      "members":{
+        "DocumentName":{"shape":"SSMDocumentName"},
+        "DocumentVersion":{"shape":"SSMDocumentVersion"}
+      }
     },
     "TooManyTagsException":{
       "type":"structure",

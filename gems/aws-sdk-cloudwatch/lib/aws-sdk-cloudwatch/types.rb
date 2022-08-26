@@ -1090,7 +1090,7 @@ module Aws::CloudWatch
     # many Amazon EC2 metrics publish `InstanceId` as a dimension name, and
     # the actual instance ID as the value for that dimension.
     #
-    # You can assign up to 10 dimensions to a metric.
+    # You can assign up to 30 dimensions to a metric.
     #
     # @note When making an API call, you may pass Dimension
     #   data as a hash:
@@ -1843,7 +1843,7 @@ module Aws::CloudWatch
     # @!attribute [rw] output_format
     #   The output format for the stream. Valid values are `json` and
     #   `opentelemetry0.7`. For more information about metric stream output
-    #   formats, see [ Metric streams output formats][1].
+    #   formats, see [Metric streams output formats][1].
     #
     #
     #
@@ -1996,13 +1996,18 @@ module Aws::CloudWatch
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html
     #   @return [String]
     #
+    # @!attribute [rw] managed_rule
+    #   An optional built-in rule that Amazon Web Services manages.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/InsightRule AWS API Documentation
     #
     class InsightRule < Struct.new(
       :name,
       :state,
       :schema,
-      :definition)
+      :definition,
+      :managed_rule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2327,6 +2332,60 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListManagedInsightRulesInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of an Amazon Web Services resource that has managed
+    #   Contributor Insights rules.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Include this value to get the next set of rules if the value was
+    #   returned by the previous operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in one operation. If you
+    #   omit this parameter, the default number is used. The default number
+    #   is `100`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListManagedInsightRulesInput AWS API Documentation
+    #
+    class ListManagedInsightRulesInput < Struct.new(
+      :resource_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] managed_rules
+    #   The managed rules that are available for the specified Amazon Web
+    #   Services resource.
+    #   @return [Array<Types::ManagedRuleDescription>]
+    #
+    # @!attribute [rw] next_token
+    #   Include this value to get the next set of rules if the value was
+    #   returned by the previous operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListManagedInsightRulesOutput AWS API Documentation
+    #
+    class ListManagedInsightRulesOutput < Struct.new(
+      :managed_rules,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListMetricStreamsInput
     #   data as a hash:
     #
@@ -2492,6 +2551,106 @@ module Aws::CloudWatch
     #
     class ListTagsForResourceOutput < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the information that's required to enable a managed
+    # Contributor Insights rule for an Amazon Web Services resource.
+    #
+    # @note When making an API call, you may pass ManagedRule
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The template name for the managed Contributor Insights rule, as
+    #   returned by `ListManagedInsightRules`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of an Amazon Web Services resource that has managed
+    #   Contributor Insights rules.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs that you can associate with a managed
+    #   Contributor Insights rule. You can associate as many as 50 tags with
+    #   a rule. Tags can help you organize and categorize your resources.
+    #   You also can use them to scope user permissions by granting a user
+    #   permission to access or change only the resources that have certain
+    #   tag values. To associate tags with a rule, you must have the
+    #   `cloudwatch:TagResource` permission in addition to the
+    #   `cloudwatch:PutInsightRule` permission. If you are using this
+    #   operation to update an existing Contributor Insights rule, any tags
+    #   that you specify in this parameter are ignored. To change the tags
+    #   of an existing rule, use `TagResource`.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ManagedRule AWS API Documentation
+    #
+    class ManagedRule < Struct.new(
+      :template_name,
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about managed Contributor Insights rules, as
+    # returned by `ListManagedInsightRules`.
+    #
+    # @!attribute [rw] template_name
+    #   The template name for the managed rule. Used to enable managed rules
+    #   using `PutManagedInsightRules`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   If a managed rule is enabled, this is the ARN for the related Amazon
+    #   Web Services resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_state
+    #   Describes the state of a managed rule. If present, it contains
+    #   information about the Contributor Insights rule that contains
+    #   information about the related Amazon Web Services resource.
+    #   @return [Types::ManagedRuleState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ManagedRuleDescription AWS API Documentation
+    #
+    class ManagedRuleDescription < Struct.new(
+      :template_name,
+      :resource_arn,
+      :rule_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of a managed Contributor Insights rule.
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the Contributor Insights rule that contains data for the
+    #   specified Amazon Web Services resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Indicates whether the rule is enabled or disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ManagedRuleState AWS API Documentation
+    #
+    class ManagedRuleState < Struct.new(
+      :rule_name,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3859,6 +4018,48 @@ module Aws::CloudWatch
     #
     class PutInsightRuleOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass PutManagedInsightRulesInput
+    #   data as a hash:
+    #
+    #       {
+    #         managed_rules: [ # required
+    #           {
+    #             template_name: "TemplateName", # required
+    #             resource_arn: "AmazonResourceName", # required
+    #             tags: [
+    #               {
+    #                 key: "TagKey", # required
+    #                 value: "TagValue", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] managed_rules
+    #   A list of `ManagedRules` to enable.
+    #   @return [Array<Types::ManagedRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutManagedInsightRulesInput AWS API Documentation
+    #
+    class PutManagedInsightRulesInput < Struct.new(
+      :managed_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failures
+    #   An array that lists the rules that could not be enabled.
+    #   @return [Array<Types::PartialFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutManagedInsightRulesOutput AWS API Documentation
+    #
+    class PutManagedInsightRulesOutput < Struct.new(
+      :failures)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutMetricAlarmInput
     #   data as a hash:
     #
@@ -4082,7 +4283,7 @@ module Aws::CloudWatch
     #
     #   However, if the metric is published with multiple types of units and
     #   you don't specify a unit, the alarm's behavior is not defined and
-    #   it behaves predictably.
+    #   it behaves unpredictably.
     #
     #   We recommend omitting `Unit` so that you don't inadvertently
     #   specify an incorrect unit that is not published for this metric.
@@ -4288,7 +4489,7 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] metric_data
-    #   The data for the metric. The array can include no more than 20
+    #   The data for the metric. The array can include no more than 1000
     #   metrics per call.
     #   @return [Array<Types::MetricDatum>]
     #

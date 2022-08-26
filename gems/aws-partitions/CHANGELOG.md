@@ -3,6 +3,53 @@ Unreleased Changes
 
 * Feature - Add a metadata method to `Partition` to supplement endpoint generation in service gems.
 
+1.622.0 (2022-08-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.621.0 (2022-08-22)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SupportApp`.
+
+1.620.0 (2022-08-19)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.619.0 (2022-08-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.618.0 (2022-08-12)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.617.0 (2022-08-11)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PrivateNetworks`.
+
+* Feature - Added support for enumerating regions for `Aws::BackupStorage`.
+
+1.616.0 (2022-08-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.615.0 (2022-08-04)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.614.0 (2022-08-02)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::LicenseManagerUserSubscriptions`.
+
 1.613.0 (2022-07-29)
 ------------------
 

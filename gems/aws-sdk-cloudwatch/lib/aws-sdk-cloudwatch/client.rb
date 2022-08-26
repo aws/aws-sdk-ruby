@@ -397,7 +397,14 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
-    # Deletes the specified anomaly detection model from your account.
+    # Deletes the specified anomaly detection model from your account. For
+    # more information about how to delete an anomaly detection model, see
+    # [Deleting an anomaly detection model][1] in the *CloudWatch User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Anomaly_Detection_Alarm.html#Delete_Anomaly_Detection_Model
     #
     # @option params [String] :namespace
     #   The namespace associated with the anomaly detection model to delete.
@@ -1037,6 +1044,8 @@ module Aws::CloudWatch
     #   * {Types::DescribeAnomalyDetectorsOutput#anomaly_detectors #anomaly_detectors} => Array&lt;Types::AnomalyDetector&gt;
     #   * {Types::DescribeAnomalyDetectorsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_anomaly_detectors({
@@ -1138,6 +1147,7 @@ module Aws::CloudWatch
     #   resp.insight_rules[0].state #=> String
     #   resp.insight_rules[0].schema #=> String
     #   resp.insight_rules[0].definition #=> String
+    #   resp.insight_rules[0].managed_rule #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeInsightRules AWS API Documentation
     #
@@ -2083,6 +2093,55 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Returns a list that contains the number of managed Contributor
+    # Insights rules in your account.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of an Amazon Web Services resource that has managed
+    #   Contributor Insights rules.
+    #
+    # @option params [String] :next_token
+    #   Include this value to get the next set of rules if the value was
+    #   returned by the previous operation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in one operation. If you omit
+    #   this parameter, the default number is used. The default number is
+    #   `100`.
+    #
+    # @return [Types::ListManagedInsightRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListManagedInsightRulesOutput#managed_rules #managed_rules} => Array&lt;Types::ManagedRuleDescription&gt;
+    #   * {Types::ListManagedInsightRulesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_managed_insight_rules({
+    #     resource_arn: "AmazonResourceName", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.managed_rules #=> Array
+    #   resp.managed_rules[0].template_name #=> String
+    #   resp.managed_rules[0].resource_arn #=> String
+    #   resp.managed_rules[0].rule_state.rule_name #=> String
+    #   resp.managed_rules[0].rule_state.state #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListManagedInsightRules AWS API Documentation
+    #
+    # @overload list_managed_insight_rules(params = {})
+    # @param [Hash] params ({})
+    def list_managed_insight_rules(params = {}, options = {})
+      req = build_request(:list_managed_insight_rules, params)
+      req.send_request(options)
+    end
+
     # Returns a list of metric streams in this account.
     #
     # @option params [String] :next_token
@@ -2746,6 +2805,57 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Creates a managed Contributor Insights rule for a specified Amazon Web
+    # Services resource. When you enable a managed rule, you create a
+    # Contributor Insights rule that collects data from Amazon Web Services
+    # services. You cannot edit these rules with `PutInsightRule`. The rules
+    # can be enabled, disabled, and deleted using `EnableInsightRules`,
+    # `DisableInsightRules`, and `DeleteInsightRules`. If a previously
+    # created managed rule is currently disabled, a subsequent call to this
+    # API will re-enable it. Use `ListManagedInsightRules` to describe all
+    # available rules.
+    #
+    # @option params [required, Array<Types::ManagedRule>] :managed_rules
+    #   A list of `ManagedRules` to enable.
+    #
+    # @return [Types::PutManagedInsightRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutManagedInsightRulesOutput#failures #failures} => Array&lt;Types::PartialFailure&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_managed_insight_rules({
+    #     managed_rules: [ # required
+    #       {
+    #         template_name: "TemplateName", # required
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failures #=> Array
+    #   resp.failures[0].failure_resource #=> String
+    #   resp.failures[0].exception_type #=> String
+    #   resp.failures[0].failure_code #=> String
+    #   resp.failures[0].failure_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutManagedInsightRules AWS API Documentation
+    #
+    # @overload put_managed_insight_rules(params = {})
+    # @param [Hash] params ({})
+    def put_managed_insight_rules(params = {}, options = {})
+      req = build_request(:put_managed_insight_rules, params)
+      req.send_request(options)
+    end
+
     # Creates or updates an alarm and associates it with the specified
     # metric, metric math expression, or anomaly detection model.
     #
@@ -2949,7 +3059,7 @@ module Aws::CloudWatch
     #
     #   However, if the metric is published with multiple types of units and
     #   you don't specify a unit, the alarm's behavior is not defined and it
-    #   behaves predictably.
+    #   behaves unpredictably.
     #
     #   We recommend omitting `Unit` so that you don't inadvertently specify
     #   an incorrect unit that is not published for this metric. Doing so
@@ -3162,16 +3272,16 @@ module Aws::CloudWatch
     # `PutMetricData` request, and supports retrieving percentile statistics
     # on this data.
     #
-    # Each `PutMetricData` request is limited to 40 KB in size for HTTP POST
+    # Each `PutMetricData` request is limited to 1 MB in size for HTTP POST
     # requests. You can send a payload compressed by gzip. Each request is
-    # also limited to no more than 20 different metrics.
+    # also limited to no more than 1000 different metrics.
     #
     # Although the `Value` parameter accepts numbers of type `Double`,
     # CloudWatch rejects values that are either too small or too large.
     # Values must be in the range of -2^360 to 2^360. In addition, special
     # values (for example, NaN, +Infinity, -Infinity) are not supported.
     #
-    # You can use up to 10 dimensions per metric to further clarify what
+    # You can use up to 30 dimensions per metric to further clarify what
     # data the metric collects. Each dimension consists of a Name and Value
     # pair. For more information about specifying dimensions, see
     # [Publishing Metrics][2] in the *Amazon CloudWatch User Guide*.
@@ -3212,8 +3322,8 @@ module Aws::CloudWatch
     #   should not specify a namespace that begins with `AWS/`
     #
     # @option params [required, Array<Types::MetricDatum>] :metric_data
-    #   The data for the metric. The array can include no more than 20 metrics
-    #   per call.
+    #   The data for the metric. The array can include no more than 1000
+    #   metrics per call.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3662,7 +3772,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

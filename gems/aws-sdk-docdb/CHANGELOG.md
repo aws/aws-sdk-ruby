@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2022-08-22)
+------------------
+
+* Feature - Update document for volume clone
+
 1.43.0 (2022-07-21)
 ------------------
 

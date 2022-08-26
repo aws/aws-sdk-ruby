@@ -6173,12 +6173,14 @@ module Aws::IAM
     # Although each user is limited to a small number of keys, you can still
     # paginate the results using the `MaxItems` and `Marker` parameters.
     #
-    # If the `UserName` field is not specified, the user name is determined
+    # If the `UserName` is not specified, the user name is determined
     # implicitly based on the Amazon Web Services access key ID used to sign
-    # the request. This operation works for access keys under the Amazon Web
-    # Services account. Consequently, you can use this operation to manage
-    # Amazon Web Services account root user credentials even if the Amazon
-    # Web Services account has no associated users.
+    # the request. If a temporary access key is used, then `UserName` is
+    # required. If a long-term key is assigned to the user, then `UserName`
+    # is not required. This operation works for access keys under the Amazon
+    # Web Services account. Consequently, you can use this operation to
+    # manage Amazon Web Services account root user credentials even if the
+    # Amazon Web Services account has no associated users.
     #
     # <note markdown="1"> To ensure the security of your Amazon Web Services account, the secret
     # access key is accessible only during key and user creation.
@@ -10226,36 +10228,28 @@ module Aws::IAM
     #   resources that you must define to run the simulation.
     #
     #   Each of the EC2 scenarios requires that you specify instance, image,
-    #   and security-group resources. If your scenario includes an EBS volume,
+    #   and security group resources. If your scenario includes an EBS volume,
     #   then you must specify that volume as a resource. If the EC2 scenario
-    #   includes VPC, then you must supply the network-interface resource. If
+    #   includes VPC, then you must supply the network interface resource. If
     #   it includes an IP subnet, then you must specify the subnet resource.
     #   For more information on the EC2 scenario options, see [Supported
     #   platforms][1] in the *Amazon EC2 User Guide*.
     #
-    #   * **EC2-Classic-InstanceStore**
-    #
-    #     instance, image, security-group
-    #
-    #   * **EC2-Classic-EBS**
-    #
-    #     instance, image, security-group, volume
-    #
     #   * **EC2-VPC-InstanceStore**
     #
-    #     instance, image, security-group, network-interface
+    #     instance, image, security group, network interface
     #
     #   * **EC2-VPC-InstanceStore-Subnet**
     #
-    #     instance, image, security-group, network-interface, subnet
+    #     instance, image, security group, network interface, subnet
     #
     #   * **EC2-VPC-EBS**
     #
-    #     instance, image, security-group, network-interface, volume
+    #     instance, image, security group, network interface, volume
     #
     #   * **EC2-VPC-EBS-Subnet**
     #
-    #     instance, image, security-group, network-interface, subnet, volume
+    #     instance, image, security group, network interface, subnet, volume
     #
     #
     #
@@ -10589,14 +10583,6 @@ module Aws::IAM
     #   it includes an IP subnet, then you must specify the subnet resource.
     #   For more information on the EC2 scenario options, see [Supported
     #   platforms][1] in the *Amazon EC2 User Guide*.
-    #
-    #   * **EC2-Classic-InstanceStore**
-    #
-    #     instance, image, security group
-    #
-    #   * **EC2-Classic-EBS**
-    #
-    #     instance, image, security group, volume
     #
     #   * **EC2-VPC-InstanceStore**
     #
@@ -11772,10 +11758,12 @@ module Aws::IAM
     #
     # If the `UserName` is not specified, the user name is determined
     # implicitly based on the Amazon Web Services access key ID used to sign
-    # the request. This operation works for access keys under the Amazon Web
-    # Services account. Consequently, you can use this operation to manage
-    # Amazon Web Services account root user credentials even if the Amazon
-    # Web Services account has no associated users.
+    # the request. If a temporary access key is used, then `UserName` is
+    # required. If a long-term key is assigned to the user, then `UserName`
+    # is not required. This operation works for access keys under the Amazon
+    # Web Services account. Consequently, you can use this operation to
+    # manage Amazon Web Services account root user credentials even if the
+    # Amazon Web Services account has no associated users.
     #
     # For information about rotating keys, see [Managing keys and
     # certificates][1] in the *IAM User Guide*.
@@ -13225,7 +13213,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

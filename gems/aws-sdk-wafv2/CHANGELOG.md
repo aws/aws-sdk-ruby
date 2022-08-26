@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2022-08-03)
+------------------
+
+* Feature - You can now associate an AWS WAF web ACL with an Amazon Cognito user pool.
+
 1.40.0 (2022-07-15)
 ------------------
 

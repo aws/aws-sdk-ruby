@@ -136,6 +136,21 @@ module Aws
           expect(resp.context.http_request.endpoint.path).to eq('/obj')
         end
 
+        it 'INVESTIGATE' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'aws-global',
+            s3_us_east_1_regional_endpoint: 'regional',
+            s3_use_arn_region: false
+          )
+          arn = 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
+          resp = client.get_object(bucket: arn, key: 'obj')
+          host = 'myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com'
+          expect(resp.context.http_request.endpoint.host).to eq(host)
+          expect(resp.context.http_request.endpoint.path).to eq('/obj')
+        end
+
         it 's3_use_arn_region false; accepts an accesspoint arn matching the client region' do
           client = Aws::S3::Client.new(
             stub_responses: true,

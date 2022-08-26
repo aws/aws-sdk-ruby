@@ -38,6 +38,7 @@ module Aws::QuickSight
     AnalysisSummary = Shapes::StructureShape.new(name: 'AnalysisSummary')
     AnalysisSummaryList = Shapes::ListShape.new(name: 'AnalysisSummaryList')
     AnonymousUserDashboardEmbeddingConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserDashboardEmbeddingConfiguration')
+    AnonymousUserDashboardVisualEmbeddingConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserDashboardVisualEmbeddingConfiguration')
     AnonymousUserEmbeddingExperienceConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserEmbeddingExperienceConfiguration')
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
@@ -141,6 +142,7 @@ module Aws::QuickSight
     DashboardVersion = Shapes::StructureShape.new(name: 'DashboardVersion')
     DashboardVersionSummary = Shapes::StructureShape.new(name: 'DashboardVersionSummary')
     DashboardVersionSummaryList = Shapes::ListShape.new(name: 'DashboardVersionSummaryList')
+    DashboardVisualId = Shapes::StructureShape.new(name: 'DashboardVisualId')
     DataColorPalette = Shapes::StructureShape.new(name: 'DataColorPalette')
     DataSet = Shapes::StructureShape.new(name: 'DataSet')
     DataSetArnsList = Shapes::ListShape.new(name: 'DataSetArnsList')
@@ -445,6 +447,7 @@ module Aws::QuickSight
     RegisterUserRequest = Shapes::StructureShape.new(name: 'RegisterUserRequest')
     RegisterUserResponse = Shapes::StructureShape.new(name: 'RegisterUserResponse')
     RegisteredUserDashboardEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserDashboardEmbeddingConfiguration')
+    RegisteredUserDashboardVisualEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserDashboardVisualEmbeddingConfiguration')
     RegisteredUserEmbeddingExperienceConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserEmbeddingExperienceConfiguration')
     RegisteredUserQSearchBarEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserQSearchBarEmbeddingConfiguration')
     RegisteredUserQuickSightConsoleEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserQuickSightConsoleEmbeddingConfiguration')
@@ -713,7 +716,11 @@ module Aws::QuickSight
     AnonymousUserDashboardEmbeddingConfiguration.add_member(:initial_dashboard_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location_name: "InitialDashboardId"))
     AnonymousUserDashboardEmbeddingConfiguration.struct_class = Types::AnonymousUserDashboardEmbeddingConfiguration
 
+    AnonymousUserDashboardVisualEmbeddingConfiguration.add_member(:initial_dashboard_visual_id, Shapes::ShapeRef.new(shape: DashboardVisualId, required: true, location_name: "InitialDashboardVisualId"))
+    AnonymousUserDashboardVisualEmbeddingConfiguration.struct_class = Types::AnonymousUserDashboardVisualEmbeddingConfiguration
+
     AnonymousUserEmbeddingExperienceConfiguration.add_member(:dashboard, Shapes::ShapeRef.new(shape: AnonymousUserDashboardEmbeddingConfiguration, location_name: "Dashboard"))
+    AnonymousUserEmbeddingExperienceConfiguration.add_member(:dashboard_visual, Shapes::ShapeRef.new(shape: AnonymousUserDashboardVisualEmbeddingConfiguration, location_name: "DashboardVisual"))
     AnonymousUserEmbeddingExperienceConfiguration.struct_class = Types::AnonymousUserEmbeddingExperienceConfiguration
 
     ArnList.member = Shapes::ShapeRef.new(shape: Arn)
@@ -1160,6 +1167,11 @@ module Aws::QuickSight
     DashboardVersionSummary.struct_class = Types::DashboardVersionSummary
 
     DashboardVersionSummaryList.member = Shapes::ShapeRef.new(shape: DashboardVersionSummary)
+
+    DashboardVisualId.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location_name: "DashboardId"))
+    DashboardVisualId.add_member(:sheet_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location_name: "SheetId"))
+    DashboardVisualId.add_member(:visual_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location_name: "VisualId"))
+    DashboardVisualId.struct_class = Types::DashboardVisualId
 
     DataColorPalette.add_member(:colors, Shapes::ShapeRef.new(shape: ColorList, location_name: "Colors"))
     DataColorPalette.add_member(:min_max_gradient, Shapes::ShapeRef.new(shape: ColorList, location_name: "MinMaxGradient"))
@@ -2361,9 +2373,13 @@ module Aws::QuickSight
     RegisteredUserDashboardEmbeddingConfiguration.add_member(:initial_dashboard_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location_name: "InitialDashboardId"))
     RegisteredUserDashboardEmbeddingConfiguration.struct_class = Types::RegisteredUserDashboardEmbeddingConfiguration
 
+    RegisteredUserDashboardVisualEmbeddingConfiguration.add_member(:initial_dashboard_visual_id, Shapes::ShapeRef.new(shape: DashboardVisualId, required: true, location_name: "InitialDashboardVisualId"))
+    RegisteredUserDashboardVisualEmbeddingConfiguration.struct_class = Types::RegisteredUserDashboardVisualEmbeddingConfiguration
+
     RegisteredUserEmbeddingExperienceConfiguration.add_member(:dashboard, Shapes::ShapeRef.new(shape: RegisteredUserDashboardEmbeddingConfiguration, location_name: "Dashboard"))
     RegisteredUserEmbeddingExperienceConfiguration.add_member(:quick_sight_console, Shapes::ShapeRef.new(shape: RegisteredUserQuickSightConsoleEmbeddingConfiguration, location_name: "QuickSightConsole"))
     RegisteredUserEmbeddingExperienceConfiguration.add_member(:q_search_bar, Shapes::ShapeRef.new(shape: RegisteredUserQSearchBarEmbeddingConfiguration, location_name: "QSearchBar"))
+    RegisteredUserEmbeddingExperienceConfiguration.add_member(:dashboard_visual, Shapes::ShapeRef.new(shape: RegisteredUserDashboardVisualEmbeddingConfiguration, location_name: "DashboardVisual"))
     RegisteredUserEmbeddingExperienceConfiguration.struct_class = Types::RegisteredUserEmbeddingExperienceConfiguration
 
     RegisteredUserQSearchBarEmbeddingConfiguration.add_member(:initial_topic_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "InitialTopicId"))

@@ -6,6 +6,13 @@ require 'tempfile'
 
 module Aws
   module S3
+
+    class Test
+      def foo
+        defined?(Aws)
+      end
+    end
+
     describe Client do
       let(:client) { Client.new }
 
@@ -20,6 +27,12 @@ module Aws
       after(:each) do
         Aws.config = {}
         S3::BUCKET_REGIONS.clear
+      end
+
+      it 'mocks defined?' do
+        t = Test.new
+        allow(t).to receive(:defined?).and_return("MOCK")
+        puts t.foo
       end
 
       it 'raises an error when region is missing' do

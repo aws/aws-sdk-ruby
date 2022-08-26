@@ -3558,9 +3558,9 @@ module Aws::Glue
     #       {
     #         logical_operator: "EQUALS", # accepts EQUALS
     #         job_name: "NameString",
-    #         state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
+    #         state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT, ERROR, WAITING
     #         crawler_name: "NameString",
-    #         crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
+    #         crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED, ERROR
     #       }
     #
     # @!attribute [rw] logical_operator
@@ -6089,6 +6089,7 @@ module Aws::Glue
     #             },
     #           },
     #         },
+    #         execution_class: "FLEX", # accepts FLEX, STANDARD
     #       }
     #
     # @!attribute [rw] name
@@ -6277,6 +6278,20 @@ module Aws::Glue
     #   based.
     #   @return [Hash<String,Types::CodeGenConfigurationNode>]
     #
+    # @!attribute [rw] execution_class
+    #   Indicates whether the job is run with a standard or flexible
+    #   execution class. The standard execution-class is ideal for
+    #   time-sensitive workloads that require fast job startup and dedicated
+    #   resources.
+    #
+    #   The flexible execution class is appropriate for time-insensitive
+    #   jobs whose start and completion times may vary.
+    #
+    #   Only jobs with Glue version 3.0 and above and command type `glueetl`
+    #   will be allowed to set `ExecutionClass` to `FLEX`. The flexible
+    #   execution class is available for Spark jobs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
@@ -6299,7 +6314,8 @@ module Aws::Glue
       :glue_version,
       :number_of_workers,
       :worker_type,
-      :code_gen_configuration_nodes)
+      :code_gen_configuration_nodes,
+      :execution_class)
       SENSITIVE = [:code_gen_configuration_nodes]
       include Aws::Structure
     end
@@ -7403,9 +7419,9 @@ module Aws::Glue
     #             {
     #               logical_operator: "EQUALS", # accepts EQUALS
     #               job_name: "NameString",
-    #               state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
+    #               state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT, ERROR, WAITING
     #               crawler_name: "NameString",
-    #               crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
+    #               crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED, ERROR
     #             },
     #           ],
     #         },
@@ -14752,6 +14768,20 @@ module Aws::Glue
     #   based.
     #   @return [Hash<String,Types::CodeGenConfigurationNode>]
     #
+    # @!attribute [rw] execution_class
+    #   Indicates whether the job is run with a standard or flexible
+    #   execution class. The standard execution class is ideal for
+    #   time-sensitive workloads that require fast job startup and dedicated
+    #   resources.
+    #
+    #   The flexible execution class is appropriate for time-insensitive
+    #   jobs whose start and completion times may vary.
+    #
+    #   Only jobs with Glue version 3.0 and above and command type `glueetl`
+    #   will be allowed to set `ExecutionClass` to `FLEX`. The flexible
+    #   execution class is available for Spark jobs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job AWS API Documentation
     #
     class Job < Struct.new(
@@ -14775,7 +14805,8 @@ module Aws::Glue
       :security_configuration,
       :notification_property,
       :glue_version,
-      :code_gen_configuration_nodes)
+      :code_gen_configuration_nodes,
+      :execution_class)
       SENSITIVE = [:code_gen_configuration_nodes]
       include Aws::Structure
     end
@@ -15104,6 +15135,20 @@ module Aws::Glue
     #   `MaxCapacity`.
     #   @return [Float]
     #
+    # @!attribute [rw] execution_class
+    #   Indicates whether the job is run with a standard or flexible
+    #   execution class. The standard execution-class is ideal for
+    #   time-sensitive workloads that require fast job startup and dedicated
+    #   resources.
+    #
+    #   The flexible execution class is appropriate for time-insensitive
+    #   jobs whose start and completion times may vary.
+    #
+    #   Only jobs with Glue version 3.0 and above and command type `glueetl`
+    #   will be allowed to set `ExecutionClass` to `FLEX`. The flexible
+    #   execution class is available for Spark jobs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobRun AWS API Documentation
     #
     class JobRun < Struct.new(
@@ -15129,7 +15174,8 @@ module Aws::Glue
       :log_group_name,
       :notification_property,
       :glue_version,
-      :dpu_seconds)
+      :dpu_seconds,
+      :execution_class)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15840,6 +15886,7 @@ module Aws::Glue
     #             },
     #           },
     #         },
+    #         execution_class: "FLEX", # accepts FLEX, STANDARD
     #       }
     #
     # @!attribute [rw] description
@@ -16005,6 +16052,20 @@ module Aws::Glue
     #   based.
     #   @return [Hash<String,Types::CodeGenConfigurationNode>]
     #
+    # @!attribute [rw] execution_class
+    #   Indicates whether the job is run with a standard or flexible
+    #   execution class. The standard execution-class is ideal for
+    #   time-sensitive workloads that require fast job startup and dedicated
+    #   resources.
+    #
+    #   The flexible execution class is appropriate for time-insensitive
+    #   jobs whose start and completion times may vary.
+    #
+    #   Only jobs with Glue version 3.0 and above and command type `glueetl`
+    #   will be allowed to set `ExecutionClass` to `FLEX`. The flexible
+    #   execution class is available for Spark jobs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate AWS API Documentation
     #
     class JobUpdate < Struct.new(
@@ -16025,7 +16086,8 @@ module Aws::Glue
       :security_configuration,
       :notification_property,
       :glue_version,
-      :code_gen_configuration_nodes)
+      :code_gen_configuration_nodes,
+      :execution_class)
       SENSITIVE = [:code_gen_configuration_nodes]
       include Aws::Structure
     end
@@ -18876,9 +18938,9 @@ module Aws::Glue
     #           {
     #             logical_operator: "EQUALS", # accepts EQUALS
     #             job_name: "NameString",
-    #             state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
+    #             state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT, ERROR, WAITING
     #             crawler_name: "NameString",
-    #             crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
+    #             crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED, ERROR
     #           },
     #         ],
     #       }
@@ -22011,6 +22073,7 @@ module Aws::Glue
     #         },
     #         worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
     #         number_of_workers: 1,
+    #         execution_class: "FLEX", # accepts FLEX, STANDARD
     #       }
     #
     # @!attribute [rw] job_name
@@ -22131,6 +22194,20 @@ module Aws::Glue
     #   when a job runs.
     #   @return [Integer]
     #
+    # @!attribute [rw] execution_class
+    #   Indicates whether the job is run with a standard or flexible
+    #   execution class. The standard execution-class is ideal for
+    #   time-sensitive workloads that require fast job startup and dedicated
+    #   resources.
+    #
+    #   The flexible execution class is appropriate for time-insensitive
+    #   jobs whose start and completion times may vary.
+    #
+    #   Only jobs with Glue version 3.0 and above and command type `glueetl`
+    #   will be allowed to set `ExecutionClass` to `FLEX`. The flexible
+    #   execution class is available for Spark jobs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobRunRequest AWS API Documentation
     #
     class StartJobRunRequest < Struct.new(
@@ -22143,7 +22220,8 @@ module Aws::Glue
       :security_configuration,
       :notification_property,
       :worker_type,
-      :number_of_workers)
+      :number_of_workers,
+      :execution_class)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23681,9 +23759,9 @@ module Aws::Glue
     #             {
     #               logical_operator: "EQUALS", # accepts EQUALS
     #               job_name: "NameString",
-    #               state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
+    #               state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT, ERROR, WAITING
     #               crawler_name: "NameString",
-    #               crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
+    #               crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED, ERROR
     #             },
     #           ],
     #         },
@@ -25360,6 +25438,7 @@ module Aws::Glue
     #               },
     #             },
     #           },
+    #           execution_class: "FLEX", # accepts FLEX, STANDARD
     #         },
     #       }
     #
@@ -25964,9 +26043,9 @@ module Aws::Glue
     #               {
     #                 logical_operator: "EQUALS", # accepts EQUALS
     #                 job_name: "NameString",
-    #                 state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
+    #                 state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT, ERROR, WAITING
     #                 crawler_name: "NameString",
-    #                 crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
+    #                 crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED, ERROR
     #               },
     #             ],
     #           },
@@ -26500,6 +26579,16 @@ module Aws::Glue
     #   Total number Actions in running state.
     #   @return [Integer]
     #
+    # @!attribute [rw] errored_actions
+    #   Indicates the count of job runs in the ERROR state in the workflow
+    #   run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] waiting_actions
+    #   Indicates the count of job runs in WAITING state in the workflow
+    #   run.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/WorkflowRunStatistics AWS API Documentation
     #
     class WorkflowRunStatistics < Struct.new(
@@ -26508,7 +26597,9 @@ module Aws::Glue
       :failed_actions,
       :stopped_actions,
       :succeeded_actions,
-      :running_actions)
+      :running_actions,
+      :errored_actions,
+      :waiting_actions)
       SENSITIVE = []
       include Aws::Structure
     end

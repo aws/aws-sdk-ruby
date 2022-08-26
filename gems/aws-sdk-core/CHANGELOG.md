@@ -3,6 +3,39 @@ Unreleased Changes
 
 * Feature - Dynamic endpoints (WIP)
 
+3.136.0 (2022-08-25)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.135.0 (2022-08-24)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.134.0 (2022-08-23)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Add support for Bearer Token Authentication and TokenProviders.
+* Issue - Validate that `_X_AMZN_TRACE_ID` ENV value contains only valid, non-control characters.
+
+3.133.0 (2022-08-22)
+------------------
+
+* Feature - Moved functionality from `aws-sdk-ssoidc` into core.
+
+3.132.0 (2022-08-08)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.131.6 (2022-08-03)
+------------------
+
+* Issue - Fix typo in `RecursionDetection`, change amz to amzn in header and env name.
+
 3.131.5 (2022-07-28)
 ------------------
 

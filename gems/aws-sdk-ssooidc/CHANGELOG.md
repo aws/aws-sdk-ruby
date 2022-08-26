@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2022-08-25)
+------------------
+
+* Feature - Updated required request parameters on IAM Identity Center's OIDC CreateToken action.
+
+1.21.0 (2022-08-22)
+------------------
+
+* Feature - Move the `aws-sdk-ssooidc` gem into `aws-sdk-core`.
+
+1.20.0 (2022-08-08)
+------------------
+
+* Feature - Documentation updates to reflect service rename - AWS IAM Identity Center (successor to AWS Single Sign-On)
+
 1.19.0 (2022-02-24)
 ------------------
 

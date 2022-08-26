@@ -2447,7 +2447,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Creates a fleet provisioning template.
+    # Creates a provisioning template.
     #
     # Requires permission to access the [CreateProvisioningTemplate][1]
     # action.
@@ -2457,26 +2457,26 @@ module Aws::IoT
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :template_name
-    #   The name of the fleet provisioning template.
+    #   The name of the provisioning template.
     #
     # @option params [String] :description
-    #   The description of the fleet provisioning template.
+    #   The description of the provisioning template.
     #
     # @option params [required, String] :template_body
-    #   The JSON formatted contents of the fleet provisioning template.
+    #   The JSON formatted contents of the provisioning template.
     #
     # @option params [Boolean] :enabled
-    #   True to enable the fleet provisioning template, otherwise false.
+    #   True to enable the provisioning template, otherwise false.
     #
     # @option params [required, String] :provisioning_role_arn
-    #   The role ARN for the role associated with the fleet provisioning
-    #   template. This IoT role grants permission to provision a device.
+    #   The role ARN for the role associated with the provisioning template.
+    #   This IoT role grants permission to provision a device.
     #
     # @option params [Types::ProvisioningHook] :pre_provisioning_hook
     #   Creates a pre-provisioning hook template.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Metadata which can be used to manage the fleet provisioning template.
+    #   Metadata which can be used to manage the provisioning template.
     #
     #   <note markdown="1"> For URI Request parameters use format:
     #   ...key1=value1&amp;key2=value2...
@@ -2488,6 +2488,17 @@ module Aws::IoT
     #   "key1=value1&amp;key2=value2..."
     #
     #    </note>
+    #
+    # @option params [String] :type
+    #   The type you define in a provisioning template. You can create a
+    #   template with only one type. You can't change the template type after
+    #   its creation. The default value is `FLEET_PROVISIONING`. For more
+    #   information about provisioning template, see: [Provisioning
+    #   template][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html
     #
     # @return [Types::CreateProvisioningTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2513,6 +2524,7 @@ module Aws::IoT
     #         value: "TagValue",
     #       },
     #     ],
+    #     type: "FLEET_PROVISIONING", # accepts FLEET_PROVISIONING, JITP
     #   })
     #
     # @example Response structure
@@ -2528,7 +2540,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Creates a new version of a fleet provisioning template.
+    # Creates a new version of a provisioning template.
     #
     # Requires permission to access the
     # [CreateProvisioningTemplateVersion][1] action.
@@ -2538,10 +2550,10 @@ module Aws::IoT
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :template_name
-    #   The name of the fleet provisioning template.
+    #   The name of the provisioning template.
     #
     # @option params [required, String] :template_body
-    #   The JSON formatted contents of the fleet provisioning template.
+    #   The JSON formatted contents of the provisioning template.
     #
     # @option params [Boolean] :set_as_default
     #   Sets a fleet provision template version as the default version.
@@ -4198,7 +4210,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Deletes a fleet provisioning template.
+    # Deletes a provisioning template.
     #
     # Requires permission to access the [DeleteProvisioningTemplate][1]
     # action.
@@ -4225,7 +4237,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Deletes a fleet provisioning template version.
+    # Deletes a provisioning template version.
     #
     # Requires permission to access the
     # [DeleteProvisioningTemplateVersion][1] action.
@@ -4235,10 +4247,10 @@ module Aws::IoT
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :template_name
-    #   The name of the fleet provisioning template version to delete.
+    #   The name of the provisioning template version to delete.
     #
     # @option params [required, Integer] :version_id
-    #   The fleet provisioning template version ID to delete.
+    #   The provisioning template version ID to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5002,6 +5014,7 @@ module Aws::IoT
     #   resp.certificate_description.certificate_mode #=> String, one of "DEFAULT", "SNI_ONLY"
     #   resp.registration_config.template_body #=> String
     #   resp.registration_config.role_arn #=> String
+    #   resp.registration_config.template_name #=> String
     #
     # @overload describe_ca_certificate(params = {})
     # @param [Hash] params ({})
@@ -5764,7 +5777,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Returns information about a fleet provisioning template.
+    # Returns information about a provisioning template.
     #
     # Requires permission to access the [DescribeProvisioningTemplate][1]
     # action.
@@ -5774,7 +5787,7 @@ module Aws::IoT
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :template_name
-    #   The name of the fleet provisioning template.
+    #   The name of the provisioning template.
     #
     # @return [Types::DescribeProvisioningTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5788,6 +5801,7 @@ module Aws::IoT
     #   * {Types::DescribeProvisioningTemplateResponse#enabled #enabled} => Boolean
     #   * {Types::DescribeProvisioningTemplateResponse#provisioning_role_arn #provisioning_role_arn} => String
     #   * {Types::DescribeProvisioningTemplateResponse#pre_provisioning_hook #pre_provisioning_hook} => Types::ProvisioningHook
+    #   * {Types::DescribeProvisioningTemplateResponse#type #type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -5808,6 +5822,7 @@ module Aws::IoT
     #   resp.provisioning_role_arn #=> String
     #   resp.pre_provisioning_hook.payload_version #=> String
     #   resp.pre_provisioning_hook.target_arn #=> String
+    #   resp.type #=> String, one of "FLEET_PROVISIONING", "JITP"
     #
     # @overload describe_provisioning_template(params = {})
     # @param [Hash] params ({})
@@ -5816,7 +5831,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Returns information about a fleet provisioning template version.
+    # Returns information about a provisioning template version.
     #
     # Requires permission to access the
     # [DescribeProvisioningTemplateVersion][1] action.
@@ -5829,7 +5844,7 @@ module Aws::IoT
     #   The template name.
     #
     # @option params [required, Integer] :version_id
-    #   The fleet provisioning template version ID.
+    #   The provisioning template version ID.
     #
     # @return [Types::DescribeProvisioningTemplateVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6301,9 +6316,9 @@ module Aws::IoT
 
     # Removes the specified policy from the specified certificate.
     #
-    # <note markdown="1"> This action is deprecated. Please use DetachPolicy instead.
-    #
-    #  </note>
+    # **Note:** This action is deprecated and works as expected for backward
+    # compatibility, but we won't add enhancements. Use DetachPolicy
+    # instead.
     #
     # Requires permission to access the [DetachPrincipalPolicy][1] action.
     #
@@ -8080,6 +8095,9 @@ module Aws::IoT
     # @option params [Boolean] :ascending_order
     #   Determines the order of the results.
     #
+    # @option params [String] :template_name
+    #   The name of the provisioning template.
+    #
     # @return [Types::ListCACertificatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCACertificatesResponse#certificates #certificates} => Array&lt;Types::CACertificate&gt;
@@ -8093,6 +8111,7 @@ module Aws::IoT
     #     page_size: 1,
     #     marker: "Marker",
     #     ascending_order: false,
+    #     template_name: "TemplateName",
     #   })
     #
     # @example Response structure
@@ -9176,8 +9195,9 @@ module Aws::IoT
 
     # Lists the principals associated with the specified policy.
     #
-    # **Note:** This action is deprecated. Please use ListTargetsForPolicy
-    # instead.
+    # **Note:** This action is deprecated and works as expected for backward
+    # compatibility, but we won't add enhancements. Use
+    # ListTargetsForPolicy instead.
     #
     # Requires permission to access the [ListPolicyPrincipals][1] action.
     #
@@ -9267,8 +9287,9 @@ module Aws::IoT
     # Cognito identity, the ID must be in [AmazonCognito Identity
     # format][1].
     #
-    # **Note:** This action is deprecated. Please use ListAttachedPolicies
-    # instead.
+    # **Note:** This action is deprecated and works as expected for backward
+    # compatibility, but we won't add enhancements. Use
+    # ListAttachedPolicies instead.
     #
     # Requires permission to access the [ListPrincipalPolicies][2] action.
     #
@@ -9373,7 +9394,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # A list of fleet provisioning template versions.
+    # A list of provisioning template versions.
     #
     # Requires permission to access the
     # [ListProvisioningTemplateVersions][1] action.
@@ -9383,7 +9404,7 @@ module Aws::IoT
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :template_name
-    #   The name of the fleet provisioning template.
+    #   The name of the provisioning template.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -9421,8 +9442,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Lists the fleet provisioning templates in your Amazon Web Services
-    # account.
+    # Lists the provisioning templates in your Amazon Web Services account.
     #
     # Requires permission to access the [ListProvisioningTemplates][1]
     # action.
@@ -9460,6 +9480,7 @@ module Aws::IoT
     #   resp.templates[0].creation_date #=> Time
     #   resp.templates[0].last_modified_date #=> Time
     #   resp.templates[0].enabled #=> Boolean
+    #   resp.templates[0].type #=> String, one of "FLEET_PROVISIONING", "JITP"
     #   resp.next_token #=> String
     #
     # @overload list_provisioning_templates(params = {})
@@ -10717,6 +10738,7 @@ module Aws::IoT
     #     registration_config: {
     #       template_body: "TemplateBody",
     #       role_arn: "RoleArn",
+    #       template_name: "TemplateName",
     #     },
     #     tags: [
     #       {
@@ -12425,6 +12447,7 @@ module Aws::IoT
     #     registration_config: {
     #       template_body: "TemplateBody",
     #       role_arn: "RoleArn",
+    #       template_name: "TemplateName",
     #     },
     #     remove_auto_registration: false,
     #   })
@@ -13034,7 +13057,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Updates a fleet provisioning template.
+    # Updates a provisioning template.
     #
     # Requires permission to access the [UpdateProvisioningTemplate][1]
     # action.
@@ -13044,13 +13067,13 @@ module Aws::IoT
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :template_name
-    #   The name of the fleet provisioning template.
+    #   The name of the provisioning template.
     #
     # @option params [String] :description
-    #   The description of the fleet provisioning template.
+    #   The description of the provisioning template.
     #
     # @option params [Boolean] :enabled
-    #   True to enable the fleet provisioning template, otherwise false.
+    #   True to enable the provisioning template, otherwise false.
     #
     # @option params [Integer] :default_version_id
     #   The ID of the default provisioning template version.
@@ -13723,7 +13746,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -20,6 +20,8 @@ module Aws::LakeFormation
     AddObjectInput = Shapes::StructureShape.new(name: 'AddObjectInput')
     AllRowsWildcard = Shapes::StructureShape.new(name: 'AllRowsWildcard')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
+    AssumeDecoratedRoleWithSAMLRequest = Shapes::StructureShape.new(name: 'AssumeDecoratedRoleWithSAMLRequest')
+    AssumeDecoratedRoleWithSAMLResponse = Shapes::StructureShape.new(name: 'AssumeDecoratedRoleWithSAMLResponse')
     AuditContext = Shapes::StructureShape.new(name: 'AuditContext')
     AuditContextString = Shapes::StringShape.new(name: 'AuditContextString')
     AuthorizedSessionTagValueList = Shapes::ListShape.new(name: 'AuthorizedSessionTagValueList')
@@ -120,6 +122,7 @@ module Aws::LakeFormation
     GrantPermissionsRequest = Shapes::StructureShape.new(name: 'GrantPermissionsRequest')
     GrantPermissionsResponse = Shapes::StructureShape.new(name: 'GrantPermissionsResponse')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
+    IAMSAMLProviderArn = Shapes::StringShape.new(name: 'IAMSAMLProviderArn')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
@@ -198,6 +201,7 @@ module Aws::LakeFormation
     RevokePermissionsRequest = Shapes::StructureShape.new(name: 'RevokePermissionsRequest')
     RevokePermissionsResponse = Shapes::StructureShape.new(name: 'RevokePermissionsResponse')
     RowFilter = Shapes::StructureShape.new(name: 'RowFilter')
+    SAMLAssertionString = Shapes::StringShape.new(name: 'SAMLAssertionString')
     SearchDatabasesByLFTagsRequest = Shapes::StructureShape.new(name: 'SearchDatabasesByLFTagsRequest')
     SearchDatabasesByLFTagsResponse = Shapes::StructureShape.new(name: 'SearchDatabasesByLFTagsResponse')
     SearchTablesByLFTagsRequest = Shapes::StructureShape.new(name: 'SearchTablesByLFTagsRequest')
@@ -286,6 +290,18 @@ module Aws::LakeFormation
 
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
+
+    AssumeDecoratedRoleWithSAMLRequest.add_member(:saml_assertion, Shapes::ShapeRef.new(shape: SAMLAssertionString, required: true, location_name: "SAMLAssertion"))
+    AssumeDecoratedRoleWithSAMLRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "RoleArn"))
+    AssumeDecoratedRoleWithSAMLRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: IAMSAMLProviderArn, required: true, location_name: "PrincipalArn"))
+    AssumeDecoratedRoleWithSAMLRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: CredentialTimeoutDurationSecondInteger, location_name: "DurationSeconds"))
+    AssumeDecoratedRoleWithSAMLRequest.struct_class = Types::AssumeDecoratedRoleWithSAMLRequest
+
+    AssumeDecoratedRoleWithSAMLResponse.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyIdString, location_name: "AccessKeyId"))
+    AssumeDecoratedRoleWithSAMLResponse.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: SecretAccessKeyString, location_name: "SecretAccessKey"))
+    AssumeDecoratedRoleWithSAMLResponse.add_member(:session_token, Shapes::ShapeRef.new(shape: SessionTokenString, location_name: "SessionToken"))
+    AssumeDecoratedRoleWithSAMLResponse.add_member(:expiration, Shapes::ShapeRef.new(shape: ExpirationTimestamp, location_name: "Expiration"))
+    AssumeDecoratedRoleWithSAMLResponse.struct_class = Types::AssumeDecoratedRoleWithSAMLResponse
 
     AuditContext.add_member(:additional_audit_context, Shapes::ShapeRef.new(shape: AuditContextString, location_name: "AdditionalAuditContext"))
     AuditContext.struct_class = Types::AuditContext
@@ -1005,6 +1021,19 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:assume_decorated_role_with_saml, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssumeDecoratedRoleWithSAML"
+        o.http_method = "POST"
+        o.http_request_uri = "/AssumeDecoratedRoleWithSAML"
+        o.input = Shapes::ShapeRef.new(shape: AssumeDecoratedRoleWithSAMLRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssumeDecoratedRoleWithSAMLResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:batch_grant_permissions, Seahorse::Model::Operation.new.tap do |o|

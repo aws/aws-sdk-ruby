@@ -10,6 +10,56 @@
 module Aws::ForecastService
   module Types
 
+    # Defines the modifications that you are making to an attribute for a
+    # what-if forecast. For example, you can use this operation to create a
+    # what-if forecast that investigates a 10% off sale on all shoes. To do
+    # this, you specify `"AttributeName": "shoes"`, `"Operation":
+    # "MULTIPLY"`, and `"Value": "0.90"`. Pair this operation with the
+    # TimeSeriesCondition operation within the
+    # CreateWhatIfForecastRequest$TimeSeriesTransformations operation to
+    # define a subset of attribute items that are modified.
+    #
+    # @note When making an API call, you may pass Action
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_name: "Name", # required
+    #         operation: "ADD", # required, accepts ADD, SUBTRACT, MULTIPLY, DIVIDE
+    #         value: 1.0, # required
+    #       }
+    #
+    # @!attribute [rw] attribute_name
+    #   The related time series that you are modifying. This value is case
+    #   insensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   The operation that is applied to the provided attribute. Operations
+    #   include:
+    #
+    #   * `ADD` - adds `Value` to all rows of `AttributeName`.
+    #
+    #   * `SUBTRACT` - subtracts `Value` from all rows of `AttributeName`.
+    #
+    #   * `MULTIPLY` - multiplies all rows of `AttributeName` by `Value`.
+    #
+    #   * `DIVIDE` - divides all rows of `AttributeName` by `Value`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value that is applied for the chosen `Operation`.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/Action AWS API Documentation
+    #
+    class Action < Struct.new(
+      :attribute_name,
+      :operation,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an additional dataset. This object is part of the DataConfig
     # object. Forecast supports the Weather Index and Holidays additional
     # datasets.
@@ -1961,6 +2011,284 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateWhatIfAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         what_if_analysis_name: "Name", # required
+    #         forecast_arn: "Arn", # required
+    #         time_series_selector: {
+    #           time_series_identifiers: {
+    #             data_source: {
+    #               s3_config: { # required
+    #                 path: "S3Path", # required
+    #                 role_arn: "Arn", # required
+    #                 kms_key_arn: "KMSKeyArn",
+    #               },
+    #             },
+    #             schema: {
+    #               attributes: [
+    #                 {
+    #                   attribute_name: "Name",
+    #                   attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
+    #                 },
+    #               ],
+    #             },
+    #             format: "Format",
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] what_if_analysis_name
+    #   The name of the what-if analysis. Each name must be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] forecast_arn
+    #   The Amazon Resource Name (ARN) of the baseline forecast.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_series_selector
+    #   Defines the set of time series that are used in the what-if analysis
+    #   with a `TimeSeriesIdentifiers` object. What-if analyses are
+    #   performed only for the time series in this object.
+    #
+    #   The `TimeSeriesIdentifiers` object needs the following information:
+    #
+    #   * `DataSource`
+    #
+    #   * `Format`
+    #
+    #   * `Schema`
+    #   @return [Types::TimeSeriesSelector]
+    #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the what if forecast.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateWhatIfAnalysisRequest AWS API Documentation
+    #
+    class CreateWhatIfAnalysisRequest < Struct.new(
+      :what_if_analysis_name,
+      :forecast_arn,
+      :time_series_selector,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] what_if_analysis_arn
+    #   The Amazon Resource Name (ARN) of the what-if analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateWhatIfAnalysisResponse AWS API Documentation
+    #
+    class CreateWhatIfAnalysisResponse < Struct.new(
+      :what_if_analysis_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateWhatIfForecastExportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         what_if_forecast_export_name: "Name", # required
+    #         what_if_forecast_arns: ["LongArn"], # required
+    #         destination: { # required
+    #           s3_config: { # required
+    #             path: "S3Path", # required
+    #             role_arn: "Arn", # required
+    #             kms_key_arn: "KMSKeyArn",
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #         format: "Format",
+    #       }
+    #
+    # @!attribute [rw] what_if_forecast_export_name
+    #   The name of the what-if forecast to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] what_if_forecast_arns
+    #   The list of what-if forecast Amazon Resource Names (ARNs) to export.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destination
+    #   The location where you want to save the forecast and an AWS Identity
+    #   and Access Management (IAM) role that Amazon Forecast can assume to
+    #   access the location. The forecast must be exported to an Amazon S3
+    #   bucket.
+    #
+    #   If encryption is used, `Destination` must include an AWS Key
+    #   Management Service (KMS) key. The IAM role must allow Amazon
+    #   Forecast permission to access the key.
+    #   @return [Types::DataDestination]
+    #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the what if forecast.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] format
+    #   The format of the exported data, CSV or PARQUET.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateWhatIfForecastExportRequest AWS API Documentation
+    #
+    class CreateWhatIfForecastExportRequest < Struct.new(
+      :what_if_forecast_export_name,
+      :what_if_forecast_arns,
+      :destination,
+      :tags,
+      :format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] what_if_forecast_export_arn
+    #   The Amazon Resource Name (ARN) of the what-if forecast.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateWhatIfForecastExportResponse AWS API Documentation
+    #
+    class CreateWhatIfForecastExportResponse < Struct.new(
+      :what_if_forecast_export_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateWhatIfForecastRequest
+    #   data as a hash:
+    #
+    #       {
+    #         what_if_forecast_name: "Name", # required
+    #         what_if_analysis_arn: "Arn", # required
+    #         time_series_transformations: [
+    #           {
+    #             action: {
+    #               attribute_name: "Name", # required
+    #               operation: "ADD", # required, accepts ADD, SUBTRACT, MULTIPLY, DIVIDE
+    #               value: 1.0, # required
+    #             },
+    #             time_series_conditions: [
+    #               {
+    #                 attribute_name: "Name", # required
+    #                 attribute_value: "AttributeValue", # required
+    #                 condition: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, LESS_THAN, GREATER_THAN
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         time_series_replacements_data_source: {
+    #           s3_config: { # required
+    #             path: "S3Path", # required
+    #             role_arn: "Arn", # required
+    #             kms_key_arn: "KMSKeyArn",
+    #           },
+    #           schema: { # required
+    #             attributes: [
+    #               {
+    #                 attribute_name: "Name",
+    #                 attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
+    #               },
+    #             ],
+    #           },
+    #           format: "Format",
+    #           timestamp_format: "TimestampFormat",
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] what_if_forecast_name
+    #   The name of the what-if forecast. Names must be unique within each
+    #   what-if analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] what_if_analysis_arn
+    #   The Amazon Resource Name (ARN) of the what-if analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_series_transformations
+    #   The transformations that are applied to the baseline time series.
+    #   Each transformation contains an action and a set of conditions. An
+    #   action is applied only when all conditions are met. If no conditions
+    #   are provided, the action is applied to all items.
+    #   @return [Array<Types::TimeSeriesTransformation>]
+    #
+    # @!attribute [rw] time_series_replacements_data_source
+    #   The replacement time series dataset, which contains the rows that
+    #   you want to change in the related time series dataset. A replacement
+    #   time series does not need to contain all rows that are in the
+    #   baseline related time series. Include only the rows
+    #   (measure-dimension combinations) that you want to include in the
+    #   what-if forecast. This dataset is merged with the original time
+    #   series to create a transformed dataset that is used for the what-if
+    #   analysis.
+    #
+    #   This dataset should contain the items to modify (such as item\_id or
+    #   workforce\_type), any relevant dimensions, the timestamp column, and
+    #   at least one of the related time series columns. This file should
+    #   not contain duplicate timestamps for the same time series.
+    #
+    #   Timestamps and item\_ids not included in this dataset are not
+    #   included in the what-if analysis.
+    #   @return [Types::TimeSeriesReplacementsDataSource]
+    #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the what if forecast.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateWhatIfForecastRequest AWS API Documentation
+    #
+    class CreateWhatIfForecastRequest < Struct.new(
+      :what_if_forecast_name,
+      :what_if_analysis_arn,
+      :time_series_transformations,
+      :time_series_replacements_data_source,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] what_if_forecast_arn
+    #   The Amazon Resource Name (ARN) of the what-if forecast.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateWhatIfForecastResponse AWS API Documentation
+    #
+    class CreateWhatIfForecastResponse < Struct.new(
+      :what_if_forecast_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The data configuration for your dataset group and any additional
     # datasets.
     #
@@ -2450,6 +2778,66 @@ module Aws::ForecastService
     #
     class DeleteResourceTreeRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteWhatIfAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         what_if_analysis_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] what_if_analysis_arn
+    #   The Amazon Resource Name (ARN) of the what-if analysis that you want
+    #   to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteWhatIfAnalysisRequest AWS API Documentation
+    #
+    class DeleteWhatIfAnalysisRequest < Struct.new(
+      :what_if_analysis_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteWhatIfForecastExportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         what_if_forecast_export_arn: "LongArn", # required
+    #       }
+    #
+    # @!attribute [rw] what_if_forecast_export_arn
+    #   The Amazon Resource Name (ARN) of the what-if forecast export that
+    #   you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteWhatIfForecastExportRequest AWS API Documentation
+    #
+    class DeleteWhatIfForecastExportRequest < Struct.new(
+      :what_if_forecast_export_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteWhatIfForecastRequest
+    #   data as a hash:
+    #
+    #       {
+    #         what_if_forecast_arn: "LongArn", # required
+    #       }
+    #
+    # @!attribute [rw] what_if_forecast_arn
+    #   The Amazon Resource Name (ARN) of the what-if forecast that you want
+    #   to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteWhatIfForecastRequest AWS API Documentation
+    #
+    class DeleteWhatIfForecastRequest < Struct.new(
+      :what_if_forecast_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3754,6 +4142,331 @@ module Aws::ForecastService
       :creation_time,
       :last_modification_time,
       :optimization_metric)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeWhatIfAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         what_if_analysis_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] what_if_analysis_arn
+    #   The Amazon Resource Name (ARN) of the what-if analysis that you are
+    #   interested in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeWhatIfAnalysisRequest AWS API Documentation
+    #
+    class DescribeWhatIfAnalysisRequest < Struct.new(
+      :what_if_analysis_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] what_if_analysis_name
+    #   The name of the what-if analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] what_if_analysis_arn
+    #   The Amazon Resource Name (ARN) of the what-if analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] forecast_arn
+    #   The Amazon Resource Name (ARN) of the what-if forecast.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_time_remaining_in_minutes
+    #   The approximate time remaining to complete the what-if analysis, in
+    #   minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the what-if analysis. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
+    #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
+    #
+    #   <note markdown="1"> The `Status` of the what-if analysis must be `ACTIVE` before you can
+    #   access the analysis.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   If an error occurred, an informational message about the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the what-if analysis was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_time
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] time_series_selector
+    #   Defines the set of time series that are used to create the forecasts
+    #   in a `TimeSeriesIdentifiers` object.
+    #
+    #   The `TimeSeriesIdentifiers` object needs the following information:
+    #
+    #   * `DataSource`
+    #
+    #   * `Format`
+    #
+    #   * `Schema`
+    #   @return [Types::TimeSeriesSelector]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeWhatIfAnalysisResponse AWS API Documentation
+    #
+    class DescribeWhatIfAnalysisResponse < Struct.new(
+      :what_if_analysis_name,
+      :what_if_analysis_arn,
+      :forecast_arn,
+      :estimated_time_remaining_in_minutes,
+      :status,
+      :message,
+      :creation_time,
+      :last_modification_time,
+      :time_series_selector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeWhatIfForecastExportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         what_if_forecast_export_arn: "LongArn", # required
+    #       }
+    #
+    # @!attribute [rw] what_if_forecast_export_arn
+    #   The Amazon Resource Name (ARN) of the what-if forecast export that
+    #   you are interested in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeWhatIfForecastExportRequest AWS API Documentation
+    #
+    class DescribeWhatIfForecastExportRequest < Struct.new(
+      :what_if_forecast_export_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] what_if_forecast_export_arn
+    #   The Amazon Resource Name (ARN) of the what-if forecast export.
+    #   @return [String]
+    #
+    # @!attribute [rw] what_if_forecast_export_name
+    #   The name of the what-if forecast export.
+    #   @return [String]
+    #
+    # @!attribute [rw] what_if_forecast_arns
+    #   An array of Amazon Resource Names (ARNs) that represent all of the
+    #   what-if forecasts exported in this resource.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destination
+    #   The destination for an export job. Provide an S3 path, an AWS
+    #   Identity and Access Management (IAM) role that allows Amazon
+    #   Forecast to access the location, and an AWS Key Management Service
+    #   (KMS) key (optional).
+    #   @return [Types::DataDestination]
+    #
+    # @!attribute [rw] message
+    #   If an error occurred, an informational message about the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the what-if forecast. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
+    #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
+    #
+    #   <note markdown="1"> The `Status` of the what-if forecast export must be `ACTIVE` before
+    #   you can access the forecast export.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the what-if forecast export was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] estimated_time_remaining_in_minutes
+    #   The approximate time remaining to complete the what-if forecast
+    #   export, in minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_modification_time
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] format
+    #   The format of the exported data, CSV or PARQUET.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeWhatIfForecastExportResponse AWS API Documentation
+    #
+    class DescribeWhatIfForecastExportResponse < Struct.new(
+      :what_if_forecast_export_arn,
+      :what_if_forecast_export_name,
+      :what_if_forecast_arns,
+      :destination,
+      :message,
+      :status,
+      :creation_time,
+      :estimated_time_remaining_in_minutes,
+      :last_modification_time,
+      :format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeWhatIfForecastRequest
+    #   data as a hash:
+    #
+    #       {
+    #         what_if_forecast_arn: "LongArn", # required
+    #       }
+    #
+    # @!attribute [rw] what_if_forecast_arn
+    #   The Amazon Resource Name (ARN) of the what-if forecast that you are
+    #   interested in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeWhatIfForecastRequest AWS API Documentation
+    #
+    class DescribeWhatIfForecastRequest < Struct.new(
+      :what_if_forecast_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] what_if_forecast_name
+    #   The name of the what-if forecast.
+    #   @return [String]
+    #
+    # @!attribute [rw] what_if_forecast_arn
+    #   The Amazon Resource Name (ARN) of the what-if forecast.
+    #   @return [String]
+    #
+    # @!attribute [rw] what_if_analysis_arn
+    #   The Amazon Resource Name (ARN) of the what-if analysis that contains
+    #   this forecast.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_time_remaining_in_minutes
+    #   The approximate time remaining to complete the what-if forecast, in
+    #   minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the what-if forecast. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
+    #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
+    #
+    #   <note markdown="1"> The `Status` of the what-if forecast must be `ACTIVE` before you can
+    #   access the forecast.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   If an error occurred, an informational message about the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the what-if forecast was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_time
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] time_series_transformations
+    #   An array of `Action` and `TimeSeriesConditions` elements that
+    #   describe what transformations were applied to which time series.
+    #   @return [Array<Types::TimeSeriesTransformation>]
+    #
+    # @!attribute [rw] time_series_replacements_data_source
+    #   An array of `S3Config`, `Schema`, and `Format` elements that
+    #   describe the replacement time series.
+    #   @return [Types::TimeSeriesReplacementsDataSource]
+    #
+    # @!attribute [rw] forecast_types
+    #   The quantiles at which probabilistic forecasts are generated. You
+    #   can specify up to 5 quantiles per what-if forecast in the
+    #   CreateWhatIfForecast operation. If you didn't specify quantiles,
+    #   the default values are `["0.1", "0.5", "0.9"]`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeWhatIfForecastResponse AWS API Documentation
+    #
+    class DescribeWhatIfForecastResponse < Struct.new(
+      :what_if_forecast_name,
+      :what_if_forecast_arn,
+      :what_if_analysis_arn,
+      :estimated_time_remaining_in_minutes,
+      :status,
+      :message,
+      :creation_time,
+      :last_modification_time,
+      :time_series_transformations,
+      :time_series_replacements_data_source,
+      :forecast_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5620,6 +6333,253 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListWhatIfAnalysesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         filters: [
+    #           {
+    #             key: "String", # required
+    #             value: "Arn", # required
+    #             condition: "IS", # required, accepts IS, IS_NOT
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous request was truncated, the response
+    #   includes a `NextToken`. To retrieve the next set of results, use the
+    #   token in the next request. Tokens expire after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of items to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   An array of filters. For each filter, you provide a condition and a
+    #   match statement. The condition is either `IS` or `IS_NOT`, which
+    #   specifies whether to include or exclude the what-if analysis jobs
+    #   that match the statement from the list, respectively. The match
+    #   statement consists of a key and a value.
+    #
+    #   **Filter properties**
+    #
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`. To include the what-if analysis jobs that match the
+    #     statement, specify `IS`. To exclude matching what-if analysis
+    #     jobs, specify `IS_NOT`.
+    #
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `WhatIfAnalysisArn` and `Status`.
+    #
+    #   * `Value` - The value to match.
+    #
+    #   For example, to list all jobs that export a forecast named
+    #   *electricityWhatIf*, specify the following filter:
+    #
+    #   `"Filters": [ \{ "Condition": "IS", "Key": "WhatIfAnalysisArn",
+    #   "Value":
+    #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWhatIf" \}
+    #   ]`
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListWhatIfAnalysesRequest AWS API Documentation
+    #
+    class ListWhatIfAnalysesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] what_if_analyses
+    #   An array of `WhatIfAnalysisSummary` objects that describe the
+    #   matched analyses.
+    #   @return [Array<Types::WhatIfAnalysisSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Forecast returns this token. To
+    #   retrieve the next set of results, use the token in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListWhatIfAnalysesResponse AWS API Documentation
+    #
+    class ListWhatIfAnalysesResponse < Struct.new(
+      :what_if_analyses,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListWhatIfForecastExportsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         filters: [
+    #           {
+    #             key: "String", # required
+    #             value: "Arn", # required
+    #             condition: "IS", # required, accepts IS, IS_NOT
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous request was truncated, the response
+    #   includes a `NextToken`. To retrieve the next set of results, use the
+    #   token in the next  request. Tokens expire after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of items to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   An array of filters. For each filter, you provide a condition and a
+    #   match statement. The condition is either `IS` or `IS_NOT`, which
+    #   specifies whether to include or exclude the what-if forecast export
+    #   jobs that match the statement from the list, respectively. The match
+    #   statement consists of a key and a value.
+    #
+    #   **Filter properties**
+    #
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`. To include the forecast export jobs that match the
+    #     statement, specify `IS`. To exclude matching forecast export jobs,
+    #     specify `IS_NOT`.
+    #
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `WhatIfForecastExportArn` and `Status`.
+    #
+    #   * `Value` - The value to match.
+    #
+    #   For example, to list all jobs that export a forecast named
+    #   *electricityWIFExport*, specify the following filter:
+    #
+    #   `"Filters": [ \{ "Condition": "IS", "Key":
+    #   "WhatIfForecastExportArn", "Value":
+    #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWIFExport"
+    #   \} ]`
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListWhatIfForecastExportsRequest AWS API Documentation
+    #
+    class ListWhatIfForecastExportsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] what_if_forecast_exports
+    #   An array of `WhatIfForecastExports` objects that describe the
+    #   matched forecast exports.
+    #   @return [Array<Types::WhatIfForecastExportSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Forecast returns this token. To
+    #   retrieve the next set of results, use the token in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListWhatIfForecastExportsResponse AWS API Documentation
+    #
+    class ListWhatIfForecastExportsResponse < Struct.new(
+      :what_if_forecast_exports,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListWhatIfForecastsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         filters: [
+    #           {
+    #             key: "String", # required
+    #             value: "Arn", # required
+    #             condition: "IS", # required, accepts IS, IS_NOT
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous request was truncated, the response
+    #   includes a `NextToken`. To retrieve the next set of results, use the
+    #   token in the next  request. Tokens expire after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of items to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   An array of filters. For each filter, you provide a condition and a
+    #   match statement. The condition is either `IS` or `IS_NOT`, which
+    #   specifies whether to include or exclude the what-if forecast export
+    #   jobs that match the statement from the list, respectively. The match
+    #   statement consists of a key and a value.
+    #
+    #   **Filter properties**
+    #
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`. To include the forecast export jobs that match the
+    #     statement, specify `IS`. To exclude matching forecast export jobs,
+    #     specify `IS_NOT`.
+    #
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `WhatIfForecastArn` and `Status`.
+    #
+    #   * `Value` - The value to match.
+    #
+    #   For example, to list all jobs that export a forecast named
+    #   *electricityWhatIfForecast*, specify the following filter:
+    #
+    #   `"Filters": [ \{ "Condition": "IS", "Key": "WhatIfForecastArn",
+    #   "Value":
+    #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWhatIfForecast"
+    #   \} ]`
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListWhatIfForecastsRequest AWS API Documentation
+    #
+    class ListWhatIfForecastsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] what_if_forecasts
+    #   An array of `WhatIfForecasts` objects that describe the matched
+    #   forecasts.
+    #   @return [Array<Types::WhatIfForecastSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous request was truncated, the response
+    #   includes a `NextToken`. To retrieve the next set of results, use the
+    #   token in the next  request. Tokens expire after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListWhatIfForecastsResponse AWS API Documentation
+    #
+    class ListWhatIfForecastsResponse < Struct.new(
+      :what_if_forecasts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An individual metric Forecast calculated when monitoring predictor
     # usage. You can compare the value for this metric to the metric's
     # value in the Baseline to see how your predictor's performance is
@@ -6895,6 +7855,47 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # Creates a subset of items within an attribute that are modified. For
+    # example, you can use this operation to create a subset of items that
+    # cost $5 or less. To do this, you specify `"AttributeName": "price"`,
+    # `"AttributeValue": "5"`, and `"Condition": "LESS_THAN"`. Pair this
+    # operation with the Action operation within the
+    # CreateWhatIfForecastRequest$TimeSeriesTransformations operation to
+    # define how the attribute is modified.
+    #
+    # @note When making an API call, you may pass TimeSeriesCondition
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_name: "Name", # required
+    #         attribute_value: "AttributeValue", # required
+    #         condition: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, LESS_THAN, GREATER_THAN
+    #       }
+    #
+    # @!attribute [rw] attribute_name
+    #   The item\_id, dimension name, IM name, or timestamp that you are
+    #   modifying.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_value
+    #   The value that is applied for the chosen `Condition`.
+    #   @return [String]
+    #
+    # @!attribute [rw] condition
+    #   The condition to apply. Valid values are `EQUALS`, `NOT_EQUALS`,
+    #   `LESS_THAN` and `GREATER_THAN`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/TimeSeriesCondition AWS API Documentation
+    #
+    class TimeSeriesCondition < Struct.new(
+      :attribute_name,
+      :attribute_value,
+      :condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the import file that contains the time series for which
     # you want to create forecasts.
     #
@@ -6944,6 +7945,68 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # A replacement dataset is a modified version of the baseline related
+    # time series that contains only the values that you want to include in
+    # a what-if forecast. The replacement dataset must contain the forecast
+    # dimensions and item identifiers in the baseline related time series as
+    # well as at least 1 changed time series. This dataset is merged with
+    # the baseline related time series to create a transformed dataset that
+    # is used for the what-if forecast.
+    #
+    # @note When making an API call, you may pass TimeSeriesReplacementsDataSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3_config: { # required
+    #           path: "S3Path", # required
+    #           role_arn: "Arn", # required
+    #           kms_key_arn: "KMSKeyArn",
+    #         },
+    #         schema: { # required
+    #           attributes: [
+    #             {
+    #               attribute_name: "Name",
+    #               attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
+    #             },
+    #           ],
+    #         },
+    #         format: "Format",
+    #         timestamp_format: "TimestampFormat",
+    #       }
+    #
+    # @!attribute [rw] s3_config
+    #   The path to the file(s) in an Amazon Simple Storage Service (Amazon
+    #   S3) bucket, and an AWS Identity and Access Management (IAM) role
+    #   that Amazon Forecast can assume to access the file(s). Optionally,
+    #   includes an AWS Key Management Service (KMS) key. This object is
+    #   part of the DataSource object that is submitted in the
+    #   CreateDatasetImportJob request, and part of the DataDestination
+    #   object.
+    #   @return [Types::S3Config]
+    #
+    # @!attribute [rw] schema
+    #   Defines the fields of a dataset.
+    #   @return [Types::Schema]
+    #
+    # @!attribute [rw] format
+    #   The format of the replacement data, CSV or PARQUET.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp_format
+    #   The timestamp format of the replacement data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/TimeSeriesReplacementsDataSource AWS API Documentation
+    #
+    class TimeSeriesReplacementsDataSource < Struct.new(
+      :s3_config,
+      :schema,
+      :format,
+      :timestamp_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the set of time series that are used to create the forecasts
     # in a `TimeSeriesIdentifiers` object.
     #
@@ -6988,6 +8051,52 @@ module Aws::ForecastService
     #
     class TimeSeriesSelector < Struct.new(
       :time_series_identifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A transformation function is a pair of operations that select and
+    # modify the rows in a related time series. You select the rows that you
+    # want with a condition operation and you modify the rows with a
+    # transformation operation. All conditions are joined with an AND
+    # operation, meaning that all conditions must be true for the
+    # transformation to be applied. Transformations are applied in the order
+    # that they are listed.
+    #
+    # @note When making an API call, you may pass TimeSeriesTransformation
+    #   data as a hash:
+    #
+    #       {
+    #         action: {
+    #           attribute_name: "Name", # required
+    #           operation: "ADD", # required, accepts ADD, SUBTRACT, MULTIPLY, DIVIDE
+    #           value: 1.0, # required
+    #         },
+    #         time_series_conditions: [
+    #           {
+    #             attribute_name: "Name", # required
+    #             attribute_value: "AttributeValue", # required
+    #             condition: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, LESS_THAN, GREATER_THAN
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] action
+    #   An array of actions that define a time series and how it is
+    #   transformed. These transformations create a new time series that is
+    #   used for the what-if analysis.
+    #   @return [Types::Action]
+    #
+    # @!attribute [rw] time_series_conditions
+    #   An array of conditions that define which members of the related time
+    #   series are transformed.
+    #   @return [Array<Types::TimeSeriesCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/TimeSeriesTransformation AWS API Documentation
+    #
+    class TimeSeriesTransformation < Struct.new(
+      :action,
+      :time_series_conditions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7073,6 +8182,228 @@ module Aws::ForecastService
     class WeightedQuantileLoss < Struct.new(
       :quantile,
       :loss_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the what-if analysis properties used in the
+    # ListWhatIfAnalyses operation. To get the complete set of properties,
+    # call the DescribeWhatIfAnalysis operation, and provide the
+    # `WhatIfAnalysisArn` that is listed in the summary.
+    #
+    # @!attribute [rw] what_if_analysis_arn
+    #   The Amazon Resource Name (ARN) of the what-if analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] what_if_analysis_name
+    #   The name of the what-if analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] forecast_arn
+    #   The Amazon Resource Name (ARN) of the baseline forecast that is
+    #   being used in this what-if analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the what-if analysis. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
+    #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
+    #
+    #   <note markdown="1"> The `Status` of the what-if analysis must be `ACTIVE` before you can
+    #   access the analysis.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   If an error occurred, an informational message about the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the what-if analysis was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_time
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/WhatIfAnalysisSummary AWS API Documentation
+    #
+    class WhatIfAnalysisSummary < Struct.new(
+      :what_if_analysis_arn,
+      :what_if_analysis_name,
+      :forecast_arn,
+      :status,
+      :message,
+      :creation_time,
+      :last_modification_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the what-if forecast export properties used in
+    # the ListWhatIfForecastExports operation. To get the complete set of
+    # properties, call the DescribeWhatIfForecastExport operation, and
+    # provide the `WhatIfForecastExportArn` that is listed in the summary.
+    #
+    # @!attribute [rw] what_if_forecast_export_arn
+    #   The Amazon Resource Name (ARN) of the what-if forecast export.
+    #   @return [String]
+    #
+    # @!attribute [rw] what_if_forecast_arns
+    #   An array of Amazon Resource Names (ARNs) that define the what-if
+    #   forecasts included in the export.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] what_if_forecast_export_name
+    #   The what-if forecast export name.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The path to the Amazon Simple Storage Service (Amazon S3) bucket
+    #   where the forecast is exported.
+    #   @return [Types::DataDestination]
+    #
+    # @!attribute [rw] status
+    #   The status of the what-if forecast export. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
+    #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
+    #
+    #   <note markdown="1"> The `Status` of the what-if analysis must be `ACTIVE` before you can
+    #   access the analysis.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   If an error occurred, an informational message about the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the what-if forecast export was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_time
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/WhatIfForecastExportSummary AWS API Documentation
+    #
+    class WhatIfForecastExportSummary < Struct.new(
+      :what_if_forecast_export_arn,
+      :what_if_forecast_arns,
+      :what_if_forecast_export_name,
+      :destination,
+      :status,
+      :message,
+      :creation_time,
+      :last_modification_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the what-if forecast properties used in the
+    # ListWhatIfForecasts operation. To get the complete set of properties,
+    # call the DescribeWhatIfForecast operation, and provide the
+    # `WhatIfForecastArn` that is listed in the summary.
+    #
+    # @!attribute [rw] what_if_forecast_arn
+    #   The Amazon Resource Name (ARN) of the what-if forecast.
+    #   @return [String]
+    #
+    # @!attribute [rw] what_if_forecast_name
+    #   The name of the what-if forecast.
+    #   @return [String]
+    #
+    # @!attribute [rw] what_if_analysis_arn
+    #   The Amazon Resource Name (ARN) of the what-if analysis that contains
+    #   this what-if forecast.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the what-if forecast. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
+    #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
+    #
+    #   <note markdown="1"> The `Status` of the what-if analysis must be `ACTIVE` before you can
+    #   access the analysis.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   If an error occurred, an informational message about the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the what-if forecast was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_time
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/WhatIfForecastSummary AWS API Documentation
+    #
+    class WhatIfForecastSummary < Struct.new(
+      :what_if_forecast_arn,
+      :what_if_forecast_name,
+      :what_if_analysis_arn,
+      :status,
+      :message,
+      :creation_time,
+      :last_modification_time)
       SENSITIVE = []
       include Aws::Structure
     end

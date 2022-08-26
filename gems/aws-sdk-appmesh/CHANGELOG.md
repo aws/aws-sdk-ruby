@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2022-08-17)
+------------------
+
+* Feature - AWS App Mesh release to support Multiple Listener and Access Log Format feature
+
 1.46.0 (2022-05-18)
 ------------------
 

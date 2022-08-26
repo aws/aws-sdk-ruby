@@ -475,6 +475,8 @@ module Aws::ConfigService
     RetentionConfigurationNameList = Shapes::ListShape.new(name: 'RetentionConfigurationNameList')
     RetentionPeriodInDays = Shapes::IntegerShape.new(name: 'RetentionPeriodInDays')
     RuleLimit = Shapes::IntegerShape.new(name: 'RuleLimit')
+    SSMDocumentName = Shapes::StringShape.new(name: 'SSMDocumentName')
+    SSMDocumentVersion = Shapes::StringShape.new(name: 'SSMDocumentVersion')
     SchemaVersionId = Shapes::StringShape.new(name: 'SchemaVersionId')
     Scope = Shapes::StructureShape.new(name: 'Scope')
     SelectAggregateResourceConfigRequest = Shapes::StructureShape.new(name: 'SelectAggregateResourceConfigRequest')
@@ -521,6 +523,7 @@ module Aws::ConfigService
     TagsList = Shapes::ListShape.new(name: 'TagsList')
     TemplateBody = Shapes::StringShape.new(name: 'TemplateBody')
     TemplateS3Uri = Shapes::StringShape.new(name: 'TemplateS3Uri')
+    TemplateSSMDocumentDetails = Shapes::StructureShape.new(name: 'TemplateSSMDocumentDetails')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UnprocessedResourceIdentifierList = Shapes::ListShape.new(name: 'UnprocessedResourceIdentifierList')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -845,6 +848,7 @@ module Aws::ConfigService
     ConformancePackDetail.add_member(:conformance_pack_input_parameters, Shapes::ShapeRef.new(shape: ConformancePackInputParameters, location_name: "ConformancePackInputParameters"))
     ConformancePackDetail.add_member(:last_update_requested_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateRequestedTime"))
     ConformancePackDetail.add_member(:created_by, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "CreatedBy"))
+    ConformancePackDetail.add_member(:template_ssm_document_details, Shapes::ShapeRef.new(shape: TemplateSSMDocumentDetails, location_name: "TemplateSSMDocumentDetails"))
     ConformancePackDetail.struct_class = Types::ConformancePackDetail
 
     ConformancePackDetailList.member = Shapes::ShapeRef.new(shape: ConformancePackDetail)
@@ -1744,6 +1748,7 @@ module Aws::ConfigService
     PutConformancePackRequest.add_member(:delivery_s3_bucket, Shapes::ShapeRef.new(shape: DeliveryS3Bucket, location_name: "DeliveryS3Bucket"))
     PutConformancePackRequest.add_member(:delivery_s3_key_prefix, Shapes::ShapeRef.new(shape: DeliveryS3KeyPrefix, location_name: "DeliveryS3KeyPrefix"))
     PutConformancePackRequest.add_member(:conformance_pack_input_parameters, Shapes::ShapeRef.new(shape: ConformancePackInputParameters, location_name: "ConformancePackInputParameters"))
+    PutConformancePackRequest.add_member(:template_ssm_document_details, Shapes::ShapeRef.new(shape: TemplateSSMDocumentDetails, location_name: "TemplateSSMDocumentDetails"))
     PutConformancePackRequest.struct_class = Types::PutConformancePackRequest
 
     PutConformancePackResponse.add_member(:conformance_pack_arn, Shapes::ShapeRef.new(shape: ConformancePackArn, location_name: "ConformancePackArn"))
@@ -2072,6 +2077,10 @@ module Aws::ConfigService
     Tags.value = Shapes::ShapeRef.new(shape: Value)
 
     TagsList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TemplateSSMDocumentDetails.add_member(:document_name, Shapes::ShapeRef.new(shape: SSMDocumentName, required: true, location_name: "DocumentName"))
+    TemplateSSMDocumentDetails.add_member(:document_version, Shapes::ShapeRef.new(shape: SSMDocumentVersion, location_name: "DocumentVersion"))
+    TemplateSSMDocumentDetails.struct_class = Types::TemplateSSMDocumentDetails
 
     TooManyTagsException.struct_class = Types::TooManyTagsException
 

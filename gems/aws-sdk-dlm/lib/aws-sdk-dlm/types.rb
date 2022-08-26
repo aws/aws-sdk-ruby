@@ -10,7 +10,8 @@
 module Aws::DLM
   module Types
 
-    # Specifies an action for an event-based policy.
+    # **\[Event-based policies only\]** Specifies an action for an
+    # event-based policy.
     #
     # @note When making an API call, you may pass Action
     #   data as a hash:
@@ -134,6 +135,12 @@ module Aws::DLM
     #           parameters: {
     #             exclude_boot_volume: false,
     #             no_reboot: false,
+    #             exclude_data_volume_tags: [
+    #               {
+    #                 key: "String", # required
+    #                 value: "String", # required
+    #               },
+    #             ],
     #           },
     #           event_source: {
     #             type: "MANAGED_CWE", # required, accepts MANAGED_CWE
@@ -213,7 +220,8 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies when to create snapshots of EBS volumes.
+    # **\[Snapshot and AMI policies only\]** Specifies when the policy
+    # should create snapshots or AMIs.
     #
     # You must specify either a Cron expression or an interval, interval
     # unit, and start time. You cannot specify both.
@@ -230,19 +238,17 @@ module Aws::DLM
     #       }
     #
     # @!attribute [rw] location
-    #   Specifies the destination for snapshots created by the policy. To
-    #   create snapshots in the same Region as the source resource, specify
-    #   `CLOUD`. To create snapshots on the same Outpost as the source
-    #   resource, specify `OUTPOST_LOCAL`. If you omit this parameter,
-    #   `CLOUD` is used by default.
+    #   **\[Snapshot policies only\]** Specifies the destination for
+    #   snapshots created by the policy. To create snapshots in the same
+    #   Region as the source resource, specify `CLOUD`. To create snapshots
+    #   on the same Outpost as the source resource, specify `OUTPOST_LOCAL`.
+    #   If you omit this parameter, `CLOUD` is used by default.
     #
     #   If the policy targets resources in an Amazon Web Services Region,
     #   then you must create snapshots in the same Region as the source
-    #   resource.
-    #
-    #   If the policy targets resources on an Outpost, then you can create
-    #   snapshots on the same Outpost as the source resource, or in the
-    #   Region of that Outpost.
+    #   resource. If the policy targets resources on an Outpost, then you
+    #   can create snapshots on the same Outpost as the source resource, or
+    #   in the Region of that Outpost.
     #   @return [String]
     #
     # @!attribute [rw] interval
@@ -285,7 +291,13 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies a rule for copying shared snapshots across Regions.
+    # **\[Event-based policies only\]** Specifies a cross-Region copy action
+    # for event-based policies.
+    #
+    # <note markdown="1"> To specify a cross-Region copy rule for snapshot and AMI policies, use
+    # CrossRegionCopyRule.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass CrossRegionCopyAction
     #   data as a hash:
@@ -311,7 +323,10 @@ module Aws::DLM
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] retain_rule
-    #   Specifies the retention rule for cross-Region snapshot copies.
+    #   Specifies a retention rule for cross-Region snapshot copies created
+    #   by snapshot or event-based policies, or cross-Region AMI copies
+    #   created by AMI policies. After the retention period expires, the
+    #   cross-Region copy is deleted.
     #   @return [Types::CrossRegionCopyRetainRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CrossRegionCopyAction AWS API Documentation
@@ -324,8 +339,8 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies an AMI deprecation rule for cross-Region AMI copies created
-    # by a cross-Region copy rule.
+    # **\[AMI policies only\]** Specifies an AMI deprecation rule for
+    # cross-Region AMI copies created by an AMI policy.
     #
     # @note When making an API call, you may pass CrossRegionCopyDeprecateRule
     #   data as a hash:
@@ -343,7 +358,9 @@ module Aws::DLM
     #   @return [Integer]
     #
     # @!attribute [rw] interval_unit
-    #   The unit of time in which to measure the **Interval**.
+    #   The unit of time in which to measure the **Interval**. For example,
+    #   to deprecate a cross-Region AMI copy after 3 months, specify
+    #   `Interval=3` and `IntervalUnit=MONTHS`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CrossRegionCopyDeprecateRule AWS API Documentation
@@ -355,7 +372,10 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies the retention rule for cross-Region snapshot copies.
+    # Specifies a retention rule for cross-Region snapshot copies created by
+    # snapshot or event-based policies, or cross-Region AMI copies created
+    # by AMI policies. After the retention period expires, the cross-Region
+    # copy is deleted.
     #
     # @note When making an API call, you may pass CrossRegionCopyRetainRule
     #   data as a hash:
@@ -366,12 +386,15 @@ module Aws::DLM
     #       }
     #
     # @!attribute [rw] interval
-    #   The amount of time to retain each snapshot. The maximum is 100
-    #   years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.
+    #   The amount of time to retain a cross-Region snapshot or AMI copy.
+    #   The maximum is 100 years. This is equivalent to 1200 months, 5200
+    #   weeks, or 36500 days.
     #   @return [Integer]
     #
     # @!attribute [rw] interval_unit
-    #   The unit of time for time-based retention.
+    #   The unit of time for time-based retention. For example, to retain a
+    #   cross-Region copy for 3 months, specify `Interval=3` and
+    #   `IntervalUnit=MONTHS`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CrossRegionCopyRetainRule AWS API Documentation
@@ -383,7 +406,13 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies a rule for cross-Region snapshot copies.
+    # **\[Snapshot and AMI policies only\]** Specifies a cross-Region copy
+    # rule for snapshot and AMI policies.
+    #
+    # <note markdown="1"> To specify a cross-Region copy action for event-based polices, use
+    # CrossRegionCopyAction.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass CrossRegionCopyRule
     #   data as a hash:
@@ -405,12 +434,14 @@ module Aws::DLM
     #       }
     #
     # @!attribute [rw] target_region
-    #   Avoid using this parameter when creating new policies. Instead, use
+    #   <note markdown="1"> Avoid using this parameter when creating new policies. Instead, use
     #   **Target** to specify a target Region or a target Outpost for
     #   snapshot copies.
     #
-    #   For policies created before the **Target** parameter was introduced,
+    #    For policies created before the **Target** parameter was introduced,
     #   this parameter indicates the target Region for snapshot copies.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -435,17 +466,17 @@ module Aws::DLM
     #
     # @!attribute [rw] copy_tags
     #   Indicates whether to copy all user-defined tags from the source
-    #   snapshot to the cross-Region snapshot copy.
+    #   snapshot or AMI to the cross-Region copy.
     #   @return [Boolean]
     #
     # @!attribute [rw] retain_rule
-    #   The retention rule that indicates how long snapshot copies are to be
-    #   retained in the destination Region.
+    #   The retention rule that indicates how long the cross-Region snapshot
+    #   or AMI copies are to be retained in the destination Region.
     #   @return [Types::CrossRegionCopyRetainRule]
     #
     # @!attribute [rw] deprecate_rule
-    #   The AMI deprecation rule for cross-Region AMI copies created by the
-    #   rule.
+    #   **\[AMI policies only\]** The AMI deprecation rule for cross-Region
+    #   AMI copies created by the rule.
     #   @return [Types::CrossRegionCopyDeprecateRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CrossRegionCopyRule AWS API Documentation
@@ -485,7 +516,12 @@ module Aws::DLM
     #
     class DeleteLifecyclePolicyResponse < Aws::EmptyStructure; end
 
-    # Specifies an AMI deprecation rule for a schedule.
+    # **\[AMI policies only\]** Specifies an AMI deprecation rule for AMIs
+    # created by an AMI lifecycle policy.
+    #
+    # For age-based schedules, you must specify **Interval** and
+    # **IntervalUnit**. For count-based schedules, you must specify
+    # **Count**.
     #
     # @note When making an API call, you may pass DeprecateRule
     #   data as a hash:
@@ -525,8 +561,8 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies the encryption settings for shared snapshots that are copied
-    # across Regions.
+    # **\[Event-based policies only\]** Specifies the encryption settings
+    # for cross-Region snapshot copies created by event-based policies.
     #
     # @note When making an API call, you may pass EncryptionConfiguration
     #   data as a hash:
@@ -558,7 +594,8 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies an event that triggers an event-based policy.
+    # **\[Event-based policies only\]** Specifies an event that activates an
+    # event-based policy.
     #
     # @note When making an API call, you may pass EventParameters
     #   data as a hash:
@@ -603,7 +640,8 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies an event that triggers an event-based policy.
+    # **\[Event-based policies only\]** Specifies an event that activates an
+    # event-based policy.
     #
     # @note When making an API call, you may pass EventSource
     #   data as a hash:
@@ -635,8 +673,10 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies a rule for enabling fast snapshot restore. You can enable
-    # fast snapshot restore based on either a count or a time interval.
+    # **\[Snapshot policies only\]** Specifies a rule for enabling fast
+    # snapshot restore for snapshots created by snaspshot policies. You can
+    # enable fast snapshot restore based on either a count or a time
+    # interval.
     #
     # @note When making an API call, you may pass FastRestoreRule
     #   data as a hash:
@@ -815,7 +855,8 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Detailed information about a lifecycle policy.
+    # **\[All policy types\]** Detailed information about a snapshot, AMI,
+    # or event-based lifecycle policy.
     #
     # @!attribute [rw] policy_id
     #   The identifier of the lifecycle policy.
@@ -897,7 +938,9 @@ module Aws::DLM
     #   The type of policy. `EBS_SNAPSHOT_MANAGEMENT` indicates that the
     #   policy manages the lifecycle of Amazon EBS snapshots.
     #   `IMAGE_MANAGEMENT` indicates that the policy manages the lifecycle
-    #   of EBS-backed AMIs.
+    #   of EBS-backed AMIs. `EVENT_BASED_POLICY` indicates that the policy
+    #   automates cross-account snapshot copies for snapshots that are
+    #   shared with your account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/LifecyclePolicySummary AWS API Documentation
@@ -965,9 +1008,20 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies optional parameters to add to a policy. The set of valid
-    # parameters depends on the combination of policy type and resource
-    # type.
+    # **\[Snapshot and AMI policies only\]** Specifies optional parameters
+    # for snapshot and AMI policies. The set of valid parameters depends on
+    # the combination of policy type and target resource type.
+    #
+    # If you choose to exclude boot volumes and you specify tags that
+    # consequently exclude all of the additional data volumes attached to an
+    # instance, then Amazon DLM will not create any snapshots for the
+    # affected instance, and it will emit a `SnapshotsCreateFailed` Amazon
+    # CloudWatch metric. For more information, see [Monitor your policies
+    # using Amazon CloudWatch][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-dlm-cw-metrics.html
     #
     # @note When making an API call, you may pass Parameters
     #   data as a hash:
@@ -975,36 +1029,53 @@ module Aws::DLM
     #       {
     #         exclude_boot_volume: false,
     #         no_reboot: false,
+    #         exclude_data_volume_tags: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] exclude_boot_volume
-    #   \[EBS Snapshot Management – Instance policies only\] Indicates
-    #   whether to exclude the root volume from snapshots created using
-    #   [CreateSnapshots][1]. The default is false.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSnapshots.html
+    #   **\[Snapshot policies that target instances only\]** Indicates
+    #   whether to exclude the root volume from multi-volume snapshot sets.
+    #   The default is `false`. If you specify `true`, then the root volumes
+    #   attached to targeted instances will be excluded from the
+    #   multi-volume snapshot sets created by the policy.
     #   @return [Boolean]
     #
     # @!attribute [rw] no_reboot
-    #   Applies to AMI lifecycle policies only. Indicates whether targeted
-    #   instances are rebooted when the lifecycle policy runs. `true`
-    #   indicates that targeted instances are not rebooted when the policy
-    #   runs. `false` indicates that target instances are rebooted when the
-    #   policy runs. The default is `true` (instances are not rebooted).
+    #   **\[AMI policies only\]** Indicates whether targeted instances are
+    #   rebooted when the lifecycle policy runs. `true` indicates that
+    #   targeted instances are not rebooted when the policy runs. `false`
+    #   indicates that target instances are rebooted when the policy runs.
+    #   The default is `true` (instances are not rebooted).
     #   @return [Boolean]
+    #
+    # @!attribute [rw] exclude_data_volume_tags
+    #   **\[Snapshot policies that target instances only\]** The tags used
+    #   to identify data (non-root) volumes to exclude from multi-volume
+    #   snapshot sets.
+    #
+    #   If you create a snapshot lifecycle policy that targets instances and
+    #   you specify tags for this parameter, then data volumes with the
+    #   specified tags that are attached to targeted instances will be
+    #   excluded from the multi-volume snapshot sets created by the policy.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Parameters AWS API Documentation
     #
     class Parameters < Struct.new(
       :exclude_boot_volume,
-      :no_reboot)
+      :no_reboot,
+      :exclude_data_volume_tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Specifies the configuration of a lifecycle policy.
+    # **\[All policy types\]** Specifies the configuration of a lifecycle
+    # policy.
     #
     # @note When making an API call, you may pass PolicyDetails
     #   data as a hash:
@@ -1087,6 +1158,12 @@ module Aws::DLM
     #         parameters: {
     #           exclude_boot_volume: false,
     #           no_reboot: false,
+    #           exclude_data_volume_tags: [
+    #             {
+    #               key: "String", # required
+    #               value: "String", # required
+    #             },
+    #           ],
     #         },
     #         event_source: {
     #           type: "MANAGED_CWE", # required, accepts MANAGED_CWE
@@ -1117,11 +1194,11 @@ module Aws::DLM
     #       }
     #
     # @!attribute [rw] policy_type
-    #   The valid target resource types and actions a policy can manage.
-    #   Specify `EBS_SNAPSHOT_MANAGEMENT` to create a lifecycle policy that
-    #   manages the lifecycle of Amazon EBS snapshots. Specify
-    #   `IMAGE_MANAGEMENT` to create a lifecycle policy that manages the
-    #   lifecycle of EBS-backed AMIs. Specify `EVENT_BASED_POLICY ` to
+    #   **\[All policy types\]** The valid target resource types and actions
+    #   a policy can manage. Specify `EBS_SNAPSHOT_MANAGEMENT` to create a
+    #   lifecycle policy that manages the lifecycle of Amazon EBS snapshots.
+    #   Specify `IMAGE_MANAGEMENT` to create a lifecycle policy that manages
+    #   the lifecycle of EBS-backed AMIs. Specify `EVENT_BASED_POLICY ` to
     #   create an event-based policy that performs specific actions when a
     #   defined event occurs in your Amazon Web Services account.
     #
@@ -1129,20 +1206,17 @@ module Aws::DLM
     #   @return [String]
     #
     # @!attribute [rw] resource_types
-    #   The target resource type for snapshot and AMI lifecycle policies.
-    #   Use `VOLUME `to create snapshots of individual volumes or use
-    #   `INSTANCE` to create multi-volume snapshots from the volumes for an
-    #   instance.
-    #
-    #   This parameter is required for snapshot and AMI policies only. If
-    #   you are creating an event-based policy, omit this parameter.
+    #   **\[Snapshot policies only\]** The target resource type for snapshot
+    #   and AMI lifecycle policies. Use `VOLUME `to create snapshots of
+    #   individual volumes or use `INSTANCE` to create multi-volume
+    #   snapshots from the volumes for an instance.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_locations
-    #   The location of the resources to backup. If the source resources are
-    #   located in an Amazon Web Services Region, specify `CLOUD`. If the
-    #   source resources are located on an Outpost in your account, specify
-    #   `OUTPOST`.
+    #   **\[Snapshot and AMI policies only\]** The location of the resources
+    #   to backup. If the source resources are located in an Amazon Web
+    #   Services Region, specify `CLOUD`. If the source resources are
+    #   located on an Outpost in your account, specify `OUTPOST`.
     #
     #   If you specify `OUTPOST`, Amazon Data Lifecycle Manager backs up all
     #   resources of the specified type with matching target tags across all
@@ -1150,42 +1224,39 @@ module Aws::DLM
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_tags
-    #   The single tag that identifies targeted resources for this policy.
-    #
-    #   This parameter is required for snapshot and AMI policies only. If
-    #   you are creating an event-based policy, omit this parameter.
+    #   **\[Snapshot and AMI policies only\]** The single tag that
+    #   identifies targeted resources for this policy.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] schedules
-    #   The schedules of policy-defined actions for snapshot and AMI
-    #   lifecycle policies. A policy can have up to four schedules—one
-    #   mandatory schedule and up to three optional schedules.
-    #
-    #   This parameter is required for snapshot and AMI policies only. If
-    #   you are creating an event-based policy, omit this parameter.
+    #   **\[Snapshot and AMI policies only\]** The schedules of
+    #   policy-defined actions for snapshot and AMI lifecycle policies. A
+    #   policy can have up to four schedules—one mandatory schedule and up
+    #   to three optional schedules.
     #   @return [Array<Types::Schedule>]
     #
     # @!attribute [rw] parameters
-    #   A set of optional parameters for snapshot and AMI lifecycle
-    #   policies.
+    #   **\[Snapshot and AMI policies only\]** A set of optional parameters
+    #   for snapshot and AMI lifecycle policies.
     #
-    #   This parameter is required for snapshot and AMI policies only. If
-    #   you are creating an event-based policy, omit this parameter.
+    #   <note markdown="1"> If you are modifying a policy that was created or previously
+    #   modified using the Amazon Data Lifecycle Manager console, then you
+    #   must include this parameter and specify either the default values or
+    #   the new values that you require. You can't omit this parameter or
+    #   set its values to null.
+    #
+    #    </note>
     #   @return [Types::Parameters]
     #
     # @!attribute [rw] event_source
-    #   The event that triggers the event-based policy.
-    #
-    #   This parameter is required for event-based policies only. If you are
-    #   creating a snapshot or AMI policy, omit this parameter.
+    #   **\[Event-based policies only\]** The event that activates the
+    #   event-based policy.
     #   @return [Types::EventSource]
     #
     # @!attribute [rw] actions
-    #   The actions to be performed when the event-based policy is
-    #   triggered. You can specify only one action per policy.
-    #
-    #   This parameter is required for event-based policies only. If you are
-    #   creating a snapshot or AMI policy, omit this parameter.
+    #   **\[Event-based policies only\]** The actions to be performed when
+    #   the event-based policy is activated. You can specify only one action
+    #   per policy.
     #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/PolicyDetails AWS API Documentation
@@ -1230,8 +1301,13 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies the retention rule for a lifecycle policy. You can retain
-    # snapshots based on either a count or a time interval.
+    # **\[Snapshot and AMI policies only\]** Specifies a retention rule for
+    # snapshots created by snapshot policies or for AMIs created by AMI
+    # policies. You can retain snapshots based on either a count or a time
+    # interval.
+    #
+    # You must specify either **Count**, or **Interval** and
+    # **IntervalUnit**.
     #
     # @note When making an API call, you may pass RetainRule
     #   data as a hash:
@@ -1266,7 +1342,8 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies a backup schedule for a snapshot or AMI lifecycle policy.
+    # **\[Snapshot and AMI policies only\]** Specifies a schedule for a
+    # snapshot or AMI lifecycle policy.
     #
     # @note When making an API call, you may pass Schedule
     #   data as a hash:
@@ -1351,11 +1428,12 @@ module Aws::DLM
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] variable_tags
-    #   A collection of key/value pairs with values determined dynamically
-    #   when the policy is executed. Keys may be any valid Amazon EC2 tag
-    #   key. Values must be in one of the two following formats:
-    #   `$(instance-id)` or `$(timestamp)`. Variable tags are only valid for
-    #   EBS Snapshot Management – Instance policies.
+    #   **\[AMI policies and snapshot policies that target instances
+    #   only\]** A collection of key/value pairs with values determined
+    #   dynamically when the policy is executed. Keys may be any valid
+    #   Amazon EC2 tag key. Values must be in one of the two following
+    #   formats: `$(instance-id)` or `$(timestamp)`. Variable tags are only
+    #   valid for EBS Snapshot Management – Instance policies.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] create_rule
@@ -1363,30 +1441,32 @@ module Aws::DLM
     #   @return [Types::CreateRule]
     #
     # @!attribute [rw] retain_rule
-    #   The retention rule.
+    #   The retention rule for snapshots or AMIs created by the policy.
     #   @return [Types::RetainRule]
     #
     # @!attribute [rw] fast_restore_rule
-    #   The rule for enabling fast snapshot restore.
+    #   **\[Snapshot policies only\]** The rule for enabling fast snapshot
+    #   restore.
     #   @return [Types::FastRestoreRule]
     #
     # @!attribute [rw] cross_region_copy_rules
-    #   The rule for cross-Region snapshot copies.
+    #   Specifies a rule for copying snapshots or AMIs across regions.
     #
-    #   You can only specify cross-Region copy rules for policies that
-    #   create snapshots in a Region. If the policy creates snapshots on an
-    #   Outpost, then you cannot copy the snapshots to a Region or to an
-    #   Outpost. If the policy creates snapshots in a Region, then snapshots
-    #   can be copied to up to three Regions or Outposts.
+    #   <note markdown="1"> You can't specify cross-Region copy rules for policies that create
+    #   snapshots on an Outpost. If the policy creates snapshots in a
+    #   Region, then snapshots can be copied to up to three Regions or
+    #   Outposts.
+    #
+    #    </note>
     #   @return [Array<Types::CrossRegionCopyRule>]
     #
     # @!attribute [rw] share_rules
-    #   The rule for sharing snapshots with other Amazon Web Services
-    #   accounts.
+    #   **\[Snapshot policies only\]** The rule for sharing snapshots with
+    #   other Amazon Web Services accounts.
     #   @return [Array<Types::ShareRule>]
     #
     # @!attribute [rw] deprecate_rule
-    #   The AMI deprecation rule for the schedule.
+    #   **\[AMI policies only\]** The AMI deprecation rule for the schedule.
     #   @return [Types::DeprecateRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Schedule AWS API Documentation
@@ -1406,8 +1486,8 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies a rule for sharing snapshots across Amazon Web Services
-    # accounts.
+    # **\[Snapshot policies only\]** Specifies a rule for sharing snapshots
+    # across Amazon Web Services accounts.
     #
     # @note When making an API call, you may pass ShareRule
     #   data as a hash:
@@ -1615,6 +1695,12 @@ module Aws::DLM
     #           parameters: {
     #             exclude_boot_volume: false,
     #             no_reboot: false,
+    #             exclude_data_volume_tags: [
+    #               {
+    #                 key: "String", # required
+    #                 value: "String", # required
+    #               },
+    #             ],
     #           },
     #           event_source: {
     #             type: "MANAGED_CWE", # required, accepts MANAGED_CWE

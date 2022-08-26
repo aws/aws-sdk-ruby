@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2022-08-24)
+------------------
+
+* Feature - Adds support for CloudFront origin access control (OAC), making it possible to restrict public access to S3 bucket origins in all AWS Regions, those with SSE-KMS, and more.
+
+1.66.0 (2022-08-15)
+------------------
+
+* Feature - Adds Http 3 support to distributions
+
 1.65.0 (2022-05-16)
 ------------------
 

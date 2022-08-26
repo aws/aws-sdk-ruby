@@ -609,6 +609,58 @@ module Aws::ChimeSDKMeetings
     #   A consistent and opaque identifier, created and maintained by the
     #   builder to represent a segment of their users.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Applies one or more tags to an Amazon Chime SDK meeting. Note the
+    #   following:
+    #
+    #   * Not all resources have tags. For a list of services with resources
+    #     that support tagging using this operation, see [Services that
+    #     support the Resource Groups Tagging API][1]. If the resource
+    #     doesn't yet support this operation, the resource's service might
+    #     support tagging using its own API operations. For more information,
+    #     refer to the documentation for that service.
+    #
+    #   * Each resource can have up to 50 tags. For other limits, see [Tag
+    #     Naming and Usage Conventions][2] in the *AWS General Reference*.
+    #
+    #   * You can only tag resources that are located in the specified AWS
+    #     Region for the AWS account.
+    #
+    #   * To add tags to a resource, you need the necessary permissions for
+    #     the service that the resource belongs to as well as permissions for
+    #     adding tags. For more information, see the documentation for each
+    #     service.
+    #
+    #   Do not store personally identifiable information (PII) or other
+    #   confidential or sensitive information in tags. We use tags to provide
+    #   you with billing and administration services. Tags are not intended to
+    #   be used for private or sensitive data.
+    #
+    #   **Minimum permissions**
+    #
+    #   In addition to the `tag:TagResources `permission required by this
+    #   operation, you must also have the tagging permission defined by the
+    #   service that created the resource. For example, to tag a
+    #   `ChimeSDKMeetings` instance using the `TagResources` operation, you
+    #   must have both of the following permissions:
+    #
+    #   `tag:TagResources`
+    #
+    #   `ChimeSDKMeetings:CreateTags`
+    #
+    #   <note markdown="1"> Some services might have specific requirements for tagging some
+    #   resources. For example, to tag an Amazon S3 bucket, you must also have
+    #   the `s3:GetBucketTagging` permission. If the expected minimum
+    #   permissions don't work, check the documentation for that service's
+    #   tagging APIs for more information.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions
+    #
     # @return [Types::CreateMeetingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMeetingResponse#meeting #meeting} => Types::Meeting
@@ -632,6 +684,12 @@ module Aws::ChimeSDKMeetings
     #     },
     #     primary_meeting_id: "PrimaryMeetingId",
     #     tenant_ids: ["TenantId"],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -652,6 +710,7 @@ module Aws::ChimeSDKMeetings
     #   resp.meeting.primary_meeting_id #=> String
     #   resp.meeting.tenant_ids #=> Array
     #   resp.meeting.tenant_ids[0] #=> String
+    #   resp.meeting.meeting_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateMeeting AWS API Documentation
     #
@@ -717,6 +776,9 @@ module Aws::ChimeSDKMeetings
     #   A consistent and opaque identifier, created and maintained by the
     #   builder to represent a segment of their users.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags in the request.
+    #
     # @return [Types::CreateMeetingWithAttendeesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMeetingWithAttendeesResponse#meeting #meeting} => Types::Meeting
@@ -752,6 +814,12 @@ module Aws::ChimeSDKMeetings
     #     ],
     #     primary_meeting_id: "PrimaryMeetingId",
     #     tenant_ids: ["TenantId"],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -772,6 +840,7 @@ module Aws::ChimeSDKMeetings
     #   resp.meeting.primary_meeting_id #=> String
     #   resp.meeting.tenant_ids #=> Array
     #   resp.meeting.tenant_ids[0] #=> String
+    #   resp.meeting.meeting_arn #=> String
     #   resp.attendees #=> Array
     #   resp.attendees[0].external_user_id #=> String
     #   resp.attendees[0].attendee_id #=> String
@@ -939,6 +1008,7 @@ module Aws::ChimeSDKMeetings
     #   resp.meeting.primary_meeting_id #=> String
     #   resp.meeting.tenant_ids #=> Array
     #   resp.meeting.tenant_ids[0] #=> String
+    #   resp.meeting.meeting_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/GetMeeting AWS API Documentation
     #
@@ -998,6 +1068,36 @@ module Aws::ChimeSDKMeetings
     # @param [Hash] params ({})
     def list_attendees(params = {}, options = {})
       req = build_request(:list_attendees, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the tags available for the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1073,6 +1173,86 @@ module Aws::ChimeSDKMeetings
     # @param [Hash] params ({})
     def stop_meeting_transcription(params = {}, options = {})
       req = build_request(:stop_meeting_transcription, params)
+      req.send_request(options)
+    end
+
+    # The resource that supports tags.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   Lists the requested tags.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified tags from the specified resources. When you
+    # specify a tag key, the action removes both that key and its associated
+    # value. The operation succeeds even if you attempt to remove tags from
+    # a resource that were already removed. Note the following:
+    #
+    # * To remove tags from a resource, you need the necessary permissions
+    #   for the service that the resource belongs to as well as permissions
+    #   for removing tags. For more information, see the documentation for
+    #   the service whose resource you want to untag.
+    #
+    # * You can only tag resources that are located in the specified AWS
+    #   Region for the calling AWS account.
+    #
+    # **Minimum permissions**
+    #
+    # In addition to the `tag:UntagResources` permission required by this
+    # operation, you must also have the remove tags permission defined by
+    # the service that created the resource. For example, to remove the tags
+    # from an Amazon EC2 instance using the `UntagResources` operation, you
+    # must have both of the following permissions:
+    #
+    # `tag:UntagResource`
+    #
+    # `ChimeSDKMeetings:DeleteTags`
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource that you're removing tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys being removed from the resources.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -1160,7 +1340,7 @@ module Aws::ChimeSDKMeetings
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmeetings'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

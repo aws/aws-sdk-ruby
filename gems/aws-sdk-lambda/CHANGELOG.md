@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2022-08-17)
+------------------
+
+* Feature - Added support for customization of Consumer Group ID for MSK and Kafka Event Source Mappings.
+
 1.84.0 (2022-05-12)
 ------------------
 

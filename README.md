@@ -335,6 +335,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Auto Scaling Plans                                | Aws::AutoScalingPlans                    | aws-sdk-autoscalingplans                    | 2018-01-06  |
 | AWS Backup                                            | Aws::Backup                              | aws-sdk-backup                              | 2018-11-15  |
 | AWS Backup Gateway                                    | Aws::BackupGateway                       | aws-sdk-backupgateway                       | 2021-01-01  |
+| AWS Backup Storage                                    | Aws::BackupStorage                       | aws-sdk-backupstorage                       | 2018-04-10  |
 | AWS Batch                                             | Aws::Batch                               | aws-sdk-batch                               | 2016-08-10  |
 | AWS Budgets                                           | Aws::Budgets                             | aws-sdk-budgets                             | 2016-10-20  |
 | AWS Certificate Manager                               | Aws::ACM                                 | aws-sdk-acm                                 | 2015-12-08  |
@@ -402,6 +403,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Lambda                                            | Aws::Lambda                              | aws-sdk-lambda                              | 2015-03-31  |
 | AWS Lambda                                            | Aws::LambdaPreview                       | aws-sdk-lambdapreview                       | 2014-11-11  |
 | AWS License Manager                                   | Aws::LicenseManager                      | aws-sdk-licensemanager                      | 2018-08-01  |
+| AWS License Manager User Subscriptions                | Aws::LicenseManagerUserSubscriptions     | aws-sdk-licensemanagerusersubscriptions     | 2018-05-10  |
 | AWS Marketplace Catalog Service                       | Aws::MarketplaceCatalog                  | aws-sdk-marketplacecatalog                  | 2018-09-17  |
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics        | aws-sdk-marketplacecommerceanalytics        | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | Aws::MarketplaceEntitlementService       | aws-sdk-marketplaceentitlementservice       | 2017-01-11  |
@@ -420,6 +422,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Panorama                                          | Aws::Panorama                            | aws-sdk-panorama                            | 2019-07-24  |
 | AWS Performance Insights                              | Aws::PI                                  | aws-sdk-pi                                  | 2018-02-27  |
 | AWS Price List Service                                | Aws::Pricing                             | aws-sdk-pricing                             | 2017-10-15  |
+| AWS Private 5G                                        | Aws::PrivateNetworks                     | aws-sdk-privatenetworks                     | 2021-12-03  |
 | AWS Proton                                            | Aws::Proton                              | aws-sdk-proton                              | 2020-07-20  |
 | AWS RDS DataService                                   | Aws::RDSDataService                      | aws-sdk-rdsdataservice                      | 2018-08-01  |
 | AWS Resilience Hub                                    | Aws::ResilienceHub                       | aws-sdk-resiliencehub                       | 2020-04-30  |
@@ -431,7 +434,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Route53 Recovery Readiness                        | Aws::Route53RecoveryReadiness            | aws-sdk-route53recoveryreadiness            | 2019-12-02  |
 | AWS S3 Control                                        | Aws::S3Control                           | aws-sdk-s3control                           | 2018-08-20  |
 | AWS SSO Identity Store                                | Aws::IdentityStore                       | aws-sdk-identitystore                       | 2020-06-15  |
-| AWS SSO OIDC                                          | Aws::SSOOIDC                             | aws-sdk-ssooidc                             | 2019-06-10  |
+| AWS SSO OIDC                                          | Aws::SSOOIDC                             | aws-sdk-core                                | 2019-06-10  |
 | AWS Savings Plans                                     | Aws::SavingsPlans                        | aws-sdk-savingsplans                        | 2019-06-28  |
 | AWS Secrets Manager                                   | Aws::SecretsManager                      | aws-sdk-secretsmanager                      | 2017-10-17  |
 | AWS Security Token Service                            | Aws::STS                                 | aws-sdk-core                                | 2011-06-15  |
@@ -447,6 +450,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Step Functions                                    | Aws::States                              | aws-sdk-states                              | 2016-11-23  |
 | AWS Storage Gateway                                   | Aws::StorageGateway                      | aws-sdk-storagegateway                      | 2013-06-30  |
 | AWS Support                                           | Aws::Support                             | aws-sdk-support                             | 2013-04-15  |
+| AWS Support App                                       | Aws::SupportApp                          | aws-sdk-supportapp                          | 2021-08-20  |
 | AWS Systems Manager Incident Manager                  | Aws::SSMIncidents                        | aws-sdk-ssmincidents                        | 2018-05-10  |
 | AWS Systems Manager Incident Manager Contacts         | Aws::SSMContacts                         | aws-sdk-ssmcontacts                         | 2021-05-03  |
 | AWS Transfer Family                                   | Aws::Transfer                            | aws-sdk-transfer                            | 2018-11-05  |

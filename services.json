@@ -96,6 +96,9 @@
   "BackupGateway": {
     "models": "backup-gateway/2021-01-01"
   },
+  "BackupStorage": {
+    "models": "backupstorage/2018-04-10"
+  },
   "Batch": {
     "models": "batch/2016-08-10"
   },
@@ -583,6 +586,9 @@
   "LicenseManager": {
     "models": "license-manager/2018-08-01"
   },
+  "LicenseManagerUserSubscriptions": {
+    "models": "license-manager-user-subscriptions/2018-05-10"
+  },
   "Lightsail": {
     "models": "lightsail/2016-11-28"
   },
@@ -747,6 +753,9 @@
   },
   "Pricing": {
     "models": "pricing/2017-10-15"
+  },
+  "PrivateNetworks": {
+    "models": "privatenetworks/2021-12-03"
   },
   "PrometheusService": {
     "models": "amp/2020-08-01"
@@ -915,7 +924,8 @@
     "models": "sso-admin/2020-07-20"
   },
   "SSOOIDC": {
-    "models": "sso-oidc/2019-06-10"
+    "models": "sso-oidc/2019-06-10",
+    "gemName": "aws-sdk-core"
   },
   "STS": {
     "models": "sts/2011-06-15",
@@ -989,6 +999,9 @@
   },
   "Support": {
     "models": "support/2013-04-15"
+  },
+  "SupportApp": {
+    "models": "support-app/2021-08-20"
   },
   "Synthetics": {
     "models": "synthetics/2017-10-11"

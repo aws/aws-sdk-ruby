@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2022-08-04)
+------------------
+
+* Feature - Documentation updates for Database Migration Service (DMS).
+
 1.71.0 (2022-07-21)
 ------------------
 

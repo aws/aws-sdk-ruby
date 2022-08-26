@@ -21,11 +21,16 @@ module Aws::ChimeSDKMessaging
     #   read.
     #   @return [Time]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel that the `AppInstanceUser` is a member of.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/AppInstanceUserMembershipSummary AWS API Documentation
     #
     class AppInstanceUserMembershipSummary < Struct.new(
       :type,
-      :read_marker_timestamp)
+      :read_marker_timestamp,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -97,13 +102,18 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel to which you're adding users.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/BatchChannelMemberships AWS API Documentation
     #
     class BatchChannelMemberships < Struct.new(
       :invited_by,
       :type,
       :members,
-      :channel_arn)
+      :channel_arn,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -141,6 +151,7 @@ module Aws::ChimeSDKMessaging
     #         type: "DEFAULT", # accepts DEFAULT, HIDDEN
     #         member_arns: ["ChimeArn"], # required
     #         chime_bearer: "ChimeArn", # required
+    #         sub_channel_id: "SubChannelId",
     #       }
     #
     # @!attribute [rw] channel_arn
@@ -164,13 +175,23 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when creating membership in a SubChannel for a
+    #   moderator in an elastic channel.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/BatchCreateChannelMembershipRequest AWS API Documentation
     #
     class BatchCreateChannelMembershipRequest < Struct.new(
       :channel_arn,
       :type,
       :member_arns,
-      :chime_bearer)
+      :chime_bearer,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -236,6 +257,11 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel flow.
     #   @return [String]
     #
+    # @!attribute [rw] elastic_channel_configuration
+    #   The attributes required to configure and create an elastic channel.
+    #   An elastic channel can support a maximum of 1-million members.
+    #   @return [Types::ElasticChannelConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -248,7 +274,8 @@ module Aws::ChimeSDKMessaging
       :created_timestamp,
       :last_message_timestamp,
       :last_updated_timestamp,
-      :channel_flow_arn)
+      :channel_flow_arn,
+      :elastic_channel_configuration)
       SENSITIVE = [:name, :metadata]
       include Aws::Structure
     end
@@ -385,6 +412,7 @@ module Aws::ChimeSDKMessaging
     #               string_values: ["MessageAttributeStringValue"],
     #             },
     #           },
+    #           sub_channel_id: "SubChannelId",
     #         },
     #       }
     #
@@ -487,6 +515,10 @@ module Aws::ChimeSDKMessaging
     #   The time at which a channel membership was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel that a user belongs to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelMembership AWS API Documentation
     #
     class ChannelMembership < Struct.new(
@@ -495,7 +527,8 @@ module Aws::ChimeSDKMessaging
       :member,
       :channel_arn,
       :created_timestamp,
-      :last_updated_timestamp)
+      :last_updated_timestamp,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -612,6 +645,10 @@ module Aws::ChimeSDKMessaging
     #   with a `FilterRule` defined in the `PushNotificationPreferences`.
     #   @return [Hash<String,Types::MessageAttributeValue>]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelMessage AWS API Documentation
     #
     class ChannelMessage < Struct.new(
@@ -627,7 +664,8 @@ module Aws::ChimeSDKMessaging
       :redacted,
       :persistence,
       :status,
-      :message_attributes)
+      :message_attributes,
+      :sub_channel_id)
       SENSITIVE = [:content, :metadata]
       include Aws::Structure
     end
@@ -651,6 +689,7 @@ module Aws::ChimeSDKMessaging
     #             string_values: ["MessageAttributeStringValue"],
     #           },
     #         },
+    #         sub_channel_id: "SubChannelId",
     #       }
     #
     # @!attribute [rw] message_id
@@ -674,6 +713,10 @@ module Aws::ChimeSDKMessaging
     #   with a `FilterRule` defined in the `PushNotificationPreferences`.
     #   @return [Hash<String,Types::MessageAttributeValue>]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelMessageCallback AWS API Documentation
     #
     class ChannelMessageCallback < Struct.new(
@@ -681,7 +724,8 @@ module Aws::ChimeSDKMessaging
       :content,
       :metadata,
       :push_notification,
-      :message_attributes)
+      :message_attributes,
+      :sub_channel_id)
       SENSITIVE = [:content, :metadata]
       include Aws::Structure
     end
@@ -1014,6 +1058,7 @@ module Aws::ChimeSDKMessaging
     #         member_arn: "ChimeArn", # required
     #         type: "DEFAULT", # required, accepts DEFAULT, HIDDEN
     #         chime_bearer: "ChimeArn", # required
+    #         sub_channel_id: "SubChannelId",
     #       }
     #
     # @!attribute [rw] channel_arn
@@ -1037,13 +1082,23 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when creating membership in a SubChannel for a
+    #   moderator in an elastic channel.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/CreateChannelMembershipRequest AWS API Documentation
     #
     class CreateChannelMembershipRequest < Struct.new(
       :channel_arn,
       :member_arn,
       :type,
-      :chime_bearer)
+      :chime_bearer,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1056,11 +1111,16 @@ module Aws::ChimeSDKMessaging
     #   The ARN and metadata of the member being added.
     #   @return [Types::Identity]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/CreateChannelMembershipResponse AWS API Documentation
     #
     class CreateChannelMembershipResponse < Struct.new(
       :channel_arn,
-      :member)
+      :member,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1133,6 +1193,11 @@ module Aws::ChimeSDKMessaging
     #         channel_id: "ChannelId",
     #         member_arns: ["ChimeArn"],
     #         moderator_arns: ["ChimeArn"],
+    #         elastic_channel_configuration: {
+    #           maximum_sub_channels: 1, # required
+    #           target_memberships_per_sub_channel: 1, # required
+    #           minimum_membership_percentage: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] app_instance_arn
@@ -1187,6 +1252,12 @@ module Aws::ChimeSDKMessaging
     #   The ARNs of the channel moderators in the request.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] elastic_channel_configuration
+    #   The attributes required to configure and create an elastic channel.
+    #   An elastic channel can support a maximum of 1-million users,
+    #   excluding moderators.
+    #   @return [Types::ElasticChannelConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
@@ -1200,7 +1271,8 @@ module Aws::ChimeSDKMessaging
       :chime_bearer,
       :channel_id,
       :member_arns,
-      :moderator_arns)
+      :moderator_arns,
+      :elastic_channel_configuration)
       SENSITIVE = [:name, :metadata, :client_request_token, :channel_id]
       include Aws::Structure
     end
@@ -1274,6 +1346,7 @@ module Aws::ChimeSDKMessaging
     #         channel_arn: "ChimeArn", # required
     #         member_arn: "ChimeArn", # required
     #         chime_bearer: "ChimeArn", # required
+    #         sub_channel_id: "SubChannelId",
     #       }
     #
     # @!attribute [rw] channel_arn
@@ -1289,12 +1362,21 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only for use by moderators.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DeleteChannelMembershipRequest AWS API Documentation
     #
     class DeleteChannelMembershipRequest < Struct.new(
       :channel_arn,
       :member_arn,
-      :chime_bearer)
+      :chime_bearer,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1306,6 +1388,7 @@ module Aws::ChimeSDKMessaging
     #         channel_arn: "ChimeArn", # required
     #         message_id: "MessageId", # required
     #         chime_bearer: "ChimeArn", # required
+    #         sub_channel_id: "SubChannelId",
     #       }
     #
     # @!attribute [rw] channel_arn
@@ -1320,12 +1403,22 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when deleting messages in a SubChannel that the user
+    #   belongs to.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DeleteChannelMessageRequest AWS API Documentation
     #
     class DeleteChannelMessageRequest < Struct.new(
       :channel_arn,
       :message_id,
-      :chime_bearer)
+      :chime_bearer,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1367,6 +1460,7 @@ module Aws::ChimeSDKMessaging
     #       {
     #         channel_arn: "ChimeArn", # required
     #         chime_bearer: "ChimeArn", # required
+    #         sub_channel_id: "SubChannelId",
     #       }
     #
     # @!attribute [rw] channel_arn
@@ -1377,11 +1471,16 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DeleteChannelRequest AWS API Documentation
     #
     class DeleteChannelRequest < Struct.new(
       :channel_arn,
-      :chime_bearer)
+      :chime_bearer,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1510,6 +1609,7 @@ module Aws::ChimeSDKMessaging
     #         channel_arn: "ChimeArn", # required
     #         member_arn: "ChimeArn", # required
     #         chime_bearer: "ChimeArn", # required
+    #         sub_channel_id: "SubChannelId",
     #       }
     #
     # @!attribute [rw] channel_arn
@@ -1524,12 +1624,22 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the request. The response contains an
+    #   `ElasticChannelConfiguration` object.
+    #
+    #   <note markdown="1"> Only required to get a user’s SubChannel membership details.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DescribeChannelMembershipRequest AWS API Documentation
     #
     class DescribeChannelMembershipRequest < Struct.new(
       :channel_arn,
       :member_arn,
-      :chime_bearer)
+      :chime_bearer,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1700,6 +1810,43 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
+    # The attributes required to configure and create an elastic channel. An
+    # elastic channel can support a maximum of 1-million members.
+    #
+    # @note When making an API call, you may pass ElasticChannelConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         maximum_sub_channels: 1, # required
+    #         target_memberships_per_sub_channel: 1, # required
+    #         minimum_membership_percentage: 1, # required
+    #       }
+    #
+    # @!attribute [rw] maximum_sub_channels
+    #   The maximum number of SubChannels that you want to allow in the
+    #   elastic channel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_memberships_per_sub_channel
+    #   The maximum number of members allowed in a SubChannel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_membership_percentage
+    #   The minimum allowed percentage of TargetMembershipsPerSubChannel
+    #   users. Ceil of the calculated value is used in balancing members
+    #   among SubChannels of the elastic channel.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ElasticChannelConfiguration AWS API Documentation
+    #
+    class ElasticChannelConfiguration < Struct.new(
+      :maximum_sub_channels,
+      :target_memberships_per_sub_channel,
+      :minimum_membership_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The client is permanently forbidden from making the request.
     #
     # @!attribute [rw] code
@@ -1777,6 +1924,7 @@ module Aws::ChimeSDKMessaging
     #         channel_arn: "ChimeArn", # required
     #         message_id: "MessageId", # required
     #         chime_bearer: "ChimeArn", # required
+    #         sub_channel_id: "SubChannelId",
     #       }
     #
     # @!attribute [rw] channel_arn
@@ -1791,12 +1939,22 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when getting messages in a SubChannel that the user
+    #   belongs to.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetChannelMessageRequest AWS API Documentation
     #
     class GetChannelMessageRequest < Struct.new(
       :channel_arn,
       :message_id,
-      :chime_bearer)
+      :chime_bearer,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1820,6 +1978,7 @@ module Aws::ChimeSDKMessaging
     #         channel_arn: "ChimeArn", # required
     #         message_id: "MessageId", # required
     #         chime_bearer: "ChimeArn", # required
+    #         sub_channel_id: "SubChannelId",
     #       }
     #
     # @!attribute [rw] channel_arn
@@ -1834,12 +1993,22 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the user making the API call.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when getting message status in a SubChannel that the
+    #   user belongs to.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetChannelMessageStatusRequest AWS API Documentation
     #
     class GetChannelMessageStatusRequest < Struct.new(
       :channel_arn,
       :message_id,
-      :chime_bearer)
+      :chime_bearer,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2096,6 +2265,7 @@ module Aws::ChimeSDKMessaging
     #         max_results: 1,
     #         next_token: "NextToken",
     #         chime_bearer: "ChimeArn", # required
+    #         sub_channel_id: "SubChannelId",
     #       }
     #
     # @!attribute [rw] channel_arn
@@ -2122,6 +2292,15 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when listing a user's memberships in a particular
+    #   sub-channel of an elastic channel.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListChannelMembershipsRequest AWS API Documentation
     #
     class ListChannelMembershipsRequest < Struct.new(
@@ -2129,7 +2308,8 @@ module Aws::ChimeSDKMessaging
       :type,
       :max_results,
       :next_token,
-      :chime_bearer)
+      :chime_bearer,
+      :sub_channel_id)
       SENSITIVE = [:next_token]
       include Aws::Structure
     end
@@ -2168,6 +2348,7 @@ module Aws::ChimeSDKMessaging
     #         max_results: 1,
     #         next_token: "NextToken",
     #         chime_bearer: "ChimeArn", # required
+    #         sub_channel_id: "SubChannelId",
     #       }
     #
     # @!attribute [rw] channel_arn
@@ -2200,6 +2381,15 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when listing the messages in a SubChannel that the
+    #   user belongs to.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListChannelMessagesRequest AWS API Documentation
     #
     class ListChannelMessagesRequest < Struct.new(
@@ -2209,7 +2399,8 @@ module Aws::ChimeSDKMessaging
       :not_after,
       :max_results,
       :next_token,
-      :chime_bearer)
+      :chime_bearer,
+      :sub_channel_id)
       SENSITIVE = [:next_token]
       include Aws::Structure
     end
@@ -2227,12 +2418,17 @@ module Aws::ChimeSDKMessaging
     #   The information about, and content of, each requested message.
     #   @return [Array<Types::ChannelMessageSummary>]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListChannelMessagesResponse AWS API Documentation
     #
     class ListChannelMessagesResponse < Struct.new(
       :channel_arn,
       :next_token,
-      :channel_messages)
+      :channel_messages,
+      :sub_channel_id)
       SENSITIVE = [:next_token]
       include Aws::Structure
     end
@@ -2463,6 +2659,67 @@ module Aws::ChimeSDKMessaging
     #
     class ListChannelsResponse < Struct.new(
       :channels,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSubChannelsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         chime_bearer: "ChimeArn", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of elastic channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] chime_bearer
+    #   The `AppInstanceUserArn` of the user making the API call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of sub-channels that you want to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested
+    #   sub-channels are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListSubChannelsRequest AWS API Documentation
+    #
+    class ListSubChannelsRequest < Struct.new(
+      :channel_arn,
+      :chime_bearer,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of elastic channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_channels
+    #   The information about each sub-channel.
+    #   @return [Array<Types::SubChannelSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested
+    #   sub-channels are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListSubChannelsResponse AWS API Documentation
+    #
+    class ListSubChannelsResponse < Struct.new(
+      :channel_arn,
+      :sub_channels,
       :next_token)
       SENSITIVE = [:next_token]
       include Aws::Structure
@@ -2767,6 +3024,7 @@ module Aws::ChimeSDKMessaging
     #         channel_arn: "ChimeArn", # required
     #         message_id: "MessageId", # required
     #         chime_bearer: "ChimeArn", # required
+    #         sub_channel_id: "SubChannelId",
     #       }
     #
     # @!attribute [rw] channel_arn
@@ -2782,12 +3040,17 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/RedactChannelMessageRequest AWS API Documentation
     #
     class RedactChannelMessageRequest < Struct.new(
       :channel_arn,
       :message_id,
-      :chime_bearer)
+      :chime_bearer,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2801,11 +3064,21 @@ module Aws::ChimeSDKMessaging
     #   The ID of the message being redacted.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the response.
+    #
+    #   <note markdown="1"> Only required when redacting messages in a SubChannel that the user
+    #   belongs to.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/RedactChannelMessageResponse AWS API Documentation
     #
     class RedactChannelMessageResponse < Struct.new(
       :channel_arn,
-      :message_id)
+      :message_id,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2957,6 +3230,7 @@ module Aws::ChimeSDKMessaging
     #             string_values: ["MessageAttributeStringValue"],
     #           },
     #         },
+    #         sub_channel_id: "SubChannelId",
     #       }
     #
     # @!attribute [rw] channel_arn
@@ -3000,6 +3274,10 @@ module Aws::ChimeSDKMessaging
     #   with a `FilterRule` defined in the `PushNotificationPreferences`.
     #   @return [Hash<String,Types::MessageAttributeValue>]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/SendChannelMessageRequest AWS API Documentation
     #
     class SendChannelMessageRequest < Struct.new(
@@ -3011,7 +3289,8 @@ module Aws::ChimeSDKMessaging
       :client_request_token,
       :chime_bearer,
       :push_notification,
-      :message_attributes)
+      :message_attributes,
+      :sub_channel_id)
       SENSITIVE = [:content, :metadata, :client_request_token]
       include Aws::Structure
     end
@@ -3028,12 +3307,17 @@ module Aws::ChimeSDKMessaging
     #   The status of the channel message.
     #   @return [Types::ChannelMessageStatusStructure]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/SendChannelMessageResponse AWS API Documentation
     #
     class SendChannelMessageResponse < Struct.new(
       :channel_arn,
       :message_id,
-      :status)
+      :status,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3068,6 +3352,25 @@ module Aws::ChimeSDKMessaging
     class ServiceUnavailableException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of the sub-channels associated with the elastic channel.
+    #
+    # @!attribute [rw] sub_channel_id
+    #   The unique ID of a SubChannel.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_count
+    #   The number of members in a SubChannel.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/SubChannelSummary AWS API Documentation
+    #
+    class SubChannelSummary < Struct.new(
+      :sub_channel_id,
+      :membership_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3252,6 +3555,7 @@ module Aws::ChimeSDKMessaging
     #         content: "Content",
     #         metadata: "Metadata",
     #         chime_bearer: "ChimeArn", # required
+    #         sub_channel_id: "SubChannelId",
     #       }
     #
     # @!attribute [rw] channel_arn
@@ -3274,6 +3578,15 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #
+    #   <note markdown="1"> Only required when updating messages in a SubChannel that the user
+    #   belongs to.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UpdateChannelMessageRequest AWS API Documentation
     #
     class UpdateChannelMessageRequest < Struct.new(
@@ -3281,7 +3594,8 @@ module Aws::ChimeSDKMessaging
       :message_id,
       :content,
       :metadata,
-      :chime_bearer)
+      :chime_bearer,
+      :sub_channel_id)
       SENSITIVE = [:content, :metadata]
       include Aws::Structure
     end
@@ -3298,12 +3612,17 @@ module Aws::ChimeSDKMessaging
     #   The status of the message update.
     #   @return [Types::ChannelMessageStatusStructure]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UpdateChannelMessageResponse AWS API Documentation
     #
     class UpdateChannelMessageResponse < Struct.new(
       :channel_arn,
       :message_id,
-      :status)
+      :status,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3314,6 +3633,7 @@ module Aws::ChimeSDKMessaging
     #       {
     #         channel_arn: "ChimeArn", # required
     #         chime_bearer: "ChimeArn", # required
+    #         sub_channel_id: "SubChannelId",
     #       }
     #
     # @!attribute [rw] channel_arn
@@ -3324,11 +3644,16 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UpdateChannelReadMarkerRequest AWS API Documentation
     #
     class UpdateChannelReadMarkerRequest < Struct.new(
       :channel_arn,
-      :chime_bearer)
+      :chime_bearer,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3337,10 +3662,15 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel.
     #   @return [String]
     #
+    # @!attribute [rw] sub_channel_id
+    #   The ID of the SubChannel in the response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UpdateChannelReadMarkerResponse AWS API Documentation
     #
     class UpdateChannelReadMarkerResponse < Struct.new(
-      :channel_arn)
+      :channel_arn,
+      :sub_channel_id)
       SENSITIVE = []
       include Aws::Structure
     end
