@@ -1666,17 +1666,18 @@ module Aws::RDS
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Web Services KMS key identifier for an encrypted CEV. A
-    #   symmetric KMS key is required for RDS Custom, but optional for
-    #   Amazon RDS.
+    #   symmetric encryption KMS key is required for RDS Custom, but
+    #   optional for Amazon RDS.
     #
-    #   If you have an existing symmetric KMS key in your account, you can
-    #   use it with RDS Custom. No further action is necessary. If you
-    #   don't already have a symmetric KMS key in your account, follow the
-    #   instructions in [ Creating symmetric KMS keys][1] in the *Amazon Web
-    #   Services Key Management Service Developer Guide*.
+    #   If you have an existing symmetric encryption KMS key in your
+    #   account, you can use it with RDS Custom. No further action is
+    #   necessary. If you don't already have a symmetric encryption KMS key
+    #   in your account, follow the instructions in [ Creating a symmetric
+    #   encryption KMS key][1] in the *Amazon Web Services Key Management
+    #   Service Developer Guide*.
     #
-    #   You can choose the same symmetric key when you create a CEV and a DB
-    #   instance, or choose different keys.
+    #   You can choose the same symmetric encryption key when you create a
+    #   CEV and a DB instance, or choose different keys.
     #
     #
     #
@@ -9204,8 +9205,7 @@ module Aws::RDS
     #   If you back up a read replica, you can determine the replica lag by
     #   comparing SnapshotDatabaseTime with originalSnapshotCreateTime. For
     #   example, if originalSnapshotCreateTime is two hours later than
-    #   SnapshotDatabaseTime, then the replica lag is two hours. ***
-    #   REVIEWERS 7/27: Switchover
+    #   SnapshotDatabaseTime, then the replica lag is two hours.
     #   @return [Time]
     #
     # @!attribute [rw] snapshot_target
@@ -15756,21 +15756,21 @@ module Aws::RDS
     #   db.m4.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide*. For RDS Custom,
-    #   see [DB instance class support for RDS Custom for Oracle][2] and [DB
-    #   instance class support for RDS Custom for SQL Server][3].
+    #   instance classes][1] in the *Amazon RDS User Guide* or [Aurora DB
+    #   instance classes][2] in the *Amazon Aurora User Guide*.
     #
     #   If you modify the DB instance class, an outage occurs during the
     #   change. The change is applied during the next maintenance window,
     #   unless `ApplyImmediately` is enabled for this request.
+    #
+    #   This setting doesn't apply to RDS Custom for Oracle.
     #
     #   Default: Uses existing setting
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.instances
-    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html#custom-reqs-limits.instancesMS
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_name

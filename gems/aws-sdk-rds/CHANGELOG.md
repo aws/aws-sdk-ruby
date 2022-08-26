@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.155.0 (2022-08-26)
+------------------
+
+* Feature - Removes support for RDS Custom from DBInstanceClass in ModifyDBInstance
+
 1.154.0 (2022-08-23)
 ------------------
 

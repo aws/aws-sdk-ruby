@@ -2677,21 +2677,21 @@ module Aws::RDS
     #   db.m4.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide*. For RDS Custom, see
-    #   [DB instance class support for RDS Custom for Oracle][2] and [DB
-    #   instance class support for RDS Custom for SQL Server][3].
+    #   instance classes][1] in the *Amazon RDS User Guide* or [Aurora DB
+    #   instance classes][2] in the *Amazon Aurora User Guide*.
     #
     #   If you modify the DB instance class, an outage occurs during the
     #   change. The change is applied during the next maintenance window,
     #   unless `ApplyImmediately` is enabled for this request.
+    #
+    #   This setting doesn't apply to RDS Custom for Oracle.
     #
     #   Default: Uses existing setting
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.instances
-    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html#custom-reqs-limits.instancesMS
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html
     # @option options [String] :db_subnet_group_name
     #   The new DB subnet group for the DB instance. You can use this
     #   parameter to move your DB instance to a different VPC. If your DB

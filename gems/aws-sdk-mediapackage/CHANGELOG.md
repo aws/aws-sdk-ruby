@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2022-08-26)
+------------------
+
+* Feature - This release adds Ads AdTriggers and AdsOnDeliveryRestrictions to describe calls for CMAF endpoints on MediaPackage.
+
 1.54.0 (2022-07-18)
 ------------------
 
