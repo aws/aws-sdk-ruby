@@ -2545,13 +2545,13 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] security_style
-    #   The security style for the volume. Specify one of the following
-    #   values:
+    #   The security style for the volume. If a volume's security style is
+    #   not specified, it is automatically set to the root volume's
+    #   security style. Specify one of the following values:
     #
     #   * `UNIX` if the file system is managed by a UNIX administrator, the
     #     majority of users are NFS clients, and an application accessing
-    #     the data uses a UNIX user as the service account. `UNIX` is the
-    #     default.
+    #     the data uses a UNIX user as the service account.
     #
     #   * `NTFS` if the file system is managed by a Windows administrator,
     #     the majority of users are SMB clients, and an application

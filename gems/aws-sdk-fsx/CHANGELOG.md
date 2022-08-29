@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2022-08-29)
+------------------
+
+* Feature - Documentation updates for Amazon FSx for NetApp ONTAP.
+
 1.57.0 (2022-07-29)
 ------------------
 

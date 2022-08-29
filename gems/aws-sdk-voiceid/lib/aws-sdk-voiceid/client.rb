@@ -372,7 +372,7 @@ module Aws::VoiceID
     #   not need to pass this option.**
     #
     # @option params [String] :description
-    #   A brief description of this domain.
+    #   A brief description of the domain.
     #
     # @option params [required, String] :name
     #   The name of the domain.
@@ -755,9 +755,10 @@ module Aws::VoiceID
     #   resp.fraud_detection_result.decision #=> String, one of "HIGH_RISK", "LOW_RISK", "NOT_ENOUGH_SPEECH"
     #   resp.fraud_detection_result.fraud_detection_result_id #=> String
     #   resp.fraud_detection_result.reasons #=> Array
-    #   resp.fraud_detection_result.reasons[0] #=> String, one of "KNOWN_FRAUDSTER"
+    #   resp.fraud_detection_result.reasons[0] #=> String, one of "KNOWN_FRAUDSTER", "VOICE_SPOOFING"
     #   resp.fraud_detection_result.risk_details.known_fraudster_risk.generated_fraudster_id #=> String
     #   resp.fraud_detection_result.risk_details.known_fraudster_risk.risk_score #=> Integer
+    #   resp.fraud_detection_result.risk_details.voice_spoofing_risk.risk_score #=> Integer
     #   resp.session_id #=> String
     #   resp.session_name #=> String
     #   resp.streaming_status #=> String, one of "PENDING_CONFIGURATION", "ONGOING", "ENDED"
@@ -774,9 +775,7 @@ module Aws::VoiceID
     # Lists all the domains in the Amazon Web Services account.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned per call. You can use
-    #   `NextToken` to obtain further pages of results. The default is 100;
-    #   the maximum allowed page size is also 100.
+    #   The maximum number of domains to list per API call.
     #
     # @option params [String] :next_token
     #   If `NextToken` is returned, there are more results available. The
@@ -1180,8 +1179,8 @@ module Aws::VoiceID
     #   The IAM role Amazon Resource Name (ARN) that grants Voice ID
     #   permissions to access customer's buckets to read the input manifest
     #   file and write the job output file. Refer to [Batch enrollment using
-    #   audio data from prior calls][1] documentation for the permissions
-    #   needed in this role.
+    #   audio data from prior calls][1] for the permissions needed in this
+    #   role.
     #
     #
     #
@@ -1328,7 +1327,7 @@ module Aws::VoiceID
     # 'Description' is not provided, it is removed from the domain.
     #
     # @option params [String] :description
-    #   A brief description about this domain.
+    #   A brief description of the domain.
     #
     # @option params [required, String] :domain_id
     #   The identifier of the domain to be updated.
@@ -1338,10 +1337,12 @@ module Aws::VoiceID
     #
     # @option params [required, Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
     #   The configuration, containing the KMS key identifier, to be used by
-    #   Voice ID for the server-side encryption of your data. Note that all
-    #   the existing data in the domain are still encrypted using the existing
-    #   key, only the data added to domain after updating the key is encrypted
-    #   using the new key.
+    #   Voice ID for the server-side encryption of your data. Changing the
+    #   domain's associated KMS key immediately triggers an asynchronous
+    #   process to remove dependency on the old KMS key, such that the
+    #   domain's data can only be accessed using the new KMS key. The
+    #   domain's `ServerSideEncryptionUpdateDetails` contains the details for
+    #   this process.
     #
     # @return [Types::UpdateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1394,7 +1395,7 @@ module Aws::VoiceID
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-voiceid'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
