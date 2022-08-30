@@ -443,24 +443,35 @@ module Aws::LookoutEquipment
     #   The name of the inference scheduler being created.
     #
     # @option params [Integer] :data_delay_offset_in_minutes
-    #   A period of time (in minutes) by which inference on the data is
-    #   delayed after the data starts. For instance, if you select an offset
-    #   delay time of five minutes, inference will not begin on the data until
-    #   the first data measurement after the five minute mark. For example, if
-    #   five minutes is selected, the inference scheduler will wake up at the
-    #   configured frequency with the additional five minute delay time to
-    #   check the customer S3 bucket. The customer can upload data at the same
-    #   frequency and they don't need to stop and restart the scheduler when
-    #   uploading new data.
+    #   The interval (in minutes) of planned delay at the start of each
+    #   inference segment. For example, if inference is set to run every ten
+    #   minutes, the delay is set to five minutes and the time is 09:08. The
+    #   inference scheduler will wake up at the configured interval (which,
+    #   without a delay configured, would be 09:10) plus the additional five
+    #   minute delay time (so 09:15) to check your Amazon S3 bucket. The delay
+    #   provides a buffer for you to upload data at the same frequency, so
+    #   that you don't have to stop and restart the scheduler when uploading
+    #   new data.
+    #
+    #   For more information, see [Understanding the inference process][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html
     #
     # @option params [required, String] :data_upload_frequency
-    #   How often data is uploaded to the source S3 bucket for the input data.
-    #   The value chosen is the length of time between data uploads. For
-    #   instance, if you select 5 minutes, Amazon Lookout for Equipment will
-    #   upload the real-time data to the source bucket once every 5 minutes.
-    #   This frequency also determines how often Amazon Lookout for Equipment
-    #   starts a scheduled inference on your data. In this example, it starts
-    #   once every 5 minutes.
+    #   How often data is uploaded to the source Amazon S3 bucket for the
+    #   input data. The value chosen is the length of time between data
+    #   uploads. For instance, if you select 5 minutes, Amazon Lookout for
+    #   Equipment will upload the real-time data to the source bucket once
+    #   every 5 minutes. This frequency also determines how often Amazon
+    #   Lookout for Equipment runs inference on your data.
+    #
+    #   For more information, see [Understanding the inference process][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html
     #
     # @option params [required, Types::InferenceInputConfiguration] :data_input_configuration
     #   Specifies configuration information for the input data for the
@@ -543,6 +554,140 @@ module Aws::LookoutEquipment
     # @param [Hash] params ({})
     def create_inference_scheduler(params = {}, options = {})
       req = build_request(:create_inference_scheduler, params)
+      req.send_request(options)
+    end
+
+    # Creates a label for an event.
+    #
+    # @option params [required, String] :label_group_name
+    #   The name of a group of labels.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The start time of the labeled event.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The end time of the labeled event.
+    #
+    # @option params [required, String] :rating
+    #   Indicates whether a labeled event represents an anomaly.
+    #
+    # @option params [String] :fault_code
+    #   Provides additional information about the label. The fault code must
+    #   be defined in the FaultCodes attribute of the label group.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #
+    # @option params [String] :notes
+    #   Metadata providing additional information about the label.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #
+    # @option params [String] :equipment
+    #   Indicates that a label pertains to a particular piece of equipment.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #
+    # @option params [required, String] :client_token
+    #   A unique identifier for the request to create a label. If you do not
+    #   set the client request token, Lookout for Equipment generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateLabelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLabelResponse#label_id #label_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_label({
+    #     label_group_name: "LabelGroupName", # required
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     rating: "ANOMALY", # required, accepts ANOMALY, NO_ANOMALY, NEUTRAL
+    #     fault_code: "FaultCode",
+    #     notes: "Comments",
+    #     equipment: "Equipment",
+    #     client_token: "IdempotenceToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.label_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/CreateLabel AWS API Documentation
+    #
+    # @overload create_label(params = {})
+    # @param [Hash] params ({})
+    def create_label(params = {}, options = {})
+      req = build_request(:create_label, params)
+      req.send_request(options)
+    end
+
+    # Creates a group of labels.
+    #
+    # @option params [required, String] :label_group_name
+    #   Names a group of labels.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #
+    # @option params [Array<String>] :fault_codes
+    #   The acceptable fault codes (indicating the type of anomaly associated
+    #   with the label) that can be used with this label group.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #
+    # @option params [required, String] :client_token
+    #   A unique identifier for the request to create a label group. If you do
+    #   not set the client request token, Lookout for Equipment generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags that provide metadata about the label group you are creating.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #
+    # @return [Types::CreateLabelGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLabelGroupResponse#label_group_name #label_group_name} => String
+    #   * {Types::CreateLabelGroupResponse#label_group_arn #label_group_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_label_group({
+    #     label_group_name: "LabelGroupName", # required
+    #     fault_codes: ["FaultCode"],
+    #     client_token: "IdempotenceToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.label_group_name #=> String
+    #   resp.label_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/CreateLabelGroup AWS API Documentation
+    #
+    # @overload create_label_group(params = {})
+    # @param [Hash] params ({})
+    def create_label_group(params = {}, options = {})
+      req = build_request(:create_label_group, params)
       req.send_request(options)
     end
 
@@ -638,10 +783,11 @@ module Aws::LookoutEquipment
     #       inline_data_schema: "InlineDataSchema",
     #     },
     #     labels_input_configuration: {
-    #       s3_input_configuration: { # required
+    #       s3_input_configuration: {
     #         bucket: "S3Bucket", # required
     #         prefix: "S3Prefix",
     #       },
+    #       label_group_name: "LabelGroupName",
     #     },
     #     client_token: "IdempotenceToken", # required
     #     training_data_start_time: Time.now,
@@ -723,6 +869,58 @@ module Aws::LookoutEquipment
     # @param [Hash] params ({})
     def delete_inference_scheduler(params = {}, options = {})
       req = build_request(:delete_inference_scheduler, params)
+      req.send_request(options)
+    end
+
+    # Deletes a label.
+    #
+    # @option params [required, String] :label_group_name
+    #   The name of the label group that contains the label that you want to
+    #   delete. Data in this field will be retained for service usage. Follow
+    #   best practices for the security of your data.
+    #
+    # @option params [required, String] :label_id
+    #   The ID of the label that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_label({
+    #     label_group_name: "LabelGroupName", # required
+    #     label_id: "LabelId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DeleteLabel AWS API Documentation
+    #
+    # @overload delete_label(params = {})
+    # @param [Hash] params ({})
+    def delete_label(params = {}, options = {})
+      req = build_request(:delete_label, params)
+      req.send_request(options)
+    end
+
+    # Deletes a group of labels.
+    #
+    # @option params [required, String] :label_group_name
+    #   The name of the label group that you want to delete. Data in this
+    #   field will be retained for service usage. Follow best practices for
+    #   the security of your data.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_label_group({
+    #     label_group_name: "LabelGroupName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DeleteLabelGroup AWS API Documentation
+    #
+    # @overload delete_label_group(params = {})
+    # @param [Hash] params ({})
+    def delete_label_group(params = {}, options = {})
+      req = build_request(:delete_label_group, params)
       req.send_request(options)
     end
 
@@ -903,6 +1101,7 @@ module Aws::LookoutEquipment
     #   * {Types::DescribeInferenceSchedulerResponse#data_output_configuration #data_output_configuration} => Types::InferenceOutputConfiguration
     #   * {Types::DescribeInferenceSchedulerResponse#role_arn #role_arn} => String
     #   * {Types::DescribeInferenceSchedulerResponse#server_side_kms_key_id #server_side_kms_key_id} => String
+    #   * {Types::DescribeInferenceSchedulerResponse#latest_inference_result #latest_inference_result} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -931,6 +1130,7 @@ module Aws::LookoutEquipment
     #   resp.data_output_configuration.kms_key_id #=> String
     #   resp.role_arn #=> String
     #   resp.server_side_kms_key_id #=> String
+    #   resp.latest_inference_result #=> String, one of "ANOMALOUS", "NORMAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeInferenceScheduler AWS API Documentation
     #
@@ -938,6 +1138,93 @@ module Aws::LookoutEquipment
     # @param [Hash] params ({})
     def describe_inference_scheduler(params = {}, options = {})
       req = build_request(:describe_inference_scheduler, params)
+      req.send_request(options)
+    end
+
+    # Returns the name of the label.
+    #
+    # @option params [required, String] :label_group_name
+    #   Returns the name of the group containing the label.
+    #
+    # @option params [required, String] :label_id
+    #   Returns the ID of the label.
+    #
+    # @return [Types::DescribeLabelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLabelResponse#label_group_name #label_group_name} => String
+    #   * {Types::DescribeLabelResponse#label_group_arn #label_group_arn} => String
+    #   * {Types::DescribeLabelResponse#label_id #label_id} => String
+    #   * {Types::DescribeLabelResponse#start_time #start_time} => Time
+    #   * {Types::DescribeLabelResponse#end_time #end_time} => Time
+    #   * {Types::DescribeLabelResponse#rating #rating} => String
+    #   * {Types::DescribeLabelResponse#fault_code #fault_code} => String
+    #   * {Types::DescribeLabelResponse#notes #notes} => String
+    #   * {Types::DescribeLabelResponse#equipment #equipment} => String
+    #   * {Types::DescribeLabelResponse#created_at #created_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_label({
+    #     label_group_name: "LabelGroupName", # required
+    #     label_id: "LabelId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.label_group_name #=> String
+    #   resp.label_group_arn #=> String
+    #   resp.label_id #=> String
+    #   resp.start_time #=> Time
+    #   resp.end_time #=> Time
+    #   resp.rating #=> String, one of "ANOMALY", "NO_ANOMALY", "NEUTRAL"
+    #   resp.fault_code #=> String
+    #   resp.notes #=> String
+    #   resp.equipment #=> String
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeLabel AWS API Documentation
+    #
+    # @overload describe_label(params = {})
+    # @param [Hash] params ({})
+    def describe_label(params = {}, options = {})
+      req = build_request(:describe_label, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the label group.
+    #
+    # @option params [required, String] :label_group_name
+    #   Returns the name of the label group.
+    #
+    # @return [Types::DescribeLabelGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLabelGroupResponse#label_group_name #label_group_name} => String
+    #   * {Types::DescribeLabelGroupResponse#label_group_arn #label_group_arn} => String
+    #   * {Types::DescribeLabelGroupResponse#fault_codes #fault_codes} => Array&lt;String&gt;
+    #   * {Types::DescribeLabelGroupResponse#created_at #created_at} => Time
+    #   * {Types::DescribeLabelGroupResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_label_group({
+    #     label_group_name: "LabelGroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.label_group_name #=> String
+    #   resp.label_group_arn #=> String
+    #   resp.fault_codes #=> Array
+    #   resp.fault_codes[0] #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeLabelGroup AWS API Documentation
+    #
+    # @overload describe_label_group(params = {})
+    # @param [Hash] params ({})
+    def describe_label_group(params = {}, options = {})
+      req = build_request(:describe_label_group, params)
       req.send_request(options)
     end
 
@@ -987,6 +1274,7 @@ module Aws::LookoutEquipment
     #   resp.schema #=> String
     #   resp.labels_input_configuration.s3_input_configuration.bucket #=> String
     #   resp.labels_input_configuration.s3_input_configuration.prefix #=> String
+    #   resp.labels_input_configuration.label_group_name #=> String
     #   resp.training_data_start_time #=> Time
     #   resp.training_data_end_time #=> Time
     #   resp.evaluation_data_start_time #=> Time
@@ -1125,12 +1413,12 @@ module Aws::LookoutEquipment
     #   The name of the inference scheduler for the inference events listed.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :interval_start_time
-    #   Lookout for Equipment will return all the inference events with start
+    #   Lookout for Equipment will return all the inference events with an end
     #   time equal to or greater than the start time given.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :interval_end_time
-    #   Lookout for Equipment will return all the inference events with end
-    #   time equal to or less than the end time given.
+    #   Returns all the inference events with an end start time equal to or
+    #   greater than less than the end time given
     #
     # @return [Types::ListInferenceEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1288,6 +1576,7 @@ module Aws::LookoutEquipment
     #   resp.inference_scheduler_summaries[0].status #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED"
     #   resp.inference_scheduler_summaries[0].data_delay_offset_in_minutes #=> Integer
     #   resp.inference_scheduler_summaries[0].data_upload_frequency #=> String, one of "PT5M", "PT10M", "PT15M", "PT30M", "PT1H"
+    #   resp.inference_scheduler_summaries[0].latest_inference_result #=> String, one of "ANOMALOUS", "NORMAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListInferenceSchedulers AWS API Documentation
     #
@@ -1295,6 +1584,118 @@ module Aws::LookoutEquipment
     # @param [Hash] params ({})
     def list_inference_schedulers(params = {}, options = {})
       req = build_request(:list_inference_schedulers, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the label groups.
+    #
+    # @option params [String] :label_group_name_begins_with
+    #   The beginning of the name of the label groups to be listed.
+    #
+    # @option params [String] :next_token
+    #   An opaque pagination token indicating where to continue the listing of
+    #   label groups.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the maximum number of label groups to list.
+    #
+    # @return [Types::ListLabelGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLabelGroupsResponse#next_token #next_token} => String
+    #   * {Types::ListLabelGroupsResponse#label_group_summaries #label_group_summaries} => Array&lt;Types::LabelGroupSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_label_groups({
+    #     label_group_name_begins_with: "LabelGroupName",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.label_group_summaries #=> Array
+    #   resp.label_group_summaries[0].label_group_name #=> String
+    #   resp.label_group_summaries[0].label_group_arn #=> String
+    #   resp.label_group_summaries[0].created_at #=> Time
+    #   resp.label_group_summaries[0].updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListLabelGroups AWS API Documentation
+    #
+    # @overload list_label_groups(params = {})
+    # @param [Hash] params ({})
+    def list_label_groups(params = {}, options = {})
+      req = build_request(:list_label_groups, params)
+      req.send_request(options)
+    end
+
+    # Provides a list of labels.
+    #
+    # @option params [required, String] :label_group_name
+    #   Retruns the name of the label group.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :interval_start_time
+    #   Returns all the labels with a end time equal to or later than the
+    #   start time given.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :interval_end_time
+    #   Returns all labels with a start time earlier than the end time given.
+    #
+    # @option params [String] :fault_code
+    #   Returns labels with a particular fault code.
+    #
+    # @option params [String] :equipment
+    #   Lists the labels that pertain to a particular piece of equipment.
+    #
+    # @option params [String] :next_token
+    #   An opaque pagination token indicating where to continue the listing of
+    #   label groups.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the maximum number of labels to list.
+    #
+    # @return [Types::ListLabelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLabelsResponse#next_token #next_token} => String
+    #   * {Types::ListLabelsResponse#label_summaries #label_summaries} => Array&lt;Types::LabelSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_labels({
+    #     label_group_name: "LabelGroupName", # required
+    #     interval_start_time: Time.now,
+    #     interval_end_time: Time.now,
+    #     fault_code: "FaultCode",
+    #     equipment: "Equipment",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.label_summaries #=> Array
+    #   resp.label_summaries[0].label_group_name #=> String
+    #   resp.label_summaries[0].label_id #=> String
+    #   resp.label_summaries[0].label_group_arn #=> String
+    #   resp.label_summaries[0].start_time #=> Time
+    #   resp.label_summaries[0].end_time #=> Time
+    #   resp.label_summaries[0].rating #=> String, one of "ANOMALY", "NO_ANOMALY", "NEUTRAL"
+    #   resp.label_summaries[0].fault_code #=> String
+    #   resp.label_summaries[0].equipment #=> String
+    #   resp.label_summaries[0].created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListLabels AWS API Documentation
+    #
+    # @overload list_labels(params = {})
+    # @param [Hash] params ({})
+    def list_labels(params = {}, options = {})
+      req = build_request(:list_labels, params)
       req.send_request(options)
     end
 
@@ -1725,6 +2126,36 @@ module Aws::LookoutEquipment
       req.send_request(options)
     end
 
+    # Updates the label group.
+    #
+    # @option params [required, String] :label_group_name
+    #   The name of the label group to be updated.
+    #
+    # @option params [Array<String>] :fault_codes
+    #   Updates the code indicating the type of anomaly associated with the
+    #   label.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_label_group({
+    #     label_group_name: "LabelGroupName", # required
+    #     fault_codes: ["FaultCode"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/UpdateLabelGroup AWS API Documentation
+    #
+    # @overload update_label_group(params = {})
+    # @param [Hash] params ({})
+    def update_label_group(params = {}, options = {})
+      req = build_request(:update_label_group, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1738,7 +2169,7 @@ module Aws::LookoutEquipment
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutequipment'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

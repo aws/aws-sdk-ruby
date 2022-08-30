@@ -152,6 +152,92 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Specifies the criteria for an allow list. The criteria must specify a
+    # regular expression (regex) or an S3 object (s3WordsList). It can't
+    # specify both.
+    #
+    # @note When making an API call, you may pass AllowListCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         regex: "__stringMin1Max512PatternSS",
+    #         s3_words_list: {
+    #           bucket_name: "__stringMin3Max255PatternAZaZ093255", # required
+    #           object_key: "__stringMin1Max1024PatternSS", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] regex
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_words_list
+    #   Provides information about an S3 object that lists specific text to
+    #   ignore.
+    #   @return [Types::S3WordsList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AllowListCriteria AWS API Documentation
+    #
+    class AllowListCriteria < Struct.new(
+      :regex,
+      :s3_words_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the current status of an allow list, which
+    # indicates whether Amazon Macie can access and use the list's
+    # criteria.
+    #
+    # @!attribute [rw] code
+    #   Indicates the current status of an allow list. Depending on the type
+    #   of criteria that the list specifies, possible values are:
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AllowListStatus AWS API Documentation
+    #
+    class AllowListStatus < Struct.new(
+      :code,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a subset of information about an allow list.
+    #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AllowListSummary AWS API Documentation
+    #
+    class AllowListSummary < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :name,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about an API operation that an entity invoked for
     # an affected resource.
     #
@@ -967,6 +1053,82 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Specifies the settings for an allow list. When Amazon Macie processes
+    # the request, Macie tests the list's criteria. If the criteria specify
+    # a regular expression that Macie can't compile or an S3 object that
+    # Macie can't retrieve or parse, an error occurs.
+    #
+    # @note When making an API call, you may pass CreateAllowListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "__string", # required
+    #         criteria: { # required
+    #           regex: "__stringMin1Max512PatternSS",
+    #           s3_words_list: {
+    #             bucket_name: "__stringMin3Max255PatternAZaZ093255", # required
+    #             object_key: "__stringMin1Max1024PatternSS", # required
+    #           },
+    #         },
+    #         description: "__stringMin1Max512PatternSS",
+    #         name: "__stringMin1Max128Pattern", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] criteria
+    #   Specifies the criteria for an allow list. The criteria must specify
+    #   a regular expression (regex) or an S3 object (s3WordsList). It
+    #   can't specify both.
+    #   @return [Types::AllowListCriteria]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that specifies the tags
+    #   (keys and values) for an Amazon Macie resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateAllowListRequest AWS API Documentation
+    #
+    class CreateAllowListRequest < Struct.new(
+      :client_token,
+      :criteria,
+      :description,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about an allow list that was created in response
+    # to a request.
+    #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateAllowListResponse AWS API Documentation
+    #
+    class CreateAllowListResponse < Struct.new(
+      :arn,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the scope, schedule, and other settings for a classification
     # job. You can't change any settings for a classification job after you
     # create it. This helps ensure that you have an immutable history of
@@ -977,6 +1139,7 @@ module Aws::Macie2
     #   data as a hash:
     #
     #       {
+    #         allow_list_ids: ["__string"],
     #         client_token: "__string", # required
     #         custom_data_identifier_ids: ["__string"],
     #         description: "__string",
@@ -1097,6 +1260,9 @@ module Aws::Macie2
     #         },
     #       }
     #
+    # @!attribute [rw] allow_list_ids
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] client_token
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1145,13 +1311,13 @@ module Aws::Macie2
     #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateClassificationJobRequest AWS API Documentation
     #
     class CreateClassificationJobRequest < Struct.new(
+      :allow_list_ids,
       :client_token,
       :custom_data_identifier_ids,
       :description,
@@ -1256,8 +1422,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateCustomDataIdentifierRequest AWS API Documentation
@@ -1346,8 +1511,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateFindingsFilterRequest AWS API Documentation
@@ -1454,8 +1618,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateMemberRequest AWS API Documentation
@@ -1710,10 +1873,7 @@ module Aws::Macie2
     # @!attribute [rw] occurrences
     #   Specifies the location of 1-15 occurrences of sensitive data that
     #   was detected by a managed data identifier or a custom data
-    #   identifier and produced a sensitive data finding. Depending on the
-    #   file or storage format of the affected S3 object, you can optionally
-    #   retrieve (reveal) sample occurrences of the sensitive data that was
-    #   detected.
+    #   identifier and produced a sensitive data finding.
     #   @return [Types::Occurrences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CustomDetection AWS API Documentation
@@ -1781,10 +1941,7 @@ module Aws::Macie2
     # @!attribute [rw] occurrences
     #   Specifies the location of 1-15 occurrences of sensitive data that
     #   was detected by a managed data identifier or a custom data
-    #   identifier and produced a sensitive data finding. Depending on the
-    #   file or storage format of the affected S3 object, you can optionally
-    #   retrieve (reveal) sample occurrences of the sensitive data that was
-    #   detected.
+    #   identifier and produced a sensitive data finding.
     #   @return [Types::Occurrences]
     #
     # @!attribute [rw] type
@@ -1799,6 +1956,33 @@ module Aws::Macie2
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteAllowListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "__string", # required
+    #         ignore_job_checks: "__string",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] ignore_job_checks
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeleteAllowListRequest AWS API Documentation
+    #
+    class DeleteAllowListRequest < Struct.new(
+      :id,
+      :ignore_job_checks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeleteAllowListResponse AWS API Documentation
+    #
+    class DeleteAllowListResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteCustomDataIdentifierRequest
     #   data as a hash:
@@ -1995,6 +2179,9 @@ module Aws::Macie2
     # Provides information about a classification job, including the current
     # configuration settings and status of the job.
     #
+    # @!attribute [rw] allow_list_ids
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] client_token
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2074,8 +2261,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] user_paused_details
@@ -2092,6 +2278,7 @@ module Aws::Macie2
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeClassificationJobResponse AWS API Documentation
     #
     class DescribeClassificationJobResponse < Struct.new(
+      :allow_list_ids,
       :client_token,
       :created_at,
       :custom_data_identifier_ids,
@@ -2269,10 +2456,9 @@ module Aws::Macie2
     # @!attribute [rw] finding_publishing_frequency
     #   The frequency with which Amazon Macie publishes updates to policy
     #   findings for an account. This includes publishing updates to
-    #   Security Hub and Amazon EventBridge (formerly called Amazon
-    #   CloudWatch Events). For more information, see [Monitoring and
-    #   processing findings][1] in the *Amazon Macie User Guide*. Valid
-    #   values are:
+    #   Security Hub and Amazon EventBridge (formerly Amazon CloudWatch
+    #   Events). For more information, see [Monitoring and processing
+    #   findings][1] in the *Amazon Macie User Guide*. Valid values are:
     #
     #
     #
@@ -2597,8 +2783,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/FindingsFilterListItem AWS API Documentation
@@ -2632,6 +2817,77 @@ module Aws::Macie2
     #
     class GetAdministratorAccountResponse < Struct.new(
       :administrator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAllowListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetAllowListRequest AWS API Documentation
+    #
+    class GetAllowListRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the settings and status of an allow list.
+    #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] criteria
+    #   Specifies the criteria for an allow list. The criteria must specify
+    #   a regular expression (regex) or an S3 object (s3WordsList). It
+    #   can't specify both.
+    #   @return [Types::AllowListCriteria]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Provides information about the current status of an allow list,
+    #   which indicates whether Amazon Macie can access and use the list's
+    #   criteria.
+    #   @return [Types::AllowListStatus]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that specifies the tags
+    #   (keys and values) for an Amazon Macie resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] updated_at
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetAllowListResponse AWS API Documentation
+    #
+    class GetAllowListResponse < Struct.new(
+      :arn,
+      :created_at,
+      :criteria,
+      :description,
+      :id,
+      :name,
+      :status,
+      :tags,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2847,8 +3103,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetCustomDataIdentifierResponse AWS API Documentation
@@ -2989,8 +3244,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingsFilterResponse AWS API Documentation
@@ -3115,10 +3369,9 @@ module Aws::Macie2
     # @!attribute [rw] finding_publishing_frequency
     #   The frequency with which Amazon Macie publishes updates to policy
     #   findings for an account. This includes publishing updates to
-    #   Security Hub and Amazon EventBridge (formerly called Amazon
-    #   CloudWatch Events). For more information, see [Monitoring and
-    #   processing findings][1] in the *Amazon Macie User Guide*. Valid
-    #   values are:
+    #   Security Hub and Amazon EventBridge (formerly Amazon CloudWatch
+    #   Events). For more information, see [Monitoring and processing
+    #   findings][1] in the *Amazon Macie User Guide*. Valid values are:
     #
     #
     #
@@ -3216,8 +3469,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] updated_at
@@ -3253,10 +3505,9 @@ module Aws::Macie2
     #   Specifies the configuration settings for retrieving occurrences of
     #   sensitive data reported by findings, and the status of the
     #   configuration for an Amazon Macie account. When you enable the
-    #   configuration for the first time, your request must specify an AWS
-    #   Key Management Service (AWS KMS) key. Otherwise, an error occurs.
-    #   Macie uses the specified key to encrypt the sensitive data that you
-    #   retrieve.
+    #   configuration for the first time, your request must specify an Key
+    #   Management Service (KMS) key. Otherwise, an error occurs. Macie uses
+    #   the specified key to encrypt the sensitive data that you retrieve.
     #   @return [Types::RevealConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetRevealConfigurationResponse AWS API Documentation
@@ -3928,6 +4179,46 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAllowListsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListAllowListsRequest AWS API Documentation
+    #
+    class ListAllowListsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the results of a request for information about allow lists.
+    #
+    # @!attribute [rw] allow_lists
+    #   @return [Array<Types::AllowListSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListAllowListsResponse AWS API Documentation
+    #
+    class ListAllowListsResponse < Struct.new(
+      :allow_lists,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies criteria for filtering, sorting, and paginating the results
     # of a request for information about classification jobs.
     #
@@ -4447,13 +4738,11 @@ module Aws::Macie2
     end
 
     # Provides information about the tags (keys and values) that are
-    # associated with a classification job, custom data identifier, findings
-    # filter, or member account.
+    # associated with an Amazon Macie resource.
     #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListTagsForResourceResponse AWS API Documentation
@@ -4633,8 +4922,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] updated_at
@@ -4737,9 +5025,7 @@ module Aws::Macie2
 
     # Specifies the location of 1-15 occurrences of sensitive data that was
     # detected by a managed data identifier or a custom data identifier and
-    # produced a sensitive data finding. Depending on the file or storage
-    # format of the affected S3 object, you can optionally retrieve (reveal)
-    # sample occurrences of the sensitive data that was detected.
+    # produced a sensitive data finding.
     #
     # @!attribute [rw] cells
     #   Specifies the location of occurrences of sensitive data in a
@@ -5018,10 +5304,9 @@ module Aws::Macie2
     # Specifies the configuration settings for retrieving occurrences of
     # sensitive data reported by findings, and the status of the
     # configuration for an Amazon Macie account. When you enable the
-    # configuration for the first time, your request must specify an AWS Key
-    # Management Service (AWS KMS) key. Otherwise, an error occurs. Macie
-    # uses the specified key to encrypt the sensitive data that you
-    # retrieve.
+    # configuration for the first time, your request must specify an Key
+    # Management Service (KMS) key. Otherwise, an error occurs. Macie uses
+    # the specified key to encrypt the sensitive data that you retrieve.
     #
     # @note When making an API call, you may pass RevealConfiguration
     #   data as a hash:
@@ -5035,8 +5320,8 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the configuration for the Amazon Macie account. In a
-    #   request, valid values are:
+    #   The status of the configuration for retrieving occurrences of
+    #   sensitive data reported by findings. Valid values are:
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/RevealConfiguration AWS API Documentation
@@ -5437,6 +5722,32 @@ module Aws::Macie2
       :storage_class,
       :tags,
       :version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about an S3 object that lists specific text to
+    # ignore.
+    #
+    # @note When making an API call, you may pass S3WordsList
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "__stringMin3Max255PatternAZaZ093255", # required
+    #         object_key: "__stringMin1Max1024PatternSS", # required
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   @return [String]
+    #
+    # @!attribute [rw] object_key
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/S3WordsList AWS API Documentation
+    #
+    class S3WordsList < Struct.new(
+      :bucket_name,
+      :object_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6315,9 +6626,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies the tags (keys and values) to associate with a
-    # classification job, custom data identifier, findings filter, or member
-    # account.
+    # Specifies the tags (keys and values) to associate with an Amazon Macie
+    # resource.
     #
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
@@ -6334,8 +6644,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/TagResourceRequest AWS API Documentation
@@ -6347,7 +6656,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # The request succeeded. The specified tags were added to the resource.
+    # The request succeeded. The specified tags were added or updated for
+    # the resource.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/TagResourceResponse AWS API Documentation
     #
@@ -6561,6 +6871,72 @@ module Aws::Macie2
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # Changes the settings for an allow list. If you change the list's
+    # criteria, Amazon Macie tests the new criteria when it processes your
+    # request. If the criteria specify a regular expression that Macie
+    # can't compile or an S3 object that Macie can't retrieve or parse, an
+    # error occurs.
+    #
+    # @note When making an API call, you may pass UpdateAllowListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         criteria: { # required
+    #           regex: "__stringMin1Max512PatternSS",
+    #           s3_words_list: {
+    #             bucket_name: "__stringMin3Max255PatternAZaZ093255", # required
+    #             object_key: "__stringMin1Max1024PatternSS", # required
+    #           },
+    #         },
+    #         description: "__stringMin1Max512PatternSS",
+    #         id: "__string", # required
+    #         name: "__stringMin1Max128Pattern", # required
+    #       }
+    #
+    # @!attribute [rw] criteria
+    #   Specifies the criteria for an allow list. The criteria must specify
+    #   a regular expression (regex) or an S3 object (s3WordsList). It
+    #   can't specify both.
+    #   @return [Types::AllowListCriteria]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateAllowListRequest AWS API Documentation
+    #
+    class UpdateAllowListRequest < Struct.new(
+      :criteria,
+      :description,
+      :id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about an allow list whose settings were changed
+    # in response to a request.
+    #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateAllowListResponse AWS API Documentation
+    #
+    class UpdateAllowListResponse < Struct.new(
+      :arn,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Changes the status of a classification job. For more information about
     # pausing, resuming, or cancelling jobs, see [Managing sensitive data
     # discovery jobs][1] in the *Amazon Macie User Guide*.
@@ -6698,10 +7074,9 @@ module Aws::Macie2
     # @!attribute [rw] finding_publishing_frequency
     #   The frequency with which Amazon Macie publishes updates to policy
     #   findings for an account. This includes publishing updates to
-    #   Security Hub and Amazon EventBridge (formerly called Amazon
-    #   CloudWatch Events). For more information, see [Monitoring and
-    #   processing findings][1] in the *Amazon Macie User Guide*. Valid
-    #   values are:
+    #   Security Hub and Amazon EventBridge (formerly Amazon CloudWatch
+    #   Events). For more information, see [Monitoring and processing
+    #   findings][1] in the *Amazon Macie User Guide*. Valid values are:
     #
     #
     #
@@ -6798,10 +7173,9 @@ module Aws::Macie2
     #   Specifies the configuration settings for retrieving occurrences of
     #   sensitive data reported by findings, and the status of the
     #   configuration for an Amazon Macie account. When you enable the
-    #   configuration for the first time, your request must specify an AWS
-    #   Key Management Service (AWS KMS) key. Otherwise, an error occurs.
-    #   Macie uses the specified key to encrypt the sensitive data that you
-    #   retrieve.
+    #   configuration for the first time, your request must specify an Key
+    #   Management Service (KMS) key. Otherwise, an error occurs. Macie uses
+    #   the specified key to encrypt the sensitive data that you retrieve.
     #   @return [Types::RevealConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateRevealConfigurationRequest AWS API Documentation
@@ -6820,10 +7194,9 @@ module Aws::Macie2
     #   Specifies the configuration settings for retrieving occurrences of
     #   sensitive data reported by findings, and the status of the
     #   configuration for an Amazon Macie account. When you enable the
-    #   configuration for the first time, your request must specify an AWS
-    #   Key Management Service (AWS KMS) key. Otherwise, an error occurs.
-    #   Macie uses the specified key to encrypt the sensitive data that you
-    #   retrieve.
+    #   configuration for the first time, your request must specify an Key
+    #   Management Service (KMS) key. Otherwise, an error occurs. Macie uses
+    #   the specified key to encrypt the sensitive data that you retrieve.
     #   @return [Types::RevealConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateRevealConfigurationResponse AWS API Documentation

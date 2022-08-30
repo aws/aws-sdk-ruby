@@ -415,7 +415,65 @@ module Aws::Macie2
       req.send_request(options)
     end
 
+    # Creates and defines the settings for an allow list.
+    #
+    # @option params [required, String] :client_token
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::AllowListCriteria] :criteria
+    #   Specifies the criteria for an allow list. The criteria must specify a
+    #   regular expression (regex) or an S3 object (s3WordsList). It can't
+    #   specify both.
+    #
+    # @option params [String] :description
+    #
+    # @option params [required, String] :name
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A string-to-string map of key-value pairs that specifies the tags
+    #   (keys and values) for an Amazon Macie resource.
+    #
+    # @return [Types::CreateAllowListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAllowListResponse#arn #arn} => String
+    #   * {Types::CreateAllowListResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_allow_list({
+    #     client_token: "__string", # required
+    #     criteria: { # required
+    #       regex: "__stringMin1Max512PatternSS",
+    #       s3_words_list: {
+    #         bucket_name: "__stringMin3Max255PatternAZaZ093255", # required
+    #         object_key: "__stringMin1Max1024PatternSS", # required
+    #       },
+    #     },
+    #     description: "__stringMin1Max512PatternSS",
+    #     name: "__stringMin1Max128Pattern", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateAllowList AWS API Documentation
+    #
+    # @overload create_allow_list(params = {})
+    # @param [Hash] params ({})
+    def create_allow_list(params = {}, options = {})
+      req = build_request(:create_allow_list, params)
+      req.send_request(options)
+    end
+
     # Creates and defines the settings for a classification job.
+    #
+    # @option params [Array<String>] :allow_list_ids
     #
     # @option params [required, String] :client_token
     #   **A suitable default value is auto-generated.** You should normally
@@ -454,8 +512,7 @@ module Aws::Macie2
     #
     # @option params [Hash<String,String>] :tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #
     # @return [Types::CreateClassificationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -465,6 +522,7 @@ module Aws::Macie2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_classification_job({
+    #     allow_list_ids: ["__string"],
     #     client_token: "__string", # required
     #     custom_data_identifier_ids: ["__string"],
     #     description: "__string",
@@ -636,8 +694,7 @@ module Aws::Macie2
     #
     # @option params [Hash<String,String>] :tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #
     # @return [Types::CreateCustomDataIdentifierResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -701,8 +758,7 @@ module Aws::Macie2
     #
     # @option params [Hash<String,String>] :tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #
     # @return [Types::CreateFindingsFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -793,8 +849,7 @@ module Aws::Macie2
     #
     # @option params [Hash<String,String>] :tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #
     # @return [Types::CreateMemberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -874,6 +929,30 @@ module Aws::Macie2
     # @param [Hash] params ({})
     def decline_invitations(params = {}, options = {})
       req = build_request(:decline_invitations, params)
+      req.send_request(options)
+    end
+
+    # Deletes an allow list.
+    #
+    # @option params [required, String] :id
+    #
+    # @option params [String] :ignore_job_checks
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_allow_list({
+    #     id: "__string", # required
+    #     ignore_job_checks: "__string",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DeleteAllowList AWS API Documentation
+    #
+    # @overload delete_allow_list(params = {})
+    # @param [Hash] params ({})
+    def delete_allow_list(params = {}, options = {})
+      req = build_request(:delete_allow_list, params)
       req.send_request(options)
     end
 
@@ -1089,6 +1168,7 @@ module Aws::Macie2
     #
     # @return [Types::DescribeClassificationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DescribeClassificationJobResponse#allow_list_ids #allow_list_ids} => Array&lt;String&gt;
     #   * {Types::DescribeClassificationJobResponse#client_token #client_token} => String
     #   * {Types::DescribeClassificationJobResponse#created_at #created_at} => Time
     #   * {Types::DescribeClassificationJobResponse#custom_data_identifier_ids #custom_data_identifier_ids} => Array&lt;String&gt;
@@ -1118,6 +1198,8 @@ module Aws::Macie2
     #
     # @example Response structure
     #
+    #   resp.allow_list_ids #=> Array
+    #   resp.allow_list_ids[0] #=> String
     #   resp.client_token #=> String
     #   resp.created_at #=> Time
     #   resp.custom_data_identifier_ids #=> Array
@@ -1319,9 +1401,9 @@ module Aws::Macie2
     # @option params [String] :finding_publishing_frequency
     #   The frequency with which Amazon Macie publishes updates to policy
     #   findings for an account. This includes publishing updates to Security
-    #   Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
-    #   For more information, see [Monitoring and processing findings][1] in
-    #   the *Amazon Macie User Guide*. Valid values are:
+    #   Hub and Amazon EventBridge (formerly Amazon CloudWatch Events). For
+    #   more information, see [Monitoring and processing findings][1] in the
+    #   *Amazon Macie User Guide*. Valid values are:
     #
     #
     #
@@ -1396,6 +1478,53 @@ module Aws::Macie2
     # @param [Hash] params ({})
     def get_administrator_account(params = {}, options = {})
       req = build_request(:get_administrator_account, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the settings and status of an allow list.
+    #
+    # @option params [required, String] :id
+    #
+    # @return [Types::GetAllowListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAllowListResponse#arn #arn} => String
+    #   * {Types::GetAllowListResponse#created_at #created_at} => Time
+    #   * {Types::GetAllowListResponse#criteria #criteria} => Types::AllowListCriteria
+    #   * {Types::GetAllowListResponse#description #description} => String
+    #   * {Types::GetAllowListResponse#id #id} => String
+    #   * {Types::GetAllowListResponse#name #name} => String
+    #   * {Types::GetAllowListResponse#status #status} => Types::AllowListStatus
+    #   * {Types::GetAllowListResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetAllowListResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_allow_list({
+    #     id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.criteria.regex #=> String
+    #   resp.criteria.s3_words_list.bucket_name #=> String
+    #   resp.criteria.s3_words_list.object_key #=> String
+    #   resp.description #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.status.code #=> String, one of "OK", "S3_OBJECT_NOT_FOUND", "S3_USER_ACCESS_DENIED", "S3_OBJECT_ACCESS_DENIED", "S3_THROTTLED", "S3_OBJECT_OVERSIZE", "S3_OBJECT_EMPTY", "UNKNOWN_ERROR"
+    #   resp.status.description #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetAllowList AWS API Documentation
+    #
+    # @overload get_allow_list(params = {})
+    # @param [Hash] params ({})
+    def get_allow_list(params = {}, options = {})
+      req = build_request(:get_allow_list, params)
       req.send_request(options)
     end
 
@@ -1999,7 +2128,7 @@ module Aws::Macie2
     end
 
     # Retrieves the status and configuration settings for retrieving
-    # (revealing) occurrences of sensitive data reported by findings.
+    # occurrences of sensitive data reported by findings.
     #
     # @return [Types::GetRevealConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2019,8 +2148,7 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves (reveals) occurrences of sensitive data reported by a
-    # finding.
+    # Retrieves occurrences of sensitive data reported by a finding.
     #
     # @option params [required, String] :finding_id
     #
@@ -2058,8 +2186,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Checks whether occurrences of sensitive data can be retrieved
-    # (revealed) for a finding.
+    # Checks whether occurrences of sensitive data can be retrieved for a
+    # finding.
     #
     # @option params [required, String] :finding_id
     #
@@ -2186,6 +2314,45 @@ module Aws::Macie2
     # @param [Hash] params ({})
     def get_usage_totals(params = {}, options = {})
       req = build_request(:get_usage_totals, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a subset of information about all the allow lists for an
+    # account.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListAllowListsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAllowListsResponse#allow_lists #allow_lists} => Array&lt;Types::AllowListSummary&gt;
+    #   * {Types::ListAllowListsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_allow_lists({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.allow_lists #=> Array
+    #   resp.allow_lists[0].arn #=> String
+    #   resp.allow_lists[0].created_at #=> Time
+    #   resp.allow_lists[0].description #=> String
+    #   resp.allow_lists[0].id #=> String
+    #   resp.allow_lists[0].name #=> String
+    #   resp.allow_lists[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListAllowLists AWS API Documentation
+    #
+    # @overload list_allow_lists(params = {})
+    # @param [Hash] params ({})
+    def list_allow_lists(params = {}, options = {})
+      req = build_request(:list_allow_lists, params)
       req.send_request(options)
     end
 
@@ -2579,9 +2746,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves the tags (keys and values) that are associated with a
-    # classification job, custom data identifier, findings filter, or member
-    # account.
+    # Retrieves the tags (keys and values) that are associated with an
+    # Amazon Macie resource.
     #
     # @option params [required, String] :resource_arn
     #
@@ -2802,15 +2968,13 @@ module Aws::Macie2
     end
 
     # Adds or updates one or more tags (keys and values) that are associated
-    # with a classification job, custom data identifier, findings filter, or
-    # member account.
+    # with an Amazon Macie resource.
     #
     # @option params [required, String] :resource_arn
     #
     # @option params [required, Hash<String,String>] :tags
     #   A string-to-string map of key-value pairs that specifies the tags
-    #   (keys and values) for a classification job, custom data identifier,
-    #   findings filter, or member account.
+    #   (keys and values) for an Amazon Macie resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2871,8 +3035,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Removes one or more tags (keys and values) from a classification job,
-    # custom data identifier, findings filter, or member account.
+    # Removes one or more tags (keys and values) from an Amazon Macie
+    # resource.
     #
     # @option params [required, String] :resource_arn
     #
@@ -2893,6 +3057,53 @@ module Aws::Macie2
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the settings for an allow list.
+    #
+    # @option params [required, Types::AllowListCriteria] :criteria
+    #   Specifies the criteria for an allow list. The criteria must specify a
+    #   regular expression (regex) or an S3 object (s3WordsList). It can't
+    #   specify both.
+    #
+    # @option params [String] :description
+    #
+    # @option params [required, String] :id
+    #
+    # @option params [required, String] :name
+    #
+    # @return [Types::UpdateAllowListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAllowListResponse#arn #arn} => String
+    #   * {Types::UpdateAllowListResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_allow_list({
+    #     criteria: { # required
+    #       regex: "__stringMin1Max512PatternSS",
+    #       s3_words_list: {
+    #         bucket_name: "__stringMin3Max255PatternAZaZ093255", # required
+    #         object_key: "__stringMin1Max1024PatternSS", # required
+    #       },
+    #     },
+    #     description: "__stringMin1Max512PatternSS",
+    #     id: "__string", # required
+    #     name: "__stringMin1Max128Pattern", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateAllowList AWS API Documentation
+    #
+    # @overload update_allow_list(params = {})
+    # @param [Hash] params ({})
+    def update_allow_list(params = {}, options = {})
+      req = build_request(:update_allow_list, params)
       req.send_request(options)
     end
 
@@ -2993,9 +3204,9 @@ module Aws::Macie2
     # @option params [String] :finding_publishing_frequency
     #   The frequency with which Amazon Macie publishes updates to policy
     #   findings for an account. This includes publishing updates to Security
-    #   Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
-    #   For more information, see [Monitoring and processing findings][1] in
-    #   the *Amazon Macie User Guide*. Valid values are:
+    #   Hub and Amazon EventBridge (formerly Amazon CloudWatch Events). For
+    #   more information, see [Monitoring and processing findings][1] in the
+    #   *Amazon Macie User Guide*. Valid values are:
     #
     #
     #
@@ -3071,16 +3282,15 @@ module Aws::Macie2
     end
 
     # Updates the status and configuration settings for retrieving
-    # (revealing) occurrences of sensitive data reported by findings.
+    # occurrences of sensitive data reported by findings.
     #
     # @option params [required, Types::RevealConfiguration] :configuration
     #   Specifies the configuration settings for retrieving occurrences of
     #   sensitive data reported by findings, and the status of the
     #   configuration for an Amazon Macie account. When you enable the
-    #   configuration for the first time, your request must specify an AWS Key
-    #   Management Service (AWS KMS) key. Otherwise, an error occurs. Macie
-    #   uses the specified key to encrypt the sensitive data that you
-    #   retrieve.
+    #   configuration for the first time, your request must specify an Key
+    #   Management Service (KMS) key. Otherwise, an error occurs. Macie uses
+    #   the specified key to encrypt the sensitive data that you retrieve.
     #
     # @return [Types::UpdateRevealConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3122,7 +3332,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

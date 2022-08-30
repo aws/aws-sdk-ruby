@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.137.0 (2022-08-30)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Issue - Fix errors in recursion detection when `_X_AMZN_TRACE_ID` is unset (#2748).
 
 3.136.0 (2022-08-25)

@@ -612,10 +612,10 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] attributes
     #   A dictionary of attributes for the platform. The IoT Greengrass Core
-    #   software defines the `os` and `platform` by default. You can specify
-    #   additional platform attributes for a core device when you deploy the
-    #   Greengrass nucleus component. For more information, see the
-    #   [Greengrass nucleus component][1] in the *IoT Greengrass V2
+    #   software defines the `os` and `architecture` by default. You can
+    #   specify additional platform attributes for a core device when you
+    #   deploy the Greengrass nucleus component. For more information, see
+    #   the [Greengrass nucleus component][1] in the *IoT Greengrass V2
     #   Developer Guide*.
     #
     #
@@ -848,7 +848,7 @@ module Aws::GreengrassV2
     #       {
     #         inline_recipe: "data",
     #         lambda_function: {
-    #           lambda_arn: "LambdaFunctionARNWithVersionNumber", # required
+    #           lambda_arn: "NonEmptyString", # required
     #           component_name: "ComponentNameString",
     #           component_version: "ComponentVersionString",
     #           component_platforms: [
@@ -1006,7 +1006,7 @@ module Aws::GreengrassV2
     #
     #       {
     #         target_arn: "TargetARN", # required
-    #         deployment_name: "NonEmptyString",
+    #         deployment_name: "DeploymentNameString",
     #         components: {
     #           "NonEmptyString" => {
     #             component_version: "ComponentVersionString",
@@ -2096,6 +2096,15 @@ module Aws::GreengrassV2
     #   Whether or not the component is a root component.
     #   @return [Boolean]
     #
+    # @!attribute [rw] last_status_change_timestamp
+    #   The status of how current the data is.
+    #
+    #   This response is based off of component state changes. The status
+    #   reflects component disruptions and deployments. If a component only
+    #   sees a configuration update during a deployment, it might not
+    #   undergo a state change and this status would not be updated.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/InstalledComponent AWS API Documentation
     #
     class InstalledComponent < Struct.new(
@@ -2103,7 +2112,8 @@ module Aws::GreengrassV2
       :component_version,
       :lifecycle_state,
       :lifecycle_state_details,
-      :is_root)
+      :is_root,
+      :last_status_change_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2623,7 +2633,7 @@ module Aws::GreengrassV2
     #   data as a hash:
     #
     #       {
-    #         lambda_arn: "LambdaFunctionARNWithVersionNumber", # required
+    #         lambda_arn: "NonEmptyString", # required
     #         component_name: "ComponentNameString",
     #         component_version: "ComponentVersionString",
     #         component_platforms: [
@@ -3181,6 +3191,7 @@ module Aws::GreengrassV2
     #         core_device_thing_name: "CoreDeviceThingName", # required
     #         max_results: 1,
     #         next_token: "NextTokenString",
+    #         topology_filter: "ALL", # accepts ALL, ROOT
     #       }
     #
     # @!attribute [rw] core_device_thing_name
@@ -3195,18 +3206,40 @@ module Aws::GreengrassV2
     #   The token to be used for the next set of paginated results.
     #   @return [String]
     #
+    # @!attribute [rw] topology_filter
+    #   The filter for the list of components. Choose from the following
+    #   options:
+    #
+    #   * `ALL` – The list includes all components installed on the core
+    #     device.
+    #
+    #   * `ROOT` – The list includes only *root* components, which are
+    #     components that you specify in a deployment. When you choose this
+    #     option, the list doesn't include components that the core device
+    #     installs as dependencies of other components.
+    #
+    #   Default: `ROOT`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListInstalledComponentsRequest AWS API Documentation
     #
     class ListInstalledComponentsRequest < Struct.new(
       :core_device_thing_name,
       :max_results,
-      :next_token)
+      :next_token,
+      :topology_filter)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] installed_components
     #   A list that summarizes each component on the core device.
+    #
+    #   <note markdown="1"> Accuracy of the `lastStatusChangeTimestamp` response depends on
+    #   Greengrass nucleus v2.7.0. It performs best on Greengrass nucleus
+    #   v2.7.0 and can be inaccurate on earlier versions.
+    #
+    #    </note>
     #   @return [Array<Types::InstalledComponent>]
     #
     # @!attribute [rw] next_token

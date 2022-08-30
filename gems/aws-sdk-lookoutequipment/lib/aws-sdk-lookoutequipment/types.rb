@@ -202,25 +202,36 @@ module Aws::LookoutEquipment
     #   @return [String]
     #
     # @!attribute [rw] data_delay_offset_in_minutes
-    #   A period of time (in minutes) by which inference on the data is
-    #   delayed after the data starts. For instance, if you select an offset
-    #   delay time of five minutes, inference will not begin on the data
-    #   until the first data measurement after the five minute mark. For
-    #   example, if five minutes is selected, the inference scheduler will
-    #   wake up at the configured frequency with the additional five minute
-    #   delay time to check the customer S3 bucket. The customer can upload
-    #   data at the same frequency and they don't need to stop and restart
-    #   the scheduler when uploading new data.
+    #   The interval (in minutes) of planned delay at the start of each
+    #   inference segment. For example, if inference is set to run every ten
+    #   minutes, the delay is set to five minutes and the time is 09:08. The
+    #   inference scheduler will wake up at the configured interval (which,
+    #   without a delay configured, would be 09:10) plus the additional five
+    #   minute delay time (so 09:15) to check your Amazon S3 bucket. The
+    #   delay provides a buffer for you to upload data at the same
+    #   frequency, so that you don't have to stop and restart the scheduler
+    #   when uploading new data.
+    #
+    #   For more information, see [Understanding the inference process][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html
     #   @return [Integer]
     #
     # @!attribute [rw] data_upload_frequency
-    #   How often data is uploaded to the source S3 bucket for the input
-    #   data. The value chosen is the length of time between data uploads.
-    #   For instance, if you select 5 minutes, Amazon Lookout for Equipment
-    #   will upload the real-time data to the source bucket once every 5
-    #   minutes. This frequency also determines how often Amazon Lookout for
-    #   Equipment starts a scheduled inference on your data. In this
-    #   example, it starts once every 5 minutes.
+    #   How often data is uploaded to the source Amazon S3 bucket for the
+    #   input data. The value chosen is the length of time between data
+    #   uploads. For instance, if you select 5 minutes, Amazon Lookout for
+    #   Equipment will upload the real-time data to the source bucket once
+    #   every 5 minutes. This frequency also determines how often Amazon
+    #   Lookout for Equipment runs inference on your data.
+    #
+    #   For more information, see [Understanding the inference process][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html
     #   @return [String]
     #
     # @!attribute [rw] data_input_configuration
@@ -296,6 +307,172 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateLabelGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         label_group_name: "LabelGroupName", # required
+    #         fault_codes: ["FaultCode"],
+    #         client_token: "IdempotenceToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] label_group_name
+    #   Names a group of labels.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] fault_codes
+    #   The acceptable fault codes (indicating the type of anomaly
+    #   associated with the label) that can be used with this label group.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier for the request to create a label group. If you
+    #   do not set the client request token, Lookout for Equipment generates
+    #   one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags that provide metadata about the label group you are creating.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/CreateLabelGroupRequest AWS API Documentation
+    #
+    class CreateLabelGroupRequest < Struct.new(
+      :label_group_name,
+      :fault_codes,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] label_group_name
+    #   The name of the label group that you have created. Data in this
+    #   field will be retained for service usage. Follow best practices for
+    #   the security of your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_group_arn
+    #   The ARN of the label group that you have created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/CreateLabelGroupResponse AWS API Documentation
+    #
+    class CreateLabelGroupResponse < Struct.new(
+      :label_group_name,
+      :label_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateLabelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         label_group_name: "LabelGroupName", # required
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #         rating: "ANOMALY", # required, accepts ANOMALY, NO_ANOMALY, NEUTRAL
+    #         fault_code: "FaultCode",
+    #         notes: "Comments",
+    #         equipment: "Equipment",
+    #         client_token: "IdempotenceToken", # required
+    #       }
+    #
+    # @!attribute [rw] label_group_name
+    #   The name of a group of labels.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the labeled event.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the labeled event.
+    #   @return [Time]
+    #
+    # @!attribute [rw] rating
+    #   Indicates whether a labeled event represents an anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] fault_code
+    #   Provides additional information about the label. The fault code must
+    #   be defined in the FaultCodes attribute of the label group.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] notes
+    #   Metadata providing additional information about the label.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] equipment
+    #   Indicates that a label pertains to a particular piece of equipment.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier for the request to create a label. If you do not
+    #   set the client request token, Lookout for Equipment generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/CreateLabelRequest AWS API Documentation
+    #
+    class CreateLabelRequest < Struct.new(
+      :label_group_name,
+      :start_time,
+      :end_time,
+      :rating,
+      :fault_code,
+      :notes,
+      :equipment,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] label_id
+    #   The ID of the label that you have created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/CreateLabelResponse AWS API Documentation
+    #
+    class CreateLabelResponse < Struct.new(
+      :label_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateModelRequest
     #   data as a hash:
     #
@@ -306,10 +483,11 @@ module Aws::LookoutEquipment
     #           inline_data_schema: "InlineDataSchema",
     #         },
     #         labels_input_configuration: {
-    #           s3_input_configuration: { # required
+    #           s3_input_configuration: {
     #             bucket: "S3Bucket", # required
     #             prefix: "S3Prefix",
     #           },
+    #           label_group_name: "LabelGroupName",
     #         },
     #         client_token: "IdempotenceToken", # required
     #         training_data_start_time: Time.now,
@@ -657,6 +835,54 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteLabelGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         label_group_name: "LabelGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] label_group_name
+    #   The name of the label group that you want to delete. Data in this
+    #   field will be retained for service usage. Follow best practices for
+    #   the security of your data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DeleteLabelGroupRequest AWS API Documentation
+    #
+    class DeleteLabelGroupRequest < Struct.new(
+      :label_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteLabelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         label_group_name: "LabelGroupName", # required
+    #         label_id: "LabelId", # required
+    #       }
+    #
+    # @!attribute [rw] label_group_name
+    #   The name of the label group that contains the label that you want to
+    #   delete. Data in this field will be retained for service usage.
+    #   Follow best practices for the security of your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_id
+    #   The ID of the label that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DeleteLabelRequest AWS API Documentation
+    #
+    class DeleteLabelRequest < Struct.new(
+      :label_group_name,
+      :label_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteModelRequest
     #   data as a hash:
     #
@@ -977,6 +1203,12 @@ module Aws::LookoutEquipment
     #   scheduler data by Amazon Lookout for Equipment.
     #   @return [String]
     #
+    # @!attribute [rw] latest_inference_result
+    #   Indicates whether the latest execution for the inference scheduler
+    #   was Anomalous (anomalous events found) or Normal (no anomalous
+    #   events found).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeInferenceSchedulerResponse AWS API Documentation
     #
     class DescribeInferenceSchedulerResponse < Struct.new(
@@ -992,7 +1224,148 @@ module Aws::LookoutEquipment
       :data_input_configuration,
       :data_output_configuration,
       :role_arn,
-      :server_side_kms_key_id)
+      :server_side_kms_key_id,
+      :latest_inference_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeLabelGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         label_group_name: "LabelGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] label_group_name
+    #   Returns the name of the label group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeLabelGroupRequest AWS API Documentation
+    #
+    class DescribeLabelGroupRequest < Struct.new(
+      :label_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] label_group_name
+    #   The name of the label group.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_group_arn
+    #   The ARN of the label group.
+    #   @return [String]
+    #
+    # @!attribute [rw] fault_codes
+    #   Codes indicating the type of anomaly associated with the labels in
+    #   the lagbel group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the label group was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the label group was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeLabelGroupResponse AWS API Documentation
+    #
+    class DescribeLabelGroupResponse < Struct.new(
+      :label_group_name,
+      :label_group_arn,
+      :fault_codes,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeLabelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         label_group_name: "LabelGroupName", # required
+    #         label_id: "LabelId", # required
+    #       }
+    #
+    # @!attribute [rw] label_group_name
+    #   Returns the name of the group containing the label.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_id
+    #   Returns the ID of the label.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeLabelRequest AWS API Documentation
+    #
+    class DescribeLabelRequest < Struct.new(
+      :label_group_name,
+      :label_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] label_group_name
+    #   The name of the requested label group.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_group_arn
+    #   The ARN of the requested label group.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_id
+    #   The ID of the requested label.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the requested label.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the requested label.
+    #   @return [Time]
+    #
+    # @!attribute [rw] rating
+    #   Indicates whether a labeled event represents an anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] fault_code
+    #   Indicates the type of anomaly associated with the label.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] notes
+    #   Metadata providing additional information about the label.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] equipment
+    #   Indicates that a label pertains to a particular piece of equipment.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the label was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeLabelResponse AWS API Documentation
+    #
+    class DescribeLabelResponse < Struct.new(
+      :label_group_name,
+      :label_group_arn,
+      :label_id,
+      :start_time,
+      :end_time,
+      :rating,
+      :fault_code,
+      :notes,
+      :equipment,
+      :created_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1502,6 +1875,12 @@ module Aws::LookoutEquipment
     #   example, it starts once every 5 minutes.
     #   @return [String]
     #
+    # @!attribute [rw] latest_inference_result
+    #   Indicates whether the latest execution for the inference scheduler
+    #   was Anomalous (anomalous events found) or Normal (no anomalous
+    #   events found).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/InferenceSchedulerSummary AWS API Documentation
     #
     class InferenceSchedulerSummary < Struct.new(
@@ -1511,7 +1890,8 @@ module Aws::LookoutEquipment
       :inference_scheduler_arn,
       :status,
       :data_delay_offset_in_minutes,
-      :data_upload_frequency)
+      :data_upload_frequency,
+      :latest_inference_result)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1667,6 +2047,92 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
+    # Contains information about the label group.
+    #
+    # @!attribute [rw] label_group_name
+    #   The name of the label group.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_group_arn
+    #   The ARN of the label group.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the label group was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the label group was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/LabelGroupSummary AWS API Documentation
+    #
+    class LabelGroupSummary < Struct.new(
+      :label_group_name,
+      :label_group_arn,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the label.
+    #
+    # @!attribute [rw] label_group_name
+    #   The name of the label group.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_id
+    #   The ID of the label.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_group_arn
+    #   The ARN of the label group.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp indicating the start of the label.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp indicating the end of the label.
+    #   @return [Time]
+    #
+    # @!attribute [rw] rating
+    #   Indicates whether a labeled event represents an anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] fault_code
+    #   Indicates the type of anomaly associated with the label.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] equipment
+    #   Indicates that a label pertains to a particular piece of equipment.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the label was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/LabelSummary AWS API Documentation
+    #
+    class LabelSummary < Struct.new(
+      :label_group_name,
+      :label_id,
+      :label_group_arn,
+      :start_time,
+      :end_time,
+      :rating,
+      :fault_code,
+      :equipment,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the configuration information for the S3 location being used
     # to hold label data.
     #
@@ -1674,10 +2140,11 @@ module Aws::LookoutEquipment
     #   data as a hash:
     #
     #       {
-    #         s3_input_configuration: { # required
+    #         s3_input_configuration: {
     #           bucket: "S3Bucket", # required
     #           prefix: "S3Prefix",
     #         },
+    #         label_group_name: "LabelGroupName",
     #       }
     #
     # @!attribute [rw] s3_input_configuration
@@ -1685,10 +2152,15 @@ module Aws::LookoutEquipment
     #   label data.
     #   @return [Types::LabelsS3InputConfiguration]
     #
+    # @!attribute [rw] label_group_name
+    #   The name of the label group to be used for label data.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/LabelsInputConfiguration AWS API Documentation
     #
     class LabelsInputConfiguration < Struct.new(
-      :s3_input_configuration)
+      :s3_input_configuration,
+      :label_group_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1880,13 +2352,13 @@ module Aws::LookoutEquipment
     #   @return [String]
     #
     # @!attribute [rw] interval_start_time
-    #   Lookout for Equipment will return all the inference events with
-    #   start time equal to or greater than the start time given.
+    #   Lookout for Equipment will return all the inference events with an
+    #   end time equal to or greater than the start time given.
     #   @return [Time]
     #
     # @!attribute [rw] interval_end_time
-    #   Lookout for Equipment will return all the inference events with end
-    #   time equal to or less than the end time given.
+    #   Returns all the inference events with an end start time equal to or
+    #   greater than less than the end time given
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListInferenceEventsRequest AWS API Documentation
@@ -2050,6 +2522,132 @@ module Aws::LookoutEquipment
     class ListInferenceSchedulersResponse < Struct.new(
       :next_token,
       :inference_scheduler_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListLabelGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         label_group_name_begins_with: "LabelGroupName",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] label_group_name_begins_with
+    #   The beginning of the name of the label groups to be listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An opaque pagination token indicating where to continue the listing
+    #   of label groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the maximum number of label groups to list.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListLabelGroupsRequest AWS API Documentation
+    #
+    class ListLabelGroupsRequest < Struct.new(
+      :label_group_name_begins_with,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   An opaque pagination token indicating where to continue the listing
+    #   of label groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_group_summaries
+    #   A summary of the label groups.
+    #   @return [Array<Types::LabelGroupSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListLabelGroupsResponse AWS API Documentation
+    #
+    class ListLabelGroupsResponse < Struct.new(
+      :next_token,
+      :label_group_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListLabelsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         label_group_name: "LabelGroupName", # required
+    #         interval_start_time: Time.now,
+    #         interval_end_time: Time.now,
+    #         fault_code: "FaultCode",
+    #         equipment: "Equipment",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] label_group_name
+    #   Retruns the name of the label group.
+    #   @return [String]
+    #
+    # @!attribute [rw] interval_start_time
+    #   Returns all the labels with a end time equal to or later than the
+    #   start time given.
+    #   @return [Time]
+    #
+    # @!attribute [rw] interval_end_time
+    #   Returns all labels with a start time earlier than the end time
+    #   given.
+    #   @return [Time]
+    #
+    # @!attribute [rw] fault_code
+    #   Returns labels with a particular fault code.
+    #   @return [String]
+    #
+    # @!attribute [rw] equipment
+    #   Lists the labels that pertain to a particular piece of equipment.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An opaque pagination token indicating where to continue the listing
+    #   of label groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the maximum number of labels to list.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListLabelsRequest AWS API Documentation
+    #
+    class ListLabelsRequest < Struct.new(
+      :label_group_name,
+      :interval_start_time,
+      :interval_end_time,
+      :fault_code,
+      :equipment,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   An opaque pagination token indicating where to continue the listing
+    #   of datasets.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_summaries
+    #   A summary of the items in the label group.
+    #   @return [Array<Types::LabelSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListLabelsResponse AWS API Documentation
+    #
+    class ListLabelsResponse < Struct.new(
+      :next_token,
+      :label_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2853,6 +3451,35 @@ module Aws::LookoutEquipment
       :data_input_configuration,
       :data_output_configuration,
       :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateLabelGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         label_group_name: "LabelGroupName", # required
+    #         fault_codes: ["FaultCode"],
+    #       }
+    #
+    # @!attribute [rw] label_group_name
+    #   The name of the label group to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] fault_codes
+    #   Updates the code indicating the type of anomaly associated with the
+    #   label.
+    #
+    #   Data in this field will be retained for service usage. Follow best
+    #   practices for the security of your data.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/UpdateLabelGroupRequest AWS API Documentation
+    #
+    class UpdateLabelGroupRequest < Struct.new(
+      :label_group_name,
+      :fault_codes)
       SENSITIVE = []
       include Aws::Structure
     end

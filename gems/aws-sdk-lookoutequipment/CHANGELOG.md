@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2022-08-30)
+------------------
+
+* Feature - This release adds new apis for providing labels.
+
 1.12.0 (2022-06-23)
 ------------------
 
