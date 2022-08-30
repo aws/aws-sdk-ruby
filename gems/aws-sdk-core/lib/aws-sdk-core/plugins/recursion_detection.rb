@@ -20,6 +20,8 @@ module Aws
 
         private
         def validate_header(header_value)
+          return unless header_value
+
           if (header_value.chars & (0..31).map(&:chr)).any?
             raise ArgumentError, 'Invalid _X_AMZN_TRACE_ID value: '\
               'contains ASCII control characters'
