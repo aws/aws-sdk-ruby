@@ -99,6 +99,15 @@ module Aws
             end
           end
         end
+
+        context 'X_AMZ_TRACE_ID is unset' do
+          let(:env_trace_id) { nil }
+
+          it 'does not set the header' do
+            resp = client.operation_with_trace_id
+            expect(resp.context.http_request.headers['x-amzn-trace-id']).to be_nil
+          end
+        end
       end
     end
   end

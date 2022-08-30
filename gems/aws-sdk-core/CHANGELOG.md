@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Issue after release #2747 (#2748)
+* Issue - Fix errors in recursion detection when `_X_AMZN_TRACE_ID` is unset (#2748).
 
 3.136.0 (2022-08-25)
 ------------------
