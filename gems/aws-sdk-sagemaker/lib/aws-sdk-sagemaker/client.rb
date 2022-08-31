@@ -3515,6 +3515,18 @@ module Aws::SageMaker
     #         },
     #       ],
     #       volume_kms_key_id: "KmsKeyId",
+    #       container_config: {
+    #         domain: "String",
+    #         task: "String",
+    #         framework: "String",
+    #         framework_version: "String",
+    #         payload_config: {
+    #           sample_payload_url: "String",
+    #           supported_content_types: ["String"],
+    #         },
+    #         nearest_model_name: "String",
+    #         supported_instance_types: ["String"],
+    #       },
     #     },
     #     job_description: "RecommendationJobDescription",
     #     stopping_conditions: {
@@ -5376,7 +5388,7 @@ module Aws::SageMaker
     # This operation can only be called when the authentication mode equals
     # IAM.
     #
-    # The IAM role or user used to call this API defines the permissions to
+    # The IAM role or user passed to this API defines the permissions to
     # access the app. Once the presigned URL is created, no additional
     # permission is required to access this URL. IAM authorization policies
     # for this API are also enforced for every HTTP request and WebSocket
@@ -6631,10 +6643,11 @@ module Aws::SageMaker
     # a domain, and is the main way to reference a "person" for the
     # purposes of sharing, reporting, and other user-oriented features. This
     # entity is created when a user onboards to Amazon SageMaker Studio. If
-    # an administrator invites a person by email or imports them from SSO, a
-    # user profile is automatically created. A user profile is the primary
-    # holder of settings for an individual user and has a reference to the
-    # user's private Amazon Elastic File System (EFS) home directory.
+    # an administrator invites a person by email or imports them from Amazon
+    # Web Services SSO, a user profile is automatically created. A user
+    # profile is the primary holder of settings for an individual user and
+    # has a reference to the user's private Amazon Elastic File System
+    # (EFS) home directory.
     #
     # @option params [required, String] :domain_id
     #   The ID of the associated Domain.
@@ -6645,14 +6658,16 @@ module Aws::SageMaker
     # @option params [String] :single_sign_on_user_identifier
     #   A specifier for the type of value specified in SingleSignOnUserValue.
     #   Currently, the only supported value is "UserName". If the Domain's
-    #   AuthMode is SSO, this field is required. If the Domain's AuthMode is
-    #   not SSO, this field cannot be specified.
+    #   AuthMode is Amazon Web Services SSO, this field is required. If the
+    #   Domain's AuthMode is not Amazon Web Services SSO, this field cannot
+    #   be specified.
     #
     # @option params [String] :single_sign_on_user_value
     #   The username of the associated Amazon Web Services Single Sign-On User
-    #   for this UserProfile. If the Domain's AuthMode is SSO, this field is
-    #   required, and must match a valid username of a user in your directory.
-    #   If the Domain's AuthMode is not SSO, this field cannot be specified.
+    #   for this UserProfile. If the Domain's AuthMode is Amazon Web Services
+    #   SSO, this field is required, and must match a valid username of a user
+    #   in your directory. If the Domain's AuthMode is not Amazon Web
+    #   Services SSO, this field cannot be specified.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Each tag consists of a key and an optional value. Tag keys must be
@@ -7251,9 +7266,9 @@ module Aws::SageMaker
     end
 
     # Used to delete a domain. If you onboarded with IAM mode, you will need
-    # to delete your domain to onboard again using SSO. Use with caution.
-    # All of the members of the domain will lose access to their EFS volume,
-    # including data, notebooks, and other artifacts.
+    # to delete your domain to onboard again using Amazon Web Services SSO.
+    # Use with caution. All of the members of the domain will lose access to
+    # their EFS volume, including data, notebooks, and other artifacts.
     #
     # @option params [required, String] :domain_id
     #   The domain ID.
@@ -10077,6 +10092,16 @@ module Aws::SageMaker
     #   resp.input_config.endpoint_configurations[0].environment_parameter_ranges.categorical_parameter_ranges[0].value #=> Array
     #   resp.input_config.endpoint_configurations[0].environment_parameter_ranges.categorical_parameter_ranges[0].value[0] #=> String
     #   resp.input_config.volume_kms_key_id #=> String
+    #   resp.input_config.container_config.domain #=> String
+    #   resp.input_config.container_config.task #=> String
+    #   resp.input_config.container_config.framework #=> String
+    #   resp.input_config.container_config.framework_version #=> String
+    #   resp.input_config.container_config.payload_config.sample_payload_url #=> String
+    #   resp.input_config.container_config.payload_config.supported_content_types #=> Array
+    #   resp.input_config.container_config.payload_config.supported_content_types[0] #=> String
+    #   resp.input_config.container_config.nearest_model_name #=> String
+    #   resp.input_config.container_config.supported_instance_types #=> Array
+    #   resp.input_config.container_config.supported_instance_types[0] #=> String
     #   resp.stopping_conditions.max_invocations #=> Integer
     #   resp.stopping_conditions.model_latency_thresholds #=> Array
     #   resp.stopping_conditions.model_latency_thresholds[0].percentile #=> String
@@ -20325,7 +20350,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

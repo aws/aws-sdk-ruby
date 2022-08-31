@@ -361,13 +361,298 @@ module Aws::IdentityStore
 
     # @!group API Operations
 
+    # Creates a group within the specified identity store.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    # @option params [String] :display_name
+    #   A string containing the name of the group. This value is commonly
+    #   displayed when the group is referenced.
+    #
+    # @option params [String] :description
+    #   A string containing the description of the group.
+    #
+    # @return [Types::CreateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGroupResponse#group_id #group_id} => String
+    #   * {Types::CreateGroupResponse#identity_store_id #identity_store_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_group({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     display_name: "GroupDisplayName",
+    #     description: "SensitiveStringType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group_id #=> String
+    #   resp.identity_store_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateGroup AWS API Documentation
+    #
+    # @overload create_group(params = {})
+    # @param [Hash] params ({})
+    def create_group(params = {}, options = {})
+      req = build_request(:create_group, params)
+      req.send_request(options)
+    end
+
+    # Creates a relationship between a member and a group. The following
+    # identifiers must be specified: `GroupId`, `IdentityStoreId`, and
+    # `MemberId`.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    # @option params [required, String] :group_id
+    #   The identifier for a group in the identity store.
+    #
+    # @option params [required, Types::MemberId] :member_id
+    #   An object that contains the identifier of a group member. Setting the
+    #   `UserID` field to the specific identifier for a user indicates that
+    #   the user is a member of the group.
+    #
+    # @return [Types::CreateGroupMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGroupMembershipResponse#membership_id #membership_id} => String
+    #   * {Types::CreateGroupMembershipResponse#identity_store_id #identity_store_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_group_membership({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     group_id: "ResourceId", # required
+    #     member_id: { # required
+    #       user_id: "ResourceId",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.membership_id #=> String
+    #   resp.identity_store_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateGroupMembership AWS API Documentation
+    #
+    # @overload create_group_membership(params = {})
+    # @param [Hash] params ({})
+    def create_group_membership(params = {}, options = {})
+      req = build_request(:create_group_membership, params)
+      req.send_request(options)
+    end
+
+    # Creates a new user within the specified identity store.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    # @option params [String] :user_name
+    #   A unique string used to identify the user. The length limit is 128
+    #   characters. This value can consist of letters, accented characters,
+    #   symbols, numbers, and punctuation. The characters &lt;&gt;;:% are
+    #   excluded. This value is specified at the time the user is created and
+    #   stored as an attribute of the user object in the identity store.
+    #
+    # @option params [Types::Name] :name
+    #   An object containing the user's name.
+    #
+    # @option params [String] :display_name
+    #   A string containing the user's name. This value is typically
+    #   formatted for display when the user is referenced. For example, "John
+    #   Doe."
+    #
+    # @option params [String] :nick_name
+    #   A string containing an alternate name for the user.
+    #
+    # @option params [String] :profile_url
+    #   A string containing a URL that may be associated with the user.
+    #
+    # @option params [Array<Types::Email>] :emails
+    #   A list of `Email` objects containing email addresses associated with
+    #   the user.
+    #
+    # @option params [Array<Types::Address>] :addresses
+    #   A list of `Address` objects containing addresses associated with the
+    #   user.
+    #
+    # @option params [Array<Types::PhoneNumber>] :phone_numbers
+    #   A list of `PhoneNumber` objects containing phone numbers associated
+    #   with the user.
+    #
+    # @option params [String] :user_type
+    #   A string indicating the user's type. Possible values depend on each
+    #   customer's specific needs, so they are left unspecified.
+    #
+    # @option params [String] :title
+    #   A string containing the user's title. Possible values are left
+    #   unspecified given that they depend on each customer's specific needs.
+    #
+    # @option params [String] :preferred_language
+    #   A string containing the preferred language of the user. For example,
+    #   "American English" or "en-us."
+    #
+    # @option params [String] :locale
+    #   A string containing the user's geographical region or location.
+    #
+    # @option params [String] :timezone
+    #   A string containing the user's time zone.
+    #
+    # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUserResponse#user_id #user_id} => String
+    #   * {Types::CreateUserResponse#identity_store_id #identity_store_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_user({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     user_name: "UserName",
+    #     name: {
+    #       formatted: "SensitiveStringType",
+    #       family_name: "SensitiveStringType",
+    #       given_name: "SensitiveStringType",
+    #       middle_name: "SensitiveStringType",
+    #       honorific_prefix: "SensitiveStringType",
+    #       honorific_suffix: "SensitiveStringType",
+    #     },
+    #     display_name: "SensitiveStringType",
+    #     nick_name: "SensitiveStringType",
+    #     profile_url: "SensitiveStringType",
+    #     emails: [
+    #       {
+    #         value: "SensitiveStringType",
+    #         type: "SensitiveStringType",
+    #         primary: false,
+    #       },
+    #     ],
+    #     addresses: [
+    #       {
+    #         street_address: "SensitiveStringType",
+    #         locality: "SensitiveStringType",
+    #         region: "SensitiveStringType",
+    #         postal_code: "SensitiveStringType",
+    #         country: "SensitiveStringType",
+    #         formatted: "SensitiveStringType",
+    #         type: "SensitiveStringType",
+    #         primary: false,
+    #       },
+    #     ],
+    #     phone_numbers: [
+    #       {
+    #         value: "SensitiveStringType",
+    #         type: "SensitiveStringType",
+    #         primary: false,
+    #       },
+    #     ],
+    #     user_type: "SensitiveStringType",
+    #     title: "SensitiveStringType",
+    #     preferred_language: "SensitiveStringType",
+    #     locale: "SensitiveStringType",
+    #     timezone: "SensitiveStringType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_id #=> String
+    #   resp.identity_store_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateUser AWS API Documentation
+    #
+    # @overload create_user(params = {})
+    # @param [Hash] params ({})
+    def create_user(params = {}, options = {})
+      req = build_request(:create_user, params)
+      req.send_request(options)
+    end
+
+    # Delete a group within an identity store given `GroupId`.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    # @option params [required, String] :group_id
+    #   The identifier for a group in the identity store.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_group({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     group_id: "ResourceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DeleteGroup AWS API Documentation
+    #
+    # @overload delete_group(params = {})
+    # @param [Hash] params ({})
+    def delete_group(params = {}, options = {})
+      req = build_request(:delete_group, params)
+      req.send_request(options)
+    end
+
+    # Delete a membership within a group given `MembershipId`.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    # @option params [required, String] :membership_id
+    #   The identifier for a `GroupMembership` in the identity store.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_group_membership({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     membership_id: "ResourceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DeleteGroupMembership AWS API Documentation
+    #
+    # @overload delete_group_membership(params = {})
+    # @param [Hash] params ({})
+    def delete_group_membership(params = {}, options = {})
+      req = build_request(:delete_group_membership, params)
+      req.send_request(options)
+    end
+
+    # Deletes a user within an identity store given `UserId`.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier for a user in the identity store.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_user({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     user_id: "ResourceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DeleteUser AWS API Documentation
+    #
+    # @overload delete_user(params = {})
+    # @param [Hash] params ({})
+    def delete_user(params = {}, options = {})
+      req = build_request(:delete_user, params)
+      req.send_request(options)
+    end
+
     # Retrieves the group metadata and attributes from `GroupId` in an
     # identity store.
     #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store, such as
     #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
-    #   `1234567890` is a randomly generated string that contains number and
+    #   `1234567890` is a randomly generated string that contains numbers and
     #   lower case letters. This value is generated at the time that a new
     #   identity store is created.
     #
@@ -378,6 +663,9 @@ module Aws::IdentityStore
     #
     #   * {Types::DescribeGroupResponse#group_id #group_id} => String
     #   * {Types::DescribeGroupResponse#display_name #display_name} => String
+    #   * {Types::DescribeGroupResponse#external_ids #external_ids} => Array&lt;Types::ExternalId&gt;
+    #   * {Types::DescribeGroupResponse#description #description} => String
+    #   * {Types::DescribeGroupResponse#identity_store_id #identity_store_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -390,6 +678,11 @@ module Aws::IdentityStore
     #
     #   resp.group_id #=> String
     #   resp.display_name #=> String
+    #   resp.external_ids #=> Array
+    #   resp.external_ids[0].issuer #=> String
+    #   resp.external_ids[0].id #=> String
+    #   resp.description #=> String
+    #   resp.identity_store_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeGroup AWS API Documentation
     #
@@ -400,13 +693,52 @@ module Aws::IdentityStore
       req.send_request(options)
     end
 
-    # Retrieves the user metadata and attributes from `UserId` in an
+    # Retrieves membership metadata and attributes from `MembershipId` in a
+    # group.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    # @option params [required, String] :membership_id
+    #   The identifier for a `GroupMembership` in the identity store.
+    #
+    # @return [Types::DescribeGroupMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGroupMembershipResponse#identity_store_id #identity_store_id} => String
+    #   * {Types::DescribeGroupMembershipResponse#membership_id #membership_id} => String
+    #   * {Types::DescribeGroupMembershipResponse#group_id #group_id} => String
+    #   * {Types::DescribeGroupMembershipResponse#member_id #member_id} => Types::MemberId
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_group_membership({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     membership_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identity_store_id #=> String
+    #   resp.membership_id #=> String
+    #   resp.group_id #=> String
+    #   resp.member_id.user_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeGroupMembership AWS API Documentation
+    #
+    # @overload describe_group_membership(params = {})
+    # @param [Hash] params ({})
+    def describe_group_membership(params = {}, options = {})
+      req = build_request(:describe_group_membership, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the user metadata and attributes from the `UserId` in an
     # identity store.
     #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store, such as
     #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
-    #   `1234567890` is a randomly generated string that contains number and
+    #   `1234567890` is a randomly generated string that contains numbers and
     #   lower case letters. This value is generated at the time that a new
     #   identity store is created.
     #
@@ -417,6 +749,20 @@ module Aws::IdentityStore
     #
     #   * {Types::DescribeUserResponse#user_name #user_name} => String
     #   * {Types::DescribeUserResponse#user_id #user_id} => String
+    #   * {Types::DescribeUserResponse#external_ids #external_ids} => Array&lt;Types::ExternalId&gt;
+    #   * {Types::DescribeUserResponse#name #name} => Types::Name
+    #   * {Types::DescribeUserResponse#display_name #display_name} => String
+    #   * {Types::DescribeUserResponse#nick_name #nick_name} => String
+    #   * {Types::DescribeUserResponse#profile_url #profile_url} => String
+    #   * {Types::DescribeUserResponse#emails #emails} => Array&lt;Types::Email&gt;
+    #   * {Types::DescribeUserResponse#addresses #addresses} => Array&lt;Types::Address&gt;
+    #   * {Types::DescribeUserResponse#phone_numbers #phone_numbers} => Array&lt;Types::PhoneNumber&gt;
+    #   * {Types::DescribeUserResponse#user_type #user_type} => String
+    #   * {Types::DescribeUserResponse#title #title} => String
+    #   * {Types::DescribeUserResponse#preferred_language #preferred_language} => String
+    #   * {Types::DescribeUserResponse#locale #locale} => String
+    #   * {Types::DescribeUserResponse#timezone #timezone} => String
+    #   * {Types::DescribeUserResponse#identity_store_id #identity_store_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -429,6 +775,41 @@ module Aws::IdentityStore
     #
     #   resp.user_name #=> String
     #   resp.user_id #=> String
+    #   resp.external_ids #=> Array
+    #   resp.external_ids[0].issuer #=> String
+    #   resp.external_ids[0].id #=> String
+    #   resp.name.formatted #=> String
+    #   resp.name.family_name #=> String
+    #   resp.name.given_name #=> String
+    #   resp.name.middle_name #=> String
+    #   resp.name.honorific_prefix #=> String
+    #   resp.name.honorific_suffix #=> String
+    #   resp.display_name #=> String
+    #   resp.nick_name #=> String
+    #   resp.profile_url #=> String
+    #   resp.emails #=> Array
+    #   resp.emails[0].value #=> String
+    #   resp.emails[0].type #=> String
+    #   resp.emails[0].primary #=> Boolean
+    #   resp.addresses #=> Array
+    #   resp.addresses[0].street_address #=> String
+    #   resp.addresses[0].locality #=> String
+    #   resp.addresses[0].region #=> String
+    #   resp.addresses[0].postal_code #=> String
+    #   resp.addresses[0].country #=> String
+    #   resp.addresses[0].formatted #=> String
+    #   resp.addresses[0].type #=> String
+    #   resp.addresses[0].primary #=> Boolean
+    #   resp.phone_numbers #=> Array
+    #   resp.phone_numbers[0].value #=> String
+    #   resp.phone_numbers[0].type #=> String
+    #   resp.phone_numbers[0].primary #=> Boolean
+    #   resp.user_type #=> String
+    #   resp.title #=> String
+    #   resp.preferred_language #=> String
+    #   resp.locale #=> String
+    #   resp.timezone #=> String
+    #   resp.identity_store_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeUser AWS API Documentation
     #
@@ -439,22 +820,314 @@ module Aws::IdentityStore
       req.send_request(options)
     end
 
-    # Lists the attribute name and value of the group that you specified in
-    # the search. We only support `DisplayName` as a valid filter attribute
-    # path currently, and filter is required. This API returns minimum
-    # attributes, including `GroupId` and group `DisplayName` in the
-    # response.
+    # Retrieves `GroupId` in an identity store.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    # @option params [required, Types::AlternateIdentifier] :alternate_identifier
+    #   A unique identifier for the group value that is not the group's
+    #   primary identifier. This value can be an identifier from an external
+    #   identity provider (IdP) that is associated with the group or a unique
+    #   attribute. For example, a unique `GroupDisplayName`.
+    #
+    # @return [Types::GetGroupIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGroupIdResponse#group_id #group_id} => String
+    #   * {Types::GetGroupIdResponse#identity_store_id #identity_store_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_group_id({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     alternate_identifier: { # required
+    #       external_id: {
+    #         issuer: "ExternalIdIssuer", # required
+    #         id: "ExternalIdIdentifier", # required
+    #       },
+    #       unique_attribute: {
+    #         attribute_path: "AttributePath", # required
+    #         attribute_value: "value", # required, value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group_id #=> String
+    #   resp.identity_store_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetGroupId AWS API Documentation
+    #
+    # @overload get_group_id(params = {})
+    # @param [Hash] params ({})
+    def get_group_id(params = {}, options = {})
+      req = build_request(:get_group_id, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the `MembershipId` in a group.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    # @option params [required, String] :group_id
+    #   The identifier for a group in the identity store.
+    #
+    # @option params [required, Types::MemberId] :member_id
+    #   An object that contains the identifier of a group member. Setting the
+    #   `UserID` field to the specific identifier for a user indicates that
+    #   the user is a member of the group.
+    #
+    # @return [Types::GetGroupMembershipIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGroupMembershipIdResponse#membership_id #membership_id} => String
+    #   * {Types::GetGroupMembershipIdResponse#identity_store_id #identity_store_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_group_membership_id({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     group_id: "ResourceId", # required
+    #     member_id: { # required
+    #       user_id: "ResourceId",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.membership_id #=> String
+    #   resp.identity_store_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetGroupMembershipId AWS API Documentation
+    #
+    # @overload get_group_membership_id(params = {})
+    # @param [Hash] params ({})
+    def get_group_membership_id(params = {}, options = {})
+      req = build_request(:get_group_membership_id, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the `UserId` in an identity store.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    # @option params [required, Types::AlternateIdentifier] :alternate_identifier
+    #   Any unique attribute associated with a user that is not the `UserId`.
+    #
+    # @return [Types::GetUserIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUserIdResponse#user_id #user_id} => String
+    #   * {Types::GetUserIdResponse#identity_store_id #identity_store_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_user_id({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     alternate_identifier: { # required
+    #       external_id: {
+    #         issuer: "ExternalIdIssuer", # required
+    #         id: "ExternalIdIdentifier", # required
+    #       },
+    #       unique_attribute: {
+    #         attribute_path: "AttributePath", # required
+    #         attribute_value: "value", # required, value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_id #=> String
+    #   resp.identity_store_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetUserId AWS API Documentation
+    #
+    # @overload get_user_id(params = {})
+    # @param [Hash] params ({})
+    def get_user_id(params = {}, options = {})
+      req = build_request(:get_user_id, params)
+      req.send_request(options)
+    end
+
+    # Returns if a member exists in specified groups.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    # @option params [required, Types::MemberId] :member_id
+    #   An object containing the identifier of a group member.
+    #
+    # @option params [required, Array<String>] :group_ids
+    #   A list of identifiers for groups in the identity store.
+    #
+    # @return [Types::IsMemberInGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::IsMemberInGroupsResponse#results #results} => Array&lt;Types::GroupMembershipExistenceResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.is_member_in_groups({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     member_id: { # required
+    #       user_id: "ResourceId",
+    #     },
+    #     group_ids: ["ResourceId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].group_id #=> String
+    #   resp.results[0].member_id.user_id #=> String
+    #   resp.results[0].membership_exists #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/IsMemberInGroups AWS API Documentation
+    #
+    # @overload is_member_in_groups(params = {})
+    # @param [Hash] params ({})
+    def is_member_in_groups(params = {}, options = {})
+      req = build_request(:is_member_in_groups, params)
+      req.send_request(options)
+    end
+
+    # For the specified group in the specified identity store, returns the
+    # list of all `GroupMembership` objects and returns results in paginated
+    # form.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    # @option params [required, String] :group_id
+    #   The identifier for a group in the identity store.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request. This
+    #   parameter is used in the `ListUsers` and `ListGroups` requests to
+    #   specify how many results to return in one page. The length limit is 50
+    #   characters.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used for the `ListUsers`, `ListGroups` and
+    #   `ListGroupMemberships` API operations. This value is generated by the
+    #   identity store service. It is returned in the API response if the
+    #   total results are more than the size of one page. This token is also
+    #   returned when it is used in the API request to search for the next
+    #   page.
+    #
+    # @return [Types::ListGroupMembershipsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGroupMembershipsResponse#group_memberships #group_memberships} => Array&lt;Types::GroupMembership&gt;
+    #   * {Types::ListGroupMembershipsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_group_memberships({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     group_id: "ResourceId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group_memberships #=> Array
+    #   resp.group_memberships[0].identity_store_id #=> String
+    #   resp.group_memberships[0].membership_id #=> String
+    #   resp.group_memberships[0].group_id #=> String
+    #   resp.group_memberships[0].member_id.user_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroupMemberships AWS API Documentation
+    #
+    # @overload list_group_memberships(params = {})
+    # @param [Hash] params ({})
+    def list_group_memberships(params = {}, options = {})
+      req = build_request(:list_group_memberships, params)
+      req.send_request(options)
+    end
+
+    # For the specified member in the specified identity store, returns the
+    # list of all `GroupMembership` objects and returns results in paginated
+    # form.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    # @option params [required, Types::MemberId] :member_id
+    #   An object that contains the identifier of a group member. Setting the
+    #   `UserID` field to the specific identifier for a user indicates that
+    #   the user is a member of the group.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request. This
+    #   parameter is used in the `ListUsers` and `ListGroups` requests to
+    #   specify how many results to return in one page. The length limit is 50
+    #   characters.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used for the `ListUsers`, `ListGroups` and
+    #   `ListGroupMemberships` API operations. This value is generated by the
+    #   identity store service. It is returned in the API response if the
+    #   total results are more than the size of one page. This token is also
+    #   returned when it is used in the API request to search for the next
+    #   page.
+    #
+    # @return [Types::ListGroupMembershipsForMemberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGroupMembershipsForMemberResponse#group_memberships #group_memberships} => Array&lt;Types::GroupMembership&gt;
+    #   * {Types::ListGroupMembershipsForMemberResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_group_memberships_for_member({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     member_id: { # required
+    #       user_id: "ResourceId",
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group_memberships #=> Array
+    #   resp.group_memberships[0].identity_store_id #=> String
+    #   resp.group_memberships[0].membership_id #=> String
+    #   resp.group_memberships[0].group_id #=> String
+    #   resp.group_memberships[0].member_id.user_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroupMembershipsForMember AWS API Documentation
+    #
+    # @overload list_group_memberships_for_member(params = {})
+    # @param [Hash] params ({})
+    def list_group_memberships_for_member(params = {}, options = {})
+      req = build_request(:list_group_memberships_for_member, params)
+      req.send_request(options)
+    end
+
+    # *Filtering for a group by the group `DisplayName` attribute is
+    # deprecated. Instead, use the `GetGroupId` API action.*
+    #
+    # Lists all groups in the identity store. Returns a paginated list of
+    # complete `Group` objects.
     #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store, such as
     #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
-    #   `1234567890` is a randomly generated string that contains number and
+    #   `1234567890` is a randomly generated string that contains numbers and
     #   lower case letters. This value is generated at the time that a new
     #   identity store is created.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per request. This
-    #   parameter is used in the `ListUsers` and `ListGroups` request to
+    #   parameter is used in the `ListUsers` and `ListGroups` requests to
     #   specify how many results to return in one page. The length limit is 50
     #   characters.
     #
@@ -466,8 +1139,8 @@ module Aws::IdentityStore
     #   API request to search for the next page.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   A list of `Filter` objects, which is used in the `ListUsers` and
-    #   `ListGroups` request.
+    #   A list of `Filter` objects that is used in the `ListUsers` and
+    #   `ListGroups` requests.
     #
     # @return [Types::ListGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -495,6 +1168,11 @@ module Aws::IdentityStore
     #   resp.groups #=> Array
     #   resp.groups[0].group_id #=> String
     #   resp.groups[0].display_name #=> String
+    #   resp.groups[0].external_ids #=> Array
+    #   resp.groups[0].external_ids[0].issuer #=> String
+    #   resp.groups[0].external_ids[0].id #=> String
+    #   resp.groups[0].description #=> String
+    #   resp.groups[0].identity_store_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroups AWS API Documentation
@@ -506,21 +1184,22 @@ module Aws::IdentityStore
       req.send_request(options)
     end
 
-    # Lists the attribute name and value of the user that you specified in
-    # the search. We only support `UserName` as a valid filter attribute
-    # path currently, and filter is required. This API returns minimum
-    # attributes, including `UserId` and `UserName` in the response.
+    # *Filtering for a user by the `UserName` attribute is deprecated.
+    # Instead, use the `GetUserId` API action.*
+    #
+    # Lists all users in the identity store. Returns a paginated list of
+    # complete `User` objects.
     #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store, such as
     #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
-    #   `1234567890` is a randomly generated string that contains number and
+    #   `1234567890` is a randomly generated string that contains numbers and
     #   lower case letters. This value is generated at the time that a new
     #   identity store is created.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per request. This
-    #   parameter is used in the `ListUsers` and `ListGroups` request to
+    #   parameter is used in the `ListUsers` and `ListGroups` requests to
     #   specify how many results to return in one page. The length limit is 50
     #   characters.
     #
@@ -532,8 +1211,8 @@ module Aws::IdentityStore
     #   API request to search for the next page.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   A list of `Filter` objects, which is used in the `ListUsers` and
-    #   `ListGroups` request.
+    #   A list of `Filter` objects that is used in the `ListUsers` and
+    #   `ListGroups` requests.
     #
     # @return [Types::ListUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -561,6 +1240,41 @@ module Aws::IdentityStore
     #   resp.users #=> Array
     #   resp.users[0].user_name #=> String
     #   resp.users[0].user_id #=> String
+    #   resp.users[0].external_ids #=> Array
+    #   resp.users[0].external_ids[0].issuer #=> String
+    #   resp.users[0].external_ids[0].id #=> String
+    #   resp.users[0].name.formatted #=> String
+    #   resp.users[0].name.family_name #=> String
+    #   resp.users[0].name.given_name #=> String
+    #   resp.users[0].name.middle_name #=> String
+    #   resp.users[0].name.honorific_prefix #=> String
+    #   resp.users[0].name.honorific_suffix #=> String
+    #   resp.users[0].display_name #=> String
+    #   resp.users[0].nick_name #=> String
+    #   resp.users[0].profile_url #=> String
+    #   resp.users[0].emails #=> Array
+    #   resp.users[0].emails[0].value #=> String
+    #   resp.users[0].emails[0].type #=> String
+    #   resp.users[0].emails[0].primary #=> Boolean
+    #   resp.users[0].addresses #=> Array
+    #   resp.users[0].addresses[0].street_address #=> String
+    #   resp.users[0].addresses[0].locality #=> String
+    #   resp.users[0].addresses[0].region #=> String
+    #   resp.users[0].addresses[0].postal_code #=> String
+    #   resp.users[0].addresses[0].country #=> String
+    #   resp.users[0].addresses[0].formatted #=> String
+    #   resp.users[0].addresses[0].type #=> String
+    #   resp.users[0].addresses[0].primary #=> Boolean
+    #   resp.users[0].phone_numbers #=> Array
+    #   resp.users[0].phone_numbers[0].value #=> String
+    #   resp.users[0].phone_numbers[0].type #=> String
+    #   resp.users[0].phone_numbers[0].primary #=> Boolean
+    #   resp.users[0].user_type #=> String
+    #   resp.users[0].title #=> String
+    #   resp.users[0].preferred_language #=> String
+    #   resp.users[0].locale #=> String
+    #   resp.users[0].timezone #=> String
+    #   resp.users[0].identity_store_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListUsers AWS API Documentation
@@ -569,6 +1283,80 @@ module Aws::IdentityStore
     # @param [Hash] params ({})
     def list_users(params = {}, options = {})
       req = build_request(:list_users, params)
+      req.send_request(options)
+    end
+
+    # For the specified group in the specified identity store, updates the
+    # group metadata and attributes.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    # @option params [required, String] :group_id
+    #   The identifier for a group in the identity store.
+    #
+    # @option params [required, Array<Types::AttributeOperation>] :operations
+    #   A list of `AttributeOperation` objects to apply to the requested
+    #   group. These operations might add, replace, or remove an attribute.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_group({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     group_id: "ResourceId", # required
+    #     operations: [ # required
+    #       {
+    #         attribute_path: "AttributePath", # required
+    #         attribute_value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/UpdateGroup AWS API Documentation
+    #
+    # @overload update_group(params = {})
+    # @param [Hash] params ({})
+    def update_group(params = {}, options = {})
+      req = build_request(:update_group, params)
+      req.send_request(options)
+    end
+
+    # For the specified user in the specified identity store, updates the
+    # user metadata and attributes.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier for a user in the identity store.
+    #
+    # @option params [required, Array<Types::AttributeOperation>] :operations
+    #   A list of `AttributeOperation` objects to apply to the requested user.
+    #   These operations might add, replace, or remove an attribute.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     user_id: "ResourceId", # required
+    #     operations: [ # required
+    #       {
+    #         attribute_path: "AttributePath", # required
+    #         attribute_value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/UpdateUser AWS API Documentation
+    #
+    # @overload update_user(params = {})
+    # @param [Hash] params ({})
+    def update_user(params = {}, options = {})
+      req = build_request(:update_user, params)
       req.send_request(options)
     end
 
@@ -585,7 +1373,7 @@ module Aws::IdentityStore
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-identitystore'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

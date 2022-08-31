@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2022-08-31)
+------------------
+
+* Feature - This release deprecates all APIs of the ThingsGraph service
+
 1.23.0 (2022-02-24)
 ------------------
 

@@ -2287,9 +2287,9 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] max_runtime_per_training_job_in_seconds
-    #   The maximum time, in seconds, that each training job is allowed to
-    #   run as part of a hyperparameter tuning job. For more information,
-    #   see the used by the action.
+    #   The maximum time, in seconds, that each training job executed inside
+    #   hyperparameter tuning is allowed to run as part of a hyperparameter
+    #   tuning job. For more information, see the used by the action.
     #   @return [Integer]
     #
     # @!attribute [rw] max_auto_ml_job_runtime_in_seconds
@@ -6807,6 +6807,18 @@ module Aws::SageMaker
     #             },
     #           ],
     #           volume_kms_key_id: "KmsKeyId",
+    #           container_config: {
+    #             domain: "String",
+    #             task: "String",
+    #             framework: "String",
+    #             framework_version: "String",
+    #             payload_config: {
+    #               sample_payload_url: "String",
+    #               supported_content_types: ["String"],
+    #             },
+    #             nearest_model_name: "String",
+    #             supported_instance_types: ["String"],
+    #           },
     #         },
     #         job_description: "RecommendationJobDescription",
     #         stopping_conditions: {
@@ -10112,17 +10124,17 @@ module Aws::SageMaker
     # @!attribute [rw] single_sign_on_user_identifier
     #   A specifier for the type of value specified in
     #   SingleSignOnUserValue. Currently, the only supported value is
-    #   "UserName". If the Domain's AuthMode is SSO, this field is
-    #   required. If the Domain's AuthMode is not SSO, this field cannot be
-    #   specified.
+    #   "UserName". If the Domain's AuthMode is Amazon Web Services SSO,
+    #   this field is required. If the Domain's AuthMode is not Amazon Web
+    #   Services SSO, this field cannot be specified.
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_user_value
     #   The username of the associated Amazon Web Services Single Sign-On
-    #   User for this UserProfile. If the Domain's AuthMode is SSO, this
-    #   field is required, and must match a valid username of a user in your
-    #   directory. If the Domain's AuthMode is not SSO, this field cannot
-    #   be specified.
+    #   User for this UserProfile. If the Domain's AuthMode is Amazon Web
+    #   Services SSO, this field is required, and must match a valid
+    #   username of a user in your directory. If the Domain's AuthMode is
+    #   not Amazon Web Services SSO, this field cannot be specified.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -13371,7 +13383,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_managed_application_instance_id
-    #   The SSO managed application instance ID.
+    #   The Amazon Web Services SSO managed application instance ID.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -17173,11 +17185,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_user_identifier
-    #   The SSO user identifier.
+    #   The Amazon Web Services SSO user identifier.
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_user_value
-    #   The SSO user value.
+    #   The Amazon Web Services SSO user value.
     #   @return [String]
     #
     # @!attribute [rw] user_settings
@@ -21586,7 +21598,7 @@ module Aws::SageMaker
     #   the compute instances and storage volumes, used for training jobs
     #   launched by the tuning job. By default, storage volumes hold model
     #   artifacts and incremental states. Choose `File` for
-    #   `TrainingInputMode` in the `AlgorithmSpecification`parameter to
+    #   `TrainingInputMode` in the `AlgorithmSpecification` parameter to
     #   additionally store training data in the storage volume (optional).
     #   @return [Types::HyperParameterTuningResourceConfig]
     #
@@ -22062,8 +22074,8 @@ module Aws::SageMaker
     # tuning jobs. Specify one or more instance type and count and the
     # allocation strategy for instance selection.
     #
-    # <note markdown="1"> HyperParameterTuningResourceConfig supports all of the capabilities of
-    # ResourceConfig with added functionality for flexible instance
+    # <note markdown="1"> `HyperParameterTuningResourceConfig` supports all of the capabilities
+    # of ResourceConfig with added functionality for flexible instance
     # management.
     #
     #  </note>
@@ -22124,21 +22136,21 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/
+    #   [1]: http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   A key used by AWS Key Management Service to encrypt data on the
-    #   storage volume attached to the compute instances used to run the
-    #   training job. You can use either of the following formats to specify
-    #   a key.
+    #   A key used by Amazon Web Services Key Management Service to encrypt
+    #   data on the storage volume attached to the compute instances used to
+    #   run the training job. You can use either of the following formats to
+    #   specify a key.
     #
     #   KMS Key ID:
     #
     #   `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
-    #   Amazon Resource Name (ARN) of a AWS KMS key:
+    #   Amazon Resource Name (ARN) of a KMS key:
     #
     #   `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -22146,13 +22158,13 @@ module Aws::SageMaker
     #   encrypt][1] storage volumes. If you choose one of these instance
     #   types, you cannot request a `VolumeKmsKeyId`. For a list of instance
     #   types that use local storage, see [instance store volumes][2]. For
-    #   more information about AWS Key Management Service, see [AWS KMS
-    #   encryption][3] for more information.
+    #   more information about Amazon Web Services Key Management Service,
+    #   see [KMS encryption][3] for more information.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
-    #   [2]: https://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/
+    #   [2]: http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/
     #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-kms-permissions.html
     #   @return [String]
     #
@@ -22169,7 +22181,7 @@ module Aws::SageMaker
     #   order in which multiple configurations provided in `InstanceConfigs`
     #   are used.
     #
-    #   <note markdown="1"> If you only want to use a single InstanceConfig inside the
+    #   <note markdown="1"> If you only want to use a single instance configuration inside the
     #   `HyperParameterTuningResourceConfig` API, do not provide a value for
     #   `InstanceConfigs`. Instead, use `InstanceType`, `VolumeSizeInGB` and
     #   `InstanceCount`. If you use `InstanceConfigs`, do not provide values
@@ -35255,6 +35267,94 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies mandatory fields for running an Inference Recommender job
+    # directly in the [CreateInferenceRecommendationsJob][1] API. The fields
+    # specified in `ContainerConfig` override the corresponding fields in
+    # the model package. Use `ContainerConfig` if you want to specify these
+    # fields for the recommendation job but don't want to edit them in your
+    # model package.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html
+    #
+    # @note When making an API call, you may pass RecommendationJobContainerConfig
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "String",
+    #         task: "String",
+    #         framework: "String",
+    #         framework_version: "String",
+    #         payload_config: {
+    #           sample_payload_url: "String",
+    #           supported_content_types: ["String"],
+    #         },
+    #         nearest_model_name: "String",
+    #         supported_instance_types: ["String"],
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   The machine learning domain of the model and its components.
+    #
+    #   Valid Values: `COMPUTER_VISION | NATURAL_LANGUAGE_PROCESSING |
+    #   MACHINE_LEARNING`
+    #   @return [String]
+    #
+    # @!attribute [rw] task
+    #   The machine learning task that the model accomplishes.
+    #
+    #   Valid Values: `IMAGE_CLASSIFICATION | OBJECT_DETECTION |
+    #   TEXT_GENERATION | IMAGE_SEGMENTATION | FILL_MASK | CLASSIFICATION |
+    #   REGRESSION | OTHER`
+    #   @return [String]
+    #
+    # @!attribute [rw] framework
+    #   The machine learning framework of the container image.
+    #
+    #   Valid Values: `TENSORFLOW | PYTORCH | XGBOOST |
+    #   SAGEMAKER-SCIKIT-LEARN`
+    #   @return [String]
+    #
+    # @!attribute [rw] framework_version
+    #   The framework version of the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload_config
+    #   Specifies the `SamplePayloadUrl` and all other sample
+    #   payload-related fields.
+    #   @return [Types::RecommendationJobPayloadConfig]
+    #
+    # @!attribute [rw] nearest_model_name
+    #   The name of a pre-trained machine learning model benchmarked by
+    #   Amazon SageMaker Inference Recommender that matches your model.
+    #
+    #   Valid Values: `efficientnetb7 | unet | xgboost |
+    #   faster-rcnn-resnet101 | nasnetlarge | vgg16 | inception-v3 |
+    #   mask-rcnn | sagemaker-scikit-learn | densenet201-gluon |
+    #   resnet18v2-gluon | xception | densenet201 | yolov4 | resnet152 |
+    #   bert-base-cased | xceptionV1-keras | resnet50 | retinanet`
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_instance_types
+    #   A list of the instance types that are used to generate inferences in
+    #   real-time.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobContainerConfig AWS API Documentation
+    #
+    class RecommendationJobContainerConfig < Struct.new(
+      :domain,
+      :task,
+      :framework,
+      :framework_version,
+      :payload_config,
+      :nearest_model_name,
+      :supported_instance_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input configuration of the recommendation job.
     #
     # @note When making an API call, you may pass RecommendationJobInputConfig
@@ -35292,6 +35392,18 @@ module Aws::SageMaker
     #           },
     #         ],
     #         volume_kms_key_id: "KmsKeyId",
+    #         container_config: {
+    #           domain: "String",
+    #           task: "String",
+    #           framework: "String",
+    #           framework_version: "String",
+    #           payload_config: {
+    #             sample_payload_url: "String",
+    #             supported_content_types: ["String"],
+    #           },
+    #           nearest_model_name: "String",
+    #           supported_instance_types: ["String"],
+    #         },
     #       }
     #
     # @!attribute [rw] model_package_version_arn
@@ -35354,6 +35466,12 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id
     #   @return [String]
     #
+    # @!attribute [rw] container_config
+    #   Specifies mandatory fields for running an Inference Recommender job.
+    #   The fields specified in `ContainerConfig` override the corresponding
+    #   fields in the model package.
+    #   @return [Types::RecommendationJobContainerConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobInputConfig AWS API Documentation
     #
     class RecommendationJobInputConfig < Struct.new(
@@ -35362,7 +35480,8 @@ module Aws::SageMaker
       :traffic_pattern,
       :resource_limit,
       :endpoint_configurations,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :container_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35424,6 +35543,35 @@ module Aws::SageMaker
     class RecommendationJobOutputConfig < Struct.new(
       :kms_key_id,
       :compiled_output_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the payload for a recommendation job.
+    #
+    # @note When making an API call, you may pass RecommendationJobPayloadConfig
+    #   data as a hash:
+    #
+    #       {
+    #         sample_payload_url: "String",
+    #         supported_content_types: ["String"],
+    #       }
+    #
+    # @!attribute [rw] sample_payload_url
+    #   The Amazon Simple Storage Service (Amazon S3) path where the sample
+    #   payload is stored. This path must point to a single gzip compressed
+    #   tar archive (.tar.gz suffix).
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_content_types
+    #   The supported MIME types for the input data.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobPayloadConfig AWS API Documentation
+    #
+    class RecommendationJobPayloadConfig < Struct.new(
+      :sample_payload_url,
+      :supported_content_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35862,29 +36010,32 @@ module Aws::SageMaker
     #   volume, choose `File` as the `TrainingInputMode` in the algorithm
     #   specification.
     #
-    #   You must specify sufficient ML storage for your scenario.
+    #   When using an ML instance with [NVMe SSD volumes][1], SageMaker
+    #   doesn't provision Amazon EBS General Purpose SSD (gp2) storage.
+    #   Available storage is fixed to the NVMe-type instance's storage
+    #   capacity. SageMaker configures storage paths for training datasets,
+    #   checkpoints, model artifacts, and outputs to use the entire capacity
+    #   of the instance storage. For example, ML instance families with the
+    #   NVMe-type instance storage include `ml.p4d`, `ml.g4dn`, and `ml.g5`.
     #
-    #   <note markdown="1"> SageMaker supports only the General Purpose SSD (gp2) ML storage
-    #   volume type.
+    #   When using an ML instance with the EBS-only storage option and
+    #   without instance storage, you must define the size of EBS volume
+    #   through `VolumeSizeInGB` in the `ResourceConfig` API. For example,
+    #   ML instance families that use EBS volumes include `ml.c5` and
+    #   `ml.p2`.
     #
-    #    </note>
+    #   To look up instance types and their instance storage types and
+    #   volumes, see [Amazon EC2 Instance Types][2].
     #
-    #   <note markdown="1"> Certain Nitro-based instances include local storage with a fixed
-    #   total size, dependent on the instance type. When using these
-    #   instances for training, SageMaker mounts the local instance storage
-    #   instead of Amazon EBS gp2 storage. You can't request a
-    #   `VolumeSizeInGB` greater than the total size of the local instance
-    #   storage.
-    #
-    #    For a list of instance types that support local instance storage,
-    #   including the total size per instance type, see [Instance Store
-    #   Volumes][1].
-    #
-    #    </note>
+    #   To find the default local paths defined by the SageMaker training
+    #   platform, see [Amazon SageMaker Training Storage Folders for
+    #   Training Datasets, Checkpoints, Model Artifacts, and Outputs][3].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes
+    #   [2]: http://aws.amazon.com/ec2/instance-types/
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage.html
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id
@@ -37662,7 +37813,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] max_runtime_in_seconds
     #   The maximum length of time, in seconds, that a training or
-    #   compilation job can run.
+    #   compilation job can run before it is stopped.
     #
     #   For compilation jobs, if the job does not complete during this time,
     #   a `TimeOut` error is generated. We recommend starting with 900
@@ -37673,6 +37824,10 @@ module Aws::SageMaker
     #   request, `MaxRuntimeInSeconds` specifies the maximum time for all of
     #   the attempts in total, not each individual attempt. The default
     #   value is 1 day. The maximum value is 28 days.
+    #
+    #   The maximum time that a `TrainingJob` can run in total, including
+    #   any time spent publishing metrics or archiving and uploading models
+    #   after it has been stopped, is 30 days.
     #   @return [Integer]
     #
     # @!attribute [rw] max_wait_time_in_seconds

@@ -3978,7 +3978,8 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Gets a CloudFront origin access control.
+    # Gets a CloudFront origin access control, including its unique
+    # identifier.
     #
     # @option params [required, String] :id
     #   The unique identifier of the origin access control.
@@ -4013,7 +4014,7 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Gets a CloudFront origin access control.
+    # Gets a CloudFront origin access control configuration.
     #
     # @option params [required, String] :id
     #   The unique identifier of the origin access control.
@@ -8045,7 +8046,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

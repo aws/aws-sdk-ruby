@@ -633,6 +633,7 @@ module Aws::IoTThingsGraph
         o.name = "AssociateEntityToThing"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AssociateEntityToThingRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateEntityToThingResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -645,6 +646,7 @@ module Aws::IoTThingsGraph
         o.name = "CreateFlowTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateFlowTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateFlowTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -658,6 +660,7 @@ module Aws::IoTThingsGraph
         o.name = "CreateSystemInstance"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateSystemInstanceRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateSystemInstanceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -671,6 +674,7 @@ module Aws::IoTThingsGraph
         o.name = "CreateSystemTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateSystemTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateSystemTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -683,6 +687,7 @@ module Aws::IoTThingsGraph
         o.name = "DeleteFlowTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteFlowTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteFlowTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -695,6 +700,7 @@ module Aws::IoTThingsGraph
         o.name = "DeleteNamespace"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteNamespaceRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteNamespaceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
@@ -705,6 +711,7 @@ module Aws::IoTThingsGraph
         o.name = "DeleteSystemInstance"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteSystemInstanceRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteSystemInstanceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -717,6 +724,7 @@ module Aws::IoTThingsGraph
         o.name = "DeleteSystemTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteSystemTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteSystemTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -729,6 +737,7 @@ module Aws::IoTThingsGraph
         o.name = "DeploySystemInstance"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeploySystemInstanceRequest)
         o.output = Shapes::ShapeRef.new(shape: DeploySystemInstanceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -742,6 +751,7 @@ module Aws::IoTThingsGraph
         o.name = "DeprecateFlowTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeprecateFlowTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: DeprecateFlowTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -754,6 +764,7 @@ module Aws::IoTThingsGraph
         o.name = "DeprecateSystemTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeprecateSystemTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: DeprecateSystemTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -766,6 +777,7 @@ module Aws::IoTThingsGraph
         o.name = "DescribeNamespace"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeNamespaceRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeNamespaceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -778,6 +790,7 @@ module Aws::IoTThingsGraph
         o.name = "DissociateEntityFromThing"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DissociateEntityFromThingRequest)
         o.output = Shapes::ShapeRef.new(shape: DissociateEntityFromThingResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -790,6 +803,7 @@ module Aws::IoTThingsGraph
         o.name = "GetEntities"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetEntitiesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetEntitiesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -802,6 +816,7 @@ module Aws::IoTThingsGraph
         o.name = "GetFlowTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetFlowTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFlowTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -814,6 +829,7 @@ module Aws::IoTThingsGraph
         o.name = "GetFlowTemplateRevisions"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetFlowTemplateRevisionsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFlowTemplateRevisionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -832,6 +848,7 @@ module Aws::IoTThingsGraph
         o.name = "GetNamespaceDeletionStatus"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetNamespaceDeletionStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: GetNamespaceDeletionStatusResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -843,6 +860,7 @@ module Aws::IoTThingsGraph
         o.name = "GetSystemInstance"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetSystemInstanceRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSystemInstanceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -855,6 +873,7 @@ module Aws::IoTThingsGraph
         o.name = "GetSystemTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetSystemTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSystemTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -867,6 +886,7 @@ module Aws::IoTThingsGraph
         o.name = "GetSystemTemplateRevisions"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetSystemTemplateRevisionsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSystemTemplateRevisionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -885,6 +905,7 @@ module Aws::IoTThingsGraph
         o.name = "GetUploadStatus"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetUploadStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: GetUploadStatusResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -897,6 +918,7 @@ module Aws::IoTThingsGraph
         o.name = "ListFlowExecutionMessages"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListFlowExecutionMessagesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFlowExecutionMessagesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -915,6 +937,7 @@ module Aws::IoTThingsGraph
         o.name = "ListTagsForResource"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -933,6 +956,7 @@ module Aws::IoTThingsGraph
         o.name = "SearchEntities"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SearchEntitiesRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchEntitiesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -950,6 +974,7 @@ module Aws::IoTThingsGraph
         o.name = "SearchFlowExecutions"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SearchFlowExecutionsRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchFlowExecutionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -968,6 +993,7 @@ module Aws::IoTThingsGraph
         o.name = "SearchFlowTemplates"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SearchFlowTemplatesRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchFlowTemplatesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -985,6 +1011,7 @@ module Aws::IoTThingsGraph
         o.name = "SearchSystemInstances"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SearchSystemInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchSystemInstancesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -1002,6 +1029,7 @@ module Aws::IoTThingsGraph
         o.name = "SearchSystemTemplates"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SearchSystemTemplatesRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchSystemTemplatesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -1019,6 +1047,7 @@ module Aws::IoTThingsGraph
         o.name = "SearchThings"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SearchThingsRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchThingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -1037,6 +1066,7 @@ module Aws::IoTThingsGraph
         o.name = "TagResource"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -1049,6 +1079,7 @@ module Aws::IoTThingsGraph
         o.name = "UndeploySystemInstance"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UndeploySystemInstanceRequest)
         o.output = Shapes::ShapeRef.new(shape: UndeploySystemInstanceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -1062,6 +1093,7 @@ module Aws::IoTThingsGraph
         o.name = "UntagResource"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -1074,6 +1106,7 @@ module Aws::IoTThingsGraph
         o.name = "UpdateFlowTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateFlowTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateFlowTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -1086,6 +1119,7 @@ module Aws::IoTThingsGraph
         o.name = "UpdateSystemTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateSystemTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSystemTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -1098,6 +1132,7 @@ module Aws::IoTThingsGraph
         o.name = "UploadEntityDefinitions"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UploadEntityDefinitionsRequest)
         o.output = Shapes::ShapeRef.new(shape: UploadEntityDefinitionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)

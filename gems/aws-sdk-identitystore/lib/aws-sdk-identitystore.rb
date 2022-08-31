@@ -28,7 +28,7 @@ require_relative 'aws-sdk-identitystore/customizations'
 # structure.
 #
 #     identity_store = Aws::IdentityStore::Client.new
-#     resp = identity_store.describe_group(params)
+#     resp = identity_store.create_group(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-identitystore/customizations'
 # @!group service
 module Aws::IdentityStore
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.19.0'
 
 end

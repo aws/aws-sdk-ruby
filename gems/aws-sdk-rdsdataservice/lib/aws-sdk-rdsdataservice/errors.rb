@@ -131,13 +131,13 @@ module Aws::RDSDataService
       end
 
       # @return [String]
-      def db_connection_id
-        @data[:db_connection_id]
+      def message
+        @message || @data[:message]
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def db_connection_id
+        @data[:db_connection_id]
       end
     end
 

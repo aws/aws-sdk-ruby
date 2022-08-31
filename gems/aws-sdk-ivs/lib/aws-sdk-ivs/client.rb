@@ -550,6 +550,11 @@ module Aws::IVS
     # @option params [String] :name
     #   Recording-configuration name. The value does not need to be unique.
     #
+    # @option params [Integer] :recording_reconnect_window_seconds
+    #   If a broadcast disconnects and then reconnects within the specified
+    #   interval, the multiple streams will be considered a single broadcast
+    #   and merged together. Default: 0.
+    #
     # @option params [Hash<String,String>] :tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`. See
     #   [Tagging Amazon Web Services Resources][1] for more information,
@@ -579,6 +584,7 @@ module Aws::IVS
     #       },
     #     },
     #     name: "RecordingConfigurationName",
+    #     recording_reconnect_window_seconds: 1,
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -593,6 +599,7 @@ module Aws::IVS
     #   resp.recording_configuration.arn #=> String
     #   resp.recording_configuration.destination_configuration.s3.bucket_name #=> String
     #   resp.recording_configuration.name #=> String
+    #   resp.recording_configuration.recording_reconnect_window_seconds #=> Integer
     #   resp.recording_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.recording_configuration.tags #=> Hash
     #   resp.recording_configuration.tags["TagKey"] #=> String
@@ -871,6 +878,7 @@ module Aws::IVS
     #   resp.recording_configuration.arn #=> String
     #   resp.recording_configuration.destination_configuration.s3.bucket_name #=> String
     #   resp.recording_configuration.name #=> String
+    #   resp.recording_configuration.recording_reconnect_window_seconds #=> Integer
     #   resp.recording_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.recording_configuration.tags #=> Hash
     #   resp.recording_configuration.tags["TagKey"] #=> String
@@ -1002,6 +1010,7 @@ module Aws::IVS
     #   resp.stream_session.recording_configuration.arn #=> String
     #   resp.stream_session.recording_configuration.destination_configuration.s3.bucket_name #=> String
     #   resp.stream_session.recording_configuration.name #=> String
+    #   resp.stream_session.recording_configuration.recording_reconnect_window_seconds #=> Integer
     #   resp.stream_session.recording_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.stream_session.recording_configuration.tags #=> Hash
     #   resp.stream_session.recording_configuration.tags["TagKey"] #=> String
@@ -1633,7 +1642,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

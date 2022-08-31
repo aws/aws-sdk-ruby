@@ -29,44 +29,44 @@ module Aws::RDSDataService
     #
     # @note ArrayValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ArrayValue corresponding to the set member.
     #
-    # @!attribute [rw] array_values
-    #   An array of arrays.
-    #   @return [Array<Types::ArrayValue>]
-    #
     # @!attribute [rw] boolean_values
     #   An array of Boolean values.
     #   @return [Array<Boolean>]
-    #
-    # @!attribute [rw] double_values
-    #   An array of floating-point numbers.
-    #   @return [Array<Float>]
     #
     # @!attribute [rw] long_values
     #   An array of integers.
     #   @return [Array<Integer>]
     #
+    # @!attribute [rw] double_values
+    #   An array of floating-point numbers.
+    #   @return [Array<Float>]
+    #
     # @!attribute [rw] string_values
     #   An array of strings.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] array_values
+    #   An array of arrays.
+    #   @return [Array<Types::ArrayValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ArrayValue AWS API Documentation
     #
     class ArrayValue < Struct.new(
-      :array_values,
       :boolean_values,
-      :double_values,
       :long_values,
+      :double_values,
       :string_values,
+      :array_values,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
-      class ArrayValues < ArrayValue; end
       class BooleanValues < ArrayValue; end
-      class DoubleValues < ArrayValue; end
       class LongValues < ArrayValue; end
+      class DoubleValues < ArrayValue; end
       class StringValues < ArrayValue; end
+      class ArrayValues < ArrayValue; end
       class Unknown < ArrayValue; end
     end
 
@@ -91,68 +91,43 @@ module Aws::RDSDataService
     #   data as a hash:
     #
     #       {
+    #         resource_arn: "Arn", # required
+    #         secret_arn: "Arn", # required
+    #         sql: "SqlStatement", # required
     #         database: "DbName",
+    #         schema: "DbName",
     #         parameter_sets: [
     #           [
     #             {
     #               name: "ParameterName",
-    #               type_hint: "JSON", # accepts JSON, UUID, TIMESTAMP, DATE, TIME, DECIMAL
     #               value: {
+    #                 is_null: false,
+    #                 boolean_value: false,
+    #                 long_value: 1,
+    #                 double_value: 1.0,
+    #                 string_value: "String",
+    #                 blob_value: "data",
     #                 array_value: {
+    #                   boolean_values: [false],
+    #                   long_values: [1],
+    #                   double_values: [1.0],
+    #                   string_values: ["String"],
     #                   array_values: [
     #                     {
     #                       # recursive ArrayValue
     #                     },
     #                   ],
-    #                   boolean_values: [false],
-    #                   double_values: [1.0],
-    #                   long_values: [1],
-    #                   string_values: ["String"],
     #                 },
-    #                 blob_value: "data",
-    #                 boolean_value: false,
-    #                 double_value: 1.0,
-    #                 is_null: false,
-    #                 long_value: 1,
-    #                 string_value: "String",
     #               },
+    #               type_hint: "JSON", # accepts JSON, UUID, TIMESTAMP, DATE, TIME, DECIMAL
     #             },
     #           ],
     #         ],
-    #         resource_arn: "Arn", # required
-    #         schema: "DbName",
-    #         secret_arn: "Arn", # required
-    #         sql: "SqlStatement", # required
     #         transaction_id: "Id",
     #       }
     #
-    # @!attribute [rw] database
-    #   The name of the database.
-    #   @return [String]
-    #
-    # @!attribute [rw] parameter_sets
-    #   The parameter set for the batch operation.
-    #
-    #   The SQL statement is executed as many times as the number of
-    #   parameter sets provided. To execute a SQL statement with no
-    #   parameters, use one of the following options:
-    #
-    #   * Specify one or more empty parameter sets.
-    #
-    #   * Use the `ExecuteStatement` operation instead of the
-    #     `BatchExecuteStatement` operation.
-    #
-    #   <note markdown="1"> Array parameters are not supported.
-    #
-    #    </note>
-    #   @return [Array<Array<Types::SqlParameter>>]
-    #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-    #   @return [String]
-    #
-    # @!attribute [rw] schema
-    #   The name of the database schema.
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
@@ -173,6 +148,31 @@ module Aws::RDSDataService
     #   of the SQL statement.
     #   @return [String]
     #
+    # @!attribute [rw] database
+    #   The name of the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   The name of the database schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_sets
+    #   The parameter set for the batch operation.
+    #
+    #   The SQL statement is executed as many times as the number of
+    #   parameter sets provided. To execute a SQL statement with no
+    #   parameters, use one of the following options:
+    #
+    #   * Specify one or more empty parameter sets.
+    #
+    #   * Use the `ExecuteStatement` operation instead of the
+    #     `BatchExecuteStatement` operation.
+    #
+    #   <note markdown="1"> Array parameters are not supported.
+    #
+    #    </note>
+    #   @return [Array<Array<Types::SqlParameter>>]
+    #
     # @!attribute [rw] transaction_id
     #   The identifier of a transaction that was started by using the
     #   `BeginTransaction` operation. Specify the transaction ID of the
@@ -185,12 +185,12 @@ module Aws::RDSDataService
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/BatchExecuteStatementRequest AWS API Documentation
     #
     class BatchExecuteStatementRequest < Struct.new(
-      :database,
-      :parameter_sets,
       :resource_arn,
-      :schema,
       :secret_arn,
       :sql,
+      :database,
+      :schema,
+      :parameter_sets,
       :transaction_id)
       SENSITIVE = []
       include Aws::Structure
@@ -218,35 +218,35 @@ module Aws::RDSDataService
     #   data as a hash:
     #
     #       {
-    #         database: "DbName",
     #         resource_arn: "Arn", # required
-    #         schema: "DbName",
     #         secret_arn: "Arn", # required
+    #         database: "DbName",
+    #         schema: "DbName",
     #       }
-    #
-    # @!attribute [rw] database
-    #   The name of the database.
-    #   @return [String]
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-    #   @return [String]
-    #
-    # @!attribute [rw] schema
-    #   The name of the database schema.
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
     #   The name or ARN of the secret that enables access to the DB cluster.
     #   @return [String]
     #
+    # @!attribute [rw] database
+    #   The name of the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   The name of the database schema.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/BeginTransactionRequest AWS API Documentation
     #
     class BeginTransactionRequest < Struct.new(
-      :database,
       :resource_arn,
-      :schema,
-      :secret_arn)
+      :secret_arn,
+      :database,
+      :schema)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -268,33 +268,45 @@ module Aws::RDSDataService
 
     # Contains the metadata for a column.
     #
-    # @!attribute [rw] array_base_column_type
+    # @!attribute [rw] name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
     #   The type of the column.
     #   @return [Integer]
     #
+    # @!attribute [rw] type_name
+    #   The database-specific data type of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] label
+    #   The label for the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   The name of the schema that owns the table that includes the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table that includes the column.
+    #   @return [String]
+    #
     # @!attribute [rw] is_auto_increment
     #   A value that indicates whether the column increments automatically.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] is_case_sensitive
-    #   A value that indicates whether the column is case-sensitive.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] is_currency
-    #   A value that indicates whether the column contains currency values.
     #   @return [Boolean]
     #
     # @!attribute [rw] is_signed
     #   A value that indicates whether an integer column is signed.
     #   @return [Boolean]
     #
-    # @!attribute [rw] label
-    #   The label for the column.
-    #   @return [String]
+    # @!attribute [rw] is_currency
+    #   A value that indicates whether the column contains currency values.
+    #   @return [Boolean]
     #
-    # @!attribute [rw] name
-    #   The name of the column.
-    #   @return [String]
+    # @!attribute [rw] is_case_sensitive
+    #   A value that indicates whether the column is case-sensitive.
+    #   @return [Boolean]
     #
     # @!attribute [rw] nullable
     #   A value that indicates whether the column is nullable.
@@ -308,39 +320,27 @@ module Aws::RDSDataService
     #   The scale value of a decimal number column.
     #   @return [Integer]
     #
-    # @!attribute [rw] schema_name
-    #   The name of the schema that owns the table that includes the column.
-    #   @return [String]
-    #
-    # @!attribute [rw] table_name
-    #   The name of the table that includes the column.
-    #   @return [String]
-    #
-    # @!attribute [rw] type
+    # @!attribute [rw] array_base_column_type
     #   The type of the column.
     #   @return [Integer]
-    #
-    # @!attribute [rw] type_name
-    #   The database-specific data type of the column.
-    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ColumnMetadata AWS API Documentation
     #
     class ColumnMetadata < Struct.new(
-      :array_base_column_type,
-      :is_auto_increment,
-      :is_case_sensitive,
-      :is_currency,
-      :is_signed,
-      :label,
       :name,
+      :type,
+      :type_name,
+      :label,
+      :schema_name,
+      :table_name,
+      :is_auto_increment,
+      :is_signed,
+      :is_currency,
+      :is_case_sensitive,
       :nullable,
       :precision,
       :scale,
-      :schema_name,
-      :table_name,
-      :type,
-      :type_name)
+      :array_base_column_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -401,12 +401,16 @@ module Aws::RDSDataService
     #   data as a hash:
     #
     #       {
-    #         aws_secret_store_arn: "Arn", # required
-    #         database: "DbName",
     #         db_cluster_or_instance_arn: "Arn", # required
-    #         schema: "DbName",
+    #         aws_secret_store_arn: "Arn", # required
     #         sql_statements: "SqlStatement", # required
+    #         database: "DbName",
+    #         schema: "DbName",
     #       }
+    #
+    # @!attribute [rw] db_cluster_or_instance_arn
+    #   The ARN of the Aurora Serverless DB cluster.
+    #   @return [String]
     #
     # @!attribute [rw] aws_secret_store_arn
     #   The Amazon Resource Name (ARN) of the secret that enables access to
@@ -421,18 +425,6 @@ module Aws::RDSDataService
     #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
     #   @return [String]
     #
-    # @!attribute [rw] database
-    #   The name of the database.
-    #   @return [String]
-    #
-    # @!attribute [rw] db_cluster_or_instance_arn
-    #   The ARN of the Aurora Serverless DB cluster.
-    #   @return [String]
-    #
-    # @!attribute [rw] schema
-    #   The name of the database schema.
-    #   @return [String]
-    #
     # @!attribute [rw] sql_statements
     #   One or more SQL statements to run on the DB cluster.
     #
@@ -441,14 +433,22 @@ module Aws::RDSDataService
     #   definition, data manipulation, and commit statements.
     #   @return [String]
     #
+    # @!attribute [rw] database
+    #   The name of the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   The name of the database schema.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ExecuteSqlRequest AWS API Documentation
     #
     class ExecuteSqlRequest < Struct.new(
-      :aws_secret_store_arn,
-      :database,
       :db_cluster_or_instance_arn,
-      :schema,
-      :sql_statements)
+      :aws_secret_store_arn,
+      :sql_statements,
+      :database,
+      :schema)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -475,102 +475,48 @@ module Aws::RDSDataService
     #   data as a hash:
     #
     #       {
-    #         continue_after_timeout: false,
+    #         resource_arn: "Arn", # required
+    #         secret_arn: "Arn", # required
+    #         sql: "SqlStatement", # required
     #         database: "DbName",
-    #         format_records_as: "NONE", # accepts NONE, JSON
-    #         include_result_metadata: false,
+    #         schema: "DbName",
     #         parameters: [
     #           {
     #             name: "ParameterName",
-    #             type_hint: "JSON", # accepts JSON, UUID, TIMESTAMP, DATE, TIME, DECIMAL
     #             value: {
+    #               is_null: false,
+    #               boolean_value: false,
+    #               long_value: 1,
+    #               double_value: 1.0,
+    #               string_value: "String",
+    #               blob_value: "data",
     #               array_value: {
+    #                 boolean_values: [false],
+    #                 long_values: [1],
+    #                 double_values: [1.0],
+    #                 string_values: ["String"],
     #                 array_values: [
     #                   {
     #                     # recursive ArrayValue
     #                   },
     #                 ],
-    #                 boolean_values: [false],
-    #                 double_values: [1.0],
-    #                 long_values: [1],
-    #                 string_values: ["String"],
     #               },
-    #               blob_value: "data",
-    #               boolean_value: false,
-    #               double_value: 1.0,
-    #               is_null: false,
-    #               long_value: 1,
-    #               string_value: "String",
     #             },
+    #             type_hint: "JSON", # accepts JSON, UUID, TIMESTAMP, DATE, TIME, DECIMAL
     #           },
     #         ],
-    #         resource_arn: "Arn", # required
+    #         transaction_id: "Id",
+    #         include_result_metadata: false,
+    #         continue_after_timeout: false,
     #         result_set_options: {
     #           decimal_return_type: "STRING", # accepts STRING, DOUBLE_OR_LONG
     #           long_return_type: "STRING", # accepts STRING, LONG
     #         },
-    #         schema: "DbName",
-    #         secret_arn: "Arn", # required
-    #         sql: "SqlStatement", # required
-    #         transaction_id: "Id",
+    #         format_records_as: "NONE", # accepts NONE, JSON
     #       }
-    #
-    # @!attribute [rw] continue_after_timeout
-    #   A value that indicates whether to continue running the statement
-    #   after the call times out. By default, the statement stops running
-    #   when the call times out.
-    #
-    #   For DDL statements, we recommend continuing to run the statement
-    #   after the call times out. When a DDL statement terminates before it
-    #   is finished running, it can result in errors and possibly corrupted
-    #   data structures.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] database
-    #   The name of the database.
-    #   @return [String]
-    #
-    # @!attribute [rw] format_records_as
-    #   A value that indicates whether to format the result set as a single
-    #   JSON string. This parameter only applies to `SELECT` statements and
-    #   is ignored for other types of statements. Allowed values are `NONE`
-    #   and `JSON`. The default value is `NONE`. The result is returned in
-    #   the `formattedRecords` field.
-    #
-    #   For usage information about the JSON format for result sets, see
-    #   [Using the Data API][1] in the *Amazon Aurora User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
-    #   @return [String]
-    #
-    # @!attribute [rw] include_result_metadata
-    #   A value that indicates whether to include metadata in the results.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] parameters
-    #   The parameters for the SQL statement.
-    #
-    #   <note markdown="1"> Array parameters are not supported.
-    #
-    #    </note>
-    #   @return [Array<Types::SqlParameter>]
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-    #   @return [String]
-    #
-    # @!attribute [rw] result_set_options
-    #   Options that control how the result set is returned.
-    #   @return [Types::ResultSetOptions]
-    #
-    # @!attribute [rw] schema
-    #   The name of the database schema.
-    #
-    #   <note markdown="1"> Currently, the `schema` parameter isn't supported.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
@@ -590,6 +536,26 @@ module Aws::RDSDataService
     #   The SQL statement to run.
     #   @return [String]
     #
+    # @!attribute [rw] database
+    #   The name of the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   The name of the database schema.
+    #
+    #   <note markdown="1"> Currently, the `schema` parameter isn't supported.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters for the SQL statement.
+    #
+    #   <note markdown="1"> Array parameters are not supported.
+    #
+    #    </note>
+    #   @return [Array<Types::SqlParameter>]
+    #
     # @!attribute [rw] transaction_id
     #   The identifier of a transaction that was started by using the
     #   `BeginTransaction` operation. Specify the transaction ID of the
@@ -599,20 +565,56 @@ module Aws::RDSDataService
     #   parameter.
     #   @return [String]
     #
+    # @!attribute [rw] include_result_metadata
+    #   A value that indicates whether to include metadata in the results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] continue_after_timeout
+    #   A value that indicates whether to continue running the statement
+    #   after the call times out. By default, the statement stops running
+    #   when the call times out.
+    #
+    #   <note markdown="1"> For DDL statements, we recommend continuing to run the statement
+    #   after the call times out. When a DDL statement terminates before it
+    #   is finished running, it can result in errors and possibly corrupted
+    #   data structures.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] result_set_options
+    #   Options that control how the result set is returned.
+    #   @return [Types::ResultSetOptions]
+    #
+    # @!attribute [rw] format_records_as
+    #   A value that indicates whether to format the result set as a single
+    #   JSON string. This parameter only applies to `SELECT` statements and
+    #   is ignored for other types of statements. Allowed values are `NONE`
+    #   and `JSON`. The default value is `NONE`. The result is returned in
+    #   the `formattedRecords` field.
+    #
+    #   For usage information about the JSON format for result sets, see
+    #   [Using the Data API][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ExecuteStatementRequest AWS API Documentation
     #
     class ExecuteStatementRequest < Struct.new(
-      :continue_after_timeout,
-      :database,
-      :format_records_as,
-      :include_result_metadata,
-      :parameters,
       :resource_arn,
-      :result_set_options,
-      :schema,
       :secret_arn,
       :sql,
-      :transaction_id)
+      :database,
+      :schema,
+      :parameters,
+      :transaction_id,
+      :include_result_metadata,
+      :continue_after_timeout,
+      :result_set_options,
+      :format_records_as)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -620,10 +622,25 @@ module Aws::RDSDataService
     # The response elements represent the output of a request to run a SQL
     # statement against a database.
     #
+    # @!attribute [rw] records
+    #   The records returned by the SQL statement. This field is blank if
+    #   the `formatRecordsAs` parameter is set to `JSON`.
+    #   @return [Array<Array<Types::Field>>]
+    #
     # @!attribute [rw] column_metadata
     #   Metadata for the columns included in the results. This field is
     #   blank if the `formatRecordsAs` parameter is set to `JSON`.
     #   @return [Array<Types::ColumnMetadata>]
+    #
+    # @!attribute [rw] number_of_records_updated
+    #   The number of records updated by the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] generated_fields
+    #   Values for fields generated during a DML request.
+    #
+    #        <note> <p>The <code>generatedFields</code> data isn't supported by Aurora PostgreSQL. To get the values of generated fields, use the <code>RETURNING</code> clause. For more information, see <a href="https://www.postgresql.org/docs/10/dml-returning.html">Returning Data From Modified Rows</a> in the PostgreSQL documentation.</p> </note>
+    #   @return [Array<Types::Field>]
     #
     # @!attribute [rw] formatted_records
     #   A string value that represents the result set of a `SELECT`
@@ -635,29 +652,14 @@ module Aws::RDSDataService
     #   10 MB, the call returns an error.
     #   @return [String]
     #
-    # @!attribute [rw] generated_fields
-    #   Values for fields generated during a DML request.
-    #
-    #        <note> <p>The <code>generatedFields</code> data isn't supported by Aurora PostgreSQL. To get the values of generated fields, use the <code>RETURNING</code> clause. For more information, see <a href="https://www.postgresql.org/docs/10/dml-returning.html">Returning Data From Modified Rows</a> in the PostgreSQL documentation.</p> </note>
-    #   @return [Array<Types::Field>]
-    #
-    # @!attribute [rw] number_of_records_updated
-    #   The number of records updated by the request.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] records
-    #   The records returned by the SQL statement. This field is blank if
-    #   the `formatRecordsAs` parameter is set to `JSON`.
-    #   @return [Array<Array<Types::Field>>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ExecuteStatementResponse AWS API Documentation
     #
     class ExecuteStatementResponse < Struct.new(
+      :records,
       :column_metadata,
-      :formatted_records,
-      :generated_fields,
       :number_of_records_updated,
-      :records)
+      :generated_fields,
+      :formatted_records)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -668,56 +670,56 @@ module Aws::RDSDataService
     #
     # @note Field is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Field corresponding to the set member.
     #
-    # @!attribute [rw] array_value
-    #   An array of values.
-    #   @return [Types::ArrayValue]
-    #
-    # @!attribute [rw] blob_value
-    #   A value of BLOB data type.
-    #   @return [String]
+    # @!attribute [rw] is_null
+    #   A NULL value.
+    #   @return [Boolean]
     #
     # @!attribute [rw] boolean_value
     #   A value of Boolean data type.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] double_value
-    #   A value of double data type.
-    #   @return [Float]
-    #
-    # @!attribute [rw] is_null
-    #   A NULL value.
     #   @return [Boolean]
     #
     # @!attribute [rw] long_value
     #   A value of long data type.
     #   @return [Integer]
     #
+    # @!attribute [rw] double_value
+    #   A value of double data type.
+    #   @return [Float]
+    #
     # @!attribute [rw] string_value
     #   A value of string data type.
     #   @return [String]
     #
+    # @!attribute [rw] blob_value
+    #   A value of BLOB data type.
+    #   @return [String]
+    #
+    # @!attribute [rw] array_value
+    #   An array of values.
+    #   @return [Types::ArrayValue]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/Field AWS API Documentation
     #
     class Field < Struct.new(
-      :array_value,
-      :blob_value,
-      :boolean_value,
-      :double_value,
       :is_null,
+      :boolean_value,
       :long_value,
+      :double_value,
       :string_value,
+      :blob_value,
+      :array_value,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
-      class ArrayValue < Field; end
-      class BlobValue < Field; end
-      class BooleanValue < Field; end
-      class DoubleValue < Field; end
       class IsNull < Field; end
+      class BooleanValue < Field; end
       class LongValue < Field; end
+      class DoubleValue < Field; end
       class StringValue < Field; end
+      class BlobValue < Field; end
+      class ArrayValue < Field; end
       class Unknown < Field; end
     end
 
@@ -758,9 +760,11 @@ module Aws::RDSDataService
 
     # A record returned by a call.
     #
-    # This data structure is only used with the deprecated `ExecuteSql`
+    # <note markdown="1"> This data structure is only used with the deprecated `ExecuteSql`
     # operation. Use the `BatchExecuteStatement` or `ExecuteStatement`
     # operation instead.
+    #
+    #  </note>
     #
     # @!attribute [rw] values
     #   The values returned in the record.
@@ -776,23 +780,25 @@ module Aws::RDSDataService
 
     # The result set returned by a SQL statement.
     #
-    # This data structure is only used with the deprecated `ExecuteSql`
+    # <note markdown="1"> This data structure is only used with the deprecated `ExecuteSql`
     # operation. Use the `BatchExecuteStatement` or `ExecuteStatement`
     # operation instead.
     #
-    # @!attribute [rw] records
-    #   The records in the result set.
-    #   @return [Array<Types::Record>]
+    #  </note>
     #
     # @!attribute [rw] result_set_metadata
     #   The result-set metadata in the result set.
     #   @return [Types::ResultSetMetadata]
     #
+    # @!attribute [rw] records
+    #   The records in the result set.
+    #   @return [Array<Types::Record>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ResultFrame AWS API Documentation
     #
     class ResultFrame < Struct.new(
-      :records,
-      :result_set_metadata)
+      :result_set_metadata,
+      :records)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -833,9 +839,11 @@ module Aws::RDSDataService
     #   specifies that it is converted to a Long value if its scale is 0, or
     #   to a Double value otherwise.
     #
-    #   Conversion to Double or Long can result in roundoff errors due to
+    #   <note markdown="1"> Conversion to Double or Long can result in roundoff errors due to
     #   precision loss. We recommend converting to String, especially when
     #   working with currency values.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] long_return_type
@@ -916,31 +924,35 @@ module Aws::RDSDataService
     #
     #       {
     #         name: "ParameterName",
-    #         type_hint: "JSON", # accepts JSON, UUID, TIMESTAMP, DATE, TIME, DECIMAL
     #         value: {
+    #           is_null: false,
+    #           boolean_value: false,
+    #           long_value: 1,
+    #           double_value: 1.0,
+    #           string_value: "String",
+    #           blob_value: "data",
     #           array_value: {
+    #             boolean_values: [false],
+    #             long_values: [1],
+    #             double_values: [1.0],
+    #             string_values: ["String"],
     #             array_values: [
     #               {
     #                 # recursive ArrayValue
     #               },
     #             ],
-    #             boolean_values: [false],
-    #             double_values: [1.0],
-    #             long_values: [1],
-    #             string_values: ["String"],
     #           },
-    #           blob_value: "data",
-    #           boolean_value: false,
-    #           double_value: 1.0,
-    #           is_null: false,
-    #           long_value: 1,
-    #           string_value: "String",
     #         },
+    #         type_hint: "JSON", # accepts JSON, UUID, TIMESTAMP, DATE, TIME, DECIMAL
     #       }
     #
     # @!attribute [rw] name
     #   The name of the parameter.
     #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the parameter.
+    #   @return [Types::Field]
     #
     # @!attribute [rw] type_hint
     #   A hint that specifies the correct object type for data type mapping.
@@ -968,66 +980,64 @@ module Aws::RDSDataService
     #     object of `UUID` type to the database.
     #   @return [String]
     #
-    # @!attribute [rw] value
-    #   The value of the parameter.
-    #   @return [Types::Field]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/SqlParameter AWS API Documentation
     #
     class SqlParameter < Struct.new(
       :name,
-      :type_hint,
-      :value)
+      :value,
+      :type_hint)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The result of a SQL statement.
     #
-    #      <important> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </important>
-    #
-    # @!attribute [rw] number_of_records_updated
-    #   The number of records updated by a SQL statement.
-    #   @return [Integer]
+    #      <note> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </note>
     #
     # @!attribute [rw] result_frame
     #   The result set of the SQL statement.
     #   @return [Types::ResultFrame]
     #
+    # @!attribute [rw] number_of_records_updated
+    #   The number of records updated by a SQL statement.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/SqlStatementResult AWS API Documentation
     #
     class SqlStatementResult < Struct.new(
-      :number_of_records_updated,
-      :result_frame)
+      :result_frame,
+      :number_of_records_updated)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The execution of the SQL statement timed out.
     #
-    # @!attribute [rw] db_connection_id
-    #   The database connection ID that executed the SQL statement.
-    #   @return [Integer]
-    #
     # @!attribute [rw] message
     #   The error message returned by this `StatementTimeoutException`
     #   error.
     #   @return [String]
     #
+    # @!attribute [rw] db_connection_id
+    #   The database connection ID that executed the SQL statement.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/StatementTimeoutException AWS API Documentation
     #
     class StatementTimeoutException < Struct.new(
-      :db_connection_id,
-      :message)
+      :message,
+      :db_connection_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A structure value returned by a call.
     #
-    # This data structure is only used with the deprecated `ExecuteSql`
+    # <note markdown="1"> This data structure is only used with the deprecated `ExecuteSql`
     # operation. Use the `BatchExecuteStatement` or `ExecuteStatement`
     # operation instead.
+    #
+    #  </note>
     #
     # @!attribute [rw] attributes
     #   The attributes returned in the record.
@@ -1057,37 +1067,29 @@ module Aws::RDSDataService
 
     # Contains the value of a column.
     #
-    #      <important> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </important>
+    #      <note> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </note>
     #
     # @note Value is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Value corresponding to the set member.
     #
-    # @!attribute [rw] array_values
-    #   An array of column values.
-    #   @return [Array<Types::Value>]
-    #
-    # @!attribute [rw] big_int_value
-    #   A value for a column of big integer data type.
-    #   @return [Integer]
+    # @!attribute [rw] is_null
+    #   A NULL value.
+    #   @return [Boolean]
     #
     # @!attribute [rw] bit_value
     #   A value for a column of BIT data type.
     #   @return [Boolean]
     #
-    # @!attribute [rw] blob_value
-    #   A value for a column of BLOB data type.
-    #   @return [String]
-    #
-    # @!attribute [rw] double_value
-    #   A value for a column of double data type.
-    #   @return [Float]
+    # @!attribute [rw] big_int_value
+    #   A value for a column of big integer data type.
+    #   @return [Integer]
     #
     # @!attribute [rw] int_value
     #   A value for a column of integer data type.
     #   @return [Integer]
     #
-    # @!attribute [rw] is_null
-    #   A NULL value.
-    #   @return [Boolean]
+    # @!attribute [rw] double_value
+    #   A value for a column of double data type.
+    #   @return [Float]
     #
     # @!attribute [rw] real_value
     #   A value for a column of real data type.
@@ -1097,6 +1099,14 @@ module Aws::RDSDataService
     #   A value for a column of string data type.
     #   @return [String]
     #
+    # @!attribute [rw] blob_value
+    #   A value for a column of BLOB data type.
+    #   @return [String]
+    #
+    # @!attribute [rw] array_values
+    #   An array of column values.
+    #   @return [Array<Types::Value>]
+    #
     # @!attribute [rw] struct_value
     #   A value for a column of STRUCT data type.
     #   @return [Types::StructValue]
@@ -1104,30 +1114,30 @@ module Aws::RDSDataService
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/Value AWS API Documentation
     #
     class Value < Struct.new(
-      :array_values,
-      :big_int_value,
-      :bit_value,
-      :blob_value,
-      :double_value,
-      :int_value,
       :is_null,
+      :bit_value,
+      :big_int_value,
+      :int_value,
+      :double_value,
       :real_value,
       :string_value,
+      :blob_value,
+      :array_values,
       :struct_value,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
-      class ArrayValues < Value; end
-      class BigIntValue < Value; end
-      class BitValue < Value; end
-      class BlobValue < Value; end
-      class DoubleValue < Value; end
-      class IntValue < Value; end
       class IsNull < Value; end
+      class BitValue < Value; end
+      class BigIntValue < Value; end
+      class IntValue < Value; end
+      class DoubleValue < Value; end
       class RealValue < Value; end
       class StringValue < Value; end
+      class BlobValue < Value; end
+      class ArrayValues < Value; end
       class StructValue < Value; end
       class Unknown < Value; end
     end

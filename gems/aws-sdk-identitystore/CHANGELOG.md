@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2022-08-31)
+------------------
+
+* Feature - Expand IdentityStore API to support Create, Read, Update, Delete and Get operations for User, Group and GroupMembership resources.
+
 1.18.0 (2022-08-30)
 ------------------
 

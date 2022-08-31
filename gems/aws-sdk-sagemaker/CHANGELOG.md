@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2022-08-31)
+------------------
+
+* Feature - SageMaker Inference Recommender now accepts Inference Recommender fields: Domain, Task, Framework, SamplePayloadUrl, SupportedContentTypes, SupportedInstanceTypes, directly in our CreateInferenceRecommendationsJob API through ContainerConfig
+
 1.134.0 (2022-08-09)
 ------------------
 

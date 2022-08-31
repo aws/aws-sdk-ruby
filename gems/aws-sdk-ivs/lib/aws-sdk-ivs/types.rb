@@ -416,6 +416,7 @@ module Aws::IVS
     #           },
     #         },
     #         name: "RecordingConfigurationName",
+    #         recording_reconnect_window_seconds: 1,
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -433,6 +434,12 @@ module Aws::IVS
     # @!attribute [rw] name
     #   Recording-configuration name. The value does not need to be unique.
     #   @return [String]
+    #
+    # @!attribute [rw] recording_reconnect_window_seconds
+    #   If a broadcast disconnects and then reconnects within the specified
+    #   interval, the multiple streams will be considered a single broadcast
+    #   and merged together. Default: 0.
+    #   @return [Integer]
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
@@ -457,6 +464,7 @@ module Aws::IVS
     class CreateRecordingConfigurationRequest < Struct.new(
       :destination_configuration,
       :name,
+      :recording_reconnect_window_seconds,
       :tags,
       :thumbnail_configuration)
       SENSITIVE = []
@@ -1365,6 +1373,12 @@ module Aws::IVS
     #   Recording-configuration name. The value does not need to be unique.
     #   @return [String]
     #
+    # @!attribute [rw] recording_reconnect_window_seconds
+    #   If a broadcast disconnects and then reconnects within the specified
+    #   interval, the multiple streams will be considered a single broadcast
+    #   and merged together. Default: 0.
+    #   @return [Integer]
+    #
     # @!attribute [rw] state
     #   Indicates the current state of the recording configuration. When the
     #   state is `ACTIVE`, the configuration is ready for recording a
@@ -1395,6 +1409,7 @@ module Aws::IVS
       :arn,
       :destination_configuration,
       :name,
+      :recording_reconnect_window_seconds,
       :state,
       :tags,
       :thumbnail_configuration)
