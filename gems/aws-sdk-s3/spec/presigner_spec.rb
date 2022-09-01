@@ -339,8 +339,6 @@ module Aws
         let(:arn) { 'arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap' }
 
         it 'creates a presigned url with sigv4a' do
-          # Signer is created twice, return a normal one first
-          expect(Aws::Sigv4::Signer).to receive(:new).and_call_original
           expect(Aws::Sigv4::Signer)
             .to receive(:new)
                   .with(hash_including(

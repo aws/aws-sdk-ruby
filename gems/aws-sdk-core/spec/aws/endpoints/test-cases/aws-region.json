@@ -1,4 +1,5 @@
 {
+  "version": "1.0",
   "testCases": [
     {
       "documentation": "basic region templating",
@@ -27,6 +28,5 @@
         "error": "Region must be set to resolve a valid endpoint"
       }
     }
-  ],
-  "version": "1.4"
+  ]
 }

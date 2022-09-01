@@ -13,10 +13,13 @@ module AwsSdkCodeGenerator
             |(name, data), array|
             param_data = endpoint_parameters[name]
 
+            next if param_data['builtIn']
+
             array << EndpointOption.new(
-              name: endpoint_parameter_config_name(name, param_data),
-              docstring: data['documentation'],
-              doc_type: data['type'].capitalize
+              name: Underscore.underscore(name), # endpoint_parameter_config_name(name, param_data),
+              docstring: param_data['documentation'],
+              doc_type: param_data['type'],
+              default: param_data['default']
             )
           end
         end
@@ -64,6 +67,8 @@ module AwsSdkCodeGenerator
           'force_path_style'
         when 'AWS::S3::UseArnRegion'
           's3_use_arn_region'
+        when 'AWS::S3::DisableMultiRegionAccessPoints'
+          's3_disable_multiregion_access_points'
         when 'SDK::Endpoint'
           'endpoint'
         else
@@ -88,6 +93,7 @@ module AwsSdkCodeGenerator
         def initialize(options)
           @name = options[:name]
           @doc_type = options[:doc_type]
+          @default = options[:default].nil? ? 'nil' : options[:default]
           @docstring = options[:docstring]
         end
 
@@ -96,6 +102,9 @@ module AwsSdkCodeGenerator
 
         # @return [String]
         attr_reader :doc_type
+
+        # @return [Boolean,String]
+        attr_reader :default
 
         # @return [String]
         attr_reader :docstring

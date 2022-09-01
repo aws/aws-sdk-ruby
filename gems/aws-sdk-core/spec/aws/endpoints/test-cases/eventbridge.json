@@ -1,4 +1,5 @@
 {
+  "version": "1.0",
   "testCases": [
     {
       "documentation": "simple region endpoint",
@@ -43,6 +44,5 @@
         "error": "FIPS endpoints not supported with multi-region endpoints"
       }
     }
-  ],
-  "version": "1.4"
+  ]
 }

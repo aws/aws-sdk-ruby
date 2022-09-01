@@ -9,7 +9,7 @@ module AwsSdkCodeGenerator
         # @option options [required, Service] :service
         def initialize(options)
           @service = options.fetch(:service)
-          test_cases = @service.endpoint_tests.fetch('testCases')
+          test_cases = @service.endpoint_tests.fetch('testCases', [])
           @endpoint_tests = test_cases.map do |endpoint_test|
             EndpointProviderTest.new(
               documentation: endpoint_test['documentation'],

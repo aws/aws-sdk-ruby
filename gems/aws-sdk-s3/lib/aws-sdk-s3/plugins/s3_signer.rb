@@ -9,23 +9,12 @@ module Aws
       # @api private
       class S3Signer < Seahorse::Client::Plugin
         option(:signature_version, 'v4')
-        #
-        # option(:sigv4_signer) do |cfg|
-        #   S3Signer.build_v4_signer(
-        #     service: 's3',
-        #     region: cfg.sigv4_region,
-        #     credentials: cfg.credentials
-        #   )
-        # end
-        #
-        # option(:sigv4_region) do |cfg|
-        #   # S3 removes core's signature_v4 plugin that checks for this
-        #   raise Aws::Errors::MissingRegionError if cfg.region.nil?
-        #
-        #   Aws::Partitions::EndpointProvider.signing_region(
-        #     cfg.region, 's3'
-        #   )
-        # end
+
+        # These once had defaults. But now they are used as overrides to
+        # new endpoint and auth resolution.
+        option(:sigv4_signer)
+        option(:sigv4_name)
+        option(:sigv4_region)
 
         def add_handlers(handlers, cfg)
           case cfg.signature_version
@@ -56,47 +45,34 @@ module Aws
 
         class V4Handler < Seahorse::Client::Handler
           def call(context)
-            Aws::Plugins::SignatureV4.apply_signature(
-              context: context,
-              signer: sigv4_signer(context)
-            )
+            auth_scheme = context[:endpoint][:auth_scheme]
+            if %w[sigv4 sigv4a].include?(auth_scheme['name'])
+              Aws::Plugins::SignatureV4.apply_signature(
+                context: context,
+                signer: sigv4_signer(context, auth_scheme)
+              )
+            end
             @handler.call(context)
           end
 
           private
 
-          def sigv4_signer(context)
+          def sigv4_signer(context, auth_scheme)
+            cfg = context.config
+            sigv4_region = Aws::Plugins::SignatureV4._sigv4_region(cfg, auth_scheme)
+            sigv4_name = Aws::Plugins::SignatureV4._sigv4_name(cfg, auth_scheme)
+
             # If the client was configured with the wrong region,
             # we have to build a new signer.
             if context[:cached_sigv4_region] &&
-               context[:cached_sigv4_region] != context.config.sigv4_signer.region
+               context[:cached_sigv4_region] != sigv4_region
               S3Signer.build_v4_signer(
-                service: 's3',
+                service: sigv4_name,
                 region: context[:cached_sigv4_region],
                 credentials: context.config.credentials
               )
-            # elsif (arn = context.metadata[:s3_arn])
-            #   if arn[:arn].is_a?(MultiRegionAccessPointARN)
-            #     signing_region = '*'
-            #     signing_algorithm = :sigv4a
-            #   else
-            #     signing_region = arn[:resolved_region]
-            #     signing_algorithm = :sigv4
-            #   end
-            #   S3Signer.build_v4_signer(
-            #     service: arn[:arn].service,
-            #     signing_algorithm: signing_algorithm,
-            #     region: signing_region,
-            #     credentials: context.config.credentials
-            #   )
-            # elsif context.operation.name == 'WriteGetObjectResponse'
-            #   S3Signer.build_v4_signer(
-            #     service: 's3-object-lambda',
-            #     region: context.config.sigv4_region,
-            #     credentials: context.config.credentials
-            #   )
             else
-              context.config.sigv4_signer
+              Aws::Plugins::SignatureV4.build_signer(context.config, auth_scheme)
             end
           end
         end
@@ -160,7 +136,7 @@ module Aws
           end
 
           def fips_region?(resp)
-            resp.context.http_request.endpoint.host.include?('fips')
+            resp.context.http_request.endpoint.host.include?('s3-fips.')
           end
 
           def expired_credentials?(resp)
@@ -168,15 +144,16 @@ module Aws
           end
 
           def custom_endpoint?(resp)
-            resolved_suffix = Aws::Partitions::EndpointProvider.dns_suffix_for(
-              resp.context.config.region,
-              's3',
-              {
-                dualstack: resp.context[:use_dualstack_endpoint],
-                fips: resp.context.config.use_fips_endpoint
-              }
-            )
-            !resp.context.http_request.endpoint.hostname.include?(resolved_suffix)
+            # resolved_suffix = Aws::Partitions::EndpointProvider.dns_suffix_for(
+            #   resp.context.config.region,
+            #   's3',
+            #   {
+            #     dualstack: resp.context[:use_dualstack_endpoint],
+            #     fips: resp.context.config.use_fips_endpoint
+            #   }
+            # )
+            # !resp.context.http_request.endpoint.hostname.include?(resolved_suffix)
+            !resp.context.config.regional_endpoint
           end
 
           def wrong_sigv4_region?(resp)
@@ -191,14 +168,13 @@ module Aws
               context, actual_region
             )
             context.metadata[:redirect_region] = actual_region
-            # if it's an ARN, use the service in the ARN
-            if (arn = context.metadata[:s3_arn])
-              service = arn[:arn].service
-            end
+
             Aws::Plugins::SignatureV4.apply_signature(
               context: context,
               signer: S3Signer.build_v4_signer(
-                service: service || 's3',
+                service: Aws::Plugins::SignatureV4._sigv4_name(
+                  context.config, context[:endpoint][:auth_scheme]
+                ),
                 region: actual_region,
                 credentials: context.config.credentials
               )
@@ -242,27 +218,12 @@ module Aws
             )
           end
 
-          # Check to see if the bucket is actually an ARN
-          # Otherwise it will retry with the ARN as the bucket name.
           def new_hostname(context, region)
-            uri = URI.parse(
-              Aws::Partitions::EndpointProvider.resolve(
-                region, 's3', 'regional',
-                {
-                  dualstack: context[:use_dualstack_endpoint],
-                  fips: context.config.use_fips_endpoint
-                }
-              )
-            )
-
-            if (arn = context.metadata[:s3_arn])
-              # Retry with the response region and not the ARN resolved one
-              ARN.resolve_url!(
-                uri, arn[:arn], region, arn[:fips], arn[:dualstack]
-              ).host
-            else
-              "#{context.params[:bucket]}.#{uri.host}"
-            end
+            endpoint_params = context[:endpoint][:params]
+            endpoint_params.region = region
+            endpoint =
+              context.config.endpoint_provider.resolve_endpoint(endpoint_params)
+            URI(endpoint.url).host
           end
         end
       end

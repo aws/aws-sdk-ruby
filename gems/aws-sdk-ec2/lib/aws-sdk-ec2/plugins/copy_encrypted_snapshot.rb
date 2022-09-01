@@ -42,7 +42,8 @@ module Aws
               use_dual_stack: context.config.use_dualstack_endpoint,
               use_fips: context.config.use_fips_endpoint,
             )
-            endpoint = EndpointProvider.new.resolve_endpoint(endpoint_params)
+            endpoint = context.config.endpoint_provider
+                              .resolve_endpoint(endpoint_params)
             auth_scheme = Aws::Endpoints.resolve_auth_scheme(endpoint, context)
 
             signer = Aws::Sigv4::Signer.new(

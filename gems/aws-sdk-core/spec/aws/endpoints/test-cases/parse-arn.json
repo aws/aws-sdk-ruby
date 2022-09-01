@@ -1,4 +1,5 @@
 {
+  "version": "1.0",
   "testCases": [
     {
       "documentation": "arn + region resolution",
@@ -147,6 +148,5 @@
         "error": "Test case passed: A valid ARN was parsed: service: `s3`, partition: `aws, region: `us-east-1`, accountId: `abcd`, resource: `resource-id`"
       }
     }
-  ],
-  "version": "1.4"
+  ]
 }

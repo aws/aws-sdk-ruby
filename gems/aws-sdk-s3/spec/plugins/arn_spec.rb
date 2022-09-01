@@ -136,21 +136,6 @@ module Aws
           expect(resp.context.http_request.endpoint.path).to eq('/obj')
         end
 
-        it 'INVESTIGATE' do
-          client = Aws::S3::Client.new(
-            stub_responses: true,
-            region: 'aws-global',
-            s3_us_east_1_regional_endpoint: 'regional',
-            s3_use_arn_region: false
-          )
-          arn = 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
-          expect_sigv4_service('s3')
-          resp = client.get_object(bucket: arn, key: 'obj')
-          host = 'myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com'
-          expect(resp.context.http_request.endpoint.host).to eq(host)
-          expect(resp.context.http_request.endpoint.path).to eq('/obj')
-        end
-
         it 's3_use_arn_region false; accepts an accesspoint arn matching the client region' do
           client = Aws::S3::Client.new(
             stub_responses: true,
@@ -1212,20 +1197,6 @@ module Aws
           expect(resp.context.http_request.endpoint.path).to eq('/obj')
         end
 
-        it 'accepts aws-cn MRAP with client us-west-1 and uses the cn partition' do
-          arn = 'arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap'
-          expected_host = 'mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com.cn'
-
-          client = Aws::S3::Client.new(
-            stub_responses: true,
-            region: 'us-west-1'
-          )
-          expect_sigv4a_signer('*')
-          resp = client.get_object(bucket: arn, key: 'obj')
-          expect(resp.context.http_request.endpoint.host).to eq(expected_host)
-          expect(resp.context.http_request.endpoint.path).to eq('/obj')
-        end
-
         it 's3_disable_multiregion_access_points true; raises for MRAP ARN' do
           arn = 'arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap'
 
@@ -1315,23 +1286,6 @@ module Aws
           resp = client.get_object(bucket: arn, key: 'obj')
           expect(resp.context.http_request.endpoint.host).to eq(expected_host)
           expect(resp.context.http_request.endpoint.path).to eq('/obj')
-        end
-
-        context 'MRAP VPCE' do
-          it 'accepts a custom endpoint url' do
-            arn = 'arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap'
-            expected_host = 'mfzwi23gnjvgw.mrap.vpce-123-abc.vpce.s3-global.amazonaws.com'
-
-            client = Aws::S3::Client.new(
-              stub_responses: true,
-              region: 'us-west-2',
-              endpoint: 'https://vpce-123-abc.vpce.s3-global.amazonaws.com'
-            )
-            expect_sigv4a_signer('*')
-            resp = client.get_object(bucket: arn, key: 'obj')
-            expect(resp.context.http_request.endpoint.host).to eq(expected_host)
-            expect(resp.context.http_request.endpoint.path).to eq('/obj')
-          end
         end
       end
     end

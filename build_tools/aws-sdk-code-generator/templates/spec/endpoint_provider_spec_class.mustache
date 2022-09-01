@@ -19,12 +19,12 @@ module {{module_name}}
       {{#expect_error?}}
       expect do
         subject.resolve_endpoint(params)
-      end.to raise_error(RuntimeError, expect['error'])
+      end.to raise_error(ArgumentError, expect['error'])
       {{/expect_error?}}
       {{^expect_error?}}
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
-      expect(endpoint.headers).to eq(expect['endpoint']['headers'])
+      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
       expect(endpoint.properties).to eq(expect['endpoint']['properties'])
       {{/expect_error?}}
     end

@@ -17,7 +17,7 @@ module Aws
 
         @authority = _authority(url, uri)
         @path = uri.path
-        @normalized_path = uri.normalize.path
+        @normalized_path = uri.path + (uri.path[-1] == '/' ? '' : '/')
         @is_ip = _is_ip(uri.host)
       end
 

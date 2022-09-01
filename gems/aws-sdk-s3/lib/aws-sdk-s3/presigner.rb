@@ -176,7 +176,7 @@ module Aws
 
       def use_bucket_as_hostname(req)
         req.handlers.remove(Plugins::BucketDns::Handler)
-        req.handle do |context|
+        req.handle(priority: 35) do |context|
           uri = context.http_request.endpoint
           uri.host = context.params[:bucket]
           uri.path.sub!("/#{context.params[:bucket]}", '')
@@ -231,18 +231,17 @@ module Aws
           end
           http_req.endpoint.query = query.join('&') unless query.empty?
 
-          signing_algorithm = :sigv4
-
-          # If it's an ARN, get the resolved region and service
-          if (arn = context.metadata[:s3_arn])
-            region = arn[:resolved_region]
-            service = arn[:arn].service
-            region = arn[:arn].is_a?(MultiRegionAccessPointARN) ? '*': arn[:resolved_region]
-            signing_algorithm = arn[:arn].is_a?(MultiRegionAccessPointARN) ? :sigv4a : :sigv4
+          auth_scheme = context[:endpoint][:auth_scheme]
+          if auth_scheme['name'] == 'sigv4a'
+            region = '*'
+            signing_algorithm = :sigv4a
+          else
+            region = auth_scheme['signingRegion']
+            signing_algorithm = :sigv4
           end
 
           signer = Aws::Sigv4::Signer.new(
-            service: service || 's3',
+            service: auth_scheme['signingName'] || 's3',
             region: region || context.config.region,
             signing_algorithm: signing_algorithm,
             credentials_provider: context.config.credentials,

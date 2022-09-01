@@ -45,6 +45,11 @@ module Aws::S3
   #
   #   @return [Boolean]
   #
+  # @!attribute use_global_endpoint
+  #   Whether the global endpoint should be used, rather then the regional endpoint for us-east-1.
+  #
+  #   @return [Boolean]
+  #
   # @!attribute snow_endpoint_url
   #   Override the snow endpoint used to send this request
   #
@@ -61,7 +66,7 @@ module Aws::S3
   #   @return [Boolean]
   #
   # @!attribute disable_multi_region_access_points
-  #   Disable Multi-Region Access Points
+  #   Whether multi-region access points (MRAP) should be disabled.
   #
   #   @return [Boolean]
   #
@@ -78,6 +83,7 @@ module Aws::S3
     :endpoint,
     :force_path_style,
     :accelerate,
+    :use_global_endpoint,
     :snow_endpoint_url,
     :use_object_lambda_endpoint,
     :disable_access_points,
@@ -95,6 +101,7 @@ module Aws::S3
       'Endpoint' => :endpoint,
       'ForcePathStyle' => :force_path_style,
       'Accelerate' => :accelerate,
+      'UseGlobalEndpoint' => :use_global_endpoint,
       'SnowEndpointUrl' => :snow_endpoint_url,
       'UseObjectLambdaEndpoint' => :use_object_lambda_endpoint,
       'DisableAccessPoints' => :disable_access_points,
@@ -122,10 +129,19 @@ module Aws::S3
       if self[:accelerate].nil?
         raise ArgumentError, "Missing required EndpointParameter: :accelerate"
       end
+      self[:use_global_endpoint] = options[:use_global_endpoint]
+      self[:use_global_endpoint] = false if self[:use_global_endpoint].nil?
+      if self[:use_global_endpoint].nil?
+        raise ArgumentError, "Missing required EndpointParameter: :use_global_endpoint"
+      end
       self[:snow_endpoint_url] = options[:snow_endpoint_url]
       self[:use_object_lambda_endpoint] = options[:use_object_lambda_endpoint]
       self[:disable_access_points] = options[:disable_access_points]
       self[:disable_multi_region_access_points] = options[:disable_multi_region_access_points]
+      self[:disable_multi_region_access_points] = false if self[:disable_multi_region_access_points].nil?
+      if self[:disable_multi_region_access_points].nil?
+        raise ArgumentError, "Missing required EndpointParameter: :disable_multi_region_access_points"
+      end
       self[:use_arn_region] = options[:use_arn_region]
     end
   end

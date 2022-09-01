@@ -7,7 +7,7 @@ module Aws
     # @api private
     class SignatureV4 < Seahorse::Client::Plugin
 
-      V4_AUTH = %w[v4 v4-unsigned-payload v4-unsigned-body]
+      V4_AUTH = %w[v4 v4-unsigned-payload v4-unsigned-body].freeze
 
       # These once had defaults. But now they are used as overrides to
       # new endpoint and auth resolution.
@@ -19,7 +19,8 @@ module Aws
         if cfg.api.metadata['signatureVersion'] == 'v4'
           # select operations where authtype is set and is not v4
           cfg.api.operation_names.select do |o|
-            cfg.api.operation(o)['authtype'] && !V4_AUTH.include?(cfg.api.operation(o)['authtype'])
+            cfg.api.operation(o)['authtype'] &&
+              !V4_AUTH.include?(cfg.api.operation(o)['authtype'])
           end
         else # service is not v4 auth
           # select all operations where authtype is not v4
@@ -44,7 +45,8 @@ module Aws
           auth_scheme = context[:endpoint][:auth_scheme]
           if %w[sigv4 sigv4a].include?(auth_scheme['name'])
             SignatureV4.apply_signature(
-              context: context, auth_scheme: auth_scheme
+              context: context,
+              auth_scheme: auth_scheme
             )
           end
           @handler.call(context)
@@ -82,12 +84,14 @@ module Aws
           end
         end
 
+        # @api private
         def _sigv4_name(cfg, scheme)
           cfg.sigv4_name || scheme['signingName'] ||
             cfg.api.metadata['signingName'] ||
             cfg.api.metadata['endpointPrefix']
         end
 
+        # @api private
         def _sigv4_region(cfg, scheme)
           cfg.sigv4_region || scheme['signingRegion'] || cfg.region
         end

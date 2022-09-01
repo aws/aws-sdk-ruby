@@ -1,4 +1,5 @@
 {
+  "version": "1.0",
   "testCases": [
     {
       "documentation": "test where URI is set and flows to URI and header",
@@ -45,6 +46,5 @@
         "error": "No fields were set"
       }
     }
-  ],
-  "version": "1.4"
+  ]
 }

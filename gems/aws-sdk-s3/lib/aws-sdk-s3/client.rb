@@ -262,8 +262,9 @@ module Aws::S3
     #     When `true`, this client will follow 307 redirects returned
     #     by Amazon S3.
     #
-    #   @option options [Boolean] :force_path_style
-    #     Forces this client to use path-style addressing for buckets.
+    #   @option options [Boolean] :force_path_style (false)
+    #     When set to `true`, the bucket name is always left in the
+    #     request URI and never moved to the host as a sub-domain.
     #
     #   @option options [Proc] :input_event_stream_handler
     #     When an EventStream or Proc object is provided, it can be used for sending events for the event stream.
@@ -350,8 +351,10 @@ module Aws::S3
     #     Pass in `regional` to enable the `us-east-1` regional endpoint.
     #     Defaults to `legacy` mode which uses the global endpoint.
     #
-    #   @option options [Boolean] :s3_use_arn_region
-    #     Enables this client to use an ARN's region when constructing an endpoint instead of the client's configured region.
+    #   @option options [Boolean] :s3_use_arn_region (true)
+    #     For S3 ARNs passed into the `:bucket` parameter, this option will
+    #     use the region in the ARN, allowing for cross-region requests to
+    #     be made. Set to `false` to use the client's region instead.
     #
     #   @option options [String] :secret_access_key
     #
@@ -379,17 +382,11 @@ module Aws::S3
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
-    #   @option options [Boolean] :disable_multi_region_access_points
-    #     Disables this client's usage of Multi-Region Access Points.
-    #
     #   @option options [Aws::S3::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::S3::EndpointParameters`
     #
     #   @option options [String] :snow_endpoint_url
-    #     Configures this client to use the provided S3 Snowball endpoint.
-    #
-    #   @option options [Boolean] :use_accelerate_endpoint
-    #     Enables this client to use S3 Transfer Acceleration endpoints.
+    #     Override the snow endpoint used to send this request
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.

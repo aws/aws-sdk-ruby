@@ -16,7 +16,7 @@ module {{module_name}}
         end
         {{module_name}}::EndpointParameters.new(
           {{#parameters}}
-          {{key}}: {{value}},
+          {{key}}: {{{value}}},
           {{/parameters}}
         )
       end
