@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2022-09-01)
+------------------
+
+* Feature - Documentation updates for Amazon Route 53.
+
 1.63.0 (2022-06-01)
 ------------------
 

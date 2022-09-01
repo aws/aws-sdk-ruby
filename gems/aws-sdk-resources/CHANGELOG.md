@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.140.0 (2022-09-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-controltower` gem.
+
 3.139.0 (2022-08-22)
 ------------------
 

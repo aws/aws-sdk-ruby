@@ -90,7 +90,7 @@ module Aws::CodeGuruReviewer
     #     (`AWS_OWNED_CMK`) or customer managed (`CUSTOMER_MANAGED_CMK`).
     #
     #   * The ID of the Amazon Web Services KMS key that is associated with
-    #     this respository association.
+    #     this repository association.
     #   @return [Types::KMSKeyDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/AssociateRepositoryRequest AWS API Documentation
@@ -130,7 +130,7 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # A type of [ `SourceCodeType` ][1] that specifies a code diff between a
+    # A type of [SourceCodeType][1] that specifies a code diff between a
     # source and destination branch in an associated repository.
     #
     #
@@ -242,7 +242,7 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
     #
     #
@@ -307,9 +307,9 @@ module Aws::CodeGuruReviewer
     #   @return [Types::SourceCodeType]
     #
     # @!attribute [rw] association_arn
-    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
+    #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
     #   that contains the reviewed source code. You can retrieve associated
-    #   repository ARNs by calling [ `ListRepositoryAssociations` ][2].
+    #   repository ARNs by calling [ListRepositoryAssociations][2].
     #
     #
     #
@@ -364,7 +364,7 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
     #
     #
@@ -455,7 +455,7 @@ module Aws::CodeGuruReviewer
     #
     # * `RepositoryAnalysis` - A code review that analyzes all code under a
     #   specified branch in an associated repository. The associated
-    #   repository is specified using its ARN in [ `CreateCodeReview` ][1].
+    #   repository is specified using its ARN in [CreateCodeReview][1].
     #
     #
     #
@@ -509,7 +509,7 @@ module Aws::CodeGuruReviewer
     # @!attribute [rw] repository_analysis
     #   A code review that analyzes all code under a specified branch in an
     #   associated repository. The associated repository is specified using
-    #   its ARN in [ `CreateCodeReview` ][1].
+    #   its ARN in [CreateCodeReview][1].
     #
     #
     #
@@ -531,7 +531,7 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # A type of [ `SourceCodeType` ][1] that specifies the commit diff for a
+    # A type of [SourceCodeType][1] that specifies the commit diff for a
     # pull request on an associated repository. The `SourceCommit` and
     # `DestinationCommit` fields are required to do a pull request code
     # review.
@@ -644,9 +644,9 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     #
     # @!attribute [rw] repository_association_arn
-    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling [
-    #   `ListRepositoryAssociations` ][2].
+    #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
+    #   object. You can retrieve this ARN by calling
+    #   [ListRepositoryAssociations][2].
     #
     #   A code review can only be created on an associated repository. This
     #   is the ARN of the associated repository.
@@ -658,8 +658,8 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of code review to create. This is specified using a [
-    #   `CodeReviewType` ][1] object. You can create a code review only of
+    #   The type of code review to create. This is specified using a
+    #   [CodeReviewType][1] object. You can create a code review only of
     #   type `RepositoryAnalysis`.
     #
     #
@@ -708,7 +708,7 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
     #
     #
@@ -745,7 +745,7 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
     #
     #
@@ -801,9 +801,9 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] association_arn
-    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling [
-    #   `ListRepositoryAssociations` ][2].
+    #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
+    #   object. You can retrieve this ARN by calling
+    #   [ListRepositoryAssociations][2].
     #
     #
     #
@@ -853,9 +853,9 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] association_arn
-    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling [
-    #   `ListRepositoryAssociations` ][2].
+    #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
+    #   object. You can retrieve this ARN by calling
+    #   [ListRepositoryAssociations][2].
     #
     #
     #
@@ -948,7 +948,7 @@ module Aws::CodeGuruReviewer
     #   (`AWS_OWNED_CMK`) or customer managed (`CUSTOMER_MANAGED_CMK`).
     #
     # * The ID of the Amazon Web Services KMS key that is associated with a
-    #   respository association.
+    #   repository association.
     #
     # @note When making an API call, you may pass KMSKeyDetails
     #   data as a hash:
@@ -960,7 +960,7 @@ module Aws::CodeGuruReviewer
     #
     # @!attribute [rw] kms_key_id
     #   The ID of the Amazon Web Services KMS key that is associated with a
-    #   respository association.
+    #   repository association.
     #   @return [String]
     #
     # @!attribute [rw] encryption_option
@@ -1028,10 +1028,10 @@ module Aws::CodeGuruReviewer
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If nextToken is returned, there are more results available. The
-    #   value of nextToken is a unique pagination token for each page. Make
-    #   the call again using the returned token to retrieve the next page.
-    #   Keep all other arguments unchanged.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ListCodeReviewsRequest AWS API Documentation
@@ -1077,9 +1077,9 @@ module Aws::CodeGuruReviewer
     #
     # @!attribute [rw] next_token
     #   If `nextToken` is returned, there are more results available. The
-    #   value of nextToken is a unique pagination token for each page. Make
-    #   the call again using the returned token to retrieve the next page.
-    #   Keep all other arguments unchanged.
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1088,7 +1088,7 @@ module Aws::CodeGuruReviewer
     #   @return [Integer]
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
     #
     #
@@ -1133,10 +1133,10 @@ module Aws::CodeGuruReviewer
     #   @return [Array<Types::RecommendationFeedbackSummary>]
     #
     # @!attribute [rw] next_token
-    #   If nextToken is returned, there are more results available. The
-    #   value of nextToken is a unique pagination token for each page. Make
-    #   the call again using the returned token to retrieve the next page.
-    #   Keep all other arguments unchanged.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ListRecommendationFeedbackResponse AWS API Documentation
@@ -1167,7 +1167,7 @@ module Aws::CodeGuruReviewer
     #   @return [Integer]
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
     #
     #
@@ -1248,7 +1248,7 @@ module Aws::CodeGuruReviewer
     #   * **Disassociated**\: CodeGuru Reviewer successfully disassociated
     #     the repository. You can create a new association with this
     #     repository if you want to review source code in it later. You can
-    #     control access to code reviews created in an associated repository
+    #     control access to code reviews created in anassociated repository
     #     with tags after it has been disassociated. For more information,
     #     see [Using tags to control access to associated repositories][1]
     #     in the *Amazon CodeGuru Reviewer User Guide*.
@@ -1339,9 +1339,9 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling [
-    #   `ListRepositoryAssociations` ][2].
+    #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
+    #   object. You can retrieve this ARN by calling
+    #   [ListRepositoryAssociations][2].
     #
     #
     #
@@ -1482,7 +1482,7 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
     #
     #
@@ -1516,7 +1516,7 @@ module Aws::CodeGuruReviewer
     # Information about the recommendation feedback.
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
     #
     #
@@ -1718,7 +1718,7 @@ module Aws::CodeGuruReviewer
 
     # A code review type that analyzes all code under a specified branch in
     # an associated repository. The associated repository is specified using
-    # its ARN when you call [ `CreateCodeReview` ][1].
+    # its ARN when you call [CreateCodeReview][1].
     #
     #
     #
@@ -1767,7 +1767,7 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] repository_head
-    #   A [ `SourceCodeType` ][1] that specifies the tip of a branch in an
+    #   A [SourceCodeType][1] that specifies the tip of a branch in an
     #   associated repository.
     #
     #
@@ -1788,8 +1788,8 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # Information about a repository association. The [
-    # `DescribeRepositoryAssociation` ][1] operation returns a
+    # Information about a repository association. The
+    # [DescribeRepositoryAssociation][1] operation returns a
     # `RepositoryAssociation` object.
     #
     #
@@ -1809,7 +1809,7 @@ module Aws::CodeGuruReviewer
     #   The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar
     #   Connections connection. Its format is
     #   `arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id`.
-    #   For more information, see [ `Connection` ][1] in the *Amazon Web
+    #   For more information, see [Connection][1] in the *Amazon Web
     #   Services CodeStar Connections API Reference*.
     #
     #
@@ -1865,7 +1865,7 @@ module Aws::CodeGuruReviewer
     #   * **Disassociated**\: CodeGuru Reviewer successfully disassociated
     #     the repository. You can create a new association with this
     #     repository if you want to review source code in it later. You can
-    #     control access to code reviews created in an associated repository
+    #     control access to code reviews created in anassociated repository
     #     with tags after it has been disassociated. For more information,
     #     see [Using tags to control access to associated repositories][1]
     #     in the *Amazon CodeGuru Reviewer User Guide*.
@@ -1898,7 +1898,7 @@ module Aws::CodeGuruReviewer
     #     (`AWS_OWNED_CMK`) or customer managed (`CUSTOMER_MANAGED_CMK`).
     #
     #   * The ID of the Amazon Web Services KMS key that is associated with
-    #     this respository association.
+    #     this repository association.
     #   @return [Types::KMSKeyDetails]
     #
     # @!attribute [rw] s3_repository_details
@@ -1926,8 +1926,8 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # Summary information about a repository association. The [
-    # `ListRepositoryAssociations` ][1] operation returns a list of
+    # Summary information about a repository association. The
+    # [ListRepositoryAssociations][1] operation returns a list of
     # `RepositoryAssociationSummary` objects.
     #
     #
@@ -1935,9 +1935,9 @@ module Aws::CodeGuruReviewer
     # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
     #
     # @!attribute [rw] association_arn
-    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling [
-    #   `ListRepositoryAssociations` ][2].
+    #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
+    #   object. You can retrieve this ARN by calling
+    #   [ListRepositoryAssociations][2].
     #
     #
     #
@@ -1949,7 +1949,7 @@ module Aws::CodeGuruReviewer
     #   The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar
     #   Connections connection. Its format is
     #   `arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id`.
-    #   For more information, see [ `Connection` ][1] in the *Amazon Web
+    #   For more information, see [Connection][1] in the *Amazon Web
     #   Services CodeStar Connections API Reference*.
     #
     #
@@ -2014,7 +2014,7 @@ module Aws::CodeGuruReviewer
     #   * **Disassociated**\: CodeGuru Reviewer successfully disassociated
     #     the repository. You can create a new association with this
     #     repository if you want to review source code in it later. You can
-    #     control access to code reviews created in an associated repository
+    #     control access to code reviews created in anassociated repository
     #     with tags after it has been disassociated. For more information,
     #     see [Using tags to control access to associated repositories][1]
     #     in the *Amazon CodeGuru Reviewer User Guide*.
@@ -2039,7 +2039,7 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # A [ `SourceCodeType` ][1] that specifies the tip of a branch in an
+    # A [SourceCodeType][1] that specifies the tip of a branch in an
     # associated repository.
     #
     #
@@ -2313,8 +2313,8 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] commit_diff
-    #   A [ `SourceCodeType` ][1] that specifies a commit diff created by a
-    #   pull request on an associated repository.
+    #   A [SourceCodeType][1] that specifies a commit diff created by a pull
+    #   request on an associated repository.
     #
     #
     #
@@ -2322,7 +2322,7 @@ module Aws::CodeGuruReviewer
     #   @return [Types::CommitDiffSourceCodeType]
     #
     # @!attribute [rw] repository_head
-    #   A [ `SourceCodeType` ][1] that specifies the tip of a branch in an
+    #   A [SourceCodeType][1] that specifies the tip of a branch in an
     #   associated repository.
     #
     #
@@ -2331,8 +2331,8 @@ module Aws::CodeGuruReviewer
     #   @return [Types::RepositoryHeadSourceCodeType]
     #
     # @!attribute [rw] branch_diff
-    #   A type of [ `SourceCodeType` ][1] that specifies a source branch
-    #   name and a destination branch name in an associated repository.
+    #   A type of [SourceCodeType][1] that specifies a source branch name
+    #   and a destination branch name in an associated repository.
     #
     #
     #
@@ -2344,8 +2344,8 @@ module Aws::CodeGuruReviewer
     #   includes its name and an `S3RepositoryDetails` object. The
     #   `S3RepositoryDetails` object includes the name of an S3 bucket, an
     #   S3 key for a source code .zip file, and an S3 key for a build
-    #   artifacts .zip file. `S3BucketRepository` is required in [
-    #   `SourceCodeType` ][1] for `S3BucketRepository` based code reviews.
+    #   artifacts .zip file. `S3BucketRepository` is required in
+    #   [SourceCodeType][1] for `S3BucketRepository` based code reviews.
     #
     #
     #
@@ -2383,9 +2383,9 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling [
-    #   `ListRepositoryAssociations` ][2].
+    #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
+    #   object. You can retrieve this ARN by calling
+    #   [ListRepositoryAssociations][2].
     #
     #
     #
@@ -2439,7 +2439,7 @@ module Aws::CodeGuruReviewer
     #   The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar
     #   Connections connection. Its format is
     #   `arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id`.
-    #   For more information, see [ `Connection` ][1] in the *Amazon Web
+    #   For more information, see [Connection][1] in the *Amazon Web
     #   Services CodeStar Connections API Reference*.
     #
     #
@@ -2451,7 +2451,7 @@ module Aws::CodeGuruReviewer
     #   The owner of the repository. For a GitHub, GitHub Enterprise, or
     #   Bitbucket repository, this is the username for the account that owns
     #   the repository. For an S3 repository, this can be the username or
-    #   Amazon Web Services account ID.
+    #   Amazon Web Services account ID
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ThirdPartySourceRepository AWS API Documentation
@@ -2486,9 +2486,9 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling [
-    #   `ListRepositoryAssociations` ][2].
+    #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
+    #   object. You can retrieve this ARN by calling
+    #   [ListRepositoryAssociations][2].
     #
     #
     #

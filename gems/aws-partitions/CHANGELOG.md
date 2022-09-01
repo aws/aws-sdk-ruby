@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.625.0 (2022-09-01)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ControlTower`.
+
 1.624.0 (2022-08-30)
 ------------------
 

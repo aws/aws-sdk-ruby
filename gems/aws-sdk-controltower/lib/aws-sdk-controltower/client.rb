@@ -33,12 +33,12 @@ require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:ssooidc)
+Aws::Plugins::GlobalConfiguration.add_identifier(:controltower)
 
-module Aws::SSOOIDC
-  # An API client for SSOOIDC.  To construct a client, you need to configure a `:region` and `:credentials`.
+module Aws::ControlTower
+  # An API client for ControlTower.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
-  #     client = Aws::SSOOIDC::Client.new(
+  #     client = Aws::ControlTower::Client.new(
   #       region: region_name,
   #       credentials: credentials,
   #       # ...
@@ -52,7 +52,7 @@ module Aws::SSOOIDC
 
     include Aws::ClientStubs
 
-    @identifier = :ssooidc
+    @identifier = :controltower
 
     set_api(ClientApi::API)
 
@@ -351,188 +351,155 @@ module Aws::SSOOIDC
 
     # @!group API Operations
 
-    # Creates and returns an access token for the authorized client. The
-    # access token issued will be used to fetch short-term credentials for
-    # the assigned roles in the AWS account.
+    # This API call turns off a control. It starts an asynchronous operation
+    # that deletes AWS resources on the specified organizational unit and
+    # the accounts it contains. The resources will vary according to the
+    # control that you specify.
     #
-    # @option params [required, String] :client_id
-    #   The unique identifier string for each client. This value should come
-    #   from the persisted result of the RegisterClient API.
+    # @option params [required, String] :control_identifier
+    #   The ARN of the control. Only **Strongly recommended** and **Elective**
+    #   controls are permitted, with the exception of the **Region deny**
+    #   guardrail.
     #
-    # @option params [required, String] :client_secret
-    #   A secret string generated for the client. This value should come from
-    #   the persisted result of the RegisterClient API.
+    # @option params [required, String] :target_identifier
+    #   The ARN of the organizational unit.
     #
-    # @option params [required, String] :grant_type
-    #   Supports grant types for authorization code, refresh token, and device
-    #   code request.
+    # @return [Types::DisableControlOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    # @option params [String] :device_code
-    #   Used only when calling this API for the device code grant type. This
-    #   short-term code is used to identify this authentication attempt. This
-    #   should come from an in-memory reference to the result of the
-    #   StartDeviceAuthorization API.
-    #
-    # @option params [String] :code
-    #   The authorization code received from the authorization service. This
-    #   parameter is required to perform an authorization grant request to get
-    #   access to a token.
-    #
-    # @option params [String] :refresh_token
-    #   The token used to obtain an access token in the event that the access
-    #   token is invalid or expired. This token is not issued by the service.
-    #
-    # @option params [Array<String>] :scope
-    #   The list of scopes that is defined by the client. Upon authorization,
-    #   this list is used to restrict permissions when granting an access
-    #   token.
-    #
-    # @option params [String] :redirect_uri
-    #   The location of the application that will receive the authorization
-    #   code. Users authorize the service to send the request to this
-    #   location.
-    #
-    # @return [Types::CreateTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::CreateTokenResponse#access_token #access_token} => String
-    #   * {Types::CreateTokenResponse#token_type #token_type} => String
-    #   * {Types::CreateTokenResponse#expires_in #expires_in} => Integer
-    #   * {Types::CreateTokenResponse#refresh_token #refresh_token} => String
-    #   * {Types::CreateTokenResponse#id_token #id_token} => String
+    #   * {Types::DisableControlOutput#operation_identifier #operation_identifier} => String
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.create_token({
-    #     client_id: "ClientId", # required
-    #     client_secret: "ClientSecret", # required
-    #     grant_type: "GrantType", # required
-    #     device_code: "DeviceCode",
-    #     code: "AuthCode",
-    #     refresh_token: "RefreshToken",
-    #     scope: ["Scope"],
-    #     redirect_uri: "URI",
+    #   resp = client.disable_control({
+    #     control_identifier: "ControlIdentifier", # required
+    #     target_identifier: "TargetIdentifier", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.access_token #=> String
-    #   resp.token_type #=> String
-    #   resp.expires_in #=> Integer
-    #   resp.refresh_token #=> String
-    #   resp.id_token #=> String
+    #   resp.operation_identifier #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-oidc-2019-06-10/CreateToken AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/DisableControl AWS API Documentation
     #
-    # @overload create_token(params = {})
+    # @overload disable_control(params = {})
     # @param [Hash] params ({})
-    def create_token(params = {}, options = {})
-      req = build_request(:create_token, params)
+    def disable_control(params = {}, options = {})
+      req = build_request(:disable_control, params)
       req.send_request(options)
     end
 
-    # Registers a client with AWS SSO. This allows clients to initiate
-    # device authorization. The output should be persisted for reuse through
-    # many authentication requests.
+    # This API call activates a control. It starts an asynchronous operation
+    # that creates AWS resources on the specified organizational unit and
+    # the accounts it contains. The resources created will vary according to
+    # the control that you specify.
     #
-    # @option params [required, String] :client_name
-    #   The friendly name of the client.
+    # @option params [required, String] :control_identifier
+    #   The ARN of the control. Only **Strongly recommended** and **Elective**
+    #   controls are permitted, with the exception of the **Region deny**
+    #   guardrail.
     #
-    # @option params [required, String] :client_type
-    #   The type of client. The service supports only `public` as a client
-    #   type. Anything other than public will be rejected by the service.
+    # @option params [required, String] :target_identifier
+    #   The ARN of the organizational unit.
     #
-    # @option params [Array<String>] :scopes
-    #   The list of scopes that are defined by the client. Upon authorization,
-    #   this list is used to restrict permissions when granting an access
-    #   token.
+    # @return [Types::EnableControlOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    # @return [Types::RegisterClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::RegisterClientResponse#client_id #client_id} => String
-    #   * {Types::RegisterClientResponse#client_secret #client_secret} => String
-    #   * {Types::RegisterClientResponse#client_id_issued_at #client_id_issued_at} => Integer
-    #   * {Types::RegisterClientResponse#client_secret_expires_at #client_secret_expires_at} => Integer
-    #   * {Types::RegisterClientResponse#authorization_endpoint #authorization_endpoint} => String
-    #   * {Types::RegisterClientResponse#token_endpoint #token_endpoint} => String
+    #   * {Types::EnableControlOutput#operation_identifier #operation_identifier} => String
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.register_client({
-    #     client_name: "ClientName", # required
-    #     client_type: "ClientType", # required
-    #     scopes: ["Scope"],
+    #   resp = client.enable_control({
+    #     control_identifier: "ControlIdentifier", # required
+    #     target_identifier: "TargetIdentifier", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.client_id #=> String
-    #   resp.client_secret #=> String
-    #   resp.client_id_issued_at #=> Integer
-    #   resp.client_secret_expires_at #=> Integer
-    #   resp.authorization_endpoint #=> String
-    #   resp.token_endpoint #=> String
+    #   resp.operation_identifier #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-oidc-2019-06-10/RegisterClient AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnableControl AWS API Documentation
     #
-    # @overload register_client(params = {})
+    # @overload enable_control(params = {})
     # @param [Hash] params ({})
-    def register_client(params = {}, options = {})
-      req = build_request(:register_client, params)
+    def enable_control(params = {}, options = {})
+      req = build_request(:enable_control, params)
       req.send_request(options)
     end
 
-    # Initiates device authorization by requesting a pair of verification
-    # codes from the authorization service.
+    # Returns the status of a particular `EnableControl` or `DisableControl`
+    # operation. Displays a message in case of error. Details for an
+    # operation are available for 90 days.
     #
-    # @option params [required, String] :client_id
-    #   The unique identifier string for the client that is registered with
-    #   AWS SSO. This value should come from the persisted result of the
-    #   RegisterClient API operation.
+    # @option params [required, String] :operation_identifier
+    #   The ID of the asynchronous operation, which is used to track status.
+    #   The operation is available for 90 days.
     #
-    # @option params [required, String] :client_secret
-    #   A secret string that is generated for the client. This value should
-    #   come from the persisted result of the RegisterClient API operation.
+    # @return [Types::GetControlOperationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    # @option params [required, String] :start_url
-    #   The URL for the AWS SSO user portal. For more information, see [Using
-    #   the User Portal][1] in the *AWS Single Sign-On User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/userguide/using-the-portal.html
-    #
-    # @return [Types::StartDeviceAuthorizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::StartDeviceAuthorizationResponse#device_code #device_code} => String
-    #   * {Types::StartDeviceAuthorizationResponse#user_code #user_code} => String
-    #   * {Types::StartDeviceAuthorizationResponse#verification_uri #verification_uri} => String
-    #   * {Types::StartDeviceAuthorizationResponse#verification_uri_complete #verification_uri_complete} => String
-    #   * {Types::StartDeviceAuthorizationResponse#expires_in #expires_in} => Integer
-    #   * {Types::StartDeviceAuthorizationResponse#interval #interval} => Integer
+    #   * {Types::GetControlOperationOutput#control_operation #control_operation} => Types::ControlOperation
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.start_device_authorization({
-    #     client_id: "ClientId", # required
-    #     client_secret: "ClientSecret", # required
-    #     start_url: "URI", # required
+    #   resp = client.get_control_operation({
+    #     operation_identifier: "OperationIdentifier", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.device_code #=> String
-    #   resp.user_code #=> String
-    #   resp.verification_uri #=> String
-    #   resp.verification_uri_complete #=> String
-    #   resp.expires_in #=> Integer
-    #   resp.interval #=> Integer
+    #   resp.control_operation.end_time #=> Time
+    #   resp.control_operation.operation_type #=> String, one of "ENABLE_CONTROL", "DISABLE_CONTROL"
+    #   resp.control_operation.start_time #=> Time
+    #   resp.control_operation.status #=> String, one of "SUCCEEDED", "FAILED", "IN_PROGRESS"
+    #   resp.control_operation.status_message #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-oidc-2019-06-10/StartDeviceAuthorization AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetControlOperation AWS API Documentation
     #
-    # @overload start_device_authorization(params = {})
+    # @overload get_control_operation(params = {})
     # @param [Hash] params ({})
-    def start_device_authorization(params = {}, options = {})
-      req = build_request(:start_device_authorization, params)
+    def get_control_operation(params = {}, options = {})
+      req = build_request(:get_control_operation, params)
+      req.send_request(options)
+    end
+
+    # Lists the controls enabled by AWS Control Tower on the specified
+    # organizational unit and the accounts it contains.
+    #
+    # @option params [Integer] :max_results
+    #   How many results to return per API call.
+    #
+    # @option params [String] :next_token
+    #   The token to continue the list from a previous API call with the same
+    #   parameters.
+    #
+    # @option params [required, String] :target_identifier
+    #   The ARN of the organizational unit.
+    #
+    # @return [Types::ListEnabledControlsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEnabledControlsOutput#enabled_controls #enabled_controls} => Array&lt;Types::EnabledControlSummary&gt;
+    #   * {Types::ListEnabledControlsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_enabled_controls({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     target_identifier: "TargetIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.enabled_controls #=> Array
+    #   resp.enabled_controls[0].control_identifier #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListEnabledControls AWS API Documentation
+    #
+    # @overload list_enabled_controls(params = {})
+    # @param [Hash] params ({})
+    def list_enabled_controls(params = {}, options = {})
+      req = build_request(:list_enabled_controls, params)
       req.send_request(options)
     end
 
@@ -548,8 +515,8 @@ module Aws::SSOOIDC
         client: self,
         params: params,
         config: config)
-      context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.138.0'
+      context[:gem_name] = 'aws-sdk-controltower'
+      context[:gem_version] = '1.0.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
