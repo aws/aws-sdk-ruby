@@ -160,10 +160,8 @@ module BuildTools
       # handled by endpoints 2.0
       api['operations'].each do |_key, operation|
         if operation['http'] && operation['http']['requestUri']
-          operation['http']['requestUri'].gsub!('/{Bucket}', '')
-          if operation['http']['requestUri'].empty?
-            operation['http']['requestUri'] = '/'
-          end
+          operation['http']['requestUri'].gsub!('/{Bucket}', '/')
+          operation['http']['requestUri'].gsub!('//', '/')
         end
       end
 
@@ -189,10 +187,8 @@ module BuildTools
       # handled by endpoints 2.0
       api['operations'].each do |_key, operation|
         if operation['http'] && operation['http']['requestUri']
-          operation['http']['requestUri'].gsub!('/{Bucket}', '')
-          if operation['http']['requestUri'].empty?
-            operation['http']['requestUri'] = '/'
-          end
+          operation['http']['requestUri'].gsub!('/{Bucket}', '/')
+          operation['http']['requestUri'].gsub!('//', '/')
         end
       end
     end

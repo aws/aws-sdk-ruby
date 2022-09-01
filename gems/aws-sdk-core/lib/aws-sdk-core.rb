@@ -27,7 +27,6 @@ require_relative 'aws-sdk-core/static_token_provider'
 require_relative 'aws-sdk-core/refreshing_token'
 require_relative 'aws-sdk-core/sso_token_provider'
 require_relative 'aws-sdk-core/token_provider_chain'
-require_relative 'aws-sdk-core/plugins/bearer_authorization'
 
 # client modules
 

@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/ec2.rb'
 require 'aws-sdk-ec2/plugins/copy_encrypted_snapshot.rb'
 require 'aws-sdk-ec2/plugins/region_validation.rb'
@@ -81,7 +81,7 @@ module Aws::EC2
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::EC2)
     add_plugin(Aws::EC2::Plugins::CopyEncryptedSnapshot)
     add_plugin(Aws::EC2::Plugins::RegionValidation)

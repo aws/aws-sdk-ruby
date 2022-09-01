@@ -844,9 +844,6 @@
       "aws-sdk-kms": "~> 1",
       "aws-sigv4": "~> 1.4"
     },
-    "removePlugins": [
-      "Aws::Plugins::SignatureV4"
-    ],
     "addPlugins": [
       "Aws::S3::Plugins::Accelerate",
       "Aws::S3::Plugins::ARN",
@@ -874,9 +871,6 @@
     "dependencies": {
       "aws-sigv4": "~> 1.1"
     },
-    "removePlugins": [
-      "Aws::Plugins::SignatureV4"
-    ],
     "addPlugins": [
       "Aws::S3Control::Plugins::ARN",
       "Aws::S3Control::Plugins::Dualstack",

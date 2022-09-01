@@ -1128,7 +1128,7 @@ module Aws::EC2
       end
 
       def add_handlers(handlers, _config)
-        handlers.add(Handler, step: :build, priority: 40)
+        handlers.add(Handler, step: :build, priority: 60)
       end
     end
   end

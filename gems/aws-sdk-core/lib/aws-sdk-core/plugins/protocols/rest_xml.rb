@@ -5,7 +5,7 @@ module Aws
     module Protocols
       class RestXml < Seahorse::Client::Plugin
 
-        handler(Rest::Handler, priority: 10)
+        handler(Rest::Handler)
         handler(Xml::ErrorHandler, step: :sign)
 
       end

@@ -369,6 +369,11 @@ module Aws::S3
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Boolean] :use_accelerate_endpoint (false)
+    #             When set to `true`, accelerated bucket endpoints will be used
+    #             for all object operations. You must first enable accelerate for
+    #             each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.

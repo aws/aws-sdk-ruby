@@ -96,21 +96,27 @@ module AwsSdkCodeGenerator
       }[protocol]
     end
 
+    # HACK: Sigv2 is deprecated, Sigv4/Bearer are with core. Always assume
+    # new signer plugin. This logic would be moved to gem dependencies
+    # calculation, but don't worry until new signature type.
     def signature_plugins(options)
-      auth_types  = [options.fetch(:signature_version)]
-      auth_types += options[:api]['operations'].map { |_n, o| o['authtype'] }.compact
-      plugins = {}
-      auth_types.each do |auth_type|
-        case auth_type
-        when 'v4'
-          plugins['Aws::Plugins::SignatureV4'] = "#{core_plugins}/signature_v4.rb"
-        when 'v2'
-          plugins['Aws::Plugins::SignatureV2'] = "#{core_plugins}/signature_v2.rb"
-        when 'bearer'
-          plugins['Aws::Plugins::BearerAuthorization'] = "#{core_plugins}/bearer_authorization.rb"
-        end
-      end
-      plugins
+      # auth_types  = [options.fetch(:signature_version)]
+      # auth_types += options[:api]['operations'].map { |_n, o| o['authtype'] }.compact
+      # plugins = {}
+      # auth_types.each do |auth_type|
+      #   case auth_type
+      #   when 'v4'
+      #     plugins['Aws::Plugins::SignatureV4'] = "#{core_plugins}/signature_v4.rb"
+      #   when 'v2'
+      #     plugins['Aws::Plugins::SignatureV2'] = "#{core_plugins}/signature_v2.rb"
+      #   when 'bearer'
+      #     plugins['Aws::Plugins::BearerAuthorization'] = "#{core_plugins}/bearer_authorization.rb"
+      #   end
+      # end
+      # plugins
+      {
+        'Aws::Plugins::Sign' => "#{core_plugins}/sign.rb"
+      }
     end
 
     def core_plugins

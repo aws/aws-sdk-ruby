@@ -185,7 +185,7 @@ module Aws
           arn = 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
           expect do
             client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+          end.to raise_error(ArgumentError)
         end
 
         it 'accepts an accesspoint arn with an aws-global client' do
@@ -210,7 +210,7 @@ module Aws
           arn = 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
           expect do
             client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+          end.to raise_error(ArgumentError)
         end
 
         it 's3_use_arn_region false; raises if client region and arn region mismatchs' do
@@ -222,7 +222,7 @@ module Aws
           arn = 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
           expect do
             client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+          end.to raise_error(ArgumentError)
         end
 
         it 'can use dualstack with the accesspoint arn' do
@@ -247,7 +247,7 @@ module Aws
           arn = 'arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint'
           expect do
             client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(Aws::Errors::InvalidARNPartitionError)
+          end.to raise_error(ArgumentError)
         end
 
         it 'accepts an accesspoint arn in a china region' do
@@ -339,7 +339,7 @@ module Aws
           arn = 'arn:aws-us-gov:s3:us-gov-west-1:123456789012:accesspoint:myendpoint'
           expect do
             client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+          end.to raise_error(ArgumentError)
         end
 
         it 'uses the arn region with the fips client region' do
@@ -558,7 +558,7 @@ module Aws
           arn = 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
           expect do
             client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+          end.to raise_error(ArgumentError)
         end
 
         it 'raises if the client and outposts arn partitions mismatch' do
@@ -569,7 +569,7 @@ module Aws
           arn = 'arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
           expect do
             client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(Aws::Errors::InvalidARNPartitionError)
+          end.to raise_error(ArgumentError)
         end
 
         it 'accepts an outpost arn in a gov region' do
@@ -799,7 +799,7 @@ module Aws
           arn = 'arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner'
           expect do
             client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+          end.to raise_error(ArgumentError)
         end
 
         it 'accepts an object lambda arn with an aws-global client' do
@@ -824,7 +824,7 @@ module Aws
           arn = 'arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner'
           expect do
             client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+          end.to raise_error(ArgumentError)
         end
 
         it 's3_use_arn_region false; raises if client region and arn region mismatchs' do
@@ -836,7 +836,7 @@ module Aws
           arn = 'arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner'
           expect do
             client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+          end.to raise_error(ArgumentError)
         end
 
         it 'raises with :use_dualstack_endpoint' do
@@ -859,7 +859,7 @@ module Aws
           arn = 'arn:aws-cn:s3-object-lambda:cn-north-1:123456789012:accesspoint/mybanner'
           expect do
             client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(Aws::Errors::InvalidARNPartitionError)
+          end.to raise_error(ArgumentError)
         end
 
         it 'accepts an object lambda arn in a china region' do
@@ -951,7 +951,7 @@ module Aws
           arn = 'arn:aws-us-gov:s3-object-lambda:us-gov-west-1:123456789012:accesspoint/mybanner'
           expect do
             client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+          end.to raise_error(ArgumentError)
         end
 
         it 'uses the arn region with the fips client region' do
@@ -1220,7 +1220,7 @@ module Aws
           )
           expect do
             client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(Aws::Errors::InvalidARNPartitionError)
+          end.to raise_error(ArgumentError)
         end
 
         it 'raises with :use_dualstack_endpoint' do
