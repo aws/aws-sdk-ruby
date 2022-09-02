@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2022-09-02)
+------------------
+
+* Feature - This release enables administrators to attribute user activity and API calls from Studio notebooks, Data Wrangler and Canvas to specific users even when users share the same execution IAM role.  ExecutionRoleIdentityConfig at Sagemaker domain level enables this feature.
+
 1.135.0 (2022-08-31)
 ------------------
 

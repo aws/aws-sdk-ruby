@@ -150,6 +150,7 @@ module Aws::MediaPackage
     #
     #       {
     #         constant_initialization_vector: "__string",
+    #         encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
@@ -171,6 +172,10 @@ module Aws::MediaPackage
     #   initialization vector (IV).
     #   @return [String]
     #
+    # @!attribute [rw] encryption_method
+    #   The encryption method to use.
+    #   @return [String]
+    #
     # @!attribute [rw] key_rotation_interval_seconds
     #   Time (in seconds) between each encryption key rotation.
     #   @return [Integer]
@@ -185,6 +190,7 @@ module Aws::MediaPackage
     #
     class CmafEncryption < Struct.new(
       :constant_initialization_vector,
+      :encryption_method,
       :key_rotation_interval_seconds,
       :speke_key_provider)
       SENSITIVE = []
@@ -235,6 +241,7 @@ module Aws::MediaPackage
     #       {
     #         encryption: {
     #           constant_initialization_vector: "__string",
+    #           encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #           key_rotation_interval_seconds: 1,
     #           speke_key_provider: { # required
     #             certificate_arn: "__string",
@@ -567,6 +574,7 @@ module Aws::MediaPackage
     #         cmaf_package: {
     #           encryption: {
     #             constant_initialization_vector: "__string",
+    #             encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
@@ -2913,6 +2921,7 @@ module Aws::MediaPackage
     #         cmaf_package: {
     #           encryption: {
     #             constant_initialization_vector: "__string",
+    #             encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",

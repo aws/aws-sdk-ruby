@@ -95,6 +95,7 @@ module Aws::CognitoIdentityProvider
     AuthEventsType = Shapes::ListShape.new(name: 'AuthEventsType')
     AuthFlowType = Shapes::StringShape.new(name: 'AuthFlowType')
     AuthParametersType = Shapes::MapShape.new(name: 'AuthParametersType')
+    AuthSessionValidityType = Shapes::IntegerShape.new(name: 'AuthSessionValidityType')
     AuthenticationResultType = Shapes::StructureShape.new(name: 'AuthenticationResultType')
     BlockedIPRangeListType = Shapes::ListShape.new(name: 'BlockedIPRangeListType')
     BooleanType = Shapes::BooleanShape.new(name: 'BooleanType')
@@ -930,6 +931,7 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolClientRequest.add_member(:prevent_user_existence_errors, Shapes::ShapeRef.new(shape: PreventUserExistenceErrorTypes, location_name: "PreventUserExistenceErrors"))
     CreateUserPoolClientRequest.add_member(:enable_token_revocation, Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnableTokenRevocation"))
     CreateUserPoolClientRequest.add_member(:enable_propagate_additional_user_context_data, Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnablePropagateAdditionalUserContextData"))
+    CreateUserPoolClientRequest.add_member(:auth_session_validity, Shapes::ShapeRef.new(shape: AuthSessionValidityType, location_name: "AuthSessionValidity"))
     CreateUserPoolClientRequest.struct_class = Types::CreateUserPoolClientRequest
 
     CreateUserPoolClientResponse.add_member(:user_pool_client, Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
@@ -1788,6 +1790,7 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolClientRequest.add_member(:prevent_user_existence_errors, Shapes::ShapeRef.new(shape: PreventUserExistenceErrorTypes, location_name: "PreventUserExistenceErrors"))
     UpdateUserPoolClientRequest.add_member(:enable_token_revocation, Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnableTokenRevocation"))
     UpdateUserPoolClientRequest.add_member(:enable_propagate_additional_user_context_data, Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnablePropagateAdditionalUserContextData"))
+    UpdateUserPoolClientRequest.add_member(:auth_session_validity, Shapes::ShapeRef.new(shape: AuthSessionValidityType, location_name: "AuthSessionValidity"))
     UpdateUserPoolClientRequest.struct_class = Types::UpdateUserPoolClientRequest
 
     UpdateUserPoolClientResponse.add_member(:user_pool_client, Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
@@ -1898,6 +1901,7 @@ module Aws::CognitoIdentityProvider
     UserPoolClientType.add_member(:prevent_user_existence_errors, Shapes::ShapeRef.new(shape: PreventUserExistenceErrorTypes, location_name: "PreventUserExistenceErrors"))
     UserPoolClientType.add_member(:enable_token_revocation, Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnableTokenRevocation"))
     UserPoolClientType.add_member(:enable_propagate_additional_user_context_data, Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnablePropagateAdditionalUserContextData"))
+    UserPoolClientType.add_member(:auth_session_validity, Shapes::ShapeRef.new(shape: AuthSessionValidityType, location_name: "AuthSessionValidity"))
     UserPoolClientType.struct_class = Types::UserPoolClientType
 
     UserPoolDescriptionType.add_member(:id, Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "Id"))

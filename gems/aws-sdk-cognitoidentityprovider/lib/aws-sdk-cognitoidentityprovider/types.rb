@@ -3401,6 +3401,7 @@ module Aws::CognitoIdentityProvider
     #         prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
     #         enable_token_revocation: false,
     #         enable_propagate_additional_user_context_data: false,
+    #         auth_session_validity: 1,
     #       }
     #
     # @!attribute [rw] user_pool_id
@@ -3678,6 +3679,13 @@ module Aws::CognitoIdentityProvider
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] auth_session_validity
+    #   Amazon Cognito creates a session token for each API request in an
+    #   authentication flow. `AuthSessionValidity` is the duration, in
+    #   minutes, of that session token. Your user pool native user must
+    #   respond to each authentication challenge before the session expires.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClientRequest AWS API Documentation
     #
     class CreateUserPoolClientRequest < Struct.new(
@@ -3701,7 +3709,8 @@ module Aws::CognitoIdentityProvider
       :analytics_configuration,
       :prevent_user_existence_errors,
       :enable_token_revocation,
-      :enable_propagate_additional_user_context_data)
+      :enable_propagate_additional_user_context_data,
+      :auth_session_validity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3945,27 +3954,30 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] sms_verification_message
-    #   A string representing the SMS verification message.
+    #   This parameter is no longer used. See
+    #   [VerificationMessageTemplateType][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
     #   @return [String]
     #
     # @!attribute [rw] email_verification_message
-    #   A string representing the email verification message.
-    #   `EmailVerificationMessage` is allowed only if
-    #   [EmailSendingAccount][1] is DEVELOPER.
+    #   This parameter is no longer used. See
+    #   [VerificationMessageTemplateType][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
     #   @return [String]
     #
     # @!attribute [rw] email_verification_subject
-    #   A string representing the email verification subject.
-    #   `EmailVerificationSubject` is allowed only if
-    #   [EmailSendingAccount][1] is DEVELOPER.
+    #   This parameter is no longer used. See
+    #   [VerificationMessageTemplateType][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
     #   @return [String]
     #
     # @!attribute [rw] verification_message_template
@@ -4672,14 +4684,34 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # The device-remembering configuration for a user pool. A null value
-    # indicates that you have deactivated device remembering in your user
-    # pool.
+    # The device-remembering configuration for a user pool. A [
+    # DescribeUserPool][1] request returns a null value for this object when
+    # the user pool isn't configured to remember devices. When device
+    # remembering is active, you can remember a user's device with a
+    # [ConfirmDevice][2] API request. Additionally. when the property
+    # `DeviceOnlyRememberedOnUserPrompt` is `true`, you must follow
+    # `ConfirmDevice` with an [UpdateDeviceStatus][3] API request that sets
+    # the user's device to `remembered` or `not_remembered`.
     #
-    # <note markdown="1"> When you provide a value for any `DeviceConfiguration` field, you
-    # activate the Amazon Cognito device-remembering feature.
+    # To sign in with a remembered device, include `DEVICE_KEY` in the
+    # authentication parameters in your user's [ InitiateAuth][4] request.
+    # If your app doesn't include a `DEVICE_KEY` parameter, the
+    # [response][5] from Amazon Cognito includes newly-generated
+    # `DEVICE_KEY` and `DEVICE_GROUP_KEY` values under `NewDeviceMetadata`.
+    # Store these values to use in future device-authentication requests.
+    #
+    # <note markdown="1"> When you provide a value for any property of `DeviceConfiguration`,
+    # you activate the device remembering for the user pool.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPool.html
+    # [2]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmDevice.html
+    # [3]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UpdateDeviceStatus.html
+    # [4]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html
+    # [5]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html#API_InitiateAuth_ResponseSyntax
     #
     # @note When making an API call, you may pass DeviceConfigurationType
     #   data as a hash:
@@ -4690,27 +4722,32 @@ module Aws::CognitoIdentityProvider
     #       }
     #
     # @!attribute [rw] challenge_required_on_new_device
-    #   When true, device authentication can replace SMS and time-based
-    #   one-time password (TOTP) factors for multi-factor authentication
-    #   (MFA).
+    #   When true, a remembered device can sign in with device
+    #   authentication instead of SMS and time-based one-time password
+    #   (TOTP) factors for multi-factor authentication (MFA).
     #
-    #   <note markdown="1"> Regardless of the value of this field, users that sign in with new
-    #   devices that have not been confirmed or remembered must provide a
-    #   second factor if your user pool requires MFA.
+    #   <note markdown="1"> Whether or not `ChallengeRequiredOnNewDevice` is true, users who
+    #   sign in with devices that have not been confirmed or remembered must
+    #   still provide a second factor in a user pool that requires MFA.
     #
     #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] device_only_remembered_on_user_prompt
-    #   When true, Amazon Cognito doesn't remember newly-confirmed devices.
-    #   Users who want to authenticate with their device can instead opt in
-    #   to remembering their device. To collect a choice from your user,
-    #   create an input prompt in your app and return the value that the
-    #   user chooses in an [UpdateDeviceStatus][1] API request.
+    #   When true, Amazon Cognito doesn't automatically remember a user's
+    #   device when your app sends a [ ConfirmDevice][1] API request. In
+    #   your app, create a prompt for your user to choose whether they want
+    #   to remember their device. Return the user's choice in an [
+    #   UpdateDeviceStatus][2] API request.
+    #
+    #   When `DeviceOnlyRememberedOnUserPrompt` is `false`, Amazon Cognito
+    #   immediately remembers devices that you register in a `ConfirmDevice`
+    #   API request.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UpdateDeviceStatus.html
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmDevice.html
+    #   [2]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UpdateDeviceStatus.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeviceConfigurationType AWS API Documentation
@@ -9617,6 +9654,7 @@ module Aws::CognitoIdentityProvider
     #         prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
     #         enable_token_revocation: false,
     #         enable_propagate_additional_user_context_data: false,
+    #         auth_session_validity: 1,
     #       }
     #
     # @!attribute [rw] user_pool_id
@@ -9863,6 +9901,13 @@ module Aws::CognitoIdentityProvider
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] auth_session_validity
+    #   Amazon Cognito creates a session token for each API request in an
+    #   authentication flow. `AuthSessionValidity` is the duration, in
+    #   minutes, of that session token. Your user pool native user must
+    #   respond to each authentication challenge before the session expires.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClientRequest AWS API Documentation
     #
     class UpdateUserPoolClientRequest < Struct.new(
@@ -9886,7 +9931,8 @@ module Aws::CognitoIdentityProvider
       :analytics_configuration,
       :prevent_user_existence_errors,
       :enable_token_revocation,
-      :enable_propagate_additional_user_context_data)
+      :enable_propagate_additional_user_context_data,
+      :auth_session_validity)
       SENSITIVE = [:client_id]
       include Aws::Structure
     end
@@ -10081,15 +10127,30 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] sms_verification_message
-    #   A container with information about the SMS verification message.
+    #   This parameter is no longer used. See
+    #   [VerificationMessageTemplateType][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
     #   @return [String]
     #
     # @!attribute [rw] email_verification_message
-    #   The contents of the email verification message.
+    #   This parameter is no longer used. See
+    #   [VerificationMessageTemplateType][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
     #   @return [String]
     #
     # @!attribute [rw] email_verification_subject
-    #   The subject of the email verification message.
+    #   This parameter is no longer used. See
+    #   [VerificationMessageTemplateType][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
     #   @return [String]
     #
     # @!attribute [rw] verification_message_template
@@ -10794,6 +10855,13 @@ module Aws::CognitoIdentityProvider
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-adaptive-authentication.html#user-pool-settings-adaptive-authentication-device-fingerprint
     #   @return [Boolean]
     #
+    # @!attribute [rw] auth_session_validity
+    #   Amazon Cognito creates a session token for each API request in an
+    #   authentication flow. `AuthSessionValidity` is the duration, in
+    #   minutes, of that session token. Your user pool native user must
+    #   respond to each authentication challenge before the session expires.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolClientType AWS API Documentation
     #
     class UserPoolClientType < Struct.new(
@@ -10820,7 +10888,8 @@ module Aws::CognitoIdentityProvider
       :analytics_configuration,
       :prevent_user_existence_errors,
       :enable_token_revocation,
-      :enable_propagate_additional_user_context_data)
+      :enable_propagate_additional_user_context_data,
+      :auth_session_validity)
       SENSITIVE = [:client_id, :client_secret]
       include Aws::Structure
     end
@@ -10954,15 +11023,30 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] sms_verification_message
-    #   The contents of the SMS verification message.
+    #   This parameter is no longer used. See
+    #   [VerificationMessageTemplateType][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
     #   @return [String]
     #
     # @!attribute [rw] email_verification_message
-    #   The contents of the email verification message.
+    #   This parameter is no longer used. See
+    #   [VerificationMessageTemplateType][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
     #   @return [String]
     #
     # @!attribute [rw] email_verification_subject
-    #   The subject of the email verification message.
+    #   This parameter is no longer used. See
+    #   [VerificationMessageTemplateType][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
     #   @return [String]
     #
     # @!attribute [rw] verification_message_template

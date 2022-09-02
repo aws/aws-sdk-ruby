@@ -589,6 +589,7 @@ module Aws::MediaPackage
     #     cmaf_package: {
     #       encryption: {
     #         constant_initialization_vector: "__string",
+    #         encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
@@ -733,6 +734,7 @@ module Aws::MediaPackage
     #   resp.authorization.secrets_role_arn #=> String
     #   resp.channel_id #=> String
     #   resp.cmaf_package.encryption.constant_initialization_vector #=> String
+    #   resp.cmaf_package.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
     #   resp.cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1", "PRESET-AUDIO-2", "PRESET-AUDIO-3", "SHARED", "UNENCRYPTED"
@@ -1011,6 +1013,7 @@ module Aws::MediaPackage
     #   resp.authorization.secrets_role_arn #=> String
     #   resp.channel_id #=> String
     #   resp.cmaf_package.encryption.constant_initialization_vector #=> String
+    #   resp.cmaf_package.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
     #   resp.cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1", "PRESET-AUDIO-2", "PRESET-AUDIO-3", "SHARED", "UNENCRYPTED"
@@ -1251,6 +1254,7 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].authorization.secrets_role_arn #=> String
     #   resp.origin_endpoints[0].channel_id #=> String
     #   resp.origin_endpoints[0].cmaf_package.encryption.constant_initialization_vector #=> String
+    #   resp.origin_endpoints[0].cmaf_package.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
     #   resp.origin_endpoints[0].cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1", "PRESET-AUDIO-2", "PRESET-AUDIO-3", "SHARED", "UNENCRYPTED"
@@ -1635,6 +1639,7 @@ module Aws::MediaPackage
     #     cmaf_package: {
     #       encryption: {
     #         constant_initialization_vector: "__string",
+    #         encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES, AES_CTR
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
@@ -1776,6 +1781,7 @@ module Aws::MediaPackage
     #   resp.authorization.secrets_role_arn #=> String
     #   resp.channel_id #=> String
     #   resp.cmaf_package.encryption.constant_initialization_vector #=> String
+    #   resp.cmaf_package.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
     #   resp.cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1", "PRESET-AUDIO-2", "PRESET-AUDIO-3", "SHARED", "UNENCRYPTED"
@@ -1900,7 +1906,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

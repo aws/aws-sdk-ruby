@@ -633,6 +633,7 @@ module Aws::SageMaker
     EnvironmentParameterRanges = Shapes::StructureShape.new(name: 'EnvironmentParameterRanges')
     EnvironmentParameters = Shapes::ListShape.new(name: 'EnvironmentParameters')
     EnvironmentValue = Shapes::StringShape.new(name: 'EnvironmentValue')
+    ExecutionRoleIdentityConfig = Shapes::StringShape.new(name: 'ExecutionRoleIdentityConfig')
     ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
     ExitMessage = Shapes::StringShape.new(name: 'ExitMessage')
     Experiment = Shapes::StructureShape.new(name: 'Experiment')
@@ -4027,9 +4028,11 @@ module Aws::SageMaker
 
     DomainSettings.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: DomainSecurityGroupIds, location_name: "SecurityGroupIds"))
     DomainSettings.add_member(:r_studio_server_pro_domain_settings, Shapes::ShapeRef.new(shape: RStudioServerProDomainSettings, location_name: "RStudioServerProDomainSettings"))
+    DomainSettings.add_member(:execution_role_identity_config, Shapes::ShapeRef.new(shape: ExecutionRoleIdentityConfig, location_name: "ExecutionRoleIdentityConfig"))
     DomainSettings.struct_class = Types::DomainSettings
 
     DomainSettingsForUpdate.add_member(:r_studio_server_pro_domain_settings_for_update, Shapes::ShapeRef.new(shape: RStudioServerProDomainSettingsForUpdate, location_name: "RStudioServerProDomainSettingsForUpdate"))
+    DomainSettingsForUpdate.add_member(:execution_role_identity_config, Shapes::ShapeRef.new(shape: ExecutionRoleIdentityConfig, location_name: "ExecutionRoleIdentityConfig"))
     DomainSettingsForUpdate.struct_class = Types::DomainSettingsForUpdate
 
     DriftCheckBaselines.add_member(:bias, Shapes::ShapeRef.new(shape: DriftCheckBias, location_name: "Bias"))

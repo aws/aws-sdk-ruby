@@ -5293,6 +5293,7 @@ module Aws::SageMaker
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
+    #           execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
     #         },
     #       }
     #
@@ -17674,6 +17675,7 @@ module Aws::SageMaker
     #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
     #         },
+    #         execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
     #       }
     #
     # @!attribute [rw] security_group_ids
@@ -17687,11 +17689,21 @@ module Aws::SageMaker
     #   Domain-level app.
     #   @return [Types::RStudioServerProDomainSettings]
     #
+    # @!attribute [rw] execution_role_identity_config
+    #   The configuration for attaching a SageMaker user profile name to the
+    #   execution role as a [ `sts:SourceIdentity` key][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettings AWS API Documentation
     #
     class DomainSettings < Struct.new(
       :security_group_ids,
-      :r_studio_server_pro_domain_settings)
+      :r_studio_server_pro_domain_settings,
+      :execution_role_identity_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17711,6 +17723,7 @@ module Aws::SageMaker
     #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
     #         },
+    #         execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
     #       }
     #
     # @!attribute [rw] r_studio_server_pro_domain_settings_for_update
@@ -17718,10 +17731,22 @@ module Aws::SageMaker
     #   update.
     #   @return [Types::RStudioServerProDomainSettingsForUpdate]
     #
+    # @!attribute [rw] execution_role_identity_config
+    #   The configuration for attaching a SageMaker user profile name to the
+    #   execution role as a [ `sts:SourceIdentity` key][1]. This
+    #   configuration can only be modified if there are no apps in the
+    #   `InService` or `Pending` state.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettingsForUpdate AWS API Documentation
     #
     class DomainSettingsForUpdate < Struct.new(
-      :r_studio_server_pro_domain_settings_for_update)
+      :r_studio_server_pro_domain_settings_for_update,
+      :execution_role_identity_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40767,6 +40792,7 @@ module Aws::SageMaker
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
+    #           execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
     #         },
     #       }
     #

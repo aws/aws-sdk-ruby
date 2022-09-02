@@ -1406,7 +1406,12 @@ module Aws::Connect
     #   The description of the security profile.
     #
     # @option params [Array<String>] :permissions
-    #   Permissions assigned to the security profile.
+    #   Permissions assigned to the security profile. For a list of valid
+    #   permissions, see [List of security profile permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -2254,6 +2259,8 @@ module Aws::Connect
     # Contact information remains available in Amazon Connect for 24 months,
     # and then it is deleted.
     #
+    #  Only data from November 12, 2021, and later is returned by this API.
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
@@ -2737,6 +2744,8 @@ module Aws::Connect
     #   resp.routing_profile.default_outbound_queue_id #=> String
     #   resp.routing_profile.tags #=> Hash
     #   resp.routing_profile.tags["TagKey"] #=> String
+    #   resp.routing_profile.number_of_associated_queues #=> Integer
+    #   resp.routing_profile.number_of_associated_users #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeRoutingProfile AWS API Documentation
     #
@@ -4117,7 +4126,8 @@ module Aws::Connect
     # change.
     #
     # For the specified version of Amazon Lex, returns a paginated list of
-    # all the Amazon Lex bots currently associated with the instance.
+    # all the Amazon Lex bots currently associated with the instance. Use
+    # this API to returns both Amazon Lex V1 and V2 bots.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -4736,8 +4746,13 @@ module Aws::Connect
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
-    # Returns a paginated list of all the Amazon Lex bots currently
-    # associated with the instance.
+    # Returns a paginated list of all the Amazon Lex V1 bots currently
+    # associated with the instance. To return both Amazon Lex V1 and V2
+    # bots, use the [ListBots][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListBots.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -5836,6 +5851,220 @@ module Aws::Connect
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
+    # Searches queues in an Amazon Connect instance, with optional
+    # filtering.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::QueueSearchFilter] :search_filter
+    #   Filters to be applied to search results.
+    #
+    # @option params [Types::QueueSearchCriteria] :search_criteria
+    #   The search criteria to be used to return queues.
+    #
+    # @return [Types::SearchQueuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchQueuesResponse#queues #queues} => Array&lt;Types::Queue&gt;
+    #   * {Types::SearchQueuesResponse#next_token #next_token} => String
+    #   * {Types::SearchQueuesResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_queues({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_filter: {
+    #       tag_filter: {
+    #         or_conditions: [
+    #           [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         ],
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive QueueSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive QueueSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #       queue_type_condition: "STANDARD", # accepts STANDARD
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queues #=> Array
+    #   resp.queues[0].name #=> String
+    #   resp.queues[0].queue_arn #=> String
+    #   resp.queues[0].queue_id #=> String
+    #   resp.queues[0].description #=> String
+    #   resp.queues[0].outbound_caller_config.outbound_caller_id_name #=> String
+    #   resp.queues[0].outbound_caller_config.outbound_caller_id_number_id #=> String
+    #   resp.queues[0].outbound_caller_config.outbound_flow_id #=> String
+    #   resp.queues[0].hours_of_operation_id #=> String
+    #   resp.queues[0].max_contacts #=> Integer
+    #   resp.queues[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.queues[0].tags #=> Hash
+    #   resp.queues[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchQueues AWS API Documentation
+    #
+    # @overload search_queues(params = {})
+    # @param [Hash] params ({})
+    def search_queues(params = {}, options = {})
+      req = build_request(:search_queues, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Searches routing profiles in an Amazon Connect instance, with optional
+    # filtering.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::RoutingProfileSearchFilter] :search_filter
+    #   Filters to be applied to search results.
+    #
+    # @option params [Types::RoutingProfileSearchCriteria] :search_criteria
+    #   The search criteria to be used to return routing profiles.
+    #
+    # @return [Types::SearchRoutingProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchRoutingProfilesResponse#routing_profiles #routing_profiles} => Array&lt;Types::RoutingProfile&gt;
+    #   * {Types::SearchRoutingProfilesResponse#next_token #next_token} => String
+    #   * {Types::SearchRoutingProfilesResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_routing_profiles({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_filter: {
+    #       tag_filter: {
+    #         or_conditions: [
+    #           [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         ],
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive RoutingProfileSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive RoutingProfileSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.routing_profiles #=> Array
+    #   resp.routing_profiles[0].instance_id #=> String
+    #   resp.routing_profiles[0].name #=> String
+    #   resp.routing_profiles[0].routing_profile_arn #=> String
+    #   resp.routing_profiles[0].routing_profile_id #=> String
+    #   resp.routing_profiles[0].description #=> String
+    #   resp.routing_profiles[0].media_concurrencies #=> Array
+    #   resp.routing_profiles[0].media_concurrencies[0].channel #=> String, one of "VOICE", "CHAT", "TASK"
+    #   resp.routing_profiles[0].media_concurrencies[0].concurrency #=> Integer
+    #   resp.routing_profiles[0].default_outbound_queue_id #=> String
+    #   resp.routing_profiles[0].tags #=> Hash
+    #   resp.routing_profiles[0].tags["TagKey"] #=> String
+    #   resp.routing_profiles[0].number_of_associated_queues #=> Integer
+    #   resp.routing_profiles[0].number_of_associated_users #=> Integer
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchRoutingProfiles AWS API Documentation
+    #
+    # @overload search_routing_profiles(params = {})
+    # @param [Hash] params ({})
+    def search_routing_profiles(params = {}, options = {})
+      req = build_request(:search_routing_profiles, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Searches security profiles in an Amazon Connect instance, with
     # optional filtering.
     #
@@ -5953,6 +6182,13 @@ module Aws::Connect
     #
     # @option params [Types::UserSearchCriteria] :search_criteria
     #   The search criteria to be used to return users.
+    #
+    #   <note markdown="1"> The `Username`, `Firstname`, and `Lastname` fields support
+    #   "contains" queries with a minimum of 2 characters and a maximum of
+    #   25 characters. Any queries with character lengths outside of this
+    #   range result in empty results.
+    #
+    #    </note>
     #
     # @return [Types::SearchUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7083,7 +7319,7 @@ module Aws::Connect
     #   The identifier of the flow.
     #
     # @option params [String] :name
-    #   TThe name of the flow.
+    #   The name of the flow.
     #
     # @option params [String] :description
     #   The description of the flow.
@@ -7887,7 +8123,12 @@ module Aws::Connect
     #   The description of the security profile.
     #
     # @option params [Array<String>] :permissions
-    #   The permissions granted to a security profile.
+    #   The permissions granted to a security profile. For a list of valid
+    #   permissions, see [List of security profile permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html
     #
     # @option params [required, String] :security_profile_id
     #   The identifier for the security profle.
@@ -8322,7 +8563,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

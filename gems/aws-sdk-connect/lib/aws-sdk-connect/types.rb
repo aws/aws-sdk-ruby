@@ -1968,7 +1968,12 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] permissions
-    #   Permissions assigned to the security profile.
+    #   Permissions assigned to the security profile. For a list of valid
+    #   permissions, see [List of security profile permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_id
@@ -7242,7 +7247,12 @@ module Aws::Connect
     end
 
     # @!attribute [rw] permissions
-    #   The permissions granted to the security profile.
+    #   The permissions granted to the security profile. For a complete list
+    #   of valid permissions, see [List of security profile permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -8023,6 +8033,130 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The search criteria to be used to return queues.
+    #
+    # @note When making an API call, you may pass QueueSearchCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         or_conditions: [
+    #           {
+    #             or_conditions: {
+    #               # recursive QueueSearchConditionList
+    #             },
+    #             and_conditions: {
+    #               # recursive QueueSearchConditionList
+    #             },
+    #             string_condition: {
+    #               field_name: "String",
+    #               value: "String",
+    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #             },
+    #             queue_type_condition: "STANDARD", # accepts STANDARD
+    #           },
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             or_conditions: {
+    #               # recursive QueueSearchConditionList
+    #             },
+    #             and_conditions: {
+    #               # recursive QueueSearchConditionList
+    #             },
+    #             string_condition: {
+    #               field_name: "String",
+    #               value: "String",
+    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #             },
+    #             queue_type_condition: "STANDARD", # accepts STANDARD
+    #           },
+    #         ],
+    #         string_condition: {
+    #           field_name: "String",
+    #           value: "String",
+    #           comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #         },
+    #         queue_type_condition: "STANDARD", # accepts STANDARD
+    #       }
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an OR
+    #   condition.
+    #   @return [Array<Types::QueueSearchCriteria>]
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions which would be applied together with an AND
+    #   condition.
+    #   @return [Array<Types::QueueSearchCriteria>]
+    #
+    # @!attribute [rw] string_condition
+    #   A leaf node condition which can be used to specify a string
+    #   condition, for example, `username = 'abc'`.
+    #   @return [Types::StringCondition]
+    #
+    # @!attribute [rw] queue_type_condition
+    #   The type of queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QueueSearchCriteria AWS API Documentation
+    #
+    class QueueSearchCriteria < Struct.new(
+      :or_conditions,
+      :and_conditions,
+      :string_condition,
+      :queue_type_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters to be applied to search results.
+    #
+    # @note When making an API call, you may pass QueueSearchFilter
+    #   data as a hash:
+    #
+    #       {
+    #         tag_filter: {
+    #           or_conditions: [
+    #             [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #           ],
+    #           and_conditions: [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #           tag_condition: {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] tag_filter
+    #   An object that can be used to specify Tag conditions inside the
+    #   `SearchFilter`. This accepts an `OR` of `AND` (List of List) input
+    #   where:
+    #
+    #   * Top level list specifies conditions that need to be applied with
+    #     `OR` operator
+    #
+    #   * Inner list specifies conditions that need to be applied with `AND`
+    #     operator.
+    #   @return [Types::ControlPlaneTagFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QueueSearchFilter AWS API Documentation
+    #
+    class QueueSearchFilter < Struct.new(
+      :tag_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about a queue.
     #
     # @!attribute [rw] id
@@ -8469,6 +8603,14 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] number_of_associated_queues
+    #   The number of associated queues in routing profile.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_associated_users
+    #   The number of associated users in routing profile.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfile AWS API Documentation
     #
     class RoutingProfile < Struct.new(
@@ -8479,7 +8621,9 @@ module Aws::Connect
       :description,
       :media_concurrencies,
       :default_outbound_queue_id,
-      :tags)
+      :tags,
+      :number_of_associated_queues,
+      :number_of_associated_users)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8630,6 +8774,122 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The search criteria to be used to return routing profiles.
+    #
+    # @note When making an API call, you may pass RoutingProfileSearchCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         or_conditions: [
+    #           {
+    #             or_conditions: {
+    #               # recursive RoutingProfileSearchConditionList
+    #             },
+    #             and_conditions: {
+    #               # recursive RoutingProfileSearchConditionList
+    #             },
+    #             string_condition: {
+    #               field_name: "String",
+    #               value: "String",
+    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #             },
+    #           },
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             or_conditions: {
+    #               # recursive RoutingProfileSearchConditionList
+    #             },
+    #             and_conditions: {
+    #               # recursive RoutingProfileSearchConditionList
+    #             },
+    #             string_condition: {
+    #               field_name: "String",
+    #               value: "String",
+    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #             },
+    #           },
+    #         ],
+    #         string_condition: {
+    #           field_name: "String",
+    #           value: "String",
+    #           comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #         },
+    #       }
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an OR
+    #   condition.
+    #   @return [Array<Types::RoutingProfileSearchCriteria>]
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions which would be applied together with an AND
+    #   condition.
+    #   @return [Array<Types::RoutingProfileSearchCriteria>]
+    #
+    # @!attribute [rw] string_condition
+    #   A leaf node condition which can be used to specify a string
+    #   condition, for example, `username = 'abc'`.
+    #   @return [Types::StringCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileSearchCriteria AWS API Documentation
+    #
+    class RoutingProfileSearchCriteria < Struct.new(
+      :or_conditions,
+      :and_conditions,
+      :string_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters to be applied to search results.
+    #
+    # @note When making an API call, you may pass RoutingProfileSearchFilter
+    #   data as a hash:
+    #
+    #       {
+    #         tag_filter: {
+    #           or_conditions: [
+    #             [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #           ],
+    #           and_conditions: [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #           tag_condition: {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] tag_filter
+    #   An object that can be used to specify Tag conditions inside the
+    #   `SearchFilter`. This accepts an `OR` of `AND` (List of List) input
+    #   where:
+    #
+    #   * Top level list specifies conditions that need to be applied with
+    #     `OR` operator
+    #
+    #   * Inner list specifies conditions that need to be applied with `AND`
+    #     operator.
+    #   @return [Types::ControlPlaneTagFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileSearchFilter AWS API Documentation
+    #
+    class RoutingProfileSearchFilter < Struct.new(
+      :tag_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about a routing profile.
     #
     # @!attribute [rw] id
@@ -8759,6 +9019,220 @@ module Aws::Connect
     class SearchAvailablePhoneNumbersResponse < Struct.new(
       :next_token,
       :available_numbers_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchQueuesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken2500",
+    #         max_results: 1,
+    #         search_filter: {
+    #           tag_filter: {
+    #             or_conditions: [
+    #               [
+    #                 {
+    #                   tag_key: "String",
+    #                   tag_value: "String",
+    #                 },
+    #               ],
+    #             ],
+    #             and_conditions: [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #             tag_condition: {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           },
+    #         },
+    #         search_criteria: {
+    #           or_conditions: [
+    #             {
+    #               # recursive QueueSearchCriteria
+    #             },
+    #           ],
+    #           and_conditions: [
+    #             {
+    #               # recursive QueueSearchCriteria
+    #             },
+    #           ],
+    #           string_condition: {
+    #             field_name: "String",
+    #             value: "String",
+    #             comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #           },
+    #           queue_type_condition: "STANDARD", # accepts STANDARD
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] search_filter
+    #   Filters to be applied to search results.
+    #   @return [Types::QueueSearchFilter]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return queues.
+    #   @return [Types::QueueSearchCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchQueuesRequest AWS API Documentation
+    #
+    class SearchQueuesRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :search_filter,
+      :search_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queues
+    #   Information about the queues.
+    #   @return [Array<Types::Queue>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] approximate_total_count
+    #   The total number of queues which matched your search query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchQueuesResponse AWS API Documentation
+    #
+    class SearchQueuesResponse < Struct.new(
+      :queues,
+      :next_token,
+      :approximate_total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchRoutingProfilesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken2500",
+    #         max_results: 1,
+    #         search_filter: {
+    #           tag_filter: {
+    #             or_conditions: [
+    #               [
+    #                 {
+    #                   tag_key: "String",
+    #                   tag_value: "String",
+    #                 },
+    #               ],
+    #             ],
+    #             and_conditions: [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #             tag_condition: {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           },
+    #         },
+    #         search_criteria: {
+    #           or_conditions: [
+    #             {
+    #               # recursive RoutingProfileSearchCriteria
+    #             },
+    #           ],
+    #           and_conditions: [
+    #             {
+    #               # recursive RoutingProfileSearchCriteria
+    #             },
+    #           ],
+    #           string_condition: {
+    #             field_name: "String",
+    #             value: "String",
+    #             comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] search_filter
+    #   Filters to be applied to search results.
+    #   @return [Types::RoutingProfileSearchFilter]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return routing profiles.
+    #   @return [Types::RoutingProfileSearchCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchRoutingProfilesRequest AWS API Documentation
+    #
+    class SearchRoutingProfilesRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :search_filter,
+      :search_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] routing_profiles
+    #   Information about the routing profiles.
+    #   @return [Array<Types::RoutingProfile>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] approximate_total_count
+    #   The total number of routing profiles which matched your search
+    #   query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchRoutingProfilesResponse AWS API Documentation
+    #
+    class SearchRoutingProfilesResponse < Struct.new(
+      :routing_profiles,
+      :next_token,
+      :approximate_total_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8943,6 +9417,13 @@ module Aws::Connect
     #
     # @!attribute [rw] search_criteria
     #   The search criteria to be used to return users.
+    #
+    #   <note markdown="1"> The `Username`, `Firstname`, and `Lastname` fields support
+    #   "contains" queries with a minimum of 2 characters and a maximum of
+    #   25 characters. Any queries with character lengths outside of this
+    #   range result in empty results.
+    #
+    #    </note>
     #   @return [Types::UserSearchCriteria]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchUsersRequest AWS API Documentation
@@ -10544,7 +11025,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   TThe name of the flow.
+    #   The name of the flow.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -11420,7 +11901,12 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] permissions
-    #   The permissions granted to a security profile.
+    #   The permissions granted to a security profile. For a list of valid
+    #   permissions, see [List of security profile permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_profile_id
@@ -12229,6 +12715,13 @@ module Aws::Connect
     end
 
     # The search criteria to be used to return users.
+    #
+    # <note markdown="1"> The `Username`, `Firstname`, and `Lastname` fields support
+    # "contains" queries with a minimum of 2 characters and a maximum of
+    # 25 characters. Any queries with character lengths outside of this
+    # range result in empty results.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass UserSearchCriteria
     #   data as a hash:
