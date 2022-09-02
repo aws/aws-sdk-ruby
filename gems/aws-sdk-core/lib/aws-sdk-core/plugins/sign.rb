@@ -49,12 +49,13 @@ module Aws
         def signer_for(context, auth_scheme)
           case auth_scheme['name']
           when 'sigv2'
-            # should never happen..
+            # don't sign, shouldn't happen in new rules
           when 'sigv4', 'sigv4a'
             Aws::Sigv4::Signer.new(
               service: _sigv4_name(context.config, auth_scheme),
               region: _sigv4_region(context.config, auth_scheme),
               credentials_provider: context.config.credentials,
+              signing_algorithm: auth_scheme['name'].to_sym,
               uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
               unsigned_headers: %w[content-length user-agent x-amzn-trace-id]
             )

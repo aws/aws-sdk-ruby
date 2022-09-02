@@ -190,6 +190,17 @@ module BuildTools
           operation['http']['requestUri'].gsub!('/{Bucket}', '/')
           operation['http']['requestUri'].gsub!('//', '/')
         end
+
+        # removes host prefix trait and requiredness
+        # defensive - checks host perfix labels and removes only those from API
+        next unless operation['endpoint'] &&
+                    (host_prefix = operation['endpoint'].delete('hostPrefix'))
+
+        host_prefix.gsub(/\{.+?\}/) do |label|
+          label = label.delete('{}')
+          input_shape = api['shapes'][operation['input']['shape']]
+          input_shape['required']&.delete(label)
+        end
       end
     end
 

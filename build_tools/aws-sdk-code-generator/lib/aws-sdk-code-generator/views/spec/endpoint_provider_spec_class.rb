@@ -37,7 +37,7 @@ module AwsSdkCodeGenerator
         class EndpointProviderTest
           def initialize(options)
             @documentation = options[:documentation]
-            @params = options[:params].map do |key, value|
+            @params = options[:params]&.map do |key, value|
               [Underscore.underscore(key).to_sym, value]
             end.to_h
             @tags = options[:tags]

@@ -420,7 +420,7 @@ module Aws::S3Control
     CloudWatchMetrics.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, required: true, location_name: "IsEnabled"))
     CloudWatchMetrics.struct_class = Types::CloudWatchMetrics
 
-    CreateAccessPointForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    CreateAccessPointForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     CreateAccessPointForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
     CreateAccessPointForObjectLambdaRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ObjectLambdaConfiguration, required: true, location_name: "Configuration"))
     CreateAccessPointForObjectLambdaRequest.struct_class = Types::CreateAccessPointForObjectLambdaRequest
@@ -428,9 +428,9 @@ module Aws::S3Control
     CreateAccessPointForObjectLambdaResult.add_member(:object_lambda_access_point_arn, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointArn, location_name: "ObjectLambdaAccessPointArn"))
     CreateAccessPointForObjectLambdaResult.struct_class = Types::CreateAccessPointForObjectLambdaResult
 
-    CreateAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    CreateAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     CreateAccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
-    CreateAccessPointRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
+    CreateAccessPointRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     CreateAccessPointRequest.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
     CreateAccessPointRequest.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
     CreateAccessPointRequest.struct_class = Types::CreateAccessPointRequest
@@ -443,7 +443,7 @@ module Aws::S3Control
     CreateBucketConfiguration.struct_class = Types::CreateBucketConfiguration
 
     CreateBucketRequest.add_member(:acl, Shapes::ShapeRef.new(shape: BucketCannedACL, location: "header", location_name: "x-amz-acl"))
-    CreateBucketRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    CreateBucketRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     CreateBucketRequest.add_member(:create_bucket_configuration, Shapes::ShapeRef.new(shape: CreateBucketConfiguration, location_name: "CreateBucketConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}}))
     CreateBucketRequest.add_member(:grant_full_control, Shapes::ShapeRef.new(shape: GrantFullControl, location: "header", location_name: "x-amz-grant-full-control"))
     CreateBucketRequest.add_member(:grant_read, Shapes::ShapeRef.new(shape: GrantRead, location: "header", location_name: "x-amz-grant-read"))
@@ -451,7 +451,7 @@ module Aws::S3Control
     CreateBucketRequest.add_member(:grant_write, Shapes::ShapeRef.new(shape: GrantWrite, location: "header", location_name: "x-amz-grant-write"))
     CreateBucketRequest.add_member(:grant_write_acp, Shapes::ShapeRef.new(shape: GrantWriteACP, location: "header", location_name: "x-amz-grant-write-acp"))
     CreateBucketRequest.add_member(:object_lock_enabled_for_bucket, Shapes::ShapeRef.new(shape: ObjectLockEnabledForBucket, location: "header", location_name: "x-amz-bucket-object-lock-enabled"))
-    CreateBucketRequest.add_member(:outpost_id, Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String, location: "header", location_name: "x-amz-outpost-id"))
+    CreateBucketRequest.add_member(:outpost_id, Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String, location: "header", location_name: "x-amz-outpost-id", metadata: {"contextParam"=>{"name"=>"OutpostId"}}))
     CreateBucketRequest.struct_class = Types::CreateBucketRequest
     CreateBucketRequest[:payload] = :create_bucket_configuration
     CreateBucketRequest[:payload_member] = CreateBucketRequest.member(:create_bucket_configuration)
@@ -460,7 +460,7 @@ module Aws::S3Control
     CreateBucketResult.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: S3RegionalBucketArn, location_name: "BucketArn"))
     CreateBucketResult.struct_class = Types::CreateBucketResult
 
-    CreateJobRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    CreateJobRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     CreateJobRequest.add_member(:confirmation_required, Shapes::ShapeRef.new(shape: ConfirmationRequired, location_name: "ConfirmationRequired", metadata: {"box"=>true}))
     CreateJobRequest.add_member(:operation, Shapes::ShapeRef.new(shape: JobOperation, required: true, location_name: "Operation"))
     CreateJobRequest.add_member(:report, Shapes::ShapeRef.new(shape: JobReport, required: true, location_name: "Report"))
@@ -481,7 +481,7 @@ module Aws::S3Control
     CreateMultiRegionAccessPointInput.add_member(:regions, Shapes::ShapeRef.new(shape: RegionCreationList, required: true, location_name: "Regions"))
     CreateMultiRegionAccessPointInput.struct_class = Types::CreateMultiRegionAccessPointInput
 
-    CreateMultiRegionAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    CreateMultiRegionAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     CreateMultiRegionAccessPointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: MultiRegionAccessPointClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateMultiRegionAccessPointRequest.add_member(:details, Shapes::ShapeRef.new(shape: CreateMultiRegionAccessPointInput, required: true, location_name: "Details"))
     CreateMultiRegionAccessPointRequest.struct_class = Types::CreateMultiRegionAccessPointRequest
@@ -489,39 +489,39 @@ module Aws::S3Control
     CreateMultiRegionAccessPointResult.add_member(:request_token_arn, Shapes::ShapeRef.new(shape: AsyncRequestTokenARN, location_name: "RequestTokenARN"))
     CreateMultiRegionAccessPointResult.struct_class = Types::CreateMultiRegionAccessPointResult
 
-    DeleteAccessPointForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DeleteAccessPointForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     DeleteAccessPointForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
     DeleteAccessPointForObjectLambdaRequest.struct_class = Types::DeleteAccessPointForObjectLambdaRequest
 
-    DeleteAccessPointPolicyForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DeleteAccessPointPolicyForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     DeleteAccessPointPolicyForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
     DeleteAccessPointPolicyForObjectLambdaRequest.struct_class = Types::DeleteAccessPointPolicyForObjectLambdaRequest
 
-    DeleteAccessPointPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    DeleteAccessPointPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
+    DeleteAccessPointPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DeleteAccessPointPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"AccessPointName"}}))
     DeleteAccessPointPolicyRequest.struct_class = Types::DeleteAccessPointPolicyRequest
 
-    DeleteAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    DeleteAccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
+    DeleteAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DeleteAccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"AccessPointName"}}))
     DeleteAccessPointRequest.struct_class = Types::DeleteAccessPointRequest
 
-    DeleteBucketLifecycleConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    DeleteBucketLifecycleConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    DeleteBucketLifecycleConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DeleteBucketLifecycleConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     DeleteBucketLifecycleConfigurationRequest.struct_class = Types::DeleteBucketLifecycleConfigurationRequest
 
-    DeleteBucketPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    DeleteBucketPolicyRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    DeleteBucketPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DeleteBucketPolicyRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     DeleteBucketPolicyRequest.struct_class = Types::DeleteBucketPolicyRequest
 
-    DeleteBucketRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    DeleteBucketRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    DeleteBucketRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DeleteBucketRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     DeleteBucketRequest.struct_class = Types::DeleteBucketRequest
 
-    DeleteBucketTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    DeleteBucketTaggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    DeleteBucketTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DeleteBucketTaggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     DeleteBucketTaggingRequest.struct_class = Types::DeleteBucketTaggingRequest
 
-    DeleteJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DeleteJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     DeleteJobTaggingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
     DeleteJobTaggingRequest.struct_class = Types::DeleteJobTaggingRequest
 
@@ -530,7 +530,7 @@ module Aws::S3Control
     DeleteMultiRegionAccessPointInput.add_member(:name, Shapes::ShapeRef.new(shape: MultiRegionAccessPointName, required: true, location_name: "Name"))
     DeleteMultiRegionAccessPointInput.struct_class = Types::DeleteMultiRegionAccessPointInput
 
-    DeleteMultiRegionAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DeleteMultiRegionAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     DeleteMultiRegionAccessPointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: MultiRegionAccessPointClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     DeleteMultiRegionAccessPointRequest.add_member(:details, Shapes::ShapeRef.new(shape: DeleteMultiRegionAccessPointInput, required: true, location_name: "Details"))
     DeleteMultiRegionAccessPointRequest.struct_class = Types::DeleteMultiRegionAccessPointRequest
@@ -538,27 +538,27 @@ module Aws::S3Control
     DeleteMultiRegionAccessPointResult.add_member(:request_token_arn, Shapes::ShapeRef.new(shape: AsyncRequestTokenARN, location_name: "RequestTokenARN"))
     DeleteMultiRegionAccessPointResult.struct_class = Types::DeleteMultiRegionAccessPointResult
 
-    DeletePublicAccessBlockRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DeletePublicAccessBlockRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     DeletePublicAccessBlockRequest.struct_class = Types::DeletePublicAccessBlockRequest
 
     DeleteStorageLensConfigurationRequest.add_member(:config_id, Shapes::ShapeRef.new(shape: ConfigId, required: true, location: "uri", location_name: "storagelensid"))
-    DeleteStorageLensConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DeleteStorageLensConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     DeleteStorageLensConfigurationRequest.struct_class = Types::DeleteStorageLensConfigurationRequest
 
     DeleteStorageLensConfigurationTaggingRequest.add_member(:config_id, Shapes::ShapeRef.new(shape: ConfigId, required: true, location: "uri", location_name: "storagelensid"))
-    DeleteStorageLensConfigurationTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DeleteStorageLensConfigurationTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     DeleteStorageLensConfigurationTaggingRequest.struct_class = Types::DeleteStorageLensConfigurationTaggingRequest
 
     DeleteStorageLensConfigurationTaggingResult.struct_class = Types::DeleteStorageLensConfigurationTaggingResult
 
-    DescribeJobRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DescribeJobRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     DescribeJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
     DescribeJobRequest.struct_class = Types::DescribeJobRequest
 
     DescribeJobResult.add_member(:job, Shapes::ShapeRef.new(shape: JobDescriptor, location_name: "Job"))
     DescribeJobResult.struct_class = Types::DescribeJobResult
 
-    DescribeMultiRegionAccessPointOperationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DescribeMultiRegionAccessPointOperationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     DescribeMultiRegionAccessPointOperationRequest.add_member(:request_token_arn, Shapes::ShapeRef.new(shape: AsyncRequestTokenARN, required: true, location: "uri", location_name: "request_token"))
     DescribeMultiRegionAccessPointOperationRequest.struct_class = Types::DescribeMultiRegionAccessPointOperationRequest
 
@@ -579,14 +579,14 @@ module Aws::S3Control
     GeneratedManifestEncryption.add_member(:ssekms, Shapes::ShapeRef.new(shape: SSEKMSEncryption, location_name: "SSE-KMS"))
     GeneratedManifestEncryption.struct_class = Types::GeneratedManifestEncryption
 
-    GetAccessPointConfigurationForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetAccessPointConfigurationForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     GetAccessPointConfigurationForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
     GetAccessPointConfigurationForObjectLambdaRequest.struct_class = Types::GetAccessPointConfigurationForObjectLambdaRequest
 
     GetAccessPointConfigurationForObjectLambdaResult.add_member(:configuration, Shapes::ShapeRef.new(shape: ObjectLambdaConfiguration, location_name: "Configuration"))
     GetAccessPointConfigurationForObjectLambdaResult.struct_class = Types::GetAccessPointConfigurationForObjectLambdaResult
 
-    GetAccessPointForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetAccessPointForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     GetAccessPointForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
     GetAccessPointForObjectLambdaRequest.struct_class = Types::GetAccessPointForObjectLambdaRequest
 
@@ -595,36 +595,36 @@ module Aws::S3Control
     GetAccessPointForObjectLambdaResult.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
     GetAccessPointForObjectLambdaResult.struct_class = Types::GetAccessPointForObjectLambdaResult
 
-    GetAccessPointPolicyForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetAccessPointPolicyForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     GetAccessPointPolicyForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
     GetAccessPointPolicyForObjectLambdaRequest.struct_class = Types::GetAccessPointPolicyForObjectLambdaRequest
 
     GetAccessPointPolicyForObjectLambdaResult.add_member(:policy, Shapes::ShapeRef.new(shape: ObjectLambdaPolicy, location_name: "Policy"))
     GetAccessPointPolicyForObjectLambdaResult.struct_class = Types::GetAccessPointPolicyForObjectLambdaResult
 
-    GetAccessPointPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    GetAccessPointPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
+    GetAccessPointPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetAccessPointPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"AccessPointName"}}))
     GetAccessPointPolicyRequest.struct_class = Types::GetAccessPointPolicyRequest
 
     GetAccessPointPolicyResult.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
     GetAccessPointPolicyResult.struct_class = Types::GetAccessPointPolicyResult
 
-    GetAccessPointPolicyStatusForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetAccessPointPolicyStatusForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     GetAccessPointPolicyStatusForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
     GetAccessPointPolicyStatusForObjectLambdaRequest.struct_class = Types::GetAccessPointPolicyStatusForObjectLambdaRequest
 
     GetAccessPointPolicyStatusForObjectLambdaResult.add_member(:policy_status, Shapes::ShapeRef.new(shape: PolicyStatus, location_name: "PolicyStatus"))
     GetAccessPointPolicyStatusForObjectLambdaResult.struct_class = Types::GetAccessPointPolicyStatusForObjectLambdaResult
 
-    GetAccessPointPolicyStatusRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    GetAccessPointPolicyStatusRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
+    GetAccessPointPolicyStatusRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetAccessPointPolicyStatusRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"AccessPointName"}}))
     GetAccessPointPolicyStatusRequest.struct_class = Types::GetAccessPointPolicyStatusRequest
 
     GetAccessPointPolicyStatusResult.add_member(:policy_status, Shapes::ShapeRef.new(shape: PolicyStatus, location_name: "PolicyStatus"))
     GetAccessPointPolicyStatusResult.struct_class = Types::GetAccessPointPolicyStatusResult
 
-    GetAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    GetAccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
+    GetAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetAccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"AccessPointName"}}))
     GetAccessPointRequest.struct_class = Types::GetAccessPointRequest
 
     GetAccessPointResult.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, location_name: "Name"))
@@ -638,22 +638,22 @@ module Aws::S3Control
     GetAccessPointResult.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, location_name: "Endpoints"))
     GetAccessPointResult.struct_class = Types::GetAccessPointResult
 
-    GetBucketLifecycleConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    GetBucketLifecycleConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    GetBucketLifecycleConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetBucketLifecycleConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     GetBucketLifecycleConfigurationRequest.struct_class = Types::GetBucketLifecycleConfigurationRequest
 
     GetBucketLifecycleConfigurationResult.add_member(:rules, Shapes::ShapeRef.new(shape: LifecycleRules, location_name: "Rules"))
     GetBucketLifecycleConfigurationResult.struct_class = Types::GetBucketLifecycleConfigurationResult
 
-    GetBucketPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    GetBucketPolicyRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    GetBucketPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetBucketPolicyRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     GetBucketPolicyRequest.struct_class = Types::GetBucketPolicyRequest
 
     GetBucketPolicyResult.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
     GetBucketPolicyResult.struct_class = Types::GetBucketPolicyResult
 
-    GetBucketRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    GetBucketRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    GetBucketRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetBucketRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     GetBucketRequest.struct_class = Types::GetBucketRequest
 
     GetBucketResult.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket"))
@@ -661,35 +661,35 @@ module Aws::S3Control
     GetBucketResult.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
     GetBucketResult.struct_class = Types::GetBucketResult
 
-    GetBucketTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    GetBucketTaggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    GetBucketTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetBucketTaggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     GetBucketTaggingRequest.struct_class = Types::GetBucketTaggingRequest
 
     GetBucketTaggingResult.add_member(:tag_set, Shapes::ShapeRef.new(shape: S3TagSet, required: true, location_name: "TagSet"))
     GetBucketTaggingResult.struct_class = Types::GetBucketTaggingResult
 
-    GetJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     GetJobTaggingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
     GetJobTaggingRequest.struct_class = Types::GetJobTaggingRequest
 
     GetJobTaggingResult.add_member(:tags, Shapes::ShapeRef.new(shape: S3TagSet, location_name: "Tags"))
     GetJobTaggingResult.struct_class = Types::GetJobTaggingResult
 
-    GetMultiRegionAccessPointPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetMultiRegionAccessPointPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     GetMultiRegionAccessPointPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: MultiRegionAccessPointName, required: true, location: "uri", location_name: "name"))
     GetMultiRegionAccessPointPolicyRequest.struct_class = Types::GetMultiRegionAccessPointPolicyRequest
 
     GetMultiRegionAccessPointPolicyResult.add_member(:policy, Shapes::ShapeRef.new(shape: MultiRegionAccessPointPolicyDocument, location_name: "Policy"))
     GetMultiRegionAccessPointPolicyResult.struct_class = Types::GetMultiRegionAccessPointPolicyResult
 
-    GetMultiRegionAccessPointPolicyStatusRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetMultiRegionAccessPointPolicyStatusRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     GetMultiRegionAccessPointPolicyStatusRequest.add_member(:name, Shapes::ShapeRef.new(shape: MultiRegionAccessPointName, required: true, location: "uri", location_name: "name"))
     GetMultiRegionAccessPointPolicyStatusRequest.struct_class = Types::GetMultiRegionAccessPointPolicyStatusRequest
 
     GetMultiRegionAccessPointPolicyStatusResult.add_member(:established, Shapes::ShapeRef.new(shape: PolicyStatus, location_name: "Established"))
     GetMultiRegionAccessPointPolicyStatusResult.struct_class = Types::GetMultiRegionAccessPointPolicyStatusResult
 
-    GetMultiRegionAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetMultiRegionAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     GetMultiRegionAccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: MultiRegionAccessPointName, required: true, location: "uri", location_name: "name"))
     GetMultiRegionAccessPointRequest.struct_class = Types::GetMultiRegionAccessPointRequest
 
@@ -701,11 +701,11 @@ module Aws::S3Control
     GetPublicAccessBlockOutput[:payload] = :public_access_block_configuration
     GetPublicAccessBlockOutput[:payload_member] = GetPublicAccessBlockOutput.member(:public_access_block_configuration)
 
-    GetPublicAccessBlockRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetPublicAccessBlockRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     GetPublicAccessBlockRequest.struct_class = Types::GetPublicAccessBlockRequest
 
     GetStorageLensConfigurationRequest.add_member(:config_id, Shapes::ShapeRef.new(shape: ConfigId, required: true, location: "uri", location_name: "storagelensid"))
-    GetStorageLensConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetStorageLensConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     GetStorageLensConfigurationRequest.struct_class = Types::GetStorageLensConfigurationRequest
 
     GetStorageLensConfigurationResult.add_member(:storage_lens_configuration, Shapes::ShapeRef.new(shape: StorageLensConfiguration, location_name: "StorageLensConfiguration"))
@@ -714,7 +714,7 @@ module Aws::S3Control
     GetStorageLensConfigurationResult[:payload_member] = GetStorageLensConfigurationResult.member(:storage_lens_configuration)
 
     GetStorageLensConfigurationTaggingRequest.add_member(:config_id, Shapes::ShapeRef.new(shape: ConfigId, required: true, location: "uri", location_name: "storagelensid"))
-    GetStorageLensConfigurationTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetStorageLensConfigurationTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     GetStorageLensConfigurationTaggingRequest.struct_class = Types::GetStorageLensConfigurationTaggingRequest
 
     GetStorageLensConfigurationTaggingResult.add_member(:tags, Shapes::ShapeRef.new(shape: StorageLensTags, location_name: "Tags"))
@@ -866,7 +866,7 @@ module Aws::S3Control
 
     LifecycleRules.member = Shapes::ShapeRef.new(shape: LifecycleRule, location_name: "Rule")
 
-    ListAccessPointsForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    ListAccessPointsForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     ListAccessPointsForObjectLambdaRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location: "querystring", location_name: "nextToken"))
     ListAccessPointsForObjectLambdaRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAccessPointsForObjectLambdaRequest.struct_class = Types::ListAccessPointsForObjectLambdaRequest
@@ -875,8 +875,8 @@ module Aws::S3Control
     ListAccessPointsForObjectLambdaResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "NextToken"))
     ListAccessPointsForObjectLambdaResult.struct_class = Types::ListAccessPointsForObjectLambdaResult
 
-    ListAccessPointsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    ListAccessPointsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, location: "querystring", location_name: "bucket"))
+    ListAccessPointsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    ListAccessPointsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, location: "querystring", location_name: "bucket", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     ListAccessPointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location: "querystring", location_name: "nextToken"))
     ListAccessPointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAccessPointsRequest.struct_class = Types::ListAccessPointsRequest
@@ -885,7 +885,7 @@ module Aws::S3Control
     ListAccessPointsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "NextToken"))
     ListAccessPointsResult.struct_class = Types::ListAccessPointsResult
 
-    ListJobsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    ListJobsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     ListJobsRequest.add_member(:job_statuses, Shapes::ShapeRef.new(shape: JobStatusList, location: "querystring", location_name: "jobStatuses"))
     ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: StringForNextToken, location: "querystring", location_name: "nextToken"))
     ListJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
@@ -895,7 +895,7 @@ module Aws::S3Control
     ListJobsResult.add_member(:jobs, Shapes::ShapeRef.new(shape: JobListDescriptorList, location_name: "Jobs"))
     ListJobsResult.struct_class = Types::ListJobsResult
 
-    ListMultiRegionAccessPointsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    ListMultiRegionAccessPointsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     ListMultiRegionAccessPointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location: "querystring", location_name: "nextToken"))
     ListMultiRegionAccessPointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListMultiRegionAccessPointsRequest.struct_class = Types::ListMultiRegionAccessPointsRequest
@@ -904,10 +904,10 @@ module Aws::S3Control
     ListMultiRegionAccessPointsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "NextToken"))
     ListMultiRegionAccessPointsResult.struct_class = Types::ListMultiRegionAccessPointsResult
 
-    ListRegionalBucketsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    ListRegionalBucketsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     ListRegionalBucketsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location: "querystring", location_name: "nextToken"))
     ListRegionalBucketsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
-    ListRegionalBucketsRequest.add_member(:outpost_id, Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String, location: "header", location_name: "x-amz-outpost-id"))
+    ListRegionalBucketsRequest.add_member(:outpost_id, Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String, location: "header", location_name: "x-amz-outpost-id", metadata: {"contextParam"=>{"name"=>"OutpostId"}}))
     ListRegionalBucketsRequest.struct_class = Types::ListRegionalBucketsRequest
 
     ListRegionalBucketsResult.add_member(:regional_bucket_list, Shapes::ShapeRef.new(shape: RegionalBucketList, location_name: "RegionalBucketList"))
@@ -920,7 +920,7 @@ module Aws::S3Control
     ListStorageLensConfigurationEntry.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, location_name: "IsEnabled"))
     ListStorageLensConfigurationEntry.struct_class = Types::ListStorageLensConfigurationEntry
 
-    ListStorageLensConfigurationsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    ListStorageLensConfigurationsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     ListStorageLensConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location: "querystring", location_name: "nextToken"))
     ListStorageLensConfigurationsRequest.struct_class = Types::ListStorageLensConfigurationsRequest
 
@@ -1013,42 +1013,42 @@ module Aws::S3Control
     PublicAccessBlockConfiguration.add_member(:restrict_public_buckets, Shapes::ShapeRef.new(shape: Setting, location_name: "RestrictPublicBuckets"))
     PublicAccessBlockConfiguration.struct_class = Types::PublicAccessBlockConfiguration
 
-    PutAccessPointConfigurationForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    PutAccessPointConfigurationForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     PutAccessPointConfigurationForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
     PutAccessPointConfigurationForObjectLambdaRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ObjectLambdaConfiguration, required: true, location_name: "Configuration"))
     PutAccessPointConfigurationForObjectLambdaRequest.struct_class = Types::PutAccessPointConfigurationForObjectLambdaRequest
 
-    PutAccessPointPolicyForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    PutAccessPointPolicyForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     PutAccessPointPolicyForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
     PutAccessPointPolicyForObjectLambdaRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ObjectLambdaPolicy, required: true, location_name: "Policy"))
     PutAccessPointPolicyForObjectLambdaRequest.struct_class = Types::PutAccessPointPolicyForObjectLambdaRequest
 
-    PutAccessPointPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    PutAccessPointPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
+    PutAccessPointPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    PutAccessPointPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"AccessPointName"}}))
     PutAccessPointPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
     PutAccessPointPolicyRequest.struct_class = Types::PutAccessPointPolicyRequest
 
-    PutBucketLifecycleConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    PutBucketLifecycleConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    PutBucketLifecycleConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    PutBucketLifecycleConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     PutBucketLifecycleConfigurationRequest.add_member(:lifecycle_configuration, Shapes::ShapeRef.new(shape: LifecycleConfiguration, location_name: "LifecycleConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}}))
     PutBucketLifecycleConfigurationRequest.struct_class = Types::PutBucketLifecycleConfigurationRequest
     PutBucketLifecycleConfigurationRequest[:payload] = :lifecycle_configuration
     PutBucketLifecycleConfigurationRequest[:payload_member] = PutBucketLifecycleConfigurationRequest.member(:lifecycle_configuration)
 
-    PutBucketPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    PutBucketPolicyRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    PutBucketPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    PutBucketPolicyRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     PutBucketPolicyRequest.add_member(:confirm_remove_self_bucket_access, Shapes::ShapeRef.new(shape: ConfirmRemoveSelfBucketAccess, location: "header", location_name: "x-amz-confirm-remove-self-bucket-access"))
     PutBucketPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
     PutBucketPolicyRequest.struct_class = Types::PutBucketPolicyRequest
 
-    PutBucketTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
-    PutBucketTaggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    PutBucketTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    PutBucketTaggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     PutBucketTaggingRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: Tagging, required: true, location_name: "Tagging", metadata: {"xmlNamespace"=>{"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}}))
     PutBucketTaggingRequest.struct_class = Types::PutBucketTaggingRequest
     PutBucketTaggingRequest[:payload] = :tagging
     PutBucketTaggingRequest[:payload_member] = PutBucketTaggingRequest.member(:tagging)
 
-    PutJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    PutJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     PutJobTaggingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
     PutJobTaggingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: S3TagSet, required: true, location_name: "Tags"))
     PutJobTaggingRequest.struct_class = Types::PutJobTaggingRequest
@@ -1059,7 +1059,7 @@ module Aws::S3Control
     PutMultiRegionAccessPointPolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
     PutMultiRegionAccessPointPolicyInput.struct_class = Types::PutMultiRegionAccessPointPolicyInput
 
-    PutMultiRegionAccessPointPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    PutMultiRegionAccessPointPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     PutMultiRegionAccessPointPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: MultiRegionAccessPointClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     PutMultiRegionAccessPointPolicyRequest.add_member(:details, Shapes::ShapeRef.new(shape: PutMultiRegionAccessPointPolicyInput, required: true, location_name: "Details"))
     PutMultiRegionAccessPointPolicyRequest.struct_class = Types::PutMultiRegionAccessPointPolicyRequest
@@ -1068,19 +1068,19 @@ module Aws::S3Control
     PutMultiRegionAccessPointPolicyResult.struct_class = Types::PutMultiRegionAccessPointPolicyResult
 
     PutPublicAccessBlockRequest.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, required: true, location_name: "PublicAccessBlockConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}}))
-    PutPublicAccessBlockRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    PutPublicAccessBlockRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     PutPublicAccessBlockRequest.struct_class = Types::PutPublicAccessBlockRequest
     PutPublicAccessBlockRequest[:payload] = :public_access_block_configuration
     PutPublicAccessBlockRequest[:payload_member] = PutPublicAccessBlockRequest.member(:public_access_block_configuration)
 
     PutStorageLensConfigurationRequest.add_member(:config_id, Shapes::ShapeRef.new(shape: ConfigId, required: true, location: "uri", location_name: "storagelensid"))
-    PutStorageLensConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    PutStorageLensConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     PutStorageLensConfigurationRequest.add_member(:storage_lens_configuration, Shapes::ShapeRef.new(shape: StorageLensConfiguration, required: true, location_name: "StorageLensConfiguration"))
     PutStorageLensConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: StorageLensTags, location_name: "Tags"))
     PutStorageLensConfigurationRequest.struct_class = Types::PutStorageLensConfigurationRequest
 
     PutStorageLensConfigurationTaggingRequest.add_member(:config_id, Shapes::ShapeRef.new(shape: ConfigId, required: true, location: "uri", location_name: "storagelensid"))
-    PutStorageLensConfigurationTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    PutStorageLensConfigurationTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     PutStorageLensConfigurationTaggingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: StorageLensTags, required: true, location_name: "Tags"))
     PutStorageLensConfigurationTaggingRequest.struct_class = Types::PutStorageLensConfigurationTaggingRequest
 
@@ -1289,7 +1289,7 @@ module Aws::S3Control
 
     TransitionList.member = Shapes::ShapeRef.new(shape: Transition, location_name: "Transition")
 
-    UpdateJobPriorityRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    UpdateJobPriorityRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     UpdateJobPriorityRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
     UpdateJobPriorityRequest.add_member(:priority, Shapes::ShapeRef.new(shape: JobPriority, required: true, location: "querystring", location_name: "priority"))
     UpdateJobPriorityRequest.struct_class = Types::UpdateJobPriorityRequest
@@ -1298,7 +1298,7 @@ module Aws::S3Control
     UpdateJobPriorityResult.add_member(:priority, Shapes::ShapeRef.new(shape: JobPriority, required: true, location_name: "Priority"))
     UpdateJobPriorityResult.struct_class = Types::UpdateJobPriorityResult
 
-    UpdateJobStatusRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    UpdateJobStatusRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     UpdateJobStatusRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
     UpdateJobStatusRequest.add_member(:requested_job_status, Shapes::ShapeRef.new(shape: RequestedJobStatus, required: true, location: "querystring", location_name: "requestedJobStatus"))
     UpdateJobStatusRequest.add_member(:status_update_reason, Shapes::ShapeRef.new(shape: JobStatusUpdateReason, location: "querystring", location_name: "statusUpdateReason"))
@@ -1334,7 +1334,6 @@ module Aws::S3Control
         o.http_method = "PUT"
         o.http_request_uri = "/v20180820/accesspoint/{name}"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: CreateAccessPointRequest,
           location_name: "CreateAccessPointRequest",
@@ -1350,7 +1349,6 @@ module Aws::S3Control
         o.http_method = "PUT"
         o.http_request_uri = "/v20180820/accesspointforobjectlambda/{name}"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: CreateAccessPointForObjectLambdaRequest,
           location_name: "CreateAccessPointForObjectLambdaRequest",
@@ -1377,7 +1375,6 @@ module Aws::S3Control
         o.http_method = "POST"
         o.http_request_uri = "/v20180820/jobs"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: CreateJobRequest,
           location_name: "CreateJobRequest",
@@ -1398,7 +1395,6 @@ module Aws::S3Control
         o.http_request_uri = "/v20180820/async-requests/mrap/create"
         o.http_checksum_required = true
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: CreateMultiRegionAccessPointRequest,
           location_name: "CreateMultiRegionAccessPointRequest",
@@ -1414,7 +1410,6 @@ module Aws::S3Control
         o.http_method = "DELETE"
         o.http_request_uri = "/v20180820/accesspoint/{name}"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteAccessPointRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -1425,7 +1420,6 @@ module Aws::S3Control
         o.http_method = "DELETE"
         o.http_request_uri = "/v20180820/accesspointforobjectlambda/{name}"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteAccessPointForObjectLambdaRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -1436,7 +1430,6 @@ module Aws::S3Control
         o.http_method = "DELETE"
         o.http_request_uri = "/v20180820/accesspoint/{name}/policy"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteAccessPointPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -1447,7 +1440,6 @@ module Aws::S3Control
         o.http_method = "DELETE"
         o.http_request_uri = "/v20180820/accesspointforobjectlambda/{name}/policy"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteAccessPointPolicyForObjectLambdaRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -1458,7 +1450,6 @@ module Aws::S3Control
         o.http_method = "DELETE"
         o.http_request_uri = "/v20180820/bucket/{name}"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -1469,7 +1460,6 @@ module Aws::S3Control
         o.http_method = "DELETE"
         o.http_request_uri = "/v20180820/bucket/{name}/lifecycleconfiguration"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketLifecycleConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -1480,7 +1470,6 @@ module Aws::S3Control
         o.http_method = "DELETE"
         o.http_request_uri = "/v20180820/bucket/{name}/policy"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -1491,7 +1480,6 @@ module Aws::S3Control
         o.http_method = "DELETE"
         o.http_request_uri = "/v20180820/bucket/{name}/tagging"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -1502,7 +1490,6 @@ module Aws::S3Control
         o.http_method = "DELETE"
         o.http_request_uri = "/v20180820/jobs/{id}/tagging"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteJobTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteJobTaggingResult)
@@ -1517,7 +1504,6 @@ module Aws::S3Control
         o.http_request_uri = "/v20180820/async-requests/mrap/delete"
         o.http_checksum_required = true
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteMultiRegionAccessPointRequest,
           location_name: "DeleteMultiRegionAccessPointRequest",
@@ -1533,7 +1519,6 @@ module Aws::S3Control
         o.http_method = "DELETE"
         o.http_request_uri = "/v20180820/configuration/publicAccessBlock"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeletePublicAccessBlockRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -1544,7 +1529,6 @@ module Aws::S3Control
         o.http_method = "DELETE"
         o.http_request_uri = "/v20180820/storagelens/{storagelensid}"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteStorageLensConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -1555,7 +1539,6 @@ module Aws::S3Control
         o.http_method = "DELETE"
         o.http_request_uri = "/v20180820/storagelens/{storagelensid}/tagging"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteStorageLensConfigurationTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteStorageLensConfigurationTaggingResult)
@@ -1566,7 +1549,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/jobs/{id}"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: DescribeJobRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeJobResult)
@@ -1582,7 +1564,6 @@ module Aws::S3Control
         o.http_request_uri = "/v20180820/async-requests/mrap/{request_token+}"
         o.http_checksum_required = true
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: DescribeMultiRegionAccessPointOperationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeMultiRegionAccessPointOperationResult)
@@ -1593,7 +1574,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/accesspoint/{name}"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetAccessPointRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAccessPointResult)
@@ -1604,7 +1584,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/accesspointforobjectlambda/{name}/configuration"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetAccessPointConfigurationForObjectLambdaRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAccessPointConfigurationForObjectLambdaResult)
@@ -1615,7 +1594,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/accesspointforobjectlambda/{name}"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetAccessPointForObjectLambdaRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAccessPointForObjectLambdaResult)
@@ -1626,7 +1604,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/accesspoint/{name}/policy"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetAccessPointPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAccessPointPolicyResult)
@@ -1637,7 +1614,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/accesspointforobjectlambda/{name}/policy"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetAccessPointPolicyForObjectLambdaRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAccessPointPolicyForObjectLambdaResult)
@@ -1648,7 +1624,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/accesspoint/{name}/policyStatus"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetAccessPointPolicyStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAccessPointPolicyStatusResult)
@@ -1659,7 +1634,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/accesspointforobjectlambda/{name}/policyStatus"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetAccessPointPolicyStatusForObjectLambdaRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAccessPointPolicyStatusForObjectLambdaResult)
@@ -1670,7 +1644,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/bucket/{name}"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetBucketRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketResult)
@@ -1681,7 +1654,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/bucket/{name}/lifecycleconfiguration"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetBucketLifecycleConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketLifecycleConfigurationResult)
@@ -1692,7 +1664,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/bucket/{name}/policy"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetBucketPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketPolicyResult)
@@ -1703,7 +1674,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/bucket/{name}/tagging"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetBucketTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketTaggingResult)
@@ -1714,7 +1684,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/jobs/{id}/tagging"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetJobTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: GetJobTaggingResult)
@@ -1729,7 +1698,6 @@ module Aws::S3Control
         o.http_request_uri = "/v20180820/mrap/instances/{name}"
         o.http_checksum_required = true
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetMultiRegionAccessPointRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMultiRegionAccessPointResult)
@@ -1741,7 +1709,6 @@ module Aws::S3Control
         o.http_request_uri = "/v20180820/mrap/instances/{name}/policy"
         o.http_checksum_required = true
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetMultiRegionAccessPointPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMultiRegionAccessPointPolicyResult)
@@ -1753,7 +1720,6 @@ module Aws::S3Control
         o.http_request_uri = "/v20180820/mrap/instances/{name}/policystatus"
         o.http_checksum_required = true
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetMultiRegionAccessPointPolicyStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMultiRegionAccessPointPolicyStatusResult)
@@ -1764,7 +1730,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/configuration/publicAccessBlock"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetPublicAccessBlockRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPublicAccessBlockOutput)
@@ -1776,7 +1741,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/storagelens/{storagelensid}"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetStorageLensConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetStorageLensConfigurationResult)
@@ -1787,7 +1751,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/storagelens/{storagelensid}/tagging"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetStorageLensConfigurationTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: GetStorageLensConfigurationTaggingResult)
@@ -1798,7 +1761,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/accesspoint"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: ListAccessPointsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAccessPointsResult)
@@ -1815,7 +1777,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/accesspointforobjectlambda"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: ListAccessPointsForObjectLambdaRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAccessPointsForObjectLambdaResult)
@@ -1832,7 +1793,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/jobs"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: ListJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListJobsResult)
@@ -1853,7 +1813,6 @@ module Aws::S3Control
         o.http_request_uri = "/v20180820/mrap/instances"
         o.http_checksum_required = true
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: ListMultiRegionAccessPointsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListMultiRegionAccessPointsResult)
@@ -1870,7 +1829,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/bucket"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: ListRegionalBucketsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRegionalBucketsResult)
@@ -1887,7 +1845,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/storagelens"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: ListStorageLensConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListStorageLensConfigurationsResult)
@@ -1903,7 +1860,6 @@ module Aws::S3Control
         o.http_method = "PUT"
         o.http_request_uri = "/v20180820/accesspointforobjectlambda/{name}/configuration"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: PutAccessPointConfigurationForObjectLambdaRequest,
           location_name: "PutAccessPointConfigurationForObjectLambdaRequest",
@@ -1919,7 +1875,6 @@ module Aws::S3Control
         o.http_method = "PUT"
         o.http_request_uri = "/v20180820/accesspoint/{name}/policy"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: PutAccessPointPolicyRequest,
           location_name: "PutAccessPointPolicyRequest",
@@ -1935,7 +1890,6 @@ module Aws::S3Control
         o.http_method = "PUT"
         o.http_request_uri = "/v20180820/accesspointforobjectlambda/{name}/policy"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: PutAccessPointPolicyForObjectLambdaRequest,
           location_name: "PutAccessPointPolicyForObjectLambdaRequest",
@@ -1952,7 +1906,6 @@ module Aws::S3Control
         o.http_request_uri = "/v20180820/bucket/{name}/lifecycleconfiguration"
         o.http_checksum_required = true
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: PutBucketLifecycleConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -1964,7 +1917,6 @@ module Aws::S3Control
         o.http_request_uri = "/v20180820/bucket/{name}/policy"
         o.http_checksum_required = true
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: PutBucketPolicyRequest,
           location_name: "PutBucketPolicyRequest",
@@ -1981,7 +1933,6 @@ module Aws::S3Control
         o.http_request_uri = "/v20180820/bucket/{name}/tagging"
         o.http_checksum_required = true
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: PutBucketTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -1992,7 +1943,6 @@ module Aws::S3Control
         o.http_method = "PUT"
         o.http_request_uri = "/v20180820/jobs/{id}/tagging"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: PutJobTaggingRequest,
           location_name: "PutJobTaggingRequest",
@@ -2013,7 +1963,6 @@ module Aws::S3Control
         o.http_request_uri = "/v20180820/async-requests/mrap/put-policy"
         o.http_checksum_required = true
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: PutMultiRegionAccessPointPolicyRequest,
           location_name: "PutMultiRegionAccessPointPolicyRequest",
@@ -2029,7 +1978,6 @@ module Aws::S3Control
         o.http_method = "PUT"
         o.http_request_uri = "/v20180820/configuration/publicAccessBlock"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: PutPublicAccessBlockRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
@@ -2040,7 +1988,6 @@ module Aws::S3Control
         o.http_method = "PUT"
         o.http_request_uri = "/v20180820/storagelens/{storagelensid}"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: PutStorageLensConfigurationRequest,
           location_name: "PutStorageLensConfigurationRequest",
@@ -2056,7 +2003,6 @@ module Aws::S3Control
         o.http_method = "PUT"
         o.http_request_uri = "/v20180820/storagelens/{storagelensid}/tagging"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: PutStorageLensConfigurationTaggingRequest,
           location_name: "PutStorageLensConfigurationTaggingRequest",
@@ -2072,7 +2018,6 @@ module Aws::S3Control
         o.http_method = "POST"
         o.http_request_uri = "/v20180820/jobs/{id}/priority"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateJobPriorityRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateJobPriorityResult)
@@ -2087,7 +2032,6 @@ module Aws::S3Control
         o.http_method = "POST"
         o.http_request_uri = "/v20180820/jobs/{id}/status"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateJobStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateJobStatusResult)

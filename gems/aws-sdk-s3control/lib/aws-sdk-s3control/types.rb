@@ -406,7 +406,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "ObjectLambdaAccessPointName", # required
     #         configuration: { # required
     #           supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
@@ -465,7 +465,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "AccessPointName", # required
     #         bucket: "BucketName", # required
     #         vpc_configuration: {
@@ -733,7 +733,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         confirmation_required: false,
     #         operation: { # required
     #           lambda_invoke: {
@@ -1052,7 +1052,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         client_token: "MultiRegionAccessPointClientToken", # required
     #         details: { # required
     #           name: "MultiRegionAccessPointName", # required
@@ -1121,7 +1121,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "ObjectLambdaAccessPointName", # required
     #       }
     #
@@ -1147,7 +1147,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "ObjectLambdaAccessPointName", # required
     #       }
     #
@@ -1174,7 +1174,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "AccessPointName", # required
     #       }
     #
@@ -1212,7 +1212,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "AccessPointName", # required
     #       }
     #
@@ -1250,7 +1250,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         bucket: "BucketName", # required
     #       }
     #
@@ -1288,7 +1288,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         bucket: "BucketName", # required
     #       }
     #
@@ -1326,7 +1326,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         bucket: "BucketName", # required
     #       }
     #
@@ -1364,7 +1364,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         bucket: "BucketName", # required
     #       }
     #
@@ -1403,7 +1403,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         job_id: "JobId", # required
     #       }
     #
@@ -1461,7 +1461,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         client_token: "MultiRegionAccessPointClientToken", # required
     #         details: { # required
     #           name: "MultiRegionAccessPointName", # required
@@ -1518,7 +1518,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #       }
     #
     # @!attribute [rw] account_id
@@ -1539,7 +1539,7 @@ module Aws::S3Control
     #
     #       {
     #         config_id: "ConfigId", # required
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #       }
     #
     # @!attribute [rw] config_id
@@ -1564,7 +1564,7 @@ module Aws::S3Control
     #
     #       {
     #         config_id: "ConfigId", # required
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #       }
     #
     # @!attribute [rw] config_id
@@ -1592,7 +1592,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         job_id: "JobId", # required
     #       }
     #
@@ -1631,7 +1631,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         request_token_arn: "AsyncRequestTokenARN", # required
     #       }
     #
@@ -1753,7 +1753,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "ObjectLambdaAccessPointName", # required
     #       }
     #
@@ -1792,7 +1792,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "ObjectLambdaAccessPointName", # required
     #       }
     #
@@ -1842,7 +1842,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "ObjectLambdaAccessPointName", # required
     #       }
     #
@@ -1880,7 +1880,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "AccessPointName", # required
     #       }
     #
@@ -1930,7 +1930,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "ObjectLambdaAccessPointName", # required
     #       }
     #
@@ -1975,7 +1975,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "AccessPointName", # required
     #       }
     #
@@ -2013,7 +2013,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "AccessPointName", # required
     #       }
     #
@@ -2127,7 +2127,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         bucket: "BucketName", # required
     #       }
     #
@@ -2177,7 +2177,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         bucket: "BucketName", # required
     #       }
     #
@@ -2227,7 +2227,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         bucket: "BucketName", # required
     #       }
     #
@@ -2286,7 +2286,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         bucket: "BucketName", # required
     #       }
     #
@@ -2336,7 +2336,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         job_id: "JobId", # required
     #       }
     #
@@ -2375,7 +2375,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "MultiRegionAccessPointName", # required
     #       }
     #
@@ -2421,7 +2421,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "MultiRegionAccessPointName", # required
     #       }
     #
@@ -2474,7 +2474,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "MultiRegionAccessPointName", # required
     #       }
     #
@@ -2535,7 +2535,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #       }
     #
     # @!attribute [rw] account_id
@@ -2556,7 +2556,7 @@ module Aws::S3Control
     #
     #       {
     #         config_id: "ConfigId", # required
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #       }
     #
     # @!attribute [rw] config_id
@@ -2593,7 +2593,7 @@ module Aws::S3Control
     #
     #       {
     #         config_id: "ConfigId", # required
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #       }
     #
     # @!attribute [rw] config_id
@@ -3704,7 +3704,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         next_token: "NonEmptyMaxLength1024String",
     #         max_results: 1,
     #       }
@@ -3764,7 +3764,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         bucket: "BucketName",
     #         next_token: "NonEmptyMaxLength1024String",
     #         max_results: 1,
@@ -3844,7 +3844,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         job_statuses: ["Active"], # accepts Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended
     #         next_token: "StringForNextToken",
     #         max_results: 1,
@@ -3908,7 +3908,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         next_token: "NonEmptyMaxLength1024String",
     #         max_results: 1,
     #       }
@@ -3960,7 +3960,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         next_token: "NonEmptyMaxLength1024String",
     #         max_results: 1,
     #         outpost_id: "NonEmptyMaxLength64String",
@@ -4053,7 +4053,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         next_token: "ContinuationToken",
     #       }
     #
@@ -4629,7 +4629,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "ObjectLambdaAccessPointName", # required
     #         configuration: { # required
     #           supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
@@ -4676,7 +4676,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "ObjectLambdaAccessPointName", # required
     #         policy: "ObjectLambdaPolicy", # required
     #       }
@@ -4708,7 +4708,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "AccessPointName", # required
     #         policy: "Policy", # required
     #       }
@@ -4761,7 +4761,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         bucket: "BucketName", # required
     #         lifecycle_configuration: {
     #           rules: [
@@ -4839,7 +4839,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         bucket: "BucketName", # required
     #         confirm_remove_self_bucket_access: false,
     #         policy: "Policy", # required
@@ -4894,7 +4894,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         bucket: "BucketName", # required
     #         tagging: { # required
     #           tag_set: [ # required
@@ -4944,7 +4944,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         job_id: "JobId", # required
     #         tags: [ # required
     #           {
@@ -5019,7 +5019,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         client_token: "MultiRegionAccessPointClientToken", # required
     #         details: { # required
     #           name: "MultiRegionAccessPointName", # required
@@ -5083,7 +5083,7 @@ module Aws::S3Control
     #           block_public_policy: false,
     #           restrict_public_buckets: false,
     #         },
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #       }
     #
     # @!attribute [rw] public_access_block_configuration
@@ -5110,7 +5110,7 @@ module Aws::S3Control
     #
     #       {
     #         config_id: "ConfigId", # required
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         storage_lens_configuration: { # required
     #           id: "ConfigId", # required
     #           account_level: { # required
@@ -5210,7 +5210,7 @@ module Aws::S3Control
     #
     #       {
     #         config_id: "ConfigId", # required
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         tags: [ # required
     #           {
     #             key: "TagKeyString", # required
@@ -6675,7 +6675,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         job_id: "JobId", # required
     #         priority: 1, # required
     #       }
@@ -6724,7 +6724,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         job_id: "JobId", # required
     #         requested_job_status: "Cancelled", # required, accepts Cancelled, Ready
     #         status_update_reason: "JobStatusUpdateReason",
