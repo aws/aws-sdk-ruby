@@ -844,6 +844,9 @@
       "aws-sdk-kms": "~> 1",
       "aws-sigv4": "~> 1.4"
     },
+    "removePlugins": [
+      "Aws::Plugins::Sign"
+    ],
     "addPlugins": [
       "Aws::S3::Plugins::Accelerate",
       "Aws::S3::Plugins::ARN",

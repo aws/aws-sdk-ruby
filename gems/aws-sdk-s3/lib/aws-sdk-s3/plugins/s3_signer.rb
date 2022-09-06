@@ -49,7 +49,7 @@ module Aws
             if %w[sigv4 sigv4a].include?(auth_scheme['name'])
               Aws::Plugins::SignatureV4.apply_signature(
                 context: context,
-                signer: sigv4_signer(context, auth_scheme)
+                signer: sigv4_signer(context)
               )
             end
             @handler.call(context)
@@ -57,23 +57,13 @@ module Aws
 
           private
 
-          def sigv4_signer(context, auth_scheme)
-            cfg = context.config
-            sigv4_region = Aws::Plugins::SignatureV4._sigv4_region(cfg, auth_scheme)
-            sigv4_name = Aws::Plugins::SignatureV4._sigv4_name(cfg, auth_scheme)
-
-            # If the client was configured with the wrong region,
-            # we have to build a new signer.
+          def sigv4_signer(context)
             if context[:cached_sigv4_region] &&
-               context[:cached_sigv4_region] != sigv4_region
-              S3Signer.build_v4_signer(
-                service: sigv4_name,
-                region: context[:cached_sigv4_region],
-                credentials: context.config.credentials
-              )
-            else
-              Aws::Plugins::SignatureV4.build_signer(context.config, auth_scheme)
+               context[:cached_sigv4_region] != context.config.region
+              region = context[:cached_sigv4_region]
             end
+
+            S3Signer.build_v4_signer(context, region)
           end
         end
 
@@ -114,7 +104,7 @@ module Aws
           def handle_region_errors(response)
             if wrong_sigv4_region?(response) &&
                !fips_region?(response) &&
-               !custom_endpoint?(response) &&
+               response.context.config.regional_endpoint &&
                !expired_credentials?(response)
               get_region_and_retry(response.context)
             else
@@ -143,19 +133,6 @@ module Aws
             resp.context.http_response.body_contents.match(/<Code>ExpiredToken<\/Code>/)
           end
 
-          def custom_endpoint?(resp)
-            # resolved_suffix = Aws::Partitions::EndpointProvider.dns_suffix_for(
-            #   resp.context.config.region,
-            #   's3',
-            #   {
-            #     dualstack: resp.context[:use_dualstack_endpoint],
-            #     fips: resp.context.config.use_fips_endpoint
-            #   }
-            # )
-            # !resp.context.http_request.endpoint.hostname.include?(resolved_suffix)
-            !resp.context.config.regional_endpoint
-          end
-
           def wrong_sigv4_region?(resp)
             resp.context.http_response.status_code == 400 &&
               (resp.context.http_response.headers['x-amz-bucket-region'] ||
@@ -171,13 +148,7 @@ module Aws
 
             Aws::Plugins::SignatureV4.apply_signature(
               context: context,
-              signer: S3Signer.build_v4_signer(
-                service: Aws::Plugins::SignatureV4._sigv4_name(
-                  context.config, context[:endpoint][:auth_scheme]
-                ),
-                region: actual_region,
-                credentials: context.config.credentials
-              )
+              signer: S3Signer.build_v4_signer(context, actual_region)
             )
           end
 
@@ -204,18 +175,31 @@ module Aws
         end
 
         class << self
-          # @option options [required, String] :region
-          # @option options [required, #credentials] :credentials
           # @api private
-          def build_v4_signer(options = {})
+          def build_v4_signer(context, new_region = nil)
+            cfg = context.config
+            auth_scheme = context[:endpoint][:auth_scheme]
             Aws::Sigv4::Signer.new(
-              service: options[:service],
-              region: options[:region],
-              credentials_provider: options[:credentials],
-              signing_algorithm: options.fetch(:signing_algorithm, :sigv4),
-              uri_escape_path: false,
-              unsigned_headers: ['content-length', 'x-amzn-trace-id']
+              service: _sigv4_name(cfg, auth_scheme),
+              region: new_region || _sigv4_region(cfg, auth_scheme),
+              credentials: cfg.credentials,
+              signing_algorithm: auth_scheme['name'].to_sym,
+              uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
+              unsigned_headers: %w[content-length user-agent x-amzn-trace-id]
             )
+          end
+
+          # @api private
+          def _sigv4_name(cfg, scheme)
+            cfg.sigv4_name || scheme['signingName'] ||
+              cfg.api.metadata['signingName'] ||
+              cfg.api.metadata['endpointPrefix']
+          end
+
+          # @api private
+          def _sigv4_region(cfg, scheme)
+            cfg.sigv4_region || scheme['signingRegion'] ||
+              '*' if scheme['name'] == 'sigv4a' || cfg.region
           end
 
           def new_hostname(context, region)

@@ -10,7 +10,6 @@ module {{module_name}}
     {{#endpoint_classes}}
     class {{name}}
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end

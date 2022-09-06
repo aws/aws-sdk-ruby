@@ -26,16 +26,12 @@ be a URI formatted like:
 
         def after_initialize(client)
           endpoint = client.config.endpoint
-          if endpoint.nil?
-            msg = "missing required option `:endpoint'"
-            raise ArgumentError, msg
-          end
-
-          endpoint = URI.parse(endpoint.to_s)
-          if URI::HTTPS === endpoint or URI::HTTP === endpoint
+          endpoint = URI.parse(endpoint) if endpoint.is_a?(String)
+          if endpoint.nil? || URI::HTTP === endpoint || URI::HTTPS === endpoint
             client.config.endpoint = endpoint
           else
-            msg = 'expected :endpoint to be a HTTP or HTTPS endpoint'
+            msg = 'invalid endpoint, expected URI::HTTP, URI::HTTPS, or nil, '\
+                  "got #{endpoint.inspect}"
             raise ArgumentError, msg
           end
         end
@@ -43,7 +39,7 @@ be a URI formatted like:
         class Handler < Client::Handler
 
           def call(context)
-            context.http_request.endpoint = URI.parse(context.config.endpoint.to_s)
+            context.http_request.endpoint = context.config.endpoint
             @handler.call(context)
           end
 

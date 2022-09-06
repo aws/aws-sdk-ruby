@@ -100,7 +100,7 @@ the background every 60 secs (default). Defaults to `false`.
         end
 
         def _discover_endpoint(ctx, required)
-          cache = ctx.config.endpoint_cache 
+          cache = ctx.config.endpoint_cache
           key = cache.extract_key(ctx)
 
           if required

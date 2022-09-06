@@ -112,7 +112,7 @@ module AwsSdkCodeGenerator
         when 'AWS::S3::DisableMultiRegionAccessPoints'
           'context.config.s3_disable_multiregion_access_points'
         when 'SDK::Endpoint'
-          'endpoint' # hack
+          'endpoint'
         end
       end
 

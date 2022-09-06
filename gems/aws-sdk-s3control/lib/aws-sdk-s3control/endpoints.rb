@@ -13,7 +13,6 @@ module Aws::S3Control
 
     class CreateAccessPoint
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -34,7 +33,6 @@ module Aws::S3Control
 
     class CreateAccessPointForObjectLambda
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -55,7 +53,6 @@ module Aws::S3Control
 
     class CreateBucket
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -76,7 +73,6 @@ module Aws::S3Control
 
     class CreateJob
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -97,7 +93,6 @@ module Aws::S3Control
 
     class CreateMultiRegionAccessPoint
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -118,7 +113,6 @@ module Aws::S3Control
 
     class DeleteAccessPoint
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -139,7 +133,6 @@ module Aws::S3Control
 
     class DeleteAccessPointForObjectLambda
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -160,7 +153,6 @@ module Aws::S3Control
 
     class DeleteAccessPointPolicy
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -181,7 +173,6 @@ module Aws::S3Control
 
     class DeleteAccessPointPolicyForObjectLambda
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -202,7 +193,6 @@ module Aws::S3Control
 
     class DeleteBucket
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -223,7 +213,6 @@ module Aws::S3Control
 
     class DeleteBucketLifecycleConfiguration
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -244,7 +233,6 @@ module Aws::S3Control
 
     class DeleteBucketPolicy
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -265,7 +253,6 @@ module Aws::S3Control
 
     class DeleteBucketTagging
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -286,7 +273,6 @@ module Aws::S3Control
 
     class DeleteJobTagging
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -307,7 +293,6 @@ module Aws::S3Control
 
     class DeleteMultiRegionAccessPoint
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -328,7 +313,6 @@ module Aws::S3Control
 
     class DeletePublicAccessBlock
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -349,7 +333,6 @@ module Aws::S3Control
 
     class DeleteStorageLensConfiguration
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -370,7 +353,6 @@ module Aws::S3Control
 
     class DeleteStorageLensConfigurationTagging
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -391,7 +373,6 @@ module Aws::S3Control
 
     class DescribeJob
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -412,7 +393,6 @@ module Aws::S3Control
 
     class DescribeMultiRegionAccessPointOperation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -433,7 +413,6 @@ module Aws::S3Control
 
     class GetAccessPoint
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -454,7 +433,6 @@ module Aws::S3Control
 
     class GetAccessPointConfigurationForObjectLambda
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -475,7 +453,6 @@ module Aws::S3Control
 
     class GetAccessPointForObjectLambda
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -496,7 +473,6 @@ module Aws::S3Control
 
     class GetAccessPointPolicy
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -517,7 +493,6 @@ module Aws::S3Control
 
     class GetAccessPointPolicyForObjectLambda
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -538,7 +513,6 @@ module Aws::S3Control
 
     class GetAccessPointPolicyStatus
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -559,7 +533,6 @@ module Aws::S3Control
 
     class GetAccessPointPolicyStatusForObjectLambda
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -580,7 +553,6 @@ module Aws::S3Control
 
     class GetBucket
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -601,7 +573,6 @@ module Aws::S3Control
 
     class GetBucketLifecycleConfiguration
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -622,7 +593,6 @@ module Aws::S3Control
 
     class GetBucketPolicy
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -643,7 +613,6 @@ module Aws::S3Control
 
     class GetBucketTagging
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -664,7 +633,6 @@ module Aws::S3Control
 
     class GetJobTagging
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -685,7 +653,6 @@ module Aws::S3Control
 
     class GetMultiRegionAccessPoint
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -706,7 +673,6 @@ module Aws::S3Control
 
     class GetMultiRegionAccessPointPolicy
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -727,7 +693,6 @@ module Aws::S3Control
 
     class GetMultiRegionAccessPointPolicyStatus
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -748,7 +713,6 @@ module Aws::S3Control
 
     class GetPublicAccessBlock
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -769,7 +733,6 @@ module Aws::S3Control
 
     class GetStorageLensConfiguration
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -790,7 +753,6 @@ module Aws::S3Control
 
     class GetStorageLensConfigurationTagging
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -811,7 +773,6 @@ module Aws::S3Control
 
     class ListAccessPoints
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -832,7 +793,6 @@ module Aws::S3Control
 
     class ListAccessPointsForObjectLambda
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -853,7 +813,6 @@ module Aws::S3Control
 
     class ListJobs
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -874,7 +833,6 @@ module Aws::S3Control
 
     class ListMultiRegionAccessPoints
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -895,7 +853,6 @@ module Aws::S3Control
 
     class ListRegionalBuckets
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -916,7 +873,6 @@ module Aws::S3Control
 
     class ListStorageLensConfigurations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -937,7 +893,6 @@ module Aws::S3Control
 
     class PutAccessPointConfigurationForObjectLambda
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -958,7 +913,6 @@ module Aws::S3Control
 
     class PutAccessPointPolicy
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -979,7 +933,6 @@ module Aws::S3Control
 
     class PutAccessPointPolicyForObjectLambda
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1000,7 +953,6 @@ module Aws::S3Control
 
     class PutBucketLifecycleConfiguration
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1021,7 +973,6 @@ module Aws::S3Control
 
     class PutBucketPolicy
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1042,7 +993,6 @@ module Aws::S3Control
 
     class PutBucketTagging
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1063,7 +1013,6 @@ module Aws::S3Control
 
     class PutJobTagging
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1084,7 +1033,6 @@ module Aws::S3Control
 
     class PutMultiRegionAccessPointPolicy
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1105,7 +1053,6 @@ module Aws::S3Control
 
     class PutPublicAccessBlock
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1126,7 +1073,6 @@ module Aws::S3Control
 
     class PutStorageLensConfiguration
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1147,7 +1093,6 @@ module Aws::S3Control
 
     class PutStorageLensConfigurationTagging
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1168,7 +1113,6 @@ module Aws::S3Control
 
     class UpdateJobPriority
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1189,7 +1133,6 @@ module Aws::S3Control
 
     class UpdateJobStatus
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end

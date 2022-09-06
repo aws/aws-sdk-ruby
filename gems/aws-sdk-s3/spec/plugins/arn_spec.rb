@@ -1123,9 +1123,6 @@ module Aws
           mock_signature = Aws::Sigv4::Signature.new(headers: {})
           mock_signer = double('sigv4a_signer', sign_request: mock_signature)
 
-          # the S3Signer plugin always creates a base signer.
-          # MRAP arns will then result in a second signer being created with :sigv4a
-          allow(Aws::Sigv4::Signer).to receive(:new).and_call_original
           allow(Aws::Sigv4::Signer).to receive(:new).with(hash_including(region: region, signing_algorithm: :sigv4a)).and_return(mock_signer)
         end
 

@@ -133,7 +133,7 @@ module Aws
         virtual_host = params.delete(:virtual_host)
         time = params.delete(:time)
         unsigned_headers = unsigned_headers(params)
-        scheme = http_scheme(params)
+        secure = params.delete(:secure) != false
         expires_in = expires_in(params)
 
         req = @client.build_request(method, params)
@@ -141,7 +141,7 @@ module Aws
         handle_presigned_url_context(req)
 
         x_amz_headers = sign_but_dont_send(
-          req, expires_in, scheme, time, unsigned_headers, hoist
+          req, expires_in, secure, time, unsigned_headers, hoist
         )
         [req.send_request.data, x_amz_headers]
       end
@@ -149,14 +149,6 @@ module Aws
       def unsigned_headers(params)
         whitelist_headers = params.delete(:whitelist_headers) || []
         BLACKLISTED_HEADERS - whitelist_headers
-      end
-
-      def http_scheme(params)
-        if params.delete(:secure) == false
-          'http'
-        else
-          @client.config.endpoint.scheme
-        end
       end
 
       def expires_in(params)
@@ -197,7 +189,7 @@ module Aws
 
       # @param [Seahorse::Client::Request] req
       def sign_but_dont_send(
-        req, expires_in, scheme, time, unsigned_headers, hoist = true
+        req, expires_in, secure, time, unsigned_headers, hoist = true
       )
         x_amz_headers = {}
 
@@ -208,12 +200,9 @@ module Aws
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
 
         req.handle(step: :send) do |context|
-          if scheme != http_req.endpoint.scheme
-            endpoint = http_req.endpoint.dup
-            endpoint.scheme = scheme
-            endpoint.port = (scheme == 'http' ? 80 : 443)
-            http_req.endpoint = URI.parse(endpoint.to_s)
-          end
+          # preserve existing scheme if default
+          http_req.endpoint.scheme = secure ? context.config.endpoint.scheme : 'http'
+          http_req.endpoint.port = secure ? 443 : 80
 
           query = http_req.endpoint.query ? http_req.endpoint.query.split('&') : []
           http_req.headers.each do |key, value|

@@ -42,7 +42,8 @@ module Aws
 
         # @api private
         def _sigv4_region(cfg, scheme)
-          cfg.sigv4_region || scheme['signingRegion'] || cfg.region
+          cfg.sigv4_region || scheme['signingRegion'] ||
+            '*' if scheme['name'] == 'sigv4a' || cfg.region
         end
 
 
@@ -62,10 +63,6 @@ module Aws
           when 'none'
             # don't sign
           end
-        end
-
-        def sign_request()
-
         end
       end
 
