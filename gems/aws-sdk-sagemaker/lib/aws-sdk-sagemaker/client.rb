@@ -12299,7 +12299,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_search_suggestions({
-    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata
+    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata, HyperParameterTuningJob
     #     suggestion_query: {
     #       property_name_query: {
     #         property_name_hint: "PropertyNameHint", # required
@@ -17102,7 +17102,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.search({
-    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata
+    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata, HyperParameterTuningJob
     #     search_expression: {
     #       filters: [
     #         {
@@ -17925,6 +17925,229 @@ module Aws::SageMaker
     #   resp.results[0].feature_metadata.parameters #=> Array
     #   resp.results[0].feature_metadata.parameters[0].key #=> String
     #   resp.results[0].feature_metadata.parameters[0].value #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_arn #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.strategy #=> String, one of "Bayesian", "Random"
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.hyper_parameter_tuning_job_objective.type #=> String, one of "Maximize", "Minimize"
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.hyper_parameter_tuning_job_objective.metric_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.resource_limits.max_number_of_training_jobs #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.resource_limits.max_parallel_training_jobs #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.parameter_ranges.integer_parameter_ranges #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.parameter_ranges.integer_parameter_ranges[0].name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.parameter_ranges.integer_parameter_ranges[0].min_value #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.parameter_ranges.integer_parameter_ranges[0].max_value #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.parameter_ranges.integer_parameter_ranges[0].scaling_type #=> String, one of "Auto", "Linear", "Logarithmic", "ReverseLogarithmic"
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.parameter_ranges.continuous_parameter_ranges #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.parameter_ranges.continuous_parameter_ranges[0].name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.parameter_ranges.continuous_parameter_ranges[0].min_value #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.parameter_ranges.continuous_parameter_ranges[0].max_value #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.parameter_ranges.continuous_parameter_ranges[0].scaling_type #=> String, one of "Auto", "Linear", "Logarithmic", "ReverseLogarithmic"
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges[0].name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges[0].values #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges[0].values[0] #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.training_job_early_stopping_type #=> String, one of "Off", "Auto"
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.tuning_job_completion_criteria.target_objective_metric_value #=> Float
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.definition_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.tuning_objective.type #=> String, one of "Maximize", "Minimize"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.tuning_objective.metric_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_ranges.integer_parameter_ranges #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_ranges.integer_parameter_ranges[0].name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_ranges.integer_parameter_ranges[0].min_value #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_ranges.integer_parameter_ranges[0].max_value #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_ranges.integer_parameter_ranges[0].scaling_type #=> String, one of "Auto", "Linear", "Logarithmic", "ReverseLogarithmic"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_ranges.continuous_parameter_ranges #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_ranges.continuous_parameter_ranges[0].name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_ranges.continuous_parameter_ranges[0].min_value #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_ranges.continuous_parameter_ranges[0].max_value #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_ranges.continuous_parameter_ranges[0].scaling_type #=> String, one of "Auto", "Linear", "Logarithmic", "ReverseLogarithmic"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_ranges.categorical_parameter_ranges #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_ranges.categorical_parameter_ranges[0].name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_ranges.categorical_parameter_ranges[0].values #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_ranges.categorical_parameter_ranges[0].values[0] #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.static_hyper_parameters #=> Hash
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.static_hyper_parameters["HyperParameterKey"] #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.algorithm_specification.training_image #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.algorithm_specification.training_input_mode #=> String, one of "Pipe", "File", "FastFile"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.algorithm_specification.algorithm_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.algorithm_specification.metric_definitions #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.algorithm_specification.metric_definitions[0].name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.algorithm_specification.metric_definitions[0].regex #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.role_arn #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].channel_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].data_source.s3_data_source.s3_data_type #=> String, one of "ManifestFile", "S3Prefix", "AugmentedManifestFile"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].data_source.s3_data_source.s3_uri #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].data_source.s3_data_source.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].data_source.s3_data_source.attribute_names #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].data_source.s3_data_source.instance_group_names #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].data_source.s3_data_source.instance_group_names[0] #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].data_source.file_system_data_source.directory_path #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].content_type #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].compression_type #=> String, one of "None", "Gzip"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].input_mode #=> String, one of "Pipe", "File", "FastFile"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.input_data_config[0].shuffle_config.seed #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.vpc_config.security_group_ids #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.vpc_config.security_group_ids[0] #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.vpc_config.subnets #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.vpc_config.subnets[0] #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.output_data_config.kms_key_id #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.output_data_config.s3_output_path #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.resource_config.instance_count #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.resource_config.volume_size_in_gb #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.resource_config.volume_kms_key_id #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.resource_config.instance_groups #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.resource_config.instance_groups[0].instance_count #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.resource_config.instance_groups[0].instance_group_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.stopping_condition.max_runtime_in_seconds #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.stopping_condition.max_wait_time_in_seconds #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.enable_network_isolation #=> Boolean
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.enable_inter_container_traffic_encryption #=> Boolean
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.enable_managed_spot_training #=> Boolean
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.checkpoint_config.s3_uri #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.checkpoint_config.local_path #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.retry_strategy.maximum_retry_attempts #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_tuning_resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_tuning_resource_config.instance_count #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_tuning_resource_config.volume_size_in_gb #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_tuning_resource_config.volume_kms_key_id #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_tuning_resource_config.allocation_strategy #=> String, one of "Prioritized"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_tuning_resource_config.instance_configs #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_tuning_resource_config.instance_configs[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_tuning_resource_config.instance_configs[0].instance_count #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.hyper_parameter_tuning_resource_config.instance_configs[0].volume_size_in_gb #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].definition_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].tuning_objective.type #=> String, one of "Maximize", "Minimize"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].tuning_objective.metric_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_ranges.integer_parameter_ranges #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_ranges.integer_parameter_ranges[0].name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_ranges.integer_parameter_ranges[0].min_value #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_ranges.integer_parameter_ranges[0].max_value #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_ranges.integer_parameter_ranges[0].scaling_type #=> String, one of "Auto", "Linear", "Logarithmic", "ReverseLogarithmic"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_ranges.continuous_parameter_ranges #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_ranges.continuous_parameter_ranges[0].name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_ranges.continuous_parameter_ranges[0].min_value #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_ranges.continuous_parameter_ranges[0].max_value #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_ranges.continuous_parameter_ranges[0].scaling_type #=> String, one of "Auto", "Linear", "Logarithmic", "ReverseLogarithmic"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_ranges.categorical_parameter_ranges #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_ranges.categorical_parameter_ranges[0].name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_ranges.categorical_parameter_ranges[0].values #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_ranges.categorical_parameter_ranges[0].values[0] #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].static_hyper_parameters #=> Hash
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].static_hyper_parameters["HyperParameterKey"] #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].algorithm_specification.training_image #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].algorithm_specification.training_input_mode #=> String, one of "Pipe", "File", "FastFile"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].algorithm_specification.algorithm_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].algorithm_specification.metric_definitions #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].algorithm_specification.metric_definitions[0].name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].algorithm_specification.metric_definitions[0].regex #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].role_arn #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].channel_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.s3_data_type #=> String, one of "ManifestFile", "S3Prefix", "AugmentedManifestFile"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.s3_uri #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.attribute_names #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.instance_group_names #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.instance_group_names[0] #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].data_source.file_system_data_source.directory_path #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].content_type #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].compression_type #=> String, one of "None", "Gzip"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].input_mode #=> String, one of "Pipe", "File", "FastFile"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].input_data_config[0].shuffle_config.seed #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].vpc_config.security_group_ids #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].vpc_config.subnets #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].vpc_config.subnets[0] #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].output_data_config.kms_key_id #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].output_data_config.s3_output_path #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].resource_config.instance_count #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].resource_config.volume_size_in_gb #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].resource_config.volume_kms_key_id #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].resource_config.instance_groups #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].resource_config.instance_groups[0].instance_count #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].resource_config.instance_groups[0].instance_group_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].stopping_condition.max_runtime_in_seconds #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].stopping_condition.max_wait_time_in_seconds #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].enable_network_isolation #=> Boolean
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].enable_inter_container_traffic_encryption #=> Boolean
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].enable_managed_spot_training #=> Boolean
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].checkpoint_config.s3_uri #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].checkpoint_config.local_path #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].retry_strategy.maximum_retry_attempts #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_count #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_tuning_resource_config.volume_size_in_gb #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_tuning_resource_config.volume_kms_key_id #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_tuning_resource_config.allocation_strategy #=> String, one of "Prioritized"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_configs #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_configs[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_configs[0].instance_count #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_configs[0].volume_size_in_gb #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
+    #   resp.results[0].hyper_parameter_tuning_job.creation_time #=> Time
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_end_time #=> Time
+    #   resp.results[0].hyper_parameter_tuning_job.last_modified_time #=> Time
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_status_counters.completed #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_status_counters.in_progress #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_status_counters.retryable_error #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_status_counters.non_retryable_error #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_status_counters.stopped #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.objective_status_counters.succeeded #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.objective_status_counters.pending #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.objective_status_counters.failed #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.best_training_job.training_job_definition_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.best_training_job.training_job_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.best_training_job.training_job_arn #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.best_training_job.tuning_job_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.best_training_job.creation_time #=> Time
+    #   resp.results[0].hyper_parameter_tuning_job.best_training_job.training_start_time #=> Time
+    #   resp.results[0].hyper_parameter_tuning_job.best_training_job.training_end_time #=> Time
+    #   resp.results[0].hyper_parameter_tuning_job.best_training_job.training_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.results[0].hyper_parameter_tuning_job.best_training_job.tuned_hyper_parameters #=> Hash
+    #   resp.results[0].hyper_parameter_tuning_job.best_training_job.tuned_hyper_parameters["HyperParameterKey"] #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.best_training_job.failure_reason #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.best_training_job.final_hyper_parameter_tuning_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
+    #   resp.results[0].hyper_parameter_tuning_job.best_training_job.final_hyper_parameter_tuning_job_objective_metric.metric_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.best_training_job.final_hyper_parameter_tuning_job_objective_metric.value #=> Float
+    #   resp.results[0].hyper_parameter_tuning_job.best_training_job.objective_status #=> String, one of "Succeeded", "Pending", "Failed"
+    #   resp.results[0].hyper_parameter_tuning_job.overall_best_training_job.training_job_definition_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.overall_best_training_job.training_job_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.overall_best_training_job.training_job_arn #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.overall_best_training_job.tuning_job_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.overall_best_training_job.creation_time #=> Time
+    #   resp.results[0].hyper_parameter_tuning_job.overall_best_training_job.training_start_time #=> Time
+    #   resp.results[0].hyper_parameter_tuning_job.overall_best_training_job.training_end_time #=> Time
+    #   resp.results[0].hyper_parameter_tuning_job.overall_best_training_job.training_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.results[0].hyper_parameter_tuning_job.overall_best_training_job.tuned_hyper_parameters #=> Hash
+    #   resp.results[0].hyper_parameter_tuning_job.overall_best_training_job.tuned_hyper_parameters["HyperParameterKey"] #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.overall_best_training_job.failure_reason #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.overall_best_training_job.final_hyper_parameter_tuning_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
+    #   resp.results[0].hyper_parameter_tuning_job.overall_best_training_job.final_hyper_parameter_tuning_job_objective_metric.metric_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.overall_best_training_job.final_hyper_parameter_tuning_job_objective_metric.value #=> Float
+    #   resp.results[0].hyper_parameter_tuning_job.overall_best_training_job.objective_status #=> String, one of "Succeeded", "Pending", "Failed"
+    #   resp.results[0].hyper_parameter_tuning_job.warm_start_config.parent_hyper_parameter_tuning_jobs #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.warm_start_config.parent_hyper_parameter_tuning_jobs[0].hyper_parameter_tuning_job_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.warm_start_config.warm_start_type #=> String, one of "IdenticalDataAndAlgorithm", "TransferLearning"
+    #   resp.results[0].hyper_parameter_tuning_job.failure_reason #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.tags #=> Array
+    #   resp.results[0].hyper_parameter_tuning_job.tags[0].key #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Search AWS API Documentation
@@ -20353,7 +20576,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.136.0'
+      context[:gem_version] = '1.137.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

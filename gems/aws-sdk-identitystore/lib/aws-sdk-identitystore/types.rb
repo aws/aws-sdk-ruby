@@ -76,8 +76,8 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] primary
-    #   A boolean representing whether this is the primary address for the
-    #   associated resource.
+    #   A Boolean value representing whether this is the primary address for
+    #   the associated resource.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/Address AWS API Documentation
@@ -95,9 +95,9 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # A unique identifier for the group value that is not the group's
-    # primary identifier. This value can be an identifier from an external
-    # identity provider (IdP) that is associated with the group or a unique
+    # A unique identifier for a user or group that is not the its primary
+    # identifier. This value can be an identifier from an external identity
+    # provider (IdP) that is associated with the group or a unique
     # attribute. For example, a unique `GroupDisplayName`.
     #
     # @note AlternateIdentifier is a union - when making an API calls you must set exactly one of the members.
@@ -143,7 +143,8 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] attribute_value
-    #   The value of the attribute.
+    #   The value of the attribute. This is a `Document` type. This type is
+    #   not supported by Java V1, Go V1, and older versions of the AWS CLI.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/AttributeOperation AWS API Documentation
@@ -231,7 +232,8 @@ module Aws::IdentityStore
     end
 
     # @!attribute [rw] membership_id
-    #   The identifier for a `GroupMembership` in the identity store.
+    #   The identifier for a newly created `GroupMembership` in an identity
+    #   store.
     #   @return [String]
     #
     # @!attribute [rw] identity_store_id
@@ -353,9 +355,9 @@ module Aws::IdentityStore
     # @!attribute [rw] user_name
     #   A unique string used to identify the user. The length limit is 128
     #   characters. This value can consist of letters, accented characters,
-    #   symbols, numbers, and punctuation. The characters &lt;&gt;;:% are
-    #   excluded. This value is specified at the time the user is created
-    #   and stored as an attribute of the user object in the identity store.
+    #   symbols, numbers, and punctuation. This value is specified at the
+    #   time the user is created and stored as an attribute of the user
+    #   object in the identity store.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -466,7 +468,7 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] membership_id
-    #   The identifier for a `GroupMembership` in the identity store.
+    #   The identifier for a `GroupMembership` in an identity store.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DeleteGroupMembershipRequest AWS API Documentation
@@ -553,7 +555,7 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] membership_id
-    #   The identifier for a `GroupMembership` in the identity store.
+    #   The identifier for a `GroupMembership` in an identity store.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeGroupMembershipRequest AWS API Documentation
@@ -570,7 +572,7 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] membership_id
-    #   The identifier for a `GroupMembership` in the identity store.
+    #   The identifier for a `GroupMembership` in an identity store.
     #   @return [String]
     #
     # @!attribute [rw] group_id
@@ -690,11 +692,11 @@ module Aws::IdentityStore
     end
 
     # @!attribute [rw] user_name
-    #   The user’s username value. The length limit is 128 characters. This
-    #   value can consist of letters, accented characters, symbols, numbers,
-    #   and punctuation. The characters `<>;:%` are excluded. This value is
-    #   specified at the time the user is created and stored as an attribute
-    #   of the user object in the identity store.
+    #   A unique string used to identify the user. The length limit is 128
+    #   characters. This value can consist of letters, accented characters,
+    #   symbols, numbers, and punctuation. This value is specified at the
+    #   time the user is created and stored as an attribute of the user
+    #   object in the identity store.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -802,8 +804,8 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] primary
-    #   A boolean representing whether this is the primary email for the
-    #   associated resource.
+    #   A Boolean value representing whether this is the primary email
+    #   address for the associated resource.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/Email AWS API Documentation
@@ -900,8 +902,8 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] alternate_identifier
-    #   A unique identifier for the group value that is not the group's
-    #   primary identifier. This value can be an identifier from an external
+    #   A unique identifier for an identity resource that is not the primary
+    #   identifier. This value can be an identifier from an external
     #   identity provider (IdP) that is associated with the group or a
     #   unique attribute. For example, a unique `GroupDisplayName`.
     #   @return [Types::AlternateIdentifier]
@@ -968,7 +970,7 @@ module Aws::IdentityStore
     end
 
     # @!attribute [rw] membership_id
-    #   The identifier for a `GroupMembership` in the identity store.
+    #   The identifier for a `GroupMembership` in an identity store.
     #   @return [String]
     #
     # @!attribute [rw] identity_store_id
@@ -1006,8 +1008,8 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] alternate_identifier
-    #   Any unique attribute associated with a user that is not the
-    #   `UserId`.
+    #   A unique identifier for an identity resource that is not the primary
+    #   identifier.
     #   @return [Types::AlternateIdentifier]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetUserIdRequest AWS API Documentation
@@ -1086,7 +1088,7 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] membership_id
-    #   The identifier for a `GroupMembership` object in the identity store.
+    #   The identifier for a `GroupMembership` object in an identity store.
     #   @return [String]
     #
     # @!attribute [rw] group_id
@@ -1199,7 +1201,7 @@ module Aws::IdentityStore
     end
 
     # @!attribute [rw] results
-    #   An object containing results of batch `IsMemberInGroups` call.
+    #   A list containing the results of membership existence checks.
     #   @return [Array<Types::GroupMembershipExistenceResult>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/IsMemberInGroupsResponse AWS API Documentation
@@ -1240,7 +1242,7 @@ module Aws::IdentityStore
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used for the `ListUsers`, `ListGroups` and
+    #   The pagination token used for the `ListUsers`, `ListGroups`, and
     #   `ListGroupMemberships` API operations. This value is generated by
     #   the identity store service. It is returned in the API response if
     #   the total results are more than the size of one page. This token is
@@ -1265,7 +1267,7 @@ module Aws::IdentityStore
     #   @return [Array<Types::GroupMembership>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used for the `ListUsers`, `ListGroups` and
+    #   The pagination token used for the `ListUsers`, `ListGroups`, and
     #   `ListGroupMemberships` API operations. This value is generated by
     #   the identity store service. It is returned in the API response if
     #   the total results are more than the size of one page. This token is
@@ -1302,9 +1304,8 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per request. This
-    #   parameter is used in the `ListUsers` and `ListGroups` requests to
-    #   specify how many results to return in one page. The length limit is
-    #   50 characters.
+    #   parameter is used in all `List` requests to specify how many results
+    #   to return in one page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1332,7 +1333,7 @@ module Aws::IdentityStore
     #   @return [Array<Types::GroupMembership>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used for the `ListUsers`, `ListGroups` and
+    #   The pagination token used for the `ListUsers`, `ListGroups`, and
     #   `ListGroupMemberships` API operations. This value is generated by
     #   the identity store service. It is returned in the API response if
     #   the total results are more than the size of one page. This token is
@@ -1388,7 +1389,7 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   A list of `Filter` objects that is used in the `ListUsers` and
+    #   A list of `Filter` objects, which is used in the `ListUsers` and
     #   `ListGroups` requests.
     #   @return [Array<Types::Filter>]
     #
@@ -1463,7 +1464,7 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   A list of `Filter` objects that is used in the `ListUsers` and
+    #   A list of `Filter` objects, which is used in the `ListUsers` and
     #   `ListGroups` requests.
     #   @return [Array<Types::Filter>]
     #
@@ -1523,7 +1524,7 @@ module Aws::IdentityStore
       class Unknown < MemberId; end
     end
 
-    # The name of the user.
+    # The full name of the user.
     #
     # @note When making an API call, you may pass Name
     #   data as a hash:
@@ -1596,8 +1597,8 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] primary
-    #   A boolean representing whether this is the primary phone number for
-    #   the associated resource.
+    #   A Boolean value representing whether this is the primary phone
+    #   number for the associated resource.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/PhoneNumber AWS API Documentation
@@ -1715,7 +1716,8 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] attribute_value
-    #   The value of the attribute.
+    #   The value of the attribute. This is a `Document` type. This type is
+    #   not supported by Java V1, Go V1, and older versions of the AWS CLI.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/UniqueAttribute AWS API Documentation
@@ -1813,11 +1815,11 @@ module Aws::IdentityStore
     # attributes.
     #
     # @!attribute [rw] user_name
-    #   The user’s user name value. The length limit is 128 characters. This
-    #   value can consist of letters, accented characters, symbols, numbers,
-    #   and punctuation. The characters `<>;:%` are excluded. This value is
-    #   specified at the time the user is created and stored as an attribute
-    #   of the user object in the identity store.
+    #   A unique string used to identify the user. The length limit is 128
+    #   characters. This value can consist of letters, accented characters,
+    #   symbols, numbers, and punctuation. This value is specified at the
+    #   time the user is created and stored as an attribute of the user
+    #   object in the identity store.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -1868,7 +1870,7 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] title
     #   A string containing the user's title. Possible values depend on
-    #   each customer's specific needs, so they are left unspecified
+    #   each customer's specific needs, so they are left unspecified.
     #   @return [String]
     #
     # @!attribute [rw] preferred_language

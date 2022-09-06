@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2022-09-06)
+------------------
+
+* Feature - This release adds HyperParameterTuningJob type in Search API.
+
 1.136.0 (2022-09-02)
 ------------------
 

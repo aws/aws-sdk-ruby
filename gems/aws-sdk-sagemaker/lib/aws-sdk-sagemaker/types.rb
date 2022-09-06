@@ -19889,7 +19889,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata
+    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata, HyperParameterTuningJob
     #         suggestion_query: {
     #           property_name_query: {
     #             property_name_hint: "PropertyNameHint", # required
@@ -21939,6 +21939,123 @@ module Aws::SageMaker
     class HyperParameterTuningJobObjective < Struct.new(
       :type,
       :metric_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An entity having characteristics over which a user can search for a
+    # hyperparameter tuning job.
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_name
+    #   The name of a hyperparameter tuning job.
+    #   @return [String]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_arn
+    #   The Amazon Resource Name (ARN) of a hyperparameter tuning job.
+    #   @return [String]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_config
+    #   Configures a hyperparameter tuning job.
+    #   @return [Types::HyperParameterTuningJobConfig]
+    #
+    # @!attribute [rw] training_job_definition
+    #   Defines the training jobs launched by a hyperparameter tuning job.
+    #   @return [Types::HyperParameterTrainingJobDefinition]
+    #
+    # @!attribute [rw] training_job_definitions
+    #   The job definitions included in a hyperparameter tuning job.
+    #   @return [Array<Types::HyperParameterTrainingJobDefinition>]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_status
+    #   The status of a hyperparameter tuning job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that a hyperparameter tuning job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_end_time
+    #   The time that a hyperparameter tuning job ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time that a hyperparameter tuning job was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_job_status_counters
+    #   The numbers of training jobs launched by a hyperparameter tuning
+    #   job, categorized by status.
+    #   @return [Types::TrainingJobStatusCounters]
+    #
+    # @!attribute [rw] objective_status_counters
+    #   Specifies the number of training jobs that this hyperparameter
+    #   tuning job launched, categorized by the status of their objective
+    #   metric. The objective metric status shows whether the final
+    #   objective metric for the training job has been evaluated by the
+    #   tuning job and used in the hyperparameter tuning process.
+    #   @return [Types::ObjectiveStatusCounters]
+    #
+    # @!attribute [rw] best_training_job
+    #   The container for the summary information about a training job.
+    #   @return [Types::HyperParameterTrainingJobSummary]
+    #
+    # @!attribute [rw] overall_best_training_job
+    #   The container for the summary information about a training job.
+    #   @return [Types::HyperParameterTrainingJobSummary]
+    #
+    # @!attribute [rw] warm_start_config
+    #   Specifies the configuration for a hyperparameter tuning job that
+    #   uses one or more previous hyperparameter tuning jobs as a starting
+    #   point. The results of previous tuning jobs are used to inform which
+    #   combinations of hyperparameters to search over in the new tuning
+    #   job.
+    #
+    #   All training jobs launched by the new hyperparameter tuning job are
+    #   evaluated by using the objective metric, and the training job that
+    #   performs the best is compared to the best training jobs from the
+    #   parent tuning jobs. From these, the training job that performs the
+    #   best as measured by the objective metric is returned as the overall
+    #   best training job.
+    #
+    #   <note markdown="1"> All training jobs launched by parent hyperparameter tuning jobs and
+    #   the new hyperparameter tuning jobs count against the limit of
+    #   training jobs for the tuning job.
+    #
+    #    </note>
+    #   @return [Types::HyperParameterTuningJobWarmStartConfig]
+    #
+    # @!attribute [rw] failure_reason
+    #   The error that was created when a hyperparameter tuning job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with a hyperparameter tuning job. For more
+    #   information see [Tagging Amazon Web Services resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobSearchEntity AWS API Documentation
+    #
+    class HyperParameterTuningJobSearchEntity < Struct.new(
+      :hyper_parameter_tuning_job_name,
+      :hyper_parameter_tuning_job_arn,
+      :hyper_parameter_tuning_job_config,
+      :training_job_definition,
+      :training_job_definitions,
+      :hyper_parameter_tuning_job_status,
+      :creation_time,
+      :hyper_parameter_tuning_end_time,
+      :last_modified_time,
+      :training_job_status_counters,
+      :objective_status_counters,
+      :best_training_job,
+      :overall_best_training_job,
+      :warm_start_config,
+      :failure_reason,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36724,6 +36841,10 @@ module Aws::SageMaker
     #   The feature metadata used to search through the features.
     #   @return [Types::FeatureMetadata]
     #
+    # @!attribute [rw] hyper_parameter_tuning_job
+    #   The properties of a hyperparameter tuning job.
+    #   @return [Types::HyperParameterTuningJobSearchEntity]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRecord AWS API Documentation
     #
     class SearchRecord < Struct.new(
@@ -36738,7 +36859,8 @@ module Aws::SageMaker
       :pipeline_execution,
       :feature_group,
       :project,
-      :feature_metadata)
+      :feature_metadata,
+      :hyper_parameter_tuning_job)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36747,7 +36869,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata
+    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata, HyperParameterTuningJob
     #         search_expression: {
     #           filters: [
     #             {

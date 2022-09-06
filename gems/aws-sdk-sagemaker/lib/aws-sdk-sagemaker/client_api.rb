@@ -750,6 +750,7 @@ module Aws::SageMaker
     HyperParameterTuningJobObjective = Shapes::StructureShape.new(name: 'HyperParameterTuningJobObjective')
     HyperParameterTuningJobObjectiveType = Shapes::StringShape.new(name: 'HyperParameterTuningJobObjectiveType')
     HyperParameterTuningJobObjectives = Shapes::ListShape.new(name: 'HyperParameterTuningJobObjectives')
+    HyperParameterTuningJobSearchEntity = Shapes::StructureShape.new(name: 'HyperParameterTuningJobSearchEntity')
     HyperParameterTuningJobSortByOptions = Shapes::StringShape.new(name: 'HyperParameterTuningJobSortByOptions')
     HyperParameterTuningJobStatus = Shapes::StringShape.new(name: 'HyperParameterTuningJobStatus')
     HyperParameterTuningJobStrategyType = Shapes::StringShape.new(name: 'HyperParameterTuningJobStrategyType')
@@ -4528,6 +4529,24 @@ module Aws::SageMaker
 
     HyperParameterTuningJobObjectives.member = Shapes::ShapeRef.new(shape: HyperParameterTuningJobObjective)
 
+    HyperParameterTuningJobSearchEntity.add_member(:hyper_parameter_tuning_job_name, Shapes::ShapeRef.new(shape: HyperParameterTuningJobName, location_name: "HyperParameterTuningJobName"))
+    HyperParameterTuningJobSearchEntity.add_member(:hyper_parameter_tuning_job_arn, Shapes::ShapeRef.new(shape: HyperParameterTuningJobArn, location_name: "HyperParameterTuningJobArn"))
+    HyperParameterTuningJobSearchEntity.add_member(:hyper_parameter_tuning_job_config, Shapes::ShapeRef.new(shape: HyperParameterTuningJobConfig, location_name: "HyperParameterTuningJobConfig"))
+    HyperParameterTuningJobSearchEntity.add_member(:training_job_definition, Shapes::ShapeRef.new(shape: HyperParameterTrainingJobDefinition, location_name: "TrainingJobDefinition"))
+    HyperParameterTuningJobSearchEntity.add_member(:training_job_definitions, Shapes::ShapeRef.new(shape: HyperParameterTrainingJobDefinitions, location_name: "TrainingJobDefinitions"))
+    HyperParameterTuningJobSearchEntity.add_member(:hyper_parameter_tuning_job_status, Shapes::ShapeRef.new(shape: HyperParameterTuningJobStatus, location_name: "HyperParameterTuningJobStatus"))
+    HyperParameterTuningJobSearchEntity.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    HyperParameterTuningJobSearchEntity.add_member(:hyper_parameter_tuning_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "HyperParameterTuningEndTime"))
+    HyperParameterTuningJobSearchEntity.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    HyperParameterTuningJobSearchEntity.add_member(:training_job_status_counters, Shapes::ShapeRef.new(shape: TrainingJobStatusCounters, location_name: "TrainingJobStatusCounters"))
+    HyperParameterTuningJobSearchEntity.add_member(:objective_status_counters, Shapes::ShapeRef.new(shape: ObjectiveStatusCounters, location_name: "ObjectiveStatusCounters"))
+    HyperParameterTuningJobSearchEntity.add_member(:best_training_job, Shapes::ShapeRef.new(shape: HyperParameterTrainingJobSummary, location_name: "BestTrainingJob"))
+    HyperParameterTuningJobSearchEntity.add_member(:overall_best_training_job, Shapes::ShapeRef.new(shape: HyperParameterTrainingJobSummary, location_name: "OverallBestTrainingJob"))
+    HyperParameterTuningJobSearchEntity.add_member(:warm_start_config, Shapes::ShapeRef.new(shape: HyperParameterTuningJobWarmStartConfig, location_name: "WarmStartConfig"))
+    HyperParameterTuningJobSearchEntity.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    HyperParameterTuningJobSearchEntity.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    HyperParameterTuningJobSearchEntity.struct_class = Types::HyperParameterTuningJobSearchEntity
+
     HyperParameterTuningJobSummaries.member = Shapes::ShapeRef.new(shape: HyperParameterTuningJobSummary)
 
     HyperParameterTuningJobSummary.add_member(:hyper_parameter_tuning_job_name, Shapes::ShapeRef.new(shape: HyperParameterTuningJobName, required: true, location_name: "HyperParameterTuningJobName"))
@@ -6680,6 +6699,7 @@ module Aws::SageMaker
     SearchRecord.add_member(:feature_group, Shapes::ShapeRef.new(shape: FeatureGroup, location_name: "FeatureGroup"))
     SearchRecord.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "Project"))
     SearchRecord.add_member(:feature_metadata, Shapes::ShapeRef.new(shape: FeatureMetadata, location_name: "FeatureMetadata"))
+    SearchRecord.add_member(:hyper_parameter_tuning_job, Shapes::ShapeRef.new(shape: HyperParameterTuningJobSearchEntity, location_name: "HyperParameterTuningJob"))
     SearchRecord.struct_class = Types::SearchRecord
 
     SearchRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "Resource"))
