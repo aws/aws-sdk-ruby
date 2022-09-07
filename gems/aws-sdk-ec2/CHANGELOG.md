@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.330.0 (2022-09-07)
+------------------
+
+* Feature - Documentation updates for Amazon EC2.
+
 1.329.0 (2022-08-22)
 ------------------
 

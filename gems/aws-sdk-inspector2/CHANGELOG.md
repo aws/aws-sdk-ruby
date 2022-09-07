@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2022-09-07)
+------------------
+
+* Feature - This release adds new fields like fixAvailable, fixedInVersion and remediation to the finding model. The requirement to have vulnerablePackages in the finding model has also been removed. The documentation has been updated to reflect these changes.
+
 1.5.0 (2022-07-14)
 ------------------
 

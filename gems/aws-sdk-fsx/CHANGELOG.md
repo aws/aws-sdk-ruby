@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2022-09-07)
+------------------
+
+* Feature - Documentation update for Amazon FSx.
+
 1.58.0 (2022-08-29)
 ------------------
 

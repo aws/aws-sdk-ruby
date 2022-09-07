@@ -5616,6 +5616,9 @@ module Aws::SageMaker
     #               memory_size_in_mb: 1, # required
     #               max_concurrency: 1, # required
     #             },
+    #             volume_size_in_gb: 1,
+    #             model_data_download_timeout_in_seconds: 1,
+    #             container_startup_health_check_timeout_in_seconds: 1,
     #           },
     #         ],
     #         data_capture_config: {
@@ -34035,6 +34038,9 @@ module Aws::SageMaker
     #           memory_size_in_mb: 1, # required
     #           max_concurrency: 1, # required
     #         },
+    #         volume_size_in_gb: 1,
+    #         model_data_download_timeout_in_seconds: 1,
+    #         container_startup_health_check_timeout_in_seconds: 1,
     #       }
     #
     # @!attribute [rw] variant_name
@@ -34084,6 +34090,29 @@ module Aws::SageMaker
     #   configuration.
     #   @return [Types::ProductionVariantServerlessConfig]
     #
+    # @!attribute [rw] volume_size_in_gb
+    #   The size, in GB, of the ML storage volume attached to individual
+    #   inference instance associated with the production variant. Currenly
+    #   only Amazon EBS gp2 storage volumes are supported.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] model_data_download_timeout_in_seconds
+    #   The timeout value, in seconds, to download and extract customer
+    #   model artifact from Amazon S3 to individual inference instance
+    #   associated with this production variant.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] container_startup_health_check_timeout_in_seconds
+    #   The timeout value, in seconds, for the customer inference container
+    #   to pass health check by SageMaker Hosting. For more information on
+    #   health check, see [How Your Container Should Respond to Health Check
+    #   (Ping) Requests][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-algo-ping-requests
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant AWS API Documentation
     #
     class ProductionVariant < Struct.new(
@@ -34094,7 +34123,10 @@ module Aws::SageMaker
       :initial_variant_weight,
       :accelerator_type,
       :core_dump_config,
-      :serverless_config)
+      :serverless_config,
+      :volume_size_in_gb,
+      :model_data_download_timeout_in_seconds,
+      :container_startup_health_check_timeout_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end

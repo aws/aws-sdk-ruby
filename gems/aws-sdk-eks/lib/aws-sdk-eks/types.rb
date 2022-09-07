@@ -605,7 +605,7 @@ module Aws::EKS
     #         addon_name: "String", # required
     #         addon_version: "String",
     #         service_account_role_arn: "RoleArn",
-    #         resolve_conflicts: "OVERWRITE", # accepts OVERWRITE, NONE
+    #         resolve_conflicts: "OVERWRITE", # accepts OVERWRITE, NONE, PRESERVE
     #         client_request_token: "String",
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -656,8 +656,29 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] resolve_conflicts
-    #   How to resolve parameter value conflicts when migrating an existing
-    #   add-on to an Amazon EKS add-on.
+    #   How to resolve field value conflicts for an Amazon EKS add-on.
+    #   Conflicts are handled based on the value you choose:
+    #
+    #   * **None** – If the self-managed version of the add-on is installed
+    #     on your cluster, Amazon EKS doesn't change the value. Creation of
+    #     the add-on might fail.
+    #
+    #   * **Overwrite** – If the self-managed version of the add-on is
+    #     installed on your cluster and the Amazon EKS default value is
+    #     different than the existing value, Amazon EKS changes the value to
+    #     the Amazon EKS default value.
+    #
+    #   * **Preserve** – Not supported. You can set this value when updating
+    #     an add-on though. For more information, see [UpdateAddon][1].
+    #
+    #   If you don't currently have the self-managed version of the add-on
+    #   installed on your cluster, the Amazon EKS add-on is installed.
+    #   Amazon EKS sets all values to default values, regardless of the
+    #   option that you specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateAddon.html
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -2296,7 +2317,7 @@ module Aws::EKS
     end
 
     # An object representing a node group launch template specification. The
-    # launch template cannot include [ `SubnetId` ][1], [
+    # launch template can't include [ `SubnetId` ][1], [
     # `IamInstanceProfile` ][2], [ `RequestSpotInstances` ][3], [
     # `HibernationOptions` ][4], or [ `TerminateInstances` ][5], or the node
     # group deployment or update will fail. For more information about
@@ -2305,7 +2326,8 @@ module Aws::EKS
     # Amazon EKS, see [Launch template support][7] in the *Amazon EKS User
     # Guide*.
     #
-    # Specify either `name` or `id`, but not both.
+    # You must specify either the launch template ID or the launch template
+    # name in the request, but not both.
     #
     #
     #
@@ -2328,15 +2350,28 @@ module Aws::EKS
     #
     # @!attribute [rw] name
     #   The name of the launch template.
+    #
+    #   You must specify either the launch template name or the launch
+    #   template ID in the request, but not both.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of the launch template to use. If no version is
-    #   specified, then the template's default version is used.
+    #   The launch template version number, `$Latest`, or `$Default`.
+    #
+    #   If the value is `$Latest`, Amazon EKS uses the latest version of the
+    #   launch template.
+    #
+    #   If the value is `$Default`, Amazon EKS uses the default version of
+    #   the launch template.
+    #
+    #   Default: The default version of the launch template.
     #   @return [String]
     #
     # @!attribute [rw] id
     #   The ID of the launch template.
+    #
+    #   You must specify either the launch template ID or the launch
+    #   template name in the request, but not both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/LaunchTemplateSpecification AWS API Documentation
@@ -3828,7 +3863,7 @@ module Aws::EKS
     #         addon_name: "String", # required
     #         addon_version: "String",
     #         service_account_role_arn: "RoleArn",
-    #         resolve_conflicts: "OVERWRITE", # accepts OVERWRITE, NONE
+    #         resolve_conflicts: "OVERWRITE", # accepts OVERWRITE, NONE, PRESERVE
     #         client_request_token: "String",
     #       }
     #
@@ -3876,8 +3911,20 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] resolve_conflicts
-    #   How to resolve parameter value conflicts when applying the new
-    #   version of the add-on to the cluster.
+    #   How to resolve field value conflicts for an Amazon EKS add-on if
+    #   you've changed a value from the Amazon EKS default value. Conflicts
+    #   are handled based on the option you choose:
+    #
+    #   * **None** – Amazon EKS doesn't change the value. The update might
+    #     fail.
+    #
+    #   * **Overwrite** – Amazon EKS overwrites the changed value back to
+    #     the Amazon EKS default value.
+    #
+    #   * **Preserve** – Amazon EKS preserves the value. If you choose this
+    #     option, we recommend that you test any field and value changes on
+    #     a non-production cluster before updating the add-on on your
+    #     production cluster.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token

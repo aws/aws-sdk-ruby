@@ -2491,6 +2491,9 @@ module Aws::SageMaker
     #           memory_size_in_mb: 1, # required
     #           max_concurrency: 1, # required
     #         },
+    #         volume_size_in_gb: 1,
+    #         model_data_download_timeout_in_seconds: 1,
+    #         container_startup_health_check_timeout_in_seconds: 1,
     #       },
     #     ],
     #     data_capture_config: {
@@ -9370,6 +9373,9 @@ module Aws::SageMaker
     #   resp.production_variants[0].core_dump_config.kms_key_id #=> String
     #   resp.production_variants[0].serverless_config.memory_size_in_mb #=> Integer
     #   resp.production_variants[0].serverless_config.max_concurrency #=> Integer
+    #   resp.production_variants[0].volume_size_in_gb #=> Integer
+    #   resp.production_variants[0].model_data_download_timeout_in_seconds #=> Integer
+    #   resp.production_variants[0].container_startup_health_check_timeout_in_seconds #=> Integer
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.initial_sampling_percentage #=> Integer
     #   resp.data_capture_config.destination_s3_uri #=> String
@@ -20576,7 +20582,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.137.0'
+      context[:gem_version] = '1.138.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

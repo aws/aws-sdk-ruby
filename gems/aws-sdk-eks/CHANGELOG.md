@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2022-09-07)
+------------------
+
+* Feature - Adds support for EKS Addons ResolveConflicts "preserve" flag. Also adds new update failed status for EKS Addons.
+
 1.75.0 (2022-05-10)
 ------------------
 

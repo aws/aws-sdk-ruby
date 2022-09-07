@@ -341,6 +341,7 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] job_id
+    #   The unique identifier for a job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CancelJobRequest AWS API Documentation
@@ -377,8 +378,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # A request to create a data set that contains one or more revisions.
-    #
     # @note When making an API call, you may pass CreateDataSetRequest
     #   data as a hash:
     #
@@ -424,8 +423,7 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
-    #   resource.
+    #   The ARN for the data set.
     #   @return [String]
     #
     # @!attribute [rw] asset_type
@@ -433,43 +431,43 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the data set was created, in ISO 8601 format.
     #   @return [Time]
     #
     # @!attribute [rw] description
-    #   A description of a resource.
+    #   The description for the data set.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   A unique identifier.
+    #   The unique identifier for the data set.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the model.
+    #   The name of the data set.
     #   @return [String]
     #
     # @!attribute [rw] origin
     #   A property that defines the data set as OWNED by the account (for
-    #   providers) or ENTITLED to the account (for subscribers). When an
-    #   owned data set is published in a product, AWS Data Exchange creates
-    #   a copy of the data set. Subscribers can access that copy of the data
-    #   set as an entitled data set.
+    #   providers) or ENTITLED to the account (for subscribers).
     #   @return [String]
     #
     # @!attribute [rw] origin_details
-    #   Information about the origin of the data set.
+    #   If the origin of this data set is ENTITLED, includes the details for
+    #   the product on AWS Marketplace.
     #   @return [Types::OriginDetails]
     #
     # @!attribute [rw] source_id
-    #   A unique identifier.
+    #   The data set ID of the owned data set corresponding to the entitled
+    #   data set being viewed. This parameter is returned when a data set
+    #   owner is viewing the entitled copy of its owned data set.
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   The tags for the data set.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] updated_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   The date and time that the data set was last updated, in ISO 8601
     #   format.
     #   @return [Time]
     #
@@ -491,8 +489,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # A request to create an event action.
-    #
     # @note When making an API call, you may pass CreateEventActionRequest
     #   data as a hash:
     #
@@ -538,12 +534,11 @@ module Aws::DataExchange
     #   @return [Types::Action]
     #
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
-    #   resource.
+    #   The ARN for the event action.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   The date and time that the event action was created, in ISO 8601
     #   format.
     #   @return [Time]
     #
@@ -552,12 +547,12 @@ module Aws::DataExchange
     #   @return [Types::Event]
     #
     # @!attribute [rw] id
-    #   A unique identifier.
+    #   The unique identifier for the event action.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the event action was last updated, in ISO
+    #   8601 format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateEventActionResponse AWS API Documentation
@@ -573,12 +568,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # The CreateJob request. AWS Data Exchange Jobs are asynchronous import
-    # or export operations used to create or copy assets. A data set owner
-    # can both import and export assets. A subscriber with an entitlement to
-    # a data set can only export. Jobs are deleted 90 days after they are
-    # created. Created jobs must be started with the StartJob operation.
-    #
     # @note When making an API call, you may pass CreateJobRequest
     #   data as a hash:
     #
@@ -676,35 +665,35 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
-    #   resource.
+    #   The ARN for the job.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the job was created, in ISO 8601 format.
     #   @return [Time]
     #
     # @!attribute [rw] details
-    #   Details for the response.
+    #   Details about the job.
     #   @return [Types::ResponseDetails]
     #
     # @!attribute [rw] errors
+    #   The errors associated with jobs.
     #   @return [Array<Types::JobError>]
     #
     # @!attribute [rw] id
-    #   A unique identifier.
+    #   The unique identifier for the job.
     #   @return [String]
     #
     # @!attribute [rw] state
+    #   The state of the job.
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The job type.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the job was last updated, in ISO 8601 format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateJobResponse AWS API Documentation
@@ -722,11 +711,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # Creates a revision for a data set. When they're created, revisions
-    # are not published to products, and therefore are not available to
-    # subscribers. To publish a revision to a data set in a product, the
-    # revision must first be finalized.
-    #
     # @note When making an API call, you may pass CreateRevisionRequest
     #   data as a hash:
     #
@@ -743,6 +727,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
+    #   The unique identifier for a data set.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -764,50 +749,64 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
-    #   resource.
+    #   The ARN for the revision.
     #   @return [String]
     #
     # @!attribute [rw] comment
+    #   An optional comment about the revision.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the revision was created, in ISO 8601 format.
     #   @return [Time]
     #
     # @!attribute [rw] data_set_id
-    #   A unique identifier.
+    #   The unique identifier for the data set associated with this
+    #   revision.
     #   @return [String]
     #
     # @!attribute [rw] finalized
+    #   To publish a revision to a data set in a product, the revision must
+    #   first be finalized. Finalizing a revision tells AWS Data Exchange
+    #   that your changes to the assets in the revision are complete. After
+    #   it's in this read-only state, you can publish the revision to your
+    #   products. Finalized revisions can be published through the AWS Data
+    #   Exchange console or the AWS Marketplace Catalog API, using the
+    #   StartChangeSet AWS Marketplace Catalog API action. When using the
+    #   API, revisions are uniquely identified by their ARN.
     #   @return [Boolean]
     #
     # @!attribute [rw] id
-    #   A unique identifier.
+    #   The unique identifier for the revision.
     #   @return [String]
     #
     # @!attribute [rw] source_id
-    #   A unique identifier.
+    #   The revision ID of the owned revision corresponding to the entitled
+    #   revision being viewed. This parameter is returned when a revision
+    #   owner is viewing the entitled copy of its owned revision.
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   The tags for the revision.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] updated_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   The date and time that the revision was last updated, in ISO 8601
     #   format.
     #   @return [Time]
     #
     # @!attribute [rw] revocation_comment
+    #   A required comment to inform subscribers of the reason their access
+    #   to the revision was revoked.
     #   @return [String]
     #
     # @!attribute [rw] revoked
+    #   A status indicating that subscribers' access to the revision was
+    #   revoked.
     #   @return [Boolean]
     #
     # @!attribute [rw] revoked_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the revision was revoked, in ISO 8601 format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateRevisionResponse AWS API Documentation
@@ -903,12 +902,15 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] asset_id
+    #   The unique identifier for an asset.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
+    #   The unique identifier for a data set.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
+    #   The unique identifier for a revision.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/DeleteAssetRequest AWS API Documentation
@@ -929,6 +931,7 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] data_set_id
+    #   The unique identifier for a data set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/DeleteDataSetRequest AWS API Documentation
@@ -947,6 +950,7 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] event_action_id
+    #   The unique identifier for the event action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/DeleteEventActionRequest AWS API Documentation
@@ -966,9 +970,11 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] data_set_id
+    #   The unique identifier for a data set.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
+    #   The unique identifier for a revision.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/DeleteRevisionRequest AWS API Documentation
@@ -1293,7 +1299,7 @@ module Aws::DataExchange
 
     # Encryption configuration of the export job. Includes the encryption
     # type in addition to the AWS KMS key. The KMS key is only necessary if
-    # you chose the KMS encryption. type.
+    # you chose the KMS encryption type.
     #
     # @note When making an API call, you may pass ExportServerSideEncryption
     #   data as a hash:
@@ -1333,12 +1339,15 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] asset_id
+    #   The unique identifier for an asset.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
+    #   The unique identifier for a data set.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
+    #   The unique identifier for a revision.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetAssetRequest AWS API Documentation
@@ -1352,8 +1361,7 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
-    #   resource.
+    #   The ARN for the asset.
     #   @return [String]
     #
     # @!attribute [rw] asset_details
@@ -1365,16 +1373,15 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the asset was created, in ISO 8601 format.
     #   @return [Time]
     #
     # @!attribute [rw] data_set_id
-    #   A unique identifier.
+    #   The unique identifier for the data set associated with this asset.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   A unique identifier.
+    #   The unique identifier for the asset.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1387,15 +1394,17 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] revision_id
-    #   A unique identifier.
+    #   The unique identifier for the revision associated with this asset.
     #   @return [String]
     #
     # @!attribute [rw] source_id
-    #   A unique identifier.
+    #   The asset ID of the owned asset corresponding to the entitled asset
+    #   being viewed. This parameter is returned when an asset owner is
+    #   viewing the entitled copy of its owned asset.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   The date and time that the asset was last updated, in ISO 8601
     #   format.
     #   @return [Time]
     #
@@ -1424,6 +1433,7 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] data_set_id
+    #   The unique identifier for a data set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetDataSetRequest AWS API Documentation
@@ -1435,8 +1445,7 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
-    #   resource.
+    #   The ARN for the data set.
     #   @return [String]
     #
     # @!attribute [rw] asset_type
@@ -1444,43 +1453,43 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the data set was created, in ISO 8601 format.
     #   @return [Time]
     #
     # @!attribute [rw] description
-    #   A description of a resource.
+    #   The description for the data set.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   A unique identifier.
+    #   The unique identifier for the data set.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the model.
+    #   The name of the data set.
     #   @return [String]
     #
     # @!attribute [rw] origin
     #   A property that defines the data set as OWNED by the account (for
-    #   providers) or ENTITLED to the account (for subscribers). When an
-    #   owned data set is published in a product, AWS Data Exchange creates
-    #   a copy of the data set. Subscribers can access that copy of the data
-    #   set as an entitled data set.
+    #   providers) or ENTITLED to the account (for subscribers).
     #   @return [String]
     #
     # @!attribute [rw] origin_details
-    #   Information about the origin of the data set.
+    #   If the origin of this data set is ENTITLED, includes the details for
+    #   the product on AWS Marketplace.
     #   @return [Types::OriginDetails]
     #
     # @!attribute [rw] source_id
-    #   A unique identifier.
+    #   The data set ID of the owned data set corresponding to the entitled
+    #   data set being viewed. This parameter is returned when a data set
+    #   owner is viewing the entitled copy of its owned data set.
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   The tags for the data set.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] updated_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   The date and time that the data set was last updated, in ISO 8601
     #   format.
     #   @return [Time]
     #
@@ -1510,6 +1519,7 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] event_action_id
+    #   The unique identifier for the event action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetEventActionRequest AWS API Documentation
@@ -1525,12 +1535,11 @@ module Aws::DataExchange
     #   @return [Types::Action]
     #
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
-    #   resource.
+    #   The ARN for the event action.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   The date and time that the event action was created, in ISO 8601
     #   format.
     #   @return [Time]
     #
@@ -1539,12 +1548,12 @@ module Aws::DataExchange
     #   @return [Types::Event]
     #
     # @!attribute [rw] id
-    #   A unique identifier.
+    #   The unique identifier for the event action.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the event action was last updated, in ISO
+    #   8601 format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetEventActionResponse AWS API Documentation
@@ -1568,6 +1577,7 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] job_id
+    #   The unique identifier for a job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetJobRequest AWS API Documentation
@@ -1579,35 +1589,35 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
-    #   resource.
+    #   The ARN for the job.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the job was created, in ISO 8601 format.
     #   @return [Time]
     #
     # @!attribute [rw] details
-    #   Details for the response.
+    #   Details about the job.
     #   @return [Types::ResponseDetails]
     #
     # @!attribute [rw] errors
+    #   The errors associated with jobs.
     #   @return [Array<Types::JobError>]
     #
     # @!attribute [rw] id
-    #   A unique identifier.
+    #   The unique identifier for the job.
     #   @return [String]
     #
     # @!attribute [rw] state
+    #   The state of the job.
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The job type.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the job was last updated, in ISO 8601 format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetJobResponse AWS API Documentation
@@ -1634,9 +1644,11 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] data_set_id
+    #   The unique identifier for a data set.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
+    #   The unique identifier for a revision.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetRevisionRequest AWS API Documentation
@@ -1649,50 +1661,64 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
-    #   resource.
+    #   The ARN for the revision.
     #   @return [String]
     #
     # @!attribute [rw] comment
+    #   An optional comment about the revision.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the revision was created, in ISO 8601 format.
     #   @return [Time]
     #
     # @!attribute [rw] data_set_id
-    #   A unique identifier.
+    #   The unique identifier for the data set associated with this
+    #   revision.
     #   @return [String]
     #
     # @!attribute [rw] finalized
+    #   To publish a revision to a data set in a product, the revision must
+    #   first be finalized. Finalizing a revision tells AWS Data Exchange
+    #   that your changes to the assets in the revision are complete. After
+    #   it's in this read-only state, you can publish the revision to your
+    #   products. Finalized revisions can be published through the AWS Data
+    #   Exchange console or the AWS Marketplace Catalog API, using the
+    #   StartChangeSet AWS Marketplace Catalog API action. When using the
+    #   API, revisions are uniquely identified by their ARN.
     #   @return [Boolean]
     #
     # @!attribute [rw] id
-    #   A unique identifier.
+    #   The unique identifier for the revision.
     #   @return [String]
     #
     # @!attribute [rw] source_id
-    #   A unique identifier.
+    #   The revision ID of the owned revision corresponding to the entitled
+    #   revision being viewed. This parameter is returned when a revision
+    #   owner is viewing the entitled copy of its owned revision.
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   The tags for the revision.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] updated_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   The date and time that the revision was last updated, in ISO 8601
     #   format.
     #   @return [Time]
     #
     # @!attribute [rw] revocation_comment
+    #   A required comment to inform subscribers of the reason their access
+    #   to the revision was revoked.
     #   @return [String]
     #
     # @!attribute [rw] revoked
+    #   A status indicating that subscribers' access to the revision was
+    #   revoked.
     #   @return [Boolean]
     #
     # @!attribute [rw] revoked_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the revision was revoked, in ISO 8601 format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetRevisionResponse AWS API Documentation
@@ -2202,12 +2228,16 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] data_set_id
+    #   The unique identifier for a data set.
     #   @return [String]
     #
     # @!attribute [rw] max_results
+    #   The maximum number of results returned by a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ListDataSetRevisionsRequest AWS API Documentation
@@ -2226,6 +2256,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] revisions
+    #   The asset objects listed by the request.
     #   @return [Array<Types::RevisionEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ListDataSetRevisionsResponse AWS API Documentation
@@ -2247,12 +2278,17 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] max_results
+    #   The maximum number of results returned by a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] origin
+    #   A property that defines the data set as OWNED by the account (for
+    #   providers) or ENTITLED to the account (for subscribers).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ListDataSetsRequest AWS API Documentation
@@ -2266,6 +2302,7 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] data_sets
+    #   The data set objects listed by the request.
     #   @return [Array<Types::DataSetEntry>]
     #
     # @!attribute [rw] next_token
@@ -2292,12 +2329,16 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] event_source_id
+    #   The unique identifier for the event source.
     #   @return [String]
     #
     # @!attribute [rw] max_results
+    #   The maximum number of results returned by a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ListEventActionsRequest AWS API Documentation
@@ -2311,6 +2352,7 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] event_actions
+    #   The event action objects listed by the request.
     #   @return [Array<Types::EventActionEntry>]
     #
     # @!attribute [rw] next_token
@@ -2338,15 +2380,20 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] data_set_id
+    #   The unique identifier for a data set.
     #   @return [String]
     #
     # @!attribute [rw] max_results
+    #   The maximum number of results returned by a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
+    #   The unique identifier for a revision.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ListJobsRequest AWS API Documentation
@@ -2361,6 +2408,7 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] jobs
+    #   The jobs listed by the request.
     #   @return [Array<Types::JobEntry>]
     #
     # @!attribute [rw] next_token
@@ -2388,15 +2436,20 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] data_set_id
+    #   The unique identifier for a data set.
     #   @return [String]
     #
     # @!attribute [rw] max_results
+    #   The maximum number of results returned by a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
+    #   The unique identifier for a revision.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ListRevisionAssetsRequest AWS API Documentation
@@ -2411,6 +2464,7 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] assets
+    #   The asset objects listed by the request.
     #   @return [Array<Types::AssetEntry>]
     #
     # @!attribute [rw] next_token
@@ -2435,6 +2489,8 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] resource_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
+    #   resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ListTagsForResourceRequest AWS API Documentation
@@ -2446,6 +2502,8 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] tags
+    #   A label that consists of a customer-defined key and an optional
+    #   value.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ListTagsForResourceResponse AWS API Documentation
@@ -2596,11 +2654,11 @@ module Aws::DataExchange
     #   @return [Types::ExportRevisionsToS3RequestDetails]
     #
     # @!attribute [rw] import_asset_from_signed_url
-    #   Details about the import from signed URL request.
+    #   Details about the import from Amazon S3 request.
     #   @return [Types::ImportAssetFromSignedUrlRequestDetails]
     #
     # @!attribute [rw] import_assets_from_s3
-    #   Details about the import from Amazon S3 request.
+    #   Information about the import asset from API Gateway API request.
     #   @return [Types::ImportAssetsFromS3RequestDetails]
     #
     # @!attribute [rw] import_assets_from_redshift_data_shares
@@ -2608,7 +2666,7 @@ module Aws::DataExchange
     #   @return [Types::ImportAssetsFromRedshiftDataSharesRequestDetails]
     #
     # @!attribute [rw] import_asset_from_api_gateway_api
-    #   Information about the import asset from API Gateway API request.
+    #   Details about the import from signed URL request.
     #   @return [Types::ImportAssetFromApiGatewayApiRequestDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RequestDetails AWS API Documentation
@@ -2757,12 +2815,10 @@ module Aws::DataExchange
     #   first be finalized. Finalizing a revision tells AWS Data Exchange
     #   that your changes to the assets in the revision are complete. After
     #   it's in this read-only state, you can publish the revision to your
-    #   products.
-    #
-    #   Finalized revisions can be published through the AWS Data Exchange
-    #   console or the AWS Marketplace Catalog API, using the StartChangeSet
-    #   AWS Marketplace Catalog API action. When using the API, revisions
-    #   are uniquely identified by their ARN.
+    #   products. Finalized revisions can be published through the AWS Data
+    #   Exchange console or the AWS Marketplace Catalog API, using the
+    #   StartChangeSet AWS Marketplace Catalog API action. When using the
+    #   API, revisions are uniquely identified by their ARN.
     #   @return [Boolean]
     #
     # @!attribute [rw] id
@@ -2833,8 +2889,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # The request sent to revoke the revision.
-    #
     # @note When making an API call, you may pass RevokeRevisionRequest
     #   data as a hash:
     #
@@ -2845,9 +2899,11 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] data_set_id
+    #   The unique identifier for a data set.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
+    #   The unique identifier for a revision.
     #   @return [String]
     #
     # @!attribute [rw] revocation_comment
@@ -2866,47 +2922,60 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
-    #   resource.
+    #   The ARN for the revision.
     #   @return [String]
     #
     # @!attribute [rw] comment
+    #   An optional comment about the revision.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the revision was created, in ISO 8601 format.
     #   @return [Time]
     #
     # @!attribute [rw] data_set_id
-    #   A unique identifier.
+    #   The unique identifier for the data set associated with this
+    #   revision.
     #   @return [String]
     #
     # @!attribute [rw] finalized
+    #   To publish a revision to a data set in a product, the revision must
+    #   first be finalized. Finalizing a revision tells AWS Data Exchange
+    #   that changes to the assets in the revision are complete. After it's
+    #   in this read-only state, you can publish the revision to your
+    #   products. Finalized revisions can be published through the AWS Data
+    #   Exchange console or the AWS Marketplace Catalog API, using the
+    #   StartChangeSet AWS Marketplace Catalog API action. When using the
+    #   API, revisions are uniquely identified by their ARN.
     #   @return [Boolean]
     #
     # @!attribute [rw] id
-    #   A unique identifier.
+    #   The unique identifier for the revision.
     #   @return [String]
-    #
-    # @!attribute [rw] revocation_comment
-    #   @return [String]
-    #
-    # @!attribute [rw] revoked
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] revoked_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
-    #   @return [Time]
     #
     # @!attribute [rw] source_id
-    #   A unique identifier.
+    #   The revision ID of the owned revision corresponding to the entitled
+    #   revision being viewed. This parameter is returned when a revision
+    #   owner is viewing the entitled copy of its owned revision.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   The date and time that the revision was last updated, in ISO 8601
     #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] revocation_comment
+    #   A required comment to inform subscribers of the reason their access
+    #   to the revision was revoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] revoked
+    #   A status indicating that subscribers' access to the revision was
+    #   revoked.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] revoked_at
+    #   The date and time that the revision was revoked, in ISO 8601 format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RevokeRevisionResponse AWS API Documentation
@@ -2918,11 +2987,11 @@ module Aws::DataExchange
       :data_set_id,
       :finalized,
       :id,
+      :source_id,
+      :updated_at,
       :revocation_comment,
       :revoked,
-      :revoked_at,
-      :source_id,
-      :updated_at)
+      :revoked_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2960,27 +3029,42 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] body
+    #   The request body.
     #   @return [String]
     #
     # @!attribute [rw] query_string_parameters
+    #   Attach query string parameters to the end of the URI (for example,
+    #   /v1/examplePath?exampleParam=exampleValue).
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] asset_id
+    #   Asset ID value for the API request.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
+    #   Data set ID value for the API request.
     #   @return [String]
     #
     # @!attribute [rw] request_headers
+    #   Any header value prefixed with x-amzn-dataexchange-header- will have
+    #   that stripped before sending the Asset API request. Use this when
+    #   you want to override a header that AWS Data Exchange uses.
+    #   Alternatively, you can use the header without a prefix to the HTTP
+    #   request.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] method
+    #   HTTP method value for the API request. Alternatively, you can use
+    #   the appropriate verb in your request.
     #   @return [String]
     #
     # @!attribute [rw] path
+    #   URI path value for the API request. Alternatively, you can set the
+    #   URI path directly by invoking /v1/\\\{pathValue\\}.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
+    #   Revision ID value for the API request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/SendApiAssetRequest AWS API Documentation
@@ -2998,8 +3082,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # The details of the send API asset response.
-    #
     # @!attribute [rw] body
     #   The response body from the underlying API tracked by the API asset.
     #   @return [String]
@@ -3021,12 +3103,15 @@ module Aws::DataExchange
     # The request has exceeded the quotas imposed by the service.
     #
     # @!attribute [rw] limit_name
+    #   The name of the limit that was reached.
     #   @return [String]
     #
     # @!attribute [rw] limit_value
+    #   The value of the exceeded limit.
     #   @return [Float]
     #
     # @!attribute [rw] message
+    #   The request has exceeded the quotas imposed by the service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ServiceLimitExceededException AWS API Documentation
@@ -3047,6 +3132,7 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] job_id
+    #   The unique identifier for a job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/StartJobRequest AWS API Documentation
@@ -3072,9 +3158,13 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] resource_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   A label that consists of a customer-defined key and an optional
+    #   value.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/TagResourceRequest AWS API Documentation
@@ -3109,9 +3199,12 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] resource_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
+    #   The key tags.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/UntagResourceRequest AWS API Documentation
@@ -3123,8 +3216,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # The request to update an asset.
-    #
     # @note When making an API call, you may pass UpdateAssetRequest
     #   data as a hash:
     #
@@ -3136,9 +3227,11 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] asset_id
+    #   The unique identifier for an asset.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
+    #   The unique identifier for a data set.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3151,6 +3244,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] revision_id
+    #   The unique identifier for a revision.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/UpdateAssetRequest AWS API Documentation
@@ -3165,8 +3259,7 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
-    #   resource.
+    #   The ARN for the asset.
     #   @return [String]
     #
     # @!attribute [rw] asset_details
@@ -3178,16 +3271,15 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the asset was created, in ISO 8601 format.
     #   @return [Time]
     #
     # @!attribute [rw] data_set_id
-    #   A unique identifier.
+    #   The unique identifier for the data set associated with this asset.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   A unique identifier.
+    #   The unique identifier for the asset.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3200,15 +3292,17 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] revision_id
-    #   A unique identifier.
+    #   The unique identifier for the revision associated with this asset.
     #   @return [String]
     #
     # @!attribute [rw] source_id
-    #   A unique identifier.
+    #   The asset ID of the owned asset corresponding to the entitled asset
+    #   being viewed. This parameter is returned when an asset owner is
+    #   viewing the entitled copy of its owned asset.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   The date and time that the asset was last updated, in ISO 8601
     #   format.
     #   @return [Time]
     #
@@ -3229,8 +3323,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # The request to update a data set.
-    #
     # @note When making an API call, you may pass UpdateDataSetRequest
     #   data as a hash:
     #
@@ -3241,6 +3333,7 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] data_set_id
+    #   The unique identifier for a data set.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3262,8 +3355,7 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
-    #   resource.
+    #   The ARN for the data set.
     #   @return [String]
     #
     # @!attribute [rw] asset_type
@@ -3271,40 +3363,39 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the data set was created, in ISO 8601 format.
     #   @return [Time]
     #
     # @!attribute [rw] description
-    #   A description of a resource.
+    #   The description for the data set.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   A unique identifier.
+    #   The unique identifier for the data set.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the model.
+    #   The name of the data set.
     #   @return [String]
     #
     # @!attribute [rw] origin
     #   A property that defines the data set as OWNED by the account (for
-    #   providers) or ENTITLED to the account (for subscribers). When an
-    #   owned data set is published in a product, AWS Data Exchange creates
-    #   a copy of the data set. Subscribers can access that copy of the data
-    #   set as an entitled data set.
+    #   providers) or ENTITLED to the account (for subscribers).
     #   @return [String]
     #
     # @!attribute [rw] origin_details
-    #   Information about the origin of the data set.
+    #   If the origin of this data set is ENTITLED, includes the details for
+    #   the product on AWS Marketplace.
     #   @return [Types::OriginDetails]
     #
     # @!attribute [rw] source_id
-    #   A unique identifier.
+    #   The data set ID of the owned data set corresponding to the entitled
+    #   data set being viewed. This parameter is returned when a data set
+    #   owner is viewing the entitled copy of its owned data set.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   The date and time that the data set was last updated, in ISO 8601
     #   format.
     #   @return [Time]
     #
@@ -3325,8 +3416,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # The request to update an event action.
-    #
     # @note When making an API call, you may pass UpdateEventActionRequest
     #   data as a hash:
     #
@@ -3351,6 +3440,7 @@ module Aws::DataExchange
     #   @return [Types::Action]
     #
     # @!attribute [rw] event_action_id
+    #   The unique identifier for the event action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/UpdateEventActionRequest AWS API Documentation
@@ -3367,12 +3457,11 @@ module Aws::DataExchange
     #   @return [Types::Action]
     #
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
-    #   resource.
+    #   The ARN for the event action.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   The date and time that the event action was created, in ISO 8601
     #   format.
     #   @return [Time]
     #
@@ -3381,12 +3470,12 @@ module Aws::DataExchange
     #   @return [Types::Event]
     #
     # @!attribute [rw] id
-    #   A unique identifier.
+    #   The unique identifier for the event action.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the event action was last updated, in ISO
+    #   8601 format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/UpdateEventActionResponse AWS API Documentation
@@ -3402,8 +3491,6 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
-    # The request to update a revision.
-    #
     # @note When making an API call, you may pass UpdateRevisionRequest
     #   data as a hash:
     #
@@ -3419,6 +3506,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
+    #   The unique identifier for a data set.
     #   @return [String]
     #
     # @!attribute [rw] finalized
@@ -3428,6 +3516,7 @@ module Aws::DataExchange
     #   @return [Boolean]
     #
     # @!attribute [rw] revision_id
+    #   The unique identifier for a revision.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/UpdateRevisionRequest AWS API Documentation
@@ -3442,47 +3531,60 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
-    #   resource.
+    #   The ARN for the revision.
     #   @return [String]
     #
     # @!attribute [rw] comment
+    #   An optional comment about the revision.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the revision was created, in ISO 8601 format.
     #   @return [Time]
     #
     # @!attribute [rw] data_set_id
-    #   A unique identifier.
+    #   The unique identifier for the data set associated with this
+    #   revision.
     #   @return [String]
     #
     # @!attribute [rw] finalized
+    #   To publish a revision to a data set in a product, the revision must
+    #   first be finalized. Finalizing a revision tells AWS Data Exchange
+    #   that changes to the assets in the revision are complete. After it's
+    #   in this read-only state, you can publish the revision to your
+    #   products. Finalized revisions can be published through the AWS Data
+    #   Exchange console or the AWS Marketplace Catalog API, using the
+    #   StartChangeSet AWS Marketplace Catalog API action. When using the
+    #   API, revisions are uniquely identified by their ARN.
     #   @return [Boolean]
     #
     # @!attribute [rw] id
-    #   A unique identifier.
+    #   The unique identifier for the revision.
     #   @return [String]
     #
     # @!attribute [rw] source_id
-    #   A unique identifier.
+    #   The revision ID of the owned revision corresponding to the entitled
+    #   revision being viewed. This parameter is returned when a revision
+    #   owner is viewing the entitled copy of its owned revision.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   The date and time that the revision was last updated, in ISO 8601
     #   format.
     #   @return [Time]
     #
     # @!attribute [rw] revocation_comment
+    #   A required comment to inform subscribers of the reason their access
+    #   to the revision was revoked.
     #   @return [String]
     #
     # @!attribute [rw] revoked
+    #   A status indicating that subscribers' access to the revision was
+    #   revoked.
     #   @return [Boolean]
     #
     # @!attribute [rw] revoked_at
-    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
-    #   format.
+    #   The date and time that the revision was revoked, in ISO 8601 format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/UpdateRevisionResponse AWS API Documentation
@@ -3511,7 +3613,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] exception_cause
-    #   The message that informs you about what the exception was.
+    #   The unique identifier for the resource that couldn't be found.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ValidationException AWS API Documentation

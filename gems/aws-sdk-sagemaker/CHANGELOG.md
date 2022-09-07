@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.138.0 (2022-09-07)
+------------------
+
+* Feature - SageMaker Hosting now allows customization on ML instance storage volume size, model data download timeout and inference container startup ping health check timeout for each ProductionVariant in CreateEndpointConfig API.
+
 1.137.0 (2022-09-06)
 ------------------
 

@@ -1145,6 +1145,12 @@ module Aws::Inspector2
     #               start_inclusive: Time.now,
     #             },
     #           ],
+    #           fix_available: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
     #           inspector_score: [
     #             {
     #               lower_inclusive: 1.0,
@@ -1417,6 +1423,12 @@ module Aws::Inspector2
     #             {
     #               end_inclusive: Time.now,
     #               start_inclusive: Time.now,
+    #             },
+    #           ],
+    #           fix_available: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
     #             },
     #           ],
     #           inspector_score: [
@@ -2482,6 +2494,12 @@ module Aws::Inspector2
     #             start_inclusive: Time.now,
     #           },
     #         ],
+    #         fix_available: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
     #         inspector_score: [
     #           {
     #             lower_inclusive: 1.0,
@@ -2668,6 +2686,13 @@ module Aws::Inspector2
     #   findings.
     #   @return [Array<Types::DateFilter>]
     #
+    # @!attribute [rw] fix_available
+    #   Details on whether a fix is available through a version update. This
+    #   value can be `YES`, `NO`, or `PARTIAL`. A `PARTIAL` fix means that
+    #   some, but not all, of the packages identified in the finding have
+    #   fixes available through updated versions.
+    #   @return [Array<Types::StringFilter>]
+    #
     # @!attribute [rw] inspector_score
     #   The Amazon Inspector score to filter on.
     #   @return [Array<Types::NumberFilter>]
@@ -2749,6 +2774,7 @@ module Aws::Inspector2
       :finding_status,
       :finding_type,
       :first_observed_at,
+      :fix_available,
       :inspector_score,
       :last_observed_at,
       :network_protocol,
@@ -2785,6 +2811,13 @@ module Aws::Inspector2
     # @!attribute [rw] first_observed_at
     #   The date and time that the finding was first observed.
     #   @return [Time]
+    #
+    # @!attribute [rw] fix_available
+    #   Details on whether a fix is available through a version update. This
+    #   value can be `YES`, `NO`, or `PARTIAL`. A `PARTIAL` fix means that
+    #   some, but not all, of the packages identified in the finding have
+    #   fixes available through updated versions.
+    #   @return [String]
     #
     # @!attribute [rw] inspector_score
     #   The Amazon Inspector score given to the finding.
@@ -2844,6 +2877,7 @@ module Aws::Inspector2
       :description,
       :finding_arn,
       :first_observed_at,
+      :fix_available,
       :inspector_score,
       :inspector_score_details,
       :last_observed_at,
@@ -3983,6 +4017,12 @@ module Aws::Inspector2
     #             {
     #               end_inclusive: Time.now,
     #               start_inclusive: Time.now,
+    #             },
+    #           ],
+    #           fix_available: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
     #             },
     #           ],
     #           inspector_score: [
@@ -5398,6 +5438,12 @@ module Aws::Inspector2
     #               start_inclusive: Time.now,
     #             },
     #           ],
+    #           fix_available: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
     #           inspector_score: [
     #             {
     #               lower_inclusive: 1.0,
@@ -5724,6 +5770,11 @@ module Aws::Inspector2
     #   The release of the vulnerable package.
     #   @return [String]
     #
+    # @!attribute [rw] remediation
+    #   The code to run in your environment to update packages with a fix
+    #   available.
+    #   @return [String]
+    #
     # @!attribute [rw] source_layer_hash
     #   The source layer hash of the vulnerable package.
     #   @return [String]
@@ -5742,6 +5793,7 @@ module Aws::Inspector2
       :name,
       :package_manager,
       :release,
+      :remediation,
       :source_layer_hash,
       :version)
       SENSITIVE = []

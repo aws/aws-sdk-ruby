@@ -937,7 +937,7 @@ module Aws::IoTSiteWise
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-assets.html
     #
     # @option params [required, String] :asset_name
-    #   A unique, friendly name for the asset.
+    #   A friendly name for the asset.
     #
     # @option params [required, String] :asset_model_id
     #   The ID of the asset model from which to create the asset.
@@ -1231,12 +1231,6 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API operation is in preview release for IoT SiteWise and is
-    # subject to change. We recommend that you use this operation only with
-    # test data, and not in production environments.
-    #
-    #  </note>
-    #
     # Defines a job to ingest data to IoT SiteWise from Amazon S3. For more
     # information, see [Create a bulk import job (CLI)][1] in the *Amazon
     # Simple Storage Service User Guide*.
@@ -2279,12 +2273,6 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API operation is in preview release for IoT SiteWise and is
-    # subject to change. We recommend that you use this operation only with
-    # test data, and not in production environments.
-    #
-    #  </note>
-    #
     # Retrieves information about a bulk import job request. For more
     # information, see [Describe a bulk import job (CLI)][1] in the *Amazon
     # Simple Storage Service User Guide*.
@@ -3587,15 +3575,9 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API operation is in preview release for IoT SiteWise and is
-    # subject to change. We recommend that you use this operation only with
-    # test data, and not in production environments.
-    #
-    #  </note>
-    #
     # Retrieves a paginated list of bulk import job requests. For more
-    # information, see [List bulk import jobs (CLI)][1] in the *Amazon
-    # Simple Storage Service User Guide*.
+    # information, see [List bulk import jobs (CLI)][1] in the *IoT SiteWise
+    # User Guide*.
     #
     #
     #
@@ -4250,7 +4232,7 @@ module Aws::IoTSiteWise
     #   The ID of the asset to update.
     #
     # @option params [required, String] :asset_name
-    #   A unique, friendly name for the asset.
+    #   A friendly name for the asset.
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -4582,6 +4564,11 @@ module Aws::IoTSiteWise
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :property_unit
+    #   The unit of measure (such as Newtons or RPM) of the asset property. If
+    #   you don't specify a value for this parameter, the service uses the
+    #   value of the `assetModelProperty` in the asset model.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4592,6 +4579,7 @@ module Aws::IoTSiteWise
     #     property_alias: "PropertyAlias",
     #     property_notification_state: "ENABLED", # accepts ENABLED, DISABLED
     #     client_token: "ClientToken",
+    #     property_unit: "PropertyUnit",
     #   })
     #
     # @overload update_asset_property(params = {})
@@ -4873,7 +4861,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

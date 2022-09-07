@@ -15,6 +15,7 @@ require_relative 'aws-sdk-dataexchange/types'
 require_relative 'aws-sdk-dataexchange/client_api'
 require_relative 'aws-sdk-dataexchange/client'
 require_relative 'aws-sdk-dataexchange/errors'
+require_relative 'aws-sdk-dataexchange/waiters'
 require_relative 'aws-sdk-dataexchange/resource'
 require_relative 'aws-sdk-dataexchange/customizations'
 
@@ -48,6 +49,6 @@ require_relative 'aws-sdk-dataexchange/customizations'
 # @!group service
 module Aws::DataExchange
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end

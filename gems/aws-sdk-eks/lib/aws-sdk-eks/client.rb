@@ -555,8 +555,29 @@ module Aws::EKS
     #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html
     #
     # @option params [String] :resolve_conflicts
-    #   How to resolve parameter value conflicts when migrating an existing
-    #   add-on to an Amazon EKS add-on.
+    #   How to resolve field value conflicts for an Amazon EKS add-on.
+    #   Conflicts are handled based on the value you choose:
+    #
+    #   * **None** – If the self-managed version of the add-on is installed on
+    #     your cluster, Amazon EKS doesn't change the value. Creation of the
+    #     add-on might fail.
+    #
+    #   * **Overwrite** – If the self-managed version of the add-on is
+    #     installed on your cluster and the Amazon EKS default value is
+    #     different than the existing value, Amazon EKS changes the value to
+    #     the Amazon EKS default value.
+    #
+    #   * **Preserve** – Not supported. You can set this value when updating
+    #     an add-on though. For more information, see [UpdateAddon][1].
+    #
+    #   If you don't currently have the self-managed version of the add-on
+    #   installed on your cluster, the Amazon EKS add-on is installed. Amazon
+    #   EKS sets all values to default values, regardless of the option that
+    #   you specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateAddon.html
     #
     # @option params [String] :client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -581,7 +602,7 @@ module Aws::EKS
     #     addon_name: "String", # required
     #     addon_version: "String",
     #     service_account_role_arn: "RoleArn",
-    #     resolve_conflicts: "OVERWRITE", # accepts OVERWRITE, NONE
+    #     resolve_conflicts: "OVERWRITE", # accepts OVERWRITE, NONE, PRESERVE
     #     client_request_token: "String",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -592,7 +613,7 @@ module Aws::EKS
     #
     #   resp.addon.addon_name #=> String
     #   resp.addon.cluster_name #=> String
-    #   resp.addon.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "DEGRADED"
+    #   resp.addon.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "DEGRADED", "UPDATE_FAILED"
     #   resp.addon.addon_version #=> String
     #   resp.addon.health.issues #=> Array
     #   resp.addon.health.issues[0].code #=> String, one of "AccessDenied", "InternalFailure", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification", "K8sResourceNotFound"
@@ -1299,7 +1320,7 @@ module Aws::EKS
     #
     #   resp.addon.addon_name #=> String
     #   resp.addon.cluster_name #=> String
-    #   resp.addon.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "DEGRADED"
+    #   resp.addon.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "DEGRADED", "UPDATE_FAILED"
     #   resp.addon.addon_version #=> String
     #   resp.addon.health.issues #=> Array
     #   resp.addon.health.issues[0].code #=> String, one of "AccessDenied", "InternalFailure", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification", "K8sResourceNotFound"
@@ -1642,7 +1663,7 @@ module Aws::EKS
     #
     #   resp.addon.addon_name #=> String
     #   resp.addon.cluster_name #=> String
-    #   resp.addon.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "DEGRADED"
+    #   resp.addon.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "DEGRADED", "UPDATE_FAILED"
     #   resp.addon.addon_version #=> String
     #   resp.addon.health.issues #=> Array
     #   resp.addon.health.issues[0].code #=> String, one of "AccessDenied", "InternalFailure", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification", "K8sResourceNotFound"
@@ -2787,8 +2808,20 @@ module Aws::EKS
     #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html
     #
     # @option params [String] :resolve_conflicts
-    #   How to resolve parameter value conflicts when applying the new version
-    #   of the add-on to the cluster.
+    #   How to resolve field value conflicts for an Amazon EKS add-on if
+    #   you've changed a value from the Amazon EKS default value. Conflicts
+    #   are handled based on the option you choose:
+    #
+    #   * **None** – Amazon EKS doesn't change the value. The update might
+    #     fail.
+    #
+    #   * **Overwrite** – Amazon EKS overwrites the changed value back to the
+    #     Amazon EKS default value.
+    #
+    #   * **Preserve** – Amazon EKS preserves the value. If you choose this
+    #     option, we recommend that you test any field and value changes on a
+    #     non-production cluster before updating the add-on on your production
+    #     cluster.
     #
     # @option params [String] :client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -2808,7 +2841,7 @@ module Aws::EKS
     #     addon_name: "String", # required
     #     addon_version: "String",
     #     service_account_role_arn: "RoleArn",
-    #     resolve_conflicts: "OVERWRITE", # accepts OVERWRITE, NONE
+    #     resolve_conflicts: "OVERWRITE", # accepts OVERWRITE, NONE, PRESERVE
     #     client_request_token: "String",
     #   })
     #
@@ -3272,7 +3305,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

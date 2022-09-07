@@ -582,7 +582,7 @@ module Aws::DataExchange
     ListRevisionAssetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListRevisionAssetsResponse.struct_class = Types::ListRevisionAssetsResponse
 
-    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
@@ -655,11 +655,11 @@ module Aws::DataExchange
     RevokeRevisionResponse.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, location_name: "DataSetId"))
     RevokeRevisionResponse.add_member(:finalized, Shapes::ShapeRef.new(shape: __boolean, location_name: "Finalized"))
     RevokeRevisionResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    RevokeRevisionResponse.add_member(:source_id, Shapes::ShapeRef.new(shape: Id, location_name: "SourceId"))
+    RevokeRevisionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     RevokeRevisionResponse.add_member(:revocation_comment, Shapes::ShapeRef.new(shape: __stringMin10Max512, location_name: "RevocationComment"))
     RevokeRevisionResponse.add_member(:revoked, Shapes::ShapeRef.new(shape: __boolean, location_name: "Revoked"))
     RevokeRevisionResponse.add_member(:revoked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RevokedAt"))
-    RevokeRevisionResponse.add_member(:source_id, Shapes::ShapeRef.new(shape: Id, location_name: "SourceId"))
-    RevokeRevisionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     RevokeRevisionResponse.struct_class = Types::RevokeRevisionResponse
 
     S3SnapshotAsset.add_member(:size, Shapes::ShapeRef.new(shape: __doubleMin0, required: true, location_name: "Size"))
@@ -693,14 +693,14 @@ module Aws::DataExchange
 
     StartJobResponse.struct_class = Types::StartJobResponse
 
-    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ResourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, required: true, location_name: "tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
-    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: ListOf__string, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
@@ -800,9 +800,9 @@ module Aws::DataExchange
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:create_data_set, Seahorse::Model::Operation.new.tap do |o|
@@ -811,11 +811,11 @@ module Aws::DataExchange
         o.http_request_uri = "/v1/data-sets"
         o.input = Shapes::ShapeRef.new(shape: CreateDataSetRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDataSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:create_event_action, Seahorse::Model::Operation.new.tap do |o|
@@ -824,11 +824,11 @@ module Aws::DataExchange
         o.http_request_uri = "/v1/event-actions"
         o.input = Shapes::ShapeRef.new(shape: CreateEventActionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateEventActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:create_job, Seahorse::Model::Operation.new.tap do |o|
@@ -839,10 +839,10 @@ module Aws::DataExchange
         o.output = Shapes::ShapeRef.new(shape: CreateJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:create_revision, Seahorse::Model::Operation.new.tap do |o|
@@ -853,9 +853,9 @@ module Aws::DataExchange
         o.output = Shapes::ShapeRef.new(shape: CreateRevisionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_asset, Seahorse::Model::Operation.new.tap do |o|
@@ -864,12 +864,12 @@ module Aws::DataExchange
         o.http_request_uri = "/v1/data-sets/{DataSetId}/revisions/{RevisionId}/assets/{AssetId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteAssetRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:delete_data_set, Seahorse::Model::Operation.new.tap do |o|
@@ -878,12 +878,12 @@ module Aws::DataExchange
         o.http_request_uri = "/v1/data-sets/{DataSetId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDataSetRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:delete_event_action, Seahorse::Model::Operation.new.tap do |o|
@@ -904,12 +904,12 @@ module Aws::DataExchange
         o.http_request_uri = "/v1/data-sets/{DataSetId}/revisions/{RevisionId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteRevisionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:get_asset, Seahorse::Model::Operation.new.tap do |o|
@@ -1065,7 +1065,7 @@ module Aws::DataExchange
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
-        o.http_request_uri = "/tags/{resource-arn}"
+        o.http_request_uri = "/tags/{ResourceArn}"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
       end)
@@ -1076,12 +1076,12 @@ module Aws::DataExchange
         o.http_request_uri = "/v1/data-sets/{DataSetId}/revisions/{RevisionId}/revoke"
         o.input = Shapes::ShapeRef.new(shape: RevokeRevisionRequest)
         o.output = Shapes::ShapeRef.new(shape: RevokeRevisionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:send_api_asset, Seahorse::Model::Operation.new.tap do |o|
@@ -1095,9 +1095,9 @@ module Aws::DataExchange
         o.output = Shapes::ShapeRef.new(shape: SendApiAssetResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:start_job, Seahorse::Model::Operation.new.tap do |o|
@@ -1106,18 +1106,18 @@ module Aws::DataExchange
         o.http_request_uri = "/v1/jobs/{JobId}"
         o.input = Shapes::ShapeRef.new(shape: StartJobRequest)
         o.output = Shapes::ShapeRef.new(shape: StartJobResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
-        o.http_request_uri = "/tags/{resource-arn}"
+        o.http_request_uri = "/tags/{ResourceArn}"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -1125,7 +1125,7 @@ module Aws::DataExchange
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UntagResource"
         o.http_method = "DELETE"
-        o.http_request_uri = "/tags/{resource-arn}"
+        o.http_request_uri = "/tags/{ResourceArn}"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -1136,12 +1136,12 @@ module Aws::DataExchange
         o.http_request_uri = "/v1/data-sets/{DataSetId}/revisions/{RevisionId}/assets/{AssetId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateAssetRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAssetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:update_data_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1152,9 +1152,9 @@ module Aws::DataExchange
         o.output = Shapes::ShapeRef.new(shape: UpdateDataSetResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_event_action, Seahorse::Model::Operation.new.tap do |o|
@@ -1165,9 +1165,9 @@ module Aws::DataExchange
         o.output = Shapes::ShapeRef.new(shape: UpdateEventActionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_revision, Seahorse::Model::Operation.new.tap do |o|
@@ -1176,12 +1176,12 @@ module Aws::DataExchange
         o.http_request_uri = "/v1/data-sets/{DataSetId}/revisions/{RevisionId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateRevisionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateRevisionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
     end
 

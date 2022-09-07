@@ -625,6 +625,12 @@ module Aws::Inspector2
     #           start_inclusive: Time.now,
     #         },
     #       ],
+    #       fix_available: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
     #       inspector_score: [
     #         {
     #           lower_inclusive: 1.0,
@@ -872,6 +878,12 @@ module Aws::Inspector2
     #         {
     #           end_inclusive: Time.now,
     #           start_inclusive: Time.now,
+    #         },
+    #       ],
+    #       fix_available: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
     #         },
     #       ],
     #       inspector_score: [
@@ -1373,6 +1385,9 @@ module Aws::Inspector2
     #   resp.filter_criteria.first_observed_at #=> Array
     #   resp.filter_criteria.first_observed_at[0].end_inclusive #=> Time
     #   resp.filter_criteria.first_observed_at[0].start_inclusive #=> Time
+    #   resp.filter_criteria.fix_available #=> Array
+    #   resp.filter_criteria.fix_available[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.fix_available[0].value #=> String
     #   resp.filter_criteria.inspector_score #=> Array
     #   resp.filter_criteria.inspector_score[0].lower_inclusive #=> Float
     #   resp.filter_criteria.inspector_score[0].upper_inclusive #=> Float
@@ -1620,7 +1635,7 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.ecr_repository.name #=> String
     #   resp.covered_resources[0].resource_metadata.ecr_repository.scan_frequency #=> String, one of "MANUAL", "SCAN_ON_PUSH", "CONTINUOUS_SCAN"
     #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY"
-    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE"
+    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY"
     #   resp.covered_resources[0].scan_status.status_code #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.covered_resources[0].scan_type #=> String, one of "NETWORK", "PACKAGE"
     #   resp.next_token #=> String
@@ -1870,6 +1885,9 @@ module Aws::Inspector2
     #   resp.filters[0].criteria.first_observed_at #=> Array
     #   resp.filters[0].criteria.first_observed_at[0].end_inclusive #=> Time
     #   resp.filters[0].criteria.first_observed_at[0].start_inclusive #=> Time
+    #   resp.filters[0].criteria.fix_available #=> Array
+    #   resp.filters[0].criteria.fix_available[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.fix_available[0].value #=> String
     #   resp.filters[0].criteria.inspector_score #=> Array
     #   resp.filters[0].criteria.inspector_score[0].lower_inclusive #=> Float
     #   resp.filters[0].criteria.inspector_score[0].upper_inclusive #=> Float
@@ -2343,6 +2361,12 @@ module Aws::Inspector2
     #           start_inclusive: Time.now,
     #         },
     #       ],
+    #       fix_available: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
     #       inspector_score: [
     #         {
     #           lower_inclusive: 1.0,
@@ -2472,6 +2496,7 @@ module Aws::Inspector2
     #   resp.findings[0].description #=> String
     #   resp.findings[0].finding_arn #=> String
     #   resp.findings[0].first_observed_at #=> Time
+    #   resp.findings[0].fix_available #=> String, one of "YES", "NO", "PARTIAL"
     #   resp.findings[0].inspector_score #=> Float
     #   resp.findings[0].inspector_score_details.adjusted_cvss.adjustments #=> Array
     #   resp.findings[0].inspector_score_details.adjusted_cvss.adjustments[0].metric #=> String
@@ -2511,6 +2536,7 @@ module Aws::Inspector2
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].name #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].package_manager #=> String, one of "BUNDLER", "CARGO", "COMPOSER", "NPM", "NUGET", "PIPENV", "POETRY", "YARN", "GOBINARY", "GOMOD", "JAR", "OS", "PIP", "PYTHONPKG", "NODEPKG", "POM"
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].release #=> String
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].remediation #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].source_layer_hash #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].version #=> String
     #   resp.findings[0].remediation.recommendation.url #=> String
@@ -2899,6 +2925,12 @@ module Aws::Inspector2
     #           start_inclusive: Time.now,
     #         },
     #       ],
+    #       fix_available: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
     #       inspector_score: [
     #         {
     #           lower_inclusive: 1.0,
@@ -3076,7 +3108,7 @@ module Aws::Inspector2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

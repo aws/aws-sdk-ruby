@@ -81,6 +81,7 @@ module Aws::SNS
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     data_protection_policy: "attributeValue",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :name
@@ -152,6 +153,14 @@ module Aws::SNS
     #   `sns:CreateTopic` and `sns:TagResource` permissions.
     #
     #    </note>
+    # @option options [String] :data_protection_policy
+    #   The body of the policy document you want to use for this topic.
+    #
+    #   You can only add one policy per topic.
+    #
+    #   The policy must be in JSON string format.
+    #
+    #   Length Constraints: Maximum length of 30,720.
     # @return [Topic]
     def create_topic(options = {})
       resp = @client.create_topic(options)
