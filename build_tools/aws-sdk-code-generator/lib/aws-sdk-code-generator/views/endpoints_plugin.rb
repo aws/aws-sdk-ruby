@@ -16,7 +16,7 @@ module AwsSdkCodeGenerator
             next if param_data['builtIn']
 
             array << EndpointOption.new(
-              name: Underscore.underscore(name), # endpoint_parameter_config_name(name, param_data),
+              name: Underscore.underscore(name),
               docstring: param_data['documentation'],
               doc_type: param_data['type'],
               default: param_data['default']

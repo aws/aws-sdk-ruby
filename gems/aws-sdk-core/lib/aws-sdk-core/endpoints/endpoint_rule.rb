@@ -3,8 +3,8 @@
 module Aws
   module Endpoints
     # @api private
-    class EndpointRule
-      def initialize(type: 'endpoint', conditions:, endpoint: nil,
+    class EndpointRule < Rule
+      def initialize(type: 'endpoint', conditions:, endpoint:,
                      documentation: nil)
         @type = type
         @conditions = Condition.from_json(conditions)
@@ -28,49 +28,24 @@ module Aws
       end
 
       def resolved_endpoint(parameters, assigns)
-        headers = resolve_headers(parameters, assigns) if @endpoint['headers']
-        if @endpoint['properties']
-          properties = resolve_properties(
-            @endpoint['properties'], parameters, assigns
-          )
-        end
-
         Endpoint.new(
-          url: resolve_endpoint(parameters, assigns),
-          properties: properties,
-          headers: headers
+          url: resolve_value(@endpoint['url'], parameters, assigns),
+          properties: resolve_properties(
+            @endpoint['properties'] || {},
+            parameters,
+            assigns
+          ),
+          headers: resolve_headers(parameters, assigns)
         )
       end
 
       private
 
-      def resolve_endpoint(parameters, assigns)
-        value = @endpoint['url']
-        if value.is_a?(Hash) && value['fn']
-          Function.new(fn: value['fn'], argv: value['argv'])
-                  .call(parameters, assigns)
-        elsif value.is_a?(Hash) && value['ref']
-          Reference.new(ref: value['ref'])
-                   .resolve(parameters, assigns)
-        else
-          Templater.resolve(value, parameters, assigns)
-        end
-      end
-
       def resolve_headers(parameters, assigns)
-        @endpoint['headers'].each.with_object({}) do |(key, arr), headers|
+        (@endpoint['headers'] || {}).each.with_object({}) do |(key, arr), headers|
           headers[key] = []
           arr.each do |value|
-            val = if value.is_a?(Hash) && value['fn']
-                    Function.new(fn: value['fn'], argv: value['argv'])
-                            .call(parameters, assigns)
-                  elsif value.is_a?(Hash) && value['ref']
-                    Reference.new(ref: value['ref'])
-                             .resolve(parameters, assigns)
-                  else
-                    Templater.resolve(value, parameters, assigns)
-                  end
-            headers[key] << val
+            headers[key] << resolve_value(value, parameters, assigns)
           end
         end
       end

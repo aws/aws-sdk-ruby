@@ -137,6 +137,9 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
                     "operationName": "CreateBucket",
                     "operationParams": {
                         "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint"
@@ -150,95 +153,6 @@
                 "Accelerate": false,
                 "DisableAccessPoints": true,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint"
-            }
-        },
-        {
-            "documentation": "S3 outposts vanilla test",
-            "expect": {
-                "endpoint": {
-                    "properties": {
-                        "authSchemes": [
-                            {
-                                "name": "sigv4",
-                                "signingName": "s3-outposts",
-                                "signingRegion": "us-west-2",
-                                "disableDoubleEncoding": true
-                            }
-                        ]
-                    },
-                    "url": "https://reports-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com"
-                }
-            },
-            "params": {
-                "Region": "us-west-2",
-                "UseFIPS": false,
-                "UseDualStack": false,
-                "Accelerate": false,
-                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"
-            }
-        },
-        {
-            "documentation": "S3 outposts vanilla test (disable access points explicitly set)",
-            "expect": {
-                "endpoint": {
-                    "properties": {
-                        "authSchemes": [
-                            {
-                                "name": "sigv4",
-                                "signingName": "s3-outposts",
-                                "signingRegion": "us-west-2",
-                                "disableDoubleEncoding": true
-                            }
-                        ]
-                    },
-                    "url": "https://reports-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com"
-                }
-            },
-            "params": {
-                "Region": "us-west-2",
-                "UseFIPS": false,
-                "UseDualStack": false,
-                "Accelerate": false,
-                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"
-            }
-        },
-        {
-            "documentation": "S3 outposts does not support dualstack",
-            "expect": {
-                "error": "S3 Outposts does not support Dual-stack"
-            },
-            "params": {
-                "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": true,
-                "Accelerate": false,
-                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"
-            }
-        },
-        {
-            "documentation": "S3 outposts does not support fips",
-            "expect": {
-                "error": "S3 Outposts does not support FIPS"
-            },
-            "params": {
-                "Region": "us-east-1",
-                "UseFIPS": true,
-                "UseDualStack": false,
-                "Accelerate": false,
-                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"
-            }
-        },
-        {
-            "documentation": "S3 outposts does not support accelerate",
-            "expect": {
-                "error": "S3 Outposts does not support S3 Accelerate"
-            },
-            "params": {
-                "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false,
-                "Accelerate": true,
-                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"
             }
         },
         {
@@ -595,6 +509,15 @@
                     "url": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/99_ab"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "99_ab",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "99_ab",
@@ -635,6 +558,15 @@
                     "url": "https://123.123.0.1/bucketname"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "99_ab",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucketname",
@@ -649,6 +581,15 @@
             "expect": {
                 "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint",
@@ -678,6 +619,15 @@
                     "url": "https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
@@ -706,104 +656,21 @@
                     "url": "https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
                 "ForcePathStyle": false,
                 "UseArnRegion": true,
                 "Region": "us-east-1",
-                "RequiresAccountId": true,
-                "UseDualStack": false,
-                "UseFIPS": false,
-                "___key": "key"
-            }
-        },
-        {
-            "documentation": "outposts arn with region mismatch and UseArnRegion=false",
-            "expect": {
-                "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"
-            },
-            "params": {
-                "Accelerate": false,
-                "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-                "ForcePathStyle": false,
-                "UseArnRegion": false,
-                "Region": "us-west-2",
-                "RequiresAccountId": true,
-                "UseDualStack": false,
-                "UseFIPS": false,
-                "___key": "key"
-            }
-        },
-        {
-            "documentation": "outposts arn with region mismatch, custom region and UseArnRegion=false",
-            "expect": {
-                "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"
-            },
-            "params": {
-                "Accelerate": false,
-                "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-                "Endpoint": "https://example.com",
-                "ForcePathStyle": false,
-                "UseArnRegion": false,
-                "Region": "us-west-2",
-                "RequiresAccountId": true,
-                "UseDualStack": false,
-                "UseFIPS": false,
-                "___key": "key"
-            }
-        },
-        {
-            "documentation": "outposts arn with region mismatch and UseArnRegion=true",
-            "expect": {
-                "endpoint": {
-                    "properties": {
-                        "authSchemes": [
-                            {
-                                "name": "sigv4",
-                                "signingName": "s3-outposts",
-                                "signingRegion": "us-east-1",
-                                "disableDoubleEncoding": true
-                            }
-                        ]
-                    },
-                    "url": "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"
-                }
-            },
-            "params": {
-                "Accelerate": false,
-                "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-                "ForcePathStyle": false,
-                "UseArnRegion": true,
-                "Region": "us-west-2",
-                "RequiresAccountId": true,
-                "UseDualStack": false,
-                "UseFIPS": false,
-                "___key": "key"
-            }
-        },
-        {
-            "documentation": "outposts arn with region mismatch and UseArnRegion unset",
-            "expect": {
-                "endpoint": {
-                    "properties": {
-                        "authSchemes": [
-                            {
-                                "name": "sigv4",
-                                "signingName": "s3-outposts",
-                                "signingRegion": "us-east-1",
-                                "disableDoubleEncoding": true
-                            }
-                        ]
-                    },
-                    "url": "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"
-                }
-            },
-            "params": {
-                "Accelerate": false,
-                "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-                "ForcePathStyle": false,
-                "Region": "us-west-2",
                 "RequiresAccountId": true,
                 "UseDualStack": false,
                 "UseFIPS": false,
@@ -839,35 +706,6 @@
             },
             "params": {
                 "Bucket": "bucket-name"
-            }
-        },
-        {
-            "documentation": "outposts arn with partition mismatch and UseArnRegion=true",
-            "expect": {
-                "endpoint": {
-                    "properties": {
-                        "authSchemes": [
-                            {
-                                "name": "sigv4",
-                                "signingName": "s3-outposts",
-                                "signingRegion": "cn-north-1",
-                                "disableDoubleEncoding": true
-                            }
-                        ]
-                    },
-                    "url": "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.cn-north-1.amazonaws.com.cn"
-                }
-            },
-            "params": {
-                "Accelerate": false,
-                "Bucket": "arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-                "ForcePathStyle": false,
-                "UseArnRegion": true,
-                "Region": "us-west-2",
-                "RequiresAccountId": true,
-                "UseDualStack": false,
-                "UseFIPS": false,
-                "___key": "key"
             }
         },
         {
@@ -1754,32 +1592,6 @@
             }
         },
         {
-            "documentation": "ARN with UseGlobalEndpoint and use-east-1 region uses the regional endpoint",
-            "expect": {
-                "endpoint": {
-                    "properties": {
-                        "authSchemes": [
-                            {
-                                "name": "sigv4",
-                                "signingName": "s3-outposts",
-                                "signingRegion": "us-east-1",
-                                "disableDoubleEncoding": true
-                            }
-                        ]
-                    },
-                    "url": "https://reports-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"
-                }
-            },
-            "params": {
-                "Region": "us-east-1",
-                "UseGlobalEndpoint": true,
-                "UseFIPS": false,
-                "UseDualStack": false,
-                "Accelerate": false,
-                "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-01234567890123456/accesspoint/reports"
-            }
-        },
-        {
             "documentation": "ARN with aws-global region and  UseArnRegion uses the regional endpoint",
             "expect": {
                 "endpoint": {
@@ -1806,6 +1618,16 @@
             }
         },
         {
+            "documentation": "cross partition MRAP ARN is an error",
+            "expect": {
+                "error": "Client was configured for partition `aws` but bucket referred to partition `aws-cn`"
+            },
+            "params": {
+                "Bucket": "arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+                "Region": "us-west-1"
+            }
+        },
+        {
             "documentation": "vanilla virtual addressing@us-west-2",
             "expect": {
                 "endpoint": {
@@ -1822,6 +1644,15 @@
                     "url": "https://bucket-name.s3.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -1849,6 +1680,15 @@
                     "url": "https://bucket-name.s3.dualstack.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -1876,6 +1716,15 @@
                     "url": "https://bucket-name.s3-accelerate.dualstack.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": true,
                 "Bucket": "bucket-name",
@@ -1903,6 +1752,15 @@
                     "url": "https://bucket-name.s3-accelerate.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": true,
                 "Bucket": "bucket-name",
@@ -1930,6 +1788,15 @@
                     "url": "https://bucket-name.s3-fips.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -1957,6 +1824,15 @@
                     "url": "https://bucket-name.s3-fips.dualstack.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -1972,6 +1848,15 @@
             "expect": {
                 "error": "Accelerate cannot be used with FIPS"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": true,
                 "Bucket": "bucket-name",
@@ -1999,6 +1884,15 @@
                     "url": "https://bucket-name.s3.cn-north-1.amazonaws.com.cn"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2026,6 +1920,15 @@
                     "url": "https://bucket-name.s3.dualstack.cn-north-1.amazonaws.com.cn"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2081,6 +1984,15 @@
                     "url": "https://bucket-name.s3.af-south-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2108,6 +2020,15 @@
                     "url": "https://bucket-name.s3.dualstack.af-south-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2135,6 +2056,15 @@
                     "url": "https://bucket-name.s3-accelerate.dualstack.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": true,
                 "Bucket": "bucket-name",
@@ -2162,6 +2092,15 @@
                     "url": "https://bucket-name.s3-accelerate.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": true,
                 "Bucket": "bucket-name",
@@ -2189,6 +2128,15 @@
                     "url": "https://bucket-name.s3-fips.af-south-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2216,6 +2164,15 @@
                     "url": "https://bucket-name.s3-fips.dualstack.af-south-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2231,6 +2188,15 @@
             "expect": {
                 "error": "Accelerate cannot be used with FIPS"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": true,
                 "Bucket": "bucket-name",
@@ -2258,6 +2224,15 @@
                     "url": "https://s3.us-west-2.amazonaws.com/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2273,6 +2248,15 @@
             "expect": {
                 "error": "Path-style addressing cannot be used with FIPS"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2288,6 +2272,15 @@
             "expect": {
                 "error": "Path-style addressing cannot be used with S3 Accelerate"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": true,
                 "Bucket": "bucket-name",
@@ -2315,6 +2308,15 @@
                     "url": "https://s3.dualstack.us-west-2.amazonaws.com/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2330,6 +2332,15 @@
             "expect": {
                 "error": "Path-style addressing cannot be used with ARN buckets"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket",
@@ -2358,6 +2369,15 @@
                     "url": "https://s3.us-west-2.amazonaws.com/99a_b"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "99a_b",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "99a_b",
@@ -2385,6 +2405,15 @@
                     "url": "https://s3.us-west-2.amazonaws.com/99a_b"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "99a_b",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "99a_b",
@@ -2411,6 +2440,15 @@
                     "url": "https://s3.cn-north-1.amazonaws.com.cn/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2426,6 +2464,15 @@
             "expect": {
                 "error": "Path-style addressing cannot be used with FIPS"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2441,6 +2488,15 @@
             "expect": {
                 "error": "Path-style addressing cannot be used with S3 Accelerate"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": true,
                 "Bucket": "bucket-name",
@@ -2468,6 +2524,15 @@
                     "url": "https://s3.dualstack.cn-north-1.amazonaws.com.cn/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2483,6 +2548,15 @@
             "expect": {
                 "error": "Path-style addressing cannot be used with ARN buckets"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket",
@@ -2511,6 +2585,15 @@
                     "url": "https://s3.cn-north-1.amazonaws.com.cn/99a_b"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "99a_b",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "99a_b",
@@ -2538,6 +2621,15 @@
                     "url": "https://s3.cn-north-1.amazonaws.com.cn/99a_b"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "99a_b",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "99a_b",
@@ -2564,6 +2656,15 @@
                     "url": "https://s3.af-south-1.amazonaws.com/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2579,6 +2680,15 @@
             "expect": {
                 "error": "Path-style addressing cannot be used with FIPS"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2594,6 +2704,15 @@
             "expect": {
                 "error": "Path-style addressing cannot be used with S3 Accelerate"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": true,
                 "Bucket": "bucket-name",
@@ -2621,6 +2740,15 @@
                     "url": "https://s3.dualstack.af-south-1.amazonaws.com/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2636,6 +2764,15 @@
             "expect": {
                 "error": "Path-style addressing cannot be used with ARN buckets"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket",
@@ -2664,6 +2801,15 @@
                     "url": "https://s3.af-south-1.amazonaws.com/99a_b"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "99a_b",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "99a_b",
@@ -2691,6 +2837,15 @@
                     "url": "https://s3.af-south-1.amazonaws.com/99a_b"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "99a_b",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "99a_b",
@@ -2717,6 +2872,15 @@
                     "url": "http://bucket-name.control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2745,6 +2909,15 @@
                     "url": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2761,6 +2934,15 @@
             "expect": {
                 "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2777,6 +2959,15 @@
             "expect": {
                 "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2793,6 +2984,15 @@
             "expect": {
                 "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": true,
                 "Bucket": "bucket-name",
@@ -2821,6 +3021,15 @@
                     "url": "https://myendpoint-123456789012.beta.example.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
@@ -2850,6 +3059,15 @@
                     "url": "https://bucket-name.control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2878,6 +3096,15 @@
                     "url": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2909,6 +3136,15 @@
             "expect": {
                 "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -2952,6 +3188,15 @@
                     "url": "https://myendpoint-123456789012.beta.example.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
@@ -2981,6 +3226,15 @@
                     "url": "https://bucket-name.control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -3009,6 +3263,15 @@
                     "url": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -3025,6 +3288,15 @@
             "expect": {
                 "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -3041,6 +3313,15 @@
             "expect": {
                 "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "bucket-name",
@@ -3057,6 +3338,15 @@
             "expect": {
                 "error": "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": true,
                 "Bucket": "bucket-name",
@@ -3085,6 +3375,15 @@
                     "url": "https://myendpoint-123456789012.beta.example.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
@@ -3114,6 +3413,15 @@
                     "url": "https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
@@ -3142,6 +3450,15 @@
                     "url": "https://myendpoint-123456789012.s3-accesspoint-fips.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
@@ -3158,6 +3475,15 @@
             "expect": {
                 "error": "Access Points do not support S3 Accelerate"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": true,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
@@ -3186,6 +3512,15 @@
                     "url": "https://myendpoint-123456789012.s3-accesspoint-fips.dualstack.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
@@ -3214,6 +3549,15 @@
                     "url": "https://myendpoint-123456789012.s3-accesspoint.cn-north-1.amazonaws.com.cn"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
@@ -3245,6 +3589,15 @@
             "expect": {
                 "error": "Access Points do not support S3 Accelerate"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": true,
                 "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
@@ -3288,6 +3641,15 @@
                     "url": "https://myendpoint-123456789012.s3-accesspoint.af-south-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
@@ -3316,6 +3678,15 @@
                     "url": "https://myendpoint-123456789012.s3-accesspoint-fips.af-south-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
@@ -3332,6 +3703,15 @@
             "expect": {
                 "error": "Access Points do not support S3 Accelerate"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": true,
                 "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
@@ -3360,6 +3740,15 @@
                     "url": "https://myendpoint-123456789012.s3-accesspoint-fips.dualstack.af-south-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint",
@@ -3372,7 +3761,7 @@
             }
         },
         {
-            "documentation": "S3 Outposts Abba Real Outpost Prod us-west-1",
+            "documentation": "S3 outposts vanilla test",
             "expect": {
                 "endpoint": {
                     "properties": {
@@ -3380,24 +3769,24 @@
                             {
                                 "name": "sigv4",
                                 "signingName": "s3-outposts",
-                                "signingRegion": "us-west-1",
+                                "signingRegion": "us-west-2",
                                 "disableDoubleEncoding": true
                             }
                         ]
                     },
-                    "url": "https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.op-0b1d075431d83bebd.s3-outposts.us-west-1.amazonaws.com"
+                    "url": "https://reports-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com"
                 }
             },
             "params": {
-                "Region": "us-west-1",
-                "Bucket": "test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
+                "Region": "us-west-2",
                 "UseFIPS": false,
                 "UseDualStack": false,
-                "Accelerate": false
+                "Accelerate": false,
+                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"
             }
         },
         {
-            "documentation": "S3 Outposts Abba Real Outpost Prod ap-east-1",
+            "documentation": "S3 outposts custom endpoint",
             "expect": {
                 "endpoint": {
                     "properties": {
@@ -3405,100 +3794,78 @@
                             {
                                 "name": "sigv4",
                                 "signingName": "s3-outposts",
-                                "signingRegion": "ap-east-1",
+                                "signingRegion": "us-west-2",
                                 "disableDoubleEncoding": true
                             }
                         ]
                     },
-                    "url": "https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.op-0b1d075431d83bebd.s3-outposts.ap-east-1.amazonaws.com"
+                    "url": "https://reports-123456789012.op-01234567890123456.example.amazonaws.com"
                 }
             },
             "params": {
-                "Region": "ap-east-1",
-                "Bucket": "test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
+                "Region": "us-west-2",
                 "UseFIPS": false,
                 "UseDualStack": false,
-                "Accelerate": false
+                "Accelerate": false,
+                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports",
+                "Endpoint": "https://example.amazonaws.com"
             }
         },
         {
-            "documentation": "S3 Outposts Abba Ec2 Outpost Prod us-east-1",
+            "documentation": "outposts arn with region mismatch and UseArnRegion=false",
             "expect": {
-                "endpoint": {
-                    "properties": {
-                        "authSchemes": [
-                            {
-                                "name": "sigv4",
-                                "signingName": "s3-outposts",
-                                "signingRegion": "us-east-1",
-                                "disableDoubleEncoding": true
-                            }
-                        ]
-                    },
-                    "url": "https://test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.ec2.s3-outposts.us-east-1.amazonaws.com"
-                }
+                "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
-                "Region": "us-east-1",
-                "Bucket": "test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
-                "UseFIPS": false,
+                "Accelerate": false,
+                "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "ForcePathStyle": false,
+                "UseArnRegion": false,
+                "Region": "us-west-2",
+                "RequiresAccountId": true,
                 "UseDualStack": false,
-                "Accelerate": false
+                "UseFIPS": false,
+                "___key": "key"
             }
         },
         {
-            "documentation": "S3 Outposts Abba Ec2 Outpost Prod me-south-1",
+            "documentation": "outposts arn with region mismatch, custom region and UseArnRegion=false",
             "expect": {
-                "endpoint": {
-                    "properties": {
-                        "authSchemes": [
-                            {
-                                "name": "sigv4",
-                                "signingName": "s3-outposts",
-                                "signingRegion": "me-south-1",
-                                "disableDoubleEncoding": true
-                            }
-                        ]
-                    },
-                    "url": "https://test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.ec2.s3-outposts.me-south-1.amazonaws.com"
-                }
+                "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
-                "Region": "me-south-1",
-                "Bucket": "test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
-                "UseFIPS": false,
+                "Accelerate": false,
+                "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "Endpoint": "https://example.com",
+                "ForcePathStyle": false,
+                "UseArnRegion": false,
+                "Region": "us-west-2",
+                "RequiresAccountId": true,
                 "UseDualStack": false,
-                "Accelerate": false
+                "UseFIPS": false,
+                "___key": "key"
             }
         },
         {
-            "documentation": "S3 Outposts Abba Real Outpost Beta",
-            "expect": {
-                "endpoint": {
-                    "properties": {
-                        "authSchemes": [
-                            {
-                                "name": "sigv4",
-                                "signingName": "s3-outposts",
-                                "signingRegion": "us-east-1",
-                                "disableDoubleEncoding": true
-                            }
-                        ]
-                    },
-                    "url": "https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3.op-0b1d075431d83bebd.beta.us-east-1.seaport.aws.a2z.com"
-                }
-            },
-            "params": {
-                "Region": "us-east-1",
-                "Bucket": "test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3",
-                "Endpoint": "https://beta.us-east-1.seaport.aws.a2z.com",
-                "UseFIPS": false,
-                "UseDualStack": false,
-                "Accelerate": false
-            }
-        },
-        {
-            "documentation": "S3 Outposts Abba Ec2 Outpost Beta",
+            "documentation": "outposts arn with region mismatch and UseArnRegion=true",
             "expect": {
                 "endpoint": {
                     "properties": {
@@ -3511,226 +3878,168 @@
                             }
                         ]
                     },
-                    "url": "https://161743052723-e00000136899934034jeahy1t8gpzpbwjj8kb7beta0--op-s3.ec2.beta.us-east-1.seaport.aws.a2z.com"
+                    "url": "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
-                "Region": "us-east-1",
-                "Bucket": "161743052723-e00000136899934034jeahy1t8gpzpbwjj8kb7beta0--op-s3",
-                "Endpoint": "https://beta.us-east-1.seaport.aws.a2z.com",
-                "UseFIPS": false,
+                "Accelerate": false,
+                "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "ForcePathStyle": false,
+                "UseArnRegion": true,
+                "Region": "us-west-2",
+                "RequiresAccountId": true,
                 "UseDualStack": false,
-                "Accelerate": false
+                "UseFIPS": false,
+                "___key": "key"
             }
         },
         {
-            "documentation": "S3 Outposts Abba - No endpoint set for beta",
-            "expect": {
-                "error": "Expected a endpoint to be specified but no endpoint was found"
-            },
-            "params": {
-                "Region": "us-east-1",
-                "Bucket": "test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3",
-                "UseFIPS": false,
-                "UseDualStack": false,
-                "Accelerate": false
-            }
-        },
-        {
-            "documentation": "S3 Outposts Abba Invalid hardware type",
-            "expect": {
-                "error": "Unrecognized hardware type: \"Expected hardware type o or e but got h\""
-            },
-            "params": {
-                "Region": "us-east-1",
-                "Bucket": "test-accessp-h0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
-                "UseFIPS": false,
-                "UseDualStack": false,
-                "Accelerate": false
-            }
-        },
-        {
-            "documentation": "S3 Outposts Abba Special character in Outpost Arn",
-            "expect": {
-                "error": "Invalid ARN: The outpost Id must only contain a-z, A-Z, 0-9 and `-`."
-            },
-            "params": {
-                "Region": "us-east-1",
-                "Bucket": "test-accessp-o00000754%1d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3",
-                "UseFIPS": false,
-                "UseDualStack": false,
-                "Accelerate": false
-            }
-        },
-        {
-            "documentation": "S3 Outposts Snow with bucket",
+            "documentation": "outposts arn with region mismatch and UseArnRegion unset",
             "expect": {
                 "endpoint": {
                     "properties": {
                         "authSchemes": [
                             {
                                 "name": "sigv4",
-                                "signingName": "s3-snow",
-                                "signingRegion": "snow",
+                                "signingName": "s3-outposts",
+                                "signingRegion": "us-east-1",
                                 "disableDoubleEncoding": true
                             }
                         ]
                     },
-                    "url": "http://10.0.1.12:433/bucketName"
+                    "url": "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
-                "Region": "snow",
-                "Bucket": "bucketName",
-                "SnowEndpointUrl": "http://10.0.1.12:433",
-                "UseFIPS": false,
+                "Accelerate": false,
+                "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "ForcePathStyle": false,
+                "Region": "us-west-2",
+                "RequiresAccountId": true,
                 "UseDualStack": false,
-                "Accelerate": false
+                "UseFIPS": false,
+                "___key": "key"
             }
         },
         {
-            "documentation": "S3 Outposts Snow without bucket",
+            "documentation": "outposts arn with partition mismatch and UseArnRegion=true",
             "expect": {
                 "endpoint": {
                     "properties": {
                         "authSchemes": [
                             {
                                 "name": "sigv4",
-                                "signingName": "s3-snow",
-                                "signingRegion": "snow",
+                                "signingName": "s3-outposts",
+                                "signingRegion": "cn-north-1",
                                 "disableDoubleEncoding": true
                             }
                         ]
                     },
-                    "url": "https://10.0.1.12:433"
+                    "url": "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.cn-north-1.amazonaws.com.cn"
                 }
             },
+            "operationInputs": [
+                {
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
-                "Region": "snow",
-                "SnowEndpointUrl": "https://10.0.1.12:433",
-                "UseFIPS": false,
+                "Accelerate": false,
+                "Bucket": "arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "ForcePathStyle": false,
+                "UseArnRegion": true,
+                "Region": "us-west-2",
+                "RequiresAccountId": true,
                 "UseDualStack": false,
-                "Accelerate": false
+                "UseFIPS": false,
+                "___key": "key"
             }
         },
         {
-            "documentation": "S3 Outposts Snow no port",
+            "documentation": "ARN with UseGlobalEndpoint and use-east-1 region uses the regional endpoint",
             "expect": {
                 "endpoint": {
                     "properties": {
                         "authSchemes": [
                             {
                                 "name": "sigv4",
-                                "signingName": "s3-snow",
-                                "signingRegion": "snow",
+                                "signingName": "s3-outposts",
+                                "signingRegion": "us-east-1",
                                 "disableDoubleEncoding": true
                             }
                         ]
                     },
-                    "url": "http://10.0.1.12/bucketName"
+                    "url": "https://reports-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"
                 }
             },
             "params": {
-                "Region": "snow",
-                "Bucket": "bucketName",
-                "SnowEndpointUrl": "http://10.0.1.12",
+                "Region": "us-east-1",
+                "UseGlobalEndpoint": true,
                 "UseFIPS": false,
                 "UseDualStack": false,
-                "Accelerate": false
+                "Accelerate": false,
+                "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-01234567890123456/accesspoint/reports"
             }
         },
         {
-            "documentation": "S3 Outposts Snow dns endpoint",
+            "documentation": "S3 outposts does not support dualstack",
             "expect": {
-                "endpoint": {
-                    "properties": {
-                        "authSchemes": [
-                            {
-                                "name": "sigv4",
-                                "signingName": "s3-snow",
-                                "signingRegion": "snow",
-                                "disableDoubleEncoding": true
-                            }
-                        ]
-                    },
-                    "url": "https://amazonaws.com/bucketName"
-                }
+                "error": "S3 Outposts does not support Dual-stack"
             },
             "params": {
-                "Region": "snow",
-                "Bucket": "bucketName",
-                "SnowEndpointUrl": "https://amazonaws.com",
-                "UseFIPS": false,
-                "UseDualStack": false,
-                "Accelerate": false
-            }
-        },
-        {
-            "documentation": "S3 Outposts Snow invalid url",
-            "expect": {
-                "error": "Snow endpoint url was not a valid url"
-            },
-            "params": {
-                "Region": "snow",
-                "SnowEndpointUrl": "invalid.url",
-                "UseFIPS": false,
-                "UseDualStack": false,
-                "Accelerate": false
-            }
-        },
-        {
-            "documentation": "S3 Outposts Snow no snow endpoint",
-            "expect": {
-                "error": "Expected snow endpoint url to be set but no url was found"
-            },
-            "params": {
-                "Region": "snow",
-                "Bucket": "bucketName",
-                "UseFIPS": false,
-                "UseDualStack": false,
-                "Accelerate": false
-            }
-        },
-        {
-            "documentation": "S3 Outposts Snow FIPS enabled",
-            "expect": {
-                "error": "S3 Snow does not support FIPS"
-            },
-            "params": {
-                "Region": "snow",
-                "Bucket": "bucketName",
-                "SnowEndpointUrl": "https://10.0.1.12:433",
-                "UseFIPS": true,
-                "UseDualStack": false,
-                "Accelerate": false
-            }
-        },
-        {
-            "documentation": "S3 Outposts Snow Dual-stack enabled",
-            "expect": {
-                "error": "S3 Snow does not support Dual-stack"
-            },
-            "params": {
-                "Region": "snow",
-                "Bucket": "bucketName",
-                "SnowEndpointUrl": "https://10.0.1.12:433",
+                "Region": "us-east-1",
                 "UseFIPS": false,
                 "UseDualStack": true,
-                "Accelerate": false
+                "Accelerate": false,
+                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"
             }
         },
         {
-            "documentation": "S3 Outposts Snow Accelerate enabled",
+            "documentation": "S3 outposts does not support fips",
             "expect": {
-                "error": "S3 Snow does not support S3 Accelerate"
+                "error": "S3 Outposts does not support FIPS"
             },
             "params": {
-                "Region": "snow",
-                "Bucket": "bucketName",
-                "SnowEndpointUrl": "https://10.0.1.12:433",
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Accelerate": false,
+                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"
+            }
+        },
+        {
+            "documentation": "S3 outposts does not support accelerate",
+            "expect": {
+                "error": "S3 Outposts does not support S3 Accelerate"
+            },
+            "params": {
+                "Region": "us-east-1",
                 "UseFIPS": false,
                 "UseDualStack": false,
-                "Accelerate": true
+                "Accelerate": true,
+                "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"
             }
         },
         {

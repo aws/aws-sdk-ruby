@@ -5,30 +5,12 @@
 {{/generated_src_warning}}
 module {{module_name}}
   class EndpointProvider
-    def initialize(rule_set = nil)
-      rule_set ||= Aws::Endpoints::RuleSet.new(
-        version: @@default_rules['version'],
-        service_id: @@default_rules['serviceId'],
-        parameters: @@default_rules['parameters'],
-        rules: @@default_rules['rules']
-      )
+    def initialize(rule_set)
       @provider = Aws::Endpoints::Provider.new(rule_set)
     end
 
     def resolve_endpoint(parameters)
       @provider.resolve_endpoint(parameters)
     end
-
-    {{#in_memory}}
-    @@default_rules = Aws::Json.load(Base64.decode64(<<-JSON
-{{{endpoint_rules_encoded}}}
-JSON
-))
-    {{/in_memory}}
-    {{^in_memory}}
-    @@default_rules = Aws::Json.load_file(
-      File.expand_path('../../endpoint-rule-set.json', __dir__)
-    )
-    {{/in_memory}}
   end
 end

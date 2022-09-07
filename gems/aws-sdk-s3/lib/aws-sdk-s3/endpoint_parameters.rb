@@ -50,11 +50,6 @@ module Aws::S3
   #
   #   @return [Boolean]
   #
-  # @!attribute snow_endpoint_url
-  #   Override the snow endpoint used to send this request
-  #
-  #   @return [String]
-  #
   # @!attribute use_object_lambda_endpoint
   #   Internal parameter to use object lambda endpoint for an operation (eg: WriteGetObjectResponse)
   #
@@ -84,7 +79,6 @@ module Aws::S3
     :force_path_style,
     :accelerate,
     :use_global_endpoint,
-    :snow_endpoint_url,
     :use_object_lambda_endpoint,
     :disable_access_points,
     :disable_multi_region_access_points,
@@ -102,7 +96,6 @@ module Aws::S3
       'ForcePathStyle' => :force_path_style,
       'Accelerate' => :accelerate,
       'UseGlobalEndpoint' => :use_global_endpoint,
-      'SnowEndpointUrl' => :snow_endpoint_url,
       'UseObjectLambdaEndpoint' => :use_object_lambda_endpoint,
       'DisableAccessPoints' => :disable_access_points,
       'DisableMultiRegionAccessPoints' => :disable_multi_region_access_points,
@@ -134,7 +127,6 @@ module Aws::S3
       if self[:use_global_endpoint].nil?
         raise ArgumentError, "Missing required EndpointParameter: :use_global_endpoint"
       end
-      self[:snow_endpoint_url] = options[:snow_endpoint_url]
       self[:use_object_lambda_endpoint] = options[:use_object_lambda_endpoint]
       self[:disable_access_points] = options[:disable_access_points]
       self[:disable_multi_region_access_points] = options[:disable_multi_region_access_points]

@@ -8,12 +8,13 @@ module Aws
 
       def resolve_endpoint(parameters)
         obj = resolve_rules(parameters)
-        if obj.is_a?(Endpoint)
+        case obj
+        when Endpoint
           obj
-        elsif obj.is_a?(ArgumentError)
+        when ArgumentError
           raise obj
         else
-          raise 'No endpoint could be resolved'
+          raise ArgumentError, 'No endpoint could be resolved'
         end
       end
 

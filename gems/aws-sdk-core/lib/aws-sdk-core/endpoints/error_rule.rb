@@ -3,7 +3,7 @@
 module Aws
   module Endpoints
     # @api private
-    class ErrorRule
+    class ErrorRule < Rule
       def initialize(type: 'error', conditions:, error: nil, documentation: nil)
         @type = type
         @conditions = Condition.from_json(conditions)
@@ -29,14 +29,7 @@ module Aws
       private
 
       def resolved_error(parameters, assigns)
-        error = if @error.is_a?(Hash) && @error['fn']
-                  Function.new(fn: @error['fn'], argv: @error['argv'])
-                          .call(parameters, assigns)
-                elsif @error.is_a?(Hash) && @error['ref']
-                  Reference.new(ref: @error['ref']).resolve(parameters, assigns)
-                else
-                  Templater.resolve(@error, parameters, assigns)
-                end
+        error = resolve_value(@error, parameters, assigns)
         ArgumentError.new(error)
       end
     end

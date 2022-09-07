@@ -6,11 +6,9 @@ module AwsSdkCodeGenerator
 
       # @option options [required, Service] :service
       # @option options [required, Hash] :endpoint_rules
-      # @option options [Boolean] :in_memory (false)
       def initialize(options)
         @service = options.fetch(:service)
         @endpoint_rules = options.fetch(:endpoint_rules)
-        @in_memory = options.fetch(:in_memory, false)
       end
 
       # @return [String|nil]
@@ -21,10 +19,6 @@ module AwsSdkCodeGenerator
 
       def module_name
         @service.module_name
-      end
-
-      def in_memory
-        @in_memory
       end
 
       def endpoint_rules_encoded

@@ -5,11 +5,21 @@ require_relative '../../spec_helper'
 module Aws
   module Plugins
     describe SignatureV4 do
+      plugin_options =
+        {
+          # SignatureV4 is no longer a default plugin, but test it anyway
+          add_plugins: { 'Aws::Plugins::SignatureV4' => "gems/aws-sdk-core/lib/aws-sdk-core/plugins/signature_v4.rb" },
+          remove_plugins: ['Aws::Plugins::Sign']
+        }
 
-      Sigv4Client = ApiHelper.sample_service(metadata: {
-        'signatureVersion' => 'v4',
-        'endpointPrefix' => 'svc-name',
-      }).const_get(:Client)
+      Sigv4Client = ApiHelper.sample_service(
+        **{
+          metadata: {
+            'signatureVersion' => 'v4',
+            'endpointPrefix' => 'svc-name',
+          }
+        }.merge(plugin_options)
+      ).const_get(:Client)
 
       let(:plugin) { SignatureV4.new }
 
@@ -49,20 +59,28 @@ module Aws
         end
 
         it 'defaults the sigv4 name to the endpoint prefix' do
-          svc = ApiHelper.sample_service(metadata: {
-            'signatureVersion' => 'v4',
-            'endpointPrefix' => 'endpoint-prefix',
-          })
+          svc = ApiHelper.sample_service(
+            **{
+                metadata: {
+                  'signatureVersion' => 'v4',
+                  'endpointPrefix' => 'endpoint-prefix'
+                }
+            }.merge(plugin_options)
+          )
           client = svc::Client.new(options)
           expect(client.config.sigv4_name).to eq('endpoint-prefix')
         end
 
         it 'prefers the signingName over endpointPrefix' do
-          svc = ApiHelper.sample_service(metadata: {
-            'signatureVersion' => 'v4',
-            'endpointPrefix' => 'endpoint-prefix',
-            'signingName' => 'signing-name',
-          })
+          svc = ApiHelper.sample_service(
+            **{
+                metadata: {
+                  'signatureVersion' => 'v4',
+                  'endpointPrefix' => 'endpoint-prefix',
+                  'signingName' => 'signing-name'
+                }
+            }.merge(plugin_options)
+          )
           client = svc::Client.new(options)
           expect(client.config.sigv4_name).to eq('signing-name')
         end
@@ -93,11 +111,15 @@ module Aws
         end
 
         it 'uses the specified region when no endpointPrefix is present' do
-          svc = ApiHelper.sample_service(metadata: {
-            'signatureVersion' => 'v4',
-            'signingName' => 'signing-name',
-            'endpointPrefix' => nil,
-          })
+          svc = ApiHelper.sample_service(
+            **{
+                metadata: {
+                  'signatureVersion' => 'v4',
+                  'endpointPrefix' => nil,
+                  'signingName' => 'signing-name'
+                }
+            }.merge(plugin_options)
+          )
           client = svc::Client.new(options.merge(
             region: 'eu-west-1',
             endpoint: 'http://uniqueness.svc.us-west-2.amazonaws.com',
@@ -107,11 +129,15 @@ module Aws
         end
 
         it 'uses the endpointPrefix to find the signing_region' do
-          svc = ApiHelper.sample_service(metadata: {
-            'signatureVersion' => 'v4',
-            'signingName' => 'signing-name',
-            'endpointPrefix' => 'api.service',
-          })
+          svc = ApiHelper.sample_service(
+            **{
+                metadata: {
+                  'signatureVersion' => 'v4',
+                  'endpointPrefix' => 'api.service',
+                  'signingName' => 'signing-name'
+                }
+            }.merge(plugin_options)
+          )
           allow(Aws::Plugins::RegionalEndpoint).to receive(:warn)
           expect(Aws::Partitions::EndpointProvider)
             .to receive(:signing_region)
@@ -214,7 +240,13 @@ module Aws
             }
           }
         }}
-        let(:svc) { ApiHelper.sample_service(api: api) }
+        let(:svc) do
+          ApiHelper.sample_service(
+            **{
+              api: api
+            }.merge(plugin_options)
+          )
+        end
         let(:client) {
           svc::Client.new(options.merge(
             region: 'region',

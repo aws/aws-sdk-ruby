@@ -7,15 +7,30 @@
 module {{module_name}}
   module Plugins
     class Endpoints < Seahorse::Client::Plugin
+      # @api private
+      option(:endpoint_rules) do
+        file = File.expand_path('../../endpoint-rule-set.json', __dir__)
+        json = Aws::Json.load_file(file) if File.exists?(file)
+
+        Aws::Endpoints::RuleSet.new(
+          version: json['version'],
+          service_id: json['serviceId'],
+          parameters: json['parameters'],
+          rules: json['rules']
+        ) if json
+      end
+
       option(
         :endpoint_provider,
-        doc_type: '{{module_name}}::EndpointProvider',
+        doc_type: '{{module_name}}::EndpointProvider, nil',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
                    '`{{module_name}}::EndpointParameters`'
-      ) do
-        {{module_name}}::EndpointProvider.new
+      ) do |cfg|
+        if cfg.endpoint_rules
+          {{module_name}}::EndpointProvider.new(cfg.endpoint_rules)
+        end
       end
 
       {{#endpoint_options}}
@@ -29,10 +44,18 @@ module {{module_name}}
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          params = parameters_for_operation(context)
-          endpoint = context.config.endpoint_provider.resolve_endpoint(params)
+          if (provider = context.config.endpoint_provider)
+            params = parameters_for_operation(context)
+            endpoint = provider.resolve_endpoint(params)
+          else
+            endpoint = Aws::Endpoints::Endpoint.new(
+              # Seahorse sets this first.
+              url: context.http_request.endpoint
+            )
+          end
 
-          apply_endpoint_properties(context, endpoint)
+          context.http_request.endpoint = endpoint.url
+          apply_endpoint_headers(context, endpoint.headers)
 
           context[:endpoint] = {
             params: params,
@@ -45,9 +68,8 @@ module {{module_name}}
 
         private
 
-        def apply_endpoint_properties(context, endpoint)
-          context.http_request.endpoint = endpoint.url
-          endpoint.headers.each do |key, val|
+        def apply_endpoint_headers(context, headers)
+          headers.each do |key, val|
             joined = val
                        .compact
                        .map do |s|

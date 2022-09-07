@@ -42,7 +42,6 @@ require 'aws-sdk-s3/plugins/http_200_errors.rb'
 require 'aws-sdk-s3/plugins/iad_regional_endpoint.rb'
 require 'aws-sdk-s3/plugins/location_constraint.rb'
 require 'aws-sdk-s3/plugins/md5s.rb'
-require 'aws-sdk-s3/plugins/object_lambda_endpoint.rb'
 require 'aws-sdk-s3/plugins/redirects.rb'
 require 'aws-sdk-s3/plugins/s3_host_id.rb'
 require 'aws-sdk-s3/plugins/s3_signer.rb'
@@ -110,7 +109,6 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::IADRegionalEndpoint)
     add_plugin(Aws::S3::Plugins::LocationConstraint)
     add_plugin(Aws::S3::Plugins::Md5s)
-    add_plugin(Aws::S3::Plugins::ObjectLambdaEndpoint)
     add_plugin(Aws::S3::Plugins::Redirects)
     add_plugin(Aws::S3::Plugins::S3HostId)
     add_plugin(Aws::S3::Plugins::S3Signer)
@@ -389,9 +387,6 @@ module Aws::S3
     #
     #   @option options [Aws::S3::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::S3::EndpointParameters`
-    #
-    #   @option options [String] :snow_endpoint_url
-    #     Override the snow endpoint used to send this request
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.

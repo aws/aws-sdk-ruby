@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'endpoints/rule'
 require_relative 'endpoints/condition'
 require_relative 'endpoints/endpoint_rule'
 require_relative 'endpoints/endpoint'
@@ -34,7 +35,7 @@ module Aws
             { 'name' => 'sigv4', 'disableDoubleEncoding' => true }
           when 'bearer'
             { 'name' => 'bearer' }
-          when 'none'
+          when 'none', nil # TODO: should we include nil here?
             { 'name' => 'none' }
           end
         end
@@ -43,8 +44,8 @@ module Aws
       private
 
       def resolve_api_authtype(context)
-        cfg.api.operation(context.operation_name)['authtype'] ||
-          cfg.api.metadata['signatureVersion']
+        context.config.api.operation(context.operation_name)['authtype'] ||
+          context.config.api.metadata['signatureVersion']
       end
     end
   end

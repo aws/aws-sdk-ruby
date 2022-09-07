@@ -120,7 +120,7 @@ module Aws
           supports_dualstack = false
           dualstack_dns_suffix = nil
 
-          variants = partition['defaults']['variants']
+          variants = partition.fetch('defaults', {}).fetch('variants', [])
           variants.each do |variant|
             if variant['tags'] == ['fips']
               supports_fips = true

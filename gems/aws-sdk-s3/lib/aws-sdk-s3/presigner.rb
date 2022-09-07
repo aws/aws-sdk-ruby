@@ -167,7 +167,6 @@ module Aws
       end
 
       def use_bucket_as_hostname(req)
-        req.handlers.remove(Plugins::BucketDns::Handler)
         req.handle(priority: 35) do |context|
           uri = context.http_request.endpoint
           uri.host = context.params[:bucket]

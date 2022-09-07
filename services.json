@@ -859,7 +859,6 @@
       "Aws::S3::Plugins::IADRegionalEndpoint",
       "Aws::S3::Plugins::LocationConstraint",
       "Aws::S3::Plugins::Md5s",
-      "Aws::S3::Plugins::ObjectLambdaEndpoint",
       "Aws::S3::Plugins::Redirects",
       "Aws::S3::Plugins::S3HostId",
       "Aws::S3::Plugins::S3Signer",

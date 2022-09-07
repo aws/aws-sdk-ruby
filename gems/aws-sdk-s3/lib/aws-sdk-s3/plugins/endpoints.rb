@@ -22,12 +22,6 @@ module Aws::S3
         Aws::S3::EndpointProvider.new
       end
 
-      option(
-        :snow_endpoint_url,
-        doc_type: 'String',
-        default: nil,
-        docstring: "Override the snow endpoint used to send this request")
-
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)

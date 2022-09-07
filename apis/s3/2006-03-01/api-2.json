@@ -8550,10 +8550,6 @@
       "documentation":"Forces this client to use path-style addressing for buckets.",
       "type":"boolean"
     },
-    "SnowEndpointUrl":{
-      "documentation":"Configures this client to use the provided S3 Snowball endpoint.",
-      "type":"string"
-    },
     "UseArnRegion":{
       "documentation":"Enables this client to use an ARN's region when constructing an endpoint instead of the client's configured region.",
       "type":"boolean"

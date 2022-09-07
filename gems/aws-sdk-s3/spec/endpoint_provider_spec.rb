@@ -97,48 +97,6 @@ module Aws::S3
       end.to raise_error(ArgumentError, expect['error'])
     end
 
-    it 'S3 outposts vanilla test' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://reports-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com"}}
-      params = EndpointParameters.new(**{:region=>"us-west-2", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"})
-      endpoint = subject.resolve_endpoint(params)
-      expect(endpoint.url).to eq(expect['endpoint']['url'])
-      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
-    end
-
-    it 'S3 outposts vanilla test (disable access points explicitly set)' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://reports-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com"}}
-      params = EndpointParameters.new(**{:region=>"us-west-2", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"})
-      endpoint = subject.resolve_endpoint(params)
-      expect(endpoint.url).to eq(expect['endpoint']['url'])
-      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
-    end
-
-    it 'S3 outposts does not support dualstack' do
-      expect = {"error"=>"S3 Outposts does not support Dual-stack"}
-      params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>true, :accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"})
-      expect do
-        subject.resolve_endpoint(params)
-      end.to raise_error(ArgumentError, expect['error'])
-    end
-
-    it 'S3 outposts does not support fips' do
-      expect = {"error"=>"S3 Outposts does not support FIPS"}
-      params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>false, :accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"})
-      expect do
-        subject.resolve_endpoint(params)
-      end.to raise_error(ArgumentError, expect['error'])
-    end
-
-    it 'S3 outposts does not support accelerate' do
-      expect = {"error"=>"S3 Outposts does not support S3 Accelerate"}
-      params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :accelerate=>true, :bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"})
-      expect do
-        subject.resolve_endpoint(params)
-      end.to raise_error(ArgumentError, expect['error'])
-    end
-
     it 'missing arn type' do
       expect = {"error"=>"Invalid ARN: `arn:aws:s3:us-west-2:123456789012:` was not a valid ARN"}
       params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false, :disable_access_points=>true, :bucket=>"arn:aws:s3:us-west-2:123456789012:"})
@@ -335,40 +293,6 @@ module Aws::S3
       expect(endpoint.properties).to eq(expect['endpoint']['properties'])
     end
 
-    it 'outposts arn with region mismatch and UseArnRegion=false' do
-      expect = {"error"=>"Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"}
-      params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :use_arn_region=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
-      expect do
-        subject.resolve_endpoint(params)
-      end.to raise_error(ArgumentError, expect['error'])
-    end
-
-    it 'outposts arn with region mismatch, custom region and UseArnRegion=false' do
-      expect = {"error"=>"Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"}
-      params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :endpoint=>"https://example.com", :force_path_style=>false, :use_arn_region=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
-      expect do
-        subject.resolve_endpoint(params)
-      end.to raise_error(ArgumentError, expect['error'])
-    end
-
-    it 'outposts arn with region mismatch and UseArnRegion=true' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
-      params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :use_arn_region=>true, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
-      endpoint = subject.resolve_endpoint(params)
-      expect(endpoint.url).to eq(expect['endpoint']['url'])
-      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
-    end
-
-    it 'outposts arn with region mismatch and UseArnRegion unset' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
-      params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
-      endpoint = subject.resolve_endpoint(params)
-      expect(endpoint.url).to eq(expect['endpoint']['url'])
-      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
-    end
-
     it 'subdomains are not allowed in virtual buckets' do
       expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"us-east-1"}]}, "url"=>"https://s3.us-east-1.amazonaws.com/bucket.name"}}
       params = EndpointParameters.new(**{:bucket=>"bucket.name", :region=>"us-east-1"})
@@ -384,15 +308,6 @@ module Aws::S3
       expect do
         subject.resolve_endpoint(params)
       end.to raise_error(ArgumentError, expect['error'])
-    end
-
-    it 'outposts arn with partition mismatch and UseArnRegion=true' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.cn-north-1.amazonaws.com.cn"}}
-      params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :use_arn_region=>true, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
-      endpoint = subject.resolve_endpoint(params)
-      expect(endpoint.url).to eq(expect['endpoint']['url'])
-      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
     end
 
     it 'UseGlobalEndpoints=true, region=us-east-1 uses the global endpoint' do
@@ -709,15 +624,6 @@ module Aws::S3
       expect(endpoint.properties).to eq(expect['endpoint']['properties'])
     end
 
-    it 'ARN with UseGlobalEndpoint and use-east-1 region uses the regional endpoint' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://reports-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
-      params = EndpointParameters.new(**{:region=>"us-east-1", :use_global_endpoint=>true, :use_fips=>false, :use_dual_stack=>false, :accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-01234567890123456/accesspoint/reports"})
-      endpoint = subject.resolve_endpoint(params)
-      expect(endpoint.url).to eq(expect['endpoint']['url'])
-      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
-    end
-
     it 'ARN with aws-global region and  UseArnRegion uses the regional endpoint' do
       expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://reports-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
       params = EndpointParameters.new(**{:region=>"aws-global", :use_arn_region=>true, :use_fips=>false, :use_dual_stack=>false, :accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-01234567890123456/accesspoint/reports"})
@@ -725,6 +631,14 @@ module Aws::S3
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
       expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+    end
+
+    it 'cross partition MRAP ARN is an error' do
+      expect = {"error"=>"Client was configured for partition `aws` but bucket referred to partition `aws-cn`"}
+      params = EndpointParameters.new(**{:bucket=>"arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap", :region=>"us-west-1"})
+      expect do
+        subject.resolve_endpoint(params)
+      end.to raise_error(ArgumentError, expect['error'])
     end
 
     it 'vanilla virtual addressing@us-west-2' do
@@ -1321,155 +1235,95 @@ module Aws::S3
       expect(endpoint.properties).to eq(expect['endpoint']['properties'])
     end
 
-    it 'S3 Outposts Abba Real Outpost Prod us-west-1' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.op-0b1d075431d83bebd.s3-outposts.us-west-1.amazonaws.com"}}
-      params = EndpointParameters.new(**{:region=>"us-west-1", :bucket=>"test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
+    it 'S3 outposts vanilla test' do
+      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://reports-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com"}}
+      params = EndpointParameters.new(**{:region=>"us-west-2", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"})
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
       expect(endpoint.properties).to eq(expect['endpoint']['properties'])
     end
 
-    it 'S3 Outposts Abba Real Outpost Prod ap-east-1' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"ap-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.op-0b1d075431d83bebd.s3-outposts.ap-east-1.amazonaws.com"}}
-      params = EndpointParameters.new(**{:region=>"ap-east-1", :bucket=>"test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
+    it 'S3 outposts custom endpoint' do
+      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://reports-123456789012.op-01234567890123456.example.amazonaws.com"}}
+      params = EndpointParameters.new(**{:region=>"us-west-2", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports", :endpoint=>"https://example.amazonaws.com"})
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
       expect(endpoint.properties).to eq(expect['endpoint']['properties'])
     end
 
-    it 'S3 Outposts Abba Ec2 Outpost Prod us-east-1' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.ec2.s3-outposts.us-east-1.amazonaws.com"}}
-      params = EndpointParameters.new(**{:region=>"us-east-1", :bucket=>"test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
-      endpoint = subject.resolve_endpoint(params)
-      expect(endpoint.url).to eq(expect['endpoint']['url'])
-      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
-    end
-
-    it 'S3 Outposts Abba Ec2 Outpost Prod me-south-1' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"me-south-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.ec2.s3-outposts.me-south-1.amazonaws.com"}}
-      params = EndpointParameters.new(**{:region=>"me-south-1", :bucket=>"test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
-      endpoint = subject.resolve_endpoint(params)
-      expect(endpoint.url).to eq(expect['endpoint']['url'])
-      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
-    end
-
-    it 'S3 Outposts Abba Real Outpost Beta' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3.op-0b1d075431d83bebd.beta.us-east-1.seaport.aws.a2z.com"}}
-      params = EndpointParameters.new(**{:region=>"us-east-1", :bucket=>"test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3", :endpoint=>"https://beta.us-east-1.seaport.aws.a2z.com", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
-      endpoint = subject.resolve_endpoint(params)
-      expect(endpoint.url).to eq(expect['endpoint']['url'])
-      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
-    end
-
-    it 'S3 Outposts Abba Ec2 Outpost Beta' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://161743052723-e00000136899934034jeahy1t8gpzpbwjj8kb7beta0--op-s3.ec2.beta.us-east-1.seaport.aws.a2z.com"}}
-      params = EndpointParameters.new(**{:region=>"us-east-1", :bucket=>"161743052723-e00000136899934034jeahy1t8gpzpbwjj8kb7beta0--op-s3", :endpoint=>"https://beta.us-east-1.seaport.aws.a2z.com", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
-      endpoint = subject.resolve_endpoint(params)
-      expect(endpoint.url).to eq(expect['endpoint']['url'])
-      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
-    end
-
-    it 'S3 Outposts Abba - No endpoint set for beta' do
-      expect = {"error"=>"Expected a endpoint to be specified but no endpoint was found"}
-      params = EndpointParameters.new(**{:region=>"us-east-1", :bucket=>"test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
+    it 'outposts arn with region mismatch and UseArnRegion=false' do
+      expect = {"error"=>"Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"}
+      params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :use_arn_region=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
       expect do
         subject.resolve_endpoint(params)
       end.to raise_error(ArgumentError, expect['error'])
     end
 
-    it 'S3 Outposts Abba Invalid hardware type' do
-      expect = {"error"=>"Unrecognized hardware type: \"Expected hardware type o or e but got h\""}
-      params = EndpointParameters.new(**{:region=>"us-east-1", :bucket=>"test-accessp-h0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
+    it 'outposts arn with region mismatch, custom region and UseArnRegion=false' do
+      expect = {"error"=>"Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"}
+      params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :endpoint=>"https://example.com", :force_path_style=>false, :use_arn_region=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
       expect do
         subject.resolve_endpoint(params)
       end.to raise_error(ArgumentError, expect['error'])
     end
 
-    it 'S3 Outposts Abba Special character in Outpost Arn' do
-      expect = {"error"=>"Invalid ARN: The outpost Id must only contain a-z, A-Z, 0-9 and `-`."}
-      params = EndpointParameters.new(**{:region=>"us-east-1", :bucket=>"test-accessp-o00000754%1d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
-      expect do
-        subject.resolve_endpoint(params)
-      end.to raise_error(ArgumentError, expect['error'])
-    end
-
-    it 'S3 Outposts Snow with bucket' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-snow", "signingRegion"=>"snow", "disableDoubleEncoding"=>true}]}, "url"=>"http://10.0.1.12:433/bucketName"}}
-      params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :snow_endpoint_url=>"http://10.0.1.12:433", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
+    it 'outposts arn with region mismatch and UseArnRegion=true' do
+      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
+      params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :use_arn_region=>true, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
       expect(endpoint.properties).to eq(expect['endpoint']['properties'])
     end
 
-    it 'S3 Outposts Snow without bucket' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-snow", "signingRegion"=>"snow", "disableDoubleEncoding"=>true}]}, "url"=>"https://10.0.1.12:433"}}
-      params = EndpointParameters.new(**{:region=>"snow", :snow_endpoint_url=>"https://10.0.1.12:433", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
+    it 'outposts arn with region mismatch and UseArnRegion unset' do
+      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
+      params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
       expect(endpoint.properties).to eq(expect['endpoint']['properties'])
     end
 
-    it 'S3 Outposts Snow no port' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-snow", "signingRegion"=>"snow", "disableDoubleEncoding"=>true}]}, "url"=>"http://10.0.1.12/bucketName"}}
-      params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :snow_endpoint_url=>"http://10.0.1.12", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
+    it 'outposts arn with partition mismatch and UseArnRegion=true' do
+      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.cn-north-1.amazonaws.com.cn"}}
+      params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :use_arn_region=>true, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
       expect(endpoint.properties).to eq(expect['endpoint']['properties'])
     end
 
-    it 'S3 Outposts Snow dns endpoint' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-snow", "signingRegion"=>"snow", "disableDoubleEncoding"=>true}]}, "url"=>"https://amazonaws.com/bucketName"}}
-      params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :snow_endpoint_url=>"https://amazonaws.com", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
+    it 'ARN with UseGlobalEndpoint and use-east-1 region uses the regional endpoint' do
+      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://reports-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
+      params = EndpointParameters.new(**{:region=>"us-east-1", :use_global_endpoint=>true, :use_fips=>false, :use_dual_stack=>false, :accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-01234567890123456/accesspoint/reports"})
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
       expect(endpoint.properties).to eq(expect['endpoint']['properties'])
     end
 
-    it 'S3 Outposts Snow invalid url' do
-      expect = {"error"=>"Snow endpoint url was not a valid url"}
-      params = EndpointParameters.new(**{:region=>"snow", :snow_endpoint_url=>"invalid.url", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
+    it 'S3 outposts does not support dualstack' do
+      expect = {"error"=>"S3 Outposts does not support Dual-stack"}
+      params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>true, :accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"})
       expect do
         subject.resolve_endpoint(params)
       end.to raise_error(ArgumentError, expect['error'])
     end
 
-    it 'S3 Outposts Snow no snow endpoint' do
-      expect = {"error"=>"Expected snow endpoint url to be set but no url was found"}
-      params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
+    it 'S3 outposts does not support fips' do
+      expect = {"error"=>"S3 Outposts does not support FIPS"}
+      params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>false, :accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"})
       expect do
         subject.resolve_endpoint(params)
       end.to raise_error(ArgumentError, expect['error'])
     end
 
-    it 'S3 Outposts Snow FIPS enabled' do
-      expect = {"error"=>"S3 Snow does not support FIPS"}
-      params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :snow_endpoint_url=>"https://10.0.1.12:433", :use_fips=>true, :use_dual_stack=>false, :accelerate=>false})
-      expect do
-        subject.resolve_endpoint(params)
-      end.to raise_error(ArgumentError, expect['error'])
-    end
-
-    it 'S3 Outposts Snow Dual-stack enabled' do
-      expect = {"error"=>"S3 Snow does not support Dual-stack"}
-      params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :snow_endpoint_url=>"https://10.0.1.12:433", :use_fips=>false, :use_dual_stack=>true, :accelerate=>false})
-      expect do
-        subject.resolve_endpoint(params)
-      end.to raise_error(ArgumentError, expect['error'])
-    end
-
-    it 'S3 Outposts Snow Accelerate enabled' do
-      expect = {"error"=>"S3 Snow does not support S3 Accelerate"}
-      params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :snow_endpoint_url=>"https://10.0.1.12:433", :use_fips=>false, :use_dual_stack=>false, :accelerate=>true})
+    it 'S3 outposts does not support accelerate' do
+      expect = {"error"=>"S3 Outposts does not support S3 Accelerate"}
+      params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :accelerate=>true, :bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"})
       expect do
         subject.resolve_endpoint(params)
       end.to raise_error(ArgumentError, expect['error'])

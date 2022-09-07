@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../arn/access_point_arn'
-require_relative '../arn/object_lambda_arn'
-require_relative '../arn/outpost_access_point_arn'
-require_relative '../arn/multi_region_access_point_arn'
-
 module Aws
   module S3
     module Plugins
