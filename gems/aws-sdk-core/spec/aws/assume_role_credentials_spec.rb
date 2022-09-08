@@ -7,7 +7,7 @@ module Aws
 
     let(:client) {
       STS::Client.new(
-        region: 'us-eas-1',
+        region: 'us-east-1',
         credentials: credentials,
         stub_responses: true
       )
