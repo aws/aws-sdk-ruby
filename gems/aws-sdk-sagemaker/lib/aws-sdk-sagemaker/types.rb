@@ -2338,6 +2338,7 @@ module Aws::SageMaker
     #         candidate_generation_config: {
     #           feature_specification_s3_uri: "S3Uri",
     #         },
+    #         mode: "AUTO", # accepts AUTO, ENSEMBLING, HYPERPARAMETER_TUNING
     #       }
     #
     # @!attribute [rw] completion_criteria
@@ -2361,13 +2362,43 @@ module Aws::SageMaker
     #   (optional).
     #   @return [Types::AutoMLCandidateGenerationConfig]
     #
+    # @!attribute [rw] mode
+    #   The method that Autopilot uses to train the data. You can either
+    #   specify the mode manually or let Autopilot choose for you based on
+    #   the dataset size by selecting `AUTO`. In `AUTO` mode, Autopilot
+    #   chooses `ENSEMBLING` for datasets smaller than 100 MB, and
+    #   `HYPERPARAMETER_TUNING` for larger ones.
+    #
+    #   The `ENSEMBLING` mode uses a multi-stack ensemble model to predict
+    #   classification and regression tasks directly from your dataset. This
+    #   machine learning mode combines several base models to produce an
+    #   optimal predictive model. It then uses a stacking ensemble method to
+    #   combine predictions from contributing members. A multi-stack
+    #   ensemble model can provide better performance over a single model by
+    #   combining the predictive capabilities of multiple models. See
+    #   [Autopilot algorithm support][1] for a list of algorithms supported
+    #   by `ENSEMBLING` mode.
+    #
+    #   The `HYPERPARAMETER_TUNING` (HPO) mode uses the best hyperparameters
+    #   to train the best version of a model. HPO will automatically select
+    #   an algorithm for the type of problem you want to solve. Then HPO
+    #   finds the best hyperparameters according to your objective metric.
+    #   See [Autopilot algorithm support][1] for a list of algorithms
+    #   supported by `HYPERPARAMETER_TUNING` mode.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobConfig AWS API Documentation
     #
     class AutoMLJobConfig < Struct.new(
       :completion_criteria,
       :security_config,
       :data_split_config,
-      :candidate_generation_config)
+      :candidate_generation_config,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4591,6 +4622,7 @@ module Aws::SageMaker
     #           candidate_generation_config: {
     #             feature_specification_s3_uri: "S3Uri",
     #           },
+    #           mode: "AUTO", # accepts AUTO, ENSEMBLING, HYPERPARAMETER_TUNING
     #         },
     #         role_arn: "RoleArn", # required
     #         generate_candidate_definitions_only: false,
@@ -9382,6 +9414,12 @@ module Aws::SageMaker
     #   You can specify a maximum of 100 hyperparameters. Each
     #   hyperparameter is a key-value pair. Each key and value is limited to
     #   256 characters, as specified by the `Length Constraint`.
+    #
+    #   You must not include any security-sensitive information, such as
+    #   account access IDs, secrets, and tokens, in the dictionary for
+    #   configuring hyperparameters. SageMaker rejects the training job
+    #   request and returns an exception error for detected credentials, if
+    #   such user input is found.
     #
     #
     #
@@ -34097,16 +34135,16 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] model_data_download_timeout_in_seconds
-    #   The timeout value, in seconds, to download and extract customer
-    #   model artifact from Amazon S3 to individual inference instance
-    #   associated with this production variant.
+    #   The timeout value, in seconds, to download and extract the model
+    #   that you want to host from Amazon S3 to the individual inference
+    #   instance associated with this production variant.
     #   @return [Integer]
     #
     # @!attribute [rw] container_startup_health_check_timeout_in_seconds
-    #   The timeout value, in seconds, for the customer inference container
-    #   to pass health check by SageMaker Hosting. For more information on
-    #   health check, see [How Your Container Should Respond to Health Check
-    #   (Ping) Requests][1].
+    #   The timeout value, in seconds, for your inference container to pass
+    #   health check by SageMaker Hosting. For more information about health
+    #   check, see [How Your Container Should Respond to Health Check (Ping)
+    #   Requests][1].
     #
     #
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2022-09-08)
+------------------
+
+* Feature - This change exposes API settings which allow Dolby Atmos and Dolby Vision to be used when running a channel using Elemental Media Live
+
 1.88.0 (2022-07-22)
 ------------------
 

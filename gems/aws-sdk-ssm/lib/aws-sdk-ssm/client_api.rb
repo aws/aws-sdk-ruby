@@ -526,6 +526,7 @@ module Aws::SSM
     InvalidResultAttributeException = Shapes::StructureShape.new(name: 'InvalidResultAttributeException')
     InvalidRole = Shapes::StructureShape.new(name: 'InvalidRole')
     InvalidSchedule = Shapes::StructureShape.new(name: 'InvalidSchedule')
+    InvalidTag = Shapes::StructureShape.new(name: 'InvalidTag')
     InvalidTarget = Shapes::StructureShape.new(name: 'InvalidTarget')
     InvalidTargetMaps = Shapes::StructureShape.new(name: 'InvalidTargetMaps')
     InvalidTypeNameException = Shapes::StructureShape.new(name: 'InvalidTypeNameException')
@@ -1698,6 +1699,7 @@ module Aws::SSM
     CreateAssociationRequest.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
     CreateAssociationRequest.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
     CreateAssociationRequest.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps", metadata: {"box"=>true}))
+    CreateAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box"=>true}))
     CreateAssociationRequest.struct_class = Types::CreateAssociationRequest
 
     CreateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
@@ -2935,6 +2937,9 @@ module Aws::SSM
 
     InvalidSchedule.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidSchedule.struct_class = Types::InvalidSchedule
+
+    InvalidTag.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidTag.struct_class = Types::InvalidTag
 
     InvalidTarget.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidTarget.struct_class = Types::InvalidTarget
@@ -4664,6 +4669,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidTarget)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSchedule)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTargetMaps)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTag)
       end)
 
       api.add_operation(:create_association_batch, Seahorse::Model::Operation.new.tap do |o|

@@ -2354,10 +2354,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -5296,10 +5296,10 @@ module Aws::EC2
     # really want a default VPC for my existing EC2 account. Is that
     # possible?" in the [Default VPCs FAQ][2].
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][3] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][3] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -5982,71 +5982,71 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
     # @option params [String] :deliver_logs_permission_arn
-    #   The ARN for the IAM role that permits Amazon EC2 to publish flow logs
-    #   to a CloudWatch Logs log group in your account.
+    #   The ARN of the IAM role that allows Amazon EC2 to publish flow logs to
+    #   a CloudWatch Logs log group in your account.
     #
-    #   If you specify `LogDestinationType` as `s3`, do not specify
-    #   `DeliverLogsPermissionArn` or `LogGroupName`.
+    #   This parameter is required if the destination type is
+    #   `cloud-watch-logs` and unsupported otherwise.
+    #
+    # @option params [String] :deliver_cross_account_role
+    #   The ARN of the IAM role that allows Amazon EC2 to publish flow logs
+    #   across accounts.
     #
     # @option params [String] :log_group_name
     #   The name of a new or existing CloudWatch Logs log group where Amazon
     #   EC2 publishes your flow logs.
     #
-    #   If you specify `LogDestinationType` as `s3`, do not specify
-    #   `DeliverLogsPermissionArn` or `LogGroupName`.
+    #   This parameter is valid only if the destination type is
+    #   `cloud-watch-logs`.
     #
     # @option params [required, Array<String>] :resource_ids
-    #   The ID of the subnet, network interface, or VPC for which you want to
-    #   create a flow log.
+    #   The IDs of the resources to monitor. For example, if the resource type
+    #   is `VPC`, specify the IDs of the VPCs.
     #
     #   Constraints: Maximum of 1000 resources
     #
     # @option params [required, String] :resource_type
-    #   The type of resource for which to create the flow log. For example, if
-    #   you specified a VPC ID for the `ResourceId` property, specify `VPC`
-    #   for this property.
+    #   The type of resource to monitor.
     #
     # @option params [String] :traffic_type
-    #   The type of traffic to log. You can log traffic that the resource
-    #   accepts or rejects, or all traffic.
+    #   The type of traffic to monitor (accepted traffic, rejected traffic, or
+    #   all traffic).
     #
     # @option params [String] :log_destination_type
-    #   The type of destination to which the flow log data is to be published.
-    #   Flow log data can be published to CloudWatch Logs or Amazon S3. To
-    #   publish flow log data to CloudWatch Logs, specify `cloud-watch-logs`.
-    #   To publish flow log data to Amazon S3, specify `s3`.
-    #
-    #   If you specify `LogDestinationType` as `s3`, do not specify
-    #   `DeliverLogsPermissionArn` or `LogGroupName`.
+    #   The type of destination for the flow log data.
     #
     #   Default: `cloud-watch-logs`
     #
     # @option params [String] :log_destination
-    #   The destination to which the flow log data is to be published. Flow
-    #   log data can be published to a CloudWatch Logs log group or an Amazon
-    #   S3 bucket. The value specified for this parameter depends on the value
-    #   specified for `LogDestinationType`.
+    #   The destination for the flow log data. The meaning of this parameter
+    #   depends on the destination type.
     #
-    #   If `LogDestinationType` is not specified or `cloud-watch-logs`,
-    #   specify the Amazon Resource Name (ARN) of the CloudWatch Logs log
-    #   group. For example, to publish to a log group called `my-logs`,
-    #   specify `arn:aws:logs:us-east-1:123456789012:log-group:my-logs`.
-    #   Alternatively, use `LogGroupName` instead.
+    #   * If the destination type is `cloud-watch-logs`, specify the ARN of a
+    #     CloudWatch Logs log group. For example:
     #
-    #   If LogDestinationType is `s3`, specify the ARN of the Amazon S3
-    #   bucket. You can also specify a subfolder in the bucket. To specify a
-    #   subfolder in the bucket, use the following ARN format:
-    #   `bucket_ARN/subfolder_name/`. For example, to specify a subfolder
-    #   named `my-logs` in a bucket named `my-bucket`, use the following ARN:
-    #   `arn:aws:s3:::my-bucket/my-logs/`. You cannot use `AWSLogs` as a
-    #   subfolder name. This is a reserved term.
+    #     arn:aws:logs:*region*\:*account\_id*\:log-group:*my\_group*
+    #
+    #     Alternatively, use the `LogGroupName` parameter.
+    #
+    #   * If the destination type is `s3`, specify the ARN of an S3 bucket.
+    #     For example:
+    #
+    #     arn:aws:s3:::*my\_bucket*/*my\_subfolder*/
+    #
+    #     The subfolder is optional. Note that you can't use `AWSLogs` as a
+    #     subfolder name.
+    #
+    #   * If the destination type is `kinesis-data-firehose`, specify the ARN
+    #     of a Kinesis Data Firehose delivery stream. For example:
+    #
+    #     arn:aws:firehose:*region*\:*account\_id*\:deliverystream:*my\_stream*
     #
     # @option params [String] :log_format
-    #   The fields to include in the flow log record, in the order in which
-    #   they should appear. For a list of available fields, see [Flow log
-    #   records][1]. If you omit this parameter, the flow log is created using
-    #   the default format. If you specify this parameter, you must specify at
-    #   least one field.
+    #   The fields to include in the flow log record. List the fields in the
+    #   order in which they should appear. For more information about the
+    #   available fields, see [Flow log records][1]. If you omit this
+    #   parameter, the flow log is created using the default format. If you
+    #   specify this parameter, you must include at least one field.
     #
     #   Specify the fields using the `$\{field-id\}` format, separated by
     #   spaces. For the CLI, surround this parameter value with single quotes
@@ -6089,11 +6089,12 @@ module Aws::EC2
     #     dry_run: false,
     #     client_token: "String",
     #     deliver_logs_permission_arn: "String",
+    #     deliver_cross_account_role: "String",
     #     log_group_name: "String",
     #     resource_ids: ["FlowLogResourceId"], # required
     #     resource_type: "VPC", # required, accepts VPC, Subnet, NetworkInterface, TransitGateway, TransitGatewayAttachment
     #     traffic_type: "ACCEPT", # accepts ACCEPT, REJECT, ALL
-    #     log_destination_type: "cloud-watch-logs", # accepts cloud-watch-logs, s3
+    #     log_destination_type: "cloud-watch-logs", # accepts cloud-watch-logs, s3, kinesis-data-firehose
     #     log_destination: "String",
     #     log_format: "String",
     #     tag_specifications: [
@@ -18026,10 +18027,10 @@ module Aws::EC2
     # a VPC through ClassicLink. You cannot use this request to return
     # information about other instances.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -19805,9 +19806,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more flow logs. To view the information in your flow
-    # logs (the log streams for the network interfaces), you must use the
-    # CloudWatch Logs console or the CloudWatch Logs API.
+    # Describes one or more flow logs.
+    #
+    # To view the published flow log records, you must view the log
+    # destination. For example, the CloudWatch Logs log group, the Amazon S3
+    # bucket, or the Kinesis Data Firehose delivery stream.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -19821,9 +19824,8 @@ module Aws::EC2
     #   * `deliver-log-status` - The status of the logs delivery (`SUCCESS` \|
     #     `FAILED`).
     #
-    #   * `log-destination-type` - The type of destination to which the flow
-    #     log publishes data. Possible destination types include
-    #     `cloud-watch-logs` and `s3`.
+    #   * `log-destination-type` - The type of destination for the flow log
+    #     data (`cloud-watch-logs` \| `s3` \| `kinesis-data-firehose`).
     #
     #   * `flow-log-id` - The ID of the flow log.
     #
@@ -19885,13 +19887,14 @@ module Aws::EC2
     #   resp.flow_logs[0].creation_time #=> Time
     #   resp.flow_logs[0].deliver_logs_error_message #=> String
     #   resp.flow_logs[0].deliver_logs_permission_arn #=> String
+    #   resp.flow_logs[0].deliver_cross_account_role #=> String
     #   resp.flow_logs[0].deliver_logs_status #=> String
     #   resp.flow_logs[0].flow_log_id #=> String
     #   resp.flow_logs[0].flow_log_status #=> String
     #   resp.flow_logs[0].log_group_name #=> String
     #   resp.flow_logs[0].resource_id #=> String
     #   resp.flow_logs[0].traffic_type #=> String, one of "ACCEPT", "REJECT", "ALL"
-    #   resp.flow_logs[0].log_destination_type #=> String, one of "cloud-watch-logs", "s3"
+    #   resp.flow_logs[0].log_destination_type #=> String, one of "cloud-watch-logs", "s3", "kinesis-data-firehose"
     #   resp.flow_logs[0].log_destination #=> String
     #   resp.flow_logs[0].log_format #=> String
     #   resp.flow_logs[0].tags #=> Array
@@ -31841,10 +31844,10 @@ module Aws::EC2
 
     # Describes the ClassicLink status of one or more VPCs.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -31913,10 +31916,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -33096,10 +33099,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -33788,10 +33791,10 @@ module Aws::EC2
     # Disables ClassicLink for a VPC. You cannot disable ClassicLink for a
     # VPC that has EC2-Classic instances linked to it.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -33840,10 +33843,10 @@ module Aws::EC2
     #
     # You must specify a VPC ID in the request.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -34989,10 +34992,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -35043,10 +35046,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -43379,10 +43382,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -50814,7 +50817,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.330.0'
+      context[:gem_version] = '1.331.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

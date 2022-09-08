@@ -408,7 +408,7 @@ module Aws::EMRContainers
     #
     # @option params [String] :certificate_arn
     #   The certificate ARN provided by users for the managed endpoint. This
-    #   fiedd is under deprecation and will be removed in future releases.
+    #   field is under deprecation and will be removed in future releases.
     #
     # @option params [Types::ConfigurationOverrides] :configuration_overrides
     #   The configuration settings that will be used to override existing
@@ -659,6 +659,8 @@ module Aws::EMRContainers
     #   resp.job_run.job_driver.spark_submit_job_driver.entry_point_arguments #=> Array
     #   resp.job_run.job_driver.spark_submit_job_driver.entry_point_arguments[0] #=> String
     #   resp.job_run.job_driver.spark_submit_job_driver.spark_submit_parameters #=> String
+    #   resp.job_run.job_driver.spark_sql_job_driver.entry_point #=> String
+    #   resp.job_run.job_driver.spark_sql_job_driver.spark_sql_parameters #=> String
     #   resp.job_run.created_at #=> Time
     #   resp.job_run.created_by #=> String
     #   resp.job_run.finished_at #=> Time
@@ -849,6 +851,8 @@ module Aws::EMRContainers
     #   resp.job_runs[0].job_driver.spark_submit_job_driver.entry_point_arguments #=> Array
     #   resp.job_runs[0].job_driver.spark_submit_job_driver.entry_point_arguments[0] #=> String
     #   resp.job_runs[0].job_driver.spark_submit_job_driver.spark_submit_parameters #=> String
+    #   resp.job_runs[0].job_driver.spark_sql_job_driver.entry_point #=> String
+    #   resp.job_runs[0].job_driver.spark_sql_job_driver.spark_sql_parameters #=> String
     #   resp.job_runs[0].created_at #=> Time
     #   resp.job_runs[0].created_by #=> String
     #   resp.job_runs[0].finished_at #=> Time
@@ -1108,6 +1112,10 @@ module Aws::EMRContainers
     #         entry_point_arguments: ["EntryPointArgument"],
     #         spark_submit_parameters: "SparkSubmitParameters",
     #       },
+    #       spark_sql_job_driver: {
+    #         entry_point: "EntryPointPath",
+    #         spark_sql_parameters: "SparkSqlParameters",
+    #       },
     #     },
     #     configuration_overrides: {
     #       application_configuration: [
@@ -1229,7 +1237,7 @@ module Aws::EMRContainers
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrcontainers'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -935,6 +935,15 @@ module Aws::MediaLive
     #               lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
     #               metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #             },
+    #             eac_3_atmos_settings: {
+    #               bitrate: 1.0,
+    #               coding_mode: "CODING_MODE_5_1_4", # accepts CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
+    #               dialnorm: 1,
+    #               drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #               drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #               height_trim: 1.0,
+    #               surround_trim: 1.0,
+    #             },
     #             eac_3_settings: {
     #               attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #               bitrate: 1.0,
@@ -1607,6 +1616,8 @@ module Aws::MediaLive
     #               color_space_settings: {
     #                 color_space_passthrough_settings: {
     #                 },
+    #                 dolby_vision_81_settings: {
+    #                 },
     #                 hdr_10_settings: {
     #                   max_cll: 1,
     #                   max_fall: 1,
@@ -1878,6 +1889,13 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.drc_profile #=> String, one of "FILM_STANDARD", "NONE"
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Float
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_5_1_4", "CODING_MODE_7_1_4", "CODING_MODE_9_1_6"
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialnorm #=> Integer
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.drc_line #=> String, one of "FILM_LIGHT", "FILM_STANDARD", "MUSIC_LIGHT", "MUSIC_STANDARD", "NONE", "SPEECH"
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.drc_rf #=> String, one of "FILM_LIGHT", "FILM_STANDARD", "MUSIC_LIGHT", "MUSIC_STANDARD", "NONE", "SPEECH"
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.height_trim #=> Float
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_trim #=> Float
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Float
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMMENTARY", "COMPLETE_MAIN", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -2941,6 +2959,13 @@ module Aws::MediaLive
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.drc_profile #=> String, one of "FILM_STANDARD", "NONE"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Float
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_5_1_4", "CODING_MODE_7_1_4", "CODING_MODE_9_1_6"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialnorm #=> Integer
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.drc_line #=> String, one of "FILM_LIGHT", "FILM_STANDARD", "MUSIC_LIGHT", "MUSIC_STANDARD", "NONE", "SPEECH"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.drc_rf #=> String, one of "FILM_LIGHT", "FILM_STANDARD", "MUSIC_LIGHT", "MUSIC_STANDARD", "NONE", "SPEECH"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.height_trim #=> Float
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_trim #=> Float
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Float
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMMENTARY", "COMPLETE_MAIN", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -3877,6 +3902,13 @@ module Aws::MediaLive
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.drc_profile #=> String, one of "FILM_STANDARD", "NONE"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Float
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_5_1_4", "CODING_MODE_7_1_4", "CODING_MODE_9_1_6"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialnorm #=> Integer
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.drc_line #=> String, one of "FILM_LIGHT", "FILM_STANDARD", "MUSIC_LIGHT", "MUSIC_STANDARD", "NONE", "SPEECH"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.drc_rf #=> String, one of "FILM_LIGHT", "FILM_STANDARD", "MUSIC_LIGHT", "MUSIC_STANDARD", "NONE", "SPEECH"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.height_trim #=> Float
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_trim #=> Float
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Float
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMMENTARY", "COMPLETE_MAIN", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -5871,6 +5903,13 @@ module Aws::MediaLive
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.drc_profile #=> String, one of "FILM_STANDARD", "NONE"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Float
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_5_1_4", "CODING_MODE_7_1_4", "CODING_MODE_9_1_6"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialnorm #=> Integer
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.drc_line #=> String, one of "FILM_LIGHT", "FILM_STANDARD", "MUSIC_LIGHT", "MUSIC_STANDARD", "NONE", "SPEECH"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.drc_rf #=> String, one of "FILM_LIGHT", "FILM_STANDARD", "MUSIC_LIGHT", "MUSIC_STANDARD", "NONE", "SPEECH"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.height_trim #=> Float
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_trim #=> Float
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Float
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMMENTARY", "COMPLETE_MAIN", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -6615,6 +6654,13 @@ module Aws::MediaLive
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.drc_profile #=> String, one of "FILM_STANDARD", "NONE"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Float
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_5_1_4", "CODING_MODE_7_1_4", "CODING_MODE_9_1_6"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialnorm #=> Integer
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.drc_line #=> String, one of "FILM_LIGHT", "FILM_STANDARD", "MUSIC_LIGHT", "MUSIC_STANDARD", "NONE", "SPEECH"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.drc_rf #=> String, one of "FILM_LIGHT", "FILM_STANDARD", "MUSIC_LIGHT", "MUSIC_STANDARD", "NONE", "SPEECH"
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.height_trim #=> Float
+    #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_trim #=> Float
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Float
     #   resp.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMMENTARY", "COMPLETE_MAIN", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -7386,6 +7432,15 @@ module Aws::MediaLive
     #               lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
     #               metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #             },
+    #             eac_3_atmos_settings: {
+    #               bitrate: 1.0,
+    #               coding_mode: "CODING_MODE_5_1_4", # accepts CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
+    #               dialnorm: 1,
+    #               drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #               drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #               height_trim: 1.0,
+    #               surround_trim: 1.0,
+    #             },
     #             eac_3_settings: {
     #               attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #               bitrate: 1.0,
@@ -8058,6 +8113,8 @@ module Aws::MediaLive
     #               color_space_settings: {
     #                 color_space_passthrough_settings: {
     #                 },
+    #                 dolby_vision_81_settings: {
+    #                 },
     #                 hdr_10_settings: {
     #                   max_cll: 1,
     #                   max_fall: 1,
@@ -8320,6 +8377,13 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.drc_profile #=> String, one of "FILM_STANDARD", "NONE"
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Float
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_5_1_4", "CODING_MODE_7_1_4", "CODING_MODE_9_1_6"
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialnorm #=> Integer
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.drc_line #=> String, one of "FILM_LIGHT", "FILM_STANDARD", "MUSIC_LIGHT", "MUSIC_STANDARD", "NONE", "SPEECH"
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.drc_rf #=> String, one of "FILM_LIGHT", "FILM_STANDARD", "MUSIC_LIGHT", "MUSIC_STANDARD", "NONE", "SPEECH"
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.height_trim #=> Float
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_trim #=> Float
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Float
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMMENTARY", "COMPLETE_MAIN", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -8995,6 +9059,13 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.drc_profile #=> String, one of "FILM_STANDARD", "NONE"
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Float
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_5_1_4", "CODING_MODE_7_1_4", "CODING_MODE_9_1_6"
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.dialnorm #=> Integer
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.drc_line #=> String, one of "FILM_LIGHT", "FILM_STANDARD", "MUSIC_LIGHT", "MUSIC_STANDARD", "NONE", "SPEECH"
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.drc_rf #=> String, one of "FILM_LIGHT", "FILM_STANDARD", "MUSIC_LIGHT", "MUSIC_STANDARD", "NONE", "SPEECH"
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.height_trim #=> Float
+    #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.surround_trim #=> Float
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Float
     #   resp.channel.encoder_settings.audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMMENTARY", "COMPLETE_MAIN", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
@@ -10016,7 +10087,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

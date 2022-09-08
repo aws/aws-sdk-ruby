@@ -101,7 +101,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation, Association
     #         resource_id: "ResourceId", # required
     #         tags: [ # required
     #           {
@@ -3222,6 +3222,12 @@ module Aws::SSM
     #             "TargetMapKey" => ["TargetMapValue"],
     #           },
     #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -3418,6 +3424,14 @@ module Aws::SSM
     #   Targets and TargetMaps can't be specified together.
     #   @return [Array<Hash<String,Array<String>>>]
     #
+    # @!attribute [rw] tags
+    #   Adds or overwrites one or more tags for a State Manager association.
+    #   *Tags* are metadata that you can assign to your Amazon Web Services
+    #   resources. Tags enable you to categorize your resources in different
+    #   ways, for example, by purpose, owner, or environment. Each tag
+    #   consists of a key and an optional value, both of which you define.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
     #
     class CreateAssociationRequest < Struct.new(
@@ -3438,7 +3452,8 @@ module Aws::SSM
       :calendar_names,
       :target_locations,
       :schedule_offset,
-      :target_maps)
+      :target_maps,
+      :tags)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -3534,7 +3549,7 @@ module Aws::SSM
     #   These are reserved by Amazon Web Services for use as document name
     #   prefixes:
     #
-    #    * `aws-`
+    #    * `aws`
     #
     #   * `amazon`
     #
@@ -5726,8 +5741,8 @@ module Aws::SSM
     #
     # @!attribute [rw] filters
     #   One or more filters. Use a filter to return a more specific list of
-    #   managed nodes. You can filter based on tags applied to EC2
-    #   instances. Use this `Filters` data type instead of
+    #   managed nodes. You can filter based on tags applied to your managed
+    #   nodes. Use this `Filters` data type instead of
     #   `InstanceInformationFilterList`, which is deprecated.
     #   @return [Array<Types::InstanceInformationStringFilter>]
     #
@@ -10553,13 +10568,16 @@ module Aws::SSM
     # @!attribute [rw] key
     #   The filter key name to describe your managed nodes. For example:
     #
-    #   "InstanceIds"\|"AgentVersion"\|"PingStatus"\|"PlatformTypes"\|"ActivationIds"\|"IamRole"\|"ResourceType"\|"AssociationStatus"\|"Tag
-    #   Key"
+    #   "InstanceIds" \| "AgentVersion" \| "PingStatus" \|
+    #   "PlatformTypes" \| "ActivationIds" \| "IamRole" \|
+    #   "ResourceType" \| "AssociationStatus" \| "tag-key" \|
+    #   "tag:`\{keyname\}`
     #
-    #   `Tag key` isn't a valid filter. You must specify either `tag-key`
-    #   or `tag:keyname` and a string. Here are some valid examples:
-    #   tag-key, tag:123, tag:al!, tag:Windows. Here are some *invalid*
-    #   examples: tag-keys, Tag Key, tag:, tagKey, abc:keyname.
+    #   `Tag Key` isn't a valid filter. You must specify either `tag-key`
+    #   or `tag:\{keyname\}` and a string. Here are some valid examples:
+    #   `tag-key`, `tag:123`, `tag:al!`, `tag:Windows`. Here are some
+    #   *invalid* examples: `tag-keys`, `Tag Key`, `tag:`, `tagKey`,
+    #   `abc:keyname`.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -11416,6 +11434,19 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidSchedule AWS API Documentation
     #
     class InvalidSchedule < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified tag key or value is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidTag AWS API Documentation
+    #
+    class InvalidTag < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -13031,7 +13062,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation, Association
     #         resource_id: "ResourceId", # required
     #       }
     #
@@ -17285,7 +17316,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation, Association
     #         resource_id: "ResourceId", # required
     #         tag_keys: ["TagKey"], # required
     #       }
@@ -18466,6 +18497,16 @@ module Aws::SSM
     #   The ARN of the Identity and Access Management (IAM) service role to
     #   use to publish Amazon Simple Notification Service (Amazon SNS)
     #   notifications for Run Command commands.
+    #
+    #   This role must provide the `sns:Publish` permission for your
+    #   notification topic. For information about creating and using this
+    #   service role, see [Monitoring Systems Manager status changes using
+    #   Amazon SNS notifications][1] in the *Amazon Web Services Systems
+    #   Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html
     #   @return [String]
     #
     # @!attribute [rw] notification_config
@@ -19231,7 +19272,9 @@ module Aws::SSM
     #
     # @!attribute [rw] token_value
     #   An encrypted token value containing session and caller information.
-    #   Used to authenticate the connection to the managed node.
+    #   This token is used to authenticate the connection to the managed
+    #   node, and is valid only long enough to ensure the connection is
+    #   successful. Never share your session's token.
     #   @return [String]
     #
     # @!attribute [rw] stream_url

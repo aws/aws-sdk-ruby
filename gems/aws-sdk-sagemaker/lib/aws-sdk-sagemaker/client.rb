@@ -1260,6 +1260,7 @@ module Aws::SageMaker
     #       candidate_generation_config: {
     #         feature_specification_s3_uri: "S3Uri",
     #       },
+    #       mode: "AUTO", # accepts AUTO, ENSEMBLING, HYPERPARAMETER_TUNING
     #     },
     #     role_arn: "RoleArn", # required
     #     generate_candidate_definitions_only: false,
@@ -5834,6 +5835,12 @@ module Aws::SageMaker
     #   a list of hyperparameters for each training algorithm provided by
     #   SageMaker, see [Algorithms][1].
     #
+    #   You must not include any security-sensitive information, such as
+    #   account access IDs, secrets, and tokens, in the dictionary for
+    #   configuring hyperparameters. SageMaker rejects the training job
+    #   request and returns an exception error for detected credentials, if
+    #   such user input is found.
+    #
     # * `InputDataConfig` - Describes the training dataset and the Amazon
     #   S3, EFS, or FSx location where it is stored.
     #
@@ -5885,6 +5892,12 @@ module Aws::SageMaker
     #   You can specify a maximum of 100 hyperparameters. Each hyperparameter
     #   is a key-value pair. Each key and value is limited to 256 characters,
     #   as specified by the `Length Constraint`.
+    #
+    #   You must not include any security-sensitive information, such as
+    #   account access IDs, secrets, and tokens, in the dictionary for
+    #   configuring hyperparameters. SageMaker rejects the training job
+    #   request and returns an exception error for detected credentials, if
+    #   such user input is found.
     #
     #
     #
@@ -8571,6 +8584,7 @@ module Aws::SageMaker
     #   resp.auto_ml_job_config.security_config.vpc_config.subnets[0] #=> String
     #   resp.auto_ml_job_config.data_split_config.validation_fraction #=> Float
     #   resp.auto_ml_job_config.candidate_generation_config.feature_specification_s3_uri #=> String
+    #   resp.auto_ml_job_config.mode #=> String, one of "AUTO", "ENSEMBLING", "HYPERPARAMETER_TUNING"
     #   resp.creation_time #=> Time
     #   resp.end_time #=> Time
     #   resp.last_modified_time #=> Time
@@ -20582,7 +20596,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.138.0'
+      context[:gem_version] = '1.139.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

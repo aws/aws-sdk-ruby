@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2022-09-08)
+------------------
+
+* Feature - EMR on EKS now allows running Spark SQL using the newly introduced Spark SQL Job Driver in the Start Job Run API
+
 1.14.0 (2022-02-24)
 ------------------
 

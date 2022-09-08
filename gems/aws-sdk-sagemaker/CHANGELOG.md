@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2022-09-08)
+------------------
+
+* Feature - This release adds Mode to AutoMLJobConfig.
+
 1.138.0 (2022-09-07)
 ------------------
 

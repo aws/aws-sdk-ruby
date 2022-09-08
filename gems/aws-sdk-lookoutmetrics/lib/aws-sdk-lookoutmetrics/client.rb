@@ -567,6 +567,10 @@ module Aws::LookoutMetrics
     #
     #   [1]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
     #
+    # @option params [Array<Types::MetricSetDimensionFilter>] :dimension_filter_list
+    #   A list of filters that specify which data is kept for anomaly
+    #   detection.
+    #
     # @return [Types::CreateMetricSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMetricSetResponse#metric_set_arn #metric_set_arn} => String
@@ -663,6 +667,17 @@ module Aws::LookoutMetrics
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     dimension_filter_list: [
+    #       {
+    #         name: "ColumnName",
+    #         filter_list: [
+    #           {
+    #             dimension_value: "DimensionValue",
+    #             filter_operation: "EQUALS", # accepts EQUALS
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -923,6 +938,7 @@ module Aws::LookoutMetrics
     #   * {Types::DescribeMetricSetResponse#metric_set_frequency #metric_set_frequency} => String
     #   * {Types::DescribeMetricSetResponse#timezone #timezone} => String
     #   * {Types::DescribeMetricSetResponse#metric_source #metric_source} => Types::MetricSource
+    #   * {Types::DescribeMetricSetResponse#dimension_filter_list #dimension_filter_list} => Array&lt;Types::MetricSetDimensionFilter&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -996,6 +1012,11 @@ module Aws::LookoutMetrics
     #   resp.metric_source.athena_source_config.work_group_name #=> String
     #   resp.metric_source.athena_source_config.s3_results_path #=> String
     #   resp.metric_source.athena_source_config.back_test_configuration.run_back_test_mode #=> Boolean
+    #   resp.dimension_filter_list #=> Array
+    #   resp.dimension_filter_list[0].name #=> String
+    #   resp.dimension_filter_list[0].filter_list #=> Array
+    #   resp.dimension_filter_list[0].filter_list[0].dimension_value #=> String
+    #   resp.dimension_filter_list[0].filter_list[0].filter_operation #=> String, one of "EQUALS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DescribeMetricSet AWS API Documentation
     #
@@ -1856,6 +1877,13 @@ module Aws::LookoutMetrics
     # @option params [Types::MetricSource] :metric_source
     #   Contains information about source data used to generate metrics.
     #
+    # @option params [Array<Types::MetricSetDimensionFilter>] :dimension_filter_list
+    #   Describes a list of filters for choosing specific dimensions and
+    #   specific values. Each filter consists of the dimension and one of its
+    #   values that you want to include. When multiple dimensions or values
+    #   are specified, the dimensions are joined with an AND operation and the
+    #   values are joined with an OR operation.
+    #
     # @return [Types::UpdateMetricSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateMetricSetResponse#metric_set_arn #metric_set_arn} => String
@@ -1947,6 +1975,17 @@ module Aws::LookoutMetrics
     #         },
     #       },
     #     },
+    #     dimension_filter_list: [
+    #       {
+    #         name: "ColumnName",
+    #         filter_list: [
+    #           {
+    #             dimension_value: "DimensionValue",
+    #             filter_operation: "EQUALS", # accepts EQUALS
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1975,7 +2014,7 @@ module Aws::LookoutMetrics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutmetrics'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

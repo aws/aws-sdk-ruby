@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.331.0 (2022-09-08)
+------------------
+
+* Feature - This release adds support to send VPC Flow Logs to kinesis-data-firehose as new destination type
+
 1.330.0 (2022-09-07)
 ------------------
 

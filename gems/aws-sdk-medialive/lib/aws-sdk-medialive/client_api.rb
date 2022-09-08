@@ -185,6 +185,7 @@ module Aws::MediaLive
     DescribeScheduleResponse = Shapes::StructureShape.new(name: 'DescribeScheduleResponse')
     DeviceSettingsSyncState = Shapes::StringShape.new(name: 'DeviceSettingsSyncState')
     DeviceUpdateStatus = Shapes::StringShape.new(name: 'DeviceUpdateStatus')
+    DolbyVision81Settings = Shapes::StructureShape.new(name: 'DolbyVision81Settings')
     DvbNitSettings = Shapes::StructureShape.new(name: 'DvbNitSettings')
     DvbSdtOutputSdt = Shapes::StringShape.new(name: 'DvbSdtOutputSdt')
     DvbSdtSettings = Shapes::StructureShape.new(name: 'DvbSdtSettings')
@@ -198,6 +199,10 @@ module Aws::MediaLive
     DvbSubOcrLanguage = Shapes::StringShape.new(name: 'DvbSubOcrLanguage')
     DvbSubSourceSettings = Shapes::StructureShape.new(name: 'DvbSubSourceSettings')
     DvbTdtSettings = Shapes::StructureShape.new(name: 'DvbTdtSettings')
+    Eac3AtmosCodingMode = Shapes::StringShape.new(name: 'Eac3AtmosCodingMode')
+    Eac3AtmosDrcLine = Shapes::StringShape.new(name: 'Eac3AtmosDrcLine')
+    Eac3AtmosDrcRf = Shapes::StringShape.new(name: 'Eac3AtmosDrcRf')
+    Eac3AtmosSettings = Shapes::StructureShape.new(name: 'Eac3AtmosSettings')
     Eac3AttenuationControl = Shapes::StringShape.new(name: 'Eac3AttenuationControl')
     Eac3BitstreamMode = Shapes::StringShape.new(name: 'Eac3BitstreamMode')
     Eac3CodingMode = Shapes::StringShape.new(name: 'Eac3CodingMode')
@@ -886,6 +891,7 @@ module Aws::MediaLive
 
     AudioCodecSettings.add_member(:aac_settings, Shapes::ShapeRef.new(shape: AacSettings, location_name: "aacSettings"))
     AudioCodecSettings.add_member(:ac_3_settings, Shapes::ShapeRef.new(shape: Ac3Settings, location_name: "ac3Settings"))
+    AudioCodecSettings.add_member(:eac_3_atmos_settings, Shapes::ShapeRef.new(shape: Eac3AtmosSettings, location_name: "eac3AtmosSettings"))
     AudioCodecSettings.add_member(:eac_3_settings, Shapes::ShapeRef.new(shape: Eac3Settings, location_name: "eac3Settings"))
     AudioCodecSettings.add_member(:mp_2_settings, Shapes::ShapeRef.new(shape: Mp2Settings, location_name: "mp2Settings"))
     AudioCodecSettings.add_member(:pass_through_settings, Shapes::ShapeRef.new(shape: PassThroughSettings, location_name: "passThroughSettings"))
@@ -1586,6 +1592,8 @@ module Aws::MediaLive
     DescribeScheduleResponse.add_member(:schedule_actions, Shapes::ShapeRef.new(shape: __listOfScheduleAction, location_name: "scheduleActions"))
     DescribeScheduleResponse.struct_class = Types::DescribeScheduleResponse
 
+    DolbyVision81Settings.struct_class = Types::DolbyVision81Settings
+
     DvbNitSettings.add_member(:network_id, Shapes::ShapeRef.new(shape: __integerMin0Max65536, required: true, location_name: "networkId"))
     DvbNitSettings.add_member(:network_name, Shapes::ShapeRef.new(shape: __stringMin1Max256, required: true, location_name: "networkName"))
     DvbNitSettings.add_member(:rep_interval, Shapes::ShapeRef.new(shape: __integerMin25Max10000, location_name: "repInterval"))
@@ -1622,6 +1630,15 @@ module Aws::MediaLive
 
     DvbTdtSettings.add_member(:rep_interval, Shapes::ShapeRef.new(shape: __integerMin1000Max30000, location_name: "repInterval"))
     DvbTdtSettings.struct_class = Types::DvbTdtSettings
+
+    Eac3AtmosSettings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __double, location_name: "bitrate"))
+    Eac3AtmosSettings.add_member(:coding_mode, Shapes::ShapeRef.new(shape: Eac3AtmosCodingMode, location_name: "codingMode"))
+    Eac3AtmosSettings.add_member(:dialnorm, Shapes::ShapeRef.new(shape: __integerMin1Max31, location_name: "dialnorm"))
+    Eac3AtmosSettings.add_member(:drc_line, Shapes::ShapeRef.new(shape: Eac3AtmosDrcLine, location_name: "drcLine"))
+    Eac3AtmosSettings.add_member(:drc_rf, Shapes::ShapeRef.new(shape: Eac3AtmosDrcRf, location_name: "drcRf"))
+    Eac3AtmosSettings.add_member(:height_trim, Shapes::ShapeRef.new(shape: __double, location_name: "heightTrim"))
+    Eac3AtmosSettings.add_member(:surround_trim, Shapes::ShapeRef.new(shape: __double, location_name: "surroundTrim"))
+    Eac3AtmosSettings.struct_class = Types::Eac3AtmosSettings
 
     Eac3Settings.add_member(:attenuation_control, Shapes::ShapeRef.new(shape: Eac3AttenuationControl, location_name: "attenuationControl"))
     Eac3Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __double, location_name: "bitrate"))
@@ -1790,6 +1807,7 @@ module Aws::MediaLive
     H264Settings.struct_class = Types::H264Settings
 
     H265ColorSpaceSettings.add_member(:color_space_passthrough_settings, Shapes::ShapeRef.new(shape: ColorSpacePassthroughSettings, location_name: "colorSpacePassthroughSettings"))
+    H265ColorSpaceSettings.add_member(:dolby_vision_81_settings, Shapes::ShapeRef.new(shape: DolbyVision81Settings, location_name: "dolbyVision81Settings"))
     H265ColorSpaceSettings.add_member(:hdr_10_settings, Shapes::ShapeRef.new(shape: Hdr10Settings, location_name: "hdr10Settings"))
     H265ColorSpaceSettings.add_member(:rec_601_settings, Shapes::ShapeRef.new(shape: Rec601Settings, location_name: "rec601Settings"))
     H265ColorSpaceSettings.add_member(:rec_709_settings, Shapes::ShapeRef.new(shape: Rec709Settings, location_name: "rec709Settings"))
