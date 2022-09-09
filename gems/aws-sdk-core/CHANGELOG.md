@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Fixed typo in gems/aws-sdk-core/spec/aws/assume_role_credentials_spec.rb.
+
 3.143.0 (2022-09-08)
 ------------------
 
