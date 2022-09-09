@@ -6504,6 +6504,10 @@ module Aws::LexModelsV2
     #   If the `multipleValuesSetting` is not set, the default value is
     #   `false`.
     #
+    # @option params [Types::SubSlotSetting] :sub_slot_setting
+    #   Specifications for the constituent sub slots and the expression for
+    #   the composite slot.
+    #
     # @return [Types::CreateSlotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSlotResponse#slot_id #slot_id} => String
@@ -6518,6 +6522,7 @@ module Aws::LexModelsV2
     #   * {Types::CreateSlotResponse#intent_id #intent_id} => String
     #   * {Types::CreateSlotResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::CreateSlotResponse#multiple_values_setting #multiple_values_setting} => Types::MultipleValuesSetting
+    #   * {Types::CreateSlotResponse#sub_slot_setting #sub_slot_setting} => Types::SubSlotSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -8032,6 +8037,247 @@ module Aws::LexModelsV2
     #     multiple_values_setting: {
     #       allow_multiple_values: false,
     #     },
+    #     sub_slot_setting: {
+    #       expression: "SubSlotExpression",
+    #       slot_specifications: {
+    #         "Name" => {
+    #           slot_type_id: "BuiltInOrCustomSlotTypeId", # required
+    #           value_elicitation_setting: { # required
+    #             default_value_specification: {
+    #               default_value_list: [ # required
+    #                 {
+    #                   default_value: "SlotDefaultValueString", # required
+    #                 },
+    #               ],
+    #             },
+    #             prompt_specification: { # required
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               max_retries: 1, # required
+    #               allow_interrupt: false,
+    #               message_selection_strategy: "Random", # accepts Random, Ordered
+    #             },
+    #             sample_utterances: [
+    #               {
+    #                 utterance: "Utterance", # required
+    #               },
+    #             ],
+    #             wait_and_continue_specification: {
+    #               waiting_response: { # required
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               continue_response: { # required
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               still_waiting_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 frequency_in_seconds: 1, # required
+    #                 timeout_in_seconds: 1, # required
+    #                 allow_interrupt: false,
+    #               },
+    #               active: false,
+    #             },
+    #           },
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -8646,6 +8892,102 @@ module Aws::LexModelsV2
     #   resp.intent_id #=> String
     #   resp.creation_date_time #=> Time
     #   resp.multiple_values_setting.allow_multiple_values #=> Boolean
+    #   resp.sub_slot_setting.expression #=> String
+    #   resp.sub_slot_setting.slot_specifications #=> Hash
+    #   resp.sub_slot_setting.slot_specifications["Name"].slot_type_id #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.default_value_specification.default_value_list #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.default_value_specification.default_value_list[0].default_value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.max_retries #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.allow_interrupt #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.sample_utterances #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.sample_utterances[0].utterance #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.allow_interrupt #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.allow_interrupt #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.frequency_in_seconds #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.timeout_in_seconds #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.active #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateSlot AWS API Documentation
     #
@@ -8717,6 +9059,9 @@ module Aws::LexModelsV2
     # @option params [Types::ExternalSourceSetting] :external_source_setting
     #   Sets the type of external information used to create the slot type.
     #
+    # @option params [Types::CompositeSlotTypeSetting] :composite_slot_type_setting
+    #   Specifications for a composite slot type.
+    #
     # @return [Types::CreateSlotTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSlotTypeResponse#slot_type_id #slot_type_id} => String
@@ -8730,6 +9075,7 @@ module Aws::LexModelsV2
     #   * {Types::CreateSlotTypeResponse#locale_id #locale_id} => String
     #   * {Types::CreateSlotTypeResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::CreateSlotTypeResponse#external_source_setting #external_source_setting} => Types::ExternalSourceSetting
+    #   * {Types::CreateSlotTypeResponse#composite_slot_type_setting #composite_slot_type_setting} => Types::CompositeSlotTypeSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -8749,7 +9095,7 @@ module Aws::LexModelsV2
     #       },
     #     ],
     #     value_selection_setting: {
-    #       resolution_strategy: "OriginalValue", # required, accepts OriginalValue, TopResolution
+    #       resolution_strategy: "OriginalValue", # required, accepts OriginalValue, TopResolution, Concatenation
     #       regex_filter: {
     #         pattern: "RegexPattern", # required
     #       },
@@ -8770,6 +9116,14 @@ module Aws::LexModelsV2
     #         },
     #       },
     #     },
+    #     composite_slot_type_setting: {
+    #       sub_slots: [
+    #         {
+    #           name: "Name", # required
+    #           slot_type_id: "BuiltInOrCustomSlotTypeId", # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -8781,7 +9135,7 @@ module Aws::LexModelsV2
     #   resp.slot_type_values[0].sample_value.value #=> String
     #   resp.slot_type_values[0].synonyms #=> Array
     #   resp.slot_type_values[0].synonyms[0].value #=> String
-    #   resp.value_selection_setting.resolution_strategy #=> String, one of "OriginalValue", "TopResolution"
+    #   resp.value_selection_setting.resolution_strategy #=> String, one of "OriginalValue", "TopResolution", "Concatenation"
     #   resp.value_selection_setting.regex_filter.pattern #=> String
     #   resp.value_selection_setting.advanced_recognition_setting.audio_recognition_strategy #=> String, one of "UseSlotValuesAsCustomVocabulary"
     #   resp.parent_slot_type_signature #=> String
@@ -8792,6 +9146,9 @@ module Aws::LexModelsV2
     #   resp.external_source_setting.grammar_slot_type_setting.source.s3_bucket_name #=> String
     #   resp.external_source_setting.grammar_slot_type_setting.source.s3_object_key #=> String
     #   resp.external_source_setting.grammar_slot_type_setting.source.kms_key_arn #=> String
+    #   resp.composite_slot_type_setting.sub_slots #=> Array
+    #   resp.composite_slot_type_setting.sub_slots[0].name #=> String
+    #   resp.composite_slot_type_setting.sub_slots[0].slot_type_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateSlotType AWS API Documentation
     #
@@ -11552,6 +11909,7 @@ module Aws::LexModelsV2
     #   * {Types::DescribeSlotResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::DescribeSlotResponse#last_updated_date_time #last_updated_date_time} => Time
     #   * {Types::DescribeSlotResponse#multiple_values_setting #multiple_values_setting} => Types::MultipleValuesSetting
+    #   * {Types::DescribeSlotResponse#sub_slot_setting #sub_slot_setting} => Types::SubSlotSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -12176,6 +12534,102 @@ module Aws::LexModelsV2
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
     #   resp.multiple_values_setting.allow_multiple_values #=> Boolean
+    #   resp.sub_slot_setting.expression #=> String
+    #   resp.sub_slot_setting.slot_specifications #=> Hash
+    #   resp.sub_slot_setting.slot_specifications["Name"].slot_type_id #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.default_value_specification.default_value_list #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.default_value_specification.default_value_list[0].default_value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.max_retries #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.allow_interrupt #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.sample_utterances #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.sample_utterances[0].utterance #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.allow_interrupt #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.allow_interrupt #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.frequency_in_seconds #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.timeout_in_seconds #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.active #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeSlot AWS API Documentation
     #
@@ -12220,6 +12674,7 @@ module Aws::LexModelsV2
     #   * {Types::DescribeSlotTypeResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::DescribeSlotTypeResponse#last_updated_date_time #last_updated_date_time} => Time
     #   * {Types::DescribeSlotTypeResponse#external_source_setting #external_source_setting} => Types::ExternalSourceSetting
+    #   * {Types::DescribeSlotTypeResponse#composite_slot_type_setting #composite_slot_type_setting} => Types::CompositeSlotTypeSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -12239,7 +12694,7 @@ module Aws::LexModelsV2
     #   resp.slot_type_values[0].sample_value.value #=> String
     #   resp.slot_type_values[0].synonyms #=> Array
     #   resp.slot_type_values[0].synonyms[0].value #=> String
-    #   resp.value_selection_setting.resolution_strategy #=> String, one of "OriginalValue", "TopResolution"
+    #   resp.value_selection_setting.resolution_strategy #=> String, one of "OriginalValue", "TopResolution", "Concatenation"
     #   resp.value_selection_setting.regex_filter.pattern #=> String
     #   resp.value_selection_setting.advanced_recognition_setting.audio_recognition_strategy #=> String, one of "UseSlotValuesAsCustomVocabulary"
     #   resp.parent_slot_type_signature #=> String
@@ -12251,6 +12706,9 @@ module Aws::LexModelsV2
     #   resp.external_source_setting.grammar_slot_type_setting.source.s3_bucket_name #=> String
     #   resp.external_source_setting.grammar_slot_type_setting.source.s3_object_key #=> String
     #   resp.external_source_setting.grammar_slot_type_setting.source.kms_key_arn #=> String
+    #   resp.composite_slot_type_setting.sub_slots #=> Array
+    #   resp.composite_slot_type_setting.sub_slots[0].name #=> String
+    #   resp.composite_slot_type_setting.sub_slots[0].slot_type_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeSlotType AWS API Documentation
     #
@@ -13324,7 +13782,7 @@ module Aws::LexModelsV2
     #   resp.slot_type_summaries[0].description #=> String
     #   resp.slot_type_summaries[0].parent_slot_type_signature #=> String
     #   resp.slot_type_summaries[0].last_updated_date_time #=> Time
-    #   resp.slot_type_summaries[0].slot_type_category #=> String, one of "Custom", "Extended", "ExternalGrammar"
+    #   resp.slot_type_summaries[0].slot_type_category #=> String, one of "Custom", "Extended", "ExternalGrammar", "Composite"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListSlotTypes AWS API Documentation
@@ -19778,6 +20236,10 @@ module Aws::LexModelsV2
     #   If the `multipleValuesSetting` is not set, the default value is
     #   `false`.
     #
+    # @option params [Types::SubSlotSetting] :sub_slot_setting
+    #   Specifications for the constituent sub slots and the expression for
+    #   the composite slot.
+    #
     # @return [Types::UpdateSlotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSlotResponse#slot_id #slot_id} => String
@@ -19793,6 +20255,7 @@ module Aws::LexModelsV2
     #   * {Types::UpdateSlotResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::UpdateSlotResponse#last_updated_date_time #last_updated_date_time} => Time
     #   * {Types::UpdateSlotResponse#multiple_values_setting #multiple_values_setting} => Types::MultipleValuesSetting
+    #   * {Types::UpdateSlotResponse#sub_slot_setting #sub_slot_setting} => Types::SubSlotSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -21308,6 +21771,247 @@ module Aws::LexModelsV2
     #     multiple_values_setting: {
     #       allow_multiple_values: false,
     #     },
+    #     sub_slot_setting: {
+    #       expression: "SubSlotExpression",
+    #       slot_specifications: {
+    #         "Name" => {
+    #           slot_type_id: "BuiltInOrCustomSlotTypeId", # required
+    #           value_elicitation_setting: { # required
+    #             default_value_specification: {
+    #               default_value_list: [ # required
+    #                 {
+    #                   default_value: "SlotDefaultValueString", # required
+    #                 },
+    #               ],
+    #             },
+    #             prompt_specification: { # required
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               max_retries: 1, # required
+    #               allow_interrupt: false,
+    #               message_selection_strategy: "Random", # accepts Random, Ordered
+    #             },
+    #             sample_utterances: [
+    #               {
+    #                 utterance: "Utterance", # required
+    #               },
+    #             ],
+    #             wait_and_continue_specification: {
+    #               waiting_response: { # required
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               continue_response: { # required
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 allow_interrupt: false,
+    #               },
+    #               still_waiting_response: {
+    #                 message_groups: [ # required
+    #                   {
+    #                     message: { # required
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     variations: [
+    #                       {
+    #                         plain_text_message: {
+    #                           value: "PlainTextMessageValue", # required
+    #                         },
+    #                         custom_payload: {
+    #                           value: "CustomPayloadValue", # required
+    #                         },
+    #                         ssml_message: {
+    #                           value: "SSMLMessageValue", # required
+    #                         },
+    #                         image_response_card: {
+    #                           title: "AttachmentTitle", # required
+    #                           subtitle: "AttachmentTitle",
+    #                           image_url: "AttachmentUrl",
+    #                           buttons: [
+    #                             {
+    #                               text: "ButtonText", # required
+    #                               value: "ButtonValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 frequency_in_seconds: 1, # required
+    #                 timeout_in_seconds: 1, # required
+    #                 allow_interrupt: false,
+    #               },
+    #               active: false,
+    #             },
+    #           },
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -21923,6 +22627,102 @@ module Aws::LexModelsV2
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
     #   resp.multiple_values_setting.allow_multiple_values #=> Boolean
+    #   resp.sub_slot_setting.expression #=> String
+    #   resp.sub_slot_setting.slot_specifications #=> Hash
+    #   resp.sub_slot_setting.slot_specifications["Name"].slot_type_id #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.default_value_specification.default_value_list #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.default_value_specification.default_value_list[0].default_value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.max_retries #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.allow_interrupt #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.sample_utterances #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.sample_utterances[0].utterance #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.allow_interrupt #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.continue_response.allow_interrupt #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.frequency_in_seconds #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.timeout_in_seconds #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.active #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateSlot AWS API Documentation
     #
@@ -21975,6 +22775,9 @@ module Aws::LexModelsV2
     #   Provides information about the external source of the slot type's
     #   definition.
     #
+    # @option params [Types::CompositeSlotTypeSetting] :composite_slot_type_setting
+    #   Specifications for a composite slot type.
+    #
     # @return [Types::UpdateSlotTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSlotTypeResponse#slot_type_id #slot_type_id} => String
@@ -21989,6 +22792,7 @@ module Aws::LexModelsV2
     #   * {Types::UpdateSlotTypeResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::UpdateSlotTypeResponse#last_updated_date_time #last_updated_date_time} => Time
     #   * {Types::UpdateSlotTypeResponse#external_source_setting #external_source_setting} => Types::ExternalSourceSetting
+    #   * {Types::UpdateSlotTypeResponse#composite_slot_type_setting #composite_slot_type_setting} => Types::CompositeSlotTypeSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -22009,7 +22813,7 @@ module Aws::LexModelsV2
     #       },
     #     ],
     #     value_selection_setting: {
-    #       resolution_strategy: "OriginalValue", # required, accepts OriginalValue, TopResolution
+    #       resolution_strategy: "OriginalValue", # required, accepts OriginalValue, TopResolution, Concatenation
     #       regex_filter: {
     #         pattern: "RegexPattern", # required
     #       },
@@ -22030,6 +22834,14 @@ module Aws::LexModelsV2
     #         },
     #       },
     #     },
+    #     composite_slot_type_setting: {
+    #       sub_slots: [
+    #         {
+    #           name: "Name", # required
+    #           slot_type_id: "BuiltInOrCustomSlotTypeId", # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -22041,7 +22853,7 @@ module Aws::LexModelsV2
     #   resp.slot_type_values[0].sample_value.value #=> String
     #   resp.slot_type_values[0].synonyms #=> Array
     #   resp.slot_type_values[0].synonyms[0].value #=> String
-    #   resp.value_selection_setting.resolution_strategy #=> String, one of "OriginalValue", "TopResolution"
+    #   resp.value_selection_setting.resolution_strategy #=> String, one of "OriginalValue", "TopResolution", "Concatenation"
     #   resp.value_selection_setting.regex_filter.pattern #=> String
     #   resp.value_selection_setting.advanced_recognition_setting.audio_recognition_strategy #=> String, one of "UseSlotValuesAsCustomVocabulary"
     #   resp.parent_slot_type_signature #=> String
@@ -22053,6 +22865,9 @@ module Aws::LexModelsV2
     #   resp.external_source_setting.grammar_slot_type_setting.source.s3_bucket_name #=> String
     #   resp.external_source_setting.grammar_slot_type_setting.source.s3_object_key #=> String
     #   resp.external_source_setting.grammar_slot_type_setting.source.kms_key_arn #=> String
+    #   resp.composite_slot_type_setting.sub_slots #=> Array
+    #   resp.composite_slot_type_setting.sub_slots[0].name #=> String
+    #   resp.composite_slot_type_setting.sub_slots[0].slot_type_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateSlotType AWS API Documentation
     #
@@ -22076,7 +22891,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

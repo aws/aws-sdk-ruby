@@ -1392,9 +1392,7 @@ module Aws::Redshift
     #   keys in an HSM.
     #
     # @option params [String] :elastic_ip
-    #   The Elastic IP (EIP) address for the cluster. You don't have to
-    #   specify the EIP for a publicly accessible cluster with
-    #   AvailabilityZoneRelocation turned on.
+    #   The Elastic IP (EIP) address for the cluster.
     #
     #   Constraints: The cluster must be provisioned in EC2-VPC and
     #   publicly-accessible through an Internet gateway. For more information
@@ -1457,16 +1455,9 @@ module Aws::Redshift
     #   Availability Zones after the cluster is created.
     #
     # @option params [String] :aqua_configuration_status
-    #   The value represents how the cluster is configured to use AQUA
-    #   (Advanced Query Accelerator) when it is created. Possible values
-    #   include the following.
-    #
-    #   * enabled - Use AQUA if it is available for the current Amazon Web
-    #     Services Region and Amazon Redshift node type.
-    #
-    #   * disabled - Don't use AQUA.
-    #
-    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #   This parameter is retired. It does not set the AQUA configuration
+    #   status. Amazon Redshift automatically determines whether to use AQUA
+    #   (Advanced Query Accelerator).
     #
     # @option params [String] :default_iam_role_arn
     #   The Amazon Resource Name (ARN) for the IAM role that was set as
@@ -7241,8 +7232,8 @@ module Aws::Redshift
     #   * Must be 1 to 64 alphanumeric characters or hyphens. The user name
     #     can't be `PUBLIC`.
     #
-    #   * Must contain only lowercase letters, numbers, underscore, plus sign,
-    #     period (dot), at symbol (@), or hyphen.
+    #   * Must contain uppercase or lowercase letters, numbers, underscore,
+    #     plus sign, period (dot), at symbol (@), or hyphen.
     #
     #   * First character must be a letter.
     #
@@ -7265,8 +7256,8 @@ module Aws::Redshift
     #
     #   * Must be 1 to 64 alphanumeric characters or hyphens
     #
-    #   * Must contain only lowercase letters, numbers, underscore, plus sign,
-    #     period (dot), at symbol (@), or hyphen.
+    #   * Must contain uppercase or lowercase letters, numbers, underscore,
+    #     plus sign, period (dot), at symbol (@), or hyphen.
     #
     #   * First character must be a letter.
     #
@@ -7561,21 +7552,16 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Modifies whether a cluster can use AQUA (Advanced Query Accelerator).
+    # This operation is retired. Calling this operation does not change AQUA
+    # configuration. Amazon Redshift automatically determines whether to use
+    # AQUA (Advanced Query Accelerator).
     #
     # @option params [required, String] :cluster_identifier
     #   The identifier of the cluster to be modified.
     #
     # @option params [String] :aqua_configuration_status
-    #   The new value of AQUA configuration status. Possible values include
-    #   the following.
-    #
-    #   * enabled - Use AQUA if it is available for the current Amazon Web
-    #     Services Region and Amazon Redshift node type.
-    #
-    #   * disabled - Don't use AQUA.
-    #
-    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #   This parameter is retired. Amazon Redshift automatically determines
+    #   whether to use AQUA (Advanced Query Accelerator).
     #
     # @return [Types::ModifyAquaOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10065,13 +10051,15 @@ module Aws::Redshift
     #
     # @option params [String] :snapshot_identifier
     #   The name of the snapshot from which to create the new cluster. This
-    #   parameter isn't case sensitive.
+    #   parameter isn't case sensitive. You can specify this parameter or
+    #   `snapshotArn`, but not both.
     #
     #   Example: `my-snapshot-id`
     #
     # @option params [String] :snapshot_arn
     #   The Amazon Resource Name (ARN) of the snapshot associated with the
-    #   message to restore from a cluster.
+    #   message to restore from a cluster. You can specify this parameter or
+    #   `snapshotIdentifier`, but not both.
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The name of the cluster the source snapshot was created from. This
@@ -10125,9 +10113,7 @@ module Aws::Redshift
     #   keys in an HSM.
     #
     # @option params [String] :elastic_ip
-    #   The elastic IP (EIP) address for the cluster. You don't have to
-    #   specify the EIP for a publicly accessible cluster with
-    #   AvailabilityZoneRelocation turned on.
+    #   The elastic IP (EIP) address for the cluster.
     #
     # @option params [String] :cluster_parameter_group_name
     #   The name of the parameter group to be associated with this cluster.
@@ -10284,16 +10270,9 @@ module Aws::Redshift
     #   Availability Zones after the cluster is restored.
     #
     # @option params [String] :aqua_configuration_status
-    #   The value represents how the cluster is configured to use AQUA
-    #   (Advanced Query Accelerator) after the cluster is restored. Possible
-    #   values include the following.
-    #
-    #   * enabled - Use AQUA if it is available for the current Amazon Web
-    #     Services Region and Amazon Redshift node type.
-    #
-    #   * disabled - Don't use AQUA.
-    #
-    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #   This parameter is retired. It does not set the AQUA configuration
+    #   status. Amazon Redshift automatically determines whether to use AQUA
+    #   (Advanced Query Accelerator).
     #
     # @option params [String] :default_iam_role_arn
     #   The Amazon Resource Name (ARN) for the IAM role that was set as
@@ -11165,7 +11144,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

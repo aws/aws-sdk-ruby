@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2022-09-09)
+------------------
+
+* Feature - This release adds CloudTrail getChannel and listChannels APIs to allow customer to view the ServiceLinkedChannel configurations.
+
 1.49.0 (2022-04-27)
 ------------------
 

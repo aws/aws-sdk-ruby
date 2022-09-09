@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2022-09-09)
+------------------
+
+* Feature - This release is for supporting Composite Slot Type feature in AWS Lex V2. Composite Slot Type will help developer to logically group coherent slots and maintain their inter-relationships in runtime conversation.
+
 1.26.0 (2022-08-22)
 ------------------
 

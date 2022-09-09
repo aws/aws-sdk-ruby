@@ -487,23 +487,27 @@ module Aws::LexRuntimeV2
     #   resp.interpretations[0].intent.slots["NonEmptyString"].value.interpreted_value #=> String
     #   resp.interpretations[0].intent.slots["NonEmptyString"].value.resolved_values #=> Array
     #   resp.interpretations[0].intent.slots["NonEmptyString"].value.resolved_values[0] #=> String
-    #   resp.interpretations[0].intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
+    #   resp.interpretations[0].intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List", "Composite"
     #   resp.interpretations[0].intent.slots["NonEmptyString"].values #=> Array
     #   resp.interpretations[0].intent.slots["NonEmptyString"].values[0] #=> Types::Slot
+    #   resp.interpretations[0].intent.slots["NonEmptyString"].sub_slots #=> Types::Slots
     #   resp.interpretations[0].intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting", "FulfillmentInProgress"
     #   resp.interpretations[0].intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   resp.session_state.dialog_action.type #=> String, one of "Close", "ConfirmIntent", "Delegate", "ElicitIntent", "ElicitSlot", "None"
     #   resp.session_state.dialog_action.slot_to_elicit #=> String
     #   resp.session_state.dialog_action.slot_elicitation_style #=> String, one of "Default", "SpellByLetter", "SpellByWord"
+    #   resp.session_state.dialog_action.sub_slot_to_elicit.name #=> String
+    #   resp.session_state.dialog_action.sub_slot_to_elicit.sub_slot_to_elicit #=> Types::ElicitSubSlot
     #   resp.session_state.intent.name #=> String
     #   resp.session_state.intent.slots #=> Hash
     #   resp.session_state.intent.slots["NonEmptyString"].value.original_value #=> String
     #   resp.session_state.intent.slots["NonEmptyString"].value.interpreted_value #=> String
     #   resp.session_state.intent.slots["NonEmptyString"].value.resolved_values #=> Array
     #   resp.session_state.intent.slots["NonEmptyString"].value.resolved_values[0] #=> String
-    #   resp.session_state.intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
+    #   resp.session_state.intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List", "Composite"
     #   resp.session_state.intent.slots["NonEmptyString"].values #=> Array
     #   resp.session_state.intent.slots["NonEmptyString"].values[0] #=> Types::Slot
+    #   resp.session_state.intent.slots["NonEmptyString"].sub_slots #=> Types::Slots
     #   resp.session_state.intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting", "FulfillmentInProgress"
     #   resp.session_state.intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   resp.session_state.active_contexts #=> Array
@@ -519,6 +523,7 @@ module Aws::LexRuntimeV2
     #   resp.session_state.runtime_hints.slot_hints["Name"] #=> Hash
     #   resp.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values #=> Array
     #   resp.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values[0].phrase #=> String
+    #   resp.session_state.runtime_hints.slot_hints["Name"]["Name"].sub_slot_hints #=> Types::SlotHintsSlotMap
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/GetSession AWS API Documentation
     #
@@ -609,6 +614,12 @@ module Aws::LexRuntimeV2
     #         type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #         slot_to_elicit: "NonEmptyString",
     #         slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
+    #         sub_slot_to_elicit: {
+    #           name: "NonEmptyString", # required
+    #           sub_slot_to_elicit: {
+    #             # recursive ElicitSubSlot
+    #           },
+    #         },
     #       },
     #       intent: {
     #         name: "NonEmptyString", # required
@@ -619,12 +630,15 @@ module Aws::LexRuntimeV2
     #               interpreted_value: "NonEmptyString", # required
     #               resolved_values: ["NonEmptyString"],
     #             },
-    #             shape: "Scalar", # accepts Scalar, List
+    #             shape: "Scalar", # accepts Scalar, List, Composite
     #             values: [
     #               {
     #                 # recursive Slot
     #               },
     #             ],
+    #             sub_slots: {
+    #               # recursive Slots
+    #             },
     #           },
     #         },
     #         state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
@@ -650,11 +664,14 @@ module Aws::LexRuntimeV2
     #         slot_hints: {
     #           "Name" => {
     #             "Name" => {
-    #               runtime_hint_values: [ # required
+    #               runtime_hint_values: [
     #                 {
     #                   phrase: "RuntimeHintPhrase", # required
     #                 },
     #               ],
+    #               sub_slot_hints: {
+    #                 # recursive SlotHintsSlotMap
+    #               },
     #             },
     #           },
     #         },
@@ -762,6 +779,12 @@ module Aws::LexRuntimeV2
     #         type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #         slot_to_elicit: "NonEmptyString",
     #         slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
+    #         sub_slot_to_elicit: {
+    #           name: "NonEmptyString", # required
+    #           sub_slot_to_elicit: {
+    #             # recursive ElicitSubSlot
+    #           },
+    #         },
     #       },
     #       intent: {
     #         name: "NonEmptyString", # required
@@ -772,12 +795,15 @@ module Aws::LexRuntimeV2
     #               interpreted_value: "NonEmptyString", # required
     #               resolved_values: ["NonEmptyString"],
     #             },
-    #             shape: "Scalar", # accepts Scalar, List
+    #             shape: "Scalar", # accepts Scalar, List, Composite
     #             values: [
     #               {
     #                 # recursive Slot
     #               },
     #             ],
+    #             sub_slots: {
+    #               # recursive Slots
+    #             },
     #           },
     #         },
     #         state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
@@ -803,11 +829,14 @@ module Aws::LexRuntimeV2
     #         slot_hints: {
     #           "Name" => {
     #             "Name" => {
-    #               runtime_hint_values: [ # required
+    #               runtime_hint_values: [
     #                 {
     #                   phrase: "RuntimeHintPhrase", # required
     #                 },
     #               ],
+    #               sub_slot_hints: {
+    #                 # recursive SlotHintsSlotMap
+    #               },
     #             },
     #           },
     #         },
@@ -832,15 +861,18 @@ module Aws::LexRuntimeV2
     #   resp.session_state.dialog_action.type #=> String, one of "Close", "ConfirmIntent", "Delegate", "ElicitIntent", "ElicitSlot", "None"
     #   resp.session_state.dialog_action.slot_to_elicit #=> String
     #   resp.session_state.dialog_action.slot_elicitation_style #=> String, one of "Default", "SpellByLetter", "SpellByWord"
+    #   resp.session_state.dialog_action.sub_slot_to_elicit.name #=> String
+    #   resp.session_state.dialog_action.sub_slot_to_elicit.sub_slot_to_elicit #=> Types::ElicitSubSlot
     #   resp.session_state.intent.name #=> String
     #   resp.session_state.intent.slots #=> Hash
     #   resp.session_state.intent.slots["NonEmptyString"].value.original_value #=> String
     #   resp.session_state.intent.slots["NonEmptyString"].value.interpreted_value #=> String
     #   resp.session_state.intent.slots["NonEmptyString"].value.resolved_values #=> Array
     #   resp.session_state.intent.slots["NonEmptyString"].value.resolved_values[0] #=> String
-    #   resp.session_state.intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
+    #   resp.session_state.intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List", "Composite"
     #   resp.session_state.intent.slots["NonEmptyString"].values #=> Array
     #   resp.session_state.intent.slots["NonEmptyString"].values[0] #=> Types::Slot
+    #   resp.session_state.intent.slots["NonEmptyString"].sub_slots #=> Types::Slots
     #   resp.session_state.intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting", "FulfillmentInProgress"
     #   resp.session_state.intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   resp.session_state.active_contexts #=> Array
@@ -856,6 +888,7 @@ module Aws::LexRuntimeV2
     #   resp.session_state.runtime_hints.slot_hints["Name"] #=> Hash
     #   resp.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values #=> Array
     #   resp.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values[0].phrase #=> String
+    #   resp.session_state.runtime_hints.slot_hints["Name"]["Name"].sub_slot_hints #=> Types::SlotHintsSlotMap
     #   resp.interpretations #=> Array
     #   resp.interpretations[0].nlu_confidence.score #=> Float
     #   resp.interpretations[0].sentiment_response.sentiment #=> String, one of "MIXED", "NEGATIVE", "NEUTRAL", "POSITIVE"
@@ -869,9 +902,10 @@ module Aws::LexRuntimeV2
     #   resp.interpretations[0].intent.slots["NonEmptyString"].value.interpreted_value #=> String
     #   resp.interpretations[0].intent.slots["NonEmptyString"].value.resolved_values #=> Array
     #   resp.interpretations[0].intent.slots["NonEmptyString"].value.resolved_values[0] #=> String
-    #   resp.interpretations[0].intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
+    #   resp.interpretations[0].intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List", "Composite"
     #   resp.interpretations[0].intent.slots["NonEmptyString"].values #=> Array
     #   resp.interpretations[0].intent.slots["NonEmptyString"].values[0] #=> Types::Slot
+    #   resp.interpretations[0].intent.slots["NonEmptyString"].sub_slots #=> Types::Slots
     #   resp.interpretations[0].intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting", "FulfillmentInProgress"
     #   resp.interpretations[0].intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   resp.request_attributes #=> Hash
@@ -1091,7 +1125,7 @@ module Aws::LexRuntimeV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexruntimev2'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

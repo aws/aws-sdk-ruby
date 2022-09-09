@@ -116,29 +116,18 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # The AQUA (Advanced Query Accelerator) configuration of the cluster.
+    # The operation that uses this structure is retired. Amazon Redshift
+    # automatically determines whether to use AQUA (Advanced Query
+    # Accelerator).
     #
     # @!attribute [rw] aqua_status
-    #   The value indicates the status of AQUA on the cluster. Possible
-    #   values include the following.
-    #
-    #   * enabled - AQUA is enabled.
-    #
-    #   * disabled - AQUA is not enabled.
-    #
-    #   * applying - AQUA status is being applied.
+    #   This field is retired. Amazon Redshift automatically determines
+    #   whether to use AQUA (Advanced Query Accelerator).
     #   @return [String]
     #
     # @!attribute [rw] aqua_configuration_status
-    #   The value represents how the cluster is configured to use AQUA.
-    #   Possible values include the following.
-    #
-    #   * enabled - Use AQUA if it is available for the current Amazon Web
-    #     Services Region and Amazon Redshift node type.
-    #
-    #   * disabled - Don't use AQUA.
-    #
-    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #   This field is retired. Amazon Redshift automatically determines
+    #   whether to use AQUA (Advanced Query Accelerator).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AquaConfiguration AWS API Documentation
@@ -908,7 +897,8 @@ module Aws::Redshift
     #   @return [Integer]
     #
     # @!attribute [rw] aqua_configuration
-    #   The AQUA (Advanced Query Accelerator) configuration of the cluster.
+    #   This field is retired. Amazon Redshift automatically determines
+    #   whether to use AQUA (Advanced Query Accelerator).
     #   @return [Types::AquaConfiguration]
     #
     # @!attribute [rw] default_iam_role_arn
@@ -2214,9 +2204,7 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] elastic_ip
-    #   The Elastic IP (EIP) address for the cluster. You don't have to
-    #   specify the EIP for a publicly accessible cluster with
-    #   AvailabilityZoneRelocation turned on.
+    #   The Elastic IP (EIP) address for the cluster.
     #
     #   Constraints: The cluster must be provisioned in EC2-VPC and
     #   publicly-accessible through an Internet gateway. For more
@@ -2289,16 +2277,9 @@ module Aws::Redshift
     #   @return [Boolean]
     #
     # @!attribute [rw] aqua_configuration_status
-    #   The value represents how the cluster is configured to use AQUA
-    #   (Advanced Query Accelerator) when it is created. Possible values
-    #   include the following.
-    #
-    #   * enabled - Use AQUA if it is available for the current Amazon Web
-    #     Services Region and Amazon Redshift node type.
-    #
-    #   * disabled - Don't use AQUA.
-    #
-    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #   This parameter is retired. It does not set the AQUA configuration
+    #   status. Amazon Redshift automatically determines whether to use AQUA
+    #   (Advanced Query Accelerator).
     #   @return [String]
     #
     # @!attribute [rw] default_iam_role_arn
@@ -7048,8 +7029,8 @@ module Aws::Redshift
     #   * Must be 1 to 64 alphanumeric characters or hyphens. The user name
     #     can't be `PUBLIC`.
     #
-    #   * Must contain only lowercase letters, numbers, underscore, plus
-    #     sign, period (dot), at symbol (@), or hyphen.
+    #   * Must contain uppercase or lowercase letters, numbers, underscore,
+    #     plus sign, period (dot), at symbol (@), or hyphen.
     #
     #   * First character must be a letter.
     #
@@ -7074,8 +7055,8 @@ module Aws::Redshift
     #
     #   * Must be 1 to 64 alphanumeric characters or hyphens
     #
-    #   * Must contain only lowercase letters, numbers, underscore, plus
-    #     sign, period (dot), at symbol (@), or hyphen.
+    #   * Must contain uppercase or lowercase letters, numbers, underscore,
+    #     plus sign, period (dot), at symbol (@), or hyphen.
     #
     #   * First character must be a letter.
     #
@@ -7871,15 +7852,8 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] aqua_configuration_status
-    #   The new value of AQUA configuration status. Possible values include
-    #   the following.
-    #
-    #   * enabled - Use AQUA if it is available for the current Amazon Web
-    #     Services Region and Amazon Redshift node type.
-    #
-    #   * disabled - Don't use AQUA.
-    #
-    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #   This parameter is retired. Amazon Redshift automatically determines
+    #   whether to use AQUA (Advanced Query Accelerator).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyAquaInputMessage AWS API Documentation
@@ -7892,7 +7866,8 @@ module Aws::Redshift
     end
 
     # @!attribute [rw] aqua_configuration
-    #   The updated AQUA configuration of the cluster.
+    #   This parameter is retired. Amazon Redshift automatically determines
+    #   whether to use AQUA (Advanced Query Accelerator).
     #   @return [Types::AquaConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyAquaOutputMessage AWS API Documentation
@@ -10250,14 +10225,16 @@ module Aws::Redshift
     #
     # @!attribute [rw] snapshot_identifier
     #   The name of the snapshot from which to create the new cluster. This
-    #   parameter isn't case sensitive.
+    #   parameter isn't case sensitive. You can specify this parameter or
+    #   `snapshotArn`, but not both.
     #
     #   Example: `my-snapshot-id`
     #   @return [String]
     #
     # @!attribute [rw] snapshot_arn
     #   The Amazon Resource Name (ARN) of the snapshot associated with the
-    #   message to restore from a cluster.
+    #   message to restore from a cluster. You can specify this parameter or
+    #   `snapshotIdentifier`, but not both.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_cluster_identifier
@@ -10321,9 +10298,7 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] elastic_ip
-    #   The elastic IP (EIP) address for the cluster. You don't have to
-    #   specify the EIP for a publicly accessible cluster with
-    #   AvailabilityZoneRelocation turned on.
+    #   The elastic IP (EIP) address for the cluster.
     #   @return [String]
     #
     # @!attribute [rw] cluster_parameter_group_name
@@ -10499,16 +10474,9 @@ module Aws::Redshift
     #   @return [Boolean]
     #
     # @!attribute [rw] aqua_configuration_status
-    #   The value represents how the cluster is configured to use AQUA
-    #   (Advanced Query Accelerator) after the cluster is restored. Possible
-    #   values include the following.
-    #
-    #   * enabled - Use AQUA if it is available for the current Amazon Web
-    #     Services Region and Amazon Redshift node type.
-    #
-    #   * disabled - Don't use AQUA.
-    #
-    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #   This parameter is retired. It does not set the AQUA configuration
+    #   status. Amazon Redshift automatically determines whether to use AQUA
+    #   (Advanced Query Accelerator).
     #   @return [String]
     #
     # @!attribute [rw] default_iam_role_arn

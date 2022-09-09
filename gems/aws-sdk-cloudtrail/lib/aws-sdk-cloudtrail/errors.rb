@@ -27,6 +27,8 @@ module Aws::CloudTrail
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {ChannelARNInvalidException}
+  # * {ChannelNotFoundException}
   # * {CloudTrailARNInvalidException}
   # * {CloudTrailAccessNotEnabledException}
   # * {CloudTrailInvalidClientTokenIdException}
@@ -91,6 +93,26 @@ module Aws::CloudTrail
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class ChannelARNInvalidException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::ChannelARNInvalidException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ChannelNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::ChannelNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
 
     class CloudTrailARNInvalidException < ServiceError
 

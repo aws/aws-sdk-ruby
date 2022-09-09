@@ -136,9 +136,9 @@ module Aws::CloudTrail
     #
     #   * <b> <code>readOnly</code> </b> - Optional. Can be set to `Equals`
     #     a value of `true` or `false`. If you do not add this field,
-    #     CloudTrail logs both both `read` and `write` events. A value of
-    #     `true` logs only `read` events. A value of `false` logs only
-    #     `write` events.
+    #     CloudTrail logs both `read` and `write` events. A value of `true`
+    #     logs only `read` events. A value of `false` logs only `write`
+    #     events.
     #
     #   * <b> <code>eventSource</code> </b> - For filtering management
     #     events only. This can be set only to `NotEquals`
@@ -363,6 +363,42 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # Contains information about a returned CloudTrail channel.
+    #
+    # @!attribute [rw] channel_arn
+    #   The Amazon Resource Name (ARN) of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the CloudTrail channel. For service-linked channels, the
+    #   name is `aws-service-channel/service-name/custom-suffix` where
+    #   `service-name` represents the name of the Amazon Web Services
+    #   service that created the channel and `custom-suffix` represents the
+    #   suffix created by the Amazon Web Services service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/Channel AWS API Documentation
+    #
+    class Channel < Struct.new(
+      :channel_arn,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified channel ARN is not valid or does not map to a channel in
+    # your account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ChannelARNInvalidException AWS API Documentation
+    #
+    class ChannelARNInvalidException < Aws::EmptyStructure; end
+
+    # The specified channel was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ChannelNotFoundException AWS API Documentation
+    #
+    class ChannelNotFoundException < Aws::EmptyStructure; end
+
     # This exception is thrown when an operation is called with a trail ARN
     # that is not valid. The following is the format of a trail ARN.
     #
@@ -472,7 +508,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] retention_period
     #   The retention period of the event data store, in days. You can set a
-    #   retention period of up to 2555 days, the equivalent of seven years.
+    #   retention period of up to 2557 days, the equivalent of seven years.
     #   @return [Integer]
     #
     # @!attribute [rw] termination_protection_enabled
@@ -1172,6 +1208,28 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # Contains information about the service where CloudTrail delivers
+    # events.
+    #
+    # @!attribute [rw] type
+    #   The type of service. For service-linked channels, the value is
+    #   `AWS_SERVICE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The location of the service. For service-linked channels, this is
+    #   the name of the Amazon Web Services service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/Destination AWS API Documentation
+    #
+    class Destination < Struct.new(
+      :type,
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about an event that was returned by a lookup
     # request. The result includes a representation of a CloudTrail event.
     #
@@ -1233,7 +1291,7 @@ module Aws::CloudTrail
 
     # A storage lake of event data against which you can run complex
     # SQL-based queries. An event data store can include events that you
-    # have logged on your account from the last 90 to 2555 days (about three
+    # have logged on your account from the last 90 to 2557 days (about three
     # months to up to seven years). To select events for an event data
     # store, use [advanced event selectors][1].
     #
@@ -1432,6 +1490,67 @@ module Aws::CloudTrail
       :include_management_events,
       :data_resources,
       :exclude_management_event_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel: "ChannelArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel
+    #   The Amazon Resource Name (ARN) of the CloudTrail service-linked
+    #   channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetChannelRequest AWS API Documentation
+    #
+    class GetChannelRequest < Struct.new(
+      :channel)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the CloudTrail service-linked channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the CloudTrail service-linked channel. For
+    #   service-linked channels, the value is
+    #   `aws-service-channel/service-name/custom-suffix` where
+    #   `service-name` represents the name of the Amazon Web Services
+    #   service that created the channel and `custom-suffix` represents the
+    #   suffix generated by the Amazon Web Services service.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The trail or event data store for the CloudTrail service-linked
+    #   channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_config
+    #   Provides information about the advanced event selectors configured
+    #   for the service-linked channel, and whether the service-linked
+    #   channel applies to all regions or one region.
+    #   @return [Types::SourceConfig]
+    #
+    # @!attribute [rw] destinations
+    #   The Amazon Web Services service that created the CloudTrail
+    #   service-linked channel.
+    #   @return [Array<Types::Destination>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetChannelResponse AWS API Documentation
+    #
+    class GetChannelResponse < Struct.new(
+      :channel_arn,
+      :name,
+      :source,
+      :source_config,
+      :destinations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2201,6 +2320,49 @@ module Aws::CloudTrail
     #
     class KmsKeyNotFoundException < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass ListChannelsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of CloudTrail channels to display on a single
+    #   page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use to get the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListChannelsRequest AWS API Documentation
+    #
+    class ListChannelsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channels
+    #   The list of CloudTrail channels.
+    #   @return [Array<Types::Channel>]
+    #
+    # @!attribute [rw] next_token
+    #   A token used to get the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListChannelsResponse AWS API Documentation
+    #
+    class ListChannelsResponse < Struct.new(
+      :channels,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListEventDataStoresRequest
     #   data as a hash:
     #
@@ -2436,9 +2598,9 @@ module Aws::CloudTrail
     # @!attribute [rw] next_token
     #   The token to use to get the next page of results after a previous
     #   API call. This token must be passed in with the same parameters that
-    #   were specified in the the original call. For example, if the
-    #   original call specified an AttributeKey of 'Username' with a value
-    #   of 'root', the call with NextToken should include those same
+    #   were specified in the original call. For example, if the original
+    #   call specified an AttributeKey of 'Username' with a value of
+    #   'root', the call with NextToken should include those same
     #   parameters.
     #   @return [String]
     #
@@ -2551,9 +2713,9 @@ module Aws::CloudTrail
     # @!attribute [rw] next_token
     #   The token to use to get the next page of results after a previous
     #   API call. This token must be passed in with the same parameters that
-    #   were specified in the the original call. For example, if the
-    #   original call specified an AttributeKey of 'Username' with a value
-    #   of 'root', the call with NextToken should include those same
+    #   were specified in the original call. For example, if the original
+    #   call specified an AttributeKey of 'Username' with a value of
+    #   'root', the call with NextToken should include those same
     #   parameters.
     #   @return [String]
     #
@@ -3140,6 +3302,27 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/S3BucketDoesNotExistException AWS API Documentation
     #
     class S3BucketDoesNotExistException < Aws::EmptyStructure; end
+
+    # Contains configuration information about the service-linked channel.
+    #
+    # @!attribute [rw] apply_to_all_regions
+    #   Specifies whether the service-linked channel applies to one region
+    #   or all regions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] advanced_event_selectors
+    #   The advanced event selectors configured for the service-linked
+    #   channel.
+    #   @return [Array<Types::AdvancedEventSelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/SourceConfig AWS API Documentation
+    #
+    class SourceConfig < Struct.new(
+      :apply_to_all_regions,
+      :advanced_event_selectors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The request to CloudTrail to start logging Amazon Web Services API
     # calls for an account.

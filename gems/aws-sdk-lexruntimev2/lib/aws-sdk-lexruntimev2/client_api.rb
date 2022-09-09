@@ -49,6 +49,7 @@ module Aws::LexRuntimeV2
     DialogActionType = Shapes::StringShape.new(name: 'DialogActionType')
     DisconnectionEvent = Shapes::StructureShape.new(name: 'DisconnectionEvent')
     Double = Shapes::FloatShape.new(name: 'Double')
+    ElicitSubSlot = Shapes::StructureShape.new(name: 'ElicitSubSlot')
     EpochMillis = Shapes::IntegerShape.new(name: 'EpochMillis')
     EventId = Shapes::StringShape.new(name: 'EventId')
     GetSessionRequest = Shapes::StructureShape.new(name: 'GetSessionRequest')
@@ -187,11 +188,16 @@ module Aws::LexRuntimeV2
     DialogAction.add_member(:type, Shapes::ShapeRef.new(shape: DialogActionType, required: true, location_name: "type"))
     DialogAction.add_member(:slot_to_elicit, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "slotToElicit"))
     DialogAction.add_member(:slot_elicitation_style, Shapes::ShapeRef.new(shape: StyleType, location_name: "slotElicitationStyle"))
+    DialogAction.add_member(:sub_slot_to_elicit, Shapes::ShapeRef.new(shape: ElicitSubSlot, location_name: "subSlotToElicit"))
     DialogAction.struct_class = Types::DialogAction
 
     DisconnectionEvent.add_member(:event_id, Shapes::ShapeRef.new(shape: EventId, location_name: "eventId"))
     DisconnectionEvent.add_member(:client_timestamp_millis, Shapes::ShapeRef.new(shape: EpochMillis, location_name: "clientTimestampMillis"))
     DisconnectionEvent.struct_class = Types::DisconnectionEvent
+
+    ElicitSubSlot.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "name"))
+    ElicitSubSlot.add_member(:sub_slot_to_elicit, Shapes::ShapeRef.new(shape: ElicitSubSlot, location_name: "subSlotToElicit"))
+    ElicitSubSlot.struct_class = Types::ElicitSubSlot
 
     GetSessionRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: BotIdentifier, required: true, location: "uri", location_name: "botId"))
     GetSessionRequest.add_member(:bot_alias_id, Shapes::ShapeRef.new(shape: BotAliasIdentifier, required: true, location: "uri", location_name: "botAliasId"))
@@ -319,7 +325,8 @@ module Aws::LexRuntimeV2
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    RuntimeHintDetails.add_member(:runtime_hint_values, Shapes::ShapeRef.new(shape: RuntimeHintValuesList, required: true, location_name: "runtimeHintValues"))
+    RuntimeHintDetails.add_member(:runtime_hint_values, Shapes::ShapeRef.new(shape: RuntimeHintValuesList, location_name: "runtimeHintValues"))
+    RuntimeHintDetails.add_member(:sub_slot_hints, Shapes::ShapeRef.new(shape: SlotHintsSlotMap, location_name: "subSlotHints"))
     RuntimeHintDetails.struct_class = Types::RuntimeHintDetails
 
     RuntimeHintValue.add_member(:phrase, Shapes::ShapeRef.new(shape: RuntimeHintPhrase, required: true, location_name: "phrase"))
@@ -351,6 +358,7 @@ module Aws::LexRuntimeV2
     Slot.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "value"))
     Slot.add_member(:shape, Shapes::ShapeRef.new(shape: Shape, location_name: "shape"))
     Slot.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "values"))
+    Slot.add_member(:sub_slots, Shapes::ShapeRef.new(shape: Slots, location_name: "subSlots"))
     Slot.struct_class = Types::Slot
 
     SlotHintsIntentMap.key = Shapes::ShapeRef.new(shape: Name)

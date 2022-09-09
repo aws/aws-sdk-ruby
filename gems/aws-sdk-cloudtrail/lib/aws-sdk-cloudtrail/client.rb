@@ -469,7 +469,7 @@ module Aws::CloudTrail
     #
     # @option params [Integer] :retention_period
     #   The retention period of the event data store, in days. You can set a
-    #   retention period of up to 2555 days, the equivalent of seven years.
+    #   retention period of up to 2557 days, the equivalent of seven years.
     #
     # @option params [Boolean] :termination_protection_enabled
     #   Specifies whether termination protection is enabled for the event data
@@ -923,6 +923,63 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Returns the specified CloudTrail service-linked channel. Amazon Web
+    # Services services create service-linked channels to view CloudTrail
+    # events.
+    #
+    # @option params [required, String] :channel
+    #   The Amazon Resource Name (ARN) of the CloudTrail service-linked
+    #   channel.
+    #
+    # @return [Types::GetChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetChannelResponse#channel_arn #channel_arn} => String
+    #   * {Types::GetChannelResponse#name #name} => String
+    #   * {Types::GetChannelResponse#source #source} => String
+    #   * {Types::GetChannelResponse#source_config #source_config} => Types::SourceConfig
+    #   * {Types::GetChannelResponse#destinations #destinations} => Array&lt;Types::Destination&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_channel({
+    #     channel: "ChannelArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.name #=> String
+    #   resp.source #=> String
+    #   resp.source_config.apply_to_all_regions #=> Boolean
+    #   resp.source_config.advanced_event_selectors #=> Array
+    #   resp.source_config.advanced_event_selectors[0].name #=> String
+    #   resp.source_config.advanced_event_selectors[0].field_selectors #=> Array
+    #   resp.source_config.advanced_event_selectors[0].field_selectors[0].field #=> String
+    #   resp.source_config.advanced_event_selectors[0].field_selectors[0].equals #=> Array
+    #   resp.source_config.advanced_event_selectors[0].field_selectors[0].equals[0] #=> String
+    #   resp.source_config.advanced_event_selectors[0].field_selectors[0].starts_with #=> Array
+    #   resp.source_config.advanced_event_selectors[0].field_selectors[0].starts_with[0] #=> String
+    #   resp.source_config.advanced_event_selectors[0].field_selectors[0].ends_with #=> Array
+    #   resp.source_config.advanced_event_selectors[0].field_selectors[0].ends_with[0] #=> String
+    #   resp.source_config.advanced_event_selectors[0].field_selectors[0].not_equals #=> Array
+    #   resp.source_config.advanced_event_selectors[0].field_selectors[0].not_equals[0] #=> String
+    #   resp.source_config.advanced_event_selectors[0].field_selectors[0].not_starts_with #=> Array
+    #   resp.source_config.advanced_event_selectors[0].field_selectors[0].not_starts_with[0] #=> String
+    #   resp.source_config.advanced_event_selectors[0].field_selectors[0].not_ends_with #=> Array
+    #   resp.source_config.advanced_event_selectors[0].field_selectors[0].not_ends_with[0] #=> String
+    #   resp.destinations #=> Array
+    #   resp.destinations[0].type #=> String, one of "EVENT_DATA_STORE", "AWS_SERVICE"
+    #   resp.destinations[0].location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetChannel AWS API Documentation
+    #
+    # @overload get_channel(params = {})
+    # @param [Hash] params ({})
+    def get_channel(params = {}, options = {})
+      req = build_request(:get_channel, params)
+      req.send_request(options)
+    end
+
     # Returns information about an event data store specified as either an
     # ARN or the ID portion of the ARN.
     #
@@ -1308,6 +1365,44 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Returns all CloudTrail channels.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of CloudTrail channels to display on a single page.
+    #
+    # @option params [String] :next_token
+    #   A token you can use to get the next page of results.
+    #
+    # @return [Types::ListChannelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChannelsResponse#channels #channels} => Array&lt;Types::Channel&gt;
+    #   * {Types::ListChannelsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_channels({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channels #=> Array
+    #   resp.channels[0].channel_arn #=> String
+    #   resp.channels[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListChannels AWS API Documentation
+    #
+    # @overload list_channels(params = {})
+    # @param [Hash] params ({})
+    def list_channels(params = {}, options = {})
+      req = build_request(:list_channels, params)
+      req.send_request(options)
+    end
+
     # Returns information about all event data stores in the account, in the
     # current region.
     #
@@ -1540,7 +1635,7 @@ module Aws::CloudTrail
     # @option params [String] :next_token
     #   The token to use to get the next page of results after a previous API
     #   call. This token must be passed in with the same parameters that were
-    #   specified in the the original call. For example, if the original call
+    #   specified in the original call. For example, if the original call
     #   specified an AttributeKey of 'Username' with a value of 'root',
     #   the call with NextToken should include those same parameters.
     #
@@ -1642,7 +1737,7 @@ module Aws::CloudTrail
     # @option params [String] :next_token
     #   The token to use to get the next page of results after a previous API
     #   call. This token must be passed in with the same parameters that were
-    #   specified in the the original call. For example, if the original call
+    #   specified in the original call. For example, if the original call
     #   specified an AttributeKey of 'Username' with a value of 'root',
     #   the call with NextToken should include those same parameters.
     #
@@ -2113,7 +2208,7 @@ module Aws::CloudTrail
     # ARN or the ID portion of the ARN. Other parameters are optional, but
     # at least one optional parameter must be specified, or CloudTrail
     # throws an error. `RetentionPeriod` is in days, and valid values are
-    # integers between 90 and 2555. By default, `TerminationProtection` is
+    # integers between 90 and 2557. By default, `TerminationProtection` is
     # enabled. `AdvancedEventSelectors` includes or excludes management and
     # data events in your event data store; for more information about
     # `AdvancedEventSelectors`, see
@@ -2418,7 +2513,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

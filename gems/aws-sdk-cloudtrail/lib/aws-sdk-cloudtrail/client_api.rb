@@ -23,6 +23,12 @@ module Aws::CloudTrail
     ByteBuffer = Shapes::BlobShape.new(name: 'ByteBuffer')
     CancelQueryRequest = Shapes::StructureShape.new(name: 'CancelQueryRequest')
     CancelQueryResponse = Shapes::StructureShape.new(name: 'CancelQueryResponse')
+    Channel = Shapes::StructureShape.new(name: 'Channel')
+    ChannelARNInvalidException = Shapes::StructureShape.new(name: 'ChannelARNInvalidException')
+    ChannelArn = Shapes::StringShape.new(name: 'ChannelArn')
+    ChannelName = Shapes::StringShape.new(name: 'ChannelName')
+    ChannelNotFoundException = Shapes::StructureShape.new(name: 'ChannelNotFoundException')
+    Channels = Shapes::ListShape.new(name: 'Channels')
     CloudTrailARNInvalidException = Shapes::StructureShape.new(name: 'CloudTrailARNInvalidException')
     CloudTrailAccessNotEnabledException = Shapes::StructureShape.new(name: 'CloudTrailAccessNotEnabledException')
     CloudTrailInvalidClientTokenIdException = Shapes::StructureShape.new(name: 'CloudTrailInvalidClientTokenIdException')
@@ -44,6 +50,9 @@ module Aws::CloudTrail
     DescribeQueryResponse = Shapes::StructureShape.new(name: 'DescribeQueryResponse')
     DescribeTrailsRequest = Shapes::StructureShape.new(name: 'DescribeTrailsRequest')
     DescribeTrailsResponse = Shapes::StructureShape.new(name: 'DescribeTrailsResponse')
+    Destination = Shapes::StructureShape.new(name: 'Destination')
+    DestinationType = Shapes::StringShape.new(name: 'DestinationType')
+    Destinations = Shapes::ListShape.new(name: 'Destinations')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Event = Shapes::StructureShape.new(name: 'Event')
     EventCategory = Shapes::StringShape.new(name: 'EventCategory')
@@ -61,6 +70,8 @@ module Aws::CloudTrail
     EventSelectors = Shapes::ListShape.new(name: 'EventSelectors')
     EventsList = Shapes::ListShape.new(name: 'EventsList')
     ExcludeManagementEventSources = Shapes::ListShape.new(name: 'ExcludeManagementEventSources')
+    GetChannelRequest = Shapes::StructureShape.new(name: 'GetChannelRequest')
+    GetChannelResponse = Shapes::StructureShape.new(name: 'GetChannelResponse')
     GetEventDataStoreRequest = Shapes::StructureShape.new(name: 'GetEventDataStoreRequest')
     GetEventDataStoreResponse = Shapes::StructureShape.new(name: 'GetEventDataStoreResponse')
     GetEventSelectorsRequest = Shapes::StructureShape.new(name: 'GetEventSelectorsRequest')
@@ -110,6 +121,9 @@ module Aws::CloudTrail
     KmsException = Shapes::StructureShape.new(name: 'KmsException')
     KmsKeyDisabledException = Shapes::StructureShape.new(name: 'KmsKeyDisabledException')
     KmsKeyNotFoundException = Shapes::StructureShape.new(name: 'KmsKeyNotFoundException')
+    ListChannelsMaxResultsCount = Shapes::IntegerShape.new(name: 'ListChannelsMaxResultsCount')
+    ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
+    ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
     ListEventDataStoresMaxResultsCount = Shapes::IntegerShape.new(name: 'ListEventDataStoresMaxResultsCount')
     ListEventDataStoresRequest = Shapes::StructureShape.new(name: 'ListEventDataStoresRequest')
     ListEventDataStoresResponse = Shapes::StructureShape.new(name: 'ListEventDataStoresResponse')
@@ -122,6 +136,7 @@ module Aws::CloudTrail
     ListTagsResponse = Shapes::StructureShape.new(name: 'ListTagsResponse')
     ListTrailsRequest = Shapes::StructureShape.new(name: 'ListTrailsRequest')
     ListTrailsResponse = Shapes::StructureShape.new(name: 'ListTrailsResponse')
+    Location = Shapes::StringShape.new(name: 'Location')
     Long = Shapes::IntegerShape.new(name: 'Long')
     LookupAttribute = Shapes::StructureShape.new(name: 'LookupAttribute')
     LookupAttributeKey = Shapes::StringShape.new(name: 'LookupAttributeKey')
@@ -174,6 +189,8 @@ module Aws::CloudTrail
     S3BucketDoesNotExistException = Shapes::StructureShape.new(name: 'S3BucketDoesNotExistException')
     SelectorField = Shapes::StringShape.new(name: 'SelectorField')
     SelectorName = Shapes::StringShape.new(name: 'SelectorName')
+    Source = Shapes::StringShape.new(name: 'Source')
+    SourceConfig = Shapes::StructureShape.new(name: 'SourceConfig')
     StartLoggingRequest = Shapes::StructureShape.new(name: 'StartLoggingRequest')
     StartLoggingResponse = Shapes::StructureShape.new(name: 'StartLoggingResponse')
     StartQueryRequest = Shapes::StructureShape.new(name: 'StartQueryRequest')
@@ -232,6 +249,16 @@ module Aws::CloudTrail
     CancelQueryResponse.add_member(:query_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "QueryId"))
     CancelQueryResponse.add_member(:query_status, Shapes::ShapeRef.new(shape: QueryStatus, required: true, location_name: "QueryStatus"))
     CancelQueryResponse.struct_class = Types::CancelQueryResponse
+
+    Channel.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "ChannelArn"))
+    Channel.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "Name"))
+    Channel.struct_class = Types::Channel
+
+    ChannelARNInvalidException.struct_class = Types::ChannelARNInvalidException
+
+    ChannelNotFoundException.struct_class = Types::ChannelNotFoundException
+
+    Channels.member = Shapes::ShapeRef.new(shape: Channel)
 
     CloudTrailARNInvalidException.struct_class = Types::CloudTrailARNInvalidException
 
@@ -330,6 +357,12 @@ module Aws::CloudTrail
     DescribeTrailsResponse.add_member(:trail_list, Shapes::ShapeRef.new(shape: TrailList, location_name: "trailList"))
     DescribeTrailsResponse.struct_class = Types::DescribeTrailsResponse
 
+    Destination.add_member(:type, Shapes::ShapeRef.new(shape: DestinationType, required: true, location_name: "Type"))
+    Destination.add_member(:location, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "Location"))
+    Destination.struct_class = Types::Destination
+
+    Destinations.member = Shapes::ShapeRef.new(shape: Destination)
+
     Event.add_member(:event_id, Shapes::ShapeRef.new(shape: String, location_name: "EventId"))
     Event.add_member(:event_name, Shapes::ShapeRef.new(shape: String, location_name: "EventName"))
     Event.add_member(:read_only, Shapes::ShapeRef.new(shape: String, location_name: "ReadOnly"))
@@ -376,6 +409,16 @@ module Aws::CloudTrail
     EventsList.member = Shapes::ShapeRef.new(shape: Event)
 
     ExcludeManagementEventSources.member = Shapes::ShapeRef.new(shape: String)
+
+    GetChannelRequest.add_member(:channel, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "Channel"))
+    GetChannelRequest.struct_class = Types::GetChannelRequest
+
+    GetChannelResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "ChannelArn"))
+    GetChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "Name"))
+    GetChannelResponse.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "Source"))
+    GetChannelResponse.add_member(:source_config, Shapes::ShapeRef.new(shape: SourceConfig, location_name: "SourceConfig"))
+    GetChannelResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: Destinations, location_name: "Destinations"))
+    GetChannelResponse.struct_class = Types::GetChannelResponse
 
     GetEventDataStoreRequest.add_member(:event_data_store, Shapes::ShapeRef.new(shape: EventDataStoreArn, required: true, location_name: "EventDataStore"))
     GetEventDataStoreRequest.struct_class = Types::GetEventDataStoreRequest
@@ -518,6 +561,14 @@ module Aws::CloudTrail
     KmsKeyDisabledException.struct_class = Types::KmsKeyDisabledException
 
     KmsKeyNotFoundException.struct_class = Types::KmsKeyNotFoundException
+
+    ListChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListChannelsMaxResultsCount, location_name: "MaxResults"))
+    ListChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListChannelsRequest.struct_class = Types::ListChannelsRequest
+
+    ListChannelsResponse.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "Channels"))
+    ListChannelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListChannelsResponse.struct_class = Types::ListChannelsResponse
 
     ListEventDataStoresRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListEventDataStoresRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEventDataStoresMaxResultsCount, location_name: "MaxResults"))
@@ -689,6 +740,10 @@ module Aws::CloudTrail
     RestoreEventDataStoreResponse.struct_class = Types::RestoreEventDataStoreResponse
 
     S3BucketDoesNotExistException.struct_class = Types::S3BucketDoesNotExistException
+
+    SourceConfig.add_member(:apply_to_all_regions, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApplyToAllRegions"))
+    SourceConfig.add_member(:advanced_event_selectors, Shapes::ShapeRef.new(shape: AdvancedEventSelectors, location_name: "AdvancedEventSelectors"))
+    SourceConfig.struct_class = Types::SourceConfig
 
     StartLoggingRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     StartLoggingRequest.struct_class = Types::StartLoggingRequest
@@ -971,6 +1026,18 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrailNameException)
       end)
 
+      api.add_operation(:get_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetChannel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ChannelARNInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: ChannelNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
       api.add_operation(:get_event_data_store, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetEventDataStore"
         o.http_method = "POST"
@@ -1053,6 +1120,23 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrailNameException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+      end)
+
+      api.add_operation(:list_channels, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListChannels"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListChannelsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListChannelsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_event_data_stores, Seahorse::Model::Operation.new.tap do |o|
