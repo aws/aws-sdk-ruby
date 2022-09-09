@@ -119,7 +119,7 @@ module SpecHelper
       else
         code = generator.source
         begin
-          Kernel.module_eval(code)
+          Object.module_eval(code)
         rescue => error
           $stderr.puts("\nCODE:\n#{code}\n")
           raise error

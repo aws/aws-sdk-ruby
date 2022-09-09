@@ -13,7 +13,6 @@ module Aws::EC2
 
     class AcceptReservedInstancesExchangeQuote
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -27,7 +26,6 @@ module Aws::EC2
 
     class AcceptTransitGatewayMulticastDomainAssociations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -41,7 +39,6 @@ module Aws::EC2
 
     class AcceptTransitGatewayPeeringAttachment
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -55,7 +52,6 @@ module Aws::EC2
 
     class AcceptTransitGatewayVpcAttachment
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -69,7 +65,6 @@ module Aws::EC2
 
     class AcceptVpcEndpointConnections
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -83,7 +78,6 @@ module Aws::EC2
 
     class AcceptVpcPeeringConnection
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -97,7 +91,6 @@ module Aws::EC2
 
     class AdvertiseByoipCidr
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -111,7 +104,6 @@ module Aws::EC2
 
     class AllocateAddress
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -125,7 +117,6 @@ module Aws::EC2
 
     class AllocateHosts
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -139,7 +130,6 @@ module Aws::EC2
 
     class AllocateIpamPoolCidr
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -153,7 +143,6 @@ module Aws::EC2
 
     class ApplySecurityGroupsToClientVpnTargetNetwork
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -167,7 +156,6 @@ module Aws::EC2
 
     class AssignIpv6Addresses
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -181,7 +169,6 @@ module Aws::EC2
 
     class AssignPrivateIpAddresses
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -195,7 +182,6 @@ module Aws::EC2
 
     class AssociateAddress
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -209,7 +195,6 @@ module Aws::EC2
 
     class AssociateClientVpnTargetNetwork
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -223,7 +208,6 @@ module Aws::EC2
 
     class AssociateDhcpOptions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -237,7 +221,6 @@ module Aws::EC2
 
     class AssociateEnclaveCertificateIamRole
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -251,7 +234,6 @@ module Aws::EC2
 
     class AssociateIamInstanceProfile
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -265,7 +247,6 @@ module Aws::EC2
 
     class AssociateInstanceEventWindow
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -279,7 +260,6 @@ module Aws::EC2
 
     class AssociateRouteTable
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -293,7 +273,6 @@ module Aws::EC2
 
     class AssociateSubnetCidrBlock
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -307,7 +286,6 @@ module Aws::EC2
 
     class AssociateTransitGatewayMulticastDomain
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -321,7 +299,6 @@ module Aws::EC2
 
     class AssociateTransitGatewayPolicyTable
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -335,7 +312,6 @@ module Aws::EC2
 
     class AssociateTransitGatewayRouteTable
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -349,7 +325,6 @@ module Aws::EC2
 
     class AssociateTrunkInterface
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -363,7 +338,6 @@ module Aws::EC2
 
     class AssociateVpcCidrBlock
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -377,7 +351,6 @@ module Aws::EC2
 
     class AttachClassicLinkVpc
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -391,7 +364,6 @@ module Aws::EC2
 
     class AttachInternetGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -405,7 +377,6 @@ module Aws::EC2
 
     class AttachNetworkInterface
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -419,7 +390,6 @@ module Aws::EC2
 
     class AttachVolume
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -433,7 +403,6 @@ module Aws::EC2
 
     class AttachVpnGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -447,7 +416,6 @@ module Aws::EC2
 
     class AuthorizeClientVpnIngress
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -461,7 +429,6 @@ module Aws::EC2
 
     class AuthorizeSecurityGroupEgress
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -475,7 +442,6 @@ module Aws::EC2
 
     class AuthorizeSecurityGroupIngress
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -489,7 +455,6 @@ module Aws::EC2
 
     class BundleInstance
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -503,7 +468,6 @@ module Aws::EC2
 
     class CancelBundleTask
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -517,7 +481,6 @@ module Aws::EC2
 
     class CancelCapacityReservation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -531,7 +494,6 @@ module Aws::EC2
 
     class CancelCapacityReservationFleets
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -545,7 +507,6 @@ module Aws::EC2
 
     class CancelConversionTask
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -559,7 +520,6 @@ module Aws::EC2
 
     class CancelExportTask
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -573,7 +533,6 @@ module Aws::EC2
 
     class CancelImportTask
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -587,7 +546,6 @@ module Aws::EC2
 
     class CancelReservedInstancesListing
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -601,7 +559,6 @@ module Aws::EC2
 
     class CancelSpotFleetRequests
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -615,7 +572,6 @@ module Aws::EC2
 
     class CancelSpotInstanceRequests
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -629,7 +585,6 @@ module Aws::EC2
 
     class ConfirmProductInstance
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -643,7 +598,6 @@ module Aws::EC2
 
     class CopyFpgaImage
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -657,7 +611,6 @@ module Aws::EC2
 
     class CopyImage
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -671,7 +624,6 @@ module Aws::EC2
 
     class CopySnapshot
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -685,7 +637,6 @@ module Aws::EC2
 
     class CreateCapacityReservation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -699,7 +650,6 @@ module Aws::EC2
 
     class CreateCapacityReservationFleet
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -713,7 +663,6 @@ module Aws::EC2
 
     class CreateCarrierGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -727,7 +676,6 @@ module Aws::EC2
 
     class CreateClientVpnEndpoint
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -741,7 +689,6 @@ module Aws::EC2
 
     class CreateClientVpnRoute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -755,7 +702,6 @@ module Aws::EC2
 
     class CreateCustomerGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -769,7 +715,6 @@ module Aws::EC2
 
     class CreateDefaultSubnet
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -783,7 +728,6 @@ module Aws::EC2
 
     class CreateDefaultVpc
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -797,7 +741,6 @@ module Aws::EC2
 
     class CreateDhcpOptions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -811,7 +754,6 @@ module Aws::EC2
 
     class CreateEgressOnlyInternetGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -825,7 +767,6 @@ module Aws::EC2
 
     class CreateFleet
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -839,7 +780,6 @@ module Aws::EC2
 
     class CreateFlowLogs
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -853,7 +793,6 @@ module Aws::EC2
 
     class CreateFpgaImage
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -867,7 +806,6 @@ module Aws::EC2
 
     class CreateImage
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -881,7 +819,6 @@ module Aws::EC2
 
     class CreateInstanceEventWindow
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -895,7 +832,6 @@ module Aws::EC2
 
     class CreateInstanceExportTask
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -909,7 +845,6 @@ module Aws::EC2
 
     class CreateInternetGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -923,7 +858,6 @@ module Aws::EC2
 
     class CreateIpam
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -937,7 +871,6 @@ module Aws::EC2
 
     class CreateIpamPool
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -951,7 +884,6 @@ module Aws::EC2
 
     class CreateIpamScope
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -965,7 +897,6 @@ module Aws::EC2
 
     class CreateKeyPair
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -979,7 +910,6 @@ module Aws::EC2
 
     class CreateLaunchTemplate
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -993,7 +923,6 @@ module Aws::EC2
 
     class CreateLaunchTemplateVersion
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1007,7 +936,6 @@ module Aws::EC2
 
     class CreateLocalGatewayRoute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1021,7 +949,6 @@ module Aws::EC2
 
     class CreateLocalGatewayRouteTableVpcAssociation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1035,7 +962,6 @@ module Aws::EC2
 
     class CreateManagedPrefixList
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1049,7 +975,6 @@ module Aws::EC2
 
     class CreateNatGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1063,7 +988,6 @@ module Aws::EC2
 
     class CreateNetworkAcl
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1077,7 +1001,6 @@ module Aws::EC2
 
     class CreateNetworkAclEntry
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1091,7 +1014,6 @@ module Aws::EC2
 
     class CreateNetworkInsightsAccessScope
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1105,7 +1027,6 @@ module Aws::EC2
 
     class CreateNetworkInsightsPath
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1119,7 +1040,6 @@ module Aws::EC2
 
     class CreateNetworkInterface
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1133,7 +1053,6 @@ module Aws::EC2
 
     class CreateNetworkInterfacePermission
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1147,7 +1066,6 @@ module Aws::EC2
 
     class CreatePlacementGroup
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1161,7 +1079,6 @@ module Aws::EC2
 
     class CreatePublicIpv4Pool
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1175,7 +1092,6 @@ module Aws::EC2
 
     class CreateReplaceRootVolumeTask
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1189,7 +1105,6 @@ module Aws::EC2
 
     class CreateReservedInstancesListing
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1203,7 +1118,6 @@ module Aws::EC2
 
     class CreateRestoreImageTask
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1217,7 +1131,6 @@ module Aws::EC2
 
     class CreateRoute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1231,7 +1144,6 @@ module Aws::EC2
 
     class CreateRouteTable
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1245,7 +1157,6 @@ module Aws::EC2
 
     class CreateSecurityGroup
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1259,7 +1170,6 @@ module Aws::EC2
 
     class CreateSnapshot
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1273,7 +1183,6 @@ module Aws::EC2
 
     class CreateSnapshots
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1287,7 +1196,6 @@ module Aws::EC2
 
     class CreateSpotDatafeedSubscription
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1301,7 +1209,6 @@ module Aws::EC2
 
     class CreateStoreImageTask
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1315,7 +1222,6 @@ module Aws::EC2
 
     class CreateSubnet
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1329,7 +1235,6 @@ module Aws::EC2
 
     class CreateSubnetCidrReservation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1343,7 +1248,6 @@ module Aws::EC2
 
     class CreateTags
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1357,7 +1261,6 @@ module Aws::EC2
 
     class CreateTrafficMirrorFilter
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1371,7 +1274,6 @@ module Aws::EC2
 
     class CreateTrafficMirrorFilterRule
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1385,7 +1287,6 @@ module Aws::EC2
 
     class CreateTrafficMirrorSession
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1399,7 +1300,6 @@ module Aws::EC2
 
     class CreateTrafficMirrorTarget
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1413,7 +1313,6 @@ module Aws::EC2
 
     class CreateTransitGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1427,7 +1326,6 @@ module Aws::EC2
 
     class CreateTransitGatewayConnect
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1441,7 +1339,6 @@ module Aws::EC2
 
     class CreateTransitGatewayConnectPeer
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1455,7 +1352,6 @@ module Aws::EC2
 
     class CreateTransitGatewayMulticastDomain
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1469,7 +1365,6 @@ module Aws::EC2
 
     class CreateTransitGatewayPeeringAttachment
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1483,7 +1378,6 @@ module Aws::EC2
 
     class CreateTransitGatewayPolicyTable
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1497,7 +1391,6 @@ module Aws::EC2
 
     class CreateTransitGatewayPrefixListReference
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1511,7 +1404,6 @@ module Aws::EC2
 
     class CreateTransitGatewayRoute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1525,7 +1417,6 @@ module Aws::EC2
 
     class CreateTransitGatewayRouteTable
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1539,7 +1430,6 @@ module Aws::EC2
 
     class CreateTransitGatewayRouteTableAnnouncement
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1553,7 +1443,6 @@ module Aws::EC2
 
     class CreateTransitGatewayVpcAttachment
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1567,7 +1456,6 @@ module Aws::EC2
 
     class CreateVolume
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1581,7 +1469,6 @@ module Aws::EC2
 
     class CreateVpc
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1595,7 +1482,6 @@ module Aws::EC2
 
     class CreateVpcEndpoint
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1609,7 +1495,6 @@ module Aws::EC2
 
     class CreateVpcEndpointConnectionNotification
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1623,7 +1508,6 @@ module Aws::EC2
 
     class CreateVpcEndpointServiceConfiguration
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1637,7 +1521,6 @@ module Aws::EC2
 
     class CreateVpcPeeringConnection
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1651,7 +1534,6 @@ module Aws::EC2
 
     class CreateVpnConnection
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1665,7 +1547,6 @@ module Aws::EC2
 
     class CreateVpnConnectionRoute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1679,7 +1560,6 @@ module Aws::EC2
 
     class CreateVpnGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1693,7 +1573,6 @@ module Aws::EC2
 
     class DeleteCarrierGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1707,7 +1586,6 @@ module Aws::EC2
 
     class DeleteClientVpnEndpoint
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1721,7 +1599,6 @@ module Aws::EC2
 
     class DeleteClientVpnRoute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1735,7 +1612,6 @@ module Aws::EC2
 
     class DeleteCustomerGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1749,7 +1625,6 @@ module Aws::EC2
 
     class DeleteDhcpOptions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1763,7 +1638,6 @@ module Aws::EC2
 
     class DeleteEgressOnlyInternetGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1777,7 +1651,6 @@ module Aws::EC2
 
     class DeleteFleets
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1791,7 +1664,6 @@ module Aws::EC2
 
     class DeleteFlowLogs
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1805,7 +1677,6 @@ module Aws::EC2
 
     class DeleteFpgaImage
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1819,7 +1690,6 @@ module Aws::EC2
 
     class DeleteInstanceEventWindow
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1833,7 +1703,6 @@ module Aws::EC2
 
     class DeleteInternetGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1847,7 +1716,6 @@ module Aws::EC2
 
     class DeleteIpam
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1861,7 +1729,6 @@ module Aws::EC2
 
     class DeleteIpamPool
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1875,7 +1742,6 @@ module Aws::EC2
 
     class DeleteIpamScope
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1889,7 +1755,6 @@ module Aws::EC2
 
     class DeleteKeyPair
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1903,7 +1768,6 @@ module Aws::EC2
 
     class DeleteLaunchTemplate
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1917,7 +1781,6 @@ module Aws::EC2
 
     class DeleteLaunchTemplateVersions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1931,7 +1794,6 @@ module Aws::EC2
 
     class DeleteLocalGatewayRoute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1945,7 +1807,6 @@ module Aws::EC2
 
     class DeleteLocalGatewayRouteTableVpcAssociation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1959,7 +1820,6 @@ module Aws::EC2
 
     class DeleteManagedPrefixList
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1973,7 +1833,6 @@ module Aws::EC2
 
     class DeleteNatGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -1987,7 +1846,6 @@ module Aws::EC2
 
     class DeleteNetworkAcl
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2001,7 +1859,6 @@ module Aws::EC2
 
     class DeleteNetworkAclEntry
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2015,7 +1872,6 @@ module Aws::EC2
 
     class DeleteNetworkInsightsAccessScope
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2029,7 +1885,6 @@ module Aws::EC2
 
     class DeleteNetworkInsightsAccessScopeAnalysis
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2043,7 +1898,6 @@ module Aws::EC2
 
     class DeleteNetworkInsightsAnalysis
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2057,7 +1911,6 @@ module Aws::EC2
 
     class DeleteNetworkInsightsPath
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2071,7 +1924,6 @@ module Aws::EC2
 
     class DeleteNetworkInterface
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2085,7 +1937,6 @@ module Aws::EC2
 
     class DeleteNetworkInterfacePermission
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2099,7 +1950,6 @@ module Aws::EC2
 
     class DeletePlacementGroup
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2113,7 +1963,6 @@ module Aws::EC2
 
     class DeletePublicIpv4Pool
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2127,7 +1976,6 @@ module Aws::EC2
 
     class DeleteQueuedReservedInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2141,7 +1989,6 @@ module Aws::EC2
 
     class DeleteRoute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2155,7 +2002,6 @@ module Aws::EC2
 
     class DeleteRouteTable
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2169,7 +2015,6 @@ module Aws::EC2
 
     class DeleteSecurityGroup
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2183,7 +2028,6 @@ module Aws::EC2
 
     class DeleteSnapshot
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2197,7 +2041,6 @@ module Aws::EC2
 
     class DeleteSpotDatafeedSubscription
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2211,7 +2054,6 @@ module Aws::EC2
 
     class DeleteSubnet
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2225,7 +2067,6 @@ module Aws::EC2
 
     class DeleteSubnetCidrReservation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2239,7 +2080,6 @@ module Aws::EC2
 
     class DeleteTags
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2253,7 +2093,6 @@ module Aws::EC2
 
     class DeleteTrafficMirrorFilter
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2267,7 +2106,6 @@ module Aws::EC2
 
     class DeleteTrafficMirrorFilterRule
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2281,7 +2119,6 @@ module Aws::EC2
 
     class DeleteTrafficMirrorSession
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2295,7 +2132,6 @@ module Aws::EC2
 
     class DeleteTrafficMirrorTarget
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2309,7 +2145,6 @@ module Aws::EC2
 
     class DeleteTransitGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2323,7 +2158,6 @@ module Aws::EC2
 
     class DeleteTransitGatewayConnect
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2337,7 +2171,6 @@ module Aws::EC2
 
     class DeleteTransitGatewayConnectPeer
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2351,7 +2184,6 @@ module Aws::EC2
 
     class DeleteTransitGatewayMulticastDomain
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2365,7 +2197,6 @@ module Aws::EC2
 
     class DeleteTransitGatewayPeeringAttachment
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2379,7 +2210,6 @@ module Aws::EC2
 
     class DeleteTransitGatewayPolicyTable
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2393,7 +2223,6 @@ module Aws::EC2
 
     class DeleteTransitGatewayPrefixListReference
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2407,7 +2236,6 @@ module Aws::EC2
 
     class DeleteTransitGatewayRoute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2421,7 +2249,6 @@ module Aws::EC2
 
     class DeleteTransitGatewayRouteTable
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2435,7 +2262,6 @@ module Aws::EC2
 
     class DeleteTransitGatewayRouteTableAnnouncement
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2449,7 +2275,6 @@ module Aws::EC2
 
     class DeleteTransitGatewayVpcAttachment
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2463,7 +2288,6 @@ module Aws::EC2
 
     class DeleteVolume
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2477,7 +2301,6 @@ module Aws::EC2
 
     class DeleteVpc
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2491,7 +2314,6 @@ module Aws::EC2
 
     class DeleteVpcEndpointConnectionNotifications
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2505,7 +2327,6 @@ module Aws::EC2
 
     class DeleteVpcEndpointServiceConfigurations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2519,7 +2340,6 @@ module Aws::EC2
 
     class DeleteVpcEndpoints
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2533,7 +2353,6 @@ module Aws::EC2
 
     class DeleteVpcPeeringConnection
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2547,7 +2366,6 @@ module Aws::EC2
 
     class DeleteVpnConnection
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2561,7 +2379,6 @@ module Aws::EC2
 
     class DeleteVpnConnectionRoute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2575,7 +2392,6 @@ module Aws::EC2
 
     class DeleteVpnGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2589,7 +2405,6 @@ module Aws::EC2
 
     class DeprovisionByoipCidr
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2603,7 +2418,6 @@ module Aws::EC2
 
     class DeprovisionIpamPoolCidr
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2617,7 +2431,6 @@ module Aws::EC2
 
     class DeprovisionPublicIpv4PoolCidr
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2631,7 +2444,6 @@ module Aws::EC2
 
     class DeregisterImage
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2645,7 +2457,6 @@ module Aws::EC2
 
     class DeregisterInstanceEventNotificationAttributes
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2659,7 +2470,6 @@ module Aws::EC2
 
     class DeregisterTransitGatewayMulticastGroupMembers
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2673,7 +2483,6 @@ module Aws::EC2
 
     class DeregisterTransitGatewayMulticastGroupSources
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2687,7 +2496,6 @@ module Aws::EC2
 
     class DescribeAccountAttributes
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2701,7 +2509,6 @@ module Aws::EC2
 
     class DescribeAddresses
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2715,7 +2522,6 @@ module Aws::EC2
 
     class DescribeAddressesAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2729,7 +2535,6 @@ module Aws::EC2
 
     class DescribeAggregateIdFormat
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2743,7 +2548,6 @@ module Aws::EC2
 
     class DescribeAvailabilityZones
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2757,7 +2561,6 @@ module Aws::EC2
 
     class DescribeBundleTasks
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2771,7 +2574,6 @@ module Aws::EC2
 
     class DescribeByoipCidrs
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2785,7 +2587,6 @@ module Aws::EC2
 
     class DescribeCapacityReservationFleets
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2799,7 +2600,6 @@ module Aws::EC2
 
     class DescribeCapacityReservations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2813,7 +2613,6 @@ module Aws::EC2
 
     class DescribeCarrierGateways
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2827,7 +2626,6 @@ module Aws::EC2
 
     class DescribeClassicLinkInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2841,7 +2639,6 @@ module Aws::EC2
 
     class DescribeClientVpnAuthorizationRules
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2855,7 +2652,6 @@ module Aws::EC2
 
     class DescribeClientVpnConnections
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2869,7 +2665,6 @@ module Aws::EC2
 
     class DescribeClientVpnEndpoints
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2883,7 +2678,6 @@ module Aws::EC2
 
     class DescribeClientVpnRoutes
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2897,7 +2691,6 @@ module Aws::EC2
 
     class DescribeClientVpnTargetNetworks
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2911,7 +2704,6 @@ module Aws::EC2
 
     class DescribeCoipPools
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2925,7 +2717,6 @@ module Aws::EC2
 
     class DescribeConversionTasks
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2939,7 +2730,6 @@ module Aws::EC2
 
     class DescribeCustomerGateways
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2953,7 +2743,6 @@ module Aws::EC2
 
     class DescribeDhcpOptions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2967,7 +2756,6 @@ module Aws::EC2
 
     class DescribeEgressOnlyInternetGateways
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2981,7 +2769,6 @@ module Aws::EC2
 
     class DescribeElasticGpus
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -2995,7 +2782,6 @@ module Aws::EC2
 
     class DescribeExportImageTasks
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3009,7 +2795,6 @@ module Aws::EC2
 
     class DescribeExportTasks
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3023,7 +2808,6 @@ module Aws::EC2
 
     class DescribeFastLaunchImages
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3037,7 +2821,6 @@ module Aws::EC2
 
     class DescribeFastSnapshotRestores
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3051,7 +2834,6 @@ module Aws::EC2
 
     class DescribeFleetHistory
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3065,7 +2847,6 @@ module Aws::EC2
 
     class DescribeFleetInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3079,7 +2860,6 @@ module Aws::EC2
 
     class DescribeFleets
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3093,7 +2873,6 @@ module Aws::EC2
 
     class DescribeFlowLogs
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3107,7 +2886,6 @@ module Aws::EC2
 
     class DescribeFpgaImageAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3121,7 +2899,6 @@ module Aws::EC2
 
     class DescribeFpgaImages
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3135,7 +2912,6 @@ module Aws::EC2
 
     class DescribeHostReservationOfferings
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3149,7 +2925,6 @@ module Aws::EC2
 
     class DescribeHostReservations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3163,7 +2938,6 @@ module Aws::EC2
 
     class DescribeHosts
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3177,7 +2951,6 @@ module Aws::EC2
 
     class DescribeIamInstanceProfileAssociations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3191,7 +2964,6 @@ module Aws::EC2
 
     class DescribeIdFormat
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3205,7 +2977,6 @@ module Aws::EC2
 
     class DescribeIdentityIdFormat
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3219,7 +2990,6 @@ module Aws::EC2
 
     class DescribeImageAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3233,7 +3003,6 @@ module Aws::EC2
 
     class DescribeImages
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3247,7 +3016,6 @@ module Aws::EC2
 
     class DescribeImportImageTasks
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3261,7 +3029,6 @@ module Aws::EC2
 
     class DescribeImportSnapshotTasks
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3275,7 +3042,6 @@ module Aws::EC2
 
     class DescribeInstanceAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3289,7 +3055,6 @@ module Aws::EC2
 
     class DescribeInstanceCreditSpecifications
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3303,7 +3068,6 @@ module Aws::EC2
 
     class DescribeInstanceEventNotificationAttributes
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3317,7 +3081,6 @@ module Aws::EC2
 
     class DescribeInstanceEventWindows
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3331,7 +3094,6 @@ module Aws::EC2
 
     class DescribeInstanceStatus
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3345,7 +3107,6 @@ module Aws::EC2
 
     class DescribeInstanceTypeOfferings
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3359,7 +3120,6 @@ module Aws::EC2
 
     class DescribeInstanceTypes
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3373,7 +3133,6 @@ module Aws::EC2
 
     class DescribeInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3387,7 +3146,6 @@ module Aws::EC2
 
     class DescribeInternetGateways
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3401,7 +3159,6 @@ module Aws::EC2
 
     class DescribeIpamPools
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3415,7 +3172,6 @@ module Aws::EC2
 
     class DescribeIpamScopes
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3429,7 +3185,6 @@ module Aws::EC2
 
     class DescribeIpams
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3443,7 +3198,6 @@ module Aws::EC2
 
     class DescribeIpv6Pools
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3457,7 +3211,6 @@ module Aws::EC2
 
     class DescribeKeyPairs
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3471,7 +3224,6 @@ module Aws::EC2
 
     class DescribeLaunchTemplateVersions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3485,7 +3237,6 @@ module Aws::EC2
 
     class DescribeLaunchTemplates
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3499,7 +3250,6 @@ module Aws::EC2
 
     class DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3513,7 +3263,6 @@ module Aws::EC2
 
     class DescribeLocalGatewayRouteTableVpcAssociations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3527,7 +3276,6 @@ module Aws::EC2
 
     class DescribeLocalGatewayRouteTables
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3541,7 +3289,6 @@ module Aws::EC2
 
     class DescribeLocalGatewayVirtualInterfaceGroups
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3555,7 +3302,6 @@ module Aws::EC2
 
     class DescribeLocalGatewayVirtualInterfaces
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3569,7 +3315,6 @@ module Aws::EC2
 
     class DescribeLocalGateways
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3583,7 +3328,6 @@ module Aws::EC2
 
     class DescribeManagedPrefixLists
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3597,7 +3341,6 @@ module Aws::EC2
 
     class DescribeMovingAddresses
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3611,7 +3354,6 @@ module Aws::EC2
 
     class DescribeNatGateways
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3625,7 +3367,6 @@ module Aws::EC2
 
     class DescribeNetworkAcls
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3639,7 +3380,6 @@ module Aws::EC2
 
     class DescribeNetworkInsightsAccessScopeAnalyses
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3653,7 +3393,6 @@ module Aws::EC2
 
     class DescribeNetworkInsightsAccessScopes
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3667,7 +3406,6 @@ module Aws::EC2
 
     class DescribeNetworkInsightsAnalyses
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3681,7 +3419,6 @@ module Aws::EC2
 
     class DescribeNetworkInsightsPaths
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3695,7 +3432,6 @@ module Aws::EC2
 
     class DescribeNetworkInterfaceAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3709,7 +3445,6 @@ module Aws::EC2
 
     class DescribeNetworkInterfacePermissions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3723,7 +3458,6 @@ module Aws::EC2
 
     class DescribeNetworkInterfaces
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3737,7 +3471,6 @@ module Aws::EC2
 
     class DescribePlacementGroups
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3751,7 +3484,6 @@ module Aws::EC2
 
     class DescribePrefixLists
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3765,7 +3497,6 @@ module Aws::EC2
 
     class DescribePrincipalIdFormat
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3779,7 +3510,6 @@ module Aws::EC2
 
     class DescribePublicIpv4Pools
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3793,7 +3523,6 @@ module Aws::EC2
 
     class DescribeRegions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3807,7 +3536,6 @@ module Aws::EC2
 
     class DescribeReplaceRootVolumeTasks
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3821,7 +3549,6 @@ module Aws::EC2
 
     class DescribeReservedInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3835,7 +3562,6 @@ module Aws::EC2
 
     class DescribeReservedInstancesListings
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3849,7 +3575,6 @@ module Aws::EC2
 
     class DescribeReservedInstancesModifications
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3863,7 +3588,6 @@ module Aws::EC2
 
     class DescribeReservedInstancesOfferings
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3877,7 +3601,6 @@ module Aws::EC2
 
     class DescribeRouteTables
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3891,7 +3614,6 @@ module Aws::EC2
 
     class DescribeScheduledInstanceAvailability
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3905,7 +3627,6 @@ module Aws::EC2
 
     class DescribeScheduledInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3919,7 +3640,6 @@ module Aws::EC2
 
     class DescribeSecurityGroupReferences
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3933,7 +3653,6 @@ module Aws::EC2
 
     class DescribeSecurityGroupRules
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3947,7 +3666,6 @@ module Aws::EC2
 
     class DescribeSecurityGroups
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3961,7 +3679,6 @@ module Aws::EC2
 
     class DescribeSnapshotAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3975,7 +3692,6 @@ module Aws::EC2
 
     class DescribeSnapshotTierStatus
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -3989,7 +3705,6 @@ module Aws::EC2
 
     class DescribeSnapshots
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4003,7 +3718,6 @@ module Aws::EC2
 
     class DescribeSpotDatafeedSubscription
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4017,7 +3731,6 @@ module Aws::EC2
 
     class DescribeSpotFleetInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4031,7 +3744,6 @@ module Aws::EC2
 
     class DescribeSpotFleetRequestHistory
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4045,7 +3757,6 @@ module Aws::EC2
 
     class DescribeSpotFleetRequests
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4059,7 +3770,6 @@ module Aws::EC2
 
     class DescribeSpotInstanceRequests
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4073,7 +3783,6 @@ module Aws::EC2
 
     class DescribeSpotPriceHistory
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4087,7 +3796,6 @@ module Aws::EC2
 
     class DescribeStaleSecurityGroups
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4101,7 +3809,6 @@ module Aws::EC2
 
     class DescribeStoreImageTasks
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4115,7 +3822,6 @@ module Aws::EC2
 
     class DescribeSubnets
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4129,7 +3835,6 @@ module Aws::EC2
 
     class DescribeTags
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4143,7 +3848,6 @@ module Aws::EC2
 
     class DescribeTrafficMirrorFilters
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4157,7 +3861,6 @@ module Aws::EC2
 
     class DescribeTrafficMirrorSessions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4171,7 +3874,6 @@ module Aws::EC2
 
     class DescribeTrafficMirrorTargets
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4185,7 +3887,6 @@ module Aws::EC2
 
     class DescribeTransitGatewayAttachments
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4199,7 +3900,6 @@ module Aws::EC2
 
     class DescribeTransitGatewayConnectPeers
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4213,7 +3913,6 @@ module Aws::EC2
 
     class DescribeTransitGatewayConnects
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4227,7 +3926,6 @@ module Aws::EC2
 
     class DescribeTransitGatewayMulticastDomains
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4241,7 +3939,6 @@ module Aws::EC2
 
     class DescribeTransitGatewayPeeringAttachments
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4255,7 +3952,6 @@ module Aws::EC2
 
     class DescribeTransitGatewayPolicyTables
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4269,7 +3965,6 @@ module Aws::EC2
 
     class DescribeTransitGatewayRouteTableAnnouncements
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4283,7 +3978,6 @@ module Aws::EC2
 
     class DescribeTransitGatewayRouteTables
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4297,7 +3991,6 @@ module Aws::EC2
 
     class DescribeTransitGatewayVpcAttachments
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4311,7 +4004,6 @@ module Aws::EC2
 
     class DescribeTransitGateways
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4325,7 +4017,6 @@ module Aws::EC2
 
     class DescribeTrunkInterfaceAssociations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4339,7 +4030,6 @@ module Aws::EC2
 
     class DescribeVolumeAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4353,7 +4043,6 @@ module Aws::EC2
 
     class DescribeVolumeStatus
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4367,7 +4056,6 @@ module Aws::EC2
 
     class DescribeVolumes
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4381,7 +4069,6 @@ module Aws::EC2
 
     class DescribeVolumesModifications
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4395,7 +4082,6 @@ module Aws::EC2
 
     class DescribeVpcAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4409,7 +4095,6 @@ module Aws::EC2
 
     class DescribeVpcClassicLink
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4423,7 +4108,6 @@ module Aws::EC2
 
     class DescribeVpcClassicLinkDnsSupport
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4437,7 +4121,6 @@ module Aws::EC2
 
     class DescribeVpcEndpointConnectionNotifications
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4451,7 +4134,6 @@ module Aws::EC2
 
     class DescribeVpcEndpointConnections
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4465,7 +4147,6 @@ module Aws::EC2
 
     class DescribeVpcEndpointServiceConfigurations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4479,7 +4160,6 @@ module Aws::EC2
 
     class DescribeVpcEndpointServicePermissions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4493,7 +4173,6 @@ module Aws::EC2
 
     class DescribeVpcEndpointServices
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4507,7 +4186,6 @@ module Aws::EC2
 
     class DescribeVpcEndpoints
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4521,7 +4199,6 @@ module Aws::EC2
 
     class DescribeVpcPeeringConnections
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4535,7 +4212,6 @@ module Aws::EC2
 
     class DescribeVpcs
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4549,7 +4225,6 @@ module Aws::EC2
 
     class DescribeVpnConnections
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4563,7 +4238,6 @@ module Aws::EC2
 
     class DescribeVpnGateways
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4577,7 +4251,6 @@ module Aws::EC2
 
     class DetachClassicLinkVpc
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4591,7 +4264,6 @@ module Aws::EC2
 
     class DetachInternetGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4605,7 +4277,6 @@ module Aws::EC2
 
     class DetachNetworkInterface
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4619,7 +4290,6 @@ module Aws::EC2
 
     class DetachVolume
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4633,7 +4303,6 @@ module Aws::EC2
 
     class DetachVpnGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4647,7 +4316,6 @@ module Aws::EC2
 
     class DisableEbsEncryptionByDefault
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4661,7 +4329,6 @@ module Aws::EC2
 
     class DisableFastLaunch
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4675,7 +4342,6 @@ module Aws::EC2
 
     class DisableFastSnapshotRestores
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4689,7 +4355,6 @@ module Aws::EC2
 
     class DisableImageDeprecation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4703,7 +4368,6 @@ module Aws::EC2
 
     class DisableIpamOrganizationAdminAccount
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4717,7 +4381,6 @@ module Aws::EC2
 
     class DisableSerialConsoleAccess
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4731,7 +4394,6 @@ module Aws::EC2
 
     class DisableTransitGatewayRouteTablePropagation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4745,7 +4407,6 @@ module Aws::EC2
 
     class DisableVgwRoutePropagation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4759,7 +4420,6 @@ module Aws::EC2
 
     class DisableVpcClassicLink
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4773,7 +4433,6 @@ module Aws::EC2
 
     class DisableVpcClassicLinkDnsSupport
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4787,7 +4446,6 @@ module Aws::EC2
 
     class DisassociateAddress
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4801,7 +4459,6 @@ module Aws::EC2
 
     class DisassociateClientVpnTargetNetwork
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4815,7 +4472,6 @@ module Aws::EC2
 
     class DisassociateEnclaveCertificateIamRole
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4829,7 +4485,6 @@ module Aws::EC2
 
     class DisassociateIamInstanceProfile
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4843,7 +4498,6 @@ module Aws::EC2
 
     class DisassociateInstanceEventWindow
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4857,7 +4511,6 @@ module Aws::EC2
 
     class DisassociateRouteTable
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4871,7 +4524,6 @@ module Aws::EC2
 
     class DisassociateSubnetCidrBlock
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4885,7 +4537,6 @@ module Aws::EC2
 
     class DisassociateTransitGatewayMulticastDomain
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4899,7 +4550,6 @@ module Aws::EC2
 
     class DisassociateTransitGatewayPolicyTable
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4913,7 +4563,6 @@ module Aws::EC2
 
     class DisassociateTransitGatewayRouteTable
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4927,7 +4576,6 @@ module Aws::EC2
 
     class DisassociateTrunkInterface
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4941,7 +4589,6 @@ module Aws::EC2
 
     class DisassociateVpcCidrBlock
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4955,7 +4602,6 @@ module Aws::EC2
 
     class EnableEbsEncryptionByDefault
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4969,7 +4615,6 @@ module Aws::EC2
 
     class EnableFastLaunch
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4983,7 +4628,6 @@ module Aws::EC2
 
     class EnableFastSnapshotRestores
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -4997,7 +4641,6 @@ module Aws::EC2
 
     class EnableImageDeprecation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5011,7 +4654,6 @@ module Aws::EC2
 
     class EnableIpamOrganizationAdminAccount
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5025,7 +4667,6 @@ module Aws::EC2
 
     class EnableSerialConsoleAccess
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5039,7 +4680,6 @@ module Aws::EC2
 
     class EnableTransitGatewayRouteTablePropagation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5053,7 +4693,6 @@ module Aws::EC2
 
     class EnableVgwRoutePropagation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5067,7 +4706,6 @@ module Aws::EC2
 
     class EnableVolumeIO
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5081,7 +4719,6 @@ module Aws::EC2
 
     class EnableVpcClassicLink
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5095,7 +4732,6 @@ module Aws::EC2
 
     class EnableVpcClassicLinkDnsSupport
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5109,7 +4745,6 @@ module Aws::EC2
 
     class ExportClientVpnClientCertificateRevocationList
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5123,7 +4758,6 @@ module Aws::EC2
 
     class ExportClientVpnClientConfiguration
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5137,7 +4771,6 @@ module Aws::EC2
 
     class ExportImage
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5151,7 +4784,6 @@ module Aws::EC2
 
     class ExportTransitGatewayRoutes
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5165,7 +4797,6 @@ module Aws::EC2
 
     class GetAssociatedEnclaveCertificateIamRoles
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5179,7 +4810,6 @@ module Aws::EC2
 
     class GetAssociatedIpv6PoolCidrs
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5193,7 +4823,6 @@ module Aws::EC2
 
     class GetCapacityReservationUsage
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5207,7 +4836,6 @@ module Aws::EC2
 
     class GetCoipPoolUsage
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5221,7 +4849,6 @@ module Aws::EC2
 
     class GetConsoleOutput
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5235,7 +4862,6 @@ module Aws::EC2
 
     class GetConsoleScreenshot
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5249,7 +4875,6 @@ module Aws::EC2
 
     class GetDefaultCreditSpecification
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5263,7 +4888,6 @@ module Aws::EC2
 
     class GetEbsDefaultKmsKeyId
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5277,7 +4901,6 @@ module Aws::EC2
 
     class GetEbsEncryptionByDefault
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5291,7 +4914,6 @@ module Aws::EC2
 
     class GetFlowLogsIntegrationTemplate
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5305,7 +4927,6 @@ module Aws::EC2
 
     class GetGroupsForCapacityReservation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5319,7 +4940,6 @@ module Aws::EC2
 
     class GetHostReservationPurchasePreview
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5333,7 +4953,6 @@ module Aws::EC2
 
     class GetInstanceTypesFromInstanceRequirements
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5347,7 +4966,6 @@ module Aws::EC2
 
     class GetInstanceUefiData
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5361,7 +4979,6 @@ module Aws::EC2
 
     class GetIpamAddressHistory
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5375,7 +4992,6 @@ module Aws::EC2
 
     class GetIpamPoolAllocations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5389,7 +5005,6 @@ module Aws::EC2
 
     class GetIpamPoolCidrs
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5403,7 +5018,6 @@ module Aws::EC2
 
     class GetIpamResourceCidrs
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5417,7 +5031,6 @@ module Aws::EC2
 
     class GetLaunchTemplateData
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5431,7 +5044,6 @@ module Aws::EC2
 
     class GetManagedPrefixListAssociations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5445,7 +5057,6 @@ module Aws::EC2
 
     class GetManagedPrefixListEntries
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5459,7 +5070,6 @@ module Aws::EC2
 
     class GetNetworkInsightsAccessScopeAnalysisFindings
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5473,7 +5083,6 @@ module Aws::EC2
 
     class GetNetworkInsightsAccessScopeContent
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5487,7 +5096,6 @@ module Aws::EC2
 
     class GetPasswordData
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5501,7 +5109,6 @@ module Aws::EC2
 
     class GetReservedInstancesExchangeQuote
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5515,7 +5122,6 @@ module Aws::EC2
 
     class GetSerialConsoleAccessStatus
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5529,7 +5135,6 @@ module Aws::EC2
 
     class GetSpotPlacementScores
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5543,7 +5148,6 @@ module Aws::EC2
 
     class GetSubnetCidrReservations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5557,7 +5161,6 @@ module Aws::EC2
 
     class GetTransitGatewayAttachmentPropagations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5571,7 +5174,6 @@ module Aws::EC2
 
     class GetTransitGatewayMulticastDomainAssociations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5585,7 +5187,6 @@ module Aws::EC2
 
     class GetTransitGatewayPolicyTableAssociations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5599,7 +5200,6 @@ module Aws::EC2
 
     class GetTransitGatewayPolicyTableEntries
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5613,7 +5213,6 @@ module Aws::EC2
 
     class GetTransitGatewayPrefixListReferences
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5627,7 +5226,6 @@ module Aws::EC2
 
     class GetTransitGatewayRouteTableAssociations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5641,7 +5239,6 @@ module Aws::EC2
 
     class GetTransitGatewayRouteTablePropagations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5655,7 +5252,6 @@ module Aws::EC2
 
     class GetVpnConnectionDeviceSampleConfiguration
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5669,7 +5265,6 @@ module Aws::EC2
 
     class GetVpnConnectionDeviceTypes
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5683,7 +5278,6 @@ module Aws::EC2
 
     class ImportClientVpnClientCertificateRevocationList
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5697,7 +5291,6 @@ module Aws::EC2
 
     class ImportImage
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5711,7 +5304,6 @@ module Aws::EC2
 
     class ImportInstance
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5725,7 +5317,6 @@ module Aws::EC2
 
     class ImportKeyPair
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5739,7 +5330,6 @@ module Aws::EC2
 
     class ImportSnapshot
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5753,7 +5343,6 @@ module Aws::EC2
 
     class ImportVolume
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5767,7 +5356,6 @@ module Aws::EC2
 
     class ListImagesInRecycleBin
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5781,7 +5369,6 @@ module Aws::EC2
 
     class ListSnapshotsInRecycleBin
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5795,7 +5382,6 @@ module Aws::EC2
 
     class ModifyAddressAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5809,7 +5395,6 @@ module Aws::EC2
 
     class ModifyAvailabilityZoneGroup
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5823,7 +5408,6 @@ module Aws::EC2
 
     class ModifyCapacityReservation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5837,7 +5421,6 @@ module Aws::EC2
 
     class ModifyCapacityReservationFleet
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5851,7 +5434,6 @@ module Aws::EC2
 
     class ModifyClientVpnEndpoint
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5865,7 +5447,6 @@ module Aws::EC2
 
     class ModifyDefaultCreditSpecification
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5879,7 +5460,6 @@ module Aws::EC2
 
     class ModifyEbsDefaultKmsKeyId
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5893,7 +5473,6 @@ module Aws::EC2
 
     class ModifyFleet
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5907,7 +5486,6 @@ module Aws::EC2
 
     class ModifyFpgaImageAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5921,7 +5499,6 @@ module Aws::EC2
 
     class ModifyHosts
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5935,7 +5512,6 @@ module Aws::EC2
 
     class ModifyIdFormat
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5949,7 +5525,6 @@ module Aws::EC2
 
     class ModifyIdentityIdFormat
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5963,7 +5538,6 @@ module Aws::EC2
 
     class ModifyImageAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5977,7 +5551,6 @@ module Aws::EC2
 
     class ModifyInstanceAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -5991,7 +5564,6 @@ module Aws::EC2
 
     class ModifyInstanceCapacityReservationAttributes
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6005,7 +5577,6 @@ module Aws::EC2
 
     class ModifyInstanceCreditSpecification
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6019,7 +5590,6 @@ module Aws::EC2
 
     class ModifyInstanceEventStartTime
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6033,7 +5603,6 @@ module Aws::EC2
 
     class ModifyInstanceEventWindow
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6047,7 +5616,6 @@ module Aws::EC2
 
     class ModifyInstanceMaintenanceOptions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6061,7 +5629,6 @@ module Aws::EC2
 
     class ModifyInstanceMetadataOptions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6075,7 +5642,6 @@ module Aws::EC2
 
     class ModifyInstancePlacement
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6089,7 +5655,6 @@ module Aws::EC2
 
     class ModifyIpam
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6103,7 +5668,6 @@ module Aws::EC2
 
     class ModifyIpamPool
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6117,7 +5681,6 @@ module Aws::EC2
 
     class ModifyIpamResourceCidr
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6131,7 +5694,6 @@ module Aws::EC2
 
     class ModifyIpamScope
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6145,7 +5707,6 @@ module Aws::EC2
 
     class ModifyLaunchTemplate
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6159,7 +5720,6 @@ module Aws::EC2
 
     class ModifyManagedPrefixList
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6173,7 +5733,6 @@ module Aws::EC2
 
     class ModifyNetworkInterfaceAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6187,7 +5746,6 @@ module Aws::EC2
 
     class ModifyPrivateDnsNameOptions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6201,7 +5759,6 @@ module Aws::EC2
 
     class ModifyReservedInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6215,7 +5772,6 @@ module Aws::EC2
 
     class ModifySecurityGroupRules
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6229,7 +5785,6 @@ module Aws::EC2
 
     class ModifySnapshotAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6243,7 +5798,6 @@ module Aws::EC2
 
     class ModifySnapshotTier
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6257,7 +5811,6 @@ module Aws::EC2
 
     class ModifySpotFleetRequest
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6271,7 +5824,6 @@ module Aws::EC2
 
     class ModifySubnetAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6285,7 +5837,6 @@ module Aws::EC2
 
     class ModifyTrafficMirrorFilterNetworkServices
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6299,7 +5850,6 @@ module Aws::EC2
 
     class ModifyTrafficMirrorFilterRule
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6313,7 +5863,6 @@ module Aws::EC2
 
     class ModifyTrafficMirrorSession
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6327,7 +5876,6 @@ module Aws::EC2
 
     class ModifyTransitGateway
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6341,7 +5889,6 @@ module Aws::EC2
 
     class ModifyTransitGatewayPrefixListReference
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6355,7 +5902,6 @@ module Aws::EC2
 
     class ModifyTransitGatewayVpcAttachment
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6369,7 +5915,6 @@ module Aws::EC2
 
     class ModifyVolume
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6383,7 +5928,6 @@ module Aws::EC2
 
     class ModifyVolumeAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6397,7 +5941,6 @@ module Aws::EC2
 
     class ModifyVpcAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6411,7 +5954,6 @@ module Aws::EC2
 
     class ModifyVpcEndpoint
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6425,7 +5967,6 @@ module Aws::EC2
 
     class ModifyVpcEndpointConnectionNotification
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6439,7 +5980,6 @@ module Aws::EC2
 
     class ModifyVpcEndpointServiceConfiguration
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6453,7 +5993,6 @@ module Aws::EC2
 
     class ModifyVpcEndpointServicePayerResponsibility
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6467,7 +6006,6 @@ module Aws::EC2
 
     class ModifyVpcEndpointServicePermissions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6481,7 +6019,6 @@ module Aws::EC2
 
     class ModifyVpcPeeringConnectionOptions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6495,7 +6032,6 @@ module Aws::EC2
 
     class ModifyVpcTenancy
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6509,7 +6045,6 @@ module Aws::EC2
 
     class ModifyVpnConnection
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6523,7 +6058,6 @@ module Aws::EC2
 
     class ModifyVpnConnectionOptions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6537,7 +6071,6 @@ module Aws::EC2
 
     class ModifyVpnTunnelCertificate
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6551,7 +6084,6 @@ module Aws::EC2
 
     class ModifyVpnTunnelOptions
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6565,7 +6097,6 @@ module Aws::EC2
 
     class MonitorInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6579,7 +6110,6 @@ module Aws::EC2
 
     class MoveAddressToVpc
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6593,7 +6123,6 @@ module Aws::EC2
 
     class MoveByoipCidrToIpam
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6607,7 +6136,6 @@ module Aws::EC2
 
     class ProvisionByoipCidr
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6621,7 +6149,6 @@ module Aws::EC2
 
     class ProvisionIpamPoolCidr
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6635,7 +6162,6 @@ module Aws::EC2
 
     class ProvisionPublicIpv4PoolCidr
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6649,7 +6175,6 @@ module Aws::EC2
 
     class PurchaseHostReservation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6663,7 +6188,6 @@ module Aws::EC2
 
     class PurchaseReservedInstancesOffering
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6677,7 +6201,6 @@ module Aws::EC2
 
     class PurchaseScheduledInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6691,7 +6214,6 @@ module Aws::EC2
 
     class RebootInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6705,7 +6227,6 @@ module Aws::EC2
 
     class RegisterImage
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6719,7 +6240,6 @@ module Aws::EC2
 
     class RegisterInstanceEventNotificationAttributes
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6733,7 +6253,6 @@ module Aws::EC2
 
     class RegisterTransitGatewayMulticastGroupMembers
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6747,7 +6266,6 @@ module Aws::EC2
 
     class RegisterTransitGatewayMulticastGroupSources
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6761,7 +6279,6 @@ module Aws::EC2
 
     class RejectTransitGatewayMulticastDomainAssociations
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6775,7 +6292,6 @@ module Aws::EC2
 
     class RejectTransitGatewayPeeringAttachment
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6789,7 +6305,6 @@ module Aws::EC2
 
     class RejectTransitGatewayVpcAttachment
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6803,7 +6318,6 @@ module Aws::EC2
 
     class RejectVpcEndpointConnections
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6817,7 +6331,6 @@ module Aws::EC2
 
     class RejectVpcPeeringConnection
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6831,7 +6344,6 @@ module Aws::EC2
 
     class ReleaseAddress
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6845,7 +6357,6 @@ module Aws::EC2
 
     class ReleaseHosts
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6859,7 +6370,6 @@ module Aws::EC2
 
     class ReleaseIpamPoolAllocation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6873,7 +6383,6 @@ module Aws::EC2
 
     class ReplaceIamInstanceProfileAssociation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6887,7 +6396,6 @@ module Aws::EC2
 
     class ReplaceNetworkAclAssociation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6901,7 +6409,6 @@ module Aws::EC2
 
     class ReplaceNetworkAclEntry
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6915,7 +6422,6 @@ module Aws::EC2
 
     class ReplaceRoute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6929,7 +6435,6 @@ module Aws::EC2
 
     class ReplaceRouteTableAssociation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6943,7 +6448,6 @@ module Aws::EC2
 
     class ReplaceTransitGatewayRoute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6957,7 +6461,6 @@ module Aws::EC2
 
     class ReportInstanceStatus
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6971,7 +6474,6 @@ module Aws::EC2
 
     class RequestSpotFleet
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6985,7 +6487,6 @@ module Aws::EC2
 
     class RequestSpotInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -6999,7 +6500,6 @@ module Aws::EC2
 
     class ResetAddressAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7013,7 +6513,6 @@ module Aws::EC2
 
     class ResetEbsDefaultKmsKeyId
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7027,7 +6526,6 @@ module Aws::EC2
 
     class ResetFpgaImageAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7041,7 +6539,6 @@ module Aws::EC2
 
     class ResetImageAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7055,7 +6552,6 @@ module Aws::EC2
 
     class ResetInstanceAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7069,7 +6565,6 @@ module Aws::EC2
 
     class ResetNetworkInterfaceAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7083,7 +6578,6 @@ module Aws::EC2
 
     class ResetSnapshotAttribute
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7097,7 +6591,6 @@ module Aws::EC2
 
     class RestoreAddressToClassic
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7111,7 +6604,6 @@ module Aws::EC2
 
     class RestoreImageFromRecycleBin
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7125,7 +6617,6 @@ module Aws::EC2
 
     class RestoreManagedPrefixListVersion
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7139,7 +6630,6 @@ module Aws::EC2
 
     class RestoreSnapshotFromRecycleBin
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7153,7 +6643,6 @@ module Aws::EC2
 
     class RestoreSnapshotTier
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7167,7 +6656,6 @@ module Aws::EC2
 
     class RevokeClientVpnIngress
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7181,7 +6669,6 @@ module Aws::EC2
 
     class RevokeSecurityGroupEgress
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7195,7 +6682,6 @@ module Aws::EC2
 
     class RevokeSecurityGroupIngress
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7209,7 +6695,6 @@ module Aws::EC2
 
     class RunInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7223,7 +6708,6 @@ module Aws::EC2
 
     class RunScheduledInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7237,7 +6721,6 @@ module Aws::EC2
 
     class SearchLocalGatewayRoutes
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7251,7 +6734,6 @@ module Aws::EC2
 
     class SearchTransitGatewayMulticastGroups
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7265,7 +6747,6 @@ module Aws::EC2
 
     class SearchTransitGatewayRoutes
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7279,7 +6760,6 @@ module Aws::EC2
 
     class SendDiagnosticInterrupt
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7293,7 +6773,6 @@ module Aws::EC2
 
     class StartInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7307,7 +6786,6 @@ module Aws::EC2
 
     class StartNetworkInsightsAccessScopeAnalysis
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7321,7 +6799,6 @@ module Aws::EC2
 
     class StartNetworkInsightsAnalysis
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7335,7 +6812,6 @@ module Aws::EC2
 
     class StartVpcEndpointServicePrivateDnsVerification
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7349,7 +6825,6 @@ module Aws::EC2
 
     class StopInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7363,7 +6838,6 @@ module Aws::EC2
 
     class TerminateClientVpnConnections
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7377,7 +6851,6 @@ module Aws::EC2
 
     class TerminateInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7391,7 +6864,6 @@ module Aws::EC2
 
     class UnassignIpv6Addresses
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7405,7 +6877,6 @@ module Aws::EC2
 
     class UnassignPrivateIpAddresses
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7419,7 +6890,6 @@ module Aws::EC2
 
     class UnmonitorInstances
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7433,7 +6903,6 @@ module Aws::EC2
 
     class UpdateSecurityGroupRuleDescriptionsEgress
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7447,7 +6916,6 @@ module Aws::EC2
 
     class UpdateSecurityGroupRuleDescriptionsIngress
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -7461,7 +6929,6 @@ module Aws::EC2
 
     class WithdrawByoipCidr
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end

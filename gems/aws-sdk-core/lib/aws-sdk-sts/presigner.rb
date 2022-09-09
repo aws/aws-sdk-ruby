@@ -38,13 +38,29 @@ module Aws
       # {https://ruby-doc.org/stdlib-2.3.1/libdoc/base64/rdoc/Base64.html#method-i-encode64}
       # "k8s-aws-v1." + Base64.urlsafe_encode64(url).chomp("==")
       def get_caller_identity_presigned_url(options = {})
-        req = @client.build_request(:get_session_token, {})
+        req = @client.build_request(:get_caller_identity, {})
+        context = req.context
 
         param_list = Aws::Query::ParamList.new
         param_list.set('Action', 'GetCallerIdentity')
         param_list.set('Version', req.context.config.api.version)
         Aws::Query::EC2ParamBuilder.new(param_list)
           .apply(req.context.operation.input, {})
+
+        # endpoint_params = Aws::STS::EndpointParameters.new(
+        #   region: context.config.region,
+        #   use_dual_stack: context.config.use_dualstack_endpoint,
+        #   use_fips: context.config.use_fips_endpoint
+        # )
+        # endpoint = context.config.endpoint_provider
+        #                   .resolve_endpoint(endpoint_params)
+        # auth_scheme = Aws::Endpoints.resolve_auth_scheme(context, endpoint)
+        #
+        # signer = Aws::Sigv4::Signer.new(
+        #   service: auth_scheme['signingName'] || 'sts',
+        #   region: auth_scheme['signingRegion'] || params[:source_region],
+        #   credentials_provider: context.config.credentials
+        # )
 
         signer = Aws::Sigv4::Signer.new(
           service: 'sts',

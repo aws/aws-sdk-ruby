@@ -367,6 +367,19 @@ module Aws::S3
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_accelerate_endpoint (false)
     #             When set to `true`, accelerated bucket endpoints will be used
     #             for all object operations. You must first enable accelerate for
@@ -385,7 +398,7 @@ module Aws::S3
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
-    #   @option options [Aws::S3::EndpointProvider] :endpoint_provider
+    #   @option options [Aws::S3::EndpointProvider, nil] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::S3::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send

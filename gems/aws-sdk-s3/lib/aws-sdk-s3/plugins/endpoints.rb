@@ -13,26 +13,35 @@ module Aws::S3
     class Endpoints < Seahorse::Client::Plugin
       option(
         :endpoint_provider,
-        doc_type: 'Aws::S3::EndpointProvider',
+        doc_type: 'Aws::S3::EndpointProvider, nil',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
                    '`Aws::S3::EndpointParameters`'
-      ) do
-        Aws::S3::EndpointProvider.new
+      ) do |cfg|
+        if Aws::S3::EndpointProvider.endpoint_rules
+          Aws::S3::EndpointProvider.new
+        end
       end
 
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          params = parameters_for_operation(context)
-          endpoint = context.config.endpoint_provider.resolve_endpoint(params)
+          if (provider = context.config.endpoint_provider)
+            params = parameters_for_operation(context)
+            endpoint = provider.resolve_endpoint(params)
+          else
+            endpoint = Aws::Endpoints::Endpoint.new(
+              # Seahorse sets this first.
+              url: context.http_request.endpoint
+            )
+          end
 
-          apply_endpoint_properties(context, endpoint)
+          context.http_request.endpoint = endpoint.url
+          apply_endpoint_headers(context, endpoint.headers)
 
           context[:endpoint] = {
             params: params,
-            endpoint: endpoint,
             auth_scheme: Aws::Endpoints.resolve_auth_scheme(context, endpoint)
           }
 
@@ -41,9 +50,8 @@ module Aws::S3
 
         private
 
-        def apply_endpoint_properties(context, endpoint)
-          context.http_request.endpoint = endpoint.url
-          endpoint.headers.each do |key, val|
+        def apply_endpoint_headers(context, headers)
+          headers.each do |key, val|
             joined = val
                        .compact
                        .map do |s|

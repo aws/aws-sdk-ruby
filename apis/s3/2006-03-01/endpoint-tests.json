@@ -3942,19 +3942,7 @@
         {
             "documentation": "outposts arn with partition mismatch and UseArnRegion=true",
             "expect": {
-                "endpoint": {
-                    "properties": {
-                        "authSchemes": [
-                            {
-                                "name": "sigv4",
-                                "signingName": "s3-outposts",
-                                "signingRegion": "cn-north-1",
-                                "disableDoubleEncoding": true
-                            }
-                        ]
-                    },
-                    "url": "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.cn-north-1.amazonaws.com.cn"
-                }
+                "error": "Client was configured for partition `aws` but ARN (`arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint`) has `aws-cn`"
             },
             "operationInputs": [
                 {
@@ -4229,19 +4217,7 @@
         {
             "documentation": "object lambda @cn-north-1, client region us-west-2 (cross partition), useArnRegion=true",
             "expect": {
-                "endpoint": {
-                    "properties": {
-                        "authSchemes": [
-                            {
-                                "name": "sigv4",
-                                "signingName": "s3-object-lambda",
-                                "signingRegion": "cn-north-1",
-                                "disableDoubleEncoding": true
-                            }
-                        ]
-                    },
-                    "url": "https://mybanner-123456789012.s3-object-lambda.cn-north-1.amazonaws.com.cn"
-                }
+                "error": "Client was configured for partition `aws` but ARN (`arn:aws-cn:s3-object-lambda:cn-north-1:123456789012:accesspoint/mybanner`) has `aws-cn`"
             },
             "params": {
                 "Region": "aws-global",

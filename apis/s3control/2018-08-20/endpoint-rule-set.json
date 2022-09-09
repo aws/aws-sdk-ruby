@@ -53,7 +53,7 @@
             "type": "String"
         },
         "UseArnRegion": {
-            "builtIn": "AWS::S3::UseArnRegion",
+            "builtIn": "AWS::S3Control::UseArnRegion",
             "required": false,
             "documentation": "When an Access Point ARN is provided and this flag is enabled, the SDK MUST use the ARN's region when constructing the endpoint instead of the client's configured region.",
             "type": "Boolean"
@@ -305,9 +305,9 @@
                                                                                                                             "authSchemes": [
                                                                                                                                 {
                                                                                                                                     "name": "sigv4",
+                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                     "signingName": "s3-outposts",
-                                                                                                                                    "signingRegion": "{Region}",
-                                                                                                                                    "disableDoubleEncoding": true
+                                                                                                                                    "signingRegion": "{Region}"
                                                                                                                                 }
                                                                                                                             ]
                                                                                                                         },
@@ -333,9 +333,9 @@
                                                                                                                             "authSchemes": [
                                                                                                                                 {
                                                                                                                                     "name": "sigv4",
+                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                     "signingName": "s3-outposts",
-                                                                                                                                    "signingRegion": "{Region}",
-                                                                                                                                    "disableDoubleEncoding": true
+                                                                                                                                    "signingRegion": "{Region}"
                                                                                                                                 }
                                                                                                                             ]
                                                                                                                         },
@@ -351,9 +351,9 @@
                                                                                                                             "authSchemes": [
                                                                                                                                 {
                                                                                                                                     "name": "sigv4",
+                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                     "signingName": "s3-outposts",
-                                                                                                                                    "signingRegion": "{Region}",
-                                                                                                                                    "disableDoubleEncoding": true
+                                                                                                                                    "signingRegion": "{Region}"
                                                                                                                                 }
                                                                                                                             ]
                                                                                                                         },
@@ -571,16 +571,10 @@
                                                                                                                     "fn": "aws.partition",
                                                                                                                     "argv": [
                                                                                                                         {
-                                                                                                                            "fn": "getAttr",
-                                                                                                                            "argv": [
-                                                                                                                                {
-                                                                                                                                    "ref": "accessPointArn"
-                                                                                                                                },
-                                                                                                                                "region"
-                                                                                                                            ]
+                                                                                                                            "ref": "Region"
                                                                                                                         }
                                                                                                                     ],
-                                                                                                                    "assign": "arnPartition"
+                                                                                                                    "assign": "partitionResult"
                                                                                                                 }
                                                                                                             ],
                                                                                                             "type": "tree",
@@ -592,7 +586,7 @@
                                                                                                                         {
                                                                                                                             "conditions": [
                                                                                                                                 {
-                                                                                                                                    "fn": "isValidHostLabel",
+                                                                                                                                    "fn": "aws.partition",
                                                                                                                                     "argv": [
                                                                                                                                         {
                                                                                                                                             "fn": "getAttr",
@@ -602,9 +596,9 @@
                                                                                                                                                 },
                                                                                                                                                 "region"
                                                                                                                                             ]
-                                                                                                                                        },
-                                                                                                                                        true
-                                                                                                                                    ]
+                                                                                                                                        }
+                                                                                                                                    ],
+                                                                                                                                    "assign": "arnPartition"
                                                                                                                                 }
                                                                                                                             ],
                                                                                                                             "type": "tree",
@@ -616,23 +610,18 @@
                                                                                                                                         {
                                                                                                                                             "conditions": [
                                                                                                                                                 {
-                                                                                                                                                    "fn": "not",
+                                                                                                                                                    "fn": "stringEquals",
                                                                                                                                                     "argv": [
                                                                                                                                                         {
-                                                                                                                                                            "fn": "stringEquals",
+                                                                                                                                                            "fn": "getAttr",
                                                                                                                                                             "argv": [
                                                                                                                                                                 {
-                                                                                                                                                                    "fn": "getAttr",
-                                                                                                                                                                    "argv": [
-                                                                                                                                                                        {
-                                                                                                                                                                            "ref": "accessPointArn"
-                                                                                                                                                                        },
-                                                                                                                                                                        "accountId"
-                                                                                                                                                                    ]
+                                                                                                                                                                    "ref": "arnPartition"
                                                                                                                                                                 },
-                                                                                                                                                                ""
+                                                                                                                                                                "name"
                                                                                                                                                             ]
-                                                                                                                                                        }
+                                                                                                                                                        },
+                                                                                                                                                        "{partitionResult#name}"
                                                                                                                                                     ]
                                                                                                                                                 }
                                                                                                                                             ],
@@ -653,10 +642,10 @@
                                                                                                                                                                                 {
                                                                                                                                                                                     "ref": "accessPointArn"
                                                                                                                                                                                 },
-                                                                                                                                                                                "accountId"
+                                                                                                                                                                                "region"
                                                                                                                                                                             ]
                                                                                                                                                                         },
-                                                                                                                                                                        false
+                                                                                                                                                                        true
                                                                                                                                                                     ]
                                                                                                                                                                 }
                                                                                                                                                             ],
@@ -669,69 +658,84 @@
                                                                                                                                                                         {
                                                                                                                                                                             "conditions": [
                                                                                                                                                                                 {
-                                                                                                                                                                                    "fn": "isSet",
-                                                                                                                                                                                    "argv": [
-                                                                                                                                                                                        {
-                                                                                                                                                                                            "ref": "AccountId"
-                                                                                                                                                                                        }
-                                                                                                                                                                                    ]
-                                                                                                                                                                                },
-                                                                                                                                                                                {
                                                                                                                                                                                     "fn": "not",
                                                                                                                                                                                     "argv": [
                                                                                                                                                                                         {
                                                                                                                                                                                             "fn": "stringEquals",
                                                                                                                                                                                             "argv": [
                                                                                                                                                                                                 {
-                                                                                                                                                                                                    "ref": "AccountId"
+                                                                                                                                                                                                    "fn": "getAttr",
+                                                                                                                                                                                                    "argv": [
+                                                                                                                                                                                                        {
+                                                                                                                                                                                                            "ref": "accessPointArn"
+                                                                                                                                                                                                        },
+                                                                                                                                                                                                        "accountId"
+                                                                                                                                                                                                    ]
                                                                                                                                                                                                 },
-                                                                                                                                                                                                "{accessPointArn#accountId}"
+                                                                                                                                                                                                ""
                                                                                                                                                                                             ]
                                                                                                                                                                                         }
                                                                                                                                                                                     ]
                                                                                                                                                                                 }
                                                                                                                                                                             ],
-                                                                                                                                                                            "error": "Invalid ARN: the accountId specified in the ARN (`{accessPointArn#accountId}`) does not match the parameter (`{AccountId}`)",
-                                                                                                                                                                            "type": "error"
-                                                                                                                                                                        },
-                                                                                                                                                                        {
-                                                                                                                                                                            "conditions": [],
                                                                                                                                                                             "type": "tree",
                                                                                                                                                                             "rules": [
                                                                                                                                                                                 {
-                                                                                                                                                                                    "conditions": [
-                                                                                                                                                                                        {
-                                                                                                                                                                                            "fn": "getAttr",
-                                                                                                                                                                                            "argv": [
-                                                                                                                                                                                                {
-                                                                                                                                                                                                    "ref": "accessPointArn"
-                                                                                                                                                                                                },
-                                                                                                                                                                                                "resourceId[2]"
-                                                                                                                                                                                            ],
-                                                                                                                                                                                            "assign": "outpostType"
-                                                                                                                                                                                        }
-                                                                                                                                                                                    ],
+                                                                                                                                                                                    "conditions": [],
                                                                                                                                                                                     "type": "tree",
                                                                                                                                                                                     "rules": [
                                                                                                                                                                                         {
-                                                                                                                                                                                            "conditions": [],
-                                                                                                                                                                                            "type": "tree",
-                                                                                                                                                                                            "rules": [
+                                                                                                                                                                                            "conditions": [
                                                                                                                                                                                                 {
-                                                                                                                                                                                                    "conditions": [
+                                                                                                                                                                                                    "fn": "isValidHostLabel",
+                                                                                                                                                                                                    "argv": [
                                                                                                                                                                                                         {
                                                                                                                                                                                                             "fn": "getAttr",
                                                                                                                                                                                                             "argv": [
                                                                                                                                                                                                                 {
                                                                                                                                                                                                                     "ref": "accessPointArn"
                                                                                                                                                                                                                 },
-                                                                                                                                                                                                                "resourceId[3]"
-                                                                                                                                                                                                            ],
-                                                                                                                                                                                                            "assign": "accessPointName"
-                                                                                                                                                                                                        }
-                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                "accountId"
+                                                                                                                                                                                                            ]
+                                                                                                                                                                                                        },
+                                                                                                                                                                                                        false
+                                                                                                                                                                                                    ]
+                                                                                                                                                                                                }
+                                                                                                                                                                                            ],
+                                                                                                                                                                                            "type": "tree",
+                                                                                                                                                                                            "rules": [
+                                                                                                                                                                                                {
+                                                                                                                                                                                                    "conditions": [],
                                                                                                                                                                                                     "type": "tree",
                                                                                                                                                                                                     "rules": [
+                                                                                                                                                                                                        {
+                                                                                                                                                                                                            "conditions": [
+                                                                                                                                                                                                                {
+                                                                                                                                                                                                                    "fn": "isSet",
+                                                                                                                                                                                                                    "argv": [
+                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                            "ref": "AccountId"
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                },
+                                                                                                                                                                                                                {
+                                                                                                                                                                                                                    "fn": "not",
+                                                                                                                                                                                                                    "argv": [
+                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                            "fn": "stringEquals",
+                                                                                                                                                                                                                            "argv": [
+                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                    "ref": "AccountId"
+                                                                                                                                                                                                                                },
+                                                                                                                                                                                                                                "{accessPointArn#accountId}"
+                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                            ],
+                                                                                                                                                                                                            "error": "Invalid ARN: the accountId specified in the ARN (`{accessPointArn#accountId}`) does not match the parameter (`{AccountId}`)",
+                                                                                                                                                                                                            "type": "error"
+                                                                                                                                                                                                        },
                                                                                                                                                                                                         {
                                                                                                                                                                                                             "conditions": [],
                                                                                                                                                                                                             "type": "tree",
@@ -739,13 +743,14 @@
                                                                                                                                                                                                                 {
                                                                                                                                                                                                                     "conditions": [
                                                                                                                                                                                                                         {
-                                                                                                                                                                                                                            "fn": "stringEquals",
+                                                                                                                                                                                                                            "fn": "getAttr",
                                                                                                                                                                                                                             "argv": [
                                                                                                                                                                                                                                 {
-                                                                                                                                                                                                                                    "ref": "outpostType"
+                                                                                                                                                                                                                                    "ref": "accessPointArn"
                                                                                                                                                                                                                                 },
-                                                                                                                                                                                                                                "accesspoint"
-                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                "resourceId[2]"
+                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                            "assign": "outpostType"
                                                                                                                                                                                                                         }
                                                                                                                                                                                                                     ],
                                                                                                                                                                                                                     "type": "tree",
@@ -757,105 +762,160 @@
                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                     "conditions": [
                                                                                                                                                                                                                                         {
-                                                                                                                                                                                                                                            "fn": "booleanEquals",
+                                                                                                                                                                                                                                            "fn": "getAttr",
                                                                                                                                                                                                                                             "argv": [
                                                                                                                                                                                                                                                 {
-                                                                                                                                                                                                                                                    "ref": "UseFIPS"
+                                                                                                                                                                                                                                                    "ref": "accessPointArn"
                                                                                                                                                                                                                                                 },
-                                                                                                                                                                                                                                                true
-                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                "resourceId[3]"
+                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                            "assign": "accessPointName"
                                                                                                                                                                                                                                         }
                                                                                                                                                                                                                                     ],
-                                                                                                                                                                                                                                    "endpoint": {
-                                                                                                                                                                                                                                        "url": "https://s3-outposts-fips.{accessPointArn#region}.{arnPartition#dnsSuffix}",
-                                                                                                                                                                                                                                        "properties": {
-                                                                                                                                                                                                                                            "authSchemes": [
-                                                                                                                                                                                                                                                {
-                                                                                                                                                                                                                                                    "name": "sigv4",
-                                                                                                                                                                                                                                                    "signingName": "s3-outposts",
-                                                                                                                                                                                                                                                    "signingRegion": "{accessPointArn#region}",
-                                                                                                                                                                                                                                                    "disableDoubleEncoding": true
-                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                            ]
-                                                                                                                                                                                                                                        },
-                                                                                                                                                                                                                                        "headers": {
-                                                                                                                                                                                                                                            "x-amz-account-id": [
-                                                                                                                                                                                                                                                "{accessPointArn#accountId}"
-                                                                                                                                                                                                                                            ],
-                                                                                                                                                                                                                                            "x-amz-outpost-id": [
-                                                                                                                                                                                                                                                "{outpostId}"
-                                                                                                                                                                                                                                            ]
-                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                    },
-                                                                                                                                                                                                                                    "type": "endpoint"
-                                                                                                                                                                                                                                },
-                                                                                                                                                                                                                                {
-                                                                                                                                                                                                                                    "conditions": [
+                                                                                                                                                                                                                                    "type": "tree",
+                                                                                                                                                                                                                                    "rules": [
                                                                                                                                                                                                                                         {
-                                                                                                                                                                                                                                            "fn": "isSet",
-                                                                                                                                                                                                                                            "argv": [
+                                                                                                                                                                                                                                            "conditions": [],
+                                                                                                                                                                                                                                            "type": "tree",
+                                                                                                                                                                                                                                            "rules": [
                                                                                                                                                                                                                                                 {
-                                                                                                                                                                                                                                                    "ref": "Endpoint"
+                                                                                                                                                                                                                                                    "conditions": [
+                                                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                                                            "fn": "stringEquals",
+                                                                                                                                                                                                                                                            "argv": [
+                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                    "ref": "outpostType"
+                                                                                                                                                                                                                                                                },
+                                                                                                                                                                                                                                                                "accesspoint"
+                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                                                    "type": "tree",
+                                                                                                                                                                                                                                                    "rules": [
+                                                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                                                            "conditions": [],
+                                                                                                                                                                                                                                                            "type": "tree",
+                                                                                                                                                                                                                                                            "rules": [
+                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                    "conditions": [
+                                                                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                                                                            "fn": "booleanEquals",
+                                                                                                                                                                                                                                                                            "argv": [
+                                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                                    "ref": "UseFIPS"
+                                                                                                                                                                                                                                                                                },
+                                                                                                                                                                                                                                                                                true
+                                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                                                                    "endpoint": {
+                                                                                                                                                                                                                                                                        "url": "https://s3-outposts-fips.{accessPointArn#region}.{arnPartition#dnsSuffix}",
+                                                                                                                                                                                                                                                                        "properties": {
+                                                                                                                                                                                                                                                                            "authSchemes": [
+                                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                                    "name": "sigv4",
+                                                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
+                                                                                                                                                                                                                                                                                    "signingName": "s3-outposts",
+                                                                                                                                                                                                                                                                                    "signingRegion": "{accessPointArn#region}"
+                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                                        },
+                                                                                                                                                                                                                                                                        "headers": {
+                                                                                                                                                                                                                                                                            "x-amz-account-id": [
+                                                                                                                                                                                                                                                                                "{accessPointArn#accountId}"
+                                                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                                                            "x-amz-outpost-id": [
+                                                                                                                                                                                                                                                                                "{outpostId}"
+                                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                    },
+                                                                                                                                                                                                                                                                    "type": "endpoint"
+                                                                                                                                                                                                                                                                },
+                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                    "conditions": [
+                                                                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                                                                            "fn": "isSet",
+                                                                                                                                                                                                                                                                            "argv": [
+                                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                                    "ref": "Endpoint"
+                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                                        },
+                                                                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                                                                            "fn": "parseURL",
+                                                                                                                                                                                                                                                                            "argv": [
+                                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                                    "ref": "Endpoint"
+                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                                                            "assign": "url"
+                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                                                                    "endpoint": {
+                                                                                                                                                                                                                                                                        "url": "{url#scheme}://{url#authority}{url#path}",
+                                                                                                                                                                                                                                                                        "properties": {
+                                                                                                                                                                                                                                                                            "authSchemes": [
+                                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                                    "name": "sigv4",
+                                                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
+                                                                                                                                                                                                                                                                                    "signingName": "s3-outposts",
+                                                                                                                                                                                                                                                                                    "signingRegion": "{accessPointArn#region}"
+                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                                        },
+                                                                                                                                                                                                                                                                        "headers": {
+                                                                                                                                                                                                                                                                            "x-amz-account-id": [
+                                                                                                                                                                                                                                                                                "{accessPointArn#accountId}"
+                                                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                                                            "x-amz-outpost-id": [
+                                                                                                                                                                                                                                                                                "{outpostId}"
+                                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                    },
+                                                                                                                                                                                                                                                                    "type": "endpoint"
+                                                                                                                                                                                                                                                                },
+                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                    "conditions": [],
+                                                                                                                                                                                                                                                                    "endpoint": {
+                                                                                                                                                                                                                                                                        "url": "https://s3-outposts.{accessPointArn#region}.{arnPartition#dnsSuffix}",
+                                                                                                                                                                                                                                                                        "properties": {
+                                                                                                                                                                                                                                                                            "authSchemes": [
+                                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                                    "name": "sigv4",
+                                                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
+                                                                                                                                                                                                                                                                                    "signingName": "s3-outposts",
+                                                                                                                                                                                                                                                                                    "signingRegion": "{accessPointArn#region}"
+                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                                        },
+                                                                                                                                                                                                                                                                        "headers": {
+                                                                                                                                                                                                                                                                            "x-amz-account-id": [
+                                                                                                                                                                                                                                                                                "{accessPointArn#accountId}"
+                                                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                                                            "x-amz-outpost-id": [
+                                                                                                                                                                                                                                                                                "{outpostId}"
+                                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                    },
+                                                                                                                                                                                                                                                                    "type": "endpoint"
+                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                                },
+                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                    "conditions": [],
+                                                                                                                                                                                                                                                    "error": "Expected an outpost type `accesspoint`, found `{outpostType}`",
+                                                                                                                                                                                                                                                    "type": "error"
                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                             ]
-                                                                                                                                                                                                                                        },
-                                                                                                                                                                                                                                        {
-                                                                                                                                                                                                                                            "fn": "parseURL",
-                                                                                                                                                                                                                                            "argv": [
-                                                                                                                                                                                                                                                {
-                                                                                                                                                                                                                                                    "ref": "Endpoint"
-                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                            ],
-                                                                                                                                                                                                                                            "assign": "url"
                                                                                                                                                                                                                                         }
-                                                                                                                                                                                                                                    ],
-                                                                                                                                                                                                                                    "endpoint": {
-                                                                                                                                                                                                                                        "url": "{url#scheme}://{url#authority}{url#path}",
-                                                                                                                                                                                                                                        "properties": {
-                                                                                                                                                                                                                                            "authSchemes": [
-                                                                                                                                                                                                                                                {
-                                                                                                                                                                                                                                                    "name": "sigv4",
-                                                                                                                                                                                                                                                    "signingName": "s3-outposts",
-                                                                                                                                                                                                                                                    "signingRegion": "{accessPointArn#region}",
-                                                                                                                                                                                                                                                    "disableDoubleEncoding": true
-                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                            ]
-                                                                                                                                                                                                                                        },
-                                                                                                                                                                                                                                        "headers": {
-                                                                                                                                                                                                                                            "x-amz-account-id": [
-                                                                                                                                                                                                                                                "{accessPointArn#accountId}"
-                                                                                                                                                                                                                                            ],
-                                                                                                                                                                                                                                            "x-amz-outpost-id": [
-                                                                                                                                                                                                                                                "{outpostId}"
-                                                                                                                                                                                                                                            ]
-                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                    },
-                                                                                                                                                                                                                                    "type": "endpoint"
+                                                                                                                                                                                                                                    ]
                                                                                                                                                                                                                                 },
                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                     "conditions": [],
-                                                                                                                                                                                                                                    "endpoint": {
-                                                                                                                                                                                                                                        "url": "https://s3-outposts.{accessPointArn#region}.{arnPartition#dnsSuffix}",
-                                                                                                                                                                                                                                        "properties": {
-                                                                                                                                                                                                                                            "authSchemes": [
-                                                                                                                                                                                                                                                {
-                                                                                                                                                                                                                                                    "name": "sigv4",
-                                                                                                                                                                                                                                                    "signingName": "s3-outposts",
-                                                                                                                                                                                                                                                    "signingRegion": "{accessPointArn#region}",
-                                                                                                                                                                                                                                                    "disableDoubleEncoding": true
-                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                            ]
-                                                                                                                                                                                                                                        },
-                                                                                                                                                                                                                                        "headers": {
-                                                                                                                                                                                                                                            "x-amz-account-id": [
-                                                                                                                                                                                                                                                "{accessPointArn#accountId}"
-                                                                                                                                                                                                                                            ],
-                                                                                                                                                                                                                                            "x-amz-outpost-id": [
-                                                                                                                                                                                                                                                "{outpostId}"
-                                                                                                                                                                                                                                            ]
-                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                    },
-                                                                                                                                                                                                                                    "type": "endpoint"
+                                                                                                                                                                                                                                    "error": "Invalid ARN: expected an access point name",
+                                                                                                                                                                                                                                    "type": "error"
                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                             ]
                                                                                                                                                                                                                         }
@@ -863,28 +923,28 @@
                                                                                                                                                                                                                 },
                                                                                                                                                                                                                 {
                                                                                                                                                                                                                     "conditions": [],
-                                                                                                                                                                                                                    "error": "Expected an outpost type `accesspoint`, found `{outpostType}`",
+                                                                                                                                                                                                                    "error": "Invalid ARN: Expected a 4-component resource",
                                                                                                                                                                                                                     "type": "error"
                                                                                                                                                                                                                 }
                                                                                                                                                                                                             ]
                                                                                                                                                                                                         }
                                                                                                                                                                                                     ]
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                    "conditions": [],
-                                                                                                                                                                                                    "error": "Invalid ARN: expected an access point name",
-                                                                                                                                                                                                    "type": "error"
                                                                                                                                                                                                 }
                                                                                                                                                                                             ]
+                                                                                                                                                                                        },
+                                                                                                                                                                                        {
+                                                                                                                                                                                            "conditions": [],
+                                                                                                                                                                                            "error": "Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: `{accessPointArn#accountId}`",
+                                                                                                                                                                                            "type": "error"
                                                                                                                                                                                         }
                                                                                                                                                                                     ]
-                                                                                                                                                                                },
-                                                                                                                                                                                {
-                                                                                                                                                                                    "conditions": [],
-                                                                                                                                                                                    "error": "Invalid ARN: Expected a 4-component resource",
-                                                                                                                                                                                    "type": "error"
                                                                                                                                                                                 }
                                                                                                                                                                             ]
+                                                                                                                                                                        },
+                                                                                                                                                                        {
+                                                                                                                                                                            "conditions": [],
+                                                                                                                                                                            "error": "Invalid ARN: missing account ID",
+                                                                                                                                                                            "type": "error"
                                                                                                                                                                         }
                                                                                                                                                                     ]
                                                                                                                                                                 }
@@ -892,7 +952,7 @@
                                                                                                                                                         },
                                                                                                                                                         {
                                                                                                                                                             "conditions": [],
-                                                                                                                                                            "error": "Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: `{accessPointArn#accountId}`",
+                                                                                                                                                            "error": "Invalid region in ARN: `{accessPointArn#region}` (invalid DNS name)",
                                                                                                                                                             "type": "error"
                                                                                                                                                         }
                                                                                                                                                     ]
@@ -901,7 +961,7 @@
                                                                                                                                         },
                                                                                                                                         {
                                                                                                                                             "conditions": [],
-                                                                                                                                            "error": "Invalid ARN: missing account ID",
+                                                                                                                                            "error": "Client was configured for partition `{partitionResult#name}` but ARN has `{arnPartition#name}`",
                                                                                                                                             "type": "error"
                                                                                                                                         }
                                                                                                                                     ]
@@ -910,7 +970,7 @@
                                                                                                                         },
                                                                                                                         {
                                                                                                                             "conditions": [],
-                                                                                                                            "error": "Invalid region in ARN: `{accessPointArn#region}` (invalid DNS name)",
+                                                                                                                            "error": "Could not load partition for ARN region `{accessPointArn#region}`",
                                                                                                                             "type": "error"
                                                                                                                         }
                                                                                                                     ]
@@ -919,7 +979,7 @@
                                                                                                         },
                                                                                                         {
                                                                                                             "conditions": [],
-                                                                                                            "error": "Could not load partition for ARN region `{accessPointArn#region}`",
+                                                                                                            "error": "A valid partition could not be determined",
                                                                                                             "type": "error"
                                                                                                         }
                                                                                                     ]
@@ -1336,9 +1396,9 @@
                                                                                                                                                                                                                                             "authSchemes": [
                                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                                     "name": "sigv4",
+                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                                                                                                                     "signingName": "s3-outposts",
-                                                                                                                                                                                                                                                    "signingRegion": "{bucketArn#region}",
-                                                                                                                                                                                                                                                    "disableDoubleEncoding": true
+                                                                                                                                                                                                                                                    "signingRegion": "{bucketArn#region}"
                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                             ]
                                                                                                                                                                                                                                         },
@@ -1379,9 +1439,9 @@
                                                                                                                                                                                                                                             "authSchemes": [
                                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                                     "name": "sigv4",
+                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                                                                                                                     "signingName": "s3-outposts",
-                                                                                                                                                                                                                                                    "signingRegion": "{bucketArn#region}",
-                                                                                                                                                                                                                                                    "disableDoubleEncoding": true
+                                                                                                                                                                                                                                                    "signingRegion": "{bucketArn#region}"
                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                             ]
                                                                                                                                                                                                                                         },
@@ -1404,9 +1464,9 @@
                                                                                                                                                                                                                                             "authSchemes": [
                                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                                     "name": "sigv4",
+                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                                                                                                                     "signingName": "s3-outposts",
-                                                                                                                                                                                                                                                    "signingRegion": "{bucketArn#region}",
-                                                                                                                                                                                                                                                    "disableDoubleEncoding": true
+                                                                                                                                                                                                                                                    "signingRegion": "{bucketArn#region}"
                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                             ]
                                                                                                                                                                                                                                         },
@@ -1740,9 +1800,9 @@
                                                                                                                             "authSchemes": [
                                                                                                                                 {
                                                                                                                                     "name": "sigv4",
+                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                     "signingName": "s3",
-                                                                                                                                    "signingRegion": "{Region}",
-                                                                                                                                    "disableDoubleEncoding": true
+                                                                                                                                    "signingRegion": "{Region}"
                                                                                                                                 }
                                                                                                                             ]
                                                                                                                         },
@@ -1758,9 +1818,9 @@
                                                                                                                             "authSchemes": [
                                                                                                                                 {
                                                                                                                                     "name": "sigv4",
+                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                     "signingName": "s3",
-                                                                                                                                    "signingRegion": "{Region}",
-                                                                                                                                    "disableDoubleEncoding": true
+                                                                                                                                    "signingRegion": "{Region}"
                                                                                                                                 }
                                                                                                                             ]
                                                                                                                         },
@@ -1828,9 +1888,9 @@
                                                                                                                     "authSchemes": [
                                                                                                                         {
                                                                                                                             "name": "sigv4",
+                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                             "signingName": "s3",
-                                                                                                                            "signingRegion": "{Region}",
-                                                                                                                            "disableDoubleEncoding": true
+                                                                                                                            "signingRegion": "{Region}"
                                                                                                                         }
                                                                                                                     ]
                                                                                                                 },
@@ -1865,9 +1925,9 @@
                                                                                                                     "authSchemes": [
                                                                                                                         {
                                                                                                                             "name": "sigv4",
+                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                             "signingName": "s3",
-                                                                                                                            "signingRegion": "{Region}",
-                                                                                                                            "disableDoubleEncoding": true
+                                                                                                                            "signingRegion": "{Region}"
                                                                                                                         }
                                                                                                                     ]
                                                                                                                 },
@@ -1927,9 +1987,9 @@
                                                                                                                     "authSchemes": [
                                                                                                                         {
                                                                                                                             "name": "sigv4",
+                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                             "signingName": "s3",
-                                                                                                                            "signingRegion": "{Region}",
-                                                                                                                            "disableDoubleEncoding": true
+                                                                                                                            "signingRegion": "{Region}"
                                                                                                                         }
                                                                                                                     ]
                                                                                                                 },
@@ -1964,9 +2024,9 @@
                                                                                                                     "authSchemes": [
                                                                                                                         {
                                                                                                                             "name": "sigv4",
+                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                             "signingName": "s3",
-                                                                                                                            "signingRegion": "{Region}",
-                                                                                                                            "disableDoubleEncoding": true
+                                                                                                                            "signingRegion": "{Region}"
                                                                                                                         }
                                                                                                                     ]
                                                                                                                 },
@@ -2026,9 +2086,9 @@
                                                                                                                     "authSchemes": [
                                                                                                                         {
                                                                                                                             "name": "sigv4",
+                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                             "signingName": "s3",
-                                                                                                                            "signingRegion": "{Region}",
-                                                                                                                            "disableDoubleEncoding": true
+                                                                                                                            "signingRegion": "{Region}"
                                                                                                                         }
                                                                                                                     ]
                                                                                                                 },
@@ -2063,9 +2123,9 @@
                                                                                                                     "authSchemes": [
                                                                                                                         {
                                                                                                                             "name": "sigv4",
+                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                             "signingName": "s3",
-                                                                                                                            "signingRegion": "{Region}",
-                                                                                                                            "disableDoubleEncoding": true
+                                                                                                                            "signingRegion": "{Region}"
                                                                                                                         }
                                                                                                                     ]
                                                                                                                 },
@@ -2125,9 +2185,9 @@
                                                                                                                     "authSchemes": [
                                                                                                                         {
                                                                                                                             "name": "sigv4",
+                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                             "signingName": "s3",
-                                                                                                                            "signingRegion": "{Region}",
-                                                                                                                            "disableDoubleEncoding": true
+                                                                                                                            "signingRegion": "{Region}"
                                                                                                                         }
                                                                                                                     ]
                                                                                                                 },
@@ -2162,9 +2222,9 @@
                                                                                                                     "authSchemes": [
                                                                                                                         {
                                                                                                                             "name": "sigv4",
+                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                             "signingName": "s3",
-                                                                                                                            "signingRegion": "{Region}",
-                                                                                                                            "disableDoubleEncoding": true
+                                                                                                                            "signingRegion": "{Region}"
                                                                                                                         }
                                                                                                                     ]
                                                                                                                 },

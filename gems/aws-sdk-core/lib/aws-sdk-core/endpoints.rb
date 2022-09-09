@@ -7,8 +7,8 @@ require_relative 'endpoints/endpoint'
 require_relative 'endpoints/error_rule'
 require_relative 'endpoints/function'
 require_relative 'endpoints/matchers'
-require_relative 'endpoints/provider'
 require_relative 'endpoints/reference'
+require_relative 'endpoints/rules_provider'
 require_relative 'endpoints/rule_set'
 require_relative 'endpoints/templater'
 require_relative 'endpoints/tree_rule'
@@ -29,13 +29,13 @@ module Aws
           auth_scheme
         else
           case resolve_api_authtype(context)
-          when 'v4'
+          when 'v4', 'v4-unsigned-payload', 'v4-unsigned-body'
             { 'name' => 'sigv4' }
           when 's3v4'
             { 'name' => 'sigv4', 'disableDoubleEncoding' => true }
           when 'bearer'
             { 'name' => 'bearer' }
-          when 'none', nil # TODO: should we include nil here?
+          when 'none', nil
             { 'name' => 'none' }
           end
         end

@@ -103,7 +103,10 @@
       "endpoint":{
         "hostPrefix":"{AccountId}."
       },
-      "httpChecksumRequired":true
+      "httpChecksumRequired":true,
+      "staticContextParams":{
+        "RequiresAccountId":{"value":true}
+      }
     },
     "DeleteAccessPoint":{
       "name":"DeleteAccessPoint",
@@ -253,7 +256,10 @@
       "endpoint":{
         "hostPrefix":"{AccountId}."
       },
-      "httpChecksumRequired":true
+      "httpChecksumRequired":true,
+      "staticContextParams":{
+        "RequiresAccountId":{"value":true}
+      }
     },
     "DeletePublicAccessBlock":{
       "name":"DeletePublicAccessBlock",
@@ -330,7 +336,10 @@
       "endpoint":{
         "hostPrefix":"{AccountId}."
       },
-      "httpChecksumRequired":true
+      "httpChecksumRequired":true,
+      "staticContextParams":{
+        "RequiresAccountId":{"value":true}
+      }
     },
     "GetAccessPoint":{
       "name":"GetAccessPoint",
@@ -528,7 +537,10 @@
       "endpoint":{
         "hostPrefix":"{AccountId}."
       },
-      "httpChecksumRequired":true
+      "httpChecksumRequired":true,
+      "staticContextParams":{
+        "RequiresAccountId":{"value":true}
+      }
     },
     "GetMultiRegionAccessPointPolicy":{
       "name":"GetMultiRegionAccessPointPolicy",
@@ -541,7 +553,10 @@
       "endpoint":{
         "hostPrefix":"{AccountId}."
       },
-      "httpChecksumRequired":true
+      "httpChecksumRequired":true,
+      "staticContextParams":{
+        "RequiresAccountId":{"value":true}
+      }
     },
     "GetMultiRegionAccessPointPolicyStatus":{
       "name":"GetMultiRegionAccessPointPolicyStatus",
@@ -554,7 +569,10 @@
       "endpoint":{
         "hostPrefix":"{AccountId}."
       },
-      "httpChecksumRequired":true
+      "httpChecksumRequired":true,
+      "staticContextParams":{
+        "RequiresAccountId":{"value":true}
+      }
     },
     "GetPublicAccessBlock":{
       "name":"GetPublicAccessBlock",
@@ -665,7 +683,10 @@
       "endpoint":{
         "hostPrefix":"{AccountId}."
       },
-      "httpChecksumRequired":true
+      "httpChecksumRequired":true,
+      "staticContextParams":{
+        "RequiresAccountId":{"value":true}
+      }
     },
     "ListRegionalBuckets":{
       "name":"ListRegionalBuckets",
@@ -840,7 +861,10 @@
       "endpoint":{
         "hostPrefix":"{AccountId}."
       },
-      "httpChecksumRequired":true
+      "httpChecksumRequired":true,
+      "staticContextParams":{
+        "RequiresAccountId":{"value":true}
+      }
     },
     "PutPublicAccessBlock":{
       "name":"PutPublicAccessBlock",
@@ -1349,6 +1373,7 @@
       "members":{
         "AccountId":{
           "shape":"AccountId",
+          "contextParam":{"name":"AccountId"},
           "hostLabel":true,
           "location":"header",
           "locationName":"x-amz-account-id"
@@ -1588,6 +1613,7 @@
       "members":{
         "AccountId":{
           "shape":"AccountId",
+          "contextParam":{"name":"AccountId"},
           "hostLabel":true,
           "location":"header",
           "locationName":"x-amz-account-id"
@@ -1701,6 +1727,7 @@
       "members":{
         "AccountId":{
           "shape":"AccountId",
+          "contextParam":{"name":"AccountId"},
           "hostLabel":true,
           "location":"header",
           "locationName":"x-amz-account-id"
@@ -2158,6 +2185,7 @@
       "members":{
         "AccountId":{
           "shape":"AccountId",
+          "contextParam":{"name":"AccountId"},
           "hostLabel":true,
           "location":"header",
           "locationName":"x-amz-account-id"
@@ -2184,6 +2212,7 @@
       "members":{
         "AccountId":{
           "shape":"AccountId",
+          "contextParam":{"name":"AccountId"},
           "hostLabel":true,
           "location":"header",
           "locationName":"x-amz-account-id"
@@ -2843,6 +2872,7 @@
       "members":{
         "AccountId":{
           "shape":"AccountId",
+          "contextParam":{"name":"AccountId"},
           "hostLabel":true,
           "location":"header",
           "locationName":"x-amz-account-id"
@@ -3470,6 +3500,7 @@
       "members":{
         "AccountId":{
           "shape":"AccountId",
+          "contextParam":{"name":"AccountId"},
           "hostLabel":true,
           "location":"header",
           "locationName":"x-amz-account-id"

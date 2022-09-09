@@ -782,7 +782,7 @@ module Aws::S3Control
 
     it 'outpost accesspoint ARN with missing accountId' do
       expect = {"error"=>"Invalid ARN: missing account ID"}
-      params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2::outpost:op-01234567890123456:outpost:op1", :region=>"us-west-2", :requires_account_id=>true, :s3_control_use_arn_region=>false, :use_dual_stack=>false, :use_fips=>false})
+      params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2::outpost:op-01234567890123456:outpost:op1", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
       expect do
         subject.resolve_endpoint(params)
       end.to raise_error(ArgumentError, expect['error'])
@@ -790,7 +790,7 @@ module Aws::S3Control
 
     it 'bucket ARN with missing accountId' do
       expect = {"error"=>"Invalid ARN: missing account ID"}
-      params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2::outpost:op-01234567890123456:bucket:mybucket", :region=>"us-west-2", :requires_account_id=>true, :s3_control_use_arn_region=>false, :use_dual_stack=>false, :use_fips=>false})
+      params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2::outpost:op-01234567890123456:bucket:mybucket", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
       expect do
         subject.resolve_endpoint(params)
       end.to raise_error(ArgumentError, expect['error'])
@@ -848,7 +848,7 @@ module Aws::S3Control
 
     it 'bucket ARN with mismatched accountId' do
       expect = {"error"=>"Invalid ARN: the accountId specified in the ARN (`999999`) does not match the parameter (`0123456789012`)"}
-      params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:999999:outpost:op-01234567890123456:bucket:mybucket", :account_id=>"0123456789012", :region=>"us-west-2", :requires_account_id=>true, :s3_control_use_arn_region=>false, :use_dual_stack=>false, :use_fips=>false})
+      params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:999999:outpost:op-01234567890123456:bucket:mybucket", :account_id=>"0123456789012", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
       expect do
         subject.resolve_endpoint(params)
       end.to raise_error(ArgumentError, expect['error'])
@@ -906,12 +906,11 @@ module Aws::S3Control
     end
 
     it 'Accesspoint ARN with partition mismatch and UseArnRegion=true' do
-      expect = {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.cn-north-1.amazonaws.com.cn"}}
+      expect = {"error"=>"Client was configured for partition `aws` but ARN has `aws-cn`"}
       params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_arn_region=>true, :use_fips=>false})
-      endpoint = subject.resolve_endpoint(params)
-      expect(endpoint.url).to eq(expect['endpoint']['url'])
-      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect do
+        subject.resolve_endpoint(params)
+      end.to raise_error(ArgumentError, expect['error'])
     end
 
     it 'Accesspoint ARN with region mismatch, UseArnRegion=false and custom endpoint' do

@@ -26,12 +26,16 @@ be a URI formatted like:
 
         def after_initialize(client)
           endpoint = client.config.endpoint
-          endpoint = URI.parse(endpoint) if endpoint.is_a?(String)
-          if endpoint.nil? || URI::HTTP === endpoint || URI::HTTPS === endpoint
+          if endpoint.nil?
+            msg = "missing required option `:endpoint'"
+            raise ArgumentError, msg
+          end
+
+          endpoint = URI.parse(endpoint.to_s)
+          if URI::HTTPS === endpoint or URI::HTTP === endpoint
             client.config.endpoint = endpoint
           else
-            msg = 'invalid endpoint, expected URI::HTTP, URI::HTTPS, or nil, '\
-                  "got #{endpoint.inspect}"
+            msg = 'expected :endpoint to be a HTTP or HTTPS endpoint'
             raise ArgumentError, msg
           end
         end

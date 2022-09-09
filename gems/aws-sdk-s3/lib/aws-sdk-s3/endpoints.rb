@@ -1271,7 +1271,7 @@ module Aws::S3
           endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
-          bucket: nil,
+          bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
@@ -1491,7 +1491,7 @@ module Aws::S3
           endpoint = context.config.endpoint.to_s
         end
         Aws::S3::EndpointParameters.new(
-          bucket: nil,
+          bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],

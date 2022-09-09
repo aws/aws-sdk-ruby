@@ -2683,7 +2683,6 @@
                 "AccessPointName": "arn:aws:s3-outposts:us-west-2::outpost:op-01234567890123456:outpost:op1",
                 "Region": "us-west-2",
                 "RequiresAccountId": true,
-                "S3Control::UseArnRegion": false,
                 "UseDualStack": false,
                 "UseFIPS": false
             }
@@ -2706,7 +2705,6 @@
                 "AccessPointName": "arn:aws:s3-outposts:us-west-2::outpost:op-01234567890123456:bucket:mybucket",
                 "Region": "us-west-2",
                 "RequiresAccountId": true,
-                "S3Control::UseArnRegion": false,
                 "UseDualStack": false,
                 "UseFIPS": false
             }
@@ -2887,7 +2885,6 @@
                 "AccountId": "0123456789012",
                 "Region": "us-west-2",
                 "RequiresAccountId": true,
-                "S3Control::UseArnRegion": false,
                 "UseDualStack": false,
                 "UseFIPS": false
             }
@@ -3091,27 +3088,7 @@
         {
             "documentation": "Accesspoint ARN with partition mismatch and UseArnRegion=true",
             "expect": {
-                "endpoint": {
-                    "headers": {
-                        "x-amz-account-id": [
-                            "123456789012"
-                        ],
-                        "x-amz-outpost-id": [
-                            "op-01234567890123456"
-                        ]
-                    },
-                    "properties": {
-                        "authSchemes": [
-                            {
-                                "name": "sigv4",
-                                "signingName": "s3-outposts",
-                                "signingRegion": "cn-north-1",
-                                "disableDoubleEncoding": true
-                            }
-                        ]
-                    },
-                    "url": "https://s3-outposts.cn-north-1.amazonaws.com.cn"
-                }
+                "error": "Client was configured for partition `aws` but ARN has `aws-cn`"
             },
             "operationInputs": [
                 {

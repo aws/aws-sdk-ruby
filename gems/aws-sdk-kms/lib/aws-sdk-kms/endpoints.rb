@@ -13,7 +13,6 @@ module Aws::KMS
 
     class CancelKeyDeletion
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -27,7 +26,6 @@ module Aws::KMS
 
     class ConnectCustomKeyStore
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -41,7 +39,6 @@ module Aws::KMS
 
     class CreateAlias
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -55,7 +52,6 @@ module Aws::KMS
 
     class CreateCustomKeyStore
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -69,7 +65,6 @@ module Aws::KMS
 
     class CreateGrant
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -83,7 +78,6 @@ module Aws::KMS
 
     class CreateKey
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -97,7 +91,6 @@ module Aws::KMS
 
     class Decrypt
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -111,7 +104,6 @@ module Aws::KMS
 
     class DeleteAlias
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -125,7 +117,6 @@ module Aws::KMS
 
     class DeleteCustomKeyStore
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -139,7 +130,6 @@ module Aws::KMS
 
     class DeleteImportedKeyMaterial
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -153,7 +143,6 @@ module Aws::KMS
 
     class DescribeCustomKeyStores
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -167,7 +156,6 @@ module Aws::KMS
 
     class DescribeKey
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -181,7 +169,6 @@ module Aws::KMS
 
     class DisableKey
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -195,7 +182,6 @@ module Aws::KMS
 
     class DisableKeyRotation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -209,7 +195,6 @@ module Aws::KMS
 
     class DisconnectCustomKeyStore
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -223,7 +208,6 @@ module Aws::KMS
 
     class EnableKey
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -237,7 +221,6 @@ module Aws::KMS
 
     class EnableKeyRotation
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -251,7 +234,6 @@ module Aws::KMS
 
     class Encrypt
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -265,7 +247,6 @@ module Aws::KMS
 
     class GenerateDataKey
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -279,7 +260,6 @@ module Aws::KMS
 
     class GenerateDataKeyPair
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -293,7 +273,6 @@ module Aws::KMS
 
     class GenerateDataKeyPairWithoutPlaintext
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -307,7 +286,6 @@ module Aws::KMS
 
     class GenerateDataKeyWithoutPlaintext
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -321,7 +299,6 @@ module Aws::KMS
 
     class GenerateMac
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -335,7 +312,6 @@ module Aws::KMS
 
     class GenerateRandom
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -349,7 +325,6 @@ module Aws::KMS
 
     class GetKeyPolicy
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -363,7 +338,6 @@ module Aws::KMS
 
     class GetKeyRotationStatus
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -377,7 +351,6 @@ module Aws::KMS
 
     class GetParametersForImport
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -391,7 +364,6 @@ module Aws::KMS
 
     class GetPublicKey
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -405,7 +377,6 @@ module Aws::KMS
 
     class ImportKeyMaterial
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -419,7 +390,6 @@ module Aws::KMS
 
     class ListAliases
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -433,7 +403,6 @@ module Aws::KMS
 
     class ListGrants
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -447,7 +416,6 @@ module Aws::KMS
 
     class ListKeyPolicies
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -461,7 +429,6 @@ module Aws::KMS
 
     class ListKeys
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -475,7 +442,6 @@ module Aws::KMS
 
     class ListResourceTags
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -489,7 +455,6 @@ module Aws::KMS
 
     class ListRetirableGrants
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -503,7 +468,6 @@ module Aws::KMS
 
     class PutKeyPolicy
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -517,7 +481,6 @@ module Aws::KMS
 
     class ReEncrypt
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -531,7 +494,6 @@ module Aws::KMS
 
     class ReplicateKey
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -545,7 +507,6 @@ module Aws::KMS
 
     class RetireGrant
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -559,7 +520,6 @@ module Aws::KMS
 
     class RevokeGrant
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -573,7 +533,6 @@ module Aws::KMS
 
     class ScheduleKeyDeletion
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -587,7 +546,6 @@ module Aws::KMS
 
     class Sign
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -601,7 +559,6 @@ module Aws::KMS
 
     class TagResource
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -615,7 +572,6 @@ module Aws::KMS
 
     class UntagResource
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -629,7 +585,6 @@ module Aws::KMS
 
     class UpdateAlias
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -643,7 +598,6 @@ module Aws::KMS
 
     class UpdateCustomKeyStore
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -657,7 +611,6 @@ module Aws::KMS
 
     class UpdateKeyDescription
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -671,7 +624,6 @@ module Aws::KMS
 
     class UpdatePrimaryRegion
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -685,7 +637,6 @@ module Aws::KMS
 
     class Verify
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
@@ -699,7 +650,6 @@ module Aws::KMS
 
     class VerifyMac
       def self.build(context)
-        # TODO: remove this hack
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end

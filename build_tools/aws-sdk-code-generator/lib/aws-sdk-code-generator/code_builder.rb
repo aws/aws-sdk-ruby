@@ -76,7 +76,7 @@ module AwsSdkCodeGenerator
 
         y.yield("#{prefix}/client.rb", client_class(codegenerated_plugins))
         if @service.protocol_settings['h2'] == 'eventstream'
-          y.yield("#{prefix}/async_client.rb", async_client_class)
+          y.yield("#{prefix}/async_client.rb", async_client_class(codegenerated_plugins))
         end
         y.yield("#{prefix}/errors.rb", errors_module)
         y.yield("#{prefix}/waiters.rb", waiters_module) if @waiters
@@ -139,7 +139,7 @@ module AwsSdkCodeGenerator
       ).render
     end
 
-    def async_client_class
+    def async_client_class(codegenerated_plugins)
       Views::AsyncClientClass.new(
         service_identifier: @service.identifier,
         service_name: @service.name,
@@ -153,6 +153,7 @@ module AwsSdkCodeGenerator
         add_plugins: @service.add_plugins,
         remove_plugins: @service.remove_plugins,
         api: @service.api,
+        codegenerated_plugins: codegenerated_plugins,
         async_client: true
       ).render
     end

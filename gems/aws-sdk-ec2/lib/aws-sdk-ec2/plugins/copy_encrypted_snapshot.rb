@@ -44,7 +44,7 @@ module Aws
             )
             endpoint = context.config.endpoint_provider
                               .resolve_endpoint(endpoint_params)
-            auth_scheme = Aws::Endpoints.resolve_auth_scheme(endpoint, context)
+            auth_scheme = Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
             signer = Aws::Sigv4::Signer.new(
               service: auth_scheme['signingName'] || 'ec2',

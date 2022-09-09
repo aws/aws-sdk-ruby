@@ -9,7 +9,6 @@
     "serviceAbbreviation":"Amazon S3",
     "serviceFullName":"Amazon Simple Storage Service",
     "serviceId": "S3",
-    "signatureVersion":"s3",
     "timestampFormat":"rfc822"
   },
   "operations":{

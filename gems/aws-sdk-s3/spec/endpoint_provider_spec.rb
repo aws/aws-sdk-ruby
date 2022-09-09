@@ -1288,12 +1288,11 @@ module Aws::S3
     end
 
     it 'outposts arn with partition mismatch and UseArnRegion=true' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.cn-north-1.amazonaws.com.cn"}}
+      expect = {"error"=>"Client was configured for partition `aws` but ARN (`arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint`) has `aws-cn`"}
       params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :use_arn_region=>true, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
-      endpoint = subject.resolve_endpoint(params)
-      expect(endpoint.url).to eq(expect['endpoint']['url'])
-      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect do
+        subject.resolve_endpoint(params)
+      end.to raise_error(ArgumentError, expect['error'])
     end
 
     it 'ARN with UseGlobalEndpoint and use-east-1 region uses the regional endpoint' do
@@ -1400,12 +1399,11 @@ module Aws::S3
     end
 
     it 'object lambda @cn-north-1, client region us-west-2 (cross partition), useArnRegion=true' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-object-lambda", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://mybanner-123456789012.s3-object-lambda.cn-north-1.amazonaws.com.cn"}}
+      expect = {"error"=>"Client was configured for partition `aws` but ARN (`arn:aws-cn:s3-object-lambda:cn-north-1:123456789012:accesspoint/mybanner`) has `aws-cn`"}
       params = EndpointParameters.new(**{:region=>"aws-global", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false, :use_arn_region=>true, :bucket=>"arn:aws-cn:s3-object-lambda:cn-north-1:123456789012:accesspoint/mybanner"})
-      endpoint = subject.resolve_endpoint(params)
-      expect(endpoint.url).to eq(expect['endpoint']['url'])
-      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect do
+        subject.resolve_endpoint(params)
+      end.to raise_error(ArgumentError, expect['error'])
     end
 
     it 'object lambda with dualstack' do

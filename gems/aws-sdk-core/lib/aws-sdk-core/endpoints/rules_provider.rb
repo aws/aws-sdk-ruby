@@ -1,7 +1,7 @@
 module Aws
   module Endpoints
     # @api private
-    class Provider
+    class RulesProvider
       def initialize(rule_set)
         @rule_set = rule_set
       end

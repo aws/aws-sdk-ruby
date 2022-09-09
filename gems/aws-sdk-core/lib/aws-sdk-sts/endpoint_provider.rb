@@ -7,7 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws::KMS
+module Aws::STS
   class EndpointProvider
     def initialize(rule_set = nil)
       rule_set ||= EndpointProvider.endpoint_rules

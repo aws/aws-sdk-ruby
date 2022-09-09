@@ -1,33 +1,29 @@
 # frozen_string_literal: true
 
-{{#generated_src_warning}}
-{{generated_src_warning}}
-{{/generated_src_warning}}
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
 
-module {{module_name}}
+
+module Aws::STS
   module Plugins
     class Endpoints < Seahorse::Client::Plugin
       option(
         :endpoint_provider,
-        doc_type: '{{module_name}}::EndpointProvider, nil',
+        doc_type: 'Aws::STS::EndpointProvider, nil',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
-                   '`{{module_name}}::EndpointParameters`'
+                   '`Aws::STS::EndpointParameters`'
       ) do |cfg|
-        if {{module_name}}::EndpointProvider.endpoint_rules
-          {{module_name}}::EndpointProvider.new
+        if Aws::STS::EndpointProvider.endpoint_rules
+          Aws::STS::EndpointProvider.new
         end
       end
 
-      {{#endpoint_options}}
-      option(
-        :{{name}},
-        doc_type: '{{doc_type}}',
-        default: {{{default}}},
-        docstring: "{{{docstring}}}")
-
-      {{/endpoint_options}}
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
@@ -69,10 +65,22 @@ module {{module_name}}
 
         def parameters_for_operation(context)
           case context.operation_name
-          {{#endpoint_classes}}
-          when :{{operation_name}}
-            {{module_name}}::Endpoints::{{class_name}}.build(context)
-          {{/endpoint_classes}}
+          when :assume_role
+            Aws::STS::Endpoints::AssumeRole.build(context)
+          when :assume_role_with_saml
+            Aws::STS::Endpoints::AssumeRoleWithSAML.build(context)
+          when :assume_role_with_web_identity
+            Aws::STS::Endpoints::AssumeRoleWithWebIdentity.build(context)
+          when :decode_authorization_message
+            Aws::STS::Endpoints::DecodeAuthorizationMessage.build(context)
+          when :get_access_key_info
+            Aws::STS::Endpoints::GetAccessKeyInfo.build(context)
+          when :get_caller_identity
+            Aws::STS::Endpoints::GetCallerIdentity.build(context)
+          when :get_federation_token
+            Aws::STS::Endpoints::GetFederationToken.build(context)
+          when :get_session_token
+            Aws::STS::Endpoints::GetSessionToken.build(context)
           end
         end
       end

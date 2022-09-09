@@ -4,7 +4,7 @@ require_relative '../../spec_helper'
 
 module Aws
   module Endpoints
-    describe Provider do
+    describe RulesProvider do
       Dir.glob(File.expand_path('../test-cases/*.json', __FILE__)).each do |path|
         file_name = File.basename(path)
 

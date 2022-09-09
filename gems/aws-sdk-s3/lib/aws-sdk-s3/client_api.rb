@@ -1632,7 +1632,7 @@ module Aws::S3
     ListBucketInventoryConfigurationsOutput.add_member(:next_continuation_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextContinuationToken"))
     ListBucketInventoryConfigurationsOutput.struct_class = Types::ListBucketInventoryConfigurationsOutput
 
-    ListBucketInventoryConfigurationsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    ListBucketInventoryConfigurationsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     ListBucketInventoryConfigurationsRequest.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "continuation-token"))
     ListBucketInventoryConfigurationsRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     ListBucketInventoryConfigurationsRequest.struct_class = Types::ListBucketInventoryConfigurationsRequest
@@ -1986,7 +1986,7 @@ module Aws::S3
     PutBucketAclRequest[:payload] = :access_control_policy
     PutBucketAclRequest[:payload_member] = PutBucketAclRequest.member(:access_control_policy)
 
-    PutBucketAnalyticsConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    PutBucketAnalyticsConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     PutBucketAnalyticsConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: AnalyticsId, required: true, location: "querystring", location_name: "id"))
     PutBucketAnalyticsConfigurationRequest.add_member(:analytics_configuration, Shapes::ShapeRef.new(shape: AnalyticsConfiguration, required: true, location_name: "AnalyticsConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketAnalyticsConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))

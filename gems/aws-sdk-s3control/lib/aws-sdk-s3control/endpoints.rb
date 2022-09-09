@@ -26,7 +26,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: context.params[:bucket],
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -46,7 +46,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -66,7 +66,7 @@ module Aws::S3Control
           outpost_id: context.params[:outpost_id],
           bucket: context.params[:bucket],
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -86,7 +86,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -101,12 +101,12 @@ module Aws::S3Control
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
-          account_id: nil,
-          requires_account_id: nil,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -126,7 +126,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: context.params[:name],
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -146,7 +146,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -166,7 +166,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: context.params[:name],
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -186,7 +186,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -206,7 +206,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: context.params[:bucket],
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -226,7 +226,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: context.params[:bucket],
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -246,7 +246,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: context.params[:bucket],
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -266,7 +266,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: context.params[:bucket],
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -286,7 +286,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -301,12 +301,12 @@ module Aws::S3Control
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
-          account_id: nil,
-          requires_account_id: nil,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -326,7 +326,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -346,7 +346,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -366,7 +366,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -386,7 +386,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -401,12 +401,12 @@ module Aws::S3Control
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
-          account_id: nil,
-          requires_account_id: nil,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -426,7 +426,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: context.params[:name],
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -446,7 +446,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -466,7 +466,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -486,7 +486,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: context.params[:name],
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -506,7 +506,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -526,7 +526,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: context.params[:name],
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -546,7 +546,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -566,7 +566,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: context.params[:bucket],
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -586,7 +586,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: context.params[:bucket],
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -606,7 +606,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: context.params[:bucket],
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -626,7 +626,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: context.params[:bucket],
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -646,7 +646,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -661,12 +661,12 @@ module Aws::S3Control
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
-          account_id: nil,
-          requires_account_id: nil,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -682,11 +682,11 @@ module Aws::S3Control
           use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
           account_id: nil,
-          requires_account_id: nil,
+          requires_account_id: true,
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -701,12 +701,12 @@ module Aws::S3Control
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
-          account_id: nil,
-          requires_account_id: nil,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -726,7 +726,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -746,7 +746,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -766,7 +766,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -786,7 +786,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: context.params[:bucket],
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -806,7 +806,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -826,7 +826,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -841,12 +841,12 @@ module Aws::S3Control
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
-          account_id: nil,
-          requires_account_id: nil,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -866,7 +866,7 @@ module Aws::S3Control
           outpost_id: context.params[:outpost_id],
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -886,7 +886,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -906,7 +906,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -926,7 +926,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: context.params[:name],
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -946,7 +946,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -966,7 +966,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: context.params[:bucket],
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -986,7 +986,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: context.params[:bucket],
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -1006,7 +1006,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: context.params[:bucket],
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -1026,7 +1026,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -1041,12 +1041,12 @@ module Aws::S3Control
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
-          account_id: nil,
-          requires_account_id: nil,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -1066,7 +1066,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -1086,7 +1086,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -1106,7 +1106,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -1126,7 +1126,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end
@@ -1146,7 +1146,7 @@ module Aws::S3Control
           outpost_id: nil,
           bucket: nil,
           access_point_name: nil,
-          use_arn_region: context.config.s3_use_arn_region,
+          use_arn_region: nil,
         )
       end
     end

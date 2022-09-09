@@ -26,6 +26,8 @@ module Aws
           case signer
           when Aws::Sigv4::Signer
             Sign::SignatureV4.apply_signature(signer, context)
+          when 'Bearer'
+            Sign::Bearer.apply(context)
           end
 
           @handler.call(context)
@@ -52,16 +54,42 @@ module Aws
           when 'sigv2'
             # don't sign, shouldn't happen in new rules
           when 'sigv4', 'sigv4a'
-            Aws::Sigv4::Signer.new(
-              service: _sigv4_name(context.config, auth_scheme),
-              region: _sigv4_region(context.config, auth_scheme),
-              credentials_provider: context.config.credentials,
-              signing_algorithm: auth_scheme['name'].to_sym,
-              uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
-              unsigned_headers: %w[content-length user-agent x-amzn-trace-id]
-            )
+            begin
+              Aws::Sigv4::Signer.new(
+                service: _sigv4_name(context.config, auth_scheme),
+                region: _sigv4_region(context.config, auth_scheme),
+                credentials_provider: context.config.credentials,
+                signing_algorithm: auth_scheme['name'].to_sym,
+                uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
+                unsigned_headers: %w[content-length user-agent x-amzn-trace-id]
+              )
+            rescue Aws::Sigv4::Errors::MissingCredentialsError
+              raise Aws::Errors::MissingCredentialsError
+            end
+          when 'bearer'
+            'Bearer'
           when 'none'
             # don't sign
+          end
+        end
+      end
+
+      # @!api private
+      module Bearer
+        class << self
+          def apply(context)
+            if context.http_request.endpoint.scheme != 'https'
+              raise ArgumentError,
+                    'Unable to use bearer authorization on non https endpoint.'
+            end
+
+            token_provider = context.config.token_provider
+            if token_provider&.set?
+              context.http_request.headers['Authorization'] =
+                "Bearer #{token_provider.token.token}"
+            else
+              raise Errors::MissingBearerTokenError
+            end
           end
         end
       end
@@ -77,12 +105,17 @@ module Aws
             apply_clock_skew(context, req)
 
             # compute the signature
-            signature = signer.sign_request(
-              http_method: req.http_method,
-              url: req.endpoint,
-              headers: req.headers,
-              body: req.body
-            )
+            begin
+              signature = signer.sign_request(
+                http_method: req.http_method,
+                url: req.endpoint,
+                headers: req.headers,
+                body: req.body
+              )
+            rescue Aws::Sigv4::Errors::MissingCredentialsError
+              # Necessary for when credentials is explicitly set to nil
+              raise Aws::Errors::MissingCredentialsError
+            end
             # apply signature headers
             req.headers.update(signature.headers)
 
