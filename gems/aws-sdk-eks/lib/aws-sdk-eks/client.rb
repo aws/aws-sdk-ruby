@@ -433,7 +433,7 @@ module Aws::EKS
     #   The name of the cluster to associate the configuration to.
     #
     # @option params [required, Types::OidcIdentityProviderConfigRequest] :oidc
-    #   An object that represents an OpenID Connect (OIDC) identity provider
+    #   An object representing an OpenID Connect (OIDC) identity provider
     #   configuration.
     #
     # @option params [Hash<String,String>] :tags
@@ -673,7 +673,11 @@ module Aws::EKS
     #
     # @option params [String] :version
     #   The desired Kubernetes version for your cluster. If you don't specify
-    #   a value here, the latest version available in Amazon EKS is used.
+    #   a value here, the default version available in Amazon EKS is used.
+    #
+    #   <note markdown="1"> The default version might not be the latest version available.
+    #
+    #    </note>
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that provides
@@ -735,6 +739,18 @@ module Aws::EKS
     #
     # @option params [Array<Types::EncryptionConfig>] :encryption_config
     #   The encryption configuration for the cluster.
+    #
+    # @option params [Types::OutpostConfigRequest] :outpost_config
+    #   An object representing the configuration of your local Amazon EKS
+    #   cluster on an Amazon Web Services Outpost. Before creating a local
+    #   cluster on an Outpost, review [Creating an Amazon EKS cluster on an
+    #   Amazon Web Services Outpost][1] in the *Amazon EKS User Guide*. This
+    #   object isn't available for creating Amazon EKS clusters on the Amazon
+    #   Web Services cloud.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/create-cluster-outpost.html
     #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -802,6 +818,10 @@ module Aws::EKS
     #         },
     #       },
     #     ],
+    #     outpost_config: {
+    #       outpost_arns: ["String"], # required
+    #       control_plane_instance_type: "String", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -845,6 +865,15 @@ module Aws::EKS
     #   resp.cluster.connector_config.activation_expiry #=> Time
     #   resp.cluster.connector_config.provider #=> String
     #   resp.cluster.connector_config.role_arn #=> String
+    #   resp.cluster.id #=> String
+    #   resp.cluster.health.issues #=> Array
+    #   resp.cluster.health.issues[0].code #=> String, one of "AccessDenied", "ClusterUnreachable", "ConfigurationConflict", "InternalFailure", "ResourceLimitExceeded", "ResourceNotFound"
+    #   resp.cluster.health.issues[0].message #=> String
+    #   resp.cluster.health.issues[0].resource_ids #=> Array
+    #   resp.cluster.health.issues[0].resource_ids[0] #=> String
+    #   resp.cluster.outpost_config.outpost_arns #=> Array
+    #   resp.cluster.outpost_config.outpost_arns[0] #=> String
+    #   resp.cluster.outpost_config.control_plane_instance_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateCluster AWS API Documentation
     #
@@ -1427,6 +1456,15 @@ module Aws::EKS
     #   resp.cluster.connector_config.activation_expiry #=> Time
     #   resp.cluster.connector_config.provider #=> String
     #   resp.cluster.connector_config.role_arn #=> String
+    #   resp.cluster.id #=> String
+    #   resp.cluster.health.issues #=> Array
+    #   resp.cluster.health.issues[0].code #=> String, one of "AccessDenied", "ClusterUnreachable", "ConfigurationConflict", "InternalFailure", "ResourceLimitExceeded", "ResourceNotFound"
+    #   resp.cluster.health.issues[0].message #=> String
+    #   resp.cluster.health.issues[0].resource_ids #=> Array
+    #   resp.cluster.health.issues[0].resource_ids[0] #=> String
+    #   resp.cluster.outpost_config.outpost_arns #=> Array
+    #   resp.cluster.outpost_config.outpost_arns[0] #=> String
+    #   resp.cluster.outpost_config.control_plane_instance_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteCluster AWS API Documentation
     #
@@ -1625,6 +1663,15 @@ module Aws::EKS
     #   resp.cluster.connector_config.activation_expiry #=> Time
     #   resp.cluster.connector_config.provider #=> String
     #   resp.cluster.connector_config.role_arn #=> String
+    #   resp.cluster.id #=> String
+    #   resp.cluster.health.issues #=> Array
+    #   resp.cluster.health.issues[0].code #=> String, one of "AccessDenied", "ClusterUnreachable", "ConfigurationConflict", "InternalFailure", "ResourceLimitExceeded", "ResourceNotFound"
+    #   resp.cluster.health.issues[0].message #=> String
+    #   resp.cluster.health.issues[0].resource_ids #=> Array
+    #   resp.cluster.health.issues[0].resource_ids[0] #=> String
+    #   resp.cluster.outpost_config.outpost_arns #=> Array
+    #   resp.cluster.outpost_config.outpost_arns[0] #=> String
+    #   resp.cluster.outpost_config.control_plane_instance_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeregisterCluster AWS API Documentation
     #
@@ -1867,6 +1914,15 @@ module Aws::EKS
     #   resp.cluster.connector_config.activation_expiry #=> Time
     #   resp.cluster.connector_config.provider #=> String
     #   resp.cluster.connector_config.role_arn #=> String
+    #   resp.cluster.id #=> String
+    #   resp.cluster.health.issues #=> Array
+    #   resp.cluster.health.issues[0].code #=> String, one of "AccessDenied", "ClusterUnreachable", "ConfigurationConflict", "InternalFailure", "ResourceLimitExceeded", "ResourceNotFound"
+    #   resp.cluster.health.issues[0].message #=> String
+    #   resp.cluster.health.issues[0].resource_ids #=> Array
+    #   resp.cluster.health.issues[0].resource_ids[0] #=> String
+    #   resp.cluster.outpost_config.outpost_arns #=> Array
+    #   resp.cluster.outpost_config.outpost_arns[0] #=> String
+    #   resp.cluster.outpost_config.control_plane_instance_type #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1943,7 +1999,7 @@ module Aws::EKS
     #   associated to.
     #
     # @option params [required, Types::IdentityProviderConfig] :identity_provider_config
-    #   An object that represents an identity provider configuration.
+    #   An object representing an identity provider configuration.
     #
     # @return [Types::DescribeIdentityProviderConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2137,7 +2193,7 @@ module Aws::EKS
     #   The name of the cluster to disassociate an identity provider from.
     #
     # @option params [required, Types::IdentityProviderConfig] :identity_provider_config
-    #   An object that represents an identity provider configuration.
+    #   An object representing an identity provider configuration.
     #
     # @option params [String] :client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -2691,6 +2747,15 @@ module Aws::EKS
     #   resp.cluster.connector_config.activation_expiry #=> Time
     #   resp.cluster.connector_config.provider #=> String
     #   resp.cluster.connector_config.role_arn #=> String
+    #   resp.cluster.id #=> String
+    #   resp.cluster.health.issues #=> Array
+    #   resp.cluster.health.issues[0].code #=> String, one of "AccessDenied", "ClusterUnreachable", "ConfigurationConflict", "InternalFailure", "ResourceLimitExceeded", "ResourceNotFound"
+    #   resp.cluster.health.issues[0].message #=> String
+    #   resp.cluster.health.issues[0].resource_ids #=> Array
+    #   resp.cluster.health.issues[0].resource_ids[0] #=> String
+    #   resp.cluster.outpost_config.outpost_arns #=> Array
+    #   resp.cluster.outpost_config.outpost_arns[0] #=> String
+    #   resp.cluster.outpost_config.control_plane_instance_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/RegisterCluster AWS API Documentation
     #
@@ -3305,7 +3370,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

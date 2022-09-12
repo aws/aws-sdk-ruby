@@ -54,7 +54,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] health
-    #   An object that represents the health of the add-on.
+    #   An object representing the health of the add-on.
     #   @return [Types::AddonHealth]
     #
     # @!attribute [rw] addon_arn
@@ -101,7 +101,7 @@ module Aws::EKS
     # The health of the add-on.
     #
     # @!attribute [rw] issues
-    #   An object that represents the add-on's health issues.
+    #   An object representing the health issues for an add-on.
     #   @return [Array<Types::AddonIssue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AddonHealth AWS API Documentation
@@ -123,8 +123,8 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] addon_versions
-    #   An object that represents information about available add-on
-    #   versions and compatible Kubernetes versions.
+    #   An object representing information about available add-on versions
+    #   and compatible Kubernetes versions.
     #   @return [Array<Types::AddonVersionInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AddonInfo AWS API Documentation
@@ -173,7 +173,7 @@ module Aws::EKS
     #   @return [Array<String>]
     #
     # @!attribute [rw] compatibilities
-    #   An object that represents the compatibilities of a version.
+    #   An object representing the compatibilities of a version.
     #   @return [Array<Types::Compatibility>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AddonVersionInfo AWS API Documentation
@@ -269,7 +269,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] oidc
-    #   An object that represents an OpenID Connect (OIDC) identity provider
+    #   An object representing an OpenID Connect (OIDC) identity provider
     #   configuration.
     #   @return [Types::OidcIdentityProviderConfigRequest]
     #
@@ -485,6 +485,24 @@ module Aws::EKS
     #   The configuration used to connect to a cluster for registration.
     #   @return [Types::ConnectorConfigResponse]
     #
+    # @!attribute [rw] id
+    #   The ID of your local Amazon EKS cluster on an Amazon Web Services
+    #   Outpost. This property isn't available for an Amazon EKS cluster on
+    #   the Amazon Web Services cloud.
+    #   @return [String]
+    #
+    # @!attribute [rw] health
+    #   An object representing the health of your local Amazon EKS cluster
+    #   on an Amazon Web Services Outpost. This object isn't available for
+    #   clusters on the Amazon Web Services cloud.
+    #   @return [Types::ClusterHealth]
+    #
+    # @!attribute [rw] outpost_config
+    #   An object representing the configuration of your local Amazon EKS
+    #   cluster on an Amazon Web Services Outpost. This object isn't
+    #   available for clusters on the Amazon Web Services cloud.
+    #   @return [Types::OutpostConfigResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -504,7 +522,53 @@ module Aws::EKS
       :platform_version,
       :tags,
       :encryption_config,
-      :connector_config)
+      :connector_config,
+      :id,
+      :health,
+      :outpost_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the health of your local Amazon EKS cluster on
+    # an Amazon Web Services Outpost. You can't use this API with an Amazon
+    # EKS cluster on the Amazon Web Services cloud.
+    #
+    # @!attribute [rw] issues
+    #   An object representing the health issues of your local Amazon EKS
+    #   cluster on an Amazon Web Services Outpost.
+    #   @return [Array<Types::ClusterIssue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ClusterHealth AWS API Documentation
+    #
+    class ClusterHealth < Struct.new(
+      :issues)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An issue with your local Amazon EKS cluster on an Amazon Web Services
+    # Outpost. You can't use this API with an Amazon EKS cluster on the
+    # Amazon Web Services cloud.
+    #
+    # @!attribute [rw] code
+    #   The error code of the issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_ids
+    #   The resource IDs that the issue relates to.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ClusterIssue AWS API Documentation
+    #
+    class ClusterIssue < Struct.new(
+      :code,
+      :message,
+      :resource_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -764,6 +828,10 @@ module Aws::EKS
     #             },
     #           },
     #         ],
+    #         outpost_config: {
+    #           outpost_arns: ["String"], # required
+    #           control_plane_instance_type: "String", # required
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -772,8 +840,12 @@ module Aws::EKS
     #
     # @!attribute [rw] version
     #   The desired Kubernetes version for your cluster. If you don't
-    #   specify a value here, the latest version available in Amazon EKS is
+    #   specify a value here, the default version available in Amazon EKS is
     #   used.
+    #
+    #   <note markdown="1"> The default version might not be the latest version available.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -845,6 +917,19 @@ module Aws::EKS
     #   The encryption configuration for the cluster.
     #   @return [Array<Types::EncryptionConfig>]
     #
+    # @!attribute [rw] outpost_config
+    #   An object representing the configuration of your local Amazon EKS
+    #   cluster on an Amazon Web Services Outpost. Before creating a local
+    #   cluster on an Outpost, review [Creating an Amazon EKS cluster on an
+    #   Amazon Web Services Outpost][1] in the *Amazon EKS User Guide*. This
+    #   object isn't available for creating Amazon EKS clusters on the
+    #   Amazon Web Services cloud.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/create-cluster-outpost.html
+    #   @return [Types::OutpostConfigRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -856,7 +941,8 @@ module Aws::EKS
       :logging,
       :client_request_token,
       :tags,
-      :encryption_config)
+      :encryption_config,
+      :outpost_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1651,7 +1737,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] identity_provider_config
-    #   An object that represents an identity provider configuration.
+    #   An object representing an identity provider configuration.
     #   @return [Types::IdentityProviderConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeIdentityProviderConfigRequest AWS API Documentation
@@ -1786,7 +1872,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] identity_provider_config
-    #   An object that represents an identity provider configuration.
+    #   An object representing an identity provider configuration.
     #   @return [Types::IdentityProviderConfig]
     #
     # @!attribute [rw] client_request_token
@@ -2045,7 +2131,7 @@ module Aws::EKS
     # The full description of your identity configuration.
     #
     # @!attribute [rw] oidc
-    #   An object that represents an OpenID Connect (OIDC) identity provider
+    #   An object representing an OpenID Connect (OIDC) identity provider
     #   configuration.
     #   @return [Types::OidcIdentityProviderConfig]
     #
@@ -3223,8 +3309,8 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object that represents the configuration for an OpenID Connect
-    # (OIDC) identity provider.
+    # An object representing the configuration for an OpenID Connect (OIDC)
+    # identity provider.
     #
     # @!attribute [rw] identity_provider_config_name
     #   The name of the configuration.
@@ -3400,6 +3486,87 @@ module Aws::EKS
       :groups_claim,
       :groups_prefix,
       :required_claims)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of your local Amazon EKS cluster on an Amazon Web
+    # Services Outpost. Before creating a cluster on an Outpost, review
+    # [Creating a local Amazon EKS cluster on an Amazon Web Services
+    # Outpost][1] in the *Amazon EKS User Guide*. This API isn't available
+    # for Amazon EKS clusters on the Amazon Web Services cloud.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/create-cluster-outpost.html
+    #
+    # @note When making an API call, you may pass OutpostConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         outpost_arns: ["String"], # required
+    #         control_plane_instance_type: "String", # required
+    #       }
+    #
+    # @!attribute [rw] outpost_arns
+    #   The ARN of the Outpost that you want to use for your local Amazon
+    #   EKS cluster on Outposts. Only a single Outpost ARN is supported.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] control_plane_instance_type
+    #   The Amazon EC2 instance type that you want to use for your local
+    #   Amazon EKS cluster on Outposts. The instance type that you specify
+    #   is used for all Kubernetes control plane instances. The instance
+    #   type can't be changed after cluster creation.
+    #
+    #   Choose an instance type based on the number of nodes that your
+    #   cluster will have. If your cluster will have:
+    #
+    #   * 1–20 nodes, then we recommend specifying a `large` instance type.
+    #
+    #   * 21–100 nodes, then we recommend specifying an `xlarge` instance
+    #     type.
+    #
+    #   * 101–250 nodes, then we recommend specifying a `2xlarge` instance
+    #     type.
+    #
+    #   For a list of the available Amazon EC2 instance types, see Compute
+    #   and storage in [Outposts rack features][1]. The control plane is not
+    #   automatically scaled by Amazon EKS.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/outposts/rack/features/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/OutpostConfigRequest AWS API Documentation
+    #
+    class OutpostConfigRequest < Struct.new(
+      :outpost_arns,
+      :control_plane_instance_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the configuration of your local Amazon EKS
+    # cluster on an Amazon Web Services Outpost. This API isn't available
+    # for Amazon EKS clusters on the Amazon Web Services cloud.
+    #
+    # @!attribute [rw] outpost_arns
+    #   The ARN of the Outpost that you specified for use with your local
+    #   Amazon EKS cluster on Outposts.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] control_plane_instance_type
+    #   The Amazon EC2 instance type used for the control plane. The
+    #   instance type is the same for all control plane instances.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/OutpostConfigResponse AWS API Documentation
+    #
+    class OutpostConfigResponse < Struct.new(
+      :outpost_arns,
+      :control_plane_instance_type)
       SENSITIVE = []
       include Aws::Structure
     end

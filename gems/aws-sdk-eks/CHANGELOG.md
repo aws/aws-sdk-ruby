@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2022-09-12)
+------------------
+
+* Feature - Adding support for local Amazon EKS clusters on Outposts
+
 1.76.0 (2022-09-07)
 ------------------
 

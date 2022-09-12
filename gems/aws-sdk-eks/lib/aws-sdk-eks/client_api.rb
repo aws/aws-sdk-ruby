@@ -40,6 +40,10 @@ module Aws::EKS
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
     ClientException = Shapes::StructureShape.new(name: 'ClientException')
     Cluster = Shapes::StructureShape.new(name: 'Cluster')
+    ClusterHealth = Shapes::StructureShape.new(name: 'ClusterHealth')
+    ClusterIssue = Shapes::StructureShape.new(name: 'ClusterIssue')
+    ClusterIssueCode = Shapes::StringShape.new(name: 'ClusterIssueCode')
+    ClusterIssueList = Shapes::ListShape.new(name: 'ClusterIssueList')
     ClusterName = Shapes::StringShape.new(name: 'ClusterName')
     ClusterStatus = Shapes::StringShape.new(name: 'ClusterStatus')
     Compatibilities = Shapes::ListShape.new(name: 'Compatibilities')
@@ -142,6 +146,8 @@ module Aws::EKS
     OIDC = Shapes::StructureShape.new(name: 'OIDC')
     OidcIdentityProviderConfig = Shapes::StructureShape.new(name: 'OidcIdentityProviderConfig')
     OidcIdentityProviderConfigRequest = Shapes::StructureShape.new(name: 'OidcIdentityProviderConfigRequest')
+    OutpostConfigRequest = Shapes::StructureShape.new(name: 'OutpostConfigRequest')
+    OutpostConfigResponse = Shapes::StructureShape.new(name: 'OutpostConfigResponse')
     PercentCapacity = Shapes::IntegerShape.new(name: 'PercentCapacity')
     Provider = Shapes::StructureShape.new(name: 'Provider')
     RegisterClusterRequest = Shapes::StructureShape.new(name: 'RegisterClusterRequest')
@@ -293,7 +299,20 @@ module Aws::EKS
     Cluster.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     Cluster.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfigList, location_name: "encryptionConfig"))
     Cluster.add_member(:connector_config, Shapes::ShapeRef.new(shape: ConnectorConfigResponse, location_name: "connectorConfig"))
+    Cluster.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    Cluster.add_member(:health, Shapes::ShapeRef.new(shape: ClusterHealth, location_name: "health"))
+    Cluster.add_member(:outpost_config, Shapes::ShapeRef.new(shape: OutpostConfigResponse, location_name: "outpostConfig"))
     Cluster.struct_class = Types::Cluster
+
+    ClusterHealth.add_member(:issues, Shapes::ShapeRef.new(shape: ClusterIssueList, location_name: "issues"))
+    ClusterHealth.struct_class = Types::ClusterHealth
+
+    ClusterIssue.add_member(:code, Shapes::ShapeRef.new(shape: ClusterIssueCode, location_name: "code"))
+    ClusterIssue.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ClusterIssue.add_member(:resource_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "resourceIds"))
+    ClusterIssue.struct_class = Types::ClusterIssue
+
+    ClusterIssueList.member = Shapes::ShapeRef.new(shape: ClusterIssue)
 
     Compatibilities.member = Shapes::ShapeRef.new(shape: Compatibility)
 
@@ -334,6 +353,7 @@ module Aws::EKS
     CreateClusterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateClusterRequest.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfigList, location_name: "encryptionConfig"))
+    CreateClusterRequest.add_member(:outpost_config, Shapes::ShapeRef.new(shape: OutpostConfigRequest, location_name: "outpostConfig"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
@@ -693,6 +713,14 @@ module Aws::EKS
     OidcIdentityProviderConfigRequest.add_member(:groups_prefix, Shapes::ShapeRef.new(shape: String, location_name: "groupsPrefix"))
     OidcIdentityProviderConfigRequest.add_member(:required_claims, Shapes::ShapeRef.new(shape: requiredClaimsMap, location_name: "requiredClaims"))
     OidcIdentityProviderConfigRequest.struct_class = Types::OidcIdentityProviderConfigRequest
+
+    OutpostConfigRequest.add_member(:outpost_arns, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "outpostArns"))
+    OutpostConfigRequest.add_member(:control_plane_instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "controlPlaneInstanceType"))
+    OutpostConfigRequest.struct_class = Types::OutpostConfigRequest
+
+    OutpostConfigResponse.add_member(:outpost_arns, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "outpostArns"))
+    OutpostConfigResponse.add_member(:control_plane_instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "controlPlaneInstanceType"))
+    OutpostConfigResponse.struct_class = Types::OutpostConfigResponse
 
     Provider.add_member(:key_arn, Shapes::ShapeRef.new(shape: String, location_name: "keyArn"))
     Provider.struct_class = Types::Provider
