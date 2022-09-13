@@ -905,6 +905,14 @@ module Aws::S3Control
       expect(endpoint.properties).to eq(expect['endpoint']['properties'])
     end
 
+    it 'Outpost Bucket ARN with partition mismatch with UseArnRegion=true' do
+      expect = {"error"=>"Client was configured for partition `aws` but ARN has `aws-cn`"}
+      params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :operation=>"GetBucket", :region=>"us-west-2", :requires_account_id=>true, :use_arn_region=>true, :use_dual_stack=>false, :use_fips=>false})
+      expect do
+        subject.resolve_endpoint(params)
+      end.to raise_error(ArgumentError, expect['error'])
+    end
+
     it 'Accesspoint ARN with partition mismatch and UseArnRegion=true' do
       expect = {"error"=>"Client was configured for partition `aws` but ARN has `aws-cn`"}
       params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_arn_region=>true, :use_fips=>false})

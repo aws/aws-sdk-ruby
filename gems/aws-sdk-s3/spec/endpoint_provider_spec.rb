@@ -215,8 +215,17 @@ module Aws::S3
     end
 
     it 'don&#39;t allow URL injections in the bucket' do
-      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3.us-west-2.amazonaws.com/example.com#"}}
+      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3.us-west-2.amazonaws.com/example.com%23"}}
       params = EndpointParameters.new(**{:bucket=>"example.com#", :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false, :accelerate=>false})
+      endpoint = subject.resolve_endpoint(params)
+      expect(endpoint.url).to eq(expect['endpoint']['url'])
+      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+    end
+
+    it 'URI encode bucket names in the path' do
+      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3.us-west-2.amazonaws.com/bucket%20name"}}
+      params = EndpointParameters.new(**{:bucket=>"bucket name", :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false, :accelerate=>false})
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
@@ -296,6 +305,24 @@ module Aws::S3
     it 'subdomains are not allowed in virtual buckets' do
       expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"us-east-1"}]}, "url"=>"https://s3.us-east-1.amazonaws.com/bucket.name"}}
       params = EndpointParameters.new(**{:bucket=>"bucket.name", :region=>"us-east-1"})
+      endpoint = subject.resolve_endpoint(params)
+      expect(endpoint.url).to eq(expect['endpoint']['url'])
+      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+    end
+
+    it 'bucket names with 3 characters are allowed in virtual buckets' do
+      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"us-east-1"}]}, "url"=>"https://aaa.s3.us-east-1.amazonaws.com"}}
+      params = EndpointParameters.new(**{:bucket=>"aaa", :region=>"us-east-1"})
+      endpoint = subject.resolve_endpoint(params)
+      expect(endpoint.url).to eq(expect['endpoint']['url'])
+      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+    end
+
+    it 'subdomains are allowed in virtual buckets on http endpoints' do
+      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"us-east-1"}]}, "url"=>"http://bucket.name.example.com"}}
+      params = EndpointParameters.new(**{:bucket=>"bucket.name", :region=>"us-east-1", :endpoint=>"http://example.com"})
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
@@ -1323,6 +1350,14 @@ module Aws::S3
     it 'S3 outposts does not support accelerate' do
       expect = {"error"=>"S3 Outposts does not support S3 Accelerate"}
       params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :accelerate=>true, :bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports"})
+      expect do
+        subject.resolve_endpoint(params)
+      end.to raise_error(ArgumentError, expect['error'])
+    end
+
+    it 'validates against subresource' do
+      expect = {"error"=>"Invalid Arn: Outpost Access Point ARN contains sub resources"}
+      params = EndpointParameters.new(**{:region=>"us-west-2", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:mybucket:object:foo"})
       expect do
         subject.resolve_endpoint(params)
       end.to raise_error(ArgumentError, expect['error'])

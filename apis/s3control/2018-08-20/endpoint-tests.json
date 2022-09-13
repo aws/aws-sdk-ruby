@@ -3086,6 +3086,29 @@
             }
         },
         {
+            "documentation": "Outpost Bucket ARN with partition mismatch with UseArnRegion=true",
+            "expect": {
+                "error": "Client was configured for partition `aws` but ARN has `aws-cn`"
+            },
+            "operationInputs": [
+                {
+                    "operationName": "GetBucket",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+                    }
+                }
+            ],
+            "params": {
+                "Bucket": "arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+                "Operation": "GetBucket",
+                "Region": "us-west-2",
+                "RequiresAccountId": true,
+                "UseArnRegion": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
             "documentation": "Accesspoint ARN with partition mismatch and UseArnRegion=true",
             "expect": {
                 "error": "Client was configured for partition `aws` but ARN has `aws-cn`"

@@ -44,23 +44,23 @@ module Aws
       end
 
       private
-      # 
+      #
       # def merge_scheme_defaults(context, scheme)
       #   scheme['signingName'] ||= sigv4_name(context.config, scheme)
       #   if scheme['name'] == 'sigv4a'
       #
       # end
       #
-      # def resolve_default_api_authtype(context)
-      #   context.config.api.operation(context.operation_name)['authtype'] ||
-      #     context.config.api.metadata['signatureVersion']
-      # end
-      #
-      # def sigv4_name(cfg, scheme)
-      #   cfg.sigv4_name || scheme['signingName'] ||
-      #     cfg.api.metadata['signingName'] ||
-      #     cfg.api.metadata['endpointPrefix']
-      # end
+      def resolve_default_api_authtype(context)
+        context.config.api.operation(context.operation_name)['authtype'] ||
+          context.config.api.metadata['signatureVersion']
+      end
+
+      def sigv4_name(cfg, scheme)
+        cfg.sigv4_name || scheme['signingName'] ||
+          cfg.api.metadata['signingName'] ||
+          cfg.api.metadata['endpointPrefix']
+      end
 
       def sigv4_region(cfg, scheme)
         cfg.sigv4_region || scheme['signingRegion'] ||
