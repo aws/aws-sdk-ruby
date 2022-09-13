@@ -91,7 +91,6 @@ module Aws
           "#{scheme}://#{name}"
         else
           # Taken from Aws::S3::Endpoints module
-          # TODO: remove this hack
           unless client.config.regional_endpoint
             endpoint = client.config.endpoint.to_s
           end
@@ -104,7 +103,6 @@ module Aws
             force_path_style: client.config.force_path_style,
             accelerate: client.config.use_accelerate_endpoint,
             use_global_endpoint: client.config.s3_us_east_1_regional_endpoint == 'legacy',
-            snow_endpoint_url: nil,
             use_object_lambda_endpoint: nil,
             disable_access_points: nil,
             disable_multi_region_access_points: client.config.s3_disable_multiregion_access_points,

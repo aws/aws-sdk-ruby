@@ -77,13 +77,21 @@ module AwsSdkCodeGenerator
       # Built-In Bindings
       # Built-in binding default values
       def endpoint_parameter_value(operation, param_name, param_data)
-        value = client_context_param_value(param_data)
+        value = static_context_param(operation, param_name)
         value ||= context_param_value(operation, param_name)
-        value ||= static_context_param(operation, param_name)
+        value ||= client_context_param_value(param_name, param_data)
+        value ||= built_in_client_context_param_value(param_data)
         value || 'nil'
       end
 
-      def client_context_param_value(param_data)
+      def client_context_param_value(param_name, param_data)
+        if @service.api['clientContextParams'].key?(param_name) &&
+           !param_data['builtIn']
+          "context.config.#{Underscore.underscore(param_name)}"
+        end
+      end
+
+      def built_in_client_context_param_value(param_data)
         case param_data['builtIn']
         when 'AWS::Region'
           'context.config.region'

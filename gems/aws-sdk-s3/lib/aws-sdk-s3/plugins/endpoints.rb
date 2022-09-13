@@ -21,21 +21,16 @@ module Aws::S3
       ) do |cfg|
         if Aws::S3::EndpointProvider.endpoint_rules
           Aws::S3::EndpointProvider.new
+        else
+          Aws::Endpoints::StaticProvider.new
         end
       end
 
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          if (provider = context.config.endpoint_provider)
-            params = parameters_for_operation(context)
-            endpoint = provider.resolve_endpoint(params)
-          else
-            endpoint = Aws::Endpoints::Endpoint.new(
-              # Seahorse sets this first.
-              url: context.http_request.endpoint
-            )
-          end
+          params = parameters_for_operation(context)
+          endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
           context.http_request.endpoint = endpoint.url
           apply_endpoint_headers(context, endpoint.headers)

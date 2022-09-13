@@ -381,9 +381,9 @@ module Aws::S3
     #     will be used to search for tokens configured for your profile in shared configuration files.
     #
     #   @option options [Boolean] :use_accelerate_endpoint (false)
-    #             When set to `true`, accelerated bucket endpoints will be used
-    #             for all object operations. You must first enable accelerate for
-    #             each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
+    #     When set to `true`, accelerated bucket endpoints will be used
+    #     for all object operations. You must first enable accelerate for
+    #     each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
     #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)

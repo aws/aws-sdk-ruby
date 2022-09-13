@@ -9,6 +9,12 @@ module AwsSdkCodeGenerator
       def initialize(options)
         @service = options.fetch(:service)
         @endpoint_rules = options.fetch(:endpoint_rules)
+
+        unless (version = @endpoint_rules['version']) &&
+               version.match?(/^\d+\.\d+$/) # &&
+               # version == '1.0'
+          raise 'Endpoint Rules version must be 1.0'
+        end
       end
 
       # @return [String|nil]

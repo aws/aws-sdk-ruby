@@ -48,34 +48,6 @@ module AwsSdkCodeGenerator
         @service.module_name
       end
 
-      # Preserve existing configuration names
-      def endpoint_parameter_config_name(name, param_data)
-        case param_data['builtIn']
-        when 'AWS::Region'
-          'region'
-        when 'AWS::UseFIPS'
-          'use_fips_endpoint'
-        when 'AWS::UseDualStack'
-          'use_dualstack_endpoint'
-        when 'AWS::STS::UseGlobalEndpoint'
-          'sts_regional_endpoints'
-        when 'AWS::S3::UseGlobalEndpoint'
-          's3_us_east_1_regional_endpoint'
-        when 'AWS::S3::Accelerate'
-          'use_accelerate_endpoint'
-        when 'AWS::S3::ForcePathStyle'
-          'force_path_style'
-        when 'AWS::S3::UseArnRegion'
-          's3_use_arn_region'
-        when 'AWS::S3::DisableMultiRegionAccessPoints'
-          's3_disable_multiregion_access_points'
-        when 'SDK::Endpoint'
-          'endpoint'
-        else
-          Underscore.underscore(name)
-        end
-      end
-
       class EndpointClass
         def initialize(options)
           @operation_name = options[:operation_name]

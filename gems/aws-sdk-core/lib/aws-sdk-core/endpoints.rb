@@ -10,13 +10,15 @@ require_relative 'endpoints/matchers'
 require_relative 'endpoints/reference'
 require_relative 'endpoints/rules_provider'
 require_relative 'endpoints/rule_set'
+require_relative 'endpoints/static_provider'
 require_relative 'endpoints/templater'
 require_relative 'endpoints/tree_rule'
 require_relative 'endpoints/url'
 
 module Aws
+  # @api private
   module Endpoints
-    SUPPORTED_AUTH_TYPES = %w[sigv4 sigv4a none].freeze
+    SUPPORTED_AUTH_TYPES = %w[sigv4 sigv4a bearer none].freeze
 
     class << self
       def resolve_auth_scheme(context, endpoint)
@@ -28,7 +30,7 @@ module Aws
 
           auth_scheme
         else
-          case resolve_api_authtype(context)
+          case resolve_default_api_authtype(context)
           when 'v4', 'v4-unsigned-payload', 'v4-unsigned-body'
             { 'name' => 'sigv4' }
           when 's3v4'
@@ -42,10 +44,27 @@ module Aws
       end
 
       private
+      # 
+      # def merge_scheme_defaults(context, scheme)
+      #   scheme['signingName'] ||= sigv4_name(context.config, scheme)
+      #   if scheme['name'] == 'sigv4a'
+      #
+      # end
+      #
+      # def resolve_default_api_authtype(context)
+      #   context.config.api.operation(context.operation_name)['authtype'] ||
+      #     context.config.api.metadata['signatureVersion']
+      # end
+      #
+      # def sigv4_name(cfg, scheme)
+      #   cfg.sigv4_name || scheme['signingName'] ||
+      #     cfg.api.metadata['signingName'] ||
+      #     cfg.api.metadata['endpointPrefix']
+      # end
 
-      def resolve_api_authtype(context)
-        context.config.api.operation(context.operation_name)['authtype'] ||
-          context.config.api.metadata['signatureVersion']
+      def sigv4_region(cfg, scheme)
+        cfg.sigv4_region || scheme['signingRegion'] ||
+          '*' if scheme['name'] == 'sigv4a' || cfg.region
       end
     end
   end

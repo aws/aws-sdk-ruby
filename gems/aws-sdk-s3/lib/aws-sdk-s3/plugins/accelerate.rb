@@ -14,9 +14,9 @@ module Aws
           default: false,
           doc_type: 'Boolean',
           docstring: <<-DOCS)
-        When set to `true`, accelerated bucket endpoints will be used
-        for all object operations. You must first enable accelerate for
-        each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
+When set to `true`, accelerated bucket endpoints will be used
+for all object operations. You must first enable accelerate for
+each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
           DOCS
 
         def add_handlers(handlers, config)
