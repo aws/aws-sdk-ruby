@@ -424,7 +424,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides filtering the query results based on document attributes.
+    # Provides filtering the query results based on document attributes or
+    # metadata fields.
     #
     # When you use the `AndAllFilters` or `OrAllFilters`, filters you can
     # use 2 layers under the first attribute filter. For example, you can
@@ -757,39 +758,44 @@ module Aws::Kendra
     #   @return [Types::AttributeFilter]
     #
     # @!attribute [rw] equals_to
-    #   Performs an equals operation on two document attributes.
+    #   Performs an equals operation on two document attributes or metadata
+    #   fields.
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] contains_all
     #   Returns true when a document contains all of the specified document
-    #   attributes. This filter is only applicable to `StringListValue`
-    #   metadata.
+    #   attributes or metadata fields. This filter is only applicable to
+    #   `StringListValue` metadata.
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] contains_any
     #   Returns true when a document contains any of the specified document
-    #   attributes. This filter is only applicable to `StringListValue`
-    #   metadata.
+    #   attributes or metadata fields. This filter is only applicable to
+    #   `StringListValue` metadata.
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] greater_than
-    #   Performs a greater than operation on two document attributes. Use
-    #   with a document attribute of type `Date` or `Long`.
+    #   Performs a greater than operation on two document attributes or
+    #   metadata fields. Use with a document attribute of type `Date` or
+    #   `Long`.
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] greater_than_or_equals
     #   Performs a greater or equals than operation on two document
-    #   attributes. Use with a document attribute of type `Date` or `Long`.
+    #   attributes or metadata fields. Use with a document attribute of type
+    #   `Date` or `Long`.
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] less_than
-    #   Performs a less than operation on two document attributes. Use with
-    #   a document attribute of type `Date` or `Long`.
+    #   Performs a less than operation on two document attributes or
+    #   metadata fields. Use with a document attribute of type `Date` or
+    #   `Long`.
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] less_than_or_equals
-    #   Performs a less than or equals operation on two document attributes.
-    #   Use with a document attribute of type `Date` or `Long`.
+    #   Performs a less than or equals operation on two document attributes
+    #   or metadata fields. Use with a document attribute of type `Date` or
+    #   `Long`.
     #   @return [Types::DocumentAttribute]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AttributeFilter AWS API Documentation
@@ -2464,7 +2470,7 @@ module Aws::Kendra
     #             },
     #           },
     #           share_point_configuration: {
-    #             share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
+    #             share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE, SHAREPOINT_2019
     #             urls: ["Url"], # required
     #             secret_arn: "SecretArn", # required
     #             crawl_attachments: false,
@@ -3981,7 +3987,7 @@ module Aws::Kendra
     #           },
     #         },
     #         share_point_configuration: {
-    #           share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
+    #           share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE, SHAREPOINT_2019
     #           urls: ["Url"], # required
     #           secret_arn: "SecretArn", # required
     #           crawl_attachments: false,
@@ -11868,7 +11874,7 @@ module Aws::Kendra
     #   data as a hash:
     #
     #       {
-    #         share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
+    #         share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE, SHAREPOINT_2019
     #         urls: ["Url"], # required
     #         secret_arn: "SecretArn", # required
     #         crawl_attachments: false,
@@ -12981,7 +12987,7 @@ module Aws::Kendra
     #             },
     #           },
     #           share_point_configuration: {
-    #             share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
+    #             share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE, SHAREPOINT_2019
     #             urls: ["Url"], # required
     #             secret_arn: "SecretArn", # required
     #             crawl_attachments: false,

@@ -5793,7 +5793,7 @@ module Aws::EC2
     #                 max: 1,
     #               },
     #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #               accelerator_total_memory_mi_b: {
     #                 min: 1,
     #                 max: 1,
@@ -5876,7 +5876,7 @@ module Aws::EC2
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
-    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.errors[0].lifecycle #=> String, one of "spot", "on-demand"
@@ -5926,7 +5926,7 @@ module Aws::EC2
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
-    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.instances[0].lifecycle #=> String, one of "spot", "on-demand"
@@ -7506,7 +7506,7 @@ module Aws::EC2
     #           max: 1,
     #         },
     #         accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #         accelerator_total_memory_mi_b: {
     #           min: 1,
     #           max: 1,
@@ -7871,7 +7871,7 @@ module Aws::EC2
     #           max: 1,
     #         },
     #         accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #         accelerator_total_memory_mi_b: {
     #           min: 1,
     #           max: 1,
@@ -8025,7 +8025,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_manufacturers #=> Array
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_names #=> Array
-    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
@@ -8047,6 +8047,11 @@ module Aws::EC2
     end
 
     # Creates a static route for the specified local gateway route table.
+    # You must specify one of the following targets:
+    #
+    # * `LocalGatewayVirtualInterfaceGroupId`
+    #
+    # * `NetworkInterfaceId`
     #
     # @option params [required, String] :destination_cidr_block
     #   The CIDR range used for destination matches. Routing decisions are
@@ -8055,7 +8060,7 @@ module Aws::EC2
     # @option params [required, String] :local_gateway_route_table_id
     #   The ID of the local gateway route table.
     #
-    # @option params [required, String] :local_gateway_virtual_interface_group_id
+    # @option params [String] :local_gateway_virtual_interface_group_id
     #   The ID of the virtual interface group.
     #
     # @option params [Boolean] :dry_run
@@ -8063,6 +8068,9 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :network_interface_id
+    #   The ID of the network interface.
     #
     # @return [Types::CreateLocalGatewayRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8073,8 +8081,9 @@ module Aws::EC2
     #   resp = client.create_local_gateway_route({
     #     destination_cidr_block: "String", # required
     #     local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
-    #     local_gateway_virtual_interface_group_id: "LocalGatewayVirtualInterfaceGroupId", # required
+    #     local_gateway_virtual_interface_group_id: "LocalGatewayVirtualInterfaceGroupId",
     #     dry_run: false,
+    #     network_interface_id: "NetworkInterfaceId",
     #   })
     #
     # @example Response structure
@@ -8086,6 +8095,9 @@ module Aws::EC2
     #   resp.route.local_gateway_route_table_id #=> String
     #   resp.route.local_gateway_route_table_arn #=> String
     #   resp.route.owner_id #=> String
+    #   resp.route.subnet_id #=> String
+    #   resp.route.coip_pool_id #=> String
+    #   resp.route.network_interface_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLocalGatewayRoute AWS API Documentation
     #
@@ -14504,6 +14516,9 @@ module Aws::EC2
     #   resp.route.local_gateway_route_table_id #=> String
     #   resp.route.local_gateway_route_table_arn #=> String
     #   resp.route.owner_id #=> String
+    #   resp.route.subnet_id #=> String
+    #   resp.route.coip_pool_id #=> String
+    #   resp.route.network_interface_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLocalGatewayRoute AWS API Documentation
     #
@@ -19662,7 +19677,7 @@ module Aws::EC2
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers #=> Array
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_names #=> Array
-    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.fleets[0].target_capacity_specification.total_target_capacity #=> Integer
@@ -19737,7 +19752,7 @@ module Aws::EC2
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
-    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.fleets[0].errors[0].lifecycle #=> String, one of "spot", "on-demand"
@@ -19787,7 +19802,7 @@ module Aws::EC2
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
-    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.fleets[0].instances[0].lifecycle #=> String, one of "spot", "on-demand"
@@ -23611,7 +23626,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_manufacturers #=> Array
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_names #=> Array
-    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
@@ -23988,6 +24003,7 @@ module Aws::EC2
     #   resp.local_gateway_route_tables[0].tags #=> Array
     #   resp.local_gateway_route_tables[0].tags[0].key #=> String
     #   resp.local_gateway_route_tables[0].tags[0].value #=> String
+    #   resp.local_gateway_route_tables[0].mode #=> String, one of "direct-vpc-routing", "coip"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLocalGatewayRouteTables AWS API Documentation
@@ -28820,7 +28836,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_manufacturers #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_names #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs #=> Array
@@ -28867,7 +28883,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_names #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_price #=> String
@@ -36129,7 +36145,7 @@ module Aws::EC2
     #         max: 1,
     #       },
     #       accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #       accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #       accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #       accelerator_total_memory_mi_b: {
     #         min: 1,
     #         max: 1,
@@ -36756,7 +36772,7 @@ module Aws::EC2
     #   resp.launch_template_data.instance_requirements.accelerator_manufacturers #=> Array
     #   resp.launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
     #   resp.launch_template_data.instance_requirements.accelerator_names #=> Array
-    #   resp.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
@@ -37449,7 +37465,7 @@ module Aws::EC2
     #           max: 1,
     #         },
     #         accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #         accelerator_total_memory_mi_b: {
     #           min: 1,
     #           max: 1,
@@ -39735,7 +39751,7 @@ module Aws::EC2
     #                 max: 1,
     #               },
     #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #               accelerator_total_memory_mi_b: {
     #                 min: 1,
     #                 max: 1,
@@ -41431,6 +41447,59 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies the specified local gateway route.
+    #
+    # @option params [required, String] :destination_cidr_block
+    #   The CIDR block used for destination matches. The value that you
+    #   provide must match the CIDR of an existing route in the table.
+    #
+    # @option params [required, String] :local_gateway_route_table_id
+    #   The ID of the local gateway route table.
+    #
+    # @option params [required, String] :network_interface_id
+    #   The ID of the network interface.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyLocalGatewayRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyLocalGatewayRouteResult#route #route} => Types::LocalGatewayRoute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_local_gateway_route({
+    #     destination_cidr_block: "String", # required
+    #     local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
+    #     network_interface_id: "NetworkInterfaceId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.route.destination_cidr_block #=> String
+    #   resp.route.local_gateway_virtual_interface_group_id #=> String
+    #   resp.route.type #=> String, one of "static", "propagated"
+    #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
+    #   resp.route.local_gateway_route_table_id #=> String
+    #   resp.route.local_gateway_route_table_arn #=> String
+    #   resp.route.owner_id #=> String
+    #   resp.route.subnet_id #=> String
+    #   resp.route.coip_pool_id #=> String
+    #   resp.route.network_interface_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyLocalGatewayRoute AWS API Documentation
+    #
+    # @overload modify_local_gateway_route(params = {})
+    # @param [Hash] params ({})
+    def modify_local_gateway_route(params = {}, options = {})
+      req = build_request(:modify_local_gateway_route, params)
+      req.send_request(options)
+    end
+
     # Modifies the specified managed prefix list.
     #
     # Adding or removing entries in a prefix list creates a new version of
@@ -42122,7 +42191,7 @@ module Aws::EC2
     #                 max: 1,
     #               },
     #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #               accelerator_total_memory_mi_b: {
     #                 min: 1,
     #                 max: 1,
@@ -46566,7 +46635,7 @@ module Aws::EC2
     #               max: 1,
     #             },
     #             accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #             accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #             accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #             accelerator_total_memory_mi_b: {
     #               min: 1,
     #               max: 1,
@@ -46630,7 +46699,7 @@ module Aws::EC2
     #                   max: 1,
     #                 },
     #                 accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #                 accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                 accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #                 accelerator_total_memory_mi_b: {
     #                   min: 1,
     #                   max: 1,
@@ -49193,6 +49262,9 @@ module Aws::EC2
     #   resp.routes[0].local_gateway_route_table_id #=> String
     #   resp.routes[0].local_gateway_route_table_arn #=> String
     #   resp.routes[0].owner_id #=> String
+    #   resp.routes[0].subnet_id #=> String
+    #   resp.routes[0].coip_pool_id #=> String
+    #   resp.routes[0].network_interface_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SearchLocalGatewayRoutes AWS API Documentation
@@ -50817,7 +50889,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.331.0'
+      context[:gem_version] = '1.332.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

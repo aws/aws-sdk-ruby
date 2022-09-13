@@ -884,6 +884,26 @@ module Aws::CloudWatchEvidently
     #
     # [1]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateProject.html
     #
+    # @option params [Types::ProjectAppConfigResourceConfig] :app_config_resource
+    #   Use this parameter if the project will use *client-side evaluation
+    #   powered by AppConfig*. Client-side evaluation allows your application
+    #   to assign variations to user sessions locally instead of by calling
+    #   the [EvaluateFeature][1] operation. This mitigates the latency and
+    #   availability risks that come with an API call. For more information,
+    #   see [ Client-side evaluation - powered by AppConfig.][2]
+    #
+    #   This parameter is a structure that contains information about the
+    #   AppConfig application and environment that will be used as for
+    #   client-side evaluation.
+    #
+    #   To create a project that uses client-side evaluation, you must have
+    #   the `evidently:ExportProjectAsConfiguration` permission.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-client-side-evaluation.html
+    #
     # @option params [Types::ProjectDataDeliveryConfig] :data_delivery
     #   A structure that contains information about where Evidently is to
     #   store evaluation events for longer term storage, if you choose to do
@@ -916,6 +936,10 @@ module Aws::CloudWatchEvidently
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_project({
+    #     app_config_resource: {
+    #       application_id: "AppConfigResourceId",
+    #       environment_id: "AppConfigResourceId",
+    #     },
     #     data_delivery: {
     #       cloud_watch_logs: {
     #         log_group: "CwLogGroupSafeName",
@@ -936,6 +960,9 @@ module Aws::CloudWatchEvidently
     #
     #   resp.project.active_experiment_count #=> Integer
     #   resp.project.active_launch_count #=> Integer
+    #   resp.project.app_config_resource.application_id #=> String
+    #   resp.project.app_config_resource.configuration_profile_id #=> String
+    #   resp.project.app_config_resource.environment_id #=> String
     #   resp.project.arn #=> String
     #   resp.project.created_time #=> Time
     #   resp.project.data_delivery.cloud_watch_logs.log_group #=> String
@@ -968,10 +995,10 @@ module Aws::CloudWatchEvidently
     #
     # Using a segment in an experiment limits that experiment to evaluate
     # only the users who match the segment criteria. Using one or more
-    # segments in a launch allow you to define different traffic splits for
+    # segments in a launch allows you to define different traffic splits for
     # the different audience segments.
     #
-    #      <p>For more information about segment pattern syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments-syntax.html"> Segment rule pattern syntax</a>.</p> <p>The pattern that you define for a segment is matched against the value of <code>evaluationContext</code>, which is passed into Evidently in the <a href="https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html">EvaluateFeature</a> operation, when Evidently assigns a feature variation to a user.</p>
+    #      <p>For more information about segment pattern syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html#CloudWatch-Evidently-segments-syntax.html"> Segment rule pattern syntax</a>.</p> <p>The pattern that you define for a segment is matched against the value of <code>evaluationContext</code>, which is passed into Evidently in the <a href="https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html">EvaluateFeature</a> operation, when Evidently assigns a feature variation to a user.</p>
     #
     # @option params [String] :description
     #   An optional description for this segment.
@@ -989,7 +1016,7 @@ module Aws::CloudWatchEvidently
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments-syntax.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html#CloudWatch-Evidently-segments-syntax.html
     #
     # @option params [Hash<String,String>] :tags
     #   Assigns one or more tags (key-value pairs) to the segment.
@@ -1328,7 +1355,12 @@ module Aws::CloudWatchEvidently
 
     # Retrieves the results of a running or completed experiment. No results
     # are available until there have been 100 events for each variation and
-    # at least 10 minutes have passed since the start of the experiment.
+    # at least 10 minutes have passed since the start of the experiment. To
+    # increase the statistical power, Evidently performs an additional
+    # offline p-value analysis at the end of the experiment. Offline p-value
+    # analysis can detect statistical significance in some cases where the
+    # anytime p-values used during the experiment do not find statistical
+    # significance.
     #
     # Experiment results are available up to 63 days after the start of the
     # experiment. They are not available after that because of CloudWatch
@@ -1596,6 +1628,9 @@ module Aws::CloudWatchEvidently
     #
     #   resp.project.active_experiment_count #=> Integer
     #   resp.project.active_launch_count #=> Integer
+    #   resp.project.app_config_resource.application_id #=> String
+    #   resp.project.app_config_resource.configuration_profile_id #=> String
+    #   resp.project.app_config_resource.environment_id #=> String
     #   resp.project.arn #=> String
     #   resp.project.created_time #=> Time
     #   resp.project.data_delivery.cloud_watch_logs.log_group #=> String
@@ -2840,6 +2875,20 @@ module Aws::CloudWatchEvidently
     # [2]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateProjectDataDelivery.html
     # [3]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html
     #
+    # @option params [Types::ProjectAppConfigResourceConfig] :app_config_resource
+    #   Use this parameter if the project will use client-side evaluation
+    #   powered by AppConfig. Client-side evaluation allows your application
+    #   to assign variations to user sessions locally instead of by calling
+    #   the [EvaluateFeature][1] operation. This mitigates the latency and
+    #   availability risks that come with an API call. allows you to
+    #
+    #   This parameter is a structure that contains information about the
+    #   AppConfig application that will be used for client-side evaluation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html
+    #
     # @option params [String] :description
     #   An optional description of the project.
     #
@@ -2853,6 +2902,10 @@ module Aws::CloudWatchEvidently
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_project({
+    #     app_config_resource: {
+    #       application_id: "AppConfigResourceId",
+    #       environment_id: "AppConfigResourceId",
+    #     },
     #     description: "Description",
     #     project: "ProjectRef", # required
     #   })
@@ -2861,6 +2914,9 @@ module Aws::CloudWatchEvidently
     #
     #   resp.project.active_experiment_count #=> Integer
     #   resp.project.active_launch_count #=> Integer
+    #   resp.project.app_config_resource.application_id #=> String
+    #   resp.project.app_config_resource.configuration_profile_id #=> String
+    #   resp.project.app_config_resource.environment_id #=> String
     #   resp.project.arn #=> String
     #   resp.project.created_time #=> Time
     #   resp.project.data_delivery.cloud_watch_logs.log_group #=> String
@@ -2927,6 +2983,9 @@ module Aws::CloudWatchEvidently
     #
     #   resp.project.active_experiment_count #=> Integer
     #   resp.project.active_launch_count #=> Integer
+    #   resp.project.app_config_resource.application_id #=> String
+    #   resp.project.app_config_resource.configuration_profile_id #=> String
+    #   resp.project.app_config_resource.environment_id #=> String
     #   resp.project.arn #=> String
     #   resp.project.created_time #=> Time
     #   resp.project.data_delivery.cloud_watch_logs.log_group #=> String
@@ -2964,7 +3023,7 @@ module Aws::CloudWatchEvidently
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevidently'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

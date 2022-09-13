@@ -1440,6 +1440,32 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteHostKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_id: "ServerId", # required
+    #         host_key_id: "HostKeyId", # required
+    #       }
+    #
+    # @!attribute [rw] server_id
+    #   Provide the ID of the server that contains the host key that you are
+    #   deleting.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_key_id
+    #   The ID of the host key that you are deleting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteHostKeyRequest AWS API Documentation
+    #
+    class DeleteHostKeyRequest < Struct.new(
+      :server_id,
+      :host_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteProfileRequest
     #   data as a hash:
     #
@@ -1793,6 +1819,44 @@ module Aws::Transfer
     class DescribeExecutionResponse < Struct.new(
       :workflow_id,
       :execution)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeHostKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_id: "ServerId", # required
+    #         host_key_id: "HostKeyId", # required
+    #       }
+    #
+    # @!attribute [rw] server_id
+    #   Provide the ID of the server that contains the host key that you
+    #   want described.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_key_id
+    #   Provide the ID of the host key that you want described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeHostKeyRequest AWS API Documentation
+    #
+    class DescribeHostKeyRequest < Struct.new(
+      :server_id,
+      :host_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] host_key
+    #   Returns the details for the specified host key.
+    #   @return [Types::DescribedHostKey]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeHostKeyResponse AWS API Documentation
+    #
+    class DescribeHostKeyResponse < Struct.new(
+      :host_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2346,6 +2410,62 @@ module Aws::Transfer
       :posix_profile,
       :status,
       :results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details for a server host key.
+    #
+    # @!attribute [rw] arn
+    #   The unique Amazon Resource Name (ARN) for the host key.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_key_id
+    #   A unique identifier for the host key.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_key_fingerprint
+    #   The public key fingerprint, which is a short sequence of bytes used
+    #   to identify the longer public key.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The text description for this host key.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The encryption algorithm used for the host key. The `Type` is one of
+    #   the following values:
+    #
+    #   * ssh-rsa
+    #
+    #   * ssh-ed25519
+    #
+    #   * ecdsa-sha2-nistp256
+    #
+    #   * ecdsa-sha2-nistp384
+    #
+    #   * ecdsa-sha2-nistp521
+    #   @return [String]
+    #
+    # @!attribute [rw] date_imported
+    #   The date on which the host key was added to the server.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   Key-value pairs that can be used to group and search for host keys.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedHostKey AWS API Documentation
+    #
+    class DescribedHostKey < Struct.new(
+      :arn,
+      :host_key_id,
+      :host_key_fingerprint,
+      :description,
+      :type,
+      :date_imported,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3236,6 +3356,68 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ImportHostKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_id: "ServerId", # required
+    #         host_key_body: "HostKey", # required
+    #         description: "HostKeyDescription",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] server_id
+    #   Provide the ID of the server that contains the host key that you are
+    #   importing.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_key_body
+    #   The public key portion of an SSH key pair.
+    #
+    #   Transfer Family accepts RSA, ECDSA, and ED25519 keys.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Enter a text description to identify this host key.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Key-value pairs that can be used to group and search for host keys.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ImportHostKeyRequest AWS API Documentation
+    #
+    class ImportHostKeyRequest < Struct.new(
+      :server_id,
+      :host_key_body,
+      :description,
+      :tags)
+      SENSITIVE = [:host_key_body]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] server_id
+    #   Returns the server ID that contains the imported key.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_key_id
+    #   Returns the host key ID for the imported key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ImportHostKeyResponse AWS API Documentation
+    #
+    class ImportHostKeyResponse < Struct.new(
+      :server_id,
+      :host_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ImportSshPublicKeyRequest
     #   data as a hash:
     #
@@ -3662,6 +3844,64 @@ module Aws::Transfer
       :next_token,
       :workflow_id,
       :executions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListHostKeysRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         server_id: "ServerId", # required
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of host keys to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When there are additional results that were not returned, a
+    #   `NextToken` parameter is returned. You can use that value for a
+    #   subsequent call to `ListHostKeys` to continue listing results.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_id
+    #   Provide the ID of the server that contains the host keys that you
+    #   want to view.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListHostKeysRequest AWS API Documentation
+    #
+    class ListHostKeysRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :server_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   Returns a token that you can use to call `ListHostKeys` again and
+    #   receive additional results, if there are any.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_id
+    #   Returns the server ID that contains the listed host keys.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_keys
+    #   Returns an array, where each item contains the details of a host
+    #   key.
+    #   @return [Array<Types::ListedHostKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListHostKeysResponse AWS API Documentation
+    #
+    class ListHostKeysResponse < Struct.new(
+      :next_token,
+      :server_id,
+      :host_keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4210,6 +4450,58 @@ module Aws::Transfer
       :initial_file_location,
       :service_metadata,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns properties of the host key that is specified.
+    #
+    # @!attribute [rw] arn
+    #   Specifies the unique Amazon Resource Name (ARN) of the host key.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_key_id
+    #   @return [String]
+    #
+    # @!attribute [rw] fingerprint
+    #   The public key fingerprint, which is a short sequence of bytes used
+    #   to identify the longer public key.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The current description for the host key. You can change it by
+    #   calling the `UpdateHostKey` operation and providing a new
+    #   description.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The encryption algorithm used for the host key. The `Type` is one of
+    #   the following values:
+    #
+    #   * ssh-rsa
+    #
+    #   * ssh-ed25519
+    #
+    #   * ecdsa-sha2-nistp256
+    #
+    #   * ecdsa-sha2-nistp384
+    #
+    #   * ecdsa-sha2-nistp521
+    #   @return [String]
+    #
+    # @!attribute [rw] date_imported
+    #   The date on which the host key was added to the server.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListedHostKey AWS API Documentation
+    #
+    class ListedHostKey < Struct.new(
+      :arn,
+      :host_key_id,
+      :fingerprint,
+      :description,
+      :type,
+      :date_imported)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5571,6 +5863,56 @@ module Aws::Transfer
     #
     class UpdateConnectorResponse < Struct.new(
       :connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateHostKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_id: "ServerId", # required
+    #         host_key_id: "HostKeyId", # required
+    #         description: "HostKeyDescription", # required
+    #       }
+    #
+    # @!attribute [rw] server_id
+    #   Provide the ID of the server that contains the host key that you are
+    #   updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_key_id
+    #   Provide the ID of the host key that you are updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Provide an updated description for the host key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateHostKeyRequest AWS API Documentation
+    #
+    class UpdateHostKeyRequest < Struct.new(
+      :server_id,
+      :host_key_id,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] server_id
+    #   Returns the server ID for the server that contains the updated host
+    #   key.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_key_id
+    #   Returns the host key ID for the updated host key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateHostKeyResponse AWS API Documentation
+    #
+    class UpdateHostKeyResponse < Struct.new(
+      :server_id,
+      :host_key_id)
       SENSITIVE = []
       include Aws::Structure
     end

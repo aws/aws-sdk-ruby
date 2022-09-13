@@ -7924,7 +7924,7 @@ module Aws::EC2
     #                     max: 1,
     #                   },
     #                   accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #                   accelerator_total_memory_mi_b: {
     #                     min: 1,
     #                     max: 1,
@@ -9402,7 +9402,7 @@ module Aws::EC2
     #               max: 1,
     #             },
     #             accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #             accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #             accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #             accelerator_total_memory_mi_b: {
     #               min: 1,
     #               max: 1,
@@ -9710,7 +9710,7 @@ module Aws::EC2
     #               max: 1,
     #             },
     #             accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #             accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #             accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #             accelerator_total_memory_mi_b: {
     #               min: 1,
     #               max: 1,
@@ -9817,8 +9817,9 @@ module Aws::EC2
     #       {
     #         destination_cidr_block: "String", # required
     #         local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
-    #         local_gateway_virtual_interface_group_id: "LocalGatewayVirtualInterfaceGroupId", # required
+    #         local_gateway_virtual_interface_group_id: "LocalGatewayVirtualInterfaceGroupId",
     #         dry_run: false,
+    #         network_interface_id: "NetworkInterfaceId",
     #       }
     #
     # @!attribute [rw] destination_cidr_block
@@ -9841,13 +9842,18 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLocalGatewayRouteRequest AWS API Documentation
     #
     class CreateLocalGatewayRouteRequest < Struct.new(
       :destination_cidr_block,
       :local_gateway_route_table_id,
       :local_gateway_virtual_interface_group_id,
-      :dry_run)
+      :dry_run,
+      :network_interface_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34546,7 +34552,7 @@ module Aws::EC2
     #                 max: 1,
     #               },
     #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #               accelerator_total_memory_mi_b: {
     #                 min: 1,
     #                 max: 1,
@@ -34723,7 +34729,7 @@ module Aws::EC2
     #             max: 1,
     #           },
     #           accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #           accelerator_total_memory_mi_b: {
     #             min: 1,
     #             max: 1,
@@ -36135,7 +36141,7 @@ module Aws::EC2
     #             max: 1,
     #           },
     #           accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #           accelerator_total_memory_mi_b: {
     #             min: 1,
     #             max: 1,
@@ -37115,7 +37121,7 @@ module Aws::EC2
     #               max: 1,
     #             },
     #             accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #             accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #             accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #             accelerator_total_memory_mi_b: {
     #               min: 1,
     #               max: 1,
@@ -41968,7 +41974,7 @@ module Aws::EC2
     #           max: 1,
     #         },
     #         accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #         accelerator_total_memory_mi_b: {
     #           min: 1,
     #           max: 1,
@@ -42369,7 +42375,7 @@ module Aws::EC2
     #           max: 1,
     #         },
     #         accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #         accelerator_total_memory_mi_b: {
     #           min: 1,
     #           max: 1,
@@ -42755,7 +42761,7 @@ module Aws::EC2
     #             max: 1,
     #           },
     #           accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #           accelerator_total_memory_mi_b: {
     #             min: 1,
     #             max: 1,
@@ -45040,7 +45046,7 @@ module Aws::EC2
     #                 max: 1,
     #               },
     #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #               accelerator_total_memory_mi_b: {
     #                 min: 1,
     #                 max: 1,
@@ -46129,7 +46135,7 @@ module Aws::EC2
     #             max: 1,
     #           },
     #           accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #           accelerator_total_memory_mi_b: {
     #             min: 1,
     #             max: 1,
@@ -47057,6 +47063,18 @@ module Aws::EC2
     #   gateway route.
     #   @return [String]
     #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] coip_pool_id
+    #   The ID of the customer-owned address pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LocalGatewayRoute AWS API Documentation
     #
     class LocalGatewayRoute < Struct.new(
@@ -47066,7 +47084,10 @@ module Aws::EC2
       :state,
       :local_gateway_route_table_id,
       :local_gateway_route_table_arn,
-      :owner_id)
+      :owner_id,
+      :subnet_id,
+      :coip_pool_id,
+      :network_interface_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47102,6 +47123,10 @@ module Aws::EC2
     #   The tags assigned to the local gateway route table.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] mode
+    #   The mode of the local gateway route table.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LocalGatewayRouteTable AWS API Documentation
     #
     class LocalGatewayRouteTable < Struct.new(
@@ -47111,7 +47136,8 @@ module Aws::EC2
       :outpost_arn,
       :owner_id,
       :state,
-      :tags)
+      :tags,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48124,7 +48150,7 @@ module Aws::EC2
     #                     max: 1,
     #                   },
     #                   accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #                   accelerator_total_memory_mi_b: {
     #                     min: 1,
     #                     max: 1,
@@ -49694,6 +49720,59 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyLocalGatewayRouteRequest
+    #   data as a hash:
+    #
+    #       {
+    #         destination_cidr_block: "String", # required
+    #         local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
+    #         network_interface_id: "NetworkInterfaceId", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The CIDR block used for destination matches. The value that you
+    #   provide must match the CIDR of an existing route in the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] local_gateway_route_table_id
+    #   The ID of the local gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyLocalGatewayRouteRequest AWS API Documentation
+    #
+    class ModifyLocalGatewayRouteRequest < Struct.new(
+      :destination_cidr_block,
+      :local_gateway_route_table_id,
+      :network_interface_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] route
+    #   Describes a route for a local gateway route table.
+    #   @return [Types::LocalGatewayRoute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyLocalGatewayRouteResult AWS API Documentation
+    #
+    class ModifyLocalGatewayRouteResult < Struct.new(
+      :route)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyManagedPrefixListRequest
     #   data as a hash:
     #
@@ -50222,7 +50301,7 @@ module Aws::EC2
     #                     max: 1,
     #                   },
     #                   accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #                   accelerator_total_memory_mi_b: {
     #                     min: 1,
     #                     max: 1,
@@ -57362,7 +57441,7 @@ module Aws::EC2
     #             max: 1,
     #           },
     #           accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #           accelerator_total_memory_mi_b: {
     #             min: 1,
     #             max: 1,
@@ -57853,7 +57932,7 @@ module Aws::EC2
     #                   max: 1,
     #                 },
     #                 accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #                 accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                 accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #                 accelerator_total_memory_mi_b: {
     #                   min: 1,
     #                   max: 1,
@@ -57917,7 +57996,7 @@ module Aws::EC2
     #                       max: 1,
     #                     },
     #                     accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #                     accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                     accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #                     accelerator_total_memory_mi_b: {
     #                       min: 1,
     #                       max: 1,
@@ -63827,7 +63906,7 @@ module Aws::EC2
     #             max: 1,
     #           },
     #           accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #           accelerator_total_memory_mi_b: {
     #             min: 1,
     #             max: 1,
@@ -64216,7 +64295,7 @@ module Aws::EC2
     #                 max: 1,
     #               },
     #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #               accelerator_total_memory_mi_b: {
     #                 min: 1,
     #                 max: 1,
@@ -64280,7 +64359,7 @@ module Aws::EC2
     #                     max: 1,
     #                   },
     #                   accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
     #                   accelerator_total_memory_mi_b: {
     #                     min: 1,
     #                     max: 1,

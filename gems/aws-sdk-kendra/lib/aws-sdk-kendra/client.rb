@@ -1074,7 +1074,7 @@ module Aws::Kendra
     #         },
     #       },
     #       share_point_configuration: {
-    #         share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
+    #         share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE, SHAREPOINT_2019
     #         urls: ["Url"], # required
     #         secret_arn: "SecretArn", # required
     #         crawl_attachments: false,
@@ -2682,7 +2682,7 @@ module Aws::Kendra
     #   resp.configuration.s3_configuration.exclusion_patterns[0] #=> String
     #   resp.configuration.s3_configuration.documents_metadata_configuration.s3_prefix #=> String
     #   resp.configuration.s3_configuration.access_control_list_configuration.key_path #=> String
-    #   resp.configuration.share_point_configuration.share_point_version #=> String, one of "SHAREPOINT_2013", "SHAREPOINT_2016", "SHAREPOINT_ONLINE"
+    #   resp.configuration.share_point_configuration.share_point_version #=> String, one of "SHAREPOINT_2013", "SHAREPOINT_2016", "SHAREPOINT_ONLINE", "SHAREPOINT_2019"
     #   resp.configuration.share_point_configuration.urls #=> Array
     #   resp.configuration.share_point_configuration.urls[0] #=> String
     #   resp.configuration.share_point_configuration.secret_arn #=> String
@@ -5295,7 +5295,7 @@ module Aws::Kendra
     #         },
     #       },
     #       share_point_configuration: {
-    #         share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
+    #         share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE, SHAREPOINT_2019
     #         urls: ["Url"], # required
     #         secret_arn: "SecretArn", # required
     #         crawl_attachments: false,
@@ -6387,7 +6387,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

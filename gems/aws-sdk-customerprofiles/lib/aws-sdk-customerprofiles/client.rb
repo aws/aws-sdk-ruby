@@ -352,7 +352,7 @@ module Aws::CustomerProfiles
     # @!group API Operations
 
     # Associates a new key value with a specific profile, such as a Contact
-    # Trace Record (CTR) ContactId.
+    # Record ContactId.
     #
     # A profile object can have a single unique key and any number of
     # additional keys that can be used to identify the profile that it
@@ -1293,6 +1293,7 @@ module Aws::CustomerProfiles
     #   * {Types::GetIntegrationResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetIntegrationResponse#object_type_names #object_type_names} => Hash&lt;String,String&gt;
     #   * {Types::GetIntegrationResponse#workflow_id #workflow_id} => String
+    #   * {Types::GetIntegrationResponse#is_unstructured #is_unstructured} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1313,6 +1314,7 @@ module Aws::CustomerProfiles
     #   resp.object_type_names #=> Hash
     #   resp.object_type_names["string1To255"] #=> String
     #   resp.workflow_id #=> String
+    #   resp.is_unstructured #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetIntegration AWS API Documentation
     #
@@ -1685,6 +1687,7 @@ module Aws::CustomerProfiles
     #   resp.items[0].object_type_names #=> Hash
     #   resp.items[0].object_type_names["string1To255"] #=> String
     #   resp.items[0].workflow_id #=> String
+    #   resp.items[0].is_unstructured #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListAccountIntegrations AWS API Documentation
@@ -1830,6 +1833,7 @@ module Aws::CustomerProfiles
     #   resp.items[0].object_type_names #=> Hash
     #   resp.items[0].object_type_names["string1To255"] #=> String
     #   resp.items[0].workflow_id #=> String
+    #   resp.items[0].is_unstructured #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListIntegrations AWS API Documentation
@@ -2181,6 +2185,14 @@ module Aws::CustomerProfiles
     #
     # An integration can belong to only one domain.
     #
+    # To add or remove tags on an existing Integration, see [ TagResource
+    # ][1]/[ UntagResource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html
+    # [2]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html
+    #
     # @option params [required, String] :domain_name
     #   The unique name of the domain.
     #
@@ -2216,6 +2228,7 @@ module Aws::CustomerProfiles
     #   * {Types::PutIntegrationResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::PutIntegrationResponse#object_type_names #object_type_names} => Hash&lt;String,String&gt;
     #   * {Types::PutIntegrationResponse#workflow_id #workflow_id} => String
+    #   * {Types::PutIntegrationResponse#is_unstructured #is_unstructured} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2306,6 +2319,7 @@ module Aws::CustomerProfiles
     #   resp.object_type_names #=> Hash
     #   resp.object_type_names["string1To255"] #=> String
     #   resp.workflow_id #=> String
+    #   resp.is_unstructured #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegration AWS API Documentation
     #
@@ -2318,10 +2332,10 @@ module Aws::CustomerProfiles
 
     # Adds additional objects to customer profiles of a given ObjectType.
     #
-    # When adding a specific profile object, like a Contact Trace Record
-    # (CTR), an inferred profile can get created if it is not mapped to an
-    # existing profile. The resulting profile will only have a phone number
-    # populated in the standard ProfileObject. Any additional CTRs with the
+    # When adding a specific profile object, like a Contact Record, an
+    # inferred profile can get created if it is not mapped to an existing
+    # profile. The resulting profile will only have a phone number populated
+    # in the standard ProfileObject. Any additional Contact Records with the
     # same phone number will be mapped to the same inferred profile.
     #
     # When a ProfileObject is created and if a ProfileObjectType already
@@ -2366,6 +2380,14 @@ module Aws::CustomerProfiles
     end
 
     # Defines a ProfileObjectType.
+    #
+    # To add or remove tags on an existing ObjectType, see [
+    # TagResource][1]/[UntagResource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html
+    # [2]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html
     #
     # @option params [required, String] :domain_name
     #   The unique name of the domain.
@@ -2689,11 +2711,16 @@ module Aws::CustomerProfiles
     # [Cross-service confused deputy prevention][3] for sample policies that
     # you should apply.
     #
+    # To add or remove tags on an existing Domain, see
+    # [TagResource][4]/[UntagResource][5].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html
     # [2]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html
+    # [4]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html
+    # [5]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html
     #
     # @option params [required, String] :domain_name
     #   The unique name of the domain.
@@ -2998,7 +3025,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2022-09-13)
+------------------
+
+* Feature - This release adds support for the client-side evaluation - powered by AWS AppConfig feature.
+
 1.7.0 (2022-07-15)
 ------------------
 

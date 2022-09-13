@@ -1723,6 +1723,7 @@ module Aws::EC2
     LocalGatewayRouteState = Shapes::StringShape.new(name: 'LocalGatewayRouteState')
     LocalGatewayRouteTable = Shapes::StructureShape.new(name: 'LocalGatewayRouteTable')
     LocalGatewayRouteTableIdSet = Shapes::ListShape.new(name: 'LocalGatewayRouteTableIdSet')
+    LocalGatewayRouteTableMode = Shapes::StringShape.new(name: 'LocalGatewayRouteTableMode')
     LocalGatewayRouteTableSet = Shapes::ListShape.new(name: 'LocalGatewayRouteTableSet')
     LocalGatewayRouteTableVirtualInterfaceGroupAssociation = Shapes::StructureShape.new(name: 'LocalGatewayRouteTableVirtualInterfaceGroupAssociation')
     LocalGatewayRouteTableVirtualInterfaceGroupAssociationId = Shapes::StringShape.new(name: 'LocalGatewayRouteTableVirtualInterfaceGroupAssociationId')
@@ -1819,6 +1820,8 @@ module Aws::EC2
     ModifyIpamScopeResult = Shapes::StructureShape.new(name: 'ModifyIpamScopeResult')
     ModifyLaunchTemplateRequest = Shapes::StructureShape.new(name: 'ModifyLaunchTemplateRequest')
     ModifyLaunchTemplateResult = Shapes::StructureShape.new(name: 'ModifyLaunchTemplateResult')
+    ModifyLocalGatewayRouteRequest = Shapes::StructureShape.new(name: 'ModifyLocalGatewayRouteRequest')
+    ModifyLocalGatewayRouteResult = Shapes::StructureShape.new(name: 'ModifyLocalGatewayRouteResult')
     ModifyManagedPrefixListRequest = Shapes::StructureShape.new(name: 'ModifyManagedPrefixListRequest')
     ModifyManagedPrefixListResult = Shapes::StructureShape.new(name: 'ModifyManagedPrefixListResult')
     ModifyNetworkInterfaceAttributeRequest = Shapes::StructureShape.new(name: 'ModifyNetworkInterfaceAttributeRequest')
@@ -4183,8 +4186,9 @@ module Aws::EC2
 
     CreateLocalGatewayRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DestinationCidrBlock"))
     CreateLocalGatewayRouteRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
-    CreateLocalGatewayRouteRequest.add_member(:local_gateway_virtual_interface_group_id, Shapes::ShapeRef.new(shape: LocalGatewayVirtualInterfaceGroupId, required: true, location_name: "LocalGatewayVirtualInterfaceGroupId"))
+    CreateLocalGatewayRouteRequest.add_member(:local_gateway_virtual_interface_group_id, Shapes::ShapeRef.new(shape: LocalGatewayVirtualInterfaceGroupId, location_name: "LocalGatewayVirtualInterfaceGroupId"))
     CreateLocalGatewayRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateLocalGatewayRouteRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
     CreateLocalGatewayRouteRequest.struct_class = Types::CreateLocalGatewayRouteRequest
 
     CreateLocalGatewayRouteResult.add_member(:route, Shapes::ShapeRef.new(shape: LocalGatewayRoute, location_name: "route"))
@@ -9557,6 +9561,9 @@ module Aws::EC2
     LocalGatewayRoute.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, location_name: "localGatewayRouteTableId"))
     LocalGatewayRoute.add_member(:local_gateway_route_table_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "localGatewayRouteTableArn"))
     LocalGatewayRoute.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    LocalGatewayRoute.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "subnetId"))
+    LocalGatewayRoute.add_member(:coip_pool_id, Shapes::ShapeRef.new(shape: CoipPoolId, location_name: "coipPoolId"))
+    LocalGatewayRoute.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "networkInterfaceId"))
     LocalGatewayRoute.struct_class = Types::LocalGatewayRoute
 
     LocalGatewayRouteList.member = Shapes::ShapeRef.new(shape: LocalGatewayRoute, location_name: "item")
@@ -9568,6 +9575,7 @@ module Aws::EC2
     LocalGatewayRouteTable.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     LocalGatewayRouteTable.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "state"))
     LocalGatewayRouteTable.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    LocalGatewayRouteTable.add_member(:mode, Shapes::ShapeRef.new(shape: LocalGatewayRouteTableMode, location_name: "mode"))
     LocalGatewayRouteTable.struct_class = Types::LocalGatewayRouteTable
 
     LocalGatewayRouteTableIdSet.member = Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, location_name: "item")
@@ -9940,6 +9948,15 @@ module Aws::EC2
 
     ModifyLaunchTemplateResult.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplate, location_name: "launchTemplate"))
     ModifyLaunchTemplateResult.struct_class = Types::ModifyLaunchTemplateResult
+
+    ModifyLocalGatewayRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DestinationCidrBlock"))
+    ModifyLocalGatewayRouteRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
+    ModifyLocalGatewayRouteRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "NetworkInterfaceId"))
+    ModifyLocalGatewayRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyLocalGatewayRouteRequest.struct_class = Types::ModifyLocalGatewayRouteRequest
+
+    ModifyLocalGatewayRouteResult.add_member(:route, Shapes::ShapeRef.new(shape: LocalGatewayRoute, location_name: "route"))
+    ModifyLocalGatewayRouteResult.struct_class = Types::ModifyLocalGatewayRouteResult
 
     ModifyManagedPrefixListRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyManagedPrefixListRequest.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, required: true, location_name: "PrefixListId"))
@@ -17744,6 +17761,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyLaunchTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyLaunchTemplateResult)
+      end)
+
+      api.add_operation(:modify_local_gateway_route, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyLocalGatewayRoute"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyLocalGatewayRouteRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyLocalGatewayRouteResult)
       end)
 
       api.add_operation(:modify_managed_prefix_list, Seahorse::Model::Operation.new.tap do |o|

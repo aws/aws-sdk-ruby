@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.332.0 (2022-09-13)
+------------------
+
+* Feature - Two new features for local gateway route tables: support for static routes targeting Elastic Network Interfaces and direct VPC routing.
+
 1.331.0 (2022-09-08)
 ------------------
 
