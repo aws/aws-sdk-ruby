@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.333.0 (2022-09-14)
+------------------
+
+* Feature - This update introduces API operations to manage and create local gateway route tables, CoIP pools, and VIF group associations.
+
 1.332.0 (2022-09-13)
 ------------------
 

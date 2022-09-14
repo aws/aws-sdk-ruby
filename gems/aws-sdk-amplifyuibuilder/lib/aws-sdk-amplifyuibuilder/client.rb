@@ -399,6 +399,7 @@ module Aws::AmplifyUIBuilder
     #                 },
     #               },
     #             ],
+    #             slot_name: "String",
     #             user_attribute: "String",
     #           },
     #           default_value: "String",
@@ -1311,6 +1312,7 @@ module Aws::AmplifyUIBuilder
     #   resp.entity.binding_properties["String"].binding_properties.predicates[0].operand #=> String
     #   resp.entity.binding_properties["String"].binding_properties.predicates[0].operator #=> String
     #   resp.entity.binding_properties["String"].binding_properties.predicates[0].or #=> Types::PredicateList
+    #   resp.entity.binding_properties["String"].binding_properties.slot_name #=> String
     #   resp.entity.binding_properties["String"].binding_properties.user_attribute #=> String
     #   resp.entity.binding_properties["String"].default_value #=> String
     #   resp.entity.binding_properties["String"].type #=> String
@@ -1846,6 +1848,231 @@ module Aws::AmplifyUIBuilder
       req.send_request(options)
     end
 
+    # Creates a new form for an Amplify app.
+    #
+    # @option params [required, String] :app_id
+    #   The unique ID of the Amplify app to associate with the form.
+    #
+    # @option params [String] :client_token
+    #   The unique client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :environment_name
+    #   The name of the backend environment that is a part of the Amplify app.
+    #
+    # @option params [required, Types::CreateFormData] :form_to_create
+    #   Represents the configuration of the form to create.
+    #
+    # @return [Types::CreateFormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFormResponse#entity #entity} => Types::Form
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_form({
+    #     app_id: "String", # required
+    #     client_token: "String",
+    #     environment_name: "String", # required
+    #     form_to_create: { # required
+    #       cta: {
+    #         cancel: {
+    #           children: "String",
+    #           excluded: false,
+    #           position: {
+    #             below: "String",
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #           },
+    #         },
+    #         clear: {
+    #           children: "String",
+    #           excluded: false,
+    #           position: {
+    #             below: "String",
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #           },
+    #         },
+    #         position: "top", # accepts top, bottom, top_and_bottom
+    #         submit: {
+    #           children: "String",
+    #           excluded: false,
+    #           position: {
+    #             below: "String",
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #           },
+    #         },
+    #       },
+    #       data_type: { # required
+    #         data_source_type: "DataStore", # required, accepts DataStore, Custom
+    #         data_type_name: "String", # required
+    #       },
+    #       fields: { # required
+    #         "String" => {
+    #           excluded: false,
+    #           input_type: {
+    #             default_checked: false,
+    #             default_country_code: "String",
+    #             default_value: "String",
+    #             descriptive_text: "String",
+    #             max_value: 1.0,
+    #             min_value: 1.0,
+    #             name: "String",
+    #             placeholder: "String",
+    #             read_only: false,
+    #             required: false,
+    #             step: 1.0,
+    #             type: "String", # required
+    #             value: "String",
+    #             value_mappings: {
+    #               values: [ # required
+    #                 {
+    #                   display_value: {
+    #                     value: "String",
+    #                   },
+    #                   value: { # required
+    #                     value: "String",
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           label: "String",
+    #           position: {
+    #             below: "String",
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #           },
+    #           validations: [
+    #             {
+    #               num_values: [1],
+    #               str_values: ["String"],
+    #               type: "String", # required
+    #               validation_message: "String",
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       form_action_type: "create", # required, accepts create, update
+    #       name: "FormName", # required
+    #       schema_version: "String", # required
+    #       sectional_elements: { # required
+    #         "String" => {
+    #           level: 1,
+    #           orientation: "String",
+    #           position: {
+    #             below: "String",
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #           },
+    #           text: "String",
+    #           type: "String", # required
+    #         },
+    #       },
+    #       style: { # required
+    #         horizontal_gap: {
+    #           token_reference: "String",
+    #           value: "String",
+    #         },
+    #         outer_padding: {
+    #           token_reference: "String",
+    #           value: "String",
+    #         },
+    #         vertical_gap: {
+    #           token_reference: "String",
+    #           value: "String",
+    #         },
+    #       },
+    #       tags: {
+    #         "TagKey" => "TagValue",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entity.app_id #=> String
+    #   resp.entity.cta.cancel.children #=> String
+    #   resp.entity.cta.cancel.excluded #=> Boolean
+    #   resp.entity.cta.cancel.position.below #=> String
+    #   resp.entity.cta.cancel.position.fixed #=> String, one of "first"
+    #   resp.entity.cta.cancel.position.right_of #=> String
+    #   resp.entity.cta.clear.children #=> String
+    #   resp.entity.cta.clear.excluded #=> Boolean
+    #   resp.entity.cta.clear.position.below #=> String
+    #   resp.entity.cta.clear.position.fixed #=> String, one of "first"
+    #   resp.entity.cta.clear.position.right_of #=> String
+    #   resp.entity.cta.position #=> String, one of "top", "bottom", "top_and_bottom"
+    #   resp.entity.cta.submit.children #=> String
+    #   resp.entity.cta.submit.excluded #=> Boolean
+    #   resp.entity.cta.submit.position.below #=> String
+    #   resp.entity.cta.submit.position.fixed #=> String, one of "first"
+    #   resp.entity.cta.submit.position.right_of #=> String
+    #   resp.entity.data_type.data_source_type #=> String, one of "DataStore", "Custom"
+    #   resp.entity.data_type.data_type_name #=> String
+    #   resp.entity.environment_name #=> String
+    #   resp.entity.fields #=> Hash
+    #   resp.entity.fields["String"].excluded #=> Boolean
+    #   resp.entity.fields["String"].input_type.default_checked #=> Boolean
+    #   resp.entity.fields["String"].input_type.default_country_code #=> String
+    #   resp.entity.fields["String"].input_type.default_value #=> String
+    #   resp.entity.fields["String"].input_type.descriptive_text #=> String
+    #   resp.entity.fields["String"].input_type.max_value #=> Float
+    #   resp.entity.fields["String"].input_type.min_value #=> Float
+    #   resp.entity.fields["String"].input_type.name #=> String
+    #   resp.entity.fields["String"].input_type.placeholder #=> String
+    #   resp.entity.fields["String"].input_type.read_only #=> Boolean
+    #   resp.entity.fields["String"].input_type.required #=> Boolean
+    #   resp.entity.fields["String"].input_type.step #=> Float
+    #   resp.entity.fields["String"].input_type.type #=> String
+    #   resp.entity.fields["String"].input_type.value #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values #=> Array
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].display_value.value #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].value.value #=> String
+    #   resp.entity.fields["String"].label #=> String
+    #   resp.entity.fields["String"].position.below #=> String
+    #   resp.entity.fields["String"].position.fixed #=> String, one of "first"
+    #   resp.entity.fields["String"].position.right_of #=> String
+    #   resp.entity.fields["String"].validations #=> Array
+    #   resp.entity.fields["String"].validations[0].num_values #=> Array
+    #   resp.entity.fields["String"].validations[0].num_values[0] #=> Integer
+    #   resp.entity.fields["String"].validations[0].str_values #=> Array
+    #   resp.entity.fields["String"].validations[0].str_values[0] #=> String
+    #   resp.entity.fields["String"].validations[0].type #=> String
+    #   resp.entity.fields["String"].validations[0].validation_message #=> String
+    #   resp.entity.form_action_type #=> String, one of "create", "update"
+    #   resp.entity.id #=> String
+    #   resp.entity.name #=> String
+    #   resp.entity.schema_version #=> String
+    #   resp.entity.sectional_elements #=> Hash
+    #   resp.entity.sectional_elements["String"].level #=> Integer
+    #   resp.entity.sectional_elements["String"].orientation #=> String
+    #   resp.entity.sectional_elements["String"].position.below #=> String
+    #   resp.entity.sectional_elements["String"].position.fixed #=> String, one of "first"
+    #   resp.entity.sectional_elements["String"].position.right_of #=> String
+    #   resp.entity.sectional_elements["String"].text #=> String
+    #   resp.entity.sectional_elements["String"].type #=> String
+    #   resp.entity.style.horizontal_gap.token_reference #=> String
+    #   resp.entity.style.horizontal_gap.value #=> String
+    #   resp.entity.style.outer_padding.token_reference #=> String
+    #   resp.entity.style.outer_padding.value #=> String
+    #   resp.entity.style.vertical_gap.token_reference #=> String
+    #   resp.entity.style.vertical_gap.value #=> String
+    #   resp.entity.tags #=> Hash
+    #   resp.entity.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CreateForm AWS API Documentation
+    #
+    # @overload create_form(params = {})
+    # @param [Hash] params ({})
+    def create_form(params = {}, options = {})
+      req = build_request(:create_form, params)
+      req.send_request(options)
+    end
+
     # Creates a theme to apply to the components in an Amplify app.
     #
     # @option params [required, String] :app_id
@@ -1962,6 +2189,36 @@ module Aws::AmplifyUIBuilder
       req.send_request(options)
     end
 
+    # Deletes a form from an Amplify app.
+    #
+    # @option params [required, String] :app_id
+    #   The unique ID of the Amplify app associated with the form to delete.
+    #
+    # @option params [required, String] :environment_name
+    #   The name of the backend environment that is a part of the Amplify app.
+    #
+    # @option params [required, String] :id
+    #   The unique ID of the form to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_form({
+    #     app_id: "String", # required
+    #     environment_name: "String", # required
+    #     id: "Uuid", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/DeleteForm AWS API Documentation
+    #
+    # @overload delete_form(params = {})
+    # @param [Hash] params ({})
+    def delete_form(params = {}, options = {})
+      req = build_request(:delete_form, params)
+      req.send_request(options)
+    end
+
     # Deletes a theme from an Amplify app.
     #
     # @option params [required, String] :app_id
@@ -2075,6 +2332,7 @@ module Aws::AmplifyUIBuilder
     #   resp.entities[0].binding_properties["String"].binding_properties.predicates[0].operand #=> String
     #   resp.entities[0].binding_properties["String"].binding_properties.predicates[0].operator #=> String
     #   resp.entities[0].binding_properties["String"].binding_properties.predicates[0].or #=> Types::PredicateList
+    #   resp.entities[0].binding_properties["String"].binding_properties.slot_name #=> String
     #   resp.entities[0].binding_properties["String"].binding_properties.user_attribute #=> String
     #   resp.entities[0].binding_properties["String"].default_value #=> String
     #   resp.entities[0].binding_properties["String"].type #=> String
@@ -2611,6 +2869,116 @@ module Aws::AmplifyUIBuilder
       req.send_request(options)
     end
 
+    # Exports form configurations to code that is ready to integrate into an
+    # Amplify app.
+    #
+    # @option params [required, String] :app_id
+    #   The unique ID of the Amplify app to export forms to.
+    #
+    # @option params [required, String] :environment_name
+    #   The name of the backend environment that is a part of the Amplify app.
+    #
+    # @option params [String] :next_token
+    #   The token to request the next page of results.
+    #
+    # @return [Types::ExportFormsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportFormsResponse#entities #entities} => Array&lt;Types::Form&gt;
+    #   * {Types::ExportFormsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_forms({
+    #     app_id: "String", # required
+    #     environment_name: "String", # required
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entities #=> Array
+    #   resp.entities[0].app_id #=> String
+    #   resp.entities[0].cta.cancel.children #=> String
+    #   resp.entities[0].cta.cancel.excluded #=> Boolean
+    #   resp.entities[0].cta.cancel.position.below #=> String
+    #   resp.entities[0].cta.cancel.position.fixed #=> String, one of "first"
+    #   resp.entities[0].cta.cancel.position.right_of #=> String
+    #   resp.entities[0].cta.clear.children #=> String
+    #   resp.entities[0].cta.clear.excluded #=> Boolean
+    #   resp.entities[0].cta.clear.position.below #=> String
+    #   resp.entities[0].cta.clear.position.fixed #=> String, one of "first"
+    #   resp.entities[0].cta.clear.position.right_of #=> String
+    #   resp.entities[0].cta.position #=> String, one of "top", "bottom", "top_and_bottom"
+    #   resp.entities[0].cta.submit.children #=> String
+    #   resp.entities[0].cta.submit.excluded #=> Boolean
+    #   resp.entities[0].cta.submit.position.below #=> String
+    #   resp.entities[0].cta.submit.position.fixed #=> String, one of "first"
+    #   resp.entities[0].cta.submit.position.right_of #=> String
+    #   resp.entities[0].data_type.data_source_type #=> String, one of "DataStore", "Custom"
+    #   resp.entities[0].data_type.data_type_name #=> String
+    #   resp.entities[0].environment_name #=> String
+    #   resp.entities[0].fields #=> Hash
+    #   resp.entities[0].fields["String"].excluded #=> Boolean
+    #   resp.entities[0].fields["String"].input_type.default_checked #=> Boolean
+    #   resp.entities[0].fields["String"].input_type.default_country_code #=> String
+    #   resp.entities[0].fields["String"].input_type.default_value #=> String
+    #   resp.entities[0].fields["String"].input_type.descriptive_text #=> String
+    #   resp.entities[0].fields["String"].input_type.max_value #=> Float
+    #   resp.entities[0].fields["String"].input_type.min_value #=> Float
+    #   resp.entities[0].fields["String"].input_type.name #=> String
+    #   resp.entities[0].fields["String"].input_type.placeholder #=> String
+    #   resp.entities[0].fields["String"].input_type.read_only #=> Boolean
+    #   resp.entities[0].fields["String"].input_type.required #=> Boolean
+    #   resp.entities[0].fields["String"].input_type.step #=> Float
+    #   resp.entities[0].fields["String"].input_type.type #=> String
+    #   resp.entities[0].fields["String"].input_type.value #=> String
+    #   resp.entities[0].fields["String"].input_type.value_mappings.values #=> Array
+    #   resp.entities[0].fields["String"].input_type.value_mappings.values[0].display_value.value #=> String
+    #   resp.entities[0].fields["String"].input_type.value_mappings.values[0].value.value #=> String
+    #   resp.entities[0].fields["String"].label #=> String
+    #   resp.entities[0].fields["String"].position.below #=> String
+    #   resp.entities[0].fields["String"].position.fixed #=> String, one of "first"
+    #   resp.entities[0].fields["String"].position.right_of #=> String
+    #   resp.entities[0].fields["String"].validations #=> Array
+    #   resp.entities[0].fields["String"].validations[0].num_values #=> Array
+    #   resp.entities[0].fields["String"].validations[0].num_values[0] #=> Integer
+    #   resp.entities[0].fields["String"].validations[0].str_values #=> Array
+    #   resp.entities[0].fields["String"].validations[0].str_values[0] #=> String
+    #   resp.entities[0].fields["String"].validations[0].type #=> String
+    #   resp.entities[0].fields["String"].validations[0].validation_message #=> String
+    #   resp.entities[0].form_action_type #=> String, one of "create", "update"
+    #   resp.entities[0].id #=> String
+    #   resp.entities[0].name #=> String
+    #   resp.entities[0].schema_version #=> String
+    #   resp.entities[0].sectional_elements #=> Hash
+    #   resp.entities[0].sectional_elements["String"].level #=> Integer
+    #   resp.entities[0].sectional_elements["String"].orientation #=> String
+    #   resp.entities[0].sectional_elements["String"].position.below #=> String
+    #   resp.entities[0].sectional_elements["String"].position.fixed #=> String, one of "first"
+    #   resp.entities[0].sectional_elements["String"].position.right_of #=> String
+    #   resp.entities[0].sectional_elements["String"].text #=> String
+    #   resp.entities[0].sectional_elements["String"].type #=> String
+    #   resp.entities[0].style.horizontal_gap.token_reference #=> String
+    #   resp.entities[0].style.horizontal_gap.value #=> String
+    #   resp.entities[0].style.outer_padding.token_reference #=> String
+    #   resp.entities[0].style.outer_padding.value #=> String
+    #   resp.entities[0].style.vertical_gap.token_reference #=> String
+    #   resp.entities[0].style.vertical_gap.value #=> String
+    #   resp.entities[0].tags #=> Hash
+    #   resp.entities[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ExportForms AWS API Documentation
+    #
+    # @overload export_forms(params = {})
+    # @param [Hash] params ({})
+    def export_forms(params = {}, options = {})
+      req = build_request(:export_forms, params)
+      req.send_request(options)
+    end
+
     # Exports theme configurations to code that is ready to integrate into
     # an Amplify app.
     #
@@ -2706,6 +3074,7 @@ module Aws::AmplifyUIBuilder
     #   resp.component.binding_properties["String"].binding_properties.predicates[0].operand #=> String
     #   resp.component.binding_properties["String"].binding_properties.predicates[0].operator #=> String
     #   resp.component.binding_properties["String"].binding_properties.predicates[0].or #=> Types::PredicateList
+    #   resp.component.binding_properties["String"].binding_properties.slot_name #=> String
     #   resp.component.binding_properties["String"].binding_properties.user_attribute #=> String
     #   resp.component.binding_properties["String"].default_value #=> String
     #   resp.component.binding_properties["String"].type #=> String
@@ -3241,6 +3610,143 @@ module Aws::AmplifyUIBuilder
       req.send_request(options)
     end
 
+    # Returns an existing form for an Amplify app.
+    #
+    # @option params [required, String] :app_id
+    #   The unique ID of the Amplify app.
+    #
+    # @option params [required, String] :environment_name
+    #   The name of the backend environment that is part of the Amplify app.
+    #
+    # @option params [required, String] :id
+    #   The unique ID of the form.
+    #
+    # @return [Types::GetFormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFormResponse#form #form} => Types::Form
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_form({
+    #     app_id: "String", # required
+    #     environment_name: "String", # required
+    #     id: "Uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.form.app_id #=> String
+    #   resp.form.cta.cancel.children #=> String
+    #   resp.form.cta.cancel.excluded #=> Boolean
+    #   resp.form.cta.cancel.position.below #=> String
+    #   resp.form.cta.cancel.position.fixed #=> String, one of "first"
+    #   resp.form.cta.cancel.position.right_of #=> String
+    #   resp.form.cta.clear.children #=> String
+    #   resp.form.cta.clear.excluded #=> Boolean
+    #   resp.form.cta.clear.position.below #=> String
+    #   resp.form.cta.clear.position.fixed #=> String, one of "first"
+    #   resp.form.cta.clear.position.right_of #=> String
+    #   resp.form.cta.position #=> String, one of "top", "bottom", "top_and_bottom"
+    #   resp.form.cta.submit.children #=> String
+    #   resp.form.cta.submit.excluded #=> Boolean
+    #   resp.form.cta.submit.position.below #=> String
+    #   resp.form.cta.submit.position.fixed #=> String, one of "first"
+    #   resp.form.cta.submit.position.right_of #=> String
+    #   resp.form.data_type.data_source_type #=> String, one of "DataStore", "Custom"
+    #   resp.form.data_type.data_type_name #=> String
+    #   resp.form.environment_name #=> String
+    #   resp.form.fields #=> Hash
+    #   resp.form.fields["String"].excluded #=> Boolean
+    #   resp.form.fields["String"].input_type.default_checked #=> Boolean
+    #   resp.form.fields["String"].input_type.default_country_code #=> String
+    #   resp.form.fields["String"].input_type.default_value #=> String
+    #   resp.form.fields["String"].input_type.descriptive_text #=> String
+    #   resp.form.fields["String"].input_type.max_value #=> Float
+    #   resp.form.fields["String"].input_type.min_value #=> Float
+    #   resp.form.fields["String"].input_type.name #=> String
+    #   resp.form.fields["String"].input_type.placeholder #=> String
+    #   resp.form.fields["String"].input_type.read_only #=> Boolean
+    #   resp.form.fields["String"].input_type.required #=> Boolean
+    #   resp.form.fields["String"].input_type.step #=> Float
+    #   resp.form.fields["String"].input_type.type #=> String
+    #   resp.form.fields["String"].input_type.value #=> String
+    #   resp.form.fields["String"].input_type.value_mappings.values #=> Array
+    #   resp.form.fields["String"].input_type.value_mappings.values[0].display_value.value #=> String
+    #   resp.form.fields["String"].input_type.value_mappings.values[0].value.value #=> String
+    #   resp.form.fields["String"].label #=> String
+    #   resp.form.fields["String"].position.below #=> String
+    #   resp.form.fields["String"].position.fixed #=> String, one of "first"
+    #   resp.form.fields["String"].position.right_of #=> String
+    #   resp.form.fields["String"].validations #=> Array
+    #   resp.form.fields["String"].validations[0].num_values #=> Array
+    #   resp.form.fields["String"].validations[0].num_values[0] #=> Integer
+    #   resp.form.fields["String"].validations[0].str_values #=> Array
+    #   resp.form.fields["String"].validations[0].str_values[0] #=> String
+    #   resp.form.fields["String"].validations[0].type #=> String
+    #   resp.form.fields["String"].validations[0].validation_message #=> String
+    #   resp.form.form_action_type #=> String, one of "create", "update"
+    #   resp.form.id #=> String
+    #   resp.form.name #=> String
+    #   resp.form.schema_version #=> String
+    #   resp.form.sectional_elements #=> Hash
+    #   resp.form.sectional_elements["String"].level #=> Integer
+    #   resp.form.sectional_elements["String"].orientation #=> String
+    #   resp.form.sectional_elements["String"].position.below #=> String
+    #   resp.form.sectional_elements["String"].position.fixed #=> String, one of "first"
+    #   resp.form.sectional_elements["String"].position.right_of #=> String
+    #   resp.form.sectional_elements["String"].text #=> String
+    #   resp.form.sectional_elements["String"].type #=> String
+    #   resp.form.style.horizontal_gap.token_reference #=> String
+    #   resp.form.style.horizontal_gap.value #=> String
+    #   resp.form.style.outer_padding.token_reference #=> String
+    #   resp.form.style.outer_padding.value #=> String
+    #   resp.form.style.vertical_gap.token_reference #=> String
+    #   resp.form.style.vertical_gap.value #=> String
+    #   resp.form.tags #=> Hash
+    #   resp.form.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/GetForm AWS API Documentation
+    #
+    # @overload get_form(params = {})
+    # @param [Hash] params ({})
+    def get_form(params = {}, options = {})
+      req = build_request(:get_form, params)
+      req.send_request(options)
+    end
+
+    # Returns existing metadata for an Amplify app.
+    #
+    # @option params [required, String] :app_id
+    #   The unique ID of the Amplify app.
+    #
+    # @option params [required, String] :environment_name
+    #   The name of the backend environment that is part of the Amplify app.
+    #
+    # @return [Types::GetMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMetadataResponse#features #features} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_metadata({
+    #     app_id: "String", # required
+    #     environment_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.features #=> Hash
+    #   resp.features["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/GetMetadata AWS API Documentation
+    #
+    # @overload get_metadata(params = {})
+    # @param [Hash] params ({})
+    def get_metadata(params = {}, options = {})
+      req = build_request(:get_metadata, params)
+      req.send_request(options)
+    end
+
     # Returns an existing theme for an Amplify app.
     #
     # @option params [required, String] :app_id
@@ -3342,6 +3848,58 @@ module Aws::AmplifyUIBuilder
       req.send_request(options)
     end
 
+    # Retrieves a list of forms for a specified Amplify app and backend
+    # environment.
+    #
+    # @option params [required, String] :app_id
+    #   The unique ID for the Amplify app.
+    #
+    # @option params [required, String] :environment_name
+    #   The name of the backend environment that is a part of the Amplify app.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of forms to retrieve.
+    #
+    # @option params [String] :next_token
+    #   The token to request the next page of results.
+    #
+    # @return [Types::ListFormsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFormsResponse#entities #entities} => Array&lt;Types::FormSummary&gt;
+    #   * {Types::ListFormsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_forms({
+    #     app_id: "String", # required
+    #     environment_name: "String", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entities #=> Array
+    #   resp.entities[0].app_id #=> String
+    #   resp.entities[0].data_type.data_source_type #=> String, one of "DataStore", "Custom"
+    #   resp.entities[0].data_type.data_type_name #=> String
+    #   resp.entities[0].environment_name #=> String
+    #   resp.entities[0].form_action_type #=> String, one of "create", "update"
+    #   resp.entities[0].id #=> String
+    #   resp.entities[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ListForms AWS API Documentation
+    #
+    # @overload list_forms(params = {})
+    # @param [Hash] params ({})
+    def list_forms(params = {}, options = {})
+      req = build_request(:list_forms, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of themes for a specified Amplify app and backend
     # environment.
     #
@@ -3388,6 +3946,42 @@ module Aws::AmplifyUIBuilder
     # @param [Hash] params ({})
     def list_themes(params = {}, options = {})
       req = build_request(:list_themes, params)
+      req.send_request(options)
+    end
+
+    # Stores the metadata information about a feature on a form or view.
+    #
+    # @option params [required, String] :app_id
+    #   The unique ID for the Amplify app.
+    #
+    # @option params [required, Types::PutMetadataFlagBody] :body
+    #   The metadata information to store.
+    #
+    # @option params [required, String] :environment_name
+    #   The name of the backend environment that is part of the Amplify app.
+    #
+    # @option params [required, String] :feature_name
+    #   The name of the feature associated with the metadata.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_metadata_flag({
+    #     app_id: "String", # required
+    #     body: { # required
+    #       new_value: "String", # required
+    #     },
+    #     environment_name: "String", # required
+    #     feature_name: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/PutMetadataFlag AWS API Documentation
+    #
+    # @overload put_metadata_flag(params = {})
+    # @param [Hash] params ({})
+    def put_metadata_flag(params = {}, options = {})
+      req = build_request(:put_metadata_flag, params)
       req.send_request(options)
     end
 
@@ -3481,6 +4075,7 @@ module Aws::AmplifyUIBuilder
     #                 },
     #               },
     #             ],
+    #             slot_name: "String",
     #             user_attribute: "String",
     #           },
     #           default_value: "String",
@@ -4390,6 +4985,7 @@ module Aws::AmplifyUIBuilder
     #   resp.entity.binding_properties["String"].binding_properties.predicates[0].operand #=> String
     #   resp.entity.binding_properties["String"].binding_properties.predicates[0].operator #=> String
     #   resp.entity.binding_properties["String"].binding_properties.predicates[0].or #=> Types::PredicateList
+    #   resp.entity.binding_properties["String"].binding_properties.slot_name #=> String
     #   resp.entity.binding_properties["String"].binding_properties.user_attribute #=> String
     #   resp.entity.binding_properties["String"].default_value #=> String
     #   resp.entity.binding_properties["String"].type #=> String
@@ -4925,6 +5521,232 @@ module Aws::AmplifyUIBuilder
       req.send_request(options)
     end
 
+    # Updates an existing form.
+    #
+    # @option params [required, String] :app_id
+    #   The unique ID for the Amplify app.
+    #
+    # @option params [String] :client_token
+    #   The unique client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :environment_name
+    #   The name of the backend environment that is part of the Amplify app.
+    #
+    # @option params [required, String] :id
+    #   The unique ID for the form.
+    #
+    # @option params [required, Types::UpdateFormData] :updated_form
+    #   The request accepts the following data in JSON format.
+    #
+    # @return [Types::UpdateFormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFormResponse#entity #entity} => Types::Form
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_form({
+    #     app_id: "String", # required
+    #     client_token: "String",
+    #     environment_name: "String", # required
+    #     id: "Uuid", # required
+    #     updated_form: { # required
+    #       cta: {
+    #         cancel: {
+    #           children: "String",
+    #           excluded: false,
+    #           position: {
+    #             below: "String",
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #           },
+    #         },
+    #         clear: {
+    #           children: "String",
+    #           excluded: false,
+    #           position: {
+    #             below: "String",
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #           },
+    #         },
+    #         position: "top", # accepts top, bottom, top_and_bottom
+    #         submit: {
+    #           children: "String",
+    #           excluded: false,
+    #           position: {
+    #             below: "String",
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #           },
+    #         },
+    #       },
+    #       data_type: {
+    #         data_source_type: "DataStore", # required, accepts DataStore, Custom
+    #         data_type_name: "String", # required
+    #       },
+    #       fields: {
+    #         "String" => {
+    #           excluded: false,
+    #           input_type: {
+    #             default_checked: false,
+    #             default_country_code: "String",
+    #             default_value: "String",
+    #             descriptive_text: "String",
+    #             max_value: 1.0,
+    #             min_value: 1.0,
+    #             name: "String",
+    #             placeholder: "String",
+    #             read_only: false,
+    #             required: false,
+    #             step: 1.0,
+    #             type: "String", # required
+    #             value: "String",
+    #             value_mappings: {
+    #               values: [ # required
+    #                 {
+    #                   display_value: {
+    #                     value: "String",
+    #                   },
+    #                   value: { # required
+    #                     value: "String",
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           label: "String",
+    #           position: {
+    #             below: "String",
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #           },
+    #           validations: [
+    #             {
+    #               num_values: [1],
+    #               str_values: ["String"],
+    #               type: "String", # required
+    #               validation_message: "String",
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       form_action_type: "create", # accepts create, update
+    #       name: "FormName",
+    #       schema_version: "String",
+    #       sectional_elements: {
+    #         "String" => {
+    #           level: 1,
+    #           orientation: "String",
+    #           position: {
+    #             below: "String",
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #           },
+    #           text: "String",
+    #           type: "String", # required
+    #         },
+    #       },
+    #       style: {
+    #         horizontal_gap: {
+    #           token_reference: "String",
+    #           value: "String",
+    #         },
+    #         outer_padding: {
+    #           token_reference: "String",
+    #           value: "String",
+    #         },
+    #         vertical_gap: {
+    #           token_reference: "String",
+    #           value: "String",
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entity.app_id #=> String
+    #   resp.entity.cta.cancel.children #=> String
+    #   resp.entity.cta.cancel.excluded #=> Boolean
+    #   resp.entity.cta.cancel.position.below #=> String
+    #   resp.entity.cta.cancel.position.fixed #=> String, one of "first"
+    #   resp.entity.cta.cancel.position.right_of #=> String
+    #   resp.entity.cta.clear.children #=> String
+    #   resp.entity.cta.clear.excluded #=> Boolean
+    #   resp.entity.cta.clear.position.below #=> String
+    #   resp.entity.cta.clear.position.fixed #=> String, one of "first"
+    #   resp.entity.cta.clear.position.right_of #=> String
+    #   resp.entity.cta.position #=> String, one of "top", "bottom", "top_and_bottom"
+    #   resp.entity.cta.submit.children #=> String
+    #   resp.entity.cta.submit.excluded #=> Boolean
+    #   resp.entity.cta.submit.position.below #=> String
+    #   resp.entity.cta.submit.position.fixed #=> String, one of "first"
+    #   resp.entity.cta.submit.position.right_of #=> String
+    #   resp.entity.data_type.data_source_type #=> String, one of "DataStore", "Custom"
+    #   resp.entity.data_type.data_type_name #=> String
+    #   resp.entity.environment_name #=> String
+    #   resp.entity.fields #=> Hash
+    #   resp.entity.fields["String"].excluded #=> Boolean
+    #   resp.entity.fields["String"].input_type.default_checked #=> Boolean
+    #   resp.entity.fields["String"].input_type.default_country_code #=> String
+    #   resp.entity.fields["String"].input_type.default_value #=> String
+    #   resp.entity.fields["String"].input_type.descriptive_text #=> String
+    #   resp.entity.fields["String"].input_type.max_value #=> Float
+    #   resp.entity.fields["String"].input_type.min_value #=> Float
+    #   resp.entity.fields["String"].input_type.name #=> String
+    #   resp.entity.fields["String"].input_type.placeholder #=> String
+    #   resp.entity.fields["String"].input_type.read_only #=> Boolean
+    #   resp.entity.fields["String"].input_type.required #=> Boolean
+    #   resp.entity.fields["String"].input_type.step #=> Float
+    #   resp.entity.fields["String"].input_type.type #=> String
+    #   resp.entity.fields["String"].input_type.value #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values #=> Array
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].display_value.value #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].value.value #=> String
+    #   resp.entity.fields["String"].label #=> String
+    #   resp.entity.fields["String"].position.below #=> String
+    #   resp.entity.fields["String"].position.fixed #=> String, one of "first"
+    #   resp.entity.fields["String"].position.right_of #=> String
+    #   resp.entity.fields["String"].validations #=> Array
+    #   resp.entity.fields["String"].validations[0].num_values #=> Array
+    #   resp.entity.fields["String"].validations[0].num_values[0] #=> Integer
+    #   resp.entity.fields["String"].validations[0].str_values #=> Array
+    #   resp.entity.fields["String"].validations[0].str_values[0] #=> String
+    #   resp.entity.fields["String"].validations[0].type #=> String
+    #   resp.entity.fields["String"].validations[0].validation_message #=> String
+    #   resp.entity.form_action_type #=> String, one of "create", "update"
+    #   resp.entity.id #=> String
+    #   resp.entity.name #=> String
+    #   resp.entity.schema_version #=> String
+    #   resp.entity.sectional_elements #=> Hash
+    #   resp.entity.sectional_elements["String"].level #=> Integer
+    #   resp.entity.sectional_elements["String"].orientation #=> String
+    #   resp.entity.sectional_elements["String"].position.below #=> String
+    #   resp.entity.sectional_elements["String"].position.fixed #=> String, one of "first"
+    #   resp.entity.sectional_elements["String"].position.right_of #=> String
+    #   resp.entity.sectional_elements["String"].text #=> String
+    #   resp.entity.sectional_elements["String"].type #=> String
+    #   resp.entity.style.horizontal_gap.token_reference #=> String
+    #   resp.entity.style.horizontal_gap.value #=> String
+    #   resp.entity.style.outer_padding.token_reference #=> String
+    #   resp.entity.style.outer_padding.value #=> String
+    #   resp.entity.style.vertical_gap.token_reference #=> String
+    #   resp.entity.style.vertical_gap.value #=> String
+    #   resp.entity.tags #=> Hash
+    #   resp.entity.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/UpdateForm AWS API Documentation
+    #
+    # @overload update_form(params = {})
+    # @param [Hash] params ({})
+    def update_form(params = {}, options = {})
+      req = build_request(:update_form, params)
+      req.send_request(options)
+    end
+
     # Updates an existing theme.
     #
     # @option params [required, String] :app_id
@@ -5025,7 +5847,7 @@ module Aws::AmplifyUIBuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifyuibuilder'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
