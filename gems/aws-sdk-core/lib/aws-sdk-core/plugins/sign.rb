@@ -20,8 +20,7 @@ module Aws
 
       class Handler < Seahorse::Client::Handler
         def call(context)
-          auth_scheme = context[:endpoint][:auth_scheme]
-          signer = signer_for(context, auth_scheme)
+          signer = signer_for(context[:auth_scheme], context.config)
 
           case signer
           when Aws::Sigv4::Signer
@@ -35,31 +34,22 @@ module Aws
 
         private
 
-        # @api private
-        def _sigv4_name(cfg, scheme)
-          cfg.sigv4_name || scheme['signingName'] ||
-            cfg.api.metadata['signingName'] ||
-            cfg.api.metadata['endpointPrefix']
-        end
-
-        # @api private
-        def _sigv4_region(cfg, scheme)
-          cfg.sigv4_region || scheme['signingRegion'] ||
-            '*' if scheme['name'] == 'sigv4a' || cfg.region
-        end
-
-
-        def signer_for(context, auth_scheme)
-          case auth_scheme['name']
+        def signer_for(auth_scheme, config)
+          case (scheme_name = auth_scheme['name'])
           when 'sigv2'
             # don't sign, shouldn't happen in new rules
           when 'sigv4', 'sigv4a'
             begin
+              region = if scheme_name == 'sigv4a'
+                         auth_scheme['signingRegionSet'].first
+                       else
+                         config.sigv4_region || auth_scheme['signingRegion']
+                       end
               Aws::Sigv4::Signer.new(
-                service: _sigv4_name(context.config, auth_scheme),
-                region: _sigv4_region(context.config, auth_scheme),
-                credentials_provider: context.config.credentials,
-                signing_algorithm: auth_scheme['name'].to_sym,
+                service: config.sigv4_name || auth_scheme['signingName'],
+                region: region,
+                credentials_provider: config.credentials,
+                signing_algorithm: scheme_name.to_sym,
                 uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
                 unsigned_headers: %w[content-length user-agent x-amzn-trace-id]
               )
@@ -84,12 +74,11 @@ module Aws
             end
 
             token_provider = context.config.token_provider
-            if token_provider&.set?
-              context.http_request.headers['Authorization'] =
-                "Bearer #{token_provider.token.token}"
-            else
-              raise Errors::MissingBearerTokenError
-            end
+
+            raise Errors::MissingBearerTokenError unless token_provider&.set?
+
+            context.http_request.headers['Authorization'] =
+              "Bearer #{token_provider.token.token}"
           end
         end
       end

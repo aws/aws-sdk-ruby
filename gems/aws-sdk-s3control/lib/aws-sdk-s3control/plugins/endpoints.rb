@@ -35,10 +35,9 @@ module Aws::S3Control
           context.http_request.endpoint = endpoint.url
           apply_endpoint_headers(context, endpoint.headers)
 
-          context[:endpoint] = {
-            params: params,
-            auth_scheme: Aws::Endpoints.resolve_auth_scheme(context, endpoint)
-          }
+          context[:endpoint_params] = params
+          context[:auth_scheme] =
+            Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
           @handler.call(context)
         end

@@ -28,43 +28,59 @@ module Aws
           end
           raise 'No supported auth scheme for this endpoint.' unless auth_scheme
 
-          auth_scheme
+          merge_signing_defaults(auth_scheme, context.config)
         else
-          case resolve_default_api_authtype(context)
-          when 'v4', 'v4-unsigned-payload', 'v4-unsigned-body'
-            { 'name' => 'sigv4' }
-          when 's3v4'
-            { 'name' => 'sigv4', 'disableDoubleEncoding' => true }
-          when 'bearer'
-            { 'name' => 'bearer' }
-          when 'none', nil
-            { 'name' => 'none' }
-          end
+          default_auth_scheme(context)
         end
       end
 
       private
-      #
-      # def merge_scheme_defaults(context, scheme)
-      #   scheme['signingName'] ||= sigv4_name(context.config, scheme)
-      #   if scheme['name'] == 'sigv4a'
-      #
-      # end
-      #
-      def resolve_default_api_authtype(context)
+
+      def default_auth_scheme(context)
+        case default_api_authtype(context)
+        when 'v4', 'v4-unsigned-payload', 'v4-unsigned-body'
+          auth_scheme = { 'name' => 'sigv4' }
+          merge_signing_defaults(auth_scheme, context.config)
+        when 's3v4'
+          auth_scheme = { 'name' => 'sigv4', 'disableDoubleEncoding' => true }
+          merge_signing_defaults(auth_scheme, context.config)
+        when 'bearer'
+          { 'name' => 'bearer' }
+        when 'none', nil
+          { 'name' => 'none' }
+        end
+      end
+
+      def merge_signing_defaults(auth_scheme, config)
+        if %w[sigv4 sigv4a].include?(auth_scheme['name'])
+          auth_scheme['signingName'] ||= sigv4_name(config, auth_scheme)
+          if auth_scheme['name'] == 'sigv4a'
+            auth_scheme['signingRegionSet'] ||=
+              sigv4a_regions(config, auth_scheme)
+          else
+            auth_scheme['signingRegion'] ||= sigv4_region(config, auth_scheme)
+          end
+        end
+        auth_scheme
+      end
+
+      def default_api_authtype(context)
         context.config.api.operation(context.operation_name)['authtype'] ||
           context.config.api.metadata['signatureVersion']
       end
 
-      def sigv4_name(cfg, scheme)
-        cfg.sigv4_name || scheme['signingName'] ||
-          cfg.api.metadata['signingName'] ||
-          cfg.api.metadata['endpointPrefix']
+      def sigv4_name(config, auth_scheme)
+        auth_scheme['signingName'] ||
+          config.api.metadata['signingName'] ||
+          config.api.metadata['endpointPrefix']
       end
 
-      def sigv4_region(cfg, scheme)
-        cfg.sigv4_region || scheme['signingRegion'] ||
-          '*' if scheme['name'] == 'sigv4a' || cfg.region
+      def sigv4_region(config, auth_scheme)
+        auth_scheme['signingRegion'] || config.region
+      end
+
+      def sigv4a_regions(_config, auth_scheme)
+        auth_scheme['signingRegionSet'] || ['*']
       end
     end
   end

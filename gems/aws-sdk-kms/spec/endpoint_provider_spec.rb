@@ -1234,5 +1234,30 @@ module Aws::KMS
       expect(endpoint.properties).to eq(expect['endpoint']['properties'])
     end
 
+    it 'For custom endpoint with fips disabled and dualstack disabled' do
+      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"kms", "name"=>"sigv4"}]}, "url"=>"https://example.com"}}
+      params = EndpointParameters.new(**{:use_fips=>false, :region=>"us-east-1", :use_dual_stack=>false, :endpoint=>"https://example.com"})
+      endpoint = subject.resolve_endpoint(params)
+      expect(endpoint.url).to eq(expect['endpoint']['url'])
+      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+    end
+
+    it 'For custom endpoint with fips enabled and dualstack disabled' do
+      expect = {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
+      params = EndpointParameters.new(**{:use_fips=>true, :region=>"us-east-1", :use_dual_stack=>false, :endpoint=>"https://example.com"})
+      expect do
+        subject.resolve_endpoint(params)
+      end.to raise_error(ArgumentError, expect['error'])
+    end
+
+    it 'For custom endpoint with fips disabled and dualstack enabled' do
+      expect = {"error"=>"Invalid Configuration: Dualstack and custom endpoint are not supported"}
+      params = EndpointParameters.new(**{:use_fips=>false, :region=>"us-east-1", :use_dual_stack=>true, :endpoint=>"https://example.com"})
+      expect do
+        subject.resolve_endpoint(params)
+      end.to raise_error(ArgumentError, expect['error'])
+    end
+
   end
 end

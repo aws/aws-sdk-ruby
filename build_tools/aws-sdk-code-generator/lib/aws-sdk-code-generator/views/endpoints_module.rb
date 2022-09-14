@@ -85,7 +85,7 @@ module AwsSdkCodeGenerator
       end
 
       def client_context_param_value(param_name, param_data)
-        if @service.api['clientContextParams'].key?(param_name) &&
+        if @service.api['clientContextParams']&.key?(param_name) &&
            !param_data['builtIn']
           "context.config.#{Underscore.underscore(param_name)}"
         end

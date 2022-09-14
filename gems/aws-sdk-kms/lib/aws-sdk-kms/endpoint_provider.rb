@@ -18,6 +18,7 @@ module Aws::KMS
       @provider.resolve_endpoint(parameters)
     end
 
+    # @api private
     def self.endpoint_rules
       @endpoint_rules ||= begin
         file = File.expand_path('../../endpoint-rule-set.json', __dir__)
