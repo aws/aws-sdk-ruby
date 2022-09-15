@@ -19,31 +19,21 @@ module Aws::EC2
                    'where `parameters` is a Struct similar to '\
                    '`Aws::EC2::EndpointParameters`'
       ) do |cfg|
-        if Aws::EC2::EndpointProvider.endpoint_rules
-          Aws::EC2::EndpointProvider.new
-        end
+        Aws::EC2::EndpointProvider.new
       end
 
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          if (provider = context.config.endpoint_provider)
-            params = parameters_for_operation(context)
-            endpoint = provider.resolve_endpoint(params)
-          else
-            endpoint = Aws::Endpoints::Endpoint.new(
-              # Seahorse sets this first.
-              url: context.http_request.endpoint
-            )
-          end
+          params = parameters_for_operation(context)
+          endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
           context.http_request.endpoint = endpoint.url
           apply_endpoint_headers(context, endpoint.headers)
 
-          context[:endpoint] = {
-            params: params,
-            auth_scheme: Aws::Endpoints.resolve_auth_scheme(context, endpoint)
-          }
+          context[:endpoint_params] = params
+          context[:auth_scheme] =
+            Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
           @handler.call(context)
         end

@@ -18,9 +18,36 @@ module Aws
         handlers.add(Handler, step: :sign, operations: operations)
       end
 
+      def self.signer_for(auth_scheme, config)
+        case (scheme_name = auth_scheme['name'])
+        when 'sigv4', 'sigv4a'
+          begin
+            region = if scheme_name == 'sigv4a'
+                       auth_scheme['signingRegionSet'].first
+                     else
+                       config.sigv4_region || auth_scheme['signingRegion']
+                     end
+            Aws::Sigv4::Signer.new(
+              service: config.sigv4_name || auth_scheme['signingName'],
+              region: region,
+              credentials_provider: config.credentials,
+              signing_algorithm: scheme_name.to_sym,
+              uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
+              unsigned_headers: %w[content-length user-agent x-amzn-trace-id]
+            )
+          rescue Aws::Sigv4::Errors::MissingCredentialsError
+            raise Aws::Errors::MissingCredentialsError
+          end
+        when 'bearer'
+          'Bearer'
+        when 'none'
+          # don't sign
+        end
+      end
+
       class Handler < Seahorse::Client::Handler
         def call(context)
-          signer = signer_for(context[:auth_scheme], context.config)
+          signer = Sign.signer_for(context[:auth_scheme], context.config)
 
           case signer
           when Aws::Sigv4::Signer
@@ -30,37 +57,6 @@ module Aws
           end
 
           @handler.call(context)
-        end
-
-        private
-
-        def signer_for(auth_scheme, config)
-          case (scheme_name = auth_scheme['name'])
-          when 'sigv2'
-            # don't sign, shouldn't happen in new rules
-          when 'sigv4', 'sigv4a'
-            begin
-              region = if scheme_name == 'sigv4a'
-                         auth_scheme['signingRegionSet'].first
-                       else
-                         config.sigv4_region || auth_scheme['signingRegion']
-                       end
-              Aws::Sigv4::Signer.new(
-                service: config.sigv4_name || auth_scheme['signingName'],
-                region: region,
-                credentials_provider: config.credentials,
-                signing_algorithm: scheme_name.to_sym,
-                uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
-                unsigned_headers: %w[content-length user-agent x-amzn-trace-id]
-              )
-            rescue Aws::Sigv4::Errors::MissingCredentialsError
-              raise Aws::Errors::MissingCredentialsError
-            end
-          when 'bearer'
-            'Bearer'
-          when 'none'
-            # don't sign
-          end
         end
       end
 

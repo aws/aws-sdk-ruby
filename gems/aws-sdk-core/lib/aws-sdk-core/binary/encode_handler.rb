@@ -13,7 +13,7 @@ module Aws
             context.config.api.metadata['protocol'],
             eventstream_member,
             context.operation.input,
-            context.config.sigv4_signer
+            Aws::Plugins::Sign.signer_for(context[:auth_scheme], context.config)
           )
           context[:input_event_emitter] = input_es_handler.event_emitter
         end

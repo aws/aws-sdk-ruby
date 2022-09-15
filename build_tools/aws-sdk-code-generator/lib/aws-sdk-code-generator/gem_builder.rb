@@ -24,7 +24,6 @@ module AwsSdkCodeGenerator
         y.yield('features/env.rb', features_env_file)
         y.yield('features/step_definitions.rb', features_step_definitions_file)
         y.yield('spec/spec_helper.rb', spec_helper_file)
-        y.yield('spec/endpoint_provider_spec.rb', endpoint_provider_spec_file)
         if @service.smoke_tests
           y.yield('features/smoke.feature', smoke_file)
           y.yield('features/smoke_step_definitions.rb', smoke_step_definitions_file)
@@ -34,6 +33,10 @@ module AwsSdkCodeGenerator
 
         if @service.endpoint_rules && !@service.endpoint_rules.empty?
           y.yield('endpoint-rule-set.json', JSON.dump(@service.endpoint_rules))
+        end
+
+        if @service.endpoint_tests
+          y.yield('spec/endpoint_provider_spec.rb', endpoint_provider_spec_file)
         end
 
         code = CodeBuilder.new(@options)

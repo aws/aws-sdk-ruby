@@ -48,6 +48,10 @@ module AwsSdkCodeGenerator
         @service.module_name
       end
 
+      def endpoint_rules?
+        @service.endpoint_rules && !@service.endpoint_rules.empty?
+      end
+
       class EndpointClass
         def initialize(options)
           @operation_name = options[:operation_name]

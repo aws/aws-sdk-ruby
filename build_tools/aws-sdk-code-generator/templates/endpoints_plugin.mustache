@@ -15,11 +15,12 @@ module {{module_name}}
                    'where `parameters` is a Struct similar to '\
                    '`{{module_name}}::EndpointParameters`'
       ) do |cfg|
-        if {{module_name}}::EndpointProvider.endpoint_rules
-          {{module_name}}::EndpointProvider.new
-        else
-          Aws::Endpoints::StaticProvider.new
-        end
+        {{#endpoint_rules?}}
+        {{module_name}}::EndpointProvider.new
+        {{/endpoint_rules?}}
+        {{^endpoint_rules?}}
+        Aws::Endpoints::StaticProvider.new(cfg.endpoint)
+        {{/endpoint_rules?}}
       end
 
       {{#endpoint_options}}
@@ -33,7 +34,12 @@ module {{module_name}}
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
+          {{#endpoint_rules?}}
           params = parameters_for_operation(context)
+          {{/endpoint_rules?}}
+          {{^endpoint_rules?}}
+          params = {{module_name}}::EndpointParameters.new
+          {{/endpoint_rules?}}
           endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
           context.http_request.endpoint = endpoint.url
@@ -60,6 +66,7 @@ module {{module_name}}
             context.http_request.headers[key] = joined
           end
         end
+        {{#endpoint_rules?}}
 
         def parameters_for_operation(context)
           case context.operation_name
@@ -69,10 +76,11 @@ module {{module_name}}
           {{/endpoint_classes}}
           end
         end
+        {{/endpoint_rules?}}
       end
 
       def add_handlers(handlers, _config)
-        handlers.add(Handler, step: :build, priority: 60)
+        handlers.add(Handler, step: :build, priority: 99)
       end
     end
   end

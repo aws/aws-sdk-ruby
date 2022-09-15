@@ -18,10 +18,12 @@ module AwsSdkCodeGenerator
     private
 
     def compute_plugins(options)
+      protocol = options.fetch(:protocol)
+
       plugins = {}
       plugins.update(options[:async_client] ? default_async_plugins : default_plugins)
-      plugins.update(signature_plugins(options))
-      plugins.update(protocol_plugins(options.fetch(:protocol)))
+      plugins.update(signature_plugins(protocol))
+      plugins.update(protocol_plugins(protocol))
       plugins.update(options.fetch(:add_plugins))
       options.fetch(:remove_plugins).each do |plugin_name|
         plugins.delete(plugin_name)
@@ -99,7 +101,7 @@ module AwsSdkCodeGenerator
     # HACK: Sigv2 is deprecated, Sigv4/Bearer are with core. Always assume
     # new signer plugin. This logic would be moved to gem dependencies
     # calculation, but don't worry until new signature type.
-    def signature_plugins(options)
+    def signature_plugins(protocol)
       # auth_types  = [options.fetch(:signature_version)]
       # auth_types += options[:api]['operations'].map { |_n, o| o['authtype'] }.compact
       # plugins = {}
@@ -114,9 +116,15 @@ module AwsSdkCodeGenerator
       #   end
       # end
       # plugins
-      {
-        'Aws::Plugins::Sign' => "#{core_plugins}/sign.rb"
-      }
+      if protocol != 'api-gateway'
+        {
+          'Aws::Plugins::Sign' => "#{core_plugins}/sign.rb"
+        }
+      else
+        {
+          'Aws::Plugins::SignatureV4' => "#{core_plugins}/signature_v4.rb"
+        }
+      end
     end
 
     def core_plugins

@@ -219,23 +219,21 @@ module Aws
           end
           http_req.endpoint.query = query.join('&') unless query.empty?
 
-          auth_scheme = context[:endpoint][:auth_scheme]
-          if auth_scheme['name'] == 'sigv4a'
-            region = '*'
-            signing_algorithm = :sigv4a
-          else
-            region = auth_scheme['signingRegion']
-            signing_algorithm = :sigv4
-          end
-
+          auth_scheme = context[:auth_scheme]
+          scheme_name = auth_scheme['name']
+          region = if scheme_name == 'sigv4a'
+                     auth_scheme['signingRegionSet'].first
+                   else
+                     auth_scheme['signingRegion']
+                   end
           signer = Aws::Sigv4::Signer.new(
             service: auth_scheme['signingName'] || 's3',
             region: region || context.config.region,
-            signing_algorithm: signing_algorithm,
             credentials_provider: context.config.credentials,
+            signing_algorithm: scheme_name.to_sym,
+            uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
             unsigned_headers: unsigned_headers,
-            apply_checksum_header: false,
-            uri_escape_path: false
+            apply_checksum_header: false
           )
 
           url = signer.presign_url(

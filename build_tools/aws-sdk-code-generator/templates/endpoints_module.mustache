@@ -10,7 +10,7 @@ module {{module_name}}
     {{#endpoint_classes}}
     class {{name}}
       def self.build(context)
-        unless context.config.regional_endpoint || !{{module_name}}::EndpointProvider.endpoint_rules
+        unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
         end
         {{module_name}}::EndpointParameters.new(

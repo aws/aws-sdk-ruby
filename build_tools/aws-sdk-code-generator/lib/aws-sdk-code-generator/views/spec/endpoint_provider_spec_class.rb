@@ -42,7 +42,17 @@ module AwsSdkCodeGenerator
             end.to_h
             @tags = options[:tags]
             @expect = options[:expect]
-            @operation_inputs = options[:operation_inputs]
+            # operation_inputs = options[:operation_inputs] || []
+            # @operation_inputs = operation_inputs.map do |operation_inputs_test|
+            #   OperationInputsTest.new(
+            #     built_in_params: operation_inputs_test['builtInParams'],
+            #     operation_name: Underscore.underscore(
+            #       operation_inputs_test['operationName']
+            #     ),
+            #     operation_params: operation_inputs_test['operationParams'],
+            #     client_params: operation_inputs_test['clientParams']
+            #   )
+            # end
           end
 
           # @return [String]
@@ -57,13 +67,38 @@ module AwsSdkCodeGenerator
           # @return [Hash]
           attr_reader :expect
 
-          # @return [Array<OperationInput>]
-          attr_reader :operation_inputs
+          # # @return [Array<OperationInput>]
+          # attr_reader :operation_inputs
 
           def expect_error?
             !@expect['error'].nil?
           end
+
+          # def operation_inputs?
+          #   !@operation_inputs.empty?
+          # end
         end
+
+        # class OperationInputsTest
+        #   def initialize(options)
+        #     @built_in_params = options[:built_in_params]
+        #     @operation_name = options[:operation_name]
+        #     @operation_params = options[:operation_params]
+        #     @client_params = options[:client_params]
+        #   end
+        #
+        #   # @return [Hash<String, String>]
+        #   attr_reader :built_in_params
+        #
+        #   # @return String
+        #   attr_reader :operation_name
+        #
+        #   # @return [Hash<String, String>]
+        #   attr_reader :operation_params
+        #
+        #   # @return [Hash<String, String>]
+        #   attr_reader :client_params
+        # end
 
       end
     end

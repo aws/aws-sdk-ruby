@@ -19,11 +19,7 @@ module Aws::S3Control
                    'where `parameters` is a Struct similar to '\
                    '`Aws::S3Control::EndpointParameters`'
       ) do |cfg|
-        if Aws::S3Control::EndpointProvider.endpoint_rules
-          Aws::S3Control::EndpointProvider.new
-        else
-          Aws::Endpoints::StaticProvider.new
-        end
+        Aws::S3Control::EndpointProvider.new
       end
 
       # @api private

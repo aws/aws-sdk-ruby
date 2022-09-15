@@ -6,27 +6,28 @@
 module {{module_name}}
   class EndpointProvider
     def initialize(rule_set = nil)
-      rule_set ||= EndpointProvider.endpoint_rules
+      {{#in_memory}}
+      @@endpoint_rules ||= Aws::Json.load(Base64.decode64(<<-JSON
+        {{{endpoint_rules_encoded}}}
+      JSON
+      ))
+      {{/in_memory}}
+      {{^in_memory}}
+      @@endpoint_rules ||= Aws::Json.load_file(
+        File.expand_path('../../endpoint-rule-set.json', __dir__)
+      )
+      {{/in_memory}}
+      rule_set ||= Aws::Endpoints::RuleSet.new(
+        version: @@endpoint_rules['version'],
+        service_id: @@endpoint_rules['serviceId'],
+        parameters: @@endpoint_rules['parameters'],
+        rules: @@endpoint_rules['rules']
+      )
       @provider = Aws::Endpoints::RulesProvider.new(rule_set)
     end
 
     def resolve_endpoint(parameters)
       @provider.resolve_endpoint(parameters)
-    end
-
-    # @api private
-    def self.endpoint_rules
-      @endpoint_rules ||= begin
-        file = File.expand_path('../../endpoint-rule-set.json', __dir__)
-        json = Aws::Json.load_file(file) if File.exists?(file)
-
-        Aws::Endpoints::RuleSet.new(
-          version: json['version'],
-          service_id: json['serviceId'],
-          parameters: json['parameters'],
-          rules: json['rules']
-        ) if json
-      end
     end
   end
 end

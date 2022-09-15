@@ -7,7 +7,7 @@ module AwsSdkCodeGenerator
       # @option options [required, Service] :service
       def initialize(options)
         @service = options.fetch(:service)
-        if (parameters = @service.endpoint_rules['parameters'])
+        if (parameters = @service.endpoint_rules&.fetch('parameters'))
           @parameters = parameters.map do |k,p|
             EndpointParameter.new(k, p)
           end

@@ -45,7 +45,7 @@ module Aws
 
         class V4Handler < Seahorse::Client::Handler
           def call(context)
-            auth_scheme = context[:endpoint][:auth_scheme]
+            auth_scheme = context[:auth_scheme]
             if %w[sigv4 sigv4a].include?(auth_scheme['name'])
               Aws::Plugins::SignatureV4.apply_signature(
                 context: context,
@@ -178,7 +178,7 @@ module Aws
           # @api private
           def build_v4_signer(context, new_region = nil)
             cfg = context.config
-            auth_scheme = context[:endpoint][:auth_scheme]
+            auth_scheme = context[:auth_scheme]
             Aws::Sigv4::Signer.new(
               service: _sigv4_name(cfg, auth_scheme),
               region: new_region || _sigv4_region(cfg, auth_scheme),
@@ -203,7 +203,7 @@ module Aws
           end
 
           def new_hostname(context, region)
-            endpoint_params = context[:endpoint][:params]
+            endpoint_params = context[:endpoint_params]
             endpoint_params.region = region
             endpoint =
               context.config.endpoint_provider.resolve_endpoint(endpoint_params)

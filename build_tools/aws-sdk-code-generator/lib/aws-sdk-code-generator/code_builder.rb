@@ -32,6 +32,7 @@ module AwsSdkCodeGenerator
       @resources = @service.resources
       @examples = @service.examples
       @endpoint_rules = @service.endpoint_rules
+      @in_memory = options.fetch(:in_memory, false)
     end
 
     # Generates the source for a library as a single string.
@@ -81,9 +82,12 @@ module AwsSdkCodeGenerator
         y.yield("#{prefix}/errors.rb", errors_module)
         y.yield("#{prefix}/waiters.rb", waiters_module) if @waiters
         y.yield("#{prefix}/resource.rb", root_resource_class)
+
         y.yield("#{prefix}/endpoint_parameters.rb", endpoint_parameters)
-        y.yield("#{prefix}/endpoint_provider.rb", endpoint_provider)
-        y.yield("#{prefix}/endpoints.rb", endpoints_module)
+        if @service.endpoint_rules && !@service.endpoint_rules.empty?
+          y.yield("#{prefix}/endpoints.rb", endpoints_module)
+          y.yield("#{prefix}/endpoint_provider.rb", endpoint_provider)
+        end
 
         if @resources
           @resources['resources'].keys.sort.each do |name|
@@ -222,7 +226,7 @@ module AwsSdkCodeGenerator
     def endpoint_provider
       Views::EndpointProviderClass.new(
         service: @service,
-        endpoint_rules: @endpoint_rules
+        in_memory: @in_memory
       ).render
     end
 
@@ -235,6 +239,8 @@ module AwsSdkCodeGenerator
     end
 
     def codegen_plugins(prefix)
+      return [] if @service.protocol == 'api-gateway'
+
       [
         CodegeneratedPlugin.new(
           source: endpoints_plugin,

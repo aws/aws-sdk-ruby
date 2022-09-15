@@ -36,8 +36,8 @@ module AwsSdkCodeGenerator
       @resources = load_json(options[:resources])
       @examples = load_json(options[:examples])
       @smoke_tests = load_json(options[:smoke_tests])
-      @endpoint_rules = load_json(options[:endpoint_rules]) || {}
-      @endpoint_tests = load_json(options[:endpoint_tests]) || {}
+      @endpoint_rules = load_json(options[:endpoint_rules])
+      @endpoint_tests = load_json(options[:endpoint_tests])
       @gem_dependencies = options[:gem_dependencies] || {}
       @add_plugins = options[:add_plugins] || {}
       @remove_plugins = options[:remove_plugins] || []

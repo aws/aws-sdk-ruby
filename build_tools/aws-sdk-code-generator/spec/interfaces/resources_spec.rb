@@ -173,8 +173,10 @@ describe 'Interfaces' do
         :GEM_VERSION,
         :Client,
         :ClientApi,
+        :EndpointParameters,
         :Errors,
         :Types,
+        :Plugins,
         :Resource,
         :Waiters,
         # service specific resource classes

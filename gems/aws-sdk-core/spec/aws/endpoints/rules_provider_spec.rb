@@ -18,6 +18,7 @@ module Aws
         rule_set_json = Aws::Json.load_file(valid_rules_path)
         sample_module = ApiHelper.sample_service(endpoint_rules: rule_set_json)
 
+        # Still have to construct this anyway
         rule_set = Aws::Endpoints::RuleSet.new(
           version: rule_set_json['version'],
           service_id: rule_set_json['serviceId'],
