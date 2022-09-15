@@ -83,8 +83,8 @@ module AwsSdkCodeGenerator
         y.yield("#{prefix}/waiters.rb", waiters_module) if @waiters
         y.yield("#{prefix}/resource.rb", root_resource_class)
 
-        y.yield("#{prefix}/endpoint_parameters.rb", endpoint_parameters)
         if @service.endpoint_rules && !@service.endpoint_rules.empty?
+          y.yield("#{prefix}/endpoint_parameters.rb", endpoint_parameters)
           y.yield("#{prefix}/endpoints.rb", endpoints_module)
           y.yield("#{prefix}/endpoint_provider.rb", endpoint_provider)
         end
@@ -139,6 +139,7 @@ module AwsSdkCodeGenerator
         waiters: @service.waiters,
         examples: @service.examples,
         custom: @service.protocol == 'api-gateway',
+        has_endpoint_rules: @service.endpoint_rules && !@service.endpoint_rules.empty?,
         codegenerated_plugins: codegenerated_plugins
       ).render
     end
@@ -157,6 +158,7 @@ module AwsSdkCodeGenerator
         add_plugins: @service.add_plugins,
         remove_plugins: @service.remove_plugins,
         api: @service.api,
+        has_endpoint_rules: @service.endpoint_rules && !@service.endpoint_rules.empty?,
         codegenerated_plugins: codegenerated_plugins,
         async_client: true
       ).render
@@ -239,15 +241,17 @@ module AwsSdkCodeGenerator
     end
 
     def codegen_plugins(prefix)
-      return [] if @service.protocol == 'api-gateway'
-
-      [
-        CodegeneratedPlugin.new(
-          source: endpoints_plugin,
-          class_name: "#{@service.module_name}::Plugins::Endpoints",
-          path: "#{prefix}/plugins/endpoints.rb"
-        )
-      ]
+      if @service.endpoint_rules && !@service.endpoint_rules.empty?
+        [
+          CodegeneratedPlugin.new(
+            source: endpoints_plugin,
+            class_name: "#{@service.module_name}::Plugins::Endpoints",
+            path: "#{prefix}/plugins/endpoints.rb"
+          )
+        ]
+      else
+        []
+      end
     end
 
     private

@@ -42,6 +42,14 @@ module AwsSdkCodeGenerator
         @custom ? false : true
       end
 
+      def files
+        files = ['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb']
+        if @service.endpoint_rules && !@service.endpoint_rules.empty?
+          files += ['endpoint-rule-set.json']
+        end
+        files
+      end
+
       # @return [String]
       def description
         if @custom

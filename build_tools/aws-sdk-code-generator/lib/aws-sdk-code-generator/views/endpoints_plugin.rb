@@ -48,6 +48,22 @@ module AwsSdkCodeGenerator
         @service.module_name
       end
 
+      def documentation_type
+        if endpoint_rules?
+          "#{module_name}::EndpointProvider"
+        else
+          'Aws::Endpoints::StaticProvider'
+        end
+      end
+
+      def default_provider
+        if endpoint_rules?
+          "#{module_name}::EndpointProvider.new"
+        else
+          'Aws::Endpoints::StaticProvider.new(cfg.endpoint)'
+        end
+      end
+
       def endpoint_rules?
         @service.endpoint_rules && !@service.endpoint_rules.empty?
       end

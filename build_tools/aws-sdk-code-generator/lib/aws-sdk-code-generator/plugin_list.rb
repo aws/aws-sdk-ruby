@@ -18,12 +18,10 @@ module AwsSdkCodeGenerator
     private
 
     def compute_plugins(options)
-      protocol = options.fetch(:protocol)
-
       plugins = {}
       plugins.update(options[:async_client] ? default_async_plugins : default_plugins)
-      plugins.update(signature_plugins(protocol))
-      plugins.update(protocol_plugins(protocol))
+      plugins.update(signature_plugins(options))
+      plugins.update(protocol_plugins(options.fetch(:protocol)))
       plugins.update(options.fetch(:add_plugins))
       options.fetch(:remove_plugins).each do |plugin_name|
         plugins.delete(plugin_name)
@@ -101,29 +99,28 @@ module AwsSdkCodeGenerator
     # HACK: Sigv2 is deprecated, Sigv4/Bearer are with core. Always assume
     # new signer plugin. This logic would be moved to gem dependencies
     # calculation, but don't worry until new signature type.
-    def signature_plugins(protocol)
-      # auth_types  = [options.fetch(:signature_version)]
-      # auth_types += options[:api]['operations'].map { |_n, o| o['authtype'] }.compact
-      # plugins = {}
-      # auth_types.each do |auth_type|
-      #   case auth_type
-      #   when 'v4'
-      #     plugins['Aws::Plugins::SignatureV4'] = "#{core_plugins}/signature_v4.rb"
-      #   when 'v2'
-      #     plugins['Aws::Plugins::SignatureV2'] = "#{core_plugins}/signature_v2.rb"
-      #   when 'bearer'
-      #     plugins['Aws::Plugins::BearerAuthorization'] = "#{core_plugins}/bearer_authorization.rb"
-      #   end
-      # end
-      # plugins
-      if protocol != 'api-gateway'
+    #
+    # NOTE: If no rules are provided, just use old Signing method
+    def signature_plugins(options)
+      if options[:has_endpoint_rules]
         {
           'Aws::Plugins::Sign' => "#{core_plugins}/sign.rb"
         }
       else
-        {
-          'Aws::Plugins::SignatureV4' => "#{core_plugins}/signature_v4.rb"
-        }
+        auth_types  = [options.fetch(:signature_version)]
+        auth_types += options[:api]['operations'].map { |_n, o| o['authtype'] }.compact
+        plugins = {}
+        auth_types.each do |auth_type|
+          case auth_type
+          when 'v4'
+            plugins['Aws::Plugins::SignatureV4'] = "#{core_plugins}/signature_v4.rb"
+          when 'v2'
+            plugins['Aws::Plugins::SignatureV2'] = "#{core_plugins}/signature_v2.rb"
+          when 'bearer'
+            plugins['Aws::Plugins::BearerAuthorization'] = "#{core_plugins}/bearer_authorization.rb"
+          end
+        end
+        plugins
       end
     end
 
