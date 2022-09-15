@@ -5915,7 +5915,7 @@ module Aws::DynamoDB
     # `TransactGetItems` is a synchronous operation that atomically
     # retrieves multiple items from one or more tables (but not from
     # indexes) in a single account and Region. A `TransactGetItems` call can
-    # contain up to 25 `TransactGetItem` objects, each of which contains a
+    # contain up to 100 `TransactGetItem` objects, each of which contains a
     # `Get` structure that specifies an item to retrieve from a table in the
     # account and Region. A call to `TransactGetItems` cannot retrieve items
     # from tables in more than one Amazon Web Services account or Region.
@@ -5936,7 +5936,7 @@ module Aws::DynamoDB
     #   MB.
     #
     # @option params [required, Array<Types::TransactGetItem>] :transact_items
-    #   An ordered array of up to 25 `TransactGetItem` objects, each of which
+    #   An ordered array of up to 100 `TransactGetItem` objects, each of which
     #   contains a `Get` structure.
     #
     # @option params [String] :return_consumed_capacity
@@ -6001,7 +6001,7 @@ module Aws::DynamoDB
     end
 
     # `TransactWriteItems` is a synchronous write operation that groups up
-    # to 25 action requests. These actions can target items in different
+    # to 100 action requests. These actions can target items in different
     # tables, but not in different Amazon Web Services accounts or Regions,
     # and no two actions can target the same item. For example, you cannot
     # both `ConditionCheck` and `Update` the same item. The aggregate size
@@ -6059,7 +6059,7 @@ module Aws::DynamoDB
     # * There is a user error, such as an invalid data format.
     #
     # @option params [required, Array<Types::TransactWriteItem>] :transact_items
-    #   An ordered array of up to 25 `TransactWriteItem` objects, each of
+    #   An ordered array of up to 100 `TransactWriteItem` objects, each of
     #   which contains a `ConditionCheck`, `Put`, `Update`, or `Delete`
     #   object. These can operate on items in different tables, but the tables
     #   must reside in the same Amazon Web Services account and Region, and no
@@ -7628,7 +7628,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

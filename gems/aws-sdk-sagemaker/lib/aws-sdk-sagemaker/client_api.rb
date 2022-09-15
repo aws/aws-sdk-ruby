@@ -754,6 +754,7 @@ module Aws::SageMaker
     HyperParameterTuningJobSearchEntity = Shapes::StructureShape.new(name: 'HyperParameterTuningJobSearchEntity')
     HyperParameterTuningJobSortByOptions = Shapes::StringShape.new(name: 'HyperParameterTuningJobSortByOptions')
     HyperParameterTuningJobStatus = Shapes::StringShape.new(name: 'HyperParameterTuningJobStatus')
+    HyperParameterTuningJobStrategyConfig = Shapes::StructureShape.new(name: 'HyperParameterTuningJobStrategyConfig')
     HyperParameterTuningJobStrategyType = Shapes::StringShape.new(name: 'HyperParameterTuningJobStrategyType')
     HyperParameterTuningJobSummaries = Shapes::ListShape.new(name: 'HyperParameterTuningJobSummaries')
     HyperParameterTuningJobSummary = Shapes::StructureShape.new(name: 'HyperParameterTuningJobSummary')
@@ -762,6 +763,9 @@ module Aws::SageMaker
     HyperParameterTuningResourceConfig = Shapes::StructureShape.new(name: 'HyperParameterTuningResourceConfig')
     HyperParameterValue = Shapes::StringShape.new(name: 'HyperParameterValue')
     HyperParameters = Shapes::MapShape.new(name: 'HyperParameters')
+    HyperbandStrategyConfig = Shapes::StructureShape.new(name: 'HyperbandStrategyConfig')
+    HyperbandStrategyMaxResource = Shapes::IntegerShape.new(name: 'HyperbandStrategyMaxResource')
+    HyperbandStrategyMinResource = Shapes::IntegerShape.new(name: 'HyperbandStrategyMinResource')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageArn = Shapes::StringShape.new(name: 'ImageArn')
@@ -4521,6 +4525,7 @@ module Aws::SageMaker
     HyperParameterTuningInstanceConfigs.member = Shapes::ShapeRef.new(shape: HyperParameterTuningInstanceConfig)
 
     HyperParameterTuningJobConfig.add_member(:strategy, Shapes::ShapeRef.new(shape: HyperParameterTuningJobStrategyType, required: true, location_name: "Strategy"))
+    HyperParameterTuningJobConfig.add_member(:strategy_config, Shapes::ShapeRef.new(shape: HyperParameterTuningJobStrategyConfig, location_name: "StrategyConfig"))
     HyperParameterTuningJobConfig.add_member(:hyper_parameter_tuning_job_objective, Shapes::ShapeRef.new(shape: HyperParameterTuningJobObjective, location_name: "HyperParameterTuningJobObjective"))
     HyperParameterTuningJobConfig.add_member(:resource_limits, Shapes::ShapeRef.new(shape: ResourceLimits, required: true, location_name: "ResourceLimits"))
     HyperParameterTuningJobConfig.add_member(:parameter_ranges, Shapes::ShapeRef.new(shape: ParameterRanges, location_name: "ParameterRanges"))
@@ -4552,6 +4557,9 @@ module Aws::SageMaker
     HyperParameterTuningJobSearchEntity.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     HyperParameterTuningJobSearchEntity.struct_class = Types::HyperParameterTuningJobSearchEntity
 
+    HyperParameterTuningJobStrategyConfig.add_member(:hyperband_strategy_config, Shapes::ShapeRef.new(shape: HyperbandStrategyConfig, location_name: "HyperbandStrategyConfig"))
+    HyperParameterTuningJobStrategyConfig.struct_class = Types::HyperParameterTuningJobStrategyConfig
+
     HyperParameterTuningJobSummaries.member = Shapes::ShapeRef.new(shape: HyperParameterTuningJobSummary)
 
     HyperParameterTuningJobSummary.add_member(:hyper_parameter_tuning_job_name, Shapes::ShapeRef.new(shape: HyperParameterTuningJobName, required: true, location_name: "HyperParameterTuningJobName"))
@@ -4580,6 +4588,10 @@ module Aws::SageMaker
 
     HyperParameters.key = Shapes::ShapeRef.new(shape: HyperParameterKey)
     HyperParameters.value = Shapes::ShapeRef.new(shape: HyperParameterValue)
+
+    HyperbandStrategyConfig.add_member(:min_resource, Shapes::ShapeRef.new(shape: HyperbandStrategyMinResource, location_name: "MinResource"))
+    HyperbandStrategyConfig.add_member(:max_resource, Shapes::ShapeRef.new(shape: HyperbandStrategyMaxResource, location_name: "MaxResource"))
+    HyperbandStrategyConfig.struct_class = Types::HyperbandStrategyConfig
 
     Image.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     Image.add_member(:description, Shapes::ShapeRef.new(shape: ImageDescription, location_name: "Description"))

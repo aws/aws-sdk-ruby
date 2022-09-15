@@ -54,6 +54,8 @@ module Aws::EC2
     AddIpamOperatingRegionSet = Shapes::ListShape.new(name: 'AddIpamOperatingRegionSet')
     AddPrefixListEntries = Shapes::ListShape.new(name: 'AddPrefixListEntries')
     AddPrefixListEntry = Shapes::StructureShape.new(name: 'AddPrefixListEntry')
+    AddedPrincipal = Shapes::StructureShape.new(name: 'AddedPrincipal')
+    AddedPrincipalSet = Shapes::ListShape.new(name: 'AddedPrincipalSet')
     AdditionalDetail = Shapes::StructureShape.new(name: 'AdditionalDetail')
     AdditionalDetailList = Shapes::ListShape.new(name: 'AdditionalDetailList')
     Address = Shapes::StructureShape.new(name: 'Address')
@@ -2882,6 +2884,14 @@ module Aws::EC2
     AddPrefixListEntry.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     AddPrefixListEntry.struct_class = Types::AddPrefixListEntry
 
+    AddedPrincipal.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "principalType"))
+    AddedPrincipal.add_member(:principal, Shapes::ShapeRef.new(shape: String, location_name: "principal"))
+    AddedPrincipal.add_member(:service_permission_id, Shapes::ShapeRef.new(shape: String, location_name: "servicePermissionId"))
+    AddedPrincipal.add_member(:service_id, Shapes::ShapeRef.new(shape: String, location_name: "serviceId"))
+    AddedPrincipal.struct_class = Types::AddedPrincipal
+
+    AddedPrincipalSet.member = Shapes::ShapeRef.new(shape: AddedPrincipal, location_name: "item")
+
     AdditionalDetail.add_member(:additional_detail_type, Shapes::ShapeRef.new(shape: String, location_name: "additionalDetailType"))
     AdditionalDetail.add_member(:component, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "component"))
     AdditionalDetail.struct_class = Types::AdditionalDetail
@@ -2973,6 +2983,9 @@ module Aws::EC2
 
     AllowedPrincipal.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "principalType"))
     AllowedPrincipal.add_member(:principal, Shapes::ShapeRef.new(shape: String, location_name: "principal"))
+    AllowedPrincipal.add_member(:service_permission_id, Shapes::ShapeRef.new(shape: String, location_name: "servicePermissionId"))
+    AllowedPrincipal.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    AllowedPrincipal.add_member(:service_id, Shapes::ShapeRef.new(shape: String, location_name: "serviceId"))
     AllowedPrincipal.struct_class = Types::AllowedPrincipal
 
     AllowedPrincipalSet.member = Shapes::ShapeRef.new(shape: AllowedPrincipal, location_name: "item")
@@ -10298,6 +10311,7 @@ module Aws::EC2
     ModifyVpcEndpointServicePermissionsRequest.add_member(:remove_allowed_principals, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "RemoveAllowedPrincipals"))
     ModifyVpcEndpointServicePermissionsRequest.struct_class = Types::ModifyVpcEndpointServicePermissionsRequest
 
+    ModifyVpcEndpointServicePermissionsResult.add_member(:added_principals, Shapes::ShapeRef.new(shape: AddedPrincipalSet, location_name: "addedPrincipalSet"))
     ModifyVpcEndpointServicePermissionsResult.add_member(:return_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     ModifyVpcEndpointServicePermissionsResult.struct_class = Types::ModifyVpcEndpointServicePermissionsResult
 
@@ -13433,6 +13447,8 @@ module Aws::EC2
     VpcEndpointConnection.add_member(:network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "networkLoadBalancerArnSet"))
     VpcEndpointConnection.add_member(:gateway_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "gatewayLoadBalancerArnSet"))
     VpcEndpointConnection.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
+    VpcEndpointConnection.add_member(:vpc_endpoint_connection_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcEndpointConnectionId"))
+    VpcEndpointConnection.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     VpcEndpointConnection.struct_class = Types::VpcEndpointConnection
 
     VpcEndpointConnectionSet.member = Shapes::ShapeRef.new(shape: VpcEndpointConnection, location_name: "item")

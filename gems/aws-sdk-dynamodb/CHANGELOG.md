@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2022-09-15)
+------------------
+
+* Feature - Increased DynamoDB transaction limit from 25 to 100.
+
 1.76.0 (2022-08-18)
 ------------------
 

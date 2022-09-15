@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.334.0 (2022-09-15)
+------------------
+
+* Feature - This feature allows customers to create tags for vpc-endpoint-connections and vpc-endpoint-service-permissions.
+
 1.333.0 (2022-09-14)
 ------------------
 

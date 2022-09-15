@@ -9962,7 +9962,7 @@ module Aws::DynamoDB
     #       }
     #
     # @!attribute [rw] transact_items
-    #   An ordered array of up to 25 `TransactGetItem` objects, each of
+    #   An ordered array of up to 100 `TransactGetItem` objects, each of
     #   which contains a `Get` structure.
     #   @return [Array<Types::TransactGetItem>]
     #
@@ -9990,7 +9990,7 @@ module Aws::DynamoDB
     #   @return [Array<Types::ConsumedCapacity>]
     #
     # @!attribute [rw] responses
-    #   An ordered array of up to 25 `ItemResponse` objects, each of which
+    #   An ordered array of up to 100 `ItemResponse` objects, each of which
     #   corresponds to the `TransactGetItem` object in the same position in
     #   the *TransactItems* array. Each `ItemResponse` object contains a Map
     #   of the name-value pairs that are the projected attributes of the
@@ -10175,7 +10175,7 @@ module Aws::DynamoDB
     #       }
     #
     # @!attribute [rw] transact_items
-    #   An ordered array of up to 25 `TransactWriteItem` objects, each of
+    #   An ordered array of up to 100 `TransactWriteItem` objects, each of
     #   which contains a `ConditionCheck`, `Put`, `Update`, or `Delete`
     #   object. These can operate on items in different tables, but the
     #   tables must reside in the same Amazon Web Services account and

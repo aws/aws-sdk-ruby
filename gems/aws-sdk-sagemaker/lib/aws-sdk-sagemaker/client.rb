@@ -940,8 +940,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates a running app for the specified UserProfile. Supported apps
-    # are `JupyterServer` and `KernelGateway`. This operation is
+    # Creates a running app for the specified UserProfile. This operation is
     # automatically invoked by Amazon SageMaker Studio upon access to the
     # associated Domain, and when new kernel configurations are selected by
     # the user. A user may have multiple Apps active simultaneously.
@@ -953,8 +952,7 @@ module Aws::SageMaker
     #   The user profile name.
     #
     # @option params [required, String] :app_type
-    #   The type of app. Supported apps are `JupyterServer` and
-    #   `KernelGateway`. `TensorBoard` is not supported.
+    #   The type of app.
     #
     # @option params [required, String] :app_name
     #   The name of the app.
@@ -3015,7 +3013,13 @@ module Aws::SageMaker
     #   resp = client.create_hyper_parameter_tuning_job({
     #     hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
     #     hyper_parameter_tuning_job_config: { # required
-    #       strategy: "Bayesian", # required, accepts Bayesian, Random
+    #       strategy: "Bayesian", # required, accepts Bayesian, Random, Hyperband
+    #       strategy_config: {
+    #         hyperband_strategy_config: {
+    #           min_resource: 1,
+    #           max_resource: 1,
+    #         },
+    #       },
     #       hyper_parameter_tuning_job_objective: {
     #         type: "Maximize", # required, accepts Maximize, Minimize
     #         metric_name: "MetricName", # required
@@ -9722,7 +9726,9 @@ module Aws::SageMaker
     #
     #   resp.hyper_parameter_tuning_job_name #=> String
     #   resp.hyper_parameter_tuning_job_arn #=> String
-    #   resp.hyper_parameter_tuning_job_config.strategy #=> String, one of "Bayesian", "Random"
+    #   resp.hyper_parameter_tuning_job_config.strategy #=> String, one of "Bayesian", "Random", "Hyperband"
+    #   resp.hyper_parameter_tuning_job_config.strategy_config.hyperband_strategy_config.min_resource #=> Integer
+    #   resp.hyper_parameter_tuning_job_config.strategy_config.hyperband_strategy_config.max_resource #=> Integer
     #   resp.hyper_parameter_tuning_job_config.hyper_parameter_tuning_job_objective.type #=> String, one of "Maximize", "Minimize"
     #   resp.hyper_parameter_tuning_job_config.hyper_parameter_tuning_job_objective.metric_name #=> String
     #   resp.hyper_parameter_tuning_job_config.resource_limits.max_number_of_training_jobs #=> Integer
@@ -14078,7 +14084,7 @@ module Aws::SageMaker
     #   resp.hyper_parameter_tuning_job_summaries[0].hyper_parameter_tuning_job_name #=> String
     #   resp.hyper_parameter_tuning_job_summaries[0].hyper_parameter_tuning_job_arn #=> String
     #   resp.hyper_parameter_tuning_job_summaries[0].hyper_parameter_tuning_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
-    #   resp.hyper_parameter_tuning_job_summaries[0].strategy #=> String, one of "Bayesian", "Random"
+    #   resp.hyper_parameter_tuning_job_summaries[0].strategy #=> String, one of "Bayesian", "Random", "Hyperband"
     #   resp.hyper_parameter_tuning_job_summaries[0].creation_time #=> Time
     #   resp.hyper_parameter_tuning_job_summaries[0].hyper_parameter_tuning_end_time #=> Time
     #   resp.hyper_parameter_tuning_job_summaries[0].last_modified_time #=> Time
@@ -17947,7 +17953,9 @@ module Aws::SageMaker
     #   resp.results[0].feature_metadata.parameters[0].value #=> String
     #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_name #=> String
     #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_arn #=> String
-    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.strategy #=> String, one of "Bayesian", "Random"
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.strategy #=> String, one of "Bayesian", "Random", "Hyperband"
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.strategy_config.hyperband_strategy_config.min_resource #=> Integer
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.strategy_config.hyperband_strategy_config.max_resource #=> Integer
     #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.hyper_parameter_tuning_job_objective.type #=> String, one of "Maximize", "Minimize"
     #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.hyper_parameter_tuning_job_objective.metric_name #=> String
     #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.resource_limits.max_number_of_training_jobs #=> Integer
@@ -20596,7 +20604,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.139.0'
+      context[:gem_version] = '1.140.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

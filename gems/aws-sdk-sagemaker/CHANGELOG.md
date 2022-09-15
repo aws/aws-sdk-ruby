@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.140.0 (2022-09-15)
+------------------
+
+* Feature - Amazon SageMaker Automatic Model Tuning now supports specifying Hyperband strategy for tuning jobs, which uses a multi-fidelity based tuning strategy to stop underperforming hyperparameter configurations early.
+
 1.139.0 (2022-09-08)
 ------------------
 

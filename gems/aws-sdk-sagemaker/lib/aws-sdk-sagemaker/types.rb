@@ -4440,8 +4440,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] app_type
-    #   The type of app. Supported apps are `JupyterServer` and
-    #   `KernelGateway`. `TensorBoard` is not supported.
+    #   The type of app.
     #   @return [String]
     #
     # @!attribute [rw] app_name
@@ -6293,7 +6292,13 @@ module Aws::SageMaker
     #       {
     #         hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
     #         hyper_parameter_tuning_job_config: { # required
-    #           strategy: "Bayesian", # required, accepts Bayesian, Random
+    #           strategy: "Bayesian", # required, accepts Bayesian, Random, Hyperband
+    #           strategy_config: {
+    #             hyperband_strategy_config: {
+    #               min_resource: 1,
+    #               max_resource: 1,
+    #             },
+    #           },
     #           hyper_parameter_tuning_job_objective: {
     #             type: "Maximize", # required, accepts Maximize, Minimize
     #             metric_name: "MetricName", # required
@@ -17732,7 +17737,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] execution_role_identity_config
     #   The configuration for attaching a SageMaker user profile name to the
-    #   execution role as a [ `sts:SourceIdentity` key][1].
+    #   execution role as a [sts:SourceIdentity key][1].
     #
     #
     #
@@ -17774,9 +17779,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] execution_role_identity_config
     #   The configuration for attaching a SageMaker user profile name to the
-    #   execution role as a [ `sts:SourceIdentity` key][1]. This
-    #   configuration can only be modified if there are no apps in the
-    #   `InService` or `Pending` state.
+    #   execution role as a [sts:SourceIdentity key][1]. This configuration
+    #   can only be modified if there are no apps in the `InService` or
+    #   `Pending` state.
     #
     #
     #
@@ -21179,7 +21184,8 @@ module Aws::SageMaker
     #   Defines the maximum number of data objects that can be labeled by
     #   human workers at the same time. Also referred to as batch size. Each
     #   object may have more than one worker at one time. The default value
-    #   is 1000 objects.
+    #   is 1000 objects. To increase the maximum value to 5000 objects,
+    #   contact Amazon Web Services Support.
     #   @return [Integer]
     #
     # @!attribute [rw] annotation_consolidation_config
@@ -21848,7 +21854,13 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         strategy: "Bayesian", # required, accepts Bayesian, Random
+    #         strategy: "Bayesian", # required, accepts Bayesian, Random, Hyperband
+    #         strategy_config: {
+    #           hyperband_strategy_config: {
+    #             min_resource: 1,
+    #             max_resource: 1,
+    #           },
+    #         },
     #         hyper_parameter_tuning_job_objective: {
     #           type: "Maximize", # required, accepts Maximize, Minimize
     #           metric_name: "MetricName", # required
@@ -21889,15 +21901,20 @@ module Aws::SageMaker
     #
     # @!attribute [rw] strategy
     #   Specifies how hyperparameter tuning chooses the combinations of
-    #   hyperparameter values to use for the training job it launches. To
-    #   use the Bayesian search strategy, set this to `Bayesian`. To
-    #   randomly search, set it to `Random`. For information about search
-    #   strategies, see [How Hyperparameter Tuning Works][1].
+    #   hyperparameter values to use for the training job it launches. For
+    #   information about search strategies, see [How Hyperparameter Tuning
+    #   Works][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html
     #   @return [String]
+    #
+    # @!attribute [rw] strategy_config
+    #   The configuration for the `Hyperband` optimization strategy. This
+    #   parameter should be provided only if `Hyperband` is selected as the
+    #   strategy for `HyperParameterTuningJobConfig`.
+    #   @return [Types::HyperParameterTuningJobStrategyConfig]
     #
     # @!attribute [rw] hyper_parameter_tuning_job_objective
     #   The HyperParameterTuningJobObjective object that specifies the
@@ -21916,8 +21933,11 @@ module Aws::SageMaker
     #
     # @!attribute [rw] training_job_early_stopping_type
     #   Specifies whether to use early stopping for training jobs launched
-    #   by the hyperparameter tuning job. This can be one of the following
-    #   values (the default value is `OFF`):
+    #   by the hyperparameter tuning job. Because the `Hyperband` strategy
+    #   has its own advanced internal early stopping mechanism,
+    #   `TrainingJobEarlyStoppingType` must be `OFF` to use `Hyperband`.
+    #   This parameter can take on one of the following values (the default
+    #   value is `OFF`):
     #
     #   OFF
     #
@@ -21944,6 +21964,7 @@ module Aws::SageMaker
     #
     class HyperParameterTuningJobConfig < Struct.new(
       :strategy,
+      :strategy_config,
       :hyper_parameter_tuning_job_objective,
       :resource_limits,
       :parameter_ranges,
@@ -22101,6 +22122,42 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The configuration for a training job launched by a hyperparameter
+    # tuning job. Choose `Bayesian` for Bayesian optimization, and `Random`
+    # for random search optimization. For more advanced use cases, use
+    # `Hyperband`, which evaluates objective metrics for training jobs after
+    # every epoch. For more information about strategies, see [How
+    # Hyperparameter Tuning Works][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html
+    #
+    # @note When making an API call, you may pass HyperParameterTuningJobStrategyConfig
+    #   data as a hash:
+    #
+    #       {
+    #         hyperband_strategy_config: {
+    #           min_resource: 1,
+    #           max_resource: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] hyperband_strategy_config
+    #   The configuration for the object that specifies the `Hyperband`
+    #   strategy. This parameter is only supported for the `Hyperband`
+    #   selection for `Strategy` within the `HyperParameterTuningJobConfig`
+    #   API.
+    #   @return [Types::HyperbandStrategyConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobStrategyConfig AWS API Documentation
+    #
+    class HyperParameterTuningJobStrategyConfig < Struct.new(
+      :hyperband_strategy_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides summary information about a hyperparameter tuning job.
     #
     # @!attribute [rw] hyper_parameter_tuning_job_name
@@ -22117,8 +22174,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] strategy
     #   Specifies the search strategy hyperparameter tuning uses to choose
-    #   which hyperparameters to use for each iteration. Currently, the only
-    #   valid value is Bayesian.
+    #   which hyperparameters to evaluate at each iteration.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -22382,6 +22438,74 @@ module Aws::SageMaker
       :volume_kms_key_id,
       :allocation_strategy,
       :instance_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for `Hyperband`, a multi-fidelity based
+    # hyperparameter tuning strategy. `Hyperband` uses the final and
+    # intermediate results of a training job to dynamically allocate
+    # resources to utilized hyperparameter configurations while
+    # automatically stopping under-performing configurations. This parameter
+    # should be provided only if `Hyperband` is selected as the
+    # `StrategyConfig` under the `HyperParameterTuningJobConfig` API.
+    #
+    # @note When making an API call, you may pass HyperbandStrategyConfig
+    #   data as a hash:
+    #
+    #       {
+    #         min_resource: 1,
+    #         max_resource: 1,
+    #       }
+    #
+    # @!attribute [rw] min_resource
+    #   The minimum number of resources (such as epochs) that can be used by
+    #   a training job launched by a hyperparameter tuning job. If the value
+    #   for `MinResource` has not been reached, the training job will not be
+    #   stopped by `Hyperband`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_resource
+    #   The maximum number of resources (such as epochs) that can be used by
+    #   a training job launched by a hyperparameter tuning job. Once a job
+    #   reaches the `MaxResource` value, it is stopped. If a value for
+    #   `MaxResource` is not provided, and `Hyperband` is selected as the
+    #   hyperparameter tuning strategy, `HyperbandTrainingJ` attempts to
+    #   infer `MaxResource` from the following keys (if present) in
+    #   [StaticsHyperParameters][1]\:
+    #
+    #   * `epochs`
+    #
+    #   * `numepochs`
+    #
+    #   * `n-epochs`
+    #
+    #   * `n_epochs`
+    #
+    #   * `num_epochs`
+    #
+    #   If `HyperbandStrategyConfig` is unable to infer a value for
+    #   `MaxResource`, it generates a validation error. The maximum value is
+    #   20,000 epochs. All metrics that correspond to an objective metric
+    #   are used to derive [early stopping decisions][2]. For
+    #   [distributive][3] training jobs, ensure that duplicate metrics are
+    #   not printed in the logs across the individual nodes in a training
+    #   job. If multiple nodes are publishing duplicate or incorrect
+    #   metrics, training jobs may make an incorrect stopping decision and
+    #   stop the job prematurely.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-StaticHyperParameters
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperbandStrategyConfig AWS API Documentation
+    #
+    class HyperbandStrategyConfig < Struct.new(
+      :min_resource,
+      :max_resource)
       SENSITIVE = []
       include Aws::Structure
     end
