@@ -18,7 +18,7 @@ module Aws
         handlers.add(Handler, step: :sign, operations: operations)
       end
 
-      def self.signer_for(auth_scheme, config)
+      def self.signer_for(auth_scheme, config, region_override = nil)
         case (scheme_name = auth_scheme['name'])
         when 'sigv4', 'sigv4a'
           begin
@@ -29,7 +29,7 @@ module Aws
                      end
             Aws::Sigv4::Signer.new(
               service: config.sigv4_name || auth_scheme['signingName'],
-              region: region,
+              region: region_override || region,
               credentials_provider: config.credentials,
               signing_algorithm: scheme_name.to_sym,
               uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],

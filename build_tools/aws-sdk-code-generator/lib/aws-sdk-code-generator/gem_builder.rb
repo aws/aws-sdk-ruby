@@ -31,10 +31,6 @@ module AwsSdkCodeGenerator
         y.yield('VERSION', version_file)
         y.yield('LICENSE.txt', license_file)
 
-        if @service.endpoint_rules && !@service.endpoint_rules.empty?
-          y.yield('endpoint-rule-set.json', JSON.dump(@service.endpoint_rules))
-        end
-
         if @service.endpoint_tests
           y.yield('spec/endpoint_provider_spec.rb', endpoint_provider_spec_file)
         end

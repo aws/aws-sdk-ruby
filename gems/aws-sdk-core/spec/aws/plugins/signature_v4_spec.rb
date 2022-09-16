@@ -26,110 +26,106 @@ module Aws
         }.to raise_error(Errors::MissingCredentialsError)
       end
 
-      # Endpoints 2.0 signing does not conform to this anymore.
-      # These config options being tested are not part of the public interface.
-      # These tests are still relevant to test the SignatureV4 plugin.
+      describe 'sigv4 signing name' do
 
-      # describe 'sigv4 signing name' do
-      #
-      #   it 'accepts a sigv4 signing name configuration option' do
-      #     client = Sigv4Client.new(options.merge(
-      #       sigv4_name: 'name',
-      #     ))
-      #     expect(client.config.sigv4_name).to eq('name')
-      #   end
-      #
-      #   it 'uses the endpoint provider for service name' do
-      #     expect(Aws::Partitions::EndpointProvider)
-      #       .to receive(:signing_service)
-      #             .with('other-region', 'svc-name')
-      #             .and_return('override-service')
-      #
-      #     client = Sigv4Client.new(options.merge(
-      #       region: 'other-region',
-      #       endpoint: 'https://svc-name.amazonaws.com'
-      #     ))
-      #     expect(client.config.sigv4_name).to eq('override-service')
-      #   end
-      #
-      #   it 'defaults the sigv4 name to the endpoint prefix' do
-      #     svc = ApiHelper.sample_service(metadata: {
-      #       'signatureVersion' => 'v4',
-      #       'endpointPrefix' => 'endpoint-prefix',
-      #     })
-      #     client = svc::Client.new(options)
-      #     expect(client.config.sigv4_name).to eq('endpoint-prefix')
-      #   end
-      #
-      #   it 'prefers the signingName over endpointPrefix' do
-      #     svc = ApiHelper.sample_service(metadata: {
-      #       'signatureVersion' => 'v4',
-      #       'endpointPrefix' => 'endpoint-prefix',
-      #       'signingName' => 'signing-name',
-      #     })
-      #     client = svc::Client.new(options)
-      #     expect(client.config.sigv4_name).to eq('signing-name')
-      #   end
-      #
-      # end
-      #
-      # describe 'sigv4 signing region' do
-      #
-      #   it 'uses the endpoint provider for global endpoints' do
-      #     expect(Aws::Partitions::EndpointProvider)
-      #       .to receive(:signing_region)
-      #             .with('other-region', 'svc-name', nil)
-      #             .and_return('us-east-1')
-      #
-      #     client = Sigv4Client.new(options.merge(
-      #       region: 'other-region',
-      #       endpoint: 'https://svc-name.amazonaws.com'
-      #     ))
-      #     expect(client.config.sigv4_region).to eq('us-east-1')
-      #   end
-      #
-      #   it 'defaults to configured region if it can not be extracted' do
-      #     client = Sigv4Client.new(options.merge(
-      #       region: 'other-region',
-      #       endpoint: 'https://localhost:3000'
-      #     ))
-      #     expect(client.config.sigv4_region).to eq('other-region')
-      #   end
-      #
-      #   it 'uses the specified region when no endpointPrefix is present' do
-      #     svc = ApiHelper.sample_service(metadata: {
-      #       'signatureVersion' => 'v4',
-      #       'signingName' => 'signing-name',
-      #       'endpointPrefix' => nil,
-      #     })
-      #     client = svc::Client.new(options.merge(
-      #       region: 'eu-west-1',
-      #       endpoint: 'http://uniqueness.svc.us-west-2.amazonaws.com',
-      #     ))
-      #     expect(client.config.sigv4_name).to eq('signing-name')
-      #     expect(client.config.sigv4_region).to eq('eu-west-1')
-      #   end
-      #
-      #   it 'uses the endpointPrefix to find the signing_region' do
-      #     svc = ApiHelper.sample_service(metadata: {
-      #       'signatureVersion' => 'v4',
-      #       'signingName' => 'signing-name',
-      #       'endpointPrefix' => 'api.service',
-      #     })
-      #     allow(Aws::Plugins::RegionalEndpoint).to receive(:warn)
-      #     expect(Aws::Partitions::EndpointProvider)
-      #       .to receive(:signing_region)
-      #       .with('us-east-1', 'api.service', nil)
-      #       .and_return('us-east-1')
-      #
-      #     client = svc::Client.new(options.merge(
-      #       region: 'fips-us-east-1',
-      #       ))
-      #     expect(client.config.sigv4_name).to eq('signing-name')
-      #     expect(client.config.sigv4_region).to eq('us-east-1')
-      #   end
-      #
-      # end
+        it 'accepts a sigv4 signing name configuration option' do
+          client = Sigv4Client.new(options.merge(
+            sigv4_name: 'name',
+          ))
+          expect(client.config.sigv4_name).to eq('name')
+        end
+
+        it 'uses the endpoint provider for service name' do
+          expect(Aws::Partitions::EndpointProvider)
+            .to receive(:signing_service)
+                  .with('other-region', 'svc-name')
+                  .and_return('override-service')
+
+          client = Sigv4Client.new(options.merge(
+            region: 'other-region',
+            endpoint: 'https://svc-name.amazonaws.com'
+          ))
+          expect(client.config.sigv4_name).to eq('override-service')
+        end
+
+        it 'defaults the sigv4 name to the endpoint prefix' do
+          svc = ApiHelper.sample_service(metadata: {
+            'signatureVersion' => 'v4',
+            'endpointPrefix' => 'endpoint-prefix',
+          })
+          client = svc::Client.new(options)
+          expect(client.config.sigv4_name).to eq('endpoint-prefix')
+        end
+
+        it 'prefers the signingName over endpointPrefix' do
+          svc = ApiHelper.sample_service(metadata: {
+            'signatureVersion' => 'v4',
+            'endpointPrefix' => 'endpoint-prefix',
+            'signingName' => 'signing-name',
+          })
+          client = svc::Client.new(options)
+          expect(client.config.sigv4_name).to eq('signing-name')
+        end
+
+      end
+
+      describe 'sigv4 signing region' do
+
+        it 'uses the endpoint provider for global endpoints' do
+          expect(Aws::Partitions::EndpointProvider)
+            .to receive(:signing_region)
+                  .with('other-region', 'svc-name', nil)
+                  .and_return('us-east-1')
+
+          client = Sigv4Client.new(options.merge(
+            region: 'other-region',
+            endpoint: 'https://svc-name.amazonaws.com'
+          ))
+          expect(client.config.sigv4_region).to eq('us-east-1')
+        end
+
+        it 'defaults to configured region if it can not be extracted' do
+          client = Sigv4Client.new(options.merge(
+            region: 'other-region',
+            endpoint: 'https://localhost:3000'
+          ))
+          expect(client.config.sigv4_region).to eq('other-region')
+        end
+
+        it 'uses the specified region when no endpointPrefix is present' do
+          svc = ApiHelper.sample_service(metadata: {
+            'signatureVersion' => 'v4',
+            'signingName' => 'signing-name',
+            'endpointPrefix' => nil,
+          })
+          client = svc::Client.new(options.merge(
+            region: 'eu-west-1',
+            endpoint: 'http://uniqueness.svc.us-west-2.amazonaws.com',
+          ))
+          expect(client.config.sigv4_name).to eq('signing-name')
+          expect(client.config.sigv4_region).to eq('eu-west-1')
+        end
+
+        it 'uses the endpointPrefix to find the signing_region' do
+          svc = ApiHelper.sample_service(metadata: {
+            'signatureVersion' => 'v4',
+            'signingName' => 'signing-name',
+            'endpointPrefix' => 'api.service',
+          })
+          allow(Aws::Plugins::RegionalEndpoint).to receive(:warn)
+          expect(Aws::Partitions::EndpointProvider)
+            .to receive(:signing_region)
+            .with('us-east-1', 'api.service', nil)
+            .and_return('us-east-1')
+
+          client = svc::Client.new(options.merge(
+            region: 'fips-us-east-1',
+            ))
+          expect(client.config.sigv4_name).to eq('signing-name')
+          expect(client.config.sigv4_region).to eq('us-east-1')
+        end
+
+      end
 
       describe 'apply authtype trait' do
 

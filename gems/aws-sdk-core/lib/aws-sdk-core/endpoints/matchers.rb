@@ -52,6 +52,38 @@ module Aws
         input[r_start...r_stop]
       end
 
+      # stringEquals(value1: string, value2: string) bool
+      def self.string_equals?(value1, value2)
+        value1 == value2
+      end
+
+      # booleanEquals(value1: bool, value2: bool) bool
+      def self.boolean_equals?(value1, value2)
+        value1 == value2
+      end
+
+      # uriEncode(value: string) string
+      def self.uri_encode(value)
+        CGI.escape(value.encode('UTF-8')).gsub('+', '%20').gsub('%7E', '~')
+      end
+
+      # parseUrl(value: string) Option<URL>
+      def self.parse_url(value)
+        URL.new(value).as_json
+      rescue ArgumentError, URI::InvalidURIError
+        nil
+      end
+
+      # isValidHostLabel(value: string, allowSubDomains: bool) bool
+      def self.valid_host_label?(value, allow_sub_domains = false)
+        if allow_sub_domains
+          labels = value.split('.')
+          return labels.all? { |l| valid_host_label?(l) }
+        end
+
+        value =~ /\A(?!-)[a-zA-Z0-9-]{1,63}(?<!-)\z/
+      end
+
       # AWS
 
       # aws.partition(value: string) Option<Partition>
@@ -85,40 +117,17 @@ module Aws
         nil
       end
 
-      # Strings (also core TBH)
-
-      # stringEquals(value1: string, value2: string) bool
-      def self.string_equals?(value1, value2)
-        value1 == value2
-      end
-
-      # isValidHostLabel(value: string, allowSubDomains: bool) bool
-      def self.valid_host_label?(value, allow_sub_domains = false)
+      # aws.isVirtualHostableS3Bucket(value: string, allowSubDomains: bool) bool
+      def self.aws_virtual_hostable_s3_bucket?(value, allow_sub_domains = false)
         if allow_sub_domains
-          labels = value.split('.')
-          return labels.all? { |l| valid_host_label?(l) }
+          labels = value.split('.', -1)
+          return labels.all? { |l| aws_virtual_hostable_s3_bucket?(l) }
         end
 
-        value =~ /\A(?!-)[a-zA-Z0-9-]{1,63}(?<!-)\z/
-      end
-
-      # uriEncode(value: string) string
-      def self.uri_encode(value)
-        CGI.escape(value.encode('UTF-8')).gsub('+', '%20').gsub('%7E', '~')
-      end
-
-      # parseUrl(value: string) Option<URL>
-      def self.parse_url(value)
-        URL.new(value).as_json
-      rescue ArgumentError, URI::InvalidURIError
-        nil
-      end
-
-      # Booleans (also core TBH)
-
-      # booleanEquals(value1: bool, value2: bool) bool
-      def self.boolean_equals?(value1, value2)
-        value1 == value2
+        value.size < 64 &&
+          value =~ /^[a-z0-9][a-z0-9.-]+[a-z0-9]$/ &&
+          value !~ /(\d+\.){3}\d+/ &&
+          value !~ /[.-]{2}/ || false
       end
     end
   end

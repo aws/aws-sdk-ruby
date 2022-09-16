@@ -36,20 +36,22 @@ module Aws
           Matchers.attr(*args)
         when 'substring'
           Matchers.substring(*args)
-        when 'aws.partition'
-          Matchers.aws_partition(*args)
-        when 'aws.parseArn'
-          Matchers.aws_parse_arn(*args)
         when 'stringEquals'
           Matchers.string_equals?(*args)
-        when 'isValidHostLabel'
-          Matchers.valid_host_label?(*args)
+        when 'booleanEquals'
+          Matchers.boolean_equals?(*args)
         when 'uriEncode'
           Matchers.uri_encode(*args)
         when 'parseURL'
           Matchers.parse_url(*args)
-        when 'booleanEquals'
-          Matchers.boolean_equals?(*args)
+        when 'isValidHostLabel'
+          Matchers.valid_host_label?(*args)
+        when 'aws.partition'
+          Matchers.aws_partition(*args)
+        when 'aws.parseArn'
+          Matchers.aws_parse_arn(*args)
+        when 'aws.isVirtualHostableS3Bucket'
+          Matchers.aws_virtual_hostable_s3_bucket?(*args)
         else
           raise "Function not found: #{@fn}"
         end

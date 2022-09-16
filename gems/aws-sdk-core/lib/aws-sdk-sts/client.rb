@@ -321,7 +321,7 @@ module Aws::STS
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
-    #   @option options [Aws::STS::EndpointProvider, nil] :endpoint_provider
+    #   @option options [Aws::STS::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::STS::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send

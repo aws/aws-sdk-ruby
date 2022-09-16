@@ -32,7 +32,6 @@ module AwsSdkCodeGenerator
       @resources = @service.resources
       @examples = @service.examples
       @endpoint_rules = @service.endpoint_rules
-      @in_memory = options.fetch(:in_memory, false)
     end
 
     # Generates the source for a library as a single string.
@@ -226,10 +225,7 @@ module AwsSdkCodeGenerator
     end
 
     def endpoint_provider
-      Views::EndpointProviderClass.new(
-        service: @service,
-        in_memory: @in_memory
-      ).render
+      Views::EndpointProviderClass.new(service: @service).render
     end
 
     def endpoints_module

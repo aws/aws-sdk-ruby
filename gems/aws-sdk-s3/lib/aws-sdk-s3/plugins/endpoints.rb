@@ -13,17 +13,13 @@ module Aws::S3
     class Endpoints < Seahorse::Client::Plugin
       option(
         :endpoint_provider,
-        doc_type: 'Aws::S3::EndpointProvider, nil',
+        doc_type: 'Aws::S3::EndpointProvider',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
                    '`Aws::S3::EndpointParameters`'
       ) do |cfg|
-        if Aws::S3::EndpointProvider.endpoint_rules
-          Aws::S3::EndpointProvider.new
-        else
-          Aws::Endpoints::StaticProvider.new
-        end
+        Aws::S3::EndpointProvider.new
       end
 
       # @api private
@@ -258,7 +254,7 @@ module Aws::S3
       end
 
       def add_handlers(handlers, _config)
-        handlers.add(Handler, step: :build, priority: 60)
+        handlers.add(Handler, step: :build, priority: 75)
       end
     end
   end

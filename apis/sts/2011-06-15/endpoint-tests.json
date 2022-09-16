@@ -8,12 +8,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-south-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-south-2.api.aws"
+                    "url": "https://sts-fips.ap-south-2.api.aws"
                 }
             },
             "params": {
@@ -30,12 +30,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-south-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-south-2.amazonaws.com"
+                    "url": "https://sts-fips.ap-south-2.amazonaws.com"
                 }
             },
             "params": {
@@ -52,12 +52,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-south-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-south-2.api.aws"
+                    "url": "https://sts.ap-south-2.api.aws"
                 }
             },
             "params": {
@@ -74,12 +74,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-south-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-south-2.amazonaws.com"
+                    "url": "https://sts.ap-south-2.amazonaws.com"
                 }
             },
             "params": {
@@ -96,12 +96,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-south-1.api.aws"
+                    "url": "https://sts-fips.ap-south-1.api.aws"
                 }
             },
             "params": {
@@ -118,12 +118,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-south-1.amazonaws.com"
+                    "url": "https://sts-fips.ap-south-1.amazonaws.com"
                 }
             },
             "params": {
@@ -140,12 +140,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-south-1.api.aws"
+                    "url": "https://sts.ap-south-1.api.aws"
                 }
             },
             "params": {
@@ -162,12 +162,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-south-1.amazonaws.com"
+                    "url": "https://sts.ap-south-1.amazonaws.com"
                 }
             },
             "params": {
@@ -184,12 +184,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-south-1.api.aws"
+                    "url": "https://sts-fips.eu-south-1.api.aws"
                 }
             },
             "params": {
@@ -206,12 +206,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-south-1.amazonaws.com"
+                    "url": "https://sts-fips.eu-south-1.amazonaws.com"
                 }
             },
             "params": {
@@ -228,12 +228,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-south-1.api.aws"
+                    "url": "https://sts.eu-south-1.api.aws"
                 }
             },
             "params": {
@@ -250,12 +250,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-south-1.amazonaws.com"
+                    "url": "https://sts.eu-south-1.amazonaws.com"
                 }
             },
             "params": {
@@ -272,12 +272,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-south-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-south-2.api.aws"
+                    "url": "https://sts-fips.eu-south-2.api.aws"
                 }
             },
             "params": {
@@ -294,12 +294,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-south-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-south-2.amazonaws.com"
+                    "url": "https://sts-fips.eu-south-2.amazonaws.com"
                 }
             },
             "params": {
@@ -316,12 +316,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-south-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-south-2.api.aws"
+                    "url": "https://sts.eu-south-2.api.aws"
                 }
             },
             "params": {
@@ -338,12 +338,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-south-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-south-2.amazonaws.com"
+                    "url": "https://sts.eu-south-2.amazonaws.com"
                 }
             },
             "params": {
@@ -360,12 +360,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-gov-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.us-gov-east-1.api.aws"
+                    "url": "https://sts-fips.us-gov-east-1.api.aws"
                 }
             },
             "params": {
@@ -382,12 +382,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-gov-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-gov-east-1.amazonaws.com"
+                    "url": "https://sts.us-gov-east-1.amazonaws.com"
                 }
             },
             "params": {
@@ -404,12 +404,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-gov-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-gov-east-1.api.aws"
+                    "url": "https://sts.us-gov-east-1.api.aws"
                 }
             },
             "params": {
@@ -426,12 +426,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-gov-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-gov-east-1.amazonaws.com"
+                    "url": "https://sts.us-gov-east-1.amazonaws.com"
                 }
             },
             "params": {
@@ -448,12 +448,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "me-central-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.me-central-1.api.aws"
+                    "url": "https://sts-fips.me-central-1.api.aws"
                 }
             },
             "params": {
@@ -470,12 +470,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "me-central-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.me-central-1.amazonaws.com"
+                    "url": "https://sts-fips.me-central-1.amazonaws.com"
                 }
             },
             "params": {
@@ -492,12 +492,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "me-central-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.me-central-1.api.aws"
+                    "url": "https://sts.me-central-1.api.aws"
                 }
             },
             "params": {
@@ -514,12 +514,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "me-central-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.me-central-1.amazonaws.com"
+                    "url": "https://sts.me-central-1.amazonaws.com"
                 }
             },
             "params": {
@@ -536,12 +536,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ca-central-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ca-central-1.api.aws"
+                    "url": "https://sts-fips.ca-central-1.api.aws"
                 }
             },
             "params": {
@@ -558,12 +558,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ca-central-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ca-central-1.amazonaws.com"
+                    "url": "https://sts-fips.ca-central-1.amazonaws.com"
                 }
             },
             "params": {
@@ -580,12 +580,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ca-central-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ca-central-1.api.aws"
+                    "url": "https://sts.ca-central-1.api.aws"
                 }
             },
             "params": {
@@ -602,12 +602,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ca-central-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ca-central-1.amazonaws.com"
+                    "url": "https://sts.ca-central-1.amazonaws.com"
                 }
             },
             "params": {
@@ -624,12 +624,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-central-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-central-1.api.aws"
+                    "url": "https://sts-fips.eu-central-1.api.aws"
                 }
             },
             "params": {
@@ -646,12 +646,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-central-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-central-1.amazonaws.com"
+                    "url": "https://sts-fips.eu-central-1.amazonaws.com"
                 }
             },
             "params": {
@@ -668,12 +668,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-central-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-central-1.api.aws"
+                    "url": "https://sts.eu-central-1.api.aws"
                 }
             },
             "params": {
@@ -690,12 +690,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-central-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-central-1.amazonaws.com"
+                    "url": "https://sts.eu-central-1.amazonaws.com"
                 }
             },
             "params": {
@@ -723,12 +723,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-iso-west-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.us-iso-west-1.c2s.ic.gov"
+                    "url": "https://sts-fips.us-iso-west-1.c2s.ic.gov"
                 }
             },
             "params": {
@@ -756,12 +756,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-iso-west-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-iso-west-1.c2s.ic.gov"
+                    "url": "https://sts.us-iso-west-1.c2s.ic.gov"
                 }
             },
             "params": {
@@ -778,12 +778,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-central-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-central-2.api.aws"
+                    "url": "https://sts-fips.eu-central-2.api.aws"
                 }
             },
             "params": {
@@ -800,12 +800,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-central-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-central-2.amazonaws.com"
+                    "url": "https://sts-fips.eu-central-2.amazonaws.com"
                 }
             },
             "params": {
@@ -822,12 +822,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-central-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-central-2.api.aws"
+                    "url": "https://sts.eu-central-2.api.aws"
                 }
             },
             "params": {
@@ -844,12 +844,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-central-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-central-2.amazonaws.com"
+                    "url": "https://sts.eu-central-2.amazonaws.com"
                 }
             },
             "params": {
@@ -866,12 +866,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-west-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.us-west-1.api.aws"
+                    "url": "https://sts-fips.us-west-1.api.aws"
                 }
             },
             "params": {
@@ -888,12 +888,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-west-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.us-west-1.amazonaws.com"
+                    "url": "https://sts-fips.us-west-1.amazonaws.com"
                 }
             },
             "params": {
@@ -910,12 +910,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-west-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-west-1.api.aws"
+                    "url": "https://sts.us-west-1.api.aws"
                 }
             },
             "params": {
@@ -932,12 +932,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-west-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-west-1.amazonaws.com"
+                    "url": "https://sts.us-west-1.amazonaws.com"
                 }
             },
             "params": {
@@ -954,12 +954,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-west-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.us-west-2.api.aws"
+                    "url": "https://sts-fips.us-west-2.api.aws"
                 }
             },
             "params": {
@@ -976,12 +976,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-west-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.us-west-2.amazonaws.com"
+                    "url": "https://sts-fips.us-west-2.amazonaws.com"
                 }
             },
             "params": {
@@ -998,12 +998,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-west-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-west-2.api.aws"
+                    "url": "https://sts.us-west-2.api.aws"
                 }
             },
             "params": {
@@ -1020,17 +1020,39 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-west-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-west-2.amazonaws.com"
+                    "url": "https://sts.us-west-2.amazonaws.com"
                 }
             },
             "params": {
                 "UseFIPS": false,
                 "Region": "us-west-2",
+                "UseDualStack": false
+            }
+        },
+        {
+            "documentation": "For region aws-global with FIPS disabled and DualStack disabled",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "UseFIPS": false,
+                "Region": "aws-global",
                 "UseDualStack": false
             }
         },
@@ -1042,12 +1064,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "af-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.af-south-1.api.aws"
+                    "url": "https://sts-fips.af-south-1.api.aws"
                 }
             },
             "params": {
@@ -1064,12 +1086,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "af-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.af-south-1.amazonaws.com"
+                    "url": "https://sts-fips.af-south-1.amazonaws.com"
                 }
             },
             "params": {
@@ -1086,12 +1108,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "af-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.af-south-1.api.aws"
+                    "url": "https://sts.af-south-1.api.aws"
                 }
             },
             "params": {
@@ -1108,12 +1130,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "af-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.af-south-1.amazonaws.com"
+                    "url": "https://sts.af-south-1.amazonaws.com"
                 }
             },
             "params": {
@@ -1130,12 +1152,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-north-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-north-1.api.aws"
+                    "url": "https://sts-fips.eu-north-1.api.aws"
                 }
             },
             "params": {
@@ -1152,12 +1174,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-north-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-north-1.amazonaws.com"
+                    "url": "https://sts-fips.eu-north-1.amazonaws.com"
                 }
             },
             "params": {
@@ -1174,12 +1196,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-north-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-north-1.api.aws"
+                    "url": "https://sts.eu-north-1.api.aws"
                 }
             },
             "params": {
@@ -1196,12 +1218,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-north-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-north-1.amazonaws.com"
+                    "url": "https://sts.eu-north-1.amazonaws.com"
                 }
             },
             "params": {
@@ -1218,12 +1240,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-west-3",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-west-3.api.aws"
+                    "url": "https://sts-fips.eu-west-3.api.aws"
                 }
             },
             "params": {
@@ -1240,12 +1262,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-west-3",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-west-3.amazonaws.com"
+                    "url": "https://sts-fips.eu-west-3.amazonaws.com"
                 }
             },
             "params": {
@@ -1262,12 +1284,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-west-3",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-west-3.api.aws"
+                    "url": "https://sts.eu-west-3.api.aws"
                 }
             },
             "params": {
@@ -1284,12 +1306,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-west-3",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-west-3.amazonaws.com"
+                    "url": "https://sts.eu-west-3.amazonaws.com"
                 }
             },
             "params": {
@@ -1306,12 +1328,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-west-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-west-2.api.aws"
+                    "url": "https://sts-fips.eu-west-2.api.aws"
                 }
             },
             "params": {
@@ -1328,12 +1350,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-west-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-west-2.amazonaws.com"
+                    "url": "https://sts-fips.eu-west-2.amazonaws.com"
                 }
             },
             "params": {
@@ -1350,12 +1372,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-west-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-west-2.api.aws"
+                    "url": "https://sts.eu-west-2.api.aws"
                 }
             },
             "params": {
@@ -1372,12 +1394,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-west-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-west-2.amazonaws.com"
+                    "url": "https://sts.eu-west-2.amazonaws.com"
                 }
             },
             "params": {
@@ -1394,12 +1416,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-west-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-west-1.api.aws"
+                    "url": "https://sts-fips.eu-west-1.api.aws"
                 }
             },
             "params": {
@@ -1416,12 +1438,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-west-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.eu-west-1.amazonaws.com"
+                    "url": "https://sts-fips.eu-west-1.amazonaws.com"
                 }
             },
             "params": {
@@ -1438,12 +1460,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-west-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-west-1.api.aws"
+                    "url": "https://sts.eu-west-1.api.aws"
                 }
             },
             "params": {
@@ -1460,12 +1482,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "eu-west-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.eu-west-1.amazonaws.com"
+                    "url": "https://sts.eu-west-1.amazonaws.com"
                 }
             },
             "params": {
@@ -1482,12 +1504,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-northeast-3",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-northeast-3.api.aws"
+                    "url": "https://sts-fips.ap-northeast-3.api.aws"
                 }
             },
             "params": {
@@ -1504,12 +1526,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-northeast-3",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-northeast-3.amazonaws.com"
+                    "url": "https://sts-fips.ap-northeast-3.amazonaws.com"
                 }
             },
             "params": {
@@ -1526,12 +1548,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-northeast-3",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-northeast-3.api.aws"
+                    "url": "https://sts.ap-northeast-3.api.aws"
                 }
             },
             "params": {
@@ -1548,12 +1570,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-northeast-3",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-northeast-3.amazonaws.com"
+                    "url": "https://sts.ap-northeast-3.amazonaws.com"
                 }
             },
             "params": {
@@ -1570,12 +1592,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-northeast-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-northeast-2.api.aws"
+                    "url": "https://sts-fips.ap-northeast-2.api.aws"
                 }
             },
             "params": {
@@ -1592,12 +1614,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-northeast-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-northeast-2.amazonaws.com"
+                    "url": "https://sts-fips.ap-northeast-2.amazonaws.com"
                 }
             },
             "params": {
@@ -1614,12 +1636,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-northeast-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-northeast-2.api.aws"
+                    "url": "https://sts.ap-northeast-2.api.aws"
                 }
             },
             "params": {
@@ -1636,12 +1658,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-northeast-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-northeast-2.amazonaws.com"
+                    "url": "https://sts.ap-northeast-2.amazonaws.com"
                 }
             },
             "params": {
@@ -1658,12 +1680,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-northeast-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-northeast-1.api.aws"
+                    "url": "https://sts-fips.ap-northeast-1.api.aws"
                 }
             },
             "params": {
@@ -1680,12 +1702,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-northeast-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-northeast-1.amazonaws.com"
+                    "url": "https://sts-fips.ap-northeast-1.amazonaws.com"
                 }
             },
             "params": {
@@ -1702,12 +1724,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-northeast-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-northeast-1.api.aws"
+                    "url": "https://sts.ap-northeast-1.api.aws"
                 }
             },
             "params": {
@@ -1724,12 +1746,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-northeast-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-northeast-1.amazonaws.com"
+                    "url": "https://sts.ap-northeast-1.amazonaws.com"
                 }
             },
             "params": {
@@ -1746,12 +1768,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "me-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.me-south-1.api.aws"
+                    "url": "https://sts-fips.me-south-1.api.aws"
                 }
             },
             "params": {
@@ -1768,12 +1790,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "me-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.me-south-1.amazonaws.com"
+                    "url": "https://sts-fips.me-south-1.amazonaws.com"
                 }
             },
             "params": {
@@ -1790,12 +1812,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "me-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.me-south-1.api.aws"
+                    "url": "https://sts.me-south-1.api.aws"
                 }
             },
             "params": {
@@ -1812,12 +1834,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "me-south-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.me-south-1.amazonaws.com"
+                    "url": "https://sts.me-south-1.amazonaws.com"
                 }
             },
             "params": {
@@ -1834,12 +1856,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "sa-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.sa-east-1.api.aws"
+                    "url": "https://sts-fips.sa-east-1.api.aws"
                 }
             },
             "params": {
@@ -1856,12 +1878,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "sa-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.sa-east-1.amazonaws.com"
+                    "url": "https://sts-fips.sa-east-1.amazonaws.com"
                 }
             },
             "params": {
@@ -1878,12 +1900,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "sa-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.sa-east-1.api.aws"
+                    "url": "https://sts.sa-east-1.api.aws"
                 }
             },
             "params": {
@@ -1900,12 +1922,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "sa-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.sa-east-1.amazonaws.com"
+                    "url": "https://sts.sa-east-1.amazonaws.com"
                 }
             },
             "params": {
@@ -1922,12 +1944,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-east-1.api.aws"
+                    "url": "https://sts-fips.ap-east-1.api.aws"
                 }
             },
             "params": {
@@ -1944,12 +1966,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-east-1.amazonaws.com"
+                    "url": "https://sts-fips.ap-east-1.amazonaws.com"
                 }
             },
             "params": {
@@ -1966,12 +1988,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-east-1.api.aws"
+                    "url": "https://sts.ap-east-1.api.aws"
                 }
             },
             "params": {
@@ -1988,12 +2010,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-east-1.amazonaws.com"
+                    "url": "https://sts.ap-east-1.amazonaws.com"
                 }
             },
             "params": {
@@ -2010,12 +2032,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "cn-north-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.cn-north-1.api.amazonwebservices.com.cn"
+                    "url": "https://sts-fips.cn-north-1.api.amazonwebservices.com.cn"
                 }
             },
             "params": {
@@ -2032,12 +2054,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "cn-north-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.cn-north-1.amazonaws.com.cn"
+                    "url": "https://sts-fips.cn-north-1.amazonaws.com.cn"
                 }
             },
             "params": {
@@ -2054,12 +2076,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "cn-north-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.cn-north-1.api.amazonwebservices.com.cn"
+                    "url": "https://sts.cn-north-1.api.amazonwebservices.com.cn"
                 }
             },
             "params": {
@@ -2076,17 +2098,105 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "cn-north-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.cn-north-1.amazonaws.com.cn"
+                    "url": "https://sts.cn-north-1.amazonaws.com.cn"
                 }
             },
             "params": {
                 "UseFIPS": false,
                 "Region": "cn-north-1",
+                "UseDualStack": false
+            }
+        },
+        {
+            "documentation": "For region ca-west-1 with FIPS enabled and DualStack enabled",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "ca-west-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts-fips.ca-west-1.api.aws"
+                }
+            },
+            "params": {
+                "UseFIPS": true,
+                "Region": "ca-west-1",
+                "UseDualStack": true
+            }
+        },
+        {
+            "documentation": "For region ca-west-1 with FIPS enabled and DualStack disabled",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "ca-west-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts-fips.ca-west-1.amazonaws.com"
+                }
+            },
+            "params": {
+                "UseFIPS": true,
+                "Region": "ca-west-1",
+                "UseDualStack": false
+            }
+        },
+        {
+            "documentation": "For region ca-west-1 with FIPS disabled and DualStack enabled",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "ca-west-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.ca-west-1.api.aws"
+                }
+            },
+            "params": {
+                "UseFIPS": false,
+                "Region": "ca-west-1",
+                "UseDualStack": true
+            }
+        },
+        {
+            "documentation": "For region ca-west-1 with FIPS disabled and DualStack disabled",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "ca-west-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.ca-west-1.amazonaws.com"
+                }
+            },
+            "params": {
+                "UseFIPS": false,
+                "Region": "ca-west-1",
                 "UseDualStack": false
             }
         },
@@ -2098,12 +2208,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-gov-west-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.us-gov-west-1.api.aws"
+                    "url": "https://sts-fips.us-gov-west-1.api.aws"
                 }
             },
             "params": {
@@ -2120,12 +2230,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-gov-west-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-gov-west-1.amazonaws.com"
+                    "url": "https://sts.us-gov-west-1.amazonaws.com"
                 }
             },
             "params": {
@@ -2142,12 +2252,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-gov-west-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-gov-west-1.api.aws"
+                    "url": "https://sts.us-gov-west-1.api.aws"
                 }
             },
             "params": {
@@ -2164,12 +2274,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-gov-west-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-gov-west-1.amazonaws.com"
+                    "url": "https://sts.us-gov-west-1.amazonaws.com"
                 }
             },
             "params": {
@@ -2186,12 +2296,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-southeast-1.api.aws"
+                    "url": "https://sts-fips.ap-southeast-1.api.aws"
                 }
             },
             "params": {
@@ -2208,12 +2318,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-southeast-1.amazonaws.com"
+                    "url": "https://sts-fips.ap-southeast-1.amazonaws.com"
                 }
             },
             "params": {
@@ -2230,12 +2340,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-southeast-1.api.aws"
+                    "url": "https://sts.ap-southeast-1.api.aws"
                 }
             },
             "params": {
@@ -2252,12 +2362,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-southeast-1.amazonaws.com"
+                    "url": "https://sts.ap-southeast-1.amazonaws.com"
                 }
             },
             "params": {
@@ -2274,12 +2384,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-southeast-2.api.aws"
+                    "url": "https://sts-fips.ap-southeast-2.api.aws"
                 }
             },
             "params": {
@@ -2296,12 +2406,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-southeast-2.amazonaws.com"
+                    "url": "https://sts-fips.ap-southeast-2.amazonaws.com"
                 }
             },
             "params": {
@@ -2318,12 +2428,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-southeast-2.api.aws"
+                    "url": "https://sts.ap-southeast-2.api.aws"
                 }
             },
             "params": {
@@ -2340,12 +2450,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-southeast-2.amazonaws.com"
+                    "url": "https://sts.ap-southeast-2.amazonaws.com"
                 }
             },
             "params": {
@@ -2373,12 +2483,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-iso-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.us-iso-east-1.c2s.ic.gov"
+                    "url": "https://sts-fips.us-iso-east-1.c2s.ic.gov"
                 }
             },
             "params": {
@@ -2406,12 +2516,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-iso-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-iso-east-1.c2s.ic.gov"
+                    "url": "https://sts.us-iso-east-1.c2s.ic.gov"
                 }
             },
             "params": {
@@ -2428,12 +2538,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-3",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-southeast-3.api.aws"
+                    "url": "https://sts-fips.ap-southeast-3.api.aws"
                 }
             },
             "params": {
@@ -2450,12 +2560,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-3",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-southeast-3.amazonaws.com"
+                    "url": "https://sts-fips.ap-southeast-3.amazonaws.com"
                 }
             },
             "params": {
@@ -2472,12 +2582,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-3",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-southeast-3.api.aws"
+                    "url": "https://sts.ap-southeast-3.api.aws"
                 }
             },
             "params": {
@@ -2494,12 +2604,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-3",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-southeast-3.amazonaws.com"
+                    "url": "https://sts.ap-southeast-3.amazonaws.com"
                 }
             },
             "params": {
@@ -2516,12 +2626,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-4",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-southeast-4.api.aws"
+                    "url": "https://sts-fips.ap-southeast-4.api.aws"
                 }
             },
             "params": {
@@ -2538,12 +2648,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-4",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.ap-southeast-4.amazonaws.com"
+                    "url": "https://sts-fips.ap-southeast-4.amazonaws.com"
                 }
             },
             "params": {
@@ -2560,12 +2670,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-4",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-southeast-4.api.aws"
+                    "url": "https://sts.ap-southeast-4.api.aws"
                 }
             },
             "params": {
@@ -2582,17 +2692,105 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "ap-southeast-4",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.ap-southeast-4.amazonaws.com"
+                    "url": "https://sts.ap-southeast-4.amazonaws.com"
                 }
             },
             "params": {
                 "UseFIPS": false,
                 "Region": "ap-southeast-4",
+                "UseDualStack": false
+            }
+        },
+        {
+            "documentation": "For region ap-southeast-5 with FIPS enabled and DualStack enabled",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "ap-southeast-5",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts-fips.ap-southeast-5.api.aws"
+                }
+            },
+            "params": {
+                "UseFIPS": true,
+                "Region": "ap-southeast-5",
+                "UseDualStack": true
+            }
+        },
+        {
+            "documentation": "For region ap-southeast-5 with FIPS enabled and DualStack disabled",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "ap-southeast-5",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts-fips.ap-southeast-5.amazonaws.com"
+                }
+            },
+            "params": {
+                "UseFIPS": true,
+                "Region": "ap-southeast-5",
+                "UseDualStack": false
+            }
+        },
+        {
+            "documentation": "For region ap-southeast-5 with FIPS disabled and DualStack enabled",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "ap-southeast-5",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.ap-southeast-5.api.aws"
+                }
+            },
+            "params": {
+                "UseFIPS": false,
+                "Region": "ap-southeast-5",
+                "UseDualStack": true
+            }
+        },
+        {
+            "documentation": "For region ap-southeast-5 with FIPS disabled and DualStack disabled",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "ap-southeast-5",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.ap-southeast-5.amazonaws.com"
+                }
+            },
+            "params": {
+                "UseFIPS": false,
+                "Region": "ap-southeast-5",
                 "UseDualStack": false
             }
         },
@@ -2604,12 +2802,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.us-east-1.api.aws"
+                    "url": "https://sts-fips.us-east-1.api.aws"
                 }
             },
             "params": {
@@ -2626,12 +2824,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.us-east-1.amazonaws.com"
+                    "url": "https://sts-fips.us-east-1.amazonaws.com"
                 }
             },
             "params": {
@@ -2648,12 +2846,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-east-1.api.aws"
+                    "url": "https://sts.us-east-1.api.aws"
                 }
             },
             "params": {
@@ -2670,17 +2868,105 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-east-1.amazonaws.com"
+                    "url": "https://sts.us-east-1.amazonaws.com"
                 }
             },
             "params": {
                 "UseFIPS": false,
                 "Region": "us-east-1",
+                "UseDualStack": false
+            }
+        },
+        {
+            "documentation": "For region ap-southeast-6 with FIPS enabled and DualStack enabled",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "ap-southeast-6",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts-fips.ap-southeast-6.api.aws"
+                }
+            },
+            "params": {
+                "UseFIPS": true,
+                "Region": "ap-southeast-6",
+                "UseDualStack": true
+            }
+        },
+        {
+            "documentation": "For region ap-southeast-6 with FIPS enabled and DualStack disabled",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "ap-southeast-6",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts-fips.ap-southeast-6.amazonaws.com"
+                }
+            },
+            "params": {
+                "UseFIPS": true,
+                "Region": "ap-southeast-6",
+                "UseDualStack": false
+            }
+        },
+        {
+            "documentation": "For region ap-southeast-6 with FIPS disabled and DualStack enabled",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "ap-southeast-6",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.ap-southeast-6.api.aws"
+                }
+            },
+            "params": {
+                "UseFIPS": false,
+                "Region": "ap-southeast-6",
+                "UseDualStack": true
+            }
+        },
+        {
+            "documentation": "For region ap-southeast-6 with FIPS disabled and DualStack disabled",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "ap-southeast-6",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.ap-southeast-6.amazonaws.com"
+                }
+            },
+            "params": {
+                "UseFIPS": false,
+                "Region": "ap-southeast-6",
                 "UseDualStack": false
             }
         },
@@ -2692,12 +2978,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-east-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.us-east-2.api.aws"
+                    "url": "https://sts-fips.us-east-2.api.aws"
                 }
             },
             "params": {
@@ -2714,12 +3000,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-east-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.us-east-2.amazonaws.com"
+                    "url": "https://sts-fips.us-east-2.amazonaws.com"
                 }
             },
             "params": {
@@ -2736,12 +3022,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-east-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-east-2.api.aws"
+                    "url": "https://sts.us-east-2.api.aws"
                 }
             },
             "params": {
@@ -2758,12 +3044,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-east-2",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-east-2.amazonaws.com"
+                    "url": "https://sts.us-east-2.amazonaws.com"
                 }
             },
             "params": {
@@ -2780,12 +3066,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "cn-northwest-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                    "url": "https://sts-fips.cn-northwest-1.api.amazonwebservices.com.cn"
                 }
             },
             "params": {
@@ -2802,12 +3088,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "cn-northwest-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.cn-northwest-1.amazonaws.com.cn"
+                    "url": "https://sts-fips.cn-northwest-1.amazonaws.com.cn"
                 }
             },
             "params": {
@@ -2824,12 +3110,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "cn-northwest-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.cn-northwest-1.api.amazonwebservices.com.cn"
+                    "url": "https://sts.cn-northwest-1.api.amazonwebservices.com.cn"
                 }
             },
             "params": {
@@ -2846,12 +3132,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "cn-northwest-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.cn-northwest-1.amazonaws.com.cn"
+                    "url": "https://sts.cn-northwest-1.amazonaws.com.cn"
                 }
             },
             "params": {
@@ -2879,12 +3165,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-isob-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2-fips.us-isob-east-1.sc2s.sgov.gov"
+                    "url": "https://sts-fips.us-isob-east-1.sc2s.sgov.gov"
                 }
             },
             "params": {
@@ -2912,12 +3198,12 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-isob-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
                     },
-                    "url": "https://ec2.us-isob-east-1.sc2s.sgov.gov"
+                    "url": "https://sts.us-isob-east-1.sc2s.sgov.gov"
                 }
             },
             "params": {
@@ -2934,7 +3220,7 @@
                         "authSchemes": [
                             {
                                 "signingRegion": "us-east-1",
-                                "signingName": "ec2",
+                                "signingName": "sts",
                                 "name": "sigv4"
                             }
                         ]
@@ -2970,6 +3256,421 @@
                 "UseFIPS": false,
                 "Region": "us-east-1",
                 "UseDualStack": true,
+                "Endpoint": "https://example.com"
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `ap-northeast-1`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "ap-northeast-1",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `ap-south-1`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "ap-south-1",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `ap-southeast-1`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "ap-southeast-1",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `ap-southeast-2`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "ap-southeast-2",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `aws-global`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "aws-global",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `ca-central-1`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "ca-central-1",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `eu-central-1`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "eu-central-1",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `eu-north-1`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "eu-north-1",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `eu-west-1`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "eu-west-1",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `eu-west-2`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "eu-west-2",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `eu-west-3`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "eu-west-3",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `sa-east-1`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "sa-east-1",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `us-east-1`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "us-east-1",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `us-east-2`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "us-east-2",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `us-west-1`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "us-west-1",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region `us-west-2`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "us-west-2",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with Non-legacy region `us-east-3`",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-east-3",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://sts.us-east-3.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "us-east-3",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false
+            }
+        },
+        {
+            "documentation": "UseGlobalEndpoint with legacy region and custom endpoint",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingRegion": "us-west-1",
+                                "signingName": "sts",
+                                "name": "sigv4"
+                            }
+                        ]
+                    },
+                    "url": "https://example.com"
+                }
+            },
+            "params": {
+                "Region": "us-west-1",
+                "UseGlobalEndpoint": true,
+                "UseDualStack": false,
+                "UseFIPS": false,
                 "Endpoint": "https://example.com"
             }
         }

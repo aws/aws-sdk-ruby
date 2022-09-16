@@ -47,41 +47,23 @@ module Aws
         Aws::Query::EC2ParamBuilder.new(param_list)
           .apply(req.context.operation.input, {})
 
-        # endpoint_params = Aws::STS::EndpointParameters.new(
-        #   region: context.config.region,
-        #   use_dual_stack: context.config.use_dualstack_endpoint,
-        #   use_fips: context.config.use_fips_endpoint
-        # )
-        # endpoint = context.config.endpoint_provider
-        #                   .resolve_endpoint(endpoint_params)
-        # auth_scheme = Aws::Endpoints.resolve_auth_scheme(context, endpoint)
-        #
-        # signer = Aws::Sigv4::Signer.new(
-        #   service: auth_scheme['signingName'] || 'sts',
-        #   region: auth_scheme['signingRegion'] || params[:source_region],
-        #   credentials_provider: context.config.credentials
-        # )
-
-        signer = Aws::Sigv4::Signer.new(
-          service: 'sts',
-          region: req.context.config.region,
-          credentials_provider: req.context.config.credentials
+        endpoint_params = Aws::STS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          use_global_endpoint: context.config.sts_regional_endpoints == 'legacy'
         )
+        endpoint = context.config.endpoint_provider
+                          .resolve_endpoint(endpoint_params)
+        auth_scheme = Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
-        url = Aws::Partitions::EndpointProvider.resolve(
-          req.context.config.region,
-          'sts',
-          req.context.config.sts_regional_endpoints,
-          {
-            dualstack: req.context.config.use_dualstack_endpoint,
-            fips: req.context.config.use_fips_endpoint
-          }
+        signer = Aws::Plugins::Sign.signer_for(
+          auth_scheme, context.config
         )
-        url += "/?#{param_list}"
 
         signer.presign_url(
           http_method: 'GET',
-          url: url,
+          url: "#{endpoint.url}?#{param_list}",
           body: '',
           headers: options[:headers]
         ).to_s

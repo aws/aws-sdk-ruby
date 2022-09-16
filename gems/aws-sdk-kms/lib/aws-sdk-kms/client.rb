@@ -324,7 +324,7 @@ module Aws::KMS
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
-    #   @option options [Aws::KMS::EndpointProvider, nil] :endpoint_provider
+    #   @option options [Aws::KMS::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::KMS::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send

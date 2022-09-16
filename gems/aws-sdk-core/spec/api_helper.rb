@@ -147,8 +147,7 @@ module ApiHelper
           endpoint_tests: options[:endpoint_tests],
           gem_dependencies: { 'aws-sdk-core' => '3' },
           gem_version: '1.0.0'
-        ),
-        in_memory: true # endpoint rules are in memory
+        )
       )
       begin
         Object.module_eval(code.source)

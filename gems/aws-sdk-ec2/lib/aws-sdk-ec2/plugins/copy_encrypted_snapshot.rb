@@ -40,16 +40,14 @@ module Aws
             endpoint_params = Aws::EC2::EndpointParameters.new(
               region: params[:source_region],
               use_dual_stack: context.config.use_dualstack_endpoint,
-              use_fips: context.config.use_fips_endpoint,
+              use_fips: context.config.use_fips_endpoint
             )
             endpoint = context.config.endpoint_provider
                               .resolve_endpoint(endpoint_params)
             auth_scheme = Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
-            signer = Aws::Sigv4::Signer.new(
-              service: auth_scheme['signingName'] || 'ec2',
-              region: auth_scheme['signingRegion'] || params[:source_region],
-              credentials_provider: context.config.credentials
+            signer = Aws::Plugins::Sign.signer_for(
+              auth_scheme, context.config, params[:source_region]
             )
 
             signer.presign_url(

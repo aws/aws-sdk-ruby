@@ -17,6 +17,7 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
     end
@@ -27,6 +28,7 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
     end
@@ -37,6 +39,7 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
     end
@@ -47,6 +50,7 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
     end
@@ -57,6 +61,7 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
     end
@@ -67,6 +72,7 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
     end
@@ -77,6 +83,7 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
     end
@@ -87,6 +94,7 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
     end

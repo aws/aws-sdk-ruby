@@ -43,7 +43,7 @@ be a URI formatted like:
         class Handler < Client::Handler
 
           def call(context)
-            context.http_request.endpoint = context.config.endpoint
+            context.http_request.endpoint = URI.parse(context.config.endpoint.to_s)
             @handler.call(context)
           end
 

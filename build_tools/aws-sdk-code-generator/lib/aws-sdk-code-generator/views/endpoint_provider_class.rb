@@ -6,20 +6,15 @@ module AwsSdkCodeGenerator
 
       # @option options [required, Service] :service
       # @option options [required, Hash] :endpoint_rules
-      # @option options [Boolean] :in_memory (false)
       def initialize(options)
         @service = options.fetch(:service)
         @endpoint_rules = @service.endpoint_rules
-        @in_memory = options.fetch(:in_memory)
 
         version = @endpoint_rules['version']
         return if version.match?(/^\d+\.\d+$/) #&& version == '1.0'
 
         raise 'Endpoint Rules version must be 1.0'
       end
-
-      # @return [Boolean]
-      attr_reader :in_memory
 
       # @return [String|nil]
       def generated_src_warning
