@@ -352,12 +352,13 @@ module Aws::CodeStarNotifications
     # @!group API Operations
 
     # Creates a notification rule for a resource. The rule specifies the
-    # events you want notifications about and the targets (such as SNS
-    # topics) where you want to receive them.
+    # events you want notifications about and the targets (such as Chatbot
+    # topics or Chatbot clients configured for Slack) where you want to
+    # receive them.
     #
     # @option params [required, String] :name
-    #   The name for the notification rule. Notifictaion rule names must be
-    #   unique in your AWS account.
+    #   The name for the notification rule. Notification rule names must be
+    #   unique in your Amazon Web Services account.
     #
     # @option params [required, Array<String>] :event_type_ids
     #   A list of event types associated with this notification rule. For a
@@ -365,18 +366,19 @@ module Aws::CodeStarNotifications
     #
     # @option params [required, String] :resource
     #   The Amazon Resource Name (ARN) of the resource to associate with the
-    #   notification rule. Supported resources include pipelines in AWS
-    #   CodePipeline, repositories in AWS CodeCommit, and build projects in
-    #   AWS CodeBuild.
+    #   notification rule. Supported resources include pipelines in
+    #   CodePipeline, repositories in CodeCommit, and build projects in
+    #   CodeBuild.
     #
     # @option params [required, Array<Types::Target>] :targets
-    #   A list of Amazon Resource Names (ARNs) of SNS topics to associate with
-    #   the notification rule.
+    #   A list of Amazon Resource Names (ARNs) of Amazon Simple Notification
+    #   Service topics and Chatbot clients to associate with the notification
+    #   rule.
     #
     # @option params [required, String] :detail_type
     #   The level of detail to include in the notifications for this resource.
-    #   BASIC will include only the contents of the event as it would appear
-    #   in AWS CloudWatch. FULL will include any supplemental information
+    #   `BASIC` will include only the contents of the event as it would appear
+    #   in Amazon CloudWatch. `FULL` will include any supplemental information
     #   provided by AWS CodeStar Notifications and/or the service for the
     #   resource for which the notification is created.
     #
@@ -387,8 +389,9 @@ module Aws::CodeStarNotifications
     #   token is included, the request returns information about the initial
     #   request that used that token.
     #
-    #   <note markdown="1"> The AWS SDKs prepopulate client request tokens. If you are using an
-    #   AWS SDK, an idempotency token is created for you.
+    #   <note markdown="1"> The Amazon Web Services SDKs prepopulate client request tokens. If you
+    #   are using an Amazon Web Services SDK, an idempotency token is created
+    #   for you.
     #
     #    </note>
     #
@@ -397,11 +400,11 @@ module Aws::CodeStarNotifications
     #
     # @option params [Hash<String,String>] :tags
     #   A list of tags to apply to this notification rule. Key names cannot
-    #   start with "aws".
+    #   start with "`aws`".
     #
     # @option params [String] :status
-    #   The status of the notification rule. The default value is ENABLED. If
-    #   the status is set to DISABLED, notifications aren't sent for the
+    #   The status of the notification rule. The default value is `ENABLED`.
+    #   If the status is set to `DISABLED`, notifications aren't sent for the
     #   notification rule.
     #
     # @return [Types::CreateNotificationRuleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -473,13 +476,14 @@ module Aws::CodeStarNotifications
     # Deletes a specified target for notifications.
     #
     # @option params [required, String] :target_address
-    #   The Amazon Resource Name (ARN) of the SNS topic to delete.
+    #   The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client
+    #   to delete.
     #
     # @option params [Boolean] :force_unsubscribe_all
     #   A Boolean value that can be used to delete all associations with this
-    #   SNS topic. The default value is FALSE. If set to TRUE, all
+    #   Chatbot topic. The default value is FALSE. If set to TRUE, all
     #   associations between that target and every notification rule in your
-    #   AWS account are deleted.
+    #   Amazon Web Services account are deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -608,7 +612,8 @@ module Aws::CodeStarNotifications
       req.send_request(options)
     end
 
-    # Returns a list of the notification rules for an AWS account.
+    # Returns a list of the notification rules for an Amazon Web Services
+    # account.
     #
     # @option params [Array<Types::ListNotificationRulesFilter>] :filters
     #   The filters to use to return information by service or resource type.
@@ -693,7 +698,8 @@ module Aws::CodeStarNotifications
       req.send_request(options)
     end
 
-    # Returns a list of the notification rule targets for an AWS account.
+    # Returns a list of the notification rule targets for an Amazon Web
+    # Services account.
     #
     # @option params [Array<Types::ListTargetsFilter>] :filters
     #   The filters to use to return information by service or resource type.
@@ -750,16 +756,17 @@ module Aws::CodeStarNotifications
       req.send_request(options)
     end
 
-    # Creates an association between a notification rule and an SNS topic so
-    # that the associated target can receive notifications when the events
-    # described in the rule are triggered.
+    # Creates an association between a notification rule and an Chatbot
+    # topic or Chatbot client so that the associated target can receive
+    # notifications when the events described in the rule are triggered.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the notification rule for which you
     #   want to create the association.
     #
     # @option params [required, Types::Target] :target
-    #   Information about the SNS topics associated with a notification rule.
+    #   Information about the Chatbot topics or Chatbot clients associated
+    #   with a notification rule.
     #
     # @option params [String] :client_request_token
     #   An enumeration token that, when provided in a request, returns the
@@ -800,7 +807,7 @@ module Aws::CodeStarNotifications
     #
     # @option params [required, Hash<String,String>] :tags
     #   The list of tags to associate with the resource. Tag key names cannot
-    #   start with "aws".
+    #   start with "`aws`".
     #
     # @return [Types::TagResourceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -829,7 +836,7 @@ module Aws::CodeStarNotifications
       req.send_request(options)
     end
 
-    # Removes an association between a notification rule and an Amazon SNS
+    # Removes an association between a notification rule and an Chatbot
     # topic so that subscribers to that topic stop receiving notifications
     # when the events described in the rule are triggered.
     #
@@ -837,7 +844,8 @@ module Aws::CodeStarNotifications
     #   The Amazon Resource Name (ARN) of the notification rule.
     #
     # @option params [required, String] :target_address
-    #   The ARN of the SNS topic to unsubscribe from the notification rule.
+    #   The ARN of the Chatbot topic to unsubscribe from the notification
+    #   rule.
     #
     # @return [Types::UnsubscribeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -911,7 +919,13 @@ module Aws::CodeStarNotifications
     #   (sending notifications) or disabled (not sending notifications).
     #
     # @option params [Array<String>] :event_type_ids
-    #   A list of event types associated with this notification rule.
+    #   A list of event types associated with this notification rule. For a
+    #   complete list of event types and IDs, see [Notification concepts][1]
+    #   in the *Developer Tools Console User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codestar-notifications/latest/userguide/concepts.html#concepts-api
     #
     # @option params [Array<Types::Target>] :targets
     #   The address and type of the targets to receive notifications from this
@@ -920,7 +934,7 @@ module Aws::CodeStarNotifications
     # @option params [String] :detail_type
     #   The level of detail to include in the notifications for this resource.
     #   BASIC will include only the contents of the event as it would appear
-    #   in AWS CloudWatch. FULL will include any supplemental information
+    #   in Amazon CloudWatch. FULL will include any supplemental information
     #   provided by AWS CodeStar Notifications and/or the service for the
     #   resource for which the notification is created.
     #
@@ -964,7 +978,7 @@ module Aws::CodeStarNotifications
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestarnotifications'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

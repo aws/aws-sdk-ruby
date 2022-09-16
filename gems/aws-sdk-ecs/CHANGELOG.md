@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2022-09-16)
+------------------
+
+* Feature - This release supports new task definition sizes.
+
 1.100.0 (2022-06-21)
 ------------------
 
