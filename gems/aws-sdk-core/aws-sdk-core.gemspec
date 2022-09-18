@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.files         = Dir['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb', 'ca-bundle.crt']
 
-  spec.add_dependency('jmespath', '~> 1', '>= 1.6.1') # necessary for secure jmespath JSON parsing
+  spec.add_dependency('jmespath', '~> 1.6.1') # necessary for secure jmespath JSON parsing
   spec.add_dependency('aws-partitions', '~> 1', '>= 1.525.0') # necessary for dualstack/fips
   spec.add_dependency('aws-sigv4', '~> 1.1') # necessary for making Aws::STS API calls
   spec.add_dependency('aws-eventstream', '~> 1', '>= 1.0.2') # necessary for binary eventstream

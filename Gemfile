@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 gem 'rake', require: false
 
 gem 'http-2'
-gem 'jmespath'
+gem 'jmespath', '~> 1.6.1'
 gem 'aws-crt' if ENV['CRT']
 
 # faster xml libraries
