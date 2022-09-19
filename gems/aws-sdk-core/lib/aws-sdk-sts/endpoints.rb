@@ -17,6 +17,10 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
@@ -28,6 +32,10 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
@@ -39,6 +47,10 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
@@ -50,6 +62,10 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
@@ -61,6 +77,10 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
@@ -72,6 +92,10 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
@@ -83,6 +107,10 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
@@ -94,6 +122,10 @@ module Aws::STS
           endpoint = context.config.endpoint.to_s
         end
         Aws::STS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end

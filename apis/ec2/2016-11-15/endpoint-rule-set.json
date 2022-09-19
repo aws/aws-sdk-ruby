@@ -105,15 +105,7 @@
                                         "url": {
                                             "ref": "Endpoint"
                                         },
-                                        "properties": {
-                                            "authSchemes": [
-                                                {
-                                                    "name": "sigv4",
-                                                    "signingRegion": "{Region}",
-                                                    "signingName": "ec2"
-                                                }
-                                            ]
-                                        },
+                                        "properties": {},
                                         "headers": {}
                                     },
                                     "type": "endpoint"
@@ -184,15 +176,7 @@
                                     "conditions": [],
                                     "endpoint": {
                                         "url": "https://ec2-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": {
-                                            "authSchemes": [
-                                                {
-                                                    "name": "sigv4",
-                                                    "signingRegion": "{Region}",
-                                                    "signingName": "ec2"
-                                                }
-                                            ]
-                                        },
+                                        "properties": {},
                                         "headers": {}
                                     },
                                     "type": "endpoint"
@@ -264,15 +248,7 @@
                                             ],
                                             "endpoint": {
                                                 "url": "https://ec2.{Region}.{PartitionResult#dnsSuffix}",
-                                                "properties": {
-                                                    "authSchemes": [
-                                                        {
-                                                            "name": "sigv4",
-                                                            "signingRegion": "{Region}",
-                                                            "signingName": "ec2"
-                                                        }
-                                                    ]
-                                                },
+                                                "properties": {},
                                                 "headers": {}
                                             },
                                             "type": "endpoint"
@@ -281,15 +257,7 @@
                                             "conditions": [],
                                             "endpoint": {
                                                 "url": "https://ec2-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                "properties": {
-                                                    "authSchemes": [
-                                                        {
-                                                            "name": "sigv4",
-                                                            "signingRegion": "{Region}",
-                                                            "signingName": "ec2"
-                                                        }
-                                                    ]
-                                                },
+                                                "properties": {},
                                                 "headers": {}
                                             },
                                             "type": "endpoint"
@@ -343,15 +311,7 @@
                                     "conditions": [],
                                     "endpoint": {
                                         "url": "https://ec2.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": {
-                                            "authSchemes": [
-                                                {
-                                                    "name": "sigv4",
-                                                    "signingRegion": "{Region}",
-                                                    "signingName": "ec2"
-                                                }
-                                            ]
-                                        },
+                                        "properties": {},
                                         "headers": {}
                                     },
                                     "type": "endpoint"
@@ -369,15 +329,7 @@
                     "conditions": [],
                     "endpoint": {
                         "url": "https://ec2.{Region}.{PartitionResult#dnsSuffix}",
-                        "properties": {
-                            "authSchemes": [
-                                {
-                                    "name": "sigv4",
-                                    "signingRegion": "{Region}",
-                                    "signingName": "ec2"
-                                }
-                            ]
-                        },
+                        "properties": {},
                         "headers": {}
                     },
                     "type": "endpoint"

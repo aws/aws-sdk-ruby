@@ -5,7 +5,9 @@ require 'aws-sigv4'
 module Aws
   module S3
     module Plugins
-      # This plugin is an implementation detail and may be modified.
+      # This plugin used to have a V4 signer but it was removed in favor of
+      # generic Sign plugin that uses endpoint auth scheme.
+      #
       # @api private
       class S3Signer < Seahorse::Client::Plugin
         option(:signature_version, 'v4')
@@ -28,7 +30,6 @@ module Aws
 
         def add_v4_handlers(handlers)
           handlers.add(CachedBucketRegionHandler, step: :sign, priority: 60)
-          handlers.add(V4Handler, step: :sign)
           handlers.add(BucketRegionErrorHandler, step: :sign, priority: 40)
         end
 
@@ -40,30 +41,6 @@ module Aws
           def call(context)
             LegacySigner.sign(context)
             @handler.call(context)
-          end
-        end
-
-        class V4Handler < Seahorse::Client::Handler
-          def call(context)
-            auth_scheme = context[:auth_scheme]
-            if %w[sigv4 sigv4a].include?(auth_scheme['name'])
-              Aws::Plugins::SignatureV4.apply_signature(
-                context: context,
-                signer: sigv4_signer(context)
-              )
-            end
-            @handler.call(context)
-          end
-
-          private
-
-          def sigv4_signer(context)
-            if context[:cached_sigv4_region] &&
-               context[:cached_sigv4_region] != context.config.region
-              region = context[:cached_sigv4_region]
-            end
-
-            S3Signer.build_v4_signer(context, region)
           end
         end
 
@@ -84,7 +61,7 @@ module Aws
               context.http_request.endpoint.host = S3Signer.new_hostname(
                 context, cached_region
               )
-              context[:cached_sigv4_region] = cached_region
+              context[:sigv4_region] = cached_region # Sign plugin will use this
             end
           end
         end

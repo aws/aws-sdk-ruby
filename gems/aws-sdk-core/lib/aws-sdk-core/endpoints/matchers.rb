@@ -119,15 +119,13 @@ module Aws
 
       # aws.isVirtualHostableS3Bucket(value: string, allowSubDomains: bool) bool
       def self.aws_virtual_hostable_s3_bucket?(value, allow_sub_domains = false)
-        if allow_sub_domains
-          labels = value.split('.', -1)
-          return labels.all? { |l| aws_virtual_hostable_s3_bucket?(l) }
-        end
-
-        (value.size < 64 &&
-          value =~ /^[a-z0-9][a-z0-9-]+[a-z0-9]$/ &&
+        !!(value.size < 64 &&
+          # regular naming rules
+          value =~ /^[a-z0-9][a-z0-9\-#{'.' if allow_sub_domains}]+[a-z0-9]$/ &&
+          # not IP address
           value !~ /(\d+\.){3}\d+/ &&
-          value !~ /[.-]{2}/) || false
+          # no dash and hyphen together
+          value !~ /[.-]{2}/)
       end
     end
   end

@@ -42,12 +42,18 @@ module Aws
           'Bearer'
         when 'none'
           # don't sign
+        when 'sigv2'
+          # also don't sign. A seperate plugin will pick this up
         end
       end
 
       class Handler < Seahorse::Client::Handler
         def call(context)
-          signer = Sign.signer_for(context[:auth_scheme], context.config)
+          signer = Sign.signer_for(
+            context[:auth_scheme],
+            context.config,
+            context[:sigv4_region]
+          )
 
           case signer
           when Aws::Sigv4::Signer

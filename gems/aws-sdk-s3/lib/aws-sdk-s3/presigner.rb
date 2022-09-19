@@ -195,7 +195,7 @@ module Aws
         http_req = req.context.http_request
 
         req.handlers.remove(Aws::S3::Plugins::S3Signer::LegacyHandler)
-        req.handlers.remove(Aws::S3::Plugins::S3Signer::V4Handler)
+        req.handlers.remove(Aws::Plugins::Sign::Handler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
 
         req.handle(step: :send) do |context|

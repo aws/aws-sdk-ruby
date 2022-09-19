@@ -76,7 +76,7 @@ module Aws::STS
       end
 
       def add_handlers(handlers, _config)
-        handlers.add(Handler, step: :build, priority: 99)
+        handlers.add(Handler, step: :build, priority: 75)
       end
     end
   end

@@ -13,7 +13,7 @@ module Aws::EC2
     class Endpoints < Seahorse::Client::Plugin
       option(
         :endpoint_provider,
-        doc_type: 'Aws::EC2::EndpointProvider, nil',
+        doc_type: 'Aws::EC2::EndpointProvider',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -1126,7 +1126,7 @@ module Aws::EC2
       end
 
       def add_handlers(handlers, _config)
-        handlers.add(Handler, step: :build, priority: 60)
+        handlers.add(Handler, step: :build, priority: 75)
       end
     end
   end

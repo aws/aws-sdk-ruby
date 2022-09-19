@@ -1,6 +1,32 @@
 {
     "version": "1.3",
     "parameters": {
+        "Region": {
+            "builtIn": "AWS::Region",
+            "required": true,
+            "documentation": "The AWS region used to dispatch the request.",
+            "type": "String"
+        },
+        "UseDualStack": {
+            "builtIn": "AWS::UseDualStack",
+            "required": true,
+            "default": false,
+            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+            "type": "Boolean"
+        },
+        "UseFIPS": {
+            "builtIn": "AWS::UseFIPS",
+            "required": true,
+            "default": false,
+            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+            "type": "Boolean"
+        },
+        "Endpoint": {
+            "builtIn": "SDK::Endpoint",
+            "required": false,
+            "documentation": "Override the endpoint used to send this request",
+            "type": "String"
+        },
         "UseGlobalEndpoint": {
             "builtIn": "AWS::STS::UseGlobalEndpoint",
             "required": true,
@@ -596,15 +622,7 @@
                                                 "url": {
                                                     "ref": "Endpoint"
                                                 },
-                                                "properties": {
-                                                    "authSchemes": [
-                                                        {
-                                                            "name": "sigv4",
-                                                            "signingRegion": "{Region}",
-                                                            "signingName": "sts"
-                                                        }
-                                                    ]
-                                                },
+                                                "properties": {},
                                                 "headers": {}
                                             },
                                             "type": "endpoint"
@@ -675,15 +693,7 @@
                                             "conditions": [],
                                             "endpoint": {
                                                 "url": "https://sts-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                "properties": {
-                                                    "authSchemes": [
-                                                        {
-                                                            "name": "sigv4",
-                                                            "signingRegion": "{Region}",
-                                                            "signingName": "sts"
-                                                        }
-                                                    ]
-                                                },
+                                                "properties": {},
                                                 "headers": {}
                                             },
                                             "type": "endpoint"
@@ -755,15 +765,7 @@
                                                     ],
                                                     "endpoint": {
                                                         "url": "https://sts.{Region}.{PartitionResult#dnsSuffix}",
-                                                        "properties": {
-                                                            "authSchemes": [
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingRegion": "{Region}",
-                                                                    "signingName": "sts"
-                                                                }
-                                                            ]
-                                                        },
+                                                        "properties": {},
                                                         "headers": {}
                                                     },
                                                     "type": "endpoint"
@@ -772,15 +774,7 @@
                                                     "conditions": [],
                                                     "endpoint": {
                                                         "url": "https://sts-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                        "properties": {
-                                                            "authSchemes": [
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingRegion": "{Region}",
-                                                                    "signingName": "sts"
-                                                                }
-                                                            ]
-                                                        },
+                                                        "properties": {},
                                                         "headers": {}
                                                     },
                                                     "type": "endpoint"
@@ -834,15 +828,7 @@
                                             "conditions": [],
                                             "endpoint": {
                                                 "url": "https://sts.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                "properties": {
-                                                    "authSchemes": [
-                                                        {
-                                                            "name": "sigv4",
-                                                            "signingRegion": "{Region}",
-                                                            "signingName": "sts"
-                                                        }
-                                                    ]
-                                                },
+                                                "properties": {},
                                                 "headers": {}
                                             },
                                             "type": "endpoint"
@@ -891,15 +877,7 @@
                                     "conditions": [],
                                     "endpoint": {
                                         "url": "https://sts.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": {
-                                            "authSchemes": [
-                                                {
-                                                    "name": "sigv4",
-                                                    "signingRegion": "{Region}",
-                                                    "signingName": "sts"
-                                                }
-                                            ]
-                                        },
+                                        "properties": {},
                                         "headers": {}
                                     },
                                     "type": "endpoint"

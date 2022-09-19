@@ -25,10 +25,16 @@ module Aws::EC2
   #
   #   @return [Boolean]
   #
+  # @!attribute endpoint
+  #   Override the endpoint used to send this request
+  #
+  #   @return [String]
+  #
   EndpointParameters = Struct.new(
     :region,
     :use_dual_stack,
     :use_fips,
+    :endpoint,
   ) do
     include Aws::Structure
 
@@ -37,6 +43,7 @@ module Aws::EC2
       'Region' => :region,
       'UseDualStack' => :use_dual_stack,
       'UseFIPS' => :use_fips,
+      'Endpoint' => :endpoint,
     }.freeze
 
     def initialize(options = {})
@@ -54,6 +61,7 @@ module Aws::EC2
       if self[:use_fips].nil?
         raise ArgumentError, "Missing required EndpointParameter: :use_fips"
       end
+      self[:endpoint] = options[:endpoint]
     end
   end
 end

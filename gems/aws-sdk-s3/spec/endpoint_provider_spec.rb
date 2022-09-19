@@ -70,7 +70,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'Access points: partition does not support FIPS' do
@@ -119,7 +119,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'Access point ARN with Dualstack' do
@@ -128,7 +128,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'vanilla MRAP' do
@@ -137,7 +137,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'MRAP does not support FIPS' do
@@ -178,7 +178,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'Dual-stack endpoint + SDK::Host is error' do
@@ -203,7 +203,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'implicit path style bucket + dualstack' do
@@ -220,7 +220,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'URI encode bucket names in the path' do
@@ -229,7 +229,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'scheme is respected' do
@@ -238,7 +238,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'scheme is respected (virtual addressing)' do
@@ -247,7 +247,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'path style + implicit private link' do
@@ -256,7 +256,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'invalid Endpoint override' do
@@ -273,7 +273,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'vanilla access point arn with region mismatch and UseArnRegion=false' do
@@ -290,7 +290,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'vanilla access point arn with region mismatch and UseArnRegion=true' do
@@ -299,7 +299,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'subdomains are not allowed in virtual buckets' do
@@ -308,7 +308,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'bucket names with 3 characters are allowed in virtual buckets' do
@@ -317,7 +317,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'bucket names with fewer than 3 characters are not allowed in virtual host' do
@@ -326,7 +326,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'bucket names with uppercase characters are not allowed in virtual host' do
@@ -335,7 +335,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'subdomains are allowed in virtual buckets on http endpoints' do
@@ -344,7 +344,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'no region set' do
@@ -361,7 +361,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'UseGlobalEndpoints=true, region=us-west-2 uses the regional endpoint' do
@@ -370,7 +370,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'UseGlobalEndpoints=true, region=cn-north-1 uses the regional endpoint' do
@@ -379,7 +379,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'UseGlobalEndpoints=true, region=us-east-1, fips=true uses the regional endpoint with fips' do
@@ -388,7 +388,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'UseGlobalEndpoints=true, region=us-east-1, dualstack=true uses the regional endpoint with dualstack' do
@@ -397,7 +397,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'UseGlobalEndpoints=true, region=us-east-1, dualstack and fips uses the regional endpoint with fips/dualstack' do
@@ -406,7 +406,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'UseGlobalEndpoints=true, region=us-east-1 with custom endpoint, uses custom' do
@@ -415,7 +415,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'UseGlobalEndpoints=true, region=us-west-2 with custom endpoint, uses custom' do
@@ -424,7 +424,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'UseGlobalEndpoints=true, region=us-east-1 with accelerate on non bucket case uses the global endpoint and ignores accelerate' do
@@ -433,7 +433,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'aws-global region uses the global endpoint' do
@@ -442,7 +442,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'aws-global region with fips uses the regional endpoint' do
@@ -451,7 +451,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'aws-global region with dualstack uses the regional endpoint' do
@@ -460,7 +460,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'aws-global region with fips and dualstack uses the regional endpoint' do
@@ -469,7 +469,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'aws-global region with accelerate on non-bucket case, uses global endpoint and ignores accelerate' do
@@ -478,7 +478,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'aws-global region with custom endpoint, uses custom' do
@@ -487,7 +487,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing, aws-global region uses the global endpoint' do
@@ -496,7 +496,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing, aws-global region with fips uses the regional fips endpoint' do
@@ -505,7 +505,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing, aws-global region with dualstack uses the regional dualstack endpoint' do
@@ -514,7 +514,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing, aws-global region with fips/dualstack uses the regional fips/dualstack endpoint' do
@@ -523,7 +523,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing, aws-global region with accelerate uses the global accelerate endpoint' do
@@ -532,7 +532,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing, aws-global region with custom endpoint' do
@@ -541,7 +541,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing, UseGlobalEndpoint and us-east-1 region uses the global endpoint' do
@@ -550,7 +550,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing, UseGlobalEndpoint and us-west-2 region uses the regional endpoint' do
@@ -559,7 +559,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing, UseGlobalEndpoint and us-east-1 region and fips uses the regional fips endpoint' do
@@ -568,7 +568,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing, UseGlobalEndpoint and us-east-1 region and dualstack uses the regional dualstack endpoint' do
@@ -577,7 +577,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing, UseGlobalEndpoint and us-east-1 region and accelerate uses the global accelerate endpoint' do
@@ -586,7 +586,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing, UseGlobalEndpoint and us-east-1 region with custom endpoint' do
@@ -595,7 +595,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'ForcePathStyle, aws-global region uses the global endpoint' do
@@ -604,7 +604,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'ForcePathStyle, aws-global region with fips is invalid' do
@@ -621,7 +621,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'ForcePathStyle, aws-global region custom endpoint uses the custom endpoint' do
@@ -630,7 +630,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'ForcePathStyle, UseGlobalEndpoint us-east-1 region uses the global endpoint' do
@@ -639,7 +639,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'ForcePathStyle, UseGlobalEndpoint us-west-2 region uses the regional endpoint' do
@@ -648,7 +648,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'ForcePathStyle, UseGlobalEndpoint us-east-1 region, dualstack uses the regional dualstack endpoint' do
@@ -657,7 +657,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'ForcePathStyle, UseGlobalEndpoint us-east-1 region custom endpoint uses the custom endpoint' do
@@ -666,7 +666,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'ARN with aws-global region and  UseArnRegion uses the regional endpoint' do
@@ -675,7 +675,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'cross partition MRAP ARN is an error' do
@@ -692,7 +692,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing + dualstack@us-west-2' do
@@ -701,7 +701,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'accelerate + dualstack@us-west-2' do
@@ -710,7 +710,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'accelerate (dualstack=false)@us-west-2' do
@@ -719,7 +719,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing + fips@us-west-2' do
@@ -728,7 +728,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing + dualstack + fips@us-west-2' do
@@ -737,7 +737,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'accelerate + fips = error@us-west-2' do
@@ -754,7 +754,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing + dualstack@cn-north-1' do
@@ -763,7 +763,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'accelerate (dualstack=false)@cn-north-1' do
@@ -788,7 +788,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing + dualstack@af-south-1' do
@@ -797,7 +797,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'accelerate + dualstack@af-south-1' do
@@ -806,7 +806,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'accelerate (dualstack=false)@af-south-1' do
@@ -815,7 +815,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing + fips@af-south-1' do
@@ -824,7 +824,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing + dualstack + fips@af-south-1' do
@@ -833,7 +833,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'accelerate + fips = error@af-south-1' do
@@ -850,7 +850,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'path style + fips@us-west-2' do
@@ -875,7 +875,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'path style + arn is error@us-west-2' do
@@ -892,7 +892,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'no path style + invalid DNS name@us-west-2' do
@@ -901,7 +901,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'vanilla path style@cn-north-1' do
@@ -910,7 +910,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'path style + fips@cn-north-1' do
@@ -935,7 +935,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'path style + arn is error@cn-north-1' do
@@ -952,7 +952,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'no path style + invalid DNS name@cn-north-1' do
@@ -961,7 +961,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'vanilla path style@af-south-1' do
@@ -970,7 +970,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'path style + fips@af-south-1' do
@@ -995,7 +995,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'path style + arn is error@af-south-1' do
@@ -1012,7 +1012,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'no path style + invalid DNS name@af-south-1' do
@@ -1021,7 +1021,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing + private link@us-west-2' do
@@ -1030,7 +1030,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'path style + private link@us-west-2' do
@@ -1039,7 +1039,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'SDK::Host + FIPS@us-west-2' do
@@ -1072,7 +1072,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing + private link@cn-north-1' do
@@ -1081,7 +1081,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'path style + private link@cn-north-1' do
@@ -1090,7 +1090,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'SDK::Host + FIPS@cn-north-1' do
@@ -1123,7 +1123,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'virtual addressing + private link@af-south-1' do
@@ -1132,7 +1132,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'path style + private link@af-south-1' do
@@ -1141,7 +1141,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'SDK::Host + FIPS@af-south-1' do
@@ -1174,7 +1174,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'vanilla access point arn@us-west-2' do
@@ -1183,7 +1183,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'access point arn + FIPS@us-west-2' do
@@ -1192,7 +1192,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'access point arn + accelerate = error@us-west-2' do
@@ -1209,7 +1209,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'vanilla access point arn@cn-north-1' do
@@ -1218,7 +1218,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'access point arn + FIPS@cn-north-1' do
@@ -1251,7 +1251,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'access point arn + FIPS@af-south-1' do
@@ -1260,7 +1260,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'access point arn + accelerate = error@af-south-1' do
@@ -1277,7 +1277,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'S3 outposts vanilla test' do
@@ -1286,7 +1286,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'S3 outposts custom endpoint' do
@@ -1295,7 +1295,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'outposts arn with region mismatch and UseArnRegion=false' do
@@ -1320,7 +1320,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'outposts arn with region mismatch and UseArnRegion unset' do
@@ -1329,7 +1329,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'outposts arn with partition mismatch and UseArnRegion=true' do
@@ -1346,7 +1346,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'S3 outposts does not support dualstack' do
@@ -1387,7 +1387,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'object lambda @us-west-2' do
@@ -1396,7 +1396,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'object lambda, colon resource deliminator @us-west-2' do
@@ -1405,7 +1405,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'object lambda @us-east-1, client region us-west-2, useArnRegion=true' do
@@ -1414,7 +1414,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'object lambda @us-east-1, client region s3-external-1, useArnRegion=true' do
@@ -1423,7 +1423,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'object lambda @us-east-1, client region s3-external-1, useArnRegion=false' do
@@ -1440,7 +1440,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'object lambda @us-east-1, client region aws-global, useArnRegion=false' do
@@ -1473,7 +1473,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'object lambda @us-gov-east-1, with fips' do
@@ -1482,7 +1482,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'object lambda @cn-north-1, with fips' do
@@ -1579,7 +1579,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'WriteGetObjectResponse @ us-west-2' do
@@ -1588,7 +1588,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'WriteGetObjectResponse with custom endpoint' do
@@ -1597,7 +1597,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'WriteGetObjectResponse @ us-east-1' do
@@ -1606,7 +1606,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'WriteGetObjectResponse with fips' do
@@ -1615,7 +1615,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
     it 'WriteGetObjectResponse with dualstack' do
@@ -1656,7 +1656,7 @@ module Aws::S3
       endpoint = subject.resolve_endpoint(params)
       expect(endpoint.url).to eq(expect['endpoint']['url'])
       expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
     end
 
   end
