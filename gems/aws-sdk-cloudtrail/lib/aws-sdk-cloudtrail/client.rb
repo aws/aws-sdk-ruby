@@ -1056,12 +1056,17 @@ module Aws::CloudTrail
     # * If your event selector includes data events, the resources on which
     #   you are logging data events.
     #
-    # For more information, see [Logging Data and Management Events for
-    # Trails ][1] in the *CloudTrail User Guide*.
+    # For more information about logging management and data events, see the
+    # following topics in the *CloudTrail User Guide*\:
+    #
+    # * [Logging management events for trails ][1]
+    #
+    # * [Logging data events for trails ][2]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
     #
     # @option params [required, String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
@@ -1130,6 +1135,57 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def get_event_selectors(params = {}, options = {})
       req = build_request(:get_event_selectors, params)
+      req.send_request(options)
+    end
+
+    # Returns information for the specified import.
+    #
+    # @option params [required, String] :import_id
+    #   The ID for the import.
+    #
+    # @return [Types::GetImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetImportResponse#import_id #import_id} => String
+    #   * {Types::GetImportResponse#destinations #destinations} => Array&lt;String&gt;
+    #   * {Types::GetImportResponse#import_source #import_source} => Types::ImportSource
+    #   * {Types::GetImportResponse#start_event_time #start_event_time} => Time
+    #   * {Types::GetImportResponse#end_event_time #end_event_time} => Time
+    #   * {Types::GetImportResponse#import_status #import_status} => String
+    #   * {Types::GetImportResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetImportResponse#updated_timestamp #updated_timestamp} => Time
+    #   * {Types::GetImportResponse#import_statistics #import_statistics} => Types::ImportStatistics
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_import({
+    #     import_id: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_id #=> String
+    #   resp.destinations #=> Array
+    #   resp.destinations[0] #=> String
+    #   resp.import_source.s3.s3_location_uri #=> String
+    #   resp.import_source.s3.s3_bucket_region #=> String
+    #   resp.import_source.s3.s3_bucket_access_role_arn #=> String
+    #   resp.start_event_time #=> Time
+    #   resp.end_event_time #=> Time
+    #   resp.import_status #=> String, one of "INITIALIZING", "IN_PROGRESS", "FAILED", "STOPPED", "COMPLETED"
+    #   resp.created_timestamp #=> Time
+    #   resp.updated_timestamp #=> Time
+    #   resp.import_statistics.prefixes_found #=> Integer
+    #   resp.import_statistics.prefixes_completed #=> Integer
+    #   resp.import_statistics.files_completed #=> Integer
+    #   resp.import_statistics.events_completed #=> Integer
+    #   resp.import_statistics.failed_entries #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetImport AWS API Documentation
+    #
+    # @overload get_import(params = {})
+    # @param [Hash] params ({})
+    def get_import(params = {}, options = {})
+      req = build_request(:get_import, params)
       req.send_request(options)
     end
 
@@ -1462,6 +1518,102 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def list_event_data_stores(params = {}, options = {})
       req = build_request(:list_event_data_stores, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of failures for the specified import.
+    #
+    # @option params [required, String] :import_id
+    #   The ID of the import.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of failures to display on a single page.
+    #
+    # @option params [String] :next_token
+    #   A token you can use to get the next page of import failures.
+    #
+    # @return [Types::ListImportFailuresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImportFailuresResponse#failures #failures} => Array&lt;Types::ImportFailureListItem&gt;
+    #   * {Types::ListImportFailuresResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_import_failures({
+    #     import_id: "UUID", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failures #=> Array
+    #   resp.failures[0].location #=> String
+    #   resp.failures[0].status #=> String, one of "FAILED", "RETRY", "SUCCEEDED"
+    #   resp.failures[0].error_type #=> String
+    #   resp.failures[0].error_message #=> String
+    #   resp.failures[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListImportFailures AWS API Documentation
+    #
+    # @overload list_import_failures(params = {})
+    # @param [Hash] params ({})
+    def list_import_failures(params = {}, options = {})
+      req = build_request(:list_import_failures, params)
+      req.send_request(options)
+    end
+
+    # Returns information on all imports, or a select set of imports by
+    # `ImportStatus` or `Destination`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of imports to display on a single page.
+    #
+    # @option params [String] :destination
+    #   The destination event data store.
+    #
+    # @option params [String] :import_status
+    #   The status of the import.
+    #
+    # @option params [String] :next_token
+    #   A token you can use to get the next page of import results.
+    #
+    # @return [Types::ListImportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImportsResponse#imports #imports} => Array&lt;Types::ImportsListItem&gt;
+    #   * {Types::ListImportsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_imports({
+    #     max_results: 1,
+    #     destination: "EventDataStoreArn",
+    #     import_status: "INITIALIZING", # accepts INITIALIZING, IN_PROGRESS, FAILED, STOPPED, COMPLETED
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.imports #=> Array
+    #   resp.imports[0].import_id #=> String
+    #   resp.imports[0].import_status #=> String, one of "INITIALIZING", "IN_PROGRESS", "FAILED", "STOPPED", "COMPLETED"
+    #   resp.imports[0].destinations #=> Array
+    #   resp.imports[0].destinations[0] #=> String
+    #   resp.imports[0].created_timestamp #=> Time
+    #   resp.imports[0].updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListImports AWS API Documentation
+    #
+    # @overload list_imports(params = {})
+    # @param [Hash] params ({})
+    def list_imports(params = {}, options = {})
+      req = build_request(:list_imports, params)
       req.send_request(options)
     end
 
@@ -1823,8 +1975,9 @@ module Aws::CloudTrail
     # `InvalidHomeRegionException` exception is thrown.
     #
     # You can configure up to five event selectors for each trail. For more
-    # information, see [Logging data and management events for trails ][1]
-    # and [Quotas in CloudTrail][2] in the *CloudTrail User Guide*.
+    # information, see [Logging management events for trails ][1], [Logging
+    # data events for trails ][2], and [Quotas in CloudTrail][3] in the
+    # *CloudTrail User Guide*.
     #
     # You can add advanced event selectors, and conditions for your advanced
     # event selectors, up to a maximum of 500 values for all conditions and
@@ -1832,13 +1985,13 @@ module Aws::CloudTrail
     # `EventSelectors`, but not both. If you apply `AdvancedEventSelectors`
     # to a trail, any existing `EventSelectors` are overwritten. For more
     # information about advanced event selectors, see [Logging data events
-    # for trails][3] in the *CloudTrail User Guide*.
+    # for trails][2] in the *CloudTrail User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
-    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
-    # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
+    # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
     #
     # @option params [required, String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
@@ -2110,6 +2263,92 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Starts an import of logged trail events from a source S3 bucket to a
+    # destination event data store.
+    #
+    # When you start a new import, the `Destinations` and `ImportSource`
+    # parameters are required. Before starting a new import, disable any
+    # access control lists (ACLs) attached to the source S3 bucket. For more
+    # information about disabling ACLs, see [Controlling ownership of
+    # objects and disabling ACLs for your bucket][1].
+    #
+    # When you retry an import, the `ImportID` parameter is required.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    #
+    # @option params [Array<String>] :destinations
+    #   The destination event data store. Use this parameter for a new import.
+    #
+    # @option params [Types::ImportSource] :import_source
+    #   The source S3 bucket for the import. Use this parameter for a new
+    #   import.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_event_time
+    #   Use with `EndEventTime` to bound a `StartImport` request, and limit
+    #   imported trail events to only those events logged within a specified
+    #   time period.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_event_time
+    #   Use with `StartEventTime` to bound a `StartImport` request, and limit
+    #   imported trail events to only those events logged within a specified
+    #   time period.
+    #
+    # @option params [String] :import_id
+    #   The ID of the import. Use this parameter when you are retrying an
+    #   import.
+    #
+    # @return [Types::StartImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartImportResponse#import_id #import_id} => String
+    #   * {Types::StartImportResponse#destinations #destinations} => Array&lt;String&gt;
+    #   * {Types::StartImportResponse#import_source #import_source} => Types::ImportSource
+    #   * {Types::StartImportResponse#start_event_time #start_event_time} => Time
+    #   * {Types::StartImportResponse#end_event_time #end_event_time} => Time
+    #   * {Types::StartImportResponse#import_status #import_status} => String
+    #   * {Types::StartImportResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::StartImportResponse#updated_timestamp #updated_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_import({
+    #     destinations: ["EventDataStoreArn"],
+    #     import_source: {
+    #       s3: { # required
+    #         s3_location_uri: "String", # required
+    #         s3_bucket_region: "String", # required
+    #         s3_bucket_access_role_arn: "String", # required
+    #       },
+    #     },
+    #     start_event_time: Time.now,
+    #     end_event_time: Time.now,
+    #     import_id: "UUID",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_id #=> String
+    #   resp.destinations #=> Array
+    #   resp.destinations[0] #=> String
+    #   resp.import_source.s3.s3_location_uri #=> String
+    #   resp.import_source.s3.s3_bucket_region #=> String
+    #   resp.import_source.s3.s3_bucket_access_role_arn #=> String
+    #   resp.start_event_time #=> Time
+    #   resp.end_event_time #=> Time
+    #   resp.import_status #=> String, one of "INITIALIZING", "IN_PROGRESS", "FAILED", "STOPPED", "COMPLETED"
+    #   resp.created_timestamp #=> Time
+    #   resp.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartImport AWS API Documentation
+    #
+    # @overload start_import(params = {})
+    # @param [Hash] params ({})
+    def start_import(params = {}, options = {})
+      req = build_request(:start_import, params)
+      req.send_request(options)
+    end
+
     # Starts the recording of Amazon Web Services API calls and log file
     # delivery for a trail. For a trail that is enabled in all regions, this
     # operation must be called from the region in which the trail was
@@ -2170,6 +2409,57 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Stops a specified import.
+    #
+    # @option params [required, String] :import_id
+    #   The ID of the import.
+    #
+    # @return [Types::StopImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopImportResponse#import_id #import_id} => String
+    #   * {Types::StopImportResponse#import_source #import_source} => Types::ImportSource
+    #   * {Types::StopImportResponse#destinations #destinations} => Array&lt;String&gt;
+    #   * {Types::StopImportResponse#import_status #import_status} => String
+    #   * {Types::StopImportResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::StopImportResponse#updated_timestamp #updated_timestamp} => Time
+    #   * {Types::StopImportResponse#start_event_time #start_event_time} => Time
+    #   * {Types::StopImportResponse#end_event_time #end_event_time} => Time
+    #   * {Types::StopImportResponse#import_statistics #import_statistics} => Types::ImportStatistics
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_import({
+    #     import_id: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_id #=> String
+    #   resp.import_source.s3.s3_location_uri #=> String
+    #   resp.import_source.s3.s3_bucket_region #=> String
+    #   resp.import_source.s3.s3_bucket_access_role_arn #=> String
+    #   resp.destinations #=> Array
+    #   resp.destinations[0] #=> String
+    #   resp.import_status #=> String, one of "INITIALIZING", "IN_PROGRESS", "FAILED", "STOPPED", "COMPLETED"
+    #   resp.created_timestamp #=> Time
+    #   resp.updated_timestamp #=> Time
+    #   resp.start_event_time #=> Time
+    #   resp.end_event_time #=> Time
+    #   resp.import_statistics.prefixes_found #=> Integer
+    #   resp.import_statistics.prefixes_completed #=> Integer
+    #   resp.import_statistics.files_completed #=> Integer
+    #   resp.import_statistics.events_completed #=> Integer
+    #   resp.import_statistics.failed_entries #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StopImport AWS API Documentation
+    #
+    # @overload stop_import(params = {})
+    # @param [Hash] params ({})
+    def stop_import(params = {}, options = {})
+      req = build_request(:stop_import, params)
+      req.send_request(options)
+    end
+
     # Suspends the recording of Amazon Web Services API calls and log file
     # delivery for the specified trail. Under most circumstances, there is
     # no need to use this action. You can update a trail without stopping it
@@ -2223,7 +2513,8 @@ module Aws::CloudTrail
     #
     # @option params [Array<Types::AdvancedEventSelector>] :advanced_event_selectors
     #   The advanced event selectors used to select events for the event data
-    #   store.
+    #   store. You can configure up to five advanced event selectors for each
+    #   event data store.
     #
     # @option params [Boolean] :multi_region_enabled
     #   Specifies whether an event data store collects events from all
@@ -2513,7 +2804,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

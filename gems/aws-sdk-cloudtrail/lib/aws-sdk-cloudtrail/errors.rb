@@ -27,6 +27,7 @@ module Aws::CloudTrail
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {AccountHasOngoingImportException}
   # * {ChannelARNInvalidException}
   # * {ChannelNotFoundException}
   # * {CloudTrailARNInvalidException}
@@ -36,9 +37,11 @@ module Aws::CloudTrail
   # * {ConflictException}
   # * {EventDataStoreARNInvalidException}
   # * {EventDataStoreAlreadyExistsException}
+  # * {EventDataStoreHasOngoingImportException}
   # * {EventDataStoreMaxLimitExceededException}
   # * {EventDataStoreNotFoundException}
   # * {EventDataStoreTerminationProtectedException}
+  # * {ImportNotFoundException}
   # * {InactiveEventDataStoreException}
   # * {InactiveQueryException}
   # * {InsightNotEnabledException}
@@ -50,9 +53,11 @@ module Aws::CloudTrail
   # * {InvalidCloudWatchLogsRoleArnException}
   # * {InvalidDateRangeException}
   # * {InvalidEventCategoryException}
+  # * {InvalidEventDataStoreCategoryException}
   # * {InvalidEventDataStoreStatusException}
   # * {InvalidEventSelectorsException}
   # * {InvalidHomeRegionException}
+  # * {InvalidImportSourceException}
   # * {InvalidInsightSelectorsException}
   # * {InvalidKmsKeyIdException}
   # * {InvalidLookupAttributesException}
@@ -93,6 +98,16 @@ module Aws::CloudTrail
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class AccountHasOngoingImportException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::AccountHasOngoingImportException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
 
     class ChannelARNInvalidException < ServiceError
 
@@ -184,6 +199,16 @@ module Aws::CloudTrail
       end
     end
 
+    class EventDataStoreHasOngoingImportException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::EventDataStoreHasOngoingImportException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class EventDataStoreMaxLimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -209,6 +234,16 @@ module Aws::CloudTrail
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudTrail::Types::EventDataStoreTerminationProtectedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ImportNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::ImportNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -324,6 +359,16 @@ module Aws::CloudTrail
       end
     end
 
+    class InvalidEventDataStoreCategoryException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::InvalidEventDataStoreCategoryException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InvalidEventDataStoreStatusException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -349,6 +394,16 @@ module Aws::CloudTrail
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudTrail::Types::InvalidHomeRegionException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidImportSourceException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::InvalidImportSourceException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

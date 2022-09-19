@@ -478,7 +478,7 @@ module Aws::MediaConnect
     #         min_latency: 1,
     #         name: "__string",
     #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #         remote_id: "__string",
     #         sender_control_port: 1,
     #         smoothing_latency: 1,
@@ -528,11 +528,13 @@ module Aws::MediaConnect
     #   resp.outputs[0].transport.max_latency #=> Integer
     #   resp.outputs[0].transport.max_sync_buffer #=> Integer
     #   resp.outputs[0].transport.min_latency #=> Integer
-    #   resp.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "fujitsu-qos"
+    #   resp.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos"
     #   resp.outputs[0].transport.remote_id #=> String
     #   resp.outputs[0].transport.sender_control_port #=> Integer
     #   resp.outputs[0].transport.sender_ip_address #=> String
     #   resp.outputs[0].transport.smoothing_latency #=> Integer
+    #   resp.outputs[0].transport.source_listener_address #=> String
+    #   resp.outputs[0].transport.source_listener_port #=> Integer
     #   resp.outputs[0].transport.stream_id #=> String
     #   resp.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #
@@ -596,9 +598,11 @@ module Aws::MediaConnect
     #         ],
     #         min_latency: 1,
     #         name: "__string",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #         sender_control_port: 1,
     #         sender_ip_address: "__string",
+    #         source_listener_address: "__string",
+    #         source_listener_port: 1,
     #         stream_id: "__string",
     #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
@@ -641,11 +645,13 @@ module Aws::MediaConnect
     #   resp.sources[0].transport.max_latency #=> Integer
     #   resp.sources[0].transport.max_sync_buffer #=> Integer
     #   resp.sources[0].transport.min_latency #=> Integer
-    #   resp.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "fujitsu-qos"
+    #   resp.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos"
     #   resp.sources[0].transport.remote_id #=> String
     #   resp.sources[0].transport.sender_control_port #=> Integer
     #   resp.sources[0].transport.sender_ip_address #=> String
     #   resp.sources[0].transport.smoothing_latency #=> Integer
+    #   resp.sources[0].transport.source_listener_address #=> String
+    #   resp.sources[0].transport.source_listener_port #=> Integer
     #   resp.sources[0].transport.stream_id #=> String
     #   resp.sources[0].vpc_interface_name #=> String
     #   resp.sources[0].whitelist_cidr #=> String
@@ -833,7 +839,7 @@ module Aws::MediaConnect
     #         min_latency: 1,
     #         name: "__string",
     #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #         remote_id: "__string",
     #         sender_control_port: 1,
     #         smoothing_latency: 1,
@@ -877,9 +883,11 @@ module Aws::MediaConnect
     #       ],
     #       min_latency: 1,
     #       name: "__string",
-    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #       sender_control_port: 1,
     #       sender_ip_address: "__string",
+    #       source_listener_address: "__string",
+    #       source_listener_port: 1,
     #       stream_id: "__string",
     #       vpc_interface_name: "__string",
     #       whitelist_cidr: "__string",
@@ -927,9 +935,11 @@ module Aws::MediaConnect
     #         ],
     #         min_latency: 1,
     #         name: "__string",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #         sender_control_port: 1,
     #         sender_ip_address: "__string",
+    #         source_listener_address: "__string",
+    #         source_listener_port: 1,
     #         stream_id: "__string",
     #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
@@ -1025,11 +1035,13 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
     #   resp.flow.outputs[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.outputs[0].transport.min_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "fujitsu-qos"
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos"
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.sender_control_port #=> Integer
     #   resp.flow.outputs[0].transport.sender_ip_address #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
+    #   resp.flow.outputs[0].transport.source_listener_address #=> String
+    #   resp.flow.outputs[0].transport.source_listener_port #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
     #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
@@ -1063,11 +1075,13 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.max_latency #=> Integer
     #   resp.flow.source.transport.max_sync_buffer #=> Integer
     #   resp.flow.source.transport.min_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "fujitsu-qos"
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos"
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.sender_control_port #=> Integer
     #   resp.flow.source.transport.sender_ip_address #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
+    #   resp.flow.source.transport.source_listener_address #=> String
+    #   resp.flow.source.transport.source_listener_port #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
@@ -1107,11 +1121,13 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.max_latency #=> Integer
     #   resp.flow.sources[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.sources[0].transport.min_latency #=> Integer
-    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "fujitsu-qos"
+    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos"
     #   resp.flow.sources[0].transport.remote_id #=> String
     #   resp.flow.sources[0].transport.sender_control_port #=> Integer
     #   resp.flow.sources[0].transport.sender_ip_address #=> String
     #   resp.flow.sources[0].transport.smoothing_latency #=> Integer
+    #   resp.flow.sources[0].transport.source_listener_address #=> String
+    #   resp.flow.sources[0].transport.source_listener_port #=> Integer
     #   resp.flow.sources[0].transport.stream_id #=> String
     #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
@@ -1260,11 +1276,13 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
     #   resp.flow.outputs[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.outputs[0].transport.min_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "fujitsu-qos"
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos"
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.sender_control_port #=> Integer
     #   resp.flow.outputs[0].transport.sender_ip_address #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
+    #   resp.flow.outputs[0].transport.source_listener_address #=> String
+    #   resp.flow.outputs[0].transport.source_listener_port #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
     #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
@@ -1298,11 +1316,13 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.max_latency #=> Integer
     #   resp.flow.source.transport.max_sync_buffer #=> Integer
     #   resp.flow.source.transport.min_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "fujitsu-qos"
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos"
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.sender_control_port #=> Integer
     #   resp.flow.source.transport.sender_ip_address #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
+    #   resp.flow.source.transport.source_listener_address #=> String
+    #   resp.flow.source.transport.source_listener_port #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
@@ -1342,11 +1362,13 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.max_latency #=> Integer
     #   resp.flow.sources[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.sources[0].transport.min_latency #=> Integer
-    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "fujitsu-qos"
+    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos"
     #   resp.flow.sources[0].transport.remote_id #=> String
     #   resp.flow.sources[0].transport.sender_control_port #=> Integer
     #   resp.flow.sources[0].transport.sender_ip_address #=> String
     #   resp.flow.sources[0].transport.smoothing_latency #=> Integer
+    #   resp.flow.sources[0].transport.source_listener_address #=> String
+    #   resp.flow.sources[0].transport.source_listener_port #=> Integer
     #   resp.flow.sources[0].transport.stream_id #=> String
     #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
@@ -2190,11 +2212,13 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
     #   resp.flow.outputs[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.outputs[0].transport.min_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "fujitsu-qos"
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos"
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.sender_control_port #=> Integer
     #   resp.flow.outputs[0].transport.sender_ip_address #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
+    #   resp.flow.outputs[0].transport.source_listener_address #=> String
+    #   resp.flow.outputs[0].transport.source_listener_port #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
     #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
@@ -2228,11 +2252,13 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.max_latency #=> Integer
     #   resp.flow.source.transport.max_sync_buffer #=> Integer
     #   resp.flow.source.transport.min_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "fujitsu-qos"
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos"
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.sender_control_port #=> Integer
     #   resp.flow.source.transport.sender_ip_address #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
+    #   resp.flow.source.transport.source_listener_address #=> String
+    #   resp.flow.source.transport.source_listener_port #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
@@ -2272,11 +2298,13 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.max_latency #=> Integer
     #   resp.flow.sources[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.sources[0].transport.min_latency #=> Integer
-    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "fujitsu-qos"
+    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos"
     #   resp.flow.sources[0].transport.remote_id #=> String
     #   resp.flow.sources[0].transport.sender_control_port #=> Integer
     #   resp.flow.sources[0].transport.sender_ip_address #=> String
     #   resp.flow.sources[0].transport.smoothing_latency #=> Integer
+    #   resp.flow.sources[0].transport.source_listener_address #=> String
+    #   resp.flow.sources[0].transport.source_listener_port #=> Integer
     #   resp.flow.sources[0].transport.stream_id #=> String
     #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
@@ -2488,7 +2516,8 @@ module Aws::MediaConnect
     # @option params [required, String] :flow_arn
     #
     # @option params [Integer] :max_latency
-    #   The maximum latency in milliseconds for Zixi-based streams.
+    #   The maximum latency in milliseconds. This parameter applies only to
+    #   RIST-based, Zixi-based, and Fujitsu-based streams.
     #
     # @option params [Array<Types::MediaStreamOutputConfigurationRequest>] :media_stream_output_configurations
     #   The media streams that are associated with the output, and the
@@ -2578,7 +2607,7 @@ module Aws::MediaConnect
     #     min_latency: 1,
     #     output_arn: "__string", # required
     #     port: 1,
-    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #     remote_id: "__string",
     #     sender_control_port: 1,
     #     sender_ip_address: "__string",
@@ -2626,11 +2655,13 @@ module Aws::MediaConnect
     #   resp.output.transport.max_latency #=> Integer
     #   resp.output.transport.max_sync_buffer #=> Integer
     #   resp.output.transport.min_latency #=> Integer
-    #   resp.output.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "fujitsu-qos"
+    #   resp.output.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos"
     #   resp.output.transport.remote_id #=> String
     #   resp.output.transport.sender_control_port #=> Integer
     #   resp.output.transport.sender_ip_address #=> String
     #   resp.output.transport.smoothing_latency #=> Integer
+    #   resp.output.transport.source_listener_address #=> String
+    #   resp.output.transport.source_listener_port #=> Integer
     #   resp.output.transport.stream_id #=> String
     #   resp.output.vpc_interface_attachment.vpc_interface_name #=> String
     #
@@ -2690,12 +2721,20 @@ module Aws::MediaConnect
     #   The protocol that is used by the source.
     #
     # @option params [Integer] :sender_control_port
+    #   The port that the flow uses to send outbound requests to initiate
+    #   connection with the sender.
     #
     # @option params [String] :sender_ip_address
     #   The IP address that the flow communicates with to initiate connection
     #   with the sender.
     #
     # @option params [required, String] :source_arn
+    #
+    # @option params [String] :source_listener_address
+    #   Source IP or domain name for SRT-caller protocol.
+    #
+    # @option params [Integer] :source_listener_port
+    #   Source port for SRT-caller protocol.
     #
     # @option params [String] :stream_id
     #   The stream ID that you want to use for this transport. This parameter
@@ -2750,10 +2789,12 @@ module Aws::MediaConnect
     #       },
     #     ],
     #     min_latency: 1,
-    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #     sender_control_port: 1,
     #     sender_ip_address: "__string",
     #     source_arn: "__string", # required
+    #     source_listener_address: "__string",
+    #     source_listener_port: 1,
     #     stream_id: "__string",
     #     vpc_interface_name: "__string",
     #     whitelist_cidr: "__string",
@@ -2793,11 +2834,13 @@ module Aws::MediaConnect
     #   resp.source.transport.max_latency #=> Integer
     #   resp.source.transport.max_sync_buffer #=> Integer
     #   resp.source.transport.min_latency #=> Integer
-    #   resp.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "fujitsu-qos"
+    #   resp.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos"
     #   resp.source.transport.remote_id #=> String
     #   resp.source.transport.sender_control_port #=> Integer
     #   resp.source.transport.sender_ip_address #=> String
     #   resp.source.transport.smoothing_latency #=> Integer
+    #   resp.source.transport.source_listener_address #=> String
+    #   resp.source.transport.source_listener_port #=> Integer
     #   resp.source.transport.stream_id #=> String
     #   resp.source.vpc_interface_name #=> String
     #   resp.source.whitelist_cidr #=> String
@@ -2824,7 +2867,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

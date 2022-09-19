@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2022-09-19)
+------------------
+
+* Feature - This release includes support for importing existing trails into CloudTrail Lake.
+
 1.50.0 (2022-09-09)
 ------------------
 

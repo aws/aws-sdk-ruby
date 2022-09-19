@@ -2583,7 +2583,7 @@ module Aws::RDS
     #
     # @option params [String] :db_cluster_instance_class
     #   The compute and memory capacity of each DB instance in the Multi-AZ DB
-    #   cluster, for example db.m6g.xlarge. Not all DB instance classes are
+    #   cluster, for example db.m6gd.xlarge. Not all DB instance classes are
     #   available in all Amazon Web Services Regions, or for all database
     #   engines.
     #
@@ -3510,8 +3510,8 @@ module Aws::RDS
     #
     #   * It must contain 1 to 63 alphanumeric characters.
     #
-    #   * It must begin with a letter or an underscore. Subsequent characters
-    #     can be letters, underscores, or digits (0 to 9).
+    #   * It must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0 to 9).
     #
     #   * It can't be a word reserved by the database engine.
     #
@@ -3819,11 +3819,11 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #   * It must be 1 to 255 letters, numbers, or hyphens.
     #
-    #   * First character must be a letter
+    #   * The first character must be a letter.
     #
-    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #   * It can't end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [Integer] :backup_retention_period
     #   The number of days for which automated backups are retained. Setting
@@ -5701,7 +5701,7 @@ module Aws::RDS
     #   it interprets network traffic to and from the database. For Aurora
     #   MySQL, RDS for MariaDB, and RDS for MySQL databases, specify `MYSQL`.
     #   For Aurora PostgreSQL and RDS for PostgreSQL databases, specify
-    #   `POSTGRESQL`.
+    #   `POSTGRESQL`. For RDS for Microsoft SQL Server, specify `SQLSERVER`.
     #
     # @option params [required, Array<Types::UserAuthConfig>] :auth
     #   The authorization mechanism that the proxy uses.
@@ -5747,14 +5747,14 @@ module Aws::RDS
     #
     #   resp = client.create_db_proxy({
     #     db_proxy_name: "String", # required
-    #     engine_family: "MYSQL", # required, accepts MYSQL, POSTGRESQL
+    #     engine_family: "MYSQL", # required, accepts MYSQL, POSTGRESQL, SQLSERVER
     #     auth: [ # required
     #       {
     #         description: "String",
     #         user_name: "String",
     #         auth_scheme: "SECRETS", # accepts SECRETS
     #         secret_arn: "String",
-    #         iam_auth: "DISABLED", # accepts DISABLED, REQUIRED
+    #         iam_auth: "DISABLED", # accepts DISABLED, REQUIRED, ENABLED
     #       },
     #     ],
     #     role_arn: "String", # required
@@ -5787,7 +5787,7 @@ module Aws::RDS
     #   resp.db_proxy.auth[0].user_name #=> String
     #   resp.db_proxy.auth[0].auth_scheme #=> String, one of "SECRETS"
     #   resp.db_proxy.auth[0].secret_arn #=> String
-    #   resp.db_proxy.auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED"
+    #   resp.db_proxy.auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED", "ENABLED"
     #   resp.db_proxy.role_arn #=> String
     #   resp.db_proxy.endpoint #=> String
     #   resp.db_proxy.require_tls #=> Boolean
@@ -5830,7 +5830,9 @@ module Aws::RDS
     #
     # @option params [String] :target_role
     #   A value that indicates whether the DB proxy endpoint can be used for
-    #   read/write or read-only operations. The default is `READ_WRITE`.
+    #   read/write or read-only operations. The default is `READ_WRITE`. The
+    #   only role that proxies for RDS for Microsoft SQL Server support is
+    #   `READ_WRITE`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
@@ -7533,7 +7535,7 @@ module Aws::RDS
     #   resp.db_proxy.auth[0].user_name #=> String
     #   resp.db_proxy.auth[0].auth_scheme #=> String, one of "SECRETS"
     #   resp.db_proxy.auth[0].secret_arn #=> String
-    #   resp.db_proxy.auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED"
+    #   resp.db_proxy.auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED", "ENABLED"
     #   resp.db_proxy.role_arn #=> String
     #   resp.db_proxy.endpoint #=> String
     #   resp.db_proxy.require_tls #=> Boolean
@@ -9983,7 +9985,7 @@ module Aws::RDS
     #   resp.db_proxies[0].auth[0].user_name #=> String
     #   resp.db_proxies[0].auth[0].auth_scheme #=> String, one of "SECRETS"
     #   resp.db_proxies[0].auth[0].secret_arn #=> String
-    #   resp.db_proxies[0].auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED"
+    #   resp.db_proxies[0].auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED", "ENABLED"
     #   resp.db_proxies[0].role_arn #=> String
     #   resp.db_proxies[0].endpoint #=> String
     #   resp.db_proxies[0].require_tls #=> Boolean
@@ -12311,8 +12313,20 @@ module Aws::RDS
 
     # Returns a list of the source Amazon Web Services Regions where the
     # current Amazon Web Services Region can create a read replica, copy a
-    # DB snapshot from, or replicate automated backups from. This API action
-    # supports pagination.
+    # DB snapshot from, or replicate automated backups from.
+    #
+    # Use this operation to determine whether cross-Region features are
+    # supported between other Regions and your current Region. This
+    # operation supports pagination.
+    #
+    # To return information about the Regions that are enabled for your
+    # account, or all Regions, use the EC2 operation `DescribeRegions`. For
+    # more information, see [ DescribeRegions][1] in the *Amazon EC2 API
+    # Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeRegions.html
     #
     # @option params [String] :region_name
     #   The source Amazon Web Services Region name. For example, `us-east-1`.
@@ -13699,7 +13713,7 @@ module Aws::RDS
     #
     # @option params [String] :db_cluster_instance_class
     #   The compute and memory capacity of each DB instance in the Multi-AZ DB
-    #   cluster, for example db.m6g.xlarge. Not all DB instance classes are
+    #   cluster, for example db.m6gd.xlarge. Not all DB instance classes are
     #   available in all Amazon Web Services Regions, or for all database
     #   engines.
     #
@@ -15609,7 +15623,7 @@ module Aws::RDS
     #         user_name: "String",
     #         auth_scheme: "SECRETS", # accepts SECRETS
     #         secret_arn: "String",
-    #         iam_auth: "DISABLED", # accepts DISABLED, REQUIRED
+    #         iam_auth: "DISABLED", # accepts DISABLED, REQUIRED, ENABLED
     #       },
     #     ],
     #     require_tls: false,
@@ -15635,7 +15649,7 @@ module Aws::RDS
     #   resp.db_proxy.auth[0].user_name #=> String
     #   resp.db_proxy.auth[0].auth_scheme #=> String, one of "SECRETS"
     #   resp.db_proxy.auth[0].secret_arn #=> String
-    #   resp.db_proxy.auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED"
+    #   resp.db_proxy.auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED", "ENABLED"
     #   resp.db_proxy.role_arn #=> String
     #   resp.db_proxy.endpoint #=> String
     #   resp.db_proxy.require_tls #=> Boolean
@@ -18621,7 +18635,7 @@ module Aws::RDS
     #
     # @option params [String] :db_cluster_instance_class
     #   The compute and memory capacity of the each DB instance in the
-    #   Multi-AZ DB cluster, for example db.m6g.xlarge. Not all DB instance
+    #   Multi-AZ DB cluster, for example db.m6gd.xlarge. Not all DB instance
     #   classes are available in all Amazon Web Services Regions, or for all
     #   database engines.
     #
@@ -19226,7 +19240,7 @@ module Aws::RDS
     #
     # @option params [String] :db_cluster_instance_class
     #   The compute and memory capacity of the each DB instance in the
-    #   Multi-AZ DB cluster, for example db.m6g.xlarge. Not all DB instance
+    #   Multi-AZ DB cluster, for example db.m6gd.xlarge. Not all DB instance
     #   classes are available in all Amazon Web Services Regions, or for all
     #   database engines.
     #
@@ -23013,7 +23027,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.155.0'
+      context[:gem_version] = '1.156.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

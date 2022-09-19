@@ -79,6 +79,7 @@ module Aws::EC2
     AllocationIds = Shapes::ListShape.new(name: 'AllocationIds')
     AllocationState = Shapes::StringShape.new(name: 'AllocationState')
     AllocationStrategy = Shapes::StringShape.new(name: 'AllocationStrategy')
+    AllocationType = Shapes::StringShape.new(name: 'AllocationType')
     AllowedPrincipal = Shapes::StructureShape.new(name: 'AllowedPrincipal')
     AllowedPrincipalSet = Shapes::ListShape.new(name: 'AllowedPrincipalSet')
     AllowsMultipleInstanceTypes = Shapes::StringShape.new(name: 'AllowsMultipleInstanceTypes')
@@ -235,6 +236,8 @@ module Aws::EC2
     CancelSpotInstanceRequestsResult = Shapes::StructureShape.new(name: 'CancelSpotInstanceRequestsResult')
     CancelledSpotInstanceRequest = Shapes::StructureShape.new(name: 'CancelledSpotInstanceRequest')
     CancelledSpotInstanceRequestList = Shapes::ListShape.new(name: 'CancelledSpotInstanceRequestList')
+    CapacityAllocation = Shapes::StructureShape.new(name: 'CapacityAllocation')
+    CapacityAllocations = Shapes::ListShape.new(name: 'CapacityAllocations')
     CapacityReservation = Shapes::StructureShape.new(name: 'CapacityReservation')
     CapacityReservationFleet = Shapes::StructureShape.new(name: 'CapacityReservationFleet')
     CapacityReservationFleetCancellationState = Shapes::StructureShape.new(name: 'CapacityReservationFleetCancellationState')
@@ -3521,6 +3524,12 @@ module Aws::EC2
 
     CancelledSpotInstanceRequestList.member = Shapes::ShapeRef.new(shape: CancelledSpotInstanceRequest, location_name: "item")
 
+    CapacityAllocation.add_member(:allocation_type, Shapes::ShapeRef.new(shape: AllocationType, location_name: "allocationType"))
+    CapacityAllocation.add_member(:count, Shapes::ShapeRef.new(shape: Integer, location_name: "count"))
+    CapacityAllocation.struct_class = Types::CapacityAllocation
+
+    CapacityAllocations.member = Shapes::ShapeRef.new(shape: CapacityAllocation, location_name: "item")
+
     CapacityReservation.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationId"))
     CapacityReservation.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     CapacityReservation.add_member(:capacity_reservation_arn, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationArn"))
@@ -3543,6 +3552,7 @@ module Aws::EC2
     CapacityReservation.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OutpostArn, location_name: "outpostArn"))
     CapacityReservation.add_member(:capacity_reservation_fleet_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationFleetId"))
     CapacityReservation.add_member(:placement_group_arn, Shapes::ShapeRef.new(shape: PlacementGroupArn, location_name: "placementGroupArn"))
+    CapacityReservation.add_member(:capacity_allocations, Shapes::ShapeRef.new(shape: CapacityAllocations, location_name: "capacityAllocationSet"))
     CapacityReservation.struct_class = Types::CapacityReservation
 
     CapacityReservationFleet.add_member(:capacity_reservation_fleet_id, Shapes::ShapeRef.new(shape: CapacityReservationFleetId, location_name: "capacityReservationFleetId"))

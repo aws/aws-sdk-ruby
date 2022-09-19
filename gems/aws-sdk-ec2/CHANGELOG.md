@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.335.0 (2022-09-19)
+------------------
+
+* Feature - This release adds CapacityAllocations field to DescribeCapacityReservations
+
 1.334.0 (2022-09-15)
 ------------------
 

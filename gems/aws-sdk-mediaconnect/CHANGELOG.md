@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2022-09-19)
+------------------
+
+* Feature - This change allows the customer to use the SRT Caller protocol as part of their flows
+
 1.44.0 (2022-03-21)
 ------------------
 

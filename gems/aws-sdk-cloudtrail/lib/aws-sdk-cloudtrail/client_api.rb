@@ -13,6 +13,7 @@ module Aws::CloudTrail
 
     include Seahorse::Model
 
+    AccountHasOngoingImportException = Shapes::StructureShape.new(name: 'AccountHasOngoingImportException')
     AddTagsRequest = Shapes::StructureShape.new(name: 'AddTagsRequest')
     AddTagsResponse = Shapes::StructureShape.new(name: 'AddTagsResponse')
     AdvancedEventSelector = Shapes::StructureShape.new(name: 'AdvancedEventSelector')
@@ -60,6 +61,7 @@ module Aws::CloudTrail
     EventDataStoreARNInvalidException = Shapes::StructureShape.new(name: 'EventDataStoreARNInvalidException')
     EventDataStoreAlreadyExistsException = Shapes::StructureShape.new(name: 'EventDataStoreAlreadyExistsException')
     EventDataStoreArn = Shapes::StringShape.new(name: 'EventDataStoreArn')
+    EventDataStoreHasOngoingImportException = Shapes::StructureShape.new(name: 'EventDataStoreHasOngoingImportException')
     EventDataStoreMaxLimitExceededException = Shapes::StructureShape.new(name: 'EventDataStoreMaxLimitExceededException')
     EventDataStoreName = Shapes::StringShape.new(name: 'EventDataStoreName')
     EventDataStoreNotFoundException = Shapes::StructureShape.new(name: 'EventDataStoreNotFoundException')
@@ -76,6 +78,8 @@ module Aws::CloudTrail
     GetEventDataStoreResponse = Shapes::StructureShape.new(name: 'GetEventDataStoreResponse')
     GetEventSelectorsRequest = Shapes::StructureShape.new(name: 'GetEventSelectorsRequest')
     GetEventSelectorsResponse = Shapes::StructureShape.new(name: 'GetEventSelectorsResponse')
+    GetImportRequest = Shapes::StructureShape.new(name: 'GetImportRequest')
+    GetImportResponse = Shapes::StructureShape.new(name: 'GetImportResponse')
     GetInsightSelectorsRequest = Shapes::StructureShape.new(name: 'GetInsightSelectorsRequest')
     GetInsightSelectorsResponse = Shapes::StructureShape.new(name: 'GetInsightSelectorsResponse')
     GetQueryResultsRequest = Shapes::StructureShape.new(name: 'GetQueryResultsRequest')
@@ -84,6 +88,16 @@ module Aws::CloudTrail
     GetTrailResponse = Shapes::StructureShape.new(name: 'GetTrailResponse')
     GetTrailStatusRequest = Shapes::StructureShape.new(name: 'GetTrailStatusRequest')
     GetTrailStatusResponse = Shapes::StructureShape.new(name: 'GetTrailStatusResponse')
+    ImportDestinations = Shapes::ListShape.new(name: 'ImportDestinations')
+    ImportFailureList = Shapes::ListShape.new(name: 'ImportFailureList')
+    ImportFailureListItem = Shapes::StructureShape.new(name: 'ImportFailureListItem')
+    ImportFailureStatus = Shapes::StringShape.new(name: 'ImportFailureStatus')
+    ImportNotFoundException = Shapes::StructureShape.new(name: 'ImportNotFoundException')
+    ImportSource = Shapes::StructureShape.new(name: 'ImportSource')
+    ImportStatistics = Shapes::StructureShape.new(name: 'ImportStatistics')
+    ImportStatus = Shapes::StringShape.new(name: 'ImportStatus')
+    ImportsList = Shapes::ListShape.new(name: 'ImportsList')
+    ImportsListItem = Shapes::StructureShape.new(name: 'ImportsListItem')
     InactiveEventDataStoreException = Shapes::StructureShape.new(name: 'InactiveEventDataStoreException')
     InactiveQueryException = Shapes::StructureShape.new(name: 'InactiveQueryException')
     InsightNotEnabledException = Shapes::StructureShape.new(name: 'InsightNotEnabledException')
@@ -99,9 +113,11 @@ module Aws::CloudTrail
     InvalidCloudWatchLogsRoleArnException = Shapes::StructureShape.new(name: 'InvalidCloudWatchLogsRoleArnException')
     InvalidDateRangeException = Shapes::StructureShape.new(name: 'InvalidDateRangeException')
     InvalidEventCategoryException = Shapes::StructureShape.new(name: 'InvalidEventCategoryException')
+    InvalidEventDataStoreCategoryException = Shapes::StructureShape.new(name: 'InvalidEventDataStoreCategoryException')
     InvalidEventDataStoreStatusException = Shapes::StructureShape.new(name: 'InvalidEventDataStoreStatusException')
     InvalidEventSelectorsException = Shapes::StructureShape.new(name: 'InvalidEventSelectorsException')
     InvalidHomeRegionException = Shapes::StructureShape.new(name: 'InvalidHomeRegionException')
+    InvalidImportSourceException = Shapes::StructureShape.new(name: 'InvalidImportSourceException')
     InvalidInsightSelectorsException = Shapes::StructureShape.new(name: 'InvalidInsightSelectorsException')
     InvalidKmsKeyIdException = Shapes::StructureShape.new(name: 'InvalidKmsKeyIdException')
     InvalidLookupAttributesException = Shapes::StructureShape.new(name: 'InvalidLookupAttributesException')
@@ -127,6 +143,12 @@ module Aws::CloudTrail
     ListEventDataStoresMaxResultsCount = Shapes::IntegerShape.new(name: 'ListEventDataStoresMaxResultsCount')
     ListEventDataStoresRequest = Shapes::StructureShape.new(name: 'ListEventDataStoresRequest')
     ListEventDataStoresResponse = Shapes::StructureShape.new(name: 'ListEventDataStoresResponse')
+    ListImportFailuresMaxResultsCount = Shapes::IntegerShape.new(name: 'ListImportFailuresMaxResultsCount')
+    ListImportFailuresRequest = Shapes::StructureShape.new(name: 'ListImportFailuresRequest')
+    ListImportFailuresResponse = Shapes::StructureShape.new(name: 'ListImportFailuresResponse')
+    ListImportsMaxResultsCount = Shapes::IntegerShape.new(name: 'ListImportsMaxResultsCount')
+    ListImportsRequest = Shapes::StructureShape.new(name: 'ListImportsRequest')
+    ListImportsResponse = Shapes::StructureShape.new(name: 'ListImportsResponse')
     ListPublicKeysRequest = Shapes::StructureShape.new(name: 'ListPublicKeysRequest')
     ListPublicKeysResponse = Shapes::StructureShape.new(name: 'ListPublicKeysResponse')
     ListQueriesMaxResultsCount = Shapes::IntegerShape.new(name: 'ListQueriesMaxResultsCount')
@@ -187,14 +209,19 @@ module Aws::CloudTrail
     RestoreEventDataStoreResponse = Shapes::StructureShape.new(name: 'RestoreEventDataStoreResponse')
     RetentionPeriod = Shapes::IntegerShape.new(name: 'RetentionPeriod')
     S3BucketDoesNotExistException = Shapes::StructureShape.new(name: 'S3BucketDoesNotExistException')
+    S3ImportSource = Shapes::StructureShape.new(name: 'S3ImportSource')
     SelectorField = Shapes::StringShape.new(name: 'SelectorField')
     SelectorName = Shapes::StringShape.new(name: 'SelectorName')
     Source = Shapes::StringShape.new(name: 'Source')
     SourceConfig = Shapes::StructureShape.new(name: 'SourceConfig')
+    StartImportRequest = Shapes::StructureShape.new(name: 'StartImportRequest')
+    StartImportResponse = Shapes::StructureShape.new(name: 'StartImportResponse')
     StartLoggingRequest = Shapes::StructureShape.new(name: 'StartLoggingRequest')
     StartLoggingResponse = Shapes::StructureShape.new(name: 'StartLoggingResponse')
     StartQueryRequest = Shapes::StructureShape.new(name: 'StartQueryRequest')
     StartQueryResponse = Shapes::StructureShape.new(name: 'StartQueryResponse')
+    StopImportRequest = Shapes::StructureShape.new(name: 'StopImportRequest')
+    StopImportResponse = Shapes::StructureShape.new(name: 'StopImportResponse')
     StopLoggingRequest = Shapes::StructureShape.new(name: 'StopLoggingRequest')
     StopLoggingResponse = Shapes::StructureShape.new(name: 'StopLoggingResponse')
     String = Shapes::StringShape.new(name: 'String')
@@ -218,6 +245,8 @@ module Aws::CloudTrail
     UpdateEventDataStoreResponse = Shapes::StructureShape.new(name: 'UpdateEventDataStoreResponse')
     UpdateTrailRequest = Shapes::StructureShape.new(name: 'UpdateTrailRequest')
     UpdateTrailResponse = Shapes::StructureShape.new(name: 'UpdateTrailResponse')
+
+    AccountHasOngoingImportException.struct_class = Types::AccountHasOngoingImportException
 
     AddTagsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
     AddTagsRequest.add_member(:tags_list, Shapes::ShapeRef.new(shape: TagsList, required: true, location_name: "TagsList"))
@@ -390,6 +419,8 @@ module Aws::CloudTrail
 
     EventDataStoreAlreadyExistsException.struct_class = Types::EventDataStoreAlreadyExistsException
 
+    EventDataStoreHasOngoingImportException.struct_class = Types::EventDataStoreHasOngoingImportException
+
     EventDataStoreMaxLimitExceededException.struct_class = Types::EventDataStoreMaxLimitExceededException
 
     EventDataStoreNotFoundException.struct_class = Types::EventDataStoreNotFoundException
@@ -443,6 +474,20 @@ module Aws::CloudTrail
     GetEventSelectorsResponse.add_member(:advanced_event_selectors, Shapes::ShapeRef.new(shape: AdvancedEventSelectors, location_name: "AdvancedEventSelectors"))
     GetEventSelectorsResponse.struct_class = Types::GetEventSelectorsResponse
 
+    GetImportRequest.add_member(:import_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "ImportId"))
+    GetImportRequest.struct_class = Types::GetImportRequest
+
+    GetImportResponse.add_member(:import_id, Shapes::ShapeRef.new(shape: UUID, location_name: "ImportId"))
+    GetImportResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: ImportDestinations, location_name: "Destinations"))
+    GetImportResponse.add_member(:import_source, Shapes::ShapeRef.new(shape: ImportSource, location_name: "ImportSource"))
+    GetImportResponse.add_member(:start_event_time, Shapes::ShapeRef.new(shape: Date, location_name: "StartEventTime"))
+    GetImportResponse.add_member(:end_event_time, Shapes::ShapeRef.new(shape: Date, location_name: "EndEventTime"))
+    GetImportResponse.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "ImportStatus"))
+    GetImportResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedTimestamp"))
+    GetImportResponse.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "UpdatedTimestamp"))
+    GetImportResponse.add_member(:import_statistics, Shapes::ShapeRef.new(shape: ImportStatistics, location_name: "ImportStatistics"))
+    GetImportResponse.struct_class = Types::GetImportResponse
+
     GetInsightSelectorsRequest.add_member(:trail_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrailName"))
     GetInsightSelectorsRequest.struct_class = Types::GetInsightSelectorsRequest
 
@@ -491,6 +536,38 @@ module Aws::CloudTrail
     GetTrailStatusResponse.add_member(:time_logging_stopped, Shapes::ShapeRef.new(shape: String, location_name: "TimeLoggingStopped"))
     GetTrailStatusResponse.struct_class = Types::GetTrailStatusResponse
 
+    ImportDestinations.member = Shapes::ShapeRef.new(shape: EventDataStoreArn)
+
+    ImportFailureList.member = Shapes::ShapeRef.new(shape: ImportFailureListItem)
+
+    ImportFailureListItem.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "Location"))
+    ImportFailureListItem.add_member(:status, Shapes::ShapeRef.new(shape: ImportFailureStatus, location_name: "Status"))
+    ImportFailureListItem.add_member(:error_type, Shapes::ShapeRef.new(shape: String, location_name: "ErrorType"))
+    ImportFailureListItem.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    ImportFailureListItem.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdatedTime"))
+    ImportFailureListItem.struct_class = Types::ImportFailureListItem
+
+    ImportNotFoundException.struct_class = Types::ImportNotFoundException
+
+    ImportSource.add_member(:s3, Shapes::ShapeRef.new(shape: S3ImportSource, required: true, location_name: "S3"))
+    ImportSource.struct_class = Types::ImportSource
+
+    ImportStatistics.add_member(:prefixes_found, Shapes::ShapeRef.new(shape: Long, location_name: "PrefixesFound"))
+    ImportStatistics.add_member(:prefixes_completed, Shapes::ShapeRef.new(shape: Long, location_name: "PrefixesCompleted"))
+    ImportStatistics.add_member(:files_completed, Shapes::ShapeRef.new(shape: Long, location_name: "FilesCompleted"))
+    ImportStatistics.add_member(:events_completed, Shapes::ShapeRef.new(shape: Long, location_name: "EventsCompleted"))
+    ImportStatistics.add_member(:failed_entries, Shapes::ShapeRef.new(shape: Long, location_name: "FailedEntries"))
+    ImportStatistics.struct_class = Types::ImportStatistics
+
+    ImportsList.member = Shapes::ShapeRef.new(shape: ImportsListItem)
+
+    ImportsListItem.add_member(:import_id, Shapes::ShapeRef.new(shape: UUID, location_name: "ImportId"))
+    ImportsListItem.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "ImportStatus"))
+    ImportsListItem.add_member(:destinations, Shapes::ShapeRef.new(shape: ImportDestinations, location_name: "Destinations"))
+    ImportsListItem.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedTimestamp"))
+    ImportsListItem.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "UpdatedTimestamp"))
+    ImportsListItem.struct_class = Types::ImportsListItem
+
     InactiveEventDataStoreException.struct_class = Types::InactiveEventDataStoreException
 
     InactiveQueryException.struct_class = Types::InactiveQueryException
@@ -518,11 +595,15 @@ module Aws::CloudTrail
 
     InvalidEventCategoryException.struct_class = Types::InvalidEventCategoryException
 
+    InvalidEventDataStoreCategoryException.struct_class = Types::InvalidEventDataStoreCategoryException
+
     InvalidEventDataStoreStatusException.struct_class = Types::InvalidEventDataStoreStatusException
 
     InvalidEventSelectorsException.struct_class = Types::InvalidEventSelectorsException
 
     InvalidHomeRegionException.struct_class = Types::InvalidHomeRegionException
+
+    InvalidImportSourceException.struct_class = Types::InvalidImportSourceException
 
     InvalidInsightSelectorsException.struct_class = Types::InvalidInsightSelectorsException
 
@@ -577,6 +658,25 @@ module Aws::CloudTrail
     ListEventDataStoresResponse.add_member(:event_data_stores, Shapes::ShapeRef.new(shape: EventDataStores, location_name: "EventDataStores"))
     ListEventDataStoresResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListEventDataStoresResponse.struct_class = Types::ListEventDataStoresResponse
+
+    ListImportFailuresRequest.add_member(:import_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "ImportId"))
+    ListImportFailuresRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListImportFailuresMaxResultsCount, location_name: "MaxResults"))
+    ListImportFailuresRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListImportFailuresRequest.struct_class = Types::ListImportFailuresRequest
+
+    ListImportFailuresResponse.add_member(:failures, Shapes::ShapeRef.new(shape: ImportFailureList, location_name: "Failures"))
+    ListImportFailuresResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListImportFailuresResponse.struct_class = Types::ListImportFailuresResponse
+
+    ListImportsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListImportsMaxResultsCount, location_name: "MaxResults"))
+    ListImportsRequest.add_member(:destination, Shapes::ShapeRef.new(shape: EventDataStoreArn, location_name: "Destination"))
+    ListImportsRequest.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "ImportStatus"))
+    ListImportsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListImportsRequest.struct_class = Types::ListImportsRequest
+
+    ListImportsResponse.add_member(:imports, Shapes::ShapeRef.new(shape: ImportsList, location_name: "Imports"))
+    ListImportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListImportsResponse.struct_class = Types::ListImportsResponse
 
     ListPublicKeysRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Date, location_name: "StartTime"))
     ListPublicKeysRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Date, location_name: "EndTime"))
@@ -741,9 +841,31 @@ module Aws::CloudTrail
 
     S3BucketDoesNotExistException.struct_class = Types::S3BucketDoesNotExistException
 
+    S3ImportSource.add_member(:s3_location_uri, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3LocationUri"))
+    S3ImportSource.add_member(:s3_bucket_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketRegion"))
+    S3ImportSource.add_member(:s3_bucket_access_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketAccessRoleArn"))
+    S3ImportSource.struct_class = Types::S3ImportSource
+
     SourceConfig.add_member(:apply_to_all_regions, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApplyToAllRegions"))
     SourceConfig.add_member(:advanced_event_selectors, Shapes::ShapeRef.new(shape: AdvancedEventSelectors, location_name: "AdvancedEventSelectors"))
     SourceConfig.struct_class = Types::SourceConfig
+
+    StartImportRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: ImportDestinations, location_name: "Destinations"))
+    StartImportRequest.add_member(:import_source, Shapes::ShapeRef.new(shape: ImportSource, location_name: "ImportSource"))
+    StartImportRequest.add_member(:start_event_time, Shapes::ShapeRef.new(shape: Date, location_name: "StartEventTime"))
+    StartImportRequest.add_member(:end_event_time, Shapes::ShapeRef.new(shape: Date, location_name: "EndEventTime"))
+    StartImportRequest.add_member(:import_id, Shapes::ShapeRef.new(shape: UUID, location_name: "ImportId"))
+    StartImportRequest.struct_class = Types::StartImportRequest
+
+    StartImportResponse.add_member(:import_id, Shapes::ShapeRef.new(shape: UUID, location_name: "ImportId"))
+    StartImportResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: ImportDestinations, location_name: "Destinations"))
+    StartImportResponse.add_member(:import_source, Shapes::ShapeRef.new(shape: ImportSource, location_name: "ImportSource"))
+    StartImportResponse.add_member(:start_event_time, Shapes::ShapeRef.new(shape: Date, location_name: "StartEventTime"))
+    StartImportResponse.add_member(:end_event_time, Shapes::ShapeRef.new(shape: Date, location_name: "EndEventTime"))
+    StartImportResponse.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "ImportStatus"))
+    StartImportResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedTimestamp"))
+    StartImportResponse.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "UpdatedTimestamp"))
+    StartImportResponse.struct_class = Types::StartImportResponse
 
     StartLoggingRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     StartLoggingRequest.struct_class = Types::StartLoggingRequest
@@ -755,6 +877,20 @@ module Aws::CloudTrail
 
     StartQueryResponse.add_member(:query_id, Shapes::ShapeRef.new(shape: UUID, location_name: "QueryId"))
     StartQueryResponse.struct_class = Types::StartQueryResponse
+
+    StopImportRequest.add_member(:import_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "ImportId"))
+    StopImportRequest.struct_class = Types::StopImportRequest
+
+    StopImportResponse.add_member(:import_id, Shapes::ShapeRef.new(shape: UUID, location_name: "ImportId"))
+    StopImportResponse.add_member(:import_source, Shapes::ShapeRef.new(shape: ImportSource, location_name: "ImportSource"))
+    StopImportResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: ImportDestinations, location_name: "Destinations"))
+    StopImportResponse.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "ImportStatus"))
+    StopImportResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedTimestamp"))
+    StopImportResponse.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "UpdatedTimestamp"))
+    StopImportResponse.add_member(:start_event_time, Shapes::ShapeRef.new(shape: Date, location_name: "StartEventTime"))
+    StopImportResponse.add_member(:end_event_time, Shapes::ShapeRef.new(shape: Date, location_name: "EndEventTime"))
+    StopImportResponse.add_member(:import_statistics, Shapes::ShapeRef.new(shape: ImportStatistics, location_name: "ImportStatistics"))
+    StopImportResponse.struct_class = Types::StopImportResponse
 
     StopLoggingRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     StopLoggingRequest.struct_class = Types::StopLoggingRequest
@@ -977,6 +1113,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: EventDataStoreARNInvalidException)
         o.errors << Shapes::ShapeRef.new(shape: EventDataStoreNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EventDataStoreTerminationProtectedException)
+        o.errors << Shapes::ShapeRef.new(shape: EventDataStoreHasOngoingImportException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1063,6 +1200,18 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
+      api.add_operation(:get_import, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetImport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetImportRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetImportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ImportNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
       api.add_operation(:get_insight_selectors, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetInsightSelectors"
         o.http_method = "POST"
@@ -1147,6 +1296,42 @@ module Aws::CloudTrail
         o.output = Shapes::ShapeRef.new(shape: ListEventDataStoresResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_import_failures, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListImportFailures"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListImportFailuresRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListImportFailuresResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_imports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListImports"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListImportsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListImportsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EventDataStoreARNInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o[:pager] = Aws::Pager.new(
@@ -1329,6 +1514,27 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotInAllFeaturesModeException)
       end)
 
+      api.add_operation(:start_import, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartImport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartImportRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartImportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccountHasOngoingImportException)
+        o.errors << Shapes::ShapeRef.new(shape: EventDataStoreARNInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: EventDataStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEventDataStoreStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEventDataStoreCategoryException)
+        o.errors << Shapes::ShapeRef.new(shape: InactiveEventDataStoreException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidImportSourceException)
+        o.errors << Shapes::ShapeRef.new(shape: ImportNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
       api.add_operation(:start_logging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartLogging"
         o.http_method = "POST"
@@ -1360,6 +1566,18 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
+      api.add_operation(:stop_import, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopImport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopImportRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopImportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ImportNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
       api.add_operation(:stop_logging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopLogging"
         o.http_method = "POST"
@@ -1383,6 +1601,7 @@ module Aws::CloudTrail
         o.output = Shapes::ShapeRef.new(shape: UpdateEventDataStoreResponse)
         o.errors << Shapes::ShapeRef.new(shape: EventDataStoreARNInvalidException)
         o.errors << Shapes::ShapeRef.new(shape: EventDataStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EventDataStoreHasOngoingImportException)
         o.errors << Shapes::ShapeRef.new(shape: InactiveEventDataStoreException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)

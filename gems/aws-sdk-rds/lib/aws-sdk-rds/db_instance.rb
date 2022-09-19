@@ -1034,8 +1034,8 @@ module Aws::RDS
     #
     #   * It must contain 1 to 63 alphanumeric characters.
     #
-    #   * It must begin with a letter or an underscore. Subsequent characters
-    #     can be letters, underscores, or digits (0 to 9).
+    #   * It must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0 to 9).
     #
     #   * It can't be a word reserved by the database engine.
     # @option options [Integer] :allocated_storage
@@ -1318,11 +1318,11 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #   * It must be 1 to 255 letters, numbers, or hyphens.
     #
-    #   * First character must be a letter
+    #   * The first character must be a letter.
     #
-    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #   * It can't end with a hyphen or contain two consecutive hyphens.
     # @option options [Integer] :backup_retention_period
     #   The number of days for which automated backups are retained. Setting
     #   this parameter to a positive number enables backups. Setting this

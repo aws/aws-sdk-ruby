@@ -4391,6 +4391,28 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Information about instance capacity usage for a Capacity Reservation.
+    #
+    # @!attribute [rw] allocation_type
+    #   The usage type. `used` indicates that the instance capacity is in
+    #   use by instances that are running in the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The amount of instance capacity associated with the usage. For
+    #   example a value of `4` indicates that instance capacity for 4
+    #   instances is currently in use.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityAllocation AWS API Documentation
+    #
+    class CapacityAllocation < Struct.new(
+      :allocation_type,
+      :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a Capacity Reservation.
     #
     # @!attribute [rw] capacity_reservation_id
@@ -4552,6 +4574,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cr-cpg.html
     #   @return [String]
     #
+    # @!attribute [rw] capacity_allocations
+    #   Information about instance capacity usage.
+    #   @return [Array<Types::CapacityAllocation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservation AWS API Documentation
     #
     class CapacityReservation < Struct.new(
@@ -4576,7 +4602,8 @@ module Aws::EC2
       :tags,
       :outpost_arn,
       :capacity_reservation_fleet_id,
-      :placement_group_arn)
+      :placement_group_arn,
+      :capacity_allocations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35054,7 +35081,7 @@ module Aws::EC2
     # @!attribute [rw] instance_type
     #   The instance type.
     #
-    #   <note markdown="1"> If you specify `InstanceTypes`, you can't specify
+    #   <note markdown="1"> If you specify `InstanceType`, you can't specify
     #   `InstanceRequirements`.
     #
     #    </note>
@@ -35111,7 +35138,7 @@ module Aws::EC2
     #   attributes.
     #
     #   <note markdown="1"> If you specify `InstanceRequirements`, you can't specify
-    #   `InstanceTypes`.
+    #   `InstanceType`.
     #
     #    </note>
     #   @return [Types::InstanceRequirements]
@@ -35205,7 +35232,7 @@ module Aws::EC2
     # @!attribute [rw] instance_type
     #   The instance type.
     #
-    #   <note markdown="1"> If you specify `InstanceTypes`, you can't specify
+    #   <note markdown="1"> If you specify `InstanceType`, you can't specify
     #   `InstanceRequirements`.
     #
     #    </note>
@@ -35265,7 +35292,7 @@ module Aws::EC2
     #   attributes.
     #
     #   <note markdown="1"> If you specify `InstanceRequirements`, you can't specify
-    #   `InstanceTypes`.
+    #   `InstanceType`.
     #
     #    </note>
     #   @return [Types::InstanceRequirementsRequest]
@@ -41775,16 +41802,16 @@ module Aws::EC2
     #   The state of token usage for your instance metadata requests.
     #
     #   If the state is `optional`, you can choose to retrieve instance
-    #   metadata with or without a signed token header on your request. If
-    #   you retrieve the IAM role credentials without a token, the version
-    #   1.0 role credentials are returned. If you retrieve the IAM role
-    #   credentials using a valid signed token, the version 2.0 role
+    #   metadata with or without a session token on your request. If you
+    #   retrieve the IAM role credentials without a token, the version 1.0
+    #   role credentials are returned. If you retrieve the IAM role
+    #   credentials using a valid session token, the version 2.0 role
     #   credentials are returned.
     #
-    #   If the state is `required`, you must send a signed token header with
-    #   any instance metadata retrieval requests. In this state, retrieving
-    #   the IAM role credentials always returns the version 2.0 credentials;
-    #   the version 1.0 credentials are not available.
+    #   If the state is `required`, you must send a session token with any
+    #   instance metadata retrieval requests. In this state, retrieving the
+    #   IAM role credentials always returns the version 2.0 credentials; the
+    #   version 1.0 credentials are not available.
     #
     #   Default: `optional`
     #   @return [String]
@@ -41854,16 +41881,16 @@ module Aws::EC2
     #   The state of token usage for your instance metadata requests.
     #
     #   If the state is `optional`, you can choose to retrieve instance
-    #   metadata with or without a signed token header on your request. If
-    #   you retrieve the IAM role credentials without a token, the version
-    #   1.0 role credentials are returned. If you retrieve the IAM role
-    #   credentials using a valid signed token, the version 2.0 role
+    #   metadata with or without a session token on your request. If you
+    #   retrieve the IAM role credentials without a token, the version 1.0
+    #   role credentials are returned. If you retrieve the IAM role
+    #   credentials using a valid session token, the version 2.0 role
     #   credentials are returned.
     #
-    #   If the state is `required`, you must send a signed token header with
-    #   any instance metadata retrieval requests. In this state, retrieving
-    #   the IAM role credential always returns the version 2.0 credentials;
-    #   the version 1.0 credentials are not available.
+    #   If the state is `required`, you must send a session token with any
+    #   instance metadata retrieval requests. In this state, retrieving the
+    #   IAM role credentials always returns the version 2.0 credentials; the
+    #   version 1.0 credentials are not available.
     #
     #   Default: `optional`
     #   @return [String]
@@ -42374,13 +42401,13 @@ module Aws::EC2
     # attributes, Amazon EC2 will identify instance types with these
     # attributes.
     #
-    # When you specify multiple parameters, you get instance types that
-    # satisfy all of the specified parameters. If you specify multiple
-    # values for a parameter, you get instance types that satisfy any of the
-    # specified values.
+    # When you specify multiple attributes, you get instance types that
+    # satisfy all of the specified attributes. If you specify multiple
+    # values for an attribute, you get instance types that satisfy any of
+    # the specified values.
     #
-    # <note markdown="1"> You must specify `VCpuCount` and `MemoryMiB`. All other parameters are
-    # optional. Any unspecified optional parameter is set to its default.
+    # <note markdown="1"> You must specify `VCpuCount` and `MemoryMiB`. All other attributes are
+    # optional. Any unspecified optional attribute is set to its default.
     #
     #  </note>
     #
@@ -42481,10 +42508,12 @@ module Aws::EC2
     #   @return [Types::MemoryGiBPerVCpu]
     #
     # @!attribute [rw] excluded_instance_types
-    #   The instance types to exclude. You can use strings with one or more
-    #   wild cards, represented by an asterisk (`*`), to exclude an instance
-    #   type, size, or generation. The following are examples: `m5.8xlarge`,
-    #   `c5*.*`, `m5a.*`, `r*`, `*3*`.
+    #   The instance types to exclude.
+    #
+    #   You can use strings with one or more wild cards, represented by an
+    #   asterisk (`*`), to exclude an instance type, size, or generation.
+    #   The following are examples: `m5.8xlarge`, `c5*.*`, `m5a.*`, `r*`,
+    #   `*3*`.
     #
     #   For example, if you specify `c5*`,Amazon EC2 will exclude the entire
     #   C5 instance family, which includes all C5a and C5n instance types.
@@ -42734,6 +42763,11 @@ module Aws::EC2
     #
     #   * For instance types with Xilinx VU9P FPGAs, specify `vu9p`.
     #
+    #   * For instance types with Amazon Web Services Inferentia GPUs,
+    #     specify `inferentia`.
+    #
+    #   * For instance types with NVIDIA GRID K520 GPUs, specify `k520`.
+    #
     #   Default: Any accelerator
     #   @return [Array<String>]
     #
@@ -42775,13 +42809,13 @@ module Aws::EC2
     # attributes, Amazon EC2 will identify instance types with these
     # attributes.
     #
-    # When you specify multiple parameters, you get instance types that
-    # satisfy all of the specified parameters. If you specify multiple
-    # values for a parameter, you get instance types that satisfy any of the
-    # specified values.
+    # When you specify multiple attributes, you get instance types that
+    # satisfy all of the specified attributes. If you specify multiple
+    # values for an attribute, you get instance types that satisfy any of
+    # the specified values.
     #
-    # <note markdown="1"> You must specify `VCpuCount` and `MemoryMiB`. All other parameters are
-    # optional. Any unspecified optional parameter is set to its default.
+    # <note markdown="1"> You must specify `VCpuCount` and `MemoryMiB`. All other attributes are
+    # optional. Any unspecified optional attribute is set to its default.
     #
     #  </note>
     #
@@ -42882,10 +42916,12 @@ module Aws::EC2
     #   @return [Types::MemoryGiBPerVCpuRequest]
     #
     # @!attribute [rw] excluded_instance_types
-    #   The instance types to exclude. You can use strings with one or more
-    #   wild cards, represented by an asterisk (`*`), to exclude an instance
-    #   family, type, size, or generation. The following are examples:
-    #   `m5.8xlarge`, `c5*.*`, `m5a.*`, `r*`, `*3*`.
+    #   The instance types to exclude.
+    #
+    #   You can use strings with one or more wild cards, represented by an
+    #   asterisk (`*`), to exclude an instance family, type, size, or
+    #   generation. The following are examples: `m5.8xlarge`, `c5*.*`,
+    #   `m5a.*`, `r*`, `*3*`.
     #
     #   For example, if you specify `c5*`,Amazon EC2 will exclude the entire
     #   C5 instance family, which includes all C5a and C5n instance types.
@@ -43134,6 +43170,11 @@ module Aws::EC2
     #     `radeon-pro-v520`.
     #
     #   * For instance types with Xilinx VU9P FPGAs, specify ` vu9p`.
+    #
+    #   * For instance types with Amazon Web Services Inferentia GPUs,
+    #     specify `inferentia`.
+    #
+    #   * For instance types with NVIDIA GRID K520 GPUs, specify `k520`.
     #
     #   Default: Any accelerator
     #   @return [Array<String>]
@@ -45123,17 +45164,6 @@ module Aws::EC2
 
     # Describes the launch specification for an instance.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon EC2 User Guide for Linux
-    # Instances*.
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
-    #
     # @!attribute [rw] user_data
     #   The Base64-encoded user data for the instance.
     #   @return [String]
@@ -46661,7 +46691,7 @@ module Aws::EC2
     #   same way as when you specify a list of instance types.
     #
     #   <note markdown="1"> If you specify `InstanceRequirements`, you can't specify
-    #   `InstanceTypes`.
+    #   `InstanceType`.
     #
     #    </note>
     #   @return [Types::InstanceRequirements]
@@ -49631,16 +49661,16 @@ module Aws::EC2
     #   `optional`.
     #
     #   If the state is `optional`, you can choose to retrieve instance
-    #   metadata with or without a signed token header on your request. If
-    #   you retrieve the IAM role credentials without a token, the version
-    #   1.0 role credentials are returned. If you retrieve the IAM role
-    #   credentials using a valid signed token, the version 2.0 role
+    #   metadata with or without a session token on your request. If you
+    #   retrieve the IAM role credentials without a token, the version 1.0
+    #   role credentials are returned. If you retrieve the IAM role
+    #   credentials using a valid session token, the version 2.0 role
     #   credentials are returned.
     #
-    #   If the state is `required`, you must send a signed token header with
-    #   any instance metadata retrieval requests. In this state, retrieving
-    #   the IAM role credential always returns the version 2.0 credentials;
-    #   the version 1.0 credentials are not available.
+    #   If the state is `required`, you must send a session token with any
+    #   instance metadata retrieval requests. In this state, retrieving the
+    #   IAM role credentials always returns the version 2.0 credentials; the
+    #   version 1.0 credentials are not available.
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -58192,7 +58222,7 @@ module Aws::EC2
     #   attributes.
     #
     #   If you specify `InstanceRequirements`, you can't specify
-    #   `InstanceTypes`.
+    #   `InstanceType`.
     #   @return [Types::InstanceRequirementsRequest]
     #
     # @!attribute [rw] private_dns_name_options
@@ -59035,16 +59065,6 @@ module Aws::EC2
     # owner, requester, and security group information that applies to all
     # instances in the launch request.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon EC2 User Guide*.
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
-    #
     # @!attribute [rw] groups
     #   \[EC2-Classic only\] The security groups.
     #   @return [Array<Types::GroupIdentifier>]
@@ -59344,17 +59364,6 @@ module Aws::EC2
 
     # Describes the configuration settings for the modified Reserved
     # Instances.
-    #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @note When making an API call, you may pass ReservedInstancesConfiguration
     #   data as a hash:
@@ -61968,17 +61977,6 @@ module Aws::EC2
 
     # Describes a Scheduled Instance.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
-    #
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
     #   @return [String]
@@ -62062,17 +62060,6 @@ module Aws::EC2
     end
 
     # Describes a schedule that is available for your Scheduled Instances.
-    #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
@@ -64232,17 +64219,9 @@ module Aws::EC2
     # `SpotFleetLaunchSpecification`; you must use
     # [LaunchTemplateConfig][1].
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][2] in the *Amazon EC2 User Guide for Linux
-    # Instances*.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_LaunchTemplateConfig.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @note When making an API call, you may pass SpotFleetLaunchSpecification
     #   data as a hash:
@@ -64518,7 +64497,7 @@ module Aws::EC2
     #   attributes.
     #
     #   <note markdown="1"> If you specify `InstanceRequirements`, you can't specify
-    #   `InstanceTypes`.
+    #   `InstanceType`.
     #
     #    </note>
     #   @return [Types::InstanceRequirements]
@@ -64894,20 +64873,28 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] allocation_strategy
-    #   Indicates how to allocate the target Spot Instance capacity across
-    #   the Spot Instance pools specified by the Spot Fleet request.
+    #   The strategy that determines how to allocate the target Spot
+    #   Instance capacity across the Spot Instance pools specified by the
+    #   Spot Fleet launch configuration. For more information, see
+    #   [Allocation strategies for Spot Instances][1] in the *Amazon EC2
+    #   User Guide for Linux Instances*.
     #
-    #   If the allocation strategy is `lowestPrice`, Spot Fleet launches
-    #   instances from the Spot Instance pools with the lowest price. This
-    #   is the default allocation strategy.
+    #   `lowestPrice` - Spot Fleet launches instances from the lowest-price
+    #   Spot Instance pool that has available capacity. If the cheapest pool
+    #   doesn't have available capacity, the Spot Instances come from the
+    #   next cheapest pool that has available capacity. If a pool runs out
+    #   of capacity before fulfilling your desired capacity, Spot Fleet will
+    #   continue to fulfill your request by drawing from the next cheapest
+    #   pool. To ensure that your desired capacity is met, you might receive
+    #   Spot Instances from several pools.
     #
-    #   If the allocation strategy is `diversified`, Spot Fleet launches
-    #   instances from all the Spot Instance pools that you specify.
+    #   `diversified` - Spot Fleet launches instances from all of the Spot
+    #   Instance pools that you specify.
     #
-    #   If the allocation strategy is `capacityOptimized` (recommended),
-    #   Spot Fleet launches instances from Spot Instance pools with optimal
-    #   capacity for the number of instances that are launching. To give
-    #   certain instance types a higher chance of launching first, use
+    #   `capacityOptimized` (recommended) - Spot Fleet launches instances
+    #   from Spot Instance pools with optimal capacity for the number of
+    #   instances that are launching. To give certain instance types a
+    #   higher chance of launching first, use
     #   `capacityOptimizedPrioritized`. Set a priority for each instance
     #   type by using the `Priority` parameter for
     #   `LaunchTemplateOverrides`. You can assign the same priority to
@@ -64917,6 +64904,12 @@ module Aws::EC2
     #   uses a launch template. Note that if the
     #   `OnDemandAllocationStrategy` is set to `prioritized`, the same
     #   priority is applied when fulfilling On-Demand capacity.
+    #
+    #   Default: `lowestPrice`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-allocation-strategy.html
     #   @return [String]
     #
     # @!attribute [rw] on_demand_allocation_strategy
@@ -65125,15 +65118,14 @@ module Aws::EC2
     #   The value for `ResourceType` must be `spot-fleet-request`, otherwise
     #   the Spot Fleet request fails. To tag instances at launch, specify
     #   the tags in the [launch template][1] (valid only if you use
-    #   `LaunchTemplateConfigs`) or in the [ `SpotFleetTagSpecification`
-    #   ][2] (valid only if you use `LaunchSpecifications`). For information
-    #   about tagging after launch, see [Tagging Your Resources][3].
+    #   `LaunchTemplateConfigs`) or in the ` SpotFleetTagSpecification `
+    #   (valid only if you use `LaunchSpecifications`). For information
+    #   about tagging after launch, see [Tagging Your Resources][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotFleetTagSpecification.html
-    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources
     #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetRequestConfigData AWS API Documentation
@@ -65187,12 +65179,8 @@ module Aws::EC2
     # @!attribute [rw] resource_type
     #   The type of resource. Currently, the only resource type that is
     #   supported is `instance`. To tag the Spot Fleet request on creation,
-    #   use the `TagSpecifications` parameter in [
-    #   `SpotFleetRequestConfigData` ][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotFleetRequestConfigData.html
+    #   use the `TagSpecifications` parameter in `
+    #   SpotFleetRequestConfigData `.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -65498,10 +65486,18 @@ module Aws::EC2
     # @!attribute [rw] allocation_strategy
     #   The strategy that determines how to allocate the target Spot
     #   Instance capacity across the Spot Instance pools specified by the
-    #   EC2 Fleet.
+    #   EC2 Fleet launch configuration. For more information, see
+    #   [Allocation strategies for Spot Instances][1] in the *Amazon EC2
+    #   User Guide*.
     #
-    #   `lowest-price` - EC2 Fleet launches instances from the Spot Instance
-    #   pools with the lowest price.
+    #   `lowest-price` - EC2 Fleet launches instances from the lowest-price
+    #   Spot Instance pool that has available capacity. If the cheapest pool
+    #   doesn't have available capacity, the Spot Instances come from the
+    #   next cheapest pool that has available capacity. If a pool runs out
+    #   of capacity before fulfilling your desired capacity, EC2 Fleet will
+    #   continue to fulfill your request by drawing from the next cheapest
+    #   pool. To ensure that your desired capacity is met, you might receive
+    #   Spot Instances from several pools.
     #
     #   `diversified` - EC2 Fleet launches instances from all of the Spot
     #   Instance pools that you specify.
@@ -65521,6 +65517,10 @@ module Aws::EC2
     #   applied when fulfilling On-Demand capacity.
     #
     #   Default: `lowest-price`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html
     #   @return [String]
     #
     # @!attribute [rw] maintenance_strategies
@@ -65628,10 +65628,18 @@ module Aws::EC2
     # @!attribute [rw] allocation_strategy
     #   The strategy that determines how to allocate the target Spot
     #   Instance capacity across the Spot Instance pools specified by the
-    #   EC2 Fleet.
+    #   EC2 Fleet launch configuration. For more information, see
+    #   [Allocation strategies for Spot Instances][1] in the *Amazon EC2
+    #   User Guide*.
     #
-    #   `lowest-price` - EC2 Fleet launches instances from the Spot Instance
-    #   pools with the lowest price.
+    #   `lowest-price` - EC2 Fleet launches instances from the lowest-price
+    #   Spot Instance pool that has available capacity. If the cheapest pool
+    #   doesn't have available capacity, the Spot Instances come from the
+    #   next cheapest pool that has available capacity. If a pool runs out
+    #   of capacity before fulfilling your desired capacity, EC2 Fleet will
+    #   continue to fulfill your request by drawing from the next cheapest
+    #   pool. To ensure that your desired capacity is met, you might receive
+    #   Spot Instances from several pools.
     #
     #   `diversified` - EC2 Fleet launches instances from all of the Spot
     #   Instance pools that you specify.
@@ -65651,6 +65659,10 @@ module Aws::EC2
     #   applied when fulfilling On-Demand capacity.
     #
     #   Default: `lowest-price`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html
     #   @return [String]
     #
     # @!attribute [rw] maintenance_strategies

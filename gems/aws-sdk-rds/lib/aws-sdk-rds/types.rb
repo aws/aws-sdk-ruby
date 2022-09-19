@@ -820,9 +820,10 @@ module Aws::RDS
     #   `max_connections` setting for the RDS DB instance or Aurora DB
     #   cluster used by the target group.
     #
-    #   Default: 100
+    #   Default: 10 for RDS for Microsoft SQL Server, and 100 for all other
+    #   engines
     #
-    #   Constraints: between 1 and 100
+    #   Constraints: Must be between 1 and 100.
     #   @return [Integer]
     #
     # @!attribute [rw] max_idle_connections_percent
@@ -834,9 +835,15 @@ module Aws::RDS
     #   value causes the proxy to close more idle connections and return
     #   them to the database.
     #
-    #   Default: 50
+    #   Default: The default value is half of the value of
+    #   `MaxConnectionsPercent`. For example, if `MaxConnectionsPercent` is
+    #   80, then the default value of `MaxIdleConnectionsPercent` is 40. If
+    #   the value of `MaxConnectionsPercent` isn't specified, then for SQL
+    #   Server, `MaxIdleConnectionsPercent` is 5, and for all other engines,
+    #   the default is 50.
     #
-    #   Constraints: between 0 and `MaxConnectionsPercent`
+    #   Constraints: Must be between 0 and the value of
+    #   `MaxConnectionsPercent`.
     #   @return [Integer]
     #
     # @!attribute [rw] connection_borrow_timeout
@@ -915,7 +922,8 @@ module Aws::RDS
     #   normally cause all later statements in a session using a proxy to be
     #   pinned to the same underlying database connection. Including an item
     #   in the list exempts that class of SQL operations from the pinning
-    #   behavior. Currently, the only allowed value is
+    #   behavior. This setting is only supported for MySQL engine family
+    #   databases. Currently, the only allowed value is
     #   `EXCLUDE_VARIABLE_SETS`.
     #   @return [Array<String>]
     #
@@ -2469,7 +2477,7 @@ module Aws::RDS
     #
     # @!attribute [rw] db_cluster_instance_class
     #   The compute and memory capacity of each DB instance in the Multi-AZ
-    #   DB cluster, for example db.m6g.xlarge. Not all DB instance classes
+    #   DB cluster, for example db.m6gd.xlarge. Not all DB instance classes
     #   are available in all Amazon Web Services Regions, or for all
     #   database engines.
     #
@@ -3160,8 +3168,8 @@ module Aws::RDS
     #
     #   * It must contain 1 to 63 alphanumeric characters.
     #
-    #   * It must begin with a letter or an underscore. Subsequent
-    #     characters can be letters, underscores, or digits (0 to 9).
+    #   * It must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0 to 9).
     #
     #   * It can't be a word reserved by the database engine.
     #   @return [String]
@@ -3482,11 +3490,11 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #   * It must be 1 to 255 letters, numbers, or hyphens.
     #
-    #   * First character must be a letter
+    #   * The first character must be a letter.
     #
-    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #   * It can't end with a hyphen or contain two consecutive hyphens.
     #   @return [String]
     #
     # @!attribute [rw] backup_retention_period
@@ -5139,7 +5147,9 @@ module Aws::RDS
     #
     # @!attribute [rw] target_role
     #   A value that indicates whether the DB proxy endpoint can be used for
-    #   read/write or read-only operations. The default is `READ_WRITE`.
+    #   read/write or read-only operations. The default is `READ_WRITE`. The
+    #   only role that proxies for RDS for Microsoft SQL Server support is
+    #   `READ_WRITE`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5184,14 +5194,14 @@ module Aws::RDS
     #
     #       {
     #         db_proxy_name: "String", # required
-    #         engine_family: "MYSQL", # required, accepts MYSQL, POSTGRESQL
+    #         engine_family: "MYSQL", # required, accepts MYSQL, POSTGRESQL, SQLSERVER
     #         auth: [ # required
     #           {
     #             description: "String",
     #             user_name: "String",
     #             auth_scheme: "SECRETS", # accepts SECRETS
     #             secret_arn: "String",
-    #             iam_auth: "DISABLED", # accepts DISABLED, REQUIRED
+    #             iam_auth: "DISABLED", # accepts DISABLED, REQUIRED, ENABLED
     #           },
     #         ],
     #         role_arn: "String", # required
@@ -5222,7 +5232,8 @@ module Aws::RDS
     #   it interprets network traffic to and from the database. For Aurora
     #   MySQL, RDS for MariaDB, and RDS for MySQL databases, specify
     #   `MYSQL`. For Aurora PostgreSQL and RDS for PostgreSQL databases,
-    #   specify `POSTGRESQL`.
+    #   specify `POSTGRESQL`. For RDS for Microsoft SQL Server, specify
+    #   `SQLSERVER`.
     #   @return [String]
     #
     # @!attribute [rw] auth
@@ -8556,6 +8567,7 @@ module Aws::RDS
     #   it interprets network traffic to and from the database. `MYSQL`
     #   supports Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases.
     #   `POSTGRESQL` supports Aurora PostgreSQL and RDS for PostgreSQL
+    #   databases. `SQLSERVER` supports RDS for Microsoft SQL Server
     #   databases.
     #   @return [String]
     #
@@ -15261,7 +15273,7 @@ module Aws::RDS
     #
     # @!attribute [rw] db_cluster_instance_class
     #   The compute and memory capacity of each DB instance in the Multi-AZ
-    #   DB cluster, for example db.m6g.xlarge. Not all DB instance classes
+    #   DB cluster, for example db.m6gd.xlarge. Not all DB instance classes
     #   are available in all Amazon Web Services Regions, or for all
     #   database engines.
     #
@@ -16821,7 +16833,7 @@ module Aws::RDS
     #             user_name: "String",
     #             auth_scheme: "SECRETS", # accepts SECRETS
     #             secret_arn: "String",
-    #             iam_auth: "DISABLED", # accepts DISABLED, REQUIRED
+    #             iam_auth: "DISABLED", # accepts DISABLED, REQUIRED, ENABLED
     #           },
     #         ],
     #         require_tls: false,
@@ -20467,7 +20479,7 @@ module Aws::RDS
     #
     # @!attribute [rw] db_cluster_instance_class
     #   The compute and memory capacity of the each DB instance in the
-    #   Multi-AZ DB cluster, for example db.m6g.xlarge. Not all DB instance
+    #   Multi-AZ DB cluster, for example db.m6gd.xlarge. Not all DB instance
     #   classes are available in all Amazon Web Services Regions, or for all
     #   database engines.
     #
@@ -21010,7 +21022,7 @@ module Aws::RDS
     #
     # @!attribute [rw] db_cluster_instance_class
     #   The compute and memory capacity of the each DB instance in the
-    #   Multi-AZ DB cluster, for example db.m6g.xlarge. Not all DB instance
+    #   Multi-AZ DB cluster, for example db.m6gd.xlarge. Not all DB instance
     #   classes are available in all Amazon Web Services Regions, or for all
     #   database engines.
     #
@@ -24230,7 +24242,7 @@ module Aws::RDS
     #         user_name: "String",
     #         auth_scheme: "SECRETS", # accepts SECRETS
     #         secret_arn: "String",
-    #         iam_auth: "DISABLED", # accepts DISABLED, REQUIRED
+    #         iam_auth: "DISABLED", # accepts DISABLED, REQUIRED, ENABLED
     #       }
     #
     # @!attribute [rw] description
@@ -24256,6 +24268,8 @@ module Aws::RDS
     # @!attribute [rw] iam_auth
     #   Whether to require or disallow Amazon Web Services Identity and
     #   Access Management (IAM) authentication for connections to the proxy.
+    #   The `ENABLED` value is valid only for proxies with RDS for Microsoft
+    #   SQL Server.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UserAuthConfig AWS API Documentation
@@ -24296,6 +24310,8 @@ module Aws::RDS
     # @!attribute [rw] iam_auth
     #   Whether to require or disallow Amazon Web Services Identity and
     #   Access Management (IAM) authentication for connections to the proxy.
+    #   The `ENABLED` value is valid only for proxies with RDS for Microsoft
+    #   SQL Server.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UserAuthConfigInfo AWS API Documentation

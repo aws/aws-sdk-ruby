@@ -825,7 +825,7 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters only
     # @option options [String] :db_cluster_instance_class
     #   The compute and memory capacity of the each DB instance in the
-    #   Multi-AZ DB cluster, for example db.m6g.xlarge. Not all DB instance
+    #   Multi-AZ DB cluster, for example db.m6gd.xlarge. Not all DB instance
     #   classes are available in all Amazon Web Services Regions, or for all
     #   database engines.
     #

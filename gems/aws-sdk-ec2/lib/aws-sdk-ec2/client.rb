@@ -4530,6 +4530,9 @@ module Aws::EC2
     #   resp.capacity_reservation.outpost_arn #=> String
     #   resp.capacity_reservation.capacity_reservation_fleet_id #=> String
     #   resp.capacity_reservation.placement_group_arn #=> String
+    #   resp.capacity_reservation.capacity_allocations #=> Array
+    #   resp.capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
+    #   resp.capacity_reservation.capacity_allocations[0].count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservation AWS API Documentation
     #
@@ -18343,6 +18346,9 @@ module Aws::EC2
     #   resp.capacity_reservations[0].outpost_arn #=> String
     #   resp.capacity_reservations[0].capacity_reservation_fleet_id #=> String
     #   resp.capacity_reservations[0].placement_group_arn #=> String
+    #   resp.capacity_reservations[0].capacity_allocations #=> Array
+    #   resp.capacity_reservations[0].capacity_allocations[0].allocation_type #=> String, one of "used"
+    #   resp.capacity_reservations[0].capacity_allocations[0].count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservations AWS API Documentation
     #
@@ -22582,16 +22588,6 @@ module Aws::EC2
     # are in the affected zone, or do not specify any instance IDs at all,
     # the call fails. If you describe instances and specify only instance
     # IDs that are in an unaffected zone, the call works normally.
-    #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon EC2 User Guide*.
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -26833,17 +26829,9 @@ module Aws::EC2
     # For more information about Reserved Instances, see [Reserved
     # Instances][1] in the *Amazon EC2 User Guide*.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -27077,17 +27065,9 @@ module Aws::EC2
     # For more information, see [Modifying Reserved Instances][1] in the
     # *Amazon EC2 User Guide*.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -27198,17 +27178,9 @@ module Aws::EC2
     # For more information, see [Reserved Instance Marketplace][1] in the
     # *Amazon EC2 User Guide*.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [String] :availability_zone
     #   The Availability Zone in which the Reserved Instance can be used.
@@ -27617,17 +27589,6 @@ module Aws::EC2
     # PurchaseScheduledInstances to purchase Scheduled Instances with that
     # schedule.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -27788,17 +27749,6 @@ module Aws::EC2
 
     # Describes the specified Scheduled Instances or all your Scheduled
     # Instances.
-    #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -41237,16 +41187,16 @@ module Aws::EC2
     #   `optional`.
     #
     #   If the state is `optional`, you can choose to retrieve instance
-    #   metadata with or without a signed token header on your request. If you
+    #   metadata with or without a session token on your request. If you
     #   retrieve the IAM role credentials without a token, the version 1.0
     #   role credentials are returned. If you retrieve the IAM role
-    #   credentials using a valid signed token, the version 2.0 role
+    #   credentials using a valid session token, the version 2.0 role
     #   credentials are returned.
     #
-    #   If the state is `required`, you must send a signed token header with
-    #   any instance metadata retrieval requests. In this state, retrieving
-    #   the IAM role credential always returns the version 2.0 credentials;
-    #   the version 1.0 credentials are not available.
+    #   If the state is `required`, you must send a session token with any
+    #   instance metadata retrieval requests. In this state, retrieving the
+    #   IAM role credentials always returns the version 2.0 credentials; the
+    #   version 1.0 credentials are not available.
     #
     # @option params [Integer] :http_put_response_hop_limit
     #   The desired HTTP PUT response hop limit for instance metadata
@@ -42168,18 +42118,18 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the Availability Zone, instance count, instance type, or
-    # network platform (EC2-Classic or EC2-VPC) of your Reserved Instances.
-    # The Reserved Instances to be modified must be identical, except for
-    # Availability Zone, network platform, and instance type.
+    # Modifies the configuration of your Reserved Instances, such as the
+    # Availability Zone, instance count, or instance type. The Reserved
+    # Instances to be modified must be identical, except for Availability
+    # Zone, network platform, and instance type.
     #
     # For more information, see [Modifying Reserved Instances][1] in the
     # *Amazon EC2 User Guide*.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -45075,10 +45025,18 @@ module Aws::EC2
     # For more information, see [Reserved Instances][1] and [Reserved
     # Instance Marketplace][2] in the *Amazon EC2 User Guide*.
     #
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][3] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [required, Integer] :instance_count
     #   The number of Reserved Instances to purchase.
@@ -45131,6 +45089,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # <note markdown="1"> You can no longer purchase Scheduled Instances.
+    #
+    #  </note>
+    #
     # Purchases the Scheduled Instances with the specified schedule.
     #
     # Scheduled Instances enable you to purchase Amazon EC2 compute capacity
@@ -47198,9 +47160,9 @@ module Aws::EC2
     # Spot Instances, see [Which is the best Spot request method to use?][2]
     # in the *Amazon EC2 User Guide for Linux Instances*.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][3] in the *Amazon EC2 User Guide for Linux
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][3] in the *Amazon EC2 User Guide for Linux
     # Instances*.
     #
     #  </note>
@@ -48636,9 +48598,9 @@ module Aws::EC2
     # For troubleshooting, see [What to do if an instance immediately
     # terminates][7], and [Troubleshooting connecting to your instance][8].
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][9] in the *Amazon EC2 User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][9] in the *Amazon EC2 User Guide*.
     #
     #  </note>
     #
@@ -51311,7 +51273,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.334.0'
+      context[:gem_version] = '1.335.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

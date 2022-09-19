@@ -10,6 +10,13 @@
 module Aws::CloudTrail
   module Types
 
+    # This exception is thrown when you start a new import and a previous
+    # import is still in progress.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AccountHasOngoingImportException AWS API Documentation
+    #
+    class AccountHasOngoingImportException < Aws::EmptyStructure; end
+
     # Specifies the tags to add to a trail or event data store.
     #
     # @note When making an API call, you may pass AddTagsRequest
@@ -964,8 +971,7 @@ module Aws::CloudTrail
     #   strings for the specified objects.
     #
     #   * To log data events for all objects in all S3 buckets in your
-    #     Amazon Web Services account, specify the prefix as
-    #     `arn:aws:s3:::`.
+    #     Amazon Web Services account, specify the prefix as `arn:aws:s3`.
     #
     #     <note markdown="1"> This also enables logging of data event activity performed by any
     #     user or role in your Amazon Web Services account, even if that
@@ -1378,6 +1384,13 @@ module Aws::CloudTrail
     #
     class EventDataStoreAlreadyExistsException < Aws::EmptyStructure; end
 
+    # This exception is thrown when you try to update or delete an event
+    # data store that currently has an import in progress.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventDataStoreHasOngoingImportException AWS API Documentation
+    #
+    class EventDataStoreHasOngoingImportException < Aws::EmptyStructure; end
+
     # Your account has used the maximum number of event data stores.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventDataStoreMaxLimitExceededException AWS API Documentation
@@ -1451,7 +1464,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html
     #   [2]: http://aws.amazon.com/cloudtrail/pricing/
     #   @return [Boolean]
     #
@@ -1468,7 +1481,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
     #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
     #   @return [Array<Types::DataResource>]
     #
@@ -1692,6 +1705,81 @@ module Aws::CloudTrail
       :trail_arn,
       :event_selectors,
       :advanced_event_selectors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetImportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         import_id: "UUID", # required
+    #       }
+    #
+    # @!attribute [rw] import_id
+    #   The ID for the import.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetImportRequest AWS API Documentation
+    #
+    class GetImportRequest < Struct.new(
+      :import_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_id
+    #   The ID of the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   The destination event data store.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] import_source
+    #   The source S3 bucket.
+    #   @return [Types::ImportSource]
+    #
+    # @!attribute [rw] start_event_time
+    #   Used with `EndEventTime` to bound a `StartImport` request, and limit
+    #   imported trail events to only those events logged within a specified
+    #   time period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_event_time
+    #   Used with `StartEventTime` to bound a `StartImport` request, and
+    #   limit imported trail events to only those events logged within a
+    #   specified time period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] import_status
+    #   The status of the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp of the import's creation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The timestamp of when the import was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] import_statistics
+    #   Provides statistics for the import.
+    #   @return [Types::ImportStatistics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetImportResponse AWS API Documentation
+    #
+    class GetImportResponse < Struct.new(
+      :import_id,
+      :destinations,
+      :import_source,
+      :start_event_time,
+      :end_event_time,
+      :import_status,
+      :created_timestamp,
+      :updated_timestamp,
+      :import_statistics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2021,6 +2109,140 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # Provides information about an import failure.
+    #
+    # @!attribute [rw] location
+    #   The location of the failure in the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_type
+    #   The type of import error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Provides the reason the import failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   When the import was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ImportFailureListItem AWS API Documentation
+    #
+    class ImportFailureListItem < Struct.new(
+      :location,
+      :status,
+      :error_type,
+      :error_message,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified import was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ImportNotFoundException AWS API Documentation
+    #
+    class ImportNotFoundException < Aws::EmptyStructure; end
+
+    # The import source.
+    #
+    # @note When making an API call, you may pass ImportSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3: { # required
+    #           s3_location_uri: "String", # required
+    #           s3_bucket_region: "String", # required
+    #           s3_bucket_access_role_arn: "String", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3
+    #   The source S3 bucket.
+    #   @return [Types::S3ImportSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ImportSource AWS API Documentation
+    #
+    class ImportSource < Struct.new(
+      :s3)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides statistics for the specified `ImportID`.
+    #
+    # @!attribute [rw] prefixes_found
+    #   The number of S3 prefixes found for the import.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefixes_completed
+    #   The number of S3 prefixes that completed import.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] files_completed
+    #   The number of files that completed import.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] events_completed
+    #   The number of trail events imported.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_entries
+    #   The number of failed entries.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ImportStatistics AWS API Documentation
+    #
+    class ImportStatistics < Struct.new(
+      :prefixes_found,
+      :prefixes_completed,
+      :files_completed,
+      :events_completed,
+      :failed_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an import that was returned by a lookup
+    # request.
+    #
+    # @!attribute [rw] import_id
+    #   The ID of the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_status
+    #   The status of the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   The destination event data store.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp of the import's creation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The timestamp of the import's last update.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ImportsListItem AWS API Documentation
+    #
+    class ImportsListItem < Struct.new(
+      :import_id,
+      :import_status,
+      :destinations,
+      :created_timestamp,
+      :updated_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The event data store is inactive.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InactiveEventDataStoreException AWS API Documentation
@@ -2128,6 +2350,13 @@ module Aws::CloudTrail
     #
     class InvalidEventCategoryException < Aws::EmptyStructure; end
 
+    # This exception is thrown when the event data store category is not
+    # valid for the import.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidEventDataStoreCategoryException AWS API Documentation
+    #
+    class InvalidEventDataStoreCategoryException < Aws::EmptyStructure; end
+
     # The event data store is not in a status that supports the operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidEventDataStoreStatusException AWS API Documentation
@@ -2170,6 +2399,13 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidHomeRegionException AWS API Documentation
     #
     class InvalidHomeRegionException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the provided source S3 bucket is not
+    # valid for import.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidImportSourceException AWS API Documentation
+    #
+    class InvalidImportSourceException < Aws::EmptyStructure; end
 
     # The formatting or syntax of the `InsightSelectors` JSON statement in
     # your `PutInsightSelectors` or `GetInsightSelectors` request is not
@@ -2402,6 +2638,108 @@ module Aws::CloudTrail
     #
     class ListEventDataStoresResponse < Struct.new(
       :event_data_stores,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListImportFailuresRequest
+    #   data as a hash:
+    #
+    #       {
+    #         import_id: "UUID", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] import_id
+    #   The ID of the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of failures to display on a single page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use to get the next page of import failures.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListImportFailuresRequest AWS API Documentation
+    #
+    class ListImportFailuresRequest < Struct.new(
+      :import_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failures
+    #   Contains information about the import failures.
+    #   @return [Array<Types::ImportFailureListItem>]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use to get the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListImportFailuresResponse AWS API Documentation
+    #
+    class ListImportFailuresResponse < Struct.new(
+      :failures,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListImportsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         destination: "EventDataStoreArn",
+    #         import_status: "INITIALIZING", # accepts INITIALIZING, IN_PROGRESS, FAILED, STOPPED, COMPLETED
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of imports to display on a single page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination
+    #   The destination event data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_status
+    #   The status of the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use to get the next page of import results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListImportsRequest AWS API Documentation
+    #
+    class ListImportsRequest < Struct.new(
+      :max_results,
+      :destination,
+      :import_status,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] imports
+    #   The list of returned imports.
+    #   @return [Array<Types::ImportsListItem>]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use to get the next page of import results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListImportsResponse AWS API Documentation
+    #
+    class ListImportsResponse < Struct.new(
+      :imports,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3303,6 +3641,39 @@ module Aws::CloudTrail
     #
     class S3BucketDoesNotExistException < Aws::EmptyStructure; end
 
+    # The settings for the source S3 bucket.
+    #
+    # @note When making an API call, you may pass S3ImportSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3_location_uri: "String", # required
+    #         s3_bucket_region: "String", # required
+    #         s3_bucket_access_role_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] s3_location_uri
+    #   The URI for the source S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_region
+    #   The region associated with the source S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_access_role_arn
+    #   The IAM ARN role used to access the source S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/S3ImportSource AWS API Documentation
+    #
+    class S3ImportSource < Struct.new(
+      :s3_location_uri,
+      :s3_bucket_region,
+      :s3_bucket_access_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains configuration information about the service-linked channel.
     #
     # @!attribute [rw] apply_to_all_regions
@@ -3320,6 +3691,115 @@ module Aws::CloudTrail
     class SourceConfig < Struct.new(
       :apply_to_all_regions,
       :advanced_event_selectors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartImportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         destinations: ["EventDataStoreArn"],
+    #         import_source: {
+    #           s3: { # required
+    #             s3_location_uri: "String", # required
+    #             s3_bucket_region: "String", # required
+    #             s3_bucket_access_role_arn: "String", # required
+    #           },
+    #         },
+    #         start_event_time: Time.now,
+    #         end_event_time: Time.now,
+    #         import_id: "UUID",
+    #       }
+    #
+    # @!attribute [rw] destinations
+    #   The destination event data store. Use this parameter for a new
+    #   import.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] import_source
+    #   The source S3 bucket for the import. Use this parameter for a new
+    #   import.
+    #   @return [Types::ImportSource]
+    #
+    # @!attribute [rw] start_event_time
+    #   Use with `EndEventTime` to bound a `StartImport` request, and limit
+    #   imported trail events to only those events logged within a specified
+    #   time period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_event_time
+    #   Use with `StartEventTime` to bound a `StartImport` request, and
+    #   limit imported trail events to only those events logged within a
+    #   specified time period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] import_id
+    #   The ID of the import. Use this parameter when you are retrying an
+    #   import.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartImportRequest AWS API Documentation
+    #
+    class StartImportRequest < Struct.new(
+      :destinations,
+      :import_source,
+      :start_event_time,
+      :end_event_time,
+      :import_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_id
+    #   The ID of the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   The destination event data store.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] import_source
+    #   The source S3 bucket.
+    #   @return [Types::ImportSource]
+    #
+    # @!attribute [rw] start_event_time
+    #   Used with `EndEventTime` to bound a `StartImport` request, and limit
+    #   imported trail events to only those events logged within a specified
+    #   time period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_event_time
+    #   Used with `StartEventTime` to bound a `StartImport` request, and
+    #   limit imported trail events to only those events logged within a
+    #   specified time period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] import_status
+    #   Shows the status of the import after a `StartImport` request. An
+    #   import finishes with a status of `COMPLETED` if there were no
+    #   failures, or `FAILED` if there were failures.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp for the import's creation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The timestamp of the import's last update, if applicable.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartImportResponse AWS API Documentation
+    #
+    class StartImportResponse < Struct.new(
+      :import_id,
+      :destinations,
+      :import_source,
+      :start_event_time,
+      :end_event_time,
+      :import_status,
+      :created_timestamp,
+      :updated_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3384,6 +3864,81 @@ module Aws::CloudTrail
     #
     class StartQueryResponse < Struct.new(
       :query_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopImportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         import_id: "UUID", # required
+    #       }
+    #
+    # @!attribute [rw] import_id
+    #   The ID of the import.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StopImportRequest AWS API Documentation
+    #
+    class StopImportRequest < Struct.new(
+      :import_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_id
+    #   The ID for the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_source
+    #   The source S3 bucket.
+    #   @return [Types::ImportSource]
+    #
+    # @!attribute [rw] destinations
+    #   The destination event data store.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] import_status
+    #   The status of the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp of the import's creation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The timestamp of the import's last update.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_event_time
+    #   Used with `EndEventTime` to bound a `StartImport` request, and limit
+    #   imported trail events to only those events logged within a specified
+    #   time period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_event_time
+    #   Used with `StartEventTime` to bound a `StartImport` request, and
+    #   limit imported trail events to only those events logged within a
+    #   specified time period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] import_statistics
+    #   Returns information on the stopped import.
+    #   @return [Types::ImportStatistics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StopImportResponse AWS API Documentation
+    #
+    class StopImportResponse < Struct.new(
+      :import_id,
+      :import_source,
+      :destinations,
+      :import_status,
+      :created_timestamp,
+      :updated_timestamp,
+      :start_event_time,
+      :end_event_time,
+      :import_statistics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3667,7 +4222,8 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] advanced_event_selectors
     #   The advanced event selectors used to select events for the event
-    #   data store.
+    #   data store. You can configure up to five advanced event selectors
+    #   for each event data store.
     #   @return [Array<Types::AdvancedEventSelector>]
     #
     # @!attribute [rw] multi_region_enabled
