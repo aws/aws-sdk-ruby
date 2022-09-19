@@ -125,7 +125,7 @@ module Aws
         end
 
         (value.size < 64 &&
-          value =~ /^[a-z0-9][a-z0-9.-]+[a-z0-9]$/ &&
+          value =~ /^[a-z0-9][a-z0-9-]+[a-z0-9]$/ &&
           value !~ /(\d+\.){3}\d+/ &&
           value !~ /[.-]{2}/) || false
       end
