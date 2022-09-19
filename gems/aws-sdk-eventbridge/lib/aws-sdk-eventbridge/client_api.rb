@@ -1003,7 +1003,7 @@ module Aws::EventBridge
     Primary.struct_class = Types::Primary
 
     PutEventsRequest.add_member(:entries, Shapes::ShapeRef.new(shape: PutEventsRequestEntryList, required: true, location_name: "Entries"))
-    PutEventsRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId"))
+    PutEventsRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId", metadata: {"contextParam"=>{"name"=>"EndpointId"}}))
     PutEventsRequest.struct_class = Types::PutEventsRequest
 
     PutEventsRequestEntry.add_member(:time, Shapes::ShapeRef.new(shape: EventTime, location_name: "Time"))

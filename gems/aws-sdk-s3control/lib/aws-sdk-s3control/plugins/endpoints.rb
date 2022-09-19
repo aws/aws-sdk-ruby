@@ -13,7 +13,7 @@ module Aws::S3Control
     class Endpoints < Seahorse::Client::Plugin
       option(
         :endpoint_provider,
-        doc_type: 'Aws::S3Control::EndpointProvider, nil',
+        doc_type: 'Aws::S3Control::EndpointProvider',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -174,7 +174,7 @@ module Aws::S3Control
       end
 
       def add_handlers(handlers, _config)
-        handlers.add(Handler, step: :build, priority: 60)
+        handlers.add(Handler, step: :build, priority: 75)
       end
     end
   end

@@ -320,6 +320,24 @@ module Aws::S3
       expect(endpoint.properties).to eq(expect['endpoint']['properties'])
     end
 
+    it 'bucket names with fewer than 3 characters are not allowed in virtual host' do
+      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"us-east-1"}]}, "url"=>"https://s3.us-east-1.amazonaws.com/aa"}}
+      params = EndpointParameters.new(**{:bucket=>"aa", :region=>"us-east-1"})
+      endpoint = subject.resolve_endpoint(params)
+      expect(endpoint.url).to eq(expect['endpoint']['url'])
+      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+    end
+
+    it 'bucket names with uppercase characters are not allowed in virtual host' do
+      expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"us-east-1"}]}, "url"=>"https://s3.us-east-1.amazonaws.com/BucketName"}}
+      params = EndpointParameters.new(**{:bucket=>"BucketName", :region=>"us-east-1"})
+      endpoint = subject.resolve_endpoint(params)
+      expect(endpoint.url).to eq(expect['endpoint']['url'])
+      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
+      expect(endpoint.properties).to eq(expect['endpoint']['properties'])
+    end
+
     it 'subdomains are allowed in virtual buckets on http endpoints' do
       expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"us-east-1"}]}, "url"=>"http://bucket.name.example.com"}}
       params = EndpointParameters.new(**{:bucket=>"bucket.name", :region=>"us-east-1", :endpoint=>"http://example.com"})

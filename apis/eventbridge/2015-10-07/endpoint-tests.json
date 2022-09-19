@@ -1793,6 +1793,118 @@
                 "UseFIPS": false,
                 "Endpoint": "https://example.com"
             }
+        },
+        {
+            "documentation": "Valid endpointId with fips disabled and dualstack disabled",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingName": "eventbridge",
+                                "signingRegionSet": [
+                                    "*"
+                                ],
+                                "name": "sigv4a"
+                            }
+                        ]
+                    },
+                    "url": "https://abc123.456def.endpoint.events.amazonaws.com"
+                }
+            },
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "EndpointId": "abc123.456def"
+            }
+        },
+        {
+            "documentation": "Valid EndpointId with dualstack disabled and fips enabled",
+            "expect": {
+                "error": "Invalid Configuration: FIPS is not supported with EventBridge multi-region endpoints."
+            },
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "EndpointId": "abc123.456def"
+            }
+        },
+        {
+            "documentation": "Valid EndpointId with dualstack enabled and fips enabled",
+            "expect": {
+                "error": "Invalid Configuration: FIPS is not supported with EventBridge multi-region endpoints."
+            },
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true,
+                "EndpointId": "abc123.456def"
+            }
+        },
+        {
+            "documentation": "Invalid EndpointId",
+            "expect": {
+                "error": "EndpointId must be a valid host label."
+            },
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "EndpointId": "badactor.com?foo=bar"
+            }
+        },
+        {
+            "documentation": "Valid endpointId with fips disabled and dualstack true",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingName": "eventbridge",
+                                "signingRegionSet": [
+                                    "*"
+                                ],
+                                "name": "sigv4a"
+                            }
+                        ]
+                    },
+                    "url": "https://abc123.456def.endpoint.events.api.aws"
+                }
+            },
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "EndpointId": "abc123.456def"
+            }
+        },
+        {
+            "documentation": "Valid endpointId with custom sdk endpoint",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "signingName": "eventbridge",
+                                "signingRegionSet": [
+                                    "*"
+                                ],
+                                "name": "sigv4a"
+                            }
+                        ]
+                    },
+                    "url": "https://example.com"
+                }
+            },
+            "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "EndpointId": "abc123.456def",
+                "Endpoint": "https://example.com"
+            }
         }
     ],
     "version": "1.0"

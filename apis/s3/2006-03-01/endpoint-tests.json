@@ -747,6 +747,50 @@
             }
         },
         {
+            "documentation": "bucket names with fewer than 3 characters are not allowed in virtual host",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-east-1"
+                            }
+                        ]
+                    },
+                    "url": "https://s3.us-east-1.amazonaws.com/aa"
+                }
+            },
+            "params": {
+                "Bucket": "aa",
+                "Region": "us-east-1"
+            }
+        },
+        {
+            "documentation": "bucket names with uppercase characters are not allowed in virtual host",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3",
+                                "disableDoubleEncoding": true,
+                                "signingRegion": "us-east-1"
+                            }
+                        ]
+                    },
+                    "url": "https://s3.us-east-1.amazonaws.com/BucketName"
+                }
+            },
+            "params": {
+                "Bucket": "BucketName",
+                "Region": "us-east-1"
+            }
+        },
+        {
             "documentation": "subdomains are allowed in virtual buckets on http endpoints",
             "expect": {
                 "endpoint": {

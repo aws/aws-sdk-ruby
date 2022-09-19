@@ -124,10 +124,10 @@ module Aws
           return labels.all? { |l| aws_virtual_hostable_s3_bucket?(l) }
         end
 
-        value.size < 64 &&
+        (value.size < 64 &&
           value =~ /^[a-z0-9][a-z0-9.-]+[a-z0-9]$/ &&
           value !~ /(\d+\.){3}\d+/ &&
-          value !~ /[.-]{2}/ || false
+          value !~ /[.-]{2}/) || false
       end
     end
   end

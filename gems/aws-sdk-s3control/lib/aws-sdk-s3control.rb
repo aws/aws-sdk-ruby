@@ -18,8 +18,8 @@ require_relative 'aws-sdk-s3control/client'
 require_relative 'aws-sdk-s3control/errors'
 require_relative 'aws-sdk-s3control/resource'
 require_relative 'aws-sdk-s3control/endpoint_parameters'
-require_relative 'aws-sdk-s3control/endpoints'
 require_relative 'aws-sdk-s3control/endpoint_provider'
+require_relative 'aws-sdk-s3control/endpoints'
 require_relative 'aws-sdk-s3control/customizations'
 
 # This module provides support for AWS S3 Control. This module is available in the

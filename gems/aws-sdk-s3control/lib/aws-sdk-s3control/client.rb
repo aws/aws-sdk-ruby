@@ -326,7 +326,7 @@ module Aws::S3Control
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
-    #   @option options [Aws::S3Control::EndpointProvider, nil] :endpoint_provider
+    #   @option options [Aws::S3Control::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::S3Control::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
