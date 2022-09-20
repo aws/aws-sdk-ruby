@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2022-09-06)
+------------------
+
+* Feature - Documentation updates for the Identity Store CLI Reference.
+
+1.19.0 (2022-08-31)
+------------------
+
+* Feature - Expand IdentityStore API to support Create, Read, Update, Delete and Get operations for User, Group and GroupMembership resources.
+
+1.18.0 (2022-08-30)
+------------------
+
+* Feature - Documentation updates for the Identity Store CLI Reference.
+
 1.17.0 (2022-08-15)
 ------------------
 

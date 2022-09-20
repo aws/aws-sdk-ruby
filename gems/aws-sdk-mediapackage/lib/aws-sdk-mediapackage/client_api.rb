@@ -22,6 +22,7 @@ module Aws::MediaPackage
     ChannelList = Shapes::StructureShape.new(name: 'ChannelList')
     ChannelUpdateParameters = Shapes::StructureShape.new(name: 'ChannelUpdateParameters')
     CmafEncryption = Shapes::StructureShape.new(name: 'CmafEncryption')
+    CmafEncryptionMethod = Shapes::StringShape.new(name: 'CmafEncryptionMethod')
     CmafPackage = Shapes::StructureShape.new(name: 'CmafPackage')
     CmafPackageCreateOrUpdateParameters = Shapes::StructureShape.new(name: 'CmafPackageCreateOrUpdateParameters')
     ConfigureLogsParameters = Shapes::StructureShape.new(name: 'ConfigureLogsParameters')
@@ -149,6 +150,7 @@ module Aws::MediaPackage
     ChannelUpdateParameters.struct_class = Types::ChannelUpdateParameters
 
     CmafEncryption.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: __string, location_name: "constantInitializationVector"))
+    CmafEncryption.add_member(:encryption_method, Shapes::ShapeRef.new(shape: CmafEncryptionMethod, location_name: "encryptionMethod"))
     CmafEncryption.add_member(:key_rotation_interval_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "keyRotationIntervalSeconds"))
     CmafEncryption.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, required: true, location_name: "spekeKeyProvider"))
     CmafEncryption.struct_class = Types::CmafEncryption

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2022-09-09)
+------------------
+
+* Feature - This release updates documentation for AQUA features and other description updates.
+
 1.84.0 (2022-07-11)
 ------------------
 

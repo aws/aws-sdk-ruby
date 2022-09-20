@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2022-08-31)
+------------------
+
+* Feature - Update API documentation for CloudFront origin access control (OAC)
+
 1.67.0 (2022-08-24)
 ------------------
 

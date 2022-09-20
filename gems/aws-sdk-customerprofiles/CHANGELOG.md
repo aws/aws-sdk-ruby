@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2022-09-13)
+------------------
+
+* Feature - Added isUnstructured in response for Customer Profiles Integration APIs
+
 1.21.0 (2022-06-30)
 ------------------
 

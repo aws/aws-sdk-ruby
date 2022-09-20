@@ -581,6 +581,7 @@ module Aws::AmplifyUIBuilder
     #               },
     #             },
     #           ],
+    #           slot_name: "String",
     #           user_attribute: "String",
     #         },
     #         default_value: "String",
@@ -637,6 +638,7 @@ module Aws::AmplifyUIBuilder
     #             },
     #           },
     #         ],
+    #         slot_name: "String",
     #         user_attribute: "String",
     #       }
     #
@@ -664,6 +666,10 @@ module Aws::AmplifyUIBuilder
     #   A list of predicates for binding a component's properties to data.
     #   @return [Array<Types::Predicate>]
     #
+    # @!attribute [rw] slot_name
+    #   The name of a component slot.
+    #   @return [String]
+    #
     # @!attribute [rw] user_attribute
     #   An authenticated user attribute.
     #   @return [String]
@@ -677,6 +683,7 @@ module Aws::AmplifyUIBuilder
       :key,
       :model,
       :predicates,
+      :slot_name,
       :user_attribute)
       SENSITIVE = []
       include Aws::Structure
@@ -2547,6 +2554,7 @@ module Aws::AmplifyUIBuilder
     #                   },
     #                 },
     #               ],
+    #               slot_name: "String",
     #               user_attribute: "String",
     #             },
     #             default_value: "String",
@@ -3543,6 +3551,7 @@ module Aws::AmplifyUIBuilder
     #                     },
     #                   },
     #                 ],
+    #                 slot_name: "String",
     #                 user_attribute: "String",
     #               },
     #               default_value: "String",
@@ -4483,6 +4492,348 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # Represents all of the information that is required to create a form.
+    #
+    # @note When making an API call, you may pass CreateFormData
+    #   data as a hash:
+    #
+    #       {
+    #         cta: {
+    #           cancel: {
+    #             children: "String",
+    #             excluded: false,
+    #             position: {
+    #               below: "String",
+    #               fixed: "first", # accepts first
+    #               right_of: "String",
+    #             },
+    #           },
+    #           clear: {
+    #             children: "String",
+    #             excluded: false,
+    #             position: {
+    #               below: "String",
+    #               fixed: "first", # accepts first
+    #               right_of: "String",
+    #             },
+    #           },
+    #           position: "top", # accepts top, bottom, top_and_bottom
+    #           submit: {
+    #             children: "String",
+    #             excluded: false,
+    #             position: {
+    #               below: "String",
+    #               fixed: "first", # accepts first
+    #               right_of: "String",
+    #             },
+    #           },
+    #         },
+    #         data_type: { # required
+    #           data_source_type: "DataStore", # required, accepts DataStore, Custom
+    #           data_type_name: "String", # required
+    #         },
+    #         fields: { # required
+    #           "String" => {
+    #             excluded: false,
+    #             input_type: {
+    #               default_checked: false,
+    #               default_country_code: "String",
+    #               default_value: "String",
+    #               descriptive_text: "String",
+    #               max_value: 1.0,
+    #               min_value: 1.0,
+    #               name: "String",
+    #               placeholder: "String",
+    #               read_only: false,
+    #               required: false,
+    #               step: 1.0,
+    #               type: "String", # required
+    #               value: "String",
+    #               value_mappings: {
+    #                 values: [ # required
+    #                   {
+    #                     display_value: {
+    #                       value: "String",
+    #                     },
+    #                     value: { # required
+    #                       value: "String",
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #             label: "String",
+    #             position: {
+    #               below: "String",
+    #               fixed: "first", # accepts first
+    #               right_of: "String",
+    #             },
+    #             validations: [
+    #               {
+    #                 num_values: [1],
+    #                 str_values: ["String"],
+    #                 type: "String", # required
+    #                 validation_message: "String",
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         form_action_type: "create", # required, accepts create, update
+    #         name: "FormName", # required
+    #         schema_version: "String", # required
+    #         sectional_elements: { # required
+    #           "String" => {
+    #             level: 1,
+    #             orientation: "String",
+    #             position: {
+    #               below: "String",
+    #               fixed: "first", # accepts first
+    #               right_of: "String",
+    #             },
+    #             text: "String",
+    #             type: "String", # required
+    #           },
+    #         },
+    #         style: { # required
+    #           horizontal_gap: {
+    #             token_reference: "String",
+    #             value: "String",
+    #           },
+    #           outer_padding: {
+    #             token_reference: "String",
+    #             value: "String",
+    #           },
+    #           vertical_gap: {
+    #             token_reference: "String",
+    #             value: "String",
+    #           },
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cta
+    #   The `FormCTA` object that stores the call to action configuration
+    #   for the form.
+    #   @return [Types::FormCTA]
+    #
+    # @!attribute [rw] data_type
+    #   The type of data source to use to create the form.
+    #   @return [Types::FormDataTypeConfig]
+    #
+    # @!attribute [rw] fields
+    #   The configuration information for the form's fields.
+    #   @return [Hash<String,Types::FieldConfig>]
+    #
+    # @!attribute [rw] form_action_type
+    #   Specifies whether to perform a create or update action on the form.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the form.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_version
+    #   The schema version of the form.
+    #   @return [String]
+    #
+    # @!attribute [rw] sectional_elements
+    #   The configuration information for the visual helper elements for the
+    #   form. These elements are not associated with any data.
+    #   @return [Hash<String,Types::SectionalElement>]
+    #
+    # @!attribute [rw] style
+    #   The configuration for the form's style.
+    #   @return [Types::FormStyle]
+    #
+    # @!attribute [rw] tags
+    #   One or more key-value pairs to use when tagging the form data.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CreateFormData AWS API Documentation
+    #
+    class CreateFormData < Struct.new(
+      :cta,
+      :data_type,
+      :fields,
+      :form_action_type,
+      :name,
+      :schema_version,
+      :sectional_elements,
+      :style,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFormRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "String", # required
+    #         client_token: "String",
+    #         environment_name: "String", # required
+    #         form_to_create: { # required
+    #           cta: {
+    #             cancel: {
+    #               children: "String",
+    #               excluded: false,
+    #               position: {
+    #                 below: "String",
+    #                 fixed: "first", # accepts first
+    #                 right_of: "String",
+    #               },
+    #             },
+    #             clear: {
+    #               children: "String",
+    #               excluded: false,
+    #               position: {
+    #                 below: "String",
+    #                 fixed: "first", # accepts first
+    #                 right_of: "String",
+    #               },
+    #             },
+    #             position: "top", # accepts top, bottom, top_and_bottom
+    #             submit: {
+    #               children: "String",
+    #               excluded: false,
+    #               position: {
+    #                 below: "String",
+    #                 fixed: "first", # accepts first
+    #                 right_of: "String",
+    #               },
+    #             },
+    #           },
+    #           data_type: { # required
+    #             data_source_type: "DataStore", # required, accepts DataStore, Custom
+    #             data_type_name: "String", # required
+    #           },
+    #           fields: { # required
+    #             "String" => {
+    #               excluded: false,
+    #               input_type: {
+    #                 default_checked: false,
+    #                 default_country_code: "String",
+    #                 default_value: "String",
+    #                 descriptive_text: "String",
+    #                 max_value: 1.0,
+    #                 min_value: 1.0,
+    #                 name: "String",
+    #                 placeholder: "String",
+    #                 read_only: false,
+    #                 required: false,
+    #                 step: 1.0,
+    #                 type: "String", # required
+    #                 value: "String",
+    #                 value_mappings: {
+    #                   values: [ # required
+    #                     {
+    #                       display_value: {
+    #                         value: "String",
+    #                       },
+    #                       value: { # required
+    #                         value: "String",
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               label: "String",
+    #               position: {
+    #                 below: "String",
+    #                 fixed: "first", # accepts first
+    #                 right_of: "String",
+    #               },
+    #               validations: [
+    #                 {
+    #                   num_values: [1],
+    #                   str_values: ["String"],
+    #                   type: "String", # required
+    #                   validation_message: "String",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           form_action_type: "create", # required, accepts create, update
+    #           name: "FormName", # required
+    #           schema_version: "String", # required
+    #           sectional_elements: { # required
+    #             "String" => {
+    #               level: 1,
+    #               orientation: "String",
+    #               position: {
+    #                 below: "String",
+    #                 fixed: "first", # accepts first
+    #                 right_of: "String",
+    #               },
+    #               text: "String",
+    #               type: "String", # required
+    #             },
+    #           },
+    #           style: { # required
+    #             horizontal_gap: {
+    #               token_reference: "String",
+    #               value: "String",
+    #             },
+    #             outer_padding: {
+    #               token_reference: "String",
+    #               value: "String",
+    #             },
+    #             vertical_gap: {
+    #               token_reference: "String",
+    #               value: "String",
+    #             },
+    #           },
+    #           tags: {
+    #             "TagKey" => "TagValue",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   The unique ID of the Amplify app to associate with the form.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The unique client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is a part of the Amplify
+    #   app.
+    #   @return [String]
+    #
+    # @!attribute [rw] form_to_create
+    #   Represents the configuration of the form to create.
+    #   @return [Types::CreateFormData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CreateFormRequest AWS API Documentation
+    #
+    class CreateFormRequest < Struct.new(
+      :app_id,
+      :client_token,
+      :environment_name,
+      :form_to_create)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entity
+    #   Describes the configuration of the new form.
+    #   @return [Types::Form]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CreateFormResponse AWS API Documentation
+    #
+    class CreateFormResponse < Struct.new(
+      :entity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents all of the information that is required to create a theme.
     #
     # @note When making an API call, you may pass CreateThemeData
@@ -4658,6 +5009,38 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteFormRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "String", # required
+    #         environment_name: "String", # required
+    #         id: "Uuid", # required
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   The unique ID of the Amplify app associated with the form to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is a part of the Amplify
+    #   app.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the form to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/DeleteFormRequest AWS API Documentation
+    #
+    class DeleteFormRequest < Struct.new(
+      :app_id,
+      :environment_name,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteThemeRequest
     #   data as a hash:
     #
@@ -4820,6 +5203,55 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ExportFormsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "String", # required
+    #         environment_name: "String", # required
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   The unique ID of the Amplify app to export forms to.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is a part of the Amplify
+    #   app.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ExportFormsRequest AWS API Documentation
+    #
+    class ExportFormsRequest < Struct.new(
+      :app_id,
+      :environment_name,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entities
+    #   Represents the configuration of the exported forms.
+    #   @return [Array<Types::Form>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's included if more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ExportFormsResponse AWS API Documentation
+    #
+    class ExportFormsResponse < Struct.new(
+      :entities,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ExportThemesRequest
     #   data as a hash:
     #
@@ -4868,6 +5300,351 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # Describes the configuration information for a field in a table.
+    #
+    # @note When making an API call, you may pass FieldConfig
+    #   data as a hash:
+    #
+    #       {
+    #         excluded: false,
+    #         input_type: {
+    #           default_checked: false,
+    #           default_country_code: "String",
+    #           default_value: "String",
+    #           descriptive_text: "String",
+    #           max_value: 1.0,
+    #           min_value: 1.0,
+    #           name: "String",
+    #           placeholder: "String",
+    #           read_only: false,
+    #           required: false,
+    #           step: 1.0,
+    #           type: "String", # required
+    #           value: "String",
+    #           value_mappings: {
+    #             values: [ # required
+    #               {
+    #                 display_value: {
+    #                   value: "String",
+    #                 },
+    #                 value: { # required
+    #                   value: "String",
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         label: "String",
+    #         position: {
+    #           below: "String",
+    #           fixed: "first", # accepts first
+    #           right_of: "String",
+    #         },
+    #         validations: [
+    #           {
+    #             num_values: [1],
+    #             str_values: ["String"],
+    #             type: "String", # required
+    #             validation_message: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] excluded
+    #   Specifies whether to hide a field.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] input_type
+    #   Describes the configuration for the default input value to display
+    #   for a field.
+    #   @return [Types::FieldInputConfig]
+    #
+    # @!attribute [rw] label
+    #   The label for the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] position
+    #   Specifies the field position.
+    #   @return [Types::FieldPosition]
+    #
+    # @!attribute [rw] validations
+    #   The validations to perform on the value in the field.
+    #   @return [Array<Types::FieldValidationConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FieldConfig AWS API Documentation
+    #
+    class FieldConfig < Struct.new(
+      :excluded,
+      :input_type,
+      :label,
+      :position,
+      :validations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration for the default input values to display
+    # for a field.
+    #
+    # @note When making an API call, you may pass FieldInputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         default_checked: false,
+    #         default_country_code: "String",
+    #         default_value: "String",
+    #         descriptive_text: "String",
+    #         max_value: 1.0,
+    #         min_value: 1.0,
+    #         name: "String",
+    #         placeholder: "String",
+    #         read_only: false,
+    #         required: false,
+    #         step: 1.0,
+    #         type: "String", # required
+    #         value: "String",
+    #         value_mappings: {
+    #           values: [ # required
+    #             {
+    #               display_value: {
+    #                 value: "String",
+    #               },
+    #               value: { # required
+    #                 value: "String",
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] default_checked
+    #   Specifies whether a field has a default value.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] default_country_code
+    #   The default country code for a phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The default value for the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] descriptive_text
+    #   The text to display to describe the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_value
+    #   The maximum value to display for the field.
+    #   @return [Float]
+    #
+    # @!attribute [rw] min_value
+    #   The minimum value to display for the field.
+    #   @return [Float]
+    #
+    # @!attribute [rw] name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] placeholder
+    #   The text to display as a placeholder for the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] read_only
+    #   Specifies a read only field.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] required
+    #   Specifies a field that requires input.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] step
+    #   The stepping increment for a numeric value in a field.
+    #   @return [Float]
+    #
+    # @!attribute [rw] type
+    #   The input type for the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_mappings
+    #   The information to use to customize the input fields with data at
+    #   runtime.
+    #   @return [Types::ValueMappings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FieldInputConfig AWS API Documentation
+    #
+    class FieldInputConfig < Struct.new(
+      :default_checked,
+      :default_country_code,
+      :default_value,
+      :descriptive_text,
+      :max_value,
+      :min_value,
+      :name,
+      :placeholder,
+      :read_only,
+      :required,
+      :step,
+      :type,
+      :value,
+      :value_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the field position.
+    #
+    # @note FieldPosition is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note FieldPosition is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FieldPosition corresponding to the set member.
+    #
+    # @!attribute [rw] below
+    #   The field position is below the field specified by the string.
+    #   @return [String]
+    #
+    # @!attribute [rw] fixed
+    #   The field position is fixed and doesn't change in relation to other
+    #   fields.
+    #   @return [String]
+    #
+    # @!attribute [rw] right_of
+    #   The field position is to the right of the field specified by the
+    #   string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FieldPosition AWS API Documentation
+    #
+    class FieldPosition < Struct.new(
+      :below,
+      :fixed,
+      :right_of,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Below < FieldPosition; end
+      class Fixed < FieldPosition; end
+      class RightOf < FieldPosition; end
+      class Unknown < FieldPosition; end
+    end
+
+    # Describes the validation configuration for a field.
+    #
+    # @note When making an API call, you may pass FieldValidationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         num_values: [1],
+    #         str_values: ["String"],
+    #         type: "String", # required
+    #         validation_message: "String",
+    #       }
+    #
+    # @!attribute [rw] num_values
+    #   The validation to perform on a number value.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] str_values
+    #   The validation to perform on a string value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   The validation to perform on an object type.``
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_message
+    #   The validation message to display.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FieldValidationConfiguration AWS API Documentation
+    #
+    class FieldValidationConfiguration < Struct.new(
+      :num_values,
+      :str_values,
+      :type,
+      :validation_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the configuration settings for a `Form` user interface (UI)
+    # element for an Amplify app. A form is a component you can add to your
+    # project by specifying a data source as the default configuration for
+    # the form.
+    #
+    # @!attribute [rw] app_id
+    #   The unique ID of the Amplify app associated with the form.
+    #   @return [String]
+    #
+    # @!attribute [rw] cta
+    #   Stores the call to action configuration for the form.
+    #   @return [Types::FormCTA]
+    #
+    # @!attribute [rw] data_type
+    #   The type of data source to use to create the form.
+    #   @return [Types::FormDataTypeConfig]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is a part of the Amplify
+    #   app.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   Stores the information about the form's fields.
+    #   @return [Hash<String,Types::FieldConfig>]
+    #
+    # @!attribute [rw] form_action_type
+    #   The operation to perform on the specified form.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the form.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the form.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_version
+    #   The schema version of the form when it was imported.
+    #   @return [String]
+    #
+    # @!attribute [rw] sectional_elements
+    #   Stores the visual helper elements for the form that are not
+    #   associated with any data.
+    #   @return [Hash<String,Types::SectionalElement>]
+    #
+    # @!attribute [rw] style
+    #   Stores the configuration for the form's style.
+    #   @return [Types::FormStyle]
+    #
+    # @!attribute [rw] tags
+    #   One or more key-value pairs to use when tagging the form.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/Form AWS API Documentation
+    #
+    class Form < Struct.new(
+      :app_id,
+      :cta,
+      :data_type,
+      :environment_name,
+      :fields,
+      :form_action_type,
+      :id,
+      :name,
+      :schema_version,
+      :sectional_elements,
+      :style,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes how to bind a component property to form data.
     #
     # @note When making an API call, you may pass FormBindingElement
@@ -4891,6 +5668,271 @@ module Aws::AmplifyUIBuilder
     class FormBindingElement < Struct.new(
       :element,
       :property)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration for a button UI element that is a part of
+    # a form.
+    #
+    # @note When making an API call, you may pass FormButton
+    #   data as a hash:
+    #
+    #       {
+    #         children: "String",
+    #         excluded: false,
+    #         position: {
+    #           below: "String",
+    #           fixed: "first", # accepts first
+    #           right_of: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] children
+    #   Describes the button's properties.
+    #   @return [String]
+    #
+    # @!attribute [rw] excluded
+    #   Specifies whether the button is visible on the form.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] position
+    #   The position of the button.
+    #   @return [Types::FieldPosition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FormButton AWS API Documentation
+    #
+    class FormButton < Struct.new(
+      :children,
+      :excluded,
+      :position)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the call to action button configuration for the form..
+    #
+    # @note When making an API call, you may pass FormCTA
+    #   data as a hash:
+    #
+    #       {
+    #         cancel: {
+    #           children: "String",
+    #           excluded: false,
+    #           position: {
+    #             below: "String",
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #           },
+    #         },
+    #         clear: {
+    #           children: "String",
+    #           excluded: false,
+    #           position: {
+    #             below: "String",
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #           },
+    #         },
+    #         position: "top", # accepts top, bottom, top_and_bottom
+    #         submit: {
+    #           children: "String",
+    #           excluded: false,
+    #           position: {
+    #             below: "String",
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cancel
+    #   Displays a cancel button.
+    #   @return [Types::FormButton]
+    #
+    # @!attribute [rw] clear
+    #   Displays a clear button.
+    #   @return [Types::FormButton]
+    #
+    # @!attribute [rw] position
+    #   The position of the button.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit
+    #   Displays a submit button.
+    #   @return [Types::FormButton]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FormCTA AWS API Documentation
+    #
+    class FormCTA < Struct.new(
+      :cancel,
+      :clear,
+      :position,
+      :submit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the data type configuration for the data source associated
+    # with a form.
+    #
+    # @note When making an API call, you may pass FormDataTypeConfig
+    #   data as a hash:
+    #
+    #       {
+    #         data_source_type: "DataStore", # required, accepts DataStore, Custom
+    #         data_type_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] data_source_type
+    #   The data source type, either an Amplify DataStore model or a custom
+    #   data type.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type_name
+    #   The unique name of the data type you are using as the data source
+    #   for the form.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FormDataTypeConfig AWS API Documentation
+    #
+    class FormDataTypeConfig < Struct.new(
+      :data_source_type,
+      :data_type_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration for an input field on a form. Use
+    # `FormInputValueProperty` to specify the values to render or bind by
+    # default.
+    #
+    # @note When making an API call, you may pass FormInputValueProperty
+    #   data as a hash:
+    #
+    #       {
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The value to assign to the input field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FormInputValueProperty AWS API Documentation
+    #
+    class FormInputValueProperty < Struct.new(
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration for the form's style.
+    #
+    # @note When making an API call, you may pass FormStyle
+    #   data as a hash:
+    #
+    #       {
+    #         horizontal_gap: {
+    #           token_reference: "String",
+    #           value: "String",
+    #         },
+    #         outer_padding: {
+    #           token_reference: "String",
+    #           value: "String",
+    #         },
+    #         vertical_gap: {
+    #           token_reference: "String",
+    #           value: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] horizontal_gap
+    #   The spacing for the horizontal gap.
+    #   @return [Types::FormStyleConfig]
+    #
+    # @!attribute [rw] outer_padding
+    #   The size of the outer padding for the form.
+    #   @return [Types::FormStyleConfig]
+    #
+    # @!attribute [rw] vertical_gap
+    #   The spacing for the vertical gap.
+    #   @return [Types::FormStyleConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FormStyle AWS API Documentation
+    #
+    class FormStyle < Struct.new(
+      :horizontal_gap,
+      :outer_padding,
+      :vertical_gap)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration settings for the form's style properties.
+    #
+    # @note FormStyleConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note FormStyleConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FormStyleConfig corresponding to the set member.
+    #
+    # @!attribute [rw] token_reference
+    #   A reference to a design token to use to bind the form's style
+    #   properties to an existing theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the style setting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FormStyleConfig AWS API Documentation
+    #
+    class FormStyleConfig < Struct.new(
+      :token_reference,
+      :value,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class TokenReference < FormStyleConfig; end
+      class Value < FormStyleConfig; end
+      class Unknown < FormStyleConfig; end
+    end
+
+    # Describes the basic information about a form.
+    #
+    # @!attribute [rw] app_id
+    #   The unique ID for the app associated with the form summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   The form's data source type.
+    #   @return [Types::FormDataTypeConfig]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is part of the Amplify app.
+    #   @return [String]
+    #
+    # @!attribute [rw] form_action_type
+    #   The type of operation to perform on the form.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the form.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the form.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FormSummary AWS API Documentation
+    #
+    class FormSummary < Struct.new(
+      :app_id,
+      :data_type,
+      :environment_name,
+      :form_action_type,
+      :id,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4934,6 +5976,86 @@ module Aws::AmplifyUIBuilder
     #
     class GetComponentResponse < Struct.new(
       :component)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFormRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "String", # required
+    #         environment_name: "String", # required
+    #         id: "Uuid", # required
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   The unique ID of the Amplify app.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is part of the Amplify app.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the form.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/GetFormRequest AWS API Documentation
+    #
+    class GetFormRequest < Struct.new(
+      :app_id,
+      :environment_name,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] form
+    #   Represents the configuration settings for the form.
+    #   @return [Types::Form]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/GetFormResponse AWS API Documentation
+    #
+    class GetFormResponse < Struct.new(
+      :form)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "String", # required
+    #         environment_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   The unique ID of the Amplify app.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is part of the Amplify app.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/GetMetadataRequest AWS API Documentation
+    #
+    class GetMetadataRequest < Struct.new(
+      :app_id,
+      :environment_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] features
+    #   Represents the configuration settings for the features metadata.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/GetMetadataResponse AWS API Documentation
+    #
+    class GetMetadataResponse < Struct.new(
+      :features)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5056,6 +6178,61 @@ module Aws::AmplifyUIBuilder
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ListComponentsResponse AWS API Documentation
     #
     class ListComponentsResponse < Struct.new(
+      :entities,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFormsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "String", # required
+    #         environment_name: "String", # required
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   The unique ID for the Amplify app.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is a part of the Amplify
+    #   app.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of forms to retrieve.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ListFormsRequest AWS API Documentation
+    #
+    class ListFormsRequest < Struct.new(
+      :app_id,
+      :environment_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entities
+    #   The list of forms for the Amplify app.
+    #   @return [Array<Types::FormSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's included if more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ListFormsResponse AWS API Documentation
+    #
+    class ListFormsResponse < Struct.new(
       :entities,
       :next_token)
       SENSITIVE = []
@@ -5265,6 +6442,66 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # Stores the metadata information about a feature on a form or view.
+    #
+    # @note When making an API call, you may pass PutMetadataFlagBody
+    #   data as a hash:
+    #
+    #       {
+    #         new_value: "String", # required
+    #       }
+    #
+    # @!attribute [rw] new_value
+    #   The new information to store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/PutMetadataFlagBody AWS API Documentation
+    #
+    class PutMetadataFlagBody < Struct.new(
+      :new_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutMetadataFlagRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "String", # required
+    #         body: { # required
+    #           new_value: "String", # required
+    #         },
+    #         environment_name: "String", # required
+    #         feature_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   The unique ID for the Amplify app.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The metadata information to store.
+    #   @return [Types::PutMetadataFlagBody]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is part of the Amplify app.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_name
+    #   The name of the feature associated with the metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/PutMetadataFlagRequest AWS API Documentation
+    #
+    class PutMetadataFlagRequest < Struct.new(
+      :app_id,
+      :body,
+      :environment_name,
+      :feature_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RefreshTokenRequest
     #   data as a hash:
     #
@@ -5355,6 +6592,61 @@ module Aws::AmplifyUIBuilder
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Stores the configuration information for a visual helper element for a
+    # form. A sectional element can be a header, a text block, or a divider.
+    # These elements are static and not associated with any data.
+    #
+    # @note When making an API call, you may pass SectionalElement
+    #   data as a hash:
+    #
+    #       {
+    #         level: 1,
+    #         orientation: "String",
+    #         position: {
+    #           below: "String",
+    #           fixed: "first", # accepts first
+    #           right_of: "String",
+    #         },
+    #         text: "String",
+    #         type: "String", # required
+    #       }
+    #
+    # @!attribute [rw] level
+    #   Specifies the size of the font for a `Heading` sectional element.
+    #   Valid values are `1 | 2 | 3 | 4 | 5 | 6`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] orientation
+    #   Specifies the orientation for a `Divider` sectional element. Valid
+    #   values are `horizontal` or `vertical`.
+    #   @return [String]
+    #
+    # @!attribute [rw] position
+    #   Specifies the position of the text in a field for a `Text` sectional
+    #   element.
+    #   @return [Types::FieldPosition]
+    #
+    # @!attribute [rw] text
+    #   The text for a `Text` sectional element.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of sectional element. Valid values are `Heading`, `Text`,
+    #   and `Divider`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/SectionalElement AWS API Documentation
+    #
+    class SectionalElement < Struct.new(
+      :level,
+      :orientation,
+      :position,
+      :text,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5560,6 +6852,19 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # You don't have permission to perform this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Updates and saves all of the information about a component, based on
     # component ID.
     #
@@ -5588,6 +6893,7 @@ module Aws::AmplifyUIBuilder
     #                   },
     #                 },
     #               ],
+    #               slot_name: "String",
     #               user_attribute: "String",
     #             },
     #             default_value: "String",
@@ -6584,6 +7890,7 @@ module Aws::AmplifyUIBuilder
     #                     },
     #                   },
     #                 ],
+    #                 slot_name: "String",
     #                 user_attribute: "String",
     #               },
     #               default_value: "String",
@@ -7525,6 +8832,343 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # Updates and saves all of the information about a form, based on form
+    # ID.
+    #
+    # @note When making an API call, you may pass UpdateFormData
+    #   data as a hash:
+    #
+    #       {
+    #         cta: {
+    #           cancel: {
+    #             children: "String",
+    #             excluded: false,
+    #             position: {
+    #               below: "String",
+    #               fixed: "first", # accepts first
+    #               right_of: "String",
+    #             },
+    #           },
+    #           clear: {
+    #             children: "String",
+    #             excluded: false,
+    #             position: {
+    #               below: "String",
+    #               fixed: "first", # accepts first
+    #               right_of: "String",
+    #             },
+    #           },
+    #           position: "top", # accepts top, bottom, top_and_bottom
+    #           submit: {
+    #             children: "String",
+    #             excluded: false,
+    #             position: {
+    #               below: "String",
+    #               fixed: "first", # accepts first
+    #               right_of: "String",
+    #             },
+    #           },
+    #         },
+    #         data_type: {
+    #           data_source_type: "DataStore", # required, accepts DataStore, Custom
+    #           data_type_name: "String", # required
+    #         },
+    #         fields: {
+    #           "String" => {
+    #             excluded: false,
+    #             input_type: {
+    #               default_checked: false,
+    #               default_country_code: "String",
+    #               default_value: "String",
+    #               descriptive_text: "String",
+    #               max_value: 1.0,
+    #               min_value: 1.0,
+    #               name: "String",
+    #               placeholder: "String",
+    #               read_only: false,
+    #               required: false,
+    #               step: 1.0,
+    #               type: "String", # required
+    #               value: "String",
+    #               value_mappings: {
+    #                 values: [ # required
+    #                   {
+    #                     display_value: {
+    #                       value: "String",
+    #                     },
+    #                     value: { # required
+    #                       value: "String",
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #             label: "String",
+    #             position: {
+    #               below: "String",
+    #               fixed: "first", # accepts first
+    #               right_of: "String",
+    #             },
+    #             validations: [
+    #               {
+    #                 num_values: [1],
+    #                 str_values: ["String"],
+    #                 type: "String", # required
+    #                 validation_message: "String",
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         form_action_type: "create", # accepts create, update
+    #         name: "FormName",
+    #         schema_version: "String",
+    #         sectional_elements: {
+    #           "String" => {
+    #             level: 1,
+    #             orientation: "String",
+    #             position: {
+    #               below: "String",
+    #               fixed: "first", # accepts first
+    #               right_of: "String",
+    #             },
+    #             text: "String",
+    #             type: "String", # required
+    #           },
+    #         },
+    #         style: {
+    #           horizontal_gap: {
+    #             token_reference: "String",
+    #             value: "String",
+    #           },
+    #           outer_padding: {
+    #             token_reference: "String",
+    #             value: "String",
+    #           },
+    #           vertical_gap: {
+    #             token_reference: "String",
+    #             value: "String",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cta
+    #   The `FormCTA` object that stores the call to action configuration
+    #   for the form.
+    #   @return [Types::FormCTA]
+    #
+    # @!attribute [rw] data_type
+    #   The type of data source to use to create the form.
+    #   @return [Types::FormDataTypeConfig]
+    #
+    # @!attribute [rw] fields
+    #   The configuration information for the form's fields.
+    #   @return [Hash<String,Types::FieldConfig>]
+    #
+    # @!attribute [rw] form_action_type
+    #   Specifies whether to perform a create or update action on the form.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the form.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_version
+    #   The schema version of the form.
+    #   @return [String]
+    #
+    # @!attribute [rw] sectional_elements
+    #   The configuration information for the visual helper elements for the
+    #   form. These elements are not associated with any data.
+    #   @return [Hash<String,Types::SectionalElement>]
+    #
+    # @!attribute [rw] style
+    #   The configuration for the form's style.
+    #   @return [Types::FormStyle]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/UpdateFormData AWS API Documentation
+    #
+    class UpdateFormData < Struct.new(
+      :cta,
+      :data_type,
+      :fields,
+      :form_action_type,
+      :name,
+      :schema_version,
+      :sectional_elements,
+      :style)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFormRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "String", # required
+    #         client_token: "String",
+    #         environment_name: "String", # required
+    #         id: "Uuid", # required
+    #         updated_form: { # required
+    #           cta: {
+    #             cancel: {
+    #               children: "String",
+    #               excluded: false,
+    #               position: {
+    #                 below: "String",
+    #                 fixed: "first", # accepts first
+    #                 right_of: "String",
+    #               },
+    #             },
+    #             clear: {
+    #               children: "String",
+    #               excluded: false,
+    #               position: {
+    #                 below: "String",
+    #                 fixed: "first", # accepts first
+    #                 right_of: "String",
+    #               },
+    #             },
+    #             position: "top", # accepts top, bottom, top_and_bottom
+    #             submit: {
+    #               children: "String",
+    #               excluded: false,
+    #               position: {
+    #                 below: "String",
+    #                 fixed: "first", # accepts first
+    #                 right_of: "String",
+    #               },
+    #             },
+    #           },
+    #           data_type: {
+    #             data_source_type: "DataStore", # required, accepts DataStore, Custom
+    #             data_type_name: "String", # required
+    #           },
+    #           fields: {
+    #             "String" => {
+    #               excluded: false,
+    #               input_type: {
+    #                 default_checked: false,
+    #                 default_country_code: "String",
+    #                 default_value: "String",
+    #                 descriptive_text: "String",
+    #                 max_value: 1.0,
+    #                 min_value: 1.0,
+    #                 name: "String",
+    #                 placeholder: "String",
+    #                 read_only: false,
+    #                 required: false,
+    #                 step: 1.0,
+    #                 type: "String", # required
+    #                 value: "String",
+    #                 value_mappings: {
+    #                   values: [ # required
+    #                     {
+    #                       display_value: {
+    #                         value: "String",
+    #                       },
+    #                       value: { # required
+    #                         value: "String",
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               label: "String",
+    #               position: {
+    #                 below: "String",
+    #                 fixed: "first", # accepts first
+    #                 right_of: "String",
+    #               },
+    #               validations: [
+    #                 {
+    #                   num_values: [1],
+    #                   str_values: ["String"],
+    #                   type: "String", # required
+    #                   validation_message: "String",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           form_action_type: "create", # accepts create, update
+    #           name: "FormName",
+    #           schema_version: "String",
+    #           sectional_elements: {
+    #             "String" => {
+    #               level: 1,
+    #               orientation: "String",
+    #               position: {
+    #                 below: "String",
+    #                 fixed: "first", # accepts first
+    #                 right_of: "String",
+    #               },
+    #               text: "String",
+    #               type: "String", # required
+    #             },
+    #           },
+    #           style: {
+    #             horizontal_gap: {
+    #               token_reference: "String",
+    #               value: "String",
+    #             },
+    #             outer_padding: {
+    #               token_reference: "String",
+    #               value: "String",
+    #             },
+    #             vertical_gap: {
+    #               token_reference: "String",
+    #               value: "String",
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   The unique ID for the Amplify app.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The unique client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is part of the Amplify app.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID for the form.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_form
+    #   The request accepts the following data in JSON format.
+    #   @return [Types::UpdateFormData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/UpdateFormRequest AWS API Documentation
+    #
+    class UpdateFormRequest < Struct.new(
+      :app_id,
+      :client_token,
+      :environment_name,
+      :id,
+      :updated_form)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entity
+    #   Describes the configuration of the updated form.
+    #   @return [Types::Form]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/UpdateFormResponse AWS API Documentation
+    #
+    class UpdateFormResponse < Struct.new(
+      :entity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Saves the data binding information for a theme.
     #
     # @note When making an API call, you may pass UpdateThemeData
@@ -7664,6 +9308,68 @@ module Aws::AmplifyUIBuilder
     #
     class UpdateThemeResponse < Struct.new(
       :entity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Associates a complex object with a display value. Use `ValueMapping`
+    # to store how to represent complex objects when they are displayed.
+    #
+    # @note When making an API call, you may pass ValueMapping
+    #   data as a hash:
+    #
+    #       {
+    #         display_value: {
+    #           value: "String",
+    #         },
+    #         value: { # required
+    #           value: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] display_value
+    #   The value to display for the complex object.
+    #   @return [Types::FormInputValueProperty]
+    #
+    # @!attribute [rw] value
+    #   The complex object.
+    #   @return [Types::FormInputValueProperty]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ValueMapping AWS API Documentation
+    #
+    class ValueMapping < Struct.new(
+      :display_value,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the data binding configuration for a value map.
+    #
+    # @note When making an API call, you may pass ValueMappings
+    #   data as a hash:
+    #
+    #       {
+    #         values: [ # required
+    #           {
+    #             display_value: {
+    #               value: "String",
+    #             },
+    #             value: { # required
+    #               value: "String",
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] values
+    #   The value and display value pairs.
+    #   @return [Array<Types::ValueMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ValueMappings AWS API Documentation
+    #
+    class ValueMappings < Struct.new(
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end

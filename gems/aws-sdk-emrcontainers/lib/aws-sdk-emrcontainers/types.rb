@@ -325,7 +325,7 @@ module Aws::EMRContainers
     #
     # @!attribute [rw] certificate_arn
     #   The certificate ARN provided by users for the managed endpoint. This
-    #   fiedd is under deprecation and will be removed in future releases.
+    #   field is under deprecation and will be removed in future releases.
     #   @return [String]
     #
     # @!attribute [rw] configuration_overrides
@@ -787,16 +787,25 @@ module Aws::EMRContainers
     #           entry_point_arguments: ["EntryPointArgument"],
     #           spark_submit_parameters: "SparkSubmitParameters",
     #         },
+    #         spark_sql_job_driver: {
+    #           entry_point: "EntryPointPath",
+    #           spark_sql_parameters: "SparkSqlParameters",
+    #         },
     #       }
     #
     # @!attribute [rw] spark_submit_job_driver
     #   The job driver parameters specified for spark submit.
     #   @return [Types::SparkSubmitJobDriver]
     #
+    # @!attribute [rw] spark_sql_job_driver
+    #   The job driver for job type.
+    #   @return [Types::SparkSqlJobDriver]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/JobDriver AWS API Documentation
     #
     class JobDriver < Struct.new(
-      :spark_submit_job_driver)
+      :spark_submit_job_driver,
+      :spark_sql_job_driver)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1214,6 +1223,33 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
+    # The job driver for job type.
+    #
+    # @note When making an API call, you may pass SparkSqlJobDriver
+    #   data as a hash:
+    #
+    #       {
+    #         entry_point: "EntryPointPath",
+    #         spark_sql_parameters: "SparkSqlParameters",
+    #       }
+    #
+    # @!attribute [rw] entry_point
+    #   The SQL file to be executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] spark_sql_parameters
+    #   The Spark parameters to be included in the Spark SQL command.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/SparkSqlJobDriver AWS API Documentation
+    #
+    class SparkSqlJobDriver < Struct.new(
+      :entry_point,
+      :spark_sql_parameters)
+      SENSITIVE = [:entry_point, :spark_sql_parameters]
+      include Aws::Structure
+    end
+
     # The information about job driver for Spark submit.
     #
     # @note When making an API call, you may pass SparkSubmitJobDriver
@@ -1261,6 +1297,10 @@ module Aws::EMRContainers
     #             entry_point: "EntryPointPath", # required
     #             entry_point_arguments: ["EntryPointArgument"],
     #             spark_submit_parameters: "SparkSubmitParameters",
+    #           },
+    #           spark_sql_job_driver: {
+    #             entry_point: "EntryPointPath",
+    #             spark_sql_parameters: "SparkSqlParameters",
     #           },
     #         },
     #         configuration_overrides: {

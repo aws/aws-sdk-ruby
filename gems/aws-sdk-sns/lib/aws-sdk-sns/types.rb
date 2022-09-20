@@ -401,6 +401,7 @@ module Aws::SNS
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         data_protection_policy: "attributeValue",
     #       }
     #
     # @!attribute [rw] name
@@ -481,12 +482,23 @@ module Aws::SNS
     #    </note>
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] data_protection_policy
+    #   The body of the policy document you want to use for this topic.
+    #
+    #   You can only add one policy per topic.
+    #
+    #   The policy must be in JSON string format.
+    #
+    #   Length Constraints: Maximum length of 30,720.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateTopicInput AWS API Documentation
     #
     class CreateTopicInput < Struct.new(
       :name,
       :attributes,
-      :tags)
+      :tags,
+      :data_protection_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -647,6 +659,44 @@ module Aws::SNS
     #
     class FilterPolicyLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDataProtectionPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "topicARN", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the topic whose `DataProtectionPolicy` you want to get.
+    #
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the Amazon Web Services General Reference.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetDataProtectionPolicyInput AWS API Documentation
+    #
+    class GetDataProtectionPolicyInput < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_protection_policy
+    #   Retrieves the `DataProtectionPolicy` in JSON string format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetDataProtectionPolicyResponse AWS API Documentation
+    #
+    class GetDataProtectionPolicyResponse < Struct.new(
+      :data_protection_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2223,6 +2273,43 @@ module Aws::SNS
     class PublishResponse < Struct.new(
       :message_id,
       :sequence_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutDataProtectionPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "topicARN", # required
+    #         data_protection_policy: "attributeValue", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the topic whose `DataProtectionPolicy` you want to add or
+    #   update.
+    #
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the Amazon Web Services General Reference.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] data_protection_policy
+    #   The JSON serialization of the topic's `DataProtectionPolicy`.
+    #
+    #   The `DataProtectionPolicy` must be in JSON string format.
+    #
+    #   Length Constraints: Maximum length of 30,720.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PutDataProtectionPolicyInput AWS API Documentation
+    #
+    class PutDataProtectionPolicyInput < Struct.new(
+      :resource_arn,
+      :data_protection_policy)
       SENSITIVE = []
       include Aws::Structure
     end

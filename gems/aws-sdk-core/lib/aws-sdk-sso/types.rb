@@ -10,21 +10,18 @@
 module Aws::SSO
   module Types
 
-    # Provides information about your Amazon Web Services account.
+    # Provides information about your AWS account.
     #
     # @!attribute [rw] account_id
-    #   The identifier of the Amazon Web Services account that is assigned
-    #   to the user.
+    #   The identifier of the AWS account that is assigned to the user.
     #   @return [String]
     #
     # @!attribute [rw] account_name
-    #   The display name of the Amazon Web Services account that is assigned
-    #   to the user.
+    #   The display name of the AWS account that is assigned to the user.
     #   @return [String]
     #
     # @!attribute [rw] email_address
-    #   The email address of the Amazon Web Services account that is
-    #   assigned to the user.
+    #   The email address of the AWS account that is assigned to the user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-2019-06-10/AccountInfo AWS API Documentation
@@ -51,14 +48,13 @@ module Aws::SSO
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The identifier for the Amazon Web Services account that is assigned
-    #   to the user.
+    #   The identifier for the AWS account that is assigned to the user.
     #   @return [String]
     #
     # @!attribute [rw] access_token
     #   The token issued by the `CreateToken` API call. For more
-    #   information, see [CreateToken][1] in the *Amazon Web Services SSO
-    #   OIDC API Reference Guide*.
+    #   information, see [CreateToken][1] in the *IAM Identity Center OIDC
+    #   API Reference Guide*.
     #
     #
     #
@@ -122,8 +118,8 @@ module Aws::SSO
     #
     # @!attribute [rw] access_token
     #   The token issued by the `CreateToken` API call. For more
-    #   information, see [CreateToken][1] in the *Amazon Web Services SSO
-    #   OIDC API Reference Guide*.
+    #   information, see [CreateToken][1] in the *IAM Identity Center OIDC
+    #   API Reference Guide*.
     #
     #
     #
@@ -131,8 +127,7 @@ module Aws::SSO
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The identifier for the Amazon Web Services account that is assigned
-    #   to the user.
+    #   The identifier for the AWS account that is assigned to the user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-2019-06-10/ListAccountRolesRequest AWS API Documentation
@@ -184,8 +179,8 @@ module Aws::SSO
     #
     # @!attribute [rw] access_token
     #   The token issued by the `CreateToken` API call. For more
-    #   information, see [CreateToken][1] in the *Amazon Web Services SSO
-    #   OIDC API Reference Guide*.
+    #   information, see [CreateToken][1] in the *IAM Identity Center OIDC
+    #   API Reference Guide*.
     #
     #
     #
@@ -229,8 +224,8 @@ module Aws::SSO
     #
     # @!attribute [rw] access_token
     #   The token issued by the `CreateToken` API call. For more
-    #   information, see [CreateToken][1] in the *Amazon Web Services SSO
-    #   OIDC API Reference Guide*.
+    #   information, see [CreateToken][1] in the *IAM Identity Center OIDC
+    #   API Reference Guide*.
     #
     #
     #
@@ -264,8 +259,7 @@ module Aws::SSO
     # @!attribute [rw] access_key_id
     #   The identifier used for the temporary security credentials. For more
     #   information, see [Using Temporary Security Credentials to Request
-    #   Access to Amazon Web Services Resources][1] in the *Amazon Web
-    #   Services IAM User Guide*.
+    #   Access to AWS Resources][1] in the *AWS IAM User Guide*.
     #
     #
     #
@@ -274,9 +268,8 @@ module Aws::SSO
     #
     # @!attribute [rw] secret_access_key
     #   The key that is used to sign the request. For more information, see
-    #   [Using Temporary Security Credentials to Request Access to Amazon
-    #   Web Services Resources][1] in the *Amazon Web Services IAM User
-    #   Guide*.
+    #   [Using Temporary Security Credentials to Request Access to AWS
+    #   Resources][1] in the *AWS IAM User Guide*.
     #
     #
     #
@@ -285,9 +278,8 @@ module Aws::SSO
     #
     # @!attribute [rw] session_token
     #   The token used for temporary credentials. For more information, see
-    #   [Using Temporary Security Credentials to Request Access to Amazon
-    #   Web Services Resources][1] in the *Amazon Web Services IAM User
-    #   Guide*.
+    #   [Using Temporary Security Credentials to Request Access to AWS
+    #   Resources][1] in the *AWS IAM User Guide*.
     #
     #
     #
@@ -316,8 +308,7 @@ module Aws::SSO
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The identifier of the Amazon Web Services account assigned to the
-    #   user.
+    #   The identifier of the AWS account assigned to the user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-2019-06-10/RoleInfo AWS API Documentation

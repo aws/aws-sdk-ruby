@@ -45,6 +45,8 @@ module Aws::SNS
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointDisabledException = Shapes::StructureShape.new(name: 'EndpointDisabledException')
     FilterPolicyLimitExceededException = Shapes::StructureShape.new(name: 'FilterPolicyLimitExceededException')
+    GetDataProtectionPolicyInput = Shapes::StructureShape.new(name: 'GetDataProtectionPolicyInput')
+    GetDataProtectionPolicyResponse = Shapes::StructureShape.new(name: 'GetDataProtectionPolicyResponse')
     GetEndpointAttributesInput = Shapes::StructureShape.new(name: 'GetEndpointAttributesInput')
     GetEndpointAttributesResponse = Shapes::StructureShape.new(name: 'GetEndpointAttributesResponse')
     GetPlatformApplicationAttributesInput = Shapes::StructureShape.new(name: 'GetPlatformApplicationAttributesInput')
@@ -118,6 +120,7 @@ module Aws::SNS
     PublishBatchResultEntryList = Shapes::ListShape.new(name: 'PublishBatchResultEntryList')
     PublishInput = Shapes::StructureShape.new(name: 'PublishInput')
     PublishResponse = Shapes::StructureShape.new(name: 'PublishResponse')
+    PutDataProtectionPolicyInput = Shapes::StructureShape.new(name: 'PutDataProtectionPolicyInput')
     RemovePermissionInput = Shapes::StructureShape.new(name: 'RemovePermissionInput')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RouteType = Shapes::StringShape.new(name: 'RouteType')
@@ -251,6 +254,7 @@ module Aws::SNS
     CreateTopicInput.add_member(:name, Shapes::ShapeRef.new(shape: topicName, required: true, location_name: "Name"))
     CreateTopicInput.add_member(:attributes, Shapes::ShapeRef.new(shape: TopicAttributesMap, location_name: "Attributes"))
     CreateTopicInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateTopicInput.add_member(:data_protection_policy, Shapes::ShapeRef.new(shape: attributeValue, location_name: "DataProtectionPolicy"))
     CreateTopicInput.struct_class = Types::CreateTopicInput
 
     CreateTopicResponse.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, location_name: "TopicArn"))
@@ -284,6 +288,12 @@ module Aws::SNS
 
     FilterPolicyLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     FilterPolicyLimitExceededException.struct_class = Types::FilterPolicyLimitExceededException
+
+    GetDataProtectionPolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "ResourceArn"))
+    GetDataProtectionPolicyInput.struct_class = Types::GetDataProtectionPolicyInput
+
+    GetDataProtectionPolicyResponse.add_member(:data_protection_policy, Shapes::ShapeRef.new(shape: attributeValue, location_name: "DataProtectionPolicy"))
+    GetDataProtectionPolicyResponse.struct_class = Types::GetDataProtectionPolicyResponse
 
     GetEndpointAttributesInput.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
     GetEndpointAttributesInput.struct_class = Types::GetEndpointAttributesInput
@@ -508,6 +518,10 @@ module Aws::SNS
     PublishResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: messageId, location_name: "MessageId"))
     PublishResponse.add_member(:sequence_number, Shapes::ShapeRef.new(shape: String, location_name: "SequenceNumber"))
     PublishResponse.struct_class = Types::PublishResponse
+
+    PutDataProtectionPolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "ResourceArn"))
+    PutDataProtectionPolicyInput.add_member(:data_protection_policy, Shapes::ShapeRef.new(shape: attributeValue, required: true, location_name: "DataProtectionPolicy"))
+    PutDataProtectionPolicyInput.struct_class = Types::PutDataProtectionPolicyInput
 
     RemovePermissionInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "TopicArn"))
     RemovePermissionInput.add_member(:label, Shapes::ShapeRef.new(shape: label, required: true, location_name: "Label"))
@@ -796,6 +810,19 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentAccessException)
       end)
 
+      api.add_operation(:get_data_protection_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataProtectionPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDataProtectionPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: GetDataProtectionPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityException)
+      end)
+
       api.add_operation(:get_endpoint_attributes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetEndpointAttributes"
         o.http_method = "POST"
@@ -1050,6 +1077,7 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:publish_batch, Seahorse::Model::Operation.new.tap do |o|
@@ -1076,6 +1104,20 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: KMSOptInRequired)
         o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:put_data_protection_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutDataProtectionPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutDataProtectionPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityException)
       end)
 

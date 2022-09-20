@@ -139,7 +139,7 @@ module Aws::MediaConnect
     #             min_latency: 1,
     #             name: "__string",
     #             port: 1,
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #             remote_id: "__string",
     #             sender_control_port: 1,
     #             smoothing_latency: 1,
@@ -229,9 +229,11 @@ module Aws::MediaConnect
     #             ],
     #             min_latency: 1,
     #             name: "__string",
-    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #             sender_control_port: 1,
     #             sender_ip_address: "__string",
+    #             source_listener_address: "__string",
+    #             source_listener_port: 1,
     #             stream_id: "__string",
     #             vpc_interface_name: "__string",
     #             whitelist_cidr: "__string",
@@ -472,7 +474,7 @@ module Aws::MediaConnect
     #         min_latency: 1,
     #         name: "__string",
     #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #         remote_id: "__string",
     #         sender_control_port: 1,
     #         smoothing_latency: 1,
@@ -702,7 +704,7 @@ module Aws::MediaConnect
     #             min_latency: 1,
     #             name: "__string",
     #             port: 1,
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #             remote_id: "__string",
     #             sender_control_port: 1,
     #             smoothing_latency: 1,
@@ -746,9 +748,11 @@ module Aws::MediaConnect
     #           ],
     #           min_latency: 1,
     #           name: "__string",
-    #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #           sender_control_port: 1,
     #           sender_ip_address: "__string",
+    #           source_listener_address: "__string",
+    #           source_listener_port: 1,
     #           stream_id: "__string",
     #           vpc_interface_name: "__string",
     #           whitelist_cidr: "__string",
@@ -796,9 +800,11 @@ module Aws::MediaConnect
     #             ],
     #             min_latency: 1,
     #             name: "__string",
-    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #             sender_control_port: 1,
     #             sender_ip_address: "__string",
+    #             source_listener_address: "__string",
+    #             source_listener_port: 1,
     #             stream_id: "__string",
     #             vpc_interface_name: "__string",
     #             whitelist_cidr: "__string",
@@ -3091,9 +3097,11 @@ module Aws::MediaConnect
     #         ],
     #         min_latency: 1,
     #         name: "__string",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #         sender_control_port: 1,
     #         sender_ip_address: "__string",
+    #         source_listener_address: "__string",
+    #         source_listener_port: 1,
     #         stream_id: "__string",
     #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
@@ -3165,6 +3173,14 @@ module Aws::MediaConnect
     #   connection with the sender.
     #   @return [String]
     #
+    # @!attribute [rw] source_listener_address
+    #   Source IP or domain name for SRT-caller protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_listener_port
+    #   Source port for SRT-caller protocol.
+    #   @return [Integer]
+    #
     # @!attribute [rw] stream_id
     #   The stream ID that you want to use for this transport. This
     #   parameter applies only to Zixi-based streams.
@@ -3197,6 +3213,8 @@ module Aws::MediaConnect
       :protocol,
       :sender_control_port,
       :sender_ip_address,
+      :source_listener_address,
+      :source_listener_port,
       :stream_id,
       :vpc_interface_name,
       :whitelist_cidr)
@@ -3497,6 +3515,14 @@ module Aws::MediaConnect
     #   streams.
     #   @return [Integer]
     #
+    # @!attribute [rw] source_listener_address
+    #   Source IP or domain name for SRT-caller protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_listener_port
+    #   Source port for SRT-caller protocol.
+    #   @return [Integer]
+    #
     # @!attribute [rw] stream_id
     #   The stream ID that you want to use for this transport. This
     #   parameter applies only to Zixi-based streams.
@@ -3515,6 +3541,8 @@ module Aws::MediaConnect
       :sender_control_port,
       :sender_ip_address,
       :smoothing_latency,
+      :source_listener_address,
+      :source_listener_port,
       :stream_id)
       SENSITIVE = []
       include Aws::Structure
@@ -3895,7 +3923,7 @@ module Aws::MediaConnect
     #         min_latency: 1,
     #         output_arn: "__string", # required
     #         port: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #         remote_id: "__string",
     #         sender_control_port: 1,
     #         sender_ip_address: "__string",
@@ -3933,7 +3961,8 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] max_latency
-    #   The maximum latency in milliseconds for Zixi-based streams.
+    #   The maximum latency in milliseconds. This parameter applies only to
+    #   RIST-based, Zixi-based, and Fujitsu-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] media_stream_output_configurations
@@ -4131,10 +4160,12 @@ module Aws::MediaConnect
     #           },
     #         ],
     #         min_latency: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos
     #         sender_control_port: 1,
     #         sender_ip_address: "__string",
     #         source_arn: "__string", # required
+    #         source_listener_address: "__string",
+    #         source_listener_port: 1,
     #         stream_id: "__string",
     #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
@@ -4196,6 +4227,8 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] sender_control_port
+    #   The port that the flow uses to send outbound requests to initiate
+    #   connection with the sender.
     #   @return [Integer]
     #
     # @!attribute [rw] sender_ip_address
@@ -4205,6 +4238,14 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] source_arn
     #   @return [String]
+    #
+    # @!attribute [rw] source_listener_address
+    #   Source IP or domain name for SRT-caller protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_listener_port
+    #   Source port for SRT-caller protocol.
+    #   @return [Integer]
     #
     # @!attribute [rw] stream_id
     #   The stream ID that you want to use for this transport. This
@@ -4239,6 +4280,8 @@ module Aws::MediaConnect
       :sender_control_port,
       :sender_ip_address,
       :source_arn,
+      :source_listener_address,
+      :source_listener_port,
       :stream_id,
       :vpc_interface_name,
       :whitelist_cidr)

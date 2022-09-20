@@ -563,6 +563,15 @@ module Aws::MediaLive
     #           lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
     #           metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #         },
+    #         eac_3_atmos_settings: {
+    #           bitrate: 1.0,
+    #           coding_mode: "CODING_MODE_5_1_4", # accepts CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
+    #           dialnorm: 1,
+    #           drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #           drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #           height_trim: 1.0,
+    #           surround_trim: 1.0,
+    #         },
     #         eac_3_settings: {
     #           attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #           bitrate: 1.0,
@@ -607,6 +616,10 @@ module Aws::MediaLive
     #   Ac3 Settings
     #   @return [Types::Ac3Settings]
     #
+    # @!attribute [rw] eac_3_atmos_settings
+    #   Eac3 Atmos Settings
+    #   @return [Types::Eac3AtmosSettings]
+    #
     # @!attribute [rw] eac_3_settings
     #   Eac3 Settings
     #   @return [Types::Eac3Settings]
@@ -628,6 +641,7 @@ module Aws::MediaLive
     class AudioCodecSettings < Struct.new(
       :aac_settings,
       :ac_3_settings,
+      :eac_3_atmos_settings,
       :eac_3_settings,
       :mp_2_settings,
       :pass_through_settings,
@@ -684,6 +698,15 @@ module Aws::MediaLive
     #             drc_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
     #             lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
     #             metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
+    #           },
+    #           eac_3_atmos_settings: {
+    #             bitrate: 1.0,
+    #             coding_mode: "CODING_MODE_5_1_4", # accepts CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
+    #             dialnorm: 1,
+    #             drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #             drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #             height_trim: 1.0,
+    #             surround_trim: 1.0,
     #           },
     #           eac_3_settings: {
     #             attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
@@ -3318,6 +3341,15 @@ module Aws::MediaLive
     #                   lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
     #                   metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                 },
+    #                 eac_3_atmos_settings: {
+    #                   bitrate: 1.0,
+    #                   coding_mode: "CODING_MODE_5_1_4", # accepts CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
+    #                   dialnorm: 1,
+    #                   drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #                   drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #                   height_trim: 1.0,
+    #                   surround_trim: 1.0,
+    #                 },
     #                 eac_3_settings: {
     #                   attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #                   bitrate: 1.0,
@@ -3989,6 +4021,8 @@ module Aws::MediaLive
     #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                   color_space_settings: {
     #                     color_space_passthrough_settings: {
+    #                     },
+    #                     dolby_vision_81_settings: {
     #                     },
     #                     hdr_10_settings: {
     #                       max_cll: 1,
@@ -5999,6 +6033,14 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Dolby Vision Profile 8.1 Settings
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DolbyVision81Settings AWS API Documentation
+    #
+    class DolbyVision81Settings < Aws::EmptyStructure; end
+
     # DVB Network Information Table (NIT)
     #
     # @note When making an API call, you may pass DvbNitSettings
@@ -6310,6 +6352,72 @@ module Aws::MediaLive
     #
     class DvbTdtSettings < Struct.new(
       :rep_interval)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Eac3 Atmos Settings
+    #
+    # @note When making an API call, you may pass Eac3AtmosSettings
+    #   data as a hash:
+    #
+    #       {
+    #         bitrate: 1.0,
+    #         coding_mode: "CODING_MODE_5_1_4", # accepts CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
+    #         dialnorm: 1,
+    #         drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #         drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #         height_trim: 1.0,
+    #         surround_trim: 1.0,
+    #       }
+    #
+    # @!attribute [rw] bitrate
+    #   Average bitrate in bits/second. Valid bitrates depend on the coding
+    #   mode. // * @affectsRightSizing true
+    #   @return [Float]
+    #
+    # @!attribute [rw] coding_mode
+    #   Dolby Digital Plus with Dolby Atmos coding mode. Determines number
+    #   of channels.
+    #   @return [String]
+    #
+    # @!attribute [rw] dialnorm
+    #   Sets the dialnorm for the output. Default 23.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] drc_line
+    #   Sets the Dolby dynamic range compression profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] drc_rf
+    #   Sets the profile for heavy Dolby dynamic range compression, ensures
+    #   that the instantaneous signal peaks do not exceed specified levels.
+    #   @return [String]
+    #
+    # @!attribute [rw] height_trim
+    #   Height dimensional trim. Sets the maximum amount to attenuate the
+    #   height channels when the downstream player isn??t configured to
+    #   handle Dolby Digital Plus with Dolby Atmos and must remix the
+    #   channels.
+    #   @return [Float]
+    #
+    # @!attribute [rw] surround_trim
+    #   Surround dimensional trim. Sets the maximum amount to attenuate the
+    #   surround channels when the downstream player isn't configured to
+    #   handle Dolby Digital Plus with Dolby Atmos and must remix the
+    #   channels.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Eac3AtmosSettings AWS API Documentation
+    #
+    class Eac3AtmosSettings < Struct.new(
+      :bitrate,
+      :coding_mode,
+      :dialnorm,
+      :drc_line,
+      :drc_rf,
+      :height_trim,
+      :surround_trim)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6647,6 +6755,15 @@ module Aws::MediaLive
     #                 drc_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
     #                 lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
     #                 metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
+    #               },
+    #               eac_3_atmos_settings: {
+    #                 bitrate: 1.0,
+    #                 coding_mode: "CODING_MODE_5_1_4", # accepts CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
+    #                 dialnorm: 1,
+    #                 drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #                 drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #                 height_trim: 1.0,
+    #                 surround_trim: 1.0,
     #               },
     #               eac_3_settings: {
     #                 attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
@@ -7319,6 +7436,8 @@ module Aws::MediaLive
     #                 color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                 color_space_settings: {
     #                   color_space_passthrough_settings: {
+    #                   },
+    #                   dolby_vision_81_settings: {
     #                   },
     #                   hdr_10_settings: {
     #                     max_cll: 1,
@@ -8405,6 +8524,8 @@ module Aws::MediaLive
     #       {
     #         color_space_passthrough_settings: {
     #         },
+    #         dolby_vision_81_settings: {
+    #         },
     #         hdr_10_settings: {
     #           max_cll: 1,
     #           max_fall: 1,
@@ -8418,6 +8539,10 @@ module Aws::MediaLive
     # @!attribute [rw] color_space_passthrough_settings
     #   Passthrough applies no color space conversion to the output
     #   @return [Types::ColorSpacePassthroughSettings]
+    #
+    # @!attribute [rw] dolby_vision_81_settings
+    #   Dolby Vision Profile 8.1 Settings
+    #   @return [Types::DolbyVision81Settings]
     #
     # @!attribute [rw] hdr_10_settings
     #   Hdr10 Settings
@@ -8435,6 +8560,7 @@ module Aws::MediaLive
     #
     class H265ColorSpaceSettings < Struct.new(
       :color_space_passthrough_settings,
+      :dolby_vision_81_settings,
       :hdr_10_settings,
       :rec_601_settings,
       :rec_709_settings)
@@ -8480,6 +8606,8 @@ module Aws::MediaLive
     #         color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #         color_space_settings: {
     #           color_space_passthrough_settings: {
+    #           },
+    #           dolby_vision_81_settings: {
     #           },
     #           hdr_10_settings: {
     #             max_cll: 1,
@@ -18116,6 +18244,15 @@ module Aws::MediaLive
     #                   lfe_filter: "DISABLED", # accepts DISABLED, ENABLED
     #                   metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                 },
+    #                 eac_3_atmos_settings: {
+    #                   bitrate: 1.0,
+    #                   coding_mode: "CODING_MODE_5_1_4", # accepts CODING_MODE_5_1_4, CODING_MODE_7_1_4, CODING_MODE_9_1_6
+    #                   dialnorm: 1,
+    #                   drc_line: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #                   drc_rf: "FILM_LIGHT", # accepts FILM_LIGHT, FILM_STANDARD, MUSIC_LIGHT, MUSIC_STANDARD, NONE, SPEECH
+    #                   height_trim: 1.0,
+    #                   surround_trim: 1.0,
+    #                 },
     #                 eac_3_settings: {
     #                   attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #                   bitrate: 1.0,
@@ -18787,6 +18924,8 @@ module Aws::MediaLive
     #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                   color_space_settings: {
     #                     color_space_passthrough_settings: {
+    #                     },
+    #                     dolby_vision_81_settings: {
     #                     },
     #                     hdr_10_settings: {
     #                       max_cll: 1,
@@ -19771,6 +19910,8 @@ module Aws::MediaLive
     #           color_space_settings: {
     #             color_space_passthrough_settings: {
     #             },
+    #             dolby_vision_81_settings: {
+    #             },
     #             hdr_10_settings: {
     #               max_cll: 1,
     #               max_fall: 1,
@@ -19935,6 +20076,8 @@ module Aws::MediaLive
     #             color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #             color_space_settings: {
     #               color_space_passthrough_settings: {
+    #               },
+    #               dolby_vision_81_settings: {
     #               },
     #               hdr_10_settings: {
     #                 max_cll: 1,

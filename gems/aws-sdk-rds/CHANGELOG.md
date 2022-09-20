@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.156.0 (2022-09-19)
+------------------
+
+* Feature - This release adds support for Amazon RDS Proxy with SQL Server compatibility.
+
 1.155.0 (2022-08-26)
 ------------------
 

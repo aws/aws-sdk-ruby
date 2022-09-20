@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2022-09-08)
+------------------
+
+* Feature - This release adds support for Systems Manager State Manager Association tagging.
+
 1.138.0 (2022-07-27)
 ------------------
 

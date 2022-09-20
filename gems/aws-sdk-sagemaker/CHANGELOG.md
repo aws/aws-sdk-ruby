@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.140.0 (2022-09-15)
+------------------
+
+* Feature - Amazon SageMaker Automatic Model Tuning now supports specifying Hyperband strategy for tuning jobs, which uses a multi-fidelity based tuning strategy to stop underperforming hyperparameter configurations early.
+
+1.139.0 (2022-09-08)
+------------------
+
+* Feature - This release adds Mode to AutoMLJobConfig.
+
+1.138.0 (2022-09-07)
+------------------
+
+* Feature - SageMaker Hosting now allows customization on ML instance storage volume size, model data download timeout and inference container startup ping health check timeout for each ProductionVariant in CreateEndpointConfig API.
+
+1.137.0 (2022-09-06)
+------------------
+
+* Feature - This release adds HyperParameterTuningJob type in Search API.
+
+1.136.0 (2022-09-02)
+------------------
+
+* Feature - This release enables administrators to attribute user activity and API calls from Studio notebooks, Data Wrangler and Canvas to specific users even when users share the same execution IAM role.  ExecutionRoleIdentityConfig at Sagemaker domain level enables this feature.
+
+1.135.0 (2022-08-31)
+------------------
+
+* Feature - SageMaker Inference Recommender now accepts Inference Recommender fields: Domain, Task, Framework, SamplePayloadUrl, SupportedContentTypes, SupportedInstanceTypes, directly in our CreateInferenceRecommendationsJob API through ContainerConfig
+
 1.134.0 (2022-08-09)
 ------------------
 

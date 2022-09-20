@@ -259,6 +259,12 @@ module Aws::LexRuntimeV2
     #             type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #             slot_to_elicit: "NonEmptyString",
     #             slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
+    #             sub_slot_to_elicit: {
+    #               name: "NonEmptyString", # required
+    #               sub_slot_to_elicit: {
+    #                 # recursive ElicitSubSlot
+    #               },
+    #             },
     #           },
     #           intent: {
     #             name: "NonEmptyString", # required
@@ -269,12 +275,15 @@ module Aws::LexRuntimeV2
     #                   interpreted_value: "NonEmptyString", # required
     #                   resolved_values: ["NonEmptyString"],
     #                 },
-    #                 shape: "Scalar", # accepts Scalar, List
+    #                 shape: "Scalar", # accepts Scalar, List, Composite
     #                 values: [
     #                   {
     #                     # recursive Slot
     #                   },
     #                 ],
+    #                 sub_slots: {
+    #                   # recursive Slots
+    #                 },
     #               },
     #             },
     #             state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
@@ -300,11 +309,14 @@ module Aws::LexRuntimeV2
     #             slot_hints: {
     #               "Name" => {
     #                 "Name" => {
-    #                   runtime_hint_values: [ # required
+    #                   runtime_hint_values: [
     #                     {
     #                       phrase: "RuntimeHintPhrase", # required
     #                     },
     #                   ],
+    #                   sub_slot_hints: {
+    #                     # recursive SlotHintsSlotMap
+    #                   },
     #                 },
     #               },
     #             },
@@ -376,6 +388,14 @@ module Aws::LexRuntimeV2
     #
     # @!attribute [rw] welcome_messages
     #   A list of messages to send to the user.
+    #
+    #   If you set the `welcomeMessage` field, you must also set the [
+    #   `DialogAction` ][1] structure's [ `type` ][2] field.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html
+    #   [2]: https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html#lexv2-Type-runtime_DialogAction-type
     #   @return [Array<Types::Message>]
     #
     # @!attribute [rw] disable_playback
@@ -553,6 +573,12 @@ module Aws::LexRuntimeV2
     #         type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #         slot_to_elicit: "NonEmptyString",
     #         slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
+    #         sub_slot_to_elicit: {
+    #           name: "NonEmptyString", # required
+    #           sub_slot_to_elicit: {
+    #             # recursive ElicitSubSlot
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] type
@@ -568,6 +594,9 @@ module Aws::LexRuntimeV2
     #     such as "Place the order?"
     #
     #   * `Delegate` - The next action is determined by Amazon Lex V2.
+    #
+    #   * `ElicitIntent` - The next action is to elicit an intent from the
+    #     user.
     #
     #   * `ElicitSlot` - The next action is to elicit a slot value from the
     #     user.
@@ -594,12 +623,18 @@ module Aws::LexRuntimeV2
     #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/using-spelling.html
     #   @return [String]
     #
+    # @!attribute [rw] sub_slot_to_elicit
+    #   The name of the constituent sub slot of the composite slot specified
+    #   in slotToElicit that should be elicited from the user.
+    #   @return [Types::ElicitSubSlot]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/DialogAction AWS API Documentation
     #
     class DialogAction < Struct.new(
       :type,
       :slot_to_elicit,
-      :slot_elicitation_style)
+      :slot_elicitation_style,
+      :sub_slot_to_elicit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -632,6 +667,39 @@ module Aws::LexRuntimeV2
       :event_id,
       :client_timestamp_millis,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specific constituent sub slot of the composite slot to elicit in
+    # dialog action.
+    #
+    # @note When making an API call, you may pass ElicitSubSlot
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString", # required
+    #         sub_slot_to_elicit: {
+    #           name: "NonEmptyString", # required
+    #           sub_slot_to_elicit: {
+    #             # recursive ElicitSubSlot
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the slot that should be elicited from the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_slot_to_elicit
+    #   The field is not supported.
+    #   @return [Types::ElicitSubSlot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/ElicitSubSlot AWS API Documentation
+    #
+    class ElicitSubSlot < Struct.new(
+      :name,
+      :sub_slot_to_elicit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -800,12 +868,15 @@ module Aws::LexRuntimeV2
     #               interpreted_value: "NonEmptyString", # required
     #               resolved_values: ["NonEmptyString"],
     #             },
-    #             shape: "Scalar", # accepts Scalar, List
+    #             shape: "Scalar", # accepts Scalar, List, Composite
     #             values: [
     #               {
     #                 # recursive Slot
     #               },
     #             ],
+    #             sub_slots: {
+    #               # recursive Slots
+    #             },
     #           },
     #         },
     #         state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
@@ -1081,6 +1152,12 @@ module Aws::LexRuntimeV2
     #             type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #             slot_to_elicit: "NonEmptyString",
     #             slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
+    #             sub_slot_to_elicit: {
+    #               name: "NonEmptyString", # required
+    #               sub_slot_to_elicit: {
+    #                 # recursive ElicitSubSlot
+    #               },
+    #             },
     #           },
     #           intent: {
     #             name: "NonEmptyString", # required
@@ -1091,12 +1168,15 @@ module Aws::LexRuntimeV2
     #                   interpreted_value: "NonEmptyString", # required
     #                   resolved_values: ["NonEmptyString"],
     #                 },
-    #                 shape: "Scalar", # accepts Scalar, List
+    #                 shape: "Scalar", # accepts Scalar, List, Composite
     #                 values: [
     #                   {
     #                     # recursive Slot
     #                   },
     #                 ],
+    #                 sub_slots: {
+    #                   # recursive Slots
+    #                 },
     #               },
     #             },
     #             state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
@@ -1122,11 +1202,14 @@ module Aws::LexRuntimeV2
     #             slot_hints: {
     #               "Name" => {
     #                 "Name" => {
-    #                   runtime_hint_values: [ # required
+    #                   runtime_hint_values: [
     #                     {
     #                       phrase: "RuntimeHintPhrase", # required
     #                     },
     #                   ],
+    #                   sub_slot_hints: {
+    #                     # recursive SlotHintsSlotMap
+    #                   },
     #                 },
     #               },
     #             },
@@ -1260,6 +1343,12 @@ module Aws::LexRuntimeV2
     #             type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #             slot_to_elicit: "NonEmptyString",
     #             slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
+    #             sub_slot_to_elicit: {
+    #               name: "NonEmptyString", # required
+    #               sub_slot_to_elicit: {
+    #                 # recursive ElicitSubSlot
+    #               },
+    #             },
     #           },
     #           intent: {
     #             name: "NonEmptyString", # required
@@ -1270,12 +1359,15 @@ module Aws::LexRuntimeV2
     #                   interpreted_value: "NonEmptyString", # required
     #                   resolved_values: ["NonEmptyString"],
     #                 },
-    #                 shape: "Scalar", # accepts Scalar, List
+    #                 shape: "Scalar", # accepts Scalar, List, Composite
     #                 values: [
     #                   {
     #                     # recursive Slot
     #                   },
     #                 ],
+    #                 sub_slots: {
+    #                   # recursive Slots
+    #                 },
     #               },
     #             },
     #             state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
@@ -1301,11 +1393,14 @@ module Aws::LexRuntimeV2
     #             slot_hints: {
     #               "Name" => {
     #                 "Name" => {
-    #                   runtime_hint_values: [ # required
+    #                   runtime_hint_values: [
     #                     {
     #                       phrase: "RuntimeHintPhrase", # required
     #                     },
     #                   ],
+    #                   sub_slot_hints: {
+    #                     # recursive SlotHintsSlotMap
+    #                   },
     #                 },
     #               },
     #             },
@@ -1659,11 +1754,23 @@ module Aws::LexRuntimeV2
     #   data as a hash:
     #
     #       {
-    #         runtime_hint_values: [ # required
+    #         runtime_hint_values: [
     #           {
     #             phrase: "RuntimeHintPhrase", # required
     #           },
     #         ],
+    #         sub_slot_hints: {
+    #           "Name" => {
+    #             runtime_hint_values: [
+    #               {
+    #                 phrase: "RuntimeHintPhrase", # required
+    #               },
+    #             ],
+    #             sub_slot_hints: {
+    #               # recursive SlotHintsSlotMap
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] runtime_hint_values
@@ -1672,10 +1779,20 @@ module Aws::LexRuntimeV2
     #   values.
     #   @return [Array<Types::RuntimeHintValue>]
     #
+    # @!attribute [rw] sub_slot_hints
+    #   A map of constituent sub slot names inside a composite slot in the
+    #   intent and the phrases that should be added for each sub slot.
+    #   Inside each composite slot hints, this structure provides a
+    #   mechanism to add granular sub slot phrases. Only sub slot hints are
+    #   supported for composite slots. The intent name, composite slot name
+    #   and the constituent sub slot names must exist.
+    #   @return [Hash<String,Types::RuntimeHintDetails>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/RuntimeHintDetails AWS API Documentation
     #
     class RuntimeHintDetails < Struct.new(
-      :runtime_hint_values)
+      :runtime_hint_values,
+      :sub_slot_hints)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1712,11 +1829,12 @@ module Aws::LexRuntimeV2
     # Before you can use runtime hints with an existing bot, you must first
     # rebuild the bot.
     #
-    # For more information, see [Using hints to improve accuracy][1].
+    # For more information, see [Using runtime hints to improve recognition
+    # of slot values][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.xml
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html
     #
     # @note When making an API call, you may pass RuntimeHints
     #   data as a hash:
@@ -1725,11 +1843,14 @@ module Aws::LexRuntimeV2
     #         slot_hints: {
     #           "Name" => {
     #             "Name" => {
-    #               runtime_hint_values: [ # required
+    #               runtime_hint_values: [
     #                 {
     #                   phrase: "RuntimeHintPhrase", # required
     #                 },
     #               ],
+    #               sub_slot_hints: {
+    #                 # recursive SlotHintsSlotMap
+    #               },
     #             },
     #           },
     #         },
@@ -1747,7 +1868,7 @@ module Aws::LexRuntimeV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.xml
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html
     #   @return [Hash<String,Hash<String,Types::RuntimeHintDetails>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/RuntimeHints AWS API Documentation
@@ -1832,6 +1953,12 @@ module Aws::LexRuntimeV2
     #           type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #           slot_to_elicit: "NonEmptyString",
     #           slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
+    #           sub_slot_to_elicit: {
+    #             name: "NonEmptyString", # required
+    #             sub_slot_to_elicit: {
+    #               # recursive ElicitSubSlot
+    #             },
+    #           },
     #         },
     #         intent: {
     #           name: "NonEmptyString", # required
@@ -1842,12 +1969,15 @@ module Aws::LexRuntimeV2
     #                 interpreted_value: "NonEmptyString", # required
     #                 resolved_values: ["NonEmptyString"],
     #               },
-    #               shape: "Scalar", # accepts Scalar, List
+    #               shape: "Scalar", # accepts Scalar, List, Composite
     #               values: [
     #                 {
     #                   # recursive Slot
     #                 },
     #               ],
+    #               sub_slots: {
+    #                 # recursive Slots
+    #               },
     #             },
     #           },
     #           state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
@@ -1873,11 +2003,14 @@ module Aws::LexRuntimeV2
     #           slot_hints: {
     #             "Name" => {
     #               "Name" => {
-    #                 runtime_hint_values: [ # required
+    #                 runtime_hint_values: [
     #                   {
     #                     phrase: "RuntimeHintPhrase", # required
     #                   },
     #                 ],
+    #                 sub_slot_hints: {
+    #                   # recursive SlotHintsSlotMap
+    #                 },
     #               },
     #             },
     #           },
@@ -1940,7 +2073,7 @@ module Aws::LexRuntimeV2
     #           interpreted_value: "NonEmptyString", # required
     #           resolved_values: ["NonEmptyString"],
     #         },
-    #         shape: "Scalar", # accepts Scalar, List
+    #         shape: "Scalar", # accepts Scalar, List, Composite
     #         values: [
     #           {
     #             value: {
@@ -1948,12 +2081,35 @@ module Aws::LexRuntimeV2
     #               interpreted_value: "NonEmptyString", # required
     #               resolved_values: ["NonEmptyString"],
     #             },
-    #             shape: "Scalar", # accepts Scalar, List
+    #             shape: "Scalar", # accepts Scalar, List, Composite
     #             values: {
     #               # recursive Values
     #             },
+    #             sub_slots: {
+    #               "NonEmptyString" => {
+    #                 # recursive Slot
+    #               },
+    #             },
     #           },
     #         ],
+    #         sub_slots: {
+    #           "NonEmptyString" => {
+    #             value: {
+    #               original_value: "NonEmptyString",
+    #               interpreted_value: "NonEmptyString", # required
+    #               resolved_values: ["NonEmptyString"],
+    #             },
+    #             shape: "Scalar", # accepts Scalar, List, Composite
+    #             values: [
+    #               {
+    #                 # recursive Slot
+    #               },
+    #             ],
+    #             sub_slots: {
+    #               # recursive Slots
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] value
@@ -1972,12 +2128,17 @@ module Aws::LexRuntimeV2
     #   might be "pepperoni" and "pineapple."
     #   @return [Array<Types::Slot>]
     #
+    # @!attribute [rw] sub_slots
+    #   The constituent sub slots of a composite slot.
+    #   @return [Hash<String,Types::Slot>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/Slot AWS API Documentation
     #
     class Slot < Struct.new(
       :value,
       :shape,
-      :values)
+      :values,
+      :sub_slots)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2214,6 +2375,12 @@ module Aws::LexRuntimeV2
     #               type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #               slot_to_elicit: "NonEmptyString",
     #               slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
+    #               sub_slot_to_elicit: {
+    #                 name: "NonEmptyString", # required
+    #                 sub_slot_to_elicit: {
+    #                   # recursive ElicitSubSlot
+    #                 },
+    #               },
     #             },
     #             intent: {
     #               name: "NonEmptyString", # required
@@ -2224,12 +2391,15 @@ module Aws::LexRuntimeV2
     #                     interpreted_value: "NonEmptyString", # required
     #                     resolved_values: ["NonEmptyString"],
     #                   },
-    #                   shape: "Scalar", # accepts Scalar, List
+    #                   shape: "Scalar", # accepts Scalar, List, Composite
     #                   values: [
     #                     {
     #                       # recursive Slot
     #                     },
     #                   ],
+    #                   sub_slots: {
+    #                     # recursive Slots
+    #                   },
     #                 },
     #               },
     #               state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
@@ -2255,11 +2425,14 @@ module Aws::LexRuntimeV2
     #               slot_hints: {
     #                 "Name" => {
     #                   "Name" => {
-    #                     runtime_hint_values: [ # required
+    #                     runtime_hint_values: [
     #                       {
     #                         phrase: "RuntimeHintPhrase", # required
     #                       },
     #                     ],
+    #                     sub_slot_hints: {
+    #                       # recursive SlotHintsSlotMap
+    #                     },
     #                   },
     #                 },
     #               },

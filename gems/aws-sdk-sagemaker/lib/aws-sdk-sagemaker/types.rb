@@ -2287,9 +2287,9 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] max_runtime_per_training_job_in_seconds
-    #   The maximum time, in seconds, that each training job is allowed to
-    #   run as part of a hyperparameter tuning job. For more information,
-    #   see the used by the action.
+    #   The maximum time, in seconds, that each training job executed inside
+    #   hyperparameter tuning is allowed to run as part of a hyperparameter
+    #   tuning job. For more information, see the used by the action.
     #   @return [Integer]
     #
     # @!attribute [rw] max_auto_ml_job_runtime_in_seconds
@@ -2338,6 +2338,7 @@ module Aws::SageMaker
     #         candidate_generation_config: {
     #           feature_specification_s3_uri: "S3Uri",
     #         },
+    #         mode: "AUTO", # accepts AUTO, ENSEMBLING, HYPERPARAMETER_TUNING
     #       }
     #
     # @!attribute [rw] completion_criteria
@@ -2361,13 +2362,43 @@ module Aws::SageMaker
     #   (optional).
     #   @return [Types::AutoMLCandidateGenerationConfig]
     #
+    # @!attribute [rw] mode
+    #   The method that Autopilot uses to train the data. You can either
+    #   specify the mode manually or let Autopilot choose for you based on
+    #   the dataset size by selecting `AUTO`. In `AUTO` mode, Autopilot
+    #   chooses `ENSEMBLING` for datasets smaller than 100 MB, and
+    #   `HYPERPARAMETER_TUNING` for larger ones.
+    #
+    #   The `ENSEMBLING` mode uses a multi-stack ensemble model to predict
+    #   classification and regression tasks directly from your dataset. This
+    #   machine learning mode combines several base models to produce an
+    #   optimal predictive model. It then uses a stacking ensemble method to
+    #   combine predictions from contributing members. A multi-stack
+    #   ensemble model can provide better performance over a single model by
+    #   combining the predictive capabilities of multiple models. See
+    #   [Autopilot algorithm support][1] for a list of algorithms supported
+    #   by `ENSEMBLING` mode.
+    #
+    #   The `HYPERPARAMETER_TUNING` (HPO) mode uses the best hyperparameters
+    #   to train the best version of a model. HPO will automatically select
+    #   an algorithm for the type of problem you want to solve. Then HPO
+    #   finds the best hyperparameters according to your objective metric.
+    #   See [Autopilot algorithm support][1] for a list of algorithms
+    #   supported by `HYPERPARAMETER_TUNING` mode.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobConfig AWS API Documentation
     #
     class AutoMLJobConfig < Struct.new(
       :completion_criteria,
       :security_config,
       :data_split_config,
-      :candidate_generation_config)
+      :candidate_generation_config,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4409,8 +4440,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] app_type
-    #   The type of app. Supported apps are `JupyterServer` and
-    #   `KernelGateway`. `TensorBoard` is not supported.
+    #   The type of app.
     #   @return [String]
     #
     # @!attribute [rw] app_name
@@ -4591,6 +4621,7 @@ module Aws::SageMaker
     #           candidate_generation_config: {
     #             feature_specification_s3_uri: "S3Uri",
     #           },
+    #           mode: "AUTO", # accepts AUTO, ENSEMBLING, HYPERPARAMETER_TUNING
     #         },
     #         role_arn: "RoleArn", # required
     #         generate_candidate_definitions_only: false,
@@ -5293,6 +5324,7 @@ module Aws::SageMaker
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
+    #           execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
     #         },
     #       }
     #
@@ -5615,6 +5647,9 @@ module Aws::SageMaker
     #               memory_size_in_mb: 1, # required
     #               max_concurrency: 1, # required
     #             },
+    #             volume_size_in_gb: 1,
+    #             model_data_download_timeout_in_seconds: 1,
+    #             container_startup_health_check_timeout_in_seconds: 1,
     #           },
     #         ],
     #         data_capture_config: {
@@ -6257,7 +6292,13 @@ module Aws::SageMaker
     #       {
     #         hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
     #         hyper_parameter_tuning_job_config: { # required
-    #           strategy: "Bayesian", # required, accepts Bayesian, Random
+    #           strategy: "Bayesian", # required, accepts Bayesian, Random, Hyperband
+    #           strategy_config: {
+    #             hyperband_strategy_config: {
+    #               min_resource: 1,
+    #               max_resource: 1,
+    #             },
+    #           },
     #           hyper_parameter_tuning_job_objective: {
     #             type: "Maximize", # required, accepts Maximize, Minimize
     #             metric_name: "MetricName", # required
@@ -6807,6 +6848,18 @@ module Aws::SageMaker
     #             },
     #           ],
     #           volume_kms_key_id: "KmsKeyId",
+    #           container_config: {
+    #             domain: "String",
+    #             task: "String",
+    #             framework: "String",
+    #             framework_version: "String",
+    #             payload_config: {
+    #               sample_payload_url: "String",
+    #               supported_content_types: ["String"],
+    #             },
+    #             nearest_model_name: "String",
+    #             supported_instance_types: ["String"],
+    #           },
     #         },
     #         job_description: "RecommendationJobDescription",
     #         stopping_conditions: {
@@ -9367,6 +9420,12 @@ module Aws::SageMaker
     #   hyperparameter is a key-value pair. Each key and value is limited to
     #   256 characters, as specified by the `Length Constraint`.
     #
+    #   You must not include any security-sensitive information, such as
+    #   account access IDs, secrets, and tokens, in the dictionary for
+    #   configuring hyperparameters. SageMaker rejects the training job
+    #   request and returns an exception error for detected credentials, if
+    #   such user input is found.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
@@ -10112,17 +10171,17 @@ module Aws::SageMaker
     # @!attribute [rw] single_sign_on_user_identifier
     #   A specifier for the type of value specified in
     #   SingleSignOnUserValue. Currently, the only supported value is
-    #   "UserName". If the Domain's AuthMode is SSO, this field is
-    #   required. If the Domain's AuthMode is not SSO, this field cannot be
-    #   specified.
+    #   "UserName". If the Domain's AuthMode is Amazon Web Services SSO,
+    #   this field is required. If the Domain's AuthMode is not Amazon Web
+    #   Services SSO, this field cannot be specified.
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_user_value
     #   The username of the associated Amazon Web Services Single Sign-On
-    #   User for this UserProfile. If the Domain's AuthMode is SSO, this
-    #   field is required, and must match a valid username of a user in your
-    #   directory. If the Domain's AuthMode is not SSO, this field cannot
-    #   be specified.
+    #   User for this UserProfile. If the Domain's AuthMode is Amazon Web
+    #   Services SSO, this field is required, and must match a valid
+    #   username of a user in your directory. If the Domain's AuthMode is
+    #   not Amazon Web Services SSO, this field cannot be specified.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -13371,7 +13430,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_managed_application_instance_id
-    #   The SSO managed application instance ID.
+    #   The Amazon Web Services SSO managed application instance ID.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -17173,11 +17232,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_user_identifier
-    #   The SSO user identifier.
+    #   The Amazon Web Services SSO user identifier.
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_user_value
-    #   The SSO user value.
+    #   The Amazon Web Services SSO user value.
     #   @return [String]
     #
     # @!attribute [rw] user_settings
@@ -17662,6 +17721,7 @@ module Aws::SageMaker
     #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
     #         },
+    #         execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
     #       }
     #
     # @!attribute [rw] security_group_ids
@@ -17675,11 +17735,21 @@ module Aws::SageMaker
     #   Domain-level app.
     #   @return [Types::RStudioServerProDomainSettings]
     #
+    # @!attribute [rw] execution_role_identity_config
+    #   The configuration for attaching a SageMaker user profile name to the
+    #   execution role as a [sts:SourceIdentity key][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettings AWS API Documentation
     #
     class DomainSettings < Struct.new(
       :security_group_ids,
-      :r_studio_server_pro_domain_settings)
+      :r_studio_server_pro_domain_settings,
+      :execution_role_identity_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17699,6 +17769,7 @@ module Aws::SageMaker
     #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
     #         },
+    #         execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
     #       }
     #
     # @!attribute [rw] r_studio_server_pro_domain_settings_for_update
@@ -17706,10 +17777,22 @@ module Aws::SageMaker
     #   update.
     #   @return [Types::RStudioServerProDomainSettingsForUpdate]
     #
+    # @!attribute [rw] execution_role_identity_config
+    #   The configuration for attaching a SageMaker user profile name to the
+    #   execution role as a [sts:SourceIdentity key][1]. This configuration
+    #   can only be modified if there are no apps in the `InService` or
+    #   `Pending` state.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettingsForUpdate AWS API Documentation
     #
     class DomainSettingsForUpdate < Struct.new(
-      :r_studio_server_pro_domain_settings_for_update)
+      :r_studio_server_pro_domain_settings_for_update,
+      :execution_role_identity_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19852,7 +19935,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata
+    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata, HyperParameterTuningJob
     #         suggestion_query: {
     #           property_name_query: {
     #             property_name_hint: "PropertyNameHint", # required
@@ -21101,7 +21184,8 @@ module Aws::SageMaker
     #   Defines the maximum number of data objects that can be labeled by
     #   human workers at the same time. Also referred to as batch size. Each
     #   object may have more than one worker at one time. The default value
-    #   is 1000 objects.
+    #   is 1000 objects. To increase the maximum value to 5000 objects,
+    #   contact Amazon Web Services Support.
     #   @return [Integer]
     #
     # @!attribute [rw] annotation_consolidation_config
@@ -21586,7 +21670,7 @@ module Aws::SageMaker
     #   the compute instances and storage volumes, used for training jobs
     #   launched by the tuning job. By default, storage volumes hold model
     #   artifacts and incremental states. Choose `File` for
-    #   `TrainingInputMode` in the `AlgorithmSpecification`parameter to
+    #   `TrainingInputMode` in the `AlgorithmSpecification` parameter to
     #   additionally store training data in the storage volume (optional).
     #   @return [Types::HyperParameterTuningResourceConfig]
     #
@@ -21770,7 +21854,13 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         strategy: "Bayesian", # required, accepts Bayesian, Random
+    #         strategy: "Bayesian", # required, accepts Bayesian, Random, Hyperband
+    #         strategy_config: {
+    #           hyperband_strategy_config: {
+    #             min_resource: 1,
+    #             max_resource: 1,
+    #           },
+    #         },
     #         hyper_parameter_tuning_job_objective: {
     #           type: "Maximize", # required, accepts Maximize, Minimize
     #           metric_name: "MetricName", # required
@@ -21811,15 +21901,20 @@ module Aws::SageMaker
     #
     # @!attribute [rw] strategy
     #   Specifies how hyperparameter tuning chooses the combinations of
-    #   hyperparameter values to use for the training job it launches. To
-    #   use the Bayesian search strategy, set this to `Bayesian`. To
-    #   randomly search, set it to `Random`. For information about search
-    #   strategies, see [How Hyperparameter Tuning Works][1].
+    #   hyperparameter values to use for the training job it launches. For
+    #   information about search strategies, see [How Hyperparameter Tuning
+    #   Works][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html
     #   @return [String]
+    #
+    # @!attribute [rw] strategy_config
+    #   The configuration for the `Hyperband` optimization strategy. This
+    #   parameter should be provided only if `Hyperband` is selected as the
+    #   strategy for `HyperParameterTuningJobConfig`.
+    #   @return [Types::HyperParameterTuningJobStrategyConfig]
     #
     # @!attribute [rw] hyper_parameter_tuning_job_objective
     #   The HyperParameterTuningJobObjective object that specifies the
@@ -21838,8 +21933,11 @@ module Aws::SageMaker
     #
     # @!attribute [rw] training_job_early_stopping_type
     #   Specifies whether to use early stopping for training jobs launched
-    #   by the hyperparameter tuning job. This can be one of the following
-    #   values (the default value is `OFF`):
+    #   by the hyperparameter tuning job. Because the `Hyperband` strategy
+    #   has its own advanced internal early stopping mechanism,
+    #   `TrainingJobEarlyStoppingType` must be `OFF` to use `Hyperband`.
+    #   This parameter can take on one of the following values (the default
+    #   value is `OFF`):
     #
     #   OFF
     #
@@ -21866,6 +21964,7 @@ module Aws::SageMaker
     #
     class HyperParameterTuningJobConfig < Struct.new(
       :strategy,
+      :strategy_config,
       :hyper_parameter_tuning_job_objective,
       :resource_limits,
       :parameter_ranges,
@@ -21906,6 +22005,159 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # An entity having characteristics over which a user can search for a
+    # hyperparameter tuning job.
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_name
+    #   The name of a hyperparameter tuning job.
+    #   @return [String]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_arn
+    #   The Amazon Resource Name (ARN) of a hyperparameter tuning job.
+    #   @return [String]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_config
+    #   Configures a hyperparameter tuning job.
+    #   @return [Types::HyperParameterTuningJobConfig]
+    #
+    # @!attribute [rw] training_job_definition
+    #   Defines the training jobs launched by a hyperparameter tuning job.
+    #   @return [Types::HyperParameterTrainingJobDefinition]
+    #
+    # @!attribute [rw] training_job_definitions
+    #   The job definitions included in a hyperparameter tuning job.
+    #   @return [Array<Types::HyperParameterTrainingJobDefinition>]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_status
+    #   The status of a hyperparameter tuning job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that a hyperparameter tuning job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_end_time
+    #   The time that a hyperparameter tuning job ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time that a hyperparameter tuning job was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_job_status_counters
+    #   The numbers of training jobs launched by a hyperparameter tuning
+    #   job, categorized by status.
+    #   @return [Types::TrainingJobStatusCounters]
+    #
+    # @!attribute [rw] objective_status_counters
+    #   Specifies the number of training jobs that this hyperparameter
+    #   tuning job launched, categorized by the status of their objective
+    #   metric. The objective metric status shows whether the final
+    #   objective metric for the training job has been evaluated by the
+    #   tuning job and used in the hyperparameter tuning process.
+    #   @return [Types::ObjectiveStatusCounters]
+    #
+    # @!attribute [rw] best_training_job
+    #   The container for the summary information about a training job.
+    #   @return [Types::HyperParameterTrainingJobSummary]
+    #
+    # @!attribute [rw] overall_best_training_job
+    #   The container for the summary information about a training job.
+    #   @return [Types::HyperParameterTrainingJobSummary]
+    #
+    # @!attribute [rw] warm_start_config
+    #   Specifies the configuration for a hyperparameter tuning job that
+    #   uses one or more previous hyperparameter tuning jobs as a starting
+    #   point. The results of previous tuning jobs are used to inform which
+    #   combinations of hyperparameters to search over in the new tuning
+    #   job.
+    #
+    #   All training jobs launched by the new hyperparameter tuning job are
+    #   evaluated by using the objective metric, and the training job that
+    #   performs the best is compared to the best training jobs from the
+    #   parent tuning jobs. From these, the training job that performs the
+    #   best as measured by the objective metric is returned as the overall
+    #   best training job.
+    #
+    #   <note markdown="1"> All training jobs launched by parent hyperparameter tuning jobs and
+    #   the new hyperparameter tuning jobs count against the limit of
+    #   training jobs for the tuning job.
+    #
+    #    </note>
+    #   @return [Types::HyperParameterTuningJobWarmStartConfig]
+    #
+    # @!attribute [rw] failure_reason
+    #   The error that was created when a hyperparameter tuning job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with a hyperparameter tuning job. For more
+    #   information see [Tagging Amazon Web Services resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobSearchEntity AWS API Documentation
+    #
+    class HyperParameterTuningJobSearchEntity < Struct.new(
+      :hyper_parameter_tuning_job_name,
+      :hyper_parameter_tuning_job_arn,
+      :hyper_parameter_tuning_job_config,
+      :training_job_definition,
+      :training_job_definitions,
+      :hyper_parameter_tuning_job_status,
+      :creation_time,
+      :hyper_parameter_tuning_end_time,
+      :last_modified_time,
+      :training_job_status_counters,
+      :objective_status_counters,
+      :best_training_job,
+      :overall_best_training_job,
+      :warm_start_config,
+      :failure_reason,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a training job launched by a hyperparameter
+    # tuning job. Choose `Bayesian` for Bayesian optimization, and `Random`
+    # for random search optimization. For more advanced use cases, use
+    # `Hyperband`, which evaluates objective metrics for training jobs after
+    # every epoch. For more information about strategies, see [How
+    # Hyperparameter Tuning Works][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html
+    #
+    # @note When making an API call, you may pass HyperParameterTuningJobStrategyConfig
+    #   data as a hash:
+    #
+    #       {
+    #         hyperband_strategy_config: {
+    #           min_resource: 1,
+    #           max_resource: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] hyperband_strategy_config
+    #   The configuration for the object that specifies the `Hyperband`
+    #   strategy. This parameter is only supported for the `Hyperband`
+    #   selection for `Strategy` within the `HyperParameterTuningJobConfig`
+    #   API.
+    #   @return [Types::HyperbandStrategyConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobStrategyConfig AWS API Documentation
+    #
+    class HyperParameterTuningJobStrategyConfig < Struct.new(
+      :hyperband_strategy_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides summary information about a hyperparameter tuning job.
     #
     # @!attribute [rw] hyper_parameter_tuning_job_name
@@ -21922,8 +22174,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] strategy
     #   Specifies the search strategy hyperparameter tuning uses to choose
-    #   which hyperparameters to use for each iteration. Currently, the only
-    #   valid value is Bayesian.
+    #   which hyperparameters to evaluate at each iteration.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -22062,8 +22313,8 @@ module Aws::SageMaker
     # tuning jobs. Specify one or more instance type and count and the
     # allocation strategy for instance selection.
     #
-    # <note markdown="1"> HyperParameterTuningResourceConfig supports all of the capabilities of
-    # ResourceConfig with added functionality for flexible instance
+    # <note markdown="1"> `HyperParameterTuningResourceConfig` supports all of the capabilities
+    # of ResourceConfig with added functionality for flexible instance
     # management.
     #
     #  </note>
@@ -22124,21 +22375,21 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/
+    #   [1]: http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   A key used by AWS Key Management Service to encrypt data on the
-    #   storage volume attached to the compute instances used to run the
-    #   training job. You can use either of the following formats to specify
-    #   a key.
+    #   A key used by Amazon Web Services Key Management Service to encrypt
+    #   data on the storage volume attached to the compute instances used to
+    #   run the training job. You can use either of the following formats to
+    #   specify a key.
     #
     #   KMS Key ID:
     #
     #   `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
-    #   Amazon Resource Name (ARN) of a AWS KMS key:
+    #   Amazon Resource Name (ARN) of a KMS key:
     #
     #   `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -22146,13 +22397,13 @@ module Aws::SageMaker
     #   encrypt][1] storage volumes. If you choose one of these instance
     #   types, you cannot request a `VolumeKmsKeyId`. For a list of instance
     #   types that use local storage, see [instance store volumes][2]. For
-    #   more information about AWS Key Management Service, see [AWS KMS
-    #   encryption][3] for more information.
+    #   more information about Amazon Web Services Key Management Service,
+    #   see [KMS encryption][3] for more information.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
-    #   [2]: https://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/
+    #   [2]: http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/
     #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-kms-permissions.html
     #   @return [String]
     #
@@ -22169,7 +22420,7 @@ module Aws::SageMaker
     #   order in which multiple configurations provided in `InstanceConfigs`
     #   are used.
     #
-    #   <note markdown="1"> If you only want to use a single InstanceConfig inside the
+    #   <note markdown="1"> If you only want to use a single instance configuration inside the
     #   `HyperParameterTuningResourceConfig` API, do not provide a value for
     #   `InstanceConfigs`. Instead, use `InstanceType`, `VolumeSizeInGB` and
     #   `InstanceCount`. If you use `InstanceConfigs`, do not provide values
@@ -22187,6 +22438,74 @@ module Aws::SageMaker
       :volume_kms_key_id,
       :allocation_strategy,
       :instance_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for `Hyperband`, a multi-fidelity based
+    # hyperparameter tuning strategy. `Hyperband` uses the final and
+    # intermediate results of a training job to dynamically allocate
+    # resources to utilized hyperparameter configurations while
+    # automatically stopping under-performing configurations. This parameter
+    # should be provided only if `Hyperband` is selected as the
+    # `StrategyConfig` under the `HyperParameterTuningJobConfig` API.
+    #
+    # @note When making an API call, you may pass HyperbandStrategyConfig
+    #   data as a hash:
+    #
+    #       {
+    #         min_resource: 1,
+    #         max_resource: 1,
+    #       }
+    #
+    # @!attribute [rw] min_resource
+    #   The minimum number of resources (such as epochs) that can be used by
+    #   a training job launched by a hyperparameter tuning job. If the value
+    #   for `MinResource` has not been reached, the training job will not be
+    #   stopped by `Hyperband`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_resource
+    #   The maximum number of resources (such as epochs) that can be used by
+    #   a training job launched by a hyperparameter tuning job. Once a job
+    #   reaches the `MaxResource` value, it is stopped. If a value for
+    #   `MaxResource` is not provided, and `Hyperband` is selected as the
+    #   hyperparameter tuning strategy, `HyperbandTrainingJ` attempts to
+    #   infer `MaxResource` from the following keys (if present) in
+    #   [StaticsHyperParameters][1]\:
+    #
+    #   * `epochs`
+    #
+    #   * `numepochs`
+    #
+    #   * `n-epochs`
+    #
+    #   * `n_epochs`
+    #
+    #   * `num_epochs`
+    #
+    #   If `HyperbandStrategyConfig` is unable to infer a value for
+    #   `MaxResource`, it generates a validation error. The maximum value is
+    #   20,000 epochs. All metrics that correspond to an objective metric
+    #   are used to derive [early stopping decisions][2]. For
+    #   [distributive][3] training jobs, ensure that duplicate metrics are
+    #   not printed in the logs across the individual nodes in a training
+    #   job. If multiple nodes are publishing duplicate or incorrect
+    #   metrics, training jobs may make an incorrect stopping decision and
+    #   stop the job prematurely.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-StaticHyperParameters
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperbandStrategyConfig AWS API Documentation
+    #
+    class HyperbandStrategyConfig < Struct.new(
+      :min_resource,
+      :max_resource)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33881,6 +34200,9 @@ module Aws::SageMaker
     #           memory_size_in_mb: 1, # required
     #           max_concurrency: 1, # required
     #         },
+    #         volume_size_in_gb: 1,
+    #         model_data_download_timeout_in_seconds: 1,
+    #         container_startup_health_check_timeout_in_seconds: 1,
     #       }
     #
     # @!attribute [rw] variant_name
@@ -33930,6 +34252,29 @@ module Aws::SageMaker
     #   configuration.
     #   @return [Types::ProductionVariantServerlessConfig]
     #
+    # @!attribute [rw] volume_size_in_gb
+    #   The size, in GB, of the ML storage volume attached to individual
+    #   inference instance associated with the production variant. Currenly
+    #   only Amazon EBS gp2 storage volumes are supported.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] model_data_download_timeout_in_seconds
+    #   The timeout value, in seconds, to download and extract the model
+    #   that you want to host from Amazon S3 to the individual inference
+    #   instance associated with this production variant.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] container_startup_health_check_timeout_in_seconds
+    #   The timeout value, in seconds, for your inference container to pass
+    #   health check by SageMaker Hosting. For more information about health
+    #   check, see [How Your Container Should Respond to Health Check (Ping)
+    #   Requests][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-algo-ping-requests
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant AWS API Documentation
     #
     class ProductionVariant < Struct.new(
@@ -33940,7 +34285,10 @@ module Aws::SageMaker
       :initial_variant_weight,
       :accelerator_type,
       :core_dump_config,
-      :serverless_config)
+      :serverless_config,
+      :volume_size_in_gb,
+      :model_data_download_timeout_in_seconds,
+      :container_startup_health_check_timeout_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35255,6 +35603,94 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies mandatory fields for running an Inference Recommender job
+    # directly in the [CreateInferenceRecommendationsJob][1] API. The fields
+    # specified in `ContainerConfig` override the corresponding fields in
+    # the model package. Use `ContainerConfig` if you want to specify these
+    # fields for the recommendation job but don't want to edit them in your
+    # model package.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html
+    #
+    # @note When making an API call, you may pass RecommendationJobContainerConfig
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "String",
+    #         task: "String",
+    #         framework: "String",
+    #         framework_version: "String",
+    #         payload_config: {
+    #           sample_payload_url: "String",
+    #           supported_content_types: ["String"],
+    #         },
+    #         nearest_model_name: "String",
+    #         supported_instance_types: ["String"],
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   The machine learning domain of the model and its components.
+    #
+    #   Valid Values: `COMPUTER_VISION | NATURAL_LANGUAGE_PROCESSING |
+    #   MACHINE_LEARNING`
+    #   @return [String]
+    #
+    # @!attribute [rw] task
+    #   The machine learning task that the model accomplishes.
+    #
+    #   Valid Values: `IMAGE_CLASSIFICATION | OBJECT_DETECTION |
+    #   TEXT_GENERATION | IMAGE_SEGMENTATION | FILL_MASK | CLASSIFICATION |
+    #   REGRESSION | OTHER`
+    #   @return [String]
+    #
+    # @!attribute [rw] framework
+    #   The machine learning framework of the container image.
+    #
+    #   Valid Values: `TENSORFLOW | PYTORCH | XGBOOST |
+    #   SAGEMAKER-SCIKIT-LEARN`
+    #   @return [String]
+    #
+    # @!attribute [rw] framework_version
+    #   The framework version of the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload_config
+    #   Specifies the `SamplePayloadUrl` and all other sample
+    #   payload-related fields.
+    #   @return [Types::RecommendationJobPayloadConfig]
+    #
+    # @!attribute [rw] nearest_model_name
+    #   The name of a pre-trained machine learning model benchmarked by
+    #   Amazon SageMaker Inference Recommender that matches your model.
+    #
+    #   Valid Values: `efficientnetb7 | unet | xgboost |
+    #   faster-rcnn-resnet101 | nasnetlarge | vgg16 | inception-v3 |
+    #   mask-rcnn | sagemaker-scikit-learn | densenet201-gluon |
+    #   resnet18v2-gluon | xception | densenet201 | yolov4 | resnet152 |
+    #   bert-base-cased | xceptionV1-keras | resnet50 | retinanet`
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_instance_types
+    #   A list of the instance types that are used to generate inferences in
+    #   real-time.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobContainerConfig AWS API Documentation
+    #
+    class RecommendationJobContainerConfig < Struct.new(
+      :domain,
+      :task,
+      :framework,
+      :framework_version,
+      :payload_config,
+      :nearest_model_name,
+      :supported_instance_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input configuration of the recommendation job.
     #
     # @note When making an API call, you may pass RecommendationJobInputConfig
@@ -35292,6 +35728,18 @@ module Aws::SageMaker
     #           },
     #         ],
     #         volume_kms_key_id: "KmsKeyId",
+    #         container_config: {
+    #           domain: "String",
+    #           task: "String",
+    #           framework: "String",
+    #           framework_version: "String",
+    #           payload_config: {
+    #             sample_payload_url: "String",
+    #             supported_content_types: ["String"],
+    #           },
+    #           nearest_model_name: "String",
+    #           supported_instance_types: ["String"],
+    #         },
     #       }
     #
     # @!attribute [rw] model_package_version_arn
@@ -35354,6 +35802,12 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id
     #   @return [String]
     #
+    # @!attribute [rw] container_config
+    #   Specifies mandatory fields for running an Inference Recommender job.
+    #   The fields specified in `ContainerConfig` override the corresponding
+    #   fields in the model package.
+    #   @return [Types::RecommendationJobContainerConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobInputConfig AWS API Documentation
     #
     class RecommendationJobInputConfig < Struct.new(
@@ -35362,7 +35816,8 @@ module Aws::SageMaker
       :traffic_pattern,
       :resource_limit,
       :endpoint_configurations,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :container_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35424,6 +35879,35 @@ module Aws::SageMaker
     class RecommendationJobOutputConfig < Struct.new(
       :kms_key_id,
       :compiled_output_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the payload for a recommendation job.
+    #
+    # @note When making an API call, you may pass RecommendationJobPayloadConfig
+    #   data as a hash:
+    #
+    #       {
+    #         sample_payload_url: "String",
+    #         supported_content_types: ["String"],
+    #       }
+    #
+    # @!attribute [rw] sample_payload_url
+    #   The Amazon Simple Storage Service (Amazon S3) path where the sample
+    #   payload is stored. This path must point to a single gzip compressed
+    #   tar archive (.tar.gz suffix).
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_content_types
+    #   The supported MIME types for the input data.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobPayloadConfig AWS API Documentation
+    #
+    class RecommendationJobPayloadConfig < Struct.new(
+      :sample_payload_url,
+      :supported_content_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35862,29 +36346,32 @@ module Aws::SageMaker
     #   volume, choose `File` as the `TrainingInputMode` in the algorithm
     #   specification.
     #
-    #   You must specify sufficient ML storage for your scenario.
+    #   When using an ML instance with [NVMe SSD volumes][1], SageMaker
+    #   doesn't provision Amazon EBS General Purpose SSD (gp2) storage.
+    #   Available storage is fixed to the NVMe-type instance's storage
+    #   capacity. SageMaker configures storage paths for training datasets,
+    #   checkpoints, model artifacts, and outputs to use the entire capacity
+    #   of the instance storage. For example, ML instance families with the
+    #   NVMe-type instance storage include `ml.p4d`, `ml.g4dn`, and `ml.g5`.
     #
-    #   <note markdown="1"> SageMaker supports only the General Purpose SSD (gp2) ML storage
-    #   volume type.
+    #   When using an ML instance with the EBS-only storage option and
+    #   without instance storage, you must define the size of EBS volume
+    #   through `VolumeSizeInGB` in the `ResourceConfig` API. For example,
+    #   ML instance families that use EBS volumes include `ml.c5` and
+    #   `ml.p2`.
     #
-    #    </note>
+    #   To look up instance types and their instance storage types and
+    #   volumes, see [Amazon EC2 Instance Types][2].
     #
-    #   <note markdown="1"> Certain Nitro-based instances include local storage with a fixed
-    #   total size, dependent on the instance type. When using these
-    #   instances for training, SageMaker mounts the local instance storage
-    #   instead of Amazon EBS gp2 storage. You can't request a
-    #   `VolumeSizeInGB` greater than the total size of the local instance
-    #   storage.
-    #
-    #    For a list of instance types that support local instance storage,
-    #   including the total size per instance type, see [Instance Store
-    #   Volumes][1].
-    #
-    #    </note>
+    #   To find the default local paths defined by the SageMaker training
+    #   platform, see [Amazon SageMaker Training Storage Folders for
+    #   Training Datasets, Checkpoints, Model Artifacts, and Outputs][3].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes
+    #   [2]: http://aws.amazon.com/ec2/instance-types/
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage.html
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id
@@ -36548,6 +37035,10 @@ module Aws::SageMaker
     #   The feature metadata used to search through the features.
     #   @return [Types::FeatureMetadata]
     #
+    # @!attribute [rw] hyper_parameter_tuning_job
+    #   The properties of a hyperparameter tuning job.
+    #   @return [Types::HyperParameterTuningJobSearchEntity]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRecord AWS API Documentation
     #
     class SearchRecord < Struct.new(
@@ -36562,7 +37053,8 @@ module Aws::SageMaker
       :pipeline_execution,
       :feature_group,
       :project,
-      :feature_metadata)
+      :feature_metadata,
+      :hyper_parameter_tuning_job)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36571,7 +37063,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata
+    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project, FeatureMetadata, HyperParameterTuningJob
     #         search_expression: {
     #           filters: [
     #             {
@@ -37662,7 +38154,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] max_runtime_in_seconds
     #   The maximum length of time, in seconds, that a training or
-    #   compilation job can run.
+    #   compilation job can run before it is stopped.
     #
     #   For compilation jobs, if the job does not complete during this time,
     #   a `TimeOut` error is generated. We recommend starting with 900
@@ -37673,6 +38165,10 @@ module Aws::SageMaker
     #   request, `MaxRuntimeInSeconds` specifies the maximum time for all of
     #   the attempts in total, not each individual attempt. The default
     #   value is 1 day. The maximum value is 28 days.
+    #
+    #   The maximum time that a `TrainingJob` can run in total, including
+    #   any time spent publishing metrics or archiving and uploading models
+    #   after it has been stopped, is 30 days.
     #   @return [Integer]
     #
     # @!attribute [rw] max_wait_time_in_seconds
@@ -40612,6 +41108,7 @@ module Aws::SageMaker
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
+    #           execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
     #         },
     #       }
     #

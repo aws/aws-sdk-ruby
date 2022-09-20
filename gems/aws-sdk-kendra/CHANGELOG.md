@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2022-09-13)
+------------------
+
+* Feature - This release enables our customer to choose the option of Sharepoint 2019 for the on-premise Sharepoint connector.
+
 1.57.0 (2022-08-19)
 ------------------
 

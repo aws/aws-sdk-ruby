@@ -302,6 +302,7 @@ module Aws
             'ConnectContactLens' => 'contact-lens',
             'ConnectParticipant' => 'participant.connect',
             'ConnectWisdomService' => 'wisdom',
+            'ControlTower' => 'controltower',
             'CostExplorer' => 'ce',
             'CostandUsageReportService' => 'cur',
             'CustomerProfiles' => 'profile',

@@ -1036,6 +1036,17 @@ module Aws::LookoutMetrics
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         dimension_filter_list: [
+    #           {
+    #             name: "ColumnName",
+    #             filter_list: [
+    #               {
+    #                 dimension_value: "DimensionValue",
+    #                 filter_operation: "EQUALS", # accepts EQUALS
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] anomaly_detector_arn
@@ -1091,6 +1102,11 @@ module Aws::LookoutMetrics
     #   [1]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] dimension_filter_list
+    #   A list of filters that specify which data is kept for anomaly
+    #   detection.
+    #   @return [Array<Types::MetricSetDimensionFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/CreateMetricSetRequest AWS API Documentation
     #
     class CreateMetricSetRequest < Struct.new(
@@ -1104,7 +1120,8 @@ module Aws::LookoutMetrics
       :metric_set_frequency,
       :metric_source,
       :timezone,
-      :tags)
+      :tags,
+      :dimension_filter_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1509,6 +1526,11 @@ module Aws::LookoutMetrics
     #   Contains information about the dataset's source data.
     #   @return [Types::MetricSource]
     #
+    # @!attribute [rw] dimension_filter_list
+    #   The dimensions and their values that were used to filter the
+    #   dataset.
+    #   @return [Array<Types::MetricSetDimensionFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DescribeMetricSetResponse AWS API Documentation
     #
     class DescribeMetricSetResponse < Struct.new(
@@ -1524,7 +1546,8 @@ module Aws::LookoutMetrics
       :dimension_list,
       :metric_set_frequency,
       :timezone,
-      :metric_source)
+      :metric_source,
+      :dimension_filter_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1868,6 +1891,36 @@ module Aws::LookoutMetrics
     class FileFormatDescriptor < Struct.new(
       :csv_format_descriptor,
       :json_format_descriptor)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a filter for choosing a subset of dimension values. Each
+    # filter consists of the dimension that you want to include and the
+    # condition statement. The condition statement is specified in the
+    # `FilterOperation` object.
+    #
+    # @note When making an API call, you may pass Filter
+    #   data as a hash:
+    #
+    #       {
+    #         dimension_value: "DimensionValue",
+    #         filter_operation: "EQUALS", # accepts EQUALS
+    #       }
+    #
+    # @!attribute [rw] dimension_value
+    #   The value that you want to include in the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_operation
+    #   The condition to apply.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/Filter AWS API Documentation
+    #
+    class Filter < Struct.new(
+      :dimension_value,
+      :filter_operation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2639,6 +2692,42 @@ module Aws::LookoutMetrics
     class MetricSetDataQualityMetric < Struct.new(
       :metric_set_arn,
       :data_quality_metric_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a list of filters for choosing a subset of dimension values.
+    # Each filter consists of the dimension and one of its values that you
+    # want to include. When multiple dimensions or values are specified, the
+    # dimensions are joined with an AND operation and the values are joined
+    # with an OR operation.
+    #
+    # @note When making an API call, you may pass MetricSetDimensionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ColumnName",
+    #         filter_list: [
+    #           {
+    #             dimension_value: "DimensionValue",
+    #             filter_operation: "EQUALS", # accepts EQUALS
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The dimension that you want to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_list
+    #   The list of filters that you are applying.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/MetricSetDimensionFilter AWS API Documentation
+    #
+    class MetricSetDimensionFilter < Struct.new(
+      :name,
+      :filter_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3543,6 +3632,17 @@ module Aws::LookoutMetrics
     #             },
     #           },
     #         },
+    #         dimension_filter_list: [
+    #           {
+    #             name: "ColumnName",
+    #             filter_list: [
+    #               {
+    #                 dimension_value: "DimensionValue",
+    #                 filter_operation: "EQUALS", # accepts EQUALS
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] metric_set_arn
@@ -3579,6 +3679,14 @@ module Aws::LookoutMetrics
     #   Contains information about source data used to generate metrics.
     #   @return [Types::MetricSource]
     #
+    # @!attribute [rw] dimension_filter_list
+    #   Describes a list of filters for choosing specific dimensions and
+    #   specific values. Each filter consists of the dimension and one of
+    #   its values that you want to include. When multiple dimensions or
+    #   values are specified, the dimensions are joined with an AND
+    #   operation and the values are joined with an OR operation.
+    #   @return [Array<Types::MetricSetDimensionFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/UpdateMetricSetRequest AWS API Documentation
     #
     class UpdateMetricSetRequest < Struct.new(
@@ -3589,7 +3697,8 @@ module Aws::LookoutMetrics
       :timestamp_column,
       :dimension_list,
       :metric_set_frequency,
-      :metric_source)
+      :metric_source,
+      :dimension_filter_list)
       SENSITIVE = []
       include Aws::Structure
     end

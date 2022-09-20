@@ -2564,7 +2564,7 @@ module Aws::IoTSiteWise
     #       }
     #
     # @!attribute [rw] asset_name
-    #   A unique, friendly name for the asset.
+    #   A friendly name for the asset.
     #   @return [String]
     #
     # @!attribute [rw] asset_model_id
@@ -8003,6 +8003,7 @@ module Aws::IoTSiteWise
     #         property_alias: "PropertyAlias",
     #         property_notification_state: "ENABLED", # accepts ENABLED, DISABLED
     #         client_token: "ClientToken",
+    #         property_unit: "PropertyUnit",
     #       }
     #
     # @!attribute [rw] asset_id
@@ -8051,12 +8052,19 @@ module Aws::IoTSiteWise
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] property_unit
+    #   The unit of measure (such as Newtons or RPM) of the asset property.
+    #   If you don't specify a value for this parameter, the service uses
+    #   the value of the `assetModelProperty` in the asset model.
+    #   @return [String]
+    #
     class UpdateAssetPropertyRequest < Struct.new(
       :asset_id,
       :property_id,
       :property_alias,
       :property_notification_state,
-      :client_token)
+      :client_token,
+      :property_unit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8076,7 +8084,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] asset_name
-    #   A unique, friendly name for the asset.
+    #   A friendly name for the asset.
     #   @return [String]
     #
     # @!attribute [rw] client_token

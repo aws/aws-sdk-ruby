@@ -83,6 +83,7 @@ module Aws
   autoload :ConnectContactLens, 'aws-sdk-connectcontactlens'
   autoload :ConnectParticipant, 'aws-sdk-connectparticipant'
   autoload :ConnectWisdomService, 'aws-sdk-connectwisdomservice'
+  autoload :ControlTower, 'aws-sdk-controltower'
   autoload :CostExplorer, 'aws-sdk-costexplorer'
   autoload :CostandUsageReportService, 'aws-sdk-costandusagereportservice'
   autoload :CustomerProfiles, 'aws-sdk-customerprofiles'

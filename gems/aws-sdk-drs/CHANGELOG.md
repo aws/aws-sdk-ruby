@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2022-09-13)
+------------------
+
+* Feature - Fixed the data type of lagDuration that is returned in Describe Source Server API
+
 1.6.0 (2022-07-15)
 ------------------
 

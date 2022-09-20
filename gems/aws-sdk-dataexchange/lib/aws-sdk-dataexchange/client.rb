@@ -355,6 +355,7 @@ module Aws::DataExchange
     # in the WAITING state.
     #
     # @option params [required, String] :job_id
+    #   The unique identifier for a job.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -680,6 +681,7 @@ module Aws::DataExchange
     #   An optional comment about the revision.
     #
     # @option params [required, String] :data_set_id
+    #   The unique identifier for a data set.
     #
     # @option params [Hash<String,String>] :tags
     #   A revision tag is an optional label that you can assign to a revision
@@ -741,10 +743,13 @@ module Aws::DataExchange
     # This operation deletes an asset.
     #
     # @option params [required, String] :asset_id
+    #   The unique identifier for an asset.
     #
     # @option params [required, String] :data_set_id
+    #   The unique identifier for a data set.
     #
     # @option params [required, String] :revision_id
+    #   The unique identifier for a revision.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -768,6 +773,7 @@ module Aws::DataExchange
     # This operation deletes a data set.
     #
     # @option params [required, String] :data_set_id
+    #   The unique identifier for a data set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -789,6 +795,7 @@ module Aws::DataExchange
     # This operation deletes the event action.
     #
     # @option params [required, String] :event_action_id
+    #   The unique identifier for the event action.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -810,8 +817,10 @@ module Aws::DataExchange
     # This operation deletes a revision.
     #
     # @option params [required, String] :data_set_id
+    #   The unique identifier for a data set.
     #
     # @option params [required, String] :revision_id
+    #   The unique identifier for a revision.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -834,10 +843,13 @@ module Aws::DataExchange
     # This operation returns information about an asset.
     #
     # @option params [required, String] :asset_id
+    #   The unique identifier for an asset.
     #
     # @option params [required, String] :data_set_id
+    #   The unique identifier for a data set.
     #
     # @option params [required, String] :revision_id
+    #   The unique identifier for a revision.
     #
     # @return [Types::GetAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -895,6 +907,7 @@ module Aws::DataExchange
     # This operation returns information about a data set.
     #
     # @option params [required, String] :data_set_id
+    #   The unique identifier for a data set.
     #
     # @return [Types::GetDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -943,6 +956,7 @@ module Aws::DataExchange
     # This operation retrieves information about an event action.
     #
     # @option params [required, String] :event_action_id
+    #   The unique identifier for the event action.
     #
     # @return [Types::GetEventActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -983,6 +997,7 @@ module Aws::DataExchange
     # This operation returns information about a job.
     #
     # @option params [required, String] :job_id
+    #   The unique identifier for a job.
     #
     # @return [Types::GetJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1080,8 +1095,10 @@ module Aws::DataExchange
     # This operation returns information about a revision.
     #
     # @option params [required, String] :data_set_id
+    #   The unique identifier for a data set.
     #
     # @option params [required, String] :revision_id
+    #   The unique identifier for a revision.
     #
     # @return [Types::GetRevisionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1134,10 +1151,14 @@ module Aws::DataExchange
     # descending order.
     #
     # @option params [required, String] :data_set_id
+    #   The unique identifier for a data set.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of results returned by a single call.
     #
     # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @return [Types::ListDataSetRevisionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1185,10 +1206,15 @@ module Aws::DataExchange
     # ignored.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of results returned by a single call.
     #
     # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [String] :origin
+    #   A property that defines the data set as OWNED by the account (for
+    #   providers) or ENTITLED to the account (for subscribers).
     #
     # @return [Types::ListDataSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1232,10 +1258,14 @@ module Aws::DataExchange
     # This operation lists your event actions.
     #
     # @option params [String] :event_source_id
+    #   The unique identifier for the event source.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of results returned by a single call.
     #
     # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @return [Types::ListEventActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1279,12 +1309,17 @@ module Aws::DataExchange
     # order.
     #
     # @option params [String] :data_set_id
+    #   The unique identifier for a data set.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of results returned by a single call.
     #
     # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [String] :revision_id
+    #   The unique identifier for a revision.
     #
     # @return [Types::ListJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1384,12 +1419,17 @@ module Aws::DataExchange
     # descending order.
     #
     # @option params [required, String] :data_set_id
+    #   The unique identifier for a data set.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of results returned by a single call.
     #
     # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [required, String] :revision_id
+    #   The unique identifier for a revision.
     #
     # @return [Types::ListRevisionAssetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1444,6 +1484,8 @@ module Aws::DataExchange
     # This operation lists the tags on the resource.
     #
     # @option params [required, String] :resource_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
+    #   resource.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1472,8 +1514,10 @@ module Aws::DataExchange
     # This operation revokes subscribers' access to a revision.
     #
     # @option params [required, String] :data_set_id
+    #   The unique identifier for a data set.
     #
     # @option params [required, String] :revision_id
+    #   The unique identifier for a revision.
     #
     # @option params [required, String] :revocation_comment
     #   A required comment to inform subscribers of the reason their access to
@@ -1487,11 +1531,11 @@ module Aws::DataExchange
     #   * {Types::RevokeRevisionResponse#data_set_id #data_set_id} => String
     #   * {Types::RevokeRevisionResponse#finalized #finalized} => Boolean
     #   * {Types::RevokeRevisionResponse#id #id} => String
+    #   * {Types::RevokeRevisionResponse#source_id #source_id} => String
+    #   * {Types::RevokeRevisionResponse#updated_at #updated_at} => Time
     #   * {Types::RevokeRevisionResponse#revocation_comment #revocation_comment} => String
     #   * {Types::RevokeRevisionResponse#revoked #revoked} => Boolean
     #   * {Types::RevokeRevisionResponse#revoked_at #revoked_at} => Time
-    #   * {Types::RevokeRevisionResponse#source_id #source_id} => String
-    #   * {Types::RevokeRevisionResponse#updated_at #updated_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1509,11 +1553,11 @@ module Aws::DataExchange
     #   resp.data_set_id #=> String
     #   resp.finalized #=> Boolean
     #   resp.id #=> String
+    #   resp.source_id #=> String
+    #   resp.updated_at #=> Time
     #   resp.revocation_comment #=> String
     #   resp.revoked #=> Boolean
     #   resp.revoked_at #=> Time
-    #   resp.source_id #=> String
-    #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RevokeRevision AWS API Documentation
     #
@@ -1528,20 +1572,34 @@ module Aws::DataExchange
     # proxied to the provider’s API Gateway API.
     #
     # @option params [String] :body
+    #   The request body.
     #
     # @option params [Hash<String,String>] :query_string_parameters
+    #   Attach query string parameters to the end of the URI (for example,
+    #   /v1/examplePath?exampleParam=exampleValue).
     #
     # @option params [required, String] :asset_id
+    #   Asset ID value for the API request.
     #
     # @option params [required, String] :data_set_id
+    #   Data set ID value for the API request.
     #
     # @option params [Hash<String,String>] :request_headers
+    #   Any header value prefixed with x-amzn-dataexchange-header- will have
+    #   that stripped before sending the Asset API request. Use this when you
+    #   want to override a header that AWS Data Exchange uses. Alternatively,
+    #   you can use the header without a prefix to the HTTP request.
     #
     # @option params [String] :method
+    #   HTTP method value for the API request. Alternatively, you can use the
+    #   appropriate verb in your request.
     #
     # @option params [String] :path
+    #   URI path value for the API request. Alternatively, you can set the URI
+    #   path directly by invoking /v1/\\\{pathValue\\}.
     #
     # @option params [required, String] :revision_id
+    #   Revision ID value for the API request.
     #
     # @return [Types::SendApiAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1583,6 +1641,7 @@ module Aws::DataExchange
     # This operation starts a job.
     #
     # @option params [required, String] :job_id
+    #   The unique identifier for a job.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1604,8 +1663,11 @@ module Aws::DataExchange
     # This operation tags a resource.
     #
     # @option params [required, String] :resource_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
+    #   resource.
     #
     # @option params [required, Hash<String,String>] :tags
+    #   A label that consists of a customer-defined key and an optional value.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1630,8 +1692,11 @@ module Aws::DataExchange
     # This operation removes one or more tags from a resource.
     #
     # @option params [required, String] :resource_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
+    #   resource.
     #
     # @option params [required, Array<String>] :tag_keys
+    #   The key tags.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1654,8 +1719,10 @@ module Aws::DataExchange
     # This operation updates an asset.
     #
     # @option params [required, String] :asset_id
+    #   The unique identifier for an asset.
     #
     # @option params [required, String] :data_set_id
+    #   The unique identifier for a data set.
     #
     # @option params [required, String] :name
     #   The name of the asset. When importing from Amazon S3, the S3 object
@@ -1666,6 +1733,7 @@ module Aws::DataExchange
     #   asset name.
     #
     # @option params [required, String] :revision_id
+    #   The unique identifier for a revision.
     #
     # @return [Types::UpdateAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1724,6 +1792,7 @@ module Aws::DataExchange
     # This operation updates a data set.
     #
     # @option params [required, String] :data_set_id
+    #   The unique identifier for a data set.
     #
     # @option params [String] :description
     #   The description for the data set.
@@ -1780,6 +1849,7 @@ module Aws::DataExchange
     #   What occurs after a certain event.
     #
     # @option params [required, String] :event_action_id
+    #   The unique identifier for the event action.
     #
     # @return [Types::UpdateEventActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1835,6 +1905,7 @@ module Aws::DataExchange
     #   An optional comment about the revision.
     #
     # @option params [required, String] :data_set_id
+    #   The unique identifier for a data set.
     #
     # @option params [Boolean] :finalized
     #   Finalizing a revision tells AWS Data Exchange that your changes to the
@@ -1842,6 +1913,7 @@ module Aws::DataExchange
     #   state, you can publish the revision to your products.
     #
     # @option params [required, String] :revision_id
+    #   The unique identifier for a revision.
     #
     # @return [Types::UpdateRevisionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1902,7 +1974,7 @@ module Aws::DataExchange
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

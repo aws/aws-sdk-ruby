@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2022-09-02)
+------------------
+
+* Feature - Added support for AES_CTR encryption to CMAF origin endpoints
+
 1.55.0 (2022-08-26)
 ------------------
 

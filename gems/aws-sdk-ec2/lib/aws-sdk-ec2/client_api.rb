@@ -54,6 +54,8 @@ module Aws::EC2
     AddIpamOperatingRegionSet = Shapes::ListShape.new(name: 'AddIpamOperatingRegionSet')
     AddPrefixListEntries = Shapes::ListShape.new(name: 'AddPrefixListEntries')
     AddPrefixListEntry = Shapes::StructureShape.new(name: 'AddPrefixListEntry')
+    AddedPrincipal = Shapes::StructureShape.new(name: 'AddedPrincipal')
+    AddedPrincipalSet = Shapes::ListShape.new(name: 'AddedPrincipalSet')
     AdditionalDetail = Shapes::StructureShape.new(name: 'AdditionalDetail')
     AdditionalDetailList = Shapes::ListShape.new(name: 'AdditionalDetailList')
     Address = Shapes::StructureShape.new(name: 'Address')
@@ -77,6 +79,7 @@ module Aws::EC2
     AllocationIds = Shapes::ListShape.new(name: 'AllocationIds')
     AllocationState = Shapes::StringShape.new(name: 'AllocationState')
     AllocationStrategy = Shapes::StringShape.new(name: 'AllocationStrategy')
+    AllocationType = Shapes::StringShape.new(name: 'AllocationType')
     AllowedPrincipal = Shapes::StructureShape.new(name: 'AllowedPrincipal')
     AllowedPrincipalSet = Shapes::ListShape.new(name: 'AllowedPrincipalSet')
     AllowsMultipleInstanceTypes = Shapes::StringShape.new(name: 'AllowsMultipleInstanceTypes')
@@ -233,6 +236,8 @@ module Aws::EC2
     CancelSpotInstanceRequestsResult = Shapes::StructureShape.new(name: 'CancelSpotInstanceRequestsResult')
     CancelledSpotInstanceRequest = Shapes::StructureShape.new(name: 'CancelledSpotInstanceRequest')
     CancelledSpotInstanceRequestList = Shapes::ListShape.new(name: 'CancelledSpotInstanceRequestList')
+    CapacityAllocation = Shapes::StructureShape.new(name: 'CapacityAllocation')
+    CapacityAllocations = Shapes::ListShape.new(name: 'CapacityAllocations')
     CapacityReservation = Shapes::StructureShape.new(name: 'CapacityReservation')
     CapacityReservationFleet = Shapes::StructureShape.new(name: 'CapacityReservationFleet')
     CapacityReservationFleetCancellationState = Shapes::StructureShape.new(name: 'CapacityReservationFleetCancellationState')
@@ -310,11 +315,14 @@ module Aws::EC2
     CloudWatchLogOptionsSpecification = Shapes::StructureShape.new(name: 'CloudWatchLogOptionsSpecification')
     CoipAddressUsage = Shapes::StructureShape.new(name: 'CoipAddressUsage')
     CoipAddressUsageSet = Shapes::ListShape.new(name: 'CoipAddressUsageSet')
+    CoipCidr = Shapes::StructureShape.new(name: 'CoipCidr')
     CoipPool = Shapes::StructureShape.new(name: 'CoipPool')
     CoipPoolId = Shapes::StringShape.new(name: 'CoipPoolId')
     CoipPoolIdSet = Shapes::ListShape.new(name: 'CoipPoolIdSet')
     CoipPoolMaxResults = Shapes::IntegerShape.new(name: 'CoipPoolMaxResults')
     CoipPoolSet = Shapes::ListShape.new(name: 'CoipPoolSet')
+    ComponentAccount = Shapes::StringShape.new(name: 'ComponentAccount')
+    ComponentRegion = Shapes::StringShape.new(name: 'ComponentRegion')
     ConfirmProductInstanceRequest = Shapes::StructureShape.new(name: 'ConfirmProductInstanceRequest')
     ConfirmProductInstanceResult = Shapes::StructureShape.new(name: 'ConfirmProductInstanceResult')
     ConnectionLogOptions = Shapes::StructureShape.new(name: 'ConnectionLogOptions')
@@ -355,6 +363,10 @@ module Aws::EC2
     CreateClientVpnEndpointResult = Shapes::StructureShape.new(name: 'CreateClientVpnEndpointResult')
     CreateClientVpnRouteRequest = Shapes::StructureShape.new(name: 'CreateClientVpnRouteRequest')
     CreateClientVpnRouteResult = Shapes::StructureShape.new(name: 'CreateClientVpnRouteResult')
+    CreateCoipCidrRequest = Shapes::StructureShape.new(name: 'CreateCoipCidrRequest')
+    CreateCoipCidrResult = Shapes::StructureShape.new(name: 'CreateCoipCidrResult')
+    CreateCoipPoolRequest = Shapes::StructureShape.new(name: 'CreateCoipPoolRequest')
+    CreateCoipPoolResult = Shapes::StructureShape.new(name: 'CreateCoipPoolResult')
     CreateCustomerGatewayRequest = Shapes::StructureShape.new(name: 'CreateCustomerGatewayRequest')
     CreateCustomerGatewayResult = Shapes::StructureShape.new(name: 'CreateCustomerGatewayResult')
     CreateDefaultSubnetRequest = Shapes::StructureShape.new(name: 'CreateDefaultSubnetRequest')
@@ -396,6 +408,10 @@ module Aws::EC2
     CreateLaunchTemplateVersionResult = Shapes::StructureShape.new(name: 'CreateLaunchTemplateVersionResult')
     CreateLocalGatewayRouteRequest = Shapes::StructureShape.new(name: 'CreateLocalGatewayRouteRequest')
     CreateLocalGatewayRouteResult = Shapes::StructureShape.new(name: 'CreateLocalGatewayRouteResult')
+    CreateLocalGatewayRouteTableRequest = Shapes::StructureShape.new(name: 'CreateLocalGatewayRouteTableRequest')
+    CreateLocalGatewayRouteTableResult = Shapes::StructureShape.new(name: 'CreateLocalGatewayRouteTableResult')
+    CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest = Shapes::StructureShape.new(name: 'CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest')
+    CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult = Shapes::StructureShape.new(name: 'CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult')
     CreateLocalGatewayRouteTableVpcAssociationRequest = Shapes::StructureShape.new(name: 'CreateLocalGatewayRouteTableVpcAssociationRequest')
     CreateLocalGatewayRouteTableVpcAssociationResult = Shapes::StructureShape.new(name: 'CreateLocalGatewayRouteTableVpcAssociationResult')
     CreateManagedPrefixListRequest = Shapes::StructureShape.new(name: 'CreateManagedPrefixListRequest')
@@ -520,6 +536,10 @@ module Aws::EC2
     DeleteClientVpnEndpointResult = Shapes::StructureShape.new(name: 'DeleteClientVpnEndpointResult')
     DeleteClientVpnRouteRequest = Shapes::StructureShape.new(name: 'DeleteClientVpnRouteRequest')
     DeleteClientVpnRouteResult = Shapes::StructureShape.new(name: 'DeleteClientVpnRouteResult')
+    DeleteCoipCidrRequest = Shapes::StructureShape.new(name: 'DeleteCoipCidrRequest')
+    DeleteCoipCidrResult = Shapes::StructureShape.new(name: 'DeleteCoipCidrResult')
+    DeleteCoipPoolRequest = Shapes::StructureShape.new(name: 'DeleteCoipPoolRequest')
+    DeleteCoipPoolResult = Shapes::StructureShape.new(name: 'DeleteCoipPoolResult')
     DeleteCustomerGatewayRequest = Shapes::StructureShape.new(name: 'DeleteCustomerGatewayRequest')
     DeleteDhcpOptionsRequest = Shapes::StructureShape.new(name: 'DeleteDhcpOptionsRequest')
     DeleteEgressOnlyInternetGatewayRequest = Shapes::StructureShape.new(name: 'DeleteEgressOnlyInternetGatewayRequest')
@@ -556,6 +576,10 @@ module Aws::EC2
     DeleteLaunchTemplateVersionsResult = Shapes::StructureShape.new(name: 'DeleteLaunchTemplateVersionsResult')
     DeleteLocalGatewayRouteRequest = Shapes::StructureShape.new(name: 'DeleteLocalGatewayRouteRequest')
     DeleteLocalGatewayRouteResult = Shapes::StructureShape.new(name: 'DeleteLocalGatewayRouteResult')
+    DeleteLocalGatewayRouteTableRequest = Shapes::StructureShape.new(name: 'DeleteLocalGatewayRouteTableRequest')
+    DeleteLocalGatewayRouteTableResult = Shapes::StructureShape.new(name: 'DeleteLocalGatewayRouteTableResult')
+    DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest = Shapes::StructureShape.new(name: 'DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest')
+    DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult = Shapes::StructureShape.new(name: 'DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult')
     DeleteLocalGatewayRouteTableVpcAssociationRequest = Shapes::StructureShape.new(name: 'DeleteLocalGatewayRouteTableVpcAssociationRequest')
     DeleteLocalGatewayRouteTableVpcAssociationResult = Shapes::StructureShape.new(name: 'DeleteLocalGatewayRouteTableVpcAssociationResult')
     DeleteManagedPrefixListRequest = Shapes::StructureShape.new(name: 'DeleteManagedPrefixListRequest')
@@ -1723,6 +1747,7 @@ module Aws::EC2
     LocalGatewayRouteState = Shapes::StringShape.new(name: 'LocalGatewayRouteState')
     LocalGatewayRouteTable = Shapes::StructureShape.new(name: 'LocalGatewayRouteTable')
     LocalGatewayRouteTableIdSet = Shapes::ListShape.new(name: 'LocalGatewayRouteTableIdSet')
+    LocalGatewayRouteTableMode = Shapes::StringShape.new(name: 'LocalGatewayRouteTableMode')
     LocalGatewayRouteTableSet = Shapes::ListShape.new(name: 'LocalGatewayRouteTableSet')
     LocalGatewayRouteTableVirtualInterfaceGroupAssociation = Shapes::StructureShape.new(name: 'LocalGatewayRouteTableVirtualInterfaceGroupAssociation')
     LocalGatewayRouteTableVirtualInterfaceGroupAssociationId = Shapes::StringShape.new(name: 'LocalGatewayRouteTableVirtualInterfaceGroupAssociationId')
@@ -1819,6 +1844,8 @@ module Aws::EC2
     ModifyIpamScopeResult = Shapes::StructureShape.new(name: 'ModifyIpamScopeResult')
     ModifyLaunchTemplateRequest = Shapes::StructureShape.new(name: 'ModifyLaunchTemplateRequest')
     ModifyLaunchTemplateResult = Shapes::StructureShape.new(name: 'ModifyLaunchTemplateResult')
+    ModifyLocalGatewayRouteRequest = Shapes::StructureShape.new(name: 'ModifyLocalGatewayRouteRequest')
+    ModifyLocalGatewayRouteResult = Shapes::StructureShape.new(name: 'ModifyLocalGatewayRouteResult')
     ModifyManagedPrefixListRequest = Shapes::StructureShape.new(name: 'ModifyManagedPrefixListRequest')
     ModifyManagedPrefixListResult = Shapes::StructureShape.new(name: 'ModifyManagedPrefixListResult')
     ModifyNetworkInterfaceAttributeRequest = Shapes::StructureShape.new(name: 'ModifyNetworkInterfaceAttributeRequest')
@@ -2862,6 +2889,14 @@ module Aws::EC2
     AddPrefixListEntry.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     AddPrefixListEntry.struct_class = Types::AddPrefixListEntry
 
+    AddedPrincipal.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "principalType"))
+    AddedPrincipal.add_member(:principal, Shapes::ShapeRef.new(shape: String, location_name: "principal"))
+    AddedPrincipal.add_member(:service_permission_id, Shapes::ShapeRef.new(shape: String, location_name: "servicePermissionId"))
+    AddedPrincipal.add_member(:service_id, Shapes::ShapeRef.new(shape: String, location_name: "serviceId"))
+    AddedPrincipal.struct_class = Types::AddedPrincipal
+
+    AddedPrincipalSet.member = Shapes::ShapeRef.new(shape: AddedPrincipal, location_name: "item")
+
     AdditionalDetail.add_member(:additional_detail_type, Shapes::ShapeRef.new(shape: String, location_name: "additionalDetailType"))
     AdditionalDetail.add_member(:component, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "component"))
     AdditionalDetail.struct_class = Types::AdditionalDetail
@@ -2953,6 +2988,9 @@ module Aws::EC2
 
     AllowedPrincipal.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "principalType"))
     AllowedPrincipal.add_member(:principal, Shapes::ShapeRef.new(shape: String, location_name: "principal"))
+    AllowedPrincipal.add_member(:service_permission_id, Shapes::ShapeRef.new(shape: String, location_name: "servicePermissionId"))
+    AllowedPrincipal.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    AllowedPrincipal.add_member(:service_id, Shapes::ShapeRef.new(shape: String, location_name: "serviceId"))
     AllowedPrincipal.struct_class = Types::AllowedPrincipal
 
     AllowedPrincipalSet.member = Shapes::ShapeRef.new(shape: AllowedPrincipal, location_name: "item")
@@ -3005,6 +3043,7 @@ module Aws::EC2
     AnalysisRouteTableRoute.add_member(:origin, Shapes::ShapeRef.new(shape: String, location_name: "origin"))
     AnalysisRouteTableRoute.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayId"))
     AnalysisRouteTableRoute.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcPeeringConnectionId"))
+    AnalysisRouteTableRoute.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "state"))
     AnalysisRouteTableRoute.struct_class = Types::AnalysisRouteTableRoute
 
     AnalysisSecurityGroupRule.add_member(:cidr, Shapes::ShapeRef.new(shape: String, location_name: "cidr"))
@@ -3488,6 +3527,12 @@ module Aws::EC2
 
     CancelledSpotInstanceRequestList.member = Shapes::ShapeRef.new(shape: CancelledSpotInstanceRequest, location_name: "item")
 
+    CapacityAllocation.add_member(:allocation_type, Shapes::ShapeRef.new(shape: AllocationType, location_name: "allocationType"))
+    CapacityAllocation.add_member(:count, Shapes::ShapeRef.new(shape: Integer, location_name: "count"))
+    CapacityAllocation.struct_class = Types::CapacityAllocation
+
+    CapacityAllocations.member = Shapes::ShapeRef.new(shape: CapacityAllocation, location_name: "item")
+
     CapacityReservation.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationId"))
     CapacityReservation.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     CapacityReservation.add_member(:capacity_reservation_arn, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationArn"))
@@ -3510,6 +3555,7 @@ module Aws::EC2
     CapacityReservation.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OutpostArn, location_name: "outpostArn"))
     CapacityReservation.add_member(:capacity_reservation_fleet_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationFleetId"))
     CapacityReservation.add_member(:placement_group_arn, Shapes::ShapeRef.new(shape: PlacementGroupArn, location_name: "placementGroupArn"))
+    CapacityReservation.add_member(:capacity_allocations, Shapes::ShapeRef.new(shape: CapacityAllocations, location_name: "capacityAllocationSet"))
     CapacityReservation.struct_class = Types::CapacityReservation
 
     CapacityReservationFleet.add_member(:capacity_reservation_fleet_id, Shapes::ShapeRef.new(shape: CapacityReservationFleetId, location_name: "capacityReservationFleetId"))
@@ -3756,6 +3802,11 @@ module Aws::EC2
 
     CoipAddressUsageSet.member = Shapes::ShapeRef.new(shape: CoipAddressUsage, location_name: "item")
 
+    CoipCidr.add_member(:cidr, Shapes::ShapeRef.new(shape: String, location_name: "cidr"))
+    CoipCidr.add_member(:coip_pool_id, Shapes::ShapeRef.new(shape: Ipv4PoolCoipId, location_name: "coipPoolId"))
+    CoipCidr.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: String, location_name: "localGatewayRouteTableId"))
+    CoipCidr.struct_class = Types::CoipCidr
+
     CoipPool.add_member(:pool_id, Shapes::ShapeRef.new(shape: Ipv4PoolCoipId, location_name: "poolId"))
     CoipPool.add_member(:pool_cidrs, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "poolCidrSet"))
     CoipPool.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, location_name: "localGatewayRouteTableId"))
@@ -3953,6 +4004,22 @@ module Aws::EC2
     CreateClientVpnRouteResult.add_member(:status, Shapes::ShapeRef.new(shape: ClientVpnRouteStatus, location_name: "status"))
     CreateClientVpnRouteResult.struct_class = Types::CreateClientVpnRouteResult
 
+    CreateCoipCidrRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
+    CreateCoipCidrRequest.add_member(:coip_pool_id, Shapes::ShapeRef.new(shape: Ipv4PoolCoipId, required: true, location_name: "CoipPoolId"))
+    CreateCoipCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateCoipCidrRequest.struct_class = Types::CreateCoipCidrRequest
+
+    CreateCoipCidrResult.add_member(:coip_cidr, Shapes::ShapeRef.new(shape: CoipCidr, location_name: "coipCidr"))
+    CreateCoipCidrResult.struct_class = Types::CreateCoipCidrResult
+
+    CreateCoipPoolRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
+    CreateCoipPoolRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateCoipPoolRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateCoipPoolRequest.struct_class = Types::CreateCoipPoolRequest
+
+    CreateCoipPoolResult.add_member(:coip_pool, Shapes::ShapeRef.new(shape: CoipPool, location_name: "coipPool"))
+    CreateCoipPoolResult.struct_class = Types::CreateCoipPoolResult
+
     CreateCustomerGatewayRequest.add_member(:bgp_asn, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "BgpAsn"))
     CreateCustomerGatewayRequest.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "PublicIp"))
     CreateCustomerGatewayRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
@@ -4039,6 +4106,7 @@ module Aws::EC2
     CreateFlowLogsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateFlowLogsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CreateFlowLogsRequest.add_member(:deliver_logs_permission_arn, Shapes::ShapeRef.new(shape: String, location_name: "DeliverLogsPermissionArn"))
+    CreateFlowLogsRequest.add_member(:deliver_cross_account_role, Shapes::ShapeRef.new(shape: String, location_name: "DeliverCrossAccountRole"))
     CreateFlowLogsRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: String, location_name: "LogGroupName"))
     CreateFlowLogsRequest.add_member(:resource_ids, Shapes::ShapeRef.new(shape: FlowLogResourceIds, required: true, location_name: "ResourceId"))
     CreateFlowLogsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: FlowLogsResourceType, required: true, location_name: "ResourceType"))
@@ -4182,12 +4250,31 @@ module Aws::EC2
 
     CreateLocalGatewayRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DestinationCidrBlock"))
     CreateLocalGatewayRouteRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
-    CreateLocalGatewayRouteRequest.add_member(:local_gateway_virtual_interface_group_id, Shapes::ShapeRef.new(shape: LocalGatewayVirtualInterfaceGroupId, required: true, location_name: "LocalGatewayVirtualInterfaceGroupId"))
+    CreateLocalGatewayRouteRequest.add_member(:local_gateway_virtual_interface_group_id, Shapes::ShapeRef.new(shape: LocalGatewayVirtualInterfaceGroupId, location_name: "LocalGatewayVirtualInterfaceGroupId"))
     CreateLocalGatewayRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateLocalGatewayRouteRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
     CreateLocalGatewayRouteRequest.struct_class = Types::CreateLocalGatewayRouteRequest
 
     CreateLocalGatewayRouteResult.add_member(:route, Shapes::ShapeRef.new(shape: LocalGatewayRoute, location_name: "route"))
     CreateLocalGatewayRouteResult.struct_class = Types::CreateLocalGatewayRouteResult
+
+    CreateLocalGatewayRouteTableRequest.add_member(:local_gateway_id, Shapes::ShapeRef.new(shape: LocalGatewayId, required: true, location_name: "LocalGatewayId"))
+    CreateLocalGatewayRouteTableRequest.add_member(:mode, Shapes::ShapeRef.new(shape: LocalGatewayRouteTableMode, location_name: "Mode"))
+    CreateLocalGatewayRouteTableRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateLocalGatewayRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateLocalGatewayRouteTableRequest.struct_class = Types::CreateLocalGatewayRouteTableRequest
+
+    CreateLocalGatewayRouteTableResult.add_member(:local_gateway_route_table, Shapes::ShapeRef.new(shape: LocalGatewayRouteTable, location_name: "localGatewayRouteTable"))
+    CreateLocalGatewayRouteTableResult.struct_class = Types::CreateLocalGatewayRouteTableResult
+
+    CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
+    CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest.add_member(:local_gateway_virtual_interface_group_id, Shapes::ShapeRef.new(shape: LocalGatewayVirtualInterfaceGroupId, required: true, location_name: "LocalGatewayVirtualInterfaceGroupId"))
+    CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest.struct_class = Types::CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest
+
+    CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult.add_member(:local_gateway_route_table_virtual_interface_group_association, Shapes::ShapeRef.new(shape: LocalGatewayRouteTableVirtualInterfaceGroupAssociation, location_name: "localGatewayRouteTableVirtualInterfaceGroupAssociation"))
+    CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult.struct_class = Types::CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult
 
     CreateLocalGatewayRouteTableVpcAssociationRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
     CreateLocalGatewayRouteTableVpcAssociationRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
@@ -4800,6 +4887,21 @@ module Aws::EC2
     DeleteClientVpnRouteResult.add_member(:status, Shapes::ShapeRef.new(shape: ClientVpnRouteStatus, location_name: "status"))
     DeleteClientVpnRouteResult.struct_class = Types::DeleteClientVpnRouteResult
 
+    DeleteCoipCidrRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
+    DeleteCoipCidrRequest.add_member(:coip_pool_id, Shapes::ShapeRef.new(shape: Ipv4PoolCoipId, required: true, location_name: "CoipPoolId"))
+    DeleteCoipCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteCoipCidrRequest.struct_class = Types::DeleteCoipCidrRequest
+
+    DeleteCoipCidrResult.add_member(:coip_cidr, Shapes::ShapeRef.new(shape: CoipCidr, location_name: "coipCidr"))
+    DeleteCoipCidrResult.struct_class = Types::DeleteCoipCidrResult
+
+    DeleteCoipPoolRequest.add_member(:coip_pool_id, Shapes::ShapeRef.new(shape: Ipv4PoolCoipId, required: true, location_name: "CoipPoolId"))
+    DeleteCoipPoolRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteCoipPoolRequest.struct_class = Types::DeleteCoipPoolRequest
+
+    DeleteCoipPoolResult.add_member(:coip_pool, Shapes::ShapeRef.new(shape: CoipPool, location_name: "coipPool"))
+    DeleteCoipPoolResult.struct_class = Types::DeleteCoipPoolResult
+
     DeleteCustomerGatewayRequest.add_member(:customer_gateway_id, Shapes::ShapeRef.new(shape: CustomerGatewayId, required: true, location_name: "CustomerGatewayId"))
     DeleteCustomerGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteCustomerGatewayRequest.struct_class = Types::DeleteCustomerGatewayRequest
@@ -4934,6 +5036,20 @@ module Aws::EC2
 
     DeleteLocalGatewayRouteResult.add_member(:route, Shapes::ShapeRef.new(shape: LocalGatewayRoute, location_name: "route"))
     DeleteLocalGatewayRouteResult.struct_class = Types::DeleteLocalGatewayRouteResult
+
+    DeleteLocalGatewayRouteTableRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
+    DeleteLocalGatewayRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteLocalGatewayRouteTableRequest.struct_class = Types::DeleteLocalGatewayRouteTableRequest
+
+    DeleteLocalGatewayRouteTableResult.add_member(:local_gateway_route_table, Shapes::ShapeRef.new(shape: LocalGatewayRouteTable, location_name: "localGatewayRouteTable"))
+    DeleteLocalGatewayRouteTableResult.struct_class = Types::DeleteLocalGatewayRouteTableResult
+
+    DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest.add_member(:local_gateway_route_table_virtual_interface_group_association_id, Shapes::ShapeRef.new(shape: LocalGatewayRouteTableVirtualInterfaceGroupAssociationId, required: true, location_name: "LocalGatewayRouteTableVirtualInterfaceGroupAssociationId"))
+    DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest.struct_class = Types::DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest
+
+    DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult.add_member(:local_gateway_route_table_virtual_interface_group_association, Shapes::ShapeRef.new(shape: LocalGatewayRouteTableVirtualInterfaceGroupAssociation, location_name: "localGatewayRouteTableVirtualInterfaceGroupAssociation"))
+    DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult.struct_class = Types::DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult
 
     DeleteLocalGatewayRouteTableVpcAssociationRequest.add_member(:local_gateway_route_table_vpc_association_id, Shapes::ShapeRef.new(shape: LocalGatewayRouteTableVpcAssociationId, required: true, location_name: "LocalGatewayRouteTableVpcAssociationId"))
     DeleteLocalGatewayRouteTableVpcAssociationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -7351,6 +7467,8 @@ module Aws::EC2
     Explanation.add_member(:transit_gateway_route_table, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGatewayRouteTable"))
     Explanation.add_member(:transit_gateway_route_table_route, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableRoute, location_name: "transitGatewayRouteTableRoute"))
     Explanation.add_member(:transit_gateway_attachment, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGatewayAttachment"))
+    Explanation.add_member(:component_account, Shapes::ShapeRef.new(shape: ComponentAccount, location_name: "componentAccount"))
+    Explanation.add_member(:component_region, Shapes::ShapeRef.new(shape: ComponentRegion, location_name: "componentRegion"))
     Explanation.struct_class = Types::Explanation
 
     ExplanationList.member = Shapes::ShapeRef.new(shape: Explanation, location_name: "item")
@@ -7597,6 +7715,7 @@ module Aws::EC2
     FlowLog.add_member(:creation_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "creationTime"))
     FlowLog.add_member(:deliver_logs_error_message, Shapes::ShapeRef.new(shape: String, location_name: "deliverLogsErrorMessage"))
     FlowLog.add_member(:deliver_logs_permission_arn, Shapes::ShapeRef.new(shape: String, location_name: "deliverLogsPermissionArn"))
+    FlowLog.add_member(:deliver_cross_account_role, Shapes::ShapeRef.new(shape: String, location_name: "deliverCrossAccountRole"))
     FlowLog.add_member(:deliver_logs_status, Shapes::ShapeRef.new(shape: String, location_name: "deliverLogsStatus"))
     FlowLog.add_member(:flow_log_id, Shapes::ShapeRef.new(shape: String, location_name: "flowLogId"))
     FlowLog.add_member(:flow_log_status, Shapes::ShapeRef.new(shape: String, location_name: "flowLogStatus"))
@@ -9555,6 +9674,9 @@ module Aws::EC2
     LocalGatewayRoute.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, location_name: "localGatewayRouteTableId"))
     LocalGatewayRoute.add_member(:local_gateway_route_table_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "localGatewayRouteTableArn"))
     LocalGatewayRoute.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    LocalGatewayRoute.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "subnetId"))
+    LocalGatewayRoute.add_member(:coip_pool_id, Shapes::ShapeRef.new(shape: CoipPoolId, location_name: "coipPoolId"))
+    LocalGatewayRoute.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "networkInterfaceId"))
     LocalGatewayRoute.struct_class = Types::LocalGatewayRoute
 
     LocalGatewayRouteList.member = Shapes::ShapeRef.new(shape: LocalGatewayRoute, location_name: "item")
@@ -9566,6 +9688,8 @@ module Aws::EC2
     LocalGatewayRouteTable.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     LocalGatewayRouteTable.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "state"))
     LocalGatewayRouteTable.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    LocalGatewayRouteTable.add_member(:mode, Shapes::ShapeRef.new(shape: LocalGatewayRouteTableMode, location_name: "mode"))
+    LocalGatewayRouteTable.add_member(:state_reason, Shapes::ShapeRef.new(shape: StateReason, location_name: "stateReason"))
     LocalGatewayRouteTable.struct_class = Types::LocalGatewayRouteTable
 
     LocalGatewayRouteTableIdSet.member = Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, location_name: "item")
@@ -9939,6 +10063,16 @@ module Aws::EC2
     ModifyLaunchTemplateResult.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplate, location_name: "launchTemplate"))
     ModifyLaunchTemplateResult.struct_class = Types::ModifyLaunchTemplateResult
 
+    ModifyLocalGatewayRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DestinationCidrBlock"))
+    ModifyLocalGatewayRouteRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
+    ModifyLocalGatewayRouteRequest.add_member(:local_gateway_virtual_interface_group_id, Shapes::ShapeRef.new(shape: LocalGatewayVirtualInterfaceGroupId, location_name: "LocalGatewayVirtualInterfaceGroupId"))
+    ModifyLocalGatewayRouteRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
+    ModifyLocalGatewayRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyLocalGatewayRouteRequest.struct_class = Types::ModifyLocalGatewayRouteRequest
+
+    ModifyLocalGatewayRouteResult.add_member(:route, Shapes::ShapeRef.new(shape: LocalGatewayRoute, location_name: "route"))
+    ModifyLocalGatewayRouteResult.struct_class = Types::ModifyLocalGatewayRouteResult
+
     ModifyManagedPrefixListRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyManagedPrefixListRequest.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, required: true, location_name: "PrefixListId"))
     ModifyManagedPrefixListRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: Long, location_name: "CurrentVersion"))
@@ -10192,6 +10326,7 @@ module Aws::EC2
     ModifyVpcEndpointServicePermissionsRequest.add_member(:remove_allowed_principals, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "RemoveAllowedPrincipals"))
     ModifyVpcEndpointServicePermissionsRequest.struct_class = Types::ModifyVpcEndpointServicePermissionsRequest
 
+    ModifyVpcEndpointServicePermissionsResult.add_member(:added_principals, Shapes::ShapeRef.new(shape: AddedPrincipalSet, location_name: "addedPrincipalSet"))
     ModifyVpcEndpointServicePermissionsResult.add_member(:return_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     ModifyVpcEndpointServicePermissionsResult.struct_class = Types::ModifyVpcEndpointServicePermissionsResult
 
@@ -10610,6 +10745,8 @@ module Aws::EC2
     PathComponent.add_member(:additional_details, Shapes::ShapeRef.new(shape: AdditionalDetailList, location_name: "additionalDetailSet"))
     PathComponent.add_member(:transit_gateway, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGateway"))
     PathComponent.add_member(:transit_gateway_route_table_route, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableRoute, location_name: "transitGatewayRouteTableRoute"))
+    PathComponent.add_member(:explanations, Shapes::ShapeRef.new(shape: ExplanationList, location_name: "explanationSet"))
+    PathComponent.add_member(:elastic_load_balancer_listener, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "elasticLoadBalancerListener"))
     PathComponent.struct_class = Types::PathComponent
 
     PathComponentList.member = Shapes::ShapeRef.new(shape: PathComponent, location_name: "item")
@@ -13327,6 +13464,8 @@ module Aws::EC2
     VpcEndpointConnection.add_member(:network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "networkLoadBalancerArnSet"))
     VpcEndpointConnection.add_member(:gateway_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "gatewayLoadBalancerArnSet"))
     VpcEndpointConnection.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
+    VpcEndpointConnection.add_member(:vpc_endpoint_connection_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcEndpointConnectionId"))
+    VpcEndpointConnection.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     VpcEndpointConnection.struct_class = Types::VpcEndpointConnection
 
     VpcEndpointConnectionSet.member = Shapes::ShapeRef.new(shape: VpcEndpointConnection, location_name: "item")
@@ -13943,6 +14082,22 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateClientVpnRouteResult)
       end)
 
+      api.add_operation(:create_coip_cidr, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCoipCidr"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCoipCidrRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCoipCidrResult)
+      end)
+
+      api.add_operation(:create_coip_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCoipPool"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCoipPoolRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCoipPoolResult)
+      end)
+
       api.add_operation(:create_customer_gateway, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCustomerGateway"
         o.http_method = "POST"
@@ -14093,6 +14248,22 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateLocalGatewayRouteRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateLocalGatewayRouteResult)
+      end)
+
+      api.add_operation(:create_local_gateway_route_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLocalGatewayRouteTable"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLocalGatewayRouteTableRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLocalGatewayRouteTableResult)
+      end)
+
+      api.add_operation(:create_local_gateway_route_table_virtual_interface_group_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult)
       end)
 
       api.add_operation(:create_local_gateway_route_table_vpc_association, Seahorse::Model::Operation.new.tap do |o|
@@ -14503,6 +14674,22 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DeleteClientVpnRouteResult)
       end)
 
+      api.add_operation(:delete_coip_cidr, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCoipCidr"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCoipCidrRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCoipCidrResult)
+      end)
+
+      api.add_operation(:delete_coip_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCoipPool"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCoipPoolRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCoipPoolResult)
+      end)
+
       api.add_operation(:delete_customer_gateway, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCustomerGateway"
         o.http_method = "POST"
@@ -14621,6 +14808,22 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteLocalGatewayRouteRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteLocalGatewayRouteResult)
+      end)
+
+      api.add_operation(:delete_local_gateway_route_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLocalGatewayRouteTable"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLocalGatewayRouteTableRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLocalGatewayRouteTableResult)
+      end)
+
+      api.add_operation(:delete_local_gateway_route_table_virtual_interface_group_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult)
       end)
 
       api.add_operation(:delete_local_gateway_route_table_vpc_association, Seahorse::Model::Operation.new.tap do |o|
@@ -17742,6 +17945,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyLaunchTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyLaunchTemplateResult)
+      end)
+
+      api.add_operation(:modify_local_gateway_route, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyLocalGatewayRoute"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyLocalGatewayRouteRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyLocalGatewayRouteResult)
       end)
 
       api.add_operation(:modify_managed_prefix_list, Seahorse::Model::Operation.new.tap do |o|

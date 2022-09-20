@@ -84,6 +84,7 @@ module Aws::Drs
     GetReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'GetReplicationConfigurationRequest')
     IPsList = Shapes::ListShape.new(name: 'IPsList')
     ISO8601DatetimeString = Shapes::StringShape.new(name: 'ISO8601DatetimeString')
+    ISO8601DurationString = Shapes::StringShape.new(name: 'ISO8601DurationString')
     IdentificationHints = Shapes::StructureShape.new(name: 'IdentificationHints')
     InitializeServiceRequest = Shapes::StructureShape.new(name: 'InitializeServiceRequest')
     InitializeServiceResponse = Shapes::StructureShape.new(name: 'InitializeServiceResponse')
@@ -271,7 +272,7 @@ module Aws::Drs
     DataReplicationInfo.add_member(:data_replication_initiation, Shapes::ShapeRef.new(shape: DataReplicationInitiation, location_name: "dataReplicationInitiation"))
     DataReplicationInfo.add_member(:data_replication_state, Shapes::ShapeRef.new(shape: DataReplicationState, location_name: "dataReplicationState"))
     DataReplicationInfo.add_member(:eta_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "etaDateTime"))
-    DataReplicationInfo.add_member(:lag_duration, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "lagDuration"))
+    DataReplicationInfo.add_member(:lag_duration, Shapes::ShapeRef.new(shape: ISO8601DurationString, location_name: "lagDuration"))
     DataReplicationInfo.add_member(:replicated_disks, Shapes::ShapeRef.new(shape: DataReplicationInfoReplicatedDisks, location_name: "replicatedDisks"))
     DataReplicationInfo.struct_class = Types::DataReplicationInfo
 
@@ -479,7 +480,7 @@ module Aws::Drs
     Licensing.struct_class = Types::Licensing
 
     LifeCycle.add_member(:added_to_service_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "addedToServiceDateTime"))
-    LifeCycle.add_member(:elapsed_replication_duration, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "elapsedReplicationDuration"))
+    LifeCycle.add_member(:elapsed_replication_duration, Shapes::ShapeRef.new(shape: ISO8601DurationString, location_name: "elapsedReplicationDuration"))
     LifeCycle.add_member(:first_byte_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "firstByteDateTime"))
     LifeCycle.add_member(:last_launch, Shapes::ShapeRef.new(shape: LifeCycleLastLaunch, location_name: "lastLaunch"))
     LifeCycle.add_member(:last_seen_by_service_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "lastSeenByServiceDateTime"))

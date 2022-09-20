@@ -14,6 +14,7 @@ module Aws::CloudWatchEvidently
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AppConfigResourceId = Shapes::StringShape.new(name: 'AppConfigResourceId')
     Arn = Shapes::StringShape.new(name: 'Arn')
     BatchEvaluateFeatureRequest = Shapes::StructureShape.new(name: 'BatchEvaluateFeatureRequest')
     BatchEvaluateFeatureResponse = Shapes::StructureShape.new(name: 'BatchEvaluateFeatureResponse')
@@ -158,6 +159,8 @@ module Aws::CloudWatchEvidently
     OnlineAbDefinition = Shapes::StructureShape.new(name: 'OnlineAbDefinition')
     PrimitiveBoolean = Shapes::BooleanShape.new(name: 'PrimitiveBoolean')
     Project = Shapes::StructureShape.new(name: 'Project')
+    ProjectAppConfigResource = Shapes::StructureShape.new(name: 'ProjectAppConfigResource')
+    ProjectAppConfigResourceConfig = Shapes::StructureShape.new(name: 'ProjectAppConfigResourceConfig')
     ProjectArn = Shapes::StringShape.new(name: 'ProjectArn')
     ProjectDataDelivery = Shapes::StructureShape.new(name: 'ProjectDataDelivery')
     ProjectDataDeliveryConfig = Shapes::StructureShape.new(name: 'ProjectDataDeliveryConfig')
@@ -316,6 +319,7 @@ module Aws::CloudWatchEvidently
     CreateLaunchResponse.add_member(:launch, Shapes::ShapeRef.new(shape: Launch, required: true, location_name: "launch"))
     CreateLaunchResponse.struct_class = Types::CreateLaunchResponse
 
+    CreateProjectRequest.add_member(:app_config_resource, Shapes::ShapeRef.new(shape: ProjectAppConfigResourceConfig, location_name: "appConfigResource"))
     CreateProjectRequest.add_member(:data_delivery, Shapes::ShapeRef.new(shape: ProjectDataDeliveryConfig, location_name: "dataDelivery"))
     CreateProjectRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "name"))
@@ -696,6 +700,7 @@ module Aws::CloudWatchEvidently
 
     Project.add_member(:active_experiment_count, Shapes::ShapeRef.new(shape: Long, location_name: "activeExperimentCount"))
     Project.add_member(:active_launch_count, Shapes::ShapeRef.new(shape: Long, location_name: "activeLaunchCount"))
+    Project.add_member(:app_config_resource, Shapes::ShapeRef.new(shape: ProjectAppConfigResource, location_name: "appConfigResource"))
     Project.add_member(:arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "arn"))
     Project.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdTime"))
     Project.add_member(:data_delivery, Shapes::ShapeRef.new(shape: ProjectDataDelivery, location_name: "dataDelivery"))
@@ -708,6 +713,15 @@ module Aws::CloudWatchEvidently
     Project.add_member(:status, Shapes::ShapeRef.new(shape: ProjectStatus, required: true, location_name: "status"))
     Project.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     Project.struct_class = Types::Project
+
+    ProjectAppConfigResource.add_member(:application_id, Shapes::ShapeRef.new(shape: AppConfigResourceId, required: true, location_name: "applicationId"))
+    ProjectAppConfigResource.add_member(:configuration_profile_id, Shapes::ShapeRef.new(shape: AppConfigResourceId, required: true, location_name: "configurationProfileId"))
+    ProjectAppConfigResource.add_member(:environment_id, Shapes::ShapeRef.new(shape: AppConfigResourceId, required: true, location_name: "environmentId"))
+    ProjectAppConfigResource.struct_class = Types::ProjectAppConfigResource
+
+    ProjectAppConfigResourceConfig.add_member(:application_id, Shapes::ShapeRef.new(shape: AppConfigResourceId, location_name: "applicationId"))
+    ProjectAppConfigResourceConfig.add_member(:environment_id, Shapes::ShapeRef.new(shape: AppConfigResourceId, location_name: "environmentId"))
+    ProjectAppConfigResourceConfig.struct_class = Types::ProjectAppConfigResourceConfig
 
     ProjectDataDelivery.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: CloudWatchLogsDestination, location_name: "cloudWatchLogs"))
     ProjectDataDelivery.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
@@ -954,6 +968,7 @@ module Aws::CloudWatchEvidently
     UpdateProjectDataDeliveryResponse.add_member(:project, Shapes::ShapeRef.new(shape: Project, required: true, location_name: "project"))
     UpdateProjectDataDeliveryResponse.struct_class = Types::UpdateProjectDataDeliveryResponse
 
+    UpdateProjectRequest.add_member(:app_config_resource, Shapes::ShapeRef.new(shape: ProjectAppConfigResourceConfig, location_name: "appConfigResource"))
     UpdateProjectRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateProjectRequest.add_member(:project, Shapes::ShapeRef.new(shape: ProjectRef, required: true, location: "uri", location_name: "project"))
     UpdateProjectRequest.struct_class = Types::UpdateProjectRequest

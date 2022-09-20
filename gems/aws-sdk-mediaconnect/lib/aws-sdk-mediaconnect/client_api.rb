@@ -626,6 +626,8 @@ module Aws::MediaConnect
     SetSourceRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol"))
     SetSourceRequest.add_member(:sender_control_port, Shapes::ShapeRef.new(shape: __integer, location_name: "senderControlPort"))
     SetSourceRequest.add_member(:sender_ip_address, Shapes::ShapeRef.new(shape: __string, location_name: "senderIpAddress"))
+    SetSourceRequest.add_member(:source_listener_address, Shapes::ShapeRef.new(shape: __string, location_name: "sourceListenerAddress"))
+    SetSourceRequest.add_member(:source_listener_port, Shapes::ShapeRef.new(shape: __integer, location_name: "sourceListenerPort"))
     SetSourceRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
     SetSourceRequest.add_member(:vpc_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "vpcInterfaceName"))
     SetSourceRequest.add_member(:whitelist_cidr, Shapes::ShapeRef.new(shape: __string, location_name: "whitelistCidr"))
@@ -681,6 +683,8 @@ module Aws::MediaConnect
     Transport.add_member(:sender_control_port, Shapes::ShapeRef.new(shape: __integer, location_name: "senderControlPort"))
     Transport.add_member(:sender_ip_address, Shapes::ShapeRef.new(shape: __string, location_name: "senderIpAddress"))
     Transport.add_member(:smoothing_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "smoothingLatency"))
+    Transport.add_member(:source_listener_address, Shapes::ShapeRef.new(shape: __string, location_name: "sourceListenerAddress"))
+    Transport.add_member(:source_listener_port, Shapes::ShapeRef.new(shape: __integer, location_name: "sourceListenerPort"))
     Transport.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
     Transport.struct_class = Types::Transport
 
@@ -775,6 +779,8 @@ module Aws::MediaConnect
     UpdateFlowSourceRequest.add_member(:sender_control_port, Shapes::ShapeRef.new(shape: __integer, location_name: "senderControlPort"))
     UpdateFlowSourceRequest.add_member(:sender_ip_address, Shapes::ShapeRef.new(shape: __string, location_name: "senderIpAddress"))
     UpdateFlowSourceRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "sourceArn"))
+    UpdateFlowSourceRequest.add_member(:source_listener_address, Shapes::ShapeRef.new(shape: __string, location_name: "sourceListenerAddress"))
+    UpdateFlowSourceRequest.add_member(:source_listener_port, Shapes::ShapeRef.new(shape: __integer, location_name: "sourceListenerPort"))
     UpdateFlowSourceRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
     UpdateFlowSourceRequest.add_member(:vpc_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "vpcInterfaceName"))
     UpdateFlowSourceRequest.add_member(:whitelist_cidr, Shapes::ShapeRef.new(shape: __string, location_name: "whitelistCidr"))

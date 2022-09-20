@@ -748,6 +748,15 @@ module Aws::SNS
     #
     #    </note>
     #
+    # @option params [String] :data_protection_policy
+    #   The body of the policy document you want to use for this topic.
+    #
+    #   You can only add one policy per topic.
+    #
+    #   The policy must be in JSON string format.
+    #
+    #   Length Constraints: Maximum length of 30,720.
+    #
     # @return [Types::CreateTopicResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTopicResponse#topic_arn #topic_arn} => String
@@ -765,6 +774,7 @@ module Aws::SNS
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     data_protection_policy: "attributeValue",
     #   })
     #
     # @example Response structure
@@ -899,6 +909,42 @@ module Aws::SNS
     # @param [Hash] params ({})
     def delete_topic(params = {}, options = {})
       req = build_request(:delete_topic, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified inline `DataProtectionPolicy` document that is
+    # stored in the specified Amazon SNS topic.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the topic whose `DataProtectionPolicy` you want to get.
+    #
+    #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
+    #   in the Amazon Web Services General Reference.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @return [Types::GetDataProtectionPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataProtectionPolicyResponse#data_protection_policy #data_protection_policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_protection_policy({
+    #     resource_arn: "topicARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_protection_policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetDataProtectionPolicy AWS API Documentation
+    #
+    # @overload get_data_protection_policy(params = {})
+    # @param [Hash] params ({})
+    def get_data_protection_policy(params = {}, options = {})
+      req = build_request(:get_data_protection_policy, params)
       req.send_request(options)
     end
 
@@ -1836,6 +1882,45 @@ module Aws::SNS
       req.send_request(options)
     end
 
+    # Adds or updates an inline policy document that is stored in the
+    # specified Amazon SNS topic.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the topic whose `DataProtectionPolicy` you want to add or
+    #   update.
+    #
+    #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
+    #   in the Amazon Web Services General Reference.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [required, String] :data_protection_policy
+    #   The JSON serialization of the topic's `DataProtectionPolicy`.
+    #
+    #   The `DataProtectionPolicy` must be in JSON string format.
+    #
+    #   Length Constraints: Maximum length of 30,720.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_data_protection_policy({
+    #     resource_arn: "topicARN", # required
+    #     data_protection_policy: "attributeValue", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PutDataProtectionPolicy AWS API Documentation
+    #
+    # @overload put_data_protection_policy(params = {})
+    # @param [Hash] params ({})
+    def put_data_protection_policy(params = {}, options = {})
+      req = build_request(:put_data_protection_policy, params)
+      req.send_request(options)
+    end
+
     # Removes a statement from a topic's access control policy.
     #
     # @option params [required, String] :topic_arn
@@ -2606,7 +2691,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

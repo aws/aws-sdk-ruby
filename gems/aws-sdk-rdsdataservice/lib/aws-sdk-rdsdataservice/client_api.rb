@@ -88,17 +88,17 @@ module Aws::RDSDataService
 
     ArrayOfArray.member = Shapes::ShapeRef.new(shape: ArrayValue)
 
-    ArrayValue.add_member(:array_values, Shapes::ShapeRef.new(shape: ArrayOfArray, location_name: "arrayValues"))
     ArrayValue.add_member(:boolean_values, Shapes::ShapeRef.new(shape: BooleanArray, location_name: "booleanValues"))
-    ArrayValue.add_member(:double_values, Shapes::ShapeRef.new(shape: DoubleArray, location_name: "doubleValues"))
     ArrayValue.add_member(:long_values, Shapes::ShapeRef.new(shape: LongArray, location_name: "longValues"))
+    ArrayValue.add_member(:double_values, Shapes::ShapeRef.new(shape: DoubleArray, location_name: "doubleValues"))
     ArrayValue.add_member(:string_values, Shapes::ShapeRef.new(shape: StringArray, location_name: "stringValues"))
+    ArrayValue.add_member(:array_values, Shapes::ShapeRef.new(shape: ArrayOfArray, location_name: "arrayValues"))
     ArrayValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    ArrayValue.add_member_subclass(:array_values, Types::ArrayValue::ArrayValues)
     ArrayValue.add_member_subclass(:boolean_values, Types::ArrayValue::BooleanValues)
-    ArrayValue.add_member_subclass(:double_values, Types::ArrayValue::DoubleValues)
     ArrayValue.add_member_subclass(:long_values, Types::ArrayValue::LongValues)
+    ArrayValue.add_member_subclass(:double_values, Types::ArrayValue::DoubleValues)
     ArrayValue.add_member_subclass(:string_values, Types::ArrayValue::StringValues)
+    ArrayValue.add_member_subclass(:array_values, Types::ArrayValue::ArrayValues)
     ArrayValue.add_member_subclass(:unknown, Types::ArrayValue::Unknown)
     ArrayValue.struct_class = Types::ArrayValue
 
@@ -107,22 +107,22 @@ module Aws::RDSDataService
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
 
-    BatchExecuteStatementRequest.add_member(:database, Shapes::ShapeRef.new(shape: DbName, location_name: "database"))
-    BatchExecuteStatementRequest.add_member(:parameter_sets, Shapes::ShapeRef.new(shape: SqlParameterSets, location_name: "parameterSets"))
     BatchExecuteStatementRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
-    BatchExecuteStatementRequest.add_member(:schema, Shapes::ShapeRef.new(shape: DbName, location_name: "schema"))
     BatchExecuteStatementRequest.add_member(:secret_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "secretArn"))
     BatchExecuteStatementRequest.add_member(:sql, Shapes::ShapeRef.new(shape: SqlStatement, required: true, location_name: "sql"))
+    BatchExecuteStatementRequest.add_member(:database, Shapes::ShapeRef.new(shape: DbName, location_name: "database"))
+    BatchExecuteStatementRequest.add_member(:schema, Shapes::ShapeRef.new(shape: DbName, location_name: "schema"))
+    BatchExecuteStatementRequest.add_member(:parameter_sets, Shapes::ShapeRef.new(shape: SqlParameterSets, location_name: "parameterSets"))
     BatchExecuteStatementRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: Id, location_name: "transactionId"))
     BatchExecuteStatementRequest.struct_class = Types::BatchExecuteStatementRequest
 
     BatchExecuteStatementResponse.add_member(:update_results, Shapes::ShapeRef.new(shape: UpdateResults, location_name: "updateResults"))
     BatchExecuteStatementResponse.struct_class = Types::BatchExecuteStatementResponse
 
-    BeginTransactionRequest.add_member(:database, Shapes::ShapeRef.new(shape: DbName, location_name: "database"))
     BeginTransactionRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
-    BeginTransactionRequest.add_member(:schema, Shapes::ShapeRef.new(shape: DbName, location_name: "schema"))
     BeginTransactionRequest.add_member(:secret_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "secretArn"))
+    BeginTransactionRequest.add_member(:database, Shapes::ShapeRef.new(shape: DbName, location_name: "database"))
+    BeginTransactionRequest.add_member(:schema, Shapes::ShapeRef.new(shape: DbName, location_name: "schema"))
     BeginTransactionRequest.struct_class = Types::BeginTransactionRequest
 
     BeginTransactionResponse.add_member(:transaction_id, Shapes::ShapeRef.new(shape: Id, location_name: "transactionId"))
@@ -130,20 +130,20 @@ module Aws::RDSDataService
 
     BooleanArray.member = Shapes::ShapeRef.new(shape: BoxedBoolean)
 
-    ColumnMetadata.add_member(:array_base_column_type, Shapes::ShapeRef.new(shape: Integer, location_name: "arrayBaseColumnType"))
-    ColumnMetadata.add_member(:is_auto_increment, Shapes::ShapeRef.new(shape: Boolean, location_name: "isAutoIncrement"))
-    ColumnMetadata.add_member(:is_case_sensitive, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCaseSensitive"))
-    ColumnMetadata.add_member(:is_currency, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCurrency"))
-    ColumnMetadata.add_member(:is_signed, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSigned"))
-    ColumnMetadata.add_member(:label, Shapes::ShapeRef.new(shape: String, location_name: "label"))
     ColumnMetadata.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    ColumnMetadata.add_member(:type, Shapes::ShapeRef.new(shape: Integer, location_name: "type"))
+    ColumnMetadata.add_member(:type_name, Shapes::ShapeRef.new(shape: String, location_name: "typeName"))
+    ColumnMetadata.add_member(:label, Shapes::ShapeRef.new(shape: String, location_name: "label"))
+    ColumnMetadata.add_member(:schema_name, Shapes::ShapeRef.new(shape: String, location_name: "schemaName"))
+    ColumnMetadata.add_member(:table_name, Shapes::ShapeRef.new(shape: String, location_name: "tableName"))
+    ColumnMetadata.add_member(:is_auto_increment, Shapes::ShapeRef.new(shape: Boolean, location_name: "isAutoIncrement"))
+    ColumnMetadata.add_member(:is_signed, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSigned"))
+    ColumnMetadata.add_member(:is_currency, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCurrency"))
+    ColumnMetadata.add_member(:is_case_sensitive, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCaseSensitive"))
     ColumnMetadata.add_member(:nullable, Shapes::ShapeRef.new(shape: Integer, location_name: "nullable"))
     ColumnMetadata.add_member(:precision, Shapes::ShapeRef.new(shape: Integer, location_name: "precision"))
     ColumnMetadata.add_member(:scale, Shapes::ShapeRef.new(shape: Integer, location_name: "scale"))
-    ColumnMetadata.add_member(:schema_name, Shapes::ShapeRef.new(shape: String, location_name: "schemaName"))
-    ColumnMetadata.add_member(:table_name, Shapes::ShapeRef.new(shape: String, location_name: "tableName"))
-    ColumnMetadata.add_member(:type, Shapes::ShapeRef.new(shape: Integer, location_name: "type"))
-    ColumnMetadata.add_member(:type_name, Shapes::ShapeRef.new(shape: String, location_name: "typeName"))
+    ColumnMetadata.add_member(:array_base_column_type, Shapes::ShapeRef.new(shape: Integer, location_name: "arrayBaseColumnType"))
     ColumnMetadata.struct_class = Types::ColumnMetadata
 
     CommitTransactionRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
@@ -156,51 +156,51 @@ module Aws::RDSDataService
 
     DoubleArray.member = Shapes::ShapeRef.new(shape: BoxedDouble)
 
-    ExecuteSqlRequest.add_member(:aws_secret_store_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "awsSecretStoreArn"))
-    ExecuteSqlRequest.add_member(:database, Shapes::ShapeRef.new(shape: DbName, location_name: "database"))
     ExecuteSqlRequest.add_member(:db_cluster_or_instance_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "dbClusterOrInstanceArn"))
-    ExecuteSqlRequest.add_member(:schema, Shapes::ShapeRef.new(shape: DbName, location_name: "schema"))
+    ExecuteSqlRequest.add_member(:aws_secret_store_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "awsSecretStoreArn"))
     ExecuteSqlRequest.add_member(:sql_statements, Shapes::ShapeRef.new(shape: SqlStatement, required: true, location_name: "sqlStatements"))
+    ExecuteSqlRequest.add_member(:database, Shapes::ShapeRef.new(shape: DbName, location_name: "database"))
+    ExecuteSqlRequest.add_member(:schema, Shapes::ShapeRef.new(shape: DbName, location_name: "schema"))
     ExecuteSqlRequest.struct_class = Types::ExecuteSqlRequest
 
     ExecuteSqlResponse.add_member(:sql_statement_results, Shapes::ShapeRef.new(shape: SqlStatementResults, location_name: "sqlStatementResults"))
     ExecuteSqlResponse.struct_class = Types::ExecuteSqlResponse
 
-    ExecuteStatementRequest.add_member(:continue_after_timeout, Shapes::ShapeRef.new(shape: Boolean, location_name: "continueAfterTimeout"))
-    ExecuteStatementRequest.add_member(:database, Shapes::ShapeRef.new(shape: DbName, location_name: "database"))
-    ExecuteStatementRequest.add_member(:format_records_as, Shapes::ShapeRef.new(shape: RecordsFormatType, location_name: "formatRecordsAs"))
-    ExecuteStatementRequest.add_member(:include_result_metadata, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeResultMetadata"))
-    ExecuteStatementRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: SqlParametersList, location_name: "parameters"))
     ExecuteStatementRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
-    ExecuteStatementRequest.add_member(:result_set_options, Shapes::ShapeRef.new(shape: ResultSetOptions, location_name: "resultSetOptions"))
-    ExecuteStatementRequest.add_member(:schema, Shapes::ShapeRef.new(shape: DbName, location_name: "schema"))
     ExecuteStatementRequest.add_member(:secret_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "secretArn"))
     ExecuteStatementRequest.add_member(:sql, Shapes::ShapeRef.new(shape: SqlStatement, required: true, location_name: "sql"))
+    ExecuteStatementRequest.add_member(:database, Shapes::ShapeRef.new(shape: DbName, location_name: "database"))
+    ExecuteStatementRequest.add_member(:schema, Shapes::ShapeRef.new(shape: DbName, location_name: "schema"))
+    ExecuteStatementRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: SqlParametersList, location_name: "parameters"))
     ExecuteStatementRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: Id, location_name: "transactionId"))
+    ExecuteStatementRequest.add_member(:include_result_metadata, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeResultMetadata"))
+    ExecuteStatementRequest.add_member(:continue_after_timeout, Shapes::ShapeRef.new(shape: Boolean, location_name: "continueAfterTimeout"))
+    ExecuteStatementRequest.add_member(:result_set_options, Shapes::ShapeRef.new(shape: ResultSetOptions, location_name: "resultSetOptions"))
+    ExecuteStatementRequest.add_member(:format_records_as, Shapes::ShapeRef.new(shape: RecordsFormatType, location_name: "formatRecordsAs"))
     ExecuteStatementRequest.struct_class = Types::ExecuteStatementRequest
 
-    ExecuteStatementResponse.add_member(:column_metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "columnMetadata"))
-    ExecuteStatementResponse.add_member(:formatted_records, Shapes::ShapeRef.new(shape: FormattedSqlRecords, location_name: "formattedRecords"))
-    ExecuteStatementResponse.add_member(:generated_fields, Shapes::ShapeRef.new(shape: FieldList, location_name: "generatedFields"))
-    ExecuteStatementResponse.add_member(:number_of_records_updated, Shapes::ShapeRef.new(shape: RecordsUpdated, location_name: "numberOfRecordsUpdated"))
     ExecuteStatementResponse.add_member(:records, Shapes::ShapeRef.new(shape: SqlRecords, location_name: "records"))
+    ExecuteStatementResponse.add_member(:column_metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "columnMetadata"))
+    ExecuteStatementResponse.add_member(:number_of_records_updated, Shapes::ShapeRef.new(shape: RecordsUpdated, location_name: "numberOfRecordsUpdated"))
+    ExecuteStatementResponse.add_member(:generated_fields, Shapes::ShapeRef.new(shape: FieldList, location_name: "generatedFields"))
+    ExecuteStatementResponse.add_member(:formatted_records, Shapes::ShapeRef.new(shape: FormattedSqlRecords, location_name: "formattedRecords"))
     ExecuteStatementResponse.struct_class = Types::ExecuteStatementResponse
 
-    Field.add_member(:array_value, Shapes::ShapeRef.new(shape: ArrayValue, location_name: "arrayValue"))
-    Field.add_member(:blob_value, Shapes::ShapeRef.new(shape: Blob, location_name: "blobValue"))
-    Field.add_member(:boolean_value, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "booleanValue"))
-    Field.add_member(:double_value, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "doubleValue"))
     Field.add_member(:is_null, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "isNull"))
+    Field.add_member(:boolean_value, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "booleanValue"))
     Field.add_member(:long_value, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "longValue"))
+    Field.add_member(:double_value, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "doubleValue"))
     Field.add_member(:string_value, Shapes::ShapeRef.new(shape: String, location_name: "stringValue"))
+    Field.add_member(:blob_value, Shapes::ShapeRef.new(shape: Blob, location_name: "blobValue"))
+    Field.add_member(:array_value, Shapes::ShapeRef.new(shape: ArrayValue, location_name: "arrayValue"))
     Field.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    Field.add_member_subclass(:array_value, Types::Field::ArrayValue)
-    Field.add_member_subclass(:blob_value, Types::Field::BlobValue)
-    Field.add_member_subclass(:boolean_value, Types::Field::BooleanValue)
-    Field.add_member_subclass(:double_value, Types::Field::DoubleValue)
     Field.add_member_subclass(:is_null, Types::Field::IsNull)
+    Field.add_member_subclass(:boolean_value, Types::Field::BooleanValue)
     Field.add_member_subclass(:long_value, Types::Field::LongValue)
+    Field.add_member_subclass(:double_value, Types::Field::DoubleValue)
     Field.add_member_subclass(:string_value, Types::Field::StringValue)
+    Field.add_member_subclass(:blob_value, Types::Field::BlobValue)
+    Field.add_member_subclass(:array_value, Types::Field::ArrayValue)
     Field.add_member_subclass(:unknown, Types::Field::Unknown)
     Field.struct_class = Types::Field
 
@@ -223,8 +223,8 @@ module Aws::RDSDataService
 
     Records.member = Shapes::ShapeRef.new(shape: Record)
 
-    ResultFrame.add_member(:records, Shapes::ShapeRef.new(shape: Records, location_name: "records"))
     ResultFrame.add_member(:result_set_metadata, Shapes::ShapeRef.new(shape: ResultSetMetadata, location_name: "resultSetMetadata"))
+    ResultFrame.add_member(:records, Shapes::ShapeRef.new(shape: Records, location_name: "records"))
     ResultFrame.struct_class = Types::ResultFrame
 
     ResultSetMetadata.add_member(:column_count, Shapes::ShapeRef.new(shape: Long, location_name: "columnCount"))
@@ -248,8 +248,8 @@ module Aws::RDSDataService
     ServiceUnavailableError.struct_class = Types::ServiceUnavailableError
 
     SqlParameter.add_member(:name, Shapes::ShapeRef.new(shape: ParameterName, location_name: "name"))
-    SqlParameter.add_member(:type_hint, Shapes::ShapeRef.new(shape: TypeHint, location_name: "typeHint"))
     SqlParameter.add_member(:value, Shapes::ShapeRef.new(shape: Field, location_name: "value"))
+    SqlParameter.add_member(:type_hint, Shapes::ShapeRef.new(shape: TypeHint, location_name: "typeHint"))
     SqlParameter.struct_class = Types::SqlParameter
 
     SqlParameterSets.member = Shapes::ShapeRef.new(shape: SqlParametersList)
@@ -258,14 +258,14 @@ module Aws::RDSDataService
 
     SqlRecords.member = Shapes::ShapeRef.new(shape: FieldList)
 
-    SqlStatementResult.add_member(:number_of_records_updated, Shapes::ShapeRef.new(shape: RecordsUpdated, location_name: "numberOfRecordsUpdated"))
     SqlStatementResult.add_member(:result_frame, Shapes::ShapeRef.new(shape: ResultFrame, location_name: "resultFrame"))
+    SqlStatementResult.add_member(:number_of_records_updated, Shapes::ShapeRef.new(shape: RecordsUpdated, location_name: "numberOfRecordsUpdated"))
     SqlStatementResult.struct_class = Types::SqlStatementResult
 
     SqlStatementResults.member = Shapes::ShapeRef.new(shape: SqlStatementResult)
 
-    StatementTimeoutException.add_member(:db_connection_id, Shapes::ShapeRef.new(shape: Long, location_name: "dbConnectionId"))
     StatementTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    StatementTimeoutException.add_member(:db_connection_id, Shapes::ShapeRef.new(shape: Long, location_name: "dbConnectionId"))
     StatementTimeoutException.struct_class = Types::StatementTimeoutException
 
     StringArray.member = Shapes::ShapeRef.new(shape: String)
@@ -278,26 +278,26 @@ module Aws::RDSDataService
 
     UpdateResults.member = Shapes::ShapeRef.new(shape: UpdateResult)
 
-    Value.add_member(:array_values, Shapes::ShapeRef.new(shape: ArrayValueList, location_name: "arrayValues"))
-    Value.add_member(:big_int_value, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "bigIntValue"))
-    Value.add_member(:bit_value, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "bitValue"))
-    Value.add_member(:blob_value, Shapes::ShapeRef.new(shape: Blob, location_name: "blobValue"))
-    Value.add_member(:double_value, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "doubleValue"))
-    Value.add_member(:int_value, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "intValue"))
     Value.add_member(:is_null, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "isNull"))
+    Value.add_member(:bit_value, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "bitValue"))
+    Value.add_member(:big_int_value, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "bigIntValue"))
+    Value.add_member(:int_value, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "intValue"))
+    Value.add_member(:double_value, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "doubleValue"))
     Value.add_member(:real_value, Shapes::ShapeRef.new(shape: BoxedFloat, location_name: "realValue"))
     Value.add_member(:string_value, Shapes::ShapeRef.new(shape: String, location_name: "stringValue"))
+    Value.add_member(:blob_value, Shapes::ShapeRef.new(shape: Blob, location_name: "blobValue"))
+    Value.add_member(:array_values, Shapes::ShapeRef.new(shape: ArrayValueList, location_name: "arrayValues"))
     Value.add_member(:struct_value, Shapes::ShapeRef.new(shape: StructValue, location_name: "structValue"))
     Value.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    Value.add_member_subclass(:array_values, Types::Value::ArrayValues)
-    Value.add_member_subclass(:big_int_value, Types::Value::BigIntValue)
-    Value.add_member_subclass(:bit_value, Types::Value::BitValue)
-    Value.add_member_subclass(:blob_value, Types::Value::BlobValue)
-    Value.add_member_subclass(:double_value, Types::Value::DoubleValue)
-    Value.add_member_subclass(:int_value, Types::Value::IntValue)
     Value.add_member_subclass(:is_null, Types::Value::IsNull)
+    Value.add_member_subclass(:bit_value, Types::Value::BitValue)
+    Value.add_member_subclass(:big_int_value, Types::Value::BigIntValue)
+    Value.add_member_subclass(:int_value, Types::Value::IntValue)
+    Value.add_member_subclass(:double_value, Types::Value::DoubleValue)
     Value.add_member_subclass(:real_value, Types::Value::RealValue)
     Value.add_member_subclass(:string_value, Types::Value::StringValue)
+    Value.add_member_subclass(:blob_value, Types::Value::BlobValue)
+    Value.add_member_subclass(:array_values, Types::Value::ArrayValues)
     Value.add_member_subclass(:struct_value, Types::Value::StructValue)
     Value.add_member_subclass(:unknown, Types::Value::Unknown)
     Value.struct_class = Types::Value

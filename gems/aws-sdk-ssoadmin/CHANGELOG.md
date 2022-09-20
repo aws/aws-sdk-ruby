@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2022-08-30)
+------------------
+
+* Feature - Documentation updates for the AWS IAM Identity Center CLI Reference.
+
 1.19.0 (2022-08-23)
 ------------------
 

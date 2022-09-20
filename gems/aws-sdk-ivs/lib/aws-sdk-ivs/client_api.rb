@@ -102,6 +102,7 @@ module Aws::IVS
     RecordingConfigurationState = Shapes::StringShape.new(name: 'RecordingConfigurationState')
     RecordingConfigurationSummary = Shapes::StructureShape.new(name: 'RecordingConfigurationSummary')
     RecordingMode = Shapes::StringShape.new(name: 'RecordingMode')
+    RecordingReconnectWindowSeconds = Shapes::IntegerShape.new(name: 'RecordingReconnectWindowSeconds')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3DestinationBucketName = Shapes::StringShape.new(name: 'S3DestinationBucketName')
@@ -227,6 +228,7 @@ module Aws::IVS
 
     CreateRecordingConfigurationRequest.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
     CreateRecordingConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
+    CreateRecordingConfigurationRequest.add_member(:recording_reconnect_window_seconds, Shapes::ShapeRef.new(shape: RecordingReconnectWindowSeconds, location_name: "recordingReconnectWindowSeconds"))
     CreateRecordingConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateRecordingConfigurationRequest.add_member(:thumbnail_configuration, Shapes::ShapeRef.new(shape: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))
     CreateRecordingConfigurationRequest.struct_class = Types::CreateRecordingConfigurationRequest
@@ -392,6 +394,7 @@ module Aws::IVS
     RecordingConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: RecordingConfigurationArn, required: true, location_name: "arn"))
     RecordingConfiguration.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
     RecordingConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
+    RecordingConfiguration.add_member(:recording_reconnect_window_seconds, Shapes::ShapeRef.new(shape: RecordingReconnectWindowSeconds, location_name: "recordingReconnectWindowSeconds"))
     RecordingConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: RecordingConfigurationState, required: true, location_name: "state"))
     RecordingConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RecordingConfiguration.add_member(:thumbnail_configuration, Shapes::ShapeRef.new(shape: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2022-09-16)
+------------------
+
+* Feature - This release adds tag based access control for the UntagResource API.
+
 1.19.0 (2022-02-24)
 ------------------
 

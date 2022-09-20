@@ -612,7 +612,8 @@ module Aws::IoTThingsGraph
 
     # Deletes the specified namespace. This action deletes all of the
     # entities in the namespace. Delete the systems and flows that use
-    # entities in the namespace before performing this action.
+    # entities in the namespace before performing this action. This action
+    # takes no request parameters.
     #
     # @return [Types::DeleteNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1921,7 +1922,7 @@ module Aws::IoTThingsGraph
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotthingsgraph'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

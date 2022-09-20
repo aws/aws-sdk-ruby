@@ -124,6 +124,9 @@ module Aws::LookoutMetrics
     ExecutionStatus = Shapes::StructureShape.new(name: 'ExecutionStatus')
     FieldName = Shapes::StringShape.new(name: 'FieldName')
     FileFormatDescriptor = Shapes::StructureShape.new(name: 'FileFormatDescriptor')
+    Filter = Shapes::StructureShape.new(name: 'Filter')
+    FilterList = Shapes::ListShape.new(name: 'FilterList')
+    FilterOperation = Shapes::StringShape.new(name: 'FilterOperation')
     FlowName = Shapes::StringShape.new(name: 'FlowName')
     Frequency = Shapes::StringShape.new(name: 'Frequency')
     GetAnomalyGroupRequest = Shapes::StructureShape.new(name: 'GetAnomalyGroupRequest')
@@ -175,6 +178,8 @@ module Aws::LookoutMetrics
     MetricSetDataQualityMetric = Shapes::StructureShape.new(name: 'MetricSetDataQualityMetric')
     MetricSetDataQualityMetricList = Shapes::ListShape.new(name: 'MetricSetDataQualityMetricList')
     MetricSetDescription = Shapes::StringShape.new(name: 'MetricSetDescription')
+    MetricSetDimensionFilter = Shapes::StructureShape.new(name: 'MetricSetDimensionFilter')
+    MetricSetDimensionFilterList = Shapes::ListShape.new(name: 'MetricSetDimensionFilterList')
     MetricSetName = Shapes::StringShape.new(name: 'MetricSetName')
     MetricSetSummary = Shapes::StructureShape.new(name: 'MetricSetSummary')
     MetricSetSummaryList = Shapes::ListShape.new(name: 'MetricSetSummaryList')
@@ -432,6 +437,7 @@ module Aws::LookoutMetrics
     CreateMetricSetRequest.add_member(:metric_source, Shapes::ShapeRef.new(shape: MetricSource, required: true, location_name: "MetricSource"))
     CreateMetricSetRequest.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "Timezone"))
     CreateMetricSetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateMetricSetRequest.add_member(:dimension_filter_list, Shapes::ShapeRef.new(shape: MetricSetDimensionFilterList, location_name: "DimensionFilterList"))
     CreateMetricSetRequest.struct_class = Types::CreateMetricSetRequest
 
     CreateMetricSetResponse.add_member(:metric_set_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "MetricSetArn"))
@@ -515,6 +521,7 @@ module Aws::LookoutMetrics
     DescribeMetricSetResponse.add_member(:metric_set_frequency, Shapes::ShapeRef.new(shape: Frequency, location_name: "MetricSetFrequency"))
     DescribeMetricSetResponse.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "Timezone"))
     DescribeMetricSetResponse.add_member(:metric_source, Shapes::ShapeRef.new(shape: MetricSource, location_name: "MetricSource"))
+    DescribeMetricSetResponse.add_member(:dimension_filter_list, Shapes::ShapeRef.new(shape: MetricSetDimensionFilterList, location_name: "DimensionFilterList"))
     DescribeMetricSetResponse.struct_class = Types::DescribeMetricSetResponse
 
     DetectMetricSetConfigRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
@@ -594,6 +601,12 @@ module Aws::LookoutMetrics
     FileFormatDescriptor.add_member(:csv_format_descriptor, Shapes::ShapeRef.new(shape: CsvFormatDescriptor, location_name: "CsvFormatDescriptor"))
     FileFormatDescriptor.add_member(:json_format_descriptor, Shapes::ShapeRef.new(shape: JsonFormatDescriptor, location_name: "JsonFormatDescriptor"))
     FileFormatDescriptor.struct_class = Types::FileFormatDescriptor
+
+    Filter.add_member(:dimension_value, Shapes::ShapeRef.new(shape: DimensionValue, location_name: "DimensionValue"))
+    Filter.add_member(:filter_operation, Shapes::ShapeRef.new(shape: FilterOperation, location_name: "FilterOperation"))
+    Filter.struct_class = Types::Filter
+
+    FilterList.member = Shapes::ShapeRef.new(shape: Filter)
 
     GetAnomalyGroupRequest.add_member(:anomaly_group_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "AnomalyGroupId"))
     GetAnomalyGroupRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
@@ -746,6 +759,12 @@ module Aws::LookoutMetrics
     MetricSetDataQualityMetric.struct_class = Types::MetricSetDataQualityMetric
 
     MetricSetDataQualityMetricList.member = Shapes::ShapeRef.new(shape: MetricSetDataQualityMetric)
+
+    MetricSetDimensionFilter.add_member(:name, Shapes::ShapeRef.new(shape: ColumnName, location_name: "Name"))
+    MetricSetDimensionFilter.add_member(:filter_list, Shapes::ShapeRef.new(shape: FilterList, location_name: "FilterList"))
+    MetricSetDimensionFilter.struct_class = Types::MetricSetDimensionFilter
+
+    MetricSetDimensionFilterList.member = Shapes::ShapeRef.new(shape: MetricSetDimensionFilter)
 
     MetricSetSummary.add_member(:metric_set_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "MetricSetArn"))
     MetricSetSummary.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AnomalyDetectorArn"))
@@ -903,6 +922,7 @@ module Aws::LookoutMetrics
     UpdateMetricSetRequest.add_member(:dimension_list, Shapes::ShapeRef.new(shape: DimensionList, location_name: "DimensionList"))
     UpdateMetricSetRequest.add_member(:metric_set_frequency, Shapes::ShapeRef.new(shape: Frequency, location_name: "MetricSetFrequency"))
     UpdateMetricSetRequest.add_member(:metric_source, Shapes::ShapeRef.new(shape: MetricSource, location_name: "MetricSource"))
+    UpdateMetricSetRequest.add_member(:dimension_filter_list, Shapes::ShapeRef.new(shape: MetricSetDimensionFilterList, location_name: "DimensionFilterList"))
     UpdateMetricSetRequest.struct_class = Types::UpdateMetricSetRequest
 
     UpdateMetricSetResponse.add_member(:metric_set_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "MetricSetArn"))

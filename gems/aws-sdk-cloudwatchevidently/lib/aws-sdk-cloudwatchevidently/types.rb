@@ -517,6 +517,10 @@ module Aws::CloudWatchEvidently
     #   data as a hash:
     #
     #       {
+    #         app_config_resource: {
+    #           application_id: "AppConfigResourceId",
+    #           environment_id: "AppConfigResourceId",
+    #         },
     #         data_delivery: {
     #           cloud_watch_logs: {
     #             log_group: "CwLogGroupSafeName",
@@ -532,6 +536,28 @@ module Aws::CloudWatchEvidently
     #           "TagKey" => "TagValue",
     #         },
     #       }
+    #
+    # @!attribute [rw] app_config_resource
+    #   Use this parameter if the project will use *client-side evaluation
+    #   powered by AppConfig*. Client-side evaluation allows your
+    #   application to assign variations to user sessions locally instead of
+    #   by calling the [EvaluateFeature][1] operation. This mitigates the
+    #   latency and availability risks that come with an API call. For more
+    #   information, see [ Client-side evaluation - powered by
+    #   AppConfig.][2]
+    #
+    #   This parameter is a structure that contains information about the
+    #   AppConfig application and environment that will be used as for
+    #   client-side evaluation.
+    #
+    #   To create a project that uses client-side evaluation, you must have
+    #   the `evidently:ExportProjectAsConfiguration` permission.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-client-side-evaluation.html
+    #   @return [Types::ProjectAppConfigResourceConfig]
     #
     # @!attribute [rw] data_delivery
     #   A structure that contains information about where Evidently is to
@@ -566,6 +592,7 @@ module Aws::CloudWatchEvidently
     # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/CreateProjectRequest AWS API Documentation
     #
     class CreateProjectRequest < Struct.new(
+      :app_config_resource,
       :data_delivery,
       :description,
       :name,
@@ -612,7 +639,7 @@ module Aws::CloudWatchEvidently
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments-syntax.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html#CloudWatch-Evidently-segments-syntax.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2543,6 +2570,11 @@ module Aws::CloudWatchEvidently
     #   The number of ongoing launches currently in the project.
     #   @return [Integer]
     #
+    # @!attribute [rw] app_config_resource
+    #   This structure defines the configuration of how your application
+    #   integrates with AppConfig to run client-side evaluation.
+    #   @return [Types::ProjectAppConfigResource]
+    #
     # @!attribute [rw] arn
     #   The name or ARN of the project.
     #   @return [String]
@@ -2597,6 +2629,7 @@ module Aws::CloudWatchEvidently
     class Project < Struct.new(
       :active_experiment_count,
       :active_launch_count,
+      :app_config_resource,
       :arn,
       :created_time,
       :data_delivery,
@@ -2608,6 +2641,77 @@ module Aws::CloudWatchEvidently
       :name,
       :status,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This is a structure that defines the configuration of how your
+    # application integrates with AppConfig to run client-side evaluation.
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the AppConfig application to use for client-side
+    #   evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_profile_id
+    #   The ID of the AppConfig profile to use for client-side evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The ID of the AppConfig environment to use for client-side
+    #   evaluation. This must be an environment that is within the
+    #   application that you specify for `applicationId`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/ProjectAppConfigResource AWS API Documentation
+    #
+    class ProjectAppConfigResource < Struct.new(
+      :application_id,
+      :configuration_profile_id,
+      :environment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use this parameter to configure client-side evaluation for your
+    # project. Client-side evaluation allows your application to assign
+    # variations to user sessions locally instead of by calling the
+    # [EvaluateFeature][1] operation to assign the variations. This
+    # mitigates the latency and availability risks that come with an API
+    # call.
+    #
+    # `ProjectAppConfigResource` is a structure that defines the
+    # configuration of how your application integrates with AppConfig to run
+    # client-side evaluation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html
+    #
+    # @note When making an API call, you may pass ProjectAppConfigResourceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "AppConfigResourceId",
+    #         environment_id: "AppConfigResourceId",
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the AppConfig application to use for client-side
+    #   evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The ID of the AppConfig environment to use for client-side
+    #   evaluation. This must be an environment that is within the
+    #   application that you specify for `applicationId`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/ProjectAppConfigResourceConfig AWS API Documentation
+    #
+    class ProjectAppConfigResourceConfig < Struct.new(
+      :application_id,
+      :environment_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3139,6 +3243,13 @@ module Aws::CloudWatchEvidently
     #   @return [String]
     #
     # @!attribute [rw] pattern
+    #   The pattern that defines the attributes to use to evalute whether a
+    #   user session will be in the segment. For more information about the
+    #   pattern syntax, see [Segment rule pattern syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4028,9 +4139,28 @@ module Aws::CloudWatchEvidently
     #   data as a hash:
     #
     #       {
+    #         app_config_resource: {
+    #           application_id: "AppConfigResourceId",
+    #           environment_id: "AppConfigResourceId",
+    #         },
     #         description: "Description",
     #         project: "ProjectRef", # required
     #       }
+    #
+    # @!attribute [rw] app_config_resource
+    #   Use this parameter if the project will use client-side evaluation
+    #   powered by AppConfig. Client-side evaluation allows your application
+    #   to assign variations to user sessions locally instead of by calling
+    #   the [EvaluateFeature][1] operation. This mitigates the latency and
+    #   availability risks that come with an API call. allows you to
+    #
+    #   This parameter is a structure that contains information about the
+    #   AppConfig application that will be used for client-side evaluation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html
+    #   @return [Types::ProjectAppConfigResourceConfig]
     #
     # @!attribute [rw] description
     #   An optional description of the project.
@@ -4043,6 +4173,7 @@ module Aws::CloudWatchEvidently
     # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/UpdateProjectRequest AWS API Documentation
     #
     class UpdateProjectRequest < Struct.new(
+      :app_config_resource,
       :description,
       :project)
       SENSITIVE = []

@@ -630,7 +630,7 @@ module Aws::GreengrassV2
     #   resp = client.create_component_version({
     #     inline_recipe: "data",
     #     lambda_function: {
-    #       lambda_arn: "LambdaFunctionARNWithVersionNumber", # required
+    #       lambda_arn: "NonEmptyString", # required
     #       component_name: "ComponentNameString",
     #       component_version: "ComponentVersionString",
     #       component_platforms: [
@@ -794,7 +794,7 @@ module Aws::GreengrassV2
     #
     #   resp = client.create_deployment({
     #     target_arn: "TargetARN", # required
-    #     deployment_name: "NonEmptyString",
+    #     deployment_name: "DeploymentNameString",
     #     components: {
     #       "NonEmptyString" => {
     #         component_version: "ComponentVersionString",
@@ -1050,9 +1050,7 @@ module Aws::GreengrassV2
       req.send_request(options)
     end
 
-    # Gets the recipe for a version of a component. Core devices can call
-    # this operation to identify the artifacts and requirements to install a
-    # component.
+    # Gets the recipe for a version of a component.
     #
     # @option params [String] :recipe_output_format
     #   The format of the recipe.
@@ -1209,6 +1207,9 @@ module Aws::GreengrassV2
     #
     # * At a [regular interval that you can configure][1], which defaults to
     #   24 hours
+    #
+    # * For IoT Greengrass Core v2.7.0, the core device sends status updates
+    #   upon local deployment and cloud deployment
     #
     #  </note>
     #
@@ -1526,6 +1527,9 @@ module Aws::GreengrassV2
     # * At a [regular interval that you can configure][1], which defaults to
     #   24 hours
     #
+    # * For IoT Greengrass Core v2.7.0, the core device sends status updates
+    #   upon local deployment and cloud deployment
+    #
     #  </note>
     #
     #
@@ -1708,9 +1712,10 @@ module Aws::GreengrassV2
     end
 
     # Retrieves a paginated list of the components that a Greengrass core
-    # device runs. This list doesn't include components that are deployed
-    # from local deployments or components that are deployed as dependencies
-    # of other components.
+    # device runs. By default, this list doesn't include components that
+    # are deployed as dependencies of other components. To include
+    # dependencies in the response, set the `topologyFilter` parameter to
+    # `ALL`.
     #
     # <note markdown="1"> IoT Greengrass relies on individual devices to send status updates to
     # the Amazon Web Services Cloud. If the IoT Greengrass Core software
@@ -1731,6 +1736,9 @@ module Aws::GreengrassV2
     # * At a [regular interval that you can configure][1], which defaults to
     #   24 hours
     #
+    # * For IoT Greengrass Core v2.7.0, the core device sends status updates
+    #   upon local deployment and cloud deployment
+    #
     #  </note>
     #
     #
@@ -1746,6 +1754,20 @@ module Aws::GreengrassV2
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results.
     #
+    # @option params [String] :topology_filter
+    #   The filter for the list of components. Choose from the following
+    #   options:
+    #
+    #   * `ALL` – The list includes all components installed on the core
+    #     device.
+    #
+    #   * `ROOT` – The list includes only *root* components, which are
+    #     components that you specify in a deployment. When you choose this
+    #     option, the list doesn't include components that the core device
+    #     installs as dependencies of other components.
+    #
+    #   Default: `ROOT`
+    #
     # @return [Types::ListInstalledComponentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListInstalledComponentsResponse#installed_components #installed_components} => Array&lt;Types::InstalledComponent&gt;
@@ -1759,6 +1781,7 @@ module Aws::GreengrassV2
     #     core_device_thing_name: "CoreDeviceThingName", # required
     #     max_results: 1,
     #     next_token: "NextTokenString",
+    #     topology_filter: "ALL", # accepts ALL, ROOT
     #   })
     #
     # @example Response structure
@@ -1769,6 +1792,7 @@ module Aws::GreengrassV2
     #   resp.installed_components[0].lifecycle_state #=> String, one of "NEW", "INSTALLED", "STARTING", "RUNNING", "STOPPING", "ERRORED", "BROKEN", "FINISHED"
     #   resp.installed_components[0].lifecycle_state_details #=> String
     #   resp.installed_components[0].is_root #=> Boolean
+    #   resp.installed_components[0].last_status_change_timestamp #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListInstalledComponents AWS API Documentation
@@ -2023,7 +2047,7 @@ module Aws::GreengrassV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrassv2'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

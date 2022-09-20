@@ -31,6 +31,569 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
+    # The address associated with the specified user.
+    #
+    # @note When making an API call, you may pass Address
+    #   data as a hash:
+    #
+    #       {
+    #         street_address: "SensitiveStringType",
+    #         locality: "SensitiveStringType",
+    #         region: "SensitiveStringType",
+    #         postal_code: "SensitiveStringType",
+    #         country: "SensitiveStringType",
+    #         formatted: "SensitiveStringType",
+    #         type: "SensitiveStringType",
+    #         primary: false,
+    #       }
+    #
+    # @!attribute [rw] street_address
+    #   The street of the address.
+    #   @return [String]
+    #
+    # @!attribute [rw] locality
+    #   A string of the address locality.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The region of the address.
+    #   @return [String]
+    #
+    # @!attribute [rw] postal_code
+    #   The postal code of the address.
+    #   @return [String]
+    #
+    # @!attribute [rw] country
+    #   The country of the address.
+    #   @return [String]
+    #
+    # @!attribute [rw] formatted
+    #   A string containing a formatted version of the address for display.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   A string representing the type of address. For example, "Home."
+    #   @return [String]
+    #
+    # @!attribute [rw] primary
+    #   A Boolean value representing whether this is the primary address for
+    #   the associated resource.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/Address AWS API Documentation
+    #
+    class Address < Struct.new(
+      :street_address,
+      :locality,
+      :region,
+      :postal_code,
+      :country,
+      :formatted,
+      :type,
+      :primary)
+      SENSITIVE = [:street_address, :locality, :region, :postal_code, :country, :formatted, :type, :primary]
+      include Aws::Structure
+    end
+
+    # A unique identifier for a user or group that is not the its primary
+    # identifier. This value can be an identifier from an external identity
+    # provider (IdP) that is associated with the group or a unique
+    # attribute. For example, a unique `GroupDisplayName`.
+    #
+    # @note AlternateIdentifier is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] external_id
+    #   The identifier issued to this resource by an external identity
+    #   provider.
+    #   @return [Types::ExternalId]
+    #
+    # @!attribute [rw] unique_attribute
+    #   An entity attribute that's unique to a specific entity.
+    #   @return [Types::UniqueAttribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/AlternateIdentifier AWS API Documentation
+    #
+    class AlternateIdentifier < Struct.new(
+      :external_id,
+      :unique_attribute,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ExternalId < AlternateIdentifier; end
+      class UniqueAttribute < AlternateIdentifier; end
+      class Unknown < AlternateIdentifier; end
+    end
+
+    # An operation that applies to the requested group. This operation might
+    # add, replace, or remove an attribute.
+    #
+    # @note When making an API call, you may pass AttributeOperation
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_path: "AttributePath", # required
+    #         attribute_value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #       }
+    #
+    # @!attribute [rw] attribute_path
+    #   A string representation of the path to a given attribute or
+    #   sub-attribute. Supports JMESPath.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_value
+    #   The value of the attribute. This is a `Document` type. This type is
+    #   not supported by Java V1, Go V1, and older versions of the AWS CLI.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/AttributeOperation AWS API Documentation
+    #
+    class AttributeOperation < Struct.new(
+      :attribute_path,
+      :attribute_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This request cannot be completed for one of the following reasons:
+    #
+    # * Performing the requested operation would violate an existing
+    #   uniqueness claim in the identity store. Resolve the conflict before
+    #   retrying this request.
+    #
+    # * The requested resource was being concurrently modified by another
+    #   request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The identifier for each request. This value is a globally unique ID
+    #   that is generated by the identity store service for each sent
+    #   request, and is then returned inside the exception if the request
+    #   fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   This request cannot be completed for one of the following reasons:
+    #
+    #   * Performing the requested operation would violate an existing
+    #     uniqueness claim in the identity store. Resolve the conflict
+    #     before retrying this request.
+    #
+    #   * The requested resource was being concurrently modified by another
+    #     request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message,
+      :request_id,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateGroupMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         group_id: "ResourceId", # required
+    #         member_id: { # required
+    #           user_id: "ResourceId",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The identifier for a group in the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   An object that contains the identifier of a group member. Setting
+    #   the `UserID` field to the specific identifier for a user indicates
+    #   that the user is a member of the group.
+    #   @return [Types::MemberId]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateGroupMembershipRequest AWS API Documentation
+    #
+    class CreateGroupMembershipRequest < Struct.new(
+      :identity_store_id,
+      :group_id,
+      :member_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_id
+    #   The identifier for a newly created `GroupMembership` in an identity
+    #   store.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateGroupMembershipResponse AWS API Documentation
+    #
+    class CreateGroupMembershipResponse < Struct.new(
+      :membership_id,
+      :identity_store_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         display_name: "GroupDisplayName",
+    #         description: "SensitiveStringType",
+    #       }
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   A string containing the name of the group. This value is commonly
+    #   displayed when the group is referenced.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A string containing the description of the group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateGroupRequest AWS API Documentation
+    #
+    class CreateGroupRequest < Struct.new(
+      :identity_store_id,
+      :display_name,
+      :description)
+      SENSITIVE = [:display_name, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_id
+    #   The identifier of the newly created group in the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateGroupResponse AWS API Documentation
+    #
+    class CreateGroupResponse < Struct.new(
+      :group_id,
+      :identity_store_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         user_name: "UserName",
+    #         name: {
+    #           formatted: "SensitiveStringType",
+    #           family_name: "SensitiveStringType",
+    #           given_name: "SensitiveStringType",
+    #           middle_name: "SensitiveStringType",
+    #           honorific_prefix: "SensitiveStringType",
+    #           honorific_suffix: "SensitiveStringType",
+    #         },
+    #         display_name: "SensitiveStringType",
+    #         nick_name: "SensitiveStringType",
+    #         profile_url: "SensitiveStringType",
+    #         emails: [
+    #           {
+    #             value: "SensitiveStringType",
+    #             type: "SensitiveStringType",
+    #             primary: false,
+    #           },
+    #         ],
+    #         addresses: [
+    #           {
+    #             street_address: "SensitiveStringType",
+    #             locality: "SensitiveStringType",
+    #             region: "SensitiveStringType",
+    #             postal_code: "SensitiveStringType",
+    #             country: "SensitiveStringType",
+    #             formatted: "SensitiveStringType",
+    #             type: "SensitiveStringType",
+    #             primary: false,
+    #           },
+    #         ],
+    #         phone_numbers: [
+    #           {
+    #             value: "SensitiveStringType",
+    #             type: "SensitiveStringType",
+    #             primary: false,
+    #           },
+    #         ],
+    #         user_type: "SensitiveStringType",
+    #         title: "SensitiveStringType",
+    #         preferred_language: "SensitiveStringType",
+    #         locale: "SensitiveStringType",
+    #         timezone: "SensitiveStringType",
+    #       }
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   A unique string used to identify the user. The length limit is 128
+    #   characters. This value can consist of letters, accented characters,
+    #   symbols, numbers, and punctuation. This value is specified at the
+    #   time the user is created and stored as an attribute of the user
+    #   object in the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   An object containing the user's name.
+    #   @return [Types::Name]
+    #
+    # @!attribute [rw] display_name
+    #   A string containing the user's name. This value is typically
+    #   formatted for display when the user is referenced. For example,
+    #   "John Doe."
+    #   @return [String]
+    #
+    # @!attribute [rw] nick_name
+    #   A string containing an alternate name for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_url
+    #   A string containing a URL that may be associated with the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] emails
+    #   A list of `Email` objects containing email addresses associated with
+    #   the user.
+    #   @return [Array<Types::Email>]
+    #
+    # @!attribute [rw] addresses
+    #   A list of `Address` objects containing addresses associated with the
+    #   user.
+    #   @return [Array<Types::Address>]
+    #
+    # @!attribute [rw] phone_numbers
+    #   A list of `PhoneNumber` objects containing phone numbers associated
+    #   with the user.
+    #   @return [Array<Types::PhoneNumber>]
+    #
+    # @!attribute [rw] user_type
+    #   A string indicating the user's type. Possible values depend on each
+    #   customer's specific needs, so they are left unspecified.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A string containing the user's title. Possible values are left
+    #   unspecified given that they depend on each customer's specific
+    #   needs.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_language
+    #   A string containing the preferred language of the user. For example,
+    #   "American English" or "en-us."
+    #   @return [String]
+    #
+    # @!attribute [rw] locale
+    #   A string containing the user's geographical region or location.
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   A string containing the user's time zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateUserRequest AWS API Documentation
+    #
+    class CreateUserRequest < Struct.new(
+      :identity_store_id,
+      :user_name,
+      :name,
+      :display_name,
+      :nick_name,
+      :profile_url,
+      :emails,
+      :addresses,
+      :phone_numbers,
+      :user_type,
+      :title,
+      :preferred_language,
+      :locale,
+      :timezone)
+      SENSITIVE = [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_id
+    #   The identifier of the newly created user in the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateUserResponse AWS API Documentation
+    #
+    class CreateUserResponse < Struct.new(
+      :user_id,
+      :identity_store_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteGroupMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         membership_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   The identifier for a `GroupMembership` in an identity store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DeleteGroupMembershipRequest AWS API Documentation
+    #
+    class DeleteGroupMembershipRequest < Struct.new(
+      :identity_store_id,
+      :membership_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DeleteGroupMembershipResponse AWS API Documentation
+    #
+    class DeleteGroupMembershipResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         group_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The identifier for a group in the identity store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DeleteGroupRequest AWS API Documentation
+    #
+    class DeleteGroupRequest < Struct.new(
+      :identity_store_id,
+      :group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DeleteGroupResponse AWS API Documentation
+    #
+    class DeleteGroupResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         user_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier for a user in the identity store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DeleteUserRequest AWS API Documentation
+    #
+    class DeleteUserRequest < Struct.new(
+      :identity_store_id,
+      :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DeleteUserResponse AWS API Documentation
+    #
+    class DeleteUserResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribeGroupMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         membership_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   The identifier for a `GroupMembership` in an identity store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeGroupMembershipRequest AWS API Documentation
+    #
+    class DescribeGroupMembershipRequest < Struct.new(
+      :identity_store_id,
+      :membership_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   The identifier for a `GroupMembership` in an identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The identifier for a group in the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   An object containing the identifier of a group member.
+    #   @return [Types::MemberId]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeGroupMembershipResponse AWS API Documentation
+    #
+    class DescribeGroupMembershipResponse < Struct.new(
+      :identity_store_id,
+      :membership_id,
+      :group_id,
+      :member_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeGroupRequest
     #   data as a hash:
     #
@@ -42,9 +605,9 @@ module Aws::IdentityStore
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store, such as
     #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
-    #   `1234567890` is a randomly generated string that contains number and
-    #   lower case letters. This value is generated at the time that a new
-    #   identity store is created.
+    #   `1234567890` is a randomly generated string that contains numbers
+    #   and lower case letters. This value is generated at the time that a
+    #   new identity store is created.
     #   @return [String]
     #
     # @!attribute [rw] group_id
@@ -65,7 +628,7 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   Contains the group’s display name value. The length limit is 1,024
+    #   The group’s display name value. The length limit is 1,024
     #   characters. This value can consist of letters, accented characters,
     #   symbols, numbers, punctuation, tab, new line, carriage return,
     #   space, and nonbreaking space in this attribute. The characters
@@ -74,12 +637,28 @@ module Aws::IdentityStore
     #   the identity store.
     #   @return [String]
     #
+    # @!attribute [rw] external_ids
+    #   A list of `ExternalId` objects that contains the identifiers issued
+    #   to this resource by an external identity provider.
+    #   @return [Array<Types::ExternalId>]
+    #
+    # @!attribute [rw] description
+    #   A string containing a description of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeGroupResponse AWS API Documentation
     #
     class DescribeGroupResponse < Struct.new(
       :group_id,
-      :display_name)
-      SENSITIVE = []
+      :display_name,
+      :external_ids,
+      :description,
+      :identity_store_id)
+      SENSITIVE = [:display_name, :description]
       include Aws::Structure
     end
 
@@ -94,9 +673,9 @@ module Aws::IdentityStore
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store, such as
     #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
-    #   `1234567890` is a randomly generated string that contains number and
-    #   lower case letters. This value is generated at the time that a new
-    #   identity store is created.
+    #   `1234567890` is a randomly generated string that contains numbers
+    #   and lower case letters. This value is generated at the time that a
+    #   new identity store is created.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -113,23 +692,158 @@ module Aws::IdentityStore
     end
 
     # @!attribute [rw] user_name
-    #   Contains the user’s user name value. The length limit is 128
+    #   A unique string used to identify the user. The length limit is 128
     #   characters. This value can consist of letters, accented characters,
-    #   symbols, numbers, and punctuation. The characters `<>;:%` are
-    #   excluded. This value is specified at the time the user is created
-    #   and stored as an attribute of the user object in the identity store.
+    #   symbols, numbers, and punctuation. This value is specified at the
+    #   time the user is created and stored as an attribute of the user
+    #   object in the identity store.
     #   @return [String]
     #
     # @!attribute [rw] user_id
     #   The identifier for a user in the identity store.
     #   @return [String]
     #
+    # @!attribute [rw] external_ids
+    #   A list of `ExternalId` objects that contains the identifiers issued
+    #   to this resource by an external identity provider.
+    #   @return [Array<Types::ExternalId>]
+    #
+    # @!attribute [rw] name
+    #   The name of the user.
+    #   @return [Types::Name]
+    #
+    # @!attribute [rw] display_name
+    #   The user's name value for display.
+    #   @return [String]
+    #
+    # @!attribute [rw] nick_name
+    #   An alternative descriptive name for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_url
+    #   A URL link for the user's profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] emails
+    #   The user's email value.
+    #   @return [Array<Types::Email>]
+    #
+    # @!attribute [rw] addresses
+    #   The user's physical address.
+    #   @return [Array<Types::Address>]
+    #
+    # @!attribute [rw] phone_numbers
+    #   A list of `PhoneNumber` objects associated with a user.
+    #   @return [Array<Types::PhoneNumber>]
+    #
+    # @!attribute [rw] user_type
+    #   A string indicating the user's type.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A string containing the user's title.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_language
+    #   The preferred language of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale
+    #   A string containing the user's geographical region or location.
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   The time zone for a user.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeUserResponse AWS API Documentation
     #
     class DescribeUserResponse < Struct.new(
       :user_name,
-      :user_id)
-      SENSITIVE = [:user_name]
+      :user_id,
+      :external_ids,
+      :name,
+      :display_name,
+      :nick_name,
+      :profile_url,
+      :emails,
+      :addresses,
+      :phone_numbers,
+      :user_type,
+      :title,
+      :preferred_language,
+      :locale,
+      :timezone,
+      :identity_store_id)
+      SENSITIVE = [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone]
+      include Aws::Structure
+    end
+
+    # The email address associated with the user.
+    #
+    # @note When making an API call, you may pass Email
+    #   data as a hash:
+    #
+    #       {
+    #         value: "SensitiveStringType",
+    #         type: "SensitiveStringType",
+    #         primary: false,
+    #       }
+    #
+    # @!attribute [rw] value
+    #   A string containing an email address. For example,
+    #   "johndoe@amazon.com."
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   A string representing the type of address. For example, "Work."
+    #   @return [String]
+    #
+    # @!attribute [rw] primary
+    #   A Boolean value representing whether this is the primary email
+    #   address for the associated resource.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/Email AWS API Documentation
+    #
+    class Email < Struct.new(
+      :value,
+      :type,
+      :primary)
+      SENSITIVE = [:value, :type, :primary]
+      include Aws::Structure
+    end
+
+    # The identifier issued to this resource by an external identity
+    # provider.
+    #
+    # @note When making an API call, you may pass ExternalId
+    #   data as a hash:
+    #
+    #       {
+    #         issuer: "ExternalIdIssuer", # required
+    #         id: "ExternalIdIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] issuer
+    #   The issuer for an external identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier issued to this resource by an external identity
+    #   provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ExternalId AWS API Documentation
+    #
+    class ExternalId < Struct.new(
+      :issuer,
+      :id)
+      SENSITIVE = [:issuer, :id]
       include Aws::Structure
     end
 
@@ -166,7 +880,165 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # A group object, which contains a specified group’s metadata and
+    # @note When making an API call, you may pass GetGroupIdRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         alternate_identifier: { # required
+    #           external_id: {
+    #             issuer: "ExternalIdIssuer", # required
+    #             id: "ExternalIdIdentifier", # required
+    #           },
+    #           unique_attribute: {
+    #             attribute_path: "AttributePath", # required
+    #             attribute_value: "value", # required, value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] alternate_identifier
+    #   A unique identifier for an identity resource that is not the primary
+    #   identifier. This value can be an identifier from an external
+    #   identity provider (IdP) that is associated with the group or a
+    #   unique attribute. For example, a unique `GroupDisplayName`.
+    #   @return [Types::AlternateIdentifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetGroupIdRequest AWS API Documentation
+    #
+    class GetGroupIdRequest < Struct.new(
+      :identity_store_id,
+      :alternate_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_id
+    #   The identifier for a group in the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetGroupIdResponse AWS API Documentation
+    #
+    class GetGroupIdResponse < Struct.new(
+      :group_id,
+      :identity_store_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetGroupMembershipIdRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         group_id: "ResourceId", # required
+    #         member_id: { # required
+    #           user_id: "ResourceId",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The identifier for a group in the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   An object that contains the identifier of a group member. Setting
+    #   the `UserID` field to the specific identifier for a user indicates
+    #   that the user is a member of the group.
+    #   @return [Types::MemberId]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetGroupMembershipIdRequest AWS API Documentation
+    #
+    class GetGroupMembershipIdRequest < Struct.new(
+      :identity_store_id,
+      :group_id,
+      :member_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_id
+    #   The identifier for a `GroupMembership` in an identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetGroupMembershipIdResponse AWS API Documentation
+    #
+    class GetGroupMembershipIdResponse < Struct.new(
+      :membership_id,
+      :identity_store_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetUserIdRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         alternate_identifier: { # required
+    #           external_id: {
+    #             issuer: "ExternalIdIssuer", # required
+    #             id: "ExternalIdIdentifier", # required
+    #           },
+    #           unique_attribute: {
+    #             attribute_path: "AttributePath", # required
+    #             attribute_value: "value", # required, value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] alternate_identifier
+    #   A unique identifier for an identity resource that is not the primary
+    #   identifier.
+    #   @return [Types::AlternateIdentifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetUserIdRequest AWS API Documentation
+    #
+    class GetUserIdRequest < Struct.new(
+      :identity_store_id,
+      :alternate_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_id
+    #   The identifier for a user in the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetUserIdResponse AWS API Documentation
+    #
+    class GetUserIdResponse < Struct.new(
+      :user_id,
+      :identity_store_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A group object that contains a specified group’s metadata and
     # attributes.
     #
     # @!attribute [rw] group_id
@@ -174,7 +1046,7 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   Contains the group’s display name value. The length limit is 1,024
+    #   The group’s display name value. The length limit is 1,024
     #   characters. This value can consist of letters, accented characters,
     #   symbols, numbers, punctuation, tab, new line, carriage return,
     #   space, and nonbreaking space in this attribute. The characters
@@ -183,12 +1055,87 @@ module Aws::IdentityStore
     #   identity store.
     #   @return [String]
     #
+    # @!attribute [rw] external_ids
+    #   A list of `ExternalId` objects that contains the identifiers issued
+    #   to this resource by an external identity provider.
+    #   @return [Array<Types::ExternalId>]
+    #
+    # @!attribute [rw] description
+    #   A string containing a description of the specified group.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/Group AWS API Documentation
     #
     class Group < Struct.new(
       :group_id,
-      :display_name)
+      :display_name,
+      :external_ids,
+      :description,
+      :identity_store_id)
+      SENSITIVE = [:display_name, :description]
+      include Aws::Structure
+    end
+
+    # Contains the identifiers for a group, a group member, and a
+    # `GroupMembership` object in the identity store.
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   The identifier for a `GroupMembership` object in an identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The identifier for a group in the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   An object that contains the identifier of a group member. Setting
+    #   the `UserID` field to the specific identifier for a user indicates
+    #   that the user is a member of the group.
+    #   @return [Types::MemberId]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GroupMembership AWS API Documentation
+    #
+    class GroupMembership < Struct.new(
+      :identity_store_id,
+      :membership_id,
+      :group_id,
+      :member_id)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates whether a resource is a member of a group in the identity
+    # store.
+    #
+    # @!attribute [rw] group_id
+    #   The identifier for a group in the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   An object that contains the identifier of a group member. Setting
+    #   the `UserID` field to the specific identifier for a user indicates
+    #   that the user is a member of the group.
+    #   @return [Types::MemberId]
+    #
+    # @!attribute [rw] membership_exists
+    #   Indicates whether a membership relation exists or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GroupMembershipExistenceResult AWS API Documentation
+    #
+    class GroupMembershipExistenceResult < Struct.new(
+      :group_id,
+      :member_id,
+      :membership_exists)
+      SENSITIVE = [:membership_exists]
       include Aws::Structure
     end
 
@@ -205,11 +1152,200 @@ module Aws::IdentityStore
     #   fails.
     #   @return [String]
     #
+    # @!attribute [rw] retry_after_seconds
+    #   The number of seconds that you would like to wait before retrying
+    #   the next request.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/InternalServerException AWS API Documentation
     #
     class InternalServerException < Struct.new(
       :message,
-      :request_id)
+      :request_id,
+      :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass IsMemberInGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         member_id: { # required
+    #           user_id: "ResourceId",
+    #         },
+    #         group_ids: ["ResourceId"], # required
+    #       }
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   An object containing the identifier of a group member.
+    #   @return [Types::MemberId]
+    #
+    # @!attribute [rw] group_ids
+    #   A list of identifiers for groups in the identity store.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/IsMemberInGroupsRequest AWS API Documentation
+    #
+    class IsMemberInGroupsRequest < Struct.new(
+      :identity_store_id,
+      :member_id,
+      :group_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   A list containing the results of membership existence checks.
+    #   @return [Array<Types::GroupMembershipExistenceResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/IsMemberInGroupsResponse AWS API Documentation
+    #
+    class IsMemberInGroupsResponse < Struct.new(
+      :results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListGroupMembershipsForMemberRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         member_id: { # required
+    #           user_id: "ResourceId",
+    #         },
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   An object that contains the identifier of a group member. Setting
+    #   the `UserID` field to the specific identifier for a user indicates
+    #   that the user is a member of the group.
+    #   @return [Types::MemberId]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request. This
+    #   parameter is used in the `ListUsers` and `ListGroups` requests to
+    #   specify how many results to return in one page. The length limit is
+    #   50 characters.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used for the `ListUsers`, `ListGroups`, and
+    #   `ListGroupMemberships` API operations. This value is generated by
+    #   the identity store service. It is returned in the API response if
+    #   the total results are more than the size of one page. This token is
+    #   also returned when it is used in the API request to search for the
+    #   next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroupMembershipsForMemberRequest AWS API Documentation
+    #
+    class ListGroupMembershipsForMemberRequest < Struct.new(
+      :identity_store_id,
+      :member_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_memberships
+    #   A list of `GroupMembership` objects in the group for a specified
+    #   member.
+    #   @return [Array<Types::GroupMembership>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used for the `ListUsers`, `ListGroups`, and
+    #   `ListGroupMemberships` API operations. This value is generated by
+    #   the identity store service. It is returned in the API response if
+    #   the total results are more than the size of one page. This token is
+    #   also returned when it is used in the API request to search for the
+    #   next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroupMembershipsForMemberResponse AWS API Documentation
+    #
+    class ListGroupMembershipsForMemberResponse < Struct.new(
+      :group_memberships,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListGroupMembershipsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         group_id: "ResourceId", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The identifier for a group in the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request. This
+    #   parameter is used in all `List` requests to specify how many results
+    #   to return in one page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used for the `ListUsers`, `ListGroups` and
+    #   `ListGroupMemberships` API operations. This value is generated by
+    #   the identity store service. It is returned in the API response if
+    #   the total results are more than the size of one page. This token is
+    #   also returned when it is used in the API request to search for the
+    #   next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroupMembershipsRequest AWS API Documentation
+    #
+    class ListGroupMembershipsRequest < Struct.new(
+      :identity_store_id,
+      :group_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_memberships
+    #   A list of `GroupMembership` objects in the group.
+    #   @return [Array<Types::GroupMembership>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used for the `ListUsers`, `ListGroups`, and
+    #   `ListGroupMemberships` API operations. This value is generated by
+    #   the identity store service. It is returned in the API response if
+    #   the total results are more than the size of one page. This token is
+    #   also returned when it is used in the API request to search for the
+    #   next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroupMembershipsResponse AWS API Documentation
+    #
+    class ListGroupMembershipsResponse < Struct.new(
+      :group_memberships,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -232,14 +1368,14 @@ module Aws::IdentityStore
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store, such as
     #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
-    #   `1234567890` is a randomly generated string that contains number and
-    #   lower case letters. This value is generated at the time that a new
-    #   identity store is created.
+    #   `1234567890` is a randomly generated string that contains numbers
+    #   and lower case letters. This value is generated at the time that a
+    #   new identity store is created.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per request. This
-    #   parameter is used in the `ListUsers` and `ListGroups` request to
+    #   parameter is used in the `ListUsers` and `ListGroups` requests to
     #   specify how many results to return in one page. The length limit is
     #   50 characters.
     #   @return [Integer]
@@ -254,7 +1390,7 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] filters
     #   A list of `Filter` objects, which is used in the `ListUsers` and
-    #   `ListGroups` request.
+    #   `ListGroups` requests.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroupsRequest AWS API Documentation
@@ -307,14 +1443,14 @@ module Aws::IdentityStore
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store, such as
     #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
-    #   `1234567890` is a randomly generated string that contains number and
-    #   lower case letters. This value is generated at the time that a new
-    #   identity store is created.
+    #   `1234567890` is a randomly generated string that contains numbers
+    #   and lower case letters. This value is generated at the time that a
+    #   new identity store is created.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per request. This
-    #   parameter is used in the `ListUsers` and `ListGroups` request to
+    #   parameter is used in the `ListUsers` and `ListGroups` requests to
     #   specify how many results to return in one page. The length limit is
     #   50 characters.
     #   @return [Integer]
@@ -329,7 +1465,7 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] filters
     #   A list of `Filter` objects, which is used in the `ListUsers` and
-    #   `ListGroups` request.
+    #   `ListGroups` requests.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListUsersRequest AWS API Documentation
@@ -364,23 +1500,133 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
+    # An object containing the identifier of a group member.
+    #
+    # @note MemberId is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note MemberId is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MemberId corresponding to the set member.
+    #
+    # @!attribute [rw] user_id
+    #   An object containing the identifiers of resources that can be
+    #   members.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/MemberId AWS API Documentation
+    #
+    class MemberId < Struct.new(
+      :user_id,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class UserId < MemberId; end
+      class Unknown < MemberId; end
+    end
+
+    # The full name of the user.
+    #
+    # @note When making an API call, you may pass Name
+    #   data as a hash:
+    #
+    #       {
+    #         formatted: "SensitiveStringType",
+    #         family_name: "SensitiveStringType",
+    #         given_name: "SensitiveStringType",
+    #         middle_name: "SensitiveStringType",
+    #         honorific_prefix: "SensitiveStringType",
+    #         honorific_suffix: "SensitiveStringType",
+    #       }
+    #
+    # @!attribute [rw] formatted
+    #   A string containing a formatted version of the name for display.
+    #   @return [String]
+    #
+    # @!attribute [rw] family_name
+    #   The family name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] given_name
+    #   The given name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] middle_name
+    #   The middle name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] honorific_prefix
+    #   The honorific prefix of the user. For example, "Dr."
+    #   @return [String]
+    #
+    # @!attribute [rw] honorific_suffix
+    #   The honorific suffix of the user. For example, "M.D."
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/Name AWS API Documentation
+    #
+    class Name < Struct.new(
+      :formatted,
+      :family_name,
+      :given_name,
+      :middle_name,
+      :honorific_prefix,
+      :honorific_suffix)
+      SENSITIVE = [:formatted, :family_name, :given_name, :middle_name, :honorific_prefix, :honorific_suffix]
+      include Aws::Structure
+    end
+
+    # The phone number associated with the user.
+    #
+    # @note When making an API call, you may pass PhoneNumber
+    #   data as a hash:
+    #
+    #       {
+    #         value: "SensitiveStringType",
+    #         type: "SensitiveStringType",
+    #         primary: false,
+    #       }
+    #
+    # @!attribute [rw] value
+    #   A string containing a phone number. For example, "8675309" or "+1
+    #   (800) 123-4567".
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   A string representing the type of a phone number. For example,
+    #   "Mobile."
+    #   @return [String]
+    #
+    # @!attribute [rw] primary
+    #   A Boolean value representing whether this is the primary phone
+    #   number for the associated resource.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/PhoneNumber AWS API Documentation
+    #
+    class PhoneNumber < Struct.new(
+      :value,
+      :type,
+      :primary)
+      SENSITIVE = [:value, :type, :primary]
+      include Aws::Structure
+    end
+
     # Indicates that a requested resource is not found.
     #
     # @!attribute [rw] resource_type
-    #   The type of resource in the identity store service, which is an enum
-    #   object. Valid values include USER, GROUP, and IDENTITY\_STORE.
+    #   An enum object indicating the type of resource in the identity store
+    #   service. Valid values include USER, GROUP, and IDENTITY\_STORE.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The identifier for a resource in the identity store, which can be
-    #   used as `UserId` or `GroupId`. The format for `ResourceId` is either
+    #   The identifier for a resource in the identity store that can be used
+    #   as `UserId` or `GroupId`. The format for `ResourceId` is either
     #   `UUID` or `1234567890-UUID`, where `UUID` is a randomly generated
     #   value for each resource when it is created and `1234567890`
     #   represents the `IdentityStoreId` string value. In the case that the
-    #   identity store is migrated from a legacy single sign-on identity
-    #   store, the `ResourceId` for that identity store will be in the
-    #   format of `UUID`. Otherwise, it will be in the `1234567890-UUID`
-    #   format.
+    #   identity store is migrated from a legacy SSO identity store, the
+    #   `ResourceId` for that identity store will be in the format of
+    #   `UUID`. Otherwise, it will be in the `1234567890-UUID` format.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -404,6 +1650,28 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
+    # The request would cause the number of users or groups in the identity
+    # store to exceed the maximum allowed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The identifier for each request. This value is a globally unique ID
+    #   that is generated by the identity store service for each sent
+    #   request, and is then returned inside the exception if the request
+    #   fails.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Indicates that the principal has crossed the throttling limits of the
     # API operations.
     #
@@ -417,36 +1685,231 @@ module Aws::IdentityStore
     #   fails.
     #   @return [String]
     #
+    # @!attribute [rw] retry_after_seconds
+    #   The number of seconds that you would like to wait before retrying
+    #   the next request.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
       :message,
-      :request_id)
+      :request_id,
+      :retry_after_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A user object, which contains a specified user’s metadata and
-    # attributes.
+    # An entity attribute that's unique to a specific entity.
     #
-    # @!attribute [rw] user_name
-    #   Contains the user’s user name value. The length limit is 128
-    #   characters. This value can consist of letters, accented characters,
-    #   symbols, numbers, and punctuation. The characters `<>;:%` are
-    #   excluded. This value is specified at the time the user is created
-    #   and stored as an attribute of the user object in the identity store.
+    # @note When making an API call, you may pass UniqueAttribute
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_path: "AttributePath", # required
+    #         attribute_value: "value", # required, value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #       }
+    #
+    # @!attribute [rw] attribute_path
+    #   A string representation of the path to a given attribute or
+    #   sub-attribute. Supports JMESPath.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_value
+    #   The value of the attribute. This is a `Document` type. This type is
+    #   not supported by Java V1, Go V1, and older versions of the AWS CLI.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/UniqueAttribute AWS API Documentation
+    #
+    class UniqueAttribute < Struct.new(
+      :attribute_path,
+      :attribute_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         group_id: "ResourceId", # required
+    #         operations: [ # required
+    #           {
+    #             attribute_path: "AttributePath", # required
+    #             attribute_value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The identifier for a group in the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] operations
+    #   A list of `AttributeOperation` objects to apply to the requested
+    #   group. These operations might add, replace, or remove an attribute.
+    #   @return [Array<Types::AttributeOperation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/UpdateGroupRequest AWS API Documentation
+    #
+    class UpdateGroupRequest < Struct.new(
+      :identity_store_id,
+      :group_id,
+      :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/UpdateGroupResponse AWS API Documentation
+    #
+    class UpdateGroupResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         user_id: "ResourceId", # required
+    #         operations: [ # required
+    #           {
+    #             attribute_path: "AttributePath", # required
+    #             attribute_value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
     #   @return [String]
     #
     # @!attribute [rw] user_id
     #   The identifier for a user in the identity store.
     #   @return [String]
     #
+    # @!attribute [rw] operations
+    #   A list of `AttributeOperation` objects to apply to the requested
+    #   user. These operations might add, replace, or remove an attribute.
+    #   @return [Array<Types::AttributeOperation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/UpdateUserRequest AWS API Documentation
+    #
+    class UpdateUserRequest < Struct.new(
+      :identity_store_id,
+      :user_id,
+      :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/UpdateUserResponse AWS API Documentation
+    #
+    class UpdateUserResponse < Aws::EmptyStructure; end
+
+    # A user object that contains a specified user’s metadata and
+    # attributes.
+    #
+    # @!attribute [rw] user_name
+    #   A unique string used to identify the user. The length limit is 128
+    #   characters. This value can consist of letters, accented characters,
+    #   symbols, numbers, and punctuation. This value is specified at the
+    #   time the user is created and stored as an attribute of the user
+    #   object in the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier for a user in the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_ids
+    #   A list of `ExternalId` objects that contains the identifiers issued
+    #   to this resource by an external identity provider.
+    #   @return [Array<Types::ExternalId>]
+    #
+    # @!attribute [rw] name
+    #   An object containing the user's name.
+    #   @return [Types::Name]
+    #
+    # @!attribute [rw] display_name
+    #   A string containing the user's name that's formatted for display
+    #   when the user is referenced. For example, "John Doe."
+    #   @return [String]
+    #
+    # @!attribute [rw] nick_name
+    #   A string containing an alternate name for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_url
+    #   A string containing a URL that may be associated with the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] emails
+    #   A list of `Email` objects containing email addresses associated with
+    #   the user.
+    #   @return [Array<Types::Email>]
+    #
+    # @!attribute [rw] addresses
+    #   A list of `Address` objects containing addresses associated with the
+    #   user.
+    #   @return [Array<Types::Address>]
+    #
+    # @!attribute [rw] phone_numbers
+    #   A list of `PhoneNumber` objects containing phone numbers associated
+    #   with the user.
+    #   @return [Array<Types::PhoneNumber>]
+    #
+    # @!attribute [rw] user_type
+    #   A string indicating the user's type. Possible values depend on each
+    #   customer's specific needs, so they are left unspecified.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A string containing the user's title. Possible values depend on
+    #   each customer's specific needs, so they are left unspecified.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_language
+    #   A string containing the preferred language of the user. For example,
+    #   "American English" or "en-us."
+    #   @return [String]
+    #
+    # @!attribute [rw] locale
+    #   A string containing the user's geographical region or location.
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   A string containing the user's time zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/User AWS API Documentation
     #
     class User < Struct.new(
       :user_name,
-      :user_id)
-      SENSITIVE = [:user_name]
+      :user_id,
+      :external_ids,
+      :name,
+      :display_name,
+      :nick_name,
+      :profile_url,
+      :emails,
+      :addresses,
+      :phone_numbers,
+      :user_type,
+      :title,
+      :preferred_language,
+      :locale,
+      :timezone,
+      :identity_store_id)
+      SENSITIVE = [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone]
       include Aws::Structure
     end
 

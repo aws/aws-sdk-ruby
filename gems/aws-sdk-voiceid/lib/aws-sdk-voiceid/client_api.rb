@@ -134,6 +134,7 @@ module Aws::VoiceID
     UpdateDomainRequest = Shapes::StructureShape.new(name: 'UpdateDomainRequest')
     UpdateDomainResponse = Shapes::StructureShape.new(name: 'UpdateDomainResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    VoiceSpoofingRisk = Shapes::StructureShape.new(name: 'VoiceSpoofingRisk')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -273,6 +274,7 @@ module Aws::VoiceID
     FraudDetectionResult.struct_class = Types::FraudDetectionResult
 
     FraudRiskDetails.add_member(:known_fraudster_risk, Shapes::ShapeRef.new(shape: KnownFraudsterRisk, required: true, location_name: "KnownFraudsterRisk"))
+    FraudRiskDetails.add_member(:voice_spoofing_risk, Shapes::ShapeRef.new(shape: VoiceSpoofingRisk, required: true, location_name: "VoiceSpoofingRisk"))
     FraudRiskDetails.struct_class = Types::FraudRiskDetails
 
     Fraudster.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
@@ -496,6 +498,9 @@ module Aws::VoiceID
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
+
+    VoiceSpoofingRisk.add_member(:risk_score, Shapes::ShapeRef.new(shape: Score, required: true, location_name: "RiskScore"))
+    VoiceSpoofingRisk.struct_class = Types::VoiceSpoofingRisk
 
 
     # @api private
@@ -746,6 +751,7 @@ module Aws::VoiceID
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: OptOutSpeakerRequest)
         o.output = Shapes::ShapeRef.new(shape: OptOutSpeakerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

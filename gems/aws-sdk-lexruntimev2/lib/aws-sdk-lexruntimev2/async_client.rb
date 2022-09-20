@@ -519,23 +519,27 @@ module Aws::LexRuntimeV2
     #   event.interpretations[0].intent.slots["NonEmptyString"].value.interpreted_value #=> String
     #   event.interpretations[0].intent.slots["NonEmptyString"].value.resolved_values #=> Array
     #   event.interpretations[0].intent.slots["NonEmptyString"].value.resolved_values[0] #=> String
-    #   event.interpretations[0].intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
+    #   event.interpretations[0].intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List", "Composite"
     #   event.interpretations[0].intent.slots["NonEmptyString"].values #=> Array
     #   event.interpretations[0].intent.slots["NonEmptyString"].values[0] #=> Types::Slot
+    #   event.interpretations[0].intent.slots["NonEmptyString"].sub_slots #=> Types::Slots
     #   event.interpretations[0].intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting", "FulfillmentInProgress"
     #   event.interpretations[0].intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   event.session_state.dialog_action.type #=> String, one of "Close", "ConfirmIntent", "Delegate", "ElicitIntent", "ElicitSlot", "None"
     #   event.session_state.dialog_action.slot_to_elicit #=> String
     #   event.session_state.dialog_action.slot_elicitation_style #=> String, one of "Default", "SpellByLetter", "SpellByWord"
+    #   event.session_state.dialog_action.sub_slot_to_elicit.name #=> String
+    #   event.session_state.dialog_action.sub_slot_to_elicit.sub_slot_to_elicit #=> Types::ElicitSubSlot
     #   event.session_state.intent.name #=> String
     #   event.session_state.intent.slots #=> Hash
     #   event.session_state.intent.slots["NonEmptyString"].value.original_value #=> String
     #   event.session_state.intent.slots["NonEmptyString"].value.interpreted_value #=> String
     #   event.session_state.intent.slots["NonEmptyString"].value.resolved_values #=> Array
     #   event.session_state.intent.slots["NonEmptyString"].value.resolved_values[0] #=> String
-    #   event.session_state.intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
+    #   event.session_state.intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List", "Composite"
     #   event.session_state.intent.slots["NonEmptyString"].values #=> Array
     #   event.session_state.intent.slots["NonEmptyString"].values[0] #=> Types::Slot
+    #   event.session_state.intent.slots["NonEmptyString"].sub_slots #=> Types::Slots
     #   event.session_state.intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting", "FulfillmentInProgress"
     #   event.session_state.intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   event.session_state.active_contexts #=> Array
@@ -551,6 +555,7 @@ module Aws::LexRuntimeV2
     #   event.session_state.runtime_hints.slot_hints["Name"] #=> Hash
     #   event.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values #=> Array
     #   event.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values[0].phrase #=> String
+    #   event.session_state.runtime_hints.slot_hints["Name"]["Name"].sub_slot_hints #=> Types::SlotHintsSlotMap
     #   event.request_attributes #=> Hash
     #   event.request_attributes["NonEmptyString"] #=> String
     #   event.session_id #=> String
@@ -643,7 +648,7 @@ module Aws::LexRuntimeV2
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-lexruntimev2'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

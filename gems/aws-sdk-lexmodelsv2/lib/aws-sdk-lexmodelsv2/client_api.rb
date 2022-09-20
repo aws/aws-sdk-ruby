@@ -102,6 +102,7 @@ module Aws::LexModelsV2
     CloudWatchLogGroupLogDestination = Shapes::StructureShape.new(name: 'CloudWatchLogGroupLogDestination')
     CodeHookInterfaceVersion = Shapes::StringShape.new(name: 'CodeHookInterfaceVersion')
     CodeHookSpecification = Shapes::StructureShape.new(name: 'CodeHookSpecification')
+    CompositeSlotTypeSetting = Shapes::StructureShape.new(name: 'CompositeSlotTypeSetting')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConditionExpression = Shapes::StringShape.new(name: 'ConditionExpression')
     ConditionKey = Shapes::StringShape.new(name: 'ConditionKey')
@@ -412,6 +413,7 @@ module Aws::LexModelsV2
     SlotValueSelectionSetting = Shapes::StructureShape.new(name: 'SlotValueSelectionSetting')
     SlotValues = Shapes::ListShape.new(name: 'SlotValues')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    Specifications = Shapes::StructureShape.new(name: 'Specifications')
     StartBotRecommendationRequest = Shapes::StructureShape.new(name: 'StartBotRecommendationRequest')
     StartBotRecommendationResponse = Shapes::StructureShape.new(name: 'StartBotRecommendationResponse')
     StartImportRequest = Shapes::StructureShape.new(name: 'StartImportRequest')
@@ -423,6 +425,12 @@ module Aws::LexModelsV2
     StopBotRecommendationResponse = Shapes::StructureShape.new(name: 'StopBotRecommendationResponse')
     String = Shapes::StringShape.new(name: 'String')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
+    SubSlotExpression = Shapes::StringShape.new(name: 'SubSlotExpression')
+    SubSlotSetting = Shapes::StructureShape.new(name: 'SubSlotSetting')
+    SubSlotSpecificationMap = Shapes::MapShape.new(name: 'SubSlotSpecificationMap')
+    SubSlotTypeComposition = Shapes::StructureShape.new(name: 'SubSlotTypeComposition')
+    SubSlotTypeList = Shapes::ListShape.new(name: 'SubSlotTypeList')
+    SubSlotValueElicitationSetting = Shapes::StructureShape.new(name: 'SubSlotValueElicitationSetting')
     SynonymList = Shapes::ListShape.new(name: 'SynonymList')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -692,6 +700,9 @@ module Aws::LexModelsV2
     CodeHookSpecification.add_member(:lambda_code_hook, Shapes::ShapeRef.new(shape: LambdaCodeHook, required: true, location_name: "lambdaCodeHook"))
     CodeHookSpecification.struct_class = Types::CodeHookSpecification
 
+    CompositeSlotTypeSetting.add_member(:sub_slots, Shapes::ShapeRef.new(shape: SubSlotTypeList, location_name: "subSlots"))
+    CompositeSlotTypeSetting.struct_class = Types::CompositeSlotTypeSetting
+
     Condition.add_member(:expression_string, Shapes::ShapeRef.new(shape: ConditionExpression, required: true, location_name: "expressionString"))
     Condition.struct_class = Types::Condition
 
@@ -876,6 +887,7 @@ module Aws::LexModelsV2
     CreateSlotRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
     CreateSlotRequest.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "intentId"))
     CreateSlotRequest.add_member(:multiple_values_setting, Shapes::ShapeRef.new(shape: MultipleValuesSetting, location_name: "multipleValuesSetting"))
+    CreateSlotRequest.add_member(:sub_slot_setting, Shapes::ShapeRef.new(shape: SubSlotSetting, location_name: "subSlotSetting"))
     CreateSlotRequest.struct_class = Types::CreateSlotRequest
 
     CreateSlotResponse.add_member(:slot_id, Shapes::ShapeRef.new(shape: Id, location_name: "slotId"))
@@ -890,6 +902,7 @@ module Aws::LexModelsV2
     CreateSlotResponse.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, location_name: "intentId"))
     CreateSlotResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     CreateSlotResponse.add_member(:multiple_values_setting, Shapes::ShapeRef.new(shape: MultipleValuesSetting, location_name: "multipleValuesSetting"))
+    CreateSlotResponse.add_member(:sub_slot_setting, Shapes::ShapeRef.new(shape: SubSlotSetting, location_name: "subSlotSetting"))
     CreateSlotResponse.struct_class = Types::CreateSlotResponse
 
     CreateSlotTypeRequest.add_member(:slot_type_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "slotTypeName"))
@@ -901,6 +914,7 @@ module Aws::LexModelsV2
     CreateSlotTypeRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
     CreateSlotTypeRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
     CreateSlotTypeRequest.add_member(:external_source_setting, Shapes::ShapeRef.new(shape: ExternalSourceSetting, location_name: "externalSourceSetting"))
+    CreateSlotTypeRequest.add_member(:composite_slot_type_setting, Shapes::ShapeRef.new(shape: CompositeSlotTypeSetting, location_name: "compositeSlotTypeSetting"))
     CreateSlotTypeRequest.struct_class = Types::CreateSlotTypeRequest
 
     CreateSlotTypeResponse.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: Id, location_name: "slotTypeId"))
@@ -914,6 +928,7 @@ module Aws::LexModelsV2
     CreateSlotTypeResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
     CreateSlotTypeResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     CreateSlotTypeResponse.add_member(:external_source_setting, Shapes::ShapeRef.new(shape: ExternalSourceSetting, location_name: "externalSourceSetting"))
+    CreateSlotTypeResponse.add_member(:composite_slot_type_setting, Shapes::ShapeRef.new(shape: CompositeSlotTypeSetting, location_name: "compositeSlotTypeSetting"))
     CreateSlotTypeResponse.struct_class = Types::CreateSlotTypeResponse
 
     CreateUploadUrlRequest.struct_class = Types::CreateUploadUrlRequest
@@ -1239,6 +1254,7 @@ module Aws::LexModelsV2
     DescribeSlotResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     DescribeSlotResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
     DescribeSlotResponse.add_member(:multiple_values_setting, Shapes::ShapeRef.new(shape: MultipleValuesSetting, location_name: "multipleValuesSetting"))
+    DescribeSlotResponse.add_member(:sub_slot_setting, Shapes::ShapeRef.new(shape: SubSlotSetting, location_name: "subSlotSetting"))
     DescribeSlotResponse.struct_class = Types::DescribeSlotResponse
 
     DescribeSlotTypeRequest.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "slotTypeId"))
@@ -1259,6 +1275,7 @@ module Aws::LexModelsV2
     DescribeSlotTypeResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     DescribeSlotTypeResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
     DescribeSlotTypeResponse.add_member(:external_source_setting, Shapes::ShapeRef.new(shape: ExternalSourceSetting, location_name: "externalSourceSetting"))
+    DescribeSlotTypeResponse.add_member(:composite_slot_type_setting, Shapes::ShapeRef.new(shape: CompositeSlotTypeSetting, location_name: "compositeSlotTypeSetting"))
     DescribeSlotTypeResponse.struct_class = Types::DescribeSlotTypeResponse
 
     DialogAction.add_member(:type, Shapes::ShapeRef.new(shape: DialogActionType, required: true, location_name: "type"))
@@ -1917,6 +1934,10 @@ module Aws::LexModelsV2
 
     SlotValues.member = Shapes::ShapeRef.new(shape: SlotValueOverride)
 
+    Specifications.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: BuiltInOrCustomSlotTypeId, required: true, location_name: "slotTypeId"))
+    Specifications.add_member(:value_elicitation_setting, Shapes::ShapeRef.new(shape: SubSlotValueElicitationSetting, required: true, location_name: "valueElicitationSetting"))
+    Specifications.struct_class = Types::Specifications
+
     StartBotRecommendationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     StartBotRecommendationRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
     StartBotRecommendationRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
@@ -1968,6 +1989,25 @@ module Aws::LexModelsV2
 
     StringMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     StringMap.value = Shapes::ShapeRef.new(shape: String)
+
+    SubSlotSetting.add_member(:expression, Shapes::ShapeRef.new(shape: SubSlotExpression, location_name: "expression"))
+    SubSlotSetting.add_member(:slot_specifications, Shapes::ShapeRef.new(shape: SubSlotSpecificationMap, location_name: "slotSpecifications"))
+    SubSlotSetting.struct_class = Types::SubSlotSetting
+
+    SubSlotSpecificationMap.key = Shapes::ShapeRef.new(shape: Name)
+    SubSlotSpecificationMap.value = Shapes::ShapeRef.new(shape: Specifications)
+
+    SubSlotTypeComposition.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    SubSlotTypeComposition.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: BuiltInOrCustomSlotTypeId, required: true, location_name: "slotTypeId"))
+    SubSlotTypeComposition.struct_class = Types::SubSlotTypeComposition
+
+    SubSlotTypeList.member = Shapes::ShapeRef.new(shape: SubSlotTypeComposition)
+
+    SubSlotValueElicitationSetting.add_member(:default_value_specification, Shapes::ShapeRef.new(shape: SlotDefaultValueSpecification, location_name: "defaultValueSpecification"))
+    SubSlotValueElicitationSetting.add_member(:prompt_specification, Shapes::ShapeRef.new(shape: PromptSpecification, required: true, location_name: "promptSpecification"))
+    SubSlotValueElicitationSetting.add_member(:sample_utterances, Shapes::ShapeRef.new(shape: SampleUtterancesList, location_name: "sampleUtterances"))
+    SubSlotValueElicitationSetting.add_member(:wait_and_continue_specification, Shapes::ShapeRef.new(shape: WaitAndContinueSpecification, location_name: "waitAndContinueSpecification"))
+    SubSlotValueElicitationSetting.struct_class = Types::SubSlotValueElicitationSetting
 
     SynonymList.member = Shapes::ShapeRef.new(shape: SampleValue)
 
@@ -2161,6 +2201,7 @@ module Aws::LexModelsV2
     UpdateSlotRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
     UpdateSlotRequest.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "intentId"))
     UpdateSlotRequest.add_member(:multiple_values_setting, Shapes::ShapeRef.new(shape: MultipleValuesSetting, location_name: "multipleValuesSetting"))
+    UpdateSlotRequest.add_member(:sub_slot_setting, Shapes::ShapeRef.new(shape: SubSlotSetting, location_name: "subSlotSetting"))
     UpdateSlotRequest.struct_class = Types::UpdateSlotRequest
 
     UpdateSlotResponse.add_member(:slot_id, Shapes::ShapeRef.new(shape: Id, location_name: "slotId"))
@@ -2176,6 +2217,7 @@ module Aws::LexModelsV2
     UpdateSlotResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     UpdateSlotResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
     UpdateSlotResponse.add_member(:multiple_values_setting, Shapes::ShapeRef.new(shape: MultipleValuesSetting, location_name: "multipleValuesSetting"))
+    UpdateSlotResponse.add_member(:sub_slot_setting, Shapes::ShapeRef.new(shape: SubSlotSetting, location_name: "subSlotSetting"))
     UpdateSlotResponse.struct_class = Types::UpdateSlotResponse
 
     UpdateSlotTypeRequest.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "slotTypeId"))
@@ -2188,6 +2230,7 @@ module Aws::LexModelsV2
     UpdateSlotTypeRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
     UpdateSlotTypeRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
     UpdateSlotTypeRequest.add_member(:external_source_setting, Shapes::ShapeRef.new(shape: ExternalSourceSetting, location_name: "externalSourceSetting"))
+    UpdateSlotTypeRequest.add_member(:composite_slot_type_setting, Shapes::ShapeRef.new(shape: CompositeSlotTypeSetting, location_name: "compositeSlotTypeSetting"))
     UpdateSlotTypeRequest.struct_class = Types::UpdateSlotTypeRequest
 
     UpdateSlotTypeResponse.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: Id, location_name: "slotTypeId"))
@@ -2202,6 +2245,7 @@ module Aws::LexModelsV2
     UpdateSlotTypeResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     UpdateSlotTypeResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
     UpdateSlotTypeResponse.add_member(:external_source_setting, Shapes::ShapeRef.new(shape: ExternalSourceSetting, location_name: "externalSourceSetting"))
+    UpdateSlotTypeResponse.add_member(:composite_slot_type_setting, Shapes::ShapeRef.new(shape: CompositeSlotTypeSetting, location_name: "compositeSlotTypeSetting"))
     UpdateSlotTypeResponse.struct_class = Types::UpdateSlotTypeResponse
 
     UtteranceAggregationDuration.add_member(:relative_aggregation_duration, Shapes::ShapeRef.new(shape: RelativeAggregationDuration, required: true, location_name: "relativeAggregationDuration"))

@@ -3,6 +3,83 @@ Unreleased Changes
 
 * Feature - Dynamic endpoints (WIP)
 
+3.151.0 (2022-09-20)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.150.0 (2022-09-19)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.149.0 (2022-09-16)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.148.0 (2022-09-15)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.147.0 (2022-09-14)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.146.0 (2022-09-13)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.145.0 (2022-09-12)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.144.0 (2022-09-09)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.143.0 (2022-09-08)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.142.0 (2022-09-07)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.141.0 (2022-09-06)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.140.0 (2022-09-02)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.139.0 (2022-09-01)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.138.0 (2022-08-31)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.137.0 (2022-08-30)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Issue - Fix errors in recursion detection when `_X_AMZN_TRACE_ID` is unset (#2748).
+
 3.136.0 (2022-08-25)
 ------------------
 

@@ -1483,6 +1483,33 @@ module Aws::Transfer
       req.send_request(options)
     end
 
+    # Deletes the host key that's specified in the `HoskKeyId` parameter.
+    #
+    # @option params [required, String] :server_id
+    #   Provide the ID of the server that contains the host key that you are
+    #   deleting.
+    #
+    # @option params [required, String] :host_key_id
+    #   The ID of the host key that you are deleting.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_host_key({
+    #     server_id: "ServerId", # required
+    #     host_key_id: "HostKeyId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteHostKey AWS API Documentation
+    #
+    # @overload delete_host_key(params = {})
+    # @param [Hash] params ({})
+    def delete_host_key(params = {}, options = {})
+      req = build_request(:delete_host_key, params)
+      req.send_request(options)
+    end
+
     # Deletes the profile that's specified in the `ProfileId` parameter.
     #
     # @option params [required, String] :profile_id
@@ -1878,6 +1905,48 @@ module Aws::Transfer
       req.send_request(options)
     end
 
+    # Returns the details of the host key that's specified by the
+    # `HostKeyId` and `ServerId`.
+    #
+    # @option params [required, String] :server_id
+    #   Provide the ID of the server that contains the host key that you want
+    #   described.
+    #
+    # @option params [required, String] :host_key_id
+    #   Provide the ID of the host key that you want described.
+    #
+    # @return [Types::DescribeHostKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeHostKeyResponse#host_key #host_key} => Types::DescribedHostKey
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_host_key({
+    #     server_id: "ServerId", # required
+    #     host_key_id: "HostKeyId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.host_key.arn #=> String
+    #   resp.host_key.host_key_id #=> String
+    #   resp.host_key.host_key_fingerprint #=> String
+    #   resp.host_key.description #=> String
+    #   resp.host_key.type #=> String
+    #   resp.host_key.date_imported #=> Time
+    #   resp.host_key.tags #=> Array
+    #   resp.host_key.tags[0].key #=> String
+    #   resp.host_key.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeHostKey AWS API Documentation
+    #
+    # @overload describe_host_key(params = {})
+    # @param [Hash] params ({})
+    def describe_host_key(params = {}, options = {})
+      req = build_request(:describe_host_key, params)
+      req.send_request(options)
+    end
+
     # Returns the details of the profile that's specified by the
     # `ProfileId`.
     #
@@ -2233,6 +2302,56 @@ module Aws::Transfer
       req.send_request(options)
     end
 
+    # Adds a host key to the server specified by the `ServerId` parameter.
+    #
+    # @option params [required, String] :server_id
+    #   Provide the ID of the server that contains the host key that you are
+    #   importing.
+    #
+    # @option params [required, String] :host_key_body
+    #   The public key portion of an SSH key pair.
+    #
+    #   Transfer Family accepts RSA, ECDSA, and ED25519 keys.
+    #
+    # @option params [String] :description
+    #   Enter a text description to identify this host key.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Key-value pairs that can be used to group and search for host keys.
+    #
+    # @return [Types::ImportHostKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportHostKeyResponse#server_id #server_id} => String
+    #   * {Types::ImportHostKeyResponse#host_key_id #host_key_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_host_key({
+    #     server_id: "ServerId", # required
+    #     host_key_body: "HostKey", # required
+    #     description: "HostKeyDescription",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.server_id #=> String
+    #   resp.host_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ImportHostKey AWS API Documentation
+    #
+    # @overload import_host_key(params = {})
+    # @param [Hash] params ({})
+    def import_host_key(params = {}, options = {})
+      req = build_request(:import_host_key, params)
+      req.send_request(options)
+    end
+
     # Adds a Secure Shell (SSH) public key to a user account identified by a
     # `UserName` value assigned to the specific file transfer
     # protocol-enabled server, identified by `ServerId`.
@@ -2548,6 +2667,56 @@ module Aws::Transfer
     # @param [Hash] params ({})
     def list_executions(params = {}, options = {})
       req = build_request(:list_executions, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of host keys for the server specified by the `ServerId`
+    # paramter.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of host keys to return.
+    #
+    # @option params [String] :next_token
+    #   When there are additional results that were not returned, a
+    #   `NextToken` parameter is returned. You can use that value for a
+    #   subsequent call to `ListHostKeys` to continue listing results.
+    #
+    # @option params [required, String] :server_id
+    #   Provide the ID of the server that contains the host keys that you want
+    #   to view.
+    #
+    # @return [Types::ListHostKeysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListHostKeysResponse#next_token #next_token} => String
+    #   * {Types::ListHostKeysResponse#server_id #server_id} => String
+    #   * {Types::ListHostKeysResponse#host_keys #host_keys} => Array&lt;Types::ListedHostKey&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_host_keys({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     server_id: "ServerId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.server_id #=> String
+    #   resp.host_keys #=> Array
+    #   resp.host_keys[0].arn #=> String
+    #   resp.host_keys[0].host_key_id #=> String
+    #   resp.host_keys[0].fingerprint #=> String
+    #   resp.host_keys[0].description #=> String
+    #   resp.host_keys[0].type #=> String
+    #   resp.host_keys[0].date_imported #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListHostKeys AWS API Documentation
+    #
+    # @overload list_host_keys(params = {})
+    # @param [Hash] params ({})
+    def list_host_keys(params = {}, options = {})
+      req = build_request(:list_host_keys, params)
       req.send_request(options)
     end
 
@@ -3482,6 +3651,46 @@ module Aws::Transfer
       req.send_request(options)
     end
 
+    # Updates the description for the host key specified by the specified by
+    # the `ServerId` and `HostKeyId` parameters.
+    #
+    # @option params [required, String] :server_id
+    #   Provide the ID of the server that contains the host key that you are
+    #   updating.
+    #
+    # @option params [required, String] :host_key_id
+    #   Provide the ID of the host key that you are updating.
+    #
+    # @option params [required, String] :description
+    #   Provide an updated description for the host key.
+    #
+    # @return [Types::UpdateHostKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateHostKeyResponse#server_id #server_id} => String
+    #   * {Types::UpdateHostKeyResponse#host_key_id #host_key_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_host_key({
+    #     server_id: "ServerId", # required
+    #     host_key_id: "HostKeyId", # required
+    #     description: "HostKeyDescription", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.server_id #=> String
+    #   resp.host_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateHostKey AWS API Documentation
+    #
+    # @overload update_host_key(params = {})
+    # @param [Hash] params ({})
+    def update_host_key(params = {}, options = {})
+      req = build_request(:update_host_key, params)
+      req.send_request(options)
+    end
+
     # Updates some of the parameters for an existing profile. Provide the
     # `ProfileId` for the profile that you want to update, along with the
     # new values for the parameters to update.
@@ -3958,7 +4167,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

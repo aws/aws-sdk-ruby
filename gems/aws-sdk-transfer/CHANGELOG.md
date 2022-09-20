@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2022-09-13)
+------------------
+
+* Feature - This release introduces the ability to have multiple server host keys for any of your Transfer Family servers that use the SFTP protocol.
+
 1.58.0 (2022-08-24)
 ------------------
 

@@ -100,6 +100,7 @@ module Aws::SSM
   # * {InvalidResultAttributeException}
   # * {InvalidRole}
   # * {InvalidSchedule}
+  # * {InvalidTag}
   # * {InvalidTarget}
   # * {InvalidTargetMaps}
   # * {InvalidTypeNameException}
@@ -1192,6 +1193,21 @@ module Aws::SSM
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SSM::Types::InvalidSchedule] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidTag < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidTag] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

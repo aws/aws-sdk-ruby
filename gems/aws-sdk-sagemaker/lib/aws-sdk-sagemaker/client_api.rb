@@ -121,6 +121,7 @@ module Aws::SageMaker
     AutoMLMaxResults = Shapes::IntegerShape.new(name: 'AutoMLMaxResults')
     AutoMLMetricEnum = Shapes::StringShape.new(name: 'AutoMLMetricEnum')
     AutoMLMetricExtendedEnum = Shapes::StringShape.new(name: 'AutoMLMetricExtendedEnum')
+    AutoMLMode = Shapes::StringShape.new(name: 'AutoMLMode')
     AutoMLNameContains = Shapes::StringShape.new(name: 'AutoMLNameContains')
     AutoMLOutputDataConfig = Shapes::StructureShape.new(name: 'AutoMLOutputDataConfig')
     AutoMLPartialFailureReason = Shapes::StructureShape.new(name: 'AutoMLPartialFailureReason')
@@ -633,6 +634,7 @@ module Aws::SageMaker
     EnvironmentParameterRanges = Shapes::StructureShape.new(name: 'EnvironmentParameterRanges')
     EnvironmentParameters = Shapes::ListShape.new(name: 'EnvironmentParameters')
     EnvironmentValue = Shapes::StringShape.new(name: 'EnvironmentValue')
+    ExecutionRoleIdentityConfig = Shapes::StringShape.new(name: 'ExecutionRoleIdentityConfig')
     ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
     ExitMessage = Shapes::StringShape.new(name: 'ExitMessage')
     Experiment = Shapes::StructureShape.new(name: 'Experiment')
@@ -749,8 +751,10 @@ module Aws::SageMaker
     HyperParameterTuningJobObjective = Shapes::StructureShape.new(name: 'HyperParameterTuningJobObjective')
     HyperParameterTuningJobObjectiveType = Shapes::StringShape.new(name: 'HyperParameterTuningJobObjectiveType')
     HyperParameterTuningJobObjectives = Shapes::ListShape.new(name: 'HyperParameterTuningJobObjectives')
+    HyperParameterTuningJobSearchEntity = Shapes::StructureShape.new(name: 'HyperParameterTuningJobSearchEntity')
     HyperParameterTuningJobSortByOptions = Shapes::StringShape.new(name: 'HyperParameterTuningJobSortByOptions')
     HyperParameterTuningJobStatus = Shapes::StringShape.new(name: 'HyperParameterTuningJobStatus')
+    HyperParameterTuningJobStrategyConfig = Shapes::StructureShape.new(name: 'HyperParameterTuningJobStrategyConfig')
     HyperParameterTuningJobStrategyType = Shapes::StringShape.new(name: 'HyperParameterTuningJobStrategyType')
     HyperParameterTuningJobSummaries = Shapes::ListShape.new(name: 'HyperParameterTuningJobSummaries')
     HyperParameterTuningJobSummary = Shapes::StructureShape.new(name: 'HyperParameterTuningJobSummary')
@@ -759,6 +763,9 @@ module Aws::SageMaker
     HyperParameterTuningResourceConfig = Shapes::StructureShape.new(name: 'HyperParameterTuningResourceConfig')
     HyperParameterValue = Shapes::StringShape.new(name: 'HyperParameterValue')
     HyperParameters = Shapes::MapShape.new(name: 'HyperParameters')
+    HyperbandStrategyConfig = Shapes::StructureShape.new(name: 'HyperbandStrategyConfig')
+    HyperbandStrategyMaxResource = Shapes::IntegerShape.new(name: 'HyperbandStrategyMaxResource')
+    HyperbandStrategyMinResource = Shapes::IntegerShape.new(name: 'HyperbandStrategyMinResource')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageArn = Shapes::StringShape.new(name: 'ImageArn')
@@ -1273,14 +1280,17 @@ module Aws::SageMaker
     ProductListings = Shapes::ListShape.new(name: 'ProductListings')
     ProductionVariant = Shapes::StructureShape.new(name: 'ProductionVariant')
     ProductionVariantAcceleratorType = Shapes::StringShape.new(name: 'ProductionVariantAcceleratorType')
+    ProductionVariantContainerStartupHealthCheckTimeoutInSeconds = Shapes::IntegerShape.new(name: 'ProductionVariantContainerStartupHealthCheckTimeoutInSeconds')
     ProductionVariantCoreDumpConfig = Shapes::StructureShape.new(name: 'ProductionVariantCoreDumpConfig')
     ProductionVariantInstanceType = Shapes::StringShape.new(name: 'ProductionVariantInstanceType')
     ProductionVariantList = Shapes::ListShape.new(name: 'ProductionVariantList')
+    ProductionVariantModelDataDownloadTimeoutInSeconds = Shapes::IntegerShape.new(name: 'ProductionVariantModelDataDownloadTimeoutInSeconds')
     ProductionVariantServerlessConfig = Shapes::StructureShape.new(name: 'ProductionVariantServerlessConfig')
     ProductionVariantStatus = Shapes::StructureShape.new(name: 'ProductionVariantStatus')
     ProductionVariantStatusList = Shapes::ListShape.new(name: 'ProductionVariantStatusList')
     ProductionVariantSummary = Shapes::StructureShape.new(name: 'ProductionVariantSummary')
     ProductionVariantSummaryList = Shapes::ListShape.new(name: 'ProductionVariantSummaryList')
+    ProductionVariantVolumeSizeInGB = Shapes::IntegerShape.new(name: 'ProductionVariantVolumeSizeInGB')
     ProfilerConfig = Shapes::StructureShape.new(name: 'ProfilerConfig')
     ProfilerConfigForUpdate = Shapes::StructureShape.new(name: 'ProfilerConfigForUpdate')
     ProfilerRuleConfiguration = Shapes::StructureShape.new(name: 'ProfilerRuleConfiguration')
@@ -1330,13 +1340,17 @@ module Aws::SageMaker
     RealtimeInferenceInstanceTypes = Shapes::ListShape.new(name: 'RealtimeInferenceInstanceTypes')
     RecommendationJobArn = Shapes::StringShape.new(name: 'RecommendationJobArn')
     RecommendationJobCompiledOutputConfig = Shapes::StructureShape.new(name: 'RecommendationJobCompiledOutputConfig')
+    RecommendationJobContainerConfig = Shapes::StructureShape.new(name: 'RecommendationJobContainerConfig')
     RecommendationJobDescription = Shapes::StringShape.new(name: 'RecommendationJobDescription')
     RecommendationJobInputConfig = Shapes::StructureShape.new(name: 'RecommendationJobInputConfig')
     RecommendationJobName = Shapes::StringShape.new(name: 'RecommendationJobName')
     RecommendationJobOutputConfig = Shapes::StructureShape.new(name: 'RecommendationJobOutputConfig')
+    RecommendationJobPayloadConfig = Shapes::StructureShape.new(name: 'RecommendationJobPayloadConfig')
     RecommendationJobResourceLimit = Shapes::StructureShape.new(name: 'RecommendationJobResourceLimit')
     RecommendationJobStatus = Shapes::StringShape.new(name: 'RecommendationJobStatus')
     RecommendationJobStoppingConditions = Shapes::StructureShape.new(name: 'RecommendationJobStoppingConditions')
+    RecommendationJobSupportedContentTypes = Shapes::ListShape.new(name: 'RecommendationJobSupportedContentTypes')
+    RecommendationJobSupportedInstanceTypes = Shapes::ListShape.new(name: 'RecommendationJobSupportedInstanceTypes')
     RecommendationJobType = Shapes::StringShape.new(name: 'RecommendationJobType')
     RecommendationMetrics = Shapes::StructureShape.new(name: 'RecommendationMetrics')
     RecordWrapper = Shapes::StringShape.new(name: 'RecordWrapper')
@@ -1943,6 +1957,7 @@ module Aws::SageMaker
     AutoMLJobConfig.add_member(:security_config, Shapes::ShapeRef.new(shape: AutoMLSecurityConfig, location_name: "SecurityConfig"))
     AutoMLJobConfig.add_member(:data_split_config, Shapes::ShapeRef.new(shape: AutoMLDataSplitConfig, location_name: "DataSplitConfig"))
     AutoMLJobConfig.add_member(:candidate_generation_config, Shapes::ShapeRef.new(shape: AutoMLCandidateGenerationConfig, location_name: "CandidateGenerationConfig"))
+    AutoMLJobConfig.add_member(:mode, Shapes::ShapeRef.new(shape: AutoMLMode, location_name: "Mode"))
     AutoMLJobConfig.struct_class = Types::AutoMLJobConfig
 
     AutoMLJobObjective.add_member(:metric_name, Shapes::ShapeRef.new(shape: AutoMLMetricEnum, required: true, location_name: "MetricName"))
@@ -4023,9 +4038,11 @@ module Aws::SageMaker
 
     DomainSettings.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: DomainSecurityGroupIds, location_name: "SecurityGroupIds"))
     DomainSettings.add_member(:r_studio_server_pro_domain_settings, Shapes::ShapeRef.new(shape: RStudioServerProDomainSettings, location_name: "RStudioServerProDomainSettings"))
+    DomainSettings.add_member(:execution_role_identity_config, Shapes::ShapeRef.new(shape: ExecutionRoleIdentityConfig, location_name: "ExecutionRoleIdentityConfig"))
     DomainSettings.struct_class = Types::DomainSettings
 
     DomainSettingsForUpdate.add_member(:r_studio_server_pro_domain_settings_for_update, Shapes::ShapeRef.new(shape: RStudioServerProDomainSettingsForUpdate, location_name: "RStudioServerProDomainSettingsForUpdate"))
+    DomainSettingsForUpdate.add_member(:execution_role_identity_config, Shapes::ShapeRef.new(shape: ExecutionRoleIdentityConfig, location_name: "ExecutionRoleIdentityConfig"))
     DomainSettingsForUpdate.struct_class = Types::DomainSettingsForUpdate
 
     DriftCheckBaselines.add_member(:bias, Shapes::ShapeRef.new(shape: DriftCheckBias, location_name: "Bias"))
@@ -4508,6 +4525,7 @@ module Aws::SageMaker
     HyperParameterTuningInstanceConfigs.member = Shapes::ShapeRef.new(shape: HyperParameterTuningInstanceConfig)
 
     HyperParameterTuningJobConfig.add_member(:strategy, Shapes::ShapeRef.new(shape: HyperParameterTuningJobStrategyType, required: true, location_name: "Strategy"))
+    HyperParameterTuningJobConfig.add_member(:strategy_config, Shapes::ShapeRef.new(shape: HyperParameterTuningJobStrategyConfig, location_name: "StrategyConfig"))
     HyperParameterTuningJobConfig.add_member(:hyper_parameter_tuning_job_objective, Shapes::ShapeRef.new(shape: HyperParameterTuningJobObjective, location_name: "HyperParameterTuningJobObjective"))
     HyperParameterTuningJobConfig.add_member(:resource_limits, Shapes::ShapeRef.new(shape: ResourceLimits, required: true, location_name: "ResourceLimits"))
     HyperParameterTuningJobConfig.add_member(:parameter_ranges, Shapes::ShapeRef.new(shape: ParameterRanges, location_name: "ParameterRanges"))
@@ -4520,6 +4538,27 @@ module Aws::SageMaker
     HyperParameterTuningJobObjective.struct_class = Types::HyperParameterTuningJobObjective
 
     HyperParameterTuningJobObjectives.member = Shapes::ShapeRef.new(shape: HyperParameterTuningJobObjective)
+
+    HyperParameterTuningJobSearchEntity.add_member(:hyper_parameter_tuning_job_name, Shapes::ShapeRef.new(shape: HyperParameterTuningJobName, location_name: "HyperParameterTuningJobName"))
+    HyperParameterTuningJobSearchEntity.add_member(:hyper_parameter_tuning_job_arn, Shapes::ShapeRef.new(shape: HyperParameterTuningJobArn, location_name: "HyperParameterTuningJobArn"))
+    HyperParameterTuningJobSearchEntity.add_member(:hyper_parameter_tuning_job_config, Shapes::ShapeRef.new(shape: HyperParameterTuningJobConfig, location_name: "HyperParameterTuningJobConfig"))
+    HyperParameterTuningJobSearchEntity.add_member(:training_job_definition, Shapes::ShapeRef.new(shape: HyperParameterTrainingJobDefinition, location_name: "TrainingJobDefinition"))
+    HyperParameterTuningJobSearchEntity.add_member(:training_job_definitions, Shapes::ShapeRef.new(shape: HyperParameterTrainingJobDefinitions, location_name: "TrainingJobDefinitions"))
+    HyperParameterTuningJobSearchEntity.add_member(:hyper_parameter_tuning_job_status, Shapes::ShapeRef.new(shape: HyperParameterTuningJobStatus, location_name: "HyperParameterTuningJobStatus"))
+    HyperParameterTuningJobSearchEntity.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    HyperParameterTuningJobSearchEntity.add_member(:hyper_parameter_tuning_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "HyperParameterTuningEndTime"))
+    HyperParameterTuningJobSearchEntity.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    HyperParameterTuningJobSearchEntity.add_member(:training_job_status_counters, Shapes::ShapeRef.new(shape: TrainingJobStatusCounters, location_name: "TrainingJobStatusCounters"))
+    HyperParameterTuningJobSearchEntity.add_member(:objective_status_counters, Shapes::ShapeRef.new(shape: ObjectiveStatusCounters, location_name: "ObjectiveStatusCounters"))
+    HyperParameterTuningJobSearchEntity.add_member(:best_training_job, Shapes::ShapeRef.new(shape: HyperParameterTrainingJobSummary, location_name: "BestTrainingJob"))
+    HyperParameterTuningJobSearchEntity.add_member(:overall_best_training_job, Shapes::ShapeRef.new(shape: HyperParameterTrainingJobSummary, location_name: "OverallBestTrainingJob"))
+    HyperParameterTuningJobSearchEntity.add_member(:warm_start_config, Shapes::ShapeRef.new(shape: HyperParameterTuningJobWarmStartConfig, location_name: "WarmStartConfig"))
+    HyperParameterTuningJobSearchEntity.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    HyperParameterTuningJobSearchEntity.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    HyperParameterTuningJobSearchEntity.struct_class = Types::HyperParameterTuningJobSearchEntity
+
+    HyperParameterTuningJobStrategyConfig.add_member(:hyperband_strategy_config, Shapes::ShapeRef.new(shape: HyperbandStrategyConfig, location_name: "HyperbandStrategyConfig"))
+    HyperParameterTuningJobStrategyConfig.struct_class = Types::HyperParameterTuningJobStrategyConfig
 
     HyperParameterTuningJobSummaries.member = Shapes::ShapeRef.new(shape: HyperParameterTuningJobSummary)
 
@@ -4549,6 +4588,10 @@ module Aws::SageMaker
 
     HyperParameters.key = Shapes::ShapeRef.new(shape: HyperParameterKey)
     HyperParameters.value = Shapes::ShapeRef.new(shape: HyperParameterValue)
+
+    HyperbandStrategyConfig.add_member(:min_resource, Shapes::ShapeRef.new(shape: HyperbandStrategyMinResource, location_name: "MinResource"))
+    HyperbandStrategyConfig.add_member(:max_resource, Shapes::ShapeRef.new(shape: HyperbandStrategyMaxResource, location_name: "MaxResource"))
+    HyperbandStrategyConfig.struct_class = Types::HyperbandStrategyConfig
 
     Image.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     Image.add_member(:description, Shapes::ShapeRef.new(shape: ImageDescription, location_name: "Description"))
@@ -6322,6 +6365,9 @@ module Aws::SageMaker
     ProductionVariant.add_member(:accelerator_type, Shapes::ShapeRef.new(shape: ProductionVariantAcceleratorType, location_name: "AcceleratorType"))
     ProductionVariant.add_member(:core_dump_config, Shapes::ShapeRef.new(shape: ProductionVariantCoreDumpConfig, location_name: "CoreDumpConfig"))
     ProductionVariant.add_member(:serverless_config, Shapes::ShapeRef.new(shape: ProductionVariantServerlessConfig, location_name: "ServerlessConfig"))
+    ProductionVariant.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: ProductionVariantVolumeSizeInGB, location_name: "VolumeSizeInGB"))
+    ProductionVariant.add_member(:model_data_download_timeout_in_seconds, Shapes::ShapeRef.new(shape: ProductionVariantModelDataDownloadTimeoutInSeconds, location_name: "ModelDataDownloadTimeoutInSeconds"))
+    ProductionVariant.add_member(:container_startup_health_check_timeout_in_seconds, Shapes::ShapeRef.new(shape: ProductionVariantContainerStartupHealthCheckTimeoutInSeconds, location_name: "ContainerStartupHealthCheckTimeoutInSeconds"))
     ProductionVariant.struct_class = Types::ProductionVariant
 
     ProductionVariantCoreDumpConfig.add_member(:destination_s3_uri, Shapes::ShapeRef.new(shape: DestinationS3Uri, required: true, location_name: "DestinationS3Uri"))
@@ -6503,17 +6549,31 @@ module Aws::SageMaker
     RecommendationJobCompiledOutputConfig.add_member(:s3_output_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3OutputUri"))
     RecommendationJobCompiledOutputConfig.struct_class = Types::RecommendationJobCompiledOutputConfig
 
+    RecommendationJobContainerConfig.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
+    RecommendationJobContainerConfig.add_member(:task, Shapes::ShapeRef.new(shape: String, location_name: "Task"))
+    RecommendationJobContainerConfig.add_member(:framework, Shapes::ShapeRef.new(shape: String, location_name: "Framework"))
+    RecommendationJobContainerConfig.add_member(:framework_version, Shapes::ShapeRef.new(shape: String, location_name: "FrameworkVersion"))
+    RecommendationJobContainerConfig.add_member(:payload_config, Shapes::ShapeRef.new(shape: RecommendationJobPayloadConfig, location_name: "PayloadConfig"))
+    RecommendationJobContainerConfig.add_member(:nearest_model_name, Shapes::ShapeRef.new(shape: String, location_name: "NearestModelName"))
+    RecommendationJobContainerConfig.add_member(:supported_instance_types, Shapes::ShapeRef.new(shape: RecommendationJobSupportedInstanceTypes, location_name: "SupportedInstanceTypes"))
+    RecommendationJobContainerConfig.struct_class = Types::RecommendationJobContainerConfig
+
     RecommendationJobInputConfig.add_member(:model_package_version_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageVersionArn"))
     RecommendationJobInputConfig.add_member(:job_duration_in_seconds, Shapes::ShapeRef.new(shape: JobDurationInSeconds, location_name: "JobDurationInSeconds"))
     RecommendationJobInputConfig.add_member(:traffic_pattern, Shapes::ShapeRef.new(shape: TrafficPattern, location_name: "TrafficPattern"))
     RecommendationJobInputConfig.add_member(:resource_limit, Shapes::ShapeRef.new(shape: RecommendationJobResourceLimit, location_name: "ResourceLimit"))
     RecommendationJobInputConfig.add_member(:endpoint_configurations, Shapes::ShapeRef.new(shape: EndpointInputConfigurations, location_name: "EndpointConfigurations"))
     RecommendationJobInputConfig.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    RecommendationJobInputConfig.add_member(:container_config, Shapes::ShapeRef.new(shape: RecommendationJobContainerConfig, location_name: "ContainerConfig"))
     RecommendationJobInputConfig.struct_class = Types::RecommendationJobInputConfig
 
     RecommendationJobOutputConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     RecommendationJobOutputConfig.add_member(:compiled_output_config, Shapes::ShapeRef.new(shape: RecommendationJobCompiledOutputConfig, location_name: "CompiledOutputConfig"))
     RecommendationJobOutputConfig.struct_class = Types::RecommendationJobOutputConfig
+
+    RecommendationJobPayloadConfig.add_member(:sample_payload_url, Shapes::ShapeRef.new(shape: String, location_name: "SamplePayloadUrl"))
+    RecommendationJobPayloadConfig.add_member(:supported_content_types, Shapes::ShapeRef.new(shape: RecommendationJobSupportedContentTypes, location_name: "SupportedContentTypes"))
+    RecommendationJobPayloadConfig.struct_class = Types::RecommendationJobPayloadConfig
 
     RecommendationJobResourceLimit.add_member(:max_number_of_tests, Shapes::ShapeRef.new(shape: MaxNumberOfTests, location_name: "MaxNumberOfTests"))
     RecommendationJobResourceLimit.add_member(:max_parallel_of_tests, Shapes::ShapeRef.new(shape: MaxParallelOfTests, location_name: "MaxParallelOfTests"))
@@ -6522,6 +6582,10 @@ module Aws::SageMaker
     RecommendationJobStoppingConditions.add_member(:max_invocations, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxInvocations"))
     RecommendationJobStoppingConditions.add_member(:model_latency_thresholds, Shapes::ShapeRef.new(shape: ModelLatencyThresholds, location_name: "ModelLatencyThresholds"))
     RecommendationJobStoppingConditions.struct_class = Types::RecommendationJobStoppingConditions
+
+    RecommendationJobSupportedContentTypes.member = Shapes::ShapeRef.new(shape: String)
+
+    RecommendationJobSupportedInstanceTypes.member = Shapes::ShapeRef.new(shape: String)
 
     RecommendationMetrics.add_member(:cost_per_hour, Shapes::ShapeRef.new(shape: Float, required: true, location_name: "CostPerHour"))
     RecommendationMetrics.add_member(:cost_per_inference, Shapes::ShapeRef.new(shape: Float, required: true, location_name: "CostPerInference"))
@@ -6655,6 +6719,7 @@ module Aws::SageMaker
     SearchRecord.add_member(:feature_group, Shapes::ShapeRef.new(shape: FeatureGroup, location_name: "FeatureGroup"))
     SearchRecord.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "Project"))
     SearchRecord.add_member(:feature_metadata, Shapes::ShapeRef.new(shape: FeatureMetadata, location_name: "FeatureMetadata"))
+    SearchRecord.add_member(:hyper_parameter_tuning_job, Shapes::ShapeRef.new(shape: HyperParameterTuningJobSearchEntity, location_name: "HyperParameterTuningJob"))
     SearchRecord.struct_class = Types::SearchRecord
 
     SearchRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "Resource"))

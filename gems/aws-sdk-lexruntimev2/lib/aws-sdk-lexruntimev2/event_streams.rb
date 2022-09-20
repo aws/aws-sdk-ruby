@@ -57,6 +57,14 @@ module Aws::LexRuntimeV2
       # @option params [Array&lt;Types::Message&gt;] :welcome_messages
       #   A list of messages to send to the user.
       #
+      #   If you set the `welcomeMessage` field, you must also set the [
+      #   `DialogAction` ][1] structure&#39;s [ `type` ][2] field.
+      #
+      #
+      #
+      #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html
+      #   [2]: https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html#lexv2-Type-runtime_DialogAction-type
+      #
       # @option params [Boolean] :disable_playback
       #   Determines whether Amazon Lex V2 should send audio responses to the
       #   client application.

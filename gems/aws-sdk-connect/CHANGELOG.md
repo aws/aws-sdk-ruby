@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2022-09-02)
+------------------
+
+* Feature - This release adds search APIs for Routing Profiles and Queues, which can be used to search for those resources within a Connect Instance.
+
 1.75.0 (2022-08-19)
 ------------------
 

@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.336.0 (2022-09-20)
+------------------
+
+* Feature - This release adds support for blocked paths to Amazon VPC Reachability Analyzer.
+
+1.335.0 (2022-09-19)
+------------------
+
+* Feature - This release adds CapacityAllocations field to DescribeCapacityReservations
+
+1.334.0 (2022-09-15)
+------------------
+
+* Feature - This feature allows customers to create tags for vpc-endpoint-connections and vpc-endpoint-service-permissions.
+
+1.333.0 (2022-09-14)
+------------------
+
+* Feature - This update introduces API operations to manage and create local gateway route tables, CoIP pools, and VIF group associations.
+
+1.332.0 (2022-09-13)
+------------------
+
+* Feature - Two new features for local gateway route tables: support for static routes targeting Elastic Network Interfaces and direct VPC routing.
+
+1.331.0 (2022-09-08)
+------------------
+
+* Feature - This release adds support to send VPC Flow Logs to kinesis-data-firehose as new destination type
+
+1.330.0 (2022-09-07)
+------------------
+
+* Feature - Documentation updates for Amazon EC2.
+
 1.329.0 (2022-08-22)
 ------------------
 

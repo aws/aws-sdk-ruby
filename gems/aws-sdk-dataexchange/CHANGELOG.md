@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2022-09-07)
+------------------
+
+* Feature - Documentation updates for AWS Data Exchange.
+
 1.26.0 (2022-03-15)
 ------------------
 

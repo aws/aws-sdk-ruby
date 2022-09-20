@@ -770,34 +770,16 @@ module Aws::ECS
     # Elastic Container Service Developer Guide*.
     #
     # When the service scheduler launches new tasks, it determines task
-    # placement in your cluster using the following logic:
-    #
-    # * Determine which of the container instances in your cluster can
-    #   support the task definition of your service. For example, they have
-    #   the required CPU, memory, ports, and container instance attributes.
-    #
-    # * By default, the service scheduler attempts to balance tasks across
-    #   Availability Zones in this manner. This is the case even if you can
-    #   choose a different placement strategy with the `placementStrategy`
-    #   parameter.
-    #
-    #   * Sort the valid container instances, giving priority to instances
-    #     that have the fewest number of running tasks for this service in
-    #     their respective Availability Zone. For example, if zone A has one
-    #     running service task and zones B and C each have zero, valid
-    #     container instances in either zone B or C are considered optimal
-    #     for placement.
-    #
-    #   * Place the new service task on a valid container instance in an
-    #     optimal Availability Zone based on the previous steps, favoring
-    #     container instances with the fewest number of running tasks for
-    #     this service.
+    # placement. For information about task placement and task placement
+    # strategies, see [Amazon ECS task placement][4] in the *Amazon Elastic
+    # Container Service Developer Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
     # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -5547,7 +5529,8 @@ module Aws::ECS
     #
     #   If you're using the EC2 launch type, this field is optional.
     #   Supported values are between `128` CPU units (`0.125` vCPUs) and
-    #   `10240` CPU units (`10` vCPUs).
+    #   `10240` CPU units (`10` vCPUs). If you do not specify a value, the
+    #   parameter is ignored.
     #
     #   If you're using the Fargate launch type, this field is required and
     #   you must use one of the following values, which determines your range
@@ -5565,11 +5548,21 @@ module Aws::ECS
     #   * 1024 (1 vCPU) - Available `memory` values: 2048 (2 GB), 3072 (3 GB),
     #     4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
     #
-    #   * 2048 (2 vCPU) - Available `memory` values: Between 4096 (4 GB) and
-    #     16384 (16 GB) in increments of 1024 (1 GB)
+    #   * 2048 (2 vCPU) - Available `memory` values: 4096 (4 GB) and 16384 (16
+    #     GB) in increments of 1024 (1 GB)
     #
-    #   * 4096 (4 vCPU) - Available `memory` values: Between 8192 (8 GB) and
-    #     30720 (30 GB) in increments of 1024 (1 GB)
+    #   * 4096 (4 vCPU) - Available `memory` values: 8192 (8 GB) and 30720 (30
+    #     GB) in increments of 1024 (1 GB)
+    #
+    #   * 8192 (8 vCPU) - Available `memory` values: 16 GB and 60 GB in 4 GB
+    #     increments
+    #
+    #     This option requires Linux platform `1.4.0` or later.
+    #
+    #   * 16384 (16vCPU) - Available `memory` values: 32GB and 120 GB in 8 GB
+    #     increments
+    #
+    #     This option requires Linux platform `1.4.0` or later.
     #
     # @option params [String] :memory
     #   The amount of memory (in MiB) used by the task. It can be expressed as
@@ -5607,6 +5600,16 @@ module Aws::ECS
     #
     #   * Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) -
     #     Available `cpu` values: 4096 (4 vCPU)
+    #
+    #   * Between 16 GB and 60 GB in 4 GB increments - Available `cpu` values:
+    #     8192 (8 vCPU)
+    #
+    #     This option requires Linux platform `1.4.0` or later.
+    #
+    #   * Between 32GB and 120 GB in 8 GB increments - Available `cpu` values:
+    #     16384 (16 vCPU)
+    #
+    #     This option requires Linux platform `1.4.0` or later.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the task definition to help you
@@ -8757,7 +8760,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

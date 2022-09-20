@@ -374,6 +374,7 @@ module Aws::Connect
     ListUserHierarchyGroupsResponse = Shapes::StructureShape.new(name: 'ListUserHierarchyGroupsResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
     ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResult10 = Shapes::IntegerShape.new(name: 'MaxResult10')
     MaxResult100 = Shapes::IntegerShape.new(name: 'MaxResult100')
     MaxResult1000 = Shapes::IntegerShape.new(name: 'MaxResult1000')
@@ -438,6 +439,10 @@ module Aws::Connect
     QueueName = Shapes::StringShape.new(name: 'QueueName')
     QueueQuickConnectConfig = Shapes::StructureShape.new(name: 'QueueQuickConnectConfig')
     QueueReference = Shapes::StructureShape.new(name: 'QueueReference')
+    QueueSearchConditionList = Shapes::ListShape.new(name: 'QueueSearchConditionList')
+    QueueSearchCriteria = Shapes::StructureShape.new(name: 'QueueSearchCriteria')
+    QueueSearchFilter = Shapes::StructureShape.new(name: 'QueueSearchFilter')
+    QueueSearchSummaryList = Shapes::ListShape.new(name: 'QueueSearchSummaryList')
     QueueStatus = Shapes::StringShape.new(name: 'QueueStatus')
     QueueSummary = Shapes::StructureShape.new(name: 'QueueSummary')
     QueueSummaryList = Shapes::ListShape.new(name: 'QueueSummaryList')
@@ -476,6 +481,7 @@ module Aws::Connect
     RoutingProfile = Shapes::StructureShape.new(name: 'RoutingProfile')
     RoutingProfileDescription = Shapes::StringShape.new(name: 'RoutingProfileDescription')
     RoutingProfileId = Shapes::StringShape.new(name: 'RoutingProfileId')
+    RoutingProfileList = Shapes::ListShape.new(name: 'RoutingProfileList')
     RoutingProfileName = Shapes::StringShape.new(name: 'RoutingProfileName')
     RoutingProfileQueueConfig = Shapes::StructureShape.new(name: 'RoutingProfileQueueConfig')
     RoutingProfileQueueConfigList = Shapes::ListShape.new(name: 'RoutingProfileQueueConfigList')
@@ -484,17 +490,25 @@ module Aws::Connect
     RoutingProfileQueueReference = Shapes::StructureShape.new(name: 'RoutingProfileQueueReference')
     RoutingProfileQueueReferenceList = Shapes::ListShape.new(name: 'RoutingProfileQueueReferenceList')
     RoutingProfileReference = Shapes::StructureShape.new(name: 'RoutingProfileReference')
+    RoutingProfileSearchConditionList = Shapes::ListShape.new(name: 'RoutingProfileSearchConditionList')
+    RoutingProfileSearchCriteria = Shapes::StructureShape.new(name: 'RoutingProfileSearchCriteria')
+    RoutingProfileSearchFilter = Shapes::StructureShape.new(name: 'RoutingProfileSearchFilter')
     RoutingProfileSummary = Shapes::StructureShape.new(name: 'RoutingProfileSummary')
     RoutingProfileSummaryList = Shapes::ListShape.new(name: 'RoutingProfileSummaryList')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
     SearchAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersRequest')
     SearchAvailablePhoneNumbersResponse = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersResponse')
+    SearchQueuesRequest = Shapes::StructureShape.new(name: 'SearchQueuesRequest')
+    SearchQueuesResponse = Shapes::StructureShape.new(name: 'SearchQueuesResponse')
+    SearchRoutingProfilesRequest = Shapes::StructureShape.new(name: 'SearchRoutingProfilesRequest')
+    SearchRoutingProfilesResponse = Shapes::StructureShape.new(name: 'SearchRoutingProfilesResponse')
     SearchSecurityProfilesRequest = Shapes::StructureShape.new(name: 'SearchSecurityProfilesRequest')
     SearchSecurityProfilesResponse = Shapes::StructureShape.new(name: 'SearchSecurityProfilesResponse')
     SearchUsersRequest = Shapes::StructureShape.new(name: 'SearchUsersRequest')
     SearchUsersResponse = Shapes::StructureShape.new(name: 'SearchUsersResponse')
     SearchVocabulariesRequest = Shapes::StructureShape.new(name: 'SearchVocabulariesRequest')
     SearchVocabulariesResponse = Shapes::StructureShape.new(name: 'SearchVocabulariesResponse')
+    SearchableQueueType = Shapes::StringShape.new(name: 'SearchableQueueType')
     SecurityKey = Shapes::StructureShape.new(name: 'SecurityKey')
     SecurityKeysList = Shapes::ListShape.new(name: 'SecurityKeysList')
     SecurityProfile = Shapes::StructureShape.new(name: 'SecurityProfile')
@@ -2028,6 +2042,19 @@ module Aws::Connect
     QueueReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     QueueReference.struct_class = Types::QueueReference
 
+    QueueSearchConditionList.member = Shapes::ShapeRef.new(shape: QueueSearchCriteria)
+
+    QueueSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: QueueSearchConditionList, location_name: "OrConditions"))
+    QueueSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: QueueSearchConditionList, location_name: "AndConditions"))
+    QueueSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    QueueSearchCriteria.add_member(:queue_type_condition, Shapes::ShapeRef.new(shape: SearchableQueueType, location_name: "QueueTypeCondition"))
+    QueueSearchCriteria.struct_class = Types::QueueSearchCriteria
+
+    QueueSearchFilter.add_member(:tag_filter, Shapes::ShapeRef.new(shape: ControlPlaneTagFilter, location_name: "TagFilter"))
+    QueueSearchFilter.struct_class = Types::QueueSearchFilter
+
+    QueueSearchSummaryList.member = Shapes::ShapeRef.new(shape: Queue)
+
     QueueSummary.add_member(:id, Shapes::ShapeRef.new(shape: QueueId, location_name: "Id"))
     QueueSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     QueueSummary.add_member(:name, Shapes::ShapeRef.new(shape: QueueName, location_name: "Name"))
@@ -2130,7 +2157,11 @@ module Aws::Connect
     RoutingProfile.add_member(:media_concurrencies, Shapes::ShapeRef.new(shape: MediaConcurrencies, location_name: "MediaConcurrencies"))
     RoutingProfile.add_member(:default_outbound_queue_id, Shapes::ShapeRef.new(shape: QueueId, location_name: "DefaultOutboundQueueId"))
     RoutingProfile.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    RoutingProfile.add_member(:number_of_associated_queues, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfAssociatedQueues"))
+    RoutingProfile.add_member(:number_of_associated_users, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfAssociatedUsers"))
     RoutingProfile.struct_class = Types::RoutingProfile
+
+    RoutingProfileList.member = Shapes::ShapeRef.new(shape: RoutingProfile)
 
     RoutingProfileQueueConfig.add_member(:queue_reference, Shapes::ShapeRef.new(shape: RoutingProfileQueueReference, required: true, location_name: "QueueReference"))
     RoutingProfileQueueConfig.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, required: true, location_name: "Priority", metadata: {"box"=>true}))
@@ -2159,6 +2190,16 @@ module Aws::Connect
     RoutingProfileReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     RoutingProfileReference.struct_class = Types::RoutingProfileReference
 
+    RoutingProfileSearchConditionList.member = Shapes::ShapeRef.new(shape: RoutingProfileSearchCriteria)
+
+    RoutingProfileSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: RoutingProfileSearchConditionList, location_name: "OrConditions"))
+    RoutingProfileSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: RoutingProfileSearchConditionList, location_name: "AndConditions"))
+    RoutingProfileSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    RoutingProfileSearchCriteria.struct_class = Types::RoutingProfileSearchCriteria
+
+    RoutingProfileSearchFilter.add_member(:tag_filter, Shapes::ShapeRef.new(shape: ControlPlaneTagFilter, location_name: "TagFilter"))
+    RoutingProfileSearchFilter.struct_class = Types::RoutingProfileSearchFilter
+
     RoutingProfileSummary.add_member(:id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "Id"))
     RoutingProfileSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     RoutingProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: RoutingProfileName, location_name: "Name"))
@@ -2182,6 +2223,30 @@ module Aws::Connect
     SearchAvailablePhoneNumbersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
     SearchAvailablePhoneNumbersResponse.add_member(:available_numbers_list, Shapes::ShapeRef.new(shape: AvailableNumbersList, location_name: "AvailableNumbersList"))
     SearchAvailablePhoneNumbersResponse.struct_class = Types::SearchAvailablePhoneNumbersResponse
+
+    SearchQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SearchQueuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchQueuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchQueuesRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: QueueSearchFilter, location_name: "SearchFilter"))
+    SearchQueuesRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: QueueSearchCriteria, location_name: "SearchCriteria"))
+    SearchQueuesRequest.struct_class = Types::SearchQueuesRequest
+
+    SearchQueuesResponse.add_member(:queues, Shapes::ShapeRef.new(shape: QueueSearchSummaryList, location_name: "Queues"))
+    SearchQueuesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchQueuesResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
+    SearchQueuesResponse.struct_class = Types::SearchQueuesResponse
+
+    SearchRoutingProfilesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SearchRoutingProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchRoutingProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchRoutingProfilesRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: RoutingProfileSearchFilter, location_name: "SearchFilter"))
+    SearchRoutingProfilesRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: RoutingProfileSearchCriteria, location_name: "SearchCriteria"))
+    SearchRoutingProfilesRequest.struct_class = Types::SearchRoutingProfilesRequest
+
+    SearchRoutingProfilesResponse.add_member(:routing_profiles, Shapes::ShapeRef.new(shape: RoutingProfileList, location_name: "RoutingProfiles"))
+    SearchRoutingProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchRoutingProfilesResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
+    SearchRoutingProfilesResponse.struct_class = Types::SearchRoutingProfilesResponse
 
     SearchSecurityProfilesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SearchSecurityProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
@@ -4378,6 +4443,44 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_queues, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchQueues"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-queues"
+        o.input = Shapes::ShapeRef.new(shape: SearchQueuesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchQueuesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_routing_profiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchRoutingProfiles"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-routing-profiles"
+        o.input = Shapes::ShapeRef.new(shape: SearchRoutingProfilesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchRoutingProfilesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

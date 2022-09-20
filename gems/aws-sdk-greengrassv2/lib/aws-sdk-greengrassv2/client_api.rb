@@ -83,6 +83,7 @@ module Aws::GreengrassV2
     DeploymentIoTJobConfiguration = Shapes::StructureShape.new(name: 'DeploymentIoTJobConfiguration')
     DeploymentList = Shapes::ListShape.new(name: 'DeploymentList')
     DeploymentName = Shapes::StringShape.new(name: 'DeploymentName')
+    DeploymentNameString = Shapes::StringShape.new(name: 'DeploymentNameString')
     DeploymentPolicies = Shapes::StructureShape.new(name: 'DeploymentPolicies')
     DeploymentStatus = Shapes::StringShape.new(name: 'DeploymentStatus')
     DescribeComponentRequest = Shapes::StructureShape.new(name: 'DescribeComponentRequest')
@@ -116,6 +117,7 @@ module Aws::GreengrassV2
     InstalledComponent = Shapes::StructureShape.new(name: 'InstalledComponent')
     InstalledComponentLifecycleState = Shapes::StringShape.new(name: 'InstalledComponentLifecycleState')
     InstalledComponentList = Shapes::ListShape.new(name: 'InstalledComponentList')
+    InstalledComponentTopologyFilter = Shapes::StringShape.new(name: 'InstalledComponentTopologyFilter')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IoTJobARN = Shapes::StringShape.new(name: 'IoTJobARN')
     IoTJobAbortAction = Shapes::StringShape.new(name: 'IoTJobAbortAction')
@@ -149,7 +151,6 @@ module Aws::GreengrassV2
     LambdaExecArgsList = Shapes::ListShape.new(name: 'LambdaExecArgsList')
     LambdaExecutionParameters = Shapes::StructureShape.new(name: 'LambdaExecutionParameters')
     LambdaFilesystemPermission = Shapes::StringShape.new(name: 'LambdaFilesystemPermission')
-    LambdaFunctionARNWithVersionNumber = Shapes::StringShape.new(name: 'LambdaFunctionARNWithVersionNumber')
     LambdaFunctionRecipeSource = Shapes::StructureShape.new(name: 'LambdaFunctionRecipeSource')
     LambdaInputPayloadEncodingType = Shapes::StringShape.new(name: 'LambdaInputPayloadEncodingType')
     LambdaIsolationMode = Shapes::StringShape.new(name: 'LambdaIsolationMode')
@@ -368,7 +369,7 @@ module Aws::GreengrassV2
     CreateComponentVersionResponse.struct_class = Types::CreateComponentVersionResponse
 
     CreateDeploymentRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetARN, required: true, location_name: "targetArn"))
-    CreateDeploymentRequest.add_member(:deployment_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "deploymentName"))
+    CreateDeploymentRequest.add_member(:deployment_name, Shapes::ShapeRef.new(shape: DeploymentNameString, location_name: "deploymentName"))
     CreateDeploymentRequest.add_member(:components, Shapes::ShapeRef.new(shape: ComponentDeploymentSpecifications, location_name: "components"))
     CreateDeploymentRequest.add_member(:iot_job_configuration, Shapes::ShapeRef.new(shape: DeploymentIoTJobConfiguration, location_name: "iotJobConfiguration"))
     CreateDeploymentRequest.add_member(:deployment_policies, Shapes::ShapeRef.new(shape: DeploymentPolicies, location_name: "deploymentPolicies"))
@@ -527,6 +528,7 @@ module Aws::GreengrassV2
     InstalledComponent.add_member(:lifecycle_state, Shapes::ShapeRef.new(shape: InstalledComponentLifecycleState, location_name: "lifecycleState"))
     InstalledComponent.add_member(:lifecycle_state_details, Shapes::ShapeRef.new(shape: LifecycleStateDetails, location_name: "lifecycleStateDetails"))
     InstalledComponent.add_member(:is_root, Shapes::ShapeRef.new(shape: IsRoot, location_name: "isRoot"))
+    InstalledComponent.add_member(:last_status_change_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastStatusChangeTimestamp"))
     InstalledComponent.struct_class = Types::InstalledComponent
 
     InstalledComponentList.member = Shapes::ShapeRef.new(shape: InstalledComponent)
@@ -599,7 +601,7 @@ module Aws::GreengrassV2
     LambdaExecutionParameters.add_member(:linux_process_params, Shapes::ShapeRef.new(shape: LambdaLinuxProcessParams, location_name: "linuxProcessParams"))
     LambdaExecutionParameters.struct_class = Types::LambdaExecutionParameters
 
-    LambdaFunctionRecipeSource.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: LambdaFunctionARNWithVersionNumber, required: true, location_name: "lambdaArn"))
+    LambdaFunctionRecipeSource.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "lambdaArn"))
     LambdaFunctionRecipeSource.add_member(:component_name, Shapes::ShapeRef.new(shape: ComponentNameString, location_name: "componentName"))
     LambdaFunctionRecipeSource.add_member(:component_version, Shapes::ShapeRef.new(shape: ComponentVersionString, location_name: "componentVersion"))
     LambdaFunctionRecipeSource.add_member(:component_platforms, Shapes::ShapeRef.new(shape: ComponentPlatformList, location_name: "componentPlatforms"))
@@ -678,6 +680,7 @@ module Aws::GreengrassV2
     ListInstalledComponentsRequest.add_member(:core_device_thing_name, Shapes::ShapeRef.new(shape: CoreDeviceThingName, required: true, location: "uri", location_name: "coreDeviceThingName"))
     ListInstalledComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
     ListInstalledComponentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box"=>true}))
+    ListInstalledComponentsRequest.add_member(:topology_filter, Shapes::ShapeRef.new(shape: InstalledComponentTopologyFilter, location: "querystring", location_name: "topologyFilter", metadata: {"box"=>true}))
     ListInstalledComponentsRequest.struct_class = Types::ListInstalledComponentsRequest
 
     ListInstalledComponentsResponse.add_member(:installed_components, Shapes::ShapeRef.new(shape: InstalledComponentList, location_name: "installedComponents"))

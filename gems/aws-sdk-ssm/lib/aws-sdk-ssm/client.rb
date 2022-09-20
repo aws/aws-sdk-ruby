@@ -450,7 +450,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_tags_to_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation, Association
     #     resource_id: "ResourceId", # required
     #     tags: [ # required
     #       {
@@ -898,6 +898,13 @@ module Aws::SSM
     #   A key-value mapping of document parameters to target resources. Both
     #   Targets and TargetMaps can't be specified together.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Adds or overwrites one or more tags for a State Manager association.
+    #   *Tags* are metadata that you can assign to your Amazon Web Services
+    #   resources. Tags enable you to categorize your resources in different
+    #   ways, for example, by purpose, owner, or environment. Each tag
+    #   consists of a key and an optional value, both of which you define.
+    #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -946,6 +953,12 @@ module Aws::SSM
     #     target_maps: [
     #       {
     #         "TargetMapKey" => ["TargetMapValue"],
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -1240,7 +1253,7 @@ module Aws::SSM
     #   You can't use the following strings as document name prefixes. These
     #   are reserved by Amazon Web Services for use as document name prefixes:
     #
-    #    * `aws-`
+    #    * `aws`
     #
     #   * `amazon`
     #
@@ -3540,8 +3553,8 @@ module Aws::SSM
     #
     # @option params [Array<Types::InstanceInformationStringFilter>] :filters
     #   One or more filters. Use a filter to return a more specific list of
-    #   managed nodes. You can filter based on tags applied to EC2 instances.
-    #   Use this `Filters` data type instead of
+    #   managed nodes. You can filter based on tags applied to your managed
+    #   nodes. Use this `Filters` data type instead of
     #   `InstanceInformationFilterList`, which is deprecated.
     #
     # @option params [Integer] :max_results
@@ -7946,7 +7959,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation, Association
     #     resource_id: "ResourceId", # required
     #   })
     #
@@ -8960,7 +8973,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_tags_from_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation, Association
     #     resource_id: "ResourceId", # required
     #     tag_keys: ["TagKey"], # required
     #   })
@@ -9269,6 +9282,16 @@ module Aws::SSM
     #   The ARN of the Identity and Access Management (IAM) service role to
     #   use to publish Amazon Simple Notification Service (Amazon SNS)
     #   notifications for Run Command commands.
+    #
+    #   This role must provide the `sns:Publish` permission for your
+    #   notification topic. For information about creating and using this
+    #   service role, see [Monitoring Systems Manager status changes using
+    #   Amazon SNS notifications][1] in the *Amazon Web Services Systems
+    #   Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html
     #
     # @option params [Types::NotificationConfig] :notification_config
     #   Configurations for sending notifications.
@@ -11638,7 +11661,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.138.0'
+      context[:gem_version] = '1.139.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

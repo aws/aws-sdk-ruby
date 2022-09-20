@@ -7263,7 +7263,7 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] origin_access_control_config
-    #   Contains an origin access control.
+    #   Contains an origin access control configuration.
     #   @return [Types::OriginAccessControlConfig]
     #
     # @!attribute [rw] etag
@@ -7300,7 +7300,7 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] origin_access_control
-    #   Contains an origin access control.
+    #   Contains an origin access control, including its unique identifier.
     #   @return [Types::OriginAccessControl]
     #
     # @!attribute [rw] etag
@@ -10184,7 +10184,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A CloudFront origin access control.
+    # A CloudFront origin access control, including its unique identifier.
     #
     # @!attribute [rw] id
     #   The unique identifier of the origin access control.
@@ -10216,7 +10216,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A CloudFront origin access control.
+    # A CloudFront origin access control configuration.
     #
     # @note When making an API call, you may pass OriginAccessControlConfig
     #   data as a hash:
@@ -10264,14 +10264,14 @@ module Aws::CloudFront
     #     CloudFront doesn't sign the origin request and instead passes
     #     along the `Authorization` header from the viewer request.
     #     **WARNING: To pass along the `Authorization` header from the
-    #     viewer request, you *must* add the `Authorization` header to an
-    #     [origin request policy][2] for all cache behaviors that use
-    #     origins associated with this origin access control.**
+    #     viewer request, you *must* add the `Authorization` header to a
+    #     [cache policy][2] for all cache behaviors that use origins
+    #     associated with this origin access control.**
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings
-    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html
     #   @return [String]
     #
     # @!attribute [rw] origin_access_control_origin_type

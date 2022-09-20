@@ -263,8 +263,8 @@ module Aws::CodeStarNotifications
     UnsubscribeResult.add_member(:arn, Shapes::ShapeRef.new(shape: NotificationRuleArn, required: true, location_name: "Arn"))
     UnsubscribeResult.struct_class = Types::UnsubscribeResult
 
-    UntagResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: NotificationRuleArn, required: true, location_name: "Arn"))
-    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: NotificationRuleArn, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResult.struct_class = Types::UntagResourceResult
@@ -410,6 +410,7 @@ module Aws::CodeStarNotifications
         o.output = Shapes::ShapeRef.new(shape: SubscribeResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -419,6 +420,7 @@ module Aws::CodeStarNotifications
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
@@ -435,10 +437,11 @@ module Aws::CodeStarNotifications
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UntagResource"
         o.http_method = "POST"
-        o.http_request_uri = "/untagResource"
+        o.http_request_uri = "/untagResource/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
@@ -451,6 +454,7 @@ module Aws::CodeStarNotifications
         o.output = Shapes::ShapeRef.new(shape: UpdateNotificationRuleResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationException)
       end)
     end
 

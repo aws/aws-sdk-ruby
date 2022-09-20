@@ -61,6 +61,7 @@ module Aws::Transfer
     DeleteAgreementRequest = Shapes::StructureShape.new(name: 'DeleteAgreementRequest')
     DeleteCertificateRequest = Shapes::StructureShape.new(name: 'DeleteCertificateRequest')
     DeleteConnectorRequest = Shapes::StructureShape.new(name: 'DeleteConnectorRequest')
+    DeleteHostKeyRequest = Shapes::StructureShape.new(name: 'DeleteHostKeyRequest')
     DeleteProfileRequest = Shapes::StructureShape.new(name: 'DeleteProfileRequest')
     DeleteServerRequest = Shapes::StructureShape.new(name: 'DeleteServerRequest')
     DeleteSshPublicKeyRequest = Shapes::StructureShape.new(name: 'DeleteSshPublicKeyRequest')
@@ -77,6 +78,8 @@ module Aws::Transfer
     DescribeConnectorResponse = Shapes::StructureShape.new(name: 'DescribeConnectorResponse')
     DescribeExecutionRequest = Shapes::StructureShape.new(name: 'DescribeExecutionRequest')
     DescribeExecutionResponse = Shapes::StructureShape.new(name: 'DescribeExecutionResponse')
+    DescribeHostKeyRequest = Shapes::StructureShape.new(name: 'DescribeHostKeyRequest')
+    DescribeHostKeyResponse = Shapes::StructureShape.new(name: 'DescribeHostKeyResponse')
     DescribeProfileRequest = Shapes::StructureShape.new(name: 'DescribeProfileRequest')
     DescribeProfileResponse = Shapes::StructureShape.new(name: 'DescribeProfileResponse')
     DescribeSecurityPolicyRequest = Shapes::StructureShape.new(name: 'DescribeSecurityPolicyRequest')
@@ -92,6 +95,7 @@ module Aws::Transfer
     DescribedCertificate = Shapes::StructureShape.new(name: 'DescribedCertificate')
     DescribedConnector = Shapes::StructureShape.new(name: 'DescribedConnector')
     DescribedExecution = Shapes::StructureShape.new(name: 'DescribedExecution')
+    DescribedHostKey = Shapes::StructureShape.new(name: 'DescribedHostKey')
     DescribedProfile = Shapes::StructureShape.new(name: 'DescribedProfile')
     DescribedSecurityPolicy = Shapes::StructureShape.new(name: 'DescribedSecurityPolicy')
     DescribedServer = Shapes::StructureShape.new(name: 'DescribedServer')
@@ -125,11 +129,16 @@ module Aws::Transfer
     HomeDirectoryMappings = Shapes::ListShape.new(name: 'HomeDirectoryMappings')
     HomeDirectoryType = Shapes::StringShape.new(name: 'HomeDirectoryType')
     HostKey = Shapes::StringShape.new(name: 'HostKey')
+    HostKeyDescription = Shapes::StringShape.new(name: 'HostKeyDescription')
     HostKeyFingerprint = Shapes::StringShape.new(name: 'HostKeyFingerprint')
+    HostKeyId = Shapes::StringShape.new(name: 'HostKeyId')
+    HostKeyType = Shapes::StringShape.new(name: 'HostKeyType')
     IdentityProviderDetails = Shapes::StructureShape.new(name: 'IdentityProviderDetails')
     IdentityProviderType = Shapes::StringShape.new(name: 'IdentityProviderType')
     ImportCertificateRequest = Shapes::StructureShape.new(name: 'ImportCertificateRequest')
     ImportCertificateResponse = Shapes::StructureShape.new(name: 'ImportCertificateResponse')
+    ImportHostKeyRequest = Shapes::StructureShape.new(name: 'ImportHostKeyRequest')
+    ImportHostKeyResponse = Shapes::StructureShape.new(name: 'ImportHostKeyResponse')
     ImportSshPublicKeyRequest = Shapes::StructureShape.new(name: 'ImportSshPublicKeyRequest')
     ImportSshPublicKeyResponse = Shapes::StructureShape.new(name: 'ImportSshPublicKeyResponse')
     InputFileLocation = Shapes::StructureShape.new(name: 'InputFileLocation')
@@ -146,6 +155,8 @@ module Aws::Transfer
     ListConnectorsResponse = Shapes::StructureShape.new(name: 'ListConnectorsResponse')
     ListExecutionsRequest = Shapes::StructureShape.new(name: 'ListExecutionsRequest')
     ListExecutionsResponse = Shapes::StructureShape.new(name: 'ListExecutionsResponse')
+    ListHostKeysRequest = Shapes::StructureShape.new(name: 'ListHostKeysRequest')
+    ListHostKeysResponse = Shapes::StructureShape.new(name: 'ListHostKeysResponse')
     ListProfilesRequest = Shapes::StructureShape.new(name: 'ListProfilesRequest')
     ListProfilesResponse = Shapes::StructureShape.new(name: 'ListProfilesResponse')
     ListSecurityPoliciesRequest = Shapes::StructureShape.new(name: 'ListSecurityPoliciesRequest')
@@ -168,6 +179,8 @@ module Aws::Transfer
     ListedConnectors = Shapes::ListShape.new(name: 'ListedConnectors')
     ListedExecution = Shapes::StructureShape.new(name: 'ListedExecution')
     ListedExecutions = Shapes::ListShape.new(name: 'ListedExecutions')
+    ListedHostKey = Shapes::StructureShape.new(name: 'ListedHostKey')
+    ListedHostKeys = Shapes::ListShape.new(name: 'ListedHostKeys')
     ListedProfile = Shapes::StructureShape.new(name: 'ListedProfile')
     ListedProfiles = Shapes::ListShape.new(name: 'ListedProfiles')
     ListedServer = Shapes::StructureShape.new(name: 'ListedServer')
@@ -271,6 +284,8 @@ module Aws::Transfer
     UpdateCertificateResponse = Shapes::StructureShape.new(name: 'UpdateCertificateResponse')
     UpdateConnectorRequest = Shapes::StructureShape.new(name: 'UpdateConnectorRequest')
     UpdateConnectorResponse = Shapes::StructureShape.new(name: 'UpdateConnectorResponse')
+    UpdateHostKeyRequest = Shapes::StructureShape.new(name: 'UpdateHostKeyRequest')
+    UpdateHostKeyResponse = Shapes::StructureShape.new(name: 'UpdateHostKeyResponse')
     UpdateProfileRequest = Shapes::StructureShape.new(name: 'UpdateProfileRequest')
     UpdateProfileResponse = Shapes::StructureShape.new(name: 'UpdateProfileResponse')
     UpdateServerRequest = Shapes::StructureShape.new(name: 'UpdateServerRequest')
@@ -432,6 +447,10 @@ module Aws::Transfer
     DeleteConnectorRequest.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
     DeleteConnectorRequest.struct_class = Types::DeleteConnectorRequest
 
+    DeleteHostKeyRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    DeleteHostKeyRequest.add_member(:host_key_id, Shapes::ShapeRef.new(shape: HostKeyId, required: true, location_name: "HostKeyId"))
+    DeleteHostKeyRequest.struct_class = Types::DeleteHostKeyRequest
+
     DeleteProfileRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ProfileId, required: true, location_name: "ProfileId"))
     DeleteProfileRequest.struct_class = Types::DeleteProfileRequest
 
@@ -488,6 +507,13 @@ module Aws::Transfer
     DescribeExecutionResponse.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "WorkflowId"))
     DescribeExecutionResponse.add_member(:execution, Shapes::ShapeRef.new(shape: DescribedExecution, required: true, location_name: "Execution"))
     DescribeExecutionResponse.struct_class = Types::DescribeExecutionResponse
+
+    DescribeHostKeyRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    DescribeHostKeyRequest.add_member(:host_key_id, Shapes::ShapeRef.new(shape: HostKeyId, required: true, location_name: "HostKeyId"))
+    DescribeHostKeyRequest.struct_class = Types::DescribeHostKeyRequest
+
+    DescribeHostKeyResponse.add_member(:host_key, Shapes::ShapeRef.new(shape: DescribedHostKey, required: true, location_name: "HostKey"))
+    DescribeHostKeyResponse.struct_class = Types::DescribeHostKeyResponse
 
     DescribeProfileRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ProfileId, required: true, location_name: "ProfileId"))
     DescribeProfileRequest.struct_class = Types::DescribeProfileRequest
@@ -576,6 +602,15 @@ module Aws::Transfer
     DescribedExecution.add_member(:status, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "Status"))
     DescribedExecution.add_member(:results, Shapes::ShapeRef.new(shape: ExecutionResults, location_name: "Results"))
     DescribedExecution.struct_class = Types::DescribedExecution
+
+    DescribedHostKey.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    DescribedHostKey.add_member(:host_key_id, Shapes::ShapeRef.new(shape: HostKeyId, location_name: "HostKeyId"))
+    DescribedHostKey.add_member(:host_key_fingerprint, Shapes::ShapeRef.new(shape: HostKeyFingerprint, location_name: "HostKeyFingerprint"))
+    DescribedHostKey.add_member(:description, Shapes::ShapeRef.new(shape: HostKeyDescription, location_name: "Description"))
+    DescribedHostKey.add_member(:type, Shapes::ShapeRef.new(shape: HostKeyType, location_name: "Type"))
+    DescribedHostKey.add_member(:date_imported, Shapes::ShapeRef.new(shape: DateImported, location_name: "DateImported"))
+    DescribedHostKey.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    DescribedHostKey.struct_class = Types::DescribedHostKey
 
     DescribedProfile.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     DescribedProfile.add_member(:profile_id, Shapes::ShapeRef.new(shape: ProfileId, location_name: "ProfileId"))
@@ -691,6 +726,16 @@ module Aws::Transfer
     ImportCertificateResponse.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location_name: "CertificateId"))
     ImportCertificateResponse.struct_class = Types::ImportCertificateResponse
 
+    ImportHostKeyRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    ImportHostKeyRequest.add_member(:host_key_body, Shapes::ShapeRef.new(shape: HostKey, required: true, location_name: "HostKeyBody"))
+    ImportHostKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: HostKeyDescription, location_name: "Description"))
+    ImportHostKeyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ImportHostKeyRequest.struct_class = Types::ImportHostKeyRequest
+
+    ImportHostKeyResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    ImportHostKeyResponse.add_member(:host_key_id, Shapes::ShapeRef.new(shape: HostKeyId, required: true, location_name: "HostKeyId"))
+    ImportHostKeyResponse.struct_class = Types::ImportHostKeyResponse
+
     ImportSshPublicKeyRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     ImportSshPublicKeyRequest.add_member(:ssh_public_key_body, Shapes::ShapeRef.new(shape: SshPublicKeyBody, required: true, location_name: "SshPublicKeyBody"))
     ImportSshPublicKeyRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "UserName"))
@@ -758,6 +803,16 @@ module Aws::Transfer
     ListExecutionsResponse.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "WorkflowId"))
     ListExecutionsResponse.add_member(:executions, Shapes::ShapeRef.new(shape: ListedExecutions, required: true, location_name: "Executions"))
     ListExecutionsResponse.struct_class = Types::ListExecutionsResponse
+
+    ListHostKeysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListHostKeysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListHostKeysRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    ListHostKeysRequest.struct_class = Types::ListHostKeysRequest
+
+    ListHostKeysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListHostKeysResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    ListHostKeysResponse.add_member(:host_keys, Shapes::ShapeRef.new(shape: ListedHostKeys, required: true, location_name: "HostKeys"))
+    ListHostKeysResponse.struct_class = Types::ListHostKeysResponse
 
     ListProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -857,6 +912,16 @@ module Aws::Transfer
     ListedExecution.struct_class = Types::ListedExecution
 
     ListedExecutions.member = Shapes::ShapeRef.new(shape: ListedExecution)
+
+    ListedHostKey.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    ListedHostKey.add_member(:host_key_id, Shapes::ShapeRef.new(shape: HostKeyId, location_name: "HostKeyId"))
+    ListedHostKey.add_member(:fingerprint, Shapes::ShapeRef.new(shape: HostKeyFingerprint, location_name: "Fingerprint"))
+    ListedHostKey.add_member(:description, Shapes::ShapeRef.new(shape: HostKeyDescription, location_name: "Description"))
+    ListedHostKey.add_member(:type, Shapes::ShapeRef.new(shape: HostKeyType, location_name: "Type"))
+    ListedHostKey.add_member(:date_imported, Shapes::ShapeRef.new(shape: DateImported, location_name: "DateImported"))
+    ListedHostKey.struct_class = Types::ListedHostKey
+
+    ListedHostKeys.member = Shapes::ShapeRef.new(shape: ListedHostKey)
 
     ListedProfile.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     ListedProfile.add_member(:profile_id, Shapes::ShapeRef.new(shape: ProfileId, location_name: "ProfileId"))
@@ -1066,6 +1131,15 @@ module Aws::Transfer
 
     UpdateConnectorResponse.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
     UpdateConnectorResponse.struct_class = Types::UpdateConnectorResponse
+
+    UpdateHostKeyRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    UpdateHostKeyRequest.add_member(:host_key_id, Shapes::ShapeRef.new(shape: HostKeyId, required: true, location_name: "HostKeyId"))
+    UpdateHostKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: HostKeyDescription, required: true, location_name: "Description"))
+    UpdateHostKeyRequest.struct_class = Types::UpdateHostKeyRequest
+
+    UpdateHostKeyResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    UpdateHostKeyResponse.add_member(:host_key_id, Shapes::ShapeRef.new(shape: HostKeyId, required: true, location_name: "HostKeyId"))
+    UpdateHostKeyResponse.struct_class = Types::UpdateHostKeyResponse
 
     UpdateProfileRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ProfileId, required: true, location_name: "ProfileId"))
     UpdateProfileRequest.add_member(:certificate_ids, Shapes::ShapeRef.new(shape: CertificateIds, location_name: "CertificateIds"))
@@ -1288,6 +1362,19 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:delete_host_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteHostKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteHostKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteProfile"
         o.http_method = "POST"
@@ -1411,6 +1498,18 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_host_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeHostKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeHostKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeHostKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:describe_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeProfile"
         o.http_method = "POST"
@@ -1481,6 +1580,20 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:import_host_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportHostKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ImportHostKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: ImportHostKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:import_ssh_public_key, Seahorse::Model::Operation.new.tap do |o|
@@ -1590,6 +1703,19 @@ module Aws::Transfer
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_host_keys, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListHostKeys"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListHostKeysRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListHostKeysResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_profiles, Seahorse::Model::Operation.new.tap do |o|
@@ -1840,6 +1966,19 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_host_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateHostKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateHostKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateHostKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_profile, Seahorse::Model::Operation.new.tap do |o|

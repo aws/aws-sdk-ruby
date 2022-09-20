@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2022-09-07)
+------------------
+
+* Feature - Allow specifying units in Asset Properties
+
 1.44.0 (2022-08-22)
 ------------------
 

@@ -352,7 +352,7 @@ module Aws::CodeGuruReviewer
     # @!group API Operations
 
     # Use to associate an Amazon Web Services CodeCommit repository or a
-    # repostory managed by Amazon Web Services CodeStar Connections with
+    # repository managed by Amazon Web Services CodeStar Connections with
     # Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru
     # Reviewer reviews source code changes in the repository's pull
     # requests and provides automatic recommendations. You can view
@@ -414,7 +414,7 @@ module Aws::CodeGuruReviewer
     #     (`AWS_OWNED_CMK`) or customer managed (`CUSTOMER_MANAGED_CMK`).
     #
     #   * The ID of the Amazon Web Services KMS key that is associated with
-    #     this respository association.
+    #     this repository association.
     #
     # @return [Types::AssociateRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -482,7 +482,7 @@ module Aws::CodeGuruReviewer
       req.send_request(options)
     end
 
-    # Use to create a code review with a [ `CodeReviewType` ][1] of
+    # Use to create a code review with a [CodeReviewType][1] of
     # `RepositoryAnalysis`. This type of code review analyzes all code under
     # a specified branch in an associated repository. `PullRequest` code
     # reviews are automatically triggered by a pull request.
@@ -496,9 +496,9 @@ module Aws::CodeGuruReviewer
     #   Amazon Web Services account must be unique.
     #
     # @option params [required, String] :repository_association_arn
-    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling [
-    #   `ListRepositoryAssociations` ][2].
+    #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
+    #   object. You can retrieve this ARN by calling
+    #   [ListRepositoryAssociations][2].
     #
     #   A code review can only be created on an associated repository. This is
     #   the ARN of the associated repository.
@@ -509,9 +509,9 @@ module Aws::CodeGuruReviewer
     #   [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
     #
     # @option params [required, Types::CodeReviewType] :type
-    #   The type of code review to create. This is specified using a [
-    #   `CodeReviewType` ][1] object. You can create a code review only of
-    #   type `RepositoryAnalysis`.
+    #   The type of code review to create. This is specified using a
+    #   [CodeReviewType][1] object. You can create a code review only of type
+    #   `RepositoryAnalysis`.
     #
     #
     #
@@ -626,7 +626,7 @@ module Aws::CodeGuruReviewer
     # status.
     #
     # @option params [required, String] :code_review_arn
-    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
     #
     #
@@ -696,7 +696,7 @@ module Aws::CodeGuruReviewer
     # recommendation.
     #
     # @option params [required, String] :code_review_arn
-    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
     #
     #
@@ -750,17 +750,17 @@ module Aws::CodeGuruReviewer
       req.send_request(options)
     end
 
-    # Returns a [ `RepositoryAssociation` ][1] object that contains
-    # information about the requested repository association.
+    # Returns a [RepositoryAssociation][1] object that contains information
+    # about the requested repository association.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
     #
     # @option params [required, String] :association_arn
-    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling [
-    #   `ListRepositoryAssociations` ][2].
+    #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
+    #   object. You can retrieve this ARN by calling
+    #   [ListRepositoryAssociations][2].
     #
     #
     #
@@ -816,9 +816,9 @@ module Aws::CodeGuruReviewer
     # repository.
     #
     # @option params [required, String] :association_arn
-    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling [
-    #   `ListRepositoryAssociations` ][2].
+    #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
+    #   object. You can retrieve this ARN by calling
+    #   [ListRepositoryAssociations][2].
     #
     #
     #
@@ -900,10 +900,10 @@ module Aws::CodeGuruReviewer
     #   is 100.
     #
     # @option params [String] :next_token
-    #   If nextToken is returned, there are more results available. The value
-    #   of nextToken is a unique pagination token for each page. Make the call
-    #   again using the returned token to retrieve the next page. Keep all
-    #   other arguments unchanged.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged.
     #
     # @return [Types::ListCodeReviewsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -965,7 +965,7 @@ module Aws::CodeGuruReviewer
       req.send_request(options)
     end
 
-    # Returns a list of [ `RecommendationFeedbackSummary` ][1] objects that
+    # Returns a list of [RecommendationFeedbackSummary][1] objects that
     # contain customer recommendation feedback for all CodeGuru Reviewer
     # users.
     #
@@ -975,7 +975,7 @@ module Aws::CodeGuruReviewer
     #
     # @option params [String] :next_token
     #   If `nextToken` is returned, there are more results available. The
-    #   value of nextToken is a unique pagination token for each page. Make
+    #   value of `nextToken` is a unique pagination token for each page. Make
     #   the call again using the returned token to retrieve the next page.
     #   Keep all other arguments unchanged.
     #
@@ -984,7 +984,7 @@ module Aws::CodeGuruReviewer
     #   is 100.
     #
     # @option params [required, String] :code_review_arn
-    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
     #
     #
@@ -1052,7 +1052,7 @@ module Aws::CodeGuruReviewer
     #   is 100.
     #
     # @option params [required, String] :code_review_arn
-    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
     #
     #
@@ -1100,10 +1100,10 @@ module Aws::CodeGuruReviewer
       req.send_request(options)
     end
 
-    # Returns a list of [ `RepositoryAssociationSummary` ][1] objects that
+    # Returns a list of [RepositoryAssociationSummary][1] objects that
     # contain summary information about a repository association. You can
-    # filter the returned list by [ `ProviderType` ][2], [ `Name` ][3], [
-    # `State` ][4], and [ `Owner` ][5].
+    # filter the returned list by [ProviderType][2], [Name][3], [State][4],
+    # and [Owner][5].
     #
     #
     #
@@ -1147,7 +1147,7 @@ module Aws::CodeGuruReviewer
     #   * **Disassociated**\: CodeGuru Reviewer successfully disassociated the
     #     repository. You can create a new association with this repository if
     #     you want to review source code in it later. You can control access
-    #     to code reviews created in an associated repository with tags after
+    #     to code reviews created in anassociated repository with tags after
     #     it has been disassociated. For more information, see [Using tags to
     #     control access to associated repositories][1] in the *Amazon
     #     CodeGuru Reviewer User Guide*.
@@ -1233,9 +1233,9 @@ module Aws::CodeGuruReviewer
     # resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling [
-    #   `ListRepositoryAssociations` ][2].
+    #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
+    #   object. You can retrieve this ARN by calling
+    #   [ListRepositoryAssociations][2].
     #
     #
     #
@@ -1271,7 +1271,7 @@ module Aws::CodeGuruReviewer
     # feedback is overwritten.
     #
     # @option params [required, String] :code_review_arn
-    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #   The Amazon Resource Name (ARN) of the [CodeReview][1] object.
     #
     #
     #
@@ -1307,9 +1307,9 @@ module Aws::CodeGuruReviewer
     # Adds one or more tags to an associated repository.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling [
-    #   `ListRepositoryAssociations` ][2].
+    #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
+    #   object. You can retrieve this ARN by calling
+    #   [ListRepositoryAssociations][2].
     #
     #
     #
@@ -1351,9 +1351,9 @@ module Aws::CodeGuruReviewer
     # Removes a tag from an associated repository.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
-    #   object. You can retrieve this ARN by calling [
-    #   `ListRepositoryAssociations` ][2].
+    #   The Amazon Resource Name (ARN) of the [RepositoryAssociation][1]
+    #   object. You can retrieve this ARN by calling
+    #   [ListRepositoryAssociations][2].
     #
     #
     #
@@ -1395,7 +1395,7 @@ module Aws::CodeGuruReviewer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codegurureviewer'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

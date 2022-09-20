@@ -3005,25 +3005,28 @@ module Aws::CognitoIdentityProvider
     #   username when they sign up.
     #
     # @option params [String] :sms_verification_message
-    #   A string representing the SMS verification message.
+    #   This parameter is no longer used. See
+    #   [VerificationMessageTemplateType][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
     #
     # @option params [String] :email_verification_message
-    #   A string representing the email verification message.
-    #   `EmailVerificationMessage` is allowed only if [EmailSendingAccount][1]
-    #   is DEVELOPER.
+    #   This parameter is no longer used. See
+    #   [VerificationMessageTemplateType][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
     #
     # @option params [String] :email_verification_subject
-    #   A string representing the email verification subject.
-    #   `EmailVerificationSubject` is allowed only if [EmailSendingAccount][1]
-    #   is DEVELOPER.
+    #   This parameter is no longer used. See
+    #   [VerificationMessageTemplateType][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
     #
     # @option params [Types::VerificationMessageTemplateType] :verification_message_template
     #   The template for the verification message that the user sees when the
@@ -3585,6 +3588,12 @@ module Aws::CognitoIdentityProvider
     #
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
     #
+    # @option params [Integer] :auth_session_validity
+    #   Amazon Cognito creates a session token for each API request in an
+    #   authentication flow. `AuthSessionValidity` is the duration, in
+    #   minutes, of that session token. Your user pool native user must
+    #   respond to each authentication challenge before the session expires.
+    #
     # @return [Types::CreateUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
@@ -3623,6 +3632,7 @@ module Aws::CognitoIdentityProvider
     #     prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
     #     enable_token_revocation: false,
     #     enable_propagate_additional_user_context_data: false,
+    #     auth_session_validity: 1,
     #   })
     #
     # @example Response structure
@@ -3665,6 +3675,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.prevent_user_existence_errors #=> String, one of "LEGACY", "ENABLED"
     #   resp.user_pool_client.enable_token_revocation #=> Boolean
     #   resp.user_pool_client.enable_propagate_additional_user_context_data #=> Boolean
+    #   resp.user_pool_client.auth_session_validity #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClient AWS API Documentation
     #
@@ -4292,6 +4303,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.prevent_user_existence_errors #=> String, one of "LEGACY", "ENABLED"
     #   resp.user_pool_client.enable_token_revocation #=> Boolean
     #   resp.user_pool_client.enable_propagate_additional_user_context_data #=> Boolean
+    #   resp.user_pool_client.auth_session_validity #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolClient AWS API Documentation
     #
@@ -7160,13 +7172,28 @@ module Aws::CognitoIdentityProvider
     #   requests to update user pools.
     #
     # @option params [String] :sms_verification_message
-    #   A container with information about the SMS verification message.
+    #   This parameter is no longer used. See
+    #   [VerificationMessageTemplateType][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
     #
     # @option params [String] :email_verification_message
-    #   The contents of the email verification message.
+    #   This parameter is no longer used. See
+    #   [VerificationMessageTemplateType][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
     #
     # @option params [String] :email_verification_subject
-    #   The subject of the email verification message.
+    #   This parameter is no longer used. See
+    #   [VerificationMessageTemplateType][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
     #
     # @option params [Types::VerificationMessageTemplateType] :verification_message_template
     #   The template for verification messages.
@@ -7592,6 +7619,12 @@ module Aws::CognitoIdentityProvider
     #
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
     #
+    # @option params [Integer] :auth_session_validity
+    #   Amazon Cognito creates a session token for each API request in an
+    #   authentication flow. `AuthSessionValidity` is the duration, in
+    #   minutes, of that session token. Your user pool native user must
+    #   respond to each authentication challenge before the session expires.
+    #
     # @return [Types::UpdateUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
@@ -7630,6 +7663,7 @@ module Aws::CognitoIdentityProvider
     #     prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
     #     enable_token_revocation: false,
     #     enable_propagate_additional_user_context_data: false,
+    #     auth_session_validity: 1,
     #   })
     #
     # @example Response structure
@@ -7672,6 +7706,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.prevent_user_existence_errors #=> String, one of "LEGACY", "ENABLED"
     #   resp.user_pool_client.enable_token_revocation #=> Boolean
     #   resp.user_pool_client.enable_propagate_additional_user_context_data #=> Boolean
+    #   resp.user_pool_client.auth_session_validity #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClient AWS API Documentation
     #
@@ -7867,7 +7902,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3708,7 +3708,8 @@
         "CompletionCriteria":{"shape":"AutoMLJobCompletionCriteria"},
         "SecurityConfig":{"shape":"AutoMLSecurityConfig"},
         "DataSplitConfig":{"shape":"AutoMLDataSplitConfig"},
-        "CandidateGenerationConfig":{"shape":"AutoMLCandidateGenerationConfig"}
+        "CandidateGenerationConfig":{"shape":"AutoMLCandidateGenerationConfig"},
+        "Mode":{"shape":"AutoMLMode"}
       }
     },
     "AutoMLJobName":{
@@ -3821,6 +3822,14 @@
         "Recall",
         "RecallMacro",
         "LogLoss"
+      ]
+    },
+    "AutoMLMode":{
+      "type":"string",
+      "enum":[
+        "AUTO",
+        "ENSEMBLING",
+        "HYPERPARAMETER_TUNING"
       ]
     },
     "AutoMLNameContains":{
@@ -8257,13 +8266,15 @@
       "type":"structure",
       "members":{
         "SecurityGroupIds":{"shape":"DomainSecurityGroupIds"},
-        "RStudioServerProDomainSettings":{"shape":"RStudioServerProDomainSettings"}
+        "RStudioServerProDomainSettings":{"shape":"RStudioServerProDomainSettings"},
+        "ExecutionRoleIdentityConfig":{"shape":"ExecutionRoleIdentityConfig"}
       }
     },
     "DomainSettingsForUpdate":{
       "type":"structure",
       "members":{
-        "RStudioServerProDomainSettingsForUpdate":{"shape":"RStudioServerProDomainSettingsForUpdate"}
+        "RStudioServerProDomainSettingsForUpdate":{"shape":"RStudioServerProDomainSettingsForUpdate"},
+        "ExecutionRoleIdentityConfig":{"shape":"ExecutionRoleIdentityConfig"}
       }
     },
     "DomainStatus":{
@@ -8783,6 +8794,13 @@
       "type":"string",
       "max":1024,
       "pattern":"[\\S\\s]*"
+    },
+    "ExecutionRoleIdentityConfig":{
+      "type":"string",
+      "enum":[
+        "USER_PROFILE_NAME",
+        "DISABLED"
+      ]
     },
     "ExecutionStatus":{
       "type":"string",
@@ -9673,6 +9691,7 @@
       ],
       "members":{
         "Strategy":{"shape":"HyperParameterTuningJobStrategyType"},
+        "StrategyConfig":{"shape":"HyperParameterTuningJobStrategyConfig"},
         "HyperParameterTuningJobObjective":{"shape":"HyperParameterTuningJobObjective"},
         "ResourceLimits":{"shape":"ResourceLimits"},
         "ParameterRanges":{"shape":"ParameterRanges"},
@@ -9708,6 +9727,27 @@
       "type":"list",
       "member":{"shape":"HyperParameterTuningJobObjective"}
     },
+    "HyperParameterTuningJobSearchEntity":{
+      "type":"structure",
+      "members":{
+        "HyperParameterTuningJobName":{"shape":"HyperParameterTuningJobName"},
+        "HyperParameterTuningJobArn":{"shape":"HyperParameterTuningJobArn"},
+        "HyperParameterTuningJobConfig":{"shape":"HyperParameterTuningJobConfig"},
+        "TrainingJobDefinition":{"shape":"HyperParameterTrainingJobDefinition"},
+        "TrainingJobDefinitions":{"shape":"HyperParameterTrainingJobDefinitions"},
+        "HyperParameterTuningJobStatus":{"shape":"HyperParameterTuningJobStatus"},
+        "CreationTime":{"shape":"Timestamp"},
+        "HyperParameterTuningEndTime":{"shape":"Timestamp"},
+        "LastModifiedTime":{"shape":"Timestamp"},
+        "TrainingJobStatusCounters":{"shape":"TrainingJobStatusCounters"},
+        "ObjectiveStatusCounters":{"shape":"ObjectiveStatusCounters"},
+        "BestTrainingJob":{"shape":"HyperParameterTrainingJobSummary"},
+        "OverallBestTrainingJob":{"shape":"HyperParameterTrainingJobSummary"},
+        "WarmStartConfig":{"shape":"HyperParameterTuningJobWarmStartConfig"},
+        "FailureReason":{"shape":"FailureReason"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
     "HyperParameterTuningJobSortByOptions":{
       "type":"string",
       "enum":[
@@ -9726,11 +9766,18 @@
         "Stopping"
       ]
     },
+    "HyperParameterTuningJobStrategyConfig":{
+      "type":"structure",
+      "members":{
+        "HyperbandStrategyConfig":{"shape":"HyperbandStrategyConfig"}
+      }
+    },
     "HyperParameterTuningJobStrategyType":{
       "type":"string",
       "enum":[
         "Bayesian",
-        "Random"
+        "Random",
+        "Hyperband"
       ]
     },
     "HyperParameterTuningJobSummaries":{
@@ -9801,6 +9848,21 @@
       "value":{"shape":"HyperParameterValue"},
       "max":100,
       "min":0
+    },
+    "HyperbandStrategyConfig":{
+      "type":"structure",
+      "members":{
+        "MinResource":{"shape":"HyperbandStrategyMinResource"},
+        "MaxResource":{"shape":"HyperbandStrategyMaxResource"}
+      }
+    },
+    "HyperbandStrategyMaxResource":{
+      "type":"integer",
+      "min":1
+    },
+    "HyperbandStrategyMinResource":{
+      "type":"integer",
+      "min":1
     },
     "IdempotencyToken":{
       "type":"string",
@@ -11980,7 +12042,7 @@
     },
     "MaxConcurrentTaskCount":{
       "type":"integer",
-      "max":1000,
+      "max":5000,
       "min":1
     },
     "MaxConcurrentTransforms":{
@@ -14108,7 +14170,10 @@
         "InitialVariantWeight":{"shape":"VariantWeight"},
         "AcceleratorType":{"shape":"ProductionVariantAcceleratorType"},
         "CoreDumpConfig":{"shape":"ProductionVariantCoreDumpConfig"},
-        "ServerlessConfig":{"shape":"ProductionVariantServerlessConfig"}
+        "ServerlessConfig":{"shape":"ProductionVariantServerlessConfig"},
+        "VolumeSizeInGB":{"shape":"ProductionVariantVolumeSizeInGB"},
+        "ModelDataDownloadTimeoutInSeconds":{"shape":"ProductionVariantModelDataDownloadTimeoutInSeconds"},
+        "ContainerStartupHealthCheckTimeoutInSeconds":{"shape":"ProductionVariantContainerStartupHealthCheckTimeoutInSeconds"}
       }
     },
     "ProductionVariantAcceleratorType":{
@@ -14121,6 +14186,11 @@
         "ml.eia2.large",
         "ml.eia2.xlarge"
       ]
+    },
+    "ProductionVariantContainerStartupHealthCheckTimeoutInSeconds":{
+      "type":"integer",
+      "max":3600,
+      "min":60
     },
     "ProductionVariantCoreDumpConfig":{
       "type":"structure",
@@ -14225,6 +14295,11 @@
       "max":10,
       "min":1
     },
+    "ProductionVariantModelDataDownloadTimeoutInSeconds":{
+      "type":"integer",
+      "max":3600,
+      "min":60
+    },
     "ProductionVariantServerlessConfig":{
       "type":"structure",
       "required":[
@@ -14269,6 +14344,11 @@
     "ProductionVariantSummaryList":{
       "type":"list",
       "member":{"shape":"ProductionVariantSummary"},
+      "min":1
+    },
+    "ProductionVariantVolumeSizeInGB":{
+      "type":"integer",
+      "max":512,
       "min":1
     },
     "ProfilerConfig":{
@@ -14639,6 +14719,18 @@
         "S3OutputUri":{"shape":"S3Uri"}
       }
     },
+    "RecommendationJobContainerConfig":{
+      "type":"structure",
+      "members":{
+        "Domain":{"shape":"String"},
+        "Task":{"shape":"String"},
+        "Framework":{"shape":"String"},
+        "FrameworkVersion":{"shape":"String"},
+        "PayloadConfig":{"shape":"RecommendationJobPayloadConfig"},
+        "NearestModelName":{"shape":"String"},
+        "SupportedInstanceTypes":{"shape":"RecommendationJobSupportedInstanceTypes"}
+      }
+    },
     "RecommendationJobDescription":{
       "type":"string",
       "max":128
@@ -14652,7 +14744,8 @@
         "TrafficPattern":{"shape":"TrafficPattern"},
         "ResourceLimit":{"shape":"RecommendationJobResourceLimit"},
         "EndpointConfigurations":{"shape":"EndpointInputConfigurations"},
-        "VolumeKmsKeyId":{"shape":"KmsKeyId"}
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "ContainerConfig":{"shape":"RecommendationJobContainerConfig"}
       }
     },
     "RecommendationJobName":{
@@ -14666,6 +14759,13 @@
       "members":{
         "KmsKeyId":{"shape":"KmsKeyId"},
         "CompiledOutputConfig":{"shape":"RecommendationJobCompiledOutputConfig"}
+      }
+    },
+    "RecommendationJobPayloadConfig":{
+      "type":"structure",
+      "members":{
+        "SamplePayloadUrl":{"shape":"String"},
+        "SupportedContentTypes":{"shape":"RecommendationJobSupportedContentTypes"}
       }
     },
     "RecommendationJobResourceLimit":{
@@ -14692,6 +14792,14 @@
         "MaxInvocations":{"shape":"Integer"},
         "ModelLatencyThresholds":{"shape":"ModelLatencyThresholds"}
       }
+    },
+    "RecommendationJobSupportedContentTypes":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
+    "RecommendationJobSupportedInstanceTypes":{
+      "type":"list",
+      "member":{"shape":"String"}
     },
     "RecommendationJobType":{
       "type":"string",
@@ -14964,7 +15072,8 @@
         "PipelineExecution",
         "FeatureGroup",
         "Project",
-        "FeatureMetadata"
+        "FeatureMetadata",
+        "HyperParameterTuningJob"
       ]
     },
     "ResponseMIMEType":{
@@ -15159,7 +15268,8 @@
         "PipelineExecution":{"shape":"PipelineExecution"},
         "FeatureGroup":{"shape":"FeatureGroup"},
         "Project":{"shape":"Project"},
-        "FeatureMetadata":{"shape":"FeatureMetadata"}
+        "FeatureMetadata":{"shape":"FeatureMetadata"},
+        "HyperParameterTuningJob":{"shape":"HyperParameterTuningJobSearchEntity"}
       }
     },
     "SearchRequest":{

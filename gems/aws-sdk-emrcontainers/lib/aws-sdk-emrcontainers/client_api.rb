@@ -84,6 +84,8 @@ module Aws::EMRContainers
     RsiArn = Shapes::StringShape.new(name: 'RsiArn')
     S3MonitoringConfiguration = Shapes::StructureShape.new(name: 'S3MonitoringConfiguration')
     SensitivePropertiesMap = Shapes::MapShape.new(name: 'SensitivePropertiesMap')
+    SparkSqlJobDriver = Shapes::StructureShape.new(name: 'SparkSqlJobDriver')
+    SparkSqlParameters = Shapes::StringShape.new(name: 'SparkSqlParameters')
     SparkSubmitJobDriver = Shapes::StructureShape.new(name: 'SparkSubmitJobDriver')
     SparkSubmitParameters = Shapes::StringShape.new(name: 'SparkSubmitParameters')
     StartJobRunRequest = Shapes::StructureShape.new(name: 'StartJobRunRequest')
@@ -242,6 +244,7 @@ module Aws::EMRContainers
     InternalServerException.struct_class = Types::InternalServerException
 
     JobDriver.add_member(:spark_submit_job_driver, Shapes::ShapeRef.new(shape: SparkSubmitJobDriver, location_name: "sparkSubmitJobDriver"))
+    JobDriver.add_member(:spark_sql_job_driver, Shapes::ShapeRef.new(shape: SparkSqlJobDriver, location_name: "sparkSqlJobDriver"))
     JobDriver.struct_class = Types::JobDriver
 
     JobRun.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
@@ -324,6 +327,10 @@ module Aws::EMRContainers
 
     SensitivePropertiesMap.key = Shapes::ShapeRef.new(shape: String1024)
     SensitivePropertiesMap.value = Shapes::ShapeRef.new(shape: String1024)
+
+    SparkSqlJobDriver.add_member(:entry_point, Shapes::ShapeRef.new(shape: EntryPointPath, location_name: "entryPoint"))
+    SparkSqlJobDriver.add_member(:spark_sql_parameters, Shapes::ShapeRef.new(shape: SparkSqlParameters, location_name: "sparkSqlParameters"))
+    SparkSqlJobDriver.struct_class = Types::SparkSqlJobDriver
 
     SparkSubmitJobDriver.add_member(:entry_point, Shapes::ShapeRef.new(shape: EntryPointPath, required: true, location_name: "entryPoint"))
     SparkSubmitJobDriver.add_member(:entry_point_arguments, Shapes::ShapeRef.new(shape: EntryPointArguments, location_name: "entryPointArguments"))

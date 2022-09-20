@@ -2036,6 +2036,12 @@ module Aws::CustomerProfiles
     #   Unique identifier for the workflow.
     #   @return [String]
     #
+    # @!attribute [rw] is_unstructured
+    #   Boolean to indicate if the Flow associated with the Integration is
+    #   created via Appflow console or with ObjectTypeName equals
+    #   \_unstructured via API/CLI in flowDefinition
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetIntegrationResponse AWS API Documentation
     #
     class GetIntegrationResponse < Struct.new(
@@ -2046,7 +2052,8 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :tags,
       :object_type_names,
-      :workflow_id)
+      :workflow_id,
+      :is_unstructured)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2894,6 +2901,12 @@ module Aws::CustomerProfiles
     #   Unique identifier for the workflow.
     #   @return [String]
     #
+    # @!attribute [rw] is_unstructured
+    #   Boolean to indicate if the Flow associated with the Integration is
+    #   created via Appflow console or with ObjectTypeName equals
+    #   \_unstructured via API/CLI in flowDefinition
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListIntegrationItem AWS API Documentation
     #
     class ListIntegrationItem < Struct.new(
@@ -2904,7 +2917,8 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :tags,
       :object_type_names,
-      :workflow_id)
+      :workflow_id,
+      :is_unstructured)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3973,6 +3987,12 @@ module Aws::CustomerProfiles
     #   Unique identifier for the workflow.
     #   @return [String]
     #
+    # @!attribute [rw] is_unstructured
+    #   Boolean to indicate if the Flow associated with the Integration is
+    #   created via Appflow console or with ObjectTypeName equals
+    #   \_unstructured via API/CLI in flowDefinition
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegrationResponse AWS API Documentation
     #
     class PutIntegrationResponse < Struct.new(
@@ -3983,7 +4003,8 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :tags,
       :object_type_names,
-      :workflow_id)
+      :workflow_id,
+      :is_unstructured)
       SENSITIVE = []
       include Aws::Structure
     end

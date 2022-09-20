@@ -358,13 +358,12 @@ module Aws::SSO
     #   The friendly name of the role that is assigned to the user.
     #
     # @option params [required, String] :account_id
-    #   The identifier for the Amazon Web Services account that is assigned to
-    #   the user.
+    #   The identifier for the AWS account that is assigned to the user.
     #
     # @option params [required, String] :access_token
     #   The token issued by the `CreateToken` API call. For more information,
-    #   see [CreateToken][1] in the *Amazon Web Services SSO OIDC API
-    #   Reference Guide*.
+    #   see [CreateToken][1] in the *IAM Identity Center OIDC API Reference
+    #   Guide*.
     #
     #
     #
@@ -398,8 +397,7 @@ module Aws::SSO
       req.send_request(options)
     end
 
-    # Lists all roles that are assigned to the user for a given Amazon Web
-    # Services account.
+    # Lists all roles that are assigned to the user for a given AWS account.
     #
     # @option params [String] :next_token
     #   The page token from the previous response output when you request
@@ -410,16 +408,15 @@ module Aws::SSO
     #
     # @option params [required, String] :access_token
     #   The token issued by the `CreateToken` API call. For more information,
-    #   see [CreateToken][1] in the *Amazon Web Services SSO OIDC API
-    #   Reference Guide*.
+    #   see [CreateToken][1] in the *IAM Identity Center OIDC API Reference
+    #   Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html
     #
     # @option params [required, String] :account_id
-    #   The identifier for the Amazon Web Services account that is assigned to
-    #   the user.
+    #   The identifier for the AWS account that is assigned to the user.
     #
     # @return [Types::ListAccountRolesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -453,11 +450,10 @@ module Aws::SSO
       req.send_request(options)
     end
 
-    # Lists all Amazon Web Services accounts assigned to the user. These
-    # Amazon Web Services accounts are assigned by the administrator of the
-    # account. For more information, see [Assign User Access][1] in the
-    # *Amazon Web Services SSO User Guide*. This operation returns a
-    # paginated response.
+    # Lists all AWS accounts assigned to the user. These AWS accounts are
+    # assigned by the administrator of the account. For more information,
+    # see [Assign User Access][1] in the *IAM Identity Center User Guide*.
+    # This operation returns a paginated response.
     #
     #
     #
@@ -472,8 +468,8 @@ module Aws::SSO
     #
     # @option params [required, String] :access_token
     #   The token issued by the `CreateToken` API call. For more information,
-    #   see [CreateToken][1] in the *Amazon Web Services SSO OIDC API
-    #   Reference Guide*.
+    #   see [CreateToken][1] in the *IAM Identity Center OIDC API Reference
+    #   Guide*.
     #
     #
     #
@@ -512,21 +508,20 @@ module Aws::SSO
     end
 
     # Removes the locally stored SSO tokens from the client-side cache and
-    # sends an API call to the Amazon Web Services SSO service to invalidate
-    # the corresponding server-side Amazon Web Services SSO sign in session.
+    # sends an API call to the IAM Identity Center service to invalidate the
+    # corresponding server-side IAM Identity Center sign in session.
     #
-    # <note markdown="1"> If a user uses Amazon Web Services SSO to access the AWS CLI, the
-    # user’s Amazon Web Services SSO sign in session is used to obtain an
-    # IAM session, as specified in the corresponding Amazon Web Services SSO
-    # permission set. More specifically, Amazon Web Services SSO assumes an
-    # IAM role in the target account on behalf of the user, and the
-    # corresponding temporary Amazon Web Services credentials are returned
-    # to the client.
+    # <note markdown="1"> If a user uses IAM Identity Center to access the AWS CLI, the user’s
+    # IAM Identity Center sign in session is used to obtain an IAM session,
+    # as specified in the corresponding IAM Identity Center permission set.
+    # More specifically, IAM Identity Center assumes an IAM role in the
+    # target account on behalf of the user, and the corresponding temporary
+    # AWS credentials are returned to the client.
     #
     #  After user logout, any existing IAM role sessions that were created by
-    # using Amazon Web Services SSO permission sets continue based on the
+    # using IAM Identity Center permission sets continue based on the
     # duration configured in the permission set. For more information, see
-    # [User authentications][1] in the *Amazon Web Services SSO User Guide*.
+    # [User authentications][1] in the *IAM Identity Center User Guide*.
     #
     #  </note>
     #
@@ -536,8 +531,8 @@ module Aws::SSO
     #
     # @option params [required, String] :access_token
     #   The token issued by the `CreateToken` API call. For more information,
-    #   see [CreateToken][1] in the *Amazon Web Services SSO OIDC API
-    #   Reference Guide*.
+    #   see [CreateToken][1] in the *IAM Identity Center OIDC API Reference
+    #   Guide*.
     #
     #
     #
@@ -573,7 +568,7 @@ module Aws::SSO
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.136.0'
+      context[:gem_version] = '3.151.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

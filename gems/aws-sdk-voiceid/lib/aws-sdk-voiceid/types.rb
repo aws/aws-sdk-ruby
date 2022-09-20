@@ -167,7 +167,7 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A brief description of this domain.
+    #   A brief description of the domain.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -557,8 +557,8 @@ module Aws::VoiceID
     #   Details about the most recent server-side encryption configuration
     #   update. When the server-side encryption configuration is changed,
     #   dependency on the old KMS key is removed through an asynchronous
-    #   process. When this update is complete, the domain’s data can only be
-    #   accessed using the new KMS key.
+    #   process. When this update is complete, the domain's data can only
+    #   be accessed using the new KMS key.
     #   @return [Types::ServerSideEncryptionUpdateDetails]
     #
     # @!attribute [rw] updated_at
@@ -799,11 +799,13 @@ module Aws::VoiceID
     # @!attribute [rw] reasons
     #   The reason speaker was flagged by the fraud detection system. This
     #   is only be populated if fraud detection Decision is `HIGH_RISK`, and
-    #   only has one possible value: `KNOWN_FRAUDSTER`.
+    #   the following possible values: `KNOWN_FRAUDSTER` and
+    #   `VOICE_SPOOFING`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] risk_details
-    #   Details about each risk analyzed for this speaker.
+    #   Details about each risk analyzed for this speaker. Currently, this
+    #   contains KnownFraudsterRisk and VoiceSpoofingRisk details.
     #   @return [Types::FraudRiskDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/FraudDetectionResult AWS API Documentation
@@ -828,10 +830,16 @@ module Aws::VoiceID
     #   speaker.
     #   @return [Types::KnownFraudsterRisk]
     #
+    # @!attribute [rw] voice_spoofing_risk
+    #   The details resulting from 'Voice Spoofing Risk' analysis of the
+    #   speaker.
+    #   @return [Types::VoiceSpoofingRisk]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/FraudRiskDetails AWS API Documentation
     #
     class FraudRiskDetails < Struct.new(
-      :known_fraudster_risk)
+      :known_fraudster_risk,
+      :voice_spoofing_risk)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -915,7 +923,7 @@ module Aws::VoiceID
     # @!attribute [rw] output_data_config
     #   The output data config containing the S3 location where you want
     #   Voice ID to write your job output file; you must also include a KMS
-    #   key iD in order to encrypt the file.
+    #   key ID in order to encrypt the file.
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] registration_config
@@ -971,7 +979,7 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] job_name
-    #   The client-provied name for the fraudster registration job.
+    #   The client-provided name for the fraudster registration job.
     #   @return [String]
     #
     # @!attribute [rw] job_progress
@@ -1081,9 +1089,7 @@ module Aws::VoiceID
     #       }
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned per call. You can
-    #   use `NextToken` to obtain further pages of results. The default is
-    #   100; the maximum allowed page size is also 100.
+    #   The maximum number of domains to list per API call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1395,8 +1401,9 @@ module Aws::VoiceID
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   the identifier of the KMS key you want Voice ID to use to encrypt
-    #   the output file of the fraudster registration job.
+    #   The identifier of the KMS key you want Voice ID to use to encrypt
+    #   the output file of a speaker enrollment job/fraudster registration
+    #   job.
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
@@ -1482,8 +1489,8 @@ module Aws::VoiceID
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier of the KMS key you want Voice ID to use to encrypt
-    #   your data.
+    #   The identifier of the KMS key to use to encrypt data stored by Voice
+    #   ID. Voice ID doesn't support asymmetric customer managed keys.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/ServerSideEncryptionConfiguration AWS API Documentation
@@ -1906,8 +1913,8 @@ module Aws::VoiceID
     #   The IAM role Amazon Resource Name (ARN) that grants Voice ID
     #   permissions to access customer's buckets to read the input manifest
     #   file and write the job output file. Refer to [Batch enrollment using
-    #   audio data from prior calls][1] documentation for the permissions
-    #   needed in this role.
+    #   audio data from prior calls][1] for the permissions needed in this
+    #   role.
     #
     #
     #
@@ -1966,7 +1973,9 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # A tag that can be assigned to a Voice ID resource.
+    # The tags used to organize, track, or control access for this resource.
+    # For example, \\\{ "tags": \\\{"key1":"value1",
+    # "key2":"value2"\\} \\}.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -1978,14 +1987,14 @@ module Aws::VoiceID
     #
     # @!attribute [rw] key
     #   The first part of a key:value pair that forms a tag associated with
-    #   a given resource. For example, in the tag ‘Department’:’Sales’, the
-    #   key is 'Department'.
+    #   a given resource. For example, in the tag 'Department':'Sales',
+    #   the key is 'Department'.
     #   @return [String]
     #
     # @!attribute [rw] value
     #   The second part of a key:value pair that forms a tag associated with
-    #   a given resource. For example, in the tag ‘Department’:’Sales’, the
-    #   value is 'Sales'.
+    #   a given resource. For example, in the tag 'Department':'Sales',
+    #   the value is 'Sales'.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/Tag AWS API Documentation
@@ -2094,7 +2103,7 @@ module Aws::VoiceID
     #       }
     #
     # @!attribute [rw] description
-    #   A brief description about this domain.
+    #   A brief description of the domain.
     #   @return [String]
     #
     # @!attribute [rw] domain_id
@@ -2107,10 +2116,12 @@ module Aws::VoiceID
     #
     # @!attribute [rw] server_side_encryption_configuration
     #   The configuration, containing the KMS key identifier, to be used by
-    #   Voice ID for the server-side encryption of your data. Note that all
-    #   the existing data in the domain are still encrypted using the
-    #   existing key, only the data added to domain after updating the key
-    #   is encrypted using the new key.
+    #   Voice ID for the server-side encryption of your data. Changing the
+    #   domain's associated KMS key immediately triggers an asynchronous
+    #   process to remove dependency on the old KMS key, such that the
+    #   domain's data can only be accessed using the new KMS key. The
+    #   domain's `ServerSideEncryptionUpdateDetails` contains the details
+    #   for this process.
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/UpdateDomainRequest AWS API Documentation
@@ -2146,6 +2157,22 @@ module Aws::VoiceID
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details resulting from 'Voice Spoofing Risk' analysis of the
+    # speaker.
+    #
+    # @!attribute [rw] risk_score
+    #   The score indicating the likelihood of speaker’s voice being
+    #   spoofed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/VoiceSpoofingRisk AWS API Documentation
+    #
+    class VoiceSpoofingRisk < Struct.new(
+      :risk_score)
       SENSITIVE = []
       include Aws::Structure
     end
