@@ -76,6 +76,8 @@ module Aws
 
       # isValidHostLabel(value: string, allowSubDomains: bool) bool
       def self.valid_host_label?(value, allow_sub_domains = false)
+        return false if value.empty?
+
         if allow_sub_domains
           labels = value.split('.')
           return labels.all? { |l| valid_host_label?(l) }

@@ -25,10 +25,9 @@ module Aws
         mock_signature = Aws::Sigv4::Signature.new(headers: {})
         mock_signer = double('sigv4a_signer', sign_request: mock_signature)
 
-        # a base signer is always created
-        # multi-region endpoints result in a second signer being created with :sigv4a
-        allow(Aws::Sigv4::Signer).to receive(:new).and_call_original
-        allow(Aws::Sigv4::Signer).to receive(:new).with(hash_including(region: region, signing_algorithm: :sigv4a)).and_return(mock_signer)
+        expect(Aws::Sigv4::Signer).to receive(:new)
+          .with(hash_including(region: region, signing_algorithm: :sigv4a))
+          .and_return(mock_signer)
       end
 
       it 'does not update the endpoint when endpoint_id is not set' do
@@ -51,7 +50,7 @@ module Aws
       it 'raises when given an empty endpoint_id' do
         expect do
           client.put_events(entries: entries, endpoint_id: '')
-        end.to raise_error(ArgumentError)
+        end.to raise_error(ArgumentError, /valid host label/)
       end
 
       context 'use_dualstack_endpoint' do
