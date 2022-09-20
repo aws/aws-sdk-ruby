@@ -1496,6 +1496,14 @@ module Aws::EC2
     #   The ID of a VPC peering connection.
     #   @return [String]
     #
+    # @!attribute [rw] state
+    #   The state. The following are the possible values:
+    #
+    #   * active
+    #
+    #   * blackhole
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AnalysisRouteTableRoute AWS API Documentation
     #
     class AnalysisRouteTableRoute < Struct.new(
@@ -1508,7 +1516,8 @@ module Aws::EC2
       :network_interface_id,
       :origin,
       :transit_gateway_id,
-      :vpc_peering_connection_id)
+      :vpc_peering_connection_id,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24526,10 +24535,10 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   The filters. The following are the possible values:
     #
-    #   * PathFound - A Boolean value that indicates whether a feasible path
-    #     is found.
+    #   * path-found - A Boolean value that indicates whether a feasible
+    #     path is found.
     #
-    #   * Status - The status of the analysis (running \| succeeded \|
+    #   * status - The status of the analysis (running \| succeeded \|
     #     failed).
     #   @return [Array<Types::Filter>]
     #
@@ -24606,15 +24615,13 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   The filters. The following are the possible values:
     #
-    #   * Destination - The ID of the resource.
+    #   * destination - The ID of the resource.
     #
-    #   * DestinationPort - The destination port.
+    #   * destination-port - The destination port.
     #
-    #   * Name - The path name.
+    #   * protocol - The protocol.
     #
-    #   * Protocol - The protocol.
-    #
-    #   * Source - The ID of the resource.
+    #   * source - The ID of the resource.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -27633,9 +27640,21 @@ module Aws::EC2
     #     information to be returned for the subnet. You can also use `cidr`
     #     or `cidrBlock` as the filter names.
     #
+    #   * `customer-owned-ipv4-pool` - The customer-owned IPv4 address pool
+    #     associated with the subnet.
+    #
     #   * `default-for-az` - Indicates whether this is the default subnet
     #     for the Availability Zone (`true` \| `false`). You can also use
     #     `defaultForAz` as the filter name.
+    #
+    #   * `enable-dns64` - Indicates whether DNS queries made to the
+    #     Amazon-provided DNS Resolver in this subnet should return
+    #     synthetic IPv6 addresses for IPv4-only destinations.
+    #
+    #   * `enable-lni-at-device-index` - Indicates the device position for
+    #     local network interfaces in this subnet. For example, `1`
+    #     indicates local network interfaces in this subnet are the
+    #     secondary network interface (eth1).
     #
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the subnet.
@@ -27649,10 +27668,32 @@ module Aws::EC2
     #   * `ipv6-native` - Indicates whether this is an IPv6 only subnet
     #     (`true` \| `false`).
     #
+    #   * `map-customer-owned-ip-on-launch` - Indicates whether a network
+    #     interface created in this subnet (including a network interface
+    #     created by RunInstances) receives a customer-owned IPv4 address.
+    #
+    #   * `map-public-ip-on-launch` - Indicates whether instances launched
+    #     in this subnet receive a public IPv4 address.
+    #
     #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
     #
     #   * `owner-id` - The ID of the Amazon Web Services account that owns
     #     the subnet.
+    #
+    #   * `private-dns-name-options-on-launch.hostname-type` - The type of
+    #     hostname to assign to instances in the subnet at launch. For
+    #     IPv4-only and dual-stack (IPv4 and IPv6) subnets, an instance DNS
+    #     name can be based on the instance IPv4 address (ip-name) or the
+    #     instance ID (resource-name). For IPv6 only subnets, an instance
+    #     DNS name must be based on the instance ID (resource-name).
+    #
+    #   * `private-dns-name-options-on-launch.enable-resource-name-dns-a-record`
+    #     - Indicates whether to respond to DNS queries for instance
+    #     hostnames with DNS A records.
+    #
+    #   * `private-dns-name-options-on-launch.enable-resource-name-dns-aaaa-record`
+    #     - Indicates whether to respond to DNS queries for instance
+    #     hostnames with DNS AAAA records.
     #
     #   * `state` - The state of the subnet (`pending` \| `available`).
     #
@@ -33878,6 +33919,14 @@ module Aws::EC2
     #   The transit gateway attachment.
     #   @return [Types::AnalysisComponent]
     #
+    # @!attribute [rw] component_account
+    #   The Amazon Web Services account for the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] component_region
+    #   The Region for the component.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Explanation AWS API Documentation
     #
     class Explanation < Struct.new(
@@ -33929,7 +33978,9 @@ module Aws::EC2
       :transit_gateway,
       :transit_gateway_route_table,
       :transit_gateway_route_table_route,
-      :transit_gateway_attachment)
+      :transit_gateway_attachment,
+      :component_account,
+      :component_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -54405,6 +54456,14 @@ module Aws::EC2
     #   The route in a transit gateway route table.
     #   @return [Types::TransitGatewayRouteTableRoute]
     #
+    # @!attribute [rw] explanations
+    #   The explanation codes.
+    #   @return [Array<Types::Explanation>]
+    #
+    # @!attribute [rw] elastic_load_balancer_listener
+    #   The load balancer listener.
+    #   @return [Types::AnalysisComponent]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PathComponent AWS API Documentation
     #
     class PathComponent < Struct.new(
@@ -54422,7 +54481,9 @@ module Aws::EC2
       :vpc,
       :additional_details,
       :transit_gateway,
-      :transit_gateway_route_table_route)
+      :transit_gateway_route_table_route,
+      :explanations,
+      :elastic_load_balancer_listener)
       SENSITIVE = []
       include Aws::Structure
     end

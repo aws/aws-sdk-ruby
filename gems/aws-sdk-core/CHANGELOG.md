@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.151.0 (2022-09-20)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 3.150.0 (2022-09-19)
 ------------------
 

@@ -25325,10 +25325,10 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   The filters. The following are the possible values:
     #
-    #   * PathFound - A Boolean value that indicates whether a feasible path
+    #   * path-found - A Boolean value that indicates whether a feasible path
     #     is found.
     #
-    #   * Status - The status of the analysis (running \| succeeded \|
+    #   * status - The status of the analysis (running \| succeeded \|
     #     failed).
     #
     # @option params [Integer] :max_results
@@ -25433,6 +25433,7 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.origin #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.state #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].security_group_rule.cidr #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].security_group_rule.direction #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].security_group_rule.security_group_id #=> String
@@ -25464,6 +25465,159 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].acl.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].acl.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].acl.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].acl_rule.cidr #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].acl_rule.egress #=> Boolean
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].acl_rule.port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].acl_rule.port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].acl_rule.protocol #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].acl_rule.rule_action #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].acl_rule.rule_number #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].address #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].addresses #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].addresses[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].attached_to.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].attached_to.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].attached_to.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].availability_zones #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].availability_zones[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].cidrs #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].cidrs[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].component.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].component.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].component.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].customer_gateway.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].customer_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].customer_gateway.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].destination.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].destination.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].destination.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].destination_vpc.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].destination_vpc.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].destination_vpc.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].direction #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].explanation_code #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].ingress_route_table.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].ingress_route_table.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].ingress_route_table.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].internet_gateway.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].internet_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].internet_gateway.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].classic_load_balancer_listener.load_balancer_port #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].classic_load_balancer_listener.instance_port #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_listener_port #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_target.address #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_target.availability_zone #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_target.instance.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_target.instance.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_target.instance.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_target.port #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_target_group.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_target_group.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_target_group.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_target_groups #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_target_groups[0].id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_target_groups[0].arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_target_groups[0].name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].load_balancer_target_port #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].elastic_load_balancer_listener.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].elastic_load_balancer_listener.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].elastic_load_balancer_listener.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].missing_component #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].nat_gateway.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].nat_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].nat_gateway.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].network_interface.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].network_interface.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].network_interface.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].packet_field #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].vpc_peering_connection.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].vpc_peering_connection.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].vpc_peering_connection.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].port #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].port_ranges #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].port_ranges[0].from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].port_ranges[0].to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].prefix_list.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].prefix_list.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].prefix_list.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].protocols #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].protocols[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.destination_prefix_list_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.egress_only_internet_gateway_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.gateway_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.instance_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.nat_gateway_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.network_interface_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.origin #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.transit_gateway_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table_route.state #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].route_table.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].security_group.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].security_group.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].security_group.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].security_group_rule.cidr #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].security_group_rule.direction #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].security_group_rule.security_group_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].security_group_rule.port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].security_group_rule.port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].security_group_rule.prefix_list_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].security_group_rule.protocol #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].security_groups #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].security_groups[0].id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].security_groups[0].arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].security_groups[0].name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].source_vpc.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].source_vpc.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].source_vpc.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].state #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].subnet.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].subnet.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].subnet.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].subnet_route_table.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].subnet_route_table.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].subnet_route_table.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].vpc.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].vpc.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].vpc.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].vpc_endpoint.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].vpc_endpoint.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].vpc_endpoint.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].vpn_connection.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].vpn_connection.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].vpn_connection.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].vpn_gateway.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].vpn_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].vpn_gateway.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_route_table.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_route_table.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_route_table.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_route_table_route.state #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_route_table_route.route_origin #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_route_table_route.prefix_list_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_route_table_route.attachment_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_route_table_route.resource_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_attachment.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_attachment.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_attachment.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].component_account #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].component_region #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].elastic_load_balancer_listener.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].elastic_load_balancer_listener.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].elastic_load_balancer_listener.name #=> String
     #   resp.network_insights_analyses[0].return_path_components #=> Array
     #   resp.network_insights_analyses[0].return_path_components[0].sequence_number #=> Integer
     #   resp.network_insights_analyses[0].return_path_components[0].acl_rule.cidr #=> String
@@ -25514,6 +25668,7 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.origin #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.state #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].security_group_rule.cidr #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].security_group_rule.direction #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].security_group_rule.security_group_id #=> String
@@ -25545,6 +25700,159 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].acl.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].acl.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].acl.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].acl_rule.cidr #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].acl_rule.egress #=> Boolean
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].acl_rule.port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].acl_rule.port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].acl_rule.protocol #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].acl_rule.rule_action #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].acl_rule.rule_number #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].address #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].addresses #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].addresses[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].attached_to.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].attached_to.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].attached_to.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].availability_zones #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].availability_zones[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].cidrs #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].cidrs[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].component.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].component.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].component.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].customer_gateway.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].customer_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].customer_gateway.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].destination.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].destination.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].destination.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].destination_vpc.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].destination_vpc.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].destination_vpc.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].direction #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].explanation_code #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].ingress_route_table.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].ingress_route_table.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].ingress_route_table.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].internet_gateway.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].internet_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].internet_gateway.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].classic_load_balancer_listener.load_balancer_port #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].classic_load_balancer_listener.instance_port #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_listener_port #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_target.address #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_target.availability_zone #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_target.instance.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_target.instance.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_target.instance.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_target.port #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_target_group.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_target_group.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_target_group.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_target_groups #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_target_groups[0].id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_target_groups[0].arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_target_groups[0].name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].load_balancer_target_port #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].elastic_load_balancer_listener.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].elastic_load_balancer_listener.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].elastic_load_balancer_listener.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].missing_component #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].nat_gateway.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].nat_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].nat_gateway.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].network_interface.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].network_interface.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].network_interface.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].packet_field #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].vpc_peering_connection.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].vpc_peering_connection.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].vpc_peering_connection.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].port #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].port_ranges #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].port_ranges[0].from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].port_ranges[0].to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].prefix_list.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].prefix_list.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].prefix_list.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].protocols #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].protocols[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.destination_prefix_list_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.egress_only_internet_gateway_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.gateway_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.instance_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.nat_gateway_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.network_interface_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.origin #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.transit_gateway_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table_route.state #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].route_table.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].security_group.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].security_group.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].security_group.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].security_group_rule.cidr #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].security_group_rule.direction #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].security_group_rule.security_group_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].security_group_rule.port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].security_group_rule.port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].security_group_rule.prefix_list_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].security_group_rule.protocol #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].security_groups #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].security_groups[0].id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].security_groups[0].arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].security_groups[0].name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].source_vpc.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].source_vpc.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].source_vpc.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].state #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].subnet.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].subnet.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].subnet.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].subnet_route_table.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].subnet_route_table.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].subnet_route_table.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].vpc.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].vpc.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].vpc.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].vpc_endpoint.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].vpc_endpoint.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].vpc_endpoint.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].vpn_connection.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].vpn_connection.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].vpn_connection.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].vpn_gateway.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].vpn_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].vpn_gateway.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_route_table.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_route_table.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_route_table.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_route_table_route.state #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_route_table_route.route_origin #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_route_table_route.prefix_list_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_route_table_route.attachment_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_route_table_route.resource_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_attachment.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_attachment.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_attachment.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].component_account #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].component_region #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].elastic_load_balancer_listener.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].elastic_load_balancer_listener.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].elastic_load_balancer_listener.name #=> String
     #   resp.network_insights_analyses[0].explanations #=> Array
     #   resp.network_insights_analyses[0].explanations[0].acl.id #=> String
     #   resp.network_insights_analyses[0].explanations[0].acl.arn #=> String
@@ -25637,6 +25945,7 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].explanations[0].route_table_route.origin #=> String
     #   resp.network_insights_analyses[0].explanations[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analyses[0].explanations[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table_route.state #=> String
     #   resp.network_insights_analyses[0].explanations[0].route_table.id #=> String
     #   resp.network_insights_analyses[0].explanations[0].route_table.arn #=> String
     #   resp.network_insights_analyses[0].explanations[0].route_table.name #=> String
@@ -25692,6 +26001,8 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].explanations[0].transit_gateway_attachment.id #=> String
     #   resp.network_insights_analyses[0].explanations[0].transit_gateway_attachment.arn #=> String
     #   resp.network_insights_analyses[0].explanations[0].transit_gateway_attachment.name #=> String
+    #   resp.network_insights_analyses[0].explanations[0].component_account #=> String
+    #   resp.network_insights_analyses[0].explanations[0].component_region #=> String
     #   resp.network_insights_analyses[0].alternate_path_hints #=> Array
     #   resp.network_insights_analyses[0].alternate_path_hints[0].component_id #=> String
     #   resp.network_insights_analyses[0].alternate_path_hints[0].component_arn #=> String
@@ -25717,15 +26028,13 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   The filters. The following are the possible values:
     #
-    #   * Destination - The ID of the resource.
+    #   * destination - The ID of the resource.
     #
-    #   * DestinationPort - The destination port.
+    #   * destination-port - The destination port.
     #
-    #   * Name - The path name.
+    #   * protocol - The protocol.
     #
-    #   * Protocol - The protocol.
-    #
-    #   * Source - The ID of the resource.
+    #   * source - The ID of the resource.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -29977,9 +30286,21 @@ module Aws::EC2
     #     to be returned for the subnet. You can also use `cidr` or
     #     `cidrBlock` as the filter names.
     #
+    #   * `customer-owned-ipv4-pool` - The customer-owned IPv4 address pool
+    #     associated with the subnet.
+    #
     #   * `default-for-az` - Indicates whether this is the default subnet for
     #     the Availability Zone (`true` \| `false`). You can also use
     #     `defaultForAz` as the filter name.
+    #
+    #   * `enable-dns64` - Indicates whether DNS queries made to the
+    #     Amazon-provided DNS Resolver in this subnet should return synthetic
+    #     IPv6 addresses for IPv4-only destinations.
+    #
+    #   * `enable-lni-at-device-index` - Indicates the device position for
+    #     local network interfaces in this subnet. For example, `1` indicates
+    #     local network interfaces in this subnet are the secondary network
+    #     interface (eth1).
     #
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the subnet.
@@ -29993,10 +30314,32 @@ module Aws::EC2
     #   * `ipv6-native` - Indicates whether this is an IPv6 only subnet
     #     (`true` \| `false`).
     #
+    #   * `map-customer-owned-ip-on-launch` - Indicates whether a network
+    #     interface created in this subnet (including a network interface
+    #     created by RunInstances) receives a customer-owned IPv4 address.
+    #
+    #   * `map-public-ip-on-launch` - Indicates whether instances launched in
+    #     this subnet receive a public IPv4 address.
+    #
     #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
     #
     #   * `owner-id` - The ID of the Amazon Web Services account that owns the
     #     subnet.
+    #
+    #   * `private-dns-name-options-on-launch.hostname-type` - The type of
+    #     hostname to assign to instances in the subnet at launch. For
+    #     IPv4-only and dual-stack (IPv4 and IPv6) subnets, an instance DNS
+    #     name can be based on the instance IPv4 address (ip-name) or the
+    #     instance ID (resource-name). For IPv6 only subnets, an instance DNS
+    #     name must be based on the instance ID (resource-name).
+    #
+    #   * `private-dns-name-options-on-launch.enable-resource-name-dns-a-record`
+    #     - Indicates whether to respond to DNS queries for instance hostnames
+    #     with DNS A records.
+    #
+    #   * `private-dns-name-options-on-launch.enable-resource-name-dns-aaaa-record`
+    #     - Indicates whether to respond to DNS queries for instance hostnames
+    #     with DNS AAAA records.
     #
     #   * `state` - The state of the subnet (`pending` \| `available`).
     #
@@ -37354,6 +37697,7 @@ module Aws::EC2
     #   resp.analysis_findings[0].finding_components[0].route_table_route.origin #=> String
     #   resp.analysis_findings[0].finding_components[0].route_table_route.transit_gateway_id #=> String
     #   resp.analysis_findings[0].finding_components[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].route_table_route.state #=> String
     #   resp.analysis_findings[0].finding_components[0].security_group_rule.cidr #=> String
     #   resp.analysis_findings[0].finding_components[0].security_group_rule.direction #=> String
     #   resp.analysis_findings[0].finding_components[0].security_group_rule.security_group_id #=> String
@@ -37385,6 +37729,159 @@ module Aws::EC2
     #   resp.analysis_findings[0].finding_components[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.analysis_findings[0].finding_components[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.analysis_findings[0].finding_components[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].acl.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].acl.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].acl.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].acl_rule.cidr #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].acl_rule.egress #=> Boolean
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].acl_rule.port_range.from #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].acl_rule.port_range.to #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].acl_rule.protocol #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].acl_rule.rule_action #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].acl_rule.rule_number #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].address #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].addresses #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].addresses[0] #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].attached_to.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].attached_to.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].attached_to.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].availability_zones #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].availability_zones[0] #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].cidrs #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].cidrs[0] #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].component.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].component.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].component.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].customer_gateway.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].customer_gateway.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].customer_gateway.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].destination.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].destination.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].destination.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].destination_vpc.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].destination_vpc.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].destination_vpc.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].direction #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].explanation_code #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].ingress_route_table.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].ingress_route_table.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].ingress_route_table.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].internet_gateway.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].internet_gateway.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].internet_gateway.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].classic_load_balancer_listener.load_balancer_port #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].classic_load_balancer_listener.instance_port #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_listener_port #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_target.address #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_target.availability_zone #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_target.instance.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_target.instance.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_target.instance.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_target.port #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_target_group.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_target_group.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_target_group.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_target_groups #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_target_groups[0].id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_target_groups[0].arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_target_groups[0].name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].load_balancer_target_port #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].elastic_load_balancer_listener.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].elastic_load_balancer_listener.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].elastic_load_balancer_listener.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].missing_component #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].nat_gateway.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].nat_gateway.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].nat_gateway.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].network_interface.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].network_interface.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].network_interface.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].packet_field #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].vpc_peering_connection.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].vpc_peering_connection.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].vpc_peering_connection.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].port #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].port_ranges #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].port_ranges[0].from #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].port_ranges[0].to #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].prefix_list.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].prefix_list.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].prefix_list.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].protocols #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].protocols[0] #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.destination_cidr #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.destination_prefix_list_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.egress_only_internet_gateway_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.gateway_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.instance_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.nat_gateway_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.network_interface_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.origin #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.transit_gateway_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table_route.state #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].route_table.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].security_group.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].security_group.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].security_group.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].security_group_rule.cidr #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].security_group_rule.direction #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].security_group_rule.security_group_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].security_group_rule.port_range.from #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].security_group_rule.port_range.to #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].security_group_rule.prefix_list_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].security_group_rule.protocol #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].security_groups #=> Array
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].security_groups[0].id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].security_groups[0].arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].security_groups[0].name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].source_vpc.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].source_vpc.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].source_vpc.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].state #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].subnet.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].subnet.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].subnet.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].subnet_route_table.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].subnet_route_table.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].subnet_route_table.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].vpc.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].vpc.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].vpc.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].vpc_endpoint.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].vpc_endpoint.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].vpc_endpoint.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].vpn_connection.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].vpn_connection.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].vpn_connection.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].vpn_gateway.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].vpn_gateway.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].vpn_gateway.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_route_table.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_route_table.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_route_table.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_route_table_route.destination_cidr #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_route_table_route.state #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_route_table_route.route_origin #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_route_table_route.prefix_list_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_route_table_route.attachment_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_route_table_route.resource_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_attachment.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_attachment.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_attachment.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].component_account #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].component_region #=> String
+    #   resp.analysis_findings[0].finding_components[0].elastic_load_balancer_listener.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].elastic_load_balancer_listener.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].elastic_load_balancer_listener.name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetNetworkInsightsAccessScopeAnalysisFindings AWS API Documentation
@@ -50190,6 +50687,7 @@ module Aws::EC2
     #   resp.network_insights_analysis.forward_path_components[0].route_table_route.origin #=> String
     #   resp.network_insights_analysis.forward_path_components[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].route_table_route.state #=> String
     #   resp.network_insights_analysis.forward_path_components[0].security_group_rule.cidr #=> String
     #   resp.network_insights_analysis.forward_path_components[0].security_group_rule.direction #=> String
     #   resp.network_insights_analysis.forward_path_components[0].security_group_rule.security_group_id #=> String
@@ -50221,6 +50719,159 @@ module Aws::EC2
     #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].acl.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].acl.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].acl.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].acl_rule.cidr #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].acl_rule.egress #=> Boolean
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].acl_rule.port_range.from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].acl_rule.port_range.to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].acl_rule.protocol #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].acl_rule.rule_action #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].acl_rule.rule_number #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].address #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].addresses #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].addresses[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].attached_to.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].attached_to.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].attached_to.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].availability_zones #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].availability_zones[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].cidrs #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].cidrs[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].component.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].component.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].component.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].customer_gateway.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].customer_gateway.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].customer_gateway.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].destination.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].destination.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].destination.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].destination_vpc.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].destination_vpc.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].destination_vpc.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].direction #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].explanation_code #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].ingress_route_table.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].ingress_route_table.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].ingress_route_table.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].internet_gateway.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].internet_gateway.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].internet_gateway.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].classic_load_balancer_listener.load_balancer_port #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].classic_load_balancer_listener.instance_port #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_listener_port #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_target.address #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_target.availability_zone #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_target.instance.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_target.instance.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_target.instance.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_target.port #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_target_group.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_target_group.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_target_group.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_target_groups #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_target_groups[0].id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_target_groups[0].arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_target_groups[0].name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].load_balancer_target_port #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].elastic_load_balancer_listener.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].elastic_load_balancer_listener.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].elastic_load_balancer_listener.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].missing_component #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].nat_gateway.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].nat_gateway.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].nat_gateway.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].network_interface.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].network_interface.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].network_interface.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].packet_field #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].vpc_peering_connection.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].vpc_peering_connection.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].vpc_peering_connection.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].port #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].port_ranges #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].port_ranges[0].from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].port_ranges[0].to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].prefix_list.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].prefix_list.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].prefix_list.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].protocols #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].protocols[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.destination_prefix_list_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.egress_only_internet_gateway_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.gateway_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.instance_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.nat_gateway_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.network_interface_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.origin #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.transit_gateway_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table_route.state #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].route_table.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].security_group.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].security_group.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].security_group.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].security_group_rule.cidr #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].security_group_rule.direction #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].security_group_rule.security_group_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].security_group_rule.port_range.from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].security_group_rule.port_range.to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].security_group_rule.prefix_list_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].security_group_rule.protocol #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].security_groups #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].security_groups[0].id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].security_groups[0].arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].security_groups[0].name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].source_vpc.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].source_vpc.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].source_vpc.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].state #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].subnet.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].subnet.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].subnet.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].subnet_route_table.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].subnet_route_table.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].subnet_route_table.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].vpc.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].vpc.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].vpc.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].vpc_endpoint.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].vpc_endpoint.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].vpc_endpoint.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].vpn_connection.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].vpn_connection.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].vpn_connection.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].vpn_gateway.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].vpn_gateway.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].vpn_gateway.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_route_table.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_route_table.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_route_table.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_route_table_route.state #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_route_table_route.route_origin #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_route_table_route.prefix_list_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_route_table_route.attachment_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_route_table_route.resource_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_attachment.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_attachment.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_attachment.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].component_account #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].component_region #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].elastic_load_balancer_listener.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].elastic_load_balancer_listener.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].elastic_load_balancer_listener.name #=> String
     #   resp.network_insights_analysis.return_path_components #=> Array
     #   resp.network_insights_analysis.return_path_components[0].sequence_number #=> Integer
     #   resp.network_insights_analysis.return_path_components[0].acl_rule.cidr #=> String
@@ -50271,6 +50922,7 @@ module Aws::EC2
     #   resp.network_insights_analysis.return_path_components[0].route_table_route.origin #=> String
     #   resp.network_insights_analysis.return_path_components[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analysis.return_path_components[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].route_table_route.state #=> String
     #   resp.network_insights_analysis.return_path_components[0].security_group_rule.cidr #=> String
     #   resp.network_insights_analysis.return_path_components[0].security_group_rule.direction #=> String
     #   resp.network_insights_analysis.return_path_components[0].security_group_rule.security_group_id #=> String
@@ -50302,6 +50954,159 @@ module Aws::EC2
     #   resp.network_insights_analysis.return_path_components[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.network_insights_analysis.return_path_components[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.network_insights_analysis.return_path_components[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].acl.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].acl.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].acl.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].acl_rule.cidr #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].acl_rule.egress #=> Boolean
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].acl_rule.port_range.from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].acl_rule.port_range.to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].acl_rule.protocol #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].acl_rule.rule_action #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].acl_rule.rule_number #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].address #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].addresses #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].addresses[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].attached_to.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].attached_to.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].attached_to.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].availability_zones #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].availability_zones[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].cidrs #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].cidrs[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].component.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].component.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].component.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].customer_gateway.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].customer_gateway.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].customer_gateway.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].destination.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].destination.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].destination.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].destination_vpc.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].destination_vpc.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].destination_vpc.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].direction #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].explanation_code #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].ingress_route_table.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].ingress_route_table.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].ingress_route_table.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].internet_gateway.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].internet_gateway.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].internet_gateway.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].classic_load_balancer_listener.load_balancer_port #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].classic_load_balancer_listener.instance_port #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_listener_port #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_target.address #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_target.availability_zone #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_target.instance.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_target.instance.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_target.instance.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_target.port #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_target_group.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_target_group.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_target_group.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_target_groups #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_target_groups[0].id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_target_groups[0].arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_target_groups[0].name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].load_balancer_target_port #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].elastic_load_balancer_listener.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].elastic_load_balancer_listener.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].elastic_load_balancer_listener.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].missing_component #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].nat_gateway.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].nat_gateway.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].nat_gateway.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].network_interface.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].network_interface.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].network_interface.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].packet_field #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].vpc_peering_connection.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].vpc_peering_connection.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].vpc_peering_connection.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].port #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].port_ranges #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].port_ranges[0].from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].port_ranges[0].to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].prefix_list.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].prefix_list.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].prefix_list.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].protocols #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].protocols[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.destination_prefix_list_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.egress_only_internet_gateway_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.gateway_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.instance_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.nat_gateway_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.network_interface_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.origin #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.transit_gateway_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table_route.state #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].route_table.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].security_group.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].security_group.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].security_group.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].security_group_rule.cidr #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].security_group_rule.direction #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].security_group_rule.security_group_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].security_group_rule.port_range.from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].security_group_rule.port_range.to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].security_group_rule.prefix_list_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].security_group_rule.protocol #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].security_groups #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].security_groups[0].id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].security_groups[0].arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].security_groups[0].name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].source_vpc.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].source_vpc.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].source_vpc.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].state #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].subnet.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].subnet.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].subnet.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].subnet_route_table.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].subnet_route_table.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].subnet_route_table.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].vpc.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].vpc.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].vpc.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].vpc_endpoint.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].vpc_endpoint.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].vpc_endpoint.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].vpn_connection.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].vpn_connection.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].vpn_connection.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].vpn_gateway.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].vpn_gateway.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].vpn_gateway.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_route_table.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_route_table.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_route_table.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_route_table_route.state #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_route_table_route.route_origin #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_route_table_route.prefix_list_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_route_table_route.attachment_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_route_table_route.resource_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_attachment.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_attachment.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_attachment.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].component_account #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].component_region #=> String
+    #   resp.network_insights_analysis.return_path_components[0].elastic_load_balancer_listener.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].elastic_load_balancer_listener.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].elastic_load_balancer_listener.name #=> String
     #   resp.network_insights_analysis.explanations #=> Array
     #   resp.network_insights_analysis.explanations[0].acl.id #=> String
     #   resp.network_insights_analysis.explanations[0].acl.arn #=> String
@@ -50394,6 +51199,7 @@ module Aws::EC2
     #   resp.network_insights_analysis.explanations[0].route_table_route.origin #=> String
     #   resp.network_insights_analysis.explanations[0].route_table_route.transit_gateway_id #=> String
     #   resp.network_insights_analysis.explanations[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table_route.state #=> String
     #   resp.network_insights_analysis.explanations[0].route_table.id #=> String
     #   resp.network_insights_analysis.explanations[0].route_table.arn #=> String
     #   resp.network_insights_analysis.explanations[0].route_table.name #=> String
@@ -50449,6 +51255,8 @@ module Aws::EC2
     #   resp.network_insights_analysis.explanations[0].transit_gateway_attachment.id #=> String
     #   resp.network_insights_analysis.explanations[0].transit_gateway_attachment.arn #=> String
     #   resp.network_insights_analysis.explanations[0].transit_gateway_attachment.name #=> String
+    #   resp.network_insights_analysis.explanations[0].component_account #=> String
+    #   resp.network_insights_analysis.explanations[0].component_region #=> String
     #   resp.network_insights_analysis.alternate_path_hints #=> Array
     #   resp.network_insights_analysis.alternate_path_hints[0].component_id #=> String
     #   resp.network_insights_analysis.alternate_path_hints[0].component_arn #=> String
@@ -51273,7 +52081,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.335.0'
+      context[:gem_version] = '1.336.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

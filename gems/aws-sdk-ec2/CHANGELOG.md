@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.336.0 (2022-09-20)
+------------------
+
+* Feature - This release adds support for blocked paths to Amazon VPC Reachability Analyzer.
+
 1.335.0 (2022-09-19)
 ------------------
 
