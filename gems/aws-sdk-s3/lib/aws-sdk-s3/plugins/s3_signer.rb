@@ -12,12 +12,6 @@ module Aws
       class S3Signer < Seahorse::Client::Plugin
         option(:signature_version, 'v4')
 
-        # These once had defaults. But now they are used as overrides to
-        # new endpoint and auth resolution.
-        option(:sigv4_signer)
-        option(:sigv4_name)
-        option(:sigv4_region)
-
         def add_handlers(handlers, cfg)
           case cfg.signature_version
           when 'v4' then add_v4_handlers(handlers)
@@ -34,6 +28,7 @@ module Aws
         end
 
         def add_legacy_handler(handlers)
+          # generic Sign plugin will be skipped if it sees sigv2
           handlers.add(LegacyHandler, step: :sign)
         end
 
@@ -69,7 +64,8 @@ module Aws
         # This handler detects when a request fails because of a mismatched bucket
         # region. It follows up by making a request to determine the correct
         # region, then finally a version 4 signed request against the correct
-        # regional endpoint.
+        # regional endpoint. This is intended for s3's global endpoint which
+        # will return 400 if the bucket is not in region.
         class BucketRegionErrorHandler < Seahorse::Client::Handler
           def call(context)
             response = @handler.call(context)
@@ -123,10 +119,13 @@ module Aws
             )
             context.metadata[:redirect_region] = actual_region
 
-            Aws::Plugins::SignatureV4.apply_signature(
-              context: context,
-              signer: S3Signer.build_v4_signer(context, actual_region)
+            signer = Aws::Plugins::Sign::SignatureV4.build_v4_signer(
+              context[:auth_scheme],
+              context.config,
+              actual_region
             )
+
+            Aws::Plugins::Sign::SignatureV4.apply_signature(signer, context)
           end
 
           def region_from_body(body)
@@ -152,33 +151,6 @@ module Aws
         end
 
         class << self
-          # @api private
-          def build_v4_signer(context, new_region = nil)
-            cfg = context.config
-            auth_scheme = context[:auth_scheme]
-            Aws::Sigv4::Signer.new(
-              service: _sigv4_name(cfg, auth_scheme),
-              region: new_region || _sigv4_region(cfg, auth_scheme),
-              credentials: cfg.credentials,
-              signing_algorithm: auth_scheme['name'].to_sym,
-              uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
-              unsigned_headers: %w[content-length user-agent x-amzn-trace-id]
-            )
-          end
-
-          # @api private
-          def _sigv4_name(cfg, scheme)
-            cfg.sigv4_name || scheme['signingName'] ||
-              cfg.api.metadata['signingName'] ||
-              cfg.api.metadata['endpointPrefix']
-          end
-
-          # @api private
-          def _sigv4_region(cfg, scheme)
-            cfg.sigv4_region || scheme['signingRegion'] ||
-              '*' if scheme['name'] == 'sigv4a' || cfg.region
-          end
-
           def new_hostname(context, region)
             endpoint_params = context[:endpoint_params]
             endpoint_params.region = region

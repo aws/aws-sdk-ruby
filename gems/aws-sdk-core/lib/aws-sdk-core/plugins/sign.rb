@@ -19,22 +19,10 @@ module Aws
       end
 
       def self.signer_for(auth_scheme, config, region_override = nil)
-        case (scheme_name = auth_scheme['name'])
+        case auth_scheme['name']
         when 'sigv4', 'sigv4a'
           begin
-            region = if scheme_name == 'sigv4a'
-                       auth_scheme['signingRegionSet'].first
-                     else
-                       config.sigv4_region || auth_scheme['signingRegion']
-                     end
-            Aws::Sigv4::Signer.new(
-              service: config.sigv4_name || auth_scheme['signingName'],
-              region: region_override || region,
-              credentials_provider: config.credentials,
-              signing_algorithm: scheme_name.to_sym,
-              uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
-              unsigned_headers: %w[content-length user-agent x-amzn-trace-id]
-            )
+            SignatureV4.build_v4_signer(auth_scheme, config, region_override)
           rescue Aws::Sigv4::Errors::MissingCredentialsError
             raise Aws::Errors::MissingCredentialsError
           end
@@ -42,8 +30,6 @@ module Aws
           'Bearer'
         when 'none'
           # don't sign
-        when 'sigv2'
-          # also don't sign. A seperate plugin will pick this up
         end
       end
 
@@ -88,6 +74,29 @@ module Aws
       # @api private
       module SignatureV4
         class << self
+          def build_v4_signer(auth_scheme, config, region_override = nil)
+            scheme_name = auth_scheme['name']
+
+            unless %w[sigv4 sigv4a].include?(scheme_name)
+              raise ArgumentError,
+                    "Expected sigv4 or sigv4a auth scheme, got #{scheme_name}"
+            end
+
+            region = if scheme_name == 'sigv4a'
+                       auth_scheme['signingRegionSet'].first
+                     else
+                       config.sigv4_region || auth_scheme['signingRegion']
+                     end
+            Aws::Sigv4::Signer.new(
+              service: config.sigv4_name || auth_scheme['signingName'],
+              region: region_override || region,
+              credentials_provider: config.credentials,
+              signing_algorithm: scheme_name.to_sym,
+              uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
+              unsigned_headers: %w[content-length user-agent x-amzn-trace-id]
+            )
+          end
+
           def apply_signature(signer, context)
             req = context.http_request
 

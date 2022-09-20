@@ -63,7 +63,7 @@ module Aws
 
         signer.presign_url(
           http_method: 'GET',
-          url: "#{endpoint.url}?#{param_list}",
+          url: "#{endpoint.url}/?#{param_list}",
           body: '',
           headers: options[:headers]
         ).to_s

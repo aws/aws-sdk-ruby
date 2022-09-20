@@ -1123,7 +1123,9 @@ module Aws
           mock_signature = Aws::Sigv4::Signature.new(headers: {})
           mock_signer = double('sigv4a_signer', sign_request: mock_signature)
 
-          allow(Aws::Sigv4::Signer).to receive(:new).with(hash_including(region: region, signing_algorithm: :sigv4a)).and_return(mock_signer)
+          allow(Aws::Sigv4::Signer).to receive(:new)
+            .with(hash_including(region: region, signing_algorithm: :sigv4a))
+            .and_return(mock_signer)
         end
 
         it 's3_use_arn_region n/a; accepts MRAP with client us-east-1' do
