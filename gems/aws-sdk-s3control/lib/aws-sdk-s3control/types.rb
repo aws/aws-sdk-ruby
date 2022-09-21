@@ -154,7 +154,7 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   A generic descritpion of the error condition in English.
+    #   A generic description of the error condition in English.
     #   @return [String]
     #
     # @!attribute [rw] resource
@@ -677,7 +677,7 @@ module Aws::S3Control
     # @!attribute [rw] outpost_id
     #   The ID of the Outposts where the bucket is being created.
     #
-    #   <note markdown="1"> This is required by Amazon S3 on Outposts buckets.
+    #   <note markdown="1"> This ID is required by Amazon S3 on Outposts buckets.
     #
     #    </note>
     #   @return [String]
@@ -2332,6 +2332,51 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetBucketVersioningRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         bucket: "BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the S3 on Outposts bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   The S3 on Outposts bucket to return the versioning state for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketVersioningRequest AWS API Documentation
+    #
+    class GetBucketVersioningRequest < Struct.new(
+      :account_id,
+      :bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The versioning state of the S3 on Outposts bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] mfa_delete
+    #   Specifies whether MFA delete is enabled in the bucket versioning
+    #   configuration. This element is returned only if the bucket has been
+    #   configured with MFA delete. If MFA delete has never been configured
+    #   for the bucket, this element is not returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketVersioningResult AWS API Documentation
+    #
+    class GetBucketVersioningResult < Struct.new(
+      :status,
+      :mfa_delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetJobTaggingRequest
     #   data as a hash:
     #
@@ -3977,9 +4022,9 @@ module Aws::S3Control
     #   @return [Integer]
     #
     # @!attribute [rw] outpost_id
-    #   The ID of the Outposts.
+    #   The ID of the Outposts resource.
     #
-    #   <note markdown="1"> This is required by Amazon S3 on Outposts buckets.
+    #   <note markdown="1"> This ID is required by Amazon S3 on Outposts buckets.
     #
     #    </note>
     #   @return [String]
@@ -4177,7 +4222,7 @@ module Aws::S3Control
     #   The current status of the Multi-Region Access Point.
     #
     #   `CREATING` and `DELETING` are temporary states that exist while the
-    #   request is propogating and being completed. If a Multi-Region Access
+    #   request is propagating and being completed. If a Multi-Region Access
     #   Point has a status of `PARTIALLY_CREATED`, you can retry creation or
     #   send a request to delete the Multi-Region Access Point. If a
     #   Multi-Region Access Point has a status of `PARTIALLY_DELETED`, you
@@ -4936,6 +4981,48 @@ module Aws::S3Control
       :account_id,
       :bucket,
       :tagging)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutBucketVersioningRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         bucket: "BucketName", # required
+    #         mfa: "MFA",
+    #         versioning_configuration: { # required
+    #           mfa_delete: "Enabled", # accepts Enabled, Disabled
+    #           status: "Enabled", # accepts Enabled, Suspended
+    #         },
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the S3 on Outposts bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   The S3 on Outposts bucket to set the versioning state for.
+    #   @return [String]
+    #
+    # @!attribute [rw] mfa
+    #   The concatenation of the authentication device's serial number, a
+    #   space, and the value that is displayed on your authentication
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] versioning_configuration
+    #   The root-level tag for the `VersioningConfiguration` parameters.
+    #   @return [Types::VersioningConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutBucketVersioningRequest AWS API Documentation
+    #
+    class PutBucketVersioningRequest < Struct.new(
+      :account_id,
+      :bucket,
+      :mfa,
+      :versioning_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6270,8 +6357,8 @@ module Aws::S3Control
     #
     # @!attribute [rw] key_id
     #   Specifies the ID of the Amazon Web Services Key Management Service
-    #   (Amazon Web Services KMS) symmetric customer managed key to use for
-    #   encrypting generated manifest objects.
+    #   (Amazon Web Services KMS) symmetric encryption customer managed key
+    #   to use for encrypting generated manifest objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SSEKMSEncryption AWS API Documentation
@@ -6778,6 +6865,39 @@ module Aws::S3Control
       :job_id,
       :status,
       :status_update_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the versioning state of an Amazon S3 on Outposts bucket. For
+    # more information, see [PutBucketVersioning][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html
+    #
+    # @note When making an API call, you may pass VersioningConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         mfa_delete: "Enabled", # accepts Enabled, Disabled
+    #         status: "Enabled", # accepts Enabled, Suspended
+    #       }
+    #
+    # @!attribute [rw] mfa_delete
+    #   Specifies whether MFA delete is enabled or disabled in the bucket
+    #   versioning configuration for the S3 on Outposts bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Sets the versioning state of the S3 on Outposts bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/VersioningConfiguration AWS API Documentation
+    #
+    class VersioningConfiguration < Struct.new(
+      :mfa_delete,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

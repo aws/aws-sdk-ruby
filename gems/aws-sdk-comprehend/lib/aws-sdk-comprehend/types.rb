@@ -126,10 +126,10 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] text_list
-    #   A list containing the text of the input documents. The list can
-    #   contain a maximum of 25 documents. Each document should contain at
-    #   least 20 characters and must contain fewer than 5,000 bytes of UTF-8
-    #   encoded characters.
+    #   A list containing the UTF-8 encoded text of the input documents. The
+    #   list can contain a maximum of 25 documents. Each document should
+    #   contain at least 20 characters. The maximum size of each document is
+    #   5 KB.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectDominantLanguageRequest AWS API Documentation
@@ -193,9 +193,9 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] text_list
-    #   A list containing the text of the input documents. The list can
-    #   contain a maximum of 25 documents. Each document must contain fewer
-    #   than 5,000 bytes of UTF-8 encoded characters.
+    #   A list containing the UTF-8 encoded text of the input documents. The
+    #   list can contain a maximum of 25 documents. The maximum size of each
+    #   document is 5 KB.
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
@@ -266,9 +266,9 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] text_list
-    #   A list containing the text of the input documents. The list can
-    #   contain a maximum of 25 documents. Each document must contain fewer
-    #   than 5,000 bytes of UTF-8 encoded characters.
+    #   A list containing the UTF-8 encoded text of the input documents. The
+    #   list can contain a maximum of 25 documents. The maximum size of each
+    #   document is 5 KB.
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
@@ -344,9 +344,15 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] text_list
-    #   A list containing the text of the input documents. The list can
-    #   contain a maximum of 25 documents. Each document must contain fewer
-    #   that 5,000 bytes of UTF-8 encoded characters.
+    #   A list containing the UTF-8 encoded text of the input documents. The
+    #   list can contain a maximum of 25 documents. The maximum size of each
+    #   document is 5 KB.
+    #
+    #   <note markdown="1"> Amazon Comprehend performs real-time sentiment analysis on the first
+    #   500 characters of the input text and ignores any additional text in
+    #   the input.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
@@ -417,9 +423,9 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] text_list
-    #   A list containing the text of the input documents. The list can
-    #   contain a maximum of 25 documents. Each document must contain fewer
-    #   that 5,000 bytes of UTF-8 encoded characters.
+    #   A list containing the UTF-8 encoded text of the input documents. The
+    #   list can contain a maximum of 25 documents. The maximum size for
+    #   each document is 5 KB.
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
@@ -456,6 +462,73 @@ module Aws::Comprehend
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectSyntaxResponse AWS API Documentation
     #
     class BatchDetectSyntaxResponse < Struct.new(
+      :result_list,
+      :error_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Analysis results for one of the documents in the batch.
+    #
+    # @!attribute [rw] index
+    #   The zero-based index of this result in the input list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] entities
+    #   An array of targeted sentiment entities.
+    #   @return [Array<Types::TargetedSentimentEntity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectTargetedSentimentItemResult AWS API Documentation
+    #
+    class BatchDetectTargetedSentimentItemResult < Struct.new(
+      :index,
+      :entities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDetectTargetedSentimentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         text_list: ["CustomerInputString"], # required
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #       }
+    #
+    # @!attribute [rw] text_list
+    #   A list containing the UTF-8 encoded text of the input documents. The
+    #   list can contain a maximum of 25 documents. The maximum size of each
+    #   document is 5 KB.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents. Currently, English is the only
+    #   supported language.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectTargetedSentimentRequest AWS API Documentation
+    #
+    class BatchDetectTargetedSentimentRequest < Struct.new(
+      :text_list,
+      :language_code)
+      SENSITIVE = [:text_list]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result_list
+    #   A list of objects containing the results of the operation. The
+    #   results are sorted in ascending order by the `Index` field and match
+    #   the order of the documents in the input list. If all of the
+    #   documents contain an error, the `ResultList` is empty.
+    #   @return [Array<Types::BatchDetectTargetedSentimentItemResult>]
+    #
+    # @!attribute [rw] error_list
+    #   List of errors that the operation can return.
+    #   @return [Array<Types::BatchItemError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectTargetedSentimentResponse AWS API Documentation
+    #
+    class BatchDetectTargetedSentimentResponse < Struct.new(
       :result_list,
       :error_list)
       SENSITIVE = []
@@ -692,9 +765,7 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] text
-    #   Creates a new document classification request to analyze a single
-    #   document in real-time, returning personally identifiable information
-    #   (PII) entity labels.
+    #   A UTF-8 text string. The maximum string size is 100 KB.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -1728,9 +1799,8 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] text
-    #   A UTF-8 text string. Each string should contain at least 20
-    #   characters and must contain fewer that 5,000 bytes of UTF-8 encoded
-    #   characters.
+    #   A UTF-8 text string. The string must contain at least 20 characters.
+    #   The maximum string size is 100 KB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectDominantLanguageRequest AWS API Documentation
@@ -1771,8 +1841,7 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] text
-    #   A UTF-8 text string. Each string must contain fewer that 5,000 bytes
-    #   of UTF-8 encoded characters.
+    #   A UTF-8 text string. The maximum string size is 100 KB.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -1822,7 +1891,12 @@ module Aws::Comprehend
     #   If your request uses a custom entity recognition model, Amazon
     #   Comprehend detects the entities that the model is trained to
     #   recognize. Otherwise, it detects the default entity types. For a
-    #   list of default entity types, see how-entities.
+    #   list of default entity types, see [Entities][1] in the Comprehend
+    #   Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html
     #   @return [Array<Types::Entity>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectEntitiesResponse AWS API Documentation
@@ -1842,8 +1916,8 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] text
-    #   A UTF-8 text string. Each string must contain fewer that 5,000 bytes
-    #   of UTF-8 encoded characters.
+    #   A UTF-8 text string. The string must contain less than 100 KB of
+    #   UTF-8 encoded characters.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -1886,8 +1960,7 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] text
-    #   A UTF-8 text string. Each string must contain fewer that 5,000 bytes
-    #   of UTF-8 encoded characters.
+    #   A UTF-8 text string. The maximum string size is 100 KB.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -1928,8 +2001,13 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] text
-    #   A UTF-8 text string. Each string must contain fewer that 5,000 bytes
-    #   of UTF-8 encoded characters.
+    #   A UTF-8 text string. The maximum string size is 5 KB.
+    #
+    #   <note markdown="1"> Amazon Comprehend performs real-time sentiment analysis on the first
+    #   500 characters of the input text and ignores any additional text in
+    #   the input.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -1975,8 +2053,7 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] text
-    #   A UTF-8 string. Each string must contain fewer that 5,000 bytes of
-    #   UTF encoded characters.
+    #   A UTF-8 string. The maximum string size is 5 KB.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -2000,13 +2077,56 @@ module Aws::Comprehend
     #   the response provides the text, the token type, where the text
     #   begins and ends, and the level of confidence that Amazon Comprehend
     #   has that the token is correct. For a list of token types, see
-    #   how-syntax.
+    #   [Syntax][1] in the Comprehend Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html
     #   @return [Array<Types::SyntaxToken>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectSyntaxResponse AWS API Documentation
     #
     class DetectSyntaxResponse < Struct.new(
       :syntax_tokens)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DetectTargetedSentimentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         text: "CustomerInputString", # required
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #       }
+    #
+    # @!attribute [rw] text
+    #   A UTF-8 text string. The maximum string length is 5 KB.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents. Currently, English is the only
+    #   supported language.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectTargetedSentimentRequest AWS API Documentation
+    #
+    class DetectTargetedSentimentRequest < Struct.new(
+      :text,
+      :language_code)
+      SENSITIVE = [:text]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entities
+    #   Targeted sentiment analysis for each of the entities identified in
+    #   the input text.
+    #   @return [Array<Types::TargetedSentimentEntity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectTargetedSentimentResponse AWS API Documentation
+    #
+    class DetectTargetedSentimentResponse < Struct.new(
+      :entities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2233,7 +2353,11 @@ module Aws::Comprehend
     # The input properties for training a document classifier.
     #
     # For more information on how the input file is formatted, see
-    # prep-classifier-data.
+    # [Preparing training data][1] in the Comprehend Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/prep-classifier-data.html
     #
     # @note When making an API call, you may pass DocumentClassifierInputDataConfig
     #   data as a hash:
@@ -2291,10 +2415,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] test_s3_uri
-    #   The Amazon S3 URI for the input data. The Amazon S3 bucket must be
-    #   in the same AWS Region as the API endpoint that you are calling. The
-    #   URI can point to a single input file or it can provide the prefix
-    #   for a collection of input files.
+    #   This specifies the Amazon S3 location where the test annotations for
+    #   an entity recognizer are located. The URI must be in the same AWS
+    #   Region as the API endpoint that you are calling.
     #   @return [String]
     #
     # @!attribute [rw] label_delimiter
@@ -3091,20 +3214,13 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] begin_offset
-    #   A character offset in the input text that shows where the entity
-    #   begins (the first character is at position 0). The offset returns
-    #   the position of each UTF-8 code point in the string. A *code point*
-    #   is the abstract character from a particular graphical
-    #   representation. For example, a multi-byte UTF-8 character maps to a
-    #   single code point.
+    #   The zero-based offset from the beginning of the source text to the
+    #   first character in the entity.
     #   @return [Integer]
     #
     # @!attribute [rw] end_offset
-    #   A character offset in the input text that shows where the entity
-    #   ends. The offset returns the position of each UTF-8 code point in
-    #   the string. A *code point* is the abstract character from a
-    #   particular graphical representation. For example, a multi-byte UTF-8
-    #   character maps to a single code point.
+    #   The zero-based offset from the beginning of the source text to the
+    #   last character in the entity.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/Entity AWS API Documentation
@@ -3157,9 +3273,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] test_s3_uri
-    #   This specifies the Amazon S3 location where the test annotations for
-    #   an entity recognizer are located. The URI must be in the same AWS
-    #   Region as the API endpoint that you are calling.
+    #   Specifies the Amazon S3 location where the test annotations for an
+    #   entity recognizer are located. The URI must be in the same region as
+    #   the API endpoint that you are calling.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerAnnotations AWS API Documentation
@@ -4041,20 +4157,13 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] begin_offset
-    #   A character offset in the input text that shows where the key phrase
-    #   begins (the first character is at position 0). The offset returns
-    #   the position of each UTF-8 code point in the string. A *code point*
-    #   is the abstract character from a particular graphical
-    #   representation. For example, a multi-byte UTF-8 character maps to a
-    #   single code point.
+    #   The zero-based offset from the beginning of the source text to the
+    #   first character in the key phrase.
     #   @return [Integer]
     #
     # @!attribute [rw] end_offset
-    #   A character offset in the input text where the key phrase ends. The
-    #   offset returns the position of each UTF-8 code point in the string.
-    #   A `code point` is the abstract character from a particular graphical
-    #   representation. For example, a multi-byte UTF-8 character maps to a
-    #   single code point.
+    #   The zero-based offset from the beginning of the source text to the
+    #   last character in the key phrase.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/KeyPhrase AWS API Documentation
@@ -5030,6 +5139,34 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # Contains the sentiment and sentiment score for one mention of an
+    # entity.
+    #
+    # For more information about targeted sentiment, see [Targeted
+    # sentiment][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html
+    #
+    # @!attribute [rw] sentiment
+    #   The sentiment of the mention.
+    #   @return [String]
+    #
+    # @!attribute [rw] sentiment_score
+    #   Describes the level of confidence that Amazon Comprehend has in the
+    #   accuracy of its detection of sentiments.
+    #   @return [Types::SentimentScore]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/MentionSentiment AWS API Documentation
+    #
+    class MentionSentiment < Struct.new(
+      :sentiment,
+      :sentiment_score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides configuration parameters for the output of inference jobs.
     #
     # @note When making an API call, you may pass OutputDataConfig
@@ -5085,7 +5222,12 @@ module Aws::Comprehend
     # Identifies the part of speech represented by the token and gives the
     # confidence that Amazon Comprehend has that the part of speech was
     # correctly identified. For more information about the parts of speech
-    # that Amazon Comprehend can identify, see how-syntax.
+    # that Amazon Comprehend can identify, see [Syntax][1] in the Comprehend
+    # Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html
     #
     # @!attribute [rw] tag
     #   Identifies the part of speech that the token represents.
@@ -5256,20 +5398,13 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] begin_offset
-    #   A character offset in the input text that shows where the PII entity
-    #   begins (the first character is at position 0). The offset returns
-    #   the position of each UTF-8 code point in the string. A *code point*
-    #   is the abstract character from a particular graphical
-    #   representation. For example, a multi-byte UTF-8 character maps to a
-    #   single code point.
+    #   The zero-based offset from the beginning of the source text to the
+    #   first character in the entity.
     #   @return [Integer]
     #
     # @!attribute [rw] end_offset
-    #   A character offset in the input text that shows where the PII entity
-    #   ends. The offset returns the position of each UTF-8 code point in
-    #   the string. A *code point* is the abstract character from a
-    #   particular graphical representation. For example, a multi-byte UTF-8
-    #   character maps to a single code point.
+    #   The zero-based offset from the beginning of the source text to the
+    #   last character in the entity.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/PiiEntity AWS API Documentation
@@ -6756,7 +6891,7 @@ module Aws::Comprehend
     #
     # @!attribute [rw] language_code
     #   The language of the input documents. Currently, English is the only
-    #   valid language.
+    #   supported language.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -7351,7 +7486,12 @@ module Aws::Comprehend
     # @!attribute [rw] part_of_speech
     #   Provides the part of speech label and the confidence level that
     #   Amazon Comprehend has that the part of speech was correctly
-    #   identified. For more information, see how-syntax.
+    #   identified. For more information, see [Syntax][1] in the Comprehend
+    #   Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html
     #   @return [Types::PartOfSpeechTag]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/SyntaxToken AWS API Documentation
@@ -7590,6 +7730,100 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # Information about one of the entities found by targeted sentiment
+    # analysis.
+    #
+    # For more information about targeted sentiment, see [Targeted
+    # sentiment][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html
+    #
+    # @!attribute [rw] descriptive_mention_index
+    #   One or more index into the Mentions array that provides the best
+    #   name for the entity group.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] mentions
+    #   An array of mentions of the entity in the document. The array
+    #   represents a co-reference group. See [ Co-reference group][1] for an
+    #   example.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html#how-targeted-sentiment-values
+    #   @return [Array<Types::TargetedSentimentMention>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TargetedSentimentEntity AWS API Documentation
+    #
+    class TargetedSentimentEntity < Struct.new(
+      :descriptive_mention_index,
+      :mentions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about one mention of an entity. The mention information
+    # includes the location of the mention in the text and the sentiment of
+    # the mention.
+    #
+    # For more information about targeted sentiment, see [Targeted
+    # sentiment][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html
+    #
+    # @!attribute [rw] score
+    #   Model confidence that the entity is relevant. Value range is zero to
+    #   one, where one is highest confidence.
+    #   @return [Float]
+    #
+    # @!attribute [rw] group_score
+    #   The confidence that all the entities mentioned in the group relate
+    #   to the same entity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] text
+    #   The text in the document that identifies the entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the entity. Amazon Comprehend supports a variety of
+    #   [entity types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html#how-targeted-sentiment-entities
+    #   @return [String]
+    #
+    # @!attribute [rw] mention_sentiment
+    #   Contains the sentiment and sentiment score for the mention.
+    #   @return [Types::MentionSentiment]
+    #
+    # @!attribute [rw] begin_offset
+    #   The offset into the document text where the mention begins.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   The offset into the document text where the mention ends.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TargetedSentimentMention AWS API Documentation
+    #
+    class TargetedSentimentMention < Struct.new(
+      :score,
+      :group_score,
+      :text,
+      :type,
+      :mention_sentiment,
+      :begin_offset,
+      :end_offset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The size of the input text exceeds the limit. Use a smaller document.
     #
     # @!attribute [rw] message
@@ -7798,7 +8032,11 @@ module Aws::Comprehend
     # Amazon Comprehend can't process the language of the input text. For
     # custom entity recognition APIs, only English, Spanish, French,
     # Italian, German, or Portuguese are accepted. For a list of supported
-    # languages, see supported-languages.
+    # languages, [Supported languages][1] in the Comprehend Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/supported-languages.html
     #
     # @!attribute [rw] message
     #   @return [String]
