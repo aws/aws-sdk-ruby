@@ -8,25 +8,69 @@ require_relative 'spec_helper'
 
 module {{module_name}}
   describe EndpointProvider do
+    def expect_auth(auth_scheme)
+      expect(Aws::Plugins::Sign).to receive(:signer_for).and_wrap_original do |m, *args|
+        expect(args.first).to eq(auth_scheme)
+        m.call(*args)
+      end
+    end
+
     subject { {{module_name}}::EndpointProvider.new }
 
-    # TODO: operation inputs
-
     {{#endpoint_tests}}
-    it '{{documentation}}' do
-      expect = {{{expect}}}
-      params = EndpointParameters.new(**{{{params}}})
-      {{#expect_error?}}
-      expect do
-        subject.resolve_endpoint(params)
-      end.to raise_error(ArgumentError, expect['error'])
-      {{/expect_error?}}
-      {{^expect_error?}}
-      endpoint = subject.resolve_endpoint(params)
-      expect(endpoint.url).to eq(expect['endpoint']['url'])
-      expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-      expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
-      {{/expect_error?}}
+    context '{{documentation}}' do
+      it 'produces the expected output from the EndpointProvider' do
+        expect = {{{expect}}}
+        params = EndpointParameters.new(**{{{params}}})
+        {{#expect_error?}}
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expect['error'])
+        {{/expect_error?}}
+        {{^expect_error?}}
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expect['endpoint']['url'])
+        expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
+        {{/expect_error?}}
+      end
+      {{#operation_inputs}}
+
+      it 'produces the correct output from the client when calling {{operation_name}}' do
+        expect = {{{expect}}}
+        client = Client.new(
+          {{#client_params}}
+          {{param}}: {{{value}}},
+          {{/client_params}}
+          stub_responses: true
+        )
+        {{#expect_error?}}
+        expect do
+          client.{{operation_name}}(
+            {{#operation_params}}
+            {{param}}: {{{value}}},
+            {{/operation_params}}
+          )
+        end.to raise_error(ArgumentError, expect['error'])
+        {{/expect_error?}}
+        {{^expect_error?}}
+        {{#expect_auth?}}
+        expect_auth({{{expected_auth}}})
+        {{/expect_auth?}}
+        resp = client.{{operation_name}}(
+          {{#operation_params}}
+          {{param}}: {{{value}}},
+          {{/operation_params}}
+        )
+        expect(resp.context.http_request.endpoint.to_s).to include(expect['endpoint']['url'])
+        {{#expect_headers?}}
+        {{#expected_headers}}
+        expect(resp.context.http_request.headers['{{param}}'].to eq({{{value}}})
+        {{/expected_headers}}
+        {{/expect_headers?}}
+        {{/expect_error?}}
+      end
+      {{/operation_inputs}}
     end
 
     {{/endpoint_tests}}
