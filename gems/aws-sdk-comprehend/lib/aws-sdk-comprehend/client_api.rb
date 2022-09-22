@@ -33,6 +33,9 @@ module Aws::Comprehend
     BatchDetectSyntaxItemResult = Shapes::StructureShape.new(name: 'BatchDetectSyntaxItemResult')
     BatchDetectSyntaxRequest = Shapes::StructureShape.new(name: 'BatchDetectSyntaxRequest')
     BatchDetectSyntaxResponse = Shapes::StructureShape.new(name: 'BatchDetectSyntaxResponse')
+    BatchDetectTargetedSentimentItemResult = Shapes::StructureShape.new(name: 'BatchDetectTargetedSentimentItemResult')
+    BatchDetectTargetedSentimentRequest = Shapes::StructureShape.new(name: 'BatchDetectTargetedSentimentRequest')
+    BatchDetectTargetedSentimentResponse = Shapes::StructureShape.new(name: 'BatchDetectTargetedSentimentResponse')
     BatchItemError = Shapes::StructureShape.new(name: 'BatchItemError')
     BatchItemErrorList = Shapes::ListShape.new(name: 'BatchItemErrorList')
     BatchSizeLimitExceededException = Shapes::StructureShape.new(name: 'BatchSizeLimitExceededException')
@@ -103,6 +106,8 @@ module Aws::Comprehend
     DetectSentimentResponse = Shapes::StructureShape.new(name: 'DetectSentimentResponse')
     DetectSyntaxRequest = Shapes::StructureShape.new(name: 'DetectSyntaxRequest')
     DetectSyntaxResponse = Shapes::StructureShape.new(name: 'DetectSyntaxResponse')
+    DetectTargetedSentimentRequest = Shapes::StructureShape.new(name: 'DetectTargetedSentimentRequest')
+    DetectTargetedSentimentResponse = Shapes::StructureShape.new(name: 'DetectTargetedSentimentResponse')
     DocumentClass = Shapes::StructureShape.new(name: 'DocumentClass')
     DocumentClassificationJobFilter = Shapes::StructureShape.new(name: 'DocumentClassificationJobFilter')
     DocumentClassificationJobProperties = Shapes::StructureShape.new(name: 'DocumentClassificationJobProperties')
@@ -208,20 +213,24 @@ module Aws::Comprehend
     ListKeyPhrasesDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListKeyPhrasesDetectionJobsRequest')
     ListKeyPhrasesDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListKeyPhrasesDetectionJobsResponse')
     ListOfClasses = Shapes::ListShape.new(name: 'ListOfClasses')
+    ListOfDescriptiveMentionIndices = Shapes::ListShape.new(name: 'ListOfDescriptiveMentionIndices')
     ListOfDetectDominantLanguageResult = Shapes::ListShape.new(name: 'ListOfDetectDominantLanguageResult')
     ListOfDetectEntitiesResult = Shapes::ListShape.new(name: 'ListOfDetectEntitiesResult')
     ListOfDetectKeyPhrasesResult = Shapes::ListShape.new(name: 'ListOfDetectKeyPhrasesResult')
     ListOfDetectSentimentResult = Shapes::ListShape.new(name: 'ListOfDetectSentimentResult')
     ListOfDetectSyntaxResult = Shapes::ListShape.new(name: 'ListOfDetectSyntaxResult')
+    ListOfDetectTargetedSentimentResult = Shapes::ListShape.new(name: 'ListOfDetectTargetedSentimentResult')
     ListOfDocumentReadFeatureTypes = Shapes::ListShape.new(name: 'ListOfDocumentReadFeatureTypes')
     ListOfDominantLanguages = Shapes::ListShape.new(name: 'ListOfDominantLanguages')
     ListOfEntities = Shapes::ListShape.new(name: 'ListOfEntities')
     ListOfEntityLabels = Shapes::ListShape.new(name: 'ListOfEntityLabels')
     ListOfKeyPhrases = Shapes::ListShape.new(name: 'ListOfKeyPhrases')
     ListOfLabels = Shapes::ListShape.new(name: 'ListOfLabels')
+    ListOfMentions = Shapes::ListShape.new(name: 'ListOfMentions')
     ListOfPiiEntities = Shapes::ListShape.new(name: 'ListOfPiiEntities')
     ListOfPiiEntityTypes = Shapes::ListShape.new(name: 'ListOfPiiEntityTypes')
     ListOfSyntaxTokens = Shapes::ListShape.new(name: 'ListOfSyntaxTokens')
+    ListOfTargetedSentimentEntities = Shapes::ListShape.new(name: 'ListOfTargetedSentimentEntities')
     ListPiiEntitiesDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListPiiEntitiesDetectionJobsRequest')
     ListPiiEntitiesDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListPiiEntitiesDetectionJobsResponse')
     ListSentimentDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListSentimentDetectionJobsRequest')
@@ -234,6 +243,7 @@ module Aws::Comprehend
     ListTopicsDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListTopicsDetectionJobsResponse')
     MaskCharacter = Shapes::StringShape.new(name: 'MaskCharacter')
     MaxResultsInteger = Shapes::IntegerShape.new(name: 'MaxResultsInteger')
+    MentionSentiment = Shapes::StructureShape.new(name: 'MentionSentiment')
     ModelStatus = Shapes::StringShape.new(name: 'ModelStatus')
     NumberOfTopicsInteger = Shapes::IntegerShape.new(name: 'NumberOfTopicsInteger')
     OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
@@ -317,6 +327,9 @@ module Aws::Comprehend
     TargetedSentimentDetectionJobFilter = Shapes::StructureShape.new(name: 'TargetedSentimentDetectionJobFilter')
     TargetedSentimentDetectionJobProperties = Shapes::StructureShape.new(name: 'TargetedSentimentDetectionJobProperties')
     TargetedSentimentDetectionJobPropertiesList = Shapes::ListShape.new(name: 'TargetedSentimentDetectionJobPropertiesList')
+    TargetedSentimentEntity = Shapes::StructureShape.new(name: 'TargetedSentimentEntity')
+    TargetedSentimentEntityType = Shapes::StringShape.new(name: 'TargetedSentimentEntityType')
+    TargetedSentimentMention = Shapes::StructureShape.new(name: 'TargetedSentimentMention')
     TextSizeLimitExceededException = Shapes::StructureShape.new(name: 'TextSizeLimitExceededException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -402,6 +415,18 @@ module Aws::Comprehend
     BatchDetectSyntaxResponse.add_member(:result_list, Shapes::ShapeRef.new(shape: ListOfDetectSyntaxResult, required: true, location_name: "ResultList"))
     BatchDetectSyntaxResponse.add_member(:error_list, Shapes::ShapeRef.new(shape: BatchItemErrorList, required: true, location_name: "ErrorList"))
     BatchDetectSyntaxResponse.struct_class = Types::BatchDetectSyntaxResponse
+
+    BatchDetectTargetedSentimentItemResult.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "Index"))
+    BatchDetectTargetedSentimentItemResult.add_member(:entities, Shapes::ShapeRef.new(shape: ListOfTargetedSentimentEntities, location_name: "Entities"))
+    BatchDetectTargetedSentimentItemResult.struct_class = Types::BatchDetectTargetedSentimentItemResult
+
+    BatchDetectTargetedSentimentRequest.add_member(:text_list, Shapes::ShapeRef.new(shape: CustomerInputStringList, required: true, location_name: "TextList"))
+    BatchDetectTargetedSentimentRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    BatchDetectTargetedSentimentRequest.struct_class = Types::BatchDetectTargetedSentimentRequest
+
+    BatchDetectTargetedSentimentResponse.add_member(:result_list, Shapes::ShapeRef.new(shape: ListOfDetectTargetedSentimentResult, required: true, location_name: "ResultList"))
+    BatchDetectTargetedSentimentResponse.add_member(:error_list, Shapes::ShapeRef.new(shape: BatchItemErrorList, required: true, location_name: "ErrorList"))
+    BatchDetectTargetedSentimentResponse.struct_class = Types::BatchDetectTargetedSentimentResponse
 
     BatchItemError.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "Index"))
     BatchItemError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
@@ -638,6 +663,13 @@ module Aws::Comprehend
 
     DetectSyntaxResponse.add_member(:syntax_tokens, Shapes::ShapeRef.new(shape: ListOfSyntaxTokens, location_name: "SyntaxTokens"))
     DetectSyntaxResponse.struct_class = Types::DetectSyntaxResponse
+
+    DetectTargetedSentimentRequest.add_member(:text, Shapes::ShapeRef.new(shape: CustomerInputString, required: true, location_name: "Text"))
+    DetectTargetedSentimentRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    DetectTargetedSentimentRequest.struct_class = Types::DetectTargetedSentimentRequest
+
+    DetectTargetedSentimentResponse.add_member(:entities, Shapes::ShapeRef.new(shape: ListOfTargetedSentimentEntities, location_name: "Entities"))
+    DetectTargetedSentimentResponse.struct_class = Types::DetectTargetedSentimentResponse
 
     DocumentClass.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     DocumentClass.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
@@ -1064,6 +1096,8 @@ module Aws::Comprehend
 
     ListOfClasses.member = Shapes::ShapeRef.new(shape: DocumentClass)
 
+    ListOfDescriptiveMentionIndices.member = Shapes::ShapeRef.new(shape: Integer)
+
     ListOfDetectDominantLanguageResult.member = Shapes::ShapeRef.new(shape: BatchDetectDominantLanguageItemResult)
 
     ListOfDetectEntitiesResult.member = Shapes::ShapeRef.new(shape: BatchDetectEntitiesItemResult)
@@ -1073,6 +1107,8 @@ module Aws::Comprehend
     ListOfDetectSentimentResult.member = Shapes::ShapeRef.new(shape: BatchDetectSentimentItemResult)
 
     ListOfDetectSyntaxResult.member = Shapes::ShapeRef.new(shape: BatchDetectSyntaxItemResult)
+
+    ListOfDetectTargetedSentimentResult.member = Shapes::ShapeRef.new(shape: BatchDetectTargetedSentimentItemResult)
 
     ListOfDocumentReadFeatureTypes.member = Shapes::ShapeRef.new(shape: DocumentReadFeatureTypes)
 
@@ -1086,11 +1122,15 @@ module Aws::Comprehend
 
     ListOfLabels.member = Shapes::ShapeRef.new(shape: DocumentLabel)
 
+    ListOfMentions.member = Shapes::ShapeRef.new(shape: TargetedSentimentMention)
+
     ListOfPiiEntities.member = Shapes::ShapeRef.new(shape: PiiEntity)
 
     ListOfPiiEntityTypes.member = Shapes::ShapeRef.new(shape: PiiEntityType)
 
     ListOfSyntaxTokens.member = Shapes::ShapeRef.new(shape: SyntaxToken)
+
+    ListOfTargetedSentimentEntities.member = Shapes::ShapeRef.new(shape: TargetedSentimentEntity)
 
     ListPiiEntitiesDetectionJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: PiiEntitiesDetectionJobFilter, location_name: "Filter"))
     ListPiiEntitiesDetectionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -1134,6 +1174,10 @@ module Aws::Comprehend
     ListTopicsDetectionJobsResponse.add_member(:topics_detection_job_properties_list, Shapes::ShapeRef.new(shape: TopicsDetectionJobPropertiesList, location_name: "TopicsDetectionJobPropertiesList"))
     ListTopicsDetectionJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListTopicsDetectionJobsResponse.struct_class = Types::ListTopicsDetectionJobsResponse
+
+    MentionSentiment.add_member(:sentiment, Shapes::ShapeRef.new(shape: SentimentType, location_name: "Sentiment"))
+    MentionSentiment.add_member(:sentiment_score, Shapes::ShapeRef.new(shape: SentimentScore, location_name: "SentimentScore"))
+    MentionSentiment.struct_class = Types::MentionSentiment
 
     OutputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     OutputDataConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
@@ -1482,6 +1526,19 @@ module Aws::Comprehend
 
     TargetedSentimentDetectionJobPropertiesList.member = Shapes::ShapeRef.new(shape: TargetedSentimentDetectionJobProperties)
 
+    TargetedSentimentEntity.add_member(:descriptive_mention_index, Shapes::ShapeRef.new(shape: ListOfDescriptiveMentionIndices, location_name: "DescriptiveMentionIndex"))
+    TargetedSentimentEntity.add_member(:mentions, Shapes::ShapeRef.new(shape: ListOfMentions, location_name: "Mentions"))
+    TargetedSentimentEntity.struct_class = Types::TargetedSentimentEntity
+
+    TargetedSentimentMention.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    TargetedSentimentMention.add_member(:group_score, Shapes::ShapeRef.new(shape: Float, location_name: "GroupScore"))
+    TargetedSentimentMention.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
+    TargetedSentimentMention.add_member(:type, Shapes::ShapeRef.new(shape: TargetedSentimentEntityType, location_name: "Type"))
+    TargetedSentimentMention.add_member(:mention_sentiment, Shapes::ShapeRef.new(shape: MentionSentiment, location_name: "MentionSentiment"))
+    TargetedSentimentMention.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
+    TargetedSentimentMention.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
+    TargetedSentimentMention.struct_class = Types::TargetedSentimentMention
+
     TextSizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     TextSizeLimitExceededException.struct_class = Types::TextSizeLimitExceededException
 
@@ -1614,6 +1671,19 @@ module Aws::Comprehend
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: BatchDetectSyntaxRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchDetectSyntaxResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        o.errors << Shapes::ShapeRef.new(shape: BatchSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:batch_detect_targeted_sentiment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDetectTargetedSentiment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchDetectTargetedSentimentRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDetectTargetedSentimentResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
@@ -1966,6 +2036,18 @@ module Aws::Comprehend
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DetectSyntaxRequest)
         o.output = Shapes::ShapeRef.new(shape: DetectSyntaxResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:detect_targeted_sentiment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetectTargetedSentiment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetectTargetedSentimentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DetectTargetedSentimentResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
