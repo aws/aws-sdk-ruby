@@ -1959,6 +1959,12 @@ module Aws::SageMaker
     #           },
     #         ],
     #       },
+    #       canvas_app_settings: {
+    #         time_series_forecasting_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #           amazon_forecast_role_arn: "RoleArn",
+    #         },
+    #       },
     #     },
     #     subnet_ids: ["SubnetId"], # required
     #     vpc_id: "VpcId", # required
@@ -6664,8 +6670,8 @@ module Aws::SageMaker
     # a domain, and is the main way to reference a "person" for the
     # purposes of sharing, reporting, and other user-oriented features. This
     # entity is created when a user onboards to Amazon SageMaker Studio. If
-    # an administrator invites a person by email or imports them from Amazon
-    # Web Services SSO, a user profile is automatically created. A user
+    # an administrator invites a person by email or imports them from IAM
+    # Identity Center, a user profile is automatically created. A user
     # profile is the primary holder of settings for an individual user and
     # has a reference to the user's private Amazon Elastic File System
     # (EFS) home directory.
@@ -6679,16 +6685,16 @@ module Aws::SageMaker
     # @option params [String] :single_sign_on_user_identifier
     #   A specifier for the type of value specified in SingleSignOnUserValue.
     #   Currently, the only supported value is "UserName". If the Domain's
-    #   AuthMode is Amazon Web Services SSO, this field is required. If the
-    #   Domain's AuthMode is not Amazon Web Services SSO, this field cannot
-    #   be specified.
+    #   AuthMode is IAM Identity Center, this field is required. If the
+    #   Domain's AuthMode is not IAM Identity Center, this field cannot be
+    #   specified.
     #
     # @option params [String] :single_sign_on_user_value
     #   The username of the associated Amazon Web Services Single Sign-On User
-    #   for this UserProfile. If the Domain's AuthMode is Amazon Web Services
-    #   SSO, this field is required, and must match a valid username of a user
-    #   in your directory. If the Domain's AuthMode is not Amazon Web
-    #   Services SSO, this field cannot be specified.
+    #   for this UserProfile. If the Domain's AuthMode is IAM Identity
+    #   Center, this field is required, and must match a valid username of a
+    #   user in your directory. If the Domain's AuthMode is not IAM Identity
+    #   Center, this field cannot be specified.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Each tag consists of a key and an optional value. Tag keys must be
@@ -6776,6 +6782,12 @@ module Aws::SageMaker
     #             app_image_config_name: "AppImageConfigName", # required
     #           },
     #         ],
+    #       },
+    #       canvas_app_settings: {
+    #         time_series_forecasting_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #           amazon_forecast_role_arn: "RoleArn",
+    #         },
     #       },
     #     },
     #   })
@@ -7287,8 +7299,8 @@ module Aws::SageMaker
     end
 
     # Used to delete a domain. If you onboarded with IAM mode, you will need
-    # to delete your domain to onboard again using Amazon Web Services SSO.
-    # Use with caution. All of the members of the domain will lose access to
+    # to delete your domain to onboard again using IAM Identity Center. Use
+    # with caution. All of the members of the domain will lose access to
     # their EFS volume, including data, notebooks, and other artifacts.
     #
     # @option params [required, String] :domain_id
@@ -9080,6 +9092,8 @@ module Aws::SageMaker
     #   resp.default_user_settings.r_session_app_settings.custom_images[0].image_name #=> String
     #   resp.default_user_settings.r_session_app_settings.custom_images[0].image_version_number #=> Integer
     #   resp.default_user_settings.r_session_app_settings.custom_images[0].app_image_config_name #=> String
+    #   resp.default_user_settings.canvas_app_settings.time_series_forecasting_settings.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.default_user_settings.canvas_app_settings.time_series_forecasting_settings.amazon_forecast_role_arn #=> String
     #   resp.app_network_access_type #=> String, one of "PublicInternetOnly", "VpcOnly"
     #   resp.home_efs_file_system_kms_key_id #=> String
     #   resp.subnet_ids #=> Array
@@ -11980,6 +11994,8 @@ module Aws::SageMaker
     #   resp.user_settings.r_session_app_settings.custom_images[0].image_name #=> String
     #   resp.user_settings.r_session_app_settings.custom_images[0].image_version_number #=> Integer
     #   resp.user_settings.r_session_app_settings.custom_images[0].app_image_config_name #=> String
+    #   resp.user_settings.canvas_app_settings.time_series_forecasting_settings.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.user_settings.canvas_app_settings.time_series_forecasting_settings.amazon_forecast_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeUserProfile AWS API Documentation
     #
@@ -19165,6 +19181,12 @@ module Aws::SageMaker
     #           },
     #         ],
     #       },
+    #       canvas_app_settings: {
+    #         time_series_forecasting_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #           amazon_forecast_role_arn: "RoleArn",
+    #         },
+    #       },
     #     },
     #     domain_settings_for_update: {
     #       r_studio_server_pro_domain_settings_for_update: {
@@ -20354,6 +20376,12 @@ module Aws::SageMaker
     #           },
     #         ],
     #       },
+    #       canvas_app_settings: {
+    #         time_series_forecasting_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #           amazon_forecast_role_arn: "RoleArn",
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -20604,7 +20632,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.140.0'
+      context[:gem_version] = '1.141.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

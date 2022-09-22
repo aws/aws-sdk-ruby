@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Dynamic endpoints (WIP)
 
+3.152.0 (2022-09-21)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 3.151.0 (2022-09-20)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.141.0 (2022-09-21)
+------------------
+
+* Feature - SageMaker now allows customization on Canvas Application settings, including enabling/disabling time-series forecasting and specifying an Amazon Forecast execution role at both the Domain and UserProfile levels.
+
 1.140.0 (2022-09-15)
 ------------------
 

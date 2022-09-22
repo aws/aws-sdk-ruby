@@ -370,10 +370,10 @@ module Aws::Comprehend
     # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html
     #
     # @option params [required, Array<String>] :text_list
-    #   A list containing the text of the input documents. The list can
-    #   contain a maximum of 25 documents. Each document should contain at
-    #   least 20 characters and must contain fewer than 5,000 bytes of UTF-8
-    #   encoded characters.
+    #   A list containing the UTF-8 encoded text of the input documents. The
+    #   list can contain a maximum of 25 documents. Each document should
+    #   contain at least 20 characters. The maximum size of each document is 5
+    #   KB.
     #
     # @return [Types::BatchDetectDominantLanguageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -409,12 +409,16 @@ module Aws::Comprehend
 
     # Inspects the text of a batch of documents for named entities and
     # returns information about them. For more information about named
-    # entities, see how-entities
+    # entities, see [Entities][1] in the Comprehend Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html
     #
     # @option params [required, Array<String>] :text_list
-    #   A list containing the text of the input documents. The list can
-    #   contain a maximum of 25 documents. Each document must contain fewer
-    #   than 5,000 bytes of UTF-8 encoded characters.
+    #   A list containing the UTF-8 encoded text of the input documents. The
+    #   list can contain a maximum of 25 documents. The maximum size of each
+    #   document is 5 KB.
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
@@ -460,9 +464,9 @@ module Aws::Comprehend
     # Detects the key noun phrases found in a batch of documents.
     #
     # @option params [required, Array<String>] :text_list
-    #   A list containing the text of the input documents. The list can
-    #   contain a maximum of 25 documents. Each document must contain fewer
-    #   than 5,000 bytes of UTF-8 encoded characters.
+    #   A list containing the UTF-8 encoded text of the input documents. The
+    #   list can contain a maximum of 25 documents. The maximum size of each
+    #   document is 5 KB.
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
@@ -509,9 +513,15 @@ module Aws::Comprehend
     # in each one.
     #
     # @option params [required, Array<String>] :text_list
-    #   A list containing the text of the input documents. The list can
-    #   contain a maximum of 25 documents. Each document must contain fewer
-    #   that 5,000 bytes of UTF-8 encoded characters.
+    #   A list containing the UTF-8 encoded text of the input documents. The
+    #   list can contain a maximum of 25 documents. The maximum size of each
+    #   document is 5 KB.
+    #
+    #   <note markdown="1"> Amazon Comprehend performs real-time sentiment analysis on the first
+    #   500 characters of the input text and ignores any additional text in
+    #   the input.
+    #
+    #    </note>
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
@@ -555,12 +565,17 @@ module Aws::Comprehend
 
     # Inspects the text of a batch of documents for the syntax and part of
     # speech of the words in the document and returns information about
-    # them. For more information, see how-syntax.
+    # them. For more information, see [Syntax][1] in the Comprehend
+    # Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html
     #
     # @option params [required, Array<String>] :text_list
-    #   A list containing the text of the input documents. The list can
-    #   contain a maximum of 25 documents. Each document must contain fewer
-    #   that 5,000 bytes of UTF-8 encoded characters.
+    #   A list containing the UTF-8 encoded text of the input documents. The
+    #   list can contain a maximum of 25 documents. The maximum size for each
+    #   document is 5 KB.
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
@@ -602,6 +617,70 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def batch_detect_syntax(params = {}, options = {})
       req = build_request(:batch_detect_syntax, params)
+      req.send_request(options)
+    end
+
+    # Inspects a batch of documents and returns a sentiment analysis for
+    # each entity identified in the documents.
+    #
+    # For more information about targeted sentiment, see [Targeted
+    # sentiment][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html
+    #
+    # @option params [required, Array<String>] :text_list
+    #   A list containing the UTF-8 encoded text of the input documents. The
+    #   list can contain a maximum of 25 documents. The maximum size of each
+    #   document is 5 KB.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents. Currently, English is the only
+    #   supported language.
+    #
+    # @return [Types::BatchDetectTargetedSentimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDetectTargetedSentimentResponse#result_list #result_list} => Array&lt;Types::BatchDetectTargetedSentimentItemResult&gt;
+    #   * {Types::BatchDetectTargetedSentimentResponse#error_list #error_list} => Array&lt;Types::BatchItemError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_detect_targeted_sentiment({
+    #     text_list: ["CustomerInputString"], # required
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result_list #=> Array
+    #   resp.result_list[0].index #=> Integer
+    #   resp.result_list[0].entities #=> Array
+    #   resp.result_list[0].entities[0].descriptive_mention_index #=> Array
+    #   resp.result_list[0].entities[0].descriptive_mention_index[0] #=> Integer
+    #   resp.result_list[0].entities[0].mentions #=> Array
+    #   resp.result_list[0].entities[0].mentions[0].score #=> Float
+    #   resp.result_list[0].entities[0].mentions[0].group_score #=> Float
+    #   resp.result_list[0].entities[0].mentions[0].text #=> String
+    #   resp.result_list[0].entities[0].mentions[0].type #=> String, one of "PERSON", "LOCATION", "ORGANIZATION", "FACILITY", "BRAND", "COMMERCIAL_ITEM", "MOVIE", "MUSIC", "BOOK", "SOFTWARE", "GAME", "PERSONAL_TITLE", "EVENT", "DATE", "QUANTITY", "ATTRIBUTE", "OTHER"
+    #   resp.result_list[0].entities[0].mentions[0].mention_sentiment.sentiment #=> String, one of "POSITIVE", "NEGATIVE", "NEUTRAL", "MIXED"
+    #   resp.result_list[0].entities[0].mentions[0].mention_sentiment.sentiment_score.positive #=> Float
+    #   resp.result_list[0].entities[0].mentions[0].mention_sentiment.sentiment_score.negative #=> Float
+    #   resp.result_list[0].entities[0].mentions[0].mention_sentiment.sentiment_score.neutral #=> Float
+    #   resp.result_list[0].entities[0].mentions[0].mention_sentiment.sentiment_score.mixed #=> Float
+    #   resp.result_list[0].entities[0].mentions[0].begin_offset #=> Integer
+    #   resp.result_list[0].entities[0].mentions[0].end_offset #=> Integer
+    #   resp.error_list #=> Array
+    #   resp.error_list[0].index #=> Integer
+    #   resp.error_list[0].error_code #=> String
+    #   resp.error_list[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectTargetedSentiment AWS API Documentation
+    #
+    # @overload batch_detect_targeted_sentiment(params = {})
+    # @param [Hash] params ({})
+    def batch_detect_targeted_sentiment(params = {}, options = {})
+      req = build_request(:batch_detect_targeted_sentiment, params)
       req.send_request(options)
     end
 
@@ -655,9 +734,7 @@ module Aws::Comprehend
     # types such as name, address, bank account number, or phone number.
     #
     # @option params [required, String] :text
-    #   Creates a new document classification request to analyze a single
-    #   document in real-time, returning personally identifiable information
-    #   (PII) entity labels.
+    #   A UTF-8 text string. The maximum string size is 100 KB.
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. Currently, English is the only
@@ -694,7 +771,11 @@ module Aws::Comprehend
     # documents that labeled with the categories that you want to use. After
     # the classifier is trained you can use it to categorize a set of
     # labeled documents into the categories. For more information, see
-    # how-document-classification.
+    # [Document Classification][1] in the Comprehend Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-document-classification.html
     #
     # @option params [required, String] :document_classifier_name
     #   The name of the document classifier.
@@ -1896,8 +1977,8 @@ module Aws::Comprehend
     # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html
     #
     # @option params [required, String] :text
-    #   A UTF-8 text string. Each string should contain at least 20 characters
-    #   and must contain fewer that 5,000 bytes of UTF-8 encoded characters.
+    #   A UTF-8 text string. The string must contain at least 20 characters.
+    #   The maximum string size is 100 KB.
     #
     # @return [Types::DetectDominantLanguageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1925,11 +2006,15 @@ module Aws::Comprehend
     end
 
     # Inspects text for named entities, and returns information about them.
-    # For more information, about named entities, see how-entities.
+    # For more information, about named entities, see [Entities][1] in the
+    # Comprehend Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html
     #
     # @option params [required, String] :text
-    #   A UTF-8 text string. Each string must contain fewer that 5,000 bytes
-    #   of UTF-8 encoded characters.
+    #   A UTF-8 text string. The maximum string size is 100 KB.
     #
     # @option params [String] :language_code
     #   The language of the input documents. You can specify any of the
@@ -1989,8 +2074,8 @@ module Aws::Comprehend
     # Detects the key noun phrases found in the text.
     #
     # @option params [required, String] :text
-    #   A UTF-8 text string. Each string must contain fewer that 5,000 bytes
-    #   of UTF-8 encoded characters.
+    #   A UTF-8 text string. The string must contain less than 100 KB of UTF-8
+    #   encoded characters.
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
@@ -2029,8 +2114,7 @@ module Aws::Comprehend
     # identifiable information (PII) and returns information about them.
     #
     # @option params [required, String] :text
-    #   A UTF-8 text string. Each string must contain fewer that 5,000 bytes
-    #   of UTF-8 encoded characters.
+    #   A UTF-8 text string. The maximum string size is 100 KB.
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. Currently, English is the only
@@ -2068,8 +2152,13 @@ module Aws::Comprehend
     # (`POSITIVE`, `NEUTRAL`, `MIXED`, or `NEGATIVE`).
     #
     # @option params [required, String] :text
-    #   A UTF-8 text string. Each string must contain fewer that 5,000 bytes
-    #   of UTF-8 encoded characters.
+    #   A UTF-8 text string. The maximum string size is 5 KB.
+    #
+    #   <note markdown="1"> Amazon Comprehend performs real-time sentiment analysis on the first
+    #   500 characters of the input text and ignores any additional text in
+    #   the input.
+    #
+    #    </note>
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
@@ -2106,11 +2195,15 @@ module Aws::Comprehend
     end
 
     # Inspects text for syntax and the part of speech of words in the
-    # document. For more information, how-syntax.
+    # document. For more information, see [Syntax][1] in the Comprehend
+    # Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html
     #
     # @option params [required, String] :text
-    #   A UTF-8 string. Each string must contain fewer that 5,000 bytes of UTF
-    #   encoded characters.
+    #   A UTF-8 string. The maximum string size is 5 KB.
     #
     # @option params [required, String] :language_code
     #   The language code of the input documents. You can specify any of the
@@ -2145,6 +2238,61 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def detect_syntax(params = {}, options = {})
       req = build_request(:detect_syntax, params)
+      req.send_request(options)
+    end
+
+    # Inspects the input text and returns a sentiment analysis for each
+    # entity identified in the text.
+    #
+    # For more information about targeted sentiment, see [Targeted
+    # sentiment][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html
+    #
+    # @option params [required, String] :text
+    #   A UTF-8 text string. The maximum string length is 5 KB.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents. Currently, English is the only
+    #   supported language.
+    #
+    # @return [Types::DetectTargetedSentimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetectTargetedSentimentResponse#entities #entities} => Array&lt;Types::TargetedSentimentEntity&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detect_targeted_sentiment({
+    #     text: "CustomerInputString", # required
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entities #=> Array
+    #   resp.entities[0].descriptive_mention_index #=> Array
+    #   resp.entities[0].descriptive_mention_index[0] #=> Integer
+    #   resp.entities[0].mentions #=> Array
+    #   resp.entities[0].mentions[0].score #=> Float
+    #   resp.entities[0].mentions[0].group_score #=> Float
+    #   resp.entities[0].mentions[0].text #=> String
+    #   resp.entities[0].mentions[0].type #=> String, one of "PERSON", "LOCATION", "ORGANIZATION", "FACILITY", "BRAND", "COMMERCIAL_ITEM", "MOVIE", "MUSIC", "BOOK", "SOFTWARE", "GAME", "PERSONAL_TITLE", "EVENT", "DATE", "QUANTITY", "ATTRIBUTE", "OTHER"
+    #   resp.entities[0].mentions[0].mention_sentiment.sentiment #=> String, one of "POSITIVE", "NEGATIVE", "NEUTRAL", "MIXED"
+    #   resp.entities[0].mentions[0].mention_sentiment.sentiment_score.positive #=> Float
+    #   resp.entities[0].mentions[0].mention_sentiment.sentiment_score.negative #=> Float
+    #   resp.entities[0].mentions[0].mention_sentiment.sentiment_score.neutral #=> Float
+    #   resp.entities[0].mentions[0].mention_sentiment.sentiment_score.mixed #=> Float
+    #   resp.entities[0].mentions[0].begin_offset #=> Integer
+    #   resp.entities[0].mentions[0].end_offset #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectTargetedSentiment AWS API Documentation
+    #
+    # @overload detect_targeted_sentiment(params = {})
+    # @param [Hash] params ({})
+    def detect_targeted_sentiment(params = {}, options = {})
+      req = build_request(:detect_targeted_sentiment, params)
       req.send_request(options)
     end
 
@@ -4063,7 +4211,7 @@ module Aws::Comprehend
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. Currently, English is the only
-    #   valid language.
+    #   supported language.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -4720,7 +4868,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

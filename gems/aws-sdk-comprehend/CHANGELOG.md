@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2022-09-21)
+------------------
+
+* Feature - Amazon Comprehend now supports synchronous mode for targeted sentiment API operations.
+
 1.61.0 (2022-05-20)
 ------------------
 

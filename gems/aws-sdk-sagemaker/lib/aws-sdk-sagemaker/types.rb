@@ -2058,10 +2058,32 @@ module Aws::SageMaker
     #
     # @!attribute [rw] feature_specification_s3_uri
     #   A URL to the Amazon S3 data source containing selected features from
-    #   the input data source to run an Autopilot job (optional). This file
-    #   should be in json format as shown below:
+    #   the input data source to run an Autopilot job. You can input
+    #   `FeatureAttributeNames` (optional) in JSON format as shown below:
     #
     #   `\{ "FeatureAttributeNames":["col1", "col2", ...] \}`.
+    #
+    #   You can also specify the data type of the feature (optional) in the
+    #   format shown below:
+    #
+    #   `\{ "FeatureDataTypes":\{"col1":"numeric", "col2":"categorical" ...
+    #   \} \}`
+    #
+    #   <note markdown="1"> These column keys may not include the target column.
+    #
+    #    </note>
+    #
+    #   In ensembling mode, Autopilot will only support the following data
+    #   types: `numeric`, `categorical`, `text` and `datetime`. In HPO mode,
+    #   Autopilot can support `numeric`, `categorical`, `text`, `datetime`
+    #   and `sequence`.
+    #
+    #   If only `FeatureDataTypes` is provided, the column keys (`col1`,
+    #   `col2`,..) should be a subset of the column names in the input data.
+    #
+    #   If both `FeatureDataTypes` and `FeatureAttributeNames` are provided,
+    #   then the column keys should be a subset of the column names provided
+    #   in `FeatureAttributeNames`.
     #
     #   The key name `FeatureAttributeNames` is fixed. The values listed in
     #   `["col1", "col2", ...]` is case sensitive and should be a list of
@@ -2982,6 +3004,30 @@ module Aws::SageMaker
     class CandidateProperties < Struct.new(
       :candidate_artifact_locations,
       :candidate_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The SageMaker Canvas app settings.
+    #
+    # @note When making an API call, you may pass CanvasAppSettings
+    #   data as a hash:
+    #
+    #       {
+    #         time_series_forecasting_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #           amazon_forecast_role_arn: "RoleArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] time_series_forecasting_settings
+    #   Time series forecast settings for the Canvas app.
+    #   @return [Types::TimeSeriesForecastingSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CanvasAppSettings AWS API Documentation
+    #
+    class CanvasAppSettings < Struct.new(
+      :time_series_forecasting_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5297,6 +5343,12 @@ module Aws::SageMaker
     #                 app_image_config_name: "AppImageConfigName", # required
     #               },
     #             ],
+    #           },
+    #           canvas_app_settings: {
+    #             time_series_forecasting_settings: {
+    #               status: "ENABLED", # accepts ENABLED, DISABLED
+    #               amazon_forecast_role_arn: "RoleArn",
+    #             },
     #           },
     #         },
     #         subnet_ids: ["SubnetId"], # required
@@ -10157,6 +10209,12 @@ module Aws::SageMaker
     #               },
     #             ],
     #           },
+    #           canvas_app_settings: {
+    #             time_series_forecasting_settings: {
+    #               status: "ENABLED", # accepts ENABLED, DISABLED
+    #               amazon_forecast_role_arn: "RoleArn",
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -10171,17 +10229,17 @@ module Aws::SageMaker
     # @!attribute [rw] single_sign_on_user_identifier
     #   A specifier for the type of value specified in
     #   SingleSignOnUserValue. Currently, the only supported value is
-    #   "UserName". If the Domain's AuthMode is Amazon Web Services SSO,
-    #   this field is required. If the Domain's AuthMode is not Amazon Web
-    #   Services SSO, this field cannot be specified.
+    #   "UserName". If the Domain's AuthMode is IAM Identity Center, this
+    #   field is required. If the Domain's AuthMode is not IAM Identity
+    #   Center, this field cannot be specified.
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_user_value
     #   The username of the associated Amazon Web Services Single Sign-On
-    #   User for this UserProfile. If the Domain's AuthMode is Amazon Web
-    #   Services SSO, this field is required, and must match a valid
-    #   username of a user in your directory. If the Domain's AuthMode is
-    #   not Amazon Web Services SSO, this field cannot be specified.
+    #   User for this UserProfile. If the Domain's AuthMode is IAM Identity
+    #   Center, this field is required, and must match a valid username of a
+    #   user in your directory. If the Domain's AuthMode is not IAM
+    #   Identity Center, this field cannot be specified.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -13430,7 +13488,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_managed_application_instance_id
-    #   The Amazon Web Services SSO managed application instance ID.
+    #   The IAM Identity Center managed application instance ID.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -17232,11 +17290,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_user_identifier
-    #   The Amazon Web Services SSO user identifier.
+    #   The IAM Identity Center user identifier.
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_user_value
-    #   The Amazon Web Services SSO user value.
+    #   The IAM Identity Center user value.
     #   @return [String]
     #
     # @!attribute [rw] user_settings
@@ -22005,8 +22063,12 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # An entity having characteristics over which a user can search for a
-    # hyperparameter tuning job.
+    # An entity returned by the [SearchRecord][1] API containing the
+    # properties of a hyperparameter tuning job.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_SearchRecord.html
     #
     # @!attribute [rw] hyper_parameter_tuning_job_name
     #   The name of a hyperparameter tuning job.
@@ -38448,6 +38510,46 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Time series forecast settings for the SageMaker Canvas app.
+    #
+    # @note When making an API call, you may pass TimeSeriesForecastingSettings
+    #   data as a hash:
+    #
+    #       {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #         amazon_forecast_role_arn: "RoleArn",
+    #       }
+    #
+    # @!attribute [rw] status
+    #   Describes whether time series forecasting is enabled or disabled in
+    #   the Canvas app.
+    #   @return [String]
+    #
+    # @!attribute [rw] amazon_forecast_role_arn
+    #   The IAM role that Canvas passes to Amazon Forecast for time series
+    #   forecasting. By default, Canvas uses the execution role specified in
+    #   the `UserProfile` that launches the Canvas app. If an execution role
+    #   is not specified in the `UserProfile`, Canvas uses the execution
+    #   role specified in the Domain that owns the `UserProfile`. To allow
+    #   time series forecasting, this IAM role should have the [
+    #   AmazonSageMakerCanvasForecastAccess][1] policy attached and
+    #   `forecast.amazonaws.com` added in the trust relationship as a
+    #   service principal.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/security-iam-awsmanpol-canvas.html#security-iam-awsmanpol-AmazonSageMakerCanvasForecastAccess
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TimeSeriesForecastingSettings AWS API Documentation
+    #
+    class TimeSeriesForecastingSettings < Struct.new(
+      :status,
+      :amazon_forecast_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the traffic pattern of the load test.
     #
     # @note When making an API call, you may pass TrafficPattern
@@ -41097,6 +41199,12 @@ module Aws::SageMaker
     #               },
     #             ],
     #           },
+    #           canvas_app_settings: {
+    #             time_series_forecasting_settings: {
+    #               status: "ENABLED", # accepts ENABLED, DISABLED
+    #               amazon_forecast_role_arn: "RoleArn",
+    #             },
+    #           },
     #         },
     #         domain_settings_for_update: {
     #           r_studio_server_pro_domain_settings_for_update: {
@@ -42420,6 +42528,12 @@ module Aws::SageMaker
     #               },
     #             ],
     #           },
+    #           canvas_app_settings: {
+    #             time_series_forecasting_settings: {
+    #               status: "ENABLED", # accepts ENABLED, DISABLED
+    #               amazon_forecast_role_arn: "RoleArn",
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -42761,6 +42875,12 @@ module Aws::SageMaker
     #             },
     #           ],
     #         },
+    #         canvas_app_settings: {
+    #           time_series_forecasting_settings: {
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #             amazon_forecast_role_arn: "RoleArn",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] execution_role
@@ -42807,6 +42927,10 @@ module Aws::SageMaker
     #   A collection of settings that configure the `RSessionGateway` app.
     #   @return [Types::RSessionAppSettings]
     #
+    # @!attribute [rw] canvas_app_settings
+    #   The Canvas app settings.
+    #   @return [Types::CanvasAppSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UserSettings AWS API Documentation
     #
     class UserSettings < Struct.new(
@@ -42817,7 +42941,8 @@ module Aws::SageMaker
       :kernel_gateway_app_settings,
       :tensor_board_app_settings,
       :r_studio_server_pro_app_settings,
-      :r_session_app_settings)
+      :r_session_app_settings,
+      :canvas_app_settings)
       SENSITIVE = []
       include Aws::Structure
     end

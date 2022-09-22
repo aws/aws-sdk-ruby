@@ -40,6 +40,7 @@ module Aws::S3Control
     BucketLevel = Shapes::StructureShape.new(name: 'BucketLevel')
     BucketLocationConstraint = Shapes::StringShape.new(name: 'BucketLocationConstraint')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
+    BucketVersioningStatus = Shapes::StringShape.new(name: 'BucketVersioningStatus')
     Buckets = Shapes::ListShape.new(name: 'Buckets')
     CloudWatchMetrics = Shapes::StructureShape.new(name: 'CloudWatchMetrics')
     ConfigId = Shapes::StringShape.new(name: 'ConfigId')
@@ -116,6 +117,8 @@ module Aws::S3Control
     GetBucketResult = Shapes::StructureShape.new(name: 'GetBucketResult')
     GetBucketTaggingRequest = Shapes::StructureShape.new(name: 'GetBucketTaggingRequest')
     GetBucketTaggingResult = Shapes::StructureShape.new(name: 'GetBucketTaggingResult')
+    GetBucketVersioningRequest = Shapes::StructureShape.new(name: 'GetBucketVersioningRequest')
+    GetBucketVersioningResult = Shapes::StructureShape.new(name: 'GetBucketVersioningResult')
     GetJobTaggingRequest = Shapes::StructureShape.new(name: 'GetJobTaggingRequest')
     GetJobTaggingResult = Shapes::StructureShape.new(name: 'GetJobTaggingResult')
     GetMultiRegionAccessPointPolicyRequest = Shapes::StructureShape.new(name: 'GetMultiRegionAccessPointPolicyRequest')
@@ -200,6 +203,9 @@ module Aws::S3Control
     ListStorageLensConfigurationsRequest = Shapes::StructureShape.new(name: 'ListStorageLensConfigurationsRequest')
     ListStorageLensConfigurationsResult = Shapes::StructureShape.new(name: 'ListStorageLensConfigurationsResult')
     Location = Shapes::StringShape.new(name: 'Location')
+    MFA = Shapes::StringShape.new(name: 'MFA')
+    MFADelete = Shapes::StringShape.new(name: 'MFADelete')
+    MFADeleteStatus = Shapes::StringShape.new(name: 'MFADeleteStatus')
     ManifestPrefixString = Shapes::StringShape.new(name: 'ManifestPrefixString')
     MaxLength1024String = Shapes::StringShape.new(name: 'MaxLength1024String')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -257,6 +263,7 @@ module Aws::S3Control
     PutBucketLifecycleConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketLifecycleConfigurationRequest')
     PutBucketPolicyRequest = Shapes::StructureShape.new(name: 'PutBucketPolicyRequest')
     PutBucketTaggingRequest = Shapes::StructureShape.new(name: 'PutBucketTaggingRequest')
+    PutBucketVersioningRequest = Shapes::StructureShape.new(name: 'PutBucketVersioningRequest')
     PutJobTaggingRequest = Shapes::StructureShape.new(name: 'PutJobTaggingRequest')
     PutJobTaggingResult = Shapes::StructureShape.new(name: 'PutJobTaggingResult')
     PutMultiRegionAccessPointPolicyInput = Shapes::StructureShape.new(name: 'PutMultiRegionAccessPointPolicyInput')
@@ -354,6 +361,7 @@ module Aws::S3Control
     UpdateJobPriorityResult = Shapes::StructureShape.new(name: 'UpdateJobPriorityResult')
     UpdateJobStatusRequest = Shapes::StructureShape.new(name: 'UpdateJobStatusRequest')
     UpdateJobStatusResult = Shapes::StructureShape.new(name: 'UpdateJobStatusResult')
+    VersioningConfiguration = Shapes::StructureShape.new(name: 'VersioningConfiguration')
     VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
 
@@ -667,6 +675,14 @@ module Aws::S3Control
 
     GetBucketTaggingResult.add_member(:tag_set, Shapes::ShapeRef.new(shape: S3TagSet, required: true, location_name: "TagSet"))
     GetBucketTaggingResult.struct_class = Types::GetBucketTaggingResult
+
+    GetBucketVersioningRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetBucketVersioningRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    GetBucketVersioningRequest.struct_class = Types::GetBucketVersioningRequest
+
+    GetBucketVersioningResult.add_member(:status, Shapes::ShapeRef.new(shape: BucketVersioningStatus, location_name: "Status"))
+    GetBucketVersioningResult.add_member(:mfa_delete, Shapes::ShapeRef.new(shape: MFADeleteStatus, location_name: "MfaDelete"))
+    GetBucketVersioningResult.struct_class = Types::GetBucketVersioningResult
 
     GetJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     GetJobTaggingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
@@ -1048,6 +1064,14 @@ module Aws::S3Control
     PutBucketTaggingRequest[:payload] = :tagging
     PutBucketTaggingRequest[:payload_member] = PutBucketTaggingRequest.member(:tagging)
 
+    PutBucketVersioningRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    PutBucketVersioningRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
+    PutBucketVersioningRequest.add_member(:mfa, Shapes::ShapeRef.new(shape: MFA, location: "header", location_name: "x-amz-mfa"))
+    PutBucketVersioningRequest.add_member(:versioning_configuration, Shapes::ShapeRef.new(shape: VersioningConfiguration, required: true, location_name: "VersioningConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}}))
+    PutBucketVersioningRequest.struct_class = Types::PutBucketVersioningRequest
+    PutBucketVersioningRequest[:payload] = :versioning_configuration
+    PutBucketVersioningRequest[:payload_member] = PutBucketVersioningRequest.member(:versioning_configuration)
+
     PutJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}, "hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     PutJobTaggingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
     PutJobTaggingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: S3TagSet, required: true, location_name: "Tags"))
@@ -1308,6 +1332,10 @@ module Aws::S3Control
     UpdateJobStatusResult.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "Status"))
     UpdateJobStatusResult.add_member(:status_update_reason, Shapes::ShapeRef.new(shape: JobStatusUpdateReason, location_name: "StatusUpdateReason"))
     UpdateJobStatusResult.struct_class = Types::UpdateJobStatusResult
+
+    VersioningConfiguration.add_member(:mfa_delete, Shapes::ShapeRef.new(shape: MFADelete, location_name: "MfaDelete"))
+    VersioningConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: BucketVersioningStatus, location_name: "Status"))
+    VersioningConfiguration.struct_class = Types::VersioningConfiguration
 
     VpcConfiguration.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     VpcConfiguration.struct_class = Types::VpcConfiguration
@@ -1679,6 +1707,17 @@ module Aws::S3Control
         o.output = Shapes::ShapeRef.new(shape: GetBucketTaggingResult)
       end)
 
+      api.add_operation(:get_bucket_versioning, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBucketVersioning"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/bucket/{name}/versioning"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetBucketVersioningRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBucketVersioningResult)
+      end)
+
       api.add_operation(:get_job_tagging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetJobTagging"
         o.http_method = "GET"
@@ -1935,6 +1974,18 @@ module Aws::S3Control
         o.endpoint_pattern = {
         }
         o.input = Shapes::ShapeRef.new(shape: PutBucketTaggingRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:put_bucket_versioning, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutBucketVersioning"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v20180820/bucket/{name}/versioning"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: PutBucketVersioningRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 

@@ -160,6 +160,7 @@ module Aws::SageMaker
     CandidateStepName = Shapes::StringShape.new(name: 'CandidateStepName')
     CandidateStepType = Shapes::StringShape.new(name: 'CandidateStepType')
     CandidateSteps = Shapes::ListShape.new(name: 'CandidateSteps')
+    CanvasAppSettings = Shapes::StructureShape.new(name: 'CanvasAppSettings')
     CapacitySize = Shapes::StructureShape.new(name: 'CapacitySize')
     CapacitySizeType = Shapes::StringShape.new(name: 'CapacitySizeType')
     CapacitySizeValue = Shapes::IntegerShape.new(name: 'CapacitySizeValue')
@@ -675,6 +676,7 @@ module Aws::SageMaker
     FeatureParameterRemovals = Shapes::ListShape.new(name: 'FeatureParameterRemovals')
     FeatureParameterValue = Shapes::StringShape.new(name: 'FeatureParameterValue')
     FeatureParameters = Shapes::ListShape.new(name: 'FeatureParameters')
+    FeatureStatus = Shapes::StringShape.new(name: 'FeatureStatus')
     FeatureType = Shapes::StringShape.new(name: 'FeatureType')
     FileSource = Shapes::StructureShape.new(name: 'FileSource')
     FileSystemAccessMode = Shapes::StringShape.new(name: 'FileSystemAccessMode')
@@ -1534,6 +1536,7 @@ module Aws::SageMaker
     TenthFractionsOfACent = Shapes::IntegerShape.new(name: 'TenthFractionsOfACent')
     TerminationWaitInSeconds = Shapes::IntegerShape.new(name: 'TerminationWaitInSeconds')
     ThingName = Shapes::StringShape.new(name: 'ThingName')
+    TimeSeriesForecastingSettings = Shapes::StructureShape.new(name: 'TimeSeriesForecastingSettings')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TrafficDurationInSeconds = Shapes::IntegerShape.new(name: 'TrafficDurationInSeconds')
     TrafficPattern = Shapes::StructureShape.new(name: 'TrafficPattern')
@@ -2048,6 +2051,9 @@ module Aws::SageMaker
     CandidateProperties.struct_class = Types::CandidateProperties
 
     CandidateSteps.member = Shapes::ShapeRef.new(shape: AutoMLCandidateStep)
+
+    CanvasAppSettings.add_member(:time_series_forecasting_settings, Shapes::ShapeRef.new(shape: TimeSeriesForecastingSettings, location_name: "TimeSeriesForecastingSettings"))
+    CanvasAppSettings.struct_class = Types::CanvasAppSettings
 
     CapacitySize.add_member(:type, Shapes::ShapeRef.new(shape: CapacitySizeType, required: true, location_name: "Type"))
     CapacitySize.add_member(:value, Shapes::ShapeRef.new(shape: CapacitySizeValue, required: true, location_name: "Value"))
@@ -6910,6 +6916,10 @@ module Aws::SageMaker
     TensorBoardOutputConfig.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3OutputPath"))
     TensorBoardOutputConfig.struct_class = Types::TensorBoardOutputConfig
 
+    TimeSeriesForecastingSettings.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
+    TimeSeriesForecastingSettings.add_member(:amazon_forecast_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "AmazonForecastRoleArn"))
+    TimeSeriesForecastingSettings.struct_class = Types::TimeSeriesForecastingSettings
+
     TrafficPattern.add_member(:traffic_type, Shapes::ShapeRef.new(shape: TrafficType, location_name: "TrafficType"))
     TrafficPattern.add_member(:phases, Shapes::ShapeRef.new(shape: Phases, location_name: "Phases"))
     TrafficPattern.struct_class = Types::TrafficPattern
@@ -7477,6 +7487,7 @@ module Aws::SageMaker
     UserSettings.add_member(:tensor_board_app_settings, Shapes::ShapeRef.new(shape: TensorBoardAppSettings, location_name: "TensorBoardAppSettings"))
     UserSettings.add_member(:r_studio_server_pro_app_settings, Shapes::ShapeRef.new(shape: RStudioServerProAppSettings, location_name: "RStudioServerProAppSettings"))
     UserSettings.add_member(:r_session_app_settings, Shapes::ShapeRef.new(shape: RSessionAppSettings, location_name: "RSessionAppSettings"))
+    UserSettings.add_member(:canvas_app_settings, Shapes::ShapeRef.new(shape: CanvasAppSettings, location_name: "CanvasAppSettings"))
     UserSettings.struct_class = Types::UserSettings
 
     VariantProperty.add_member(:variant_property_type, Shapes::ShapeRef.new(shape: VariantPropertyType, required: true, location_name: "VariantPropertyType"))
