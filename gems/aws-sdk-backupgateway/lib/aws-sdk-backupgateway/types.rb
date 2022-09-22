@@ -299,6 +299,12 @@ module Aws::BackupGateway
     #   cloud, in Unix format and UTC time.
     #   @return [Time]
     #
+    # @!attribute [rw] maintenance_start_time
+    #   Returns your gateway's weekly maintenance start time including the
+    #   day and time of the week. Note that values are in terms of the
+    #   gateway's time zone. Can be weekly or monthly.
+    #   @return [Types::MaintenanceStartTime]
+    #
     # @!attribute [rw] next_update_availability_time
     #   Details showing the next update availability time of the gateway.
     #   @return [Time]
@@ -316,6 +322,7 @@ module Aws::BackupGateway
       :gateway_type,
       :hypervisor_id,
       :last_seen_time,
+      :maintenance_start_time,
       :next_update_availability_time,
       :vpc_endpoint)
       SENSITIVE = []
@@ -350,6 +357,38 @@ module Aws::BackupGateway
     #
     class GetGatewayOutput < Struct.new(
       :gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetVirtualMachineInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the virtual machine.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetVirtualMachineInput AWS API Documentation
+    #
+    class GetVirtualMachineInput < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_machine
+    #   This object contains the basic attributes of `VirtualMachine`
+    #   contained by the output of `GetVirtualMachine`
+    #   @return [Types::VirtualMachineDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetVirtualMachineOutput AWS API Documentation
+    #
+    class GetVirtualMachineOutput < Struct.new(
+      :virtual_machine)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -618,9 +657,15 @@ module Aws::BackupGateway
     #   data as a hash:
     #
     #       {
+    #         hypervisor_arn: "ServerArn",
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
+    #
+    # @!attribute [rw] hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor connected to your
+    #   virtual machine.
+    #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of virtual machines to list.
@@ -636,6 +681,7 @@ module Aws::BackupGateway
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/ListVirtualMachinesInput AWS API Documentation
     #
     class ListVirtualMachinesInput < Struct.new(
+      :hypervisor_arn,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -659,6 +705,46 @@ module Aws::BackupGateway
     class ListVirtualMachinesOutput < Struct.new(
       :next_token,
       :virtual_machines)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This is your gateway's weekly maintenance start time including the
+    # day and time of the week. Note that values are in terms of the
+    # gateway's time zone. Can be weekly or monthly.
+    #
+    # @!attribute [rw] day_of_month
+    #   The day of the month component of the maintenance start time
+    #   represented as an ordinal number from 1 to 28, where 1 represents
+    #   the first day of the month and 28 represents the last day of the
+    #   month.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] day_of_week
+    #   An ordinal number between 0 and 6 that represents the day of the
+    #   week, where 0 represents Sunday and 6 represents Saturday. The day
+    #   of week is in the time zone of the gateway.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] hour_of_day
+    #   The hour component of the maintenance start time represented as
+    #   *hh*, where *hh* is the hour (0 to 23). The hour of the day is in
+    #   the time zone of the gateway.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minute_of_hour
+    #   The minute component of the maintenance start time represented as
+    #   *mm*, where *mm* is the minute (0 to 59). The minute of the hour is
+    #   in the time zone of the gateway.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/MaintenanceStartTime AWS API Documentation
+    #
+    class MaintenanceStartTime < Struct.new(
+      :day_of_month,
+      :day_of_week,
+      :hour_of_day,
+      :minute_of_hour)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -854,6 +940,26 @@ module Aws::BackupGateway
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/TestHypervisorConfigurationOutput AWS API Documentation
     #
     class TestHypervisorConfigurationOutput < Aws::EmptyStructure; end
+
+    # TPS has been limited to protect against intentional or unintentional
+    # high request volumes.
+    #
+    # @!attribute [rw] error_code
+    #   Error: TPS has been limited to protect against intentional or
+    #   unintentional high request volumes.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UntagResourceInput
     #   data as a hash:
@@ -1067,6 +1173,48 @@ module Aws::BackupGateway
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/VirtualMachine AWS API Documentation
     #
     class VirtualMachine < Struct.new(
+      :host_name,
+      :hypervisor_id,
+      :last_backup_date,
+      :name,
+      :path,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Your `VirtualMachine` objects, ordered by their Amazon Resource Names
+    # (ARNs).
+    #
+    # @!attribute [rw] host_name
+    #   The host name of the virtual machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] hypervisor_id
+    #   The ID of the virtual machine's hypervisor.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_backup_date
+    #   The most recent date a virtual machine was backed up, in Unix format
+    #   and UTC time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the virtual machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path of the virtual machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the virtual machine. For example,
+    #   `arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/VirtualMachineDetails AWS API Documentation
+    #
+    class VirtualMachineDetails < Struct.new(
       :host_name,
       :hypervisor_id,
       :last_backup_date,

@@ -764,10 +764,10 @@ module Aws::EC2
     # from a telecommunication carrier, to a network interface which resides
     # in a subnet in a Wavelength Zone (for example an EC2 instance).
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][3] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][3] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -1084,6 +1084,8 @@ module Aws::EC2
     #
     # @option params [Array<String>] :disallowed_cidrs
     #   Exclude a particular CIDR range from being returned by the pool.
+    #   Disallowed CIDRs are only allowed if using netmask length for
+    #   allocation.
     #
     # @return [Types::AllocateIpamPoolCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1201,9 +1203,8 @@ module Aws::EC2
     #   specifying specific IPv6 addresses.
     #
     # @option params [Array<String>] :ipv_6_addresses
-    #   One or more specific IPv6 addresses to be assigned to the network
-    #   interface. You can't use this option if you're specifying a number
-    #   of IPv6 addresses.
+    #   The IPv6 addresses to be assigned to the network interface. You can't
+    #   use this option if you're specifying a number of IPv6 addresses.
     #
     # @option params [Integer] :ipv_6_prefix_count
     #   The number of IPv6 prefixes that Amazon Web Services automatically
@@ -1295,9 +1296,9 @@ module Aws::EC2
     #   The ID of the network interface.
     #
     # @option params [Array<String>] :private_ip_addresses
-    #   One or more IP addresses to be assigned as a secondary private IP
-    #   address to the network interface. You can't specify this parameter
-    #   when also specifying a number of secondary IP addresses.
+    #   The IP addresses to be assigned as a secondary private IP address to
+    #   the network interface. You can't specify this parameter when also
+    #   specifying a number of secondary IP addresses.
     #
     #   If you don't specify an IP address, Amazon EC2 automatically selects
     #   an IP address within the subnet range.
@@ -1410,10 +1411,10 @@ module Aws::EC2
     # For more information, see the *Elastic IP Addresses* section of
     # [Amazon EC2 Pricing][2].
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][3] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][3] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -1672,7 +1673,7 @@ module Aws::EC2
     #
     # When the IAM role is associated with the ACM certificate, the
     # certificate, certificate chain, and encrypted private key are placed
-    # in an Amazon S3 bucket that only the associated IAM role can access.
+    # in an Amazon S3 location that only the associated IAM role can access.
     # The private key of the certificate is encrypted with an Amazon Web
     # Services managed key that has an attached attestation-based key
     # policy.
@@ -2994,10 +2995,10 @@ module Aws::EC2
     # For more information about VPC security group quotas, see [Amazon VPC
     # quotas][1].
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -3030,7 +3031,8 @@ module Aws::EC2
     # @option params [String] :group_name
     #   \[EC2-Classic, default VPC\] The name of the security group. You must
     #   specify either the security group ID or the security group name in the
-    #   request.
+    #   request. For security groups in a nondefault VPC, you must specify the
+    #   security group ID.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
     #   The sets of IP permissions.
@@ -9244,12 +9246,18 @@ module Aws::EC2
 
     # Creates a network interface in the specified subnet.
     #
-    # For more information about network interfaces, see [Elastic Network
-    # Interfaces][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # The number of IP addresses you can assign to a network interface
+    # varies by instance type. For more information, see [IP Addresses Per
+    # ENI Per Instance Type][1] in the *Amazon Virtual Private Cloud User
+    # Guide*.
+    #
+    # For more information about network interfaces, see [Elastic network
+    # interfaces][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
     #
     # @option params [String] :description
     #   A description for the network interface.
@@ -9266,14 +9274,21 @@ module Aws::EC2
     # @option params [Integer] :ipv_6_address_count
     #   The number of IPv6 addresses to assign to a network interface. Amazon
     #   EC2 automatically selects the IPv6 addresses from the subnet range.
-    #   You can't use this option if specifying specific IPv6 addresses. If
-    #   your subnet has the `AssignIpv6AddressOnCreation` attribute set to
-    #   `true`, you can specify `0` to override this setting.
+    #
+    #   You can't specify a count of IPv6 addresses using this parameter if
+    #   you've specified one of the following: specific IPv6 addresses,
+    #   specific IPv6 prefixes, or a count of IPv6 prefixes.
+    #
+    #   If your subnet has the `AssignIpv6AddressOnCreation` attribute set,
+    #   you can override that setting by specifying 0 as the IPv6 address
+    #   count.
     #
     # @option params [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
-    #   One or more specific IPv6 addresses from the IPv6 CIDR block range of
-    #   your subnet. You can't use this option if you're specifying a number
-    #   of IPv6 addresses.
+    #   The IPv6 addresses from the IPv6 CIDR block range of your subnet.
+    #
+    #   You can't specify IPv6 addresses using this parameter if you've
+    #   specified one of the following: a count of IPv6 addresses, specific
+    #   IPv6 prefixes, or a count of IPv6 prefixes.
     #
     # @option params [String] :private_ip_address
     #   The primary private IPv4 address of the network interface. If you
@@ -9283,7 +9298,11 @@ module Aws::EC2
     #   primary (only one IP address can be designated as primary).
     #
     # @option params [Array<Types::PrivateIpAddressSpecification>] :private_ip_addresses
-    #   One or more private IPv4 addresses.
+    #   The private IPv4 addresses.
+    #
+    #   You can't specify private IPv4 addresses if you've specified one of
+    #   the following: a count of private IPv4 addresses, specific IPv4
+    #   prefixes, or a count of IPv4 prefixes.
     #
     # @option params [Integer] :secondary_private_ip_address_count
     #   The number of secondary private IPv4 addresses to assign to a network
@@ -9292,32 +9311,39 @@ module Aws::EC2
     #   range. You can't specify this option and specify more than one
     #   private IP address using `privateIpAddresses`.
     #
-    #   The number of IP addresses you can assign to a network interface
-    #   varies by instance type. For more information, see [IP Addresses Per
-    #   ENI Per Instance Type][1] in the *Amazon Virtual Private Cloud User
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
+    #   You can't specify a count of private IPv4 addresses if you've
+    #   specified one of the following: specific private IPv4 addresses,
+    #   specific IPv4 prefixes, or a count of IPv4 prefixes.
     #
     # @option params [Array<Types::Ipv4PrefixSpecificationRequest>] :ipv_4_prefixes
-    #   One or more IPv4 prefixes assigned to the network interface. You
-    #   cannot use this option if you use the `Ipv4PrefixCount` option.
+    #   The IPv4 prefixes assigned to the network interface.
+    #
+    #   You can't specify IPv4 prefixes if you've specified one of the
+    #   following: a count of IPv4 prefixes, specific private IPv4 addresses,
+    #   or a count of private IPv4 addresses.
     #
     # @option params [Integer] :ipv_4_prefix_count
     #   The number of IPv4 prefixes that Amazon Web Services automatically
-    #   assigns to the network interface. You cannot use this option if you
-    #   use the `Ipv4 Prefixes` option.
+    #   assigns to the network interface.
+    #
+    #   You can't specify a count of IPv4 prefixes if you've specified one
+    #   of the following: specific IPv4 prefixes, specific private IPv4
+    #   addresses, or a count of private IPv4 addresses.
     #
     # @option params [Array<Types::Ipv6PrefixSpecificationRequest>] :ipv_6_prefixes
-    #   One or more IPv6 prefixes assigned to the network interface. You
-    #   cannot use this option if you use the `Ipv6PrefixCount` option.
+    #   The IPv6 prefixes assigned to the network interface.
+    #
+    #   You can't specify IPv6 prefixes if you've specified one of the
+    #   following: a count of IPv6 prefixes, specific IPv6 addresses, or a
+    #   count of IPv6 addresses.
     #
     # @option params [Integer] :ipv_6_prefix_count
     #   The number of IPv6 prefixes that Amazon Web Services automatically
-    #   assigns to the network interface. You cannot use this option if you
-    #   use the `Ipv6Prefixes` option.
+    #   assigns to the network interface.
+    #
+    #   You can't specify a count of IPv6 prefixes if you've specified one
+    #   of the following: specific IPv6 prefixes, specific IPv6 addresses, or
+    #   a count of IPv6 addresses.
     #
     # @option params [String] :interface_type
     #   The type of network interface. The default is `interface`.
@@ -10287,10 +10313,10 @@ module Aws::EC2
     # For more information about VPC security group limits, see [Amazon VPC
     # Limits][3].
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][4] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][4] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -10573,8 +10599,11 @@ module Aws::EC2
     # Creates crash-consistent snapshots of multiple EBS volumes and stores
     # the data in S3. Volumes are chosen by specifying an instance. Any
     # attached volumes will produce one snapshot each that is
-    # crash-consistent across the instance. Boot volumes can be excluded by
-    # changing the parameters.
+    # crash-consistent across the instance.
+    #
+    # You can include all of the volumes currently attached to the instance,
+    # or you can exclude the root volume or specific data (non-root) volumes
+    # from the multi-volume snapshot set.
     #
     # You can create multi-volume snapshots of instances in a Region and
     # instances on an Outpost. If you create snapshots from an instance in a
@@ -15616,10 +15645,10 @@ module Aws::EC2
     # fails with `InvalidGroup.InUse` in EC2-Classic or
     # `DependencyViolation` in EC2-VPC.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -15632,7 +15661,9 @@ module Aws::EC2
     #
     # @option params [String] :group_name
     #   \[EC2-Classic, default VPC\] The name of the security group. You can
-    #   specify either the security group name or the security group ID.
+    #   specify either the security group name or the security group ID. For
+    #   security groups in a nondefault VPC, you must specify the security
+    #   group ID.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -17467,10 +17498,10 @@ module Aws::EC2
     # in a VPC. For more information, see [Elastic IP Addresses][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -21272,13 +21303,12 @@ module Aws::EC2
     #   regardless of ownership.
     #
     # @option params [Boolean] :include_deprecated
-    #   If `true`, all deprecated AMIs are included in the response. If
-    #   `false`, no deprecated AMIs are included in the response. If no value
-    #   is specified, the default value is `false`.
+    #   Specifies whether to include deprecated AMIs.
+    #
+    #   Default: No deprecated AMIs are included in the response.
     #
     #   <note markdown="1"> If you are the AMI owner, all deprecated AMIs appear in the response
-    #   regardless of the value (`true` or `false`) that you set for this
-    #   parameter.
+    #   regardless of what you specify for this parameter.
     #
     #    </note>
     #
@@ -26236,7 +26266,7 @@ module Aws::EC2
     # Describes the permissions for your network interfaces.
     #
     # @option params [Array<String>] :network_interface_permission_ids
-    #   One or more network interface permission IDs.
+    #   The network interface permission IDs.
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -26433,7 +26463,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :network_interface_ids
-    #   One or more network interface IDs.
+    #   The network interface IDs.
     #
     #   Default: Describes all your network interfaces.
     #
@@ -28353,10 +28383,10 @@ module Aws::EC2
     # and [Security groups for your VPC][2] in the *Amazon Virtual Private
     # Cloud User Guide*.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][3] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][3] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -34609,10 +34639,10 @@ module Aws::EC2
     # in a VPC. For more information, see [Elastic IP Addresses][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -39111,6 +39141,11 @@ module Aws::EC2
     # Import single or multi-volume disk images or EBS snapshots into an
     # Amazon Machine Image (AMI).
     #
+    # Amazon Web Services VM Import/Export strongly recommends specifying a
+    # value for either the `--license-type` or `--usage-operation` parameter
+    # when you create a new VM Import task. This ensures your operating
+    # system is licensed appropriately and your billing is optimized.
+    #
     # For more information, see [Importing a VM as an image using VM
     # Import/Export][1] in the *VM Import/Export User Guide*.
     #
@@ -39200,11 +39235,12 @@ module Aws::EC2
     #   The license type to be used for the Amazon Machine Image (AMI) after
     #   importing.
     #
-    #   By default, we detect the source-system operating system (OS) and
-    #   apply the appropriate license. Specify `AWS` to replace the
-    #   source-system license with an Amazon Web Services license, if
-    #   appropriate. Specify `BYOL` to retain the source-system license, if
-    #   appropriate.
+    #   Specify `AWS` to replace the source-system license with an Amazon Web
+    #   Services license or `BYOL` to retain the source-system license.
+    #   Leaving this parameter undefined is the same as choosing `AWS` when
+    #   importing a Windows Server operating system, and the same as choosing
+    #   `BYOL` when importing a Windows client operating system (such as
+    #   Windows 10) or a Linux operating system.
     #
     #   To use `BYOL`, you must have existing licenses with rights to use
     #   these licenses in a third party cloud, such as Amazon Web Services.
@@ -41136,7 +41172,14 @@ module Aws::EC2
     #   services such as network address translation, routing, or firewalls.
     #
     # @option params [String] :attribute
-    #   The name of the attribute.
+    #   The name of the attribute to modify.
+    #
+    #   You can modify the following attributes only: `disableApiTermination`
+    #   \| `instanceType` \| `kernel` \| `ramdisk` \|
+    #   `instanceInitiatedShutdownBehavior` \| `blockDeviceMapping` \|
+    #   `userData` \| `sourceDestCheck` \| `groupSet` \| `ebsOptimized` \|
+    #   `sriovNetSupport` \| `enaSupport` \| `nvmeSupport` \| `disableApiStop`
+    #   \| `enclaveOptions`
     #
     # @option params [Array<Types::InstanceBlockDeviceMappingSpecification>] :block_device_mappings
     #   Modifies the `DeleteOnTermination` attribute for volumes that are
@@ -45080,10 +45123,10 @@ module Aws::EC2
     # IP address that was originally allocated for use in the EC2-VPC
     # platform to the EC2-Classic platform.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -46424,10 +46467,10 @@ module Aws::EC2
     # with. To disassociate an Elastic IP address without releasing it, use
     # DisassociateAddress.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -48374,10 +48417,10 @@ module Aws::EC2
     # The Elastic IP address must not be associated with an instance or
     # network interface.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -48878,10 +48921,10 @@ module Aws::EC2
     # Rule changes are propagated to instances within the security group as
     # quickly as possible. However, a small delay might occur.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -48905,7 +48948,8 @@ module Aws::EC2
     # @option params [String] :group_name
     #   \[EC2-Classic, default VPC\] The name of the security group. You must
     #   specify either the security group ID or the security group name in the
-    #   request.
+    #   request. For security groups in a nondefault VPC, you must specify the
+    #   security group ID.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
     #   The sets of IP permissions. You can't specify a source security group
@@ -51652,7 +51696,7 @@ module Aws::EC2
     #   The IPv6 addresses to unassign from the network interface.
     #
     # @option params [Array<String>] :ipv_6_prefixes
-    #   One or more IPv6 prefixes to unassign from the network interface.
+    #   The IPv6 prefixes to unassign from the network interface.
     #
     # @option params [required, String] :network_interface_id
     #   The ID of the network interface.
@@ -51919,7 +51963,8 @@ module Aws::EC2
     # @option params [String] :group_name
     #   \[EC2-Classic, default VPC\] The name of the security group. You must
     #   specify either the security group ID or the security group name in the
-    #   request.
+    #   request. For security groups in a nondefault VPC, you must specify the
+    #   security group ID.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
     #   The IP permissions for the security group rule. You must specify
@@ -52081,7 +52126,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.336.0'
+      context[:gem_version] = '1.337.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

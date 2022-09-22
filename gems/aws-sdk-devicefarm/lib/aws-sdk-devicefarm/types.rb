@@ -58,7 +58,7 @@ module Aws::DeviceFarm
     #
     #
     #
-    #   [1]: https://aws.amazon.com/device-farm/faq/
+    #   [1]: http://aws.amazon.com/device-farm/faqs/
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/AccountSettings AWS API Documentation
@@ -516,6 +516,11 @@ module Aws::DeviceFarm
     #       {
     #         name: "Name", # required
     #         default_job_timeout_minutes: 1,
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnet_ids: ["SubnetId"], # required
+    #           vpc_id: "NonEmptyString", # required
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -528,11 +533,16 @@ module Aws::DeviceFarm
     #   unless overridden when scheduling a run.
     #   @return [Integer]
     #
+    # @!attribute [rw] vpc_config
+    #   The VPC security groups and subnets that are attached to a project.
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProjectRequest AWS API Documentation
     #
     class CreateProjectRequest < Struct.new(
       :name,
-      :default_job_timeout_minutes)
+      :default_job_timeout_minutes,
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -698,7 +708,7 @@ module Aws::DeviceFarm
     #
     #
     #
-    #   [1]: https://aws.amazon.com/device-farm/faq/
+    #   [1]: http://aws.amazon.com/device-farm/faqs/
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionRequest AWS API Documentation
@@ -1906,7 +1916,7 @@ module Aws::DeviceFarm
     #
     #
     #
-    #   [1]: https://aws.amazon.com/device-farm/faq/
+    #   [1]: http://aws.amazon.com/device-farm/faqs/
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ExecutionConfiguration AWS API Documentation
@@ -4767,13 +4777,18 @@ module Aws::DeviceFarm
     #   When the project was created.
     #   @return [Time]
     #
+    # @!attribute [rw] vpc_config
+    #   The VPC security groups and subnets that are attached to a project.
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Project AWS API Documentation
     #
     class Project < Struct.new(
       :arn,
       :name,
       :default_job_timeout_minutes,
-      :created)
+      :created,
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5065,8 +5080,12 @@ module Aws::DeviceFarm
     #
     #
     #
-    #   [1]: https://aws.amazon.com/device-farm/faq/
+    #   [1]: http://aws.amazon.com/device-farm/faqs/
     #   @return [Boolean]
+    #
+    # @!attribute [rw] vpc_config
+    #   The VPC security groups and subnets that are attached to a project.
+    #   @return [Types::VpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RemoteAccessSession AWS API Documentation
     #
@@ -5091,7 +5110,8 @@ module Aws::DeviceFarm
       :endpoint,
       :device_udid,
       :interaction_mode,
-      :skip_app_resign)
+      :skip_app_resign,
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5514,7 +5534,7 @@ module Aws::DeviceFarm
     #
     #
     #
-    #   [1]: https://aws.amazon.com/device-farm/faq/
+    #   [1]: http://aws.amazon.com/device-farm/faqs/
     #   @return [Boolean]
     #
     # @!attribute [rw] test_spec_arn
@@ -5525,6 +5545,10 @@ module Aws::DeviceFarm
     #   The results of a device filter used to select the devices for a test
     #   run.
     #   @return [Types::DeviceSelectionResult]
+    #
+    # @!attribute [rw] vpc_config
+    #   The VPC security groups and subnets that are attached to a project.
+    #   @return [Types::VpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Run AWS API Documentation
     #
@@ -5559,7 +5583,8 @@ module Aws::DeviceFarm
       :web_url,
       :skip_app_resign,
       :test_spec_arn,
-      :device_selection_result)
+      :device_selection_result,
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7132,6 +7157,11 @@ module Aws::DeviceFarm
     #         arn: "AmazonResourceName", # required
     #         name: "Name",
     #         default_job_timeout_minutes: 1,
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnet_ids: ["SubnetId"], # required
+    #           vpc_id: "NonEmptyString", # required
+    #         },
     #       }
     #
     # @!attribute [rw] arn
@@ -7148,12 +7178,17 @@ module Aws::DeviceFarm
     #   times out.
     #   @return [Integer]
     #
+    # @!attribute [rw] vpc_config
+    #   The VPC security groups and subnets that are attached to a project.
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProjectRequest AWS API Documentation
     #
     class UpdateProjectRequest < Struct.new(
       :arn,
       :name,
-      :default_job_timeout_minutes)
+      :default_job_timeout_minutes,
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7517,6 +7552,40 @@ module Aws::DeviceFarm
       :vpce_service_name,
       :service_dns_name,
       :vpce_configuration_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the VPC configuration data necessary to interface with AWS
+    # Device Farm's services.
+    #
+    # @note When making an API call, you may pass VpcConfig
+    #   data as a hash:
+    #
+    #       {
+    #         security_group_ids: ["SecurityGroupId"], # required
+    #         subnet_ids: ["SubnetId"], # required
+    #         vpc_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] security_group_ids
+    #   An array of one or more security groups IDs in your Amazon VPC.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   An array of one or more subnet IDs in your Amazon VPC.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the Amazon VPC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/VpcConfig AWS API Documentation
+    #
+    class VpcConfig < Struct.new(
+      :security_group_ids,
+      :subnet_ids,
+      :vpc_id)
       SENSITIVE = []
       include Aws::Structure
     end

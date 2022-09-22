@@ -1215,6 +1215,8 @@ module Aws::EC2
     #
     # @!attribute [rw] disallowed_cidrs
     #   Exclude a particular CIDR range from being returned by the pool.
+    #   Disallowed CIDRs are only allowed if using netmask length for
+    #   allocation.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateIpamPoolCidrRequest AWS API Documentation
@@ -1640,9 +1642,9 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_addresses
-    #   One or more specific IPv6 addresses to be assigned to the network
-    #   interface. You can't use this option if you're specifying a number
-    #   of IPv6 addresses.
+    #   The IPv6 addresses to be assigned to the network interface. You
+    #   can't use this option if you're specifying a number of IPv6
+    #   addresses.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ipv_6_prefix_count
@@ -1721,9 +1723,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] private_ip_addresses
-    #   One or more IP addresses to be assigned as a secondary private IP
-    #   address to the network interface. You can't specify this parameter
-    #   when also specifying a number of secondary IP addresses.
+    #   The IP addresses to be assigned as a secondary private IP address to
+    #   the network interface. You can't specify this parameter when also
+    #   specifying a number of secondary IP addresses.
     #
     #   If you don't specify an IP address, Amazon EC2 automatically
     #   selects an IP address within the subnet range.
@@ -3377,7 +3379,8 @@ module Aws::EC2
     # @!attribute [rw] group_name
     #   \[EC2-Classic, default VPC\] The name of the security group. You
     #   must specify either the security group ID or the security group name
-    #   in the request.
+    #   in the request. For security groups in a nondefault VPC, you must
+    #   specify the security group ID.
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
@@ -10951,8 +10954,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateNetworkInterface.
-    #
     # @note When making an API call, you may pass CreateNetworkInterfaceRequest
     #   data as a hash:
     #
@@ -11020,16 +11021,23 @@ module Aws::EC2
     # @!attribute [rw] ipv_6_address_count
     #   The number of IPv6 addresses to assign to a network interface.
     #   Amazon EC2 automatically selects the IPv6 addresses from the subnet
-    #   range. You can't use this option if specifying specific IPv6
-    #   addresses. If your subnet has the `AssignIpv6AddressOnCreation`
-    #   attribute set to `true`, you can specify `0` to override this
-    #   setting.
+    #   range.
+    #
+    #   You can't specify a count of IPv6 addresses using this parameter if
+    #   you've specified one of the following: specific IPv6 addresses,
+    #   specific IPv6 prefixes, or a count of IPv6 prefixes.
+    #
+    #   If your subnet has the `AssignIpv6AddressOnCreation` attribute set,
+    #   you can override that setting by specifying 0 as the IPv6 address
+    #   count.
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_addresses
-    #   One or more specific IPv6 addresses from the IPv6 CIDR block range
-    #   of your subnet. You can't use this option if you're specifying a
-    #   number of IPv6 addresses.
+    #   The IPv6 addresses from the IPv6 CIDR block range of your subnet.
+    #
+    #   You can't specify IPv6 addresses using this parameter if you've
+    #   specified one of the following: a count of IPv6 addresses, specific
+    #   IPv6 prefixes, or a count of IPv6 prefixes.
     #   @return [Array<Types::InstanceIpv6Address>]
     #
     # @!attribute [rw] private_ip_address
@@ -11041,7 +11049,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] private_ip_addresses
-    #   One or more private IPv4 addresses.
+    #   The private IPv4 addresses.
+    #
+    #   You can't specify private IPv4 addresses if you've specified one
+    #   of the following: a count of private IPv4 addresses, specific IPv4
+    #   prefixes, or a count of IPv4 prefixes.
     #   @return [Array<Types::PrivateIpAddressSpecification>]
     #
     # @!attribute [rw] secondary_private_ip_address_count
@@ -11051,36 +11063,43 @@ module Aws::EC2
     #   subnet's IPv4 CIDR range. You can't specify this option and
     #   specify more than one private IP address using `privateIpAddresses`.
     #
-    #   The number of IP addresses you can assign to a network interface
-    #   varies by instance type. For more information, see [IP Addresses Per
-    #   ENI Per Instance Type][1] in the *Amazon Virtual Private Cloud User
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
+    #   You can't specify a count of private IPv4 addresses if you've
+    #   specified one of the following: specific private IPv4 addresses,
+    #   specific IPv4 prefixes, or a count of IPv4 prefixes.
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_4_prefixes
-    #   One or more IPv4 prefixes assigned to the network interface. You
-    #   cannot use this option if you use the `Ipv4PrefixCount` option.
+    #   The IPv4 prefixes assigned to the network interface.
+    #
+    #   You can't specify IPv4 prefixes if you've specified one of the
+    #   following: a count of IPv4 prefixes, specific private IPv4
+    #   addresses, or a count of private IPv4 addresses.
     #   @return [Array<Types::Ipv4PrefixSpecificationRequest>]
     #
     # @!attribute [rw] ipv_4_prefix_count
     #   The number of IPv4 prefixes that Amazon Web Services automatically
-    #   assigns to the network interface. You cannot use this option if you
-    #   use the `Ipv4 Prefixes` option.
+    #   assigns to the network interface.
+    #
+    #   You can't specify a count of IPv4 prefixes if you've specified one
+    #   of the following: specific IPv4 prefixes, specific private IPv4
+    #   addresses, or a count of private IPv4 addresses.
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_prefixes
-    #   One or more IPv6 prefixes assigned to the network interface. You
-    #   cannot use this option if you use the `Ipv6PrefixCount` option.
+    #   The IPv6 prefixes assigned to the network interface.
+    #
+    #   You can't specify IPv6 prefixes if you've specified one of the
+    #   following: a count of IPv6 prefixes, specific IPv6 addresses, or a
+    #   count of IPv6 addresses.
     #   @return [Array<Types::Ipv6PrefixSpecificationRequest>]
     #
     # @!attribute [rw] ipv_6_prefix_count
     #   The number of IPv6 prefixes that Amazon Web Services automatically
-    #   assigns to the network interface. You cannot use this option if you
-    #   use the `Ipv6Prefixes` option.
+    #   assigns to the network interface.
+    #
+    #   You can't specify a count of IPv6 prefixes if you've specified one
+    #   of the following: specific IPv6 prefixes, specific IPv6 addresses,
+    #   or a count of IPv6 addresses.
     #   @return [Integer]
     #
     # @!attribute [rw] interface_type
@@ -11133,8 +11152,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CreateNetworkInterface.
-    #
     # @!attribute [rw] network_interface
     #   Information about the network interface.
     #   @return [Types::NetworkInterface]
@@ -16614,7 +16631,9 @@ module Aws::EC2
     #
     # @!attribute [rw] group_name
     #   \[EC2-Classic, default VPC\] The name of the security group. You can
-    #   specify either the security group name or the security group ID.
+    #   specify either the security group name or the security group ID. For
+    #   security groups in a nondefault VPC, you must specify the security
+    #   group ID.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -21470,13 +21489,12 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] include_deprecated
-    #   If `true`, all deprecated AMIs are included in the response. If
-    #   `false`, no deprecated AMIs are included in the response. If no
-    #   value is specified, the default value is `false`.
+    #   Specifies whether to include deprecated AMIs.
+    #
+    #   Default: No deprecated AMIs are included in the response.
     #
     #   <note markdown="1"> If you are the AMI owner, all deprecated AMIs appear in the response
-    #   regardless of the value (`true` or `false`) that you set for this
-    #   parameter.
+    #   regardless of what you specify for this parameter.
     #
     #    </note>
     #   @return [Boolean]
@@ -24759,7 +24777,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] network_interface_permission_ids
-    #   One or more network interface permission IDs.
+    #   The network interface permission IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
@@ -24968,7 +24986,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] network_interface_ids
-    #   One or more network interface IDs.
+    #   The network interface IDs.
     #
     #   Default: Describes all your network interfaces.
     #   @return [Array<String>]
@@ -39851,11 +39869,12 @@ module Aws::EC2
     #   The license type to be used for the Amazon Machine Image (AMI) after
     #   importing.
     #
-    #   By default, we detect the source-system operating system (OS) and
-    #   apply the appropriate license. Specify `AWS` to replace the
-    #   source-system license with an Amazon Web Services license, if
-    #   appropriate. Specify `BYOL` to retain the source-system license, if
-    #   appropriate.
+    #   Specify `AWS` to replace the source-system license with an Amazon
+    #   Web Services license or `BYOL` to retain the source-system license.
+    #   Leaving this parameter undefined is the same as choosing `AWS` when
+    #   importing a Windows Server operating system, and the same as
+    #   choosing `BYOL` when importing a Windows client operating system
+    #   (such as Windows 10) or a Linux operating system.
     #
     #   To use `BYOL`, you must have existing licenses with rights to use
     #   these licenses in a third party cloud, such as Amazon Web Services.
@@ -42027,11 +42046,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] groups
-    #   One or more security groups.
+    #   The security groups.
     #   @return [Array<Types::GroupIdentifier>]
     #
     # @!attribute [rw] ipv_6_addresses
-    #   One or more IPv6 addresses associated with the network interface.
+    #   The IPv6 addresses associated with the network interface.
     #   @return [Array<Types::InstanceIpv6Address>]
     #
     # @!attribute [rw] mac_address
@@ -42056,8 +42075,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] private_ip_addresses
-    #   One or more private IPv4 addresses associated with the network
-    #   interface.
+    #   The private IPv4 addresses associated with the network interface.
     #   @return [Array<Types::InstancePrivateIpAddress>]
     #
     # @!attribute [rw] source_dest_check
@@ -42279,8 +42297,8 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_addresses
-    #   One or more IPv6 addresses to assign to the network interface. You
-    #   cannot specify this option and the option to assign a number of IPv6
+    #   The IPv6 addresses to assign to the network interface. You cannot
+    #   specify this option and the option to assign a number of IPv6
     #   addresses in the same request. You cannot specify this option if
     #   you've specified a minimum number of instances to launch.
     #   @return [Array<Types::InstanceIpv6Address>]
@@ -42304,10 +42322,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] private_ip_addresses
-    #   One or more private IPv4 addresses to assign to the network
-    #   interface. Only one private IPv4 address can be designated as
-    #   primary. You cannot specify this option if you're launching more
-    #   than one instance in a [RunInstances][1] request.
+    #   The private IPv4 addresses to assign to the network interface. Only
+    #   one private IPv4 address can be designated as primary. You cannot
+    #   specify this option if you're launching more than one instance in a
+    #   [RunInstances][1] request.
     #
     #
     #
@@ -42368,9 +42386,8 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_4_prefixes
-    #   One or more IPv4 delegated prefixes to be assigned to the network
-    #   interface. You cannot use this option if you use the
-    #   `Ipv4PrefixCount` option.
+    #   The IPv4 delegated prefixes to be assigned to the network interface.
+    #   You cannot use this option if you use the `Ipv4PrefixCount` option.
     #   @return [Array<Types::Ipv4PrefixSpecificationRequest>]
     #
     # @!attribute [rw] ipv_4_prefix_count
@@ -42380,9 +42397,8 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_prefixes
-    #   One or more IPv6 delegated prefixes to be assigned to the network
-    #   interface. You cannot use this option if you use the
-    #   `Ipv6PrefixCount` option.
+    #   The IPv6 delegated prefixes to be assigned to the network interface.
+    #   You cannot use this option if you use the `Ipv6PrefixCount` option.
     #   @return [Array<Types::Ipv6PrefixSpecificationRequest>]
     #
     # @!attribute [rw] ipv_6_prefix_count
@@ -42814,7 +42830,7 @@ module Aws::EC2
     #
     #   * For instance types with Xilinx VU9P FPGAs, specify `vu9p`.
     #
-    #   * For instance types with Amazon Web Services Inferentia GPUs,
+    #   * For instance types with Amazon Web Services Inferentia chips,
     #     specify `inferentia`.
     #
     #   * For instance types with NVIDIA GRID K520 GPUs, specify `k520`.
@@ -43222,7 +43238,7 @@ module Aws::EC2
     #
     #   * For instance types with Xilinx VU9P FPGAs, specify ` vu9p`.
     #
-    #   * For instance types with Amazon Web Services Inferentia GPUs,
+    #   * For instance types with Amazon Web Services Inferentia chips,
     #     specify `inferentia`.
     #
     #   * For instance types with NVIDIA GRID K520 GPUs, specify `k520`.
@@ -43370,6 +43386,12 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] exclude_data_volume_ids
+    #   The IDs of the data (non-root) volumes to exclude from the
+    #   multi-volume snapshot set. If you specify the ID of the root volume,
+    #   the request fails. To exclude the root volume, use
+    #   **ExcludeBootVolume**.
+    #
+    #   You can specify up to 40 volume IDs per request.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceSpecification AWS API Documentation
@@ -44837,8 +44859,7 @@ module Aws::EC2
     # interface.
     #
     # @!attribute [rw] ipv_4_prefix
-    #   One or more IPv4 delegated prefixes assigned to the network
-    #   interface.
+    #   The IPv4 delegated prefixes assigned to the network interface.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipv4PrefixSpecificationResponse AWS API Documentation
@@ -44950,8 +44971,7 @@ module Aws::EC2
     # interface.
     #
     # @!attribute [rw] ipv_6_prefix
-    #   One or more IPv6 delegated prefixes assigned to the network
-    #   interface.
+    #   The IPv6 delegated prefixes assigned to the network interface.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipv6PrefixSpecificationResponse AWS API Documentation
@@ -49220,7 +49240,14 @@ module Aws::EC2
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] attribute
-    #   The name of the attribute.
+    #   The name of the attribute to modify.
+    #
+    #   You can modify the following attributes only:
+    #   `disableApiTermination` \| `instanceType` \| `kernel` \| `ramdisk`
+    #   \| `instanceInitiatedShutdownBehavior` \| `blockDeviceMapping` \|
+    #   `userData` \| `sourceDestCheck` \| `groupSet` \| `ebsOptimized` \|
+    #   `sriovNetSupport` \| `enaSupport` \| `nvmeSupport` \|
+    #   `disableApiStop` \| `enclaveOptions`
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
@@ -51380,6 +51407,11 @@ module Aws::EC2
     #   A private Autonomous System Number (ASN) for the Amazon side of a
     #   BGP session. The range is 64512 to 65534 for 16-bit ASNs and
     #   4200000000 to 4294967294 for 32-bit ASNs.
+    #
+    #   The modify ASN operation is not allowed on a transit gateway with
+    #   active BGP sessions. You must first delete all transit gateway
+    #   attachments that have BGP configured prior to modifying the ASN on
+    #   the transit gateway.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayOptions AWS API Documentation
@@ -53025,10 +53057,10 @@ module Aws::EC2
 
     # Describes the status of a moving Elastic IP address.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #
@@ -55541,7 +55573,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] private_ip_address
-    #   The private IPv4 addresses.
+    #   The private IPv4 address.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrivateIpAddressSpecification AWS API Documentation
@@ -58073,7 +58105,7 @@ module Aws::EC2
     #   The instance type. For more information, see [Instance types][1] in
     #   the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   If you specify `InstanceTypes`, you can't specify
+    #   If you specify `InstanceType`, you can't specify
     #   `InstanceRequirements`.
     #
     #
@@ -60842,7 +60874,8 @@ module Aws::EC2
     # @!attribute [rw] group_name
     #   \[EC2-Classic, default VPC\] The name of the security group. You
     #   must specify either the security group ID or the security group name
-    #   in the request.
+    #   in the request. For security groups in a nondefault VPC, you must
+    #   specify the security group ID.
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
@@ -69337,7 +69370,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] ipv_6_prefixes
-    #   One or more IPv6 prefixes to unassign from the network interface.
+    #   The IPv6 prefixes to unassign from the network interface.
     #   @return [Array<String>]
     #
     # @!attribute [rw] network_interface_id
@@ -69709,7 +69742,8 @@ module Aws::EC2
     # @!attribute [rw] group_name
     #   \[EC2-Classic, default VPC\] The name of the security group. You
     #   must specify either the security group ID or the security group name
-    #   in the request.
+    #   in the request. For security groups in a nondefault VPC, you must
+    #   specify the security group ID.
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
@@ -69818,10 +69852,10 @@ module Aws::EC2
 
     # Describes a security group and Amazon Web Services account ID pair.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
+    # EC2-Classic to a VPC. For more information, see [Migrate from
+    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #  </note>
     #

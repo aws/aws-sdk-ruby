@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2022-09-22)
+------------------
+
+* Feature - Documentation updates for the Identity Store CLI Reference.
+
 1.20.0 (2022-09-06)
 ------------------
 

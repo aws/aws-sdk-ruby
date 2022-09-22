@@ -1998,6 +1998,8 @@ module Aws::Glue
     #         database_name: "NameString", # required
     #         tables: ["NameString"], # required
     #         connection_name: "ConnectionName",
+    #         event_queue_arn: "EventQueueArn",
+    #         dlq_event_queue_arn: "EventQueueArn",
     #       }
     #
     # @!attribute [rw] database_name
@@ -2014,12 +2016,24 @@ module Aws::Glue
     #   type paired with a `NETWORK` Connection type.
     #   @return [String]
     #
+    # @!attribute [rw] event_queue_arn
+    #   A valid Amazon SQS ARN. For example,
+    #   `arn:aws:sqs:region:account:sqs`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dlq_event_queue_arn
+    #   A valid Amazon dead-letter SQS ARN. For example,
+    #   `arn:aws:sqs:region:account:deadLetterQueue`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogTarget AWS API Documentation
     #
     class CatalogTarget < Struct.new(
       :database_name,
       :tables,
-      :connection_name)
+      :connection_name,
+      :event_queue_arn,
+      :dlq_event_queue_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4404,6 +4418,8 @@ module Aws::Glue
     #             database_name: "NameString", # required
     #             tables: ["NameString"], # required
     #             connection_name: "ConnectionName",
+    #             event_queue_arn: "EventQueueArn",
+    #             dlq_event_queue_arn: "EventQueueArn",
     #           },
     #         ],
     #         delta_targets: [
@@ -4719,6 +4735,8 @@ module Aws::Glue
     #               database_name: "NameString", # required
     #               tables: ["NameString"], # required
     #               connection_name: "ConnectionName",
+    #               event_queue_arn: "EventQueueArn",
+    #               dlq_event_queue_arn: "EventQueueArn",
     #             },
     #           ],
     #           delta_targets: [
@@ -24323,6 +24341,8 @@ module Aws::Glue
     #               database_name: "NameString", # required
     #               tables: ["NameString"], # required
     #               connection_name: "ConnectionName",
+    #               event_queue_arn: "EventQueueArn",
+    #               dlq_event_queue_arn: "EventQueueArn",
     #             },
     #           ],
     #           delta_targets: [

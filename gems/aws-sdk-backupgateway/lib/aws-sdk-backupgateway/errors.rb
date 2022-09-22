@@ -31,6 +31,7 @@ module Aws::BackupGateway
   # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
+  # * {ThrottlingException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -104,6 +105,26 @@ module Aws::BackupGateway
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::BackupGateway::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error_code
+        @data[:error_code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::BackupGateway::Types::ThrottlingException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
