@@ -399,6 +399,7 @@ module Aws::S3
         expect = {"error"=>"Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"}
         client = Client.new(
           region: 'us-west-2',
+          s3_use_arn_region: false,
           stub_responses: true
         )
         expect do
@@ -449,6 +450,7 @@ module Aws::S3
         expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com"}}
         client = Client.new(
           region: 'us-east-1',
+          s3_use_arn_region: true,
           stub_responses: true
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
@@ -1048,6 +1050,7 @@ module Aws::S3
         expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://bucket-name.s3-fips.us-west-2.amazonaws.com"}}
         client = Client.new(
           region: 'us-west-2',
+          use_fips_endpoint: true,
           stub_responses: true
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
@@ -1074,6 +1077,7 @@ module Aws::S3
         client = Client.new(
           region: 'us-west-2',
           use_dualstack_endpoint: true,
+          use_fips_endpoint: true,
           stub_responses: true
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
@@ -1099,6 +1103,7 @@ module Aws::S3
         client = Client.new(
           region: 'us-west-2',
           use_accelerate_endpoint: true,
+          use_fips_endpoint: true,
           stub_responses: true
         )
         expect do
@@ -1299,6 +1304,7 @@ module Aws::S3
         expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://bucket-name.s3-fips.af-south-1.amazonaws.com"}}
         client = Client.new(
           region: 'af-south-1',
+          use_fips_endpoint: true,
           stub_responses: true
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true})
@@ -1325,6 +1331,7 @@ module Aws::S3
         client = Client.new(
           region: 'af-south-1',
           use_dualstack_endpoint: true,
+          use_fips_endpoint: true,
           stub_responses: true
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true})
@@ -1350,6 +1357,7 @@ module Aws::S3
         client = Client.new(
           region: 'af-south-1',
           use_accelerate_endpoint: true,
+          use_fips_endpoint: true,
           stub_responses: true
         )
         expect do
@@ -1401,6 +1409,7 @@ module Aws::S3
         client = Client.new(
           region: 'us-west-2',
           force_path_style: true,
+          use_fips_endpoint: true,
           stub_responses: true
         )
         expect do
@@ -1581,6 +1590,7 @@ module Aws::S3
         client = Client.new(
           region: 'cn-north-1',
           force_path_style: true,
+          use_fips_endpoint: true,
           stub_responses: true
         )
         expect do
@@ -1761,6 +1771,7 @@ module Aws::S3
         client = Client.new(
           region: 'af-south-1',
           force_path_style: true,
+          use_fips_endpoint: true,
           stub_responses: true
         )
         expect do
@@ -1968,6 +1979,7 @@ module Aws::S3
         client = Client.new(
           region: 'us-west-2',
           endpoint: 'https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com',
+          use_fips_endpoint: true,
           stub_responses: true
         )
         expect do
@@ -2249,6 +2261,7 @@ module Aws::S3
         client = Client.new(
           region: 'af-south-1',
           endpoint: 'https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com',
+          use_fips_endpoint: true,
           stub_responses: true
         )
         expect do
@@ -2377,6 +2390,7 @@ module Aws::S3
         expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://myendpoint-123456789012.s3-accesspoint-fips.us-west-2.amazonaws.com"}}
         client = Client.new(
           region: 'us-west-2',
+          use_fips_endpoint: true,
           stub_responses: true
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
@@ -2428,6 +2442,7 @@ module Aws::S3
         client = Client.new(
           region: 'us-west-2',
           use_dualstack_endpoint: true,
+          use_fips_endpoint: true,
           stub_responses: true
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
@@ -2548,6 +2563,7 @@ module Aws::S3
         expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://myendpoint-123456789012.s3-accesspoint-fips.af-south-1.amazonaws.com"}}
         client = Client.new(
           region: 'af-south-1',
+          use_fips_endpoint: true,
           stub_responses: true
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true})
@@ -2599,6 +2615,7 @@ module Aws::S3
         client = Client.new(
           region: 'af-south-1',
           use_dualstack_endpoint: true,
+          use_fips_endpoint: true,
           stub_responses: true
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true})
@@ -2645,6 +2662,7 @@ module Aws::S3
         expect = {"error"=>"Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"}
         client = Client.new(
           region: 'us-west-2',
+          s3_use_arn_region: false,
           stub_responses: true
         )
         expect do
@@ -2670,6 +2688,7 @@ module Aws::S3
         client = Client.new(
           region: 'us-west-2',
           endpoint: 'https://example.com',
+          s3_use_arn_region: false,
           stub_responses: true
         )
         expect do
@@ -2695,6 +2714,7 @@ module Aws::S3
         expect = {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
         client = Client.new(
           region: 'us-west-2',
+          s3_use_arn_region: true,
           stub_responses: true
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
@@ -2744,6 +2764,7 @@ module Aws::S3
         expect = {"error"=>"Client was configured for partition `aws` but ARN (`arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint`) has `aws-cn`"}
         client = Client.new(
           region: 'us-west-2',
+          s3_use_arn_region: true,
           stub_responses: true
         )
         expect do

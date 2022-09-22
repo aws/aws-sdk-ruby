@@ -617,7 +617,8 @@
             "operationInputs": [
                 {
                     "builtInParams": {
-                        "AWS::Region": "us-west-2"
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3::UseArnRegion": false
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -698,7 +699,8 @@
             "operationInputs": [
                 {
                     "builtInParams": {
-                        "AWS::Region": "us-east-1"
+                        "AWS::Region": "us-east-1",
+                        "AWS::S3::UseArnRegion": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -1938,7 +1940,8 @@
             "operationInputs": [
                 {
                     "builtInParams": {
-                        "AWS::Region": "us-west-2"
+                        "AWS::Region": "us-west-2",
+                        "AWS::UseFIPS": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -1978,7 +1981,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "us-west-2",
-                        "AWS::UseDualStack": true
+                        "AWS::UseDualStack": true,
+                        "AWS::UseFIPS": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -2006,7 +2010,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "us-west-2",
-                        "AWS::S3::Accelerate": true
+                        "AWS::S3::Accelerate": true,
+                        "AWS::UseFIPS": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -2312,7 +2317,8 @@
             "operationInputs": [
                 {
                     "builtInParams": {
-                        "AWS::Region": "af-south-1"
+                        "AWS::Region": "af-south-1",
+                        "AWS::UseFIPS": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -2352,7 +2358,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "af-south-1",
-                        "AWS::UseDualStack": true
+                        "AWS::UseDualStack": true,
+                        "AWS::UseFIPS": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -2380,7 +2387,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "af-south-1",
-                        "AWS::S3::Accelerate": true
+                        "AWS::S3::Accelerate": true,
+                        "AWS::UseFIPS": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -2448,7 +2456,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "us-west-2",
-                        "AWS::S3::ForcePathStyle": true
+                        "AWS::S3::ForcePathStyle": true,
+                        "AWS::UseFIPS": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -2693,7 +2702,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "cn-north-1",
-                        "AWS::S3::ForcePathStyle": true
+                        "AWS::S3::ForcePathStyle": true,
+                        "AWS::UseFIPS": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -2938,7 +2948,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "af-south-1",
-                        "AWS::S3::ForcePathStyle": true
+                        "AWS::S3::ForcePathStyle": true,
+                        "AWS::UseFIPS": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -3226,7 +3237,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "us-west-2",
-                        "SDK::Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com"
+                        "SDK::Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                        "AWS::UseFIPS": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -3625,7 +3637,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "af-south-1",
-                        "SDK::Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com"
+                        "SDK::Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+                        "AWS::UseFIPS": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -3807,7 +3820,8 @@
             "operationInputs": [
                 {
                     "builtInParams": {
-                        "AWS::Region": "us-west-2"
+                        "AWS::Region": "us-west-2",
+                        "AWS::UseFIPS": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -3877,7 +3891,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "us-west-2",
-                        "AWS::UseDualStack": true
+                        "AWS::UseDualStack": true,
+                        "AWS::UseFIPS": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -4056,7 +4071,8 @@
             "operationInputs": [
                 {
                     "builtInParams": {
-                        "AWS::Region": "af-south-1"
+                        "AWS::Region": "af-south-1",
+                        "AWS::UseFIPS": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -4126,7 +4142,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "af-south-1",
-                        "AWS::UseDualStack": true
+                        "AWS::UseDualStack": true,
+                        "AWS::UseFIPS": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -4205,7 +4222,8 @@
             "operationInputs": [
                 {
                     "builtInParams": {
-                        "AWS::Region": "us-west-2"
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3::UseArnRegion": false
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -4235,7 +4253,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "us-west-2",
-                        "SDK::Endpoint": "https://example.com"
+                        "SDK::Endpoint": "https://example.com",
+                        "AWS::S3::UseArnRegion": false
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -4277,7 +4296,8 @@
             "operationInputs": [
                 {
                     "builtInParams": {
-                        "AWS::Region": "us-west-2"
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3::UseArnRegion": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -4346,7 +4366,8 @@
             "operationInputs": [
                 {
                     "builtInParams": {
-                        "AWS::Region": "us-west-2"
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3::UseArnRegion": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
