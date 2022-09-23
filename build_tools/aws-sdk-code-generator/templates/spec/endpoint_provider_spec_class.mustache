@@ -11,7 +11,12 @@ module {{module_name}}
     def expect_auth(auth_scheme)
       expect(Aws::Plugins::Sign).to receive(:signer_for).and_wrap_original do |m, *args|
         expect(args.first).to eq(auth_scheme)
-        m.call(*args)
+        if auth_scheme['name'] == 'sigv4a'
+          mock_signature = Aws::Sigv4::Signature.new(headers: {})
+          double('sigv4a_signer', sign_request: mock_signature)
+        else
+          m.call(*args)
+        end
       end
     end
 
@@ -19,25 +24,27 @@ module {{module_name}}
 
     {{#endpoint_tests}}
     context '{{documentation}}' do
+      let(:expected) do
+        {{{expect}}}
+      end
+
       it 'produces the expected output from the EndpointProvider' do
-        expect = {{{expect}}}
         params = EndpointParameters.new(**{{{params}}})
         {{#expect_error?}}
         expect do
           subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expect['error'])
+        end.to raise_error(ArgumentError, expected['error'])
         {{/expect_error?}}
         {{^expect_error?}}
         endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expect['endpoint']['url'])
-        expect(endpoint.headers).to eq(expect['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expect['endpoint']['properties'] || {})
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
         {{/expect_error?}}
       end
       {{#operation_inputs}}
 
       it 'produces the correct output from the client when calling {{operation_name}}' do
-        expect = {{{expect}}}
         client = Client.new(
           {{#client_params}}
           {{param}}: {{{value}}},
@@ -51,7 +58,7 @@ module {{module_name}}
             {{param}}: {{{value}}},
             {{/operation_params}}
           )
-        end.to raise_error(ArgumentError, expect['error'])
+        end.to raise_error(ArgumentError, expected['error'])
         {{/expect_error?}}
         {{^expect_error?}}
         {{#expect_auth?}}
@@ -62,7 +69,10 @@ module {{module_name}}
           {{param}}: {{{value}}},
           {{/operation_params}}
         )
-        expect(resp.context.http_request.endpoint.to_s).to include(expect['endpoint']['url'])
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
         {{#expect_headers?}}
         {{#expected_headers}}
         expect(resp.context.http_request.headers['{{param}}'].to eq({{{value}}})

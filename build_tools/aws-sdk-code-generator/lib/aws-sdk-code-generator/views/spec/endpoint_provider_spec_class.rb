@@ -113,6 +113,10 @@ module AwsSdkCodeGenerator
             @client_params += options[:built_in_params].map do |k,v|
               built_in_to_param(k, v)
             end
+            # the expected default of UseGlobalEndpoint does not match the SDK's default value
+            unless options[:built_in_params].include?('AWS::S3::UseGlobalEndpoint')
+              @client_params << built_in_to_param('AWS::S3::UseGlobalEndpoint', false)
+            end
           end
 
           # @return String

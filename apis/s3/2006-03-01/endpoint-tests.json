@@ -17,6 +17,18 @@
             "expect": {
                 "error": "Invalid ARN: The ARN was not for the S3 service, found: not-s3"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:not-s3:us-west-2:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseFIPS": false,
@@ -30,6 +42,18 @@
             "expect": {
                 "error": "Invalid ARN: The ARN may only contain a single resource component after `accesspoint`."
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint:more-data",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseFIPS": false,
@@ -43,6 +67,18 @@
             "expect": {
                 "error": "Invalid ARN: Expected a resource of the format `accesspoint:<accesspoint name>` but no name was provided"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseFIPS": false,
@@ -56,6 +92,18 @@
             "expect": {
                 "error": "Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: `123456_789012`"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456_789012:accesspoint:apname",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseFIPS": false,
@@ -69,6 +117,18 @@
             "expect": {
                 "error": "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: `ap_name`"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:ap_name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseFIPS": false,
@@ -94,6 +154,18 @@
                     "url": "https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseFIPS": false,
@@ -108,6 +180,19 @@
             "expect": {
                 "error": "Partition does not support FIPS"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "cn-north-1",
+                        "AWS::UseFIPS": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "cn-north-1",
                 "UseFIPS": true,
@@ -121,6 +206,18 @@
             "expect": {
                 "error": "Invalid region in ARN: `us-west -2` (invalid DNS name)"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west -2:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseFIPS": false,
@@ -160,6 +257,18 @@
             "expect": {
                 "error": "Invalid ARN: `arn:aws:s3:us-west-2:123456789012:` was not a valid ARN"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseFIPS": false,
@@ -174,6 +283,20 @@
             "expect": {
                 "error": "DualStack cannot be combined with a Host override (PrivateLink)"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "cn-north-1",
+                        "AWS::UseDualStack": true,
+                        "SDK::Endpoint": "https://beta.example.com"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
@@ -202,6 +325,20 @@
                     "url": "https://myendpoint-123456789012.s3-accesspoint-fips.dualstack.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseFIPS": true,
+                        "AWS::UseDualStack": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseFIPS": true,
@@ -228,6 +365,19 @@
                     "url": "https://myendpoint-123456789012.s3-accesspoint.dualstack.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseDualStack": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseFIPS": false,
@@ -256,6 +406,18 @@
                     "url": "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
                 "Region": "us-east-1",
@@ -270,6 +432,19 @@
             "expect": {
                 "error": "S3 MRAP does not support FIPS"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseFIPS": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
                 "Region": "us-east-1",
@@ -284,6 +459,19 @@
             "expect": {
                 "error": "S3 MRAP does not support dual-stack"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseDualStack": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
                 "Region": "us-east-1",
@@ -298,6 +486,19 @@
             "expect": {
                 "error": "S3 MRAP does not support S3 Accelerate"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::S3::Accelerate": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
                 "Region": "us-east-1",
@@ -312,6 +513,19 @@
             "expect": {
                 "error": "Invalid configuration: Multi-Region Access Point ARNs are disabled."
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::S3::DisableMultiRegionAccessPoints": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
                 "Region": "us-east-1",
@@ -338,6 +552,20 @@
                     "url": "https://s3.dualstack.us-west-2.amazonaws.com/bucketname"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::UseDualStack": true,
+                        "AWS::S3::ForcePathStyle": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucketname",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Bucket": "bucketname",
                 "Region": "us-west-2",
@@ -352,6 +580,21 @@
             "expect": {
                 "error": "Cannot set dual-stack in combination with a custom endpoint."
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::UseDualStack": true,
+                        "SDK::Endpoint": "https://abc.com",
+                        "AWS::S3::ForcePathStyle": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucketname",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Bucket": "bucketname",
                 "Region": "us-west-2",
@@ -367,6 +610,19 @@
             "expect": {
                 "error": "Path-style addressing cannot be used with ARN buckets"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3::ForcePathStyle": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
@@ -393,6 +649,19 @@
                     "url": "https://s3.dualstack.us-west-2.amazonaws.com/99_ab"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::UseDualStack": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "99_ab",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "99_ab",
@@ -406,6 +675,20 @@
             "expect": {
                 "error": "Cannot set dual-stack in combination with a custom endpoint."
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::UseDualStack": true,
+                        "SDK::Endpoint": "http://abc.com"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "99_ab",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "Bucket": "99_ab",
@@ -432,6 +715,18 @@
                     "url": "https://s3.us-west-2.amazonaws.com/example.com%23"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "example.com#",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Bucket": "example.com#",
                 "Region": "us-west-2",
@@ -457,6 +752,18 @@
                     "url": "https://s3.us-west-2.amazonaws.com/bucket%20name"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Bucket": "bucket name",
                 "Region": "us-west-2",
@@ -738,6 +1045,18 @@
                     "url": "https://s3.us-east-1.amazonaws.com/bucket.name"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket.name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Bucket": "bucket.name",
                 "Region": "us-east-1"
@@ -760,6 +1079,18 @@
                     "url": "https://aaa.s3.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "aaa",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Bucket": "aaa",
                 "Region": "us-east-1"
@@ -782,6 +1113,18 @@
                     "url": "https://s3.us-east-1.amazonaws.com/aa"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "aa",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Bucket": "aa",
                 "Region": "us-east-1"
@@ -804,6 +1147,18 @@
                     "url": "https://s3.us-east-1.amazonaws.com/BucketName"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "BucketName",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Bucket": "BucketName",
                 "Region": "us-east-1"
@@ -826,6 +1181,19 @@
                     "url": "http://bucket.name.example.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "SDK::Endpoint": "http://example.com"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket.name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Bucket": "bucket.name",
                 "Region": "us-east-1",
@@ -858,6 +1226,15 @@
                     "url": "https://s3.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "ListBuckets"
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseGlobalEndpoint": true,
@@ -883,6 +1260,15 @@
                     "url": "https://s3.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "ListBuckets"
+                }
+            ],
             "params": {
                 "Region": "us-west-2",
                 "UseGlobalEndpoint": true,
@@ -908,6 +1294,15 @@
                     "url": "https://s3.cn-north-1.amazonaws.com.cn"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "cn-north-1",
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "ListBuckets"
+                }
+            ],
             "params": {
                 "Region": "cn-north-1",
                 "UseGlobalEndpoint": true,
@@ -933,6 +1328,16 @@
                     "url": "https://s3-fips.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseFIPS": true,
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "ListBuckets"
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseGlobalEndpoint": true,
@@ -958,6 +1363,16 @@
                     "url": "https://s3.dualstack.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseDualStack": true,
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "ListBuckets"
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseGlobalEndpoint": true,
@@ -983,6 +1398,17 @@
                     "url": "https://s3-fips.dualstack.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseFIPS": true,
+                        "AWS::UseDualStack": true,
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "ListBuckets"
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseGlobalEndpoint": true,
@@ -1008,6 +1434,16 @@
                     "url": "https://example.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "SDK::Endpoint": "https://example.com",
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "ListBuckets"
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "Endpoint": "https://example.com",
@@ -1034,6 +1470,16 @@
                     "url": "https://example.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "SDK::Endpoint": "https://example.com",
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "ListBuckets"
+                }
+            ],
             "params": {
                 "Region": "us-west-2",
                 "Endpoint": "https://example.com",
@@ -1060,6 +1506,16 @@
                     "url": "https://s3.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::S3::Accelerate": true,
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "ListBuckets"
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseGlobalEndpoint": true,
@@ -1085,6 +1541,14 @@
                     "url": "https://s3.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global"
+                    },
+                    "operationName": "ListBuckets"
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "UseFIPS": false,
@@ -1109,6 +1573,15 @@
                     "url": "https://s3-fips.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "AWS::UseFIPS": true
+                    },
+                    "operationName": "ListBuckets"
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "UseFIPS": true,
@@ -1133,6 +1606,15 @@
                     "url": "https://s3.dualstack.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "AWS::UseDualStack": true
+                    },
+                    "operationName": "ListBuckets"
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "UseFIPS": false,
@@ -1157,6 +1639,16 @@
                     "url": "https://s3-fips.dualstack.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "AWS::UseFIPS": true,
+                        "AWS::UseDualStack": true
+                    },
+                    "operationName": "ListBuckets"
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "UseFIPS": true,
@@ -1181,6 +1673,15 @@
                     "url": "https://s3.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "AWS::S3::Accelerate": true
+                    },
+                    "operationName": "ListBuckets"
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "UseFIPS": false,
@@ -1205,6 +1706,15 @@
                     "url": "https://example.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "SDK::Endpoint": "https://example.com"
+                    },
+                    "operationName": "ListBuckets"
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "Endpoint": "https://example.com",
@@ -1231,6 +1741,18 @@
                     "url": "https://bucket-name.s3.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "Bucket": "bucket-name",
@@ -1256,6 +1778,19 @@
                     "url": "https://bucket-name.s3-fips.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "AWS::UseFIPS": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "Bucket": "bucket-name",
@@ -1281,6 +1816,19 @@
                     "url": "https://bucket-name.s3.dualstack.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "AWS::UseDualStack": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "Bucket": "bucket-name",
@@ -1306,6 +1854,20 @@
                     "url": "https://bucket-name.s3-fips.dualstack.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "AWS::UseFIPS": true,
+                        "AWS::UseDualStack": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "Bucket": "bucket-name",
@@ -1331,6 +1893,19 @@
                     "url": "https://bucket-name.s3-accelerate.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "AWS::S3::Accelerate": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "Bucket": "bucket-name",
@@ -1356,6 +1931,19 @@
                     "url": "https://bucket-name.example.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "SDK::Endpoint": "https://example.com"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "Endpoint": "https://example.com",
@@ -1382,6 +1970,19 @@
                     "url": "https://bucket-name.s3.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseGlobalEndpoint": true,
@@ -1408,6 +2009,19 @@
                     "url": "https://bucket-name.s3.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-west-2",
                 "UseGlobalEndpoint": true,
@@ -1434,6 +2048,20 @@
                     "url": "https://bucket-name.s3-fips.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseFIPS": true,
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseGlobalEndpoint": true,
@@ -1460,6 +2088,20 @@
                     "url": "https://bucket-name.s3.dualstack.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseDualStack": true,
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseGlobalEndpoint": true,
@@ -1486,6 +2128,20 @@
                     "url": "https://bucket-name.s3-accelerate.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::S3::Accelerate": true,
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseGlobalEndpoint": true,
@@ -1512,6 +2168,20 @@
                     "url": "https://bucket-name.example.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "SDK::Endpoint": "https://example.com",
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "Endpoint": "https://example.com",
@@ -1539,6 +2209,19 @@
                     "url": "https://s3.amazonaws.com/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "AWS::S3::ForcePathStyle": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "Bucket": "bucket-name",
@@ -1579,6 +2262,20 @@
                     "url": "https://s3.dualstack.us-east-1.amazonaws.com/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "AWS::UseDualStack": true,
+                        "AWS::S3::ForcePathStyle": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "Bucket": "bucket-name",
@@ -1605,6 +2302,20 @@
                     "url": "https://example.com/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "SDK::Endpoint": "https://example.com",
+                        "AWS::S3::ForcePathStyle": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "Endpoint": "https://example.com",
@@ -1632,6 +2343,20 @@
                     "url": "https://s3.amazonaws.com/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::S3::ForcePathStyle": true,
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "Bucket": "bucket-name",
@@ -1659,6 +2384,20 @@
                     "url": "https://s3.us-west-2.amazonaws.com/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3::ForcePathStyle": true,
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-west-2",
                 "Bucket": "bucket-name",
@@ -1686,6 +2425,21 @@
                     "url": "https://s3.dualstack.us-east-1.amazonaws.com/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseDualStack": true,
+                        "AWS::S3::ForcePathStyle": true,
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "Bucket": "bucket-name",
@@ -1713,6 +2467,21 @@
                     "url": "https://example.com/bucket-name"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "SDK::Endpoint": "https://example.com",
+                        "AWS::S3::ForcePathStyle": true,
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "bucket-name",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "Bucket": "bucket-name",
@@ -1741,6 +2510,19 @@
                     "url": "https://reports-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "AWS::S3::UseArnRegion": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-01234567890123456/accesspoint/reports",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "UseArnRegion": true,
@@ -1755,6 +2537,18 @@
             "expect": {
                 "error": "Client was configured for partition `aws` but bucket referred to partition `aws-cn`"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-1"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Bucket": "arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
                 "Region": "us-west-1"
@@ -1981,8 +2775,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "us-west-2",
-                        "AWS::UseDualStack": true,
-                        "AWS::UseFIPS": true
+                        "AWS::UseFIPS": true,
+                        "AWS::UseDualStack": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -2010,8 +2804,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "us-west-2",
-                        "AWS::S3::Accelerate": true,
-                        "AWS::UseFIPS": true
+                        "AWS::UseFIPS": true,
+                        "AWS::S3::Accelerate": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -2358,8 +3152,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "af-south-1",
-                        "AWS::UseDualStack": true,
-                        "AWS::UseFIPS": true
+                        "AWS::UseFIPS": true,
+                        "AWS::UseDualStack": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -2387,8 +3181,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "af-south-1",
-                        "AWS::S3::Accelerate": true,
-                        "AWS::UseFIPS": true
+                        "AWS::UseFIPS": true,
+                        "AWS::S3::Accelerate": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -2456,8 +3250,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "us-west-2",
-                        "AWS::S3::ForcePathStyle": true,
-                        "AWS::UseFIPS": true
+                        "AWS::UseFIPS": true,
+                        "AWS::S3::ForcePathStyle": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -2702,8 +3496,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "cn-north-1",
-                        "AWS::S3::ForcePathStyle": true,
-                        "AWS::UseFIPS": true
+                        "AWS::UseFIPS": true,
+                        "AWS::S3::ForcePathStyle": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -2948,8 +3742,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "af-south-1",
-                        "AWS::S3::ForcePathStyle": true,
-                        "AWS::UseFIPS": true
+                        "AWS::UseFIPS": true,
+                        "AWS::S3::ForcePathStyle": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -3237,8 +4031,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "us-west-2",
-                        "SDK::Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                        "AWS::UseFIPS": true
+                        "AWS::UseFIPS": true,
+                        "SDK::Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com"
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -3637,8 +4431,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "af-south-1",
-                        "SDK::Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
-                        "AWS::UseFIPS": true
+                        "AWS::UseFIPS": true,
+                        "SDK::Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com"
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -3891,8 +4685,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "us-west-2",
-                        "AWS::UseDualStack": true,
-                        "AWS::UseFIPS": true
+                        "AWS::UseFIPS": true,
+                        "AWS::UseDualStack": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -4142,8 +4936,8 @@
                 {
                     "builtInParams": {
                         "AWS::Region": "af-south-1",
-                        "AWS::UseDualStack": true,
-                        "AWS::UseFIPS": true
+                        "AWS::UseFIPS": true,
+                        "AWS::UseDualStack": true
                     },
                     "operationName": "GetObject",
                     "operationParams": {
@@ -4180,6 +4974,18 @@
                     "url": "https://reports-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-west-2",
                 "UseFIPS": false,
@@ -4205,6 +5011,19 @@
                     "url": "https://reports-123456789012.op-01234567890123456.example.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "SDK::Endpoint": "https://example.amazonaws.com"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-west-2",
                 "UseFIPS": false,
@@ -4405,6 +5224,19 @@
                     "url": "https://reports-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::S3::UseGlobalEndpoint": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-01234567890123456/accesspoint/reports",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseGlobalEndpoint": true,
@@ -4509,6 +5341,19 @@
                     "url": "https://mybanner-123456789012.s3-object-lambda.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3::UseArnRegion": false
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint/mybanner",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-west-2",
                 "UseFIPS": false,
@@ -4535,6 +5380,19 @@
                     "url": "https://mybanner-123456789012.s3-object-lambda.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3::UseArnRegion": false
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint:mybanner",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-west-2",
                 "UseFIPS": false,
@@ -4561,6 +5419,19 @@
                     "url": "https://mybanner-123456789012.s3-object-lambda.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3::UseArnRegion": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-west-2",
                 "UseFIPS": false,
@@ -4587,6 +5458,19 @@
                     "url": "https://mybanner-123456789012.s3-object-lambda.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "s3-external-1",
+                        "AWS::S3::UseArnRegion": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "s3-external-1",
                 "UseFIPS": false,
@@ -4601,6 +5485,19 @@
             "expect": {
                 "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `s3-external-1` and UseArnRegion is `false`"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "s3-external-1",
+                        "AWS::S3::UseArnRegion": false
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "s3-external-1",
                 "UseFIPS": false,
@@ -4627,6 +5524,19 @@
                     "url": "https://mybanner-123456789012.s3-object-lambda.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "AWS::S3::UseArnRegion": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "UseFIPS": false,
@@ -4641,6 +5551,19 @@
             "expect": {
                 "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `aws-global` and UseArnRegion is `false`"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "AWS::S3::UseArnRegion": false
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "UseFIPS": false,
@@ -4655,6 +5578,19 @@
             "expect": {
                 "error": "Client was configured for partition `aws` but ARN (`arn:aws-cn:s3-object-lambda:cn-north-1:123456789012:accesspoint/mybanner`) has `aws-cn`"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "aws-global",
+                        "AWS::S3::UseArnRegion": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws-cn:s3-object-lambda:cn-north-1:123456789012:accesspoint/mybanner",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "aws-global",
                 "UseFIPS": false,
@@ -4669,6 +5605,20 @@
             "expect": {
                 "error": "S3 Object Lambda does not support Dual-stack"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::UseDualStack": true,
+                        "AWS::S3::UseArnRegion": false
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint/mybanner",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-west-2",
                 "UseFIPS": false,
@@ -4749,6 +5699,20 @@
             "expect": {
                 "error": "S3 Object Lambda does not support S3 Accelerate"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3::Accelerate": true,
+                        "AWS::S3::UseArnRegion": false
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint/mybanner",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-west-2",
                 "UseFIPS": false,
@@ -4763,6 +5727,19 @@
             "expect": {
                 "error": "Invalid ARN: Unrecognized format: arn:aws:sqs:us-west-2:123456789012:someresource (type: someresource)"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3::UseArnRegion": false
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:sqs:us-west-2:123456789012:someresource",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-west-2",
                 "UseFIPS": false,
@@ -4819,6 +5796,19 @@
             "expect": {
                 "error": "Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: `123.45678.9012`"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3::UseArnRegion": true
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-object-lambda:us-west-2:123.45678.9012:accesspoint:mybucket",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-west-2",
                 "UseFIPS": false,
@@ -4901,6 +5891,20 @@
                     "url": "https://mybanner-123456789012.my-endpoint.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "SDK::Endpoint": "https://my-endpoint.com",
+                        "AWS::S3::UseArnRegion": false
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint/mybanner",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-west-2",
                 "UseFIPS": false,
@@ -4928,6 +5932,18 @@
                     "url": "https://s3-object-lambda.us-west-2.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
+                    "operationName": "WriteGetObjectResponse",
+                    "operationParams": {
+                        "RequestRoute": "RequestRoute",
+                        "RequestToken": "RequestToken"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "UseObjectLambdaEndpoint": true,
@@ -4953,6 +5969,19 @@
                     "url": "https://my-endpoint.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "SDK::Endpoint": "https://my-endpoint.com"
+                    },
+                    "operationName": "WriteGetObjectResponse",
+                    "operationParams": {
+                        "RequestRoute": "RequestRoute",
+                        "RequestToken": "RequestToken"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "UseObjectLambdaEndpoint": true,
@@ -4979,6 +6008,18 @@
                     "url": "https://s3-object-lambda.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "WriteGetObjectResponse",
+                    "operationParams": {
+                        "RequestRoute": "RequestRoute",
+                        "RequestToken": "RequestToken"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "UseObjectLambdaEndpoint": true,
@@ -5004,6 +6045,19 @@
                     "url": "https://s3-object-lambda-fips.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseFIPS": true
+                    },
+                    "operationName": "WriteGetObjectResponse",
+                    "operationParams": {
+                        "RequestRoute": "RequestRoute",
+                        "RequestToken": "RequestToken"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "UseObjectLambdaEndpoint": true,
@@ -5017,6 +6071,19 @@
             "expect": {
                 "error": "S3 Object Lambda does not support Dual-stack"
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseDualStack": true
+                    },
+                    "operationName": "WriteGetObjectResponse",
+                    "operationParams": {
+                        "RequestRoute": "RequestRoute",
+                        "RequestToken": "RequestToken"
+                    }
+                }
+            ],
             "params": {
                 "Accelerate": false,
                 "UseObjectLambdaEndpoint": true,
