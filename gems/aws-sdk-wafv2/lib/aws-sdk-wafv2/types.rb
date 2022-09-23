@@ -1773,9 +1773,9 @@ module Aws::WAFV2
     #
     # @!attribute [rw] addresses
     #   Contains an array of strings that specifies zero or more IP
-    #   addresses or blocks of IP addresses in Classless Inter-Domain
-    #   Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges
-    #   except for /0.
+    #   addresses or blocks of IP addresses. All addresses must be specified
+    #   using Classless Inter-Domain Routing (CIDR) notation. WAF supports
+    #   all IPv4 and IPv6 CIDR ranges except for `/0`.
     #
     #   Example address strings:
     #
@@ -3447,7 +3447,7 @@ module Aws::WAFV2
 
     # In a WebACL, this is the action that you want WAF to perform when a
     # web request doesn't match any of the rules in the `WebACL`. The
-    # default action must be a terminating action, so you can't use count.
+    # default action must be a terminating action.
     #
     # @note When making an API call, you may pass DefaultAction
     #   data as a hash:
@@ -4326,6 +4326,18 @@ module Aws::WAFV2
     #   You cannot nest a `ManagedRuleGroupStatement`, for example for use
     #   inside a `NotStatement` or `OrStatement`. It can only be referenced
     #   as a top-level statement within a rule.
+    #
+    #   <note markdown="1"> You are charged additional fees when you use the WAF Bot Control
+    #   managed rule group `AWSManagedRulesBotControlRuleSet` or the WAF
+    #   Fraud Control account takeover prevention (ATP) managed rule group
+    #   `AWSManagedRulesATPRuleSet`. For more information, see [WAF
+    #   Pricing][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/waf/pricing/
     #   @return [Types::ManagedRuleGroupStatement]
     #
     # @!attribute [rw] rule_group_reference_statement
@@ -5424,9 +5436,9 @@ module Aws::WAFV2
     #
     # @!attribute [rw] addresses
     #   Contains an array of strings that specifies zero or more IP
-    #   addresses or blocks of IP addresses in Classless Inter-Domain
-    #   Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges
-    #   except for /0.
+    #   addresses or blocks of IP addresses. All addresses must be specified
+    #   using Classless Inter-Domain Routing (CIDR) notation. WAF supports
+    #   all IPv4 and IPv6 CIDR ranges except for `/0`.
     #
     #   Example address strings:
     #
@@ -6476,6 +6488,13 @@ module Aws::WAFV2
     #   regional application can be an Application Load Balancer (ALB), an
     #   Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
     #   Cognito user pool.
+    #
+    #   <note markdown="1"> If you don't provide a resource type, the call uses the resource
+    #   type `APPLICATION_LOAD_BALANCER`.
+    #
+    #    </note>
+    #
+    #   Default: `APPLICATION_LOAD_BALANCER`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListResourcesForWebACLRequest AWS API Documentation
@@ -6978,6 +6997,18 @@ module Aws::WAFV2
     # You cannot nest a `ManagedRuleGroupStatement`, for example for use
     # inside a `NotStatement` or `OrStatement`. It can only be referenced as
     # a top-level statement within a rule.
+    #
+    # <note markdown="1"> You are charged additional fees when you use the WAF Bot Control
+    # managed rule group `AWSManagedRulesBotControlRuleSet` or the WAF Fraud
+    # Control account takeover prevention (ATP) managed rule group
+    # `AWSManagedRulesATPRuleSet`. For more information, see [WAF
+    # Pricing][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/waf/pricing/
     #
     # @note When making an API call, you may pass ManagedRuleGroupStatement
     #   data as a hash:
@@ -10691,7 +10722,8 @@ module Aws::WAFV2
     #   @return [Types::AllowAction]
     #
     # @!attribute [rw] count
-    #   Instructs WAF to count the web request and allow it.
+    #   Instructs WAF to count the web request and then continue evaluating
+    #   the request using the remaining rules in the web ACL.
     #   @return [Types::CountAction]
     #
     # @!attribute [rw] captcha
@@ -14002,6 +14034,18 @@ module Aws::WAFV2
     #   You cannot nest a `ManagedRuleGroupStatement`, for example for use
     #   inside a `NotStatement` or `OrStatement`. It can only be referenced
     #   as a top-level statement within a rule.
+    #
+    #   <note markdown="1"> You are charged additional fees when you use the WAF Bot Control
+    #   managed rule group `AWSManagedRulesBotControlRuleSet` or the WAF
+    #   Fraud Control account takeover prevention (ATP) managed rule group
+    #   `AWSManagedRulesATPRuleSet`. For more information, see [WAF
+    #   Pricing][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/waf/pricing/
     #   @return [Types::ManagedRuleGroupStatement]
     #
     # @!attribute [rw] label_match_statement
@@ -14432,9 +14476,9 @@ module Aws::WAFV2
     #
     # @!attribute [rw] addresses
     #   Contains an array of strings that specifies zero or more IP
-    #   addresses or blocks of IP addresses in Classless Inter-Domain
-    #   Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges
-    #   except for /0.
+    #   addresses or blocks of IP addresses. All addresses must be specified
+    #   using Classless Inter-Domain Routing (CIDR) notation. WAF supports
+    #   all IPv4 and IPv6 CIDR ranges except for `/0`.
     #
     #   Example address strings:
     #
@@ -16384,8 +16428,10 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # WAF couldn’t perform the operation because your resource doesn’t
-    # exist.
+    # WAF couldn’t perform the operation because your resource doesn't
+    # exist. If you've just created a resource that you're using in this
+    # operation, you might just need to wait a few minutes. It can take from
+    # a few seconds to a number of minutes for changes to propagate.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -16477,8 +16523,11 @@ module Aws::WAFV2
     end
 
     # WAF couldn’t retrieve a resource that you specified for this
-    # operation. Verify the resources that you are specifying in your
-    # request parameters and then retry the operation.
+    # operation. If you've just created a resource that you're using in
+    # this operation, you might just need to wait a few minutes. It can take
+    # from a few seconds to a number of minutes for changes to propagate.
+    # Verify the resources that you are specifying in your request
+    # parameters and then retry the operation.
     #
     # @!attribute [rw] message
     #   @return [String]

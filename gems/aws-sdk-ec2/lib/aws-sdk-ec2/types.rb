@@ -8139,6 +8139,7 @@ module Aws::EC2
     #                     max: 1,
     #                   },
     #                 },
+    #                 image_id: "ImageId",
     #               },
     #             ],
     #           },
@@ -35119,6 +35120,7 @@ module Aws::EC2
     #                 max: 1,
     #               },
     #             },
+    #             image_id: "ImageId",
     #           },
     #         ],
     #       }
@@ -35212,6 +35214,11 @@ module Aws::EC2
     #    </note>
     #   @return [Types::InstanceRequirements]
     #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI. An AMI is required to launch an instance. The AMI
+    #   ID must be specified here or in the launch template.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverrides AWS API Documentation
     #
     class FleetLaunchTemplateOverrides < Struct.new(
@@ -35222,7 +35229,8 @@ module Aws::EC2
       :weighted_capacity,
       :priority,
       :placement,
-      :instance_requirements)
+      :instance_requirements,
+      :image_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35296,6 +35304,7 @@ module Aws::EC2
     #             max: 1,
     #           },
     #         },
+    #         image_id: "ImageId",
     #       }
     #
     # @!attribute [rw] instance_type
@@ -35366,6 +35375,11 @@ module Aws::EC2
     #    </note>
     #   @return [Types::InstanceRequirementsRequest]
     #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI. An AMI is required to launch an instance. The AMI
+    #   ID must be specified here or in the launch template.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverridesRequest AWS API Documentation
     #
     class FleetLaunchTemplateOverridesRequest < Struct.new(
@@ -35376,7 +35390,8 @@ module Aws::EC2
       :weighted_capacity,
       :priority,
       :placement,
-      :instance_requirements)
+      :instance_requirements,
+      :image_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48727,6 +48742,7 @@ module Aws::EC2
     #                     max: 1,
     #                   },
     #                 },
+    #                 image_id: "ImageId",
     #               },
     #             ],
     #           },

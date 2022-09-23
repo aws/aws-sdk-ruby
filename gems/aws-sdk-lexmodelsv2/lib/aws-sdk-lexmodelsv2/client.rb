@@ -1988,6 +1988,31 @@ module Aws::LexModelsV2
     #         max_retries: 1, # required
     #         allow_interrupt: false,
     #         message_selection_strategy: "Random", # accepts Random, Ordered
+    #         prompt_attempts_specification: {
+    #           "Initial" => {
+    #             allow_interrupt: false,
+    #             allowed_input_types: { # required
+    #               allow_audio_input: false, # required
+    #               allow_dtmf_input: false, # required
+    #             },
+    #             audio_and_dtmf_input_specification: {
+    #               start_timeout_ms: 1, # required
+    #               audio_specification: {
+    #                 max_length_ms: 1, # required
+    #                 end_timeout_ms: 1, # required
+    #               },
+    #               dtmf_specification: {
+    #                 max_length: 1, # required
+    #                 end_timeout_ms: 1, # required
+    #                 deletion_character: "DTMFCharacter", # required
+    #                 end_character: "DTMFCharacter", # required
+    #               },
+    #             },
+    #             text_input_specification: {
+    #               start_timeout_ms: 1, # required
+    #             },
+    #           },
+    #         },
     #       },
     #       declination_response: {
     #         message_groups: [ # required
@@ -5166,6 +5191,18 @@ module Aws::LexModelsV2
     #   resp.intent_confirmation_setting.prompt_specification.max_retries #=> Integer
     #   resp.intent_confirmation_setting.prompt_specification.allow_interrupt #=> Boolean
     #   resp.intent_confirmation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification #=> Hash
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allow_interrupt #=> Boolean
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_audio_input #=> Boolean
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_dtmf_input #=> Boolean
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.start_timeout_ms #=> Integer
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.max_length_ms #=> Integer
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.end_timeout_ms #=> Integer
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.max_length #=> Integer
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_timeout_ms #=> Integer
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.deletion_character #=> String
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_character #=> String
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].text_input_specification.start_timeout_ms #=> Integer
     #   resp.intent_confirmation_setting.declination_response.message_groups #=> Array
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].message.plain_text_message.value #=> String
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].message.custom_payload.value #=> String
@@ -6593,6 +6630,31 @@ module Aws::LexModelsV2
     #         max_retries: 1, # required
     #         allow_interrupt: false,
     #         message_selection_strategy: "Random", # accepts Random, Ordered
+    #         prompt_attempts_specification: {
+    #           "Initial" => {
+    #             allow_interrupt: false,
+    #             allowed_input_types: { # required
+    #               allow_audio_input: false, # required
+    #               allow_dtmf_input: false, # required
+    #             },
+    #             audio_and_dtmf_input_specification: {
+    #               start_timeout_ms: 1, # required
+    #               audio_specification: {
+    #                 max_length_ms: 1, # required
+    #                 end_timeout_ms: 1, # required
+    #               },
+    #               dtmf_specification: {
+    #                 max_length: 1, # required
+    #                 end_timeout_ms: 1, # required
+    #                 deletion_character: "DTMFCharacter", # required
+    #                 end_character: "DTMFCharacter", # required
+    #               },
+    #             },
+    #             text_input_specification: {
+    #               start_timeout_ms: 1, # required
+    #             },
+    #           },
+    #         },
     #       },
     #       sample_utterances: [
     #         {
@@ -8104,6 +8166,31 @@ module Aws::LexModelsV2
     #               max_retries: 1, # required
     #               allow_interrupt: false,
     #               message_selection_strategy: "Random", # accepts Random, Ordered
+    #               prompt_attempts_specification: {
+    #                 "Initial" => {
+    #                   allow_interrupt: false,
+    #                   allowed_input_types: { # required
+    #                     allow_audio_input: false, # required
+    #                     allow_dtmf_input: false, # required
+    #                   },
+    #                   audio_and_dtmf_input_specification: {
+    #                     start_timeout_ms: 1, # required
+    #                     audio_specification: {
+    #                       max_length_ms: 1, # required
+    #                       end_timeout_ms: 1, # required
+    #                     },
+    #                     dtmf_specification: {
+    #                       max_length: 1, # required
+    #                       end_timeout_ms: 1, # required
+    #                       deletion_character: "DTMFCharacter", # required
+    #                       end_character: "DTMFCharacter", # required
+    #                     },
+    #                   },
+    #                   text_input_specification: {
+    #                     start_timeout_ms: 1, # required
+    #                   },
+    #                 },
+    #               },
     #             },
     #             sample_utterances: [
     #               {
@@ -8312,6 +8399,18 @@ module Aws::LexModelsV2
     #   resp.value_elicitation_setting.prompt_specification.max_retries #=> Integer
     #   resp.value_elicitation_setting.prompt_specification.allow_interrupt #=> Boolean
     #   resp.value_elicitation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification #=> Hash
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allow_interrupt #=> Boolean
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_audio_input #=> Boolean
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_dtmf_input #=> Boolean
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.start_timeout_ms #=> Integer
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.max_length_ms #=> Integer
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.end_timeout_ms #=> Integer
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.max_length #=> Integer
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_timeout_ms #=> Integer
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.deletion_character #=> String
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_character #=> String
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].text_input_specification.start_timeout_ms #=> Integer
     #   resp.value_elicitation_setting.sample_utterances #=> Array
     #   resp.value_elicitation_setting.sample_utterances[0].utterance #=> String
     #   resp.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups #=> Array
@@ -8920,6 +9019,18 @@ module Aws::LexModelsV2
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.max_retries #=> Integer
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.allow_interrupt #=> Boolean
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification #=> Hash
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allow_interrupt #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_audio_input #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_dtmf_input #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.start_timeout_ms #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.max_length_ms #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.end_timeout_ms #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.max_length #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_timeout_ms #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.deletion_character #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_character #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].text_input_specification.start_timeout_ms #=> Integer
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.sample_utterances #=> Array
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.sample_utterances[0].utterance #=> String
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups #=> Array
@@ -10704,6 +10815,18 @@ module Aws::LexModelsV2
     #   resp.intent_confirmation_setting.prompt_specification.max_retries #=> Integer
     #   resp.intent_confirmation_setting.prompt_specification.allow_interrupt #=> Boolean
     #   resp.intent_confirmation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification #=> Hash
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allow_interrupt #=> Boolean
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_audio_input #=> Boolean
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_dtmf_input #=> Boolean
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.start_timeout_ms #=> Integer
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.max_length_ms #=> Integer
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.end_timeout_ms #=> Integer
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.max_length #=> Integer
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_timeout_ms #=> Integer
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.deletion_character #=> String
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_character #=> String
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].text_input_specification.start_timeout_ms #=> Integer
     #   resp.intent_confirmation_setting.declination_response.message_groups #=> Array
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].message.plain_text_message.value #=> String
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].message.custom_payload.value #=> String
@@ -11953,6 +12076,18 @@ module Aws::LexModelsV2
     #   resp.value_elicitation_setting.prompt_specification.max_retries #=> Integer
     #   resp.value_elicitation_setting.prompt_specification.allow_interrupt #=> Boolean
     #   resp.value_elicitation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification #=> Hash
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allow_interrupt #=> Boolean
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_audio_input #=> Boolean
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_dtmf_input #=> Boolean
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.start_timeout_ms #=> Integer
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.max_length_ms #=> Integer
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.end_timeout_ms #=> Integer
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.max_length #=> Integer
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_timeout_ms #=> Integer
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.deletion_character #=> String
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_character #=> String
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].text_input_specification.start_timeout_ms #=> Integer
     #   resp.value_elicitation_setting.sample_utterances #=> Array
     #   resp.value_elicitation_setting.sample_utterances[0].utterance #=> String
     #   resp.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups #=> Array
@@ -12562,6 +12697,18 @@ module Aws::LexModelsV2
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.max_retries #=> Integer
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.allow_interrupt #=> Boolean
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification #=> Hash
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allow_interrupt #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_audio_input #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_dtmf_input #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.start_timeout_ms #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.max_length_ms #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.end_timeout_ms #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.max_length #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_timeout_ms #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.deletion_character #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_character #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].text_input_specification.start_timeout_ms #=> Integer
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.sample_utterances #=> Array
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.sample_utterances[0].utterance #=> String
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups #=> Array
@@ -13903,6 +14050,18 @@ module Aws::LexModelsV2
     #   resp.slot_summaries[0].value_elicitation_prompt_specification.max_retries #=> Integer
     #   resp.slot_summaries[0].value_elicitation_prompt_specification.allow_interrupt #=> Boolean
     #   resp.slot_summaries[0].value_elicitation_prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
+    #   resp.slot_summaries[0].value_elicitation_prompt_specification.prompt_attempts_specification #=> Hash
+    #   resp.slot_summaries[0].value_elicitation_prompt_specification.prompt_attempts_specification["PromptAttempt"].allow_interrupt #=> Boolean
+    #   resp.slot_summaries[0].value_elicitation_prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_audio_input #=> Boolean
+    #   resp.slot_summaries[0].value_elicitation_prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_dtmf_input #=> Boolean
+    #   resp.slot_summaries[0].value_elicitation_prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.start_timeout_ms #=> Integer
+    #   resp.slot_summaries[0].value_elicitation_prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.max_length_ms #=> Integer
+    #   resp.slot_summaries[0].value_elicitation_prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.end_timeout_ms #=> Integer
+    #   resp.slot_summaries[0].value_elicitation_prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.max_length #=> Integer
+    #   resp.slot_summaries[0].value_elicitation_prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_timeout_ms #=> Integer
+    #   resp.slot_summaries[0].value_elicitation_prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.deletion_character #=> String
+    #   resp.slot_summaries[0].value_elicitation_prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_character #=> String
+    #   resp.slot_summaries[0].value_elicitation_prompt_specification.prompt_attempts_specification["PromptAttempt"].text_input_specification.start_timeout_ms #=> Integer
     #   resp.slot_summaries[0].last_updated_date_time #=> Time
     #   resp.next_token #=> String
     #
@@ -15815,6 +15974,31 @@ module Aws::LexModelsV2
     #         max_retries: 1, # required
     #         allow_interrupt: false,
     #         message_selection_strategy: "Random", # accepts Random, Ordered
+    #         prompt_attempts_specification: {
+    #           "Initial" => {
+    #             allow_interrupt: false,
+    #             allowed_input_types: { # required
+    #               allow_audio_input: false, # required
+    #               allow_dtmf_input: false, # required
+    #             },
+    #             audio_and_dtmf_input_specification: {
+    #               start_timeout_ms: 1, # required
+    #               audio_specification: {
+    #                 max_length_ms: 1, # required
+    #                 end_timeout_ms: 1, # required
+    #               },
+    #               dtmf_specification: {
+    #                 max_length: 1, # required
+    #                 end_timeout_ms: 1, # required
+    #                 deletion_character: "DTMFCharacter", # required
+    #                 end_character: "DTMFCharacter", # required
+    #               },
+    #             },
+    #             text_input_specification: {
+    #               start_timeout_ms: 1, # required
+    #             },
+    #           },
+    #         },
     #       },
     #       declination_response: {
     #         message_groups: [ # required
@@ -18996,6 +19180,18 @@ module Aws::LexModelsV2
     #   resp.intent_confirmation_setting.prompt_specification.max_retries #=> Integer
     #   resp.intent_confirmation_setting.prompt_specification.allow_interrupt #=> Boolean
     #   resp.intent_confirmation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification #=> Hash
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allow_interrupt #=> Boolean
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_audio_input #=> Boolean
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_dtmf_input #=> Boolean
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.start_timeout_ms #=> Integer
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.max_length_ms #=> Integer
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.end_timeout_ms #=> Integer
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.max_length #=> Integer
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_timeout_ms #=> Integer
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.deletion_character #=> String
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_character #=> String
+    #   resp.intent_confirmation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].text_input_specification.start_timeout_ms #=> Integer
     #   resp.intent_confirmation_setting.declination_response.message_groups #=> Array
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].message.plain_text_message.value #=> String
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].message.custom_payload.value #=> String
@@ -20327,6 +20523,31 @@ module Aws::LexModelsV2
     #         max_retries: 1, # required
     #         allow_interrupt: false,
     #         message_selection_strategy: "Random", # accepts Random, Ordered
+    #         prompt_attempts_specification: {
+    #           "Initial" => {
+    #             allow_interrupt: false,
+    #             allowed_input_types: { # required
+    #               allow_audio_input: false, # required
+    #               allow_dtmf_input: false, # required
+    #             },
+    #             audio_and_dtmf_input_specification: {
+    #               start_timeout_ms: 1, # required
+    #               audio_specification: {
+    #                 max_length_ms: 1, # required
+    #                 end_timeout_ms: 1, # required
+    #               },
+    #               dtmf_specification: {
+    #                 max_length: 1, # required
+    #                 end_timeout_ms: 1, # required
+    #                 deletion_character: "DTMFCharacter", # required
+    #                 end_character: "DTMFCharacter", # required
+    #               },
+    #             },
+    #             text_input_specification: {
+    #               start_timeout_ms: 1, # required
+    #             },
+    #           },
+    #         },
     #       },
     #       sample_utterances: [
     #         {
@@ -21838,6 +22059,31 @@ module Aws::LexModelsV2
     #               max_retries: 1, # required
     #               allow_interrupt: false,
     #               message_selection_strategy: "Random", # accepts Random, Ordered
+    #               prompt_attempts_specification: {
+    #                 "Initial" => {
+    #                   allow_interrupt: false,
+    #                   allowed_input_types: { # required
+    #                     allow_audio_input: false, # required
+    #                     allow_dtmf_input: false, # required
+    #                   },
+    #                   audio_and_dtmf_input_specification: {
+    #                     start_timeout_ms: 1, # required
+    #                     audio_specification: {
+    #                       max_length_ms: 1, # required
+    #                       end_timeout_ms: 1, # required
+    #                     },
+    #                     dtmf_specification: {
+    #                       max_length: 1, # required
+    #                       end_timeout_ms: 1, # required
+    #                       deletion_character: "DTMFCharacter", # required
+    #                       end_character: "DTMFCharacter", # required
+    #                     },
+    #                   },
+    #                   text_input_specification: {
+    #                     start_timeout_ms: 1, # required
+    #                   },
+    #                 },
+    #               },
     #             },
     #             sample_utterances: [
     #               {
@@ -22046,6 +22292,18 @@ module Aws::LexModelsV2
     #   resp.value_elicitation_setting.prompt_specification.max_retries #=> Integer
     #   resp.value_elicitation_setting.prompt_specification.allow_interrupt #=> Boolean
     #   resp.value_elicitation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification #=> Hash
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allow_interrupt #=> Boolean
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_audio_input #=> Boolean
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_dtmf_input #=> Boolean
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.start_timeout_ms #=> Integer
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.max_length_ms #=> Integer
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.end_timeout_ms #=> Integer
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.max_length #=> Integer
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_timeout_ms #=> Integer
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.deletion_character #=> String
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_character #=> String
+    #   resp.value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].text_input_specification.start_timeout_ms #=> Integer
     #   resp.value_elicitation_setting.sample_utterances #=> Array
     #   resp.value_elicitation_setting.sample_utterances[0].utterance #=> String
     #   resp.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups #=> Array
@@ -22655,6 +22913,18 @@ module Aws::LexModelsV2
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.max_retries #=> Integer
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.allow_interrupt #=> Boolean
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.message_selection_strategy #=> String, one of "Random", "Ordered"
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification #=> Hash
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allow_interrupt #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_audio_input #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].allowed_input_types.allow_dtmf_input #=> Boolean
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.start_timeout_ms #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.max_length_ms #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.audio_specification.end_timeout_ms #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.max_length #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_timeout_ms #=> Integer
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.deletion_character #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].audio_and_dtmf_input_specification.dtmf_specification.end_character #=> String
+    #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.prompt_specification.prompt_attempts_specification["PromptAttempt"].text_input_specification.start_timeout_ms #=> Integer
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.sample_utterances #=> Array
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.sample_utterances[0].utterance #=> String
     #   resp.sub_slot_setting.slot_specifications["Name"].value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups #=> Array
@@ -22891,7 +23161,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

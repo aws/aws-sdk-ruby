@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.140.0 (2022-09-23)
+------------------
+
+* Feature - This release adds new SSM document types ConformancePackTemplate and CloudFormation
+
 1.139.0 (2022-09-08)
 ------------------
 

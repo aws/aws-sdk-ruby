@@ -366,7 +366,7 @@ module Aws::NimbleStudio
     #   The EULA ID.
     #
     # @option params [required, String] :studio_id
-    #   A collection of EULA IDs.
+    #   The studio ID.
     #
     # @return [Types::AcceptEulasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -452,7 +452,7 @@ module Aws::NimbleStudio
     #     name: "LaunchProfileName", # required
     #     stream_configuration: { # required
     #       clipboard_mode: "ENABLED", # required, accepts ENABLED, DISABLED
-    #       ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge
+    #       ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g3.4xlarge, g3s.xlarge, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.16xlarge
     #       max_session_length_in_minutes: 1,
     #       max_stopped_session_length_in_minutes: 1,
     #       session_storage: {
@@ -484,11 +484,11 @@ module Aws::NimbleStudio
     #   resp.launch_profile.launch_profile_protocol_versions[0] #=> String
     #   resp.launch_profile.name #=> String
     #   resp.launch_profile.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
-    #   resp.launch_profile.status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED"
+    #   resp.launch_profile.status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED", "INVALID_INSTANCE_TYPES_PROVIDED", "INVALID_SUBNETS_COMBINATION"
     #   resp.launch_profile.status_message #=> String
     #   resp.launch_profile.stream_configuration.clipboard_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.launch_profile.stream_configuration.ec2_instance_types #=> Array
-    #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge"
+    #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g3.4xlarge", "g3s.xlarge", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.16xlarge"
     #   resp.launch_profile.stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.max_stopped_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.session_storage.mode #=> Array
@@ -634,7 +634,7 @@ module Aws::NimbleStudio
     #
     #   resp = client.create_streaming_session({
     #     client_token: "ClientToken",
-    #     ec2_instance_type: "g4dn.xlarge", # accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge
+    #     ec2_instance_type: "g4dn.xlarge", # accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g3.4xlarge, g3s.xlarge, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.16xlarge
     #     launch_profile_id: "String",
     #     owned_by: "String",
     #     streaming_image_id: "StreamingImageId",
@@ -1053,11 +1053,11 @@ module Aws::NimbleStudio
     #   resp.launch_profile.launch_profile_protocol_versions[0] #=> String
     #   resp.launch_profile.name #=> String
     #   resp.launch_profile.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
-    #   resp.launch_profile.status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED"
+    #   resp.launch_profile.status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED", "INVALID_INSTANCE_TYPES_PROVIDED", "INVALID_SUBNETS_COMBINATION"
     #   resp.launch_profile.status_message #=> String
     #   resp.launch_profile.stream_configuration.clipboard_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.launch_profile.stream_configuration.ec2_instance_types #=> Array
-    #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge"
+    #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g3.4xlarge", "g3s.xlarge", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.16xlarge"
     #   resp.launch_profile.stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.max_stopped_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.session_storage.mode #=> Array
@@ -1102,7 +1102,7 @@ module Aws::NimbleStudio
     #   The Launch Profile ID.
     #
     # @option params [required, String] :principal_id
-    #   The principal ID. This currently supports a Amazon Web Services SSO
+    #   The principal ID. This currently supports a IAM Identity Center
     #   UserId.
     #
     # @option params [required, String] :studio_id
@@ -1401,7 +1401,7 @@ module Aws::NimbleStudio
     #   not need to pass this option.**
     #
     # @option params [required, String] :principal_id
-    #   The principal ID. This currently supports a Amazon Web Services SSO
+    #   The principal ID. This currently supports a IAM Identity Center
     #   UserId.
     #
     # @option params [required, String] :studio_id
@@ -1490,11 +1490,11 @@ module Aws::NimbleStudio
     #   resp.launch_profile.launch_profile_protocol_versions[0] #=> String
     #   resp.launch_profile.name #=> String
     #   resp.launch_profile.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
-    #   resp.launch_profile.status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED"
+    #   resp.launch_profile.status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED", "INVALID_INSTANCE_TYPES_PROVIDED", "INVALID_SUBNETS_COMBINATION"
     #   resp.launch_profile.status_message #=> String
     #   resp.launch_profile.stream_configuration.clipboard_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.launch_profile.stream_configuration.ec2_instance_types #=> Array
-    #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge"
+    #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g3.4xlarge", "g3s.xlarge", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.16xlarge"
     #   resp.launch_profile.stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.max_stopped_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.session_storage.mode #=> Array
@@ -1568,11 +1568,11 @@ module Aws::NimbleStudio
     #   resp.launch_profile.launch_profile_protocol_versions[0] #=> String
     #   resp.launch_profile.name #=> String
     #   resp.launch_profile.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
-    #   resp.launch_profile.status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED"
+    #   resp.launch_profile.status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED", "INVALID_INSTANCE_TYPES_PROVIDED", "INVALID_SUBNETS_COMBINATION"
     #   resp.launch_profile.status_message #=> String
     #   resp.launch_profile.stream_configuration.clipboard_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.launch_profile.stream_configuration.ec2_instance_types #=> Array
-    #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge"
+    #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g3.4xlarge", "g3s.xlarge", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.16xlarge"
     #   resp.launch_profile.stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.max_stopped_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.session_storage.mode #=> Array
@@ -1708,7 +1708,7 @@ module Aws::NimbleStudio
     #   The Launch Profile ID.
     #
     # @option params [required, String] :principal_id
-    #   The principal ID. This currently supports a Amazon Web Services SSO
+    #   The principal ID. This currently supports a IAM Identity Center
     #   UserId.
     #
     # @option params [required, String] :studio_id
@@ -2043,7 +2043,7 @@ module Aws::NimbleStudio
     # Get a user's membership in a studio.
     #
     # @option params [required, String] :principal_id
-    #   The principal ID. This currently supports a Amazon Web Services SSO
+    #   The principal ID. This currently supports a IAM Identity Center
     #   UserId.
     #
     # @option params [required, String] :studio_id
@@ -2219,7 +2219,7 @@ module Aws::NimbleStudio
     #   The token to request the next page of results.
     #
     # @option params [String] :principal_id
-    #   The principal ID. This currently supports a Amazon Web Services SSO
+    #   The principal ID. This currently supports a IAM Identity Center
     #   UserId.
     #
     # @option params [Array<String>] :states
@@ -2259,11 +2259,11 @@ module Aws::NimbleStudio
     #   resp.launch_profiles[0].launch_profile_protocol_versions[0] #=> String
     #   resp.launch_profiles[0].name #=> String
     #   resp.launch_profiles[0].state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
-    #   resp.launch_profiles[0].status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED"
+    #   resp.launch_profiles[0].status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED", "INVALID_INSTANCE_TYPES_PROVIDED", "INVALID_SUBNETS_COMBINATION"
     #   resp.launch_profiles[0].status_message #=> String
     #   resp.launch_profiles[0].stream_configuration.clipboard_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.launch_profiles[0].stream_configuration.ec2_instance_types #=> Array
-    #   resp.launch_profiles[0].stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge"
+    #   resp.launch_profiles[0].stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g3.4xlarge", "g3s.xlarge", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.16xlarge"
     #   resp.launch_profiles[0].stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profiles[0].stream_configuration.max_stopped_session_length_in_minutes #=> Integer
     #   resp.launch_profiles[0].stream_configuration.session_storage.mode #=> Array
@@ -2805,20 +2805,19 @@ module Aws::NimbleStudio
       req.send_request(options)
     end
 
-    # Repairs the Amazon Web Services SSO configuration for a given studio.
+    # Repairs the IAM Identity Center configuration for a given studio.
     #
-    # If the studio has a valid Amazon Web Services SSO configuration
-    # currently associated with it, this operation will fail with a
-    # validation error.
+    # If the studio has a valid IAM Identity Center configuration currently
+    # associated with it, this operation will fail with a validation error.
     #
-    # If the studio does not have a valid Amazon Web Services SSO
-    # configuration currently associated with it, then a new Amazon Web
-    # Services SSO application is created for the studio and the studio is
-    # changed to the READY state.
+    # If the studio does not have a valid IAM Identity Center configuration
+    # currently associated with it, then a new IAM Identity Center
+    # application is created for the studio and the studio is changed to the
+    # READY state.
     #
-    # After the Amazon Web Services SSO application is repaired, you must
-    # use the Amazon Nimble Studio console to add administrators and users
-    # to your studio.
+    # After the IAM Identity Center application is repaired, you must use
+    # the Amazon Nimble Studio console to add administrators and users to
+    # your studio.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -3042,7 +3041,7 @@ module Aws::NimbleStudio
     #     name: "LaunchProfileName",
     #     stream_configuration: {
     #       clipboard_mode: "ENABLED", # required, accepts ENABLED, DISABLED
-    #       ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge
+    #       ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g3.4xlarge, g3s.xlarge, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.16xlarge
     #       max_session_length_in_minutes: 1,
     #       max_stopped_session_length_in_minutes: 1,
     #       session_storage: {
@@ -3071,11 +3070,11 @@ module Aws::NimbleStudio
     #   resp.launch_profile.launch_profile_protocol_versions[0] #=> String
     #   resp.launch_profile.name #=> String
     #   resp.launch_profile.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "DELETE_FAILED", "CREATE_FAILED", "UPDATE_FAILED"
-    #   resp.launch_profile.status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED"
+    #   resp.launch_profile.status_code #=> String, one of "LAUNCH_PROFILE_CREATED", "LAUNCH_PROFILE_UPDATED", "LAUNCH_PROFILE_DELETED", "LAUNCH_PROFILE_CREATE_IN_PROGRESS", "LAUNCH_PROFILE_UPDATE_IN_PROGRESS", "LAUNCH_PROFILE_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "STREAMING_IMAGE_NOT_FOUND", "STREAMING_IMAGE_NOT_READY", "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED", "ENCRYPTION_KEY_ACCESS_DENIED", "ENCRYPTION_KEY_NOT_FOUND", "INVALID_SUBNETS_PROVIDED", "INVALID_INSTANCE_TYPES_PROVIDED", "INVALID_SUBNETS_COMBINATION"
     #   resp.launch_profile.status_message #=> String
     #   resp.launch_profile.stream_configuration.clipboard_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.launch_profile.stream_configuration.ec2_instance_types #=> Array
-    #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge"
+    #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g3.4xlarge", "g3s.xlarge", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.16xlarge"
     #   resp.launch_profile.stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.max_stopped_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.session_storage.mode #=> Array
@@ -3123,7 +3122,7 @@ module Aws::NimbleStudio
     #   The persona.
     #
     # @option params [required, String] :principal_id
-    #   The principal ID. This currently supports a Amazon Web Services SSO
+    #   The principal ID. This currently supports a IAM Identity Center
     #   UserId.
     #
     # @option params [required, String] :studio_id
@@ -3471,7 +3470,7 @@ module Aws::NimbleStudio
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-nimblestudio'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

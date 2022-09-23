@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2022-09-23)
+------------------
+
+* Feature - Add the default specification for ResourceType in ListResourcesForWebACL.
+
 1.41.0 (2022-08-03)
 ------------------
 

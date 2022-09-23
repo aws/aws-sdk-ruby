@@ -276,7 +276,7 @@ module Aws::NimbleStudio
 
     end
 
-    # Wait until a StreamingSessionDeleted. Use this after invoking Deletesession
+    # Wait until a StreamingSessionDeleted. Use this after invoking DeleteStreamingSession
     class StreamingSessionDeleted
 
       # @param [Hash] options
