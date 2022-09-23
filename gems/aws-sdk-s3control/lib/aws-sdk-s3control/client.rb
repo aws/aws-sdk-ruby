@@ -2873,7 +2873,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html
     #
-    # @option params [required, String] :account_id
+    # @option params [String] :account_id
     #   The Amazon Web Services account ID of the S3 on Outposts bucket.
     #
     # @option params [required, String] :bucket
@@ -2887,7 +2887,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bucket_versioning({
-    #     account_id: "AccountId", # required
+    #     account_id: "AccountId",
     #     bucket: "BucketName", # required
     #   })
     #
@@ -4368,7 +4368,7 @@ module Aws::S3Control
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html
     #
-    # @option params [required, String] :account_id
+    # @option params [String] :account_id
     #   The Amazon Web Services account ID of the S3 on Outposts bucket.
     #
     # @option params [required, String] :bucket
@@ -4386,7 +4386,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_bucket_versioning({
-    #     account_id: "AccountId", # required
+    #     account_id: "AccountId",
     #     bucket: "BucketName", # required
     #     mfa: "MFA",
     #     versioning_configuration: { # required

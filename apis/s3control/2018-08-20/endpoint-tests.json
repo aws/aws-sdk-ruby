@@ -27,12 +27,19 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -41,6 +48,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "us-west-2",
                 "RequiresAccountId": true,
                 "S3Control::UseArnRegion": false,
@@ -75,12 +83,19 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -89,6 +104,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "us-west-2",
                 "RequiresAccountId": true,
                 "S3Control::UseArnRegion": true,
@@ -123,12 +139,19 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -137,6 +160,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "us-west-2",
                 "RequiresAccountId": true,
                 "UseDualStack": false,
@@ -170,12 +194,19 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "cn-north-1"
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "cn-north-1"
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -184,6 +215,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "cn-north-1",
                 "RequiresAccountId": true,
                 "UseDualStack": false,
@@ -217,12 +249,19 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -231,6 +270,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "us-west-2",
                 "RequiresAccountId": true,
                 "UseDualStack": false,
@@ -264,12 +304,21 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -278,6 +327,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "us-west-2",
                 "RequiresAccountId": true,
                 "UseDualStack": false,
@@ -311,12 +361,21 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-gov-west-1",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-gov-west-1",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -325,6 +384,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "us-gov-west-1",
                 "RequiresAccountId": true,
                 "S3Control::UseArnRegion": true,
@@ -359,12 +419,19 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "cn-north-1"
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "cn-north-1"
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -373,6 +440,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "cn-north-1",
                 "RequiresAccountId": true,
                 "UseDualStack": false,
@@ -406,12 +474,21 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "cn-north-1",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "cn-north-1",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -420,6 +497,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "cn-north-1",
                 "RequiresAccountId": true,
                 "UseDualStack": false,
@@ -453,12 +531,21 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-gov-west-1",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-gov-west-1",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -467,6 +554,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "us-gov-west-1",
                 "RequiresAccountId": true,
                 "S3Control::UseArnRegion": true,
@@ -501,12 +589,19 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "af-south-1"
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "af-south-1"
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -515,6 +610,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "af-south-1",
                 "RequiresAccountId": true,
                 "UseDualStack": false,
@@ -548,12 +644,21 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "af-south-1",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "af-south-1",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -562,6 +667,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "af-south-1",
                 "RequiresAccountId": true,
                 "UseDualStack": false,
@@ -595,12 +701,21 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-gov-west-1",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-gov-west-1",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -609,6 +724,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "us-gov-west-1",
                 "RequiresAccountId": true,
                 "S3Control::UseArnRegion": true,
@@ -635,6 +751,9 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-2"
+                    },
                     "operationName": "CreateBucket",
                     "operationParams": {
                         "Bucket": "blah",
@@ -671,6 +790,10 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-2",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "CreateBucket",
                     "operationParams": {
                         "Bucket": "blah",
@@ -707,6 +830,9 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-2"
+                    },
                     "operationName": "CreateBucket",
                     "operationParams": {
                         "Bucket": "blah"
@@ -741,6 +867,9 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-2"
+                    },
                     "operationName": "ListRegionalBuckets",
                     "operationParams": {
                         "AccountId": "123",
@@ -777,6 +906,9 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-2"
+                    },
                     "operationName": "ListRegionalBuckets",
                     "operationParams": {
                         "AccountId": "123"
@@ -811,6 +943,10 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-2",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "ListRegionalBuckets",
                     "operationParams": {
                         "AccountId": "123",
@@ -835,6 +971,7 @@
             },
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "us-west-2",
                 "RequiresAccountId": true,
                 "UseDualStack": true,
@@ -848,6 +985,7 @@
             },
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "cn-north-1",
                 "RequiresAccountId": true,
                 "UseDualStack": true,
@@ -861,6 +999,7 @@
             },
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "af-south-1",
                 "RequiresAccountId": true,
                 "UseDualStack": true,
@@ -874,6 +1013,7 @@
             },
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost",
+                "AccountId": "123456789012",
                 "Region": "us-west-2",
                 "RequiresAccountId": true,
                 "UseDualStack": false,
@@ -933,7 +1073,7 @@
             }
         },
         {
-            "documentation": "Account ID set inline & in ARN but they both match@us-west-2",
+            "documentation": "Account ID set inline and in ARN but they both match@us-west-2",
             "expect": {
                 "endpoint": {
                     "headers": {
@@ -959,6 +1099,10 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3Control::UseArnRegion": false
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
                         "AccountId": "123456789012",
@@ -971,21 +1115,25 @@
                 "AccountId": "123456789012",
                 "Region": "us-west-2",
                 "RequiresAccountId": true,
-                "S3Control::UseArnRegion": false,
+                "UseArnRegion": false,
                 "UseDualStack": false,
                 "UseFIPS": false
             }
         },
         {
-            "documentation": "Account ID set inline & in ARN and they do not match@us-west-2",
+            "documentation": "Account ID set inline and in ARN and they do not match@us-west-2",
             "expect": {
                 "error": "Invalid ARN: the accountId specified in the ARN (`123456789012`) does not match the parameter (`9999999`)"
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3Control::UseArnRegion": false
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "AccountId": "123456789012",
+                        "AccountId": "9999999",
                         "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
                     }
                 }
@@ -995,7 +1143,7 @@
                 "AccountId": "9999999",
                 "Region": "us-west-2",
                 "RequiresAccountId": true,
-                "S3Control::UseArnRegion": false,
+                "UseArnRegion": false,
                 "UseDualStack": false,
                 "UseFIPS": false
             }
@@ -1019,6 +1167,10 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "SDK::Endpoint": "https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com"
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
                         "AccountId": "123456789012",
@@ -1064,14 +1216,20 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "SDK::Endpoint": "https://beta.example.com"
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 }
             ],
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Endpoint": "https://beta.example.com",
                 "Operation": "GetAccessPoint",
                 "Region": "us-west-2",
@@ -1165,6 +1323,10 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "SDK::Endpoint": "https://beta.example.com"
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -1200,6 +1362,10 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-2",
+                        "SDK::Endpoint": "https://beta.example.com"
+                    },
                     "operationName": "ListRegionalBuckets",
                     "operationParams": {
                         "AccountId": "123",
@@ -1237,6 +1403,11 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-2",
+                        "AWS::UseFIPS": true,
+                        "SDK::Endpoint": "https://beta.example.com"
+                    },
                     "operationName": "ListRegionalBuckets",
                     "operationParams": {
                         "AccountId": "123",
@@ -1274,6 +1445,11 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-2",
+                        "AWS::UseFIPS": true,
+                        "SDK::Endpoint": "https://beta.example.com"
+                    },
                     "operationName": "CreateBucket",
                     "operationParams": {
                         "Bucket": "blah",
@@ -1350,6 +1526,9 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
                     "operationName": "CreateAccessPoint",
                     "operationParams": {
                         "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
@@ -1393,6 +1572,9 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -1435,6 +1617,9 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-gov-east-1"
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -1477,6 +1662,10 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-gov-west-1",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -1518,6 +1707,10 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-2",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -1572,6 +1765,9 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "cn-north-1"
+                    },
                     "operationName": "CreateAccessPoint",
                     "operationParams": {
                         "Bucket": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
@@ -1615,6 +1811,9 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -1657,6 +1856,9 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-gov-east-1"
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -1699,6 +1901,10 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-gov-west-1",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -1740,6 +1946,10 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-2",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -1794,6 +2004,9 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "af-south-1"
+                    },
                     "operationName": "CreateAccessPoint",
                     "operationParams": {
                         "Bucket": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
@@ -1837,6 +2050,9 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -1879,6 +2095,9 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-gov-east-1"
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -1921,6 +2140,10 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-gov-west-1",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -1962,6 +2185,10 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-2",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -2058,14 +2285,6 @@
                     "url": "https://1234567890.s3-control.us-west-2.amazonaws.com"
                 }
             },
-            "operationInputs": [
-                {
-                    "operationName": "PutPublicAccessBlock",
-                    "operationParams": {
-                        "AccountId": "1234567890"
-                    }
-                }
-            ],
             "params": {
                 "AccountId": "1234567890",
                 "Region": "us-west-2",
@@ -2091,14 +2310,6 @@
                     "url": "https://1234567890.s3-control.dualstack.us-east-1.amazonaws.com"
                 }
             },
-            "operationInputs": [
-                {
-                    "operationName": "PutPublicAccessBlock",
-                    "operationParams": {
-                        "AccountId": "1234567890"
-                    }
-                }
-            ],
             "params": {
                 "AccountId": "1234567890",
                 "Region": "us-east-1",
@@ -2124,14 +2335,6 @@
                     "url": "https://1234567890.s3-control-fips.us-east-1.amazonaws.com"
                 }
             },
-            "operationInputs": [
-                {
-                    "operationName": "PutPublicAccessBlock",
-                    "operationParams": {
-                        "AccountId": "1234567890"
-                    }
-                }
-            ],
             "params": {
                 "AccountId": "1234567890",
                 "Region": "us-east-1",
@@ -2157,14 +2360,6 @@
                     "url": "https://1234567890-aBC.s3-control-fips.us-east-1.amazonaws.com"
                 }
             },
-            "operationInputs": [
-                {
-                    "operationName": "PutPublicAccessBlock",
-                    "operationParams": {
-                        "AccountId": "1234567890-aBC"
-                    }
-                }
-            ],
             "params": {
                 "AccountId": "1234567890-aBC",
                 "Region": "us-east-1",
@@ -2190,6 +2385,17 @@
                     "url": "https://s3-control.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "ListRegionalBuckets",
+                    "operationParams": {
+                        "AccountId": "0123456789012"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1"
             }
@@ -2211,6 +2417,18 @@
                     "url": "https://s3-control-fips.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseFIPS": true
+                    },
+                    "operationName": "ListRegionalBuckets",
+                    "operationParams": {
+                        "AccountId": "0123456789012"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseFIPS": true
@@ -2233,6 +2451,18 @@
                     "url": "https://s3-control.dualstack.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseDualStack": true
+                    },
+                    "operationName": "ListRegionalBuckets",
+                    "operationParams": {
+                        "AccountId": "0123456789012"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseDualStack": true
@@ -2255,6 +2485,19 @@
                     "url": "https://s3-control-fips.dualstack.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseFIPS": true,
+                        "AWS::UseDualStack": true
+                    },
+                    "operationName": "ListRegionalBuckets",
+                    "operationParams": {
+                        "AccountId": "0123456789012"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseDualStack": true,
@@ -2278,6 +2521,17 @@
                     "url": "https://s3-control.cn-north-1.amazonaws.com.cn"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "cn-north-1"
+                    },
+                    "operationName": "ListRegionalBuckets",
+                    "operationParams": {
+                        "AccountId": "0123456789012"
+                    }
+                }
+            ],
             "params": {
                 "Region": "cn-north-1"
             }
@@ -2312,7 +2566,10 @@
             },
             "operationInputs": [
                 {
-                    "operationName": "PutPublicAccessBlock",
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "ListRegionalBuckets",
                     "operationParams": {
                         "AccountId": "1234567890-aBC"
                     }
@@ -2333,9 +2590,12 @@
             },
             "operationInputs": [
                 {
-                    "operationName": "PutPublicAccessBlock",
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1"
+                    },
+                    "operationName": "ListRegionalBuckets",
                     "operationParams": {
-                        "AccountId": "1234567890-aBC"
+                        "AccountId": "/?invalid&not-host*label"
                     }
                 }
             ],
@@ -2366,7 +2626,11 @@
             },
             "operationInputs": [
                 {
-                    "operationName": "PutPublicAccessBlock",
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseFIPS": true
+                    },
+                    "operationName": "ListRegionalBuckets",
                     "operationParams": {
                         "AccountId": "1234567890-aBC"
                     }
@@ -2399,7 +2663,12 @@
             },
             "operationInputs": [
                 {
-                    "operationName": "PutPublicAccessBlock",
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseFIPS": true,
+                        "AWS::UseDualStack": true
+                    },
+                    "operationName": "ListRegionalBuckets",
                     "operationParams": {
                         "AccountId": "1234567890-aBC"
                     }
@@ -2432,7 +2701,11 @@
             },
             "operationInputs": [
                 {
-                    "operationName": "PutPublicAccessBlock",
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "SDK::Endpoint": "https://example.com"
+                    },
+                    "operationName": "ListRegionalBuckets",
                     "operationParams": {
                         "AccountId": "1234567890-aBC"
                     }
@@ -2471,6 +2744,18 @@
             "expect": {
                 "error": "AccountId must only contain a-z, A-Z, 0-9 and `-`."
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "SDK::Endpoint": "https://beta.example.com"
+                    },
+                    "operationName": "ListRegionalBuckets",
+                    "operationParams": {
+                        "AccountId": "/?invalid&not-host*label"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "Endpoint": "https://beta.example.com",
@@ -2497,7 +2782,12 @@
             },
             "operationInputs": [
                 {
-                    "operationName": "PutPublicAccessBlock",
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseFIPS": true,
+                        "SDK::Endpoint": "https://example.com"
+                    },
+                    "operationName": "ListRegionalBuckets",
                     "operationParams": {
                         "AccountId": "1234567890-aBC"
                     }
@@ -2529,6 +2819,19 @@
                     "url": "https://example.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseFIPS": true,
+                        "SDK::Endpoint": "https://example.com"
+                    },
+                    "operationName": "ListRegionalBuckets",
+                    "operationParams": {
+                        "AccountId": "0123456789012"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "Endpoint": "https://example.com",
@@ -2553,6 +2856,19 @@
                     "url": "https://example.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::UseFIPS": true,
+                        "SDK::Endpoint": "https://example.com"
+                    },
+                    "operationName": "ListRegionalBuckets",
+                    "operationParams": {
+                        "AccountId": "0123456789012"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "Endpoint": "https://example.com",
@@ -2579,9 +2895,13 @@
             },
             "operationInputs": [
                 {
-                    "operationName": "PutPublicAccessBlock",
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "SDK::Endpoint": "https://example.com"
+                    },
+                    "operationName": "ListRegionalBuckets",
                     "operationParams": {
-                        "AccountId": "1234567890-aBC"
+                        "AccountId": "0123456789012"
                     }
                 }
             ],
@@ -2612,14 +2932,6 @@
             "expect": {
                 "error": "AccountId is required but not set"
             },
-            "operationInputs": [
-                {
-                    "operationName": "ListRegionalBuckets",
-                    "operationParams": {
-                        "OutpostId": "op-123"
-                    }
-                }
-            ],
             "params": {
                 "Operation": "ListRegionalBuckets",
                 "OutpostId": "op-123",
@@ -2636,9 +2948,13 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-2"
+                    },
                     "operationName": "ListRegionalBuckets",
                     "operationParams": {
-                        "OutpostId": "op-123"
+                        "OutpostId": "op-123",
+                        "AccountId": "/?invalid&not-host*label"
                     }
                 }
             ],
@@ -2670,15 +2986,6 @@
             "expect": {
                 "error": "Invalid ARN: missing account ID"
             },
-            "operationInputs": [
-                {
-                    "operationName": "GetAccessPoint",
-                    "operationParams": {
-                        "AccountId": "123456789012",
-                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
-                    }
-                }
-            ],
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:us-west-2::outpost:op-01234567890123456:outpost:op1",
                 "Region": "us-west-2",
@@ -2692,15 +2999,6 @@
             "expect": {
                 "error": "Invalid ARN: missing account ID"
             },
-            "operationInputs": [
-                {
-                    "operationName": "GetAccessPoint",
-                    "operationParams": {
-                        "AccountId": "123456789012",
-                        "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
-                    }
-                }
-            ],
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:us-west-2::outpost:op-01234567890123456:bucket:mybucket",
                 "Region": "us-west-2",
@@ -2728,6 +3026,10 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "SDK::Endpoint": "https://beta.example.com"
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
                         "Name": "apname",
@@ -2788,6 +3090,11 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::UseDualStack": true,
+                        "SDK::Endpoint": "https://beta.example.com"
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
                         "Name": "apname",
@@ -2813,6 +3120,11 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::UseDualStack": true,
+                        "SDK::Endpoint": "https://beta.example.com"
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -2836,9 +3148,14 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "cn-north-1",
+                        "AWS::UseFIPS": true
+                    },
                     "operationName": "ListRegionalBuckets",
                     "operationParams": {
-                        "OutpostId": "op-123"
+                        "OutpostId": "op-123",
+                        "AccountId": "0123456789012"
                     }
                 }
             ],
@@ -2859,9 +3176,13 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-1"
+                    },
                     "operationName": "ListRegionalBuckets",
                     "operationParams": {
-                        "OutpostId": "op-123"
+                        "OutpostId": "?outpost/invalid+",
+                        "AccountId": "0123456789012"
                     }
                 }
             ],
@@ -2894,14 +3215,6 @@
             "expect": {
                 "error": "Invalid region: region was not a valid DNS name."
             },
-            "operationInputs": [
-                {
-                    "operationName": "ListRegionalBuckets",
-                    "operationParams": {
-                        "OutpostId": "op-123"
-                    }
-                }
-            ],
             "params": {
                 "Operation": "ListRegionalBuckets",
                 "OutpostId": "op-123",
@@ -2929,14 +3242,6 @@
                     "url": "https://s3-outposts.us-west-2.amazonaws.com"
                 }
             },
-            "operationInputs": [
-                {
-                    "operationName": "ListRegionalBuckets",
-                    "operationParams": {
-                        "OutpostId": "op-123"
-                    }
-                }
-            ],
             "params": {
                 "Operation": "ListRegionalBuckets",
                 "OutpostId": "op-123",
@@ -2952,12 +3257,21 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3Control::UseArnRegion": false
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3Control::UseArnRegion": false
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -2966,6 +3280,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "us-west-2",
                 "RequiresAccountId": true,
                 "UseArnRegion": false,
@@ -2980,9 +3295,14 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "SDK::Endpoint": "https://beta.example.com",
+                        "AWS::S3Control::UseArnRegion": false
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
-                        "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+                        "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
                     }
                 }
             ],
@@ -3024,12 +3344,19 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -3038,6 +3365,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "us-west-2",
                 "RequiresAccountId": true,
                 "UseDualStack": false,
@@ -3071,6 +3399,9 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2"
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -3092,6 +3423,10 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3Control::UseArnRegion": true
+                    },
                     "operationName": "GetBucket",
                     "operationParams": {
                         "Bucket": "arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
@@ -3115,12 +3450,21 @@
             },
             "operationInputs": [
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3Control::UseArnRegion": true
+                    },
                     "operationName": "GetAccessPoint",
                     "operationParams": {
-                        "Name": "arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+                        "Name": "arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                        "AccountId": "123456789012"
                     }
                 },
                 {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3Control::UseArnRegion": true
+                    },
                     "operationName": "DeleteAccessPoint",
                     "operationParams": {
                         "Name": "arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
@@ -3129,6 +3473,7 @@
             ],
             "params": {
                 "AccessPointName": "arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+                "AccountId": "123456789012",
                 "Region": "us-west-2",
                 "RequiresAccountId": true,
                 "UseDualStack": false,

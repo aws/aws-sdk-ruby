@@ -75,7 +75,7 @@ module {{module_name}}
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
         {{#expect_headers?}}
         {{#expected_headers}}
-        expect(resp.context.http_request.headers['{{param}}'].to eq({{{value}}})
+        expect(resp.context.http_request.headers['{{param}}']).to eq({{{value}}})
         {{/expected_headers}}
         {{/expect_headers?}}
         {{/expect_error?}}

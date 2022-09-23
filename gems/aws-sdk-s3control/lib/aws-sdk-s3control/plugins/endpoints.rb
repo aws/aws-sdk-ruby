@@ -117,6 +117,8 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::GetBucketPolicy.build(context)
           when :get_bucket_tagging
             Aws::S3Control::Endpoints::GetBucketTagging.build(context)
+          when :get_bucket_versioning
+            Aws::S3Control::Endpoints::GetBucketVersioning.build(context)
           when :get_job_tagging
             Aws::S3Control::Endpoints::GetJobTagging.build(context)
           when :get_multi_region_access_point
@@ -155,6 +157,8 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::PutBucketPolicy.build(context)
           when :put_bucket_tagging
             Aws::S3Control::Endpoints::PutBucketTagging.build(context)
+          when :put_bucket_versioning
+            Aws::S3Control::Endpoints::PutBucketVersioning.build(context)
           when :put_job_tagging
             Aws::S3Control::Endpoints::PutJobTagging.build(context)
           when :put_multi_region_access_point_policy

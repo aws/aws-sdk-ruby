@@ -2336,7 +2336,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         bucket: "BucketName", # required
     #       }
     #
@@ -4989,7 +4989,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         bucket: "BucketName", # required
     #         mfa: "MFA",
     #         versioning_configuration: { # required

@@ -676,7 +676,7 @@ module Aws::S3Control
     GetBucketTaggingResult.add_member(:tag_set, Shapes::ShapeRef.new(shape: S3TagSet, required: true, location_name: "TagSet"))
     GetBucketTaggingResult.struct_class = Types::GetBucketTaggingResult
 
-    GetBucketVersioningRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetBucketVersioningRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     GetBucketVersioningRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
     GetBucketVersioningRequest.struct_class = Types::GetBucketVersioningRequest
 
@@ -1064,7 +1064,7 @@ module Aws::S3Control
     PutBucketTaggingRequest[:payload] = :tagging
     PutBucketTaggingRequest[:payload_member] = PutBucketTaggingRequest.member(:tagging)
 
-    PutBucketVersioningRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    PutBucketVersioningRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     PutBucketVersioningRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "name"))
     PutBucketVersioningRequest.add_member(:mfa, Shapes::ShapeRef.new(shape: MFA, location: "header", location_name: "x-amz-mfa"))
     PutBucketVersioningRequest.add_member(:versioning_configuration, Shapes::ShapeRef.new(shape: VersioningConfiguration, required: true, location_name: "VersioningConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}}))
@@ -1712,7 +1712,6 @@ module Aws::S3Control
         o.http_method = "GET"
         o.http_request_uri = "/v20180820/bucket/{name}/versioning"
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: GetBucketVersioningRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketVersioningResult)
@@ -1983,7 +1982,6 @@ module Aws::S3Control
         o.http_request_uri = "/v20180820/bucket/{name}/versioning"
         o.http_checksum_required = true
         o.endpoint_pattern = {
-          "hostPrefix" => "{AccountId}.",
         }
         o.input = Shapes::ShapeRef.new(shape: PutBucketVersioningRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))

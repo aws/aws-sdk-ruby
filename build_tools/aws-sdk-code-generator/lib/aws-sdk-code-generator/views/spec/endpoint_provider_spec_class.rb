@@ -12,6 +12,7 @@ module AwsSdkCodeGenerator
           test_cases = @service.endpoint_tests.fetch('testCases', [])
           @endpoint_tests = test_cases.map do |endpoint_test|
             EndpointProviderTest.new(
+              service: @service,
               documentation: endpoint_test['documentation'],
               params: endpoint_test['params'],
               tags: endpoint_test['tags'],
@@ -36,6 +37,7 @@ module AwsSdkCodeGenerator
 
         class EndpointProviderTest
           def initialize(options)
+            @service = options[:service]
             @documentation = options[:documentation]
             @params = options[:params]&.map do |key, value|
               [Underscore.underscore(key).to_sym, value]
@@ -45,6 +47,7 @@ module AwsSdkCodeGenerator
             operation_inputs = options[:operation_inputs] || []
             @operation_inputs = operation_inputs.map do |operation_inputs_test|
               OperationInputsTest.new(
+                service: @service,
                 operation_name: Underscore.underscore(
                   operation_inputs_test['operationName']
                 ),
@@ -89,7 +92,7 @@ module AwsSdkCodeGenerator
           end
 
           def expected_headers
-            @expect['endpoint']['headers'].map { |k,v| Param.new(k, v) }
+            @expect['endpoint']['headers'].map { |k,v| Param.new(k, v.join(",")) }
           end
 
           def expect_headers?
@@ -102,6 +105,7 @@ module AwsSdkCodeGenerator
 
         class OperationInputsTest
           def initialize(options)
+            @service = options[:service]
             @operation_name = options[:operation_name]
             @operation_params = options[:operation_params].map do |k,v|
               Param.new(Underscore.underscore(k), v)
@@ -114,7 +118,7 @@ module AwsSdkCodeGenerator
               built_in_to_param(k, v)
             end
             # the expected default of UseGlobalEndpoint does not match the SDK's default value
-            unless options[:built_in_params].include?('AWS::S3::UseGlobalEndpoint')
+            if @service.identifier == 's3' && !options[:built_in_params].include?('AWS::S3::UseGlobalEndpoint')
               @client_params << built_in_to_param('AWS::S3::UseGlobalEndpoint', false)
             end
           end
