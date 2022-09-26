@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2022-09-22)
+------------------
+
+* Feature - This release adds the support for VPC-ENI based connectivity for private devices on AWS Device Farm.
+
 1.51.0 (2022-02-24)
 ------------------
 

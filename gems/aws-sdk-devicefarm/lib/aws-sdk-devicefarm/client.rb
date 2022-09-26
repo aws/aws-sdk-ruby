@@ -604,6 +604,9 @@ module Aws::DeviceFarm
     #   runs in this project use the specified execution timeout value unless
     #   overridden when scheduling a run.
     #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   The VPC security groups and subnets that are attached to a project.
+    #
     # @return [Types::CreateProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProjectResult#project #project} => Types::Project
@@ -631,6 +634,11 @@ module Aws::DeviceFarm
     #   resp = client.create_project({
     #     name: "Name", # required
     #     default_job_timeout_minutes: 1,
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnet_ids: ["SubnetId"], # required
+    #       vpc_id: "NonEmptyString", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -639,6 +647,11 @@ module Aws::DeviceFarm
     #   resp.project.name #=> String
     #   resp.project.default_job_timeout_minutes #=> Integer
     #   resp.project.created #=> Time
+    #   resp.project.vpc_config.security_group_ids #=> Array
+    #   resp.project.vpc_config.security_group_ids[0] #=> String
+    #   resp.project.vpc_config.subnet_ids #=> Array
+    #   resp.project.vpc_config.subnet_ids[0] #=> String
+    #   resp.project.vpc_config.vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProject AWS API Documentation
     #
@@ -735,7 +748,7 @@ module Aws::DeviceFarm
     #
     #
     #
-    #   [1]: https://aws.amazon.com/device-farm/faq/
+    #   [1]: http://aws.amazon.com/device-farm/faqs/
     #
     # @return [Types::CreateRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -842,6 +855,11 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device_udid #=> String
     #   resp.remote_access_session.interaction_mode #=> String, one of "INTERACTIVE", "NO_VIDEO", "VIDEO_ONLY"
     #   resp.remote_access_session.skip_app_resign #=> Boolean
+    #   resp.remote_access_session.vpc_config.security_group_ids #=> Array
+    #   resp.remote_access_session.vpc_config.security_group_ids[0] #=> String
+    #   resp.remote_access_session.vpc_config.subnet_ids #=> Array
+    #   resp.remote_access_session.vpc_config.subnet_ids[0] #=> String
+    #   resp.remote_access_session.vpc_config.vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSession AWS API Documentation
     #
@@ -2185,6 +2203,11 @@ module Aws::DeviceFarm
     #   resp.project.name #=> String
     #   resp.project.default_job_timeout_minutes #=> Integer
     #   resp.project.created #=> Time
+    #   resp.project.vpc_config.security_group_ids #=> Array
+    #   resp.project.vpc_config.security_group_ids[0] #=> String
+    #   resp.project.vpc_config.subnet_ids #=> Array
+    #   resp.project.vpc_config.subnet_ids[0] #=> String
+    #   resp.project.vpc_config.vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetProject AWS API Documentation
     #
@@ -2287,6 +2310,11 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device_udid #=> String
     #   resp.remote_access_session.interaction_mode #=> String, one of "INTERACTIVE", "NO_VIDEO", "VIDEO_ONLY"
     #   resp.remote_access_session.skip_app_resign #=> Boolean
+    #   resp.remote_access_session.vpc_config.security_group_ids #=> Array
+    #   resp.remote_access_session.vpc_config.security_group_ids[0] #=> String
+    #   resp.remote_access_session.vpc_config.subnet_ids #=> Array
+    #   resp.remote_access_session.vpc_config.subnet_ids[0] #=> String
+    #   resp.remote_access_session.vpc_config.vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSession AWS API Documentation
     #
@@ -2418,6 +2446,11 @@ module Aws::DeviceFarm
     #   resp.run.device_selection_result.filters[0].values[0] #=> String
     #   resp.run.device_selection_result.matched_devices_count #=> Integer
     #   resp.run.device_selection_result.max_devices #=> Integer
+    #   resp.run.vpc_config.security_group_ids #=> Array
+    #   resp.run.vpc_config.security_group_ids[0] #=> String
+    #   resp.run.vpc_config.subnet_ids #=> Array
+    #   resp.run.vpc_config.subnet_ids[0] #=> String
+    #   resp.run.vpc_config.vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRun AWS API Documentation
     #
@@ -3735,6 +3768,11 @@ module Aws::DeviceFarm
     #   resp.projects[0].name #=> String
     #   resp.projects[0].default_job_timeout_minutes #=> Integer
     #   resp.projects[0].created #=> Time
+    #   resp.projects[0].vpc_config.security_group_ids #=> Array
+    #   resp.projects[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.projects[0].vpc_config.subnet_ids #=> Array
+    #   resp.projects[0].vpc_config.subnet_ids[0] #=> String
+    #   resp.projects[0].vpc_config.vpc_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListProjects AWS API Documentation
@@ -3847,6 +3885,11 @@ module Aws::DeviceFarm
     #   resp.remote_access_sessions[0].device_udid #=> String
     #   resp.remote_access_sessions[0].interaction_mode #=> String, one of "INTERACTIVE", "NO_VIDEO", "VIDEO_ONLY"
     #   resp.remote_access_sessions[0].skip_app_resign #=> Boolean
+    #   resp.remote_access_sessions[0].vpc_config.security_group_ids #=> Array
+    #   resp.remote_access_sessions[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.remote_access_sessions[0].vpc_config.subnet_ids #=> Array
+    #   resp.remote_access_sessions[0].vpc_config.subnet_ids[0] #=> String
+    #   resp.remote_access_sessions[0].vpc_config.vpc_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRemoteAccessSessions AWS API Documentation
@@ -3993,6 +4036,11 @@ module Aws::DeviceFarm
     #   resp.runs[0].device_selection_result.filters[0].values[0] #=> String
     #   resp.runs[0].device_selection_result.matched_devices_count #=> Integer
     #   resp.runs[0].device_selection_result.max_devices #=> Integer
+    #   resp.runs[0].vpc_config.security_group_ids #=> Array
+    #   resp.runs[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.runs[0].vpc_config.subnet_ids #=> Array
+    #   resp.runs[0].vpc_config.subnet_ids[0] #=> String
+    #   resp.runs[0].vpc_config.vpc_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRuns AWS API Documentation
@@ -5088,6 +5136,11 @@ module Aws::DeviceFarm
     #   resp.run.device_selection_result.filters[0].values[0] #=> String
     #   resp.run.device_selection_result.matched_devices_count #=> Integer
     #   resp.run.device_selection_result.max_devices #=> Integer
+    #   resp.run.vpc_config.security_group_ids #=> Array
+    #   resp.run.vpc_config.security_group_ids[0] #=> String
+    #   resp.run.vpc_config.subnet_ids #=> Array
+    #   resp.run.vpc_config.subnet_ids[0] #=> String
+    #   resp.run.vpc_config.vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRun AWS API Documentation
     #
@@ -5266,6 +5319,11 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device_udid #=> String
     #   resp.remote_access_session.interaction_mode #=> String, one of "INTERACTIVE", "NO_VIDEO", "VIDEO_ONLY"
     #   resp.remote_access_session.skip_app_resign #=> Boolean
+    #   resp.remote_access_session.vpc_config.security_group_ids #=> Array
+    #   resp.remote_access_session.vpc_config.security_group_ids[0] #=> String
+    #   resp.remote_access_session.vpc_config.subnet_ids #=> Array
+    #   resp.remote_access_session.vpc_config.subnet_ids[0] #=> String
+    #   resp.remote_access_session.vpc_config.vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSession AWS API Documentation
     #
@@ -5379,6 +5437,11 @@ module Aws::DeviceFarm
     #   resp.run.device_selection_result.filters[0].values[0] #=> String
     #   resp.run.device_selection_result.matched_devices_count #=> Integer
     #   resp.run.device_selection_result.max_devices #=> Integer
+    #   resp.run.vpc_config.security_group_ids #=> Array
+    #   resp.run.vpc_config.security_group_ids[0] #=> String
+    #   resp.run.vpc_config.subnet_ids #=> Array
+    #   resp.run.vpc_config.subnet_ids[0] #=> String
+    #   resp.run.vpc_config.vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRun AWS API Documentation
     #
@@ -5788,6 +5851,9 @@ module Aws::DeviceFarm
     #   The number of minutes a test run in the project executes before it
     #   times out.
     #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   The VPC security groups and subnets that are attached to a project.
+    #
     # @return [Types::UpdateProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateProjectResult#project #project} => Types::Project
@@ -5817,6 +5883,11 @@ module Aws::DeviceFarm
     #     arn: "AmazonResourceName", # required
     #     name: "Name",
     #     default_job_timeout_minutes: 1,
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnet_ids: ["SubnetId"], # required
+    #       vpc_id: "NonEmptyString", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -5825,6 +5896,11 @@ module Aws::DeviceFarm
     #   resp.project.name #=> String
     #   resp.project.default_job_timeout_minutes #=> Integer
     #   resp.project.created #=> Time
+    #   resp.project.vpc_config.security_group_ids #=> Array
+    #   resp.project.vpc_config.security_group_ids[0] #=> String
+    #   resp.project.vpc_config.subnet_ids #=> Array
+    #   resp.project.vpc_config.subnet_ids[0] #=> String
+    #   resp.project.vpc_config.vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProject AWS API Documentation
     #
@@ -6006,7 +6082,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -265,6 +265,7 @@ module Aws::DeviceFarm
     ScheduleRunRequest = Shapes::StructureShape.new(name: 'ScheduleRunRequest')
     ScheduleRunResult = Shapes::StructureShape.new(name: 'ScheduleRunResult')
     ScheduleRunTest = Shapes::StructureShape.new(name: 'ScheduleRunTest')
+    SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     SensitiveURL = Shapes::StringShape.new(name: 'SensitiveURL')
@@ -279,6 +280,7 @@ module Aws::DeviceFarm
     StopRunRequest = Shapes::StructureShape.new(name: 'StopRunRequest')
     StopRunResult = Shapes::StructureShape.new(name: 'StopRunResult')
     String = Shapes::StringShape.new(name: 'String')
+    SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
     Suite = Shapes::StructureShape.new(name: 'Suite')
     Suites = Shapes::ListShape.new(name: 'Suites')
@@ -344,6 +346,9 @@ module Aws::DeviceFarm
     VPCEConfigurations = Shapes::ListShape.new(name: 'VPCEConfigurations')
     VPCEServiceName = Shapes::StringShape.new(name: 'VPCEServiceName')
     VideoCapture = Shapes::BooleanShape.new(name: 'VideoCapture')
+    VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
+    VpcSecurityGroupIds = Shapes::ListShape.new(name: 'VpcSecurityGroupIds')
+    VpcSubnetIds = Shapes::ListShape.new(name: 'VpcSubnetIds')
 
     AccountSettings.add_member(:aws_account_number, Shapes::ShapeRef.new(shape: AWSAccountNumber, location_name: "awsAccountNumber"))
     AccountSettings.add_member(:unmetered_devices, Shapes::ShapeRef.new(shape: PurchasedDevicesMap, location_name: "unmeteredDevices"))
@@ -427,6 +432,7 @@ module Aws::DeviceFarm
 
     CreateProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateProjectRequest.add_member(:default_job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "defaultJobTimeoutMinutes"))
+    CreateProjectRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     CreateProjectRequest.struct_class = Types::CreateProjectRequest
 
     CreateProjectResult.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
@@ -1083,6 +1089,7 @@ module Aws::DeviceFarm
     Project.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Project.add_member(:default_job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "defaultJobTimeoutMinutes"))
     Project.add_member(:created, Shapes::ShapeRef.new(shape: DateTime, location_name: "created"))
+    Project.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     Project.struct_class = Types::Project
 
     Projects.member = Shapes::ShapeRef.new(shape: Project)
@@ -1131,6 +1138,7 @@ module Aws::DeviceFarm
     RemoteAccessSession.add_member(:device_udid, Shapes::ShapeRef.new(shape: String, location_name: "deviceUdid"))
     RemoteAccessSession.add_member(:interaction_mode, Shapes::ShapeRef.new(shape: InteractionMode, location_name: "interactionMode"))
     RemoteAccessSession.add_member(:skip_app_resign, Shapes::ShapeRef.new(shape: SkipAppResign, location_name: "skipAppResign"))
+    RemoteAccessSession.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     RemoteAccessSession.struct_class = Types::RemoteAccessSession
 
     RemoteAccessSessions.member = Shapes::ShapeRef.new(shape: RemoteAccessSession)
@@ -1184,6 +1192,7 @@ module Aws::DeviceFarm
     Run.add_member(:skip_app_resign, Shapes::ShapeRef.new(shape: SkipAppResign, location_name: "skipAppResign"))
     Run.add_member(:test_spec_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "testSpecArn"))
     Run.add_member(:device_selection_result, Shapes::ShapeRef.new(shape: DeviceSelectionResult, location_name: "deviceSelectionResult"))
+    Run.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     Run.struct_class = Types::Run
 
     Runs.member = Shapes::ShapeRef.new(shape: Run)
@@ -1419,6 +1428,7 @@ module Aws::DeviceFarm
     UpdateProjectRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     UpdateProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     UpdateProjectRequest.add_member(:default_job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "defaultJobTimeoutMinutes"))
+    UpdateProjectRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     UpdateProjectRequest.struct_class = Types::UpdateProjectRequest
 
     UpdateProjectResult.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
@@ -1474,6 +1484,15 @@ module Aws::DeviceFarm
     VPCEConfiguration.struct_class = Types::VPCEConfiguration
 
     VPCEConfigurations.member = Shapes::ShapeRef.new(shape: VPCEConfiguration)
+
+    VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIds, required: true, location_name: "securityGroupIds"))
+    VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: VpcSubnetIds, required: true, location_name: "subnetIds"))
+    VpcConfig.add_member(:vpc_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "vpcId"))
+    VpcConfig.struct_class = Types::VpcConfig
+
+    VpcSecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
+
+    VpcSubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
 
     # @api private

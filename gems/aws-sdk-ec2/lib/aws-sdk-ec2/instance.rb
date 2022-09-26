@@ -1010,7 +1010,14 @@ module Aws::EC2
     #   You must disable source/destination checks if the instance runs
     #   services such as network address translation, routing, or firewalls.
     # @option options [String] :attribute
-    #   The name of the attribute.
+    #   The name of the attribute to modify.
+    #
+    #   You can modify the following attributes only: `disableApiTermination`
+    #   \| `instanceType` \| `kernel` \| `ramdisk` \|
+    #   `instanceInitiatedShutdownBehavior` \| `blockDeviceMapping` \|
+    #   `userData` \| `sourceDestCheck` \| `groupSet` \| `ebsOptimized` \|
+    #   `sriovNetSupport` \| `enaSupport` \| `nvmeSupport` \| `disableApiStop`
+    #   \| `enclaveOptions`
     # @option options [Array<Types::InstanceBlockDeviceMappingSpecification>] :block_device_mappings
     #   Modifies the `DeleteOnTermination` attribute for volumes that are
     #   currently attached. The volume must be owned by the caller. If no

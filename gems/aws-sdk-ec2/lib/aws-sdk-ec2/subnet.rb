@@ -880,13 +880,20 @@ module Aws::EC2
     # @option options [Integer] :ipv_6_address_count
     #   The number of IPv6 addresses to assign to a network interface. Amazon
     #   EC2 automatically selects the IPv6 addresses from the subnet range.
-    #   You can't use this option if specifying specific IPv6 addresses. If
-    #   your subnet has the `AssignIpv6AddressOnCreation` attribute set to
-    #   `true`, you can specify `0` to override this setting.
+    #
+    #   You can't specify a count of IPv6 addresses using this parameter if
+    #   you've specified one of the following: specific IPv6 addresses,
+    #   specific IPv6 prefixes, or a count of IPv6 prefixes.
+    #
+    #   If your subnet has the `AssignIpv6AddressOnCreation` attribute set,
+    #   you can override that setting by specifying 0 as the IPv6 address
+    #   count.
     # @option options [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
-    #   One or more specific IPv6 addresses from the IPv6 CIDR block range of
-    #   your subnet. You can't use this option if you're specifying a number
-    #   of IPv6 addresses.
+    #   The IPv6 addresses from the IPv6 CIDR block range of your subnet.
+    #
+    #   You can't specify IPv6 addresses using this parameter if you've
+    #   specified one of the following: a count of IPv6 addresses, specific
+    #   IPv6 prefixes, or a count of IPv6 prefixes.
     # @option options [String] :private_ip_address
     #   The primary private IPv4 address of the network interface. If you
     #   don't specify an IPv4 address, Amazon EC2 selects one for you from
@@ -894,7 +901,11 @@ module Aws::EC2
     #   cannot indicate any IP addresses specified in `privateIpAddresses` as
     #   primary (only one IP address can be designated as primary).
     # @option options [Array<Types::PrivateIpAddressSpecification>] :private_ip_addresses
-    #   One or more private IPv4 addresses.
+    #   The private IPv4 addresses.
+    #
+    #   You can't specify private IPv4 addresses if you've specified one of
+    #   the following: a count of private IPv4 addresses, specific IPv4
+    #   prefixes, or a count of IPv4 prefixes.
     # @option options [Integer] :secondary_private_ip_address_count
     #   The number of secondary private IPv4 addresses to assign to a network
     #   interface. When you specify a number of secondary IPv4 addresses,
@@ -902,28 +913,35 @@ module Aws::EC2
     #   range. You can't specify this option and specify more than one
     #   private IP address using `privateIpAddresses`.
     #
-    #   The number of IP addresses you can assign to a network interface
-    #   varies by instance type. For more information, see [IP Addresses Per
-    #   ENI Per Instance Type][1] in the *Amazon Virtual Private Cloud User
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
+    #   You can't specify a count of private IPv4 addresses if you've
+    #   specified one of the following: specific private IPv4 addresses,
+    #   specific IPv4 prefixes, or a count of IPv4 prefixes.
     # @option options [Array<Types::Ipv4PrefixSpecificationRequest>] :ipv_4_prefixes
-    #   One or more IPv4 prefixes assigned to the network interface. You
-    #   cannot use this option if you use the `Ipv4PrefixCount` option.
+    #   The IPv4 prefixes assigned to the network interface.
+    #
+    #   You can't specify IPv4 prefixes if you've specified one of the
+    #   following: a count of IPv4 prefixes, specific private IPv4 addresses,
+    #   or a count of private IPv4 addresses.
     # @option options [Integer] :ipv_4_prefix_count
     #   The number of IPv4 prefixes that Amazon Web Services automatically
-    #   assigns to the network interface. You cannot use this option if you
-    #   use the `Ipv4 Prefixes` option.
+    #   assigns to the network interface.
+    #
+    #   You can't specify a count of IPv4 prefixes if you've specified one
+    #   of the following: specific IPv4 prefixes, specific private IPv4
+    #   addresses, or a count of private IPv4 addresses.
     # @option options [Array<Types::Ipv6PrefixSpecificationRequest>] :ipv_6_prefixes
-    #   One or more IPv6 prefixes assigned to the network interface. You
-    #   cannot use this option if you use the `Ipv6PrefixCount` option.
+    #   The IPv6 prefixes assigned to the network interface.
+    #
+    #   You can't specify IPv6 prefixes if you've specified one of the
+    #   following: a count of IPv6 prefixes, specific IPv6 addresses, or a
+    #   count of IPv6 addresses.
     # @option options [Integer] :ipv_6_prefix_count
     #   The number of IPv6 prefixes that Amazon Web Services automatically
-    #   assigns to the network interface. You cannot use this option if you
-    #   use the `Ipv6Prefixes` option.
+    #   assigns to the network interface.
+    #
+    #   You can't specify a count of IPv6 prefixes if you've specified one
+    #   of the following: specific IPv6 prefixes, specific IPv6 addresses, or
+    #   a count of IPv6 addresses.
     # @option options [String] :interface_type
     #   The type of network interface. The default is `interface`.
     #
@@ -1581,7 +1599,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :network_interface_ids
-    #   One or more network interface IDs.
+    #   The network interface IDs.
     #
     #   Default: Describes all your network interfaces.
     # @return [NetworkInterface::Collection]

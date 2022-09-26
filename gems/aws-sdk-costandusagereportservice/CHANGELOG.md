@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2022-09-26)
+------------------
+
+* Feature - This release adds two new support regions(me-central-1/eu-south-2) for OSG.
+
 1.40.0 (2022-02-24)
 ------------------
 

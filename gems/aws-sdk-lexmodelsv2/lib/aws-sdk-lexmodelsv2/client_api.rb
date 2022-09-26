@@ -22,6 +22,7 @@ module Aws::LexModelsV2
     AggregatedUtterancesSortBy = Shapes::StructureShape.new(name: 'AggregatedUtterancesSortBy')
     AggregatedUtterancesSummary = Shapes::StructureShape.new(name: 'AggregatedUtterancesSummary')
     AggregatedUtterancesSummaryList = Shapes::ListShape.new(name: 'AggregatedUtterancesSummaryList')
+    AllowedInputTypes = Shapes::StructureShape.new(name: 'AllowedInputTypes')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AssociatedTranscript = Shapes::StructureShape.new(name: 'AssociatedTranscript')
     AssociatedTranscriptFilter = Shapes::StructureShape.new(name: 'AssociatedTranscriptFilter')
@@ -30,10 +31,12 @@ module Aws::LexModelsV2
     AssociatedTranscriptList = Shapes::ListShape.new(name: 'AssociatedTranscriptList')
     AttachmentTitle = Shapes::StringShape.new(name: 'AttachmentTitle')
     AttachmentUrl = Shapes::StringShape.new(name: 'AttachmentUrl')
+    AudioAndDTMFInputSpecification = Shapes::StructureShape.new(name: 'AudioAndDTMFInputSpecification')
     AudioLogDestination = Shapes::StructureShape.new(name: 'AudioLogDestination')
     AudioLogSetting = Shapes::StructureShape.new(name: 'AudioLogSetting')
     AudioLogSettingsList = Shapes::ListShape.new(name: 'AudioLogSettingsList')
     AudioRecognitionStrategy = Shapes::StringShape.new(name: 'AudioRecognitionStrategy')
+    AudioSpecification = Shapes::StructureShape.new(name: 'AudioSpecification')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BotAliasHistoryEvent = Shapes::StructureShape.new(name: 'BotAliasHistoryEvent')
     BotAliasHistoryEventsList = Shapes::ListShape.new(name: 'BotAliasHistoryEventsList')
@@ -146,6 +149,8 @@ module Aws::LexModelsV2
     CustomVocabularyExportSpecification = Shapes::StructureShape.new(name: 'CustomVocabularyExportSpecification')
     CustomVocabularyImportSpecification = Shapes::StructureShape.new(name: 'CustomVocabularyImportSpecification')
     CustomVocabularyStatus = Shapes::StringShape.new(name: 'CustomVocabularyStatus')
+    DTMFCharacter = Shapes::StringShape.new(name: 'DTMFCharacter')
+    DTMFSpecification = Shapes::StructureShape.new(name: 'DTMFSpecification')
     DataPrivacy = Shapes::StructureShape.new(name: 'DataPrivacy')
     DateRangeFilter = Shapes::StructureShape.new(name: 'DateRangeFilter')
     DefaultConditionalBranch = Shapes::StructureShape.new(name: 'DefaultConditionalBranch')
@@ -306,6 +311,7 @@ module Aws::LexModelsV2
     LocaleName = Shapes::StringShape.new(name: 'LocaleName')
     LogPrefix = Shapes::StringShape.new(name: 'LogPrefix')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaxUtteranceDigits = Shapes::IntegerShape.new(name: 'MaxUtteranceDigits')
     MergeStrategy = Shapes::StringShape.new(name: 'MergeStrategy')
     Message = Shapes::StructureShape.new(name: 'Message')
     MessageGroup = Shapes::StructureShape.new(name: 'MessageGroup')
@@ -339,6 +345,9 @@ module Aws::LexModelsV2
     PrincipalArn = Shapes::StringShape.new(name: 'PrincipalArn')
     PrincipalList = Shapes::ListShape.new(name: 'PrincipalList')
     PriorityValue = Shapes::IntegerShape.new(name: 'PriorityValue')
+    PromptAttempt = Shapes::StringShape.new(name: 'PromptAttempt')
+    PromptAttemptSpecification = Shapes::StructureShape.new(name: 'PromptAttemptSpecification')
+    PromptAttemptsSpecificationMap = Shapes::MapShape.new(name: 'PromptAttemptsSpecificationMap')
     PromptMaxRetries = Shapes::IntegerShape.new(name: 'PromptMaxRetries')
     PromptSpecification = Shapes::StructureShape.new(name: 'PromptSpecification')
     QueryFilterString = Shapes::StringShape.new(name: 'QueryFilterString')
@@ -438,11 +447,13 @@ module Aws::LexModelsV2
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TextInputSpecification = Shapes::StructureShape.new(name: 'TextInputSpecification')
     TextLogDestination = Shapes::StructureShape.new(name: 'TextLogDestination')
     TextLogSetting = Shapes::StructureShape.new(name: 'TextLogSetting')
     TextLogSettingsList = Shapes::ListShape.new(name: 'TextLogSettingsList')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeDimension = Shapes::StringShape.new(name: 'TimeDimension')
+    TimeInMilliSeconds = Shapes::IntegerShape.new(name: 'TimeInMilliSeconds')
     TimeValue = Shapes::IntegerShape.new(name: 'TimeValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Transcript = Shapes::StringShape.new(name: 'Transcript')
@@ -502,6 +513,10 @@ module Aws::LexModelsV2
 
     AggregatedUtterancesSummaryList.member = Shapes::ShapeRef.new(shape: AggregatedUtterancesSummary)
 
+    AllowedInputTypes.add_member(:allow_audio_input, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "allowAudioInput"))
+    AllowedInputTypes.add_member(:allow_dtmf_input, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "allowDTMFInput"))
+    AllowedInputTypes.struct_class = Types::AllowedInputTypes
+
     AssociatedTranscript.add_member(:transcript, Shapes::ShapeRef.new(shape: Transcript, location_name: "transcript"))
     AssociatedTranscript.struct_class = Types::AssociatedTranscript
 
@@ -513,6 +528,11 @@ module Aws::LexModelsV2
 
     AssociatedTranscriptList.member = Shapes::ShapeRef.new(shape: AssociatedTranscript)
 
+    AudioAndDTMFInputSpecification.add_member(:start_timeout_ms, Shapes::ShapeRef.new(shape: TimeInMilliSeconds, required: true, location_name: "startTimeoutMs"))
+    AudioAndDTMFInputSpecification.add_member(:audio_specification, Shapes::ShapeRef.new(shape: AudioSpecification, location_name: "audioSpecification"))
+    AudioAndDTMFInputSpecification.add_member(:dtmf_specification, Shapes::ShapeRef.new(shape: DTMFSpecification, location_name: "dtmfSpecification"))
+    AudioAndDTMFInputSpecification.struct_class = Types::AudioAndDTMFInputSpecification
+
     AudioLogDestination.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3BucketLogDestination, required: true, location_name: "s3Bucket"))
     AudioLogDestination.struct_class = Types::AudioLogDestination
 
@@ -521,6 +541,10 @@ module Aws::LexModelsV2
     AudioLogSetting.struct_class = Types::AudioLogSetting
 
     AudioLogSettingsList.member = Shapes::ShapeRef.new(shape: AudioLogSetting)
+
+    AudioSpecification.add_member(:max_length_ms, Shapes::ShapeRef.new(shape: TimeInMilliSeconds, required: true, location_name: "maxLengthMs"))
+    AudioSpecification.add_member(:end_timeout_ms, Shapes::ShapeRef.new(shape: TimeInMilliSeconds, required: true, location_name: "endTimeoutMs"))
+    AudioSpecification.struct_class = Types::AudioSpecification
 
     BotAliasHistoryEvent.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
     BotAliasHistoryEvent.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startDate"))
@@ -949,6 +973,12 @@ module Aws::LexModelsV2
     CustomVocabularyImportSpecification.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location_name: "botVersion"))
     CustomVocabularyImportSpecification.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location_name: "localeId"))
     CustomVocabularyImportSpecification.struct_class = Types::CustomVocabularyImportSpecification
+
+    DTMFSpecification.add_member(:max_length, Shapes::ShapeRef.new(shape: MaxUtteranceDigits, required: true, location_name: "maxLength"))
+    DTMFSpecification.add_member(:end_timeout_ms, Shapes::ShapeRef.new(shape: TimeInMilliSeconds, required: true, location_name: "endTimeoutMs"))
+    DTMFSpecification.add_member(:deletion_character, Shapes::ShapeRef.new(shape: DTMFCharacter, required: true, location_name: "deletionCharacter"))
+    DTMFSpecification.add_member(:end_character, Shapes::ShapeRef.new(shape: DTMFCharacter, required: true, location_name: "endCharacter"))
+    DTMFSpecification.struct_class = Types::DTMFSpecification
 
     DataPrivacy.add_member(:child_directed, Shapes::ShapeRef.new(shape: ChildDirected, required: true, location_name: "childDirected"))
     DataPrivacy.struct_class = Types::DataPrivacy
@@ -1755,10 +1785,20 @@ module Aws::LexModelsV2
 
     PrincipalList.member = Shapes::ShapeRef.new(shape: Principal)
 
+    PromptAttemptSpecification.add_member(:allow_interrupt, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "allowInterrupt"))
+    PromptAttemptSpecification.add_member(:allowed_input_types, Shapes::ShapeRef.new(shape: AllowedInputTypes, required: true, location_name: "allowedInputTypes"))
+    PromptAttemptSpecification.add_member(:audio_and_dtmf_input_specification, Shapes::ShapeRef.new(shape: AudioAndDTMFInputSpecification, location_name: "audioAndDTMFInputSpecification"))
+    PromptAttemptSpecification.add_member(:text_input_specification, Shapes::ShapeRef.new(shape: TextInputSpecification, location_name: "textInputSpecification"))
+    PromptAttemptSpecification.struct_class = Types::PromptAttemptSpecification
+
+    PromptAttemptsSpecificationMap.key = Shapes::ShapeRef.new(shape: PromptAttempt)
+    PromptAttemptsSpecificationMap.value = Shapes::ShapeRef.new(shape: PromptAttemptSpecification)
+
     PromptSpecification.add_member(:message_groups, Shapes::ShapeRef.new(shape: MessageGroupsList, required: true, location_name: "messageGroups"))
     PromptSpecification.add_member(:max_retries, Shapes::ShapeRef.new(shape: PromptMaxRetries, required: true, location_name: "maxRetries"))
     PromptSpecification.add_member(:allow_interrupt, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "allowInterrupt"))
     PromptSpecification.add_member(:message_selection_strategy, Shapes::ShapeRef.new(shape: MessageSelectionStrategy, location_name: "messageSelectionStrategy"))
+    PromptSpecification.add_member(:prompt_attempts_specification, Shapes::ShapeRef.new(shape: PromptAttemptsSpecificationMap, location_name: "promptAttemptsSpecification"))
     PromptSpecification.struct_class = Types::PromptSpecification
 
     RecommendedActions.member = Shapes::ShapeRef.new(shape: RecommendedAction)
@@ -2021,6 +2061,9 @@ module Aws::LexModelsV2
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TextInputSpecification.add_member(:start_timeout_ms, Shapes::ShapeRef.new(shape: TimeInMilliSeconds, required: true, location_name: "startTimeoutMs"))
+    TextInputSpecification.struct_class = Types::TextInputSpecification
 
     TextLogDestination.add_member(:cloud_watch, Shapes::ShapeRef.new(shape: CloudWatchLogGroupLogDestination, required: true, location_name: "cloudWatch"))
     TextLogDestination.struct_class = Types::TextLogDestination

@@ -18261,7 +18261,10 @@
           "shape":"VolumeType",
           "locationName":"volumeType"
         },
-        "KmsKeyId":{"shape":"String"},
+        "KmsKeyId":{
+          "shape":"String",
+          "locationName":"kmsKeyId"
+        },
         "Throughput":{
           "shape":"Integer",
           "locationName":"throughput"
@@ -20011,6 +20014,10 @@
         "InstanceRequirements":{
           "shape":"InstanceRequirements",
           "locationName":"instanceRequirements"
+        },
+        "ImageId":{
+          "shape":"ImageId",
+          "locationName":"imageId"
         }
       }
     },
@@ -20038,7 +20045,8 @@
         "WeightedCapacity":{"shape":"Double"},
         "Priority":{"shape":"Double"},
         "Placement":{"shape":"Placement"},
-        "InstanceRequirements":{"shape":"InstanceRequirementsRequest"}
+        "InstanceRequirements":{"shape":"InstanceRequirementsRequest"},
+        "ImageId":{"shape":"ImageId"}
       }
     },
     "FleetLaunchTemplateSpecification":{

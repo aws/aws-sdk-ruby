@@ -34,7 +34,7 @@ module Aws::NimbleStudio
     #   @return [Array<String>]
     #
     # @!attribute [rw] studio_id
-    #   A collection of EULA IDs.
+    #   The studio ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/AcceptEulasRequest AWS API Documentation
@@ -218,7 +218,7 @@ module Aws::NimbleStudio
     #         name: "LaunchProfileName", # required
     #         stream_configuration: { # required
     #           clipboard_mode: "ENABLED", # required, accepts ENABLED, DISABLED
-    #           ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge
+    #           ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g3.4xlarge, g3s.xlarge, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.16xlarge
     #           max_session_length_in_minutes: 1,
     #           max_stopped_session_length_in_minutes: 1,
     #           session_storage: {
@@ -388,7 +388,7 @@ module Aws::NimbleStudio
     #
     #       {
     #         client_token: "ClientToken",
-    #         ec2_instance_type: "g4dn.xlarge", # accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge
+    #         ec2_instance_type: "g4dn.xlarge", # accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g3.4xlarge, g3s.xlarge, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.16xlarge
     #         launch_profile_id: "String",
     #         owned_by: "String",
     #         streaming_image_id: "StreamingImageId",
@@ -776,7 +776,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   The principal ID. This currently supports a Amazon Web Services SSO
+    #   The principal ID. This currently supports a IAM Identity Center
     #   UserId.
     #   @return [String]
     #
@@ -1015,7 +1015,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   The principal ID. This currently supports a Amazon Web Services SSO
+    #   The principal ID. This currently supports a IAM Identity Center
     #   UserId.
     #   @return [String]
     #
@@ -1299,7 +1299,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   The principal ID. This currently supports a Amazon Web Services SSO
+    #   The principal ID. This currently supports a IAM Identity Center
     #   UserId.
     #   @return [String]
     #
@@ -1529,7 +1529,7 @@ module Aws::NimbleStudio
     #       }
     #
     # @!attribute [rw] principal_id
-    #   The principal ID. This currently supports a Amazon Web Services SSO
+    #   The principal ID. This currently supports a IAM Identity Center
     #   UserId.
     #   @return [String]
     #
@@ -2101,7 +2101,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   The principal ID. This currently supports a Amazon Web Services SSO
+    #   The principal ID. This currently supports a IAM Identity Center
     #   UserId.
     #   @return [String]
     #
@@ -2939,7 +2939,7 @@ module Aws::NimbleStudio
     #
     #       {
     #         clipboard_mode: "ENABLED", # required, accepts ENABLED, DISABLED
-    #         ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge
+    #         ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g3.4xlarge, g3s.xlarge, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.16xlarge
     #         max_session_length_in_minutes: 1,
     #         max_stopped_session_length_in_minutes: 1,
     #         session_storage: {
@@ -3363,8 +3363,8 @@ module Aws::NimbleStudio
     #
     # When creating a studio, you must provides two IAM roles for use with
     # the Nimble Studio portal. These roles are assumed by your users when
-    # they log in to the Nimble Studio portal via Amazon Web Services SSO
-    # and your identity source.
+    # they log in to the Nimble Studio portal via IAM Identity Center and
+    # your identity source.
     #
     # The user role must have the AmazonNimbleStudio-StudioUser managed
     # policy attached for the portal to function properly.
@@ -3399,9 +3399,9 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] sso_client_id
-    #   The Amazon Web Services SSO application client ID used to integrate
-    #   with Amazon Web Services SSO to enable Amazon Web Services SSO users
-    #   to log in to Nimble Studio portal.
+    #   The IAM Identity Center application client ID used to integrate with
+    #   IAM Identity Center to enable IAM Identity Center users to log in to
+    #   Nimble Studio portal.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -3772,11 +3772,11 @@ module Aws::NimbleStudio
     # source to elevated permissions that they are granted in the studio.
     #
     # When you add a user to your studio using the Nimble Studio console,
-    # they are given access to the studio's AWS SSO application and are
-    # given access to log in to the Nimble Studio portal. These users have
-    # the permissions provided by the studio's user IAM role and do not
-    # appear in the studio membership collection. Only studio admins appear
-    # in studio membership.
+    # they are given access to the studio's IAM Identity Center application
+    # and are given access to log in to the Nimble Studio portal. These
+    # users have the permissions provided by the studio's user IAM role and
+    # do not appear in the studio membership collection. Only studio admins
+    # appear in studio membership.
     #
     # When you add a user to studio membership with the persona ADMIN, upon
     # logging in to the Nimble Studio portal, they are granted permissions
@@ -3927,7 +3927,7 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   The principal ID. This currently supports a Amazon Web Services SSO
+    #   The principal ID. This currently supports a IAM Identity Center
     #   UserId.
     #   @return [String]
     #
@@ -3970,7 +3970,7 @@ module Aws::NimbleStudio
     #         name: "LaunchProfileName",
     #         stream_configuration: {
     #           clipboard_mode: "ENABLED", # required, accepts ENABLED, DISABLED
-    #           ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge
+    #           ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g3.4xlarge, g3s.xlarge, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.16xlarge
     #           max_session_length_in_minutes: 1,
     #           max_stopped_session_length_in_minutes: 1,
     #           session_storage: {

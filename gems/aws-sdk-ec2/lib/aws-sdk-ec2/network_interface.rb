@@ -337,9 +337,9 @@ module Aws::EC2
     #   another network interface or instance to be reassigned to the
     #   specified network interface.
     # @option options [Array<String>] :private_ip_addresses
-    #   One or more IP addresses to be assigned as a secondary private IP
-    #   address to the network interface. You can't specify this parameter
-    #   when also specifying a number of secondary IP addresses.
+    #   The IP addresses to be assigned as a secondary private IP address to
+    #   the network interface. You can't specify this parameter when also
+    #   specifying a number of secondary IP addresses.
     #
     #   If you don't specify an IP address, Amazon EC2 automatically selects
     #   an IP address within the subnet range.

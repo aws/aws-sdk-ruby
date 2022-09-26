@@ -1028,8 +1028,9 @@ module Aws::WAFV2
     #
     # @option params [required, Array<String>] :addresses
     #   Contains an array of strings that specifies zero or more IP addresses
-    #   or blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
-    #   notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0.
+    #   or blocks of IP addresses. All addresses must be specified using
+    #   Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4
+    #   and IPv6 CIDR ranges except for `/0`.
     #
     #   Example address strings:
     #
@@ -5607,6 +5608,13 @@ module Aws::WAFV2
     #   Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon
     #   Cognito user pool.
     #
+    #   <note markdown="1"> If you don't provide a resource type, the call uses the resource type
+    #   `APPLICATION_LOAD_BALANCER`.
+    #
+    #    </note>
+    #
+    #   Default: `APPLICATION_LOAD_BALANCER`
+    #
     # @return [Types::ListResourcesForWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListResourcesForWebACLResponse#resource_arns #resource_arns} => Array&lt;String&gt;
@@ -6277,8 +6285,9 @@ module Aws::WAFV2
     #
     # @option params [required, Array<String>] :addresses
     #   Contains an array of strings that specifies zero or more IP addresses
-    #   or blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
-    #   notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0.
+    #   or blocks of IP addresses. All addresses must be specified using
+    #   Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4
+    #   and IPv6 CIDR ranges except for `/0`.
     #
     #   Example address strings:
     #
@@ -7893,7 +7902,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

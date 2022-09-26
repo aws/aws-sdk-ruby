@@ -95,10 +95,10 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # A unique identifier for a user or group that is not the its primary
+    # A unique identifier for a user or group that is not the primary
     # identifier. This value can be an identifier from an external identity
-    # provider (IdP) that is associated with the group or a unique
-    # attribute. For example, a unique `GroupDisplayName`.
+    # provider (IdP) that is associated with the user, the group, or a
+    # unique attribute. For example, a unique `GroupDisplayName`.
     #
     # @note AlternateIdentifier is a union - when making an API calls you must set exactly one of the members.
     #
@@ -631,10 +631,9 @@ module Aws::IdentityStore
     #   The group’s display name value. The length limit is 1,024
     #   characters. This value can consist of letters, accented characters,
     #   symbols, numbers, punctuation, tab, new line, carriage return,
-    #   space, and nonbreaking space in this attribute. The characters
-    #   `<>;:%` are excluded. This value is specified at the time that the
-    #   group is created and stored as an attribute of the group object in
-    #   the identity store.
+    #   space, and nonbreaking space in this attribute. This value is
+    #   specified at the time that the group is created and stored as an
+    #   attribute of the group object in the identity store.
     #   @return [String]
     #
     # @!attribute [rw] external_ids
@@ -902,10 +901,10 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] alternate_identifier
-    #   A unique identifier for an identity resource that is not the primary
+    #   A unique identifier for a user or group that is not the primary
     #   identifier. This value can be an identifier from an external
-    #   identity provider (IdP) that is associated with the group or a
-    #   unique attribute. For example, a unique `GroupDisplayName`.
+    #   identity provider (IdP) that is associated with the user, the group,
+    #   or a unique attribute. For example, a unique `GroupDisplayName`.
     #   @return [Types::AlternateIdentifier]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetGroupIdRequest AWS API Documentation
@@ -1008,8 +1007,10 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] alternate_identifier
-    #   A unique identifier for an identity resource that is not the primary
-    #   identifier.
+    #   A unique identifier for a user or group that is not the primary
+    #   identifier. This value can be an identifier from an external
+    #   identity provider (IdP) that is associated with the user, the group,
+    #   or a unique attribute. For example, a unique `UserDisplayName`.
     #   @return [Types::AlternateIdentifier]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetUserIdRequest AWS API Documentation
@@ -1049,10 +1050,9 @@ module Aws::IdentityStore
     #   The group’s display name value. The length limit is 1,024
     #   characters. This value can consist of letters, accented characters,
     #   symbols, numbers, punctuation, tab, new line, carriage return,
-    #   space, and nonbreaking space in this attribute. The characters
-    #   `<>;:%` are excluded. This value is specified at the time the group
-    #   is created and stored as an attribute of the group object in the
-    #   identity store.
+    #   space, and nonbreaking space in this attribute. This value is
+    #   specified at the time the group is created and stored as an
+    #   attribute of the group object in the identity store.
     #   @return [String]
     #
     # @!attribute [rw] external_ids

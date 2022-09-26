@@ -152,6 +152,33 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Specifies the allowed input types.
+    #
+    # @note When making an API call, you may pass AllowedInputTypes
+    #   data as a hash:
+    #
+    #       {
+    #         allow_audio_input: false, # required
+    #         allow_dtmf_input: false, # required
+    #       }
+    #
+    # @!attribute [rw] allow_audio_input
+    #   Indicates whether audio input is allowed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allow_dtmf_input
+    #   Indicates whether DTMF input is allowed.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AllowedInputTypes AWS API Documentation
+    #
+    class AllowedInputTypes < Struct.new(
+      :allow_audio_input,
+      :allow_dtmf_input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The object containing information that associates the recommended
     # intent/slot type with a conversation.
     #
@@ -197,6 +224,49 @@ module Aws::LexModelsV2
     class AssociatedTranscriptFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the audio and DTMF input specification.
+    #
+    # @note When making an API call, you may pass AudioAndDTMFInputSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         start_timeout_ms: 1, # required
+    #         audio_specification: {
+    #           max_length_ms: 1, # required
+    #           end_timeout_ms: 1, # required
+    #         },
+    #         dtmf_specification: {
+    #           max_length: 1, # required
+    #           end_timeout_ms: 1, # required
+    #           deletion_character: "DTMFCharacter", # required
+    #           end_character: "DTMFCharacter", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] start_timeout_ms
+    #   Time for which a bot waits before assuming that the customer isn't
+    #   going to speak or press a key. This timeout is shared between Audio
+    #   and DTMF inputs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] audio_specification
+    #   Specifies the settings on audio input.
+    #   @return [Types::AudioSpecification]
+    #
+    # @!attribute [rw] dtmf_specification
+    #   Specifies the settings on DTMF input.
+    #   @return [Types::DTMFSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AudioAndDTMFInputSpecification AWS API Documentation
+    #
+    class AudioAndDTMFInputSpecification < Struct.new(
+      :start_timeout_ms,
+      :audio_specification,
+      :dtmf_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -265,6 +335,35 @@ module Aws::LexModelsV2
     class AudioLogSetting < Struct.new(
       :enabled,
       :destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the audio input specifications.
+    #
+    # @note When making an API call, you may pass AudioSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         max_length_ms: 1, # required
+    #         end_timeout_ms: 1, # required
+    #       }
+    #
+    # @!attribute [rw] max_length_ms
+    #   Time for how long Amazon Lex waits before speech input is truncated
+    #   and the speech is returned to application.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_timeout_ms
+    #   Time for which a bot waits after the customer stops speaking to
+    #   assume the utterance is finished.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AudioSpecification AWS API Documentation
+    #
+    class AudioSpecification < Struct.new(
+      :max_length_ms,
+      :end_timeout_ms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3297,6 +3396,31 @@ module Aws::LexModelsV2
     #             max_retries: 1, # required
     #             allow_interrupt: false,
     #             message_selection_strategy: "Random", # accepts Random, Ordered
+    #             prompt_attempts_specification: {
+    #               "Initial" => {
+    #                 allow_interrupt: false,
+    #                 allowed_input_types: { # required
+    #                   allow_audio_input: false, # required
+    #                   allow_dtmf_input: false, # required
+    #                 },
+    #                 audio_and_dtmf_input_specification: {
+    #                   start_timeout_ms: 1, # required
+    #                   audio_specification: {
+    #                     max_length_ms: 1, # required
+    #                     end_timeout_ms: 1, # required
+    #                   },
+    #                   dtmf_specification: {
+    #                     max_length: 1, # required
+    #                     end_timeout_ms: 1, # required
+    #                     deletion_character: "DTMFCharacter", # required
+    #                     end_character: "DTMFCharacter", # required
+    #                   },
+    #                 },
+    #                 text_input_specification: {
+    #                   start_timeout_ms: 1, # required
+    #                 },
+    #               },
+    #             },
     #           },
     #           declination_response: {
     #             message_groups: [ # required
@@ -6585,6 +6709,31 @@ module Aws::LexModelsV2
     #             max_retries: 1, # required
     #             allow_interrupt: false,
     #             message_selection_strategy: "Random", # accepts Random, Ordered
+    #             prompt_attempts_specification: {
+    #               "Initial" => {
+    #                 allow_interrupt: false,
+    #                 allowed_input_types: { # required
+    #                   allow_audio_input: false, # required
+    #                   allow_dtmf_input: false, # required
+    #                 },
+    #                 audio_and_dtmf_input_specification: {
+    #                   start_timeout_ms: 1, # required
+    #                   audio_specification: {
+    #                     max_length_ms: 1, # required
+    #                     end_timeout_ms: 1, # required
+    #                   },
+    #                   dtmf_specification: {
+    #                     max_length: 1, # required
+    #                     end_timeout_ms: 1, # required
+    #                     deletion_character: "DTMFCharacter", # required
+    #                     end_character: "DTMFCharacter", # required
+    #                   },
+    #                 },
+    #                 text_input_specification: {
+    #                   start_timeout_ms: 1, # required
+    #                 },
+    #               },
+    #             },
     #           },
     #           sample_utterances: [
     #             {
@@ -8096,6 +8245,31 @@ module Aws::LexModelsV2
     #                   max_retries: 1, # required
     #                   allow_interrupt: false,
     #                   message_selection_strategy: "Random", # accepts Random, Ordered
+    #                   prompt_attempts_specification: {
+    #                     "Initial" => {
+    #                       allow_interrupt: false,
+    #                       allowed_input_types: { # required
+    #                         allow_audio_input: false, # required
+    #                         allow_dtmf_input: false, # required
+    #                       },
+    #                       audio_and_dtmf_input_specification: {
+    #                         start_timeout_ms: 1, # required
+    #                         audio_specification: {
+    #                           max_length_ms: 1, # required
+    #                           end_timeout_ms: 1, # required
+    #                         },
+    #                         dtmf_specification: {
+    #                           max_length: 1, # required
+    #                           end_timeout_ms: 1, # required
+    #                           deletion_character: "DTMFCharacter", # required
+    #                           end_character: "DTMFCharacter", # required
+    #                         },
+    #                       },
+    #                       text_input_specification: {
+    #                         start_timeout_ms: 1, # required
+    #                       },
+    #                     },
+    #                   },
     #                 },
     #                 sample_utterances: [
     #                   {
@@ -8755,6 +8929,48 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the DTMF input specifications.
+    #
+    # @note When making an API call, you may pass DTMFSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         max_length: 1, # required
+    #         end_timeout_ms: 1, # required
+    #         deletion_character: "DTMFCharacter", # required
+    #         end_character: "DTMFCharacter", # required
+    #       }
+    #
+    # @!attribute [rw] max_length
+    #   The maximum number of DTMF digits allowed in an utterance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_timeout_ms
+    #   How long the bot should wait after the last DTMF character input
+    #   before assuming that the input has concluded.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] deletion_character
+    #   The DTMF character that clears the accumulated DTMF digits and
+    #   immediately ends the input.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_character
+    #   The DTMF character that immediately ends input. If the user does not
+    #   press this character, the input ends after the end timeout.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DTMFSpecification AWS API Documentation
+    #
+    class DTMFSpecification < Struct.new(
+      :max_length,
+      :end_timeout_ms,
+      :deletion_character,
+      :end_character)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14914,6 +15130,31 @@ module Aws::LexModelsV2
     #           max_retries: 1, # required
     #           allow_interrupt: false,
     #           message_selection_strategy: "Random", # accepts Random, Ordered
+    #           prompt_attempts_specification: {
+    #             "Initial" => {
+    #               allow_interrupt: false,
+    #               allowed_input_types: { # required
+    #                 allow_audio_input: false, # required
+    #                 allow_dtmf_input: false, # required
+    #               },
+    #               audio_and_dtmf_input_specification: {
+    #                 start_timeout_ms: 1, # required
+    #                 audio_specification: {
+    #                   max_length_ms: 1, # required
+    #                   end_timeout_ms: 1, # required
+    #                 },
+    #                 dtmf_specification: {
+    #                   max_length: 1, # required
+    #                   end_timeout_ms: 1, # required
+    #                   deletion_character: "DTMFCharacter", # required
+    #                   end_character: "DTMFCharacter", # required
+    #                 },
+    #               },
+    #               text_input_specification: {
+    #                 start_timeout_ms: 1, # required
+    #               },
+    #             },
+    #           },
     #         },
     #         declination_response: {
     #           message_groups: [ # required
@@ -20287,6 +20528,63 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Specifies the settings on a prompt attempt.
+    #
+    # @note When making an API call, you may pass PromptAttemptSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         allow_interrupt: false,
+    #         allowed_input_types: { # required
+    #           allow_audio_input: false, # required
+    #           allow_dtmf_input: false, # required
+    #         },
+    #         audio_and_dtmf_input_specification: {
+    #           start_timeout_ms: 1, # required
+    #           audio_specification: {
+    #             max_length_ms: 1, # required
+    #             end_timeout_ms: 1, # required
+    #           },
+    #           dtmf_specification: {
+    #             max_length: 1, # required
+    #             end_timeout_ms: 1, # required
+    #             deletion_character: "DTMFCharacter", # required
+    #             end_character: "DTMFCharacter", # required
+    #           },
+    #         },
+    #         text_input_specification: {
+    #           start_timeout_ms: 1, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] allow_interrupt
+    #   Indicates whether the user can interrupt a speech prompt attempt
+    #   from the bot.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allowed_input_types
+    #   Indicates the allowed input types of the prompt attempt.
+    #   @return [Types::AllowedInputTypes]
+    #
+    # @!attribute [rw] audio_and_dtmf_input_specification
+    #   Specifies the settings on audio and DTMF input.
+    #   @return [Types::AudioAndDTMFInputSpecification]
+    #
+    # @!attribute [rw] text_input_specification
+    #   Specifies the settings on text input.
+    #   @return [Types::TextInputSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/PromptAttemptSpecification AWS API Documentation
+    #
+    class PromptAttemptSpecification < Struct.new(
+      :allow_interrupt,
+      :allowed_input_types,
+      :audio_and_dtmf_input_specification,
+      :text_input_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a list of message groups that Amazon Lex sends to a user to
     # elicit a response.
     #
@@ -20347,6 +20645,31 @@ module Aws::LexModelsV2
     #         max_retries: 1, # required
     #         allow_interrupt: false,
     #         message_selection_strategy: "Random", # accepts Random, Ordered
+    #         prompt_attempts_specification: {
+    #           "Initial" => {
+    #             allow_interrupt: false,
+    #             allowed_input_types: { # required
+    #               allow_audio_input: false, # required
+    #               allow_dtmf_input: false, # required
+    #             },
+    #             audio_and_dtmf_input_specification: {
+    #               start_timeout_ms: 1, # required
+    #               audio_specification: {
+    #                 max_length_ms: 1, # required
+    #                 end_timeout_ms: 1, # required
+    #               },
+    #               dtmf_specification: {
+    #                 max_length: 1, # required
+    #                 end_timeout_ms: 1, # required
+    #                 deletion_character: "DTMFCharacter", # required
+    #                 end_character: "DTMFCharacter", # required
+    #               },
+    #             },
+    #             text_input_specification: {
+    #               start_timeout_ms: 1, # required
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] message_groups
@@ -20369,13 +20692,18 @@ module Aws::LexModelsV2
     #   retries.
     #   @return [String]
     #
+    # @!attribute [rw] prompt_attempts_specification
+    #   Specifies the advanced settings on each attempt of the prompt.
+    #   @return [Hash<String,Types::PromptAttemptSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/PromptSpecification AWS API Documentation
     #
     class PromptSpecification < Struct.new(
       :message_groups,
       :max_retries,
       :allow_interrupt,
-      :message_selection_strategy)
+      :message_selection_strategy,
+      :prompt_attempts_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22666,6 +22994,31 @@ module Aws::LexModelsV2
     #           max_retries: 1, # required
     #           allow_interrupt: false,
     #           message_selection_strategy: "Random", # accepts Random, Ordered
+    #           prompt_attempts_specification: {
+    #             "Initial" => {
+    #               allow_interrupt: false,
+    #               allowed_input_types: { # required
+    #                 allow_audio_input: false, # required
+    #                 allow_dtmf_input: false, # required
+    #               },
+    #               audio_and_dtmf_input_specification: {
+    #                 start_timeout_ms: 1, # required
+    #                 audio_specification: {
+    #                   max_length_ms: 1, # required
+    #                   end_timeout_ms: 1, # required
+    #                 },
+    #                 dtmf_specification: {
+    #                   max_length: 1, # required
+    #                   end_timeout_ms: 1, # required
+    #                   deletion_character: "DTMFCharacter", # required
+    #                   end_character: "DTMFCharacter", # required
+    #                 },
+    #               },
+    #               text_input_specification: {
+    #                 start_timeout_ms: 1, # required
+    #               },
+    #             },
+    #           },
     #         },
     #         sample_utterances: [
     #           {
@@ -24355,6 +24708,31 @@ module Aws::LexModelsV2
     #             max_retries: 1, # required
     #             allow_interrupt: false,
     #             message_selection_strategy: "Random", # accepts Random, Ordered
+    #             prompt_attempts_specification: {
+    #               "Initial" => {
+    #                 allow_interrupt: false,
+    #                 allowed_input_types: { # required
+    #                   allow_audio_input: false, # required
+    #                   allow_dtmf_input: false, # required
+    #                 },
+    #                 audio_and_dtmf_input_specification: {
+    #                   start_timeout_ms: 1, # required
+    #                   audio_specification: {
+    #                     max_length_ms: 1, # required
+    #                     end_timeout_ms: 1, # required
+    #                   },
+    #                   dtmf_specification: {
+    #                     max_length: 1, # required
+    #                     end_timeout_ms: 1, # required
+    #                     deletion_character: "DTMFCharacter", # required
+    #                     end_character: "DTMFCharacter", # required
+    #                   },
+    #                 },
+    #                 text_input_specification: {
+    #                   start_timeout_ms: 1, # required
+    #                 },
+    #               },
+    #             },
     #           },
     #           sample_utterances: [
     #             {
@@ -25044,6 +25422,31 @@ module Aws::LexModelsV2
     #                 max_retries: 1, # required
     #                 allow_interrupt: false,
     #                 message_selection_strategy: "Random", # accepts Random, Ordered
+    #                 prompt_attempts_specification: {
+    #                   "Initial" => {
+    #                     allow_interrupt: false,
+    #                     allowed_input_types: { # required
+    #                       allow_audio_input: false, # required
+    #                       allow_dtmf_input: false, # required
+    #                     },
+    #                     audio_and_dtmf_input_specification: {
+    #                       start_timeout_ms: 1, # required
+    #                       audio_specification: {
+    #                         max_length_ms: 1, # required
+    #                         end_timeout_ms: 1, # required
+    #                       },
+    #                       dtmf_specification: {
+    #                         max_length: 1, # required
+    #                         end_timeout_ms: 1, # required
+    #                         deletion_character: "DTMFCharacter", # required
+    #                         end_character: "DTMFCharacter", # required
+    #                       },
+    #                     },
+    #                     text_input_specification: {
+    #                       start_timeout_ms: 1, # required
+    #                     },
+    #                   },
+    #                 },
     #               },
     #               sample_utterances: [
     #                 {
@@ -25342,6 +25745,31 @@ module Aws::LexModelsV2
     #           max_retries: 1, # required
     #           allow_interrupt: false,
     #           message_selection_strategy: "Random", # accepts Random, Ordered
+    #           prompt_attempts_specification: {
+    #             "Initial" => {
+    #               allow_interrupt: false,
+    #               allowed_input_types: { # required
+    #                 allow_audio_input: false, # required
+    #                 allow_dtmf_input: false, # required
+    #               },
+    #               audio_and_dtmf_input_specification: {
+    #                 start_timeout_ms: 1, # required
+    #                 audio_specification: {
+    #                   max_length_ms: 1, # required
+    #                   end_timeout_ms: 1, # required
+    #                 },
+    #                 dtmf_specification: {
+    #                   max_length: 1, # required
+    #                   end_timeout_ms: 1, # required
+    #                   deletion_character: "DTMFCharacter", # required
+    #                   end_character: "DTMFCharacter", # required
+    #                 },
+    #               },
+    #               text_input_specification: {
+    #                 start_timeout_ms: 1, # required
+    #               },
+    #             },
+    #           },
     #         },
     #         sample_utterances: [
     #           {
@@ -25580,6 +26008,28 @@ module Aws::LexModelsV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Specifies the text input specifications.
+    #
+    # @note When making an API call, you may pass TextInputSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         start_timeout_ms: 1, # required
+    #       }
+    #
+    # @!attribute [rw] start_timeout_ms
+    #   Time for which a bot waits before re-prompting a customer for text
+    #   input.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TextInputSpecification AWS API Documentation
+    #
+    class TextInputSpecification < Struct.new(
+      :start_timeout_ms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Defines the Amazon CloudWatch Logs destination log group for
     # conversation text logs.
@@ -27312,6 +27762,31 @@ module Aws::LexModelsV2
     #             max_retries: 1, # required
     #             allow_interrupt: false,
     #             message_selection_strategy: "Random", # accepts Random, Ordered
+    #             prompt_attempts_specification: {
+    #               "Initial" => {
+    #                 allow_interrupt: false,
+    #                 allowed_input_types: { # required
+    #                   allow_audio_input: false, # required
+    #                   allow_dtmf_input: false, # required
+    #                 },
+    #                 audio_and_dtmf_input_specification: {
+    #                   start_timeout_ms: 1, # required
+    #                   audio_specification: {
+    #                     max_length_ms: 1, # required
+    #                     end_timeout_ms: 1, # required
+    #                   },
+    #                   dtmf_specification: {
+    #                     max_length: 1, # required
+    #                     end_timeout_ms: 1, # required
+    #                     deletion_character: "DTMFCharacter", # required
+    #                     end_character: "DTMFCharacter", # required
+    #                   },
+    #                 },
+    #                 text_input_specification: {
+    #                   start_timeout_ms: 1, # required
+    #                 },
+    #               },
+    #             },
     #           },
     #           declination_response: {
     #             message_groups: [ # required
@@ -30465,6 +30940,31 @@ module Aws::LexModelsV2
     #             max_retries: 1, # required
     #             allow_interrupt: false,
     #             message_selection_strategy: "Random", # accepts Random, Ordered
+    #             prompt_attempts_specification: {
+    #               "Initial" => {
+    #                 allow_interrupt: false,
+    #                 allowed_input_types: { # required
+    #                   allow_audio_input: false, # required
+    #                   allow_dtmf_input: false, # required
+    #                 },
+    #                 audio_and_dtmf_input_specification: {
+    #                   start_timeout_ms: 1, # required
+    #                   audio_specification: {
+    #                     max_length_ms: 1, # required
+    #                     end_timeout_ms: 1, # required
+    #                   },
+    #                   dtmf_specification: {
+    #                     max_length: 1, # required
+    #                     end_timeout_ms: 1, # required
+    #                     deletion_character: "DTMFCharacter", # required
+    #                     end_character: "DTMFCharacter", # required
+    #                   },
+    #                 },
+    #                 text_input_specification: {
+    #                   start_timeout_ms: 1, # required
+    #                 },
+    #               },
+    #             },
     #           },
     #           sample_utterances: [
     #             {
@@ -31976,6 +32476,31 @@ module Aws::LexModelsV2
     #                   max_retries: 1, # required
     #                   allow_interrupt: false,
     #                   message_selection_strategy: "Random", # accepts Random, Ordered
+    #                   prompt_attempts_specification: {
+    #                     "Initial" => {
+    #                       allow_interrupt: false,
+    #                       allowed_input_types: { # required
+    #                         allow_audio_input: false, # required
+    #                         allow_dtmf_input: false, # required
+    #                       },
+    #                       audio_and_dtmf_input_specification: {
+    #                         start_timeout_ms: 1, # required
+    #                         audio_specification: {
+    #                           max_length_ms: 1, # required
+    #                           end_timeout_ms: 1, # required
+    #                         },
+    #                         dtmf_specification: {
+    #                           max_length: 1, # required
+    #                           end_timeout_ms: 1, # required
+    #                           deletion_character: "DTMFCharacter", # required
+    #                           end_character: "DTMFCharacter", # required
+    #                         },
+    #                       },
+    #                       text_input_specification: {
+    #                         start_timeout_ms: 1, # required
+    #                       },
+    #                     },
+    #                   },
     #                 },
     #                 sample_utterances: [
     #                   {
