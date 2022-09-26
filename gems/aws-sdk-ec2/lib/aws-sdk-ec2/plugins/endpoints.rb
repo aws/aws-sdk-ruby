@@ -161,6 +161,10 @@ module Aws::EC2
             Aws::EC2::Endpoints::CreateClientVpnEndpoint.build(context)
           when :create_client_vpn_route
             Aws::EC2::Endpoints::CreateClientVpnRoute.build(context)
+          when :create_coip_cidr
+            Aws::EC2::Endpoints::CreateCoipCidr.build(context)
+          when :create_coip_pool
+            Aws::EC2::Endpoints::CreateCoipPool.build(context)
           when :create_customer_gateway
             Aws::EC2::Endpoints::CreateCustomerGateway.build(context)
           when :create_default_subnet
@@ -199,6 +203,10 @@ module Aws::EC2
             Aws::EC2::Endpoints::CreateLaunchTemplateVersion.build(context)
           when :create_local_gateway_route
             Aws::EC2::Endpoints::CreateLocalGatewayRoute.build(context)
+          when :create_local_gateway_route_table
+            Aws::EC2::Endpoints::CreateLocalGatewayRouteTable.build(context)
+          when :create_local_gateway_route_table_virtual_interface_group_association
+            Aws::EC2::Endpoints::CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociation.build(context)
           when :create_local_gateway_route_table_vpc_association
             Aws::EC2::Endpoints::CreateLocalGatewayRouteTableVpcAssociation.build(context)
           when :create_managed_prefix_list
@@ -301,6 +309,10 @@ module Aws::EC2
             Aws::EC2::Endpoints::DeleteClientVpnEndpoint.build(context)
           when :delete_client_vpn_route
             Aws::EC2::Endpoints::DeleteClientVpnRoute.build(context)
+          when :delete_coip_cidr
+            Aws::EC2::Endpoints::DeleteCoipCidr.build(context)
+          when :delete_coip_pool
+            Aws::EC2::Endpoints::DeleteCoipPool.build(context)
           when :delete_customer_gateway
             Aws::EC2::Endpoints::DeleteCustomerGateway.build(context)
           when :delete_dhcp_options
@@ -331,6 +343,10 @@ module Aws::EC2
             Aws::EC2::Endpoints::DeleteLaunchTemplateVersions.build(context)
           when :delete_local_gateway_route
             Aws::EC2::Endpoints::DeleteLocalGatewayRoute.build(context)
+          when :delete_local_gateway_route_table
+            Aws::EC2::Endpoints::DeleteLocalGatewayRouteTable.build(context)
+          when :delete_local_gateway_route_table_virtual_interface_group_association
+            Aws::EC2::Endpoints::DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociation.build(context)
           when :delete_local_gateway_route_table_vpc_association
             Aws::EC2::Endpoints::DeleteLocalGatewayRouteTableVpcAssociation.build(context)
           when :delete_managed_prefix_list
@@ -933,6 +949,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::ModifyIpamScope.build(context)
           when :modify_launch_template
             Aws::EC2::Endpoints::ModifyLaunchTemplate.build(context)
+          when :modify_local_gateway_route
+            Aws::EC2::Endpoints::ModifyLocalGatewayRoute.build(context)
           when :modify_managed_prefix_list
             Aws::EC2::Endpoints::ModifyManagedPrefixList.build(context)
           when :modify_network_interface_attribute

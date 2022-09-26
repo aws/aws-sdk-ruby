@@ -115,9 +115,7 @@ module AwsSdkCodeGenerator
           end
         when 'AWS::S3::ForcePathStyle'
           'context.config.force_path_style'
-        when 'AWS::S3::UseArnRegion'
-          'context.config.s3_use_arn_region'
-        when 'AWS::S3Control::UseArnRegion'
+        when 'AWS::S3::UseArnRegion', 'AWS::S3Control::UseArnRegion'
           'context.config.s3_use_arn_region'
         when 'AWS::S3::DisableMultiRegionAccessPoints'
           'context.config.s3_disable_multiregion_access_points'
