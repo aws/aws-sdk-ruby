@@ -31,7 +31,6 @@ module AwsSdkCodeGenerator
       @waiters = @service.waiters
       @resources = @service.resources
       @examples = @service.examples
-      @endpoint_rules = @service.endpoint_rules
     end
 
     # Generates the source for a library as a single string.
@@ -138,7 +137,7 @@ module AwsSdkCodeGenerator
         waiters: @service.waiters,
         examples: @service.examples,
         custom: @service.protocol == 'api-gateway',
-        has_endpoint_rules: @service.endpoint_rules && !@service.endpoint_rules.empty?,
+        endpoint_rules: @service.endpoint_rules,
         codegenerated_plugins: codegenerated_plugins
       ).render
     end
@@ -157,7 +156,7 @@ module AwsSdkCodeGenerator
         add_plugins: @service.add_plugins,
         remove_plugins: @service.remove_plugins,
         api: @service.api,
-        has_endpoint_rules: @service.endpoint_rules && !@service.endpoint_rules.empty?,
+        endpoint_rules: @service.endpoint_rules,
         codegenerated_plugins: codegenerated_plugins,
         async_client: true
       ).render
