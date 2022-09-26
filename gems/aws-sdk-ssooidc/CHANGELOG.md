@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.22.0 (2022-08-25)
-------------------
-
-* Feature - Updated required request parameters on IAM Identity Center's OIDC CreateToken action.
-
 1.21.0 (2022-08-22)
 ------------------
 

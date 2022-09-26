@@ -3228,8 +3228,32 @@
         "endpoints" : {
           "ap-southeast-2" : { },
           "eu-west-2" : { },
-          "us-east-1" : { },
-          "us-west-2" : { }
+          "fips-us-east-1" : {
+            "credentialScope" : {
+              "region" : "us-east-1"
+            },
+            "deprecated" : true,
+            "hostname" : "connect-campaigns-fips.us-east-1.amazonaws.com"
+          },
+          "fips-us-west-2" : {
+            "credentialScope" : {
+              "region" : "us-west-2"
+            },
+            "deprecated" : true,
+            "hostname" : "connect-campaigns-fips.us-west-2.amazonaws.com"
+          },
+          "us-east-1" : {
+            "variants" : [ {
+              "hostname" : "connect-campaigns-fips.us-east-1.amazonaws.com",
+              "tags" : [ "fips" ]
+            } ]
+          },
+          "us-west-2" : {
+            "variants" : [ {
+              "hostname" : "connect-campaigns-fips.us-west-2.amazonaws.com",
+              "tags" : [ "fips" ]
+            } ]
+          }
         }
       },
       "contact-lens" : {
@@ -6601,6 +6625,7 @@
         "endpoints" : {
           "af-south-1" : { },
           "ap-northeast-2" : { },
+          "ap-southeast-1" : { },
           "ap-southeast-2" : { },
           "eu-central-1" : { },
           "eu-north-1" : { },
@@ -9654,6 +9679,7 @@
           "ap-south-1" : { },
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
+          "ap-southeast-3" : { },
           "ca-central-1" : {
             "variants" : [ {
               "hostname" : "outposts-fips.ca-central-1.amazonaws.com",
@@ -12222,9 +12248,11 @@
           "ap-east-1" : { },
           "ap-northeast-1" : { },
           "ap-northeast-2" : { },
+          "ap-northeast-3" : { },
           "ap-south-1" : { },
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
+          "ap-southeast-3" : { },
           "ca-central-1" : {
             "variants" : [ {
               "hostname" : "servicediscovery-fips.ca-central-1.amazonaws.com",
@@ -15409,8 +15437,18 @@
       },
       "firehose" : {
         "endpoints" : {
-          "cn-north-1" : { },
-          "cn-northwest-1" : { }
+          "cn-north-1" : {
+            "variants" : [ {
+              "hostname" : "firehose.cn-north-1.api.amazonwebservices.com.cn",
+              "tags" : [ "dualstack" ]
+            } ]
+          },
+          "cn-northwest-1" : {
+            "variants" : [ {
+              "hostname" : "firehose.cn-northwest-1.api.amazonwebservices.com.cn",
+              "tags" : [ "dualstack" ]
+            } ]
+          }
         }
       },
       "fms" : {

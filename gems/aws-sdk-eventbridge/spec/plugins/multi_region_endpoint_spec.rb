@@ -44,7 +44,7 @@ module Aws
       it 'raises when given an invalid endpoint_id' do
         expect do
           client.put_events(entries: entries, endpoint_id: 'badactor.com?foo=bar')
-        end.to raise_error(ArgumentError)
+        end.to raise_error(ArgumentError, /valid host label/)
       end
 
       it 'raises when given an empty endpoint_id' do
