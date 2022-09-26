@@ -3,6 +3,21 @@ Unreleased Changes
 
 * Feature - Add a metadata method to `Partition` to supplement endpoint generation in service gems.
 
+1.637.0 (2022-09-26)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IoTFleetWise`.
+
+1.636.0 (2022-09-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.635.0 (2022-09-22)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.634.0 (2022-09-21)
 ------------------
 

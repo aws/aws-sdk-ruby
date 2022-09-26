@@ -35,6 +35,8 @@ module Aws::BackupGateway
     Gateways = Shapes::ListShape.new(name: 'Gateways')
     GetGatewayInput = Shapes::StructureShape.new(name: 'GetGatewayInput')
     GetGatewayOutput = Shapes::StructureShape.new(name: 'GetGatewayOutput')
+    GetVirtualMachineInput = Shapes::StructureShape.new(name: 'GetVirtualMachineInput')
+    GetVirtualMachineOutput = Shapes::StructureShape.new(name: 'GetVirtualMachineOutput')
     Host = Shapes::StringShape.new(name: 'Host')
     HourOfDay = Shapes::IntegerShape.new(name: 'HourOfDay')
     Hypervisor = Shapes::StructureShape.new(name: 'Hypervisor')
@@ -53,6 +55,7 @@ module Aws::BackupGateway
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     ListVirtualMachinesInput = Shapes::StructureShape.new(name: 'ListVirtualMachinesInput')
     ListVirtualMachinesOutput = Shapes::StructureShape.new(name: 'ListVirtualMachinesOutput')
+    MaintenanceStartTime = Shapes::StructureShape.new(name: 'MaintenanceStartTime')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MinuteOfHour = Shapes::IntegerShape.new(name: 'MinuteOfHour')
     Name = Shapes::StringShape.new(name: 'Name')
@@ -73,6 +76,7 @@ module Aws::BackupGateway
     Tags = Shapes::ListShape.new(name: 'Tags')
     TestHypervisorConfigurationInput = Shapes::StructureShape.new(name: 'TestHypervisorConfigurationInput')
     TestHypervisorConfigurationOutput = Shapes::StructureShape.new(name: 'TestHypervisorConfigurationOutput')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Time = Shapes::TimestampShape.new(name: 'Time')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
@@ -85,6 +89,7 @@ module Aws::BackupGateway
     Username = Shapes::StringShape.new(name: 'Username')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VirtualMachine = Shapes::StructureShape.new(name: 'VirtualMachine')
+    VirtualMachineDetails = Shapes::StructureShape.new(name: 'VirtualMachineDetails')
     VirtualMachines = Shapes::ListShape.new(name: 'VirtualMachines')
     VpcEndpoint = Shapes::StringShape.new(name: 'VpcEndpoint')
     string = Shapes::StringShape.new(name: 'string')
@@ -143,6 +148,7 @@ module Aws::BackupGateway
     GatewayDetails.add_member(:gateway_type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "GatewayType"))
     GatewayDetails.add_member(:hypervisor_id, Shapes::ShapeRef.new(shape: HypervisorId, location_name: "HypervisorId"))
     GatewayDetails.add_member(:last_seen_time, Shapes::ShapeRef.new(shape: Time, location_name: "LastSeenTime"))
+    GatewayDetails.add_member(:maintenance_start_time, Shapes::ShapeRef.new(shape: MaintenanceStartTime, location_name: "MaintenanceStartTime"))
     GatewayDetails.add_member(:next_update_availability_time, Shapes::ShapeRef.new(shape: Time, location_name: "NextUpdateAvailabilityTime"))
     GatewayDetails.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "VpcEndpoint"))
     GatewayDetails.struct_class = Types::GatewayDetails
@@ -154,6 +160,12 @@ module Aws::BackupGateway
 
     GetGatewayOutput.add_member(:gateway, Shapes::ShapeRef.new(shape: GatewayDetails, location_name: "Gateway"))
     GetGatewayOutput.struct_class = Types::GetGatewayOutput
+
+    GetVirtualMachineInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    GetVirtualMachineInput.struct_class = Types::GetVirtualMachineInput
+
+    GetVirtualMachineOutput.add_member(:virtual_machine, Shapes::ShapeRef.new(shape: VirtualMachineDetails, location_name: "VirtualMachine"))
+    GetVirtualMachineOutput.struct_class = Types::GetVirtualMachineOutput
 
     Hypervisor.add_member(:host, Shapes::ShapeRef.new(shape: Host, location_name: "Host"))
     Hypervisor.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, location_name: "HypervisorArn"))
@@ -202,6 +214,7 @@ module Aws::BackupGateway
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
 
+    ListVirtualMachinesInput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, location_name: "HypervisorArn"))
     ListVirtualMachinesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListVirtualMachinesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListVirtualMachinesInput.struct_class = Types::ListVirtualMachinesInput
@@ -209,6 +222,12 @@ module Aws::BackupGateway
     ListVirtualMachinesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListVirtualMachinesOutput.add_member(:virtual_machines, Shapes::ShapeRef.new(shape: VirtualMachines, location_name: "VirtualMachines"))
     ListVirtualMachinesOutput.struct_class = Types::ListVirtualMachinesOutput
+
+    MaintenanceStartTime.add_member(:day_of_month, Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth"))
+    MaintenanceStartTime.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
+    MaintenanceStartTime.add_member(:hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "HourOfDay"))
+    MaintenanceStartTime.add_member(:minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "MinuteOfHour"))
+    MaintenanceStartTime.struct_class = Types::MaintenanceStartTime
 
     PutMaintenanceStartTimeInput.add_member(:day_of_month, Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth"))
     PutMaintenanceStartTimeInput.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
@@ -246,6 +265,10 @@ module Aws::BackupGateway
     TestHypervisorConfigurationInput.struct_class = Types::TestHypervisorConfigurationInput
 
     TestHypervisorConfigurationOutput.struct_class = Types::TestHypervisorConfigurationOutput
+
+    ThrottlingException.add_member(:error_code, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ErrorCode"))
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
 
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceARN"))
     UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))
@@ -289,6 +312,14 @@ module Aws::BackupGateway
     VirtualMachine.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
     VirtualMachine.struct_class = Types::VirtualMachine
 
+    VirtualMachineDetails.add_member(:host_name, Shapes::ShapeRef.new(shape: Name, location_name: "HostName"))
+    VirtualMachineDetails.add_member(:hypervisor_id, Shapes::ShapeRef.new(shape: string, location_name: "HypervisorId"))
+    VirtualMachineDetails.add_member(:last_backup_date, Shapes::ShapeRef.new(shape: Time, location_name: "LastBackupDate"))
+    VirtualMachineDetails.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    VirtualMachineDetails.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
+    VirtualMachineDetails.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    VirtualMachineDetails.struct_class = Types::VirtualMachineDetails
+
     VirtualMachines.member = Shapes::ShapeRef.new(shape: VirtualMachine)
 
 
@@ -319,6 +350,7 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_gateway, Seahorse::Model::Operation.new.tap do |o|
@@ -329,6 +361,7 @@ module Aws::BackupGateway
         o.output = Shapes::ShapeRef.new(shape: CreateGatewayOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_gateway, Seahorse::Model::Operation.new.tap do |o|
@@ -340,6 +373,7 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_hypervisor, Seahorse::Model::Operation.new.tap do |o|
@@ -352,6 +386,7 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:disassociate_gateway_from_server, Seahorse::Model::Operation.new.tap do |o|
@@ -364,6 +399,7 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_gateway, Seahorse::Model::Operation.new.tap do |o|
@@ -375,6 +411,19 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_virtual_machine, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVirtualMachine"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetVirtualMachineInput)
+        o.output = Shapes::ShapeRef.new(shape: GetVirtualMachineOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:import_hypervisor_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -386,6 +435,7 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:list_gateways, Seahorse::Model::Operation.new.tap do |o|
@@ -396,6 +446,7 @@ module Aws::BackupGateway
         o.output = Shapes::ShapeRef.new(shape: ListGatewaysOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -412,6 +463,7 @@ module Aws::BackupGateway
         o.output = Shapes::ShapeRef.new(shape: ListHypervisorsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -429,6 +481,7 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:list_virtual_machines, Seahorse::Model::Operation.new.tap do |o|
@@ -439,6 +492,7 @@ module Aws::BackupGateway
         o.output = Shapes::ShapeRef.new(shape: ListVirtualMachinesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -457,6 +511,7 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -468,6 +523,7 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:test_hypervisor_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -480,6 +536,7 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -491,6 +548,7 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_gateway_information, Seahorse::Model::Operation.new.tap do |o|
@@ -503,6 +561,7 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_gateway_software_now, Seahorse::Model::Operation.new.tap do |o|
@@ -514,6 +573,7 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_hypervisor, Seahorse::Model::Operation.new.tap do |o|
@@ -526,6 +586,7 @@ module Aws::BackupGateway
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
     end
 

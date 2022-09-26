@@ -8774,7 +8774,7 @@ module Aws::Lightsail
     #
     #       {
     #         instance_name: "ResourceName", # required
-    #         metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, BurstCapacityTime, BurstCapacityPercentage
+    #         metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, BurstCapacityTime, BurstCapacityPercentage, MetadataNoToken
     #         period: 1, # required
     #         start_time: Time.now, # required
     #         end_time: Time.now, # required
@@ -8882,6 +8882,18 @@ module Aws::Lightsail
     #     the instance passed or failed the system status check. This metric
     #     can be either 0 (passed) or 1 (failed). This metric data is
     #     available in 1-minute (60 seconds) granularity.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #     `Unit`\: The published unit is `Count`.
+    #
+    #   * <b> <code>MetadataNoToken</code> </b> - Reports the number of
+    #     times that the instance metadata service was successfully accessed
+    #     without a token. This metric determines if there are any processes
+    #     accessing instance metadata by using Instance Metadata Service
+    #     Version 1, which doesn't use a token. If all requests use
+    #     token-backed sessions, such as Instance Metadata Service Version
+    #     2, then the value is 0.
     #
     #     `Statistics`\: The most useful statistic is `Sum`.
     #
@@ -10991,6 +11003,10 @@ module Aws::Lightsail
     #   `LightsailDefaultKeyPair`).
     #   @return [String]
     #
+    # @!attribute [rw] metadata_options
+    #   The metadata options for the Amazon Lightsail instance.
+    #   @return [Types::InstanceMetadataOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Instance AWS API Documentation
     #
     class Instance < Struct.new(
@@ -11014,7 +11030,8 @@ module Aws::Lightsail
       :networking,
       :state,
       :username,
-      :ssh_key_name)
+      :ssh_key_name,
+      :metadata_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11297,6 +11314,79 @@ module Aws::Lightsail
       :instance_name,
       :instance_health,
       :instance_health_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata options for the instance.
+    #
+    # @!attribute [rw] state
+    #   The state of the metadata option changes.
+    #
+    #   The following states are possible:
+    #
+    #   * `pending` - The metadata options are being updated. The instance
+    #     is not yet ready to process metadata traffic with the new
+    #     selection.
+    #
+    #   * `applied` - The metadata options have been successfully applied to
+    #     the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_tokens
+    #   The state of token usage for your instance metadata requests.
+    #
+    #   If the state is `optional`, you can choose whether to retrieve
+    #   instance metadata with a signed token header on your request. If you
+    #   retrieve the IAM role credentials without a token, the version 1.0
+    #   role credentials are returned. If you retrieve the IAM role
+    #   credentials by using a valid signed token, the version 2.0 role
+    #   credentials are returned.
+    #
+    #   If the state is `required`, you must send a signed token header with
+    #   all instance metadata retrieval requests. In this state, retrieving
+    #   the IAM role credential always returns the version 2.0 credentials.
+    #   The version 1.0 credentials are not available.
+    #
+    #   Not all instance blueprints in Lightsail support version 2.0
+    #   credentials. Use the `MetadataNoToken` instance metric to track the
+    #   number of calls to the instance metadata service that are using
+    #   version 1.0 credentials. For more information, see [Viewing instance
+    #   metrics in Amazon Lightsail][1] in the *Amazon Lightsail Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-viewing-instance-health-metrics
+    #   @return [String]
+    #
+    # @!attribute [rw] http_endpoint
+    #   Indicates whether the HTTP metadata endpoint on your instances is
+    #   enabled or disabled.
+    #
+    #   If the value is `disabled`, you cannot access your instance
+    #   metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_put_response_hop_limit
+    #   The desired HTTP PUT response hop limit for instance metadata
+    #   requests. A larger number means that the instance metadata requests
+    #   can travel farther.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] http_protocol_ipv_6
+    #   Indicates whether the IPv6 endpoint for the instance metadata
+    #   service is enabled or disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceMetadataOptions AWS API Documentation
+    #
+    class InstanceMetadataOptions < Struct.new(
+      :state,
+      :http_tokens,
+      :http_endpoint,
+      :http_put_response_hop_limit,
+      :http_protocol_ipv_6)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15490,6 +15580,89 @@ module Aws::Lightsail
     #
     class UpdateDomainEntryResult < Struct.new(
       :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateInstanceMetadataOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_name: "ResourceName", # required
+    #         http_tokens: "optional", # accepts optional, required
+    #         http_endpoint: "disabled", # accepts disabled, enabled
+    #         http_put_response_hop_limit: 1,
+    #         http_protocol_ipv_6: "disabled", # accepts disabled, enabled
+    #       }
+    #
+    # @!attribute [rw] instance_name
+    #   The name of the instance for which to update metadata parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_tokens
+    #   The state of token usage for your instance metadata requests. If the
+    #   parameter is not specified in the request, the default state is
+    #   `optional`.
+    #
+    #   If the state is `optional`, you can choose whether to retrieve
+    #   instance metadata with a signed token header on your request. If you
+    #   retrieve the IAM role credentials without a token, the version 1.0
+    #   role credentials are returned. If you retrieve the IAM role
+    #   credentials by using a valid signed token, the version 2.0 role
+    #   credentials are returned.
+    #
+    #   If the state is `required`, you must send a signed token header with
+    #   all instance metadata retrieval requests. In this state, retrieving
+    #   the IAM role credential always returns the version 2.0 credentials.
+    #   The version 1.0 credentials are not available.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_endpoint
+    #   Enables or disables the HTTP metadata endpoint on your instances. If
+    #   this parameter is not specified, the existing state is maintained.
+    #
+    #   If you specify a value of `disabled`, you cannot access your
+    #   instance metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_put_response_hop_limit
+    #   The desired HTTP PUT response hop limit for instance metadata
+    #   requests. A larger number means that the instance metadata requests
+    #   can travel farther. If no parameter is specified, the existing state
+    #   is maintained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] http_protocol_ipv_6
+    #   Enables or disables the IPv6 endpoint for the instance metadata
+    #   service. This setting applies only when the HTTP metadata endpoint
+    #   is enabled.
+    #
+    #   <note markdown="1"> This parameter is available only for instances in the Europe
+    #   (Stockholm) Amazon Web Services Region (`eu-north-1`).
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateInstanceMetadataOptionsRequest AWS API Documentation
+    #
+    class UpdateInstanceMetadataOptionsRequest < Struct.new(
+      :instance_name,
+      :http_tokens,
+      :http_endpoint,
+      :http_put_response_hop_limit,
+      :http_protocol_ipv_6)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation
+    #   Describes the API operation.
+    #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateInstanceMetadataOptionsResult AWS API Documentation
+    #
+    class UpdateInstanceMetadataOptionsResult < Struct.new(
+      :operation)
       SENSITIVE = []
       include Aws::Structure
     end

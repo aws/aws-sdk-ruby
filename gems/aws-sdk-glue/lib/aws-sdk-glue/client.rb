@@ -772,6 +772,8 @@ module Aws::Glue
     #   resp.crawlers[0].targets.catalog_targets[0].tables #=> Array
     #   resp.crawlers[0].targets.catalog_targets[0].tables[0] #=> String
     #   resp.crawlers[0].targets.catalog_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.catalog_targets[0].event_queue_arn #=> String
+    #   resp.crawlers[0].targets.catalog_targets[0].dlq_event_queue_arn #=> String
     #   resp.crawlers[0].targets.delta_targets #=> Array
     #   resp.crawlers[0].targets.delta_targets[0].delta_tables #=> Array
     #   resp.crawlers[0].targets.delta_targets[0].delta_tables[0] #=> String
@@ -2340,6 +2342,8 @@ module Aws::Glue
     #           database_name: "NameString", # required
     #           tables: ["NameString"], # required
     #           connection_name: "ConnectionName",
+    #           event_queue_arn: "EventQueueArn",
+    #           dlq_event_queue_arn: "EventQueueArn",
     #         },
     #       ],
     #       delta_targets: [
@@ -6150,6 +6154,8 @@ module Aws::Glue
     #   resp.crawler.targets.catalog_targets[0].tables #=> Array
     #   resp.crawler.targets.catalog_targets[0].tables[0] #=> String
     #   resp.crawler.targets.catalog_targets[0].connection_name #=> String
+    #   resp.crawler.targets.catalog_targets[0].event_queue_arn #=> String
+    #   resp.crawler.targets.catalog_targets[0].dlq_event_queue_arn #=> String
     #   resp.crawler.targets.delta_targets #=> Array
     #   resp.crawler.targets.delta_targets[0].delta_tables #=> Array
     #   resp.crawler.targets.delta_targets[0].delta_tables[0] #=> String
@@ -6292,6 +6298,8 @@ module Aws::Glue
     #   resp.crawlers[0].targets.catalog_targets[0].tables #=> Array
     #   resp.crawlers[0].targets.catalog_targets[0].tables[0] #=> String
     #   resp.crawlers[0].targets.catalog_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.catalog_targets[0].event_queue_arn #=> String
+    #   resp.crawlers[0].targets.catalog_targets[0].dlq_event_queue_arn #=> String
     #   resp.crawlers[0].targets.delta_targets #=> Array
     #   resp.crawlers[0].targets.delta_targets[0].delta_tables #=> Array
     #   resp.crawlers[0].targets.delta_targets[0].delta_tables[0] #=> String
@@ -13550,6 +13558,8 @@ module Aws::Glue
     #           database_name: "NameString", # required
     #           tables: ["NameString"], # required
     #           connection_name: "ConnectionName",
+    #           event_queue_arn: "EventQueueArn",
+    #           dlq_event_queue_arn: "EventQueueArn",
     #         },
     #       ],
     #       delta_targets: [
@@ -15140,7 +15150,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

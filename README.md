@@ -392,6 +392,7 @@ RubyGems.org page under "LINKS" section.
 | AWS IoT Events                                        | Aws::IoTEvents                           | aws-sdk-iotevents                           | 2018-07-27  |
 | AWS IoT Events Data                                   | Aws::IoTEventsData                       | aws-sdk-ioteventsdata                       | 2018-10-23  |
 | AWS IoT Fleet Hub                                     | Aws::IoTFleetHub                         | aws-sdk-iotfleethub                         | 2020-11-03  |
+| AWS IoT FleetWise                                     | Aws::IoTFleetWise                        | aws-sdk-iotfleetwise                        | 2021-06-17  |
 | AWS IoT Greengrass V2                                 | Aws::GreengrassV2                        | aws-sdk-greengrassv2                        | 2020-11-30  |
 | AWS IoT Jobs Data Plane                               | Aws::IoTJobsDataPlane                    | aws-sdk-iotjobsdataplane                    | 2017-09-29  |
 | AWS IoT Secure Tunneling                              | Aws::IoTSecureTunneling                  | aws-sdk-iotsecuretunneling                  | 2018-10-05  |

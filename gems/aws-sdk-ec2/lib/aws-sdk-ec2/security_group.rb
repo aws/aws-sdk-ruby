@@ -379,7 +379,8 @@ module Aws::EC2
     # @option options [String] :group_name
     #   \[EC2-Classic, default VPC\] The name of the security group. You must
     #   specify either the security group ID or the security group name in the
-    #   request.
+    #   request. For security groups in a nondefault VPC, you must specify the
+    #   security group ID.
     # @option options [Array<Types::IpPermission>] :ip_permissions
     #   The sets of IP permissions.
     # @option options [String] :ip_protocol
@@ -525,7 +526,9 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [String] :group_name
     #   \[EC2-Classic, default VPC\] The name of the security group. You can
-    #   specify either the security group name or the security group ID.
+    #   specify either the security group name or the security group ID. For
+    #   security groups in a nondefault VPC, you must specify the security
+    #   group ID.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -678,7 +681,8 @@ module Aws::EC2
     # @option options [String] :group_name
     #   \[EC2-Classic, default VPC\] The name of the security group. You must
     #   specify either the security group ID or the security group name in the
-    #   request.
+    #   request. For security groups in a nondefault VPC, you must specify the
+    #   security group ID.
     # @option options [Array<Types::IpPermission>] :ip_permissions
     #   The sets of IP permissions. You can't specify a source security group
     #   and a CIDR IP address range in the same set of permissions.

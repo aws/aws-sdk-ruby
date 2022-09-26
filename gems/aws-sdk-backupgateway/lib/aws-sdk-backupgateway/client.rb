@@ -555,6 +555,10 @@ module Aws::BackupGateway
     #   resp.gateway.gateway_type #=> String, one of "BACKUP_VM"
     #   resp.gateway.hypervisor_id #=> String
     #   resp.gateway.last_seen_time #=> Time
+    #   resp.gateway.maintenance_start_time.day_of_month #=> Integer
+    #   resp.gateway.maintenance_start_time.day_of_week #=> Integer
+    #   resp.gateway.maintenance_start_time.hour_of_day #=> Integer
+    #   resp.gateway.maintenance_start_time.minute_of_hour #=> Integer
     #   resp.gateway.next_update_availability_time #=> Time
     #   resp.gateway.vpc_endpoint #=> String
     #
@@ -564,6 +568,40 @@ module Aws::BackupGateway
     # @param [Hash] params ({})
     def get_gateway(params = {}, options = {})
       req = build_request(:get_gateway, params)
+      req.send_request(options)
+    end
+
+    # By providing the ARN (Amazon Resource Name), this API returns the
+    # virtual machine.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the virtual machine.
+    #
+    # @return [Types::GetVirtualMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVirtualMachineOutput#virtual_machine #virtual_machine} => Types::VirtualMachineDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_virtual_machine({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_machine.host_name #=> String
+    #   resp.virtual_machine.hypervisor_id #=> String
+    #   resp.virtual_machine.last_backup_date #=> Time
+    #   resp.virtual_machine.name #=> String
+    #   resp.virtual_machine.path #=> String
+    #   resp.virtual_machine.resource_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetVirtualMachine AWS API Documentation
+    #
+    # @overload get_virtual_machine(params = {})
+    # @param [Hash] params ({})
+    def get_virtual_machine(params = {}, options = {})
+      req = build_request(:get_virtual_machine, params)
       req.send_request(options)
     end
 
@@ -746,6 +784,10 @@ module Aws::BackupGateway
 
     # Lists your virtual machines.
     #
+    # @option params [String] :hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor connected to your
+    #   virtual machine.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of virtual machines to list.
     #
@@ -765,6 +807,7 @@ module Aws::BackupGateway
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_virtual_machines({
+    #     hypervisor_arn: "ServerArn",
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -1071,7 +1114,7 @@ module Aws::BackupGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backupgateway'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -401,6 +401,9 @@ module Aws::Lightsail
     HeaderObject = Shapes::StructureShape.new(name: 'HeaderObject')
     HostKeyAttributes = Shapes::StructureShape.new(name: 'HostKeyAttributes')
     HostKeysList = Shapes::ListShape.new(name: 'HostKeysList')
+    HttpEndpoint = Shapes::StringShape.new(name: 'HttpEndpoint')
+    HttpProtocolIpv6 = Shapes::StringShape.new(name: 'HttpProtocolIpv6')
+    HttpTokens = Shapes::StringShape.new(name: 'HttpTokens')
     IAMAccessKeyId = Shapes::StringShape.new(name: 'IAMAccessKeyId')
     ImportKeyPairRequest = Shapes::StructureShape.new(name: 'ImportKeyPairRequest')
     ImportKeyPairResult = Shapes::StructureShape.new(name: 'ImportKeyPairResult')
@@ -418,6 +421,8 @@ module Aws::Lightsail
     InstanceHealthSummary = Shapes::StructureShape.new(name: 'InstanceHealthSummary')
     InstanceHealthSummaryList = Shapes::ListShape.new(name: 'InstanceHealthSummaryList')
     InstanceList = Shapes::ListShape.new(name: 'InstanceList')
+    InstanceMetadataOptions = Shapes::StructureShape.new(name: 'InstanceMetadataOptions')
+    InstanceMetadataState = Shapes::StringShape.new(name: 'InstanceMetadataState')
     InstanceMetricName = Shapes::StringShape.new(name: 'InstanceMetricName')
     InstanceNetworking = Shapes::StructureShape.new(name: 'InstanceNetworking')
     InstancePlatform = Shapes::StringShape.new(name: 'InstancePlatform')
@@ -608,6 +613,8 @@ module Aws::Lightsail
     UpdateDistributionResult = Shapes::StructureShape.new(name: 'UpdateDistributionResult')
     UpdateDomainEntryRequest = Shapes::StructureShape.new(name: 'UpdateDomainEntryRequest')
     UpdateDomainEntryResult = Shapes::StructureShape.new(name: 'UpdateDomainEntryResult')
+    UpdateInstanceMetadataOptionsRequest = Shapes::StructureShape.new(name: 'UpdateInstanceMetadataOptionsRequest')
+    UpdateInstanceMetadataOptionsResult = Shapes::StructureShape.new(name: 'UpdateInstanceMetadataOptionsResult')
     UpdateLoadBalancerAttributeRequest = Shapes::StructureShape.new(name: 'UpdateLoadBalancerAttributeRequest')
     UpdateLoadBalancerAttributeResult = Shapes::StructureShape.new(name: 'UpdateLoadBalancerAttributeResult')
     UpdateRelationalDatabaseParametersRequest = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseParametersRequest')
@@ -2143,6 +2150,7 @@ module Aws::Lightsail
     Instance.add_member(:state, Shapes::ShapeRef.new(shape: InstanceState, location_name: "state"))
     Instance.add_member(:username, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "username"))
     Instance.add_member(:ssh_key_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "sshKeyName"))
+    Instance.add_member(:metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "metadataOptions"))
     Instance.struct_class = Types::Instance
 
     InstanceAccessDetails.add_member(:cert_key, Shapes::ShapeRef.new(shape: string, location_name: "certKey"))
@@ -2179,6 +2187,13 @@ module Aws::Lightsail
     InstanceHealthSummaryList.member = Shapes::ShapeRef.new(shape: InstanceHealthSummary)
 
     InstanceList.member = Shapes::ShapeRef.new(shape: Instance)
+
+    InstanceMetadataOptions.add_member(:state, Shapes::ShapeRef.new(shape: InstanceMetadataState, location_name: "state"))
+    InstanceMetadataOptions.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokens, location_name: "httpTokens"))
+    InstanceMetadataOptions.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: HttpEndpoint, location_name: "httpEndpoint"))
+    InstanceMetadataOptions.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: integer, location_name: "httpPutResponseHopLimit"))
+    InstanceMetadataOptions.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: HttpProtocolIpv6, location_name: "httpProtocolIpv6"))
+    InstanceMetadataOptions.struct_class = Types::InstanceMetadataOptions
 
     InstanceNetworking.add_member(:monthly_transfer, Shapes::ShapeRef.new(shape: MonthlyTransfer, location_name: "monthlyTransfer"))
     InstanceNetworking.add_member(:ports, Shapes::ShapeRef.new(shape: InstancePortInfoList, location_name: "ports"))
@@ -2849,6 +2864,16 @@ module Aws::Lightsail
 
     UpdateDomainEntryResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     UpdateDomainEntryResult.struct_class = Types::UpdateDomainEntryResult
+
+    UpdateInstanceMetadataOptionsRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
+    UpdateInstanceMetadataOptionsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokens, location_name: "httpTokens"))
+    UpdateInstanceMetadataOptionsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: HttpEndpoint, location_name: "httpEndpoint"))
+    UpdateInstanceMetadataOptionsRequest.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: integer, location_name: "httpPutResponseHopLimit"))
+    UpdateInstanceMetadataOptionsRequest.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: HttpProtocolIpv6, location_name: "httpProtocolIpv6"))
+    UpdateInstanceMetadataOptionsRequest.struct_class = Types::UpdateInstanceMetadataOptionsRequest
+
+    UpdateInstanceMetadataOptionsResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
+    UpdateInstanceMetadataOptionsResult.struct_class = Types::UpdateInstanceMetadataOptionsResult
 
     UpdateLoadBalancerAttributeRequest.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "loadBalancerName"))
     UpdateLoadBalancerAttributeRequest.add_member(:attribute_name, Shapes::ShapeRef.new(shape: LoadBalancerAttributeName, required: true, location_name: "attributeName"))
@@ -5069,6 +5094,21 @@ module Aws::Lightsail
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateDomainEntryRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDomainEntryResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:update_instance_metadata_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateInstanceMetadataOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateInstanceMetadataOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateInstanceMetadataOptionsResult)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)

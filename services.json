@@ -505,6 +505,9 @@
   "IoTFleetHub": {
     "models": "iotfleethub/2020-11-03"
   },
+  "IoTFleetWise": {
+    "models": "iotfleetwise/2021-06-17"
+  },
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29"
   },

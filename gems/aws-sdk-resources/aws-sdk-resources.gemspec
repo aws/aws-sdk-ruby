@@ -169,6 +169,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-iotevents', '~> 1')
   spec.add_dependency('aws-sdk-ioteventsdata', '~> 1')
   spec.add_dependency('aws-sdk-iotfleethub', '~> 1')
+  spec.add_dependency('aws-sdk-iotfleetwise', '~> 1')
   spec.add_dependency('aws-sdk-iotjobsdataplane', '~> 1')
   spec.add_dependency('aws-sdk-iotsecuretunneling', '~> 1')
   spec.add_dependency('aws-sdk-iotsitewise', '~> 1')

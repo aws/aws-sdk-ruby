@@ -826,10 +826,10 @@ module Aws::IdentityStore
     #   The globally unique identifier for the identity store.
     #
     # @option params [required, Types::AlternateIdentifier] :alternate_identifier
-    #   A unique identifier for an identity resource that is not the primary
+    #   A unique identifier for a user or group that is not the primary
     #   identifier. This value can be an identifier from an external identity
-    #   provider (IdP) that is associated with the group or a unique
-    #   attribute. For example, a unique `GroupDisplayName`.
+    #   provider (IdP) that is associated with the user, the group, or a
+    #   unique attribute. For example, a unique `GroupDisplayName`.
     #
     # @return [Types::GetGroupIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -914,8 +914,10 @@ module Aws::IdentityStore
     #   The globally unique identifier for the identity store.
     #
     # @option params [required, Types::AlternateIdentifier] :alternate_identifier
-    #   A unique identifier for an identity resource that is not the primary
-    #   identifier.
+    #   A unique identifier for a user or group that is not the primary
+    #   identifier. This value can be an identifier from an external identity
+    #   provider (IdP) that is associated with the user, the group, or a
+    #   unique attribute. For example, a unique `UserDisplayName`.
     #
     # @return [Types::GetUserIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1113,11 +1115,9 @@ module Aws::IdentityStore
       req.send_request(options)
     end
 
-    # Lists the attribute name and value of the group that you specified in
-    # the search. We only support `DisplayName` as a valid filter attribute
-    # path currently, and filter is required. This API returns minimum
-    # attributes, including `GroupId` and group `DisplayName` in the
-    # response.
+    # Lists all groups in the identity store. Returns a paginated list of
+    # complete `Group` objects. Filtering for a `Group` by the `DisplayName`
+    # attribute is deprecated. Instead, use the `GetGroupId` API action.
     #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store, such as
@@ -1185,10 +1185,9 @@ module Aws::IdentityStore
       req.send_request(options)
     end
 
-    # Lists the attribute name and value of the user that you specified in
-    # the search. We only support `UserName` as a valid filter attribute
-    # path currently, and filter is required. This API returns minimum
-    # attributes, including `UserId` and `UserName` in the response.
+    # Lists all users in the identity store. Returns a paginated list of
+    # complete `User` objects. Filtering for a `User` by the `UserName`
+    # attribute is deprecated. Instead, use the `GetUserId` API action.
     #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store, such as
@@ -1373,7 +1372,7 @@ module Aws::IdentityStore
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-identitystore'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

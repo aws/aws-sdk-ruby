@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2022-09-22)
+------------------
+
+* Feature - Added support for S3 Event Notifications for Catalog Target Crawlers.
+
 1.118.0 (2022-08-11)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2022-09-23)
+------------------
+
+* Feature - This release adds Instance Metadata Service (IMDS) support for Lightsail instances.
+
 1.68.0 (2022-05-26)
 ------------------
 

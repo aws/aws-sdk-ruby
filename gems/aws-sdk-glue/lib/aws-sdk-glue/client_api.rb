@@ -1368,6 +1368,8 @@ module Aws::Glue
     CatalogTarget.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     CatalogTarget.add_member(:tables, Shapes::ShapeRef.new(shape: CatalogTablesList, required: true, location_name: "Tables"))
     CatalogTarget.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
+    CatalogTarget.add_member(:event_queue_arn, Shapes::ShapeRef.new(shape: EventQueueArn, location_name: "EventQueueArn"))
+    CatalogTarget.add_member(:dlq_event_queue_arn, Shapes::ShapeRef.new(shape: EventQueueArn, location_name: "DlqEventQueueArn"))
     CatalogTarget.struct_class = Types::CatalogTarget
 
     CatalogTargetList.member = Shapes::ShapeRef.new(shape: CatalogTarget)

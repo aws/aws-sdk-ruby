@@ -899,11 +899,15 @@ module Aws::SSM
     #   Targets and TargetMaps can't be specified together.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Adds or overwrites one or more tags for a State Manager association.
-    #   *Tags* are metadata that you can assign to your Amazon Web Services
-    #   resources. Tags enable you to categorize your resources in different
-    #   ways, for example, by purpose, owner, or environment. Each tag
-    #   consists of a key and an optional value, both of which you define.
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner, or
+    #   environment. For example, you might want to tag an association to
+    #   identify the type of resource to which it applies, the environment, or
+    #   the purpose of the association.
+    #
+    # @option params [Types::AlarmConfiguration] :alarm_configuration
+    #   The details for the CloudWatch alarm you want to apply to an
+    #   automation or command.
     #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -961,6 +965,14 @@ module Aws::SSM
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     alarm_configuration: {
+    #       ignore_poll_alarm_failure: false,
+    #       alarms: [ # required
+    #         {
+    #           name: "AlarmName", # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1015,6 +1027,12 @@ module Aws::SSM
     #   resp.association_description.target_maps[0] #=> Hash
     #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
     #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
+    #   resp.association_description.alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.association_description.alarm_configuration.alarms #=> Array
+    #   resp.association_description.alarm_configuration.alarms[0].name #=> String
+    #   resp.association_description.triggered_alarms #=> Array
+    #   resp.association_description.triggered_alarms[0].name #=> String
+    #   resp.association_description.triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation AWS API Documentation
     #
@@ -1093,6 +1111,14 @@ module Aws::SSM
     #             "TargetMapKey" => ["TargetMapValue"],
     #           },
     #         ],
+    #         alarm_configuration: {
+    #           ignore_poll_alarm_failure: false,
+    #           alarms: [ # required
+    #             {
+    #               name: "AlarmName", # required
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #   })
@@ -1150,6 +1176,12 @@ module Aws::SSM
     #   resp.successful[0].target_maps[0] #=> Hash
     #   resp.successful[0].target_maps[0]["TargetMapKey"] #=> Array
     #   resp.successful[0].target_maps[0]["TargetMapKey"][0] #=> String
+    #   resp.successful[0].alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.successful[0].alarm_configuration.alarms #=> Array
+    #   resp.successful[0].alarm_configuration.alarms[0].name #=> String
+    #   resp.successful[0].triggered_alarms #=> Array
+    #   resp.successful[0].triggered_alarms[0].name #=> String
+    #   resp.successful[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #   resp.failed #=> Array
     #   resp.failed[0].entry.name #=> String
     #   resp.failed[0].entry.instance_id #=> String
@@ -1187,6 +1219,9 @@ module Aws::SSM
     #   resp.failed[0].entry.target_maps[0] #=> Hash
     #   resp.failed[0].entry.target_maps[0]["TargetMapKey"] #=> Array
     #   resp.failed[0].entry.target_maps[0]["TargetMapKey"][0] #=> String
+    #   resp.failed[0].entry.alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.failed[0].entry.alarm_configuration.alarms #=> Array
+    #   resp.failed[0].entry.alarm_configuration.alarms[0].name #=> String
     #   resp.failed[0].message #=> String
     #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
     #
@@ -1335,7 +1370,7 @@ module Aws::SSM
     #     name: "DocumentName", # required
     #     display_name: "DocumentDisplayName",
     #     version_name: "DocumentVersionName",
-    #     document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy, ChangeCalendar, Automation.ChangeTemplate, ProblemAnalysis, ProblemAnalysisTemplate
+    #     document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy, ChangeCalendar, Automation.ChangeTemplate, ProblemAnalysis, ProblemAnalysisTemplate, CloudFormation, ConformancePackTemplate
     #     document_format: "YAML", # accepts YAML, JSON, TEXT
     #     target_type: "TargetType",
     #     tags: [
@@ -1367,7 +1402,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -2683,6 +2718,12 @@ module Aws::SSM
     #   resp.association_description.target_maps[0] #=> Hash
     #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
     #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
+    #   resp.association_description.alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.association_description.alarm_configuration.alarms #=> Array
+    #   resp.association_description.alarm_configuration.alarms[0].name #=> String
+    #   resp.association_description.triggered_alarms #=> Array
+    #   resp.association_description.triggered_alarms[0].name #=> String
+    #   resp.association_description.triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation AWS API Documentation
     #
@@ -2826,6 +2867,12 @@ module Aws::SSM
     #   resp.association_executions[0].created_time #=> Time
     #   resp.association_executions[0].last_execution_date #=> Time
     #   resp.association_executions[0].resource_count_by_status #=> String
+    #   resp.association_executions[0].alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.association_executions[0].alarm_configuration.alarms #=> Array
+    #   resp.association_executions[0].alarm_configuration.alarms[0].name #=> String
+    #   resp.association_executions[0].triggered_alarms #=> Array
+    #   resp.association_executions[0].triggered_alarms[0].name #=> String
+    #   resp.association_executions[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationExecutions AWS API Documentation
@@ -2907,6 +2954,12 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].max_errors #=> String
     #   resp.automation_execution_metadata_list[0].target #=> String
     #   resp.automation_execution_metadata_list[0].automation_type #=> String, one of "CrossAccount", "Local"
+    #   resp.automation_execution_metadata_list[0].alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.automation_execution_metadata_list[0].alarm_configuration.alarms #=> Array
+    #   resp.automation_execution_metadata_list[0].alarm_configuration.alarms[0].name #=> String
+    #   resp.automation_execution_metadata_list[0].triggered_alarms #=> Array
+    #   resp.automation_execution_metadata_list[0].triggered_alarms[0].name #=> String
+    #   resp.automation_execution_metadata_list[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #   resp.automation_execution_metadata_list[0].automation_subtype #=> String, one of "ChangeRequest"
     #   resp.automation_execution_metadata_list[0].scheduled_time #=> Time
     #   resp.automation_execution_metadata_list[0].runbooks #=> Array
@@ -3260,7 +3313,7 @@ module Aws::SSM
     #   resp.document.parameters[0].default_value #=> String
     #   resp.document.platform_types #=> Array
     #   resp.document.platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
-    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate"
+    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate"
     #   resp.document.schema_version #=> String
     #   resp.document.latest_version #=> String
     #   resp.document.default_version #=> String
@@ -4036,6 +4089,12 @@ module Aws::SSM
     #   resp.window_execution_task_identities[0].end_time #=> Time
     #   resp.window_execution_task_identities[0].task_arn #=> String
     #   resp.window_execution_task_identities[0].task_type #=> String, one of "RUN_COMMAND", "AUTOMATION", "STEP_FUNCTIONS", "LAMBDA"
+    #   resp.window_execution_task_identities[0].alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.window_execution_task_identities[0].alarm_configuration.alarms #=> Array
+    #   resp.window_execution_task_identities[0].alarm_configuration.alarms[0].name #=> String
+    #   resp.window_execution_task_identities[0].triggered_alarms #=> Array
+    #   resp.window_execution_task_identities[0].triggered_alarms[0].name #=> String
+    #   resp.window_execution_task_identities[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionTasks AWS API Documentation
@@ -4323,6 +4382,9 @@ module Aws::SSM
     #   resp.tasks[0].name #=> String
     #   resp.tasks[0].description #=> String
     #   resp.tasks[0].cutoff_behavior #=> String, one of "CONTINUE_TASK", "CANCEL_TASK"
+    #   resp.tasks[0].alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.tasks[0].alarm_configuration.alarms #=> Array
+    #   resp.tasks[0].alarm_configuration.alarms[0].name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTasks AWS API Documentation
@@ -5169,6 +5231,12 @@ module Aws::SSM
     #   resp.automation_execution.progress_counters.failed_steps #=> Integer
     #   resp.automation_execution.progress_counters.cancelled_steps #=> Integer
     #   resp.automation_execution.progress_counters.timed_out_steps #=> Integer
+    #   resp.automation_execution.alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.automation_execution.alarm_configuration.alarms #=> Array
+    #   resp.automation_execution.alarm_configuration.alarms[0].name #=> String
+    #   resp.automation_execution.triggered_alarms #=> Array
+    #   resp.automation_execution.triggered_alarms[0].name #=> String
+    #   resp.automation_execution.triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #   resp.automation_execution.automation_subtype #=> String, one of "ChangeRequest"
     #   resp.automation_execution.scheduled_time #=> Time
     #   resp.automation_execution.runbooks #=> Array
@@ -5587,7 +5655,7 @@ module Aws::SSM
     #   resp.status #=> String, one of "Creating", "Active", "Updating", "Deleting", "Failed"
     #   resp.status_information #=> String
     #   resp.content #=> String
-    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate"
+    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate"
     #   resp.document_format #=> String, one of "YAML", "JSON", "TEXT"
     #   resp.requires #=> Array
     #   resp.requires[0].name #=> String
@@ -5886,6 +5954,8 @@ module Aws::SSM
     #   * {Types::GetMaintenanceWindowExecutionTaskResult#status_details #status_details} => String
     #   * {Types::GetMaintenanceWindowExecutionTaskResult#start_time #start_time} => Time
     #   * {Types::GetMaintenanceWindowExecutionTaskResult#end_time #end_time} => Time
+    #   * {Types::GetMaintenanceWindowExecutionTaskResult#alarm_configuration #alarm_configuration} => Types::AlarmConfiguration
+    #   * {Types::GetMaintenanceWindowExecutionTaskResult#triggered_alarms #triggered_alarms} => Array&lt;Types::AlarmStateInformation&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5912,6 +5982,12 @@ module Aws::SSM
     #   resp.status_details #=> String
     #   resp.start_time #=> Time
     #   resp.end_time #=> Time
+    #   resp.alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.alarm_configuration.alarms #=> Array
+    #   resp.alarm_configuration.alarms[0].name #=> String
+    #   resp.triggered_alarms #=> Array
+    #   resp.triggered_alarms[0].name #=> String
+    #   resp.triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTask AWS API Documentation
     #
@@ -6019,6 +6095,7 @@ module Aws::SSM
     #   * {Types::GetMaintenanceWindowTaskResult#name #name} => String
     #   * {Types::GetMaintenanceWindowTaskResult#description #description} => String
     #   * {Types::GetMaintenanceWindowTaskResult#cutoff_behavior #cutoff_behavior} => String
+    #   * {Types::GetMaintenanceWindowTaskResult#alarm_configuration #alarm_configuration} => Types::AlarmConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -6076,6 +6153,9 @@ module Aws::SSM
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.cutoff_behavior #=> String, one of "CONTINUE_TASK", "CANCEL_TASK"
+    #   resp.alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.alarm_configuration.alarms #=> Array
+    #   resp.alarm_configuration.alarms[0].name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowTask AWS API Documentation
     #
@@ -7176,6 +7256,12 @@ module Aws::SSM
     #   resp.commands[0].cloud_watch_output_config.cloud_watch_log_group_name #=> String
     #   resp.commands[0].cloud_watch_output_config.cloud_watch_output_enabled #=> Boolean
     #   resp.commands[0].timeout_seconds #=> Integer
+    #   resp.commands[0].alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.commands[0].alarm_configuration.alarms #=> Array
+    #   resp.commands[0].alarm_configuration.alarms[0].name #=> String
+    #   resp.commands[0].triggered_alarms #=> Array
+    #   resp.commands[0].triggered_alarms[0].name #=> String
+    #   resp.commands[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommands AWS API Documentation
@@ -7516,7 +7602,7 @@ module Aws::SSM
     #   resp.document_identifiers[0].platform_types #=> Array
     #   resp.document_identifiers[0].platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
     #   resp.document_identifiers[0].document_version #=> String
-    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate"
+    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate"
     #   resp.document_identifiers[0].schema_version #=> String
     #   resp.document_identifiers[0].document_format #=> String, one of "YAML", "JSON", "TEXT"
     #   resp.document_identifiers[0].target_type #=> String
@@ -8838,6 +8924,10 @@ module Aws::SSM
     #
     #     The status for tasks that are not completed is `TIMED_OUT`.
     #
+    # @option params [Types::AlarmConfiguration] :alarm_configuration
+    #   The CloudWatch alarm you want to apply to your maintenance window
+    #   task.
+    #
     # @return [Types::RegisterTaskWithMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterTaskWithMaintenanceWindowResult#window_task_id #window_task_id} => String
@@ -8911,6 +9001,14 @@ module Aws::SSM
     #     description: "MaintenanceWindowDescription",
     #     client_token: "ClientToken",
     #     cutoff_behavior: "CONTINUE_TASK", # accepts CONTINUE_TASK, CANCEL_TASK
+    #     alarm_configuration: {
+    #       ignore_poll_alarm_failure: false,
+    #       alarms: [ # required
+    #         {
+    #           name: "AlarmName", # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -9301,6 +9399,9 @@ module Aws::SSM
     #   to Amazon CloudWatch Logs. Run Command is a capability of Amazon Web
     #   Services Systems Manager.
     #
+    # @option params [Types::AlarmConfiguration] :alarm_configuration
+    #   The CloudWatch alarm you want to apply to your command.
+    #
     # @return [Types::SendCommandResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SendCommandResult#command #command} => Types::Command
@@ -9338,6 +9439,14 @@ module Aws::SSM
     #     cloud_watch_output_config: {
     #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
     #       cloud_watch_output_enabled: false,
+    #     },
+    #     alarm_configuration: {
+    #       ignore_poll_alarm_failure: false,
+    #       alarms: [ # required
+    #         {
+    #           name: "AlarmName", # required
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -9377,6 +9486,12 @@ module Aws::SSM
     #   resp.command.cloud_watch_output_config.cloud_watch_log_group_name #=> String
     #   resp.command.cloud_watch_output_config.cloud_watch_output_enabled #=> Boolean
     #   resp.command.timeout_seconds #=> Integer
+    #   resp.command.alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.command.alarm_configuration.alarms #=> Array
+    #   resp.command.alarm_configuration.alarms[0].name #=> String
+    #   resp.command.triggered_alarms #=> Array
+    #   resp.command.triggered_alarms[0].name #=> String
+    #   resp.command.triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommand AWS API Documentation
     #
@@ -9504,6 +9619,9 @@ module Aws::SSM
     #
     #    </note>
     #
+    # @option params [Types::AlarmConfiguration] :alarm_configuration
+    #   The CloudWatch alarm you want to apply to your automation.
+    #
     # @return [Types::StartAutomationExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartAutomationExecutionResult#automation_execution_id #automation_execution_id} => String
@@ -9547,6 +9665,14 @@ module Aws::SSM
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     alarm_configuration: {
+    #       ignore_poll_alarm_failure: false,
+    #       alarms: [ # required
+    #         {
+    #           name: "AlarmName", # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -10094,6 +10220,10 @@ module Aws::SSM
     #   A key-value mapping of document parameters to target resources. Both
     #   Targets and TargetMaps can't be specified together.
     #
+    # @option params [Types::AlarmConfiguration] :alarm_configuration
+    #   The details for the CloudWatch alarm you want to apply to an
+    #   automation or command.
+    #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -10145,6 +10275,14 @@ module Aws::SSM
     #         "TargetMapKey" => ["TargetMapValue"],
     #       },
     #     ],
+    #     alarm_configuration: {
+    #       ignore_poll_alarm_failure: false,
+    #       alarms: [ # required
+    #         {
+    #           name: "AlarmName", # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -10199,6 +10337,12 @@ module Aws::SSM
     #   resp.association_description.target_maps[0] #=> Hash
     #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
     #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
+    #   resp.association_description.alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.association_description.alarm_configuration.alarms #=> Array
+    #   resp.association_description.alarm_configuration.alarms[0].name #=> String
+    #   resp.association_description.triggered_alarms #=> Array
+    #   resp.association_description.triggered_alarms[0].name #=> String
+    #   resp.association_description.triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation AWS API Documentation
     #
@@ -10295,6 +10439,12 @@ module Aws::SSM
     #   resp.association_description.target_maps[0] #=> Hash
     #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
     #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
+    #   resp.association_description.alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.association_description.alarm_configuration.alarms #=> Array
+    #   resp.association_description.alarm_configuration.alarms[0].name #=> String
+    #   resp.association_description.triggered_alarms #=> Array
+    #   resp.association_description.triggered_alarms[0].name #=> String
+    #   resp.association_description.triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus AWS API Documentation
     #
@@ -10392,7 +10542,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -10956,6 +11106,10 @@ module Aws::SSM
     #
     #     The status for tasks that are not completed is `TIMED_OUT`.
     #
+    # @option params [Types::AlarmConfiguration] :alarm_configuration
+    #   The CloudWatch alarm you want to apply to your maintenance window
+    #   task.
+    #
     # @return [Types::UpdateMaintenanceWindowTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateMaintenanceWindowTaskResult#window_id #window_id} => String
@@ -10972,6 +11126,7 @@ module Aws::SSM
     #   * {Types::UpdateMaintenanceWindowTaskResult#name #name} => String
     #   * {Types::UpdateMaintenanceWindowTaskResult#description #description} => String
     #   * {Types::UpdateMaintenanceWindowTaskResult#cutoff_behavior #cutoff_behavior} => String
+    #   * {Types::UpdateMaintenanceWindowTaskResult#alarm_configuration #alarm_configuration} => Types::AlarmConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -11042,6 +11197,14 @@ module Aws::SSM
     #     description: "MaintenanceWindowDescription",
     #     replace: false,
     #     cutoff_behavior: "CONTINUE_TASK", # accepts CONTINUE_TASK, CANCEL_TASK
+    #     alarm_configuration: {
+    #       ignore_poll_alarm_failure: false,
+    #       alarms: [ # required
+    #         {
+    #           name: "AlarmName", # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -11092,6 +11255,9 @@ module Aws::SSM
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.cutoff_behavior #=> String, one of "CONTINUE_TASK", "CANCEL_TASK"
+    #   resp.alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.alarm_configuration.alarms #=> Array
+    #   resp.alarm_configuration.alarms[0].name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTask AWS API Documentation
     #
@@ -11661,7 +11827,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.139.0'
+      context[:gem_version] = '1.141.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
