@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.141.0 (2022-09-26)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-iotfleetwise` gem.
+
 3.140.0 (2022-09-01)
 ------------------
 

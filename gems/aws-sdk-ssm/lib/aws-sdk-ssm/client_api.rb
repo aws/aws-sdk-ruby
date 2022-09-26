@@ -28,6 +28,12 @@ module Aws::SSM
     AddTagsToResourceResult = Shapes::StructureShape.new(name: 'AddTagsToResourceResult')
     AgentErrorCode = Shapes::StringShape.new(name: 'AgentErrorCode')
     AggregatorSchemaOnly = Shapes::BooleanShape.new(name: 'AggregatorSchemaOnly')
+    Alarm = Shapes::StructureShape.new(name: 'Alarm')
+    AlarmConfiguration = Shapes::StructureShape.new(name: 'AlarmConfiguration')
+    AlarmList = Shapes::ListShape.new(name: 'AlarmList')
+    AlarmName = Shapes::StringShape.new(name: 'AlarmName')
+    AlarmStateInformation = Shapes::StructureShape.new(name: 'AlarmStateInformation')
+    AlarmStateInformationList = Shapes::ListShape.new(name: 'AlarmStateInformationList')
     AllowedPattern = Shapes::StringShape.new(name: 'AllowedPattern')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     ApplyOnlyAtCronInterval = Shapes::BooleanShape.new(name: 'ApplyOnlyAtCronInterval')
@@ -382,6 +388,7 @@ module Aws::SSM
     ExecutionMode = Shapes::StringShape.new(name: 'ExecutionMode')
     ExecutionRoleName = Shapes::StringShape.new(name: 'ExecutionRoleName')
     ExpirationDate = Shapes::TimestampShape.new(name: 'ExpirationDate')
+    ExternalAlarmState = Shapes::StringShape.new(name: 'ExternalAlarmState')
     FailedCreateAssociation = Shapes::StructureShape.new(name: 'FailedCreateAssociation')
     FailedCreateAssociationList = Shapes::ListShape.new(name: 'FailedCreateAssociationList')
     FailureDetails = Shapes::StructureShape.new(name: 'FailureDetails')
@@ -1204,6 +1211,21 @@ module Aws::SSM
 
     AddTagsToResourceResult.struct_class = Types::AddTagsToResourceResult
 
+    Alarm.add_member(:name, Shapes::ShapeRef.new(shape: AlarmName, required: true, location_name: "Name"))
+    Alarm.struct_class = Types::Alarm
+
+    AlarmConfiguration.add_member(:ignore_poll_alarm_failure, Shapes::ShapeRef.new(shape: Boolean, location_name: "IgnorePollAlarmFailure"))
+    AlarmConfiguration.add_member(:alarms, Shapes::ShapeRef.new(shape: AlarmList, required: true, location_name: "Alarms"))
+    AlarmConfiguration.struct_class = Types::AlarmConfiguration
+
+    AlarmList.member = Shapes::ShapeRef.new(shape: Alarm)
+
+    AlarmStateInformation.add_member(:name, Shapes::ShapeRef.new(shape: AlarmName, required: true, location_name: "Name"))
+    AlarmStateInformation.add_member(:state, Shapes::ShapeRef.new(shape: ExternalAlarmState, required: true, location_name: "State"))
+    AlarmStateInformation.struct_class = Types::AlarmStateInformation
+
+    AlarmStateInformationList.member = Shapes::ShapeRef.new(shape: AlarmStateInformation)
+
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
 
@@ -1260,6 +1282,8 @@ module Aws::SSM
     AssociationDescription.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
     AssociationDescription.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
     AssociationDescription.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps", metadata: {"box"=>true}))
+    AssociationDescription.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
+    AssociationDescription.add_member(:triggered_alarms, Shapes::ShapeRef.new(shape: AlarmStateInformationList, location_name: "TriggeredAlarms"))
     AssociationDescription.struct_class = Types::AssociationDescription
 
     AssociationDescriptionList.member = Shapes::ShapeRef.new(shape: AssociationDescription)
@@ -1275,6 +1299,8 @@ module Aws::SSM
     AssociationExecution.add_member(:created_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedTime"))
     AssociationExecution.add_member(:last_execution_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastExecutionDate"))
     AssociationExecution.add_member(:resource_count_by_status, Shapes::ShapeRef.new(shape: ResourceCountByStatus, location_name: "ResourceCountByStatus"))
+    AssociationExecution.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
+    AssociationExecution.add_member(:triggered_alarms, Shapes::ShapeRef.new(shape: AlarmStateInformationList, location_name: "TriggeredAlarms"))
     AssociationExecution.struct_class = Types::AssociationExecution
 
     AssociationExecutionDoesNotExist.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -1417,6 +1443,8 @@ module Aws::SSM
     AutomationExecution.add_member(:target, Shapes::ShapeRef.new(shape: String, location_name: "Target"))
     AutomationExecution.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations", metadata: {"box"=>true}))
     AutomationExecution.add_member(:progress_counters, Shapes::ShapeRef.new(shape: ProgressCounters, location_name: "ProgressCounters"))
+    AutomationExecution.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
+    AutomationExecution.add_member(:triggered_alarms, Shapes::ShapeRef.new(shape: AlarmStateInformationList, location_name: "TriggeredAlarms"))
     AutomationExecution.add_member(:automation_subtype, Shapes::ShapeRef.new(shape: AutomationSubtype, location_name: "AutomationSubtype"))
     AutomationExecution.add_member(:scheduled_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "ScheduledTime"))
     AutomationExecution.add_member(:runbooks, Shapes::ShapeRef.new(shape: Runbooks, location_name: "Runbooks"))
@@ -1458,6 +1486,8 @@ module Aws::SSM
     AutomationExecutionMetadata.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     AutomationExecutionMetadata.add_member(:target, Shapes::ShapeRef.new(shape: String, location_name: "Target"))
     AutomationExecutionMetadata.add_member(:automation_type, Shapes::ShapeRef.new(shape: AutomationType, location_name: "AutomationType"))
+    AutomationExecutionMetadata.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
+    AutomationExecutionMetadata.add_member(:triggered_alarms, Shapes::ShapeRef.new(shape: AlarmStateInformationList, location_name: "TriggeredAlarms"))
     AutomationExecutionMetadata.add_member(:automation_subtype, Shapes::ShapeRef.new(shape: AutomationSubtype, location_name: "AutomationSubtype"))
     AutomationExecutionMetadata.add_member(:scheduled_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "ScheduledTime"))
     AutomationExecutionMetadata.add_member(:runbooks, Shapes::ShapeRef.new(shape: Runbooks, location_name: "Runbooks"))
@@ -1536,6 +1566,8 @@ module Aws::SSM
     Command.add_member(:notification_config, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "NotificationConfig"))
     Command.add_member(:cloud_watch_output_config, Shapes::ShapeRef.new(shape: CloudWatchOutputConfig, location_name: "CloudWatchOutputConfig"))
     Command.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: TimeoutSeconds, location_name: "TimeoutSeconds"))
+    Command.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
+    Command.add_member(:triggered_alarms, Shapes::ShapeRef.new(shape: AlarmStateInformationList, location_name: "TriggeredAlarms"))
     Command.struct_class = Types::Command
 
     CommandFilter.add_member(:key, Shapes::ShapeRef.new(shape: CommandFilterKey, required: true, location_name: "key"))
@@ -1675,6 +1707,7 @@ module Aws::SSM
     CreateAssociationBatchRequestEntry.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
     CreateAssociationBatchRequestEntry.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
     CreateAssociationBatchRequestEntry.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps", metadata: {"box"=>true}))
+    CreateAssociationBatchRequestEntry.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
     CreateAssociationBatchRequestEntry.struct_class = Types::CreateAssociationBatchRequestEntry
 
     CreateAssociationBatchResult.add_member(:successful, Shapes::ShapeRef.new(shape: AssociationDescriptionList, location_name: "Successful"))
@@ -1700,6 +1733,7 @@ module Aws::SSM
     CreateAssociationRequest.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
     CreateAssociationRequest.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps", metadata: {"box"=>true}))
     CreateAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box"=>true}))
+    CreateAssociationRequest.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
     CreateAssociationRequest.struct_class = Types::CreateAssociationRequest
 
     CreateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
@@ -2539,6 +2573,8 @@ module Aws::SSM
     GetMaintenanceWindowExecutionTaskResult.add_member(:status_details, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionStatusDetails, location_name: "StatusDetails"))
     GetMaintenanceWindowExecutionTaskResult.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
     GetMaintenanceWindowExecutionTaskResult.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime"))
+    GetMaintenanceWindowExecutionTaskResult.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
+    GetMaintenanceWindowExecutionTaskResult.add_member(:triggered_alarms, Shapes::ShapeRef.new(shape: AlarmStateInformationList, location_name: "TriggeredAlarms"))
     GetMaintenanceWindowExecutionTaskResult.struct_class = Types::GetMaintenanceWindowExecutionTaskResult
 
     GetMaintenanceWindowRequest.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, required: true, location_name: "WindowId"))
@@ -2580,6 +2616,7 @@ module Aws::SSM
     GetMaintenanceWindowTaskResult.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
     GetMaintenanceWindowTaskResult.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     GetMaintenanceWindowTaskResult.add_member(:cutoff_behavior, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskCutoffBehavior, location_name: "CutoffBehavior", metadata: {"box"=>true}))
+    GetMaintenanceWindowTaskResult.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
     GetMaintenanceWindowTaskResult.struct_class = Types::GetMaintenanceWindowTaskResult
 
     GetOpsItemRequest.add_member(:ops_item_id, Shapes::ShapeRef.new(shape: OpsItemId, required: true, location_name: "OpsItemId"))
@@ -3258,6 +3295,8 @@ module Aws::SSM
     MaintenanceWindowExecutionTaskIdentity.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime"))
     MaintenanceWindowExecutionTaskIdentity.add_member(:task_arn, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskArn, location_name: "TaskArn"))
     MaintenanceWindowExecutionTaskIdentity.add_member(:task_type, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskType, location_name: "TaskType"))
+    MaintenanceWindowExecutionTaskIdentity.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
+    MaintenanceWindowExecutionTaskIdentity.add_member(:triggered_alarms, Shapes::ShapeRef.new(shape: AlarmStateInformationList, location_name: "TriggeredAlarms"))
     MaintenanceWindowExecutionTaskIdentity.struct_class = Types::MaintenanceWindowExecutionTaskIdentity
 
     MaintenanceWindowExecutionTaskIdentityList.member = Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionTaskIdentity)
@@ -3353,6 +3392,7 @@ module Aws::SSM
     MaintenanceWindowTask.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
     MaintenanceWindowTask.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     MaintenanceWindowTask.add_member(:cutoff_behavior, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskCutoffBehavior, location_name: "CutoffBehavior", metadata: {"box"=>true}))
+    MaintenanceWindowTask.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
     MaintenanceWindowTask.struct_class = Types::MaintenanceWindowTask
 
     MaintenanceWindowTaskInvocationParameters.add_member(:run_command, Shapes::ShapeRef.new(shape: MaintenanceWindowRunCommandParameters, location_name: "RunCommand"))
@@ -3934,6 +3974,7 @@ module Aws::SSM
     RegisterTaskWithMaintenanceWindowRequest.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:cutoff_behavior, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskCutoffBehavior, location_name: "CutoffBehavior", metadata: {"box"=>true}))
+    RegisterTaskWithMaintenanceWindowRequest.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
     RegisterTaskWithMaintenanceWindowRequest.struct_class = Types::RegisterTaskWithMaintenanceWindowRequest
 
     RegisterTaskWithMaintenanceWindowResult.add_member(:window_task_id, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskId, location_name: "WindowTaskId"))
@@ -4125,6 +4166,7 @@ module Aws::SSM
     SendCommandRequest.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "ServiceRoleArn"))
     SendCommandRequest.add_member(:notification_config, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "NotificationConfig"))
     SendCommandRequest.add_member(:cloud_watch_output_config, Shapes::ShapeRef.new(shape: CloudWatchOutputConfig, location_name: "CloudWatchOutputConfig"))
+    SendCommandRequest.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
     SendCommandRequest.struct_class = Types::SendCommandRequest
 
     SendCommandResult.add_member(:command, Shapes::ShapeRef.new(shape: Command, location_name: "Command"))
@@ -4196,6 +4238,7 @@ module Aws::SSM
     StartAutomationExecutionRequest.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     StartAutomationExecutionRequest.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations", metadata: {"box"=>true}))
     StartAutomationExecutionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartAutomationExecutionRequest.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
     StartAutomationExecutionRequest.struct_class = Types::StartAutomationExecutionRequest
 
     StartAutomationExecutionResult.add_member(:automation_execution_id, Shapes::ShapeRef.new(shape: AutomationExecutionId, location_name: "AutomationExecutionId"))
@@ -4377,6 +4420,7 @@ module Aws::SSM
     UpdateAssociationRequest.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
     UpdateAssociationRequest.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
     UpdateAssociationRequest.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps", metadata: {"box"=>true}))
+    UpdateAssociationRequest.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
     UpdateAssociationRequest.struct_class = Types::UpdateAssociationRequest
 
     UpdateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
@@ -4478,6 +4522,7 @@ module Aws::SSM
     UpdateMaintenanceWindowTaskRequest.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     UpdateMaintenanceWindowTaskRequest.add_member(:replace, Shapes::ShapeRef.new(shape: Boolean, location_name: "Replace", metadata: {"box"=>true}))
     UpdateMaintenanceWindowTaskRequest.add_member(:cutoff_behavior, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskCutoffBehavior, location_name: "CutoffBehavior", metadata: {"box"=>true}))
+    UpdateMaintenanceWindowTaskRequest.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
     UpdateMaintenanceWindowTaskRequest.struct_class = Types::UpdateMaintenanceWindowTaskRequest
 
     UpdateMaintenanceWindowTaskResult.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
@@ -4494,6 +4539,7 @@ module Aws::SSM
     UpdateMaintenanceWindowTaskResult.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
     UpdateMaintenanceWindowTaskResult.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     UpdateMaintenanceWindowTaskResult.add_member(:cutoff_behavior, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskCutoffBehavior, location_name: "CutoffBehavior", metadata: {"box"=>true}))
+    UpdateMaintenanceWindowTaskResult.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
     UpdateMaintenanceWindowTaskResult.struct_class = Types::UpdateMaintenanceWindowTaskResult
 
     UpdateManagedInstanceRoleRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ManagedInstanceId, required: true, location_name: "InstanceId"))

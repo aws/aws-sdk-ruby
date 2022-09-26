@@ -174,6 +174,80 @@ module Aws::SSM
     #
     class AddTagsToResourceResult < Aws::EmptyStructure; end
 
+    # A CloudWatch alarm you apply to an automation or command.
+    #
+    # @note When making an API call, you may pass Alarm
+    #   data as a hash:
+    #
+    #       {
+    #         name: "AlarmName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of your CloudWatch alarm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Alarm AWS API Documentation
+    #
+    class Alarm < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details for the CloudWatch alarm you want to apply to an
+    # automation or command.
+    #
+    # @note When making an API call, you may pass AlarmConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         ignore_poll_alarm_failure: false,
+    #         alarms: [ # required
+    #           {
+    #             name: "AlarmName", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] ignore_poll_alarm_failure
+    #   If you specify `true` for this value, your automation or command
+    #   continue to run even if we can't gather information about the state
+    #   of your CloudWatch alarm. The default value is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] alarms
+    #   The name of the CloudWatch alarm specified in the configuration.
+    #   @return [Array<Types::Alarm>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AlarmConfiguration AWS API Documentation
+    #
+    class AlarmConfiguration < Struct.new(
+      :ignore_poll_alarm_failure,
+      :alarms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details about the state of your CloudWatch alarm.
+    #
+    # @!attribute [rw] name
+    #   The name of your CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of your CloudWatch alarm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AlarmStateInformation AWS API Documentation
+    #
+    class AlarmStateInformation < Struct.new(
+      :name,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Error returned if an attempt is made to register a patch group with a
     # patch baseline that is already registered with a different patch
     # baseline.
@@ -509,6 +583,15 @@ module Aws::SSM
     #   Targets and TargetMaps can't be specified together.
     #   @return [Array<Hash<String,Array<String>>>]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The details for the CloudWatch alarm you want to apply to an
+    #   automation or command.
+    #   @return [Types::AlarmConfiguration]
+    #
+    # @!attribute [rw] triggered_alarms
+    #   The CloudWatch alarm that was invoked during the association.
+    #   @return [Array<Types::AlarmStateInformation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription AWS API Documentation
     #
     class AssociationDescription < Struct.new(
@@ -537,7 +620,9 @@ module Aws::SSM
       :calendar_names,
       :target_locations,
       :schedule_offset,
-      :target_maps)
+      :target_maps,
+      :alarm_configuration,
+      :triggered_alarms)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -590,6 +675,15 @@ module Aws::SSM
     #   status type.
     #   @return [String]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The details for the CloudWatch alarm you want to apply to an
+    #   automation or command.
+    #   @return [Types::AlarmConfiguration]
+    #
+    # @!attribute [rw] triggered_alarms
+    #   The CloudWatch alarms that were invoked by the association.
+    #   @return [Array<Types::AlarmStateInformation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationExecution AWS API Documentation
     #
     class AssociationExecution < Struct.new(
@@ -600,7 +694,9 @@ module Aws::SSM
       :detailed_status,
       :created_time,
       :last_execution_date,
-      :resource_count_by_status)
+      :resource_count_by_status,
+      :alarm_configuration,
+      :triggered_alarms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1282,6 +1378,14 @@ module Aws::SSM
     #   multi-account Automation execution.
     #   @return [Types::ProgressCounters]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The details for the CloudWatch alarm applied to your automation.
+    #   @return [Types::AlarmConfiguration]
+    #
+    # @!attribute [rw] triggered_alarms
+    #   The CloudWatch alarm that was invoked by the automation.
+    #   @return [Array<Types::AlarmStateInformation>]
+    #
     # @!attribute [rw] automation_subtype
     #   The subtype of the Automation operation. Currently, the only
     #   supported value is `ChangeRequest`.
@@ -1344,6 +1448,8 @@ module Aws::SSM
       :target,
       :target_locations,
       :progress_counters,
+      :alarm_configuration,
+      :triggered_alarms,
       :automation_subtype,
       :scheduled_time,
       :runbooks,
@@ -1500,6 +1606,14 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html
     #   @return [String]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The details for the CloudWatch alarm applied to your automation.
+    #   @return [Types::AlarmConfiguration]
+    #
+    # @!attribute [rw] triggered_alarms
+    #   The CloudWatch alarm that was invoked by the automation.
+    #   @return [Array<Types::AlarmStateInformation>]
+    #
     # @!attribute [rw] automation_subtype
     #   The subtype of the Automation operation. Currently, the only
     #   supported value is `ChangeRequest`.
@@ -1559,6 +1673,8 @@ module Aws::SSM
       :max_errors,
       :target,
       :automation_type,
+      :alarm_configuration,
+      :triggered_alarms,
       :automation_subtype,
       :scheduled_time,
       :runbooks,
@@ -2009,6 +2125,14 @@ module Aws::SSM
     #   The `TimeoutSeconds` value specified for a command.
     #   @return [Integer]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The details for the CloudWatch alarm applied to your command.
+    #   @return [Types::AlarmConfiguration]
+    #
+    # @!attribute [rw] triggered_alarms
+    #   The CloudWatch alarm that was invoked by the command.
+    #   @return [Array<Types::AlarmStateInformation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Command AWS API Documentation
     #
     class Command < Struct.new(
@@ -2035,7 +2159,9 @@ module Aws::SSM
       :service_role,
       :notification_config,
       :cloud_watch_output_config,
-      :timeout_seconds)
+      :timeout_seconds,
+      :alarm_configuration,
+      :triggered_alarms)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -2908,6 +3034,14 @@ module Aws::SSM
     #                 "TargetMapKey" => ["TargetMapValue"],
     #               },
     #             ],
+    #             alarm_configuration: {
+    #               ignore_poll_alarm_failure: false,
+    #               alarms: [ # required
+    #                 {
+    #                   name: "AlarmName", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #         ],
     #       }
@@ -2974,6 +3108,14 @@ module Aws::SSM
     #             "TargetMapKey" => ["TargetMapValue"],
     #           },
     #         ],
+    #         alarm_configuration: {
+    #           ignore_poll_alarm_failure: false,
+    #           alarms: [ # required
+    #             {
+    #               name: "AlarmName", # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -3133,6 +3275,11 @@ module Aws::SSM
     #   Targets and TargetMaps can't be specified together.
     #   @return [Array<Hash<String,Array<String>>>]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The details for the CloudWatch alarm you want to apply to an
+    #   automation or command.
+    #   @return [Types::AlarmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequestEntry AWS API Documentation
     #
     class CreateAssociationBatchRequestEntry < Struct.new(
@@ -3153,7 +3300,8 @@ module Aws::SSM
       :calendar_names,
       :target_locations,
       :schedule_offset,
-      :target_maps)
+      :target_maps,
+      :alarm_configuration)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -3228,6 +3376,14 @@ module Aws::SSM
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         alarm_configuration: {
+    #           ignore_poll_alarm_failure: false,
+    #           alarms: [ # required
+    #             {
+    #               name: "AlarmName", # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -3425,12 +3581,17 @@ module Aws::SSM
     #   @return [Array<Hash<String,Array<String>>>]
     #
     # @!attribute [rw] tags
-    #   Adds or overwrites one or more tags for a State Manager association.
-    #   *Tags* are metadata that you can assign to your Amazon Web Services
-    #   resources. Tags enable you to categorize your resources in different
-    #   ways, for example, by purpose, owner, or environment. Each tag
-    #   consists of a key and an optional value, both of which you define.
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment. For example, you might want to tag an association to
+    #   identify the type of resource to which it applies, the environment,
+    #   or the purpose of the association.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] alarm_configuration
+    #   The details for the CloudWatch alarm you want to apply to an
+    #   automation or command.
+    #   @return [Types::AlarmConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
     #
@@ -3453,7 +3614,8 @@ module Aws::SSM
       :target_locations,
       :schedule_offset,
       :target_maps,
-      :tags)
+      :tags,
+      :alarm_configuration)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -9168,6 +9330,16 @@ module Aws::SSM
     #   The time the task execution completed.
     #   @return [Time]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The details for the CloudWatch alarm you applied to your maintenance
+    #   window task.
+    #   @return [Types::AlarmConfiguration]
+    #
+    # @!attribute [rw] triggered_alarms
+    #   The CloudWatch alarms that were invoked by the maintenance window
+    #   task.
+    #   @return [Array<Types::AlarmStateInformation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTaskResult AWS API Documentation
     #
     class GetMaintenanceWindowExecutionTaskResult < Struct.new(
@@ -9183,7 +9355,9 @@ module Aws::SSM
       :status,
       :status_details,
       :start_time,
-      :end_time)
+      :end_time,
+      :alarm_configuration,
+      :triggered_alarms)
       SENSITIVE = [:task_parameters]
       include Aws::Structure
     end
@@ -9445,6 +9619,11 @@ module Aws::SSM
     #   operation.
     #   @return [String]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The details for the CloudWatch alarm you applied to your maintenance
+    #   window task.
+    #   @return [Types::AlarmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowTaskResult AWS API Documentation
     #
     class GetMaintenanceWindowTaskResult < Struct.new(
@@ -9462,7 +9641,8 @@ module Aws::SSM
       :logging_info,
       :name,
       :description,
-      :cutoff_behavior)
+      :cutoff_behavior,
+      :alarm_configuration)
       SENSITIVE = [:task_parameters, :description]
       include Aws::Structure
     end
@@ -11439,7 +11619,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The specified tag key or value is not valid.
+    # The tag key or value isn't valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -13267,6 +13447,16 @@ module Aws::SSM
     #   The type of task that ran.
     #   @return [String]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The details for the CloudWatch alarm applied to your maintenance
+    #   window task.
+    #   @return [Types::AlarmConfiguration]
+    #
+    # @!attribute [rw] triggered_alarms
+    #   The CloudWatch alarm that was invoked by the maintenance window
+    #   task.
+    #   @return [Array<Types::AlarmStateInformation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowExecutionTaskIdentity AWS API Documentation
     #
     class MaintenanceWindowExecutionTaskIdentity < Struct.new(
@@ -13277,7 +13467,9 @@ module Aws::SSM
       :start_time,
       :end_time,
       :task_arn,
-      :task_type)
+      :task_type,
+      :alarm_configuration,
+      :triggered_alarms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13916,6 +14108,11 @@ module Aws::SSM
     #   cutoff time specified in the maintenance windows is reached.
     #   @return [String]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The details for the CloudWatch alarm applied to your maintenance
+    #   window task.
+    #   @return [Types::AlarmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTask AWS API Documentation
     #
     class MaintenanceWindowTask < Struct.new(
@@ -13932,7 +14129,8 @@ module Aws::SSM
       :max_errors,
       :name,
       :description,
-      :cutoff_behavior)
+      :cutoff_behavior,
+      :alarm_configuration)
       SENSITIVE = [:task_parameters, :description]
       include Aws::Structure
     end
@@ -17051,6 +17249,14 @@ module Aws::SSM
     #         description: "MaintenanceWindowDescription",
     #         client_token: "ClientToken",
     #         cutoff_behavior: "CONTINUE_TASK", # accepts CONTINUE_TASK, CANCEL_TASK
+    #         alarm_configuration: {
+    #           ignore_poll_alarm_failure: false,
+    #           alarms: [ # required
+    #             {
+    #               name: "AlarmName", # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] window_id
@@ -17228,6 +17434,11 @@ module Aws::SSM
     #     The status for tasks that are not completed is `TIMED_OUT`.
     #   @return [String]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The CloudWatch alarm you want to apply to your maintenance window
+    #   task.
+    #   @return [Types::AlarmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTaskWithMaintenanceWindowRequest AWS API Documentation
     #
     class RegisterTaskWithMaintenanceWindowRequest < Struct.new(
@@ -17245,7 +17456,8 @@ module Aws::SSM
       :name,
       :description,
       :client_token,
-      :cutoff_behavior)
+      :cutoff_behavior,
+      :alarm_configuration)
       SENSITIVE = [:task_parameters, :description]
       include Aws::Structure
     end
@@ -18341,6 +18553,14 @@ module Aws::SSM
     #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
     #           cloud_watch_output_enabled: false,
     #         },
+    #         alarm_configuration: {
+    #           ignore_poll_alarm_failure: false,
+    #           alarms: [ # required
+    #             {
+    #               name: "AlarmName", # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] instance_ids
@@ -18519,6 +18739,10 @@ module Aws::SSM
     #   Amazon Web Services Systems Manager.
     #   @return [Types::CloudWatchOutputConfig]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The CloudWatch alarm you want to apply to your command.
+    #   @return [Types::AlarmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommandRequest AWS API Documentation
     #
     class SendCommandRequest < Struct.new(
@@ -18538,7 +18762,8 @@ module Aws::SSM
       :max_errors,
       :service_role_arn,
       :notification_config,
-      :cloud_watch_output_config)
+      :cloud_watch_output_config,
+      :alarm_configuration)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -18903,6 +19128,14 @@ module Aws::SSM
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         alarm_configuration: {
+    #           ignore_poll_alarm_failure: false,
+    #           alarms: [ # required
+    #             {
+    #               name: "AlarmName", # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] document_name
@@ -19008,6 +19241,10 @@ module Aws::SSM
     #    </note>
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The CloudWatch alarm you want to apply to your automation.
+    #   @return [Types::AlarmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAutomationExecutionRequest AWS API Documentation
     #
     class StartAutomationExecutionRequest < Struct.new(
@@ -19022,7 +19259,8 @@ module Aws::SSM
       :max_concurrency,
       :max_errors,
       :target_locations,
-      :tags)
+      :tags,
+      :alarm_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20017,6 +20255,14 @@ module Aws::SSM
     #             "TargetMapKey" => ["TargetMapValue"],
     #           },
     #         ],
+    #         alarm_configuration: {
+    #           ignore_poll_alarm_failure: false,
+    #           alarms: [ # required
+    #             {
+    #               name: "AlarmName", # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] association_id
@@ -20218,6 +20464,11 @@ module Aws::SSM
     #   Targets and TargetMaps can't be specified together.
     #   @return [Array<Hash<String,Array<String>>>]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The details for the CloudWatch alarm you want to apply to an
+    #   automation or command.
+    #   @return [Types::AlarmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationRequest AWS API Documentation
     #
     class UpdateAssociationRequest < Struct.new(
@@ -20239,7 +20490,8 @@ module Aws::SSM
       :calendar_names,
       :target_locations,
       :schedule_offset,
-      :target_maps)
+      :target_maps,
+      :alarm_configuration)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -20862,6 +21114,14 @@ module Aws::SSM
     #         description: "MaintenanceWindowDescription",
     #         replace: false,
     #         cutoff_behavior: "CONTINUE_TASK", # accepts CONTINUE_TASK, CANCEL_TASK
+    #         alarm_configuration: {
+    #           ignore_poll_alarm_failure: false,
+    #           alarms: [ # required
+    #             {
+    #               name: "AlarmName", # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] window_id
@@ -21053,6 +21313,11 @@ module Aws::SSM
     #     The status for tasks that are not completed is `TIMED_OUT`.
     #   @return [String]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The CloudWatch alarm you want to apply to your maintenance window
+    #   task.
+    #   @return [Types::AlarmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTaskRequest AWS API Documentation
     #
     class UpdateMaintenanceWindowTaskRequest < Struct.new(
@@ -21070,7 +21335,8 @@ module Aws::SSM
       :name,
       :description,
       :replace,
-      :cutoff_behavior)
+      :cutoff_behavior,
+      :alarm_configuration)
       SENSITIVE = [:task_parameters, :description]
       include Aws::Structure
     end
@@ -21153,6 +21419,11 @@ module Aws::SSM
     #   cutoff time specified in the maintenance windows is reached.
     #   @return [String]
     #
+    # @!attribute [rw] alarm_configuration
+    #   The details for the CloudWatch alarm you applied to your maintenance
+    #   window task.
+    #   @return [Types::AlarmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTaskResult AWS API Documentation
     #
     class UpdateMaintenanceWindowTaskResult < Struct.new(
@@ -21169,7 +21440,8 @@ module Aws::SSM
       :logging_info,
       :name,
       :description,
-      :cutoff_behavior)
+      :cutoff_behavior,
+      :alarm_configuration)
       SENSITIVE = [:task_parameters, :description]
       include Aws::Structure
     end

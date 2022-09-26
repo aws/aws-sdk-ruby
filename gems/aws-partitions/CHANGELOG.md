@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.637.0 (2022-09-26)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IoTFleetWise`.
+
 1.636.0 (2022-09-23)
 ------------------
 

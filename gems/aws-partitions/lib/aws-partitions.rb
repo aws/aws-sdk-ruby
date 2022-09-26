@@ -376,6 +376,7 @@ module Aws
             'IoTEvents' => 'iotevents',
             'IoTEventsData' => 'data.iotevents',
             'IoTFleetHub' => 'api.fleethub.iot',
+            'IoTFleetWise' => 'iotfleetwise',
             'IoTJobsDataPlane' => 'data.jobs.iot',
             'IoTSecureTunneling' => 'api.tunneling.iot',
             'IoTSiteWise' => 'iotsitewise',
