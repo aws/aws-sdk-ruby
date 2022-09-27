@@ -1,5 +1,6 @@
 {
-  "partitions" : [ {
+  "partitions" : [
+    {
     "defaults" : {
       "hostname" : "{service}.{region}.{dnsSuffix}",
       "protocols" : [ "https" ],

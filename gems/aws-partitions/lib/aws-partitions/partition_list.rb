@@ -42,6 +42,39 @@ module Aws
         end
       end
 
+      # @param [Partition] partition
+      # @api private
+      def merge_metadata(partitions_metadata)
+        partitions_metadata['partitions'].each do |partition_metadata|
+          outputs = partition_metadata['outputs']
+          md = Metadata.new(
+            name: outputs['name'],
+            dns_suffix: outputs['dnsSuffix'],
+            dualstack_dns_suffix: outputs['dualStackDnsSuffix'],
+            supports_fips: outputs['supportsFips'],
+            supports_dualstack: outputs['supportsDualStack']
+          )
+          if existing = @partitions[partition_metadata['id']]
+            @partitions[partition_metadata['id']] = Partition.new(
+              name: existing.name,
+              regions: partition_metadata['regions'],
+              region_regex: partition_metadata['region_regex'],
+              services: existing.services,
+              metadata: md
+            )
+
+          else
+            @partitions[partition_metadata['id']] = Partition.new(
+              name: partition_metadata['id'],
+              regions: partition_metadata['regions'],
+              region_regex: partition_metadata['region_regex'],
+              services: nil,
+              metadata: md
+            )
+          end
+        end
+      end
+
       # Removed all partitions.
       # @api private
       def clear
