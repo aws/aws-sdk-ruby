@@ -411,11 +411,11 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] effective_start
-    #   The effective state data of your Cost Category.
+    #   The effective start date of your Cost Category.
     #   @return [String]
     #
     # @!attribute [rw] effective_end
-    #   The effective end data of your Cost Category.
+    #   The effective end date of your Cost Category.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1144,6 +1144,7 @@ module Aws::CostExplorer
     #
     #       {
     #         name: "CostCategoryName", # required
+    #         effective_start: "ZonedDateTime",
     #         rule_version: "CostCategoryExpression.v1", # required, accepts CostCategoryExpression.v1
     #         rules: [ # required
     #           {
@@ -1211,6 +1212,13 @@ module Aws::CostExplorer
     #   The unique name of the Cost Category.
     #   @return [String]
     #
+    # @!attribute [rw] effective_start
+    #   The Cost Category's effective start date. It can only be a billing
+    #   start date (first day of the month). If the date isn't provided,
+    #   it's the first day of the current month. Dates can't be before the
+    #   previous twelve months, or in the future.
+    #   @return [String]
+    #
     # @!attribute [rw] rule_version
     #   The rule schema version in this particular Cost Category.
     #   @return [String]
@@ -1269,6 +1277,7 @@ module Aws::CostExplorer
     #
     class CreateCostCategoryDefinitionRequest < Struct.new(
       :name,
+      :effective_start,
       :rule_version,
       :rules,
       :default_value,
@@ -1283,7 +1292,8 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] effective_start
-    #   The Cost Category's effective start date.
+    #   The Cost Category's effective start date. It can only be a billing
+    #   start date (first day of the month).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CreateCostCategoryDefinitionResponse AWS API Documentation
@@ -1553,7 +1563,12 @@ module Aws::CostExplorer
     # @!attribute [rw] key
     #   The names of the metadata types that you can use to filter and group
     #   your results. For example, `AZ` returns a list of Availability
-    #   Zones.
+    #   Zones. `LINK_ACCOUNT_NAME` and `SERVICE_CODE` can only be used in
+    #   [CostCategoryRule][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -3136,6 +3151,12 @@ module Aws::CostExplorer
     # @!attribute [rw] dimension
     #   The name of the dimension. Each `Dimension` is available for a
     #   different `Context`. For more information, see `Context`.
+    #   `LINK_ACCOUNT_NAME` and `SERVICE_CODE` can only be used in
+    #   [CostCategoryRule][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html
     #   @return [String]
     #
     # @!attribute [rw] context
@@ -3452,7 +3473,8 @@ module Aws::CostExplorer
     #
     #   * RESOURCE\_ID - The unique identifier of the resource. ResourceId
     #     is an opt-in feature only available for last 14 days for
-    #     EC2-Compute Service.
+    #     EC2-Compute Service. You can opt-in by enabling `Hourly` and
+    #     `Resource Level Data` in Cost Management Console preferences.
     #
     #   If you set the context to `RESERVATIONS`, you can use the following
     #   dimensions for searching:
@@ -7180,7 +7202,7 @@ module Aws::CostExplorer
     # applied to all tags. That is, it's filtered on resources with no
     # tags.
     #
-    # If `Values` is provided and `Key` isn't specified, the `ABSENT`
+    # If `Key` is provided and `Values` isn't specified, the `ABSENT`
     # `MatchOption` is applied to the tag `Key` only. That is, it's
     # filtered on resources without the given tag key.
     #
@@ -7592,6 +7614,7 @@ module Aws::CostExplorer
     #
     #       {
     #         cost_category_arn: "Arn", # required
+    #         effective_start: "ZonedDateTime",
     #         rule_version: "CostCategoryExpression.v1", # required, accepts CostCategoryExpression.v1
     #         rules: [ # required
     #           {
@@ -7653,6 +7676,13 @@ module Aws::CostExplorer
     #   The unique identifier for your Cost Category.
     #   @return [String]
     #
+    # @!attribute [rw] effective_start
+    #   The Cost Category's effective start date. It can only be a billing
+    #   start date (first day of the month). If the date isn't provided,
+    #   it's the first day of the current month. Dates can't be before the
+    #   previous twelve months, or in the future.
+    #   @return [String]
+    #
     # @!attribute [rw] rule_version
     #   The rule schema version in this particular Cost Category.
     #   @return [String]
@@ -7679,6 +7709,7 @@ module Aws::CostExplorer
     #
     class UpdateCostCategoryDefinitionRequest < Struct.new(
       :cost_category_arn,
+      :effective_start,
       :rule_version,
       :rules,
       :default_value,
@@ -7692,7 +7723,8 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] effective_start
-    #   The Cost Category's effective start date.
+    #   The Cost Category's effective start date. It can only be a billing
+    #   start date (first day of the month).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateCostCategoryDefinitionResponse AWS API Documentation

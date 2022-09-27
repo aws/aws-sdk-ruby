@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2022-09-27)
+------------------
+
+* Feature - My AWS Service (placeholder) - Amazon Kendra now provides a data source connector for DropBox. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-dropbox.html
+
 1.58.0 (2022-09-13)
 ------------------
 

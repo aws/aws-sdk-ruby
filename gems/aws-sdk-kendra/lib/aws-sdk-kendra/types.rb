@@ -338,8 +338,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] entity_list
-    #   Lists users or groups in your Amazon Web Services SSO identity
-    #   source.
+    #   Lists users or groups in your IAM Identity Center identity source.
     #   @return [Array<Types::EntityConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AssociateEntitiesToExperienceRequest AWS API Documentation
@@ -353,7 +352,7 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] failed_entity_list
-    #   Lists the users or groups in your Amazon Web Services SSO identity
+    #   Lists the users or groups in your IAM Identity Center identity
     #   source that failed to properly configure with your Amazon Kendra
     #   experience.
     #   @return [Array<Types::FailedEntity>]
@@ -390,10 +389,9 @@ module Aws::Kendra
     #
     # @!attribute [rw] personas
     #   The personas that define the specific permissions of users or groups
-    #   in your Amazon Web Services SSO identity source. The available
-    #   personas or access roles are `Owner` and `Viewer`. For more
-    #   information on these personas, see [Providing access to your search
-    #   page][1].
+    #   in your IAM Identity Center identity source. The available personas
+    #   or access roles are `Owner` and `Viewer`. For more information on
+    #   these personas, see [Providing access to your search page][1].
     #
     #
     #
@@ -411,7 +409,7 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] failed_entity_list
-    #   Lists the users or groups in your Amazon Web Services SSO identity
+    #   Lists the users or groups in your IAM Identity Center identity
     #   source that failed to properly configure with your Amazon Kendra
     #   experience.
     #   @return [Array<Types::FailedEntity>]
@@ -3327,9 +3325,9 @@ module Aws::Kendra
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and
-    #   Amazon Web Services SSO that stores your user and group information.
-    #   For more information, see [IAM roles for Amazon Kendra][1].
+    #   `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and IAM
+    #   Identity Center that stores your user and group information. For
+    #   more information, see [IAM roles for Amazon Kendra][1].
     #
     #
     #
@@ -3619,9 +3617,9 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] user_group_resolution_configuration
-    #   Enables fetching access levels of groups and users from an Amazon
-    #   Web Services Single Sign On identity source. To configure this, see
-    #   [UserGroupResolutionConfiguration][1].
+    #   Enables fetching access levels of groups and users from an IAM
+    #   Identity Center (successor to Single Sign-On) identity source. To
+    #   configure this, see [UserGroupResolutionConfiguration][1].
     #
     #
     #
@@ -5603,8 +5601,7 @@ module Aws::Kendra
     # @!attribute [rw] role_arn
     #   Shows the Amazon Resource Name (ARN) of a role with permission to
     #   access `Query` API, `QuerySuggestions` API, `SubmitFeedback` API,
-    #   and Amazon Web Services SSO that stores your user and group
-    #   information.
+    #   and IAM Identity Center that stores your user and group information.
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -5831,8 +5828,8 @@ module Aws::Kendra
     #
     # @!attribute [rw] user_group_resolution_configuration
     #   Whether you have enabled the configuration for fetching access
-    #   levels of groups and users from an Amazon Web Services Single Sign
-    #   On identity source.
+    #   levels of groups and users from an IAM Identity Center (successor to
+    #   Single Sign-On) identity source.
     #   @return [Types::UserGroupResolutionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeIndexResponse AWS API Documentation
@@ -6276,8 +6273,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] entity_list
-    #   Lists users or groups in your Amazon Web Services SSO identity
-    #   source.
+    #   Lists users or groups in your IAM Identity Center identity source.
     #   @return [Array<Types::EntityConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DisassociateEntitiesFromExperienceRequest AWS API Documentation
@@ -6291,7 +6287,7 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] failed_entity_list
-    #   Lists the users or groups in your Amazon Web Services SSO identity
+    #   Lists the users or groups in your IAM Identity Center identity
     #   source that failed to properly remove access to your Amazon Kendra
     #   experience.
     #   @return [Array<Types::FailedEntity>]
@@ -6322,7 +6318,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] entity_ids
-    #   The identifiers of users or groups in your Amazon Web Services SSO
+    #   The identifiers of users or groups in your IAM Identity Center
     #   identity source. For example, user IDs could be user emails.
     #   @return [Array<String>]
     #
@@ -6337,7 +6333,7 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] failed_entity_list
-    #   Lists the users or groups in your Amazon Web Services SSO identity
+    #   Lists the users or groups in your IAM Identity Center identity
     #   source that failed to properly remove access to your Amazon Kendra
     #   experience.
     #   @return [Array<Types::FailedEntity>]
@@ -6911,9 +6907,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the configuration information for users or groups in your
-    # Amazon Web Services SSO identity source to grant access your Amazon
-    # Kendra experience.
+    # Provides the configuration information for users or groups in your IAM
+    # Identity Center identity source to grant access your Amazon Kendra
+    # experience.
     #
     # @note When making an API call, you may pass EntityConfiguration
     #   data as a hash:
@@ -6924,7 +6920,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] entity_id
-    #   The identifier of a user or group in your Amazon Web Services SSO
+    #   The identifier of a user or group in your IAM Identity Center
     #   identity source. For example, a user ID could be an email.
     #   @return [String]
     #
@@ -6975,10 +6971,10 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the configuration information for users or groups in your
-    # Amazon Web Services SSO identity source for access to your Amazon
-    # Kendra experience. Specific permissions are defined for each user or
-    # group once they are granted access to your Amazon Kendra experience.
+    # Provides the configuration information for users or groups in your IAM
+    # Identity Center identity source for access to your Amazon Kendra
+    # experience. Specific permissions are defined for each user or group
+    # once they are granted access to your Amazon Kendra experience.
     #
     # @note When making an API call, you may pass EntityPersonaConfiguration
     #   data as a hash:
@@ -6989,13 +6985,13 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] entity_id
-    #   The identifier of a user or group in your Amazon Web Services SSO
+    #   The identifier of a user or group in your IAM Identity Center
     #   identity source. For example, a user ID could be an email.
     #   @return [String]
     #
     # @!attribute [rw] persona
     #   The persona that defines the specific permissions of the user or
-    #   group in your Amazon Web Services SSO identity source. The available
+    #   group in your IAM Identity Center identity source. The available
     #   personas or access roles are `Owner` and `Viewer`. For more
     #   information on these personas, see [Providing access to your search
     #   page][1].
@@ -7040,8 +7036,8 @@ module Aws::Kendra
     #   @return [Types::ContentSourceConfiguration]
     #
     # @!attribute [rw] user_identity_configuration
-    #   The Amazon Web Services SSO field name that contains the identifiers
-    #   of your users, such as their emails.
+    #   The IAM Identity Center field name that contains the identifiers of
+    #   your users, such as their emails.
     #   @return [Types::UserIdentityConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ExperienceConfiguration AWS API Documentation
@@ -7075,19 +7071,18 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Summary information for users or groups in your Amazon Web Services
-    # SSO identity source with granted access to your Amazon Kendra
-    # experience. You can create an Amazon Kendra experience such as a
-    # search application. For more information on creating a search
-    # application experience, see [Building a search experience with no
-    # code][1].
+    # Summary information for users or groups in your IAM Identity Center
+    # identity source with granted access to your Amazon Kendra experience.
+    # You can create an Amazon Kendra experience such as a search
+    # application. For more information on creating a search application
+    # experience, see [Building a search experience with no code][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
     #
     # @!attribute [rw] entity_id
-    #   The identifier of a user or group in your Amazon Web Services SSO
+    #   The identifier of a user or group in your IAM Identity Center
     #   identity source. For example, a user ID could be an email.
     #   @return [String]
     #
@@ -7255,18 +7250,18 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Information on the users or groups in your Amazon Web Services SSO
+    # Information on the users or groups in your IAM Identity Center
     # identity source that failed to properly configure with your Amazon
     # Kendra experience.
     #
     # @!attribute [rw] entity_id
-    #   The identifier of the user or group in your Amazon Web Services SSO
+    #   The identifier of the user or group in your IAM Identity Center
     #   identity source. For example, a user ID could be an email.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The reason the user or group in your Amazon Web Services SSO
-    #   identity source failed to properly configure with your Amazon Kendra
+    #   The reason the user or group in your IAM Identity Center identity
+    #   source failed to properly configure with your Amazon Kendra
     #   experience.
     #   @return [String]
     #
@@ -9770,8 +9765,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Summary information for users or groups in your Amazon Web Services
-    # SSO identity source. This applies to users and groups with specific
+    # Summary information for users or groups in your IAM Identity Center
+    # identity source. This applies to users and groups with specific
     # permissions that define their level of access to your Amazon Kendra
     # experience. You can create an Amazon Kendra experience such as a
     # search application. For more information on creating a search
@@ -9783,13 +9778,13 @@ module Aws::Kendra
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
     #
     # @!attribute [rw] entity_id
-    #   The identifier of a user or group in your Amazon Web Services SSO
+    #   The identifier of a user or group in your IAM Identity Center
     #   identity source. For example, a user ID could be an email.
     #   @return [String]
     #
     # @!attribute [rw] persona
     #   The persona that defines the specific permissions of the user or
-    #   group in your Amazon Web Services SSO identity source. The available
+    #   group in your IAM Identity Center identity source. The available
     #   personas or access roles are `Owner` and `Viewer`. For more
     #   information on these personas, see [Providing access to your search
     #   page][1].
@@ -12723,18 +12718,14 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] template
-    #   The template schema used for the data source.
+    #   The template schema used for the data source, where templates
+    #   schemas are supported.
     #
-    #   The following links to the template schema for data sources where
-    #   templates are supported:
-    #
-    #   * [Zendesk template schema][1]
-    #
-    #   ^
+    #   See [Data source template schemas][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-zendesk.html#zendesk-template-schema
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/ds-schemas.html
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/TemplateConfiguration AWS API Documentation
@@ -13792,9 +13783,9 @@ module Aws::Kendra
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and
-    #   Amazon Web Services SSO that stores your user and group information.
-    #   For more information, see [IAM roles for Amazon Kendra][1].
+    #   `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and IAM
+    #   Identity Center that stores your user and group information. For
+    #   more information, see [IAM roles for Amazon Kendra][1].
     #
     #
     #
@@ -13922,9 +13913,9 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] user_group_resolution_configuration
-    #   Enables fetching access levels of groups and users from an Amazon
-    #   Web Services Single Sign On identity source. To configure this, see
-    #   [UserGroupResolutionConfiguration][1].
+    #   Enables fetching access levels of groups and users from an IAM
+    #   Identity Center (successor to Single Sign-On) identity source. To
+    #   configure this, see [UserGroupResolutionConfiguration][1].
     #
     #
     #
@@ -14275,22 +14266,22 @@ module Aws::Kendra
     end
 
     # Provides the configuration information to fetch access levels of
-    # groups and users from an Amazon Web Services Single Sign On identity
-    # source. This is useful for user context filtering, where search
-    # results are filtered based on the user or their group access to
-    # documents. You can also use the [PutPrincipalMapping][1] API to map
-    # users to their groups so that you only need to provide the user ID
-    # when you issue the query.
+    # groups and users from an IAM Identity Center (successor to Single
+    # Sign-On) identity source. This is useful for user context filtering,
+    # where search results are filtered based on the user or their group
+    # access to documents. You can also use the [PutPrincipalMapping][1] API
+    # to map users to their groups so that you only need to provide the user
+    # ID when you issue the query.
     #
-    # To set up an Amazon Web Services SSO identity source in the console to
-    # use with Amazon Kendra, see [Getting started with an Amazon Web
-    # Services SSO identity source][2]. You must also grant the required
-    # permissions to use Amazon Web Services SSO with Amazon Kendra. For
-    # more information, see [IAM roles for Amazon Web Services SSO][3].
+    # To set up an IAM Identity Center identity source in the console to use
+    # with Amazon Kendra, see [Getting started with an IAM Identity Center
+    # identity source][2]. You must also grant the required permissions to
+    # use IAM Identity Center with Amazon Kendra. For more information, see
+    # [IAM roles for IAM Identity Center][3].
     #
     # Amazon Kendra currently does not support using
     # `UserGroupResolutionConfiguration` with an Amazon Web Services
-    # organization member account for your Amazon Web Services SSO identify
+    # organization member account for your IAM Identity Center identify
     # source. You must create your index in the management account for the
     # organization in order to use `UserGroupResolutionConfiguration`.
     #
@@ -14309,10 +14300,10 @@ module Aws::Kendra
     #
     # @!attribute [rw] user_group_resolution_mode
     #   The identity store provider (mode) you want to use to fetch access
-    #   levels of groups and users. Amazon Web Services Single Sign On is
-    #   currently the only available mode. Your users and groups must exist
-    #   in an Amazon Web Services SSO identity source in order to use this
-    #   mode.
+    #   levels of groups and users. IAM Identity Center (successor to Single
+    #   Sign-On) is currently the only available mode. Your users and groups
+    #   must exist in an IAM Identity Center identity source in order to use
+    #   this mode.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UserGroupResolutionConfiguration AWS API Documentation
@@ -14334,14 +14325,13 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] identity_attribute_name
-    #   The Amazon Web Services SSO field name that contains the identifiers
-    #   of your users, such as their emails. This is used for [user context
+    #   The IAM Identity Center field name that contains the identifiers of
+    #   your users, such as their emails. This is used for [user context
     #   filtering][1] and for granting access to your Amazon Kendra
-    #   experience. You must set up Amazon Web Services SSO with Amazon
-    #   Kendra. You must include your users and groups in your Access
-    #   Control List when you ingest documents into your index. For more
-    #   information, see [Getting started with an Amazon Web Services SSO
-    #   identity source][2].
+    #   experience. You must set up IAM Identity Center with Amazon Kendra.
+    #   You must include your users and groups in your Access Control List
+    #   when you ingest documents into your index. For more information, see
+    #   [Getting started with an IAM Identity Center identity source][2].
     #
     #
     #

@@ -551,6 +551,12 @@ module Aws::CostExplorer
     # @option params [required, String] :name
     #   The unique name of the Cost Category.
     #
+    # @option params [String] :effective_start
+    #   The Cost Category's effective start date. It can only be a billing
+    #   start date (first day of the month). If the date isn't provided,
+    #   it's the first day of the current month. Dates can't be before the
+    #   previous twelve months, or in the future.
+    #
     # @option params [required, String] :rule_version
     #   The rule schema version in this particular Cost Category.
     #
@@ -608,6 +614,7 @@ module Aws::CostExplorer
     #
     #   resp = client.create_cost_category_definition({
     #     name: "CostCategoryName", # required
+    #     effective_start: "ZonedDateTime",
     #     rule_version: "CostCategoryExpression.v1", # required, accepts CostCategoryExpression.v1
     #     rules: [ # required
     #       {
@@ -1779,6 +1786,12 @@ module Aws::CostExplorer
     # @option params [required, String] :dimension
     #   The name of the dimension. Each `Dimension` is available for a
     #   different `Context`. For more information, see `Context`.
+    #   `LINK_ACCOUNT_NAME` and `SERVICE_CODE` can only be used in
+    #   [CostCategoryRule][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html
     #
     # @option params [String] :context
     #   The context for the call to `GetDimensionValues`. This can be
@@ -4486,6 +4499,12 @@ module Aws::CostExplorer
     # @option params [required, String] :cost_category_arn
     #   The unique identifier for your Cost Category.
     #
+    # @option params [String] :effective_start
+    #   The Cost Category's effective start date. It can only be a billing
+    #   start date (first day of the month). If the date isn't provided,
+    #   it's the first day of the current month. Dates can't be before the
+    #   previous twelve months, or in the future.
+    #
     # @option params [required, String] :rule_version
     #   The rule schema version in this particular Cost Category.
     #
@@ -4513,6 +4532,7 @@ module Aws::CostExplorer
     #
     #   resp = client.update_cost_category_definition({
     #     cost_category_arn: "Arn", # required
+    #     effective_start: "ZonedDateTime",
     #     rule_version: "CostCategoryExpression.v1", # required, accepts CostCategoryExpression.v1
     #     rules: [ # required
     #       {
@@ -4597,7 +4617,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

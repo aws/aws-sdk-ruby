@@ -361,7 +361,7 @@ module Aws::Kendra
 
     # @!group API Operations
 
-    # Grants users or groups in your Amazon Web Services SSO identity source
+    # Grants users or groups in your IAM Identity Center identity source
     # access to your Amazon Kendra experience. You can create an Amazon
     # Kendra experience such as a search application. For more information
     # on creating a search application experience, see [Building a search
@@ -378,7 +378,7 @@ module Aws::Kendra
     #   The identifier of the index for your Amazon Kendra experience.
     #
     # @option params [required, Array<Types::EntityConfiguration>] :entity_list
-    #   Lists users or groups in your Amazon Web Services SSO identity source.
+    #   Lists users or groups in your IAM Identity Center identity source.
     #
     # @return [Types::AssociateEntitiesToExperienceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -412,8 +412,8 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Defines the specific permissions of users or groups in your Amazon Web
-    # Services SSO identity source with access to your Amazon Kendra
+    # Defines the specific permissions of users or groups in your IAM
+    # Identity Center identity source with access to your Amazon Kendra
     # experience. You can create an Amazon Kendra experience such as a
     # search application. For more information on creating a search
     # application experience, see [Building a search experience with no
@@ -431,10 +431,9 @@ module Aws::Kendra
     #
     # @option params [required, Array<Types::EntityPersonaConfiguration>] :personas
     #   The personas that define the specific permissions of users or groups
-    #   in your Amazon Web Services SSO identity source. The available
-    #   personas or access roles are `Owner` and `Viewer`. For more
-    #   information on these personas, see [Providing access to your search
-    #   page][1].
+    #   in your IAM Identity Center identity source. The available personas or
+    #   access roles are `Owner` and `Viewer`. For more information on these
+    #   personas, see [Providing access to your search page][1].
     #
     #
     #
@@ -1793,8 +1792,8 @@ module Aws::Kendra
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and Amazon
-    #   Web Services SSO that stores your user and group information. For more
+    #   `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and IAM
+    #   Identity Center that stores your user and group information. For more
     #   information, see [IAM roles for Amazon Kendra][1].
     #
     #
@@ -2050,9 +2049,9 @@ module Aws::Kendra
     #     accessible to the user will be searchable and displayable.
     #
     # @option params [Types::UserGroupResolutionConfiguration] :user_group_resolution_configuration
-    #   Enables fetching access levels of groups and users from an Amazon Web
-    #   Services Single Sign On identity source. To configure this, see
-    #   [UserGroupResolutionConfiguration][1].
+    #   Enables fetching access levels of groups and users from an IAM
+    #   Identity Center (successor to Single Sign-On) identity source. To
+    #   configure this, see [UserGroupResolutionConfiguration][1].
     #
     #
     #
@@ -3618,11 +3617,11 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Prevents users or groups in your Amazon Web Services SSO identity
-    # source from accessing your Amazon Kendra experience. You can create an
-    # Amazon Kendra experience such as a search application. For more
-    # information on creating a search application experience, see [Building
-    # a search experience with no code][1].
+    # Prevents users or groups in your IAM Identity Center identity source
+    # from accessing your Amazon Kendra experience. You can create an Amazon
+    # Kendra experience such as a search application. For more information
+    # on creating a search application experience, see [Building a search
+    # experience with no code][1].
     #
     #
     #
@@ -3635,7 +3634,7 @@ module Aws::Kendra
     #   The identifier of the index for your Amazon Kendra experience.
     #
     # @option params [required, Array<Types::EntityConfiguration>] :entity_list
-    #   Lists users or groups in your Amazon Web Services SSO identity source.
+    #   Lists users or groups in your IAM Identity Center identity source.
     #
     # @return [Types::DisassociateEntitiesFromExperienceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3669,8 +3668,8 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Removes the specific permissions of users or groups in your Amazon Web
-    # Services SSO identity source with access to your Amazon Kendra
+    # Removes the specific permissions of users or groups in your IAM
+    # Identity Center identity source with access to your Amazon Kendra
     # experience. You can create an Amazon Kendra experience such as a
     # search application. For more information on creating a search
     # application experience, see [Building a search experience with no
@@ -3687,7 +3686,7 @@ module Aws::Kendra
     #   The identifier of the index for your Amazon Kendra experience.
     #
     # @option params [required, Array<String>] :entity_ids
-    #   The identifiers of users or groups in your Amazon Web Services SSO
+    #   The identifiers of users or groups in your IAM Identity Center
     #   identity source. For example, user IDs could be user emails.
     #
     # @return [Types::DisassociatePersonasFromEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4084,11 +4083,11 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Lists users or groups in your Amazon Web Services SSO identity source
-    # that are granted access to your Amazon Kendra experience. You can
-    # create an Amazon Kendra experience such as a search application. For
-    # more information on creating a search application experience, see
-    # [Building a search experience with no code][1].
+    # Lists users or groups in your IAM Identity Center identity source that
+    # are granted access to your Amazon Kendra experience. You can create an
+    # Amazon Kendra experience such as a search application. For more
+    # information on creating a search application experience, see [Building
+    # a search experience with no code][1].
     #
     #
     #
@@ -6005,8 +6004,8 @@ module Aws::Kendra
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and Amazon
-    #   Web Services SSO that stores your user and group information. For more
+    #   `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and IAM
+    #   Identity Center that stores your user and group information. For more
     #   information, see [IAM roles for Amazon Kendra][1].
     #
     #
@@ -6088,9 +6087,9 @@ module Aws::Kendra
     #   The user context policy.
     #
     # @option params [Types::UserGroupResolutionConfiguration] :user_group_resolution_configuration
-    #   Enables fetching access levels of groups and users from an Amazon Web
-    #   Services Single Sign On identity source. To configure this, see
-    #   [UserGroupResolutionConfiguration][1].
+    #   Enables fetching access levels of groups and users from an IAM
+    #   Identity Center (successor to Single Sign-On) identity source. To
+    #   configure this, see [UserGroupResolutionConfiguration][1].
     #
     #
     #
@@ -6387,7 +6386,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

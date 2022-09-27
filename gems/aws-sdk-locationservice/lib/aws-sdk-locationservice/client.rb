@@ -2461,7 +2461,7 @@ module Aws::LocationService
     #
     #   * `sprites@2x.png` for high pixel density displays
     #
-    #   For the JSON document contain image offsets. Use the following ﬁle
+    #   For the JSON document containing image offsets. Use the following ﬁle
     #   names:
     #
     #   * `sprites.json`
@@ -2579,6 +2579,91 @@ module Aws::LocationService
     def get_map_tile(params = {}, options = {}, &block)
       req = build_request(:get_map_tile, params)
       req.send_request(options, &block)
+    end
+
+    # Finds a place by its unique ID. A `PlaceId` is returned by other
+    # search operations.
+    #
+    # <note markdown="1"> A PlaceId is valid only if all of the following are the same in the
+    # original search request and the call to `GetPlace`.
+    #
+    #  * Customer AWS account
+    #
+    # * AWS Region
+    #
+    # * Data provider specified in the place index resource
+    #
+    #  </note>
+    #
+    # @option params [required, String] :index_name
+    #   The name of the place index resource that you want to use for the
+    #   search.
+    #
+    # @option params [String] :language
+    #   The preferred language used to return results. The value must be a
+    #   valid [BCP 47][1] language tag, for example, `en` for English.
+    #
+    #   This setting affects the languages used in the results, but not the
+    #   results themselves. If no language is specified, or not supported for
+    #   a particular result, the partner automatically chooses a language for
+    #   the result.
+    #
+    #   For an example, we'll use the Greek language. You search for a
+    #   location around Athens, Greece, with the `language` parameter set to
+    #   `en`. The `city` in the results will most likely be returned as
+    #   `Athens`.
+    #
+    #   If you set the `language` parameter to `el`, for Greek, then the
+    #   `city` in the results will more likely be returned as `Αθήνα`.
+    #
+    #   If the data provider does not have a value for Greek, the result will
+    #   be in a language that the provider does support.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/search/bcp47
+    #
+    # @option params [required, String] :place_id
+    #   The identifier of the place to find.
+    #
+    # @return [Types::GetPlaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPlaceResponse#place #place} => Types::Place
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_place({
+    #     index_name: "ResourceName", # required
+    #     language: "LanguageTag",
+    #     place_id: "PlaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.place.address_number #=> String
+    #   resp.place.country #=> String
+    #   resp.place.geometry.point #=> Array
+    #   resp.place.geometry.point[0] #=> Float
+    #   resp.place.interpolated #=> Boolean
+    #   resp.place.label #=> String
+    #   resp.place.municipality #=> String
+    #   resp.place.neighborhood #=> String
+    #   resp.place.postal_code #=> String
+    #   resp.place.region #=> String
+    #   resp.place.street #=> String
+    #   resp.place.sub_region #=> String
+    #   resp.place.time_zone.name #=> String
+    #   resp.place.time_zone.offset #=> Integer
+    #   resp.place.unit_number #=> String
+    #   resp.place.unit_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetPlace AWS API Documentation
+    #
+    # @overload get_place(params = {})
+    # @param [Hash] params ({})
+    def get_place(params = {}, options = {})
+      req = build_request(:get_place, params)
+      req.send_request(options)
     end
 
     # A batch request to retrieve all device positions.
@@ -3155,6 +3240,9 @@ module Aws::LocationService
     #   resp.results[0].place.sub_region #=> String
     #   resp.results[0].place.time_zone.name #=> String
     #   resp.results[0].place.time_zone.offset #=> Integer
+    #   resp.results[0].place.unit_number #=> String
+    #   resp.results[0].place.unit_type #=> String
+    #   resp.results[0].place_id #=> String
     #   resp.summary.data_source #=> String
     #   resp.summary.language #=> String
     #   resp.summary.max_results #=> Integer
@@ -3290,6 +3378,7 @@ module Aws::LocationService
     # @example Response structure
     #
     #   resp.results #=> Array
+    #   resp.results[0].place_id #=> String
     #   resp.results[0].text #=> String
     #   resp.summary.bias_position #=> Array
     #   resp.summary.bias_position[0] #=> Float
@@ -3447,6 +3536,9 @@ module Aws::LocationService
     #   resp.results[0].place.sub_region #=> String
     #   resp.results[0].place.time_zone.name #=> String
     #   resp.results[0].place.time_zone.offset #=> Integer
+    #   resp.results[0].place.unit_number #=> String
+    #   resp.results[0].place.unit_type #=> String
+    #   resp.results[0].place_id #=> String
     #   resp.results[0].relevance #=> Float
     #   resp.summary.bias_position #=> Array
     #   resp.summary.bias_position[0] #=> Float
@@ -3821,7 +3913,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
