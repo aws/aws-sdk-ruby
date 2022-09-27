@@ -3195,8 +3195,8 @@ module Aws::LocationService
     #
     #   * `sprites@2x.png` for high pixel density displays
     #
-    #   For the JSON document contain image offsets. Use the following ﬁle
-    #   names:
+    #   For the JSON document containing image offsets. Use the following
+    #   ﬁle names:
     #
     #   * `sprites.json`
     #
@@ -3323,6 +3323,71 @@ module Aws::LocationService
     class GetMapTileResponse < Struct.new(
       :blob,
       :content_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetPlaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_name: "ResourceName", # required
+    #         language: "LanguageTag",
+    #         place_id: "PlaceId", # required
+    #       }
+    #
+    # @!attribute [rw] index_name
+    #   The name of the place index resource that you want to use for the
+    #   search.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The preferred language used to return results. The value must be a
+    #   valid [BCP 47][1] language tag, for example, `en` for English.
+    #
+    #   This setting affects the languages used in the results, but not the
+    #   results themselves. If no language is specified, or not supported
+    #   for a particular result, the partner automatically chooses a
+    #   language for the result.
+    #
+    #   For an example, we'll use the Greek language. You search for a
+    #   location around Athens, Greece, with the `language` parameter set to
+    #   `en`. The `city` in the results will most likely be returned as
+    #   `Athens`.
+    #
+    #   If you set the `language` parameter to `el`, for Greek, then the
+    #   `city` in the results will more likely be returned as `Αθήνα`.
+    #
+    #   If the data provider does not have a value for Greek, the result
+    #   will be in a language that the provider does support.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/search/bcp47
+    #   @return [String]
+    #
+    # @!attribute [rw] place_id
+    #   The identifier of the place to find.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetPlaceRequest AWS API Documentation
+    #
+    class GetPlaceRequest < Struct.new(
+      :index_name,
+      :language,
+      :place_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] place
+    #   Details about the result, such as its address and position.
+    #   @return [Types::Place]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetPlaceResponse AWS API Documentation
+    #
+    class GetPlaceResponse < Struct.new(
+      :place)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4457,6 +4522,21 @@ module Aws::LocationService
     #   using Here as the selected partner.
     #   @return [Types::TimeZone]
     #
+    # @!attribute [rw] unit_number
+    #   For addresses with multiple units, the unit identifier. Can include
+    #   numbers and letters, for example `3B` or `Unit 123`.
+    #
+    #   <note markdown="1"> Returned only for a place index that uses Esri as a data provider.
+    #   Is not returned for `SearchPlaceIndexForPosition`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] unit_type
+    #   For addresses with a `UnitNumber`, the type of unit. For example,
+    #   `Apartment`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/Place AWS API Documentation
     #
     class Place < Struct.new(
@@ -4471,7 +4551,9 @@ module Aws::LocationService
       :region,
       :street,
       :sub_region,
-      :time_zone)
+      :time_zone,
+      :unit_number,
+      :unit_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4717,17 +4799,38 @@ module Aws::LocationService
     #   Details about the search result, such as its address and position.
     #   @return [Types::Place]
     #
+    # @!attribute [rw] place_id
+    #   The unique identifier of the place. You can use this with the
+    #   `GetPlace` operation to find the place again later.
+    #
+    #   <note markdown="1"> For `SearchPlaceIndexForPosition` operations, the `PlaceId` is
+    #   returned only by place indexes that use HERE as a data provider.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchForPositionResult AWS API Documentation
     #
     class SearchForPositionResult < Struct.new(
       :distance,
-      :place)
+      :place,
+      :place_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Contains a place suggestion resulting from a place suggestion query
     # that is run on a place index resource.
+    #
+    # @!attribute [rw] place_id
+    #   The unique identifier of the place. You can use this with the
+    #   `GetPlace` operation to find the place again later.
+    #
+    #   <note markdown="1"> For `SearchPlaceIndexForSuggestions` operations, the `PlaceId` is
+    #   returned by place indexes that use HERE or Esri as data providers.
+    #
+    #    </note>
+    #   @return [String]
     #
     # @!attribute [rw] text
     #   The text of the place suggestion, typically formatted as an address
@@ -4737,6 +4840,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchForSuggestionsResult AWS API Documentation
     #
     class SearchForSuggestionsResult < Struct.new(
+      :place_id,
       :text)
       SENSITIVE = []
       include Aws::Structure
@@ -4760,6 +4864,16 @@ module Aws::LocationService
     #   Details about the search result, such as its address and position.
     #   @return [Types::Place]
     #
+    # @!attribute [rw] place_id
+    #   The unique identifier of the place. You can use this with the
+    #   `GetPlace` operation to find the place again later.
+    #
+    #   <note markdown="1"> For `SearchPlaceIndexForText` operations, the `PlaceId` is returned
+    #   only by place indexes that use HERE as a data provider.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] relevance
     #   The relative confidence in the match for a result among the results
     #   returned. For example, if more fields for an address match
@@ -4774,6 +4888,7 @@ module Aws::LocationService
     class SearchForTextResult < Struct.new(
       :distance,
       :place,
+      :place_id,
       :relevance)
       SENSITIVE = []
       include Aws::Structure

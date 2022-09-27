@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2022-09-27)
+------------------
+
+* Feature - This release is to support retroactive Cost Categories. The new field will enable you to retroactively apply new and existing cost category rules to previous months.
+
 1.77.0 (2022-06-07)
 ------------------
 

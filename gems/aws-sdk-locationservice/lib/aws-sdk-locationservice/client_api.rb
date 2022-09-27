@@ -117,6 +117,7 @@ module Aws::LocationService
     DisassociateTrackerConsumerResponse = Shapes::StructureShape.new(name: 'DisassociateTrackerConsumerResponse')
     DistanceUnit = Shapes::StringShape.new(name: 'DistanceUnit')
     Double = Shapes::FloatShape.new(name: 'Double')
+    GeoArn = Shapes::StringShape.new(name: 'GeoArn')
     GeofenceGeometry = Shapes::StructureShape.new(name: 'GeofenceGeometry')
     GetDevicePositionHistoryRequest = Shapes::StructureShape.new(name: 'GetDevicePositionHistoryRequest')
     GetDevicePositionHistoryRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'GetDevicePositionHistoryRequestMaxResultsInteger')
@@ -138,6 +139,8 @@ module Aws::LocationService
     GetMapTileRequestYString = Shapes::StringShape.new(name: 'GetMapTileRequestYString')
     GetMapTileRequestZString = Shapes::StringShape.new(name: 'GetMapTileRequestZString')
     GetMapTileResponse = Shapes::StructureShape.new(name: 'GetMapTileResponse')
+    GetPlaceRequest = Shapes::StructureShape.new(name: 'GetPlaceRequest')
+    GetPlaceResponse = Shapes::StructureShape.new(name: 'GetPlaceResponse')
     Id = Shapes::StringShape.new(name: 'Id')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntendedUse = Shapes::StringShape.new(name: 'IntendedUse')
@@ -196,6 +199,7 @@ module Aws::LocationService
     MapStyle = Shapes::StringShape.new(name: 'MapStyle')
     Place = Shapes::StructureShape.new(name: 'Place')
     PlaceGeometry = Shapes::StructureShape.new(name: 'PlaceGeometry')
+    PlaceId = Shapes::StringShape.new(name: 'PlaceId')
     PlaceIndexSearchResultLimit = Shapes::IntegerShape.new(name: 'PlaceIndexSearchResultLimit')
     Position = Shapes::ListShape.new(name: 'Position')
     PositionFiltering = Shapes::StringShape.new(name: 'PositionFiltering')
@@ -500,7 +504,7 @@ module Aws::LocationService
     CreateMapRequest.struct_class = Types::CreateMapRequest
 
     CreateMapResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
-    CreateMapResponse.add_member(:map_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "MapArn"))
+    CreateMapResponse.add_member(:map_arn, Shapes::ShapeRef.new(shape: GeoArn, required: true, location_name: "MapArn"))
     CreateMapResponse.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "MapName"))
     CreateMapResponse.struct_class = Types::CreateMapResponse
 
@@ -592,7 +596,7 @@ module Aws::LocationService
     DescribeMapResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
     DescribeMapResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataSource"))
     DescribeMapResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, required: true, location_name: "Description"))
-    DescribeMapResponse.add_member(:map_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "MapArn"))
+    DescribeMapResponse.add_member(:map_arn, Shapes::ShapeRef.new(shape: GeoArn, required: true, location_name: "MapArn"))
     DescribeMapResponse.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "MapName"))
     DescribeMapResponse.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. Always returns RequestBasedUsage."}))
     DescribeMapResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -744,6 +748,14 @@ module Aws::LocationService
     GetMapTileResponse.struct_class = Types::GetMapTileResponse
     GetMapTileResponse[:payload] = :blob
     GetMapTileResponse[:payload_member] = GetMapTileResponse.member(:blob)
+
+    GetPlaceRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "IndexName"))
+    GetPlaceRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location: "querystring", location_name: "language"))
+    GetPlaceRequest.add_member(:place_id, Shapes::ShapeRef.new(shape: PlaceId, required: true, location: "uri", location_name: "PlaceId"))
+    GetPlaceRequest.struct_class = Types::GetPlaceRequest
+
+    GetPlaceResponse.add_member(:place, Shapes::ShapeRef.new(shape: Place, required: true, location_name: "Place"))
+    GetPlaceResponse.struct_class = Types::GetPlaceResponse
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -923,6 +935,8 @@ module Aws::LocationService
     Place.add_member(:street, Shapes::ShapeRef.new(shape: String, location_name: "Street"))
     Place.add_member(:sub_region, Shapes::ShapeRef.new(shape: String, location_name: "SubRegion"))
     Place.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))
+    Place.add_member(:unit_number, Shapes::ShapeRef.new(shape: String, location_name: "UnitNumber"))
+    Place.add_member(:unit_type, Shapes::ShapeRef.new(shape: String, location_name: "UnitType"))
     Place.struct_class = Types::Place
 
     PlaceGeometry.add_member(:point, Shapes::ShapeRef.new(shape: Position, location_name: "Point"))
@@ -964,10 +978,12 @@ module Aws::LocationService
 
     SearchForPositionResult.add_member(:distance, Shapes::ShapeRef.new(shape: SearchForPositionResultDistanceDouble, required: true, location_name: "Distance"))
     SearchForPositionResult.add_member(:place, Shapes::ShapeRef.new(shape: Place, required: true, location_name: "Place"))
+    SearchForPositionResult.add_member(:place_id, Shapes::ShapeRef.new(shape: PlaceId, location_name: "PlaceId"))
     SearchForPositionResult.struct_class = Types::SearchForPositionResult
 
     SearchForPositionResultList.member = Shapes::ShapeRef.new(shape: SearchForPositionResult)
 
+    SearchForSuggestionsResult.add_member(:place_id, Shapes::ShapeRef.new(shape: PlaceId, location_name: "PlaceId"))
     SearchForSuggestionsResult.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Text"))
     SearchForSuggestionsResult.struct_class = Types::SearchForSuggestionsResult
 
@@ -975,6 +991,7 @@ module Aws::LocationService
 
     SearchForTextResult.add_member(:distance, Shapes::ShapeRef.new(shape: SearchForTextResultDistanceDouble, location_name: "Distance"))
     SearchForTextResult.add_member(:place, Shapes::ShapeRef.new(shape: Place, required: true, location_name: "Place"))
+    SearchForTextResult.add_member(:place_id, Shapes::ShapeRef.new(shape: PlaceId, location_name: "PlaceId"))
     SearchForTextResult.add_member(:relevance, Shapes::ShapeRef.new(shape: SearchForTextResultRelevanceDouble, location_name: "Relevance"))
     SearchForTextResult.struct_class = Types::SearchForTextResult
 
@@ -1103,7 +1120,7 @@ module Aws::LocationService
     UpdateMapRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage."}))
     UpdateMapRequest.struct_class = Types::UpdateMapRequest
 
-    UpdateMapResponse.add_member(:map_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "MapArn"))
+    UpdateMapResponse.add_member(:map_arn, Shapes::ShapeRef.new(shape: GeoArn, required: true, location_name: "MapArn"))
     UpdateMapResponse.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "MapName"))
     UpdateMapResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
     UpdateMapResponse.struct_class = Types::UpdateMapResponse
@@ -1683,6 +1700,22 @@ module Aws::LocationService
         }
         o.input = Shapes::ShapeRef.new(shape: GetMapTileRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMapTileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_place, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPlace"
+        o.http_method = "GET"
+        o.http_request_uri = "/places/v0/indexes/{IndexName}/places/{PlaceId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "places.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetPlaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPlaceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

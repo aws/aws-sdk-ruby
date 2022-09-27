@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Add support for service gems to dynamically determine their own endpoints via modeling. Service gems now generate a plugin called "Endpoints" that defines configuration for EndpointProvider, a new public type, and any client config related to endpoints. Endpoint providers will resolve values using another new public type, Endpoint Parameters, generated for each service. The plugin will use the endpoint provider to resolve an endpoint and then apply it to the request prior to serialization. Endpoint providers can be composed to change endpoint resolution logic, i.e. for testing. In addition to endpoints, the endpoint provider may also override the authentication scheme (auth scheme) which details how the request should be signed for the endpoint. A new "Sign" plugin in core replaces the SignatureV4 plugin that will generically sign any type of auth scheme that a service might have.
 
+3.156.0 (2022-09-27)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 3.155.0 (2022-09-26)
 ------------------
 

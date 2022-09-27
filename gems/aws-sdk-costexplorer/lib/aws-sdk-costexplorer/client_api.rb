@@ -499,6 +499,7 @@ module Aws::CostExplorer
     CreateAnomalySubscriptionResponse.struct_class = Types::CreateAnomalySubscriptionResponse
 
     CreateCostCategoryDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: CostCategoryName, required: true, location_name: "Name"))
+    CreateCostCategoryDefinitionRequest.add_member(:effective_start, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveStart"))
     CreateCostCategoryDefinitionRequest.add_member(:rule_version, Shapes::ShapeRef.new(shape: CostCategoryRuleVersion, required: true, location_name: "RuleVersion"))
     CreateCostCategoryDefinitionRequest.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
     CreateCostCategoryDefinitionRequest.add_member(:default_value, Shapes::ShapeRef.new(shape: CostCategoryValue, location_name: "DefaultValue"))
@@ -1339,6 +1340,7 @@ module Aws::CostExplorer
     UpdateCostAllocationTagsStatusResponse.struct_class = Types::UpdateCostAllocationTagsStatusResponse
 
     UpdateCostCategoryDefinitionRequest.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CostCategoryArn"))
+    UpdateCostCategoryDefinitionRequest.add_member(:effective_start, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveStart"))
     UpdateCostCategoryDefinitionRequest.add_member(:rule_version, Shapes::ShapeRef.new(shape: CostCategoryRuleVersion, required: true, location_name: "RuleVersion"))
     UpdateCostCategoryDefinitionRequest.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
     UpdateCostCategoryDefinitionRequest.add_member(:default_value, Shapes::ShapeRef.new(shape: CostCategoryValue, location_name: "DefaultValue"))
