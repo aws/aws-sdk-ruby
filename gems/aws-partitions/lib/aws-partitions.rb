@@ -214,7 +214,6 @@ module Aws
         @default_partition_list ||= begin
           partitions = PartitionList.build(defaults)
           partitions.merge_metadata(default_metadata)
-          partitions
         end
       end
 
