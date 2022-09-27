@@ -196,12 +196,6 @@ module Aws
         end
       end
 
-      # @param [Hash] partition metadata
-      # @api private For Internal use only
-      def merge_metadata(partition_metadata)
-        default_partition_list.merge_metadata(partition_metadata)
-      end
-
       # @api private For internal use only.
       def clear
         default_partition_list.clear
@@ -211,10 +205,7 @@ module Aws
       # @return [PartitionList]
       # @api private
       def default_partition_list
-        @default_partition_list ||= begin
-          partitions = PartitionList.build(defaults)
-          partitions.merge_metadata(default_metadata)
-        end
+        @default_partition_list ||= PartitionList.build(defaults)
       end
 
       # @return [Hash]
@@ -222,16 +213,6 @@ module Aws
       def defaults
         @defaults ||= begin
           path = File.expand_path('../../partitions.json', __FILE__)
-          defaults = JSON.parse(File.read(path), freeze: true)
-          defaults.merge('partitions' => defaults['partitions'].dup)
-        end
-      end
-
-      # @return [Hash]
-      # @api private
-      def default_metadata
-        @default_metadata ||= begin
-          path = File.expand_path('../../partitions-metadata.json', __FILE__)
           defaults = JSON.parse(File.read(path), freeze: true)
           defaults.merge('partitions' => defaults['partitions'].dup)
         end
