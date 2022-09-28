@@ -77,7 +77,7 @@ module Aws
           def handle_region_errors(response)
             if wrong_sigv4_region?(response) &&
                !fips_region?(response) &&
-               response.context.config.regional_endpoint &&
+               !custom_endpoint?(response) &&
                !expired_credentials?(response)
               get_region_and_retry(response.context)
             else
@@ -104,6 +104,15 @@ module Aws
 
           def expired_credentials?(resp)
             resp.context.http_response.body_contents.match(/<Code>ExpiredToken<\/Code>/)
+          end
+
+          def custom_endpoint?(resp)
+            region = resp.context.config.region
+            partition = Aws::Endpoints::Matchers.aws_partition(region)
+            endpoint = resp.context.http_request.endpoint
+
+            !endpoint.hostname.include?(partition['dnsSuffix']) &&
+              !endpoint.hostname.include?(partition['dualStackDnsSuffix'])
           end
 
           def wrong_sigv4_region?(resp)
@@ -154,6 +163,7 @@ module Aws
           def new_hostname(context, region)
             endpoint_params = context[:endpoint_params]
             endpoint_params.region = region
+            endpoint_params.endpoint = nil
             endpoint =
               context.config.endpoint_provider.resolve_endpoint(endpoint_params)
             URI(endpoint.url).host

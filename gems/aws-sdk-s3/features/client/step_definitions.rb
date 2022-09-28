@@ -24,8 +24,10 @@ After('@s3', '@client') do
 end
 
 def create_bucket(options = {})
-  @bucket_name = "aws-sdk-test-#{Time.now.to_i}-#{rand(1000)}"
-  options[:bucket] = @bucket_name
+  unless options[:bucket]
+    @bucket_name = "aws-sdk-test-#{Time.now.to_i}-#{rand(1000)}"
+    options[:bucket] = @bucket_name
+  end
   if @client.config.region != 'us-east-1' &&
      !options[:create_bucket_configuration]
     options[:create_bucket_configuration] = {
