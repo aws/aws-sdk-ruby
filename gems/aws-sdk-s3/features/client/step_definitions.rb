@@ -104,14 +104,12 @@ When(/^I put the test png to the key "(.*?)"$/) do |key|
   file.close
 end
 
-Then(/^the object with the key "(.*?)" |
-      should have a content length of (\d+)$/x) do |key, size|
+Then(/^the object with the key "(.*?)" should have a content length of (\d+)$/) do |key, size|
   resp = @client.head_object(bucket: @bucket_name, key: key)
   expect(resp.data.content_length).to eq(size.to_i)
 end
 
-When(/^I page s3 objects prefixed "(.*?)" |
-      delimited "(.*?)" limit (\d+)$/x) do |prefix, delimiter, max_keys|
+When(/^I page s3 objects prefixed "(.*?)" delimited "(.*?)" limit (\d+)$/) do |prefix, delimiter, max_keys|
   @responses = []
   @client.list_objects(
     bucket: @bucket_name,
@@ -149,6 +147,16 @@ end
 Then(/^the bucket name should not be in the request host$/) do
   endpoint = @response.context.http_request.endpoint
   expect(endpoint.host).not_to include(@bucket_name)
+end
+
+Then(/^the bucket name should be in the request host$/) do
+  endpoint = @response.context.http_request.endpoint
+  expect(endpoint.host).to include(@bucket_name)
+end
+
+Then(/^the bucket name should not be in the request path$/) do
+  endpoint = @response.context.http_request.endpoint
+  expect(endpoint.path).not_to include(@bucket_name)
 end
 
 When(/^I put "(.*?)" to the key "(.*?)" with an aes key$/) do |body, key|
@@ -209,8 +217,7 @@ Then(/^the object should exist$/) do
   @client.head_object(bucket: @bucket_name, key: @key)
 end
 
-When(/^I create a (non-secure )?presigned url |
-      for "(.*?)" with:$/x) do |non_secure, method, params|
+When(/^I create a (non-secure )?presigned url for "(.*?)" with:$/) do |non_secure, method, params|
   presigner = Aws::S3::Presigner.new(client: @client)
   params = symbolized_params(params)
   params[:bucket] = @bucket_name
@@ -227,8 +234,7 @@ Then(/^the response should be "(.*?)"$/) do |expected|
   expect(@resp.body).to eq(expected)
 end
 
-When(/^I send an HTTP put request for the |
-      presigned url with body "(.*?)"$/x) do |body|
+When(/^I send an HTTP put request for the presigned url with body "(.*?)"$/) do |body|
   uri = URI(@url)
   http = Net::HTTP.new(uri.host)
   req = Net::HTTP::Put.new(
@@ -272,8 +278,7 @@ Then(/^the response content\-type should be "(.*?)"$/) do |_arg1|
   expect(@resp.to_hash['content-type']).to eq(['text/plain'])
 end
 
-When(/^I send an HTTP put request with the |
-      content type as "(.*?)"$/x) do |content_type|
+When(/^I send an HTTP put request with the content type as "(.*?)"$/) do |content_type|
   uri = URI(@url)
   http = Net::HTTP.new(uri.host)
   req = Net::HTTP::Put.new(uri.request_uri, 'content-type' => content_type)
@@ -285,8 +290,7 @@ When(/^the response should have a (\d+) status code$/) do |code|
   expect(@resp.code.to_i).to eq(code)
 end
 
-Then(/^the object "([^"]*)" should have a |
-      "([^"]*)" storage class$/x) do |key, sc|
+Then(/^the object "([^"]*)" should have a "([^"]*)" storage class$/) do |key, sc|
   resp = @client.list_objects(bucket: @bucket_name, prefix: key, max_keys: 1)
   expect(resp.contents.first.storage_class).to eq(sc)
 end
@@ -355,8 +359,7 @@ Then(/^response should contain "([^"]*)" event$/) do |type|
   expect(@tracker[:records]).not_to be_nil
 end
 
-Then(/^the event should have payload member |
-      with content "([^"]*)"$/x) do |payload|
+Then(/^the event should have payload member with content "([^"]*)"$/) do |payload|
   @tracker[:records].each do |e|
     # same event process twice, same string IO
     e.payload.rewind
@@ -384,8 +387,7 @@ When(/^I select it with query "([^"]*)" with block$/) do |query|
   end
 end
 
-Then(/^"([^"]*)" event should be processed "(\d+)" |
-      times when it arrives$/x) do |type, times|
+Then(/^"([^"]*)" event should be processed "(\d+)" times when it arrives$/) do |type, times|
   expect(@tracker[type.to_sym].size).to eq(times.to_i)
 end
 

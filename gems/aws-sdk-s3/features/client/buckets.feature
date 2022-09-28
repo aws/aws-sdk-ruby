@@ -60,6 +60,6 @@ Feature: S3 Buckets
     And I create a DNS compatible bucket
     When I am using the S3 "us-east-1" region
     When I get the bucket location
-    Then the bucket name should be in the request path
-    And the bucket name should not be in the request host
+    Then the bucket name should be in the request host
+    And the bucket name should not be in the request path
     And the location constraint should be "us-west-2"
