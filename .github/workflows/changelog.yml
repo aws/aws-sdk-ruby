@@ -13,6 +13,11 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
+      - run: |
+          for changed_file in ${{ steps.file_changes.outputs.files_modified }}; do
+            echo "File changed: ${changed_file}."
+          done
+
       - name: Comment PR
         if: ${{!contains(steps.file_changes.outputs.files_modified, 'gems/aws-sdk-core/CHANGELOG.md')}}
         uses: thollander/actions-comment-pull-request@main
