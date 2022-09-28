@@ -12,7 +12,8 @@ jobs:
         uses: trilom/file-changes-action@v1
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-        run: |
+
+      - run: |
           for changed_file in ${{ steps.file_changes.outputs.files_modified }}; do
             echo "File changed: ${changed_file}."
           done
