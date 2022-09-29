@@ -589,7 +589,7 @@ module Aws
       end
 
       def canonical_header_value(value)
-        value.match(/^".*"$/) ? value : value.gsub(/\s+/, ' ').strip
+        value.gsub(/\s+/, ' ').strip
       end
 
       def host(uri)
