@@ -56,7 +56,7 @@ module {{module_name}}
               .map { |s| Seahorse::Util.escape_header_list_string(s.to_s) }
               .join(',')
 
-            context.http_request.headers[key] = values
+            context.http_request.headers[key] = value
           end
         end
         {{#endpoint_rules?}}
