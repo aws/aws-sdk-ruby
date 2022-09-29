@@ -41,15 +41,13 @@ module Aws::S3
         private
 
         def apply_endpoint_headers(context, headers)
-          headers.each do |key, val|
-            joined = val
-                       .compact
-                       .map do |s|
-                         (s.include?('"') || s.include?(",")) ?
-                           "\"#{s.gsub('"', '\"')}\"" : s
-                       end
-                       .join(',')
-            context.http_request.headers[key] = joined
+          headers.each do |key, values|
+            value = values
+              .compact
+              .map { |s| Seahorse::Util.escape_header_list_string(s.to_s) }
+              .join(',')
+
+            context.http_request.headers[key] = values
           end
         end
 

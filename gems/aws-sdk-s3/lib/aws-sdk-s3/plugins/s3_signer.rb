@@ -161,7 +161,7 @@ module Aws
 
         class << self
           def new_hostname(context, region)
-            endpoint_params = context[:endpoint_params]
+            endpoint_params = context[:endpoint_params].dup
             endpoint_params.region = region
             endpoint_params.endpoint = nil
             endpoint =
