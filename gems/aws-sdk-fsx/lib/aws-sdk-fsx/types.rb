@@ -345,12 +345,12 @@ module Aws::FSx
     # Describes a data repository association's automatic export policy.
     # The `AutoExportPolicy` defines the types of updated objects on the
     # file system that will be automatically exported to the data
-    # repository. As you create, modify, or delete files, Amazon FSx
-    # automatically exports the defined changes asynchronously once your
-    # application finishes modifying the file.
+    # repository. As you create, modify, or delete files, Amazon FSx for
+    # Lustre automatically exports the defined changes asynchronously once
+    # your application finishes modifying the file.
     #
-    # This `AutoExportPolicy` is supported only for file systems with the
-    # `Persistent_2` deployment type.
+    # This `AutoExportPolicy` is supported only for Amazon FSx for Lustre
+    # file systems with the `Persistent_2` deployment type.
     #
     # @note When making an API call, you may pass AutoExportPolicy
     #   data as a hash:
@@ -362,11 +362,11 @@ module Aws::FSx
     # @!attribute [rw] events
     #   The `AutoExportPolicy` can have the following event values:
     #
-    #   * `NEW` - Amazon FSx automatically exports new files and directories
-    #     to the data repository as they are added to the file system.
+    #   * `NEW` - New files and directories are automatically exported to
+    #     the data repository as they are added to the file system.
     #
-    #   * `CHANGED` - Amazon FSx automatically exports changes to files and
-    #     directories on the file system to the data repository.
+    #   * `CHANGED` - Changes to files and directories on the file system
+    #     are automatically exported to the data repository.
     #
     #   * `DELETED` - Files and directories are automatically deleted on the
     #     data repository when they are deleted on the file system.
@@ -385,11 +385,12 @@ module Aws::FSx
 
     # Describes the data repository association's automatic import policy.
     # The AutoImportPolicy defines how Amazon FSx keeps your file metadata
-    # and directory listings up to date by importing changes to your file
-    # system as you modify objects in a linked S3 bucket.
+    # and directory listings up to date by importing changes to your Amazon
+    # FSx for Lustre file system as you modify objects in a linked S3
+    # bucket.
     #
-    # This `AutoImportPolicy` is supported only for file systems with the
-    # `Persistent_2` deployment type.
+    # The `AutoImportPolicy` is supported only for Amazon FSx for Lustre
+    # file systems with the `Persistent_2` deployment type.
     #
     # @note When making an API call, you may pass AutoImportPolicy
     #   data as a hash:
@@ -936,7 +937,7 @@ module Aws::FSx
     #
     #       {
     #         file_system_id: "FileSystemId", # required
-    #         file_system_path: "Namespace", # required
+    #         file_system_path: "Namespace",
     #         data_repository_path: "ArchivePath", # required
     #         batch_import_meta_data_on_create: false,
     #         imported_file_chunk_size: 1,
@@ -977,9 +978,9 @@ module Aws::FSx
     #   the directory.
     #
     #   <note markdown="1"> If you specify only a forward slash (`/`) as the file system path,
-    #   you can link only 1 data repository to the file system. You can only
-    #   specify "/" as the file system path for the first data repository
-    #   associated with a file system.
+    #   you can link only one data repository to the file system. You can
+    #   only specify "/" as the file system path for the first data
+    #   repository associated with a file system.
     #
     #    </note>
     #   @return [String]
@@ -1064,7 +1065,7 @@ module Aws::FSx
     #   data as a hash:
     #
     #       {
-    #         type: "EXPORT_TO_REPOSITORY", # required, accepts EXPORT_TO_REPOSITORY, IMPORT_METADATA_FROM_REPOSITORY
+    #         type: "EXPORT_TO_REPOSITORY", # required, accepts EXPORT_TO_REPOSITORY, IMPORT_METADATA_FROM_REPOSITORY, RELEASE_DATA_FROM_FILESYSTEM, AUTO_RELEASE_DATA
     #         paths: ["DataRepositoryTaskPath"],
     #         file_system_id: "FileSystemId", # required
     #         report: { # required
@@ -1080,6 +1081,7 @@ module Aws::FSx
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         capacity_to_release: 1,
     #       }
     #
     # @!attribute [rw] type
@@ -1134,6 +1136,12 @@ module Aws::FSx
     #   A list of `Tag` values, with a maximum of 50 elements.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] capacity_to_release
+    #   Specifies the amount of data to release, in GiB, by an Amazon File
+    #   Cache `AUTO_RELEASE_DATA` task that automatically releases files
+    #   from the cache.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateDataRepositoryTaskRequest AWS API Documentation
     #
     class CreateDataRepositoryTaskRequest < Struct.new(
@@ -1142,7 +1150,8 @@ module Aws::FSx
       :file_system_id,
       :report,
       :client_request_token,
-      :tags)
+      :tags,
+      :capacity_to_release)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1155,6 +1164,220 @@ module Aws::FSx
     #
     class CreateDataRepositoryTaskResponse < Struct.new(
       :data_repository_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon File Cache configuration for the cache that you are
+    # creating.
+    #
+    # @note When making an API call, you may pass CreateFileCacheLustreConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         per_unit_storage_throughput: 1, # required
+    #         deployment_type: "CACHE_1", # required, accepts CACHE_1
+    #         weekly_maintenance_start_time: "WeeklyTime",
+    #         metadata_configuration: { # required
+    #           storage_capacity: 1, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] per_unit_storage_throughput
+    #   Provisions the amount of read and write throughput for each 1
+    #   tebibyte (TiB) of cache storage capacity, in MB/s/TiB. The only
+    #   supported value is `1000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] deployment_type
+    #   Specifies the cache deployment type, which must be `CACHE_1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] weekly_maintenance_start_time
+    #   A recurring weekly time, in the format `D:HH:MM`.
+    #
+    #   `D` is the day of the week, for which 1 represents Monday and 7
+    #   represents Sunday. For further details, see [the ISO-8601 spec as
+    #   described on Wikipedia][1].
+    #
+    #   `HH` is the zero-padded hour of the day (0-23), and `MM` is the
+    #   zero-padded minute of the hour.
+    #
+    #   For example, `1:05:00` specifies maintenance at 5 AM Monday.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_configuration
+    #   The configuration for a Lustre MDT (Metadata Target) storage volume.
+    #   @return [Types::FileCacheLustreMetadataConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileCacheLustreConfiguration AWS API Documentation
+    #
+    class CreateFileCacheLustreConfiguration < Struct.new(
+      :per_unit_storage_throughput,
+      :deployment_type,
+      :weekly_maintenance_start_time,
+      :metadata_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFileCacheRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         file_cache_type: "LUSTRE", # required, accepts LUSTRE
+    #         file_cache_type_version: "FileSystemTypeVersion", # required
+    #         storage_capacity: 1, # required
+    #         subnet_ids: ["SubnetId"], # required
+    #         security_group_ids: ["SecurityGroupId"],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #         copy_tags_to_data_repository_associations: false,
+    #         kms_key_id: "KmsKeyId",
+    #         lustre_configuration: {
+    #           per_unit_storage_throughput: 1, # required
+    #           deployment_type: "CACHE_1", # required, accepts CACHE_1
+    #           weekly_maintenance_start_time: "WeeklyTime",
+    #           metadata_configuration: { # required
+    #             storage_capacity: 1, # required
+    #           },
+    #         },
+    #         data_repository_associations: [
+    #           {
+    #             file_cache_path: "Namespace", # required
+    #             data_repository_path: "ArchivePath", # required
+    #             data_repository_subdirectories: ["Namespace"],
+    #             nfs: {
+    #               version: "NFS3", # required, accepts NFS3
+    #               dns_ips: ["IpAddress"],
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   An idempotency token for resource creation, in a string of up to 64
+    #   ASCII characters. This token is automatically filled on your behalf
+    #   when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   By using the idempotent operation, you can retry a `CreateFileCache`
+    #   operation without the risk of creating an extra cache. This approach
+    #   can be useful when an initial call fails in a way that makes it
+    #   unclear whether a cache was created. Examples are if a transport
+    #   level timeout occurred, or your connection was reset. If you use the
+    #   same client request token and the initial call created a cache, the
+    #   client receives success as long as the parameters are the same.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_cache_type
+    #   The type of cache that you're creating, which must be `LUSTRE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_cache_type_version
+    #   Sets the Lustre version for the cache that you're creating, which
+    #   must be `2.12`.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_capacity
+    #   The storage capacity of the cache in gibibytes (GiB). Valid values
+    #   are 1200 GiB, 2400 GiB, and increments of 2400 GiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs that the cache will be accessible from. You can
+    #   specify only one subnet ID in a call to the `CreateFileCache`
+    #   operation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of IDs specifying the security groups to apply to all network
+    #   interfaces created for Amazon File Cache access. This list isn't
+    #   returned in later requests to describe the cache.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] copy_tags_to_data_repository_associations
+    #   A boolean flag indicating whether tags for the cache should be
+    #   copied to data repository associations. This value defaults to
+    #   false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   Specifies the ID of the Key Management Service (KMS) key to use for
+    #   encrypting data on an Amazon File Cache. If a `KmsKeyId` isn't
+    #   specified, the Amazon FSx-managed KMS key for your account is used.
+    #   For more information, see [Encrypt][1] in the *Key Management
+    #   Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
+    #   @return [String]
+    #
+    # @!attribute [rw] lustre_configuration
+    #   The configuration for the Amazon File Cache resource being created.
+    #   @return [Types::CreateFileCacheLustreConfiguration]
+    #
+    # @!attribute [rw] data_repository_associations
+    #   A list of up to 8 configurations for data repository associations
+    #   (DRAs) to be created during the cache creation. The DRAs link the
+    #   cache to either an Amazon S3 data repository or a Network File
+    #   System (NFS) data repository that supports the NFSv3 protocol.
+    #
+    #   The DRA configurations must meet the following requirements:
+    #
+    #   * All configurations on the list must be of the same data repository
+    #     type, either all S3 or all NFS. A cache can't link to different
+    #     data repository types at the same time.
+    #
+    #   * An NFS DRA must link to an NFS file system that supports the NFSv3
+    #     protocol.
+    #
+    #   DRA automatic import and automatic export is not supported.
+    #   @return [Array<Types::FileCacheDataRepositoryAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileCacheRequest AWS API Documentation
+    #
+    class CreateFileCacheRequest < Struct.new(
+      :client_request_token,
+      :file_cache_type,
+      :file_cache_type_version,
+      :storage_capacity,
+      :subnet_ids,
+      :security_group_ids,
+      :tags,
+      :copy_tags_to_data_repository_associations,
+      :kms_key_id,
+      :lustre_configuration,
+      :data_repository_associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_cache
+    #   A description of the cache that was created.
+    #   @return [Types::FileCacheCreating]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileCacheResponse AWS API Documentation
+    #
+    class CreateFileCacheResponse < Struct.new(
+      :file_cache)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1260,6 +1483,7 @@ module Aws::FSx
     #             read_only: false,
     #           },
     #         },
+    #         storage_capacity: 1,
     #       }
     #
     # @!attribute [rw] backup_id
@@ -1390,6 +1614,19 @@ module Aws::FSx
     #   The OpenZFS configuration for the file system that's being created.
     #   @return [Types::CreateFileSystemOpenZFSConfiguration]
     #
+    # @!attribute [rw] storage_capacity
+    #   Sets the storage capacity of the OpenZFS file system that you're
+    #   creating from a backup, in gibibytes (GiB). Valid values are from 64
+    #   GiB up to 524,288 GiB (512 TiB). However, the value that you specify
+    #   must be equal to or greater than the backup's storage capacity
+    #   value. If you don't use the `StorageCapacity` parameter, the
+    #   default is the backup's `StorageCapacity` value.
+    #
+    #   If used to create a file system other than OpenZFS, you must provide
+    #   a value that matches the backup's `StorageCapacity` value. If you
+    #   provide any other value, Amazon FSx responds with a 400 Bad Request.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackupRequest AWS API Documentation
     #
     class CreateFileSystemFromBackupRequest < Struct.new(
@@ -1403,7 +1640,8 @@ module Aws::FSx
       :storage_type,
       :kms_key_id,
       :file_system_type_version,
-      :open_zfs_configuration)
+      :open_zfs_configuration,
+      :storage_capacity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3241,8 +3479,9 @@ module Aws::FSx
     end
 
     # The configuration of a data repository association that links an
-    # Amazon FSx for Lustre file system to an Amazon S3 bucket. The data
-    # repository association configuration object is returned in the
+    # Amazon FSx for Lustre file system to an Amazon S3 bucket or an Amazon
+    # File Cache resource to an Amazon S3 bucket or an NFS file system. The
+    # data repository association configuration object is returned in the
     # response of the following operations:
     #
     # * `CreateDataRepositoryAssociation`
@@ -3251,8 +3490,9 @@ module Aws::FSx
     #
     # * `DescribeDataRepositoryAssociations`
     #
-    # Data repository associations are supported only for file systems with
-    # the `Persistent_2` deployment type.
+    # Data repository associations are supported only for an Amazon FSx for
+    # Lustre file system with the `Persistent_2` deployment type and for an
+    # Amazon File Cache resource.
     #
     # @!attribute [rw] association_id
     #   The system-generated, unique ID of the data repository association.
@@ -3278,17 +3518,17 @@ module Aws::FSx
     #   Describes the state of a data repository association. The lifecycle
     #   can have the following values:
     #
-    #   * `CREATING` - The data repository association between the FSx file
-    #     system and the S3 data repository is being created. The data
+    #   * `CREATING` - The data repository association between the file
+    #     system or cache and the data repository is being created. The data
     #     repository is unavailable.
     #
     #   * `AVAILABLE` - The data repository association is available for
     #     use.
     #
-    #   * `MISCONFIGURED` - Amazon FSx cannot automatically import updates
-    #     from the S3 bucket or automatically export updates to the S3
-    #     bucket until the data repository association configuration is
-    #     corrected.
+    #   * `MISCONFIGURED` - The data repository association is
+    #     misconfigured. Until the configuration is corrected, automatic
+    #     import and automatic export will not work (only for Amazon FSx for
+    #     Lustre).
     #
     #   * `UPDATING` - The data repository association is undergoing a
     #     customer initiated update that might affect its availability.
@@ -3306,14 +3546,14 @@ module Aws::FSx
     #   @return [Types::DataRepositoryFailureDetails]
     #
     # @!attribute [rw] file_system_path
-    #   A path on the file system that points to a high-level directory
-    #   (such as `/ns1/`) or subdirectory (such as `/ns1/subdir/`) that will
-    #   be mapped 1-1 with `DataRepositoryPath`. The leading forward slash
-    #   in the name is required. Two data repository associations cannot
-    #   have overlapping file system paths. For example, if a data
-    #   repository is associated with file system path `/ns1/`, then you
-    #   cannot link another data repository with file system path
-    #   `/ns1/ns2`.
+    #   A path on the Amazon FSx for Lustre file system that points to a
+    #   high-level directory (such as `/ns1/`) or subdirectory (such as
+    #   `/ns1/subdir/`) that will be mapped 1-1 with `DataRepositoryPath`.
+    #   The leading forward slash in the name is required. Two data
+    #   repository associations cannot have overlapping file system paths.
+    #   For example, if a data repository is associated with file system
+    #   path `/ns1/`, then you cannot link another data repository with file
+    #   system path `/ns1/ns2`.
     #
     #   This path specifies where in your file system files will be exported
     #   from or imported to. This file system directory can be linked to
@@ -3321,24 +3561,49 @@ module Aws::FSx
     #   the directory.
     #
     #   <note markdown="1"> If you specify only a forward slash (`/`) as the file system path,
-    #   you can link only 1 data repository to the file system. You can only
-    #   specify "/" as the file system path for the first data repository
-    #   associated with a file system.
+    #   you can link only one data repository to the file system. You can
+    #   only specify "/" as the file system path for the first data
+    #   repository associated with a file system.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] data_repository_path
-    #   The path to the Amazon S3 data repository that will be linked to the
-    #   file system. The path can be an S3 bucket or prefix in the format
-    #   `s3://myBucket/myPrefix/`. This path specifies where in the S3 data
-    #   repository files will be imported from or exported to.
+    #   The path to the data repository that will be linked to the cache or
+    #   file system.
+    #
+    #   * For Amazon File Cache, the path can be an NFS data repository that
+    #     will be linked to the cache. The path can be in one of two
+    #     formats:
+    #
+    #     * If you are not using the `DataRepositorySubdirectories`
+    #       parameter, the path is to an NFS Export directory (or one of its
+    #       subdirectories) in the format
+    #       `nsf://nfs-domain-name/exportpath`. You can therefore link a
+    #       single NFS Export to a single data repository association.
+    #
+    #     * If you are using the `DataRepositorySubdirectories` parameter,
+    #       the path is the domain name of the NFS file system in the format
+    #       `nfs://filer-domain-name`, which indicates the root of the
+    #       subdirectories specified with the `DataRepositorySubdirectories`
+    #       parameter.
+    #
+    #   * For Amazon File Cache, the path can be an S3 bucket or prefix in
+    #     the format `s3://myBucket/myPrefix/`.
+    #
+    #   * For Amazon FSx for Lustre, the path can be an S3 bucket or prefix
+    #     in the format `s3://myBucket/myPrefix/`.
     #   @return [String]
     #
     # @!attribute [rw] batch_import_meta_data_on_create
     #   A boolean flag indicating whether an import data repository task to
     #   import metadata should run after the data repository association is
     #   created. The task runs if this flag is set to `true`.
+    #
+    #   <note markdown="1"> `BatchImportMetaDataOnCreate` is not supported for data repositories
+    #   linked to an Amazon File Cache resource.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] imported_file_chunk_size
@@ -3346,7 +3611,7 @@ module Aws::FSx
     #   stripe count and maximum amount of data per file (in MiB) stored on
     #   a single physical disk. The maximum number of disks that a single
     #   file can be striped across is limited by the total number of disks
-    #   that make up the file system.
+    #   that make up the file system or cache.
     #
     #   The default chunk size is 1,024 MiB (1 GiB) and can go as high as
     #   512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5
@@ -3355,11 +3620,8 @@ module Aws::FSx
     #
     # @!attribute [rw] s3
     #   The configuration for an Amazon S3 data repository linked to an
-    #   Amazon FSx Lustre file system with a data repository association.
-    #   The configuration defines which file events (new, changed, or
-    #   deleted files or directories) are automatically imported from the
-    #   linked data repository to the file system or automatically exported
-    #   from the file system to the data repository.
+    #   Amazon FSx for Lustre file system with a data repository
+    #   association.
     #   @return [Types::S3DataRepositoryConfiguration]
     #
     # @!attribute [rw] tags
@@ -3370,6 +3632,49 @@ module Aws::FSx
     #   The time that the resource was created, in seconds (since
     #   1970-01-01T00:00:00Z), also known as Unix time.
     #   @return [Time]
+    #
+    # @!attribute [rw] file_cache_id
+    #   The globally unique ID of the Amazon File Cache resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_cache_path
+    #   A path on the Amazon File Cache that points to a high-level
+    #   directory (such as `/ns1/`) or subdirectory (such as `/ns1/subdir/`)
+    #   that will be mapped 1-1 with `DataRepositoryPath`. The leading
+    #   forward slash in the path is required. Two data repository
+    #   associations cannot have overlapping cache paths. For example, if a
+    #   data repository is associated with cache path `/ns1/`, then you
+    #   cannot link another data repository with cache path `/ns1/ns2`.
+    #
+    #   This path specifies the directory in your cache where files will be
+    #   exported from. This cache directory can be linked to only one data
+    #   repository (S3 or NFS) and no other data repository can be linked to
+    #   the directory.
+    #
+    #   <note markdown="1"> The cache path can only be set to root (/) on an NFS DRA when
+    #   `DataRepositorySubdirectories` is specified. If you specify root (/)
+    #   as the cache path, you can create only one DRA on the cache.
+    #
+    #    The cache path cannot be set to root (/) for an S3 DRA.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] data_repository_subdirectories
+    #   For Amazon File Cache, a list of NFS Exports that will be linked
+    #   with an NFS data repository association. All the subdirectories must
+    #   be on a single NFS file system. The Export paths are in the format
+    #   `/exportpath1`. To use this parameter, you must configure
+    #   `DataRepositoryPath` as the domain name of the NFS file system. The
+    #   NFS file system domain name in effect is the root of the
+    #   subdirectories. Note that `DataRepositorySubdirectories` is not
+    #   supported for S3 data repositories.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] nfs
+    #   The configuration for an NFS data repository linked to an Amazon
+    #   File Cache resource with a data repository association.
+    #   @return [Types::NFSDataRepositoryConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryAssociation AWS API Documentation
     #
@@ -3385,7 +3690,11 @@ module Aws::FSx
       :imported_file_chunk_size,
       :s3,
       :tags,
-      :creation_time)
+      :creation_time,
+      :file_cache_id,
+      :file_cache_path,
+      :data_repository_subdirectories,
+      :nfs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3524,8 +3833,9 @@ module Aws::FSx
     end
 
     # A description of the data repository task. You use data repository
-    # tasks to perform bulk transfer operations between your Amazon FSx file
-    # system and a linked data repository.
+    # tasks to perform bulk transfer operations between an Amazon FSx for
+    # Lustre file system and a linked data repository. An Amazon File Cache
+    # resource uses a task to automatically release files from the cache.
     #
     # @!attribute [rw] task_id
     #   The system-generated, unique 17-digit ID of the data repository
@@ -3535,20 +3845,20 @@ module Aws::FSx
     # @!attribute [rw] lifecycle
     #   The lifecycle status of the data repository task, as follows:
     #
-    #   * `PENDING` - Amazon FSx has not started the task.
+    #   * `PENDING` - The task has not started.
     #
-    #   * `EXECUTING` - Amazon FSx is processing the task.
+    #   * `EXECUTING` - The task is in process.
     #
-    #   * `FAILED` - Amazon FSx was not able to complete the task. For
-    #     example, there may be files the task failed to process. The
+    #   * `FAILED` - The task was not able to be completed. For example,
+    #     there may be files the task failed to process. The
     #     DataRepositoryTaskFailureDetails property provides more
     #     information about task failures.
     #
-    #   * `SUCCEEDED` - FSx completed the task successfully.
+    #   * `SUCCEEDED` - The task has completed successfully.
     #
-    #   * `CANCELED` - Amazon FSx canceled the task and it did not complete.
+    #   * `CANCELED` - The task was canceled and it did not complete.
     #
-    #   * `CANCELING` - FSx is in process of canceling the task.
+    #   * `CANCELING` - The task is in process of being canceled.
     #
     #   <note markdown="1"> You cannot delete an FSx for Lustre file system if there are data
     #   repository tasks for the file system in the `PENDING` or `EXECUTING`
@@ -3564,12 +3874,14 @@ module Aws::FSx
     # @!attribute [rw] type
     #   The type of data repository task.
     #
-    #   * The `EXPORT_TO_REPOSITORY` data repository task exports from your
-    #     Lustre file system from to a linked S3 bucket.
+    #   * `EXPORT_TO_REPOSITORY` tasks export from your Amazon FSx for
+    #     Lustre file system to a linked data repository.
     #
-    #   * The `IMPORT_METADATA_FROM_REPOSITORY` data repository task imports
-    #     metadata changes from a linked S3 bucket to your Lustre file
-    #     system.
+    #   * `IMPORT_METADATA_FROM_REPOSITORY` tasks import metadata changes
+    #     from a linked S3 bucket to your Amazon FSx for Lustre file system.
+    #
+    #   * `AUTO_RELEASE_DATA` tasks automatically release files from an
+    #     Amazon File Cache resource.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -3578,12 +3890,12 @@ module Aws::FSx
     #   @return [Time]
     #
     # @!attribute [rw] start_time
-    #   The time that Amazon FSx began processing the task.
+    #   The time the system began processing the task.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The time that Amazon FSx completed processing the task, populated
-    #   after the task is complete.
+    #   The time the system completed processing the task, populated after
+    #   the task is complete.
     #   @return [Time]
     #
     # @!attribute [rw] resource_arn
@@ -3603,14 +3915,13 @@ module Aws::FSx
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] file_system_id
-    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   The globally unique ID of the file system.
     #   @return [String]
     #
     # @!attribute [rw] paths
-    #   An array of paths on the Amazon FSx for Lustre file system that
-    #   specify the data for the data repository task to process. For
-    #   example, in an EXPORT\_TO\_REPOSITORY task, the paths specify which
-    #   data to export to the linked data repository.
+    #   An array of paths that specify the data for the data repository task
+    #   to process. For example, in an EXPORT\_TO\_REPOSITORY task, the
+    #   paths specify which data to export to the linked data repository.
     #
     #   (Default) If `Paths` is not specified, Amazon FSx uses the file
     #   system root directory.
@@ -3635,6 +3946,16 @@ module Aws::FSx
     #   gets generated for a task using the `Enabled` parameter.
     #   @return [Types::CompletionReport]
     #
+    # @!attribute [rw] capacity_to_release
+    #   Specifies the amount of data to release, in GiB, by an Amazon File
+    #   Cache AUTO\_RELEASE\_DATA task that automatically releases files
+    #   from the cache.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_cache_id
+    #   The system-generated, unique ID of the cache.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTask AWS API Documentation
     #
     class DataRepositoryTask < Struct.new(
@@ -3650,7 +3971,9 @@ module Aws::FSx
       :paths,
       :failure_details,
       :status,
-      :report)
+      :report,
+      :capacity_to_release,
+      :file_cache_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3711,7 +4034,7 @@ module Aws::FSx
     #   data as a hash:
     #
     #       {
-    #         name: "file-system-id", # accepts file-system-id, task-lifecycle, data-repository-association-id
+    #         name: "file-system-id", # accepts file-system-id, task-lifecycle, data-repository-association-id, file-cache-id
     #         values: ["DataRepositoryTaskFilterValue"],
     #       }
     #
@@ -3780,13 +4103,20 @@ module Aws::FSx
     #   The time at which the task status was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] released_capacity
+    #   The total amount of data, in GiB, released by an Amazon File Cache
+    #   AUTO\_RELEASE\_DATA task that automatically releases files from the
+    #   cache.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTaskStatus AWS API Documentation
     #
     class DataRepositoryTaskStatus < Struct.new(
       :total_count,
       :succeeded_count,
       :failed_count,
-      :last_updated_time)
+      :last_updated_time,
+      :released_capacity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3849,7 +4179,7 @@ module Aws::FSx
     #       {
     #         association_id: "DataRepositoryAssociationId", # required
     #         client_request_token: "ClientRequestToken",
-    #         delete_data_in_file_system: false, # required
+    #         delete_data_in_file_system: false,
     #       }
     #
     # @!attribute [rw] association_id
@@ -3901,6 +4231,56 @@ module Aws::FSx
       :association_id,
       :lifecycle,
       :delete_data_in_file_system)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteFileCacheRequest
+    #   data as a hash:
+    #
+    #       {
+    #         file_cache_id: "FileCacheId", # required
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] file_cache_id
+    #   The ID of the cache that's being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileCacheRequest AWS API Documentation
+    #
+    class DeleteFileCacheRequest < Struct.new(
+      :file_cache_id,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_cache_id
+    #   The ID of the cache that's being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The cache lifecycle for the deletion request. If the
+    #   `DeleteFileCache` operation is successful, this status is
+    #   `DELETING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileCacheResponse AWS API Documentation
+    #
+    class DeleteFileCacheResponse < Struct.new(
+      :file_cache_id,
+      :lifecycle)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4477,7 +4857,7 @@ module Aws::FSx
     #         backup_ids: ["BackupId"],
     #         filters: [
     #           {
-    #             name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id, data-repository-type
+    #             name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id, data-repository-type, file-cache-id, file-cache-type
     #             values: ["FilterValue"],
     #           },
     #         ],
@@ -4549,7 +4929,7 @@ module Aws::FSx
     #         association_ids: ["DataRepositoryAssociationId"],
     #         filters: [
     #           {
-    #             name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id, data-repository-type
+    #             name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id, data-repository-type, file-cache-id, file-cache-type
     #             values: ["FilterValue"],
     #           },
     #         ],
@@ -4590,7 +4970,7 @@ module Aws::FSx
     end
 
     # @!attribute [rw] associations
-    #   An array of one ore more data repository association descriptions.
+    #   An array of one or more data repository association descriptions.
     #   @return [Array<Types::DataRepositoryAssociation>]
     #
     # @!attribute [rw] next_token
@@ -4616,7 +4996,7 @@ module Aws::FSx
     #         task_ids: ["TaskId"],
     #         filters: [
     #           {
-    #             name: "file-system-id", # accepts file-system-id, task-lifecycle, data-repository-association-id
+    #             name: "file-system-id", # accepts file-system-id, task-lifecycle, data-repository-association-id, file-cache-id
     #             values: ["DataRepositoryTaskFilterValue"],
     #           },
     #         ],
@@ -4673,6 +5053,61 @@ module Aws::FSx
     #
     class DescribeDataRepositoryTasksResponse < Struct.new(
       :data_repository_tasks,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFileCachesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         file_cache_ids: ["FileCacheId"],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] file_cache_ids
+    #   IDs of the caches whose descriptions you want to retrieve (String).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resources to return in the response. This
+    #   value must be an integer greater than zero.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileCachesRequest AWS API Documentation
+    #
+    class DescribeFileCachesRequest < Struct.new(
+      :file_cache_ids,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_caches
+    #   The response object for the `DescribeFileCaches` operation.
+    #   @return [Array<Types::FileCache>]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileCachesResponse AWS API Documentation
+    #
+    class DescribeFileCachesResponse < Struct.new(
+      :file_caches,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -5112,6 +5547,515 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # A description of a specific Amazon File Cache resource, which is a
+    # response object from the `DescribeFileCaches` operation.
+    #
+    # @!attribute [rw] owner_id
+    #   An Amazon Web Services account ID. This ID is a 12-digit number that
+    #   you use to construct Amazon Resource Names (ARNs) for resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the resource was created, in seconds (since
+    #   1970-01-01T00:00:00Z), also known as Unix time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] file_cache_id
+    #   The system-generated, unique ID of the cache.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_cache_type
+    #   The type of cache, which must be `LUSTRE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_cache_type_version
+    #   The Lustre version of the cache, which must be `2.12`.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the cache. The following are the possible
+    #   values and what they mean:
+    #
+    #   * `AVAILABLE` - The cache is in a healthy state, and is reachable
+    #     and available for use.
+    #
+    #   * `CREATING` - The new cache is being created.
+    #
+    #   * `DELETING` - An existing cache is being deleted.
+    #
+    #   * `UPDATING` - The cache is undergoing a customer-initiated update.
+    #
+    #   * `FAILED` - An existing cache has experienced an unrecoverable
+    #     failure. When creating a new cache, the cache was unable to be
+    #     created.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_details
+    #   A structure providing details of any failures that occurred.
+    #   @return [Types::FileCacheFailureDetails]
+    #
+    # @!attribute [rw] storage_capacity
+    #   The storage capacity of the cache in gibibytes (GiB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of your virtual private cloud (VPC). For more information,
+    #   see [VPC and subnets][1] in the *Amazon VPC User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs that the cache will be accessible from. You can
+    #   specify only one subnet ID in a call to the `CreateFileCache`
+    #   operation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] network_interface_ids
+    #   A list of network interface IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dns_name
+    #   The Domain Name System (DNS) name for the cache.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   Specifies the ID of the Key Management Service (KMS) key to use for
+    #   encrypting data on an Amazon File Cache. If a `KmsKeyId` isn't
+    #   specified, the Amazon FSx-managed KMS key for your account is used.
+    #   For more information, see [Encrypt][1] in the *Key Management
+    #   Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
+    #   identify Amazon Web Services resources. We require an ARN when you
+    #   need to specify a resource unambiguously across all of Amazon Web
+    #   Services. For more information, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] lustre_configuration
+    #   The configuration for the Amazon File Cache resource.
+    #   @return [Types::FileCacheLustreConfiguration]
+    #
+    # @!attribute [rw] data_repository_association_ids
+    #   A list of IDs of data repository associations that are associated
+    #   with this cache.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileCache AWS API Documentation
+    #
+    class FileCache < Struct.new(
+      :owner_id,
+      :creation_time,
+      :file_cache_id,
+      :file_cache_type,
+      :file_cache_type_version,
+      :lifecycle,
+      :failure_details,
+      :storage_capacity,
+      :vpc_id,
+      :subnet_ids,
+      :network_interface_ids,
+      :dns_name,
+      :kms_key_id,
+      :resource_arn,
+      :lustre_configuration,
+      :data_repository_association_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object for the Amazon File Cache resource being created
+    # in the `CreateFileCache` operation.
+    #
+    # @!attribute [rw] owner_id
+    #   An Amazon Web Services account ID. This ID is a 12-digit number that
+    #   you use to construct Amazon Resource Names (ARNs) for resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the resource was created, in seconds (since
+    #   1970-01-01T00:00:00Z), also known as Unix time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] file_cache_id
+    #   The system-generated, unique ID of the cache.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_cache_type
+    #   The type of cache, which must be `LUSTRE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_cache_type_version
+    #   The Lustre version of the cache, which must be `2.12`.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the cache. The following are the possible
+    #   values and what they mean:
+    #
+    #   * `AVAILABLE` - The cache is in a healthy state, and is reachable
+    #     and available for use.
+    #
+    #   * `CREATING` - The new cache is being created.
+    #
+    #   * `DELETING` - An existing cache is being deleted.
+    #
+    #   * `UPDATING` - The cache is undergoing a customer-initiated update.
+    #
+    #   * `FAILED` - An existing cache has experienced an unrecoverable
+    #     failure. When creating a new cache, the cache was unable to be
+    #     created.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_details
+    #   A structure providing details of any failures that occurred.
+    #   @return [Types::FileCacheFailureDetails]
+    #
+    # @!attribute [rw] storage_capacity
+    #   The storage capacity of the cache in gibibytes (GiB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of your virtual private cloud (VPC). For more information,
+    #   see [VPC and subnets][1] in the *Amazon VPC User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs that the cache will be accessible from. You can
+    #   specify only one subnet ID in a call to the `CreateFileCache`
+    #   operation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] network_interface_ids
+    #   A list of network interface IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dns_name
+    #   The Domain Name System (DNS) name for the cache.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   Specifies the ID of the Key Management Service (KMS) key to use for
+    #   encrypting data on an Amazon File Cache. If a `KmsKeyId` isn't
+    #   specified, the Amazon FSx-managed KMS key for your account is used.
+    #   For more information, see [Encrypt][1] in the *Key Management
+    #   Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
+    #   identify Amazon Web Services resources. We require an ARN when you
+    #   need to specify a resource unambiguously across all of Amazon Web
+    #   Services. For more information, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] copy_tags_to_data_repository_associations
+    #   A boolean flag indicating whether tags for the cache should be
+    #   copied to data repository associations.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] lustre_configuration
+    #   The configuration for the Amazon File Cache resource.
+    #   @return [Types::FileCacheLustreConfiguration]
+    #
+    # @!attribute [rw] data_repository_association_ids
+    #   A list of IDs of data repository associations that are associated
+    #   with this cache.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileCacheCreating AWS API Documentation
+    #
+    class FileCacheCreating < Struct.new(
+      :owner_id,
+      :creation_time,
+      :file_cache_id,
+      :file_cache_type,
+      :file_cache_type_version,
+      :lifecycle,
+      :failure_details,
+      :storage_capacity,
+      :vpc_id,
+      :subnet_ids,
+      :network_interface_ids,
+      :dns_name,
+      :kms_key_id,
+      :resource_arn,
+      :tags,
+      :copy_tags_to_data_repository_associations,
+      :lustre_configuration,
+      :data_repository_association_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a data repository association (DRA) to be
+    # created during the Amazon File Cache resource creation. The DRA links
+    # the cache to either an Amazon S3 bucket or prefix, or a Network File
+    # System (NFS) data repository that supports the NFSv3 protocol.
+    #
+    # The DRA does not support automatic import or automatic export.
+    #
+    # @note When making an API call, you may pass FileCacheDataRepositoryAssociation
+    #   data as a hash:
+    #
+    #       {
+    #         file_cache_path: "Namespace", # required
+    #         data_repository_path: "ArchivePath", # required
+    #         data_repository_subdirectories: ["Namespace"],
+    #         nfs: {
+    #           version: "NFS3", # required, accepts NFS3
+    #           dns_ips: ["IpAddress"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file_cache_path
+    #   A path on the cache that points to a high-level directory (such as
+    #   `/ns1/`) or subdirectory (such as `/ns1/subdir/`) that will be
+    #   mapped 1-1 with `DataRepositoryPath`. The leading forward slash in
+    #   the name is required. Two data repository associations cannot have
+    #   overlapping cache paths. For example, if a data repository is
+    #   associated with cache path `/ns1/`, then you cannot link another
+    #   data repository with cache path `/ns1/ns2`.
+    #
+    #   This path specifies where in your cache files will be exported from.
+    #   This cache directory can be linked to only one data repository, and
+    #   no data repository other can be linked to the directory.
+    #
+    #   <note markdown="1"> The cache path can only be set to root (/) on an NFS DRA when
+    #   `DataRepositorySubdirectories` is specified. If you specify root (/)
+    #   as the cache path, you can create only one DRA on the cache.
+    #
+    #    The cache path cannot be set to root (/) for an S3 DRA.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] data_repository_path
+    #   The path to the S3 or NFS data repository that links to the cache.
+    #   You must provide one of the following paths:
+    #
+    #   * The path can be an NFS data repository that links to the cache.
+    #     The path can be in one of two formats:
+    #
+    #     * If you are not using the `DataRepositorySubdirectories`
+    #       parameter, the path is to an NFS Export directory (or one of its
+    #       subdirectories) in the format
+    #       `nsf://nfs-domain-name/exportpath`. You can therefore link a
+    #       single NFS Export to a single data repository association.
+    #
+    #     * If you are using the `DataRepositorySubdirectories` parameter,
+    #       the path is the domain name of the NFS file system in the format
+    #       `nfs://filer-domain-name`, which indicates the root of the
+    #       subdirectories specified with the `DataRepositorySubdirectories`
+    #       parameter.
+    #
+    #   * The path can be an S3 bucket or prefix in the format
+    #     `s3://myBucket/myPrefix/`.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_repository_subdirectories
+    #   A list of NFS Exports that will be linked with this data repository
+    #   association. The Export paths are in the format `/exportpath1`. To
+    #   use this parameter, you must configure `DataRepositoryPath` as the
+    #   domain name of the NFS file system. The NFS file system domain name
+    #   in effect is the root of the subdirectories. Note that
+    #   `DataRepositorySubdirectories` is not supported for S3 data
+    #   repositories.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] nfs
+    #   The configuration for a data repository association that links an
+    #   Amazon File Cache resource to an NFS data repository.
+    #   @return [Types::FileCacheNFSConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileCacheDataRepositoryAssociation AWS API Documentation
+    #
+    class FileCacheDataRepositoryAssociation < Struct.new(
+      :file_cache_path,
+      :data_repository_path,
+      :data_repository_subdirectories,
+      :nfs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure providing details of any failures that occurred.
+    #
+    # @!attribute [rw] message
+    #   A message describing any failures that occurred.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileCacheFailureDetails AWS API Documentation
+    #
+    class FileCacheFailureDetails < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the Amazon File Cache resource.
+    #
+    # @!attribute [rw] per_unit_storage_throughput
+    #   Per unit storage throughput represents the megabytes per second of
+    #   read or write throughput per 1 tebibyte of storage provisioned.
+    #   Cache throughput capacity is equal to Storage capacity (TiB) *
+    #   PerUnitStorageThroughput (MB/s/TiB). The only supported value is
+    #   `1000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] deployment_type
+    #   The deployment type of the Amazon File Cache resource, which must be
+    #   `CACHE_1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_name
+    #   You use the `MountName` value when mounting the cache. If you pass a
+    #   cache ID to the `DescribeFileCaches` operation, it returns the the
+    #   `MountName` value as part of the cache's description.
+    #   @return [String]
+    #
+    # @!attribute [rw] weekly_maintenance_start_time
+    #   A recurring weekly time, in the format `D:HH:MM`.
+    #
+    #   `D` is the day of the week, for which 1 represents Monday and 7
+    #   represents Sunday. For further details, see [the ISO-8601 spec as
+    #   described on Wikipedia][1].
+    #
+    #   `HH` is the zero-padded hour of the day (0-23), and `MM` is the
+    #   zero-padded minute of the hour.
+    #
+    #   For example, `1:05:00` specifies maintenance at 5 AM Monday.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_configuration
+    #   The configuration for a Lustre MDT (Metadata Target) storage volume.
+    #   @return [Types::FileCacheLustreMetadataConfiguration]
+    #
+    # @!attribute [rw] log_configuration
+    #   The configuration for Lustre logging used to write the enabled
+    #   logging events for your Amazon File Cache resource to Amazon
+    #   CloudWatch Logs.
+    #   @return [Types::LustreLogConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileCacheLustreConfiguration AWS API Documentation
+    #
+    class FileCacheLustreConfiguration < Struct.new(
+      :per_unit_storage_throughput,
+      :deployment_type,
+      :mount_name,
+      :weekly_maintenance_start_time,
+      :metadata_configuration,
+      :log_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a Lustre MDT (Metadata Target) storage volume.
+    # The metadata on Amazon File Cache is managed by a Lustre Metadata
+    # Server (MDS) while the actual metadata is persisted on an MDT.
+    #
+    # @note When making an API call, you may pass FileCacheLustreMetadataConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         storage_capacity: 1, # required
+    #       }
+    #
+    # @!attribute [rw] storage_capacity
+    #   The storage capacity of the Lustre MDT (Metadata Target) storage
+    #   volume in gibibytes (GiB). The only supported value is `2400` GiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileCacheLustreMetadataConfiguration AWS API Documentation
+    #
+    class FileCacheLustreMetadataConfiguration < Struct.new(
+      :storage_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an NFS data repository association (DRA) created
+    # during the creation of the Amazon File Cache resource.
+    #
+    # @note When making an API call, you may pass FileCacheNFSConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         version: "NFS3", # required, accepts NFS3
+    #         dns_ips: ["IpAddress"],
+    #       }
+    #
+    # @!attribute [rw] version
+    #   The version of the NFS (Network File System) protocol of the NFS
+    #   data repository. The only supported value is `NFS3`, which indicates
+    #   that the data repository must support the NFSv3 protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_ips
+    #   A list of up to 2 IP addresses of DNS servers used to resolve the
+    #   NFS file system domain name. The provided IP addresses can either be
+    #   the IP addresses of a DNS forwarder or resolver that the customer
+    #   manages and runs inside the customer VPC, or the IP addresses of the
+    #   on-premises DNS servers.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileCacheNFSConfiguration AWS API Documentation
+    #
+    class FileCacheNFSConfiguration < Struct.new(
+      :version,
+      :dns_ips)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # No caches were found based upon supplied parameters.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileCacheNotFound AWS API Documentation
+    #
+    class FileCacheNotFound < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A description of a specific Amazon FSx file system.
     #
     # @!attribute [rw] owner_id
@@ -5385,7 +6329,7 @@ module Aws::FSx
     #   data as a hash:
     #
     #       {
-    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id, data-repository-type
+    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id, data-repository-type, file-cache-id, file-cache-type
     #         values: ["FilterValue"],
     #       }
     #
@@ -5812,16 +6756,8 @@ module Aws::FSx
     end
 
     # The configuration for Lustre logging used to write the enabled logging
-    # events for your file system to Amazon CloudWatch Logs.
-    #
-    # When logging is enabled, Lustre logs error and warning events from
-    # data repository operations such as automatic export and data
-    # repository tasks. To learn more about Lustre logging, see [Logging
-    # with Amazon CloudWatch Logs][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/cw-event-logging.html
+    # events for your Amazon FSx for Lustre file system or Amazon File Cache
+    # resource to Amazon CloudWatch Logs.
     #
     # @!attribute [rw] level
     #   The data repository events that are logged by Amazon FSx.
@@ -5833,6 +6769,9 @@ module Aws::FSx
     #   * `WARN_ERROR` - both warning events and error events are logged.
     #
     #   * `DISABLED` - logging of data repository events is turned off.
+    #
+    #   Note that Amazon File Cache uses a default setting of `WARN_ERROR`,
+    #   which can't be changed.
     #   @return [String]
     #
     # @!attribute [rw] destination
@@ -5853,22 +6792,12 @@ module Aws::FSx
     end
 
     # The Lustre logging configuration used when creating or updating an
-    # Amazon FSx for Lustre file system. Lustre logging writes the enabled
-    # logging events for your file system to Amazon CloudWatch Logs.
+    # Amazon FSx for Lustre file system. An Amazon File Cache is created
+    # with Lustre logging enabled by default, with a setting of `WARN_ERROR`
+    # for the logging events. which can't be changed.
     #
-    # Error and warning events can be logged from the following data
-    # repository operations:
-    #
-    # * Automatic export
-    #
-    # * Data repository tasks
-    #
-    # To learn more about Lustre logging, see [Logging to Amazon CloudWatch
-    # Logs][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/cw-event-logging.html
+    # Lustre logging writes the enabled logging events for your file system
+    # or cache to Amazon CloudWatch Logs.
     #
     # @note When making an API call, you may pass LustreLogCreateConfiguration
     #   data as a hash:
@@ -5906,7 +6835,8 @@ module Aws::FSx
     #
     #   * If you do not provide a destination, Amazon FSx will create and
     #     use a log stream in the CloudWatch Logs `/aws/fsx/lustre` log
-    #     group.
+    #     group (for Amazon FSx for Lustre) or `/aws/fsx/filecache` (for
+    #     Amazon File Cache).
     #
     #   * If `Destination` is provided and the resource does not exist, the
     #     request will fail with a `BadRequest` error.
@@ -5986,6 +6916,20 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # A cache configuration is required for this operation.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/MissingFileCacheConfiguration AWS API Documentation
+    #
+    class MissingFileCacheConfiguration < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A file system configuration is required for this operation.
     #
     # @!attribute [rw] message
@@ -6010,6 +6954,38 @@ module Aws::FSx
     #
     class MissingVolumeConfiguration < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a data repository association that links an
+    # Amazon File Cache resource to an NFS data repository.
+    #
+    # @!attribute [rw] version
+    #   The version of the NFS (Network File System) protocol of the NFS
+    #   data repository. Currently, the only supported value is `NFS3`,
+    #   which indicates that the data repository must support the NFSv3
+    #   protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_ips
+    #   A list of up to 2 IP addresses of DNS servers used to resolve the
+    #   NFS file system domain name. The provided IP addresses can either be
+    #   the IP addresses of a DNS forwarder or resolver that the customer
+    #   manages and runs inside the customer VPC, or the IP addresses of the
+    #   on-premises DNS servers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auto_export_policy
+    #   This parameter is not supported for Amazon File Cache.
+    #   @return [Types::AutoExportPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/NFSDataRepositoryConfiguration AWS API Documentation
+    #
+    class NFSDataRepositoryConfiguration < Struct.new(
+      :version,
+      :dns_ips,
+      :auto_export_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6827,13 +7803,19 @@ module Aws::FSx
     end
 
     # The configuration for an Amazon S3 data repository linked to an Amazon
-    # FSx Lustre file system with a data repository association. The
-    # configuration consists of an `AutoImportPolicy` that defines file
-    # events on the data repository are automatically imported to the file
-    # system and an `AutoExportPolicy` that defines which file events on the
-    # file system are automatically exported to the data repository. File
-    # events are when files or directories are added, changed, or deleted on
-    # the file system or the data repository.
+    # FSx for Lustre file system with a data repository association. The
+    # configuration consists of an `AutoImportPolicy` that defines which
+    # file events on the data repository are automatically imported to the
+    # file system and an `AutoExportPolicy` that defines which file events
+    # on the file system are automatically exported to the data repository.
+    # File events are when files or directories are added, changed, or
+    # deleted on the file system or the data repository.
+    #
+    # <note markdown="1"> Data repository associations on Amazon File Cache don't use
+    # `S3DataRepositoryConfiguration` because they don't support automatic
+    # import or automatic export.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass S3DataRepositoryConfiguration
     #   data as a hash:
@@ -7684,6 +8666,91 @@ module Aws::FSx
     #
     class UpdateDataRepositoryAssociationResponse < Struct.new(
       :association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration update for an Amazon File Cache resource.
+    #
+    # @note When making an API call, you may pass UpdateFileCacheLustreConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         weekly_maintenance_start_time: "WeeklyTime",
+    #       }
+    #
+    # @!attribute [rw] weekly_maintenance_start_time
+    #   A recurring weekly time, in the format `D:HH:MM`.
+    #
+    #   `D` is the day of the week, for which 1 represents Monday and 7
+    #   represents Sunday. For further details, see [the ISO-8601 spec as
+    #   described on Wikipedia][1].
+    #
+    #   `HH` is the zero-padded hour of the day (0-23), and `MM` is the
+    #   zero-padded minute of the hour.
+    #
+    #   For example, `1:05:00` specifies maintenance at 5 AM Monday.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileCacheLustreConfiguration AWS API Documentation
+    #
+    class UpdateFileCacheLustreConfiguration < Struct.new(
+      :weekly_maintenance_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFileCacheRequest
+    #   data as a hash:
+    #
+    #       {
+    #         file_cache_id: "FileCacheId", # required
+    #         client_request_token: "ClientRequestToken",
+    #         lustre_configuration: {
+    #           weekly_maintenance_start_time: "WeeklyTime",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file_cache_id
+    #   The ID of the cache that you are updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] lustre_configuration
+    #   The configuration updates for an Amazon File Cache resource.
+    #   @return [Types::UpdateFileCacheLustreConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileCacheRequest AWS API Documentation
+    #
+    class UpdateFileCacheRequest < Struct.new(
+      :file_cache_id,
+      :client_request_token,
+      :lustre_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_cache
+    #   A description of the cache that was updated.
+    #   @return [Types::FileCache]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileCacheResponse AWS API Documentation
+    #
+    class UpdateFileCacheResponse < Struct.new(
+      :file_cache)
       SENSITIVE = []
       include Aws::Structure
     end

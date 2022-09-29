@@ -37,6 +37,7 @@ module Aws::FSx
   # * {DataRepositoryTaskEnded}
   # * {DataRepositoryTaskExecuting}
   # * {DataRepositoryTaskNotFound}
+  # * {FileCacheNotFound}
   # * {FileSystemNotFound}
   # * {IncompatibleParameterError}
   # * {IncompatibleRegionForMultiAZ}
@@ -49,6 +50,7 @@ module Aws::FSx
   # * {InvalidPerUnitStorageThroughput}
   # * {InvalidRegion}
   # * {InvalidSourceKmsKey}
+  # * {MissingFileCacheConfiguration}
   # * {MissingFileSystemConfiguration}
   # * {MissingVolumeConfiguration}
   # * {NotServiceResourceError}
@@ -227,6 +229,21 @@ module Aws::FSx
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::FSx::Types::DataRepositoryTaskNotFound] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class FileCacheNotFound < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::FileCacheNotFound] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -427,6 +444,21 @@ module Aws::FSx
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::FSx::Types::InvalidSourceKmsKey] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class MissingFileCacheConfiguration < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::MissingFileCacheConfiguration] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

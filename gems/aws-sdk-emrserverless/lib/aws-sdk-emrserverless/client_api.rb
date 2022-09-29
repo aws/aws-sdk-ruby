@@ -48,6 +48,8 @@ module Aws::EMRServerless
     EntryPointPath = Shapes::StringShape.new(name: 'EntryPointPath')
     GetApplicationRequest = Shapes::StructureShape.new(name: 'GetApplicationRequest')
     GetApplicationResponse = Shapes::StructureShape.new(name: 'GetApplicationResponse')
+    GetDashboardForJobRunRequest = Shapes::StructureShape.new(name: 'GetDashboardForJobRunRequest')
+    GetDashboardForJobRunResponse = Shapes::StructureShape.new(name: 'GetDashboardForJobRunResponse')
     GetJobRunRequest = Shapes::StructureShape.new(name: 'GetJobRunRequest')
     GetJobRunResponse = Shapes::StructureShape.new(name: 'GetJobRunResponse')
     Hive = Shapes::StructureShape.new(name: 'Hive')
@@ -115,6 +117,7 @@ module Aws::EMRServerless
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
     UriString = Shapes::StringShape.new(name: 'UriString')
+    Url = Shapes::StringShape.new(name: 'Url')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     WorkerCounts = Shapes::IntegerShape.new(name: 'WorkerCounts')
     WorkerResourceConfig = Shapes::StructureShape.new(name: 'WorkerResourceConfig')
@@ -156,7 +159,7 @@ module Aws::EMRServerless
     AutoStartConfig.struct_class = Types::AutoStartConfig
 
     AutoStopConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
-    AutoStopConfig.add_member(:idle_timeout_minutes, Shapes::ShapeRef.new(shape: AutoStopConfigIdleTimeoutMinutesInteger, location_name: "idleTimeoutMinutes", metadata: {"box"=>true}))
+    AutoStopConfig.add_member(:idle_timeout_minutes, Shapes::ShapeRef.new(shape: AutoStopConfigIdleTimeoutMinutesInteger, location_name: "idleTimeoutMinutes"))
     AutoStopConfig.struct_class = Types::AutoStopConfig
 
     CancelJobRunRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
@@ -210,6 +213,13 @@ module Aws::EMRServerless
 
     GetApplicationResponse.add_member(:application, Shapes::ShapeRef.new(shape: Application, required: true, location_name: "application"))
     GetApplicationResponse.struct_class = Types::GetApplicationResponse
+
+    GetDashboardForJobRunRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
+    GetDashboardForJobRunRequest.add_member(:job_run_id, Shapes::ShapeRef.new(shape: JobRunId, required: true, location: "uri", location_name: "jobRunId"))
+    GetDashboardForJobRunRequest.struct_class = Types::GetDashboardForJobRunRequest
+
+    GetDashboardForJobRunResponse.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "url"))
+    GetDashboardForJobRunResponse.struct_class = Types::GetDashboardForJobRunResponse
 
     GetJobRunRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     GetJobRunRequest.add_member(:job_run_id, Shapes::ShapeRef.new(shape: JobRunId, required: true, location: "uri", location_name: "jobRunId"))
@@ -279,7 +289,7 @@ module Aws::EMRServerless
     JobRuns.member = Shapes::ShapeRef.new(shape: JobRunSummary)
 
     ListApplicationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListApplicationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListApplicationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListApplicationsRequest.add_member(:states, Shapes::ShapeRef.new(shape: ApplicationStateSet, location: "querystring", location_name: "states"))
     ListApplicationsRequest.struct_class = Types::ListApplicationsRequest
 
@@ -289,7 +299,7 @@ module Aws::EMRServerless
 
     ListJobRunsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     ListJobRunsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListJobRunsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListJobRunsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListJobRunsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListJobRunsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListJobRunsRequest.add_member(:created_at_after, Shapes::ShapeRef.new(shape: Date, location: "querystring", location_name: "createdAtAfter"))
     ListJobRunsRequest.add_member(:created_at_before, Shapes::ShapeRef.new(shape: Date, location: "querystring", location_name: "createdAtBefore"))
     ListJobRunsRequest.add_member(:states, Shapes::ShapeRef.new(shape: JobRunStateSet, location: "querystring", location_name: "states"))
@@ -468,6 +478,17 @@ module Aws::EMRServerless
         o.http_request_uri = "/applications/{applicationId}"
         o.input = Shapes::ShapeRef.new(shape: GetApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_dashboard_for_job_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDashboardForJobRun"
+        o.http_method = "GET"
+        o.http_request_uri = "/applications/{applicationId}/jobruns/{jobRunId}/dashboard"
+        o.input = Shapes::ShapeRef.new(shape: GetDashboardForJobRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDashboardForJobRunResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

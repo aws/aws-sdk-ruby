@@ -1451,6 +1451,7 @@ module Aws::WorkSpaces
     #   resp.client_properties_list #=> Array
     #   resp.client_properties_list[0].resource_id #=> String
     #   resp.client_properties_list[0].client_properties.reconnect_enabled #=> String, one of "ENABLED", "DISABLED"
+    #   resp.client_properties_list[0].client_properties.log_upload_enabled #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientProperties AWS API Documentation
     #
@@ -2552,6 +2553,7 @@ module Aws::WorkSpaces
     #     resource_id: "NonEmptyString", # required
     #     client_properties: { # required
     #       reconnect_enabled: "ENABLED", # accepts ENABLED, DISABLED
+    #       log_upload_enabled: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #   })
     #
@@ -3405,7 +3407,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

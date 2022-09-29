@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2022-09-29)
+------------------
+
+* Feature - This release enables customers to access control rights on Translate resources like Parallel Data and Custom Terminology using Tag Based Authorization.
+
 1.45.0 (2022-06-29)
 ------------------
 

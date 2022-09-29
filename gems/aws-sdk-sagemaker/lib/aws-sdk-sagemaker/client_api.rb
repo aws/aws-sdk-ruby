@@ -830,6 +830,7 @@ module Aws::SageMaker
     JsonContentTypes = Shapes::ListShape.new(name: 'JsonContentTypes')
     JsonPath = Shapes::StringShape.new(name: 'JsonPath')
     JupyterServerAppSettings = Shapes::StructureShape.new(name: 'JupyterServerAppSettings')
+    KeepAlivePeriodInSeconds = Shapes::IntegerShape.new(name: 'KeepAlivePeriodInSeconds')
     KernelDisplayName = Shapes::StringShape.new(name: 'KernelDisplayName')
     KernelGatewayAppSettings = Shapes::StructureShape.new(name: 'KernelGatewayAppSettings')
     KernelGatewayImageConfig = Shapes::StructureShape.new(name: 'KernelGatewayImageConfig')
@@ -1376,6 +1377,7 @@ module Aws::SageMaker
     ResolvedAttributes = Shapes::StructureShape.new(name: 'ResolvedAttributes')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceConfig = Shapes::StructureShape.new(name: 'ResourceConfig')
+    ResourceConfigForUpdate = Shapes::StructureShape.new(name: 'ResourceConfigForUpdate')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceInUse = Shapes::StructureShape.new(name: 'ResourceInUse')
     ResourceLimitExceeded = Shapes::StructureShape.new(name: 'ResourceLimitExceeded')
@@ -1383,6 +1385,7 @@ module Aws::SageMaker
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
     ResourcePolicyString = Shapes::StringShape.new(name: 'ResourcePolicyString')
     ResourcePropertyName = Shapes::StringShape.new(name: 'ResourcePropertyName')
+    ResourceRetainedBillableTimeInSeconds = Shapes::IntegerShape.new(name: 'ResourceRetainedBillableTimeInSeconds')
     ResourceSpec = Shapes::StructureShape.new(name: 'ResourceSpec')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResponseMIMEType = Shapes::StringShape.new(name: 'ResponseMIMEType')
@@ -1693,6 +1696,8 @@ module Aws::SageMaker
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     VpcSecurityGroupIds = Shapes::ListShape.new(name: 'VpcSecurityGroupIds')
     WaitIntervalInSeconds = Shapes::IntegerShape.new(name: 'WaitIntervalInSeconds')
+    WarmPoolResourceStatus = Shapes::StringShape.new(name: 'WarmPoolResourceStatus')
+    WarmPoolStatus = Shapes::StructureShape.new(name: 'WarmPoolStatus')
     Workforce = Shapes::StructureShape.new(name: 'Workforce')
     WorkforceArn = Shapes::StringShape.new(name: 'WorkforceArn')
     WorkforceFailureReason = Shapes::StringShape.new(name: 'WorkforceFailureReason')
@@ -3862,6 +3867,7 @@ module Aws::SageMaker
     DescribeTrainingJobResponse.add_member(:profiling_status, Shapes::ShapeRef.new(shape: ProfilingStatus, location_name: "ProfilingStatus"))
     DescribeTrainingJobResponse.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "RetryStrategy"))
     DescribeTrainingJobResponse.add_member(:environment, Shapes::ShapeRef.new(shape: TrainingEnvironmentMap, location_name: "Environment"))
+    DescribeTrainingJobResponse.add_member(:warm_pool_status, Shapes::ShapeRef.new(shape: WarmPoolStatus, location_name: "WarmPoolStatus"))
     DescribeTrainingJobResponse.struct_class = Types::DescribeTrainingJobResponse
 
     DescribeTransformJobRequest.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, required: true, location_name: "TransformJobName"))
@@ -5545,6 +5551,7 @@ module Aws::SageMaker
     ListTrainingJobsRequest.add_member(:status_equals, Shapes::ShapeRef.new(shape: TrainingJobStatus, location_name: "StatusEquals"))
     ListTrainingJobsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortBy, location_name: "SortBy"))
     ListTrainingJobsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ListTrainingJobsRequest.add_member(:warm_pool_status_equals, Shapes::ShapeRef.new(shape: WarmPoolResourceStatus, location_name: "WarmPoolStatusEquals"))
     ListTrainingJobsRequest.struct_class = Types::ListTrainingJobsRequest
 
     ListTrainingJobsResponse.add_member(:training_job_summaries, Shapes::ShapeRef.new(shape: TrainingJobSummaries, required: true, location_name: "TrainingJobSummaries"))
@@ -6650,7 +6657,11 @@ module Aws::SageMaker
     ResourceConfig.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: VolumeSizeInGB, required: true, location_name: "VolumeSizeInGB"))
     ResourceConfig.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     ResourceConfig.add_member(:instance_groups, Shapes::ShapeRef.new(shape: InstanceGroups, location_name: "InstanceGroups"))
+    ResourceConfig.add_member(:keep_alive_period_in_seconds, Shapes::ShapeRef.new(shape: KeepAlivePeriodInSeconds, location_name: "KeepAlivePeriodInSeconds"))
     ResourceConfig.struct_class = Types::ResourceConfig
+
+    ResourceConfigForUpdate.add_member(:keep_alive_period_in_seconds, Shapes::ShapeRef.new(shape: KeepAlivePeriodInSeconds, required: true, location_name: "KeepAlivePeriodInSeconds"))
+    ResourceConfigForUpdate.struct_class = Types::ResourceConfigForUpdate
 
     ResourceInUse.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
     ResourceInUse.struct_class = Types::ResourceInUse
@@ -7000,6 +7011,7 @@ module Aws::SageMaker
     TrainingJobSummary.add_member(:training_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingEndTime"))
     TrainingJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     TrainingJobSummary.add_member(:training_job_status, Shapes::ShapeRef.new(shape: TrainingJobStatus, required: true, location_name: "TrainingJobStatus"))
+    TrainingJobSummary.add_member(:warm_pool_status, Shapes::ShapeRef.new(shape: WarmPoolStatus, location_name: "WarmPoolStatus"))
     TrainingJobSummary.struct_class = Types::TrainingJobSummary
 
     TrainingSpecification.add_member(:training_image, Shapes::ShapeRef.new(shape: ContainerImage, required: true, location_name: "TrainingImage"))
@@ -7411,6 +7423,7 @@ module Aws::SageMaker
     UpdateTrainingJobRequest.add_member(:training_job_name, Shapes::ShapeRef.new(shape: TrainingJobName, required: true, location_name: "TrainingJobName"))
     UpdateTrainingJobRequest.add_member(:profiler_config, Shapes::ShapeRef.new(shape: ProfilerConfigForUpdate, location_name: "ProfilerConfig"))
     UpdateTrainingJobRequest.add_member(:profiler_rule_configurations, Shapes::ShapeRef.new(shape: ProfilerRuleConfigurations, location_name: "ProfilerRuleConfigurations"))
+    UpdateTrainingJobRequest.add_member(:resource_config, Shapes::ShapeRef.new(shape: ResourceConfigForUpdate, location_name: "ResourceConfig"))
     UpdateTrainingJobRequest.struct_class = Types::UpdateTrainingJobRequest
 
     UpdateTrainingJobResponse.add_member(:training_job_arn, Shapes::ShapeRef.new(shape: TrainingJobArn, required: true, location_name: "TrainingJobArn"))
@@ -7507,6 +7520,11 @@ module Aws::SageMaker
     VpcConfig.struct_class = Types::VpcConfig
 
     VpcSecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
+
+    WarmPoolStatus.add_member(:status, Shapes::ShapeRef.new(shape: WarmPoolResourceStatus, required: true, location_name: "Status"))
+    WarmPoolStatus.add_member(:resource_retained_billable_time_in_seconds, Shapes::ShapeRef.new(shape: ResourceRetainedBillableTimeInSeconds, location_name: "ResourceRetainedBillableTimeInSeconds"))
+    WarmPoolStatus.add_member(:reused_by_job, Shapes::ShapeRef.new(shape: TrainingJobName, location_name: "ReusedByJob"))
+    WarmPoolStatus.struct_class = Types::WarmPoolStatus
 
     Workforce.add_member(:workforce_name, Shapes::ShapeRef.new(shape: WorkforceName, required: true, location_name: "WorkforceName"))
     Workforce.add_member(:workforce_arn, Shapes::ShapeRef.new(shape: WorkforceArn, required: true, location_name: "WorkforceArn"))

@@ -688,6 +688,9 @@
   "MigrationHubConfig": {
     "models": "migrationhub-config/2019-06-30"
   },
+  "MigrationHubOrchestrator": {
+    "models": "migrationhuborchestrator/2021-08-28"
+  },
   "MigrationHubRefactorSpaces": {
     "models": "migration-hub-refactor-spaces/2021-10-26"
   },

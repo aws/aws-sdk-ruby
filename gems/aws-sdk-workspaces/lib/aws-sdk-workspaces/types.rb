@@ -177,6 +177,7 @@ module Aws::WorkSpaces
     #
     #       {
     #         reconnect_enabled: "ENABLED", # accepts ENABLED, DISABLED
+    #         log_upload_enabled: "ENABLED", # accepts ENABLED, DISABLED
     #       }
     #
     # @!attribute [rw] reconnect_enabled
@@ -185,10 +186,19 @@ module Aws::WorkSpaces
     #   their WorkSpaces without re-entering their credentials.
     #   @return [String]
     #
+    # @!attribute [rw] log_upload_enabled
+    #   Specifies whether users can upload diagnostic log files of Amazon
+    #   WorkSpaces client directly to WorkSpaces to troubleshoot issues when
+    #   using the WorkSpaces client. When enabled, the log files will be
+    #   sent to WorkSpaces automatically and will be applied to all users in
+    #   the specified directory.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ClientProperties AWS API Documentation
     #
     class ClientProperties < Struct.new(
-      :reconnect_enabled)
+      :reconnect_enabled,
+      :log_upload_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -850,7 +860,8 @@ module Aws::WorkSpaces
     #   @return [Time]
     #
     # @!attribute [rw] owner_account_id
-    #   The identifier of the AWS account that owns the image.
+    #   The identifier of the Amazon Web Services account that owns the
+    #   image.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceImageResult AWS API Documentation
@@ -2912,6 +2923,7 @@ module Aws::WorkSpaces
     #         resource_id: "NonEmptyString", # required
     #         client_properties: { # required
     #           reconnect_enabled: "ENABLED", # accepts ENABLED, DISABLED
+    #           log_upload_enabled: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #       }
     #

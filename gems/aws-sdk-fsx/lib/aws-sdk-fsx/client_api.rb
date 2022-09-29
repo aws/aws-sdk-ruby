@@ -50,17 +50,23 @@ module Aws::FSx
     BatchImportMetaDataOnCreate = Shapes::BooleanShape.new(name: 'BatchImportMetaDataOnCreate')
     CancelDataRepositoryTaskRequest = Shapes::StructureShape.new(name: 'CancelDataRepositoryTaskRequest')
     CancelDataRepositoryTaskResponse = Shapes::StructureShape.new(name: 'CancelDataRepositoryTaskResponse')
+    CapacityToRelease = Shapes::IntegerShape.new(name: 'CapacityToRelease')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     CompletionReport = Shapes::StructureShape.new(name: 'CompletionReport')
     CoolingPeriod = Shapes::IntegerShape.new(name: 'CoolingPeriod')
     CopyBackupRequest = Shapes::StructureShape.new(name: 'CopyBackupRequest')
     CopyBackupResponse = Shapes::StructureShape.new(name: 'CopyBackupResponse')
+    CopyTagsToDataRepositoryAssociations = Shapes::BooleanShape.new(name: 'CopyTagsToDataRepositoryAssociations')
     CreateBackupRequest = Shapes::StructureShape.new(name: 'CreateBackupRequest')
     CreateBackupResponse = Shapes::StructureShape.new(name: 'CreateBackupResponse')
     CreateDataRepositoryAssociationRequest = Shapes::StructureShape.new(name: 'CreateDataRepositoryAssociationRequest')
     CreateDataRepositoryAssociationResponse = Shapes::StructureShape.new(name: 'CreateDataRepositoryAssociationResponse')
     CreateDataRepositoryTaskRequest = Shapes::StructureShape.new(name: 'CreateDataRepositoryTaskRequest')
     CreateDataRepositoryTaskResponse = Shapes::StructureShape.new(name: 'CreateDataRepositoryTaskResponse')
+    CreateFileCacheDataRepositoryAssociations = Shapes::ListShape.new(name: 'CreateFileCacheDataRepositoryAssociations')
+    CreateFileCacheLustreConfiguration = Shapes::StructureShape.new(name: 'CreateFileCacheLustreConfiguration')
+    CreateFileCacheRequest = Shapes::StructureShape.new(name: 'CreateFileCacheRequest')
+    CreateFileCacheResponse = Shapes::StructureShape.new(name: 'CreateFileCacheResponse')
     CreateFileSystemFromBackupRequest = Shapes::StructureShape.new(name: 'CreateFileSystemFromBackupRequest')
     CreateFileSystemFromBackupResponse = Shapes::StructureShape.new(name: 'CreateFileSystemFromBackupResponse')
     CreateFileSystemLustreConfiguration = Shapes::StructureShape.new(name: 'CreateFileSystemLustreConfiguration')
@@ -114,6 +120,8 @@ module Aws::FSx
     DeleteDataInFileSystem = Shapes::BooleanShape.new(name: 'DeleteDataInFileSystem')
     DeleteDataRepositoryAssociationRequest = Shapes::StructureShape.new(name: 'DeleteDataRepositoryAssociationRequest')
     DeleteDataRepositoryAssociationResponse = Shapes::StructureShape.new(name: 'DeleteDataRepositoryAssociationResponse')
+    DeleteFileCacheRequest = Shapes::StructureShape.new(name: 'DeleteFileCacheRequest')
+    DeleteFileCacheResponse = Shapes::StructureShape.new(name: 'DeleteFileCacheResponse')
     DeleteFileSystemLustreConfiguration = Shapes::StructureShape.new(name: 'DeleteFileSystemLustreConfiguration')
     DeleteFileSystemLustreResponse = Shapes::StructureShape.new(name: 'DeleteFileSystemLustreResponse')
     DeleteFileSystemOpenZFSConfiguration = Shapes::StructureShape.new(name: 'DeleteFileSystemOpenZFSConfiguration')
@@ -141,6 +149,8 @@ module Aws::FSx
     DescribeDataRepositoryAssociationsResponse = Shapes::StructureShape.new(name: 'DescribeDataRepositoryAssociationsResponse')
     DescribeDataRepositoryTasksRequest = Shapes::StructureShape.new(name: 'DescribeDataRepositoryTasksRequest')
     DescribeDataRepositoryTasksResponse = Shapes::StructureShape.new(name: 'DescribeDataRepositoryTasksResponse')
+    DescribeFileCachesRequest = Shapes::StructureShape.new(name: 'DescribeFileCachesRequest')
+    DescribeFileCachesResponse = Shapes::StructureShape.new(name: 'DescribeFileCachesResponse')
     DescribeFileSystemAliasesRequest = Shapes::StructureShape.new(name: 'DescribeFileSystemAliasesRequest')
     DescribeFileSystemAliasesResponse = Shapes::StructureShape.new(name: 'DescribeFileSystemAliasesResponse')
     DescribeFileSystemsRequest = Shapes::StructureShape.new(name: 'DescribeFileSystemsRequest')
@@ -165,6 +175,20 @@ module Aws::FSx
     EventType = Shapes::StringShape.new(name: 'EventType')
     EventTypes = Shapes::ListShape.new(name: 'EventTypes')
     FailedCount = Shapes::IntegerShape.new(name: 'FailedCount')
+    FileCache = Shapes::StructureShape.new(name: 'FileCache')
+    FileCacheCreating = Shapes::StructureShape.new(name: 'FileCacheCreating')
+    FileCacheDataRepositoryAssociation = Shapes::StructureShape.new(name: 'FileCacheDataRepositoryAssociation')
+    FileCacheFailureDetails = Shapes::StructureShape.new(name: 'FileCacheFailureDetails')
+    FileCacheId = Shapes::StringShape.new(name: 'FileCacheId')
+    FileCacheIds = Shapes::ListShape.new(name: 'FileCacheIds')
+    FileCacheLifecycle = Shapes::StringShape.new(name: 'FileCacheLifecycle')
+    FileCacheLustreConfiguration = Shapes::StructureShape.new(name: 'FileCacheLustreConfiguration')
+    FileCacheLustreDeploymentType = Shapes::StringShape.new(name: 'FileCacheLustreDeploymentType')
+    FileCacheLustreMetadataConfiguration = Shapes::StructureShape.new(name: 'FileCacheLustreMetadataConfiguration')
+    FileCacheNFSConfiguration = Shapes::StructureShape.new(name: 'FileCacheNFSConfiguration')
+    FileCacheNotFound = Shapes::StructureShape.new(name: 'FileCacheNotFound')
+    FileCacheType = Shapes::StringShape.new(name: 'FileCacheType')
+    FileCaches = Shapes::ListShape.new(name: 'FileCaches')
     FileSystem = Shapes::StructureShape.new(name: 'FileSystem')
     FileSystemAdministratorsGroupName = Shapes::StringShape.new(name: 'FileSystemAdministratorsGroupName')
     FileSystemEndpoint = Shapes::StructureShape.new(name: 'FileSystemEndpoint')
@@ -224,13 +248,17 @@ module Aws::FSx
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Megabytes = Shapes::IntegerShape.new(name: 'Megabytes')
     MegabytesPerSecond = Shapes::IntegerShape.new(name: 'MegabytesPerSecond')
+    MetadataStorageCapacity = Shapes::IntegerShape.new(name: 'MetadataStorageCapacity')
+    MissingFileCacheConfiguration = Shapes::StructureShape.new(name: 'MissingFileCacheConfiguration')
     MissingFileSystemConfiguration = Shapes::StructureShape.new(name: 'MissingFileSystemConfiguration')
     MissingVolumeConfiguration = Shapes::StructureShape.new(name: 'MissingVolumeConfiguration')
+    NFSDataRepositoryConfiguration = Shapes::StructureShape.new(name: 'NFSDataRepositoryConfiguration')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     NetBiosAlias = Shapes::StringShape.new(name: 'NetBiosAlias')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NetworkInterfaceIds = Shapes::ListShape.new(name: 'NetworkInterfaceIds')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NfsVersion = Shapes::StringShape.new(name: 'NfsVersion')
     NotServiceResourceError = Shapes::StructureShape.new(name: 'NotServiceResourceError')
     OntapDeploymentType = Shapes::StringShape.new(name: 'OntapDeploymentType')
     OntapEndpointIpAddresses = Shapes::ListShape.new(name: 'OntapEndpointIpAddresses')
@@ -262,8 +290,10 @@ module Aws::FSx
     Region = Shapes::StringShape.new(name: 'Region')
     ReleaseFileSystemNfsV3LocksRequest = Shapes::StructureShape.new(name: 'ReleaseFileSystemNfsV3LocksRequest')
     ReleaseFileSystemNfsV3LocksResponse = Shapes::StructureShape.new(name: 'ReleaseFileSystemNfsV3LocksResponse')
+    ReleasedCapacity = Shapes::IntegerShape.new(name: 'ReleasedCapacity')
     ReportFormat = Shapes::StringShape.new(name: 'ReportFormat')
     ReportScope = Shapes::StringShape.new(name: 'ReportScope')
+    RepositoryDnsIps = Shapes::ListShape.new(name: 'RepositoryDnsIps')
     RequestTime = Shapes::TimestampShape.new(name: 'RequestTime')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceDoesNotSupportTagging = Shapes::StructureShape.new(name: 'ResourceDoesNotSupportTagging')
@@ -316,6 +346,7 @@ module Aws::FSx
     StorageVirtualMachineRootVolumeSecurityStyle = Shapes::StringShape.new(name: 'StorageVirtualMachineRootVolumeSecurityStyle')
     StorageVirtualMachineSubtype = Shapes::StringShape.new(name: 'StorageVirtualMachineSubtype')
     StorageVirtualMachines = Shapes::ListShape.new(name: 'StorageVirtualMachines')
+    SubDirectoriesPaths = Shapes::ListShape.new(name: 'SubDirectoriesPaths')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
     SucceededCount = Shapes::IntegerShape.new(name: 'SucceededCount')
@@ -340,6 +371,9 @@ module Aws::FSx
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDataRepositoryAssociationRequest = Shapes::StructureShape.new(name: 'UpdateDataRepositoryAssociationRequest')
     UpdateDataRepositoryAssociationResponse = Shapes::StructureShape.new(name: 'UpdateDataRepositoryAssociationResponse')
+    UpdateFileCacheLustreConfiguration = Shapes::StructureShape.new(name: 'UpdateFileCacheLustreConfiguration')
+    UpdateFileCacheRequest = Shapes::StructureShape.new(name: 'UpdateFileCacheRequest')
+    UpdateFileCacheResponse = Shapes::StructureShape.new(name: 'UpdateFileCacheResponse')
     UpdateFileSystemLustreConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemLustreConfiguration')
     UpdateFileSystemOntapConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemOntapConfiguration')
     UpdateFileSystemOpenZFSConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemOpenZFSConfiguration')
@@ -501,7 +535,7 @@ module Aws::FSx
     CreateBackupResponse.struct_class = Types::CreateBackupResponse
 
     CreateDataRepositoryAssociationRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
-    CreateDataRepositoryAssociationRequest.add_member(:file_system_path, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "FileSystemPath"))
+    CreateDataRepositoryAssociationRequest.add_member(:file_system_path, Shapes::ShapeRef.new(shape: Namespace, location_name: "FileSystemPath"))
     CreateDataRepositoryAssociationRequest.add_member(:data_repository_path, Shapes::ShapeRef.new(shape: ArchivePath, required: true, location_name: "DataRepositoryPath"))
     CreateDataRepositoryAssociationRequest.add_member(:batch_import_meta_data_on_create, Shapes::ShapeRef.new(shape: BatchImportMetaDataOnCreate, location_name: "BatchImportMetaDataOnCreate"))
     CreateDataRepositoryAssociationRequest.add_member(:imported_file_chunk_size, Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
@@ -519,10 +553,35 @@ module Aws::FSx
     CreateDataRepositoryTaskRequest.add_member(:report, Shapes::ShapeRef.new(shape: CompletionReport, required: true, location_name: "Report"))
     CreateDataRepositoryTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateDataRepositoryTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateDataRepositoryTaskRequest.add_member(:capacity_to_release, Shapes::ShapeRef.new(shape: CapacityToRelease, location_name: "CapacityToRelease"))
     CreateDataRepositoryTaskRequest.struct_class = Types::CreateDataRepositoryTaskRequest
 
     CreateDataRepositoryTaskResponse.add_member(:data_repository_task, Shapes::ShapeRef.new(shape: DataRepositoryTask, location_name: "DataRepositoryTask"))
     CreateDataRepositoryTaskResponse.struct_class = Types::CreateDataRepositoryTaskResponse
+
+    CreateFileCacheDataRepositoryAssociations.member = Shapes::ShapeRef.new(shape: FileCacheDataRepositoryAssociation)
+
+    CreateFileCacheLustreConfiguration.add_member(:per_unit_storage_throughput, Shapes::ShapeRef.new(shape: PerUnitStorageThroughput, required: true, location_name: "PerUnitStorageThroughput"))
+    CreateFileCacheLustreConfiguration.add_member(:deployment_type, Shapes::ShapeRef.new(shape: FileCacheLustreDeploymentType, required: true, location_name: "DeploymentType"))
+    CreateFileCacheLustreConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    CreateFileCacheLustreConfiguration.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: FileCacheLustreMetadataConfiguration, required: true, location_name: "MetadataConfiguration"))
+    CreateFileCacheLustreConfiguration.struct_class = Types::CreateFileCacheLustreConfiguration
+
+    CreateFileCacheRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateFileCacheRequest.add_member(:file_cache_type, Shapes::ShapeRef.new(shape: FileCacheType, required: true, location_name: "FileCacheType"))
+    CreateFileCacheRequest.add_member(:file_cache_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, required: true, location_name: "FileCacheTypeVersion"))
+    CreateFileCacheRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: StorageCapacity, required: true, location_name: "StorageCapacity"))
+    CreateFileCacheRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "SubnetIds"))
+    CreateFileCacheRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
+    CreateFileCacheRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateFileCacheRequest.add_member(:copy_tags_to_data_repository_associations, Shapes::ShapeRef.new(shape: CopyTagsToDataRepositoryAssociations, location_name: "CopyTagsToDataRepositoryAssociations"))
+    CreateFileCacheRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    CreateFileCacheRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: CreateFileCacheLustreConfiguration, location_name: "LustreConfiguration"))
+    CreateFileCacheRequest.add_member(:data_repository_associations, Shapes::ShapeRef.new(shape: CreateFileCacheDataRepositoryAssociations, location_name: "DataRepositoryAssociations"))
+    CreateFileCacheRequest.struct_class = Types::CreateFileCacheRequest
+
+    CreateFileCacheResponse.add_member(:file_cache, Shapes::ShapeRef.new(shape: FileCacheCreating, location_name: "FileCache"))
+    CreateFileCacheResponse.struct_class = Types::CreateFileCacheResponse
 
     CreateFileSystemFromBackupRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
     CreateFileSystemFromBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -535,6 +594,7 @@ module Aws::FSx
     CreateFileSystemFromBackupRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateFileSystemFromBackupRequest.add_member(:file_system_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
     CreateFileSystemFromBackupRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
+    CreateFileSystemFromBackupRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
     CreateFileSystemFromBackupRequest.struct_class = Types::CreateFileSystemFromBackupRequest
 
     CreateFileSystemFromBackupResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
@@ -692,6 +752,10 @@ module Aws::FSx
     DataRepositoryAssociation.add_member(:s3, Shapes::ShapeRef.new(shape: S3DataRepositoryConfiguration, location_name: "S3"))
     DataRepositoryAssociation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DataRepositoryAssociation.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
+    DataRepositoryAssociation.add_member(:file_cache_id, Shapes::ShapeRef.new(shape: FileCacheId, location_name: "FileCacheId"))
+    DataRepositoryAssociation.add_member(:file_cache_path, Shapes::ShapeRef.new(shape: Namespace, location_name: "FileCachePath"))
+    DataRepositoryAssociation.add_member(:data_repository_subdirectories, Shapes::ShapeRef.new(shape: SubDirectoriesPaths, location_name: "DataRepositorySubdirectories"))
+    DataRepositoryAssociation.add_member(:nfs, Shapes::ShapeRef.new(shape: NFSDataRepositoryConfiguration, location_name: "NFS"))
     DataRepositoryAssociation.struct_class = Types::DataRepositoryAssociation
 
     DataRepositoryAssociationIds.member = Shapes::ShapeRef.new(shape: DataRepositoryAssociationId)
@@ -720,11 +784,13 @@ module Aws::FSx
     DataRepositoryTask.add_member(:end_time, Shapes::ShapeRef.new(shape: EndTime, location_name: "EndTime"))
     DataRepositoryTask.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
     DataRepositoryTask.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    DataRepositoryTask.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    DataRepositoryTask.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
     DataRepositoryTask.add_member(:paths, Shapes::ShapeRef.new(shape: DataRepositoryTaskPaths, location_name: "Paths"))
     DataRepositoryTask.add_member(:failure_details, Shapes::ShapeRef.new(shape: DataRepositoryTaskFailureDetails, location_name: "FailureDetails"))
     DataRepositoryTask.add_member(:status, Shapes::ShapeRef.new(shape: DataRepositoryTaskStatus, location_name: "Status"))
     DataRepositoryTask.add_member(:report, Shapes::ShapeRef.new(shape: CompletionReport, location_name: "Report"))
+    DataRepositoryTask.add_member(:capacity_to_release, Shapes::ShapeRef.new(shape: CapacityToRelease, location_name: "CapacityToRelease"))
+    DataRepositoryTask.add_member(:file_cache_id, Shapes::ShapeRef.new(shape: FileCacheId, location_name: "FileCacheId"))
     DataRepositoryTask.struct_class = Types::DataRepositoryTask
 
     DataRepositoryTaskEnded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -753,6 +819,7 @@ module Aws::FSx
     DataRepositoryTaskStatus.add_member(:succeeded_count, Shapes::ShapeRef.new(shape: SucceededCount, location_name: "SucceededCount"))
     DataRepositoryTaskStatus.add_member(:failed_count, Shapes::ShapeRef.new(shape: FailedCount, location_name: "FailedCount"))
     DataRepositoryTaskStatus.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: LastUpdatedTime, location_name: "LastUpdatedTime"))
+    DataRepositoryTaskStatus.add_member(:released_capacity, Shapes::ShapeRef.new(shape: ReleasedCapacity, location_name: "ReleasedCapacity"))
     DataRepositoryTaskStatus.struct_class = Types::DataRepositoryTaskStatus
 
     DataRepositoryTasks.member = Shapes::ShapeRef.new(shape: DataRepositoryTask)
@@ -767,13 +834,21 @@ module Aws::FSx
 
     DeleteDataRepositoryAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: DataRepositoryAssociationId, required: true, location_name: "AssociationId"))
     DeleteDataRepositoryAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
-    DeleteDataRepositoryAssociationRequest.add_member(:delete_data_in_file_system, Shapes::ShapeRef.new(shape: DeleteDataInFileSystem, required: true, location_name: "DeleteDataInFileSystem"))
+    DeleteDataRepositoryAssociationRequest.add_member(:delete_data_in_file_system, Shapes::ShapeRef.new(shape: DeleteDataInFileSystem, location_name: "DeleteDataInFileSystem"))
     DeleteDataRepositoryAssociationRequest.struct_class = Types::DeleteDataRepositoryAssociationRequest
 
     DeleteDataRepositoryAssociationResponse.add_member(:association_id, Shapes::ShapeRef.new(shape: DataRepositoryAssociationId, location_name: "AssociationId"))
     DeleteDataRepositoryAssociationResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: DataRepositoryLifecycle, location_name: "Lifecycle"))
     DeleteDataRepositoryAssociationResponse.add_member(:delete_data_in_file_system, Shapes::ShapeRef.new(shape: DeleteDataInFileSystem, location_name: "DeleteDataInFileSystem"))
     DeleteDataRepositoryAssociationResponse.struct_class = Types::DeleteDataRepositoryAssociationResponse
+
+    DeleteFileCacheRequest.add_member(:file_cache_id, Shapes::ShapeRef.new(shape: FileCacheId, required: true, location_name: "FileCacheId"))
+    DeleteFileCacheRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteFileCacheRequest.struct_class = Types::DeleteFileCacheRequest
+
+    DeleteFileCacheResponse.add_member(:file_cache_id, Shapes::ShapeRef.new(shape: FileCacheId, location_name: "FileCacheId"))
+    DeleteFileCacheResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: FileCacheLifecycle, location_name: "Lifecycle"))
+    DeleteFileCacheResponse.struct_class = Types::DeleteFileCacheResponse
 
     DeleteFileSystemLustreConfiguration.add_member(:skip_final_backup, Shapes::ShapeRef.new(shape: Flag, location_name: "SkipFinalBackup"))
     DeleteFileSystemLustreConfiguration.add_member(:final_backup_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
@@ -886,6 +961,15 @@ module Aws::FSx
     DescribeDataRepositoryTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeDataRepositoryTasksResponse.struct_class = Types::DescribeDataRepositoryTasksResponse
 
+    DescribeFileCachesRequest.add_member(:file_cache_ids, Shapes::ShapeRef.new(shape: FileCacheIds, location_name: "FileCacheIds"))
+    DescribeFileCachesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeFileCachesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeFileCachesRequest.struct_class = Types::DescribeFileCachesRequest
+
+    DescribeFileCachesResponse.add_member(:file_caches, Shapes::ShapeRef.new(shape: FileCaches, location_name: "FileCaches"))
+    DescribeFileCachesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeFileCachesResponse.struct_class = Types::DescribeFileCachesResponse
+
     DescribeFileSystemAliasesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     DescribeFileSystemAliasesRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     DescribeFileSystemAliasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -950,6 +1034,75 @@ module Aws::FSx
     DnsIps.member = Shapes::ShapeRef.new(shape: IpAddress)
 
     EventTypes.member = Shapes::ShapeRef.new(shape: EventType)
+
+    FileCache.add_member(:owner_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "OwnerId"))
+    FileCache.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
+    FileCache.add_member(:file_cache_id, Shapes::ShapeRef.new(shape: FileCacheId, location_name: "FileCacheId"))
+    FileCache.add_member(:file_cache_type, Shapes::ShapeRef.new(shape: FileCacheType, location_name: "FileCacheType"))
+    FileCache.add_member(:file_cache_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileCacheTypeVersion"))
+    FileCache.add_member(:lifecycle, Shapes::ShapeRef.new(shape: FileCacheLifecycle, location_name: "Lifecycle"))
+    FileCache.add_member(:failure_details, Shapes::ShapeRef.new(shape: FileCacheFailureDetails, location_name: "FailureDetails"))
+    FileCache.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
+    FileCache.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    FileCache.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
+    FileCache.add_member(:network_interface_ids, Shapes::ShapeRef.new(shape: NetworkInterfaceIds, location_name: "NetworkInterfaceIds"))
+    FileCache.add_member(:dns_name, Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))
+    FileCache.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    FileCache.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    FileCache.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: FileCacheLustreConfiguration, location_name: "LustreConfiguration"))
+    FileCache.add_member(:data_repository_association_ids, Shapes::ShapeRef.new(shape: DataRepositoryAssociationIds, location_name: "DataRepositoryAssociationIds"))
+    FileCache.struct_class = Types::FileCache
+
+    FileCacheCreating.add_member(:owner_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "OwnerId"))
+    FileCacheCreating.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
+    FileCacheCreating.add_member(:file_cache_id, Shapes::ShapeRef.new(shape: FileCacheId, location_name: "FileCacheId"))
+    FileCacheCreating.add_member(:file_cache_type, Shapes::ShapeRef.new(shape: FileCacheType, location_name: "FileCacheType"))
+    FileCacheCreating.add_member(:file_cache_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileCacheTypeVersion"))
+    FileCacheCreating.add_member(:lifecycle, Shapes::ShapeRef.new(shape: FileCacheLifecycle, location_name: "Lifecycle"))
+    FileCacheCreating.add_member(:failure_details, Shapes::ShapeRef.new(shape: FileCacheFailureDetails, location_name: "FailureDetails"))
+    FileCacheCreating.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
+    FileCacheCreating.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    FileCacheCreating.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
+    FileCacheCreating.add_member(:network_interface_ids, Shapes::ShapeRef.new(shape: NetworkInterfaceIds, location_name: "NetworkInterfaceIds"))
+    FileCacheCreating.add_member(:dns_name, Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))
+    FileCacheCreating.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    FileCacheCreating.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    FileCacheCreating.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    FileCacheCreating.add_member(:copy_tags_to_data_repository_associations, Shapes::ShapeRef.new(shape: CopyTagsToDataRepositoryAssociations, location_name: "CopyTagsToDataRepositoryAssociations"))
+    FileCacheCreating.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: FileCacheLustreConfiguration, location_name: "LustreConfiguration"))
+    FileCacheCreating.add_member(:data_repository_association_ids, Shapes::ShapeRef.new(shape: DataRepositoryAssociationIds, location_name: "DataRepositoryAssociationIds"))
+    FileCacheCreating.struct_class = Types::FileCacheCreating
+
+    FileCacheDataRepositoryAssociation.add_member(:file_cache_path, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "FileCachePath"))
+    FileCacheDataRepositoryAssociation.add_member(:data_repository_path, Shapes::ShapeRef.new(shape: ArchivePath, required: true, location_name: "DataRepositoryPath"))
+    FileCacheDataRepositoryAssociation.add_member(:data_repository_subdirectories, Shapes::ShapeRef.new(shape: SubDirectoriesPaths, location_name: "DataRepositorySubdirectories"))
+    FileCacheDataRepositoryAssociation.add_member(:nfs, Shapes::ShapeRef.new(shape: FileCacheNFSConfiguration, location_name: "NFS"))
+    FileCacheDataRepositoryAssociation.struct_class = Types::FileCacheDataRepositoryAssociation
+
+    FileCacheFailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    FileCacheFailureDetails.struct_class = Types::FileCacheFailureDetails
+
+    FileCacheIds.member = Shapes::ShapeRef.new(shape: FileCacheId)
+
+    FileCacheLustreConfiguration.add_member(:per_unit_storage_throughput, Shapes::ShapeRef.new(shape: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
+    FileCacheLustreConfiguration.add_member(:deployment_type, Shapes::ShapeRef.new(shape: FileCacheLustreDeploymentType, location_name: "DeploymentType"))
+    FileCacheLustreConfiguration.add_member(:mount_name, Shapes::ShapeRef.new(shape: LustreFileSystemMountName, location_name: "MountName"))
+    FileCacheLustreConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    FileCacheLustreConfiguration.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: FileCacheLustreMetadataConfiguration, location_name: "MetadataConfiguration"))
+    FileCacheLustreConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LustreLogConfiguration, location_name: "LogConfiguration"))
+    FileCacheLustreConfiguration.struct_class = Types::FileCacheLustreConfiguration
+
+    FileCacheLustreMetadataConfiguration.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: MetadataStorageCapacity, required: true, location_name: "StorageCapacity"))
+    FileCacheLustreMetadataConfiguration.struct_class = Types::FileCacheLustreMetadataConfiguration
+
+    FileCacheNFSConfiguration.add_member(:version, Shapes::ShapeRef.new(shape: NfsVersion, required: true, location_name: "Version"))
+    FileCacheNFSConfiguration.add_member(:dns_ips, Shapes::ShapeRef.new(shape: RepositoryDnsIps, location_name: "DnsIps"))
+    FileCacheNFSConfiguration.struct_class = Types::FileCacheNFSConfiguration
+
+    FileCacheNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    FileCacheNotFound.struct_class = Types::FileCacheNotFound
+
+    FileCaches.member = Shapes::ShapeRef.new(shape: FileCache)
 
     FileSystem.add_member(:owner_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "OwnerId"))
     FileSystem.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
@@ -1079,11 +1232,19 @@ module Aws::FSx
     LustreRootSquashConfiguration.add_member(:no_squash_nids, Shapes::ShapeRef.new(shape: LustreNoSquashNids, location_name: "NoSquashNids"))
     LustreRootSquashConfiguration.struct_class = Types::LustreRootSquashConfiguration
 
+    MissingFileCacheConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MissingFileCacheConfiguration.struct_class = Types::MissingFileCacheConfiguration
+
     MissingFileSystemConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     MissingFileSystemConfiguration.struct_class = Types::MissingFileSystemConfiguration
 
     MissingVolumeConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     MissingVolumeConfiguration.struct_class = Types::MissingVolumeConfiguration
+
+    NFSDataRepositoryConfiguration.add_member(:version, Shapes::ShapeRef.new(shape: NfsVersion, required: true, location_name: "Version"))
+    NFSDataRepositoryConfiguration.add_member(:dns_ips, Shapes::ShapeRef.new(shape: RepositoryDnsIps, location_name: "DnsIps"))
+    NFSDataRepositoryConfiguration.add_member(:auto_export_policy, Shapes::ShapeRef.new(shape: AutoExportPolicy, location_name: "AutoExportPolicy"))
+    NFSDataRepositoryConfiguration.struct_class = Types::NFSDataRepositoryConfiguration
 
     NetworkInterfaceIds.member = Shapes::ShapeRef.new(shape: NetworkInterfaceId)
 
@@ -1179,6 +1340,8 @@ module Aws::FSx
 
     ReleaseFileSystemNfsV3LocksResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
     ReleaseFileSystemNfsV3LocksResponse.struct_class = Types::ReleaseFileSystemNfsV3LocksResponse
+
+    RepositoryDnsIps.member = Shapes::ShapeRef.new(shape: IpAddress)
 
     ResourceDoesNotSupportTagging.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
     ResourceDoesNotSupportTagging.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -1292,6 +1455,8 @@ module Aws::FSx
 
     StorageVirtualMachines.member = Shapes::ShapeRef.new(shape: StorageVirtualMachine)
 
+    SubDirectoriesPaths.member = Shapes::ShapeRef.new(shape: Namespace)
+
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
     SvmActiveDirectoryConfiguration.add_member(:net_bios_name, Shapes::ShapeRef.new(shape: NetBiosAlias, location_name: "NetBiosName"))
@@ -1345,6 +1510,17 @@ module Aws::FSx
 
     UpdateDataRepositoryAssociationResponse.add_member(:association, Shapes::ShapeRef.new(shape: DataRepositoryAssociation, location_name: "Association"))
     UpdateDataRepositoryAssociationResponse.struct_class = Types::UpdateDataRepositoryAssociationResponse
+
+    UpdateFileCacheLustreConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    UpdateFileCacheLustreConfiguration.struct_class = Types::UpdateFileCacheLustreConfiguration
+
+    UpdateFileCacheRequest.add_member(:file_cache_id, Shapes::ShapeRef.new(shape: FileCacheId, required: true, location_name: "FileCacheId"))
+    UpdateFileCacheRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateFileCacheRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: UpdateFileCacheLustreConfiguration, location_name: "LustreConfiguration"))
+    UpdateFileCacheRequest.struct_class = Types::UpdateFileCacheRequest
+
+    UpdateFileCacheResponse.add_member(:file_cache, Shapes::ShapeRef.new(shape: FileCache, location_name: "FileCache"))
+    UpdateFileCacheResponse.struct_class = Types::UpdateFileCacheResponse
 
     UpdateFileSystemLustreConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     UpdateFileSystemLustreConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
@@ -1600,6 +1776,21 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: DataRepositoryTaskExecuting)
       end)
 
+      api.add_operation(:create_file_cache, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFileCache"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateFileCacheRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFileCacheResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNetworkSettings)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPerUnitStorageThroughput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: MissingFileCacheConfiguration)
+      end)
+
       api.add_operation(:create_file_system, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateFileSystem"
         o.http_method = "POST"
@@ -1722,6 +1913,19 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:delete_file_cache, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFileCache"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFileCacheRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFileCacheResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: FileCacheNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:delete_file_system, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteFileSystem"
         o.http_method = "POST"
@@ -1817,6 +2021,23 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: BadRequest)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         o.errors << Shapes::ShapeRef.new(shape: DataRepositoryTaskNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_file_caches, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFileCaches"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFileCachesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFileCachesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileCacheNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -2002,6 +2223,21 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: DataRepositoryAssociationNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_file_cache, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFileCache"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFileCacheRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateFileCacheResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: FileCacheNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: MissingFileCacheConfiguration)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
       end)
 
       api.add_operation(:update_file_system, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2022-09-29)
+------------------
+
+* Feature - This release adds an option to delete pipeline provisioning repositories using the UpdateAccountSettings API
+
 1.16.0 (2022-06-02)
 ------------------
 

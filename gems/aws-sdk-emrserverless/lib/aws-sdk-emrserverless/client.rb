@@ -561,6 +561,38 @@ module Aws::EMRServerless
       req.send_request(options)
     end
 
+    # Returns a URL to access the job run dashboard.
+    #
+    # @option params [required, String] :application_id
+    #   The ID of the application.
+    #
+    # @option params [required, String] :job_run_id
+    #   The ID of the job run.
+    #
+    # @return [Types::GetDashboardForJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDashboardForJobRunResponse#url #url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_dashboard_for_job_run({
+    #     application_id: "ApplicationId", # required
+    #     job_run_id: "JobRunId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetDashboardForJobRun AWS API Documentation
+    #
+    # @overload get_dashboard_for_job_run(params = {})
+    # @param [Hash] params ({})
+    def get_dashboard_for_job_run(params = {}, options = {})
+      req = build_request(:get_dashboard_for_job_run, params)
+      req.send_request(options)
+    end
+
     # Displays detailed information about a job run.
     #
     # @option params [required, String] :application_id
@@ -1108,7 +1140,7 @@ module Aws::EMRServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

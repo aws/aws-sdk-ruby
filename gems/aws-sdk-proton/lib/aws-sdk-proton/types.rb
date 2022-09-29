@@ -54,14 +54,15 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # The Proton pipeline service role and repository data shared across the
-    # Amazon Web Services account.
+    # Proton settings that are used for multiple services in the Amazon Web
+    # Services account.
     #
     # @!attribute [rw] pipeline_provisioning_repository
-    #   The repository configured in the Amazon Web Services account for
-    #   pipeline provisioning. Required it if you have environments
-    #   configured for self-managed provisioning with services that include
-    #   pipelines.
+    #   The linked repository for pipeline provisioning. Required if you
+    #   have environments configured for self-managed provisioning with
+    #   services that include pipelines. A linked repository is a repository
+    #   that has been registered with Proton. For more information, see
+    #   CreateRepository.
     #   @return [Types::RepositoryBranch]
     #
     # @!attribute [rw] pipeline_service_role_arn
@@ -262,11 +263,11 @@ module Aws::Proton
     # Detailed data of an Proton component resource.
     #
     # For more information about components, see [Proton components][1] in
-    # the *Proton Administrator Guide*.
+    # the *Proton User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html
+    # [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the component.
@@ -347,11 +348,11 @@ module Aws::Proton
     # Summary data of an Proton component resource.
     #
     # For more information about components, see [Proton components][1] in
-    # the *Proton Administrator Guide*.
+    # the *Proton User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html
+    # [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the component.
@@ -496,13 +497,12 @@ module Aws::Proton
     #   An optional list of metadata items that you can associate with the
     #   Proton component. A tag is a key-value pair.
     #
-    #   For more information, see *Proton resources and tagging* in the
-    #   [Proton Administrator Guide][1] or [Proton User Guide][2].
+    #   For more information, see [Proton resources and tagging][1] in the
+    #   *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/resources.html
-    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] template_file
@@ -580,11 +580,11 @@ module Aws::Proton
     #   account.
     #
     #   For more information about components, see [Proton components][1] in
-    #   the *Proton Administrator Guide*.
+    #   the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #   @return [String]
     #
     # @!attribute [rw] environment_name
@@ -613,11 +613,11 @@ module Aws::Proton
     #   Proton environment account connection. A tag is a key-value pair.
     #
     #   For more information, see [Proton resources and tagging][1] in the
-    #   *Proton Administrator Guide*.
+    #   *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/resources.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateEnvironmentAccountConnectionInput AWS API Documentation
@@ -682,11 +682,11 @@ module Aws::Proton
     #   components to be associated with this environment.
     #
     #   For more information about components, see [Proton components][1] in
-    #   the *Proton Administrator Guide*.
+    #   the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -697,7 +697,7 @@ module Aws::Proton
     #   The ID of the environment account connection that you provide if
     #   you're provisioning your environment infrastructure resources to an
     #   environment account. For more information, see [Environment account
-    #   connections][1] in the *Proton Administrator guide*.
+    #   connections][1] in the *Proton User guide*.
     #
     #   To use Amazon Web Services-managed provisioning for the environment,
     #   specify either the `environmentAccountConnectionId` or
@@ -706,7 +706,7 @@ module Aws::Proton
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -724,8 +724,10 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] provisioning_repository
-    #   The infrastructure repository that you use to host your rendered
-    #   infrastructure templates for self-managed provisioning.
+    #   The linked repository that you use to host your rendered
+    #   infrastructure templates for self-managed provisioning. A linked
+    #   repository is a repository that has been registered with Proton. For
+    #   more information, see CreateRepository.
     #
     #   To use self-managed provisioning for the environment, specify this
     #   parameter and omit the `environmentAccountConnectionId` and
@@ -735,24 +737,23 @@ module Aws::Proton
     # @!attribute [rw] spec
     #   A YAML formatted string that provides inputs as defined in the
     #   environment template bundle schema file. For more information, see
-    #   [Environments][1] in the *Proton Administrator Guide*.
+    #   [Environments][1] in the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-environments.html
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   An optional list of metadata items that you can associate with the
     #   Proton environment. A tag is a key-value pair.
     #
-    #   For more information, see *Proton resources and tagging* in the
-    #   [Proton Administrator Guide][1] or [Proton User Guide][2].
+    #   For more information, see [Proton resources and tagging][1] in the
+    #   *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/resources.html
-    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] template_major_version
@@ -765,11 +766,11 @@ module Aws::Proton
     #
     # @!attribute [rw] template_name
     #   The name of the environment template. For more information, see
-    #   [Environment Templates][1] in the *Proton Administrator Guide*.
+    #   [Environment Templates][1] in the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-templates.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-templates.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateEnvironmentInput AWS API Documentation
@@ -845,13 +846,12 @@ module Aws::Proton
     #   An optional list of metadata items that you can associate with the
     #   Proton environment template. A tag is a key-value pair.
     #
-    #   For more information, see *Proton resources and tagging* in the
-    #   [Proton Administrator Guide][1] or [Proton User Guide][2].
+    #   For more information, see [Proton resources and tagging][1] in the
+    #   *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/resources.html
-    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateEnvironmentTemplateInput AWS API Documentation
@@ -931,13 +931,12 @@ module Aws::Proton
     #   An optional list of metadata items that you can associate with the
     #   Proton environment template version. A tag is a key-value pair.
     #
-    #   For more information, see *Proton resources and tagging* in the
-    #   [Proton Administrator Guide][1] or [Proton User Guide][2].
+    #   For more information, see [Proton resources and tagging][1] in the
+    #   *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/resources.html
-    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] template_name
@@ -986,13 +985,14 @@ module Aws::Proton
     #       }
     #
     # @!attribute [rw] connection_arn
-    #   The Amazon Resource Name (ARN) of your Amazon Web Services CodeStar
-    #   connection. For more information, see [Setting up for Proton][1] in
-    #   the *Proton Administrator Guide*.
+    #   The Amazon Resource Name (ARN) of your AWS CodeStar connection that
+    #   connects Proton to your repository provider account. For more
+    #   information, see [Setting up for Proton][1] in the *Proton User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/setting-up-for-service.html
     #   @return [String]
     #
     # @!attribute [rw] encryption_key
@@ -1012,13 +1012,12 @@ module Aws::Proton
     #   An optional list of metadata items that you can associate with the
     #   Proton repository. A tag is a key-value pair.
     #
-    #   For more information, see *Proton resources and tagging* in the
-    #   [Proton Administrator Guide][1] or [Proton User Guide][2].
+    #   For more information, see [Proton resources and tagging][1] in the
+    #   *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/resources.html
-    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateRepositoryInput AWS API Documentation
@@ -1034,7 +1033,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] repository
-    #   The repository detail data that's returned by Proton.
+    #   The repository link's detail data that's returned by Proton.
     #   @return [Types::Repository]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateRepositoryOutput AWS API Documentation
@@ -1082,15 +1081,13 @@ module Aws::Proton
     #
     # @!attribute [rw] repository_connection_arn
     #   The Amazon Resource Name (ARN) of the repository connection. For
-    #   more information, see [Set up repository connection][1] in the
-    #   *Proton Administrator Guide* and [Setting up with Proton][2] in the
-    #   *Proton User Guide*. *Don't* include this parameter if your service
-    #   template *doesn't* include a service pipeline.
+    #   more information, see [Setting up an AWS CodeStar connection][1] in
+    #   the *Proton User Guide*. *Don't* include this parameter if your
+    #   service template *doesn't* include a service pipeline.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol
-    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/proton-setup.html#setup-repo-connection
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/setting-up-for-service.html#setting-up-vcontrol
     #   @return [String]
     #
     # @!attribute [rw] repository_id
@@ -1103,26 +1100,23 @@ module Aws::Proton
     #   template bundle schema file. The spec file is in YAML format.
     #   *Don’t* include pipeline inputs in the spec if your service template
     #   *doesn’t* include a service pipeline. For more information, see
-    #   [Create a service][1] in the *Proton Administrator Guide* and
-    #   [Create a service][2] in the *Proton User Guide*.
+    #   [Create a service][1] in the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-create-svc.html.html
-    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-create.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-create-svc.html
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   An optional list of metadata items that you can associate with the
     #   Proton service. A tag is a key-value pair.
     #
-    #   For more information, see *Proton resources and tagging* in the
-    #   [Proton Administrator Guide][1] or [Proton User Guide][2].
+    #   For more information, see [Proton resources and tagging][1] in the
+    #   *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/resources.html
-    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] template_major_version
@@ -1206,25 +1200,24 @@ module Aws::Proton
     #   By default, Proton provides a service pipeline for your service.
     #   When this parameter is included, it indicates that an Proton service
     #   pipeline *isn't* provided for your service. After it's included,
-    #   it *can't* be changed. For more information, see [Service template
-    #   bundles][1] in the *Proton Administrator Guide*.
+    #   it *can't* be changed. For more information, see [Template
+    #   bundles][1] in the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-template-authoring.html#ag-template-bundles
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   An optional list of metadata items that you can associate with the
     #   Proton service template. A tag is a key-value pair.
     #
-    #   For more information, see *Proton resources and tagging* in the
-    #   [Proton Administrator Guide][1] or [Proton User Guide][2].
+    #   For more information, see [Proton resources and tagging][1] in the
+    #   *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/resources.html
-    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateServiceTemplateInput AWS API Documentation
@@ -1320,24 +1313,23 @@ module Aws::Proton
     #   template version.
     #
     #   For more information about components, see [Proton components][1] in
-    #   the *Proton Administrator Guide*.
+    #   the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
     #   An optional list of metadata items that you can associate with the
     #   Proton service template version. A tag is a key-value pair.
     #
-    #   For more information, see *Proton resources and tagging* in the
-    #   [Proton Administrator Guide][1] or [Proton User Guide][2].
+    #   For more information, see [Proton resources and tagging][1] in the
+    #   *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/resources.html
-    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] template_name
@@ -1385,11 +1377,11 @@ module Aws::Proton
     #       }
     #
     # @!attribute [rw] branch
-    #   The branch of the registered repository for your template.
+    #   The repository branch for your template.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
-    #   The name of your repository (for example, `myrepos/myrepo`).
+    #   The repository name (for example, `myrepos/myrepo`).
     #   @return [String]
     #
     # @!attribute [rw] repository_provider
@@ -1613,7 +1605,7 @@ module Aws::Proton
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the repository.
+    #   The repository name.
     #   @return [String]
     #
     # @!attribute [rw] provider
@@ -1630,7 +1622,8 @@ module Aws::Proton
     end
 
     # @!attribute [rw] repository
-    #   The repository detail data that's returned by Proton.
+    #   The deleted repository link's detail data that's returned by
+    #   Proton.
     #   @return [Types::Repository]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteRepositoryOutput AWS API Documentation
@@ -1801,11 +1794,11 @@ module Aws::Proton
     #   defined components to be associated with the environment.
     #
     #   For more information about components, see [Proton components][1] in
-    #   the *Proton Administrator Guide*.
+    #   the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -1857,8 +1850,10 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] provisioning_repository
-    #   The infrastructure repository that you use to host your rendered
-    #   infrastructure templates for self-managed provisioning.
+    #   The linked repository that you use to host your rendered
+    #   infrastructure templates for self-managed provisioning. A linked
+    #   repository is a repository that has been registered with Proton. For
+    #   more information, see CreateRepository.
     #   @return [Types::RepositoryBranch]
     #
     # @!attribute [rw] spec
@@ -1920,11 +1915,11 @@ module Aws::Proton
     #   environments running in the account.
     #
     #   For more information about components, see [Proton components][1] in
-    #   the *Proton Administrator Guide*.
+    #   the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #   @return [String]
     #
     # @!attribute [rw] environment_account_id
@@ -1998,11 +1993,11 @@ module Aws::Proton
     #   environments running in the account.
     #
     #   For more information about components, see [Proton components][1] in
-    #   the *Proton Administrator Guide*.
+    #   the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #   @return [String]
     #
     # @!attribute [rw] environment_account_id
@@ -2075,11 +2070,11 @@ module Aws::Proton
     #   defined components to be associated with the environment.
     #
     #   For more information about components, see [Proton components][1] in
-    #   the *Proton Administrator Guide*.
+    #   the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -2596,7 +2591,7 @@ module Aws::Proton
     #
     # @!attribute [rw] template_name
     #   The name of the environment template a version of which you want to
-    #   get detailed data for..
+    #   get detailed data for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetEnvironmentTemplateVersionInput AWS API Documentation
@@ -2647,7 +2642,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] repository
-    #   The repository detail data that's returned by Proton.
+    #   The repository link's detail data that's returned by Proton.
     #   @return [Types::Repository]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetRepositoryOutput AWS API Documentation
@@ -3479,7 +3474,7 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] repositories
-    #   An array of repositories.
+    #   An array of repository links.
     #   @return [Array<Types::RepositorySummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListRepositoriesOutput AWS API Documentation
@@ -4100,11 +4095,11 @@ module Aws::Proton
     #   `TERRAFORM` can be used for self-managed provisioning.
     #
     #   For more information, see [Self-managed provisioning][1] in the
-    #   *Proton Administrator Guide*.
+    #   *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-works-prov-methods.html#ag-works-prov-methods-self
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ProvisionedResource AWS API Documentation
@@ -4149,15 +4144,16 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # Detailed data of a repository that has been registered with Proton.
+    # Detailed data of a linked repository—a repository that has been
+    # registered with Proton.
     #
     # @!attribute [rw] arn
-    #   The repository Amazon Resource Name (ARN).
+    #   The Amazon Resource Name (ARN) of the linked repository.
     #   @return [String]
     #
     # @!attribute [rw] connection_arn
-    #   The repository Amazon Web Services CodeStar connection that connects
-    #   Proton to your repository.
+    #   The Amazon Resource Name (ARN) of your AWS CodeStar connection that
+    #   connects Proton to your repository provider account.
     #   @return [String]
     #
     # @!attribute [rw] encryption_key
@@ -4184,10 +4180,10 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # Detail data for a repository branch.
+    # Detail data for a linked repository branch.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the repository branch.
+    #   The Amazon Resource Name (ARN) of the linked repository.
     #   @return [String]
     #
     # @!attribute [rw] branch
@@ -4213,7 +4209,7 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # Detail input data for a repository branch.
+    # Detail input data for a linked repository branch.
     #
     # @note When making an API call, you may pass RepositoryBranchInput
     #   data as a hash:
@@ -4246,10 +4242,11 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # Summary data of a repository that has been registered with Proton.
+    # Summary data of a linked repository—a repository that has been
+    # registered with Proton.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) for a repository.
+    #   The Amazon Resource Name (ARN) of the linked repository.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4295,7 +4292,7 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # The repository sync definition.
+    # A repository sync definition.
     #
     # @!attribute [rw] branch
     #   The repository branch.
@@ -4531,14 +4528,12 @@ module Aws::Proton
     #
     # @!attribute [rw] repository_connection_arn
     #   The Amazon Resource Name (ARN) of the repository connection. For
-    #   more information, see [Set up a repository connection][1] in the
-    #   *Proton Administrator Guide* and [Setting up with Proton][2] in the
-    #   *Proton User Guide*.
+    #   more information, see [Setting up an AWS CodeStar connection][1] in
+    #   the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol
-    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/proton-setup.html#setup-repo-connection
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/setting-up-for-service.html#setting-up-vcontrol
     #   @return [String]
     #
     # @!attribute [rw] repository_id
@@ -4794,11 +4789,11 @@ module Aws::Proton
     end
 
     # A quota was exceeded. For more information, see [Proton Quotas][1] in
-    # the *Proton Administrator Guide*.
+    # the *Proton User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-limits.html
+    # [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-limits.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -5022,11 +5017,11 @@ module Aws::Proton
     #   template version.
     #
     #   For more information about components, see [Proton components][1] in
-    #   the *Proton Administrator Guide*.
+    #   the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] template_name
@@ -5182,7 +5177,7 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] repository_name
-    #   The name of the repository, for example `myrepos/myrepo`.
+    #   The repository name (for example, `myrepos/myrepo`).
     #   @return [String]
     #
     # @!attribute [rw] repository_provider
@@ -5284,6 +5279,7 @@ module Aws::Proton
     #   data as a hash:
     #
     #       {
+    #         delete_pipeline_provisioning_repository: false,
     #         pipeline_provisioning_repository: {
     #           branch: "GitBranchName", # required
     #           name: "RepositoryName", # required
@@ -5292,10 +5288,22 @@ module Aws::Proton
     #         pipeline_service_role_arn: "PipelineRoleArn",
     #       }
     #
+    # @!attribute [rw] delete_pipeline_provisioning_repository
+    #   Set to `true` to remove a configured pipeline repository from the
+    #   account settings. Don't set this field if you are updating the
+    #   configured pipeline repository.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] pipeline_provisioning_repository
-    #   A repository for pipeline provisioning. Specify it if you have
-    #   environments configured for self-managed provisioning with services
-    #   that include pipelines.
+    #   A linked repository for pipeline provisioning. Specify it if you
+    #   have environments configured for self-managed provisioning with
+    #   services that include pipelines. A linked repository is a repository
+    #   that has been registered with Proton. For more information, see
+    #   CreateRepository.
+    #
+    #   To remove a previously configured repository, set
+    #   `deletePipelineProvisioningRepository` to `true`, and don't set
+    #   `pipelineProvisioningRepository`.
     #   @return [Types::RepositoryBranchInput]
     #
     # @!attribute [rw] pipeline_service_role_arn
@@ -5303,11 +5311,14 @@ module Aws::Proton
     #   for provisioning pipelines. Assumed by Proton for Amazon Web
     #   Services-managed provisioning, and by customer-owned automation for
     #   self-managed provisioning.
+    #
+    #   To remove a previously configured ARN, specify an empty string.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateAccountSettingsInput AWS API Documentation
     #
     class UpdateAccountSettingsInput < Struct.new(
+      :delete_pipeline_provisioning_repository,
       :pipeline_provisioning_repository,
       :pipeline_service_role_arn)
       SENSITIVE = []
@@ -5449,11 +5460,11 @@ module Aws::Proton
     #   environments running in the account.
     #
     #   For more information about components, see [Proton components][1] in
-    #   the *Proton Administrator Guide*.
+    #   the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -5518,11 +5529,11 @@ module Aws::Proton
     #   defined components to be associated with the environment.
     #
     #   For more information about components, see [Proton components][1] in
-    #   the *Proton Administrator Guide*.
+    #   the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #   @return [String]
     #
     # @!attribute [rw] deployment_type
@@ -5588,8 +5599,10 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] provisioning_repository
-    #   The infrastructure repository that you use to host your rendered
-    #   infrastructure templates for self-managed provisioning.
+    #   The linked repository that you use to host your rendered
+    #   infrastructure templates for self-managed provisioning. A linked
+    #   repository is a repository that has been registered with Proton. For
+    #   more information, see CreateRepository.
     #   @return [Types::RepositoryBranchInput]
     #
     # @!attribute [rw] spec
@@ -5756,13 +5769,12 @@ module Aws::Proton
     #   Lists the service instances to add and the existing service
     #   instances to remain. Omit the existing service instances to delete
     #   from the list. *Don't* include edits to the existing service
-    #   instances or pipeline. For more information, see *Edit a service* in
-    #   the [Proton Administrator Guide][1] or the [Proton User Guide][2].
+    #   instances or pipeline. For more information, see [Edit a service][1]
+    #   in the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-update.html
-    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-update.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-svc-update.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateServiceInput AWS API Documentation
@@ -6079,11 +6091,11 @@ module Aws::Proton
     #    </note>
     #
     #   For more information about components, see [Proton components][1] in
-    #   the *Proton Administrator Guide*.
+    #   the *Proton User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] template_name
@@ -6129,11 +6141,11 @@ module Aws::Proton
     #       }
     #
     # @!attribute [rw] branch
-    #   The repository branch.
+    #   The repository branch for your template.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
-    #   The name of the repository (for example, `myrepos/myrepo`).
+    #   The repository name (for example, `myrepos/myrepo`).
     #   @return [String]
     #
     # @!attribute [rw] repository_provider
