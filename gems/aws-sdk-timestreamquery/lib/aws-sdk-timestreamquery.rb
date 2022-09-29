@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-timestreamquery/types'
 require_relative 'aws-sdk-timestreamquery/client_api'
+require_relative 'aws-sdk-timestreamquery/plugins/endpoints.rb'
 require_relative 'aws-sdk-timestreamquery/client'
 require_relative 'aws-sdk-timestreamquery/errors'
 require_relative 'aws-sdk-timestreamquery/resource'
+require_relative 'aws-sdk-timestreamquery/endpoint_parameters'
+require_relative 'aws-sdk-timestreamquery/endpoint_provider'
+require_relative 'aws-sdk-timestreamquery/endpoints'
 require_relative 'aws-sdk-timestreamquery/customizations'
 
 # This module provides support for Amazon Timestream Query. This module is available in the

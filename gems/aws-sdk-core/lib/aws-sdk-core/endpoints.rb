@@ -22,7 +22,7 @@ module Aws
 
     class << self
       def resolve_auth_scheme(context, endpoint)
-        if (auth_schemes = endpoint.properties['authSchemes'])
+        if endpoint && (auth_schemes = endpoint.properties['authSchemes'])
           auth_scheme = auth_schemes.find do |scheme|
             SUPPORTED_AUTH_TYPES.include?(scheme['name'])
           end

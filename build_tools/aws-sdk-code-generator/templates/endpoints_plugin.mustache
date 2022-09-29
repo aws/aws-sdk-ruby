@@ -29,16 +29,19 @@ module {{module_name}}
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          {{#endpoint_rules?}}
-          params = parameters_for_operation(context)
-          {{/endpoint_rules?}}
-          {{^endpoint_rules?}}
-          params = {{module_name}}::EndpointParameters.new
-          {{/endpoint_rules?}}
-          endpoint = context.config.endpoint_provider.resolve_endpoint(params)
+          # If endpoint was discovered, do not resolve or apply the endpoint.
+          unless context[:discovered_endpoint]
+            {{#endpoint_rules?}}
+            params = parameters_for_operation(context)
+            {{/endpoint_rules?}}
+            {{^endpoint_rules?}}
+            params = {{module_name}}::EndpointParameters.new
+            {{/endpoint_rules?}}
+            endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
-          context.http_request.endpoint = endpoint.url
-          apply_endpoint_headers(context, endpoint.headers)
+            context.http_request.endpoint = endpoint.url
+            apply_endpoint_headers(context, endpoint.headers)
+          end
 
           context[:endpoint_params] = params
           context[:auth_scheme] =
