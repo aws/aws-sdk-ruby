@@ -527,29 +527,6 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
           EOF
         end
 
-        it 'leaves whitespace in quoted values in-tact' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'PUT',
-            url: 'http://domain.com',
-            headers: {
-              'Abc' => '"a  b  c"', # quoted header values preserve spaces
-              'X-Amz-Date' => '20160101T112233Z',
-            }
-          )
-          expect(signature.canonical_request).to eq(<<-EOF.strip)
-PUT
-/
-
-abc:"a  b  c"
-host:domain.com
-x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-x-amz-date:20160101T112233Z
-
-abc;host;x-amz-content-sha256;x-amz-date
-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-          EOF
-        end
-
         it 'normalizes valueless-querystring keys with a trailing =' do
           signature = Signer.new(options).sign_request(
             http_method: 'PUT',
