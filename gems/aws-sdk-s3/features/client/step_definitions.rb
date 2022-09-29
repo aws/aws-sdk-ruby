@@ -187,7 +187,7 @@ Then(/^the body should be an IO object$/) do
   expect(@response.body).to be_kind_of(StringIO)
 end
 
-Then(/^the body\#read method should return "(.*?)"$/) do |str|
+Then(/^the body #read method should return "(.*?)"$/) do |str|
   expect(@response.body.read).to eq(str)
 end
 
@@ -457,4 +457,17 @@ When(/^I select it with query "([^"]*)" with handler and block$/) do |query|
       @tracker[:records] << e
     end
   end
+end
+
+When(/I have access to an MRAP bucket and CRT/) do
+  unless Aws::Sigv4::Signer.use_crt?
+    pending("CRT is not available")
+  end
+
+  begin
+    @client.head_bucket(bucket: 'ruby-sdk-integtest-mrap-bucket')
+  rescue
+    pending("Account does not have access to the MRAP test bucket: ruby-sdk-integtest-mrap-bucket")
+  end
+  @bucket_name = "arn:aws:s3::469596866844:accesspoint/mpatcdsojq97c.mrap"
 end
