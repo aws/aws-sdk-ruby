@@ -39,6 +39,7 @@ module Aws::Translate
   # * {ServiceUnavailableException}
   # * {TextSizeLimitExceededException}
   # * {TooManyRequestsException}
+  # * {TooManyTagsException}
   # * {UnsupportedDisplayLanguageCodeException}
   # * {UnsupportedLanguagePairException}
   #
@@ -230,6 +231,26 @@ module Aws::Translate
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class TooManyTagsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Translate::Types::TooManyTagsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_arn
+        @data[:resource_arn]
       end
     end
 

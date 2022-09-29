@@ -543,6 +543,43 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetDashboardForJobRunRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "ApplicationId", # required
+    #         job_run_id: "JobRunId", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_run_id
+    #   The ID of the job run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetDashboardForJobRunRequest AWS API Documentation
+    #
+    class GetDashboardForJobRunRequest < Struct.new(
+      :application_id,
+      :job_run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] url
+    #   The URL to view job run's dashboard.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetDashboardForJobRunResponse AWS API Documentation
+    #
+    class GetDashboardForJobRunResponse < Struct.new(
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetJobRunRequest
     #   data as a hash:
     #

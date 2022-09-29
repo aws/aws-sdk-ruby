@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2022-09-29)
+------------------
+
+* Feature - This update returns additional certificate details such as certificate SANs and allows sorting in the ListCertificates API.
+
 1.51.0 (2022-02-24)
 ------------------
 

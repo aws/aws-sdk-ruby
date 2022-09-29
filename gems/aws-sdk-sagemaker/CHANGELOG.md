@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2022-09-29)
+------------------
+
+* Feature - SageMaker Training Managed Warm Pools let you retain provisioned infrastructure to reduce latency for repetitive training workloads.
+
 1.141.0 (2022-09-21)
 ------------------
 

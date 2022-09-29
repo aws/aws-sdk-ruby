@@ -436,6 +436,7 @@ module Aws
             'Mgn' => 'mgn',
             'MigrationHub' => 'mgh',
             'MigrationHubConfig' => 'migrationhub-config',
+            'MigrationHubOrchestrator' => 'migrationhub-orchestrator',
             'MigrationHubRefactorSpaces' => 'refactor-spaces',
             'MigrationHubStrategyRecommendations' => 'migrationhub-strategy',
             'Mobile' => 'mobile',

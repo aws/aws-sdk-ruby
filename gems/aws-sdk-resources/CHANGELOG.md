@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.142.0 (2022-09-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-migrationhuborchestrator` gem.
+
 3.141.0 (2022-09-26)
 ------------------
 

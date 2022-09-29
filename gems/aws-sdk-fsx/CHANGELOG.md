@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2022-09-29)
+------------------
+
+* Feature - This release adds support for Amazon File Cache.
+
 1.59.0 (2022-09-07)
 ------------------
 

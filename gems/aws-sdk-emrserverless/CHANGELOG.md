@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1.0 (2022-09-29)
+------------------
+
+* Feature - This release adds API support to debug Amazon EMR Serverless jobs in real-time with live application UIs
+
 1.0.0 (2022-05-27)
 ------------------
 

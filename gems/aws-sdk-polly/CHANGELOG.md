@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2022-09-29)
+------------------
+
+* Feature - Added support for the new Cantonese voice - Hiujin. Hiujin is available as a Neural voice only.
+
 1.57.0 (2022-07-27)
 ------------------
 

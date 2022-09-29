@@ -1460,6 +1460,12 @@ module Aws::FSx
     # linking a data repository to your file system, see [Linking your file
     # system to an S3 bucket][1].
     #
+    # <note markdown="1"> `CreateDataRepositoryAssociation` isn't supported on Amazon File
+    # Cache resources. To create a DRA on Amazon File Cache, use the
+    # `CreateFileCache` operation.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-dra-linked-data-repo.html
@@ -1467,7 +1473,7 @@ module Aws::FSx
     # @option params [required, String] :file_system_id
     #   The globally unique ID of the file system, assigned by Amazon FSx.
     #
-    # @option params [required, String] :file_system_path
+    # @option params [String] :file_system_path
     #   A path on the file system that points to a high-level directory (such
     #   as `/ns1/`) or subdirectory (such as `/ns1/subdir/`) that will be
     #   mapped 1-1 with `DataRepositoryPath`. The leading forward slash in the
@@ -1482,7 +1488,7 @@ module Aws::FSx
     #   directory.
     #
     #   <note markdown="1"> If you specify only a forward slash (`/`) as the file system path, you
-    #   can link only 1 data repository to the file system. You can only
+    #   can link only one data repository to the file system. You can only
     #   specify "/" as the file system path for the first data repository
     #   associated with a file system.
     #
@@ -1537,7 +1543,7 @@ module Aws::FSx
     #
     #   resp = client.create_data_repository_association({
     #     file_system_id: "FileSystemId", # required
-    #     file_system_path: "Namespace", # required
+    #     file_system_path: "Namespace",
     #     data_repository_path: "ArchivePath", # required
     #     batch_import_meta_data_on_create: false,
     #     imported_file_chunk_size: 1,
@@ -1577,6 +1583,15 @@ module Aws::FSx
     #   resp.association.tags[0].key #=> String
     #   resp.association.tags[0].value #=> String
     #   resp.association.creation_time #=> Time
+    #   resp.association.file_cache_id #=> String
+    #   resp.association.file_cache_path #=> String
+    #   resp.association.data_repository_subdirectories #=> Array
+    #   resp.association.data_repository_subdirectories[0] #=> String
+    #   resp.association.nfs.version #=> String, one of "NFS3"
+    #   resp.association.nfs.dns_ips #=> Array
+    #   resp.association.nfs.dns_ips[0] #=> String
+    #   resp.association.nfs.auto_export_policy.events #=> Array
+    #   resp.association.nfs.auto_export_policy.events[0] #=> String, one of "NEW", "CHANGED", "DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateDataRepositoryAssociation AWS API Documentation
     #
@@ -1650,6 +1665,11 @@ module Aws::FSx
     # @option params [Array<Types::Tag>] :tags
     #   A list of `Tag` values, with a maximum of 50 elements.
     #
+    # @option params [Integer] :capacity_to_release
+    #   Specifies the amount of data to release, in GiB, by an Amazon File
+    #   Cache `AUTO_RELEASE_DATA` task that automatically releases files from
+    #   the cache.
+    #
     # @return [Types::CreateDataRepositoryTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataRepositoryTaskResponse#data_repository_task #data_repository_task} => Types::DataRepositoryTask
@@ -1657,7 +1677,7 @@ module Aws::FSx
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_data_repository_task({
-    #     type: "EXPORT_TO_REPOSITORY", # required, accepts EXPORT_TO_REPOSITORY, IMPORT_METADATA_FROM_REPOSITORY
+    #     type: "EXPORT_TO_REPOSITORY", # required, accepts EXPORT_TO_REPOSITORY, IMPORT_METADATA_FROM_REPOSITORY, RELEASE_DATA_FROM_FILESYSTEM, AUTO_RELEASE_DATA
     #     paths: ["DataRepositoryTaskPath"],
     #     file_system_id: "FileSystemId", # required
     #     report: { # required
@@ -1673,13 +1693,14 @@ module Aws::FSx
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     capacity_to_release: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.data_repository_task.task_id #=> String
     #   resp.data_repository_task.lifecycle #=> String, one of "PENDING", "EXECUTING", "FAILED", "SUCCEEDED", "CANCELED", "CANCELING"
-    #   resp.data_repository_task.type #=> String, one of "EXPORT_TO_REPOSITORY", "IMPORT_METADATA_FROM_REPOSITORY"
+    #   resp.data_repository_task.type #=> String, one of "EXPORT_TO_REPOSITORY", "IMPORT_METADATA_FROM_REPOSITORY", "RELEASE_DATA_FROM_FILESYSTEM", "AUTO_RELEASE_DATA"
     #   resp.data_repository_task.creation_time #=> Time
     #   resp.data_repository_task.start_time #=> Time
     #   resp.data_repository_task.end_time #=> Time
@@ -1695,10 +1716,13 @@ module Aws::FSx
     #   resp.data_repository_task.status.succeeded_count #=> Integer
     #   resp.data_repository_task.status.failed_count #=> Integer
     #   resp.data_repository_task.status.last_updated_time #=> Time
+    #   resp.data_repository_task.status.released_capacity #=> Integer
     #   resp.data_repository_task.report.enabled #=> Boolean
     #   resp.data_repository_task.report.path #=> String
     #   resp.data_repository_task.report.format #=> String, one of "REPORT_CSV_20191124"
     #   resp.data_repository_task.report.scope #=> String, one of "FAILED_FILES_ONLY"
+    #   resp.data_repository_task.capacity_to_release #=> Integer
+    #   resp.data_repository_task.file_cache_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateDataRepositoryTask AWS API Documentation
     #
@@ -1706,6 +1730,193 @@ module Aws::FSx
     # @param [Hash] params ({})
     def create_data_repository_task(params = {}, options = {})
       req = build_request(:create_data_repository_task, params)
+      req.send_request(options)
+    end
+
+    # Creates a new Amazon File Cache resource.
+    #
+    # You can use this operation with a client request token in the request
+    # that Amazon File Cache uses to ensure idempotent creation. If a cache
+    # with the specified client request token exists and the parameters
+    # match, `CreateFileCache` returns the description of the existing
+    # cache. If a cache with the specified client request token exists and
+    # the parameters don't match, this call returns
+    # `IncompatibleParameterError`. If a file cache with the specified
+    # client request token doesn't exist, `CreateFileCache` does the
+    # following:
+    #
+    # * Creates a new, empty Amazon File Cache resourcewith an assigned ID,
+    #   and an initial lifecycle state of `CREATING`.
+    #
+    # * Returns the description of the cache in JSON format.
+    #
+    # <note markdown="1"> The `CreateFileCache` call returns while the cache's lifecycle state
+    # is still `CREATING`. You can check the cache creation status by
+    # calling the [DescribeFileCaches][1] operation, which returns the cache
+    # state along with other information.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileCaches.html
+    #
+    # @option params [String] :client_request_token
+    #   An idempotency token for resource creation, in a string of up to 64
+    #   ASCII characters. This token is automatically filled on your behalf
+    #   when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   By using the idempotent operation, you can retry a `CreateFileCache`
+    #   operation without the risk of creating an extra cache. This approach
+    #   can be useful when an initial call fails in a way that makes it
+    #   unclear whether a cache was created. Examples are if a transport level
+    #   timeout occurred, or your connection was reset. If you use the same
+    #   client request token and the initial call created a cache, the client
+    #   receives success as long as the parameters are the same.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :file_cache_type
+    #   The type of cache that you're creating, which must be `LUSTRE`.
+    #
+    # @option params [required, String] :file_cache_type_version
+    #   Sets the Lustre version for the cache that you're creating, which
+    #   must be `2.12`.
+    #
+    # @option params [required, Integer] :storage_capacity
+    #   The storage capacity of the cache in gibibytes (GiB). Valid values are
+    #   1200 GiB, 2400 GiB, and increments of 2400 GiB.
+    #
+    # @option params [required, Array<String>] :subnet_ids
+    #   A list of subnet IDs that the cache will be accessible from. You can
+    #   specify only one subnet ID in a call to the `CreateFileCache`
+    #   operation.
+    #
+    # @option params [Array<String>] :security_group_ids
+    #   A list of IDs specifying the security groups to apply to all network
+    #   interfaces created for Amazon File Cache access. This list isn't
+    #   returned in later requests to describe the cache.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #
+    # @option params [Boolean] :copy_tags_to_data_repository_associations
+    #   A boolean flag indicating whether tags for the cache should be copied
+    #   to data repository associations. This value defaults to false.
+    #
+    # @option params [String] :kms_key_id
+    #   Specifies the ID of the Key Management Service (KMS) key to use for
+    #   encrypting data on an Amazon File Cache. If a `KmsKeyId` isn't
+    #   specified, the Amazon FSx-managed KMS key for your account is used.
+    #   For more information, see [Encrypt][1] in the *Key Management Service
+    #   API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
+    #
+    # @option params [Types::CreateFileCacheLustreConfiguration] :lustre_configuration
+    #   The configuration for the Amazon File Cache resource being created.
+    #
+    # @option params [Array<Types::FileCacheDataRepositoryAssociation>] :data_repository_associations
+    #   A list of up to 8 configurations for data repository associations
+    #   (DRAs) to be created during the cache creation. The DRAs link the
+    #   cache to either an Amazon S3 data repository or a Network File System
+    #   (NFS) data repository that supports the NFSv3 protocol.
+    #
+    #   The DRA configurations must meet the following requirements:
+    #
+    #   * All configurations on the list must be of the same data repository
+    #     type, either all S3 or all NFS. A cache can't link to different
+    #     data repository types at the same time.
+    #
+    #   * An NFS DRA must link to an NFS file system that supports the NFSv3
+    #     protocol.
+    #
+    #   DRA automatic import and automatic export is not supported.
+    #
+    # @return [Types::CreateFileCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFileCacheResponse#file_cache #file_cache} => Types::FileCacheCreating
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_file_cache({
+    #     client_request_token: "ClientRequestToken",
+    #     file_cache_type: "LUSTRE", # required, accepts LUSTRE
+    #     file_cache_type_version: "FileSystemTypeVersion", # required
+    #     storage_capacity: 1, # required
+    #     subnet_ids: ["SubnetId"], # required
+    #     security_group_ids: ["SecurityGroupId"],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     copy_tags_to_data_repository_associations: false,
+    #     kms_key_id: "KmsKeyId",
+    #     lustre_configuration: {
+    #       per_unit_storage_throughput: 1, # required
+    #       deployment_type: "CACHE_1", # required, accepts CACHE_1
+    #       weekly_maintenance_start_time: "WeeklyTime",
+    #       metadata_configuration: { # required
+    #         storage_capacity: 1, # required
+    #       },
+    #     },
+    #     data_repository_associations: [
+    #       {
+    #         file_cache_path: "Namespace", # required
+    #         data_repository_path: "ArchivePath", # required
+    #         data_repository_subdirectories: ["Namespace"],
+    #         nfs: {
+    #           version: "NFS3", # required, accepts NFS3
+    #           dns_ips: ["IpAddress"],
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_cache.owner_id #=> String
+    #   resp.file_cache.creation_time #=> Time
+    #   resp.file_cache.file_cache_id #=> String
+    #   resp.file_cache.file_cache_type #=> String, one of "LUSTRE"
+    #   resp.file_cache.file_cache_type_version #=> String
+    #   resp.file_cache.lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED"
+    #   resp.file_cache.failure_details.message #=> String
+    #   resp.file_cache.storage_capacity #=> Integer
+    #   resp.file_cache.vpc_id #=> String
+    #   resp.file_cache.subnet_ids #=> Array
+    #   resp.file_cache.subnet_ids[0] #=> String
+    #   resp.file_cache.network_interface_ids #=> Array
+    #   resp.file_cache.network_interface_ids[0] #=> String
+    #   resp.file_cache.dns_name #=> String
+    #   resp.file_cache.kms_key_id #=> String
+    #   resp.file_cache.resource_arn #=> String
+    #   resp.file_cache.tags #=> Array
+    #   resp.file_cache.tags[0].key #=> String
+    #   resp.file_cache.tags[0].value #=> String
+    #   resp.file_cache.copy_tags_to_data_repository_associations #=> Boolean
+    #   resp.file_cache.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.file_cache.lustre_configuration.deployment_type #=> String, one of "CACHE_1"
+    #   resp.file_cache.lustre_configuration.mount_name #=> String
+    #   resp.file_cache.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_cache.lustre_configuration.metadata_configuration.storage_capacity #=> Integer
+    #   resp.file_cache.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.file_cache.lustre_configuration.log_configuration.destination #=> String
+    #   resp.file_cache.data_repository_association_ids #=> Array
+    #   resp.file_cache.data_repository_association_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileCache AWS API Documentation
+    #
+    # @overload create_file_cache(params = {})
+    # @param [Hash] params ({})
+    def create_file_cache(params = {}, options = {})
+      req = build_request(:create_file_cache, params)
       req.send_request(options)
     end
 
@@ -1745,18 +1956,6 @@ module Aws::FSx
     #   an initial lifecycle state of `CREATING`.
     #
     # * Returns the description of the file system in JSON format.
-    #
-    # This operation requires a client request token in the request that
-    # Amazon FSx uses to ensure idempotent creation. This means that calling
-    # the operation multiple times with the same client request token has no
-    # effect. By using the idempotent operation, you can retry a
-    # `CreateFileSystem` operation without the risk of creating an extra
-    # file system. This approach can be useful when an initial call fails in
-    # a way that makes it unclear whether a file system was created.
-    # Examples are if a transport-level timeout occurred, or your connection
-    # was reset. If you use the same client request token and the initial
-    # call created a file system, the client receives a success message as
-    # long as the parameters are the same.
     #
     # <note markdown="1"> The `CreateFileSystem` call returns while the file system's lifecycle
     # state is still `CREATING`. You can check the file-system creation
@@ -2453,6 +2652,18 @@ module Aws::FSx
     # @option params [Types::CreateFileSystemOpenZFSConfiguration] :open_zfs_configuration
     #   The OpenZFS configuration for the file system that's being created.
     #
+    # @option params [Integer] :storage_capacity
+    #   Sets the storage capacity of the OpenZFS file system that you're
+    #   creating from a backup, in gibibytes (GiB). Valid values are from 64
+    #   GiB up to 524,288 GiB (512 TiB). However, the value that you specify
+    #   must be equal to or greater than the backup's storage capacity value.
+    #   If you don't use the `StorageCapacity` parameter, the default is the
+    #   backup's `StorageCapacity` value.
+    #
+    #   If used to create a file system other than OpenZFS, you must provide a
+    #   value that matches the backup's `StorageCapacity` value. If you
+    #   provide any other value, Amazon FSx responds with a 400 Bad Request.
+    #
     # @return [Types::CreateFileSystemFromBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFileSystemFromBackupResponse#file_system #file_system} => Types::FileSystem
@@ -2611,6 +2822,7 @@ module Aws::FSx
     #         read_only: false,
     #       },
     #     },
+    #     storage_capacity: 1,
     #   })
     #
     # @example Response structure
@@ -3676,7 +3888,7 @@ module Aws::FSx
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, Boolean] :delete_data_in_file_system
+    # @option params [Boolean] :delete_data_in_file_system
     #   Set to `true` to delete the data in the file system that corresponds
     #   to the data repository association.
     #
@@ -3691,7 +3903,7 @@ module Aws::FSx
     #   resp = client.delete_data_repository_association({
     #     association_id: "DataRepositoryAssociationId", # required
     #     client_request_token: "ClientRequestToken",
-    #     delete_data_in_file_system: false, # required
+    #     delete_data_in_file_system: false,
     #   })
     #
     # @example Response structure
@@ -3706,6 +3918,60 @@ module Aws::FSx
     # @param [Hash] params ({})
     def delete_data_repository_association(params = {}, options = {})
       req = build_request(:delete_data_repository_association, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon File Cache resource. After deletion, the cache no
+    # longer exists, and its data is gone.
+    #
+    # The `DeleteFileCache` operation returns while the cache has the
+    # `DELETING` status. You can check the cache deletion status by calling
+    # the [DescribeFileCaches][1] operation, which returns a list of caches
+    # in your account. If you pass the cache ID for a deleted cache, the
+    # `DescribeFileCaches` operation returns a `FileCacheNotFound` error.
+    #
+    # The data in a deleted cache is also deleted and can't be recovered by
+    # any means.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileCaches.html
+    #
+    # @option params [required, String] :file_cache_id
+    #   The ID of the cache that's being deleted.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DeleteFileCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFileCacheResponse#file_cache_id #file_cache_id} => String
+    #   * {Types::DeleteFileCacheResponse#lifecycle #lifecycle} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_file_cache({
+    #     file_cache_id: "FileCacheId", # required
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_cache_id #=> String
+    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileCache AWS API Documentation
+    #
+    # @overload delete_file_cache(params = {})
+    # @param [Hash] params ({})
+    def delete_file_cache(params = {}, options = {})
+      req = build_request(:delete_file_cache, params)
       req.send_request(options)
     end
 
@@ -4103,7 +4369,7 @@ module Aws::FSx
     #     backup_ids: ["BackupId"],
     #     filters: [
     #       {
-    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id, data-repository-type
+    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id, data-repository-type, file-cache-id, file-cache-type
     #         values: ["FilterValue"],
     #       },
     #     ],
@@ -4445,26 +4711,28 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Returns the description of specific Amazon FSx for Lustre data
-    # repository associations, if one or more `AssociationIds` values are
-    # provided in the request, or if filters are used in the request. Data
-    # repository associations are supported only for file systems with the
-    # `Persistent_2` deployment type.
+    # Returns the description of specific Amazon FSx for Lustre or Amazon
+    # File Cache data repository associations, if one or more
+    # `AssociationIds` values are provided in the request, or if filters are
+    # used in the request. Data repository associations are supported only
+    # for Amazon FSx for Lustre file systems with the `Persistent_2`
+    # deployment type and for Amazon File Cache resources.
     #
     # You can use filters to narrow the response to include just data
     # repository associations for specific file systems (use the
-    # `file-system-id` filter with the ID of the file system) or data
+    # `file-system-id` filter with the ID of the file system) or caches (use
+    # the `file-cache-id` filter with the ID of the cache), or data
     # repository associations for a specific repository type (use the
-    # `data-repository-type` filter with a value of `S3`). If you don't use
-    # filters, the response returns all data repository associations owned
-    # by your Amazon Web Services account in the Amazon Web Services Region
-    # of the endpoint that you're calling.
+    # `data-repository-type` filter with a value of `S3` or `NFS`). If you
+    # don't use filters, the response returns all data repository
+    # associations owned by your Amazon Web Services account in the Amazon
+    # Web Services Region of the endpoint that you're calling.
     #
     # When retrieving all data repository associations, you can paginate the
     # response by using the optional `MaxResults` parameter to limit the
     # number of data repository associations returned in a response. If more
-    # data repository associations remain, Amazon FSx returns a `NextToken`
-    # value in the response. In this case, send a later request with the
+    # data repository associations remain, a `NextToken` value is returned
+    # in the response. In this case, send a later request with the
     # `NextToken` request parameter set to the value of `NextToken` from the
     # last response.
     #
@@ -4498,7 +4766,7 @@ module Aws::FSx
     #     association_ids: ["DataRepositoryAssociationId"],
     #     filters: [
     #       {
-    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id, data-repository-type
+    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id, data-repository-type, file-cache-id, file-cache-type
     #         values: ["FilterValue"],
     #       },
     #     ],
@@ -4526,6 +4794,15 @@ module Aws::FSx
     #   resp.associations[0].tags[0].key #=> String
     #   resp.associations[0].tags[0].value #=> String
     #   resp.associations[0].creation_time #=> Time
+    #   resp.associations[0].file_cache_id #=> String
+    #   resp.associations[0].file_cache_path #=> String
+    #   resp.associations[0].data_repository_subdirectories #=> Array
+    #   resp.associations[0].data_repository_subdirectories[0] #=> String
+    #   resp.associations[0].nfs.version #=> String, one of "NFS3"
+    #   resp.associations[0].nfs.dns_ips #=> Array
+    #   resp.associations[0].nfs.dns_ips[0] #=> String
+    #   resp.associations[0].nfs.auto_export_policy.events #=> Array
+    #   resp.associations[0].nfs.auto_export_policy.events[0] #=> String, one of "NEW", "CHANGED", "DELETED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeDataRepositoryAssociations AWS API Documentation
@@ -4537,18 +4814,19 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Returns the description of specific Amazon FSx for Lustre data
-    # repository tasks, if one or more `TaskIds` values are provided in the
-    # request, or if filters are used in the request. You can use filters to
-    # narrow the response to include just tasks for specific file systems,
-    # or tasks in a specific lifecycle state. Otherwise, it returns all data
-    # repository tasks owned by your Amazon Web Services account in the
-    # Amazon Web Services Region of the endpoint that you're calling.
+    # Returns the description of specific Amazon FSx for Lustre or Amazon
+    # File Cache data repository tasks, if one or more `TaskIds` values are
+    # provided in the request, or if filters are used in the request. You
+    # can use filters to narrow the response to include just tasks for
+    # specific file systems or caches, or tasks in a specific lifecycle
+    # state. Otherwise, it returns all data repository tasks owned by your
+    # Amazon Web Services account in the Amazon Web Services Region of the
+    # endpoint that you're calling.
     #
     # When retrieving all tasks, you can paginate the response by using the
     # optional `MaxResults` parameter to limit the number of tasks returned
-    # in a response. If more tasks remain, Amazon FSx returns a `NextToken`
-    # value in the response. In this case, send a later request with the
+    # in a response. If more tasks remain, a `NextToken` value is returned
+    # in the response. In this case, send a later request with the
     # `NextToken` request parameter set to the value of `NextToken` from the
     # last response.
     #
@@ -4584,7 +4862,7 @@ module Aws::FSx
     #     task_ids: ["TaskId"],
     #     filters: [
     #       {
-    #         name: "file-system-id", # accepts file-system-id, task-lifecycle, data-repository-association-id
+    #         name: "file-system-id", # accepts file-system-id, task-lifecycle, data-repository-association-id, file-cache-id
     #         values: ["DataRepositoryTaskFilterValue"],
     #       },
     #     ],
@@ -4597,7 +4875,7 @@ module Aws::FSx
     #   resp.data_repository_tasks #=> Array
     #   resp.data_repository_tasks[0].task_id #=> String
     #   resp.data_repository_tasks[0].lifecycle #=> String, one of "PENDING", "EXECUTING", "FAILED", "SUCCEEDED", "CANCELED", "CANCELING"
-    #   resp.data_repository_tasks[0].type #=> String, one of "EXPORT_TO_REPOSITORY", "IMPORT_METADATA_FROM_REPOSITORY"
+    #   resp.data_repository_tasks[0].type #=> String, one of "EXPORT_TO_REPOSITORY", "IMPORT_METADATA_FROM_REPOSITORY", "RELEASE_DATA_FROM_FILESYSTEM", "AUTO_RELEASE_DATA"
     #   resp.data_repository_tasks[0].creation_time #=> Time
     #   resp.data_repository_tasks[0].start_time #=> Time
     #   resp.data_repository_tasks[0].end_time #=> Time
@@ -4613,10 +4891,13 @@ module Aws::FSx
     #   resp.data_repository_tasks[0].status.succeeded_count #=> Integer
     #   resp.data_repository_tasks[0].status.failed_count #=> Integer
     #   resp.data_repository_tasks[0].status.last_updated_time #=> Time
+    #   resp.data_repository_tasks[0].status.released_capacity #=> Integer
     #   resp.data_repository_tasks[0].report.enabled #=> Boolean
     #   resp.data_repository_tasks[0].report.path #=> String
     #   resp.data_repository_tasks[0].report.format #=> String, one of "REPORT_CSV_20191124"
     #   resp.data_repository_tasks[0].report.scope #=> String, one of "FAILED_FILES_ONLY"
+    #   resp.data_repository_tasks[0].capacity_to_release #=> Integer
+    #   resp.data_repository_tasks[0].file_cache_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeDataRepositoryTasks AWS API Documentation
@@ -4625,6 +4906,101 @@ module Aws::FSx
     # @param [Hash] params ({})
     def describe_data_repository_tasks(params = {}, options = {})
       req = build_request(:describe_data_repository_tasks, params)
+      req.send_request(options)
+    end
+
+    # Returns the description of a specific Amazon File Cache resource, if a
+    # `FileCacheIds` value is provided for that cache. Otherwise, it returns
+    # descriptions of all caches owned by your Amazon Web Services account
+    # in the Amazon Web Services Region of the endpoint that you're
+    # calling.
+    #
+    # When retrieving all cache descriptions, you can optionally specify the
+    # `MaxResults` parameter to limit the number of descriptions in a
+    # response. If more cache descriptions remain, the operation returns a
+    # `NextToken` value in the response. In this case, send a later request
+    # with the `NextToken` request parameter set to the value of `NextToken`
+    # from the last response.
+    #
+    # This operation is used in an iterative process to retrieve a list of
+    # your cache descriptions. `DescribeFileCaches` is called first without
+    # a `NextToken`value. Then the operation continues to be called with the
+    # `NextToken` parameter set to the value of the last `NextToken` value
+    # until a response has no `NextToken`.
+    #
+    # When using this operation, keep the following in mind:
+    #
+    # * The implementation might return fewer than `MaxResults` cache
+    #   descriptions while still including a `NextToken` value.
+    #
+    # * The order of caches returned in the response of one
+    #   `DescribeFileCaches` call and the order of caches returned across
+    #   the responses of a multicall iteration is unspecified.
+    #
+    # @option params [Array<String>] :file_cache_ids
+    #   IDs of the caches whose descriptions you want to retrieve (String).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resources to return in the response. This value
+    #   must be an integer greater than zero.
+    #
+    # @option params [String] :next_token
+    #   (Optional) Opaque pagination token returned from a previous operation
+    #   (String). If present, this token indicates from what point you can
+    #   continue processing the request, where the previous `NextToken` value
+    #   left off.
+    #
+    # @return [Types::DescribeFileCachesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFileCachesResponse#file_caches #file_caches} => Array&lt;Types::FileCache&gt;
+    #   * {Types::DescribeFileCachesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_file_caches({
+    #     file_cache_ids: ["FileCacheId"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_caches #=> Array
+    #   resp.file_caches[0].owner_id #=> String
+    #   resp.file_caches[0].creation_time #=> Time
+    #   resp.file_caches[0].file_cache_id #=> String
+    #   resp.file_caches[0].file_cache_type #=> String, one of "LUSTRE"
+    #   resp.file_caches[0].file_cache_type_version #=> String
+    #   resp.file_caches[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED"
+    #   resp.file_caches[0].failure_details.message #=> String
+    #   resp.file_caches[0].storage_capacity #=> Integer
+    #   resp.file_caches[0].vpc_id #=> String
+    #   resp.file_caches[0].subnet_ids #=> Array
+    #   resp.file_caches[0].subnet_ids[0] #=> String
+    #   resp.file_caches[0].network_interface_ids #=> Array
+    #   resp.file_caches[0].network_interface_ids[0] #=> String
+    #   resp.file_caches[0].dns_name #=> String
+    #   resp.file_caches[0].kms_key_id #=> String
+    #   resp.file_caches[0].resource_arn #=> String
+    #   resp.file_caches[0].lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.file_caches[0].lustre_configuration.deployment_type #=> String, one of "CACHE_1"
+    #   resp.file_caches[0].lustre_configuration.mount_name #=> String
+    #   resp.file_caches[0].lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_caches[0].lustre_configuration.metadata_configuration.storage_capacity #=> Integer
+    #   resp.file_caches[0].lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.file_caches[0].lustre_configuration.log_configuration.destination #=> String
+    #   resp.file_caches[0].data_repository_association_ids #=> Array
+    #   resp.file_caches[0].data_repository_association_ids[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileCaches AWS API Documentation
+    #
+    # @overload describe_file_caches(params = {})
+    # @param [Hash] params ({})
+    def describe_file_caches(params = {}, options = {})
+      req = build_request(:describe_file_caches, params)
       req.send_request(options)
     end
 
@@ -6040,6 +6416,15 @@ module Aws::FSx
     #   resp.association.tags[0].key #=> String
     #   resp.association.tags[0].value #=> String
     #   resp.association.creation_time #=> Time
+    #   resp.association.file_cache_id #=> String
+    #   resp.association.file_cache_path #=> String
+    #   resp.association.data_repository_subdirectories #=> Array
+    #   resp.association.data_repository_subdirectories[0] #=> String
+    #   resp.association.nfs.version #=> String, one of "NFS3"
+    #   resp.association.nfs.dns_ips #=> Array
+    #   resp.association.nfs.dns_ips[0] #=> String
+    #   resp.association.nfs.auto_export_policy.events #=> Array
+    #   resp.association.nfs.auto_export_policy.events[0] #=> String, one of "NEW", "CHANGED", "DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateDataRepositoryAssociation AWS API Documentation
     #
@@ -6047,6 +6432,75 @@ module Aws::FSx
     # @param [Hash] params ({})
     def update_data_repository_association(params = {}, options = {})
       req = build_request(:update_data_repository_association, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration of an existing Amazon File Cache resource.
+    # You can update multiple properties in a single request.
+    #
+    # @option params [required, String] :file_cache_id
+    #   The ID of the cache that you are updating.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::UpdateFileCacheLustreConfiguration] :lustre_configuration
+    #   The configuration updates for an Amazon File Cache resource.
+    #
+    # @return [Types::UpdateFileCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFileCacheResponse#file_cache #file_cache} => Types::FileCache
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_file_cache({
+    #     file_cache_id: "FileCacheId", # required
+    #     client_request_token: "ClientRequestToken",
+    #     lustre_configuration: {
+    #       weekly_maintenance_start_time: "WeeklyTime",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_cache.owner_id #=> String
+    #   resp.file_cache.creation_time #=> Time
+    #   resp.file_cache.file_cache_id #=> String
+    #   resp.file_cache.file_cache_type #=> String, one of "LUSTRE"
+    #   resp.file_cache.file_cache_type_version #=> String
+    #   resp.file_cache.lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED"
+    #   resp.file_cache.failure_details.message #=> String
+    #   resp.file_cache.storage_capacity #=> Integer
+    #   resp.file_cache.vpc_id #=> String
+    #   resp.file_cache.subnet_ids #=> Array
+    #   resp.file_cache.subnet_ids[0] #=> String
+    #   resp.file_cache.network_interface_ids #=> Array
+    #   resp.file_cache.network_interface_ids[0] #=> String
+    #   resp.file_cache.dns_name #=> String
+    #   resp.file_cache.kms_key_id #=> String
+    #   resp.file_cache.resource_arn #=> String
+    #   resp.file_cache.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.file_cache.lustre_configuration.deployment_type #=> String, one of "CACHE_1"
+    #   resp.file_cache.lustre_configuration.mount_name #=> String
+    #   resp.file_cache.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_cache.lustre_configuration.metadata_configuration.storage_capacity #=> Integer
+    #   resp.file_cache.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.file_cache.lustre_configuration.log_configuration.destination #=> String
+    #   resp.file_cache.data_repository_association_ids #=> Array
+    #   resp.file_cache.data_repository_association_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileCache AWS API Documentation
+    #
+    # @overload update_file_cache(params = {})
+    # @param [Hash] params ({})
+    def update_file_cache(params = {}, options = {})
+      req = build_request(:update_file_cache, params)
       req.send_request(options)
     end
 
@@ -6995,7 +7449,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

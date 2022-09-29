@@ -468,6 +468,10 @@ module Aws::ACM
 
     # Returns detailed metadata about the specified ACM certificate.
     #
+    # If you have just created a certificate using the `RequestCertificate`
+    # action, there is a delay of several seconds before you can retrieve
+    # information about it.
+    #
     # @option params [required, String] :certificate_arn
     #   The Amazon Resource Name (ARN) of the ACM certificate. The ARN must
     #   have the following form:
@@ -581,10 +585,17 @@ module Aws::ACM
     #   `arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012`
     #
     # @option params [required, String, StringIO, File] :passphrase
-    #   Passphrase to associate with the encrypted exported private key. If
-    #   you want to later decrypt the private key, you must have the
+    #   Passphrase to associate with the encrypted exported private key.
+    #
+    #   <note markdown="1"> When creating your passphrase, you can use any ASCII character except
+    #   #, $, or %.
+    #
+    #    </note>
+    #
+    #   If you want to later decrypt the private key, you must have the
     #   passphrase. You can use the following OpenSSL command to decrypt a
-    #   private key:
+    #   private key. After entering the command, you are prompted for the
+    #   passphrase.
     #
     #   `openssl rsa -in encrypted_key.pem -out decrypted_key.pem`
     #
@@ -683,15 +694,14 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Imports a certificate into Amazon Web Services Certificate Manager
-    # (ACM) to use with services that are integrated with ACM. Note that
-    # [integrated services][1] allow only certificate types and keys they
-    # support to be associated with their resources. Further, their support
-    # differs depending on whether the certificate is imported into IAM or
-    # into ACM. For more information, see the documentation for each
-    # service. For more information about importing certificates into ACM,
-    # see [Importing Certificates][2] in the *Amazon Web Services
-    # Certificate Manager User Guide*.
+    # Imports a certificate into Certificate Manager (ACM) to use with
+    # services that are integrated with ACM. Note that [integrated
+    # services][1] allow only certificate types and keys they support to be
+    # associated with their resources. Further, their support differs
+    # depending on whether the certificate is imported into IAM or into ACM.
+    # For more information, see the documentation for each service. For more
+    # information about importing certificates into ACM, see [Importing
+    # Certificates][2] in the *Certificate Manager User Guide*.
     #
     # <note markdown="1"> ACM does not provide [managed renewal][3] for certificates that you
     # import.
@@ -833,6 +843,14 @@ module Aws::ACM
     #   response. Use this `NextToken` value in a subsequent request to
     #   retrieve additional items.
     #
+    # @option params [String] :sort_by
+    #   Specifies the field to sort results by. If you specify `SortBy`, you
+    #   must also specify `SortOrder`.
+    #
+    # @option params [String] :sort_order
+    #   Specifies the order of sorted results. If you specify `SortOrder`, you
+    #   must also specify `SortBy`.
+    #
     # @return [Types::ListCertificatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCertificatesResponse#next_token #next_token} => String
@@ -851,6 +869,8 @@ module Aws::ACM
     #     },
     #     next_token: "NextToken",
     #     max_items: 1,
+    #     sort_by: "CREATED_AT", # accepts CREATED_AT
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #   })
     #
     # @example Response structure
@@ -859,6 +879,25 @@ module Aws::ACM
     #   resp.certificate_summary_list #=> Array
     #   resp.certificate_summary_list[0].certificate_arn #=> String
     #   resp.certificate_summary_list[0].domain_name #=> String
+    #   resp.certificate_summary_list[0].subject_alternative_name_summaries #=> Array
+    #   resp.certificate_summary_list[0].subject_alternative_name_summaries[0] #=> String
+    #   resp.certificate_summary_list[0].has_additional_subject_alternative_names #=> Boolean
+    #   resp.certificate_summary_list[0].status #=> String, one of "PENDING_VALIDATION", "ISSUED", "INACTIVE", "EXPIRED", "VALIDATION_TIMED_OUT", "REVOKED", "FAILED"
+    #   resp.certificate_summary_list[0].type #=> String, one of "IMPORTED", "AMAZON_ISSUED", "PRIVATE"
+    #   resp.certificate_summary_list[0].key_algorithm #=> String, one of "RSA_1024", "RSA_2048", "RSA_3072", "RSA_4096", "EC_prime256v1", "EC_secp384r1", "EC_secp521r1"
+    #   resp.certificate_summary_list[0].key_usages #=> Array
+    #   resp.certificate_summary_list[0].key_usages[0] #=> String, one of "DIGITAL_SIGNATURE", "NON_REPUDIATION", "KEY_ENCIPHERMENT", "DATA_ENCIPHERMENT", "KEY_AGREEMENT", "CERTIFICATE_SIGNING", "CRL_SIGNING", "ENCIPHER_ONLY", "DECIPHER_ONLY", "ANY", "CUSTOM"
+    #   resp.certificate_summary_list[0].extended_key_usages #=> Array
+    #   resp.certificate_summary_list[0].extended_key_usages[0] #=> String, one of "TLS_WEB_SERVER_AUTHENTICATION", "TLS_WEB_CLIENT_AUTHENTICATION", "CODE_SIGNING", "EMAIL_PROTECTION", "TIME_STAMPING", "OCSP_SIGNING", "IPSEC_END_SYSTEM", "IPSEC_TUNNEL", "IPSEC_USER", "ANY", "NONE", "CUSTOM"
+    #   resp.certificate_summary_list[0].in_use #=> Boolean
+    #   resp.certificate_summary_list[0].exported #=> Boolean
+    #   resp.certificate_summary_list[0].renewal_eligibility #=> String, one of "ELIGIBLE", "INELIGIBLE"
+    #   resp.certificate_summary_list[0].not_before #=> Time
+    #   resp.certificate_summary_list[0].not_after #=> Time
+    #   resp.certificate_summary_list[0].created_at #=> Time
+    #   resp.certificate_summary_list[0].issued_at #=> Time
+    #   resp.certificate_summary_list[0].imported_at #=> Time
+    #   resp.certificate_summary_list[0].revoked_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificates AWS API Documentation
     #
@@ -1002,9 +1041,9 @@ module Aws::ACM
 
     # Renews an eligible ACM certificate. At this time, only exported
     # private certificates can be renewed with this operation. In order to
-    # renew your ACM PCA certificates with ACM, you must first [grant the
-    # ACM service principal permission to do so][1]. For more information,
-    # see [Testing Managed Renewal][2] in the ACM User Guide.
+    # renew your ACM Private CA certificates with ACM, you must first [grant
+    # the ACM service principal permission to do so][1]. For more
+    # information, see [Testing Managed Renewal][2] in the ACM User Guide.
     #
     #
     #
@@ -1054,19 +1093,21 @@ module Aws::ACM
     # We recommend that you use DNS validation. ACM issues public
     # certificates after receiving approval from the domain owner.
     #
-    # <note markdown="1"> ACM behavior differs from the
-    # [https://tools.ietf.org/html/rfc6125#appendix-B.2][3]RFC 6125
-    # specification of the certificate validation process. first checks for
-    # a subject alternative name, and, if it finds one, ignores the common
-    # name (CN)
+    # <note markdown="1"> ACM behavior differs from the [RFC 6125][3] specification of the
+    # certificate validation process. ACM first checks for a Subject
+    # Alternative Name, and, if it finds one, ignores the common name (CN).
     #
     #  </note>
+    #
+    # After successful completion of the `RequestCertificate` action, there
+    # is a delay of several seconds before you can retrieve information
+    # about the new certificate.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
     # [2]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
-    # [3]: https://tools.ietf.org/html/rfc6125#appendix-B.2
+    # [3]: https://datatracker.ietf.org/doc/html/rfc6125#appendix-B.2
     #
     # @option params [required, String] :domain_name
     #   Fully qualified domain name (FQDN), such as www.example.com, that you
@@ -1075,9 +1116,15 @@ module Aws::ACM
     #   For example, *.example.com protects www.example.com,
     #   site.example.com, and images.example.com.
     #
-    #   The first domain name you enter cannot exceed 64 octets, including
-    #   periods. Each subsequent Subject Alternative Name (SAN), however, can
-    #   be up to 253 octets in length.
+    #   In compliance with [RFC 5280][1], the length of the domain name
+    #   (technically, the Common Name) that you provide cannot exceed 64
+    #   octets (characters), including periods. To add a longer domain name,
+    #   specify it in the Subject Alternative Name field, which supports names
+    #   up to 253 octets in length.
+    #
+    #
+    #
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc5280
     #
     # @option params [String] :validation_method
     #   The method you want to use if you are requesting a public certificate
@@ -1150,9 +1197,8 @@ module Aws::ACM
     #   (CA) that will be used to issue the certificate. If you do not provide
     #   an ARN and you are trying to request a private certificate, ACM will
     #   attempt to issue a public certificate. For more information about
-    #   private CAs, see the [Amazon Web Services Certificate Manager Private
-    #   Certificate Authority (PCA)][1] user guide. The ARN must have the
-    #   following form:
+    #   private CAs, see the [Certificate Manager Private Certificate
+    #   Authority][1] user guide. The ARN must have the following form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
     #
@@ -1330,7 +1376,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

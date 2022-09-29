@@ -120,12 +120,27 @@ module Aws::ACM
     #   @return [Time]
     #
     # @!attribute [rw] imported_at
-    #   The date and time at which the certificate was imported. This value
+    #   The date and time when the certificate was imported. This value
     #   exists only when the certificate type is `IMPORTED`.
     #   @return [Time]
     #
     # @!attribute [rw] status
     #   The status of the certificate.
+    #
+    #   A certificate enters status PENDING\_VALIDATION upon being
+    #   requested, unless it fails for any of the reasons given in the
+    #   troubleshooting topic [Certificate request fails][1]. ACM makes
+    #   repeated attempts to validate a certificate for 72 hours and then
+    #   times out. If a certificate shows status FAILED or
+    #   VALIDATION\_TIMED\_OUT, delete the request, correct the issue with
+    #   [DNS validation][2] or [Email validation][3], and try again. If
+    #   validation succeeds, the certificate enters status ISSUED.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting-failed.html
+    #   [2]: https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html
+    #   [3]: https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html
     #   @return [String]
     #
     # @!attribute [rw] revoked_at
@@ -163,8 +178,8 @@ module Aws::ACM
     # @!attribute [rw] failure_reason
     #   The reason the certificate request failed. This value exists only
     #   when the certificate status is `FAILED`. For more information, see
-    #   [Certificate Request Failed][1] in the *Amazon Web Services
-    #   Certificate Manager User Guide*.
+    #   [Certificate Request Failed][1] in the *Certificate Manager User
+    #   Guide*.
     #
     #
     #
@@ -178,7 +193,7 @@ module Aws::ACM
     #   provide [managed renewal][1] for imported certificates. For more
     #   information about the differences between certificates that you
     #   import and those that ACM provides, see [Importing Certificates][2]
-    #   in the *Amazon Web Services Certificate Manager User Guide*.
+    #   in the *Certificate Manager User Guide*.
     #
     #
     #
@@ -210,9 +225,8 @@ module Aws::ACM
     #   @return [Array<Types::ExtendedKeyUsage>]
     #
     # @!attribute [rw] certificate_authority_arn
-    #   The Amazon Resource Name (ARN) of the ACM PCA private certificate
-    #   authority (CA) that issued the certificate. This has the following
-    #   format:
+    #   The Amazon Resource Name (ARN) of the private certificate authority
+    #   (CA) that issued the certificate. This has the following format:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
     #   @return [String]
@@ -319,11 +333,155 @@ module Aws::ACM
     #   example.com, for the certificate.
     #   @return [String]
     #
+    # @!attribute [rw] subject_alternative_name_summaries
+    #   One or more domain names (subject alternative names) included in the
+    #   certificate. This list contains the domain names that are bound to
+    #   the public key that is contained in the certificate. The subject
+    #   alternative names include the canonical domain name (CN) of the
+    #   certificate and additional domain names that can be used to connect
+    #   to the website.
+    #
+    #   When called by [ListCertificates][1], this parameter will only
+    #   return the first 100 subject alternative names included in the
+    #   certificate. To display the full list of subject alternative names,
+    #   use [DescribeCertificate][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html
+    #   [2]: https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] has_additional_subject_alternative_names
+    #   When called by [ListCertificates][1], indicates whether the full
+    #   list of subject alternative names has been included in the response.
+    #   If false, the response includes all of the subject alternative names
+    #   included in the certificate. If true, the response only includes the
+    #   first 100 subject alternative names included in the certificate. To
+    #   display the full list of subject alternative names, use
+    #   [DescribeCertificate][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html
+    #   [2]: https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The status of the certificate.
+    #
+    #   A certificate enters status PENDING\_VALIDATION upon being
+    #   requested, unless it fails for any of the reasons given in the
+    #   troubleshooting topic [Certificate request fails][1]. ACM makes
+    #   repeated attempts to validate a certificate for 72 hours and then
+    #   times out. If a certificate shows status FAILED or
+    #   VALIDATION\_TIMED\_OUT, delete the request, correct the issue with
+    #   [DNS validation][2] or [Email validation][3], and try again. If
+    #   validation succeeds, the certificate enters status ISSUED.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting-failed.html
+    #   [2]: https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html
+    #   [3]: https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The source of the certificate. For certificates provided by ACM,
+    #   this value is `AMAZON_ISSUED`. For certificates that you imported
+    #   with ImportCertificate, this value is `IMPORTED`. ACM does not
+    #   provide [managed renewal][1] for imported certificates. For more
+    #   information about the differences between certificates that you
+    #   import and those that ACM provides, see [Importing Certificates][2]
+    #   in the *Certificate Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   [2]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+    #   @return [String]
+    #
+    # @!attribute [rw] key_algorithm
+    #   The algorithm that was used to generate the public-private key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_usages
+    #   A list of Key Usage X.509 v3 extension objects. Each object is a
+    #   string value that identifies the purpose of the public key contained
+    #   in the certificate. Possible extension values include
+    #   DIGITAL\_SIGNATURE, KEY\_ENCHIPHERMENT, NON\_REPUDIATION, and more.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] extended_key_usages
+    #   Contains a list of Extended Key Usage X.509 v3 extension objects.
+    #   Each object specifies a purpose for which the certificate public key
+    #   can be used and consists of a name and an object identifier (OID).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] in_use
+    #   Indicates whether the certificate is currently in use by any Amazon
+    #   Web Services resources.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] exported
+    #   Indicates whether the certificate has been exported. This value
+    #   exists only when the certificate type is `PRIVATE`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] renewal_eligibility
+    #   Specifies whether the certificate is eligible for renewal. At this
+    #   time, only exported private certificates can be renewed with the
+    #   RenewCertificate command.
+    #   @return [String]
+    #
+    # @!attribute [rw] not_before
+    #   The time before which the certificate is not valid.
+    #   @return [Time]
+    #
+    # @!attribute [rw] not_after
+    #   The time after which the certificate is not valid.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the certificate was requested.
+    #   @return [Time]
+    #
+    # @!attribute [rw] issued_at
+    #   The time at which the certificate was issued. This value exists only
+    #   when the certificate type is `AMAZON_ISSUED`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] imported_at
+    #   The date and time when the certificate was imported. This value
+    #   exists only when the certificate type is `IMPORTED`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] revoked_at
+    #   The time at which the certificate was revoked. This value exists
+    #   only when the certificate status is `REVOKED`.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateSummary AWS API Documentation
     #
     class CertificateSummary < Struct.new(
       :certificate_arn,
-      :domain_name)
+      :domain_name,
+      :subject_alternative_name_summaries,
+      :has_additional_subject_alternative_names,
+      :status,
+      :type,
+      :key_algorithm,
+      :key_usages,
+      :extended_key_usages,
+      :in_use,
+      :exported,
+      :renewal_eligibility,
+      :not_before,
+      :not_after,
+      :created_at,
+      :issued_at,
+      :imported_at,
+      :revoked_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -560,10 +718,17 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] passphrase
-    #   Passphrase to associate with the encrypted exported private key. If
-    #   you want to later decrypt the private key, you must have the
+    #   Passphrase to associate with the encrypted exported private key.
+    #
+    #   <note markdown="1"> When creating your passphrase, you can use any ASCII character
+    #   except #, $, or %.
+    #
+    #    </note>
+    #
+    #   If you want to later decrypt the private key, you must have the
     #   passphrase. You can use the following OpenSSL command to decrypt a
-    #   private key:
+    #   private key. After entering the command, you are prompted for the
+    #   passphrase.
     #
     #   `openssl rsa -in encrypted_key.pem -out decrypted_key.pem`
     #   @return [String]
@@ -671,7 +836,7 @@ module Aws::ACM
     #   certificates that have at least one domain. To return other
     #   certificate types, provide the desired type signatures in a
     #   comma-separated list. For example, `"keyTypes":
-    #   ["RSA_2048,RSA_4096"]` returns both `RSA_2048` and `RSA_4096`
+    #   ["RSA_2048","RSA_4096"]` returns both `RSA_2048` and `RSA_4096`
     #   certificates.
     #   @return [Array<String>]
     #
@@ -940,6 +1105,8 @@ module Aws::ACM
     #         },
     #         next_token: "NextToken",
     #         max_items: 1,
+    #         sort_by: "CREATED_AT", # accepts CREATED_AT
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       }
     #
     # @!attribute [rw] certificate_statuses
@@ -966,13 +1133,25 @@ module Aws::ACM
     #   retrieve additional items.
     #   @return [Integer]
     #
+    # @!attribute [rw] sort_by
+    #   Specifies the field to sort results by. If you specify `SortBy`, you
+    #   must also specify `SortOrder`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Specifies the order of sorted results. If you specify `SortOrder`,
+    #   you must also specify `SortBy`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificatesRequest AWS API Documentation
     #
     class ListCertificatesRequest < Struct.new(
       :certificate_statuses,
       :includes,
       :next_token,
-      :max_items)
+      :max_items,
+      :sort_by,
+      :sort_order)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1218,9 +1397,15 @@ module Aws::ACM
     #   same domain. For example, *.example.com protects www.example.com,
     #   site.example.com, and images.example.com.
     #
-    #   The first domain name you enter cannot exceed 64 octets, including
-    #   periods. Each subsequent Subject Alternative Name (SAN), however,
-    #   can be up to 253 octets in length.
+    #   In compliance with [RFC 5280][1], the length of the domain name
+    #   (technically, the Common Name) that you provide cannot exceed 64
+    #   octets (characters), including periods. To add a longer domain name,
+    #   specify it in the Subject Alternative Name field, which supports
+    #   names up to 253 octets in length.
+    #
+    #
+    #
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc5280
     #   @return [String]
     #
     # @!attribute [rw] validation_method
@@ -1300,9 +1485,8 @@ module Aws::ACM
     #   (CA) that will be used to issue the certificate. If you do not
     #   provide an ARN and you are trying to request a private certificate,
     #   ACM will attempt to issue a public certificate. For more information
-    #   about private CAs, see the [Amazon Web Services Certificate Manager
-    #   Private Certificate Authority (PCA)][1] user guide. The ARN must
-    #   have the following form:
+    #   about private CAs, see the [Certificate Manager Private Certificate
+    #   Authority][1] user guide. The ARN must have the following form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
     #

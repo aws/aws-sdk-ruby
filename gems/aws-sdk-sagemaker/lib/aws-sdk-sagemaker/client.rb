@@ -879,6 +879,7 @@ module Aws::SageMaker
     #                   instance_group_name: "InstanceGroupName", # required
     #                 },
     #               ],
+    #               keep_alive_period_in_seconds: 1,
     #             },
     #             stopping_condition: { # required
     #               max_runtime_in_seconds: 1,
@@ -3155,6 +3156,7 @@ module Aws::SageMaker
     #             instance_group_name: "InstanceGroupName", # required
     #           },
     #         ],
+    #         keep_alive_period_in_seconds: 1,
     #       },
     #       stopping_condition: { # required
     #         max_runtime_in_seconds: 1,
@@ -3278,6 +3280,7 @@ module Aws::SageMaker
     #               instance_group_name: "InstanceGroupName", # required
     #             },
     #           ],
+    #           keep_alive_period_in_seconds: 1,
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -6159,6 +6162,7 @@ module Aws::SageMaker
     #           instance_group_name: "InstanceGroupName", # required
     #         },
     #       ],
+    #       keep_alive_period_in_seconds: 1,
     #     },
     #     vpc_config: {
     #       security_group_ids: ["SecurityGroupId"], # required
@@ -8335,6 +8339,7 @@ module Aws::SageMaker
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_groups[0].instance_count #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_groups[0].instance_group_name #=> String
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.keep_alive_period_in_seconds #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.stopping_condition.max_wait_time_in_seconds #=> Integer
     #   resp.validation_specification.validation_profiles[0].transform_job_definition.max_concurrent_transforms #=> Integer
@@ -9821,6 +9826,7 @@ module Aws::SageMaker
     #   resp.training_job_definition.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
     #   resp.training_job_definition.resource_config.instance_groups[0].instance_count #=> Integer
     #   resp.training_job_definition.resource_config.instance_groups[0].instance_group_name #=> String
+    #   resp.training_job_definition.resource_config.keep_alive_period_in_seconds #=> Integer
     #   resp.training_job_definition.stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.training_job_definition.stopping_condition.max_wait_time_in_seconds #=> Integer
     #   resp.training_job_definition.enable_network_isolation #=> Boolean
@@ -9897,6 +9903,7 @@ module Aws::SageMaker
     #   resp.training_job_definitions[0].resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
     #   resp.training_job_definitions[0].resource_config.instance_groups[0].instance_count #=> Integer
     #   resp.training_job_definitions[0].resource_config.instance_groups[0].instance_group_name #=> String
+    #   resp.training_job_definitions[0].resource_config.keep_alive_period_in_seconds #=> Integer
     #   resp.training_job_definitions[0].stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.training_job_definitions[0].stopping_condition.max_wait_time_in_seconds #=> Integer
     #   resp.training_job_definitions[0].enable_network_isolation #=> Boolean
@@ -11544,6 +11551,7 @@ module Aws::SageMaker
     #   * {Types::DescribeTrainingJobResponse#profiling_status #profiling_status} => String
     #   * {Types::DescribeTrainingJobResponse#retry_strategy #retry_strategy} => Types::RetryStrategy
     #   * {Types::DescribeTrainingJobResponse#environment #environment} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeTrainingJobResponse#warm_pool_status #warm_pool_status} => Types::WarmPoolStatus
     #
     # @example Request syntax with placeholder values
     #
@@ -11600,6 +11608,7 @@ module Aws::SageMaker
     #   resp.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
     #   resp.resource_config.instance_groups[0].instance_count #=> Integer
     #   resp.resource_config.instance_groups[0].instance_group_name #=> String
+    #   resp.resource_config.keep_alive_period_in_seconds #=> Integer
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.subnets #=> Array
@@ -11677,6 +11686,9 @@ module Aws::SageMaker
     #   resp.retry_strategy.maximum_retry_attempts #=> Integer
     #   resp.environment #=> Hash
     #   resp.environment["TrainingEnvironmentKey"] #=> String
+    #   resp.warm_pool_status.status #=> String, one of "Available", "Terminated", "Reused", "InUse"
+    #   resp.warm_pool_status.resource_retained_billable_time_in_seconds #=> Integer
+    #   resp.warm_pool_status.reused_by_job #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -16231,6 +16243,10 @@ module Aws::SageMaker
     # @option params [String] :sort_order
     #   The sort order for results. The default is `Ascending`.
     #
+    # @option params [String] :warm_pool_status_equals
+    #   A filter that retrieves only training jobs with a specific warm pool
+    #   status.
+    #
     # @return [Types::ListTrainingJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTrainingJobsResponse#training_job_summaries #training_job_summaries} => Array&lt;Types::TrainingJobSummary&gt;
@@ -16251,6 +16267,7 @@ module Aws::SageMaker
     #     status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
     #     sort_by: "Name", # accepts Name, CreationTime, Status
     #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     warm_pool_status_equals: "Available", # accepts Available, Terminated, Reused, InUse
     #   })
     #
     # @example Response structure
@@ -16262,6 +16279,9 @@ module Aws::SageMaker
     #   resp.training_job_summaries[0].training_end_time #=> Time
     #   resp.training_job_summaries[0].last_modified_time #=> Time
     #   resp.training_job_summaries[0].training_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.training_job_summaries[0].warm_pool_status.status #=> String, one of "Available", "Terminated", "Reused", "InUse"
+    #   resp.training_job_summaries[0].warm_pool_status.resource_retained_billable_time_in_seconds #=> Integer
+    #   resp.training_job_summaries[0].warm_pool_status.reused_by_job #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobs AWS API Documentation
@@ -17228,6 +17248,7 @@ module Aws::SageMaker
     #   resp.results[0].training_job.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
     #   resp.results[0].training_job.resource_config.instance_groups[0].instance_count #=> Integer
     #   resp.results[0].training_job.resource_config.instance_groups[0].instance_group_name #=> String
+    #   resp.results[0].training_job.resource_config.keep_alive_period_in_seconds #=> Integer
     #   resp.results[0].training_job.vpc_config.security_group_ids #=> Array
     #   resp.results[0].training_job.vpc_config.security_group_ids[0] #=> String
     #   resp.results[0].training_job.vpc_config.subnets #=> Array
@@ -17423,6 +17444,7 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.training_job.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
     #   resp.results[0].trial_component.source_detail.training_job.resource_config.instance_groups[0].instance_count #=> Integer
     #   resp.results[0].trial_component.source_detail.training_job.resource_config.instance_groups[0].instance_group_name #=> String
+    #   resp.results[0].trial_component.source_detail.training_job.resource_config.keep_alive_period_in_seconds #=> Integer
     #   resp.results[0].trial_component.source_detail.training_job.vpc_config.security_group_ids #=> Array
     #   resp.results[0].trial_component.source_detail.training_job.vpc_config.security_group_ids[0] #=> String
     #   resp.results[0].trial_component.source_detail.training_job.vpc_config.subnets #=> Array
@@ -18050,6 +18072,7 @@ module Aws::SageMaker
     #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
     #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.resource_config.instance_groups[0].instance_count #=> Integer
     #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.resource_config.instance_groups[0].instance_group_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.resource_config.keep_alive_period_in_seconds #=> Integer
     #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.stopping_condition.max_wait_time_in_seconds #=> Integer
     #   resp.results[0].hyper_parameter_tuning_job.training_job_definition.enable_network_isolation #=> Boolean
@@ -18126,6 +18149,7 @@ module Aws::SageMaker
     #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge"
     #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].resource_config.instance_groups[0].instance_count #=> Integer
     #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].resource_config.instance_groups[0].instance_group_name #=> String
+    #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].resource_config.keep_alive_period_in_seconds #=> Integer
     #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].stopping_condition.max_wait_time_in_seconds #=> Integer
     #   resp.results[0].hyper_parameter_tuning_job.training_job_definitions[0].enable_network_isolation #=> Boolean
@@ -20114,7 +20138,7 @@ module Aws::SageMaker
     end
 
     # Update a model training job to request a new Debugger profiling
-    # configuration.
+    # configuration or to change warm pool retention length.
     #
     # @option params [required, String] :training_job_name
     #   The name of a training job to update the Debugger profiling
@@ -20127,6 +20151,10 @@ module Aws::SageMaker
     # @option params [Array<Types::ProfilerRuleConfiguration>] :profiler_rule_configurations
     #   Configuration information for Debugger rules for profiling system and
     #   framework metrics.
+    #
+    # @option params [Types::ResourceConfigForUpdate] :resource_config
+    #   The training job `ResourceConfig` to update warm pool retention
+    #   length.
     #
     # @return [Types::UpdateTrainingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -20157,6 +20185,9 @@ module Aws::SageMaker
     #         },
     #       },
     #     ],
+    #     resource_config: {
+    #       keep_alive_period_in_seconds: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -20632,7 +20663,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.141.0'
+      context[:gem_version] = '1.142.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -622,6 +622,7 @@ module Aws::SageMaker
     #                 instance_group_name: "InstanceGroupName", # required
     #               },
     #             ],
+    #             keep_alive_period_in_seconds: 1,
     #           },
     #           stopping_condition: { # required
     #             max_runtime_in_seconds: 1,
@@ -744,6 +745,7 @@ module Aws::SageMaker
     #                     instance_group_name: "InstanceGroupName", # required
     #                   },
     #                 ],
+    #                 keep_alive_period_in_seconds: 1,
     #               },
     #               stopping_condition: { # required
     #                 max_runtime_in_seconds: 1,
@@ -4250,6 +4252,7 @@ module Aws::SageMaker
     #                       instance_group_name: "InstanceGroupName", # required
     #                     },
     #                   ],
+    #                   keep_alive_period_in_seconds: 1,
     #                 },
     #                 stopping_condition: { # required
     #                   max_runtime_in_seconds: 1,
@@ -6480,6 +6483,7 @@ module Aws::SageMaker
     #                 instance_group_name: "InstanceGroupName", # required
     #               },
     #             ],
+    #             keep_alive_period_in_seconds: 1,
     #           },
     #           stopping_condition: { # required
     #             max_runtime_in_seconds: 1,
@@ -6603,6 +6607,7 @@ module Aws::SageMaker
     #                   instance_group_name: "InstanceGroupName", # required
     #                 },
     #               ],
+    #               keep_alive_period_in_seconds: 1,
     #             },
     #             stopping_condition: { # required
     #               max_runtime_in_seconds: 1,
@@ -9370,6 +9375,7 @@ module Aws::SageMaker
     #               instance_group_name: "InstanceGroupName", # required
     #             },
     #           ],
+    #           keep_alive_period_in_seconds: 1,
     #         },
     #         vpc_config: {
     #           security_group_ids: ["SecurityGroupId"], # required
@@ -16815,6 +16821,10 @@ module Aws::SageMaker
     #   The environment variables to set in the Docker container.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] warm_pool_status
+    #   The status of the warm pool associated with the training job.
+    #   @return [Types::WarmPoolStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse AWS API Documentation
     #
     class DescribeTrainingJobResponse < Struct.new(
@@ -16857,7 +16867,8 @@ module Aws::SageMaker
       :profiler_rule_evaluation_statuses,
       :profiling_status,
       :retry_strategy,
-      :environment)
+      :environment,
+      :warm_pool_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21568,6 +21579,7 @@ module Aws::SageMaker
     #               instance_group_name: "InstanceGroupName", # required
     #             },
     #           ],
+    #           keep_alive_period_in_seconds: 1,
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -28601,6 +28613,7 @@ module Aws::SageMaker
     #         status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
     #         sort_by: "Name", # accepts Name, CreationTime, Status
     #         sort_order: "Ascending", # accepts Ascending, Descending
+    #         warm_pool_status_equals: "Available", # accepts Available, Terminated, Reused, InUse
     #       }
     #
     # @!attribute [rw] next_token
@@ -28650,6 +28663,11 @@ module Aws::SageMaker
     #   The sort order for results. The default is `Ascending`.
     #   @return [String]
     #
+    # @!attribute [rw] warm_pool_status_equals
+    #   A filter that retrieves only training jobs with a specific warm pool
+    #   status.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobsRequest AWS API Documentation
     #
     class ListTrainingJobsRequest < Struct.new(
@@ -28662,7 +28680,8 @@ module Aws::SageMaker
       :name_contains,
       :status_equals,
       :sort_by,
-      :sort_order)
+      :sort_order,
+      :warm_pool_status_equals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36388,6 +36407,7 @@ module Aws::SageMaker
     #             instance_group_name: "InstanceGroupName", # required
     #           },
     #         ],
+    #         keep_alive_period_in_seconds: 1,
     #       }
     #
     # @!attribute [rw] instance_type
@@ -36474,6 +36494,11 @@ module Aws::SageMaker
     #   The configuration of a heterogeneous cluster in JSON format.
     #   @return [Array<Types::InstanceGroup>]
     #
+    # @!attribute [rw] keep_alive_period_in_seconds
+    #   The duration of time in seconds to retain configured resources in a
+    #   warm pool for subsequent training jobs.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceConfig AWS API Documentation
     #
     class ResourceConfig < Struct.new(
@@ -36481,7 +36506,31 @@ module Aws::SageMaker
       :instance_count,
       :volume_size_in_gb,
       :volume_kms_key_id,
-      :instance_groups)
+      :instance_groups,
+      :keep_alive_period_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `ResourceConfig` to update `KeepAlivePeriodInSeconds`. Other
+    # fields in the `ResourceConfig` cannot be updated.
+    #
+    # @note When making an API call, you may pass ResourceConfigForUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         keep_alive_period_in_seconds: 1, # required
+    #       }
+    #
+    # @!attribute [rw] keep_alive_period_in_seconds
+    #   The `KeepAlivePeriodInSeconds` value specified in the
+    #   `ResourceConfig` to update.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceConfigForUpdate AWS API Documentation
+    #
+    class ResourceConfigForUpdate < Struct.new(
+      :keep_alive_period_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39032,6 +39081,7 @@ module Aws::SageMaker
     #               instance_group_name: "InstanceGroupName", # required
     #             },
     #           ],
+    #           keep_alive_period_in_seconds: 1,
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -39213,6 +39263,10 @@ module Aws::SageMaker
     #   The status of the training job.
     #   @return [String]
     #
+    # @!attribute [rw] warm_pool_status
+    #   The status of the warm pool associated with the training job.
+    #   @return [Types::WarmPoolStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJobSummary AWS API Documentation
     #
     class TrainingJobSummary < Struct.new(
@@ -39221,7 +39275,8 @@ module Aws::SageMaker
       :creation_time,
       :training_end_time,
       :last_modified_time,
-      :training_job_status)
+      :training_job_status,
+      :warm_pool_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42271,6 +42326,9 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
+    #         resource_config: {
+    #           keep_alive_period_in_seconds: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] training_job_name
@@ -42288,12 +42346,18 @@ module Aws::SageMaker
     #   and framework metrics.
     #   @return [Array<Types::ProfilerRuleConfiguration>]
     #
+    # @!attribute [rw] resource_config
+    #   The training job `ResourceConfig` to update warm pool retention
+    #   length.
+    #   @return [Types::ResourceConfigForUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateTrainingJobRequest AWS API Documentation
     #
     class UpdateTrainingJobRequest < Struct.new(
       :training_job_name,
       :profiler_config,
-      :profiler_rule_configurations)
+      :profiler_rule_configurations,
+      :resource_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43050,6 +43114,50 @@ module Aws::SageMaker
     class VpcConfig < Struct.new(
       :security_group_ids,
       :subnets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Status and billing information about the warm pool.
+    #
+    # @!attribute [rw] status
+    #   The status of the warm pool.
+    #
+    #   * `InUse`\: The warm pool is in use for the training job.
+    #
+    #   * `Available`\: The warm pool is available to reuse for a matching
+    #     training job.
+    #
+    #   * `Reused`\: The warm pool moved to a matching training job for
+    #     reuse.
+    #
+    #   * `Terminated`\: The warm pool is no longer available. Warm pools
+    #     are unavailable if they are terminated by a user, terminated for a
+    #     patch update, or terminated for exceeding the specified
+    #     `KeepAlivePeriodInSeconds`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_retained_billable_time_in_seconds
+    #   The billable time in seconds used by the warm pool. Billable time
+    #   refers to the absolute wall-clock time.
+    #
+    #   Multiply `ResourceRetainedBillableTimeInSeconds` by the number of
+    #   instances (`InstanceCount`) in your training cluster to get the
+    #   total compute time SageMaker bills you if you run warm pool
+    #   training. The formula is as follows:
+    #   `ResourceRetainedBillableTimeInSeconds * InstanceCount`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] reused_by_job
+    #   The name of the matching training job that reused the warm pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/WarmPoolStatus AWS API Documentation
+    #
+    class WarmPoolStatus < Struct.new(
+      :status,
+      :resource_retained_billable_time_in_seconds,
+      :reused_by_job)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -61,6 +61,8 @@ module Aws::Translate
     ListLanguagesResponse = Shapes::StructureShape.new(name: 'ListLanguagesResponse')
     ListParallelDataRequest = Shapes::StructureShape.new(name: 'ListParallelDataRequest')
     ListParallelDataResponse = Shapes::StructureShape.new(name: 'ListParallelDataResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTerminologiesRequest = Shapes::StructureShape.new(name: 'ListTerminologiesRequest')
     ListTerminologiesResponse = Shapes::StructureShape.new(name: 'ListTerminologiesResponse')
     ListTextTranslationJobsRequest = Shapes::StructureShape.new(name: 'ListTextTranslationJobsRequest')
@@ -79,6 +81,7 @@ module Aws::Translate
     ParallelDataPropertiesList = Shapes::ListShape.new(name: 'ParallelDataPropertiesList')
     ParallelDataStatus = Shapes::StringShape.new(name: 'ParallelDataStatus')
     Profanity = Shapes::StringShape.new(name: 'Profanity')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNameList = Shapes::ListShape.new(name: 'ResourceNameList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -89,6 +92,13 @@ module Aws::Translate
     StopTextTranslationJobRequest = Shapes::StructureShape.new(name: 'StopTextTranslationJobRequest')
     StopTextTranslationJobResponse = Shapes::StructureShape.new(name: 'StopTextTranslationJobResponse')
     String = Shapes::StringShape.new(name: 'String')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetLanguageCodeStringList = Shapes::ListShape.new(name: 'TargetLanguageCodeStringList')
     Term = Shapes::StructureShape.new(name: 'Term')
     TermList = Shapes::ListShape.new(name: 'TermList')
@@ -105,12 +115,15 @@ module Aws::Translate
     TextTranslationJobPropertiesList = Shapes::ListShape.new(name: 'TextTranslationJobPropertiesList')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TranslateTextRequest = Shapes::StructureShape.new(name: 'TranslateTextRequest')
     TranslateTextResponse = Shapes::StructureShape.new(name: 'TranslateTextResponse')
     TranslationSettings = Shapes::StructureShape.new(name: 'TranslationSettings')
     UnboundedLengthString = Shapes::StringShape.new(name: 'UnboundedLengthString')
     UnsupportedDisplayLanguageCodeException = Shapes::StructureShape.new(name: 'UnsupportedDisplayLanguageCodeException')
     UnsupportedLanguagePairException = Shapes::StructureShape.new(name: 'UnsupportedLanguagePairException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateParallelDataRequest = Shapes::StructureShape.new(name: 'UpdateParallelDataRequest')
     UpdateParallelDataResponse = Shapes::StructureShape.new(name: 'UpdateParallelDataResponse')
 
@@ -131,6 +144,7 @@ module Aws::Translate
     CreateParallelDataRequest.add_member(:parallel_data_config, Shapes::ShapeRef.new(shape: ParallelDataConfig, required: true, location_name: "ParallelDataConfig"))
     CreateParallelDataRequest.add_member(:encryption_key, Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "EncryptionKey"))
     CreateParallelDataRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateParallelDataRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateParallelDataRequest.struct_class = Types::CreateParallelDataRequest
 
     CreateParallelDataResponse.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
@@ -184,6 +198,7 @@ module Aws::Translate
     ImportTerminologyRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     ImportTerminologyRequest.add_member(:terminology_data, Shapes::ShapeRef.new(shape: TerminologyData, required: true, location_name: "TerminologyData"))
     ImportTerminologyRequest.add_member(:encryption_key, Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "EncryptionKey"))
+    ImportTerminologyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ImportTerminologyRequest.struct_class = Types::ImportTerminologyRequest
 
     ImportTerminologyResponse.add_member(:terminology_properties, Shapes::ShapeRef.new(shape: TerminologyProperties, location_name: "TerminologyProperties"))
@@ -239,6 +254,12 @@ module Aws::Translate
     ListParallelDataResponse.add_member(:parallel_data_properties_list, Shapes::ShapeRef.new(shape: ParallelDataPropertiesList, location_name: "ParallelDataPropertiesList"))
     ListParallelDataResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListParallelDataResponse.struct_class = Types::ListParallelDataResponse
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     ListTerminologiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTerminologiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
@@ -321,6 +342,20 @@ module Aws::Translate
     StopTextTranslationJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     StopTextTranslationJobResponse.struct_class = Types::StopTextTranslationJobResponse
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     TargetLanguageCodeStringList.member = Shapes::ShapeRef.new(shape: LanguageCodeString)
 
     Term.add_member(:source_text, Shapes::ShapeRef.new(shape: String, location_name: "SourceText"))
@@ -387,6 +422,10 @@ module Aws::Translate
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    TooManyTagsException.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
     TranslateTextRequest.add_member(:text, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "Text"))
     TranslateTextRequest.add_member(:terminology_names, Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "TerminologyNames"))
     TranslateTextRequest.add_member(:source_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "SourceLanguageCode"))
@@ -413,6 +452,12 @@ module Aws::Translate
     UnsupportedLanguagePairException.add_member(:source_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "SourceLanguageCode"))
     UnsupportedLanguagePairException.add_member(:target_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "TargetLanguageCode"))
     UnsupportedLanguagePairException.struct_class = Types::UnsupportedLanguagePairException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateParallelDataRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
     UpdateParallelDataRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -455,7 +500,9 @@ module Aws::Translate
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -527,6 +574,8 @@ module Aws::Translate
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -563,6 +612,17 @@ module Aws::Translate
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:list_terminologies, Seahorse::Model::Operation.new.tap do |o|
@@ -625,6 +685,19 @@ module Aws::Translate
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:translate_text, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TranslateText"
         o.http_method = "POST"
@@ -639,6 +712,18 @@ module Aws::Translate
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:update_parallel_data, Seahorse::Model::Operation.new.tap do |o|

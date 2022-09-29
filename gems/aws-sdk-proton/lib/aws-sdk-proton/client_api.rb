@@ -19,6 +19,7 @@ module Aws::Proton
     AccountSettings = Shapes::StructureShape.new(name: 'AccountSettings')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelComponentDeploymentInput = Shapes::StructureShape.new(name: 'CancelComponentDeploymentInput')
     CancelComponentDeploymentOutput = Shapes::StructureShape.new(name: 'CancelComponentDeploymentOutput')
     CancelEnvironmentDeploymentInput = Shapes::StructureShape.new(name: 'CancelEnvironmentDeploymentInput')
@@ -1239,6 +1240,7 @@ module Aws::Proton
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
+    UpdateAccountSettingsInput.add_member(:delete_pipeline_provisioning_repository, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletePipelineProvisioningRepository"))
     UpdateAccountSettingsInput.add_member(:pipeline_provisioning_repository, Shapes::ShapeRef.new(shape: RepositoryBranchInput, location_name: "pipelineProvisioningRepository"))
     UpdateAccountSettingsInput.add_member(:pipeline_service_role_arn, Shapes::ShapeRef.new(shape: PipelineRoleArn, location_name: "pipelineServiceRoleArn"))
     UpdateAccountSettingsInput.struct_class = Types::UpdateAccountSettingsInput

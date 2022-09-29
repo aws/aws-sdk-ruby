@@ -190,6 +190,7 @@ module Aws::WorkSpaces
     Limit = Shapes::IntegerShape.new(name: 'Limit')
     ListAvailableManagementCidrRangesRequest = Shapes::StructureShape.new(name: 'ListAvailableManagementCidrRangesRequest')
     ListAvailableManagementCidrRangesResult = Shapes::StructureShape.new(name: 'ListAvailableManagementCidrRangesResult')
+    LogUploadEnum = Shapes::StringShape.new(name: 'LogUploadEnum')
     LoginMessage = Shapes::MapShape.new(name: 'LoginMessage')
     ManagementCidrRangeConstraint = Shapes::StringShape.new(name: 'ManagementCidrRangeConstraint')
     ManagementCidrRangeMaxResults = Shapes::IntegerShape.new(name: 'ManagementCidrRangeMaxResults')
@@ -370,6 +371,7 @@ module Aws::WorkSpaces
     ClientDeviceTypeList.member = Shapes::ShapeRef.new(shape: ClientDeviceType)
 
     ClientProperties.add_member(:reconnect_enabled, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "ReconnectEnabled"))
+    ClientProperties.add_member(:log_upload_enabled, Shapes::ShapeRef.new(shape: LogUploadEnum, location_name: "LogUploadEnabled"))
     ClientProperties.struct_class = Types::ClientProperties
 
     ClientPropertiesList.member = Shapes::ShapeRef.new(shape: ClientPropertiesResult)

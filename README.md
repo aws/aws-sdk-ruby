@@ -413,6 +413,7 @@ RubyGems.org page under "LINKS" section.
 | AWS MediaTailor                                       | Aws::MediaTailor                         | aws-sdk-mediatailor                         | 2018-04-23  |
 | AWS Migration Hub                                     | Aws::MigrationHub                        | aws-sdk-migrationhub                        | 2017-05-31  |
 | AWS Migration Hub Config                              | Aws::MigrationHubConfig                  | aws-sdk-migrationhubconfig                  | 2019-06-30  |
+| AWS Migration Hub Orchestrator                        | Aws::MigrationHubOrchestrator            | aws-sdk-migrationhuborchestrator            | 2021-08-28  |
 | AWS Migration Hub Refactor Spaces                     | Aws::MigrationHubRefactorSpaces          | aws-sdk-migrationhubrefactorspaces          | 2021-10-26  |
 | AWS Mobile                                            | Aws::Mobile                              | aws-sdk-mobile                              | 2017-07-01  |
 | AWS Network Firewall                                  | Aws::NetworkFirewall                     | aws-sdk-networkfirewall                     | 2020-11-12  |

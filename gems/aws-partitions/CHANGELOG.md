@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Add a metadata method to `Partition` to supplement endpoint generation in service gems.
 
+1.639.0 (2022-09-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MigrationHubOrchestrator`.
+
 1.638.0 (2022-09-27)
 ------------------
 

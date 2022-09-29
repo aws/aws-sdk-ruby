@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.339.0 (2022-09-29)
+------------------
+
+* Feature - u-3tb1 instances are powered by Intel Xeon Platinum 8176M (Skylake) processors and are purpose-built to run large in-memory databases.
+
 1.338.0 (2022-09-23)
 ------------------
 
