@@ -104,11 +104,12 @@ module AwsSdkCodeGenerator
         end
 
         class OperationInputsTest
+
           def initialize(options)
             @service = options[:service]
             @operation_name = options[:operation_name]
             @operation_params = options[:operation_params].map do |k,v|
-              Param.new(Underscore.underscore(k), v)
+              Param.new(Underscore.underscore(k), transform_operation_values(v))
             end
             @client_params = options[:client_params].map do |k,v|
               Param.new(Underscore.underscore(k), v)
@@ -133,6 +134,19 @@ module AwsSdkCodeGenerator
           attr_reader :client_params
 
           private
+          def transform_operation_values(value)
+            case value
+            when Hash
+              value.each_with_object({}) do |(k, v), o|
+                o[Underscore.underscore(k)] = transform_operation_values(v)
+              end
+            when Array
+              value.map { |v| transform_operation_values(v) }
+            else
+              value
+            end
+          end
+
           def built_in_to_param(built_in, value)
             case built_in
             when 'AWS::Region'
