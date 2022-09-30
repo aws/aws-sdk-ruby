@@ -25,11 +25,14 @@ module Aws::S3Control
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          params = parameters_for_operation(context)
-          endpoint = context.config.endpoint_provider.resolve_endpoint(params)
+          # If endpoint was discovered, do not resolve or apply the endpoint.
+          unless context[:discovered_endpoint]
+            params = parameters_for_operation(context)
+            endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
-          context.http_request.endpoint = endpoint.url
-          apply_endpoint_headers(context, endpoint.headers)
+            context.http_request.endpoint = endpoint.url
+            apply_endpoint_headers(context, endpoint.headers)
+          end
 
           context[:endpoint_params] = params
           context[:auth_scheme] =
@@ -41,15 +44,13 @@ module Aws::S3Control
         private
 
         def apply_endpoint_headers(context, headers)
-          headers.each do |key, val|
-            joined = val
-                       .compact
-                       .map do |s|
-                         (s.include?('"') || s.include?(",")) ?
-                           "\"#{s.gsub('"', '\"')}\"" : s
-                       end
-                       .join(',')
-            context.http_request.headers[key] = joined
+          headers.each do |key, values|
+            value = values
+              .compact
+              .map { |s| Seahorse::Util.escape_header_list_string(s.to_s) }
+              .join(',')
+
+            context.http_request.headers[key] = value
           end
         end
 
