@@ -68,7 +68,8 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Information about alarms associated with the deployment group.
+    # Information about alarms associated with a deployment or deployment
+    # group.
     #
     # @note When making an API call, you may pass AlarmConfiguration
     #   data as a hash:
@@ -100,8 +101,8 @@ module Aws::CodeDeploy
     #   @return [Boolean]
     #
     # @!attribute [rw] alarms
-    #   A list of alarms configured for the deployment group. A maximum of
-    #   10 alarms can be added to a deployment group.
+    #   A list of alarms configured for the deployment or deployment group.
+    #   A maximum of 10 alarms can be added.
     #   @return [Array<Types::Alarm>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AlarmConfiguration AWS API Documentation
@@ -120,8 +121,8 @@ module Aws::CodeDeploy
     #
     class AlarmsLimitExceededException < Aws::EmptyStructure; end
 
-    # A revision for an AWS Lambda or Amazon ECS deployment that is a
-    # YAML-formatted or JSON-formatted string. For AWS Lambda and Amazon ECS
+    # A revision for an Lambda or Amazon ECS deployment that is a
+    # YAML-formatted or JSON-formatted string. For Lambda and Amazon ECS
     # deployments, the revision is the same as the AppSpec file. This method
     # replaces the deprecated `RawString` data type.
     #
@@ -136,7 +137,7 @@ module Aws::CodeDeploy
     # @!attribute [rw] content
     #   The YAML-formatted or JSON-formatted revision string.
     #
-    #   For an AWS Lambda deployment, the content includes a Lambda function
+    #   For an Lambda deployment, the content includes a Lambda function
     #   name, the alias for its original version, and the alias for its
     #   replacement version. The deployment shifts traffic from the original
     #   version of the Lambda function to the replacement version.
@@ -163,14 +164,15 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # An application with the specified name with the IAM user or AWS
-    # account already exists.
+    # An application with the specified name with the IAM user or Amazon Web
+    # Services account already exists.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ApplicationAlreadyExistsException AWS API Documentation
     #
     class ApplicationAlreadyExistsException < Aws::EmptyStructure; end
 
-    # The application does not exist with the IAM user or AWS account.
+    # The application does not exist with the IAM user or Amazon Web
+    # Services account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ApplicationDoesNotExistException AWS API Documentation
     #
@@ -319,8 +321,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application about which to get
-    #   revision information.
+    #   The name of an CodeDeploy application about which to get revision
+    #   information.
     #   @return [String]
     #
     # @!attribute [rw] revisions
@@ -412,8 +414,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an CodeDeploy application associated with the applicable
+    #   IAM or Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_names
@@ -515,20 +517,20 @@ module Aws::CodeDeploy
     #   The maximum number of deployment target IDs you can specify is 25.
     #
     #   * For deployments that use the EC2/On-premises compute platform, the
-    #     target IDs are EC2 or on-premises instances IDs, and their target
-    #     type is `instanceTarget`.
+    #     target IDs are Amazon EC2 or on-premises instances IDs, and their
+    #     target type is `instanceTarget`.
     #
-    #   * For deployments that use the AWS Lambda compute platform, the
-    #     target IDs are the names of Lambda functions, and their target
-    #     type is `instanceTarget`.
+    #   * For deployments that use the Lambda compute platform, the target
+    #     IDs are the names of Lambda functions, and their target type is
+    #     `instanceTarget`.
     #
     #   * For deployments that use the Amazon ECS compute platform, the
     #     target IDs are pairs of Amazon ECS clusters and services specified
     #     using the format `<clustername>:<servicename>`. Their target type
     #     is `ecsTarget`.
     #
-    #   * For deployments that are deployed with AWS CloudFormation, the
-    #     target IDs are CloudFormation stack IDs. Their target type is
+    #   * For deployments that are deployed with CloudFormation, the target
+    #     IDs are CloudFormation stack IDs. Their target type is
     #     `cloudFormationTarget`.
     #   @return [Array<String>]
     #
@@ -547,15 +549,15 @@ module Aws::CodeDeploy
     #   events. The type of the target objects depends on the deployment'
     #   compute platform.
     #
-    #   * **EC2/On-premises**\: Each target object is an EC2 or on-premises
-    #     instance.
+    #   * **EC2/On-premises**\: Each target object is an Amazon EC2 or
+    #     on-premises instance.
     #
-    #   * **AWS Lambda**\: The target object is a specific version of an AWS
-    #     Lambda function.
+    #   * **Lambda**\: The target object is a specific version of an Lambda
+    #     function.
     #
     #   * **Amazon ECS**\: The target object is an Amazon ECS service.
     #
-    #   * **CloudFormation**\: The target object is an AWS CloudFormation
+    #   * **CloudFormation**\: The target object is an CloudFormation
     #     blue/green deployment.
     #   @return [Array<Types::DeploymentTarget>]
     #
@@ -744,12 +746,12 @@ module Aws::CodeDeploy
     #
     class BucketNameFilterRequiredException < Aws::EmptyStructure; end
 
-    # Information about the target to be updated by an AWS CloudFormation
+    # Information about the target to be updated by an CloudFormation
     # blue/green deployment. This target type is used for all deployments
     # initiated by a CloudFormation stack update.
     #
     # @!attribute [rw] deployment_id
-    #   The unique ID of an AWS CloudFormation blue/green deployment.
+    #   The unique ID of an CloudFormation blue/green deployment.
     #   @return [String]
     #
     # @!attribute [rw] target_id
@@ -758,27 +760,27 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
-    #   The date and time when the target application was updated by an AWS
+    #   The date and time when the target application was updated by an
     #   CloudFormation blue/green deployment.
     #   @return [Time]
     #
     # @!attribute [rw] lifecycle_events
-    #   The lifecycle events of the AWS CloudFormation blue/green deployment
-    #   to this target application.
+    #   The lifecycle events of the CloudFormation blue/green deployment to
+    #   this target application.
     #   @return [Array<Types::LifecycleEvent>]
     #
     # @!attribute [rw] status
-    #   The status of an AWS CloudFormation blue/green deployment's target
+    #   The status of an CloudFormation blue/green deployment's target
     #   application.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type for the AWS CloudFormation blue/green deployment.
+    #   The resource type for the CloudFormation blue/green deployment.
     #   @return [String]
     #
     # @!attribute [rw] target_version_weight
     #   The percentage of production traffic that the target version of an
-    #   AWS CloudFormation blue/green deployment receives.
+    #   CloudFormation blue/green deployment receives.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CloudFormationTarget AWS API Documentation
@@ -842,7 +844,7 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] application_name
     #   The name of the application. This name must be unique with the
-    #   applicable IAM user or AWS account.
+    #   applicable IAM or Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] compute_platform
@@ -922,9 +924,8 @@ module Aws::CodeDeploy
     #   * FLEET\_PERCENT: The value parameter represents the minimum number
     #     of healthy instances as a percentage of the total number of
     #     instances in the deployment. If you specify FLEET\_PERCENT, at the
-    #     start of the deployment, AWS CodeDeploy converts the percentage to
-    #     the equivalent number of instances and rounds up fractional
-    #     instances.
+    #     start of the deployment, CodeDeploy converts the percentage to the
+    #     equivalent number of instances and rounds up fractional instances.
     #
     #   The value parameter takes an integer.
     #
@@ -1094,8 +1095,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the IAM
-    #   user or AWS account.
+    #   The name of an CodeDeploy application associated with the IAM user
+    #   or Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_name
@@ -1104,17 +1105,17 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] deployment_config_name
     #   If specified, the deployment configuration name can be either one of
-    #   the predefined configurations provided with AWS CodeDeploy or a
-    #   custom deployment configuration that you create by calling the
-    #   create deployment configuration operation.
+    #   the predefined configurations provided with CodeDeploy or a custom
+    #   deployment configuration that you create by calling the create
+    #   deployment configuration operation.
     #
     #   `CodeDeployDefault.OneAtATime` is the default deployment
     #   configuration. It is used if a configuration isn't specified for
     #   the deployment or deployment group.
     #
     #   For more information about the predefined deployment configurations
-    #   in AWS CodeDeploy, see [Working with Deployment Configurations in
-    #   CodeDeploy][1] in the *AWS CodeDeploy User Guide*.
+    #   in CodeDeploy, see [Working with Deployment Configurations in
+    #   CodeDeploy][1] in the *CodeDeploy User Guide*.
     #
     #
     #
@@ -1123,8 +1124,8 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] ec2_tag_filters
     #   The Amazon EC2 tags on which to filter. The deployment group
-    #   includes EC2 instances with any of the specified tags. Cannot be
-    #   used in the same call as ec2TagSet.
+    #   includes Amazon EC2 instances with any of the specified tags. Cannot
+    #   be used in the same call as ec2TagSet.
     #   @return [Array<Types::EC2TagFilter>]
     #
     # @!attribute [rw] on_premises_instance_tag_filters
@@ -1138,14 +1139,15 @@ module Aws::CodeDeploy
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_role_arn
-    #   A service role Amazon Resource Name (ARN) that allows AWS CodeDeploy
-    #   to act on the user's behalf when interacting with AWS services.
+    #   A service role Amazon Resource Name (ARN) that allows CodeDeploy to
+    #   act on the user's behalf when interacting with Amazon Web Services
+    #   services.
     #   @return [String]
     #
     # @!attribute [rw] trigger_configurations
     #   Information about triggers to create when the deployment group is
-    #   created. For examples, see [Create a Trigger for an AWS CodeDeploy
-    #   Event][1] in the *AWS CodeDeploy User Guide*.
+    #   created. For examples, see [Create a Trigger for an CodeDeploy
+    #   Event][1] in the *CodeDeploy User Guide*.
     #
     #
     #
@@ -1163,16 +1165,17 @@ module Aws::CodeDeploy
     #   @return [Types::AutoRollbackConfiguration]
     #
     # @!attribute [rw] outdated_instances_strategy
-    #   Indicates what happens when new EC2 instances are launched
+    #   Indicates what happens when new Amazon EC2 instances are launched
     #   mid-deployment and do not receive the deployed application revision.
     #
     #   If this option is set to `UPDATE` or is unspecified, CodeDeploy
     #   initiates one or more 'auto-update outdated instances' deployments
-    #   to apply the deployed application revision to the new EC2 instances.
+    #   to apply the deployed application revision to the new Amazon EC2
+    #   instances.
     #
     #   If this option is set to `IGNORE`, CodeDeploy does not initiate a
-    #   deployment to update the new EC2 instances. This may result in
-    #   instances having different revisions.
+    #   deployment to update the new Amazon EC2 instances. This may result
+    #   in instances having different revisions.
     #   @return [String]
     #
     # @!attribute [rw] deployment_style
@@ -1191,9 +1194,10 @@ module Aws::CodeDeploy
     #   @return [Types::LoadBalancerInfo]
     #
     # @!attribute [rw] ec2_tag_set
-    #   Information about groups of tags applied to EC2 instances. The
-    #   deployment group includes only EC2 instances identified by all the
-    #   tag groups. Cannot be used in the same call as `ec2TagFilters`.
+    #   Information about groups of tags applied to Amazon EC2 instances.
+    #   The deployment group includes only Amazon EC2 instances identified
+    #   by all the tag groups. Cannot be used in the same call as
+    #   `ec2TagFilters`.
     #   @return [Types::EC2TagSet]
     #
     # @!attribute [rw] ecs_services
@@ -1316,11 +1320,20 @@ module Aws::CodeDeploy
     #         },
     #         update_outdated_instances_only: false,
     #         file_exists_behavior: "DISALLOW", # accepts DISALLOW, OVERWRITE, RETAIN
+    #         override_alarm_configuration: {
+    #           enabled: false,
+    #           ignore_poll_alarm_failure: false,
+    #           alarms: [
+    #             {
+    #               name: "AlarmName",
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the IAM
-    #   user or AWS account.
+    #   The name of an CodeDeploy application associated with the IAM user
+    #   or Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_name
@@ -1333,7 +1346,7 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] deployment_config_name
     #   The name of a deployment configuration associated with the IAM user
-    #   or AWS account.
+    #   or Amazon Web Services account.
     #
     #   If not specified, the value configured in the deployment group is
     #   used as the default. If the deployment group does not have a
@@ -1360,12 +1373,12 @@ module Aws::CodeDeploy
     #   healthy hosts is not less than the minimum number of healthy hosts,
     #   then a deployment to the next instance is attempted.
     #
-    #   During a deployment, the AWS CodeDeploy agent runs the scripts
-    #   specified for `ApplicationStop`, `BeforeBlockTraffic`, and
-    #   `AfterBlockTraffic` in the AppSpec file from the previous successful
-    #   deployment. (All other scripts are run from the AppSpec file in the
-    #   current deployment.) If one of these scripts contains an error and
-    #   does not run successfully, the deployment can fail.
+    #   During a deployment, the CodeDeploy agent runs the scripts specified
+    #   for `ApplicationStop`, `BeforeBlockTraffic`, and `AfterBlockTraffic`
+    #   in the AppSpec file from the previous successful deployment. (All
+    #   other scripts are run from the AppSpec file in the current
+    #   deployment.) If one of these scripts contains an error and does not
+    #   run successfully, the deployment can fail.
     #
     #   If the cause of the failure is a script from the last successful
     #   deployment that will never run successfully, create a new deployment
@@ -1390,9 +1403,9 @@ module Aws::CodeDeploy
     #   @return [Boolean]
     #
     # @!attribute [rw] file_exists_behavior
-    #   Information about how AWS CodeDeploy handles files that already
-    #   exist in a deployment target location but weren't part of the
-    #   previous successful deployment.
+    #   Information about how CodeDeploy handles files that already exist in
+    #   a deployment target location but weren't part of the previous
+    #   successful deployment.
     #
     #   The `fileExistsBehavior` parameter takes any of the following
     #   values:
@@ -1408,6 +1421,26 @@ module Aws::CodeDeploy
     #     and used as part of the new deployment.
     #   @return [String]
     #
+    # @!attribute [rw] override_alarm_configuration
+    #   Allows you to specify information about alarms associated with a
+    #   deployment. The alarm configuration that you specify here will
+    #   override the alarm configuration at the deployment group level.
+    #   Consider overriding the alarm configuration if you have set up
+    #   alarms at the deployment group level that are causing deployment
+    #   failures. In this case, you would call `CreateDeployment` to create
+    #   a new deployment that uses a previous application revision that is
+    #   known to work, and set its alarm configuration to turn off alarm
+    #   polling. Turning off alarm polling ensures that the new deployment
+    #   proceeds without being blocked by the alarm that was generated by
+    #   the previous, failed, deployment.
+    #
+    #   <note markdown="1"> If you specify an `overrideAlarmConfiguration`, you need the
+    #   `UpdateDeploymentGroup` IAM permission when calling
+    #   `CreateDeployment`.
+    #
+    #    </note>
+    #   @return [Types::AlarmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentInput AWS API Documentation
     #
     class CreateDeploymentInput < Struct.new(
@@ -1420,7 +1453,8 @@ module Aws::CodeDeploy
       :target_instances,
       :auto_rollback_configuration,
       :update_outdated_instances_only,
-      :file_exists_behavior)
+      :file_exists_behavior,
+      :override_alarm_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1449,8 +1483,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the IAM
-    #   user or AWS account.
+    #   The name of an CodeDeploy application associated with the IAM user
+    #   or Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteApplicationInput AWS API Documentation
@@ -1472,7 +1506,7 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] deployment_config_name
     #   The name of a deployment configuration associated with the IAM user
-    #   or AWS account.
+    #   or Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentConfigInput AWS API Documentation
@@ -1494,8 +1528,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the IAM
-    #   user or AWS account.
+    #   The name of an CodeDeploy application associated with the IAM user
+    #   or Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_name
@@ -1515,10 +1549,10 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] hooks_not_cleaned_up
     #   If the output contains no data, and the corresponding deployment
-    #   group contained at least one Auto Scaling group, AWS CodeDeploy
+    #   group contained at least one Auto Scaling group, CodeDeploy
     #   successfully removed all corresponding Auto Scaling lifecycle event
     #   hooks from the Amazon EC2 instances in the Auto Scaling group. If
-    #   the output contains data, AWS CodeDeploy could not remove some Auto
+    #   the output contains data, CodeDeploy could not remove some Auto
     #   Scaling lifecycle event hooks from the Amazon EC2 instances in the
     #   Auto Scaling group.
     #   @return [Array<Types::AutoScalingGroup>]
@@ -1604,14 +1638,14 @@ module Aws::CodeDeploy
     class DeploymentAlreadyStartedException < Aws::EmptyStructure; end
 
     # A deployment configuration with the specified name with the IAM user
-    # or AWS account already exists.
+    # or Amazon Web Services account already exists.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentConfigAlreadyExistsException AWS API Documentation
     #
     class DeploymentConfigAlreadyExistsException < Aws::EmptyStructure; end
 
-    # The deployment configuration does not exist with the IAM user or AWS
-    # account.
+    # The deployment configuration does not exist with the IAM user or
+    # Amazon Web Services account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentConfigDoesNotExistException AWS API Documentation
     #
@@ -1649,8 +1683,8 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] traffic_routing_config
     #   The configuration that specifies how the deployment traffic is
-    #   routed. Used for deployments with a Lambda or ECS compute platform
-    #   only.
+    #   routed. Used for deployments with a Lambda or Amazon ECS compute
+    #   platform only.
     #   @return [Types::TrafficRoutingConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentConfigInfo AWS API Documentation
@@ -1678,21 +1712,22 @@ module Aws::CodeDeploy
     #
     class DeploymentConfigNameRequiredException < Aws::EmptyStructure; end
 
-    # The deployment with the IAM user or AWS account does not exist.
+    # The deployment with the IAM user or Amazon Web Services account does
+    # not exist.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentDoesNotExistException AWS API Documentation
     #
     class DeploymentDoesNotExistException < Aws::EmptyStructure; end
 
-    # A deployment group with the specified name with the IAM user or AWS
-    # account already exists.
+    # A deployment group with the specified name with the IAM user or Amazon
+    # Web Services account already exists.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupAlreadyExistsException AWS API Documentation
     #
     class DeploymentGroupAlreadyExistsException < Aws::EmptyStructure; end
 
-    # The named deployment group with the IAM user or AWS account does not
-    # exist.
+    # The named deployment group with the IAM user or Amazon Web Services
+    # account does not exist.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupDoesNotExistException AWS API Documentation
     #
@@ -1732,9 +1767,9 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] service_role_arn
     #   A service role Amazon Resource Name (ARN) that grants CodeDeploy
-    #   permission to make calls to AWS services on your behalf. For more
-    #   information, see [Create a Service Role for AWS CodeDeploy][1] in
-    #   the *AWS CodeDeploy User Guide*.
+    #   permission to make calls to Amazon Web Services services on your
+    #   behalf. For more information, see [Create a Service Role for
+    #   CodeDeploy][1] in the *CodeDeploy User Guide*.
     #
     #
     #
@@ -1766,16 +1801,17 @@ module Aws::CodeDeploy
     #   @return [Types::DeploymentStyle]
     #
     # @!attribute [rw] outdated_instances_strategy
-    #   Indicates what happens when new EC2 instances are launched
+    #   Indicates what happens when new Amazon EC2 instances are launched
     #   mid-deployment and do not receive the deployed application revision.
     #
     #   If this option is set to `UPDATE` or is unspecified, CodeDeploy
     #   initiates one or more 'auto-update outdated instances' deployments
-    #   to apply the deployed application revision to the new EC2 instances.
+    #   to apply the deployed application revision to the new Amazon EC2
+    #   instances.
     #
     #   If this option is set to `IGNORE`, CodeDeploy does not initiate a
-    #   deployment to update the new EC2 instances. This may result in
-    #   instances having different revisions.
+    #   deployment to update the new Amazon EC2 instances. This may result
+    #   in instances having different revisions.
     #   @return [String]
     #
     # @!attribute [rw] blue_green_deployment_configuration
@@ -1798,9 +1834,10 @@ module Aws::CodeDeploy
     #   @return [Types::LastDeploymentInfo]
     #
     # @!attribute [rw] ec2_tag_set
-    #   Information about groups of tags applied to an EC2 instance. The
-    #   deployment group includes only EC2 instances identified by all of
-    #   the tag groups. Cannot be used in the same call as ec2TagFilters.
+    #   Information about groups of tags applied to an Amazon EC2 instance.
+    #   The deployment group includes only Amazon EC2 instances identified
+    #   by all of the tag groups. Cannot be used in the same call as
+    #   ec2TagFilters.
     #   @return [Types::EC2TagSet]
     #
     # @!attribute [rw] on_premises_tag_set
@@ -1943,7 +1980,7 @@ module Aws::CodeDeploy
     #   * `codeDeployRollback`\: A rollback process created the deployment.
     #
     #   * `CodeDeployAutoUpdate`\: An auto-update process created the
-    #     deployment when it detected outdated EC2 instances.
+    #     deployment when it detected outdated Amazon EC2 instances.
     #   @return [String]
     #
     # @!attribute [rw] ignore_application_stop_failures
@@ -1961,12 +1998,12 @@ module Aws::CodeDeploy
     #   healthy hosts is not less than the minimum number of healthy hosts,
     #   then a deployment to the next instance is attempted.
     #
-    #   During a deployment, the AWS CodeDeploy agent runs the scripts
-    #   specified for `ApplicationStop`, `BeforeBlockTraffic`, and
-    #   `AfterBlockTraffic` in the AppSpec file from the previous successful
-    #   deployment. (All other scripts are run from the AppSpec file in the
-    #   current deployment.) If one of these scripts contains an error and
-    #   does not run successfully, the deployment can fail.
+    #   During a deployment, the CodeDeploy agent runs the scripts specified
+    #   for `ApplicationStop`, `BeforeBlockTraffic`, and `AfterBlockTraffic`
+    #   in the AppSpec file from the previous successful deployment. (All
+    #   other scripts are run from the AppSpec file in the current
+    #   deployment.) If one of these scripts contains an error and does not
+    #   run successfully, the deployment can fail.
     #
     #   If the cause of the failure is a script from the last successful
     #   deployment that will never run successfully, create a new deployment
@@ -2022,9 +2059,9 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] file_exists_behavior
-    #   Information about how AWS CodeDeploy handles files that already
-    #   exist in a deployment target location but weren't part of the
-    #   previous successful deployment.
+    #   Information about how CodeDeploy handles files that already exist in
+    #   a deployment target location but weren't part of the previous
+    #   successful deployment.
     #
     #   * `DISALLOW`\: The deployment fails. This is also the default
     #     behavior if no option is specified.
@@ -2054,6 +2091,11 @@ module Aws::CodeDeploy
     # @!attribute [rw] related_deployments
     #   Information about deployments related to the specified deployment.
     #   @return [Types::RelatedDeployments]
+    #
+    # @!attribute [rw] override_alarm_configuration
+    #   Information about alarms associated with a deployment or deployment
+    #   group.
+    #   @return [Types::AlarmConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentInfo AWS API Documentation
     #
@@ -2086,7 +2128,8 @@ module Aws::CodeDeploy
       :deployment_status_messages,
       :compute_platform,
       :external_id,
-      :related_deployments)
+      :related_deployments,
+      :override_alarm_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2238,8 +2281,8 @@ module Aws::CodeDeploy
     #   @return [Types::InstanceTarget]
     #
     # @!attribute [rw] lambda_target
-    #   Information about the target for a deployment that uses the AWS
-    #   Lambda compute platform.
+    #   Information about the target for a deployment that uses the Lambda
+    #   compute platform.
     #   @return [Types::LambdaTarget]
     #
     # @!attribute [rw] ecs_target
@@ -2248,7 +2291,7 @@ module Aws::CodeDeploy
     #   @return [Types::ECSTarget]
     #
     # @!attribute [rw] cloud_formation_target
-    #   Information about the target to be updated by an AWS CloudFormation
+    #   Information about the target to be updated by an CloudFormation
     #   blue/green deployment. This target type is used for all deployments
     #   initiated by a CloudFormation stack update.
     #   @return [Types::CloudFormationTarget]
@@ -2278,9 +2321,9 @@ module Aws::CodeDeploy
     class DeploymentTargetIdRequiredException < Aws::EmptyStructure; end
 
     # The maximum number of targets that can be associated with an Amazon
-    # ECS or AWS Lambda deployment was exceeded. The target list of both
-    # types of deployments must have exactly one item. This exception does
-    # not apply to EC2/On-premises deployments.
+    # ECS or Lambda deployment was exceeded. The target list of both types
+    # of deployments must have exactly one item. This exception does not
+    # apply to EC2/On-premises deployments.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentTargetListSizeExceededException AWS API Documentation
     #
@@ -2347,7 +2390,7 @@ module Aws::CodeDeploy
     # @!attribute [rw] log_tail
     #   The last portion of the diagnostic log.
     #
-    #   If available, AWS CodeDeploy returns up to the last 4 KB of the
+    #   If available, CodeDeploy returns up to the last 4 KB of the
     #   diagnostic log.
     #   @return [String]
     #
@@ -2401,7 +2444,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Information about groups of EC2 instance tags.
+    # Information about groups of Amazon EC2 instance tags.
     #
     # @note When making an API call, you may pass EC2TagSet
     #   data as a hash:
@@ -2419,8 +2462,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] ec2_tag_set_list
-    #   A list that contains other lists of EC2 instance tag groups. For an
-    #   instance to be included in the deployment group, it must be
+    #   A list that contains other lists of Amazon EC2 instance tag groups.
+    #   For an instance to be included in the deployment group, it must be
     #   identified by all of the tag groups in the list.
     #   @return [Array<Array<Types::EC2TagFilter>>]
     #
@@ -2515,10 +2558,10 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Information about a set of Amazon ECS tasks in an AWS CodeDeploy
+    # Information about a set of Amazon ECS tasks in an CodeDeploy
     # deployment. An Amazon ECS task set includes details such as the
     # desired number of tasks, how many tasks are running, and whether the
-    # task set serves production traffic. An AWS CodeDeploy application that
+    # task set serves production traffic. An CodeDeploy application that
     # uses the Amazon ECS compute platform deploys a containerized
     # application in an Amazon ECS service as a task set.
     #
@@ -2567,7 +2610,7 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] target_group
     #   The target group associated with the task set. The target group is
-    #   used by AWS CodeDeploy to manage traffic to a task set.
+    #   used by CodeDeploy to manage traffic to a task set.
     #   @return [Types::TargetGroupInfo]
     #
     # @!attribute [rw] task_set_label
@@ -2621,8 +2664,8 @@ module Aws::CodeDeploy
     # Information about a deployment error.
     #
     # @!attribute [rw] code
-    #   For more information, see [Error Codes for AWS CodeDeploy][1] in the
-    #   [AWS CodeDeploy User Guide][2].
+    #   For more information, see [Error Codes for CodeDeploy][1] in the
+    #   [CodeDeploy User Guide][2].
     #
     #   The error code:
     #
@@ -2658,7 +2701,8 @@ module Aws::CodeDeploy
     #     exceeded.
     #
     #   * THROTTLED: The operation was throttled because the calling account
-    #     exceeded the throttling limits of one or more AWS services.
+    #     exceeded the throttling limits of one or more Amazon Web Services
+    #     services.
     #
     #   * TIMEOUT: The deployment has timed out.
     #
@@ -2696,15 +2740,15 @@ module Aws::CodeDeploy
     #   @return [Array<String>]
     #
     # @!attribute [rw] first_used_time
-    #   When the revision was first used by AWS CodeDeploy.
+    #   When the revision was first used by CodeDeploy.
     #   @return [Time]
     #
     # @!attribute [rw] last_used_time
-    #   When the revision was last used by AWS CodeDeploy.
+    #   When the revision was last used by CodeDeploy.
     #   @return [Time]
     #
     # @!attribute [rw] register_time
-    #   When the revision was registered with AWS CodeDeploy.
+    #   When the revision was registered with CodeDeploy.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GenericRevisionInfo AWS API Documentation
@@ -2729,8 +2773,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the IAM
-    #   user or AWS account.
+    #   The name of an CodeDeploy application associated with the IAM user
+    #   or Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationInput AWS API Documentation
@@ -2840,7 +2884,7 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] deployment_config_name
     #   The name of a deployment configuration associated with the IAM user
-    #   or AWS account.
+    #   or Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentConfigInput AWS API Documentation
@@ -2876,8 +2920,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the IAM
-    #   user or AWS account.
+    #   The name of an CodeDeploy application associated with the IAM user
+    #   or Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_name
@@ -2917,8 +2961,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] deployment_id
-    #   The unique ID of a deployment associated with the IAM user or AWS
-    #   account.
+    #   The unique ID of a deployment associated with the IAM user or Amazon
+    #   Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInput AWS API Documentation
@@ -3500,7 +3544,7 @@ module Aws::CodeDeploy
     class InvalidExternalIdException < Aws::EmptyStructure; end
 
     # An invalid fileExistsBehavior option was specified to determine how
-    # AWS CodeDeploy handles files or directories that already exist in a
+    # CodeDeploy handles files or directories that already exist in a
     # deployment target location, but weren't part of the previous
     # successful deployment. Valid values include "DISALLOW,"
     # "OVERWRITE," and "RETAIN."
@@ -3533,7 +3577,7 @@ module Aws::CodeDeploy
     #
     class InvalidIamUserArnException < Aws::EmptyStructure; end
 
-    # The IgnoreApplicationStopFailures value is invalid. For AWS Lambda
+    # The IgnoreApplicationStopFailures value is invalid. For Lambda
     # deployments, `false` is expected. For EC2/On-premises deployments,
     # `true` or `false` is expected.
     #
@@ -3728,7 +3772,7 @@ module Aws::CodeDeploy
     #
     class InvalidTriggerConfigException < Aws::EmptyStructure; end
 
-    # The UpdateOutdatedInstancesOnly value is invalid. For AWS Lambda
+    # The UpdateOutdatedInstancesOnly value is invalid. For Lambda
     # deployments, `false` is expected. For EC2/On-premises deployments,
     # `true` or `false` is expected.
     #
@@ -3743,8 +3787,8 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] function_alias
-    #   The alias of a Lambda function. For more information, see [AWS
-    #   Lambda Function Aliases][1] in the *AWS Lambda Developer Guide*.
+    #   The alias of a Lambda function. For more information, see [Lambda
+    #   Function Aliases][1] in the *Lambda Developer Guide*.
     #
     #
     #
@@ -3777,7 +3821,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Information about the target AWS Lambda function during an AWS Lambda
+    # Information about the target Lambda function during an Lambda
     # deployment.
     #
     # @!attribute [rw] deployment_id
@@ -3794,7 +3838,7 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status an AWS Lambda deployment's target Lambda function.
+    #   The status an Lambda deployment's target Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
@@ -3937,15 +3981,15 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the IAM
-    #   user or AWS account.
+    #   The name of an CodeDeploy application associated with the IAM user
+    #   or Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
     #   The column name to use to sort the list results:
     #
     #   * `registerTime`\: Sort by the time the revisions were registered
-    #     with AWS CodeDeploy.
+    #     with CodeDeploy.
     #
     #   * `firstUsedTime`\: Sort by the time the revisions were first used
     #     in a deployment.
@@ -4134,8 +4178,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the IAM
-    #   user or AWS account.
+    #   The name of an CodeDeploy application associated with the IAM user
+    #   or Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4338,8 +4382,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the IAM
-    #   user or AWS account.
+    #   The name of an CodeDeploy application associated with the IAM user
+    #   or Amazon Web Services account.
     #
     #   <note markdown="1"> If `applicationName` is specified, then `deploymentGroupName` must
     #   be specified. If it is not specified, then `deploymentGroupName`
@@ -4689,16 +4733,16 @@ module Aws::CodeDeploy
     #   value of 1. This means a deployment to only one instance at a time.
     #   (You cannot set the type to MOST\_CONCURRENCY, only to HOST\_COUNT
     #   or FLEET\_PERCENT.) In addition, with CodeDeployDefault.OneAtATime,
-    #   AWS CodeDeploy attempts to ensure that all instances but one are
-    #   kept in a healthy state during the deployment. Although this allows
-    #   one instance at a time to be taken offline for a new deployment, it
-    #   also means that if the deployment to the last instance fails, the
-    #   overall deployment is still successful.
+    #   CodeDeploy attempts to ensure that all instances but one are kept in
+    #   a healthy state during the deployment. Although this allows one
+    #   instance at a time to be taken offline for a new deployment, it also
+    #   means that if the deployment to the last instance fails, the overall
+    #   deployment is still successful.
     #
     #    </note>
     #
-    #   For more information, see [AWS CodeDeploy Instance Health][1] in the
-    #   *AWS CodeDeploy User Guide*.
+    #   For more information, see [CodeDeploy Instance Health][1] in the
+    #   *CodeDeploy User Guide*.
     #
     #
     #
@@ -4784,8 +4828,9 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] status
     #   The result of a Lambda function that validates a deployment
-    #   lifecycle event. `Succeeded` and `Failed` are the only valid values
-    #   for `status`.
+    #   lifecycle event. The values listed in **Valid Values** are valid for
+    #   lifecycle statuses in general; however, only `Succeeded` and
+    #   `Failed` can be passed successfully in your API call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/PutLifecycleEventHookExecutionStatusInput AWS API Documentation
@@ -4811,8 +4856,8 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # A revision for an AWS Lambda deployment that is a YAML-formatted or
-    # JSON-formatted string. For AWS Lambda deployments, the revision is the
+    # A revision for an Lambda deployment that is a YAML-formatted or
+    # JSON-formatted string. For Lambda deployments, the revision is the
     # same as the AppSpec file.
     #
     # @note When making an API call, you may pass RawString
@@ -4875,8 +4920,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the IAM
-    #   user or AWS account.
+    #   The name of an CodeDeploy application associated with the IAM user
+    #   or Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4998,7 +5043,8 @@ module Aws::CodeDeploy
     #
     class ResourceValidationException < Aws::EmptyStructure; end
 
-    # The named revision does not exist with the IAM user or AWS account.
+    # The named revision does not exist with the IAM user or Amazon Web
+    # Services account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RevisionDoesNotExistException AWS API Documentation
     #
@@ -5060,11 +5106,11 @@ module Aws::CodeDeploy
     #   * GitHub: An application revision stored in GitHub (EC2/On-premises
     #     deployments only).
     #
-    #   * String: A YAML-formatted or JSON-formatted string (AWS Lambda
+    #   * String: A YAML-formatted or JSON-formatted string (Lambda
     #     deployments only).
     #
     #   * AppSpecContent: An `AppSpecContent` object that contains the
-    #     contents of an AppSpec file for an AWS Lambda or Amazon ECS
+    #     contents of an AppSpec file for an Lambda or Amazon ECS
     #     deployment. The content is formatted as JSON or YAML stored as a
     #     RawString.
     #   @return [String]
@@ -5079,12 +5125,12 @@ module Aws::CodeDeploy
     #   @return [Types::GitHubLocation]
     #
     # @!attribute [rw] string
-    #   Information about the location of an AWS Lambda deployment revision
+    #   Information about the location of an Lambda deployment revision
     #   stored as a RawString.
     #   @return [Types::RawString]
     #
     # @!attribute [rw] app_spec_content
-    #   The content of an AppSpec file for an AWS Lambda or Amazon ECS
+    #   The content of an AppSpec file for an Lambda or Amazon ECS
     #   deployment. The content is formatted as JSON or YAML and stored as a
     #   RawString.
     #   @return [Types::AppSpecContent]
@@ -5513,8 +5559,8 @@ module Aws::CodeDeploy
     #   @return [Array<String>]
     #
     # @!attribute [rw] ec2_tag_set
-    #   Information about the groups of EC2 instance tags that an instance
-    #   must be identified by in order for it to be included in the
+    #   Information about the groups of Amazon EC2 instance tags that an
+    #   instance must be identified by in order for it to be included in the
     #   replacement environment for a blue/green deployment. Cannot be used
     #   in the same call as `tagFilters`.
     #   @return [Types::EC2TagSet]
@@ -5536,9 +5582,9 @@ module Aws::CodeDeploy
     class ThrottlingException < Aws::EmptyStructure; end
 
     # A configuration that shifts traffic from one version of a Lambda
-    # function or ECS task set to another in two increments. The original
-    # and target Lambda function versions or ECS task sets are specified in
-    # the deployment's AppSpec file.
+    # function or Amazon ECS task set to another in two increments. The
+    # original and target Lambda function versions or ECS task sets are
+    # specified in the deployment's AppSpec file.
     #
     # @note When making an API call, you may pass TimeBasedCanary
     #   data as a hash:
@@ -5661,7 +5707,7 @@ module Aws::CodeDeploy
     end
 
     # The configuration that specifies how traffic is shifted from one
-    # version of a Lambda function to another version during an AWS Lambda
+    # version of a Lambda function to another version during an Lambda
     # deployment, or from one Amazon ECS task set to another during an
     # Amazon ECS deployment.
     #
@@ -5694,10 +5740,10 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] time_based_linear
     #   A configuration that shifts traffic from one version of a Lambda
-    #   function or ECS task set to another in equal increments, with an
-    #   equal number of minutes between each increment. The original and
-    #   target Lambda function versions or ECS task sets are specified in
-    #   the deployment's AppSpec file.
+    #   function or Amazon ECS task set to another in equal increments, with
+    #   an equal number of minutes between each increment. The original and
+    #   target Lambda function versions or Amazon ECS task sets are
+    #   specified in the deployment's AppSpec file.
     #   @return [Types::TimeBasedLinear]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TrafficRoutingConfig AWS API Documentation
@@ -5971,9 +6017,20 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] auto_scaling_groups
     #   The replacement list of Auto Scaling groups to be included in the
-    #   deployment group, if you want to change them. To keep the Auto
-    #   Scaling groups, enter their names. To remove Auto Scaling groups, do
-    #   not enter any Auto Scaling group names.
+    #   deployment group, if you want to change them.
+    #
+    #   * To keep the Auto Scaling groups, enter their names or do not
+    #     specify this parameter.
+    #
+    #   * To remove Auto Scaling groups, specify a non-null empty list of
+    #     Auto Scaling group names to detach all CodeDeploy-managed Auto
+    #     Scaling lifecycle hooks. For examples, see [Amazon EC2 instances
+    #     in an Amazon EC2 Auto Scaling group fail to launch and receive the
+    #     error "Heartbeat Timeout"][1] in the *CodeDeploy User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_role_arn
@@ -5983,7 +6040,7 @@ module Aws::CodeDeploy
     # @!attribute [rw] trigger_configurations
     #   Information about triggers to change when the deployment group is
     #   updated. For examples, see [Edit a Trigger in a CodeDeploy
-    #   Deployment Group][1] in the *AWS CodeDeploy User Guide*.
+    #   Deployment Group][1] in the *CodeDeploy User Guide*.
     #
     #
     #
@@ -6001,16 +6058,17 @@ module Aws::CodeDeploy
     #   @return [Types::AutoRollbackConfiguration]
     #
     # @!attribute [rw] outdated_instances_strategy
-    #   Indicates what happens when new EC2 instances are launched
+    #   Indicates what happens when new Amazon EC2 instances are launched
     #   mid-deployment and do not receive the deployed application revision.
     #
     #   If this option is set to `UPDATE` or is unspecified, CodeDeploy
     #   initiates one or more 'auto-update outdated instances' deployments
-    #   to apply the deployed application revision to the new EC2 instances.
+    #   to apply the deployed application revision to the new Amazon EC2
+    #   instances.
     #
     #   If this option is set to `IGNORE`, CodeDeploy does not initiate a
-    #   deployment to update the new EC2 instances. This may result in
-    #   instances having different revisions.
+    #   deployment to update the new Amazon EC2 instances. This may result
+    #   in instances having different revisions.
     #   @return [String]
     #
     # @!attribute [rw] deployment_style
@@ -6030,8 +6088,8 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] ec2_tag_set
     #   Information about groups of tags applied to on-premises instances.
-    #   The deployment group includes only EC2 instances identified by all
-    #   the tag groups.
+    #   The deployment group includes only Amazon EC2 instances identified
+    #   by all the tag groups.
     #   @return [Types::EC2TagSet]
     #
     # @!attribute [rw] ecs_services
@@ -6077,11 +6135,11 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] hooks_not_cleaned_up
     #   If the output contains no data, and the corresponding deployment
-    #   group contained at least one Auto Scaling group, AWS CodeDeploy
+    #   group contained at least one Auto Scaling group, CodeDeploy
     #   successfully removed all corresponding Auto Scaling lifecycle event
-    #   hooks from the AWS account. If the output contains data, AWS
-    #   CodeDeploy could not remove some Auto Scaling lifecycle event hooks
-    #   from the AWS account.
+    #   hooks from the Amazon Web Services account. If the output contains
+    #   data, CodeDeploy could not remove some Auto Scaling lifecycle event
+    #   hooks from the Amazon Web Services account.
     #   @return [Array<Types::AutoScalingGroup>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroupOutput AWS API Documentation

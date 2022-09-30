@@ -2473,6 +2473,9 @@ module Aws::SageMaker
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html
     #
+    # @option params [Types::ExplainerConfig] :explainer_config
+    #   A member of `CreateEndpointConfig` that enables explainers.
+    #
     # @return [Types::CreateEndpointConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointConfigOutput#endpoint_config_arn #endpoint_config_arn} => String
@@ -2534,6 +2537,38 @@ module Aws::SageMaker
     #         notification_config: {
     #           success_topic: "SnsTopicArn",
     #           error_topic: "SnsTopicArn",
+    #         },
+    #       },
+    #     },
+    #     explainer_config: {
+    #       clarify_explainer_config: {
+    #         enable_explanations: "ClarifyEnableExplanations",
+    #         inference_config: {
+    #           features_attribute: "ClarifyFeaturesAttribute",
+    #           content_template: "ClarifyContentTemplate",
+    #           max_record_count: 1,
+    #           max_payload_in_mb: 1,
+    #           probability_index: 1,
+    #           label_index: 1,
+    #           probability_attribute: "ClarifyProbabilityAttribute",
+    #           label_attribute: "ClarifyLabelAttribute",
+    #           label_headers: ["ClarifyHeader"],
+    #           feature_headers: ["ClarifyHeader"],
+    #           feature_types: ["numerical"], # accepts numerical, categorical, text
+    #         },
+    #         shap_config: { # required
+    #           shap_baseline_config: { # required
+    #             mime_type: "ClarifyMimeType",
+    #             shap_baseline: "ClarifyShapBaseline",
+    #             shap_baseline_uri: "Url",
+    #           },
+    #           number_of_samples: 1,
+    #           use_logit: false,
+    #           seed: 1,
+    #           text_config: {
+    #             language: "af", # required, accepts af, sq, ar, hy, eu, bn, bg, ca, zh, hr, cs, da, nl, en, et, fi, fr, de, el, gu, he, hi, hu, is, id, ga, it, kn, ky, lv, lt, lb, mk, ml, mr, ne, nb, fa, pl, pt, ro, ru, sa, sr, tn, si, sk, sl, es, sv, tl, ta, tt, te, tr, uk, ur, yo, lij, xx
+    #             granularity: "token", # required, accepts token, sentence, paragraph
+    #           },
     #         },
     #       },
     #     },
@@ -9281,6 +9316,7 @@ module Aws::SageMaker
     #   * {Types::DescribeEndpointOutput#last_deployment_config #last_deployment_config} => Types::DeploymentConfig
     #   * {Types::DescribeEndpointOutput#async_inference_config #async_inference_config} => Types::AsyncInferenceConfig
     #   * {Types::DescribeEndpointOutput#pending_deployment_summary #pending_deployment_summary} => Types::PendingDeploymentSummary
+    #   * {Types::DescribeEndpointOutput#explainer_config #explainer_config} => Types::ExplainerConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -9357,6 +9393,29 @@ module Aws::SageMaker
     #   resp.pending_deployment_summary.production_variants[0].desired_serverless_config.memory_size_in_mb #=> Integer
     #   resp.pending_deployment_summary.production_variants[0].desired_serverless_config.max_concurrency #=> Integer
     #   resp.pending_deployment_summary.start_time #=> Time
+    #   resp.explainer_config.clarify_explainer_config.enable_explanations #=> String
+    #   resp.explainer_config.clarify_explainer_config.inference_config.features_attribute #=> String
+    #   resp.explainer_config.clarify_explainer_config.inference_config.content_template #=> String
+    #   resp.explainer_config.clarify_explainer_config.inference_config.max_record_count #=> Integer
+    #   resp.explainer_config.clarify_explainer_config.inference_config.max_payload_in_mb #=> Integer
+    #   resp.explainer_config.clarify_explainer_config.inference_config.probability_index #=> Integer
+    #   resp.explainer_config.clarify_explainer_config.inference_config.label_index #=> Integer
+    #   resp.explainer_config.clarify_explainer_config.inference_config.probability_attribute #=> String
+    #   resp.explainer_config.clarify_explainer_config.inference_config.label_attribute #=> String
+    #   resp.explainer_config.clarify_explainer_config.inference_config.label_headers #=> Array
+    #   resp.explainer_config.clarify_explainer_config.inference_config.label_headers[0] #=> String
+    #   resp.explainer_config.clarify_explainer_config.inference_config.feature_headers #=> Array
+    #   resp.explainer_config.clarify_explainer_config.inference_config.feature_headers[0] #=> String
+    #   resp.explainer_config.clarify_explainer_config.inference_config.feature_types #=> Array
+    #   resp.explainer_config.clarify_explainer_config.inference_config.feature_types[0] #=> String, one of "numerical", "categorical", "text"
+    #   resp.explainer_config.clarify_explainer_config.shap_config.shap_baseline_config.mime_type #=> String
+    #   resp.explainer_config.clarify_explainer_config.shap_config.shap_baseline_config.shap_baseline #=> String
+    #   resp.explainer_config.clarify_explainer_config.shap_config.shap_baseline_config.shap_baseline_uri #=> String
+    #   resp.explainer_config.clarify_explainer_config.shap_config.number_of_samples #=> Integer
+    #   resp.explainer_config.clarify_explainer_config.shap_config.use_logit #=> Boolean
+    #   resp.explainer_config.clarify_explainer_config.shap_config.seed #=> Integer
+    #   resp.explainer_config.clarify_explainer_config.shap_config.text_config.language #=> String, one of "af", "sq", "ar", "hy", "eu", "bn", "bg", "ca", "zh", "hr", "cs", "da", "nl", "en", "et", "fi", "fr", "de", "el", "gu", "he", "hi", "hu", "is", "id", "ga", "it", "kn", "ky", "lv", "lt", "lb", "mk", "ml", "mr", "ne", "nb", "fa", "pl", "pt", "ro", "ru", "sa", "sr", "tn", "si", "sk", "sl", "es", "sv", "tl", "ta", "tt", "te", "tr", "uk", "ur", "yo", "lij", "xx"
+    #   resp.explainer_config.clarify_explainer_config.shap_config.text_config.granularity #=> String, one of "token", "sentence", "paragraph"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -9388,6 +9447,7 @@ module Aws::SageMaker
     #   * {Types::DescribeEndpointConfigOutput#kms_key_id #kms_key_id} => String
     #   * {Types::DescribeEndpointConfigOutput#creation_time #creation_time} => Time
     #   * {Types::DescribeEndpointConfigOutput#async_inference_config #async_inference_config} => Types::AsyncInferenceConfig
+    #   * {Types::DescribeEndpointConfigOutput#explainer_config #explainer_config} => Types::ExplainerConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -9430,6 +9490,29 @@ module Aws::SageMaker
     #   resp.async_inference_config.output_config.s3_output_path #=> String
     #   resp.async_inference_config.output_config.notification_config.success_topic #=> String
     #   resp.async_inference_config.output_config.notification_config.error_topic #=> String
+    #   resp.explainer_config.clarify_explainer_config.enable_explanations #=> String
+    #   resp.explainer_config.clarify_explainer_config.inference_config.features_attribute #=> String
+    #   resp.explainer_config.clarify_explainer_config.inference_config.content_template #=> String
+    #   resp.explainer_config.clarify_explainer_config.inference_config.max_record_count #=> Integer
+    #   resp.explainer_config.clarify_explainer_config.inference_config.max_payload_in_mb #=> Integer
+    #   resp.explainer_config.clarify_explainer_config.inference_config.probability_index #=> Integer
+    #   resp.explainer_config.clarify_explainer_config.inference_config.label_index #=> Integer
+    #   resp.explainer_config.clarify_explainer_config.inference_config.probability_attribute #=> String
+    #   resp.explainer_config.clarify_explainer_config.inference_config.label_attribute #=> String
+    #   resp.explainer_config.clarify_explainer_config.inference_config.label_headers #=> Array
+    #   resp.explainer_config.clarify_explainer_config.inference_config.label_headers[0] #=> String
+    #   resp.explainer_config.clarify_explainer_config.inference_config.feature_headers #=> Array
+    #   resp.explainer_config.clarify_explainer_config.inference_config.feature_headers[0] #=> String
+    #   resp.explainer_config.clarify_explainer_config.inference_config.feature_types #=> Array
+    #   resp.explainer_config.clarify_explainer_config.inference_config.feature_types[0] #=> String, one of "numerical", "categorical", "text"
+    #   resp.explainer_config.clarify_explainer_config.shap_config.shap_baseline_config.mime_type #=> String
+    #   resp.explainer_config.clarify_explainer_config.shap_config.shap_baseline_config.shap_baseline #=> String
+    #   resp.explainer_config.clarify_explainer_config.shap_config.shap_baseline_config.shap_baseline_uri #=> String
+    #   resp.explainer_config.clarify_explainer_config.shap_config.number_of_samples #=> Integer
+    #   resp.explainer_config.clarify_explainer_config.shap_config.use_logit #=> Boolean
+    #   resp.explainer_config.clarify_explainer_config.shap_config.seed #=> Integer
+    #   resp.explainer_config.clarify_explainer_config.shap_config.text_config.language #=> String, one of "af", "sq", "ar", "hy", "eu", "bn", "bg", "ca", "zh", "hr", "cs", "da", "nl", "en", "et", "fi", "fr", "de", "el", "gu", "he", "hi", "hu", "is", "id", "ga", "it", "kn", "ky", "lv", "lt", "lb", "mk", "ml", "mr", "ne", "nb", "fa", "pl", "pt", "ro", "ru", "sa", "sr", "tn", "si", "sk", "sl", "es", "sv", "tl", "ta", "tt", "te", "tr", "uk", "ur", "yo", "lij", "xx"
+    #   resp.explainer_config.clarify_explainer_config.shap_config.text_config.granularity #=> String, one of "token", "sentence", "paragraph"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfig AWS API Documentation
     #
@@ -20663,7 +20746,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.143.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -84,6 +84,10 @@ module Aws::DevOpsGuru
     #           sns: { # required
     #             topic_arn: "TopicArn",
     #           },
+    #           filters: {
+    #             severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
+    #             message_types: ["NEW_INSIGHT"], # accepts NEW_INSIGHT, CLOSED_INSIGHT, NEW_ASSOCIATION, SEVERITY_UPGRADED, NEW_RECOMMENDATION
+    #           },
     #         },
     #       }
     #
@@ -582,12 +586,14 @@ module Aws::DevOpsGuru
     #
     #   The string used for a *key* in a tag that you use to define your
     #   resource coverage must begin with the prefix `Devops-guru-`. The tag
-    #   *key* might be `Devops-guru-deployment-application` or
-    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
-    #   case of *key* characters don't matter to DevOps Guru. For example,
-    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
-    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
-    #   application might be `Devops-Guru-production-application/RDS` or
+    #   *key* might be `DevOps-Guru-deployment-application` or
+    #   `devops-guru-rds-application`. When you create a *key*, the case of
+    #   characters in the *key* can be whatever you choose. After you create
+    #   a *key*, it is case-sensitive. For example, DevOps Guru works with a
+    #   *key* named `devops-guru-rds` and a *key* named `DevOps-Guru-RDS`,
+    #   and these act as two different *keys*. Possible *key*/*value* pairs
+    #   in your application might be
+    #   `Devops-Guru-production-application/RDS` or
     #   `Devops-Guru-production-application/containers`.
     #
     #
@@ -1088,12 +1094,14 @@ module Aws::DevOpsGuru
     #
     #   The string used for a *key* in a tag that you use to define your
     #   resource coverage must begin with the prefix `Devops-guru-`. The tag
-    #   *key* might be `Devops-guru-deployment-application` or
-    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
-    #   case of *key* characters don't matter to DevOps Guru. For example,
-    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
-    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
-    #   application might be `Devops-Guru-production-application/RDS` or
+    #   *key* might be `DevOps-Guru-deployment-application` or
+    #   `devops-guru-rds-application`. When you create a *key*, the case of
+    #   characters in the *key* can be whatever you choose. After you create
+    #   a *key*, it is case-sensitive. For example, DevOps Guru works with a
+    #   *key* named `devops-guru-rds` and a *key* named `DevOps-Guru-RDS`,
+    #   and these act as two different *keys*. Possible *key*/*value* pairs
+    #   in your application might be
+    #   `Devops-Guru-production-application/RDS` or
     #   `Devops-Guru-production-application/containers`.
     #
     #
@@ -1190,12 +1198,14 @@ module Aws::DevOpsGuru
     #
     #   The string used for a *key* in a tag that you use to define your
     #   resource coverage must begin with the prefix `Devops-guru-`. The tag
-    #   *key* might be `Devops-guru-deployment-application` or
-    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
-    #   case of *key* characters don't matter to DevOps Guru. For example,
-    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
-    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
-    #   application might be `Devops-Guru-production-application/RDS` or
+    #   *key* might be `DevOps-Guru-deployment-application` or
+    #   `devops-guru-rds-application`. When you create a *key*, the case of
+    #   characters in the *key* can be whatever you choose. After you create
+    #   a *key*, it is case-sensitive. For example, DevOps Guru works with a
+    #   *key* named `devops-guru-rds` and a *key* named `DevOps-Guru-RDS`,
+    #   and these act as two different *keys*. Possible *key*/*value* pairs
+    #   in your application might be
+    #   `Devops-Guru-production-application/RDS` or
     #   `Devops-Guru-production-application/containers`.
     #
     #
@@ -2569,6 +2579,10 @@ module Aws::DevOpsGuru
     #         sns: { # required
     #           topic_arn: "TopicArn",
     #         },
+    #         filters: {
+    #           severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
+    #           message_types: ["NEW_INSIGHT"], # accepts NEW_INSIGHT, CLOSED_INSIGHT, NEW_ASSOCIATION, SEVERITY_UPGRADED, NEW_RECOMMENDATION
+    #         },
     #       }
     #
     # @!attribute [rw] sns
@@ -2600,10 +2614,57 @@ module Aws::DevOpsGuru
     #   [2]: https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html
     #   @return [Types::SnsChannelConfig]
     #
+    # @!attribute [rw] filters
+    #   The filter configurations for the Amazon SNS notification topic you
+    #   use with DevOps Guru. If you do not provide filter configurations,
+    #   the default configurations are to receive notifications for all
+    #   message types of `High` or `Medium` severity.
+    #   @return [Types::NotificationFilterConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/NotificationChannelConfig AWS API Documentation
     #
     class NotificationChannelConfig < Struct.new(
-      :sns)
+      :sns,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter configurations for the Amazon SNS notification topic you
+    # use with DevOps Guru. You can choose to specify which events or
+    # message types to receive notifications for. You can also choose to
+    # specify which severity levels to receive notifications for.
+    #
+    # @note When making an API call, you may pass NotificationFilterConfig
+    #   data as a hash:
+    #
+    #       {
+    #         severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
+    #         message_types: ["NEW_INSIGHT"], # accepts NEW_INSIGHT, CLOSED_INSIGHT, NEW_ASSOCIATION, SEVERITY_UPGRADED, NEW_RECOMMENDATION
+    #       }
+    #
+    # @!attribute [rw] severities
+    #   The severity levels that you want to receive notifications for. For
+    #   example, you can choose to receive notifications only for insights
+    #   with `HIGH` and `MEDIUM` severity levels. For more information, see
+    #   [Understanding insight severities][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] message_types
+    #   The events that you want to receive notifications for. For example,
+    #   you can choose to receive notifications only when the severity level
+    #   is upgraded or a new insight is created.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/NotificationFilterConfig AWS API Documentation
+    #
+    class NotificationFilterConfig < Struct.new(
+      :severities,
+      :message_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4165,12 +4226,14 @@ module Aws::DevOpsGuru
     #
     #   The string used for a *key* in a tag that you use to define your
     #   resource coverage must begin with the prefix `Devops-guru-`. The tag
-    #   *key* might be `Devops-guru-deployment-application` or
-    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
-    #   case of *key* characters don't matter to DevOps Guru. For example,
-    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
-    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
-    #   application might be `Devops-Guru-production-application/RDS` or
+    #   *key* might be `DevOps-Guru-deployment-application` or
+    #   `devops-guru-rds-application`. When you create a *key*, the case of
+    #   characters in the *key* can be whatever you choose. After you create
+    #   a *key*, it is case-sensitive. For example, DevOps Guru works with a
+    #   *key* named `devops-guru-rds` and a *key* named `DevOps-Guru-RDS`,
+    #   and these act as two different *keys*. Possible *key*/*value* pairs
+    #   in your application might be
+    #   `Devops-Guru-production-application/RDS` or
     #   `Devops-Guru-production-application/containers`.
     #
     #
@@ -4227,12 +4290,14 @@ module Aws::DevOpsGuru
     #
     #   The string used for a *key* in a tag that you use to define your
     #   resource coverage must begin with the prefix `Devops-guru-`. The tag
-    #   *key* might be `Devops-guru-deployment-application` or
-    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
-    #   case of *key* characters don't matter to DevOps Guru. For example,
-    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
-    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
-    #   application might be `Devops-Guru-production-application/RDS` or
+    #   *key* might be `DevOps-Guru-deployment-application` or
+    #   `devops-guru-rds-application`. When you create a *key*, the case of
+    #   characters in the *key* can be whatever you choose. After you create
+    #   a *key*, it is case-sensitive. For example, DevOps Guru works with a
+    #   *key* named `devops-guru-rds` and a *key* named `DevOps-Guru-RDS`,
+    #   and these act as two different *keys*. Possible *key*/*value* pairs
+    #   in your application might be
+    #   `Devops-Guru-production-application/RDS` or
     #   `Devops-Guru-production-application/containers`.
     #
     #
@@ -4856,7 +4921,7 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # A collection of Amazon Web Services stags.
+    # A collection of Amazon Web Services tags.
     #
     # Tags help you identify and organize your Amazon Web Services
     # resources. Many Amazon Web Services services support tagging, so you
@@ -4880,12 +4945,13 @@ module Aws::DevOpsGuru
     #
     # The string used for a *key* in a tag that you use to define your
     # resource coverage must begin with the prefix `Devops-guru-`. The tag
-    # *key* might be `Devops-guru-deployment-application` or
-    # `Devops-guru-rds-application`. While *keys* are case-sensitive, the
-    # case of *key* characters don't matter to DevOps Guru. For example,
-    # DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
-    # named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
-    # application might be `Devops-Guru-production-application/RDS` or
+    # *key* might be `DevOps-Guru-deployment-application` or
+    # `devops-guru-rds-application`. When you create a *key*, the case of
+    # characters in the *key* can be whatever you choose. After you create a
+    # *key*, it is case-sensitive. For example, DevOps Guru works with a
+    # *key* named `devops-guru-rds` and a *key* named `DevOps-Guru-RDS`, and
+    # these act as two different *keys*. Possible *key*/*value* pairs in
+    # your application might be `Devops-Guru-production-application/RDS` or
     # `Devops-Guru-production-application/containers`.
     #
     #
@@ -4908,12 +4974,14 @@ module Aws::DevOpsGuru
     #
     #   The string used for a *key* in a tag that you use to define your
     #   resource coverage must begin with the prefix `Devops-guru-`. The tag
-    #   *key* might be `Devops-guru-deployment-application` or
-    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
-    #   case of *key* characters don't matter to DevOps Guru. For example,
-    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
-    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
-    #   application might be `Devops-Guru-production-application/RDS` or
+    #   *key* might be `DevOps-Guru-deployment-application` or
+    #   `devops-guru-rds-application`. When you create a *key*, the case of
+    #   characters in the *key* can be whatever you choose. After you create
+    #   a *key*, it is case-sensitive. For example, DevOps Guru works with a
+    #   *key* named `devops-guru-rds` and a *key* named `DevOps-Guru-RDS`,
+    #   and these act as two different *keys*. Possible *key*/*value* pairs
+    #   in your application might be
+    #   `Devops-Guru-production-application/RDS` or
     #   `Devops-Guru-production-application/containers`.
     #   @return [String]
     #
@@ -4949,12 +5017,14 @@ module Aws::DevOpsGuru
     #
     #   The string used for a *key* in a tag that you use to define your
     #   resource coverage must begin with the prefix `Devops-guru-`. The tag
-    #   *key* might be `Devops-guru-deployment-application` or
-    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
-    #   case of *key* characters don't matter to DevOps Guru. For example,
-    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
-    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
-    #   application might be `Devops-Guru-production-application/RDS` or
+    #   *key* might be `DevOps-Guru-deployment-application` or
+    #   `devops-guru-rds-application`. When you create a *key*, the case of
+    #   characters in the *key* can be whatever you choose. After you create
+    #   a *key*, it is case-sensitive. For example, DevOps Guru works with a
+    #   *key* named `devops-guru-rds` and a *key* named `DevOps-Guru-RDS`,
+    #   and these act as two different *keys*. Possible *key*/*value* pairs
+    #   in your application might be
+    #   `Devops-Guru-production-application/RDS` or
     #   `Devops-Guru-production-application/containers`.
     #   @return [String]
     #
@@ -5007,12 +5077,14 @@ module Aws::DevOpsGuru
     #
     #   The string used for a *key* in a tag that you use to define your
     #   resource coverage must begin with the prefix `Devops-guru-`. The tag
-    #   *key* might be `Devops-guru-deployment-application` or
-    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
-    #   case of *key* characters don't matter to DevOps Guru. For example,
-    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
-    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
-    #   application might be `Devops-Guru-production-application/RDS` or
+    #   *key* might be `DevOps-Guru-deployment-application` or
+    #   `devops-guru-rds-application`. When you create a *key*, the case of
+    #   characters in the *key* can be whatever you choose. After you create
+    #   a *key*, it is case-sensitive. For example, DevOps Guru works with a
+    #   *key* named `devops-guru-rds` and a *key* named `DevOps-Guru-RDS`,
+    #   and these act as two different *keys*. Possible *key*/*value* pairs
+    #   in your application might be
+    #   `Devops-Guru-production-application/RDS` or
     #   `Devops-Guru-production-application/containers`.
     #   @return [String]
     #
@@ -5047,12 +5119,14 @@ module Aws::DevOpsGuru
     #
     #   The string used for a *key* in a tag that you use to define your
     #   resource coverage must begin with the prefix `Devops-guru-`. The tag
-    #   *key* might be `Devops-guru-deployment-application` or
-    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
-    #   case of *key* characters don't matter to DevOps Guru. For example,
-    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
-    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
-    #   application might be `Devops-Guru-production-application/RDS` or
+    #   *key* might be `DevOps-Guru-deployment-application` or
+    #   `devops-guru-rds-application`. When you create a *key*, the case of
+    #   characters in the *key* can be whatever you choose. After you create
+    #   a *key*, it is case-sensitive. For example, DevOps Guru works with a
+    #   *key* named `devops-guru-rds` and a *key* named `DevOps-Guru-RDS`,
+    #   and these act as two different *keys*. Possible *key*/*value* pairs
+    #   in your application might be
+    #   `Devops-Guru-production-application/RDS` or
     #   `Devops-Guru-production-application/containers`.
     #   @return [String]
     #
@@ -5235,12 +5309,14 @@ module Aws::DevOpsGuru
     #
     #   The string used for a *key* in a tag that you use to define your
     #   resource coverage must begin with the prefix `Devops-guru-`. The tag
-    #   *key* might be `Devops-guru-deployment-application` or
-    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
-    #   case of *key* characters don't matter to DevOps Guru. For example,
-    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
-    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
-    #   application might be `Devops-Guru-production-application/RDS` or
+    #   *key* might be `DevOps-Guru-deployment-application` or
+    #   `devops-guru-rds-application`. When you create a *key*, the case of
+    #   characters in the *key* can be whatever you choose. After you create
+    #   a *key*, it is case-sensitive. For example, DevOps Guru works with a
+    #   *key* named `devops-guru-rds` and a *key* named `DevOps-Guru-RDS`,
+    #   and these act as two different *keys*. Possible *key*/*value* pairs
+    #   in your application might be
+    #   `Devops-Guru-production-application/RDS` or
     #   `Devops-Guru-production-application/containers`.
     #
     #
@@ -5385,12 +5461,14 @@ module Aws::DevOpsGuru
     #
     #   The string used for a *key* in a tag that you use to define your
     #   resource coverage must begin with the prefix `Devops-guru-`. The tag
-    #   *key* might be `Devops-guru-deployment-application` or
-    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
-    #   case of *key* characters don't matter to DevOps Guru. For example,
-    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
-    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
-    #   application might be `Devops-Guru-production-application/RDS` or
+    #   *key* might be `DevOps-Guru-deployment-application` or
+    #   `devops-guru-rds-application`. When you create a *key*, the case of
+    #   characters in the *key* can be whatever you choose. After you create
+    #   a *key*, it is case-sensitive. For example, DevOps Guru works with a
+    #   *key* named `devops-guru-rds` and a *key* named `DevOps-Guru-RDS`,
+    #   and these act as two different *keys*. Possible *key*/*value* pairs
+    #   in your application might be
+    #   `Devops-Guru-production-application/RDS` or
     #   `Devops-Guru-production-application/containers`.
     #   @return [String]
     #

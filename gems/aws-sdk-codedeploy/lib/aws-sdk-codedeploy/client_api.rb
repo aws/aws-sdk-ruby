@@ -586,6 +586,7 @@ module Aws::CodeDeploy
     CreateDeploymentInput.add_member(:auto_rollback_configuration, Shapes::ShapeRef.new(shape: AutoRollbackConfiguration, location_name: "autoRollbackConfiguration"))
     CreateDeploymentInput.add_member(:update_outdated_instances_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "updateOutdatedInstancesOnly"))
     CreateDeploymentInput.add_member(:file_exists_behavior, Shapes::ShapeRef.new(shape: FileExistsBehavior, location_name: "fileExistsBehavior"))
+    CreateDeploymentInput.add_member(:override_alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "overrideAlarmConfiguration"))
     CreateDeploymentInput.struct_class = Types::CreateDeploymentInput
 
     CreateDeploymentOutput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
@@ -708,6 +709,7 @@ module Aws::CodeDeploy
     DeploymentInfo.add_member(:compute_platform, Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
     DeploymentInfo.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     DeploymentInfo.add_member(:related_deployments, Shapes::ShapeRef.new(shape: RelatedDeployments, location_name: "relatedDeployments"))
+    DeploymentInfo.add_member(:override_alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "overrideAlarmConfiguration"))
     DeploymentInfo.struct_class = Types::DeploymentInfo
 
     DeploymentIsNotInReadyStateException.struct_class = Types::DeploymentIsNotInReadyStateException
@@ -1583,6 +1585,8 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: DescriptionTooLongException)
         o.errors << Shapes::ShapeRef.new(shape: DeploymentLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTargetInstancesException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAlarmConfigException)
+        o.errors << Shapes::ShapeRef.new(shape: AlarmsLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAutoRollbackConfigException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerInfoException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFileExistsBehaviorException)

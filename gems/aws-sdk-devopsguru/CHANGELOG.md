@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2022-09-30)
+------------------
+
+* Feature - This release adds filter feature on AddNotificationChannel API, enable customer to configure the SNS notification messages by Severity or MessageTypes
+
 1.24.0 (2022-07-19)
 ------------------
 

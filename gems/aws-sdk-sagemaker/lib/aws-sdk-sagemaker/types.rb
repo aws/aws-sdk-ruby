@@ -3463,6 +3463,424 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The configuration parameters for the SageMaker Clarify explainer.
+    #
+    # @note When making an API call, you may pass ClarifyExplainerConfig
+    #   data as a hash:
+    #
+    #       {
+    #         enable_explanations: "ClarifyEnableExplanations",
+    #         inference_config: {
+    #           features_attribute: "ClarifyFeaturesAttribute",
+    #           content_template: "ClarifyContentTemplate",
+    #           max_record_count: 1,
+    #           max_payload_in_mb: 1,
+    #           probability_index: 1,
+    #           label_index: 1,
+    #           probability_attribute: "ClarifyProbabilityAttribute",
+    #           label_attribute: "ClarifyLabelAttribute",
+    #           label_headers: ["ClarifyHeader"],
+    #           feature_headers: ["ClarifyHeader"],
+    #           feature_types: ["numerical"], # accepts numerical, categorical, text
+    #         },
+    #         shap_config: { # required
+    #           shap_baseline_config: { # required
+    #             mime_type: "ClarifyMimeType",
+    #             shap_baseline: "ClarifyShapBaseline",
+    #             shap_baseline_uri: "Url",
+    #           },
+    #           number_of_samples: 1,
+    #           use_logit: false,
+    #           seed: 1,
+    #           text_config: {
+    #             language: "af", # required, accepts af, sq, ar, hy, eu, bn, bg, ca, zh, hr, cs, da, nl, en, et, fi, fr, de, el, gu, he, hi, hu, is, id, ga, it, kn, ky, lv, lt, lb, mk, ml, mr, ne, nb, fa, pl, pt, ro, ru, sa, sr, tn, si, sk, sl, es, sv, tl, ta, tt, te, tr, uk, ur, yo, lij, xx
+    #             granularity: "token", # required, accepts token, sentence, paragraph
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] enable_explanations
+    #   A JMESPath boolean expression used to filter which records to
+    #   explain. Explanations are activated by default. See [
+    #   `EnableExplanations` ][1]for additional information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker-dg/src/AWSIronmanApiDoc/build/server-root/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-enable
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_config
+    #   The inference configuration parameter for the model container.
+    #   @return [Types::ClarifyInferenceConfig]
+    #
+    # @!attribute [rw] shap_config
+    #   The configuration for SHAP analysis.
+    #   @return [Types::ClarifyShapConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClarifyExplainerConfig AWS API Documentation
+    #
+    class ClarifyExplainerConfig < Struct.new(
+      :enable_explanations,
+      :inference_config,
+      :shap_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The inference configuration parameter for the model container.
+    #
+    # @note When making an API call, you may pass ClarifyInferenceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         features_attribute: "ClarifyFeaturesAttribute",
+    #         content_template: "ClarifyContentTemplate",
+    #         max_record_count: 1,
+    #         max_payload_in_mb: 1,
+    #         probability_index: 1,
+    #         label_index: 1,
+    #         probability_attribute: "ClarifyProbabilityAttribute",
+    #         label_attribute: "ClarifyLabelAttribute",
+    #         label_headers: ["ClarifyHeader"],
+    #         feature_headers: ["ClarifyHeader"],
+    #         feature_types: ["numerical"], # accepts numerical, categorical, text
+    #       }
+    #
+    # @!attribute [rw] features_attribute
+    #   Provides the JMESPath expression to extract the features from a
+    #   model container input in JSON Lines format. For example, if
+    #   `FeaturesAttribute` is the JMESPath expression `'myfeatures'`, it
+    #   extracts a list of features `[1,2,3]` from request data
+    #   `'\{"myfeatures":[1,2,3\}'`.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_template
+    #   A template string used to format a JSON record into an acceptable
+    #   model container input. For example, a `ContentTemplate` string
+    #   `'\{"myfeatures":$features\}'` will format a list of features
+    #   `[1,2,3]` into the record string `'\{"myfeatures":[1,2,3]\}'`.
+    #   Required only when the model container input is in JSON Lines
+    #   format.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_record_count
+    #   The maximum number of records in a request that the model container
+    #   can process when querying the model container for the predictions of
+    #   a [synthetic dataset][1]. A record is a unit of input data that
+    #   inference can be made on, for example, a single line in CSV data. If
+    #   `MaxRecordCount` is `1`, the model container expects one record per
+    #   request. A value of 2 or greater means that the model expects batch
+    #   requests, which can reduce overhead and speed up the inferencing
+    #   process. If this parameter is not provided, the explainer will tune
+    #   the record count per request according to the model container's
+    #   capacity at runtime.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-synthetic
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_payload_in_mb
+    #   The maximum payload size (MB) allowed of a request from the
+    #   explainer to the model container. Defaults to `6` MB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] probability_index
+    #   A zero-based index used to extract a probability value (score) or
+    #   list from model container output in CSV format. If this value is not
+    #   provided, the entire model container output will be treated as a
+    #   probability value (score) or list.
+    #
+    #   **Example for a single class model:** If the model container output
+    #   consists of a string-formatted prediction label followed by its
+    #   probability: `'1,0.6'`, set `ProbabilityIndex` to `1` to select the
+    #   probability value `0.6`.
+    #
+    #   **Example for a multiclass model:** If the model container output
+    #   consists of a string-formatted prediction label followed by its
+    #   probability: `'"['cat','dog','fish']","[0.1,0.6,0.3]"'`, set
+    #   `ProbabilityIndex` to `1` to select the probability values
+    #   `[0.1,0.6,0.3]`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] label_index
+    #   A zero-based index used to extract a label header or list of label
+    #   headers from model container output in CSV format.
+    #
+    #   **Example for a multiclass model:** If the model container output
+    #   consists of label headers followed by probabilities:
+    #   `'"['cat','dog','fish']","[0.1,0.6,0.3]"'`, set `LabelIndex`
+    #   to `0` to select the label headers `['cat','dog','fish']`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] probability_attribute
+    #   A JMESPath expression used to extract the probability (or score)
+    #   from the model container output if the model container is in JSON
+    #   Lines format.
+    #
+    #   **Example**\: If the model container output of a single request is
+    #   `'\{"predicted_label":1,"probability":0.6\}'`, then set
+    #   `ProbabilityAttribute` to `'probability'`.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_attribute
+    #   A JMESPath expression used to locate the list of label headers in
+    #   the model container output.
+    #
+    #   **Example**\: If the model container output of a batch request is
+    #   `'\{"labels":["cat","dog","fish"],"probability":[0.6,0.3,0.1]\}'`,
+    #   then set `LabelAttribute` to `'labels'` to extract the list of label
+    #   headers `["cat","dog","fish"]`
+    #   @return [String]
+    #
+    # @!attribute [rw] label_headers
+    #   For multiclass classification problems, the label headers are the
+    #   names of the classes. Otherwise, the label header is the name of the
+    #   predicted label. These are used to help readability for the output
+    #   of the `InvokeEndpoint` API. See the [response][1] section under
+    #   **Invoke the endpoint** in the Developer Guide for more information.
+    #   If there are no label headers in the model container output, provide
+    #   them manually using this parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] feature_headers
+    #   The names of the features. If provided, these are included in the
+    #   endpoint response payload to help readability of the
+    #   `InvokeEndpoint` output. See the [Response][1] section under
+    #   **Invoke the endpoint** in the Developer Guide for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] feature_types
+    #   A list of data types of the features (optional). Applicable only to
+    #   NLP explainability. If provided, `FeatureTypes` must have at least
+    #   one `'text'` string (for example, `['text']`). If `FeatureTypes` is
+    #   not provided, the explainer infers the feature types based on the
+    #   baseline data. The feature types are included in the endpoint
+    #   response payload. For additional information see the [response][1]
+    #   section under **Invoke the endpoint** in the Developer Guide for
+    #   more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClarifyInferenceConfig AWS API Documentation
+    #
+    class ClarifyInferenceConfig < Struct.new(
+      :features_attribute,
+      :content_template,
+      :max_record_count,
+      :max_payload_in_mb,
+      :probability_index,
+      :label_index,
+      :probability_attribute,
+      :label_attribute,
+      :label_headers,
+      :feature_headers,
+      :feature_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the [SHAP baseline][1] (also called the
+    # background or reference dataset) of the Kernal SHAP algorithm.
+    #
+    # <note markdown="1"> * The number of records in the baseline data determines the size of
+    #   the synthetic dataset, which has an impact on latency of
+    #   explainability requests. For more information, see the **Synthetic
+    #   data** of [Configure and create an endpoint][2].
+    #
+    # * `ShapBaseline` and `ShapBaselineUri` are mutually exclusive
+    #   parameters. One or the either is required to configure a SHAP
+    #   baseline.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-feature-attribute-shap-baselines.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html
+    #
+    # @note When making an API call, you may pass ClarifyShapBaselineConfig
+    #   data as a hash:
+    #
+    #       {
+    #         mime_type: "ClarifyMimeType",
+    #         shap_baseline: "ClarifyShapBaseline",
+    #         shap_baseline_uri: "Url",
+    #       }
+    #
+    # @!attribute [rw] mime_type
+    #   The MIME type of the baseline data. Choose from `'text/csv'` or
+    #   `'application/jsonlines'`. Defaults to `'text/csv'`.
+    #   @return [String]
+    #
+    # @!attribute [rw] shap_baseline
+    #   The inline SHAP baseline data in string format. `ShapBaseline` can
+    #   have one or multiple records to be used as the baseline dataset. The
+    #   format of the SHAP baseline file should be the same format as the
+    #   training dataset. For example, if the training dataset is in CSV
+    #   format and each record contains four features, and all features are
+    #   numerical, then the format of the baseline data should also share
+    #   these characteristics. For natural language processing (NLP) of text
+    #   columns, the baseline value should be the value used to replace the
+    #   unit of text specified by the `Granularity` of the `TextConfig`
+    #   parameter. The size limit for `ShapBasline` is 4 KB. Use the
+    #   `ShapBaselineUri` parameter if you want to provide more than 4 KB of
+    #   baseline data.
+    #   @return [String]
+    #
+    # @!attribute [rw] shap_baseline_uri
+    #   The uniform resource identifier (URI) of the S3 bucket where the
+    #   SHAP baseline file is stored. The format of the SHAP baseline file
+    #   should be the same format as the format of the training dataset. For
+    #   example, if the training dataset is in CSV format, and each record
+    #   in the training dataset has four features, and all features are
+    #   numerical, then the baseline file should also have this same format.
+    #   Each record should contain only the features. If you are using a
+    #   virtual private cloud (VPC), the `ShapBaselineUri` should be
+    #   accessible to the VPC. For more information about setting up
+    #   endpoints with Amazon Virtual Private Cloud, see [Give SageMaker
+    #   access to Resources in your Amazon Virtual Private Cloud][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClarifyShapBaselineConfig AWS API Documentation
+    #
+    class ClarifyShapBaselineConfig < Struct.new(
+      :mime_type,
+      :shap_baseline,
+      :shap_baseline_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for SHAP analysis using SageMaker Clarify Explainer.
+    #
+    # @note When making an API call, you may pass ClarifyShapConfig
+    #   data as a hash:
+    #
+    #       {
+    #         shap_baseline_config: { # required
+    #           mime_type: "ClarifyMimeType",
+    #           shap_baseline: "ClarifyShapBaseline",
+    #           shap_baseline_uri: "Url",
+    #         },
+    #         number_of_samples: 1,
+    #         use_logit: false,
+    #         seed: 1,
+    #         text_config: {
+    #           language: "af", # required, accepts af, sq, ar, hy, eu, bn, bg, ca, zh, hr, cs, da, nl, en, et, fi, fr, de, el, gu, he, hi, hu, is, id, ga, it, kn, ky, lv, lt, lb, mk, ml, mr, ne, nb, fa, pl, pt, ro, ru, sa, sr, tn, si, sk, sl, es, sv, tl, ta, tt, te, tr, uk, ur, yo, lij, xx
+    #           granularity: "token", # required, accepts token, sentence, paragraph
+    #         },
+    #       }
+    #
+    # @!attribute [rw] shap_baseline_config
+    #   The configuration for the SHAP baseline of the Kernal SHAP
+    #   algorithm.
+    #   @return [Types::ClarifyShapBaselineConfig]
+    #
+    # @!attribute [rw] number_of_samples
+    #   The number of samples to be used for analysis by the Kernal SHAP
+    #   algorithm.
+    #
+    #   <note markdown="1"> The number of samples determines the size of the synthetic dataset,
+    #   which has an impact on latency of explainability requests. For more
+    #   information, see the **Synthetic data** of [Configure and create an
+    #   endpoint][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] use_logit
+    #   A Boolean toggle to indicate if you want to use the logit function
+    #   (true) or log-odds units (false) for model predictions. Defaults to
+    #   false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] seed
+    #   The starting value used to initialize the random number generator in
+    #   the explainer. Provide a value for this parameter to obtain a
+    #   deterministic SHAP result.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] text_config
+    #   A parameter that indicates if text features are treated as text and
+    #   explanations are provided for individual units of text. Required for
+    #   natural language processing (NLP) explainability only.
+    #   @return [Types::ClarifyTextConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClarifyShapConfig AWS API Documentation
+    #
+    class ClarifyShapConfig < Struct.new(
+      :shap_baseline_config,
+      :number_of_samples,
+      :use_logit,
+      :seed,
+      :text_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A parameter used to configure the SageMaker Clarify explainer to treat
+    # text features as text so that explanations are provided for individual
+    # units of text. Required only for natural language processing (NLP)
+    # explainability.
+    #
+    # @note When making an API call, you may pass ClarifyTextConfig
+    #   data as a hash:
+    #
+    #       {
+    #         language: "af", # required, accepts af, sq, ar, hy, eu, bn, bg, ca, zh, hr, cs, da, nl, en, et, fi, fr, de, el, gu, he, hi, hu, is, id, ga, it, kn, ky, lv, lt, lb, mk, ml, mr, ne, nb, fa, pl, pt, ro, ru, sa, sr, tn, si, sk, sl, es, sv, tl, ta, tt, te, tr, uk, ur, yo, lij, xx
+    #         granularity: "token", # required, accepts token, sentence, paragraph
+    #       }
+    #
+    # @!attribute [rw] language
+    #   Specifies the language of the text features in [ISO 639-1](
+    #   https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) or [ISO
+    #   639-3][1] code of a supported language.
+    #
+    #   <note markdown="1"> For a mix of multiple languages, use code `'xx'`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_639-3
+    #   @return [String]
+    #
+    # @!attribute [rw] granularity
+    #   The unit of granularity for the analysis of text features. For
+    #   example, if the unit is `'token'`, then each token (like a word in
+    #   English) of the text is treated as a feature. SHAP values are
+    #   computed for each unit/feature.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClarifyTextConfig AWS API Documentation
+    #
+    class ClarifyTextConfig < Struct.new(
+      :language,
+      :granularity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies summary information about a Git repository.
     #
     # @!attribute [rw] code_repository_name
@@ -5742,6 +6160,38 @@ module Aws::SageMaker
     #             },
     #           },
     #         },
+    #         explainer_config: {
+    #           clarify_explainer_config: {
+    #             enable_explanations: "ClarifyEnableExplanations",
+    #             inference_config: {
+    #               features_attribute: "ClarifyFeaturesAttribute",
+    #               content_template: "ClarifyContentTemplate",
+    #               max_record_count: 1,
+    #               max_payload_in_mb: 1,
+    #               probability_index: 1,
+    #               label_index: 1,
+    #               probability_attribute: "ClarifyProbabilityAttribute",
+    #               label_attribute: "ClarifyLabelAttribute",
+    #               label_headers: ["ClarifyHeader"],
+    #               feature_headers: ["ClarifyHeader"],
+    #               feature_types: ["numerical"], # accepts numerical, categorical, text
+    #             },
+    #             shap_config: { # required
+    #               shap_baseline_config: { # required
+    #                 mime_type: "ClarifyMimeType",
+    #                 shap_baseline: "ClarifyShapBaseline",
+    #                 shap_baseline_uri: "Url",
+    #               },
+    #               number_of_samples: 1,
+    #               use_logit: false,
+    #               seed: 1,
+    #               text_config: {
+    #                 language: "af", # required, accepts af, sq, ar, hy, eu, bn, bg, ca, zh, hr, cs, da, nl, en, et, fi, fr, de, el, gu, he, hi, hu, is, id, ga, it, kn, ky, lv, lt, lb, mk, ml, mr, ne, nb, fa, pl, pt, ro, ru, sa, sr, tn, si, sk, sl, es, sv, tl, ta, tt, te, tr, uk, ur, yo, lij, xx
+    #                 granularity: "token", # required, accepts token, sentence, paragraph
+    #               },
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] endpoint_config_name
@@ -5827,6 +6277,10 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html
     #   @return [Types::AsyncInferenceConfig]
     #
+    # @!attribute [rw] explainer_config
+    #   A member of `CreateEndpointConfig` that enables explainers.
+    #   @return [Types::ExplainerConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigInput AWS API Documentation
     #
     class CreateEndpointConfigInput < Struct.new(
@@ -5835,7 +6289,8 @@ module Aws::SageMaker
       :data_capture_config,
       :tags,
       :kms_key_id,
-      :async_inference_config)
+      :async_inference_config,
+      :explainer_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13854,6 +14309,10 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html
     #   @return [Types::AsyncInferenceConfig]
     #
+    # @!attribute [rw] explainer_config
+    #   The configuration parameters for an explainer.
+    #   @return [Types::ExplainerConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfigOutput AWS API Documentation
     #
     class DescribeEndpointConfigOutput < Struct.new(
@@ -13863,7 +14322,8 @@ module Aws::SageMaker
       :data_capture_config,
       :kms_key_id,
       :creation_time,
-      :async_inference_config)
+      :async_inference_config,
+      :explainer_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13977,6 +14437,10 @@ module Aws::SageMaker
     #   endpoint configuration.
     #   @return [Types::PendingDeploymentSummary]
     #
+    # @!attribute [rw] explainer_config
+    #   The configuration parameters for an explainer.
+    #   @return [Types::ExplainerConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointOutput AWS API Documentation
     #
     class DescribeEndpointOutput < Struct.new(
@@ -13991,7 +14455,8 @@ module Aws::SageMaker
       :last_modified_time,
       :last_deployment_config,
       :async_inference_config,
-      :pending_deployment_summary)
+      :pending_deployment_summary,
+      :explainer_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19153,6 +19618,57 @@ module Aws::SageMaker
     #
     class Explainability < Struct.new(
       :report)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A parameter to activate explainers.
+    #
+    # @note When making an API call, you may pass ExplainerConfig
+    #   data as a hash:
+    #
+    #       {
+    #         clarify_explainer_config: {
+    #           enable_explanations: "ClarifyEnableExplanations",
+    #           inference_config: {
+    #             features_attribute: "ClarifyFeaturesAttribute",
+    #             content_template: "ClarifyContentTemplate",
+    #             max_record_count: 1,
+    #             max_payload_in_mb: 1,
+    #             probability_index: 1,
+    #             label_index: 1,
+    #             probability_attribute: "ClarifyProbabilityAttribute",
+    #             label_attribute: "ClarifyLabelAttribute",
+    #             label_headers: ["ClarifyHeader"],
+    #             feature_headers: ["ClarifyHeader"],
+    #             feature_types: ["numerical"], # accepts numerical, categorical, text
+    #           },
+    #           shap_config: { # required
+    #             shap_baseline_config: { # required
+    #               mime_type: "ClarifyMimeType",
+    #               shap_baseline: "ClarifyShapBaseline",
+    #               shap_baseline_uri: "Url",
+    #             },
+    #             number_of_samples: 1,
+    #             use_logit: false,
+    #             seed: 1,
+    #             text_config: {
+    #               language: "af", # required, accepts af, sq, ar, hy, eu, bn, bg, ca, zh, hr, cs, da, nl, en, et, fi, fr, de, el, gu, he, hi, hu, is, id, ga, it, kn, ky, lv, lt, lb, mk, ml, mr, ne, nb, fa, pl, pt, ro, ru, sa, sr, tn, si, sk, sl, es, sv, tl, ta, tt, te, tr, uk, ur, yo, lij, xx
+    #               granularity: "token", # required, accepts token, sentence, paragraph
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] clarify_explainer_config
+    #   A member of `ExplainerConfig` that contains configuration parameters
+    #   for the SageMaker Clarify explainer.
+    #   @return [Types::ClarifyExplainerConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ExplainerConfig AWS API Documentation
+    #
+    class ExplainerConfig < Struct.new(
+      :clarify_explainer_config)
       SENSITIVE = []
       include Aws::Structure
     end

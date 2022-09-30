@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2022-09-30)
+------------------
+
+* Feature - A new parameter called EnableExplanations is added to InvokeEndpoint API to enable on-demand SageMaker Clarify online explainability requests.
+
 1.42.0 (2022-02-24)
 ------------------
 

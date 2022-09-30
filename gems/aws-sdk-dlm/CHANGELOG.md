@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2022-09-30)
+------------------
+
+* Feature - This release adds support for archival of single-volume snapshots created by Amazon Data Lifecycle Manager policies
+
 1.51.0 (2022-08-10)
 ------------------
 

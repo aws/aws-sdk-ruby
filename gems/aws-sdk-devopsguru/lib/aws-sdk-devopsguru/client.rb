@@ -395,6 +395,10 @@ module Aws::DevOpsGuru
     #       sns: { # required
     #         topic_arn: "TopicArn",
     #       },
+    #       filters: {
+    #         severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
+    #         message_types: ["NEW_INSIGHT"], # accepts NEW_INSIGHT, CLOSED_INSIGHT, NEW_ASSOCIATION, SEVERITY_UPGRADED, NEW_RECOMMENDATION
+    #       },
     #     },
     #   })
     #
@@ -1651,6 +1655,10 @@ module Aws::DevOpsGuru
     #   resp.channels #=> Array
     #   resp.channels[0].id #=> String
     #   resp.channels[0].config.sns.topic_arn #=> String
+    #   resp.channels[0].config.filters.severities #=> Array
+    #   resp.channels[0].config.filters.severities[0] #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.channels[0].config.filters.message_types #=> Array
+    #   resp.channels[0].config.filters.message_types[0] #=> String, one of "NEW_INSIGHT", "CLOSED_INSIGHT", "NEW_ASSOCIATION", "SEVERITY_UPGRADED", "NEW_RECOMMENDATION"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListNotificationChannels AWS API Documentation
@@ -2285,7 +2293,7 @@ module Aws::DevOpsGuru
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devopsguru'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

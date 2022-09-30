@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.5.2 (2022-09-30)
+------------------
+
 * Issue - Fix an issue where quoted strings with multiple spaces are not trimmed. (#2758)
 
 1.5.1 (2022-07-19)

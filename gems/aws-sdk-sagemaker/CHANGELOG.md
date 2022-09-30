@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.143.0 (2022-09-30)
+------------------
+
+* Feature - A new parameter called ExplainerConfig is added to CreateEndpointConfig API to enable SageMaker Clarify online explainability feature.
+
 1.142.0 (2022-09-29)
 ------------------
 

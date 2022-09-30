@@ -180,6 +180,9 @@ module Aws::DevOpsGuru
     NotificationChannel = Shapes::StructureShape.new(name: 'NotificationChannel')
     NotificationChannelConfig = Shapes::StructureShape.new(name: 'NotificationChannelConfig')
     NotificationChannelId = Shapes::StringShape.new(name: 'NotificationChannelId')
+    NotificationFilterConfig = Shapes::StructureShape.new(name: 'NotificationFilterConfig')
+    NotificationMessageType = Shapes::StringShape.new(name: 'NotificationMessageType')
+    NotificationMessageTypes = Shapes::ListShape.new(name: 'NotificationMessageTypes')
     NumMetricsAnalyzed = Shapes::IntegerShape.new(name: 'NumMetricsAnalyzed')
     NumOpenProactiveInsights = Shapes::IntegerShape.new(name: 'NumOpenProactiveInsights')
     NumOpenReactiveInsights = Shapes::IntegerShape.new(name: 'NumOpenReactiveInsights')
@@ -767,7 +770,14 @@ module Aws::DevOpsGuru
     NotificationChannel.struct_class = Types::NotificationChannel
 
     NotificationChannelConfig.add_member(:sns, Shapes::ShapeRef.new(shape: SnsChannelConfig, required: true, location_name: "Sns"))
+    NotificationChannelConfig.add_member(:filters, Shapes::ShapeRef.new(shape: NotificationFilterConfig, location_name: "Filters"))
     NotificationChannelConfig.struct_class = Types::NotificationChannelConfig
+
+    NotificationFilterConfig.add_member(:severities, Shapes::ShapeRef.new(shape: InsightSeverities, location_name: "Severities"))
+    NotificationFilterConfig.add_member(:message_types, Shapes::ShapeRef.new(shape: NotificationMessageTypes, location_name: "MessageTypes"))
+    NotificationFilterConfig.struct_class = Types::NotificationFilterConfig
+
+    NotificationMessageTypes.member = Shapes::ShapeRef.new(shape: NotificationMessageType)
 
     OpsCenterIntegration.add_member(:opt_in_status, Shapes::ShapeRef.new(shape: OptInStatus, location_name: "OptInStatus"))
     OpsCenterIntegration.struct_class = Types::OpsCenterIntegration

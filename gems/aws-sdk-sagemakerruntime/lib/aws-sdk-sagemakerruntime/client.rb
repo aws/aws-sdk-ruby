@@ -465,6 +465,16 @@ module Aws::SageMakerRuntime
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html
     #
+    # @option params [String] :enable_explanations
+    #   An optional JMESPath expression used to override the
+    #   `EnableExplanations` parameter of the `ClarifyExplainerConfig` API.
+    #   See the [EnableExplanations][1] section in the developer guide for
+    #   more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/clarify-online-explainability-create-endpoint.html#clarify-online-exaplainability-create-endpoint-enable
+    #
     # @return [Types::InvokeEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeEndpointOutput#body #body} => String
@@ -484,6 +494,7 @@ module Aws::SageMakerRuntime
     #     target_variant: "TargetVariantHeader",
     #     target_container_hostname: "TargetContainerHostnameHeader",
     #     inference_id: "InferenceId",
+    #     enable_explanations: "EnableExplanationsHeader",
     #   })
     #
     # @example Response structure
@@ -619,7 +630,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
