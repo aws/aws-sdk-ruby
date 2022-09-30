@@ -85,11 +85,11 @@ module Aws
             region = if scheme_name == 'sigv4a'
                        auth_scheme['signingRegionSet'].first
                      else
-                       config.sigv4_region || auth_scheme['signingRegion']
+                       auth_scheme['signingRegion']
                      end
             Aws::Sigv4::Signer.new(
               service: config.sigv4_name || auth_scheme['signingName'],
-              region: region_override || region,
+              region: region_override || config.sigv4_region || region,
               credentials_provider: config.credentials,
               signing_algorithm: scheme_name.to_sym,
               uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],

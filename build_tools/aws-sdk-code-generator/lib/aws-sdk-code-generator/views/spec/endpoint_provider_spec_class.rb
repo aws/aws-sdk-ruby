@@ -35,6 +35,10 @@ module AwsSdkCodeGenerator
           @service.module_name
         end
 
+        def operation_input_tests?
+          @endpoint_tests.any? { |test| test.operation_inputs.any? }
+        end
+
         class EndpointProviderTest
           def initialize(options)
             @service = options[:service]

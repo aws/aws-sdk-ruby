@@ -8,6 +8,7 @@ require_relative 'spec_helper'
 
 module {{module_name}}
   describe EndpointProvider do
+    {{#operation_input_tests?}}
     def expect_auth(auth_scheme)
       expect(Aws::Plugins::Sign).to receive(:signer_for).and_wrap_original do |m, *args|
         expect(args.first).to eq(auth_scheme)
@@ -23,6 +24,7 @@ module {{module_name}}
       end
     end
 
+    {{/operation_input_tests?}}
     subject { {{module_name}}::EndpointProvider.new }
 
     {{#endpoint_tests}}
