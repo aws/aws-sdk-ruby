@@ -55,7 +55,7 @@ module Aws
                 partition_metadata['id'],
                 partition_metadata['regions'],
                 existing),
-              region_regex: partition_metadata['region_regex'],
+              region_regex: partition_metadata['regionRegex'],
               services: existing.services.each_with_object({}) do |s, services|
                 services[s.name] = s
               end,
@@ -67,7 +67,7 @@ module Aws
               regions: build_metadata_regions(
                 partition_metadata['id'], partition_metadata['regions']
               ),
-              region_regex: partition_metadata['region_regex'],
+              region_regex: partition_metadata['regionRegex'],
               services: nil,
               metadata: outputs
             )
