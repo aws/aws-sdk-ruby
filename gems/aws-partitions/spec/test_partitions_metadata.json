@@ -9,8 +9,8 @@
       },
       "outputs": {
         "name": "test",
-        "dnsSuffix": "amazonaws.com",
-        "dualStackDnsSuffix": "api.aws",
+        "dnsSuffix": "test.com",
+        "dualStackDnsSuffix": "test.aws",
         "supportsFIPS": true,
         "supportsDualStack": true
       }
