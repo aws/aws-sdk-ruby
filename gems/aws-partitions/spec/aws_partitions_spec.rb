@@ -251,11 +251,19 @@ module Aws
       end
 
       it 'adds new partitions and regions' do
-        
+        partition = Aws::Partitions.partition('test')
+        expect(partition.regions.map(&:name)).to eq(['us-peccy-1'])
       end
 
       it 'merges existing partitions and regions' do
+        partition = Aws::Partitions.partition('aws')
+        expect(partition.regions.map(&:name)).to eq(['new-region'])
+      end
 
+      it 'appends metadata for endpoint matching' do
+        partition = Aws::Partitions.partition('test')
+        expect(partition.metadata['name']).to eq('test')
+        expect(partition.metadata['dnsSuffix']).to eq('test.com')
       end
 
       after do
