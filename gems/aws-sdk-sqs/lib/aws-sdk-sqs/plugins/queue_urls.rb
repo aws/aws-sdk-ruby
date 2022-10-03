@@ -26,10 +26,7 @@ module Aws
             if (queue_region = parse_region(queue_url))
               if queue_region != context.config.region
                 config = context.config.dup
-                config.region = queue_region
-                config.sigv4_region = queue_region
-                config.sigv4_signer = Aws::Plugins::SignatureV4.build_signer(config)
-                context.config = config
+                context[:auth_scheme]["signingRegion"] = queue_region
               end
             end
           end
