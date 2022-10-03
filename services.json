@@ -153,6 +153,7 @@
   "CloudSearchDomain": {
     "models": "cloudsearchdomain/2013-01-01",
     "partitionsKey": null,
+    "legacyEndpoints": true,
     "addPlugins": [
       "Aws::CloudSearchDomain::Plugins::ConditionalSigning",
       "Aws::CloudSearchDomain::Plugins::SwitchToPost"

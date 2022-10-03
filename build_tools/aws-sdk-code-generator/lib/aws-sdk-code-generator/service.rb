@@ -36,8 +36,10 @@ module AwsSdkCodeGenerator
       @resources = load_json(options[:resources])
       @examples = load_json(options[:examples])
       @smoke_tests = load_json(options[:smoke_tests])
-      @endpoint_rules = load_json(options[:endpoint_rules])
-      @endpoint_tests = load_json(options[:endpoint_tests])
+      unless options[:legacy_endpoints]
+        @endpoint_rules = load_json(options[:endpoint_rules])
+        @endpoint_tests = load_json(options[:endpoint_tests])
+      end
       @gem_dependencies = options[:gem_dependencies] || {}
       @add_plugins = options[:add_plugins] || {}
       @remove_plugins = options[:remove_plugins] || []
@@ -80,6 +82,11 @@ module AwsSdkCodeGenerator
 
     # @return [Hash, nil] The service smoke test model.
     attr_reader :smoke_tests
+
+    # @return Boolean True if the service should use legacy endpoints
+    def legacy_endpoints?
+      !@endpoint_rules || @endpoint_rules.empty?
+    end
 
     # @return [Hash, nil] The service endpoint rules.
     attr_reader :endpoint_rules

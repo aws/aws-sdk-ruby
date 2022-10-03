@@ -81,7 +81,7 @@ module AwsSdkCodeGenerator
         y.yield("#{prefix}/waiters.rb", waiters_module) if @waiters
         y.yield("#{prefix}/resource.rb", root_resource_class)
 
-        if @service.endpoint_rules && !@service.endpoint_rules.empty?
+        unless @service.legacy_endpoints?
           y.yield("#{prefix}/endpoint_parameters.rb", endpoint_parameters)
           y.yield("#{prefix}/endpoints.rb", endpoints_module)
           y.yield("#{prefix}/endpoint_provider.rb", endpoint_provider)
@@ -236,7 +236,7 @@ module AwsSdkCodeGenerator
     end
 
     def codegen_plugins(prefix)
-      if @service.endpoint_rules && !@service.endpoint_rules.empty?
+      unless @service.legacy_endpoints?
         [
           CodegeneratedPlugin.new(
             source: endpoints_plugin,
