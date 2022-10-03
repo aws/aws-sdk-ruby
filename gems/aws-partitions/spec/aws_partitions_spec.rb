@@ -263,6 +263,10 @@ module Aws
         original_json = JSON.load(File.read(path))
         Partitions.clear
         Partitions.add(original_json)
+        Partitions.merge_metadata(
+          JSON.load(File.read(
+            File.expand_path('../../partitions-metadata.json', __FILE__)))
+        )
       end
     end
 
@@ -430,6 +434,10 @@ module Aws
         original_json = JSON.load(File.read(path))
         Partitions.clear
         Partitions.add(original_json)
+        Partitions.merge_metadata(
+          JSON.load(File.read(
+            File.expand_path('../../partitions-metadata.json', __FILE__)))
+        )
       end
 
       path = File.expand_path('../variant_test_cases.json', __FILE__)
