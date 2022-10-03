@@ -245,6 +245,22 @@ module Aws::EC2
       data[:deprecation_time]
     end
 
+    # If `v2.0`, it indicates that IMDSv2 is specified in the AMI. Instances
+    # launched from this AMI will have `HttpTokens` automatically set to
+    # `required` so that, by default, the instance requires that IMDSv2 is
+    # used when requesting instance metadata. In addition,
+    # `HttpPutResponseHopLimit` is set to `2`. For more information, see
+    # [Configure the AMI][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
+    # @return [String]
+    def imds_support
+      data[:imds_support]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -514,7 +530,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   image.describe_attribute({
-    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, tpmSupport, uefiData, lastLaunchedTime
+    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, tpmSupport, uefiData, lastLaunchedTime, imdsSupport
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

@@ -1404,6 +1404,7 @@ module Aws::EC2
     ImageRecycleBinInfoList = Shapes::ListShape.new(name: 'ImageRecycleBinInfoList')
     ImageState = Shapes::StringShape.new(name: 'ImageState')
     ImageTypeValues = Shapes::StringShape.new(name: 'ImageTypeValues')
+    ImdsSupportValues = Shapes::StringShape.new(name: 'ImdsSupportValues')
     ImportClientVpnClientCertificateRevocationListRequest = Shapes::StructureShape.new(name: 'ImportClientVpnClientCertificateRevocationListRequest')
     ImportClientVpnClientCertificateRevocationListResult = Shapes::StructureShape.new(name: 'ImportClientVpnClientCertificateRevocationListResult')
     ImportImageLicenseConfigurationRequest = Shapes::StructureShape.new(name: 'ImportImageLicenseConfigurationRequest')
@@ -8351,6 +8352,7 @@ module Aws::EC2
     Image.add_member(:boot_mode, Shapes::ShapeRef.new(shape: BootModeValues, location_name: "bootMode"))
     Image.add_member(:tpm_support, Shapes::ShapeRef.new(shape: TpmSupportValues, location_name: "tpmSupport"))
     Image.add_member(:deprecation_time, Shapes::ShapeRef.new(shape: String, location_name: "deprecationTime"))
+    Image.add_member(:imds_support, Shapes::ShapeRef.new(shape: ImdsSupportValues, location_name: "imdsSupport"))
     Image.struct_class = Types::Image
 
     ImageAttribute.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: BlockDeviceMappingList, location_name: "blockDeviceMapping"))
@@ -8365,6 +8367,7 @@ module Aws::EC2
     ImageAttribute.add_member(:tpm_support, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "tpmSupport"))
     ImageAttribute.add_member(:uefi_data, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "uefiData"))
     ImageAttribute.add_member(:last_launched_time, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "lastLaunchedTime"))
+    ImageAttribute.add_member(:imds_support, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "imdsSupport"))
     ImageAttribute.struct_class = Types::ImageAttribute
 
     ImageDiskContainer.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -11170,6 +11173,7 @@ module Aws::EC2
     RegisterImageRequest.add_member(:boot_mode, Shapes::ShapeRef.new(shape: BootModeValues, location_name: "BootMode"))
     RegisterImageRequest.add_member(:tpm_support, Shapes::ShapeRef.new(shape: TpmSupportValues, location_name: "TpmSupport"))
     RegisterImageRequest.add_member(:uefi_data, Shapes::ShapeRef.new(shape: StringType, location_name: "UefiData"))
+    RegisterImageRequest.add_member(:imds_support, Shapes::ShapeRef.new(shape: ImdsSupportValues, location_name: "ImdsSupport"))
     RegisterImageRequest.struct_class = Types::RegisterImageRequest
 
     RegisterImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
