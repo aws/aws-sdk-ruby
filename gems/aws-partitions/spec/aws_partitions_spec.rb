@@ -77,11 +77,6 @@ module Aws
             expect(partitions.partition(p).regions.map(&:name)).to include(r)
           end
         end
-
-        it 'does not include the partition global endpoint name' do
-          regions = partitions.partition('aws').regions
-          expect(regions.map(&:name)).not_to include('aws-global')
-        end
       end
 
       describe '#region?' do
@@ -242,6 +237,32 @@ module Aws
             end
           end
         end
+      end
+    end
+
+    describe 'metadata' do
+      let(:partition_metadata_json) do
+        path = File.expand_path('../test_partitions_metadata.json', __FILE__)
+        JSON.load(File.read(path))
+      end
+
+      before do
+        Partitions.merge_metadata(partition_metadata_json)
+      end
+
+      it 'adds new partitions and regions' do
+        
+      end
+
+      it 'merges existing partitions and regions' do
+
+      end
+
+      after do
+        path = File.expand_path('../../partitions.json', __FILE__)
+        original_json = JSON.load(File.read(path))
+        Partitions.clear
+        Partitions.add(original_json)
       end
     end
 

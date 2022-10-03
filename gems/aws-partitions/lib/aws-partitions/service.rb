@@ -75,12 +75,14 @@ module Aws
 
         def regions(service, partition)
           svc_endpoints = service.key?('endpoints') ? service['endpoints'].keys : []
-          Set.new(partition['regions'].keys & svc_endpoints)
+          names = Set.new(partition['regions'].keys & svc_endpoints)
+          names - ["#{partition['partition']}-global"]
         end
 
         def variant_regions(variant_name, service, partition)
           svc_endpoints = service.fetch('endpoints', {})
-          svc_endpoints.each_with_object(Set.new) do |(key, value), names|
+          names = Set.new
+          svc_endpoints.each do |key, value|
             variants = value.fetch('variants', [])
             variants.each do |variant|
               tags = variant.fetch('tags', [])
@@ -89,6 +91,7 @@ module Aws
               end
             end
           end
+          names - ["#{partition['partition']}-global"]
         end
 
         def partition_region(service)

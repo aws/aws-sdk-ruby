@@ -88,8 +88,9 @@ module Aws
         # @param [Hash] partition
         # @return [Hash<String,Region>]
         def build_regions(partition)
-          partition['regions'].each_with_object({}) do
-            |(region_name, region), regions|
+          partition['regions'].each_with_object({}) do |(region_name, region), regions|
+            next if region_name == "#{partition['partition']}-global"
+
             regions[region_name] = Region.build(
               region_name, region, partition
             )

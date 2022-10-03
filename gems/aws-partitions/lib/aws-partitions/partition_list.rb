@@ -68,7 +68,7 @@ module Aws
                 partition_metadata['id'], partition_metadata['regions']
               ),
               region_regex: partition_metadata['regionRegex'],
-              services: nil,
+              services: {},
               metadata: outputs
             )
           end
