@@ -186,6 +186,32 @@ module Aws::SageMaker
     Cidr = Shapes::StringShape.new(name: 'Cidr')
     Cidrs = Shapes::ListShape.new(name: 'Cidrs')
     ClarifyCheckStepMetadata = Shapes::StructureShape.new(name: 'ClarifyCheckStepMetadata')
+    ClarifyContentTemplate = Shapes::StringShape.new(name: 'ClarifyContentTemplate')
+    ClarifyEnableExplanations = Shapes::StringShape.new(name: 'ClarifyEnableExplanations')
+    ClarifyExplainerConfig = Shapes::StructureShape.new(name: 'ClarifyExplainerConfig')
+    ClarifyFeatureHeaders = Shapes::ListShape.new(name: 'ClarifyFeatureHeaders')
+    ClarifyFeatureType = Shapes::StringShape.new(name: 'ClarifyFeatureType')
+    ClarifyFeatureTypes = Shapes::ListShape.new(name: 'ClarifyFeatureTypes')
+    ClarifyFeaturesAttribute = Shapes::StringShape.new(name: 'ClarifyFeaturesAttribute')
+    ClarifyHeader = Shapes::StringShape.new(name: 'ClarifyHeader')
+    ClarifyInferenceConfig = Shapes::StructureShape.new(name: 'ClarifyInferenceConfig')
+    ClarifyLabelAttribute = Shapes::StringShape.new(name: 'ClarifyLabelAttribute')
+    ClarifyLabelHeaders = Shapes::ListShape.new(name: 'ClarifyLabelHeaders')
+    ClarifyLabelIndex = Shapes::IntegerShape.new(name: 'ClarifyLabelIndex')
+    ClarifyMaxPayloadInMB = Shapes::IntegerShape.new(name: 'ClarifyMaxPayloadInMB')
+    ClarifyMaxRecordCount = Shapes::IntegerShape.new(name: 'ClarifyMaxRecordCount')
+    ClarifyMimeType = Shapes::StringShape.new(name: 'ClarifyMimeType')
+    ClarifyProbabilityAttribute = Shapes::StringShape.new(name: 'ClarifyProbabilityAttribute')
+    ClarifyProbabilityIndex = Shapes::IntegerShape.new(name: 'ClarifyProbabilityIndex')
+    ClarifyShapBaseline = Shapes::StringShape.new(name: 'ClarifyShapBaseline')
+    ClarifyShapBaselineConfig = Shapes::StructureShape.new(name: 'ClarifyShapBaselineConfig')
+    ClarifyShapConfig = Shapes::StructureShape.new(name: 'ClarifyShapConfig')
+    ClarifyShapNumberOfSamples = Shapes::IntegerShape.new(name: 'ClarifyShapNumberOfSamples')
+    ClarifyShapSeed = Shapes::IntegerShape.new(name: 'ClarifyShapSeed')
+    ClarifyShapUseLogit = Shapes::BooleanShape.new(name: 'ClarifyShapUseLogit')
+    ClarifyTextConfig = Shapes::StructureShape.new(name: 'ClarifyTextConfig')
+    ClarifyTextGranularity = Shapes::StringShape.new(name: 'ClarifyTextGranularity')
+    ClarifyTextLanguage = Shapes::StringShape.new(name: 'ClarifyTextLanguage')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
@@ -651,6 +677,7 @@ module Aws::SageMaker
     ExpiresInSeconds = Shapes::IntegerShape.new(name: 'ExpiresInSeconds')
     Explainability = Shapes::StructureShape.new(name: 'Explainability')
     ExplainabilityLocation = Shapes::StringShape.new(name: 'ExplainabilityLocation')
+    ExplainerConfig = Shapes::StructureShape.new(name: 'ExplainerConfig')
     FailStepMetadata = Shapes::StructureShape.new(name: 'FailStepMetadata')
     FailureHandlingPolicy = Shapes::StringShape.new(name: 'FailureHandlingPolicy')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
@@ -2125,6 +2152,46 @@ module Aws::SageMaker
     ClarifyCheckStepMetadata.add_member(:register_new_baseline, Shapes::ShapeRef.new(shape: Boolean, location_name: "RegisterNewBaseline"))
     ClarifyCheckStepMetadata.struct_class = Types::ClarifyCheckStepMetadata
 
+    ClarifyExplainerConfig.add_member(:enable_explanations, Shapes::ShapeRef.new(shape: ClarifyEnableExplanations, location_name: "EnableExplanations"))
+    ClarifyExplainerConfig.add_member(:inference_config, Shapes::ShapeRef.new(shape: ClarifyInferenceConfig, location_name: "InferenceConfig"))
+    ClarifyExplainerConfig.add_member(:shap_config, Shapes::ShapeRef.new(shape: ClarifyShapConfig, required: true, location_name: "ShapConfig"))
+    ClarifyExplainerConfig.struct_class = Types::ClarifyExplainerConfig
+
+    ClarifyFeatureHeaders.member = Shapes::ShapeRef.new(shape: ClarifyHeader)
+
+    ClarifyFeatureTypes.member = Shapes::ShapeRef.new(shape: ClarifyFeatureType)
+
+    ClarifyInferenceConfig.add_member(:features_attribute, Shapes::ShapeRef.new(shape: ClarifyFeaturesAttribute, location_name: "FeaturesAttribute"))
+    ClarifyInferenceConfig.add_member(:content_template, Shapes::ShapeRef.new(shape: ClarifyContentTemplate, location_name: "ContentTemplate"))
+    ClarifyInferenceConfig.add_member(:max_record_count, Shapes::ShapeRef.new(shape: ClarifyMaxRecordCount, location_name: "MaxRecordCount"))
+    ClarifyInferenceConfig.add_member(:max_payload_in_mb, Shapes::ShapeRef.new(shape: ClarifyMaxPayloadInMB, location_name: "MaxPayloadInMB"))
+    ClarifyInferenceConfig.add_member(:probability_index, Shapes::ShapeRef.new(shape: ClarifyProbabilityIndex, location_name: "ProbabilityIndex"))
+    ClarifyInferenceConfig.add_member(:label_index, Shapes::ShapeRef.new(shape: ClarifyLabelIndex, location_name: "LabelIndex"))
+    ClarifyInferenceConfig.add_member(:probability_attribute, Shapes::ShapeRef.new(shape: ClarifyProbabilityAttribute, location_name: "ProbabilityAttribute"))
+    ClarifyInferenceConfig.add_member(:label_attribute, Shapes::ShapeRef.new(shape: ClarifyLabelAttribute, location_name: "LabelAttribute"))
+    ClarifyInferenceConfig.add_member(:label_headers, Shapes::ShapeRef.new(shape: ClarifyLabelHeaders, location_name: "LabelHeaders"))
+    ClarifyInferenceConfig.add_member(:feature_headers, Shapes::ShapeRef.new(shape: ClarifyFeatureHeaders, location_name: "FeatureHeaders"))
+    ClarifyInferenceConfig.add_member(:feature_types, Shapes::ShapeRef.new(shape: ClarifyFeatureTypes, location_name: "FeatureTypes"))
+    ClarifyInferenceConfig.struct_class = Types::ClarifyInferenceConfig
+
+    ClarifyLabelHeaders.member = Shapes::ShapeRef.new(shape: ClarifyHeader)
+
+    ClarifyShapBaselineConfig.add_member(:mime_type, Shapes::ShapeRef.new(shape: ClarifyMimeType, location_name: "MimeType"))
+    ClarifyShapBaselineConfig.add_member(:shap_baseline, Shapes::ShapeRef.new(shape: ClarifyShapBaseline, location_name: "ShapBaseline"))
+    ClarifyShapBaselineConfig.add_member(:shap_baseline_uri, Shapes::ShapeRef.new(shape: Url, location_name: "ShapBaselineUri"))
+    ClarifyShapBaselineConfig.struct_class = Types::ClarifyShapBaselineConfig
+
+    ClarifyShapConfig.add_member(:shap_baseline_config, Shapes::ShapeRef.new(shape: ClarifyShapBaselineConfig, required: true, location_name: "ShapBaselineConfig"))
+    ClarifyShapConfig.add_member(:number_of_samples, Shapes::ShapeRef.new(shape: ClarifyShapNumberOfSamples, location_name: "NumberOfSamples"))
+    ClarifyShapConfig.add_member(:use_logit, Shapes::ShapeRef.new(shape: ClarifyShapUseLogit, location_name: "UseLogit"))
+    ClarifyShapConfig.add_member(:seed, Shapes::ShapeRef.new(shape: ClarifyShapSeed, location_name: "Seed"))
+    ClarifyShapConfig.add_member(:text_config, Shapes::ShapeRef.new(shape: ClarifyTextConfig, location_name: "TextConfig"))
+    ClarifyShapConfig.struct_class = Types::ClarifyShapConfig
+
+    ClarifyTextConfig.add_member(:language, Shapes::ShapeRef.new(shape: ClarifyTextLanguage, required: true, location_name: "Language"))
+    ClarifyTextConfig.add_member(:granularity, Shapes::ShapeRef.new(shape: ClarifyTextGranularity, required: true, location_name: "Granularity"))
+    ClarifyTextConfig.struct_class = Types::ClarifyTextConfig
+
     CodeRepositorySummary.add_member(:code_repository_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "CodeRepositoryName"))
     CodeRepositorySummary.add_member(:code_repository_arn, Shapes::ShapeRef.new(shape: CodeRepositoryArn, required: true, location_name: "CodeRepositoryArn"))
     CodeRepositorySummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "CreationTime"))
@@ -2395,6 +2462,7 @@ module Aws::SageMaker
     CreateEndpointConfigInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateEndpointConfigInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateEndpointConfigInput.add_member(:async_inference_config, Shapes::ShapeRef.new(shape: AsyncInferenceConfig, location_name: "AsyncInferenceConfig"))
+    CreateEndpointConfigInput.add_member(:explainer_config, Shapes::ShapeRef.new(shape: ExplainerConfig, location_name: "ExplainerConfig"))
     CreateEndpointConfigInput.struct_class = Types::CreateEndpointConfigInput
 
     CreateEndpointConfigOutput.add_member(:endpoint_config_arn, Shapes::ShapeRef.new(shape: EndpointConfigArn, required: true, location_name: "EndpointConfigArn"))
@@ -3369,6 +3437,7 @@ module Aws::SageMaker
     DescribeEndpointConfigOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     DescribeEndpointConfigOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     DescribeEndpointConfigOutput.add_member(:async_inference_config, Shapes::ShapeRef.new(shape: AsyncInferenceConfig, location_name: "AsyncInferenceConfig"))
+    DescribeEndpointConfigOutput.add_member(:explainer_config, Shapes::ShapeRef.new(shape: ExplainerConfig, location_name: "ExplainerConfig"))
     DescribeEndpointConfigOutput.struct_class = Types::DescribeEndpointConfigOutput
 
     DescribeEndpointInput.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "EndpointName"))
@@ -3386,6 +3455,7 @@ module Aws::SageMaker
     DescribeEndpointOutput.add_member(:last_deployment_config, Shapes::ShapeRef.new(shape: DeploymentConfig, location_name: "LastDeploymentConfig"))
     DescribeEndpointOutput.add_member(:async_inference_config, Shapes::ShapeRef.new(shape: AsyncInferenceConfig, location_name: "AsyncInferenceConfig"))
     DescribeEndpointOutput.add_member(:pending_deployment_summary, Shapes::ShapeRef.new(shape: PendingDeploymentSummary, location_name: "PendingDeploymentSummary"))
+    DescribeEndpointOutput.add_member(:explainer_config, Shapes::ShapeRef.new(shape: ExplainerConfig, location_name: "ExplainerConfig"))
     DescribeEndpointOutput.struct_class = Types::DescribeEndpointOutput
 
     DescribeExperimentRequest.add_member(:experiment_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, required: true, location_name: "ExperimentName"))
@@ -4274,6 +4344,9 @@ module Aws::SageMaker
 
     Explainability.add_member(:report, Shapes::ShapeRef.new(shape: MetricsSource, location_name: "Report"))
     Explainability.struct_class = Types::Explainability
+
+    ExplainerConfig.add_member(:clarify_explainer_config, Shapes::ShapeRef.new(shape: ClarifyExplainerConfig, location_name: "ClarifyExplainerConfig"))
+    ExplainerConfig.struct_class = Types::ExplainerConfig
 
     FailStepMetadata.add_member(:error_message, Shapes::ShapeRef.new(shape: String3072, location_name: "ErrorMessage"))
     FailStepMetadata.struct_class = Types::FailStepMetadata

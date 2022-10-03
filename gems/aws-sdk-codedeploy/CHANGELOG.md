@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2022-09-30)
+------------------
+
+* Feature - This release allows you to override the alarm configurations when creating a deployment.
+
 1.49.0 (2022-02-24)
 ------------------
 

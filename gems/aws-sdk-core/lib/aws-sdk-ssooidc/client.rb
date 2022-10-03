@@ -364,8 +364,14 @@ module Aws::SSOOIDC
     #   the persisted result of the RegisterClient API.
     #
     # @option params [required, String] :grant_type
-    #   Supports grant types for authorization code, refresh token, and device
-    #   code request.
+    #   Supports grant types for the authorization code, refresh token, and
+    #   device code request. For device code requests, specify the following
+    #   value:
+    #
+    #   `urn:ietf:params:oauth:grant-type:device_code `
+    #
+    #   For information about how to obtain the device code, see the
+    #   StartDeviceAuthorization topic.
     #
     # @option params [String] :device_code
     #   Used only when calling this API for the device code grant type. This
@@ -379,8 +385,17 @@ module Aws::SSOOIDC
     #   access to a token.
     #
     # @option params [String] :refresh_token
+    #   Currently, `refreshToken` is not yet implemented and is not supported.
+    #   For more information about the features and limitations of the current
+    #   IAM Identity Center OIDC implementation, see *Considerations for Using
+    #   this Guide* in the [IAM Identity Center OIDC API Reference][1].
+    #
     #   The token used to obtain an access token in the event that the access
-    #   token is invalid or expired. This token is not issued by the service.
+    #   token is invalid or expired.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html
     #
     # @option params [Array<String>] :scope
     #   The list of scopes that is defined by the client. Upon authorization,
@@ -430,9 +445,9 @@ module Aws::SSOOIDC
       req.send_request(options)
     end
 
-    # Registers a client with AWS SSO. This allows clients to initiate
-    # device authorization. The output should be persisted for reuse through
-    # many authentication requests.
+    # Registers a client with IAM Identity Center. This allows clients to
+    # initiate device authorization. The output should be persisted for
+    # reuse through many authentication requests.
     #
     # @option params [required, String] :client_name
     #   The friendly name of the client.
@@ -486,16 +501,16 @@ module Aws::SSOOIDC
     #
     # @option params [required, String] :client_id
     #   The unique identifier string for the client that is registered with
-    #   AWS SSO. This value should come from the persisted result of the
-    #   RegisterClient API operation.
+    #   IAM Identity Center. This value should come from the persisted result
+    #   of the RegisterClient API operation.
     #
     # @option params [required, String] :client_secret
     #   A secret string that is generated for the client. This value should
     #   come from the persisted result of the RegisterClient API operation.
     #
     # @option params [required, String] :start_url
-    #   The URL for the AWS SSO user portal. For more information, see [Using
-    #   the User Portal][1] in the *AWS Single Sign-On User Guide*.
+    #   The URL for the AWS access portal. For more information, see [Using
+    #   the AWS access portal][1] in the *IAM Identity Center User Guide*.
     #
     #
     #
@@ -549,7 +564,7 @@ module Aws::SSOOIDC
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.156.0'
+      context[:gem_version] = '3.158.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

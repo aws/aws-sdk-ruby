@@ -193,11 +193,6 @@ module Aws::AccessAnalyzer
       end
 
       # @return [String]
-      def field_list
-        @data[:field_list]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -205,6 +200,11 @@ module Aws::AccessAnalyzer
       # @return [String]
       def reason
         @data[:reason]
+      end
+
+      # @return [String]
+      def field_list
+        @data[:field_list]
       end
     end
 

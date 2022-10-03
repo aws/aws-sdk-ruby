@@ -554,7 +554,7 @@ module Aws::Snowball
     #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #
     # @option params [required, String] :snowball_type
-    #   The type of Snow Family Devices to use for this cluster.
+    #   The type of Snow Family devices to use for this cluster.
     #
     #   <note markdown="1"> For cluster jobs, Amazon Web Services Snow Family currently supports
     #   only the `EDGE` device type.
@@ -707,7 +707,7 @@ module Aws::Snowball
     #     address_id: "AddressId", # required
     #     kms_key_arn: "KmsKeyARN",
     #     role_arn: "RoleARN", # required
-    #     snowball_type: "STANDARD", # required, accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD
+    #     snowball_type: "STANDARD", # required, accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C
     #     shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
@@ -756,7 +756,7 @@ module Aws::Snowball
     #
     #
     #
-    # **Snow Family Devices and their capacities.**
+    # **Snow Family devices and their capacities.**
     #
     # * Snow Family device type: **SNC1\_SSD**
     #
@@ -804,6 +804,14 @@ module Aws::Snowball
     #   * Capacity: T100
     #
     #   * Description: Snowball Edge Storage Optimized with EC2 Compute
+    #
+    #
+    #
+    # * Device type: **V3\_5C**
+    #
+    #   * Capacity: T32
+    #
+    #   * Description: Snowball Edge Compute Optimized without GPU
     #
     #
     #
@@ -921,7 +929,7 @@ module Aws::Snowball
     #   job attributes are inherited from the cluster.
     #
     # @option params [String] :snowball_type
-    #   The type of Snow Family Devices to use for this job.
+    #   The type of Snow Family devices to use for this job.
     #
     #   <note markdown="1"> For cluster jobs, Amazon Web Services Snow Family currently supports
     #   only the `EDGE` device type.
@@ -1062,7 +1070,7 @@ module Aws::Snowball
     #     address_id: "AddressId",
     #     kms_key_arn: "KmsKeyARN",
     #     role_arn: "RoleARN",
-    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, NoPreference
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, NoPreference, T32
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
@@ -1070,7 +1078,7 @@ module Aws::Snowball
     #       notify_all: false,
     #     },
     #     cluster_id: "ClusterId",
-    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD
+    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C
     #     forwarding_address_id: "AddressId",
     #     tax_documents: {
     #       ind: {
@@ -1111,11 +1119,13 @@ module Aws::Snowball
     #   1-year or 3-year long-term pricing.
     #
     # @option params [Boolean] :is_long_term_pricing_auto_renew
+    #   snowballty
+    #
     #   Specifies whether the current long-term pricing type for the device
     #   should be renewed.
     #
     # @option params [String] :snowball_type
-    #   The type of Snow Family Devices to use for the long-term pricing job.
+    #   The type of Snow Family devices to use for the long-term pricing job.
     #
     # @return [Types::CreateLongTermPricingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1126,7 +1136,7 @@ module Aws::Snowball
     #   resp = client.create_long_term_pricing({
     #     long_term_pricing_type: "OneYear", # required, accepts OneYear, ThreeYear
     #     is_long_term_pricing_auto_renew: false,
-    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD
+    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C
     #   })
     #
     # @example Response structure
@@ -1389,7 +1399,7 @@ module Aws::Snowball
     #   resp.cluster_metadata.role_arn #=> String
     #   resp.cluster_metadata.cluster_state #=> String, one of "AwaitingQuorum", "Pending", "InUse", "Complete", "Cancelled"
     #   resp.cluster_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.cluster_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD"
+    #   resp.cluster_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C"
     #   resp.cluster_metadata.creation_date #=> Time
     #   resp.cluster_metadata.resources.s3_resources #=> Array
     #   resp.cluster_metadata.resources.s3_resources[0].bucket_arn #=> String
@@ -1492,7 +1502,7 @@ module Aws::Snowball
     #   resp.job_metadata.job_id #=> String
     #   resp.job_metadata.job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD"
+    #   resp.job_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C"
     #   resp.job_metadata.creation_date #=> Time
     #   resp.job_metadata.resources.s3_resources #=> Array
     #   resp.job_metadata.resources.s3_resources[0].bucket_arn #=> String
@@ -1517,7 +1527,7 @@ module Aws::Snowball
     #   resp.job_metadata.shipping_details.inbound_shipment.tracking_number #=> String
     #   resp.job_metadata.shipping_details.outbound_shipment.status #=> String
     #   resp.job_metadata.shipping_details.outbound_shipment.tracking_number #=> String
-    #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "NoPreference"
+    #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "NoPreference", "T32"
     #   resp.job_metadata.notification.sns_topic_arn #=> String
     #   resp.job_metadata.notification.job_states_to_notify #=> Array
     #   resp.job_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -1543,7 +1553,7 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].job_id #=> String
     #   resp.sub_job_metadata[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.sub_job_metadata[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.sub_job_metadata[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD"
+    #   resp.sub_job_metadata[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C"
     #   resp.sub_job_metadata[0].creation_date #=> Time
     #   resp.sub_job_metadata[0].resources.s3_resources #=> Array
     #   resp.sub_job_metadata[0].resources.s3_resources[0].bucket_arn #=> String
@@ -1568,7 +1578,7 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].shipping_details.inbound_shipment.tracking_number #=> String
     #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.status #=> String
     #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.tracking_number #=> String
-    #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "NoPreference"
+    #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "NoPreference", "T32"
     #   resp.sub_job_metadata[0].notification.sns_topic_arn #=> String
     #   resp.sub_job_metadata[0].notification.job_states_to_notify #=> Array
     #   resp.sub_job_metadata[0].notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -1641,10 +1651,12 @@ module Aws::Snowball
     # to make another call to the `GetJobManifest` action.
     #
     # The manifest is an encrypted file that you can download after your job
-    # enters the `WithCustomer` status. The manifest is decrypted by using
-    # the `UnlockCode` code value, when you pass both values to the Snow
-    # device through the Snowball client when the client is started for the
-    # first time.
+    # enters the `WithCustomer` status. This is the only valid status for
+    # calling this API as the manifest and `UnlockCode` code value are used
+    # for securing your device and should only be used when you have the
+    # device. The manifest is decrypted by using the `UnlockCode` code
+    # value, when you pass both values to the Snow device through the
+    # Snowball client when the client is started for the first time.
     #
     # As a best practice, we recommend that you don't save a copy of an
     # `UnlockCode` value in the same location as the manifest file for that
@@ -1712,7 +1724,9 @@ module Aws::Snowball
     # characters and 4 hyphens. This code is used to decrypt the manifest
     # file when it is passed along with the manifest to the Snow device
     # through the Snowball client when the client is started for the first
-    # time.
+    # time. The only valid status for calling this API is `WithCustomer` as
+    # the manifest and `Unlock` code values are used for securing your
+    # device and should only be used when you have the device.
     #
     # As a best practice, we recommend that you don't save a copy of the
     # `UnlockCode` in the same location as the manifest file for that job.
@@ -1861,6 +1875,8 @@ module Aws::Snowball
     #   * {Types::ListClusterJobsResult#job_list_entries #job_list_entries} => Array&lt;Types::JobListEntry&gt;
     #   * {Types::ListClusterJobsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To get a list of jobs in a cluster that you've created for AWS Snowball
     #
@@ -1937,7 +1953,7 @@ module Aws::Snowball
     #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD"
+    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C"
     #   resp.job_list_entries[0].creation_date #=> Time
     #   resp.job_list_entries[0].description #=> String
     #   resp.next_token #=> String
@@ -1967,6 +1983,8 @@ module Aws::Snowball
     #
     #   * {Types::ListClustersResult#cluster_list_entries #cluster_list_entries} => Array&lt;Types::ClusterListEntry&gt;
     #   * {Types::ListClustersResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To get a list of clusters that you've created for AWS Snowball
@@ -2034,6 +2052,8 @@ module Aws::Snowball
     #
     #   * {Types::ListCompatibleImagesResult#compatible_images #compatible_images} => Array&lt;Types::CompatibleImage&gt;
     #   * {Types::ListCompatibleImagesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2119,7 +2139,7 @@ module Aws::Snowball
     #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD"
+    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C"
     #   resp.job_list_entries[0].creation_date #=> Time
     #   resp.job_list_entries[0].description #=> String
     #   resp.next_token #=> String
@@ -2147,6 +2167,8 @@ module Aws::Snowball
     #   * {Types::ListLongTermPricingResult#long_term_pricing_entries #long_term_pricing_entries} => Array&lt;Types::LongTermPricingListEntry&gt;
     #   * {Types::ListLongTermPricingResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_long_term_pricing({
@@ -2165,7 +2187,7 @@ module Aws::Snowball
     #   resp.long_term_pricing_entries[0].replacement_job #=> String
     #   resp.long_term_pricing_entries[0].is_long_term_pricing_auto_renew #=> Boolean
     #   resp.long_term_pricing_entries[0].long_term_pricing_status #=> String
-    #   resp.long_term_pricing_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD"
+    #   resp.long_term_pricing_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C"
     #   resp.long_term_pricing_entries[0].job_ids #=> Array
     #   resp.long_term_pricing_entries[0].job_ids[0] #=> String
     #   resp.next_token #=> String
@@ -2433,7 +2455,7 @@ module Aws::Snowball
     #     address_id: "AddressId",
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     description: "String",
-    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, NoPreference
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, NoPreference, T32
     #     forwarding_address_id: "AddressId",
     #   })
     #
@@ -2524,7 +2546,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

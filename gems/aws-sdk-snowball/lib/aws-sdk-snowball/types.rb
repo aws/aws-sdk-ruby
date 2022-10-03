@@ -483,7 +483,7 @@ module Aws::Snowball
     #         address_id: "AddressId", # required
     #         kms_key_arn: "KmsKeyARN",
     #         role_arn: "RoleARN", # required
-    #         snowball_type: "STANDARD", # required, accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD
+    #         snowball_type: "STANDARD", # required, accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C
     #         shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
@@ -553,7 +553,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of Snow Family Devices to use for this cluster.
+    #   The type of Snow Family devices to use for this cluster.
     #
     #   <note markdown="1"> For cluster jobs, Amazon Web Services Snow Family currently supports
     #   only the `EDGE` device type.
@@ -708,7 +708,7 @@ module Aws::Snowball
     #         address_id: "AddressId",
     #         kms_key_arn: "KmsKeyARN",
     #         role_arn: "RoleARN",
-    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, NoPreference
+    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, NoPreference, T32
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
@@ -716,7 +716,7 @@ module Aws::Snowball
     #           notify_all: false,
     #         },
     #         cluster_id: "ClusterId",
-    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD
+    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C
     #         forwarding_address_id: "AddressId",
     #         tax_documents: {
     #           ind: {
@@ -833,7 +833,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of Snow Family Devices to use for this job.
+    #   The type of Snow Family devices to use for this job.
     #
     #   <note markdown="1"> For cluster jobs, Amazon Web Services Snow Family currently supports
     #   only the `EDGE` device type.
@@ -932,7 +932,7 @@ module Aws::Snowball
     #       {
     #         long_term_pricing_type: "OneYear", # required, accepts OneYear, ThreeYear
     #         is_long_term_pricing_auto_renew: false,
-    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD
+    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C
     #       }
     #
     # @!attribute [rw] long_term_pricing_type
@@ -941,12 +941,14 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] is_long_term_pricing_auto_renew
+    #   snowballty
+    #
     #   Specifies whether the current long-term pricing type for the device
     #   should be renewed.
     #   @return [Boolean]
     #
     # @!attribute [rw] snowball_type
-    #   The type of Snow Family Devices to use for the long-term pricing
+    #   The type of Snow Family devices to use for the long-term pricing
     #   job.
     #   @return [String]
     #
@@ -2256,7 +2258,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of Snow Family Devices associated with this long-term
+    #   The type of Snow Family devices associated with this long-term
     #   pricing job.
     #   @return [String]
     #
@@ -2849,7 +2851,7 @@ module Aws::Snowball
     #         address_id: "AddressId",
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         description: "String",
-    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, NoPreference
+    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, NoPreference, T32
     #         forwarding_address_id: "AddressId",
     #       }
     #

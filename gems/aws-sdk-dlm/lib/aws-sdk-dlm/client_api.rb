@@ -16,6 +16,8 @@ module Aws::DLM
     Action = Shapes::StructureShape.new(name: 'Action')
     ActionList = Shapes::ListShape.new(name: 'ActionList')
     ActionName = Shapes::StringShape.new(name: 'ActionName')
+    ArchiveRetainRule = Shapes::StructureShape.new(name: 'ArchiveRetainRule')
+    ArchiveRule = Shapes::StructureShape.new(name: 'ArchiveRule')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
@@ -81,6 +83,7 @@ module Aws::DLM
     ResourceTypeValues = Shapes::StringShape.new(name: 'ResourceTypeValues')
     ResourceTypeValuesList = Shapes::ListShape.new(name: 'ResourceTypeValuesList')
     RetainRule = Shapes::StructureShape.new(name: 'RetainRule')
+    RetentionArchiveTier = Shapes::StructureShape.new(name: 'RetentionArchiveTier')
     RetentionIntervalUnitValues = Shapes::StringShape.new(name: 'RetentionIntervalUnitValues')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
     ScheduleList = Shapes::ListShape.new(name: 'ScheduleList')
@@ -90,6 +93,8 @@ module Aws::DLM
     ShareRules = Shapes::ListShape.new(name: 'ShareRules')
     ShareTargetAccountList = Shapes::ListShape.new(name: 'ShareTargetAccountList')
     SnapshotOwnerList = Shapes::ListShape.new(name: 'SnapshotOwnerList')
+    StandardTierRetainRuleCount = Shapes::IntegerShape.new(name: 'StandardTierRetainRuleCount')
+    StandardTierRetainRuleInterval = Shapes::IntegerShape.new(name: 'StandardTierRetainRuleInterval')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     String = Shapes::StringShape.new(name: 'String')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -120,6 +125,12 @@ module Aws::DLM
     Action.struct_class = Types::Action
 
     ActionList.member = Shapes::ShapeRef.new(shape: Action)
+
+    ArchiveRetainRule.add_member(:retention_archive_tier, Shapes::ShapeRef.new(shape: RetentionArchiveTier, required: true, location_name: "RetentionArchiveTier"))
+    ArchiveRetainRule.struct_class = Types::ArchiveRetainRule
+
+    ArchiveRule.add_member(:retain_rule, Shapes::ShapeRef.new(shape: ArchiveRetainRule, required: true, location_name: "RetainRule"))
+    ArchiveRule.struct_class = Types::ArchiveRule
 
     AvailabilityZoneList.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
 
@@ -284,10 +295,15 @@ module Aws::DLM
 
     ResourceTypeValuesList.member = Shapes::ShapeRef.new(shape: ResourceTypeValues)
 
-    RetainRule.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "Count"))
-    RetainRule.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
+    RetainRule.add_member(:count, Shapes::ShapeRef.new(shape: StandardTierRetainRuleCount, location_name: "Count"))
+    RetainRule.add_member(:interval, Shapes::ShapeRef.new(shape: StandardTierRetainRuleInterval, location_name: "Interval"))
     RetainRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
     RetainRule.struct_class = Types::RetainRule
+
+    RetentionArchiveTier.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "Count"))
+    RetentionArchiveTier.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
+    RetentionArchiveTier.add_member(:interval_unit, Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
+    RetentionArchiveTier.struct_class = Types::RetentionArchiveTier
 
     Schedule.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleName, location_name: "Name"))
     Schedule.add_member(:copy_tags, Shapes::ShapeRef.new(shape: CopyTags, location_name: "CopyTags"))
@@ -299,6 +315,7 @@ module Aws::DLM
     Schedule.add_member(:cross_region_copy_rules, Shapes::ShapeRef.new(shape: CrossRegionCopyRules, location_name: "CrossRegionCopyRules"))
     Schedule.add_member(:share_rules, Shapes::ShapeRef.new(shape: ShareRules, location_name: "ShareRules"))
     Schedule.add_member(:deprecate_rule, Shapes::ShapeRef.new(shape: DeprecateRule, location_name: "DeprecateRule"))
+    Schedule.add_member(:archive_rule, Shapes::ShapeRef.new(shape: ArchiveRule, location_name: "ArchiveRule"))
     Schedule.struct_class = Types::Schedule
 
     ScheduleList.member = Shapes::ShapeRef.new(shape: Schedule)

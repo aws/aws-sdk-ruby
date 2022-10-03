@@ -785,6 +785,12 @@ module Aws::Snowball
         o.output = Shapes::ShapeRef.new(shape: ListClusterJobsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_clusters, Seahorse::Model::Operation.new.tap do |o|
@@ -794,6 +800,12 @@ module Aws::Snowball
         o.input = Shapes::ShapeRef.new(shape: ListClustersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListClustersResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_compatible_images, Seahorse::Model::Operation.new.tap do |o|
@@ -804,6 +816,12 @@ module Aws::Snowball
         o.output = Shapes::ShapeRef.new(shape: ListCompatibleImagesResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: Ec2RequestFailedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -829,6 +847,12 @@ module Aws::Snowball
         o.output = Shapes::ShapeRef.new(shape: ListLongTermPricingResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:update_cluster, Seahorse::Model::Operation.new.tap do |o|

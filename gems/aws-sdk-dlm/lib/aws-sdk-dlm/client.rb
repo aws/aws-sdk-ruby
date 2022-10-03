@@ -454,6 +454,15 @@ module Aws::DLM
     #             interval: 1,
     #             interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #           },
+    #           archive_rule: {
+    #             retain_rule: { # required
+    #               retention_archive_tier: { # required
+    #                 count: 1,
+    #                 interval: 1,
+    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #               },
+    #             },
+    #           },
     #         },
     #       ],
     #       parameters: {
@@ -513,6 +522,13 @@ module Aws::DLM
 
     # Deletes the specified lifecycle policy and halts the automated
     # operations that the policy specified.
+    #
+    # For more information about deleting a policy, see [Delete lifecycle
+    # policies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#delete
     #
     # @option params [required, String] :policy_id
     #   The identifier of the lifecycle policy.
@@ -667,6 +683,9 @@ module Aws::DLM
     #   resp.policy.policy_details.schedules[0].deprecate_rule.count #=> Integer
     #   resp.policy.policy_details.schedules[0].deprecate_rule.interval #=> Integer
     #   resp.policy.policy_details.schedules[0].deprecate_rule.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
+    #   resp.policy.policy_details.schedules[0].archive_rule.retain_rule.retention_archive_tier.count #=> Integer
+    #   resp.policy.policy_details.schedules[0].archive_rule.retain_rule.retention_archive_tier.interval #=> Integer
+    #   resp.policy.policy_details.schedules[0].archive_rule.retain_rule.retention_archive_tier.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
     #   resp.policy.policy_details.parameters.exclude_boot_volume #=> Boolean
     #   resp.policy.policy_details.parameters.no_reboot #=> Boolean
     #   resp.policy.policy_details.parameters.exclude_data_volume_tags #=> Array
@@ -783,6 +802,13 @@ module Aws::DLM
 
     # Updates the specified lifecycle policy.
     #
+    # For more information about updating a policy, see [Modify lifecycle
+    # policies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#modify
+    #
     # @option params [required, String] :policy_id
     #   The identifier of the lifecycle policy.
     #
@@ -882,6 +908,15 @@ module Aws::DLM
     #             interval: 1,
     #             interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #           },
+    #           archive_rule: {
+    #             retain_rule: { # required
+    #               retention_archive_tier: { # required
+    #                 count: 1,
+    #                 interval: 1,
+    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #               },
+    #             },
+    #           },
     #         },
     #       ],
     #       parameters: {
@@ -945,7 +980,7 @@ module Aws::DLM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

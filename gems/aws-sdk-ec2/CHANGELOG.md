@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.340.0 (2022-10-03)
+------------------
+
+* Feature - Adding an imdsSupport attribute to EC2 AMIs
+
 1.339.0 (2022-09-29)
 ------------------
 

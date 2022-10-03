@@ -152,6 +152,7 @@ module Aws::SageMakerRuntime
     #         target_variant: "TargetVariantHeader",
     #         target_container_hostname: "TargetContainerHostnameHeader",
     #         inference_id: "InferenceId",
+    #         enable_explanations: "EnableExplanationsHeader",
     #       }
     #
     # @!attribute [rw] endpoint_name
@@ -245,6 +246,17 @@ module Aws::SageMakerRuntime
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html
     #   @return [String]
     #
+    # @!attribute [rw] enable_explanations
+    #   An optional JMESPath expression used to override the
+    #   `EnableExplanations` parameter of the `ClarifyExplainerConfig` API.
+    #   See the [EnableExplanations][1] section in the developer guide for
+    #   more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/clarify-online-explainability-create-endpoint.html#clarify-online-exaplainability-create-endpoint-enable
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointInput AWS API Documentation
     #
     class InvokeEndpointInput < Struct.new(
@@ -256,7 +268,8 @@ module Aws::SageMakerRuntime
       :target_model,
       :target_variant,
       :target_container_hostname,
-      :inference_id)
+      :inference_id,
+      :enable_explanations)
       SENSITIVE = [:body, :custom_attributes]
       include Aws::Structure
     end
@@ -267,9 +280,14 @@ module Aws::SageMakerRuntime
     #   For information about the format of the response body, see [Common
     #   Data Formats-Inference][1].
     #
+    #   If the explainer is activated, the body includes the explanations
+    #   provided by the model. For more information, see the **Response
+    #   section** under [Invoke the Endpoint][2] in the Developer Guide.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response
     #   @return [String]
     #
     # @!attribute [rw] content_type

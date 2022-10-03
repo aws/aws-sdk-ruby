@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2022-09-30)
+------------------
+
+* Feature - Documentation updates for the IAM Identity Center OIDC CLI Reference.
+
 1.22.0 (2022-08-25)
 ------------------
 

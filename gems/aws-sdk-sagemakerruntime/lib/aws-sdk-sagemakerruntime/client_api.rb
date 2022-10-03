@@ -15,6 +15,7 @@ module Aws::SageMakerRuntime
 
     BodyBlob = Shapes::BlobShape.new(name: 'BodyBlob')
     CustomAttributesHeader = Shapes::StringShape.new(name: 'CustomAttributesHeader')
+    EnableExplanationsHeader = Shapes::StringShape.new(name: 'EnableExplanationsHeader')
     EndpointName = Shapes::StringShape.new(name: 'EndpointName')
     Header = Shapes::StringShape.new(name: 'Header')
     InferenceId = Shapes::StringShape.new(name: 'InferenceId')
@@ -65,6 +66,7 @@ module Aws::SageMakerRuntime
     InvokeEndpointInput.add_member(:target_variant, Shapes::ShapeRef.new(shape: TargetVariantHeader, location: "header", location_name: "X-Amzn-SageMaker-Target-Variant"))
     InvokeEndpointInput.add_member(:target_container_hostname, Shapes::ShapeRef.new(shape: TargetContainerHostnameHeader, location: "header", location_name: "X-Amzn-SageMaker-Target-Container-Hostname"))
     InvokeEndpointInput.add_member(:inference_id, Shapes::ShapeRef.new(shape: InferenceId, location: "header", location_name: "X-Amzn-SageMaker-Inference-Id"))
+    InvokeEndpointInput.add_member(:enable_explanations, Shapes::ShapeRef.new(shape: EnableExplanationsHeader, location: "header", location_name: "X-Amzn-SageMaker-Enable-Explanations"))
     InvokeEndpointInput.struct_class = Types::InvokeEndpointInput
     InvokeEndpointInput[:payload] = :body
     InvokeEndpointInput[:payload_member] = InvokeEndpointInput.member(:body)

@@ -1737,6 +1737,7 @@ module Aws::EC2
     #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi
     #     tpm_support: "v2.0", # accepts v2.0
     #     uefi_data: "StringType",
+    #     imds_support: "v2.0", # accepts v2.0
     #   })
     # @param [Hash] options ({})
     # @option options [String] :image_location
@@ -1838,6 +1839,23 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceUefiData
     #   [2]: https://github.com/awslabs/python-uefivars
     #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html
+    # @option options [String] :imds_support
+    #   Set to `v2.0` to indicate that IMDSv2 is specified in the AMI.
+    #   Instances launched from this AMI will have `HttpTokens` automatically
+    #   set to `required` so that, by default, the instance requires that
+    #   IMDSv2 is used when requesting instance metadata. In addition,
+    #   `HttpPutResponseHopLimit` is set to `2`. For more information, see
+    #   [Configure the AMI][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #   <note markdown="1"> If you set the value to `v2.0`, make sure that your AMI software can
+    #   support IMDSv2.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
     # @return [Image]
     def register_image(options = {})
       resp = @client.register_image(options)

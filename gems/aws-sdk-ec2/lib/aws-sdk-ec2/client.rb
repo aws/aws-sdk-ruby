@@ -21113,6 +21113,7 @@ module Aws::EC2
     #   * {Types::ImageAttribute#tpm_support #tpm_support} => Types::AttributeValue
     #   * {Types::ImageAttribute#uefi_data #uefi_data} => Types::AttributeValue
     #   * {Types::ImageAttribute#last_launched_time #last_launched_time} => Types::AttributeValue
+    #   * {Types::ImageAttribute#imds_support #imds_support} => Types::AttributeValue
     #
     #
     # @example Example: To describe the launch permissions for an AMI
@@ -21137,7 +21138,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_image_attribute({
-    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, tpmSupport, uefiData, lastLaunchedTime
+    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, tpmSupport, uefiData, lastLaunchedTime, imdsSupport
     #     image_id: "ImageId", # required
     #     dry_run: false,
     #   })
@@ -21174,6 +21175,7 @@ module Aws::EC2
     #   resp.tpm_support #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.uefi_data #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.last_launched_time #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.imds_support #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImageAttribute AWS API Documentation
     #
@@ -21454,6 +21456,7 @@ module Aws::EC2
     #   resp.images[0].boot_mode #=> String, one of "legacy-bios", "uefi"
     #   resp.images[0].tpm_support #=> String, one of "v2.0"
     #   resp.images[0].deprecation_time #=> String
+    #   resp.images[0].imds_support #=> String, one of "v2.0"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -46020,6 +46023,24 @@ module Aws::EC2
     #   [2]: https://github.com/awslabs/python-uefivars
     #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html
     #
+    # @option params [String] :imds_support
+    #   Set to `v2.0` to indicate that IMDSv2 is specified in the AMI.
+    #   Instances launched from this AMI will have `HttpTokens` automatically
+    #   set to `required` so that, by default, the instance requires that
+    #   IMDSv2 is used when requesting instance metadata. In addition,
+    #   `HttpPutResponseHopLimit` is set to `2`. For more information, see
+    #   [Configure the AMI][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #   <note markdown="1"> If you set the value to `v2.0`, make sure that your AMI software can
+    #   support IMDSv2.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
+    #
     # @return [Types::RegisterImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterImageResult#image_id #image_id} => String
@@ -46060,6 +46081,7 @@ module Aws::EC2
     #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi
     #     tpm_support: "v2.0", # accepts v2.0
     #     uefi_data: "StringType",
+    #     imds_support: "v2.0", # accepts v2.0
     #   })
     #
     # @example Response structure
@@ -52150,7 +52172,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.339.0'
+      context[:gem_version] = '1.340.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

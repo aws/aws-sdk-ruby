@@ -21301,7 +21301,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, tpmSupport, uefiData, lastLaunchedTime
+    #         attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, tpmSupport, uefiData, lastLaunchedTime, imdsSupport
     #         image_id: "ImageId", # required
     #         dry_run: false,
     #       }
@@ -39431,6 +39431,20 @@ module Aws::EC2
     #   for seconds, Amazon EC2 rounds the seconds to the nearest minute.
     #   @return [String]
     #
+    # @!attribute [rw] imds_support
+    #   If `v2.0`, it indicates that IMDSv2 is specified in the AMI.
+    #   Instances launched from this AMI will have `HttpTokens`
+    #   automatically set to `required` so that, by default, the instance
+    #   requires that IMDSv2 is used when requesting instance metadata. In
+    #   addition, `HttpPutResponseHopLimit` is set to `2`. For more
+    #   information, see [Configure the AMI][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -39462,7 +39476,8 @@ module Aws::EC2
       :virtualization_type,
       :boot_mode,
       :tpm_support,
-      :deprecation_time)
+      :deprecation_time,
+      :imds_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39540,6 +39555,20 @@ module Aws::EC2
     #   [1]: http://www.iso.org/iso/iso8601
     #   @return [Types::AttributeValue]
     #
+    # @!attribute [rw] imds_support
+    #   If `v2.0`, it indicates that IMDSv2 is specified in the AMI.
+    #   Instances launched from this AMI will have `HttpTokens`
+    #   automatically set to `required` so that, by default, the instance
+    #   requires that IMDSv2 is used when requesting instance metadata. In
+    #   addition, `HttpPutResponseHopLimit` is set to `2`. For more
+    #   information, see [Configure the AMI][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
+    #   @return [Types::AttributeValue]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageAttribute AWS API Documentation
     #
     class ImageAttribute < Struct.new(
@@ -39554,7 +39583,8 @@ module Aws::EC2
       :boot_mode,
       :tpm_support,
       :uefi_data,
-      :last_launched_time)
+      :last_launched_time,
+      :imds_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -56507,6 +56537,7 @@ module Aws::EC2
     #         boot_mode: "legacy-bios", # accepts legacy-bios, uefi
     #         tpm_support: "v2.0", # accepts v2.0
     #         uefi_data: "StringType",
+    #         imds_support: "v2.0", # accepts v2.0
     #       }
     #
     # @!attribute [rw] image_location
@@ -56642,6 +56673,25 @@ module Aws::EC2
     #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html
     #   @return [String]
     #
+    # @!attribute [rw] imds_support
+    #   Set to `v2.0` to indicate that IMDSv2 is specified in the AMI.
+    #   Instances launched from this AMI will have `HttpTokens`
+    #   automatically set to `required` so that, by default, the instance
+    #   requires that IMDSv2 is used when requesting instance metadata. In
+    #   addition, `HttpPutResponseHopLimit` is set to `2`. For more
+    #   information, see [Configure the AMI][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #   <note markdown="1"> If you set the value to `v2.0`, make sure that your AMI software can
+    #   support IMDSv2.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterImageRequest AWS API Documentation
     #
     class RegisterImageRequest < Struct.new(
@@ -56660,7 +56710,8 @@ module Aws::EC2
       :virtualization_type,
       :boot_mode,
       :tpm_support,
-      :uefi_data)
+      :uefi_data,
+      :imds_support)
       SENSITIVE = []
       include Aws::Structure
     end
