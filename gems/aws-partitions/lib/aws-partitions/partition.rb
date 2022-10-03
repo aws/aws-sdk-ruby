@@ -79,8 +79,7 @@ module Aws
             name: partition['partition'],
             regions: build_regions(partition),
             region_regex: partition['regionRegex'],
-            services: build_services(partition),
-            metadata: build_metadata(partition)
+            services: build_services(partition)
           )
         end
 
@@ -91,8 +90,6 @@ module Aws
         def build_regions(partition)
           partition['regions'].each_with_object({}) do
             |(region_name, region), regions|
-            next if region_name == "#{partition['partition']}-global"
-
             regions[region_name] = Region.build(
               region_name, region, partition
             )
@@ -111,33 +108,6 @@ module Aws
               service_name, service_data, partition
             )
           end
-        end
-
-        # @param [Hash] partition
-        # @return [Hash<String,Object>]
-        def build_metadata(partition)
-          supports_fips = false
-          supports_dualstack = false
-          dualstack_dns_suffix = nil
-
-          variants = partition.fetch('defaults', {}).fetch('variants', [])
-          variants.each do |variant|
-            if variant['tags'] == ['fips']
-              supports_fips = true
-            end
-            if variant['tags'] == ['dualstack']
-              supports_dualstack = true
-              dualstack_dns_suffix = variant['dnsSuffix']
-            end
-          end
-
-          Metadata.new(
-            name: partition['partition'],
-            dns_suffix: partition['dnsSuffix'],
-            dualstack_dns_suffix: dualstack_dns_suffix,
-            supports_fips: supports_fips,
-            supports_dualstack: supports_dualstack
-          )
         end
       end
     end

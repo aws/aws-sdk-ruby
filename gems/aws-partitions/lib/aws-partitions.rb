@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'aws-partitions/endpoint_provider'
-require_relative 'aws-partitions/metadata'
 require_relative 'aws-partitions/partition'
 require_relative 'aws-partitions/partition_list'
 require_relative 'aws-partitions/region'
@@ -196,6 +195,12 @@ module Aws
         end
       end
 
+      # @param [Hash] partition metadata
+      # @api private For Internal use only
+      def merge_metadata(partition_metadata)
+        default_partition_list.merge_metadata(partition_metadata)
+      end
+
       # @api private For internal use only.
       def clear
         default_partition_list.clear
@@ -205,7 +210,11 @@ module Aws
       # @return [PartitionList]
       # @api private
       def default_partition_list
-        @default_partition_list ||= PartitionList.build(defaults)
+        @default_partition_list ||= begin
+          partitions = PartitionList.build(defaults)
+          partitions.merge_metadata(default_metadata)
+          partitions
+        end
       end
 
       # @return [Hash]
@@ -213,6 +222,16 @@ module Aws
       def defaults
         @defaults ||= begin
           path = File.expand_path('../../partitions.json', __FILE__)
+          defaults = JSON.parse(File.read(path), freeze: true)
+          defaults.merge('partitions' => defaults['partitions'].dup)
+        end
+      end
+
+      # @return [Hash]
+      # @api private
+      def default_metadata
+        @default_metadata ||= begin
+          path = File.expand_path('../../partitions-metadata.json', __FILE__)
           defaults = JSON.parse(File.read(path), freeze: true)
           defaults.merge('partitions' => defaults['partitions'].dup)
         end

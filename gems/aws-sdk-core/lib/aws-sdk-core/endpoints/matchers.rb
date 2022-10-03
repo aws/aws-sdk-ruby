@@ -97,14 +97,7 @@ module Aws
 
         return nil unless partition
 
-        metadata = partition.metadata
-        {
-          'name' => metadata.name,
-          'dnsSuffix' => metadata.dns_suffix,
-          'dualStackDnsSuffix' => metadata.dualstack_dns_suffix,
-          'supportsFIPS' => metadata.supports_fips,
-          'supportsDualStack' => metadata.supports_dualstack
-        }
+        partition.metadata
       end
 
       # aws.parseArn(value: string) Option<ARN>
