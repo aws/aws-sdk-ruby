@@ -31,10 +31,7 @@ module Aws
           endpoint: "https://FOOBARFOOBAR.iot.us-east-1.amazonaws.com",
           stub_responses: true
         )
-        expect(Aws::Plugins::Sign).to receive(:signer_for).and_wrap_original do |m, *args|
-          expect(args.first['signingRegion']).to eq('us-east-1')
-          m.call(*args)
-        end
+        expect_auth({ 'signingRegion' => 'us-east-1' })
         client.get_thing_shadow(thing_name: 'thing')
       end
 
@@ -44,10 +41,7 @@ module Aws
           endpoint: "https://FOOBARFOOBAR.iot.eu-west-1.amazonaws.com",
           stub_responses: true
         )
-        expect(Aws::Plugins::Sign).to receive(:signer_for).and_wrap_original do |m, *args|
-          expect(args.first['signingRegion']).to eq('eu-west-1')
-          m.call(*args)
-        end
+        expect_auth({ 'signingRegion' => 'eu-west-1' })
         client.get_thing_shadow(thing_name: 'thing')
       end
 

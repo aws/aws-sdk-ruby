@@ -981,7 +981,8 @@
     "models": "signer/2017-08-25"
   },
   "SimpleDB": {
-    "models": "sdb/2009-04-15"
+    "models": "sdb/2009-04-15",
+    "legacyEndpoints": true
   },
   "SnowDeviceManagement": {
     "models": "snow-device-management/2021-08-04"

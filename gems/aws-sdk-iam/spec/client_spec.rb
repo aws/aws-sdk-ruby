@@ -17,10 +17,7 @@ module Aws
 
       it 'uses us-east-1 as the signing region' do
         iam = Client.new(region: 'us-west-2', stub_responses: true)
-        expect(Aws::Plugins::Sign).to receive(:signer_for).and_wrap_original do |m, *args|
-          expect(args.first['signingRegion']).to eq('us-east-1')
-          m.call(*args)
-        end
+        expect_auth({ 'signingRegion' => 'us-east-1' })
         iam.get_role(role_name: role)
       end
 
@@ -32,10 +29,7 @@ module Aws
 
       it 'uses the proper sigv4 signing name for gov-cloud' do
         iam = Client.new(region: 'us-gov-west-1', stub_responses: true)
-        expect(Aws::Plugins::Sign).to receive(:signer_for).and_wrap_original do |m, *args|
-          expect(args.first['signingRegion']).to eq('us-gov-west-1')
-          m.call(*args)
-        end
+        expect_auth({ 'signingRegion' => 'us-gov-west-1' })
         iam.get_role(role_name: role)
       end
 

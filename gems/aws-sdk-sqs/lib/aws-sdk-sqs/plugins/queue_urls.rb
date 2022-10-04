@@ -20,14 +20,11 @@ module Aws
           end
 
           # If the region in the queue url is not the configured
-          # region, then we will modify the request to have
-          # a sigv4 signer for the proper region.
+          # region, then we will modify signing to use it
           def update_region(context, queue_url)
-            if (queue_region = parse_region(queue_url))
-              if queue_region != context.config.region
-                config = context.config.dup
-                context[:auth_scheme]["signingRegion"] = queue_region
-              end
+            if (queue_region = parse_region(queue_url)) &&
+               queue_region != context.config.region
+              context[:auth_scheme]['signingRegion'] = queue_region
             end
           end
 
