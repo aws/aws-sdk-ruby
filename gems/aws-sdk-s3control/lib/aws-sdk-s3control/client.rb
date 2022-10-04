@@ -519,10 +519,10 @@ module Aws::S3Control
     #     configuration: { # required
     #       supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
     #       cloud_watch_metrics_enabled: false,
-    #       allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber
+    #       allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber, HeadObject-Range, HeadObject-PartNumber
     #       transformation_configurations: [ # required
     #         {
-    #           actions: ["GetObject"], # required, accepts GetObject
+    #           actions: ["GetObject"], # required, accepts GetObject, HeadObject, ListObjects, ListObjectsV2
     #           content_transformation: { # required
     #             aws_lambda: {
     #               function_arn: "FunctionArnString", # required
@@ -2175,10 +2175,10 @@ module Aws::S3Control
     #   resp.configuration.supporting_access_point #=> String
     #   resp.configuration.cloud_watch_metrics_enabled #=> Boolean
     #   resp.configuration.allowed_features #=> Array
-    #   resp.configuration.allowed_features[0] #=> String, one of "GetObject-Range", "GetObject-PartNumber"
+    #   resp.configuration.allowed_features[0] #=> String, one of "GetObject-Range", "GetObject-PartNumber", "HeadObject-Range", "HeadObject-PartNumber"
     #   resp.configuration.transformation_configurations #=> Array
     #   resp.configuration.transformation_configurations[0].actions #=> Array
-    #   resp.configuration.transformation_configurations[0].actions[0] #=> String, one of "GetObject"
+    #   resp.configuration.transformation_configurations[0].actions[0] #=> String, one of "GetObject", "HeadObject", "ListObjects", "ListObjectsV2"
     #   resp.configuration.transformation_configurations[0].content_transformation.aws_lambda.function_arn #=> String
     #   resp.configuration.transformation_configurations[0].content_transformation.aws_lambda.function_payload #=> String
     #
@@ -3790,10 +3790,10 @@ module Aws::S3Control
     #     configuration: { # required
     #       supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
     #       cloud_watch_metrics_enabled: false,
-    #       allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber
+    #       allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber, HeadObject-Range, HeadObject-PartNumber
     #       transformation_configurations: [ # required
     #         {
-    #           actions: ["GetObject"], # required, accepts GetObject
+    #           actions: ["GetObject"], # required, accepts GetObject, HeadObject, ListObjects, ListObjectsV2
     #           content_transformation: { # required
     #             aws_lambda: {
     #               function_arn: "FunctionArnString", # required
@@ -4906,7 +4906,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

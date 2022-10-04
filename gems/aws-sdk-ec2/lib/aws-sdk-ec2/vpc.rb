@@ -646,7 +646,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   vpc.describe_attribute({
-    #     attribute: "enableDnsSupport", # required, accepts enableDnsSupport, enableDnsHostnames
+    #     attribute: "enableDnsSupport", # required, accepts enableDnsSupport, enableDnsHostnames, enableNetworkAddressUsageMetrics
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -751,6 +751,9 @@ module Aws::EC2
     #     enable_dns_support: {
     #       value: false,
     #     },
+    #     enable_network_address_usage_metrics: {
+    #       value: false,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Types::AttributeBooleanValue] :enable_dns_hostnames
@@ -771,6 +774,9 @@ module Aws::EC2
     #
     #   You cannot modify the DNS resolution and DNS hostnames attributes in
     #   the same request. Use separate requests for each attribute.
+    # @option options [Types::AttributeBooleanValue] :enable_network_address_usage_metrics
+    #   Indicates whether Network Address Usage metrics are enabled for your
+    #   VPC.
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(vpc_id: @id)

@@ -29464,7 +29464,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         attribute: "enableDnsSupport", # required, accepts enableDnsSupport, enableDnsHostnames
+    #         attribute: "enableDnsSupport", # required, accepts enableDnsSupport, enableDnsHostnames, enableNetworkAddressUsageMetrics
     #         vpc_id: "VpcId", # required
     #         dry_run: false,
     #       }
@@ -29511,12 +29511,18 @@ module Aws::EC2
     #   it does not.
     #   @return [Types::AttributeBooleanValue]
     #
+    # @!attribute [rw] enable_network_address_usage_metrics
+    #   Indicates whether Network Address Usage metrics are enabled for your
+    #   VPC.
+    #   @return [Types::AttributeBooleanValue]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcAttributeResult AWS API Documentation
     #
     class DescribeVpcAttributeResult < Struct.new(
       :vpc_id,
       :enable_dns_hostnames,
-      :enable_dns_support)
+      :enable_dns_support,
+      :enable_network_address_usage_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51865,6 +51871,9 @@ module Aws::EC2
     #           value: false,
     #         },
     #         vpc_id: "VpcId", # required
+    #         enable_network_address_usage_metrics: {
+    #           value: false,
+    #         },
     #       }
     #
     # @!attribute [rw] enable_dns_hostnames
@@ -51893,12 +51902,18 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] enable_network_address_usage_metrics
+    #   Indicates whether Network Address Usage metrics are enabled for your
+    #   VPC.
+    #   @return [Types::AttributeBooleanValue]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcAttributeRequest AWS API Documentation
     #
     class ModifyVpcAttributeRequest < Struct.new(
       :enable_dns_hostnames,
       :enable_dns_support,
-      :vpc_id)
+      :vpc_id,
+      :enable_network_address_usage_metrics)
       SENSITIVE = []
       include Aws::Structure
     end

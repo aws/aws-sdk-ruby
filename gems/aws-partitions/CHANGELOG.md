@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.642.0 (2022-10-04)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ConnectCases`.
+
 1.641.0 (2022-10-03)
 ------------------
 

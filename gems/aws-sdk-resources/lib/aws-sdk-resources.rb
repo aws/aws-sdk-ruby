@@ -80,6 +80,7 @@ module Aws
   autoload :ConfigService, 'aws-sdk-configservice'
   autoload :Connect, 'aws-sdk-connect'
   autoload :ConnectCampaignService, 'aws-sdk-connectcampaignservice'
+  autoload :ConnectCases, 'aws-sdk-connectcases'
   autoload :ConnectContactLens, 'aws-sdk-connectcontactlens'
   autoload :ConnectParticipant, 'aws-sdk-connectparticipant'
   autoload :ConnectWisdomService, 'aws-sdk-connectwisdomservice'

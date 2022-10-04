@@ -411,10 +411,10 @@ module Aws::S3Control
     #         configuration: { # required
     #           supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
     #           cloud_watch_metrics_enabled: false,
-    #           allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber
+    #           allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber, HeadObject-Range, HeadObject-PartNumber
     #           transformation_configurations: [ # required
     #             {
-    #               actions: ["GetObject"], # required, accepts GetObject
+    #               actions: ["GetObject"], # required, accepts GetObject, HeadObject, ListObjects, ListObjectsV2
     #               content_transformation: { # required
     #                 aws_lambda: {
     #                   function_arn: "FunctionArnString", # required
@@ -4381,10 +4381,10 @@ module Aws::S3Control
     #       {
     #         supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
     #         cloud_watch_metrics_enabled: false,
-    #         allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber
+    #         allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber, HeadObject-Range, HeadObject-PartNumber
     #         transformation_configurations: [ # required
     #           {
-    #             actions: ["GetObject"], # required, accepts GetObject
+    #             actions: ["GetObject"], # required, accepts GetObject, HeadObject, ListObjects, ListObjectsV2
     #             content_transformation: { # required
     #               aws_lambda: {
     #                 function_arn: "FunctionArnString", # required
@@ -4456,7 +4456,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         actions: ["GetObject"], # required, accepts GetObject
+    #         actions: ["GetObject"], # required, accepts GetObject, HeadObject, ListObjects, ListObjectsV2
     #         content_transformation: { # required
     #           aws_lambda: {
     #             function_arn: "FunctionArnString", # required
@@ -4679,10 +4679,10 @@ module Aws::S3Control
     #         configuration: { # required
     #           supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
     #           cloud_watch_metrics_enabled: false,
-    #           allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber
+    #           allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber, HeadObject-Range, HeadObject-PartNumber
     #           transformation_configurations: [ # required
     #             {
-    #               actions: ["GetObject"], # required, accepts GetObject
+    #               actions: ["GetObject"], # required, accepts GetObject, HeadObject, ListObjects, ListObjectsV2
     #               content_transformation: { # required
     #                 aws_lambda: {
     #                   function_arn: "FunctionArnString", # required

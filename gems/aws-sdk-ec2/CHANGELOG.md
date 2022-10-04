@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.341.0 (2022-10-04)
+------------------
+
+* Feature - Added EnableNetworkAddressUsageMetrics flag for ModifyVpcAttribute, DescribeVpcAttribute APIs.
+
 1.340.0 (2022-10-03)
 ------------------
 

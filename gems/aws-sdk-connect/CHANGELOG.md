@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2022-10-04)
+------------------
+
+* Feature - Updated the CreateIntegrationAssociation API to support the CASES_DOMAIN IntegrationType.
+
 1.76.0 (2022-09-02)
 ------------------
 
