@@ -80,10 +80,12 @@ bytes in the body.
                 context.http_request.body,
                 callback
               )
+              @handler.call(context).tap do
+                unwrap_callback_body(context)
+              end
+            else
+              @handler.call(context)
             end
-            resp = @handler.call(context)
-            unwrap_callback_body(context)
-            resp
           end
 
           def unwrap_callback_body(context)
