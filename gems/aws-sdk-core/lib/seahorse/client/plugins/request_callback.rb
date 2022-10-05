@@ -80,18 +80,18 @@ bytes in the body.
                 context.http_request.body,
                 callback
               )
-              add_event_listeners(context)
+              @handler.call(context).tap do
+                unwrap_callback_body(context)
+              end
+            else
+              @handler.call(context)
             end
-            @handler.call(context)
           end
 
-          def add_event_listeners(context)
-            # unwrap the request body as soon as we start receiving a response
-            context.http_response.on_headers do
-              body = context.http_request.body
-              if body.is_a? ReadCallbackIO
-                context.http_request.body = body.io
-              end
+          def unwrap_callback_body(context)
+            body = context.http_request.body
+            if body.is_a? ReadCallbackIO
+              context.http_request.body = body.io
             end
           end
         end
