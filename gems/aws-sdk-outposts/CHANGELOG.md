@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2022-10-05)
+------------------
+
+* Feature - This release adds the Asset state information to the ListAssets response. The ListAssets request supports filtering on Asset state.
+
 1.35.0 (2022-07-14)
 ------------------
 

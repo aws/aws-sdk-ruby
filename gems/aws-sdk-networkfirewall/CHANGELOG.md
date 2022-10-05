@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2022-10-05)
+------------------
+
+* Feature - StreamExceptionPolicy configures how AWS Network Firewall processes traffic when a network connection breaks midstream
+
 1.18.0 (2022-07-21)
 ------------------
 
