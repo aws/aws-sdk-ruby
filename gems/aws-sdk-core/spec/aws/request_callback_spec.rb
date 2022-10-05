@@ -50,6 +50,14 @@ module Seahorse
           expect(@call_count).to eq(2)
         end
 
+        it 'unwraps the body on networking errors' do
+          stub_request(:post, 'http://foo.com')
+            .to_timeout
+            .to_return(status: 200)
+          client.example_operation
+          expect(@call_count).to eq(2)
+        end
+
         it 'it can be used as a parameter on the operation' do
           client = client_class.new(region: 'us-west-1', endpoint: 'http://foo.com')
           expect(client.config.on_chunk_sent).to eq(nil)

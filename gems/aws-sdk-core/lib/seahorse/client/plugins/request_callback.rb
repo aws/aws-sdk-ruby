@@ -82,16 +82,22 @@ bytes in the body.
               )
               add_event_listeners(context)
             end
-            @handler.call(context)
+            resp = @handler.call(context)
+            ReadCallbackHandler.unwrap_callback_body(context)
+            resp
           end
 
           def add_event_listeners(context)
             # unwrap the request body as soon as we start receiving a response
             context.http_response.on_headers do
-              body = context.http_request.body
-              if body.is_a? ReadCallbackIO
-                context.http_request.body = body.io
-              end
+              ReadCallbackHandler.unwrap_callback_body(context)
+            end
+          end
+
+          def self.unwrap_callback_body(context)
+            body = context.http_request.body
+            if body.is_a? ReadCallbackIO
+              context.http_request.body = body.io
             end
           end
         end
