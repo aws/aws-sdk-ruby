@@ -191,7 +191,7 @@ Known AWS regions include (not specific to this service):
           log_obj = client.api_requests[0]
           expect(log_obj[:operation_name]).to eq(:create_bucket)
           expect(log_obj[:params]).to eq({:bucket=>"aws-sdk"})
-          expect(log_obj[:context].metadata).to include(
+          expect(log_obj[:context].metadata).to eq(
             {
               :gem_name=>"aws-sdk-sampleapi2",
               :gem_version=>"1.0.0",

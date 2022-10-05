@@ -128,7 +128,7 @@ module Aws
             )
             context.metadata[:redirect_region] = actual_region
 
-            signer = Aws::Plugins::Sign::SignatureV4.build_v4_signer(
+            signer = Aws::Plugins::Sign.signer_for(
               context[:auth_scheme],
               context.config,
               actual_region

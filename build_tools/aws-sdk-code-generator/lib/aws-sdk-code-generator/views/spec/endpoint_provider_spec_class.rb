@@ -86,7 +86,6 @@ module AwsSdkCodeGenerator
           def expect_auth?
             @expect['endpoint'] &&
               @expect['endpoint']['properties'] &&
-              @expect['endpoint']['properties'] &&
               @expect['endpoint']['properties']['authSchemes'] &&
               !@expect['endpoint']['properties']['authSchemes'].empty?
           end

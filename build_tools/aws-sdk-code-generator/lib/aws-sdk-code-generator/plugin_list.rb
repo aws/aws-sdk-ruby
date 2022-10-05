@@ -102,7 +102,7 @@ module AwsSdkCodeGenerator
     #
     # NOTE: If no rules are provided, just use old Signing method
     def signature_plugins(options)
-      if options[:endpoint_rules] && !options[:endpoint_rules].empty?
+      if !options[:legacy_endpoints]
         {
           'Aws::Plugins::Sign' => "#{core_plugins}/sign.rb"
         }

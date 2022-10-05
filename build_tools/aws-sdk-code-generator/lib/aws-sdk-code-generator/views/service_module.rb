@@ -75,7 +75,8 @@ module AwsSdkCodeGenerator
         paths << "#{@prefix}/errors"
         paths << "#{@prefix}/waiters" if @service.waiters
         paths << "#{@prefix}/resource"
-        if @service.endpoint_rules && !@service.endpoint_rules.empty?
+
+        unless @service.legacy_endpoints?
           paths << "#{@prefix}/endpoint_parameters"
           paths << "#{@prefix}/endpoint_provider"
           paths << "#{@prefix}/endpoints"

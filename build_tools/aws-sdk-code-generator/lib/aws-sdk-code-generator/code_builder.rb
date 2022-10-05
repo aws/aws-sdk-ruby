@@ -137,7 +137,7 @@ module AwsSdkCodeGenerator
         waiters: @service.waiters,
         examples: @service.examples,
         custom: @service.protocol == 'api-gateway',
-        endpoint_rules: @service.endpoint_rules,
+        legacy_endpoints: @service.legacy_endpoints?,
         codegenerated_plugins: codegenerated_plugins
       ).render
     end
@@ -156,7 +156,7 @@ module AwsSdkCodeGenerator
         add_plugins: @service.add_plugins,
         remove_plugins: @service.remove_plugins,
         api: @service.api,
-        endpoint_rules: @service.endpoint_rules,
+        legacy_endpoints: @service.legacy_endpoints?,
         codegenerated_plugins: codegenerated_plugins,
         async_client: true
       ).render

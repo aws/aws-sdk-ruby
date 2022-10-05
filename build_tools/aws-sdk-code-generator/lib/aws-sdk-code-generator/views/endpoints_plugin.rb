@@ -9,8 +9,7 @@ module AwsSdkCodeGenerator
         if (client_options = @service.api['clientContextParams'])
           endpoint_parameters = @service.endpoint_rules.fetch('parameters', {})
 
-          @endpoint_options = client_options.each.with_object([]) do
-            |(name, data), array|
+          @endpoint_options = client_options.each.with_object([]) do |(name, _data), array|
             param_data = endpoint_parameters[name]
 
             next if param_data['builtIn']
@@ -46,26 +45,6 @@ module AwsSdkCodeGenerator
 
       def module_name
         @service.module_name
-      end
-
-      def documentation_type
-        if endpoint_rules?
-          "#{module_name}::EndpointProvider"
-        else
-          'Aws::Endpoints::StaticProvider'
-        end
-      end
-
-      def default_provider
-        if endpoint_rules?
-          "#{module_name}::EndpointProvider.new"
-        else
-          'Aws::Endpoints::StaticProvider.new(cfg.endpoint)'
-        end
-      end
-
-      def endpoint_rules?
-        @service.endpoint_rules && !@service.endpoint_rules.empty?
       end
 
       class EndpointClass
