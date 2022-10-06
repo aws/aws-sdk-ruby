@@ -45,6 +45,13 @@ module ApiHelper
       end
     end
 
+    def regionalized_endpoint_rules(endpoint_prefix='svc')
+      file = File.expand_path(
+        '../fixtures/endpoints/regionalized/endpoint-rule-set.json',
+        __FILE__)
+      JSON.load(File.read(file).gsub("$ENDPOINT_PREFIX$", endpoint_prefix))
+    end
+
     def sample_shapes
       {
         'StructureShape' => {
