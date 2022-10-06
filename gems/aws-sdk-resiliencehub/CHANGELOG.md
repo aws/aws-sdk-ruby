@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2022-10-06)
+------------------
+
+* Feature - Documentation change for AWS Resilience Hub. Doc-only update to fix Documentation layout
+
 1.5.0 (2022-05-16)
 ------------------
 

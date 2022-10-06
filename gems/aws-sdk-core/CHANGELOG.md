@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.158.1 (2022-10-06)
+------------------
+
 * Issue - Ensure that the ReadCallbackIO is always unwrapped (#2761). 
 
 3.158.0 (2022-09-30)
