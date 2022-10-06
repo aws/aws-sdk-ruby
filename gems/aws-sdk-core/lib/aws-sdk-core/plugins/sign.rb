@@ -13,6 +13,10 @@ module Aws
       option(:sigv4_region)
       option(:unsigned_operations, default: [])
 
+      supported_auth_types = %w[sigv4 bearer none]
+      supported_auth_types += ['sigv4a'] if Aws::Sigv4::Signer.use_crt?
+      SUPPORTED_AUTH_TYPES = supported_auth_types.freeze
+
       def add_handlers(handlers, cfg)
         operations = cfg.api.operation_names - cfg.unsigned_operations
         handlers.add(Handler, step: :sign, operations: operations)
