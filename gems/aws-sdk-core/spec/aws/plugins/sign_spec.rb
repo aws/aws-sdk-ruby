@@ -51,7 +51,6 @@ module Aws
             'name' => 'sigv4',
             'signingRegion' => region,
             'signingName' => 'svc',
-            'disableDoubleEncoding' => false
           }
         end
 
@@ -92,7 +91,7 @@ module Aws
         end
 
         it 'raises an error when attempting to sign a request w/out credentials' do
-          client = TestClient.new(client_options.tap { |o| o.delete(:stub_responses)} )
+          client = TestClient.new(client_options.merge(credentials: nil) )
           expect {
             client.operation
           }.to raise_error(Errors::MissingCredentialsError)
@@ -179,6 +178,72 @@ module Aws
         end
       end
 
+      context 'sigv4a' do
+        let(:auth_scheme) do
+          {
+            'name' => 'sigv4a',
+            'signingRegionSet' => ['*'],
+            'signingName' => 'svc',
+          }
+        end
+
+        it 'signs the request with sigv4a' do
+          expect_auth(auth_scheme)
+          client.operation
+        end
+
+        it "uses unsigned payload for operations with 'v4-unsigned-payload' for 'authtype'" do
+          expect_auth(auth_scheme)
+          resp = client.streaming_operation
+          req = resp.context.http_request
+          expect(req.headers['x-amz-content-sha256']).to eq('UNSIGNED-PAYLOAD')
+        end
+      end
+
+      context 'bearer' do
+        let(:auth_scheme) do
+          {
+            'name' => 'bearer',
+          }
+        end
+
+        it 'signs the request with bearer' do
+          resp = client.operation
+          req = resp.context.http_request
+          expect(req.headers['authorization']).to include("Bearer")
+        end
+
+        context 'http endpoint' do
+          let(:endpoint) { 'http://insecure.com' }
+
+          it 'raises an ArgumentError and does not sign the request' do
+            expect do
+              client.operation
+            end.to raise_error(ArgumentError)
+          end
+        end
+
+        it 'raises an error when attempting to sign a request w/out a token' do
+          client = TestClient.new(client_options.merge(token_provider: nil) )
+          expect {
+            client.operation
+          }.to raise_error(Errors::MissingBearerTokenError)
+        end
+      end
+
+      context 'none' do
+        let(:auth_scheme) do
+          {
+            'name' => 'none',
+          }
+        end
+
+        it 'does not sign the request' do
+          resp = client.operation
+          req = resp.context.http_request
+          expect(req.headers.key?('authorization')).to be(false)
+        end
+      end
     end
   end
 end
