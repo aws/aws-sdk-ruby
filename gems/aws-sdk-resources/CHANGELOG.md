@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.143.0 (2022-10-04)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-connectcases` gem.
+
 3.142.0 (2022-09-29)
 ------------------
 

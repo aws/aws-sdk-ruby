@@ -1447,6 +1447,14 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.database #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.table #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
+    #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
+    #   resp.jobs[0].source_control_details.repository #=> String
+    #   resp.jobs[0].source_control_details.owner #=> String
+    #   resp.jobs[0].source_control_details.branch #=> String
+    #   resp.jobs[0].source_control_details.folder #=> String
+    #   resp.jobs[0].source_control_details.last_commit_id #=> String
+    #   resp.jobs[0].source_control_details.auth_strategy #=> String, one of "PERSONAL_ACCESS_TOKEN", "AWS_SECRETS_MANAGER"
+    #   resp.jobs[0].source_control_details.auth_token #=> String
     #   resp.jobs_not_found #=> Array
     #   resp.jobs_not_found[0] #=> String
     #
@@ -2862,6 +2870,10 @@ module Aws::Glue
     #   will be allowed to set `ExecutionClass` to `FLEX`. The flexible
     #   execution class is available for Spark jobs.
     #
+    # @option params [Types::SourceControlDetails] :source_control_details
+    #   The details for a source control configuration for a job, allowing
+    #   synchronization of job artifacts to or from a remote repository.
+    #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#name #name} => String
@@ -3573,6 +3585,16 @@ module Aws::Glue
     #       },
     #     },
     #     execution_class: "FLEX", # accepts FLEX, STANDARD
+    #     source_control_details: {
+    #       provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
+    #       repository: "Generic512CharString",
+    #       owner: "Generic512CharString",
+    #       branch: "Generic512CharString",
+    #       folder: "Generic512CharString",
+    #       last_commit_id: "Generic512CharString",
+    #       auth_strategy: "PERSONAL_ACCESS_TOKEN", # accepts PERSONAL_ACCESS_TOKEN, AWS_SECRETS_MANAGER
+    #       auth_token: "Generic512CharString",
+    #     },
     #   })
     #
     # @example Response structure
@@ -7215,6 +7237,14 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.database #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.table #=> String
     #   resp.job.execution_class #=> String, one of "FLEX", "STANDARD"
+    #   resp.job.source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
+    #   resp.job.source_control_details.repository #=> String
+    #   resp.job.source_control_details.owner #=> String
+    #   resp.job.source_control_details.branch #=> String
+    #   resp.job.source_control_details.folder #=> String
+    #   resp.job.source_control_details.last_commit_id #=> String
+    #   resp.job.source_control_details.auth_strategy #=> String, one of "PERSONAL_ACCESS_TOKEN", "AWS_SECRETS_MANAGER"
+    #   resp.job.source_control_details.auth_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJob AWS API Documentation
     #
@@ -7923,6 +7953,14 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.database #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.table #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
+    #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
+    #   resp.jobs[0].source_control_details.repository #=> String
+    #   resp.jobs[0].source_control_details.owner #=> String
+    #   resp.jobs[0].source_control_details.branch #=> String
+    #   resp.jobs[0].source_control_details.folder #=> String
+    #   resp.jobs[0].source_control_details.last_commit_id #=> String
+    #   resp.jobs[0].source_control_details.auth_strategy #=> String, one of "PERSONAL_ACCESS_TOKEN", "AWS_SECRETS_MANAGER"
+    #   resp.jobs[0].source_control_details.auth_token #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobs AWS API Documentation
@@ -14474,6 +14512,16 @@ module Aws::Glue
     #         },
     #       },
     #       execution_class: "FLEX", # accepts FLEX, STANDARD
+    #       source_control_details: {
+    #         provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
+    #         repository: "Generic512CharString",
+    #         owner: "Generic512CharString",
+    #         branch: "Generic512CharString",
+    #         folder: "Generic512CharString",
+    #         last_commit_id: "Generic512CharString",
+    #         auth_strategy: "PERSONAL_ACCESS_TOKEN", # accepts PERSONAL_ACCESS_TOKEN, AWS_SECRETS_MANAGER
+    #         auth_token: "Generic512CharString",
+    #       },
     #     },
     #   })
     #
@@ -14487,6 +14535,74 @@ module Aws::Glue
     # @param [Hash] params ({})
     def update_job(params = {}, options = {})
       req = build_request(:update_job, params)
+      req.send_request(options)
+    end
+
+    # Synchronizes a job from the source control repository. This operation
+    # takes the job artifacts that are located in the remote repository and
+    # updates the Glue internal stores with these artifacts.
+    #
+    # This API supports optional parameters which take in the repository
+    # information.
+    #
+    # @option params [String] :job_name
+    #   The name of the Glue job to be synchronized to or from the remote
+    #   repository.
+    #
+    # @option params [String] :provider
+    #   The provider for the remote repository.
+    #
+    # @option params [String] :repository_name
+    #   The name of the remote repository that contains the job artifacts.
+    #
+    # @option params [String] :repository_owner
+    #   The owner of the remote repository that contains the job artifacts.
+    #
+    # @option params [String] :branch_name
+    #   An optional branch in the remote repository.
+    #
+    # @option params [String] :folder
+    #   An optional folder in the remote repository.
+    #
+    # @option params [String] :commit_id
+    #   A commit ID for a commit in the remote repository.
+    #
+    # @option params [String] :auth_strategy
+    #   The type of authentication, which can be an authentication token
+    #   stored in Amazon Web Services Secrets Manager, or a personal access
+    #   token.
+    #
+    # @option params [String] :auth_token
+    #   The value of the authorization token.
+    #
+    # @return [Types::UpdateJobFromSourceControlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateJobFromSourceControlResponse#job_name #job_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_job_from_source_control({
+    #     job_name: "NameString",
+    #     provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
+    #     repository_name: "NameString",
+    #     repository_owner: "NameString",
+    #     branch_name: "NameString",
+    #     folder: "NameString",
+    #     commit_id: "CommitIdString",
+    #     auth_strategy: "PERSONAL_ACCESS_TOKEN", # accepts PERSONAL_ACCESS_TOKEN, AWS_SECRETS_MANAGER
+    #     auth_token: "AuthTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateJobFromSourceControl AWS API Documentation
+    #
+    # @overload update_job_from_source_control(params = {})
+    # @param [Hash] params ({})
+    def update_job_from_source_control(params = {}, options = {})
+      req = build_request(:update_job_from_source_control, params)
       req.send_request(options)
     end
 
@@ -14825,6 +14941,74 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Synchronizes a job to the source control repository. This operation
+    # takes the job artifacts from the Glue internal stores and makes a
+    # commit to the remote repository that is configured on the job.
+    #
+    # This API supports optional parameters which take in the repository
+    # information.
+    #
+    # @option params [String] :job_name
+    #   The name of the Glue job to be synchronized to or from the remote
+    #   repository.
+    #
+    # @option params [String] :provider
+    #   The provider for the remote repository.
+    #
+    # @option params [String] :repository_name
+    #   The name of the remote repository that contains the job artifacts.
+    #
+    # @option params [String] :repository_owner
+    #   The owner of the remote repository that contains the job artifacts.
+    #
+    # @option params [String] :branch_name
+    #   An optional branch in the remote repository.
+    #
+    # @option params [String] :folder
+    #   An optional folder in the remote repository.
+    #
+    # @option params [String] :commit_id
+    #   A commit ID for a commit in the remote repository.
+    #
+    # @option params [String] :auth_strategy
+    #   The type of authentication, which can be an authentication token
+    #   stored in Amazon Web Services Secrets Manager, or a personal access
+    #   token.
+    #
+    # @option params [String] :auth_token
+    #   The value of the authorization token.
+    #
+    # @return [Types::UpdateSourceControlFromJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSourceControlFromJobResponse#job_name #job_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_source_control_from_job({
+    #     job_name: "NameString",
+    #     provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
+    #     repository_name: "NameString",
+    #     repository_owner: "NameString",
+    #     branch_name: "NameString",
+    #     folder: "NameString",
+    #     commit_id: "CommitIdString",
+    #     auth_strategy: "PERSONAL_ACCESS_TOKEN", # accepts PERSONAL_ACCESS_TOKEN, AWS_SECRETS_MANAGER
+    #     auth_token: "AuthTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateSourceControlFromJob AWS API Documentation
+    #
+    # @overload update_source_control_from_job(params = {})
+    # @param [Hash] params ({})
+    def update_source_control_from_job(params = {}, options = {})
+      req = build_request(:update_source_control_from_job, params)
+      req.send_request(options)
+    end
+
     # Updates a metadata table in the Data Catalog.
     #
     # @option params [String] :catalog_id
@@ -15150,7 +15334,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.119.0'
+      context[:gem_version] = '1.120.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

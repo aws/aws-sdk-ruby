@@ -32548,6 +32548,7 @@ module Aws::EC2
     #   * {Types::DescribeVpcAttributeResult#vpc_id #vpc_id} => String
     #   * {Types::DescribeVpcAttributeResult#enable_dns_hostnames #enable_dns_hostnames} => Types::AttributeBooleanValue
     #   * {Types::DescribeVpcAttributeResult#enable_dns_support #enable_dns_support} => Types::AttributeBooleanValue
+    #   * {Types::DescribeVpcAttributeResult#enable_network_address_usage_metrics #enable_network_address_usage_metrics} => Types::AttributeBooleanValue
     #
     #
     # @example Example: To describe the enableDnsSupport attribute
@@ -32590,7 +32591,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_vpc_attribute({
-    #     attribute: "enableDnsSupport", # required, accepts enableDnsSupport, enableDnsHostnames
+    #     attribute: "enableDnsSupport", # required, accepts enableDnsSupport, enableDnsHostnames, enableNetworkAddressUsageMetrics
     #     vpc_id: "VpcId", # required
     #     dry_run: false,
     #   })
@@ -32600,6 +32601,7 @@ module Aws::EC2
     #   resp.vpc_id #=> String
     #   resp.enable_dns_hostnames.value #=> Boolean
     #   resp.enable_dns_support.value #=> Boolean
+    #   resp.enable_network_address_usage_metrics.value #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcAttribute AWS API Documentation
     #
@@ -44011,6 +44013,10 @@ module Aws::EC2
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
     #
+    # @option params [Types::AttributeBooleanValue] :enable_network_address_usage_metrics
+    #   Indicates whether Network Address Usage metrics are enabled for your
+    #   VPC.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -44049,6 +44055,9 @@ module Aws::EC2
     #       value: false,
     #     },
     #     vpc_id: "VpcId", # required
+    #     enable_network_address_usage_metrics: {
+    #       value: false,
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcAttribute AWS API Documentation
@@ -52172,7 +52181,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.340.0'
+      context[:gem_version] = '1.341.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

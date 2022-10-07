@@ -6756,6 +6756,7 @@ module Aws::EC2
     DescribeVpcAttributeResult.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     DescribeVpcAttributeResult.add_member(:enable_dns_hostnames, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "enableDnsHostnames"))
     DescribeVpcAttributeResult.add_member(:enable_dns_support, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "enableDnsSupport"))
+    DescribeVpcAttributeResult.add_member(:enable_network_address_usage_metrics, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "enableNetworkAddressUsageMetrics"))
     DescribeVpcAttributeResult.struct_class = Types::DescribeVpcAttributeResult
 
     DescribeVpcClassicLinkDnsSupportRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeVpcClassicLinkDnsSupportMaxResults, location_name: "maxResults"))
@@ -10272,6 +10273,7 @@ module Aws::EC2
     ModifyVpcAttributeRequest.add_member(:enable_dns_hostnames, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "EnableDnsHostnames"))
     ModifyVpcAttributeRequest.add_member(:enable_dns_support, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "EnableDnsSupport"))
     ModifyVpcAttributeRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
+    ModifyVpcAttributeRequest.add_member(:enable_network_address_usage_metrics, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "EnableNetworkAddressUsageMetrics"))
     ModifyVpcAttributeRequest.struct_class = Types::ModifyVpcAttributeRequest
 
     ModifyVpcEndpointConnectionNotificationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))

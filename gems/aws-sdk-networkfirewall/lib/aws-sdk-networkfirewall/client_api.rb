@@ -185,6 +185,7 @@ module Aws::NetworkFirewall
     StatelessRuleGroupReferences = Shapes::ListShape.new(name: 'StatelessRuleGroupReferences')
     StatelessRules = Shapes::ListShape.new(name: 'StatelessRules')
     StatelessRulesAndCustomActions = Shapes::StructureShape.new(name: 'StatelessRulesAndCustomActions')
+    StreamExceptionPolicy = Shapes::StringShape.new(name: 'StreamExceptionPolicy')
     SubnetMapping = Shapes::StructureShape.new(name: 'SubnetMapping')
     SubnetMappings = Shapes::ListShape.new(name: 'SubnetMappings')
     SyncState = Shapes::StructureShape.new(name: 'SyncState')
@@ -695,6 +696,7 @@ module Aws::NetworkFirewall
     StatefulActions.member = Shapes::ShapeRef.new(shape: CollectionMember_String)
 
     StatefulEngineOptions.add_member(:rule_order, Shapes::ShapeRef.new(shape: RuleOrder, location_name: "RuleOrder"))
+    StatefulEngineOptions.add_member(:stream_exception_policy, Shapes::ShapeRef.new(shape: StreamExceptionPolicy, location_name: "StreamExceptionPolicy"))
     StatefulEngineOptions.struct_class = Types::StatefulEngineOptions
 
     StatefulRule.add_member(:action, Shapes::ShapeRef.new(shape: StatefulAction, required: true, location_name: "Action"))

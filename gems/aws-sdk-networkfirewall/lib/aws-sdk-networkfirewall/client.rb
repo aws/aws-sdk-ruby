@@ -744,6 +744,7 @@ module Aws::NetworkFirewall
     #       stateful_default_actions: ["CollectionMember_String"],
     #       stateful_engine_options: {
     #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
+    #         stream_exception_policy: "DROP", # accepts DROP, CONTINUE
     #       },
     #     },
     #     description: "Description",
@@ -1419,6 +1420,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy.stateful_default_actions #=> Array
     #   resp.firewall_policy.stateful_default_actions[0] #=> String
     #   resp.firewall_policy.stateful_engine_options.rule_order #=> String, one of "DEFAULT_ACTION_ORDER", "STRICT_ORDER"
+    #   resp.firewall_policy.stateful_engine_options.stream_exception_policy #=> String, one of "DROP", "CONTINUE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallPolicy AWS API Documentation
     #
@@ -2454,6 +2456,7 @@ module Aws::NetworkFirewall
     #       stateful_default_actions: ["CollectionMember_String"],
     #       stateful_engine_options: {
     #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
+    #         stream_exception_policy: "DROP", # accepts DROP, CONTINUE
     #       },
     #     },
     #     description: "Description",
@@ -2984,7 +2987,7 @@ module Aws::NetworkFirewall
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

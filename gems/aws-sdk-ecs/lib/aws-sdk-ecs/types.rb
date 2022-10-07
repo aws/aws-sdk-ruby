@@ -7432,11 +7432,6 @@ module Aws::ECS
     #   In general, ports below 32768 are outside of the ephemeral port
     #   range.
     #
-    #   <note markdown="1"> The default ephemeral port range from 49153 through 65535 is always
-    #   used for Docker versions before 1.6.0.
-    #
-    #    </note>
-    #
     #   The default reserved ports are 22 for SSH, the Docker ports 2375 and
     #   2376, and the Amazon ECS container agent ports 51678-51680. Any host
     #   port that was previously specified in a running task is also
@@ -7561,6 +7556,16 @@ module Aws::ECS
     #   container instances is affected. If `containerInsights` is
     #   specified, the default setting for CloudWatch Container Insights for
     #   your clusters is affected.
+    #
+    #   Fargate is transitioning from task count-based quotas to vCPU-based
+    #   quotas. You can set the name to `fargateVCPULimit` to opt in or opt
+    #   out of the vCPU-based quotas. For information about the opt in
+    #   timeline, see [Fargate vCPU-based quotas timeline][1] in the *Amazon
+    #   ECS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#fargate-quota-timeline
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -8501,7 +8506,7 @@ module Aws::ECS
     #
     #    * Linux platform version `1.4.0` or later.
     #
-    #   * Windows platform version `1.0.0` or later.
+    #   ^
     #
     #    </note>
     #

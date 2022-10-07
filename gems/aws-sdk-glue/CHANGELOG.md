@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2022-10-05)
+------------------
+
+* Feature - This SDK release adds support to sync glue jobs with source control provider. Additionally, a new parameter called SourceControlDetails will be added to Job model.
+
 1.119.0 (2022-09-22)
 ------------------
 

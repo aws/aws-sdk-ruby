@@ -160,7 +160,7 @@ module Aws::Outposts
     #       }
     #
     # @!attribute [rw] order_id
-    #   The ID of the order to cancel.
+    #   The ID of the order.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CancelOrderInput AWS API Documentation
@@ -223,13 +223,30 @@ module Aws::Outposts
     # Information about compute hardware assets.
     #
     # @!attribute [rw] host_id
-    #   The host ID of any Dedicated Hosts on the asset.
+    #   The host ID of the Dedicated Host on the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state.
+    #
+    #   * ACTIVE - The asset is available and can provide capacity for new
+    #     compute resources.
+    #
+    #   * ISOLATED - The asset is undergoing maintenance and can't provide
+    #     capacity for new compute resources. Existing compute resources on
+    #     the asset are not affected.
+    #
+    #   * RETIRING - The underlying hardware for the asset is degraded.
+    #     Capacity for new compute resources is reduced. Amazon Web Services
+    #     sends notifications for resources that must be stopped before the
+    #     asset can be replaced.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ComputeAttributes AWS API Documentation
     #
     class ComputeAttributes < Struct.new(
-      :host_id)
+      :host_id,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -308,7 +325,7 @@ module Aws::Outposts
     #           },
     #         ],
     #         payment_option: "ALL_UPFRONT", # required, accepts ALL_UPFRONT, NO_UPFRONT, PARTIAL_UPFRONT
-    #         payment_term: "THREE_YEARS", # accepts THREE_YEARS
+    #         payment_term: "THREE_YEARS", # accepts THREE_YEARS, ONE_YEAR
     #       }
     #
     # @!attribute [rw] outpost_identifier
@@ -320,11 +337,11 @@ module Aws::Outposts
     #   @return [Array<Types::LineItemRequest>]
     #
     # @!attribute [rw] payment_option
-    #   The payment option for the order.
+    #   The payment option.
     #   @return [String]
     #
     # @!attribute [rw] payment_term
-    #   The payment terms for the order.
+    #   The payment terms.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOrderInput AWS API Documentation
@@ -375,14 +392,6 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
-    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
-    #   Outposts Query API. To address backwards compatibility, the
-    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
-    #   parameter name, you can make the request with an ARN.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
@@ -551,14 +560,6 @@ module Aws::Outposts
     #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
-    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
-    #   Outposts Query API. To address backwards compatibility, the
-    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
-    #   parameter name, you can make the request with an ARN.
-    #
-    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteOutpostInput AWS API Documentation
@@ -582,14 +583,6 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
-    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
-    #   Outposts Query API. To address backwards compatibility, the
-    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
-    #   parameter name, you can make the request with an ARN.
-    #
-    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteSiteInput AWS API Documentation
@@ -667,7 +660,7 @@ module Aws::Outposts
     #       }
     #
     # @!attribute [rw] connection_id
-    #   The ID of the connection you request.
+    #   The ID of the connection.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetConnectionRequest AWS API Documentation
@@ -679,11 +672,11 @@ module Aws::Outposts
     end
 
     # @!attribute [rw] connection_id
-    #   The ID of the connection you receive.
+    #   The ID of the connection.
     #   @return [String]
     #
     # @!attribute [rw] connection_details
-    #   Information about a connection.
+    #   Information about the connection.
     #   @return [Types::ConnectionDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetConnectionResponse AWS API Documentation
@@ -735,14 +728,6 @@ module Aws::Outposts
     #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
-    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
-    #   Outposts Query API. To address backwards compatibility, the
-    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
-    #   parameter name, you can make the request with an ARN.
-    #
-    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpostInput AWS API Documentation
@@ -764,14 +749,6 @@ module Aws::Outposts
     #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
-    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
-    #   Outposts Query API. To address backwards compatibility, the
-    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
-    #   parameter name, you can make the request with an ARN.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -802,14 +779,6 @@ module Aws::Outposts
     #
     # @!attribute [rw] outpost_id
     #   The ID of the Outpost.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
-    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
-    #   Outposts Query API. To address backwards compatibility, the
-    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
-    #   parameter name, you can make the request with an ARN.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
@@ -849,14 +818,6 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
-    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
-    #   Outposts Query API. To address backwards compatibility, the
-    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
-    #   parameter name, you can make the request with an ARN.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] address_type
@@ -903,14 +864,6 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
-    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
-    #   Outposts Query API. To address backwards compatibility, the
-    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
-    #   parameter name, you can make the request with an ARN.
-    #
-    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetSiteInput AWS API Documentation
@@ -1006,7 +959,7 @@ module Aws::Outposts
     #   @return [String]
     #
     # @!attribute [rw] mac_address_list
-    #   MAC addresses of the asset.
+    #   The MAC addresses of the asset.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/LineItemAssetInformation AWS API Documentation
@@ -1053,6 +1006,7 @@ module Aws::Outposts
     #         host_id_filter: ["HostId"],
     #         max_results: 1,
     #         next_token: "Token",
+    #         status_filter: ["ACTIVE"], # accepts ACTIVE, RETIRING
     #       }
     #
     # @!attribute [rw] outpost_identifier
@@ -1060,11 +1014,7 @@ module Aws::Outposts
     #   @return [String]
     #
     # @!attribute [rw] host_id_filter
-    #   A filter for the host ID of Dedicated Hosts on the Outpost.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for
-    #   a filter, the values are joined with an `OR`, and the request
-    #   returns all results that match any of the specified values.
+    #   Filters the results by the host ID of a Dedicated Host.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -1075,19 +1025,24 @@ module Aws::Outposts
     #   The pagination token.
     #   @return [String]
     #
+    # @!attribute [rw] status_filter
+    #   Filters the results by state.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListAssetsInput AWS API Documentation
     #
     class ListAssetsInput < Struct.new(
       :outpost_identifier,
       :host_id_filter,
       :max_results,
-      :next_token)
+      :next_token,
+      :status_filter)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] assets
-    #   Information about hardware assets.
+    #   Information about the hardware assets.
     #   @return [Array<Types::AssetInfo>]
     #
     # @!attribute [rw] next_token
@@ -1123,27 +1078,15 @@ module Aws::Outposts
     #   @return [Integer]
     #
     # @!attribute [rw] item_class_filter
-    #   A filter for the class of items in the catalog.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for
-    #   a filter, the values are joined with an `OR`, and the request
-    #   returns all results that match any of the specified values.
+    #   Filters the results by item class.
     #   @return [Array<String>]
     #
     # @!attribute [rw] supported_storage_filter
-    #   A filter for the storage options of items in the catalog.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for
-    #   a filter, the values are joined with an `OR`, and the request
-    #   returns all results that match any of the specified values.
+    #   Filters the results by storage option.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ec2_family_filter
-    #   A filter for EC2 family options for items in the catalog.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for
-    #   a filter, the values are joined with an `OR`, and the request
-    #   returns all results that match any of the specified values.
+    #   Filters the results by EC2 family (for example, M5).
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListCatalogItemsInput AWS API Documentation
@@ -1243,27 +1186,16 @@ module Aws::Outposts
     #   @return [Integer]
     #
     # @!attribute [rw] life_cycle_status_filter
-    #   A filter for the lifecycle status of the Outpost.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for
-    #   a filter, the values are joined with an `OR`, and the request
-    #   returns all results that match any of the specified values.
+    #   Filters the results by the lifecycle status.
     #   @return [Array<String>]
     #
     # @!attribute [rw] availability_zone_filter
-    #   A filter for the Availability Zone (`us-east-1a`) of the Outpost.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for
-    #   a filter, the values are joined with an `OR`, and the request
-    #   returns all results that match any of the specified values.
+    #   Filters the results by Availability Zone (for example,
+    #   `us-east-1a`).
     #   @return [Array<String>]
     #
     # @!attribute [rw] availability_zone_id_filter
-    #   A filter for the AZ IDs (`use1-az1`) of the Outpost.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for
-    #   a filter, the values are joined with an `OR`, and the request
-    #   returns all results that match any of the specified values.
+    #   Filters the results by AZ ID (for example, `use1-az1`).
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListOutpostsInput AWS API Documentation
@@ -1315,27 +1247,15 @@ module Aws::Outposts
     #   @return [Integer]
     #
     # @!attribute [rw] operating_address_country_code_filter
-    #   A filter for the country code of the Outpost site.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for
-    #   a filter, the values are joined with an `OR`, and the request
-    #   returns all results that match any of the specified values.
+    #   Filters the results by country code.
     #   @return [Array<String>]
     #
     # @!attribute [rw] operating_address_state_or_region_filter
-    #   A filter for the state/region of the Outpost site.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for
-    #   a filter, the values are joined with an `OR`, and the request
-    #   returns all results that match any of the specified values.
+    #   Filters the results by state or region.
     #   @return [Array<String>]
     #
     # @!attribute [rw] operating_address_city_filter
-    #   A filter for the city of the Outpost site.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for
-    #   a filter, the values are joined with an `OR`, and the request
-    #   returns all results that match any of the specified values.
+    #   Filters the results by city.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListSitesInput AWS API Documentation
@@ -1427,7 +1347,7 @@ module Aws::Outposts
     #   * `PREPARING` - Order is received and being prepared.
     #
     #   * `IN_PROGRESS` - Order is either being built, shipped, or
-    #     installed. To get more details, see the `LineItem` status.
+    #     installed. To get more details, see the line item status.
     #
     #   * `COMPLETED` - Order is complete.
     #
@@ -1510,11 +1430,11 @@ module Aws::Outposts
     #   @return [Hash<String,Integer>]
     #
     # @!attribute [rw] order_submission_date
-    #   Submission date for the order.
+    #   The submission date for the order.
     #   @return [Time]
     #
     # @!attribute [rw] order_fulfilled_date
-    #   Fulfilment date for the order.
+    #   The fulfilment date for the order.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/OrderSummary AWS API Documentation
@@ -1910,14 +1830,6 @@ module Aws::Outposts
     #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
-    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
-    #   Outposts Query API. To address backwards compatibility, the
-    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
-    #   parameter name, you can make the request with an ARN.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1978,14 +1890,6 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
-    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
-    #   Outposts Query API. To address backwards compatibility, the
-    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
-    #   parameter name, you can make the request with an ARN.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] address_type
@@ -2035,14 +1939,6 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
-    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
-    #   Outposts Query API. To address backwards compatibility, the
-    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
-    #   parameter name, you can make the request with an ARN.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2098,23 +1994,15 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
-    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
-    #   Outposts Query API. To address backwards compatibility, the
-    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
-    #   parameter name, you can make the request with an ARN.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] power_draw_kva
-    #   Specify in kVA the power draw available at the hardware placement
-    #   position for the rack.
+    #   The power draw, in kVA, available at the hardware placement position
+    #   for the rack.
     #   @return [String]
     #
     # @!attribute [rw] power_phase
-    #   Specify the power option that you can provide for hardware.
+    #   The power option that you can provide for hardware.
     #
     #   * Single-phase AC feed: 200 V to 277 V, 50 Hz or 60 Hz
     #
@@ -2122,9 +2010,9 @@ module Aws::Outposts
     #   @return [String]
     #
     # @!attribute [rw] power_connector
-    #   Specify the power connector that Amazon Web Services should plan to
-    #   provide for connections to the hardware. Note the correlation
-    #   between `PowerPhase` and `PowerConnector`.
+    #   The power connector that Amazon Web Services should plan to provide
+    #   for connections to the hardware. Note the correlation between
+    #   `PowerPhase` and `PowerConnector`.
     #
     #   * Single-phase AC feed
     #
@@ -2140,12 +2028,12 @@ module Aws::Outposts
     #   @return [String]
     #
     # @!attribute [rw] power_feed_drop
-    #   Specify whether the power feed comes above or below the rack.
+    #   Indicates whether the power feed comes above or below the rack.
     #   @return [String]
     #
     # @!attribute [rw] uplink_gbps
-    #   Specify the uplink speed the rack should support for the connection
-    #   to the Region.
+    #   The uplink speed the rack should support for the connection to the
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] uplink_count
@@ -2164,16 +2052,16 @@ module Aws::Outposts
     #   @return [String]
     #
     # @!attribute [rw] fiber_optic_cable_type
-    #   Specify the type of fiber that you will use to attach the Outpost to
-    #   your network.
+    #   The type of fiber that you will use to attach the Outpost to your
+    #   network.
     #   @return [String]
     #
     # @!attribute [rw] optical_standard
-    #   Specify the type of optical standard that you will use to attach the
-    #   Outpost to your network. This field is dependent on uplink speed,
-    #   fiber type, and distance to the upstream device. For more
-    #   information about networking requirements for racks, see
-    #   [Network][1] in the Amazon Web Services Outposts User Guide.
+    #   The type of optical standard that you will use to attach the Outpost
+    #   to your network. This field is dependent on uplink speed, fiber
+    #   type, and distance to the upstream device. For more information
+    #   about networking requirements for racks, see [Network][1] in the
+    #   Amazon Web Services Outposts User Guide.
     #
     #   * `OPTIC_10GBASE_SR`\: 10GBASE-SR
     #
@@ -2207,8 +2095,8 @@ module Aws::Outposts
     #   @return [String]
     #
     # @!attribute [rw] maximum_supported_weight_lbs
-    #   Specify the maximum rack weight that this site can support.
-    #   `NO_LIMIT` is over 2000lbs.
+    #   The maximum rack weight that this site can support. `NO_LIMIT` is
+    #   over 2000lbs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/UpdateSiteRackPhysicalPropertiesInput AWS API Documentation
