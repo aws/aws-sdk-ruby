@@ -1159,7 +1159,7 @@ module Aws::Connect
     #
     #   resp = client.create_integration_association({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE
+    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN
     #     integration_arn: "ARN", # required
     #     source_application_url: "URI",
     #     source_application_name: "SourceApplicationName",
@@ -4668,7 +4668,7 @@ module Aws::Connect
     #
     #   resp = client.list_integration_associations({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE
+    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -4679,7 +4679,7 @@ module Aws::Connect
     #   resp.integration_association_summary_list[0].integration_association_id #=> String
     #   resp.integration_association_summary_list[0].integration_association_arn #=> String
     #   resp.integration_association_summary_list[0].instance_id #=> String
-    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE"
+    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "CASES_DOMAIN"
     #   resp.integration_association_summary_list[0].integration_arn #=> String
     #   resp.integration_association_summary_list[0].source_application_url #=> String
     #   resp.integration_association_summary_list[0].source_application_name #=> String
@@ -8563,7 +8563,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -432,7 +432,12 @@ module Aws::ResilienceHub
     # from one or more–up to five–CloudFormation stacks, and an appropriate
     # resiliency policy.
     #
-    #      <p>After you create a Resilience Hub application, you publish it so that you can run a resiliency assessment on it. You can then use recommendations from the assessment to improve resiliency by running another assessment, comparing results, and then iterating the process until you achieve your goals for recovery time objective (RTO) and recovery point objective (RPO).</p>
+    # After you create a Resilience Hub application, you publish it so that
+    # you can run a resiliency assessment on it. You can then use
+    # recommendations from the assessment to improve resiliency by running
+    # another assessment, comparing results, and then iterating the process
+    # until you achieve your goals for recovery time objective (RTO) and
+    # recovery point objective (RPO).
     #
     # @option params [String] :assessment_schedule
     #   Assessment execution schedule with 'Daily' or 'Disabled' values.
@@ -2700,6 +2705,11 @@ module Aws::ResilienceHub
     #   The type of resiliency policy to be created, including the recovery
     #   time objective (RTO) and recovery point objective (RPO) in seconds.
     #
+    #   <note markdown="1"> If you do not want to specify regional targets for a regional policy,
+    #   you must set the values of `rpoInSecs` and `rtoInSecs` to `-1`.
+    #
+    #    </note>
+    #
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the resiliency policy. The format
     #   for this ARN is:
@@ -2778,7 +2788,7 @@ module Aws::ResilienceHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resiliencehub'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

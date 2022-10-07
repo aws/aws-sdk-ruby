@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2022-10-04)
+------------------
+
+* Feature - Documentation updates to address various Amazon ECS tickets.
+
 1.101.0 (2022-09-16)
 ------------------
 

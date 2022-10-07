@@ -6108,6 +6108,16 @@ module Aws::Glue
     #           },
     #         },
     #         execution_class: "FLEX", # accepts FLEX, STANDARD
+    #         source_control_details: {
+    #           provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
+    #           repository: "Generic512CharString",
+    #           owner: "Generic512CharString",
+    #           branch: "Generic512CharString",
+    #           folder: "Generic512CharString",
+    #           last_commit_id: "Generic512CharString",
+    #           auth_strategy: "PERSONAL_ACCESS_TOKEN", # accepts PERSONAL_ACCESS_TOKEN, AWS_SECRETS_MANAGER
+    #           auth_token: "Generic512CharString",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -6310,6 +6320,11 @@ module Aws::Glue
     #   execution class is available for Spark jobs.
     #   @return [String]
     #
+    # @!attribute [rw] source_control_details
+    #   The details for a source control configuration for a job, allowing
+    #   synchronization of job artifacts to or from a remote repository.
+    #   @return [Types::SourceControlDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
@@ -6333,7 +6348,8 @@ module Aws::Glue
       :number_of_workers,
       :worker_type,
       :code_gen_configuration_nodes,
-      :execution_class)
+      :execution_class,
+      :source_control_details)
       SENSITIVE = [:code_gen_configuration_nodes]
       include Aws::Structure
     end
@@ -14800,6 +14816,11 @@ module Aws::Glue
     #   execution class is available for Spark jobs.
     #   @return [String]
     #
+    # @!attribute [rw] source_control_details
+    #   The details for a source control configuration for a job, allowing
+    #   synchronization of job artifacts to or from a remote repository.
+    #   @return [Types::SourceControlDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job AWS API Documentation
     #
     class Job < Struct.new(
@@ -14824,7 +14845,8 @@ module Aws::Glue
       :notification_property,
       :glue_version,
       :code_gen_configuration_nodes,
-      :execution_class)
+      :execution_class,
+      :source_control_details)
       SENSITIVE = [:code_gen_configuration_nodes]
       include Aws::Structure
     end
@@ -15905,6 +15927,16 @@ module Aws::Glue
     #           },
     #         },
     #         execution_class: "FLEX", # accepts FLEX, STANDARD
+    #         source_control_details: {
+    #           provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
+    #           repository: "Generic512CharString",
+    #           owner: "Generic512CharString",
+    #           branch: "Generic512CharString",
+    #           folder: "Generic512CharString",
+    #           last_commit_id: "Generic512CharString",
+    #           auth_strategy: "PERSONAL_ACCESS_TOKEN", # accepts PERSONAL_ACCESS_TOKEN, AWS_SECRETS_MANAGER
+    #           auth_token: "Generic512CharString",
+    #         },
     #       }
     #
     # @!attribute [rw] description
@@ -16084,6 +16116,11 @@ module Aws::Glue
     #   execution class is available for Spark jobs.
     #   @return [String]
     #
+    # @!attribute [rw] source_control_details
+    #   The details for a source control configuration for a job, allowing
+    #   synchronization of job artifacts to or from a remote repository.
+    #   @return [Types::SourceControlDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate AWS API Documentation
     #
     class JobUpdate < Struct.new(
@@ -16105,7 +16142,8 @@ module Aws::Glue
       :notification_property,
       :glue_version,
       :code_gen_configuration_nodes,
-      :execution_class)
+      :execution_class,
+      :source_control_details)
       SENSITIVE = [:code_gen_configuration_nodes]
       include Aws::Structure
     end
@@ -21585,6 +21623,72 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The details for a source control configuration for a job, allowing
+    # synchronization of job artifacts to or from a remote repository.
+    #
+    # @note When making an API call, you may pass SourceControlDetails
+    #   data as a hash:
+    #
+    #       {
+    #         provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
+    #         repository: "Generic512CharString",
+    #         owner: "Generic512CharString",
+    #         branch: "Generic512CharString",
+    #         folder: "Generic512CharString",
+    #         last_commit_id: "Generic512CharString",
+    #         auth_strategy: "PERSONAL_ACCESS_TOKEN", # accepts PERSONAL_ACCESS_TOKEN, AWS_SECRETS_MANAGER
+    #         auth_token: "Generic512CharString",
+    #       }
+    #
+    # @!attribute [rw] provider
+    #   The provider for the remote repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository
+    #   The name of the remote repository that contains the job artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The owner of the remote repository that contains the job artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch
+    #   An optional branch in the remote repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder
+    #   An optional folder in the remote repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_commit_id
+    #   The last commit ID for a commit in the remote repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_strategy
+    #   The type of authentication, which can be an authentication token
+    #   stored in Amazon Web Services Secrets Manager, or a personal access
+    #   token.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_token
+    #   The value of an authorization token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SourceControlDetails AWS API Documentation
+    #
+    class SourceControlDetails < Struct.new(
+      :provider,
+      :repository,
+      :owner,
+      :branch,
+      :folder,
+      :last_commit_id,
+      :auth_strategy,
+      :auth_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a connector to an Apache Spark data source.
     #
     # @note When making an API call, you may pass SparkConnectorSource
@@ -24753,6 +24857,88 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateJobFromSourceControlRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "NameString",
+    #         provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
+    #         repository_name: "NameString",
+    #         repository_owner: "NameString",
+    #         branch_name: "NameString",
+    #         folder: "NameString",
+    #         commit_id: "CommitIdString",
+    #         auth_strategy: "PERSONAL_ACCESS_TOKEN", # accepts PERSONAL_ACCESS_TOKEN, AWS_SECRETS_MANAGER
+    #         auth_token: "AuthTokenString",
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   The name of the Glue job to be synchronized to or from the remote
+    #   repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The provider for the remote repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the remote repository that contains the job artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_owner
+    #   The owner of the remote repository that contains the job artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   An optional branch in the remote repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder
+    #   An optional folder in the remote repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_id
+    #   A commit ID for a commit in the remote repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_strategy
+    #   The type of authentication, which can be an authentication token
+    #   stored in Amazon Web Services Secrets Manager, or a personal access
+    #   token.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_token
+    #   The value of the authorization token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateJobFromSourceControlRequest AWS API Documentation
+    #
+    class UpdateJobFromSourceControlRequest < Struct.new(
+      :job_name,
+      :provider,
+      :repository_name,
+      :repository_owner,
+      :branch_name,
+      :folder,
+      :commit_id,
+      :auth_strategy,
+      :auth_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_name
+    #   The name of the Glue job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateJobFromSourceControlResponse AWS API Documentation
+    #
+    class UpdateJobFromSourceControlResponse < Struct.new(
+      :job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateJobRequest
     #   data as a hash:
     #
@@ -25459,6 +25645,16 @@ module Aws::Glue
     #             },
     #           },
     #           execution_class: "FLEX", # accepts FLEX, STANDARD
+    #           source_control_details: {
+    #             provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
+    #             repository: "Generic512CharString",
+    #             owner: "Generic512CharString",
+    #             branch: "Generic512CharString",
+    #             folder: "Generic512CharString",
+    #             last_commit_id: "Generic512CharString",
+    #             auth_strategy: "PERSONAL_ACCESS_TOKEN", # accepts PERSONAL_ACCESS_TOKEN, AWS_SECRETS_MANAGER
+    #             auth_token: "Generic512CharString",
+    #           },
     #         },
     #       }
     #
@@ -25892,6 +26088,88 @@ module Aws::Glue
       :schema_arn,
       :schema_name,
       :registry_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateSourceControlFromJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "NameString",
+    #         provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
+    #         repository_name: "NameString",
+    #         repository_owner: "NameString",
+    #         branch_name: "NameString",
+    #         folder: "NameString",
+    #         commit_id: "CommitIdString",
+    #         auth_strategy: "PERSONAL_ACCESS_TOKEN", # accepts PERSONAL_ACCESS_TOKEN, AWS_SECRETS_MANAGER
+    #         auth_token: "AuthTokenString",
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   The name of the Glue job to be synchronized to or from the remote
+    #   repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The provider for the remote repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the remote repository that contains the job artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_owner
+    #   The owner of the remote repository that contains the job artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   An optional branch in the remote repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder
+    #   An optional folder in the remote repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_id
+    #   A commit ID for a commit in the remote repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_strategy
+    #   The type of authentication, which can be an authentication token
+    #   stored in Amazon Web Services Secrets Manager, or a personal access
+    #   token.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_token
+    #   The value of the authorization token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateSourceControlFromJobRequest AWS API Documentation
+    #
+    class UpdateSourceControlFromJobRequest < Struct.new(
+      :job_name,
+      :provider,
+      :repository_name,
+      :repository_owner,
+      :branch_name,
+      :folder,
+      :commit_id,
+      :auth_strategy,
+      :auth_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_name
+    #   The name of the Glue job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateSourceControlFromJobResponse AWS API Documentation
+    #
+    class UpdateSourceControlFromJobResponse < Struct.new(
+      :job_name)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -239,6 +239,9 @@
   "ConnectCampaignService": {
     "models": "connectcampaigns/2021-01-30"
   },
+  "ConnectCases": {
+    "models": "connectcases/2022-10-03"
+  },
   "ConnectContactLens": {
     "models": "connect-contact-lens/2020-08-21"
   },

@@ -1605,7 +1605,7 @@ module Aws::Connect
     #
     #       {
     #         instance_id: "InstanceId", # required
-    #         integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE
+    #         integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN
     #         integration_arn: "ARN", # required
     #         source_application_url: "URI",
     #         source_application_name: "SourceApplicationName",
@@ -6470,7 +6470,7 @@ module Aws::Connect
     #
     #       {
     #         instance_id: "InstanceId", # required
-    #         integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE
+    #         integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }

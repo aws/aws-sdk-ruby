@@ -351,10 +351,10 @@ module Aws::Outposts
 
     # @!group API Operations
 
-    # Cancels an order for an Outpost.
+    # Cancels the specified order for an Outpost.
     #
     # @option params [required, String] :order_id
-    #   The ID of the order to cancel.
+    #   The ID of the order.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -382,10 +382,10 @@ module Aws::Outposts
     #   The line items that make up the order.
     #
     # @option params [required, String] :payment_option
-    #   The payment option for the order.
+    #   The payment option.
     #
     # @option params [String] :payment_term
-    #   The payment terms for the order.
+    #   The payment terms.
     #
     # @return [Types::CreateOrderOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -402,7 +402,7 @@ module Aws::Outposts
     #       },
     #     ],
     #     payment_option: "ALL_UPFRONT", # required, accepts ALL_UPFRONT, NO_UPFRONT, PARTIAL_UPFRONT
-    #     payment_term: "THREE_YEARS", # accepts THREE_YEARS
+    #     payment_term: "THREE_YEARS", # accepts THREE_YEARS, ONE_YEAR
     #   })
     #
     # @example Response structure
@@ -436,7 +436,7 @@ module Aws::Outposts
 
     # Creates an Outpost.
     #
-    # You can specify `AvailabilityZone` or `AvailabilityZoneId`.
+    # You can specify either an Availability one or an AZ ID.
     #
     # @option params [required, String] :name
     #   The name of the Outpost.
@@ -446,14 +446,6 @@ module Aws::Outposts
     #
     # @option params [required, String] :site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
-    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
-    #   Query API. To address backwards compatibility, the parameter names
-    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
-    #   can make the request with an ARN.
-    #
-    #    </note>
     #
     # @option params [String] :availability_zone
     #   The Availability Zone.
@@ -629,18 +621,10 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Deletes the Outpost.
+    # Deletes the specified Outpost.
     #
     # @option params [required, String] :outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
-    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
-    #   Query API. To address backwards compatibility, the parameter names
-    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
-    #   can make the request with an ARN.
-    #
-    #    </note>
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -659,18 +643,10 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Deletes the site.
+    # Deletes the specified site.
     #
     # @option params [required, String] :site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
-    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
-    #   Query API. To address backwards compatibility, the parameter names
-    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
-    #   can make the request with an ARN.
-    #
-    #    </note>
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -689,7 +665,7 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Gets information about a catalog item.
+    # Gets information about the specified catalog item.
     #
     # @option params [required, String] :catalog_item_id
     #   The ID of the catalog item.
@@ -732,7 +708,7 @@ module Aws::Outposts
     #
     #  </note>
     #
-    # Gets information about a specified connection.
+    # Gets information about the specified connection.
     #
     # Use CloudTrail to monitor this action or Amazon Web Services managed
     # policy for Amazon Web Services Outposts to secure it. For more
@@ -747,7 +723,7 @@ module Aws::Outposts
     # [2]: https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html
     #
     # @option params [required, String] :connection_id
-    #   The ID of the connection you request.
+    #   The ID of the connection.
     #
     # @return [Types::GetConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -780,7 +756,7 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Gets an order.
+    # Gets information about the specified order.
     #
     # @option params [required, String] :order_id
     #   The ID of the order.
@@ -829,14 +805,6 @@ module Aws::Outposts
     # @option params [required, String] :outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
-    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
-    #   Query API. To address backwards compatibility, the parameter names
-    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
-    #   can make the request with an ARN.
-    #
-    #    </note>
-    #
     # @return [Types::GetOutpostOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetOutpostOutput#outpost #outpost} => Types::Outpost
@@ -876,14 +844,6 @@ module Aws::Outposts
     #
     # @option params [required, String] :outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
-    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
-    #   Query API. To address backwards compatibility, the parameter names
-    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
-    #   can make the request with an ARN.
-    #
-    #    </note>
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -930,14 +890,6 @@ module Aws::Outposts
     # @option params [required, String] :site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
     #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
-    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
-    #   Query API. To address backwards compatibility, the parameter names
-    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
-    #   can make the request with an ARN.
-    #
-    #    </note>
-    #
     # @return [Types::GetSiteOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetSiteOutput#site #site} => Types::Site
@@ -980,18 +932,10 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Gets the site address.
+    # Gets the site address of the specified site.
     #
     # @option params [required, String] :site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
-    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
-    #   Query API. To address backwards compatibility, the parameter names
-    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
-    #   can make the request with an ARN.
-    #
-    #    </note>
     #
     # @option params [required, String] :address_type
     #   The type of the address you request.
@@ -1034,26 +978,28 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Lists the hardware assets in an Outpost. If you are using Dedicated
-    # Hosts on Amazon Web Services Outposts, you can filter your request by
-    # host ID to return a list of hardware assets that allocate resources
-    # for Dedicated Hosts.
+    # Lists the hardware assets for the specified Outpost.
+    #
+    # Use filters to return specific results. If you specify multiple
+    # filters, the results include only the resources that match all of the
+    # specified filters. For a filter where you can specify multiple values,
+    # the results include items that match any of the values that you
+    # specify for the filter.
     #
     # @option params [required, String] :outpost_identifier
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #
     # @option params [Array<String>] :host_id_filter
-    #   A filter for the host ID of Dedicated Hosts on the Outpost.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for a
-    #   filter, the values are joined with an `OR`, and the request returns
-    #   all results that match any of the specified values.
+    #   Filters the results by the host ID of a Dedicated Host.
     #
     # @option params [Integer] :max_results
     #   The maximum page size.
     #
     # @option params [String] :next_token
     #   The pagination token.
+    #
+    # @option params [Array<String>] :status_filter
+    #   Filters the results by state.
     #
     # @return [Types::ListAssetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1069,6 +1015,7 @@ module Aws::Outposts
     #     host_id_filter: ["HostId"],
     #     max_results: 1,
     #     next_token: "Token",
+    #     status_filter: ["ACTIVE"], # accepts ACTIVE, RETIRING
     #   })
     #
     # @example Response structure
@@ -1078,6 +1025,7 @@ module Aws::Outposts
     #   resp.assets[0].rack_id #=> String
     #   resp.assets[0].asset_type #=> String, one of "COMPUTE"
     #   resp.assets[0].compute_attributes.host_id #=> String
+    #   resp.assets[0].compute_attributes.state #=> String, one of "ACTIVE", "ISOLATED", "RETIRING"
     #   resp.assets[0].asset_location.rack_elevation #=> Float
     #   resp.next_token #=> String
     #
@@ -1090,13 +1038,13 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Lists the items in the catalog. Add filters to your request to return
-    # a more specific list of results. Use filters to match an item class,
-    # storage option, or EC2 family.
+    # Lists the items in the catalog.
     #
-    # If you specify multiple filters, the filters are joined with an `AND`,
-    # and the request returns only results that match all of the specified
-    # filters.
+    # Use filters to return specific results. If you specify multiple
+    # filters, the results include only the resources that match all of the
+    # specified filters. For a filter where you can specify multiple values,
+    # the results include items that match any of the values that you
+    # specify for the filter.
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -1105,25 +1053,13 @@ module Aws::Outposts
     #   The maximum page size.
     #
     # @option params [Array<String>] :item_class_filter
-    #   A filter for the class of items in the catalog.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for a
-    #   filter, the values are joined with an `OR`, and the request returns
-    #   all results that match any of the specified values.
+    #   Filters the results by item class.
     #
     # @option params [Array<String>] :supported_storage_filter
-    #   A filter for the storage options of items in the catalog.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for a
-    #   filter, the values are joined with an `OR`, and the request returns
-    #   all results that match any of the specified values.
+    #   Filters the results by storage option.
     #
     # @option params [Array<String>] :ec2_family_filter
-    #   A filter for EC2 family options for items in the catalog.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for a
-    #   filter, the values are joined with an `OR`, and the request returns
-    #   all results that match any of the specified values.
+    #   Filters the results by EC2 family (for example, M5).
     #
     # @return [Types::ListCatalogItemsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1168,9 +1104,7 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Lists the Outpost orders for your Amazon Web Services account. You can
-    # filter your request by Outpost to return a more specific list of
-    # results.
+    # Lists the Outpost orders for your Amazon Web Services account.
     #
     # @option params [String] :outpost_identifier_filter
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
@@ -1218,14 +1152,13 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Lists the Outposts for your Amazon Web Services account. Add filters
-    # to your request to return a more specific list of results. Use filters
-    # to match an Outpost lifecycle status, Availability Zone
-    # (`us-east-1a`), and AZ ID (`use1-az1`).
+    # Lists the Outposts for your Amazon Web Services account.
     #
-    # If you specify multiple filters, the filters are joined with an `AND`,
-    # and the request returns only results that match all of the specified
-    # filters.
+    # Use filters to return specific results. If you specify multiple
+    # filters, the results include only the resources that match all of the
+    # specified filters. For a filter where you can specify multiple values,
+    # the results include items that match any of the values that you
+    # specify for the filter.
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -1234,25 +1167,13 @@ module Aws::Outposts
     #   The maximum page size.
     #
     # @option params [Array<String>] :life_cycle_status_filter
-    #   A filter for the lifecycle status of the Outpost.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for a
-    #   filter, the values are joined with an `OR`, and the request returns
-    #   all results that match any of the specified values.
+    #   Filters the results by the lifecycle status.
     #
     # @option params [Array<String>] :availability_zone_filter
-    #   A filter for the Availability Zone (`us-east-1a`) of the Outpost.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for a
-    #   filter, the values are joined with an `OR`, and the request returns
-    #   all results that match any of the specified values.
+    #   Filters the results by Availability Zone (for example, `us-east-1a`).
     #
     # @option params [Array<String>] :availability_zone_id_filter
-    #   A filter for the AZ IDs (`use1-az1`) of the Outpost.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for a
-    #   filter, the values are joined with an `OR`, and the request returns
-    #   all results that match any of the specified values.
+    #   Filters the results by AZ ID (for example, `use1-az1`).
     #
     # @return [Types::ListOutpostsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1298,14 +1219,14 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Lists the Outpost sites for your Amazon Web Services account. Add
-    # operating address filters to your request to return a more specific
-    # list of results. Use filters to match site city, country code, or
-    # state/region of the operating address.
+    # Lists the Outpost sites for your Amazon Web Services account. Use
+    # filters to return specific results.
     #
-    # If you specify multiple filters, the filters are joined with an `AND`,
-    # and the request returns only results that match all of the specified
-    # filters.
+    # Use filters to return specific results. If you specify multiple
+    # filters, the results include only the resources that match all of the
+    # specified filters. For a filter where you can specify multiple values,
+    # the results include items that match any of the values that you
+    # specify for the filter.
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -1314,25 +1235,13 @@ module Aws::Outposts
     #   The maximum page size.
     #
     # @option params [Array<String>] :operating_address_country_code_filter
-    #   A filter for the country code of the Outpost site.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for a
-    #   filter, the values are joined with an `OR`, and the request returns
-    #   all results that match any of the specified values.
+    #   Filters the results by country code.
     #
     # @option params [Array<String>] :operating_address_state_or_region_filter
-    #   A filter for the state/region of the Outpost site.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for a
-    #   filter, the values are joined with an `OR`, and the request returns
-    #   all results that match any of the specified values.
+    #   Filters the results by state or region.
     #
     # @option params [Array<String>] :operating_address_city_filter
-    #   A filter for the city of the Outpost site.
-    #
-    #   Filter values are case sensitive. If you specify multiple values for a
-    #   filter, the values are joined with an `OR`, and the request returns
-    #   all results that match any of the specified values.
+    #   Filters the results by city.
     #
     # @return [Types::ListSitesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1531,14 +1440,6 @@ module Aws::Outposts
     # @option params [required, String] :outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
-    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
-    #   Query API. To address backwards compatibility, the parameter names
-    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
-    #   can make the request with an ARN.
-    #
-    #    </note>
-    #
     # @option params [String] :name
     #   The name of the Outpost.
     #
@@ -1586,18 +1487,10 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Updates the site.
+    # Updates the specified site.
     #
     # @option params [required, String] :site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
-    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
-    #   Query API. To address backwards compatibility, the parameter names
-    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
-    #   can make the request with an ARN.
-    #
-    #    </note>
     #
     # @option params [String] :name
     #   The name of the site.
@@ -1653,10 +1546,10 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Updates the site address.
+    # Updates the address of the specified site.
     #
-    # To update a site address with an order `IN_PROGRESS`, you must wait
-    # for the order to complete or cancel the order.
+    # You can't update a site address if there is an order in progress. You
+    # must wait for the order to complete or cancel the order.
     #
     # You can update the operating address before you place an order at the
     # site, or after all Outposts that belong to the site have been
@@ -1664,14 +1557,6 @@ module Aws::Outposts
     #
     # @option params [required, String] :site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
-    #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
-    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
-    #   Query API. To address backwards compatibility, the parameter names
-    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
-    #   can make the request with an ARN.
-    #
-    #    </note>
     #
     # @option params [required, String] :address_type
     #   The type of the address.
@@ -1743,28 +1628,20 @@ module Aws::Outposts
     # @option params [required, String] :site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
     #
-    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
-    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
-    #   Query API. To address backwards compatibility, the parameter names
-    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
-    #   can make the request with an ARN.
-    #
-    #    </note>
-    #
     # @option params [String] :power_draw_kva
-    #   Specify in kVA the power draw available at the hardware placement
-    #   position for the rack.
+    #   The power draw, in kVA, available at the hardware placement position
+    #   for the rack.
     #
     # @option params [String] :power_phase
-    #   Specify the power option that you can provide for hardware.
+    #   The power option that you can provide for hardware.
     #
     #   * Single-phase AC feed: 200 V to 277 V, 50 Hz or 60 Hz
     #
     #   * Three-phase AC feed: 346 V to 480 V, 50 Hz or 60 Hz
     #
     # @option params [String] :power_connector
-    #   Specify the power connector that Amazon Web Services should plan to
-    #   provide for connections to the hardware. Note the correlation between
+    #   The power connector that Amazon Web Services should plan to provide
+    #   for connections to the hardware. Note the correlation between
     #   `PowerPhase` and `PowerConnector`.
     #
     #   * Single-phase AC feed
@@ -1780,11 +1657,11 @@ module Aws::Outposts
     #     * **AH532P6W (red)** – 3P+N+E, 6hr; 32A; three phase
     #
     # @option params [String] :power_feed_drop
-    #   Specify whether the power feed comes above or below the rack.
+    #   Indicates whether the power feed comes above or below the rack.
     #
     # @option params [String] :uplink_gbps
-    #   Specify the uplink speed the rack should support for the connection to
-    #   the Region.
+    #   The uplink speed the rack should support for the connection to the
+    #   Region.
     #
     # @option params [String] :uplink_count
     #   Racks come with two Outpost network devices. Depending on the
@@ -1801,15 +1678,15 @@ module Aws::Outposts
     #   * 40 and 100 Gbps- Uplinks available: 1, 2, 4
     #
     # @option params [String] :fiber_optic_cable_type
-    #   Specify the type of fiber that you will use to attach the Outpost to
-    #   your network.
+    #   The type of fiber that you will use to attach the Outpost to your
+    #   network.
     #
     # @option params [String] :optical_standard
-    #   Specify the type of optical standard that you will use to attach the
-    #   Outpost to your network. This field is dependent on uplink speed,
-    #   fiber type, and distance to the upstream device. For more information
-    #   about networking requirements for racks, see [Network][1] in the
-    #   Amazon Web Services Outposts User Guide.
+    #   The type of optical standard that you will use to attach the Outpost
+    #   to your network. This field is dependent on uplink speed, fiber type,
+    #   and distance to the upstream device. For more information about
+    #   networking requirements for racks, see [Network][1] in the Amazon Web
+    #   Services Outposts User Guide.
     #
     #   * `OPTIC_10GBASE_SR`\: 10GBASE-SR
     #
@@ -1842,8 +1719,8 @@ module Aws::Outposts
     #   [1]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking
     #
     # @option params [String] :maximum_supported_weight_lbs
-    #   Specify the maximum rack weight that this site can support. `NO_LIMIT`
-    #   is over 2000lbs.
+    #   The maximum rack weight that this site can support. `NO_LIMIT` is over
+    #   2000lbs.
     #
     # @return [Types::UpdateSiteRackPhysicalPropertiesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1909,7 +1786,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

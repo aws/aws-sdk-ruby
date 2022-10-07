@@ -30,6 +30,7 @@ module Aws::Glue
     AuditColumnNamesList = Shapes::ListShape.new(name: 'AuditColumnNamesList')
     AuditContext = Shapes::StructureShape.new(name: 'AuditContext')
     AuditContextString = Shapes::StringShape.new(name: 'AuditContextString')
+    AuthTokenString = Shapes::StringShape.new(name: 'AuthTokenString')
     BackfillError = Shapes::StructureShape.new(name: 'BackfillError')
     BackfillErrorCode = Shapes::StringShape.new(name: 'BackfillErrorCode')
     BackfillErroredPartitionsList = Shapes::ListShape.new(name: 'BackfillErroredPartitionsList')
@@ -158,6 +159,7 @@ module Aws::Glue
     ColumnValueStringList = Shapes::ListShape.new(name: 'ColumnValueStringList')
     ColumnValuesString = Shapes::StringShape.new(name: 'ColumnValuesString')
     CommentString = Shapes::StringShape.new(name: 'CommentString')
+    CommitIdString = Shapes::StringShape.new(name: 'CommitIdString')
     Comparator = Shapes::StringShape.new(name: 'Comparator')
     Compatibility = Shapes::StringShape.new(name: 'Compatibility')
     CompressionType = Shapes::StringShape.new(name: 'CompressionType')
@@ -855,6 +857,9 @@ module Aws::Glue
     SortCriteria = Shapes::ListShape.new(name: 'SortCriteria')
     SortCriterion = Shapes::StructureShape.new(name: 'SortCriterion')
     SortDirectionType = Shapes::StringShape.new(name: 'SortDirectionType')
+    SourceControlAuthStrategy = Shapes::StringShape.new(name: 'SourceControlAuthStrategy')
+    SourceControlDetails = Shapes::StructureShape.new(name: 'SourceControlDetails')
+    SourceControlProvider = Shapes::StringShape.new(name: 'SourceControlProvider')
     SparkConnectorSource = Shapes::StructureShape.new(name: 'SparkConnectorSource')
     SparkConnectorTarget = Shapes::StructureShape.new(name: 'SparkConnectorTarget')
     SparkSQL = Shapes::StructureShape.new(name: 'SparkSQL')
@@ -987,6 +992,8 @@ module Aws::Glue
     UpdateDevEndpointRequest = Shapes::StructureShape.new(name: 'UpdateDevEndpointRequest')
     UpdateDevEndpointResponse = Shapes::StructureShape.new(name: 'UpdateDevEndpointResponse')
     UpdateGrokClassifierRequest = Shapes::StructureShape.new(name: 'UpdateGrokClassifierRequest')
+    UpdateJobFromSourceControlRequest = Shapes::StructureShape.new(name: 'UpdateJobFromSourceControlRequest')
+    UpdateJobFromSourceControlResponse = Shapes::StructureShape.new(name: 'UpdateJobFromSourceControlResponse')
     UpdateJobRequest = Shapes::StructureShape.new(name: 'UpdateJobRequest')
     UpdateJobResponse = Shapes::StructureShape.new(name: 'UpdateJobResponse')
     UpdateJsonClassifierRequest = Shapes::StructureShape.new(name: 'UpdateJsonClassifierRequest')
@@ -998,6 +1005,8 @@ module Aws::Glue
     UpdateRegistryResponse = Shapes::StructureShape.new(name: 'UpdateRegistryResponse')
     UpdateSchemaInput = Shapes::StructureShape.new(name: 'UpdateSchemaInput')
     UpdateSchemaResponse = Shapes::StructureShape.new(name: 'UpdateSchemaResponse')
+    UpdateSourceControlFromJobRequest = Shapes::StructureShape.new(name: 'UpdateSourceControlFromJobRequest')
+    UpdateSourceControlFromJobResponse = Shapes::StructureShape.new(name: 'UpdateSourceControlFromJobResponse')
     UpdateTableRequest = Shapes::StructureShape.new(name: 'UpdateTableRequest')
     UpdateTableResponse = Shapes::StructureShape.new(name: 'UpdateTableResponse')
     UpdateTriggerRequest = Shapes::StructureShape.new(name: 'UpdateTriggerRequest')
@@ -1802,6 +1811,7 @@ module Aws::Glue
     CreateJobRequest.add_member(:worker_type, Shapes::ShapeRef.new(shape: WorkerType, location_name: "WorkerType"))
     CreateJobRequest.add_member(:code_gen_configuration_nodes, Shapes::ShapeRef.new(shape: CodeGenConfigurationNodes, location_name: "CodeGenConfigurationNodes"))
     CreateJobRequest.add_member(:execution_class, Shapes::ShapeRef.new(shape: ExecutionClass, location_name: "ExecutionClass"))
+    CreateJobRequest.add_member(:source_control_details, Shapes::ShapeRef.new(shape: SourceControlDetails, location_name: "SourceControlDetails"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
@@ -3137,6 +3147,7 @@ module Aws::Glue
     Job.add_member(:glue_version, Shapes::ShapeRef.new(shape: GlueVersionString, location_name: "GlueVersion"))
     Job.add_member(:code_gen_configuration_nodes, Shapes::ShapeRef.new(shape: CodeGenConfigurationNodes, location_name: "CodeGenConfigurationNodes"))
     Job.add_member(:execution_class, Shapes::ShapeRef.new(shape: ExecutionClass, location_name: "ExecutionClass"))
+    Job.add_member(:source_control_details, Shapes::ShapeRef.new(shape: SourceControlDetails, location_name: "SourceControlDetails"))
     Job.struct_class = Types::Job
 
     JobBookmarkEntry.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
@@ -3211,6 +3222,7 @@ module Aws::Glue
     JobUpdate.add_member(:glue_version, Shapes::ShapeRef.new(shape: GlueVersionString, location_name: "GlueVersion"))
     JobUpdate.add_member(:code_gen_configuration_nodes, Shapes::ShapeRef.new(shape: CodeGenConfigurationNodes, location_name: "CodeGenConfigurationNodes"))
     JobUpdate.add_member(:execution_class, Shapes::ShapeRef.new(shape: ExecutionClass, location_name: "ExecutionClass"))
+    JobUpdate.add_member(:source_control_details, Shapes::ShapeRef.new(shape: SourceControlDetails, location_name: "SourceControlDetails"))
     JobUpdate.struct_class = Types::JobUpdate
 
     Join.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
@@ -4127,6 +4139,16 @@ module Aws::Glue
     SortCriterion.add_member(:sort, Shapes::ShapeRef.new(shape: Sort, location_name: "Sort"))
     SortCriterion.struct_class = Types::SortCriterion
 
+    SourceControlDetails.add_member(:provider, Shapes::ShapeRef.new(shape: SourceControlProvider, location_name: "Provider"))
+    SourceControlDetails.add_member(:repository, Shapes::ShapeRef.new(shape: Generic512CharString, location_name: "Repository"))
+    SourceControlDetails.add_member(:owner, Shapes::ShapeRef.new(shape: Generic512CharString, location_name: "Owner"))
+    SourceControlDetails.add_member(:branch, Shapes::ShapeRef.new(shape: Generic512CharString, location_name: "Branch"))
+    SourceControlDetails.add_member(:folder, Shapes::ShapeRef.new(shape: Generic512CharString, location_name: "Folder"))
+    SourceControlDetails.add_member(:last_commit_id, Shapes::ShapeRef.new(shape: Generic512CharString, location_name: "LastCommitId"))
+    SourceControlDetails.add_member(:auth_strategy, Shapes::ShapeRef.new(shape: SourceControlAuthStrategy, location_name: "AuthStrategy"))
+    SourceControlDetails.add_member(:auth_token, Shapes::ShapeRef.new(shape: Generic512CharString, location_name: "AuthToken"))
+    SourceControlDetails.struct_class = Types::SourceControlDetails
+
     SparkConnectorSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     SparkConnectorSource.add_member(:connection_name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "ConnectionName"))
     SparkConnectorSource.add_member(:connector_name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "ConnectorName"))
@@ -4608,6 +4630,20 @@ module Aws::Glue
     UpdateGrokClassifierRequest.add_member(:custom_patterns, Shapes::ShapeRef.new(shape: CustomPatterns, location_name: "CustomPatterns"))
     UpdateGrokClassifierRequest.struct_class = Types::UpdateGrokClassifierRequest
 
+    UpdateJobFromSourceControlRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
+    UpdateJobFromSourceControlRequest.add_member(:provider, Shapes::ShapeRef.new(shape: SourceControlProvider, location_name: "Provider"))
+    UpdateJobFromSourceControlRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: NameString, location_name: "RepositoryName"))
+    UpdateJobFromSourceControlRequest.add_member(:repository_owner, Shapes::ShapeRef.new(shape: NameString, location_name: "RepositoryOwner"))
+    UpdateJobFromSourceControlRequest.add_member(:branch_name, Shapes::ShapeRef.new(shape: NameString, location_name: "BranchName"))
+    UpdateJobFromSourceControlRequest.add_member(:folder, Shapes::ShapeRef.new(shape: NameString, location_name: "Folder"))
+    UpdateJobFromSourceControlRequest.add_member(:commit_id, Shapes::ShapeRef.new(shape: CommitIdString, location_name: "CommitId"))
+    UpdateJobFromSourceControlRequest.add_member(:auth_strategy, Shapes::ShapeRef.new(shape: SourceControlAuthStrategy, location_name: "AuthStrategy"))
+    UpdateJobFromSourceControlRequest.add_member(:auth_token, Shapes::ShapeRef.new(shape: AuthTokenString, location_name: "AuthToken"))
+    UpdateJobFromSourceControlRequest.struct_class = Types::UpdateJobFromSourceControlRequest
+
+    UpdateJobFromSourceControlResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
+    UpdateJobFromSourceControlResponse.struct_class = Types::UpdateJobFromSourceControlResponse
+
     UpdateJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "JobName"))
     UpdateJobRequest.add_member(:job_update, Shapes::ShapeRef.new(shape: JobUpdate, required: true, location_name: "JobUpdate"))
     UpdateJobRequest.struct_class = Types::UpdateJobRequest
@@ -4662,6 +4698,20 @@ module Aws::Glue
     UpdateSchemaResponse.add_member(:schema_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "SchemaName"))
     UpdateSchemaResponse.add_member(:registry_name, Shapes::ShapeRef.new(shape: SchemaRegistryNameString, location_name: "RegistryName"))
     UpdateSchemaResponse.struct_class = Types::UpdateSchemaResponse
+
+    UpdateSourceControlFromJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
+    UpdateSourceControlFromJobRequest.add_member(:provider, Shapes::ShapeRef.new(shape: SourceControlProvider, location_name: "Provider"))
+    UpdateSourceControlFromJobRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: NameString, location_name: "RepositoryName"))
+    UpdateSourceControlFromJobRequest.add_member(:repository_owner, Shapes::ShapeRef.new(shape: NameString, location_name: "RepositoryOwner"))
+    UpdateSourceControlFromJobRequest.add_member(:branch_name, Shapes::ShapeRef.new(shape: NameString, location_name: "BranchName"))
+    UpdateSourceControlFromJobRequest.add_member(:folder, Shapes::ShapeRef.new(shape: NameString, location_name: "Folder"))
+    UpdateSourceControlFromJobRequest.add_member(:commit_id, Shapes::ShapeRef.new(shape: CommitIdString, location_name: "CommitId"))
+    UpdateSourceControlFromJobRequest.add_member(:auth_strategy, Shapes::ShapeRef.new(shape: SourceControlAuthStrategy, location_name: "AuthStrategy"))
+    UpdateSourceControlFromJobRequest.add_member(:auth_token, Shapes::ShapeRef.new(shape: AuthTokenString, location_name: "AuthToken"))
+    UpdateSourceControlFromJobRequest.struct_class = Types::UpdateSourceControlFromJobRequest
+
+    UpdateSourceControlFromJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
+    UpdateSourceControlFromJobResponse.struct_class = Types::UpdateSourceControlFromJobResponse
 
     UpdateTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdateTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -7207,6 +7257,21 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
+      api.add_operation(:update_job_from_source_control, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateJobFromSourceControl"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateJobFromSourceControlRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateJobFromSourceControlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
       api.add_operation(:update_ml_transform, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateMLTransform"
         o.http_method = "POST"
@@ -7257,6 +7322,21 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_source_control_from_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSourceControlFromJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSourceControlFromJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSourceControlFromJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
       api.add_operation(:update_table, Seahorse::Model::Operation.new.tap do |o|

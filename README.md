@@ -497,6 +497,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Cognito Identity Provider                      | Aws::CognitoIdentityProvider             | aws-sdk-cognitoidentityprovider             | 2016-04-18  |
 | Amazon Cognito Sync                                   | Aws::CognitoSync                         | aws-sdk-cognitosync                         | 2014-06-30  |
 | Amazon Comprehend                                     | Aws::Comprehend                          | aws-sdk-comprehend                          | 2017-11-27  |
+| Amazon Connect Cases                                  | Aws::ConnectCases                        | aws-sdk-connectcases                        | 2022-10-03  |
 | Amazon Connect Contact Lens                           | Aws::ConnectContactLens                  | aws-sdk-connectcontactlens                  | 2020-08-21  |
 | Amazon Connect Customer Profiles                      | Aws::CustomerProfiles                    | aws-sdk-customerprofiles                    | 2020-08-15  |
 | Amazon Connect Participant Service                    | Aws::ConnectParticipant                  | aws-sdk-connectparticipant                  | 2018-09-07  |

@@ -3968,6 +3968,12 @@ module Aws::ResilienceHub
     # @!attribute [rw] policy
     #   The type of resiliency policy to be created, including the recovery
     #   time objective (RTO) and recovery point objective (RPO) in seconds.
+    #
+    #   <note markdown="1"> If you do not want to specify regional targets for a regional
+    #   policy, you must set the values of `rpoInSecs` and `rtoInSecs` to
+    #   `-1`.
+    #
+    #    </note>
     #   @return [Hash<String,Types::FailurePolicy>]
     #
     # @!attribute [rw] policy_arn

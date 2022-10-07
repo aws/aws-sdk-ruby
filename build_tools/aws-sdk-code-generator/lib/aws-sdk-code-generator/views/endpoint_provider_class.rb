@@ -11,7 +11,7 @@ module AwsSdkCodeGenerator
         @endpoint_rules = @service.endpoint_rules
 
         version = @endpoint_rules['version']
-        return if version.match(/^\d+\.\d+$/) # && version == '1.0'
+        return if version&.match(/^\d+\.\d+$/) # && version == '1.0'
 
         raise 'Endpoint Rules version must be 1.0'
       end

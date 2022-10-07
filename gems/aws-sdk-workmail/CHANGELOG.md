@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2022-10-04)
+------------------
+
+* Feature - This release adds support for impersonation roles in Amazon WorkMail.
+
 1.50.0 (2022-06-30)
 ------------------
 

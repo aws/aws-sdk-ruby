@@ -25,6 +25,7 @@ module Aws::Outposts
     AssetInfo = Shapes::StructureShape.new(name: 'AssetInfo')
     AssetListDefinition = Shapes::ListShape.new(name: 'AssetListDefinition')
     AssetLocation = Shapes::StructureShape.new(name: 'AssetLocation')
+    AssetState = Shapes::StringShape.new(name: 'AssetState')
     AssetType = Shapes::StringShape.new(name: 'AssetType')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
@@ -43,6 +44,7 @@ module Aws::Outposts
     CatalogItemWeightLbs = Shapes::IntegerShape.new(name: 'CatalogItemWeightLbs')
     City = Shapes::StringShape.new(name: 'City')
     CityList = Shapes::ListShape.new(name: 'CityList')
+    ComputeAssetState = Shapes::StringShape.new(name: 'ComputeAssetState')
     ComputeAttributes = Shapes::StructureShape.new(name: 'ComputeAttributes')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionDetails = Shapes::StructureShape.new(name: 'ConnectionDetails')
@@ -164,6 +166,7 @@ module Aws::Outposts
     StartConnectionResponse = Shapes::StructureShape.new(name: 'StartConnectionResponse')
     StateOrRegion = Shapes::StringShape.new(name: 'StateOrRegion')
     StateOrRegionList = Shapes::ListShape.new(name: 'StateOrRegionList')
+    StatusList = Shapes::ListShape.new(name: 'StatusList')
     String = Shapes::StringShape.new(name: 'String')
     SupportedHardwareType = Shapes::StringShape.new(name: 'SupportedHardwareType')
     SupportedStorageEnum = Shapes::StringShape.new(name: 'SupportedStorageEnum')
@@ -251,6 +254,7 @@ module Aws::Outposts
     CityList.member = Shapes::ShapeRef.new(shape: City)
 
     ComputeAttributes.add_member(:host_id, Shapes::ShapeRef.new(shape: HostId, location_name: "HostId"))
+    ComputeAttributes.add_member(:state, Shapes::ShapeRef.new(shape: ComputeAssetState, location_name: "State"))
     ComputeAttributes.struct_class = Types::ComputeAttributes
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -412,6 +416,7 @@ module Aws::Outposts
     ListAssetsInput.add_member(:host_id_filter, Shapes::ShapeRef.new(shape: HostIdList, location: "querystring", location_name: "HostIdFilter"))
     ListAssetsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults1000, location: "querystring", location_name: "MaxResults"))
     ListAssetsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "NextToken"))
+    ListAssetsInput.add_member(:status_filter, Shapes::ShapeRef.new(shape: StatusList, location: "querystring", location_name: "StatusFilter"))
     ListAssetsInput.struct_class = Types::ListAssetsInput
 
     ListAssetsOutput.add_member(:assets, Shapes::ShapeRef.new(shape: AssetListDefinition, location_name: "Assets"))
@@ -547,6 +552,8 @@ module Aws::Outposts
     StartConnectionResponse.struct_class = Types::StartConnectionResponse
 
     StateOrRegionList.member = Shapes::ShapeRef.new(shape: StateOrRegion)
+
+    StatusList.member = Shapes::ShapeRef.new(shape: AssetState)
 
     SupportedStorageList.member = Shapes::ShapeRef.new(shape: SupportedStorageEnum)
 
