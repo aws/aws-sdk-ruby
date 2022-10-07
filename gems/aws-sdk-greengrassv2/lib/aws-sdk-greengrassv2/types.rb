@@ -1691,6 +1691,11 @@ module Aws::GreengrassV2
     #   ISO 8601 format.
     #   @return [Time]
     #
+    # @!attribute [rw] status_details
+    #   The status details that explain why a deployment has an error. This
+    #   response will be null if the deployment is in a success state.
+    #   @return [Types::EffectiveDeploymentStatusDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/EffectiveDeployment AWS API Documentation
     #
     class EffectiveDeployment < Struct.new(
@@ -1703,7 +1708,40 @@ module Aws::GreengrassV2
       :core_device_execution_status,
       :reason,
       :creation_timestamp,
-      :modified_timestamp)
+      :modified_timestamp,
+      :status_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains all error-related information for the deployment record. The
+    # status details will be null if the deployment is in a success state.
+    #
+    # <note markdown="1"> Greengrass nucleus v2.8.0 or later is required to get an accurate
+    # `errorStack` and `errorTypes` response. This field will not be
+    # returned for earlier Greengrass nucleus versions.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] error_stack
+    #   Contains an ordered list of short error codes that range from the
+    #   most generic error to the most specific one. The error codes
+    #   describe the reason for failure whenever the
+    #   `coreDeviceExecutionStatus` is in a failed state. The response will
+    #   be an empty list if there is no error.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] error_types
+    #   Contains tags which describe the error. You can use the error types
+    #   to classify errors to assist with remediating the failure. The
+    #   response will be an empty list if there is no error.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/EffectiveDeploymentStatusDetails AWS API Documentation
+    #
+    class EffectiveDeploymentStatusDetails < Struct.new(
+      :error_stack,
+      :error_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2089,7 +2127,8 @@ module Aws::GreengrassV2
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_state_details
-    #   The details about the lifecycle state of the component.
+    #   A detailed response about the lifecycle state of the component that
+    #   explains the reason why a component has an error or is broken.
     #   @return [String]
     #
     # @!attribute [rw] is_root
@@ -2105,6 +2144,32 @@ module Aws::GreengrassV2
     #   undergo a state change and this status would not be updated.
     #   @return [Time]
     #
+    # @!attribute [rw] last_reported_timestamp
+    #   The last time the Greengrass core device sent a message containing a
+    #   certain component to the Amazon Web Services Cloud.
+    #
+    #   A component does not need to see a state change for this field to
+    #   update.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_installation_source
+    #   The most recent deployment source that brought the component to the
+    #   Greengrass core device. For a thing group deployment or thing
+    #   deployment, the source will be the The ID of the deployment. and for
+    #   local deployments it will be `LOCAL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_status_codes
+    #   The status codes that indicate the reason for failure whenever the
+    #   `lifecycleState` has an error or is in a broken state.
+    #
+    #   <note markdown="1"> Greengrass nucleus v2.8.0 or later is required to get an accurate
+    #   `lifecycleStatusCodes` response. This response can be inaccurate in
+    #   earlier Greengrass nucleus versions.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/InstalledComponent AWS API Documentation
     #
     class InstalledComponent < Struct.new(
@@ -2113,7 +2178,10 @@ module Aws::GreengrassV2
       :lifecycle_state,
       :lifecycle_state_details,
       :is_root,
-      :last_status_change_timestamp)
+      :last_status_change_timestamp,
+      :last_reported_timestamp,
+      :last_installation_source,
+      :lifecycle_status_codes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3235,9 +3303,16 @@ module Aws::GreengrassV2
     # @!attribute [rw] installed_components
     #   A list that summarizes each component on the core device.
     #
-    #   <note markdown="1"> Accuracy of the `lastStatusChangeTimestamp` response depends on
-    #   Greengrass nucleus v2.7.0. It performs best on Greengrass nucleus
-    #   v2.7.0 and can be inaccurate on earlier versions.
+    #   <note markdown="1"> Greengrass nucleus v2.7.0 or later is required to get an accurate
+    #   `lastStatusChangeTimestamp` response. This response can be
+    #   inaccurate in earlier Greengrass nucleus versions.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> Greengrass nucleus v2.8.0 or later is required to get an accurate
+    #   `lastInstallationSource` and `lastReportedTimestamp` response. This
+    #   response can be inaccurate or null in earlier Greengrass nucleus
+    #   versions.
     #
     #    </note>
     #   @return [Array<Types::InstalledComponent>]

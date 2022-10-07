@@ -97,7 +97,12 @@ module Aws::GreengrassV2
     DisassociateServiceRoleFromAccountRequest = Shapes::StructureShape.new(name: 'DisassociateServiceRoleFromAccountRequest')
     DisassociateServiceRoleFromAccountResponse = Shapes::StructureShape.new(name: 'DisassociateServiceRoleFromAccountResponse')
     EffectiveDeployment = Shapes::StructureShape.new(name: 'EffectiveDeployment')
+    EffectiveDeploymentErrorCode = Shapes::StringShape.new(name: 'EffectiveDeploymentErrorCode')
+    EffectiveDeploymentErrorStack = Shapes::ListShape.new(name: 'EffectiveDeploymentErrorStack')
+    EffectiveDeploymentErrorType = Shapes::StringShape.new(name: 'EffectiveDeploymentErrorType')
+    EffectiveDeploymentErrorTypeList = Shapes::ListShape.new(name: 'EffectiveDeploymentErrorTypeList')
     EffectiveDeploymentExecutionStatus = Shapes::StringShape.new(name: 'EffectiveDeploymentExecutionStatus')
+    EffectiveDeploymentStatusDetails = Shapes::StructureShape.new(name: 'EffectiveDeploymentStatusDetails')
     EffectiveDeploymentsList = Shapes::ListShape.new(name: 'EffectiveDeploymentsList')
     FileSystemPath = Shapes::StringShape.new(name: 'FileSystemPath')
     GGCVersion = Shapes::StringShape.new(name: 'GGCVersion')
@@ -116,6 +121,8 @@ module Aws::GreengrassV2
     GetServiceRoleForAccountResponse = Shapes::StructureShape.new(name: 'GetServiceRoleForAccountResponse')
     InstalledComponent = Shapes::StructureShape.new(name: 'InstalledComponent')
     InstalledComponentLifecycleState = Shapes::StringShape.new(name: 'InstalledComponentLifecycleState')
+    InstalledComponentLifecycleStatusCode = Shapes::StringShape.new(name: 'InstalledComponentLifecycleStatusCode')
+    InstalledComponentLifecycleStatusCodeList = Shapes::ListShape.new(name: 'InstalledComponentLifecycleStatusCodeList')
     InstalledComponentList = Shapes::ListShape.new(name: 'InstalledComponentList')
     InstalledComponentTopologyFilter = Shapes::StringShape.new(name: 'InstalledComponentTopologyFilter')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -460,7 +467,16 @@ module Aws::GreengrassV2
     EffectiveDeployment.add_member(:reason, Shapes::ShapeRef.new(shape: Reason, location_name: "reason"))
     EffectiveDeployment.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTimestamp"))
     EffectiveDeployment.add_member(:modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modifiedTimestamp"))
+    EffectiveDeployment.add_member(:status_details, Shapes::ShapeRef.new(shape: EffectiveDeploymentStatusDetails, location_name: "statusDetails"))
     EffectiveDeployment.struct_class = Types::EffectiveDeployment
+
+    EffectiveDeploymentErrorStack.member = Shapes::ShapeRef.new(shape: EffectiveDeploymentErrorCode)
+
+    EffectiveDeploymentErrorTypeList.member = Shapes::ShapeRef.new(shape: EffectiveDeploymentErrorType)
+
+    EffectiveDeploymentStatusDetails.add_member(:error_stack, Shapes::ShapeRef.new(shape: EffectiveDeploymentErrorStack, location_name: "errorStack"))
+    EffectiveDeploymentStatusDetails.add_member(:error_types, Shapes::ShapeRef.new(shape: EffectiveDeploymentErrorTypeList, location_name: "errorTypes"))
+    EffectiveDeploymentStatusDetails.struct_class = Types::EffectiveDeploymentStatusDetails
 
     EffectiveDeploymentsList.member = Shapes::ShapeRef.new(shape: EffectiveDeployment)
 
@@ -529,7 +545,12 @@ module Aws::GreengrassV2
     InstalledComponent.add_member(:lifecycle_state_details, Shapes::ShapeRef.new(shape: LifecycleStateDetails, location_name: "lifecycleStateDetails"))
     InstalledComponent.add_member(:is_root, Shapes::ShapeRef.new(shape: IsRoot, location_name: "isRoot"))
     InstalledComponent.add_member(:last_status_change_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastStatusChangeTimestamp"))
+    InstalledComponent.add_member(:last_reported_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastReportedTimestamp"))
+    InstalledComponent.add_member(:last_installation_source, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "lastInstallationSource"))
+    InstalledComponent.add_member(:lifecycle_status_codes, Shapes::ShapeRef.new(shape: InstalledComponentLifecycleStatusCodeList, location_name: "lifecycleStatusCodes"))
     InstalledComponent.struct_class = Types::InstalledComponent
+
+    InstalledComponentLifecycleStatusCodeList.member = Shapes::ShapeRef.new(shape: InstalledComponentLifecycleStatusCode)
 
     InstalledComponentList.member = Shapes::ShapeRef.new(shape: InstalledComponent)
 

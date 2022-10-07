@@ -187,12 +187,12 @@ module Aws::CodeGuruReviewer
     # @!attribute [rw] build_artifacts_object_key
     #   The S3 object key for a build artifacts .zip file that contains .jar
     #   or .class files. This is required for a code review with security
-    #   analysis. For more information, see [Create code reviews with
-    #   security analysis][1] in the *Amazon CodeGuru Reviewer User Guide*.
+    #   analysis. For more information, see [Create code reviews with GitHub
+    #   Actions][1] in the *Amazon CodeGuru Reviewer User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/code-review-security.html
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/working-with-cicd.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CodeArtifacts AWS API Documentation

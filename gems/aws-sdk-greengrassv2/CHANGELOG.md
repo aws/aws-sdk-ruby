@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2022-10-07)
+------------------
+
+* Feature - This release adds error status details for deployments and components that failed on a device and adds features to improve visibility into component installation.
+
 1.19.0 (2022-08-30)
 ------------------
 

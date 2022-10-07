@@ -1700,6 +1700,10 @@ module Aws::GreengrassV2
     #   resp.effective_deployments[0].reason #=> String
     #   resp.effective_deployments[0].creation_timestamp #=> Time
     #   resp.effective_deployments[0].modified_timestamp #=> Time
+    #   resp.effective_deployments[0].status_details.error_stack #=> Array
+    #   resp.effective_deployments[0].status_details.error_stack[0] #=> String
+    #   resp.effective_deployments[0].status_details.error_types #=> Array
+    #   resp.effective_deployments[0].status_details.error_types[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListEffectiveDeployments AWS API Documentation
@@ -1793,6 +1797,10 @@ module Aws::GreengrassV2
     #   resp.installed_components[0].lifecycle_state_details #=> String
     #   resp.installed_components[0].is_root #=> Boolean
     #   resp.installed_components[0].last_status_change_timestamp #=> Time
+    #   resp.installed_components[0].last_reported_timestamp #=> Time
+    #   resp.installed_components[0].last_installation_source #=> String
+    #   resp.installed_components[0].lifecycle_status_codes #=> Array
+    #   resp.installed_components[0].lifecycle_status_codes[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListInstalledComponents AWS API Documentation
@@ -2047,7 +2055,7 @@ module Aws::GreengrassV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrassv2'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

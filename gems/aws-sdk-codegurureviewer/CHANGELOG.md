@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2022-10-07)
+------------------
+
+* Feature - Documentation update to replace broken link.
+
 1.32.0 (2022-09-01)
 ------------------
 

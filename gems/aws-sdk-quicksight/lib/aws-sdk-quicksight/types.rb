@@ -844,7 +844,7 @@ module Aws::QuickSight
     #       {
     #         geo_spatial_column_group: {
     #           name: "ColumnGroupName", # required
-    #           country_code: "US", # required, accepts US
+    #           country_code: "US", # accepts US
     #           columns: ["ColumnName"], # required
     #         },
     #       }
@@ -1811,7 +1811,7 @@ module Aws::QuickSight
     #           {
     #             geo_spatial_column_group: {
     #               name: "ColumnGroupName", # required
-    #               country_code: "US", # required, accepts US
+    #               country_code: "US", # accepts US
     #               columns: ["ColumnName"], # required
     #             },
     #           },
@@ -2203,6 +2203,7 @@ module Aws::QuickSight
     #             ],
     #           },
     #           copy_source_arn: "CopySourceArn",
+    #           secret_arn: "SecretArn",
     #         },
     #         permissions: [
     #           {
@@ -4247,6 +4248,11 @@ module Aws::QuickSight
     #   source.
     #   @return [Types::DataSourceErrorInfo]
     #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the secret associated with the
+    #   data source in Amazon Secrets Manager.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSource AWS API Documentation
     #
     class DataSource < Struct.new(
@@ -4261,7 +4267,8 @@ module Aws::QuickSight
       :alternate_data_source_parameters,
       :vpc_connection_properties,
       :ssl_properties,
-      :error_info)
+      :error_info,
+      :secret_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4378,6 +4385,7 @@ module Aws::QuickSight
     #           ],
     #         },
     #         copy_source_arn: "CopySourceArn",
+    #         secret_arn: "SecretArn",
     #       }
     #
     # @!attribute [rw] credential_pair
@@ -4391,11 +4399,17 @@ module Aws::QuickSight
     #   the credentials for the `DataSourceCredentials` structure.
     #   @return [String]
     #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the secret associated with the
+    #   data source in Amazon Secrets Manager.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSourceCredentials AWS API Documentation
     #
     class DataSourceCredentials < Struct.new(
       :credential_pair,
-      :copy_source_arn)
+      :copy_source_arn,
+      :secret_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7703,7 +7717,7 @@ module Aws::QuickSight
     #
     #       {
     #         name: "ColumnGroupName", # required
-    #         country_code: "US", # required, accepts US
+    #         country_code: "US", # accepts US
     #         columns: ["ColumnName"], # required
     #       }
     #
@@ -14261,7 +14275,7 @@ module Aws::QuickSight
     #           {
     #             geo_spatial_column_group: {
     #               name: "ColumnGroupName", # required
-    #               country_code: "US", # required, accepts US
+    #               country_code: "US", # accepts US
     #               columns: ["ColumnName"], # required
     #             },
     #           },
@@ -14707,6 +14721,7 @@ module Aws::QuickSight
     #             ],
     #           },
     #           copy_source_arn: "CopySourceArn",
+    #           secret_arn: "SecretArn",
     #         },
     #         vpc_connection_properties: {
     #           vpc_connection_arn: "Arn", # required
@@ -15953,9 +15968,10 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   The user's user name. In the output, the value for `UserName` is
-    #   `N/A` when the value for `IdentityType` is `IAM` and the
-    #   corresponding IAM user is deleted.
+    #   The user's user name. This value is required if you are registering
+    #   a user that will be managed in Amazon QuickSight. In the output, the
+    #   value for `UserName` is `N/A` when the value for `IdentityType` is
+    #   `IAM` and the corresponding IAM user is deleted.
     #   @return [String]
     #
     # @!attribute [rw] email
