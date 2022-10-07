@@ -22,16 +22,15 @@ module Aws
         handlers.add(Handler, step: :sign, operations: operations)
       end
 
+      # @api private
+      # Return a signer with the `sign(context)` method or nil if no
+      # signature should be applied
       def self.signer_for(auth_scheme, config, region_override = nil)
         case auth_scheme['name']
         when 'sigv4', 'sigv4a'
-          begin
-            SignatureV4.build_v4_signer(auth_scheme, config, region_override)
-          rescue Aws::Sigv4::Errors::MissingCredentialsError
-            raise Aws::Errors::MissingCredentialsError
-          end
+          SignatureV4.new(auth_scheme, config, region_override)
         when 'bearer'
-          'Bearer'
+          Bearer.new(auth_scheme, config, region_override)
         when 'none'
           # don't sign
         end
@@ -45,53 +44,52 @@ module Aws
             context[:sigv4_region]
           )
 
-          case signer
-          when Aws::Sigv4::Signer
-            Sign::SignatureV4.apply_signature(signer, context)
-          when 'Bearer'
-            Sign::Bearer.apply(context)
-          end
-
+          signer.sign(context) if signer
           @handler.call(context)
         end
       end
 
       # @!api private
-      module Bearer
-        class << self
-          def apply(context)
-            if context.http_request.endpoint.scheme != 'https'
-              raise ArgumentError,
-                    'Unable to use bearer authorization on non https endpoint.'
-            end
+      class Bearer
+        def initialize(auth_scheme, config, region_override = nil)
+        end
 
-            token_provider = context.config.token_provider
-
-            raise Errors::MissingBearerTokenError unless token_provider&.set?
-
-            context.http_request.headers['Authorization'] =
-              "Bearer #{token_provider.token.token}"
+        def sign(context)
+          if context.http_request.endpoint.scheme != 'https'
+            raise ArgumentError,
+                  'Unable to use bearer authorization on non https endpoint.'
           end
+
+          token_provider = context.config.token_provider
+
+          raise Errors::MissingBearerTokenError unless token_provider&.set?
+
+          context.http_request.headers['Authorization'] =
+            "Bearer #{token_provider.token.token}"
+        end
+
+        def presign_url(*args)
+          raise ArgumentError, 'Bearer auth does not support presigned urls'
         end
       end
 
       # @api private
-      module SignatureV4
-        class << self
-          def build_v4_signer(auth_scheme, config, region_override = nil)
-            scheme_name = auth_scheme['name']
+      class SignatureV4
+        def initialize(auth_scheme, config, region_override = nil)
+          scheme_name = auth_scheme['name']
 
-            unless %w[sigv4 sigv4a].include?(scheme_name)
-              raise ArgumentError,
-                    "Expected sigv4 or sigv4a auth scheme, got #{scheme_name}"
-            end
+          unless %w[sigv4 sigv4a].include?(scheme_name)
+            raise ArgumentError,
+                  "Expected sigv4 or sigv4a auth scheme, got #{scheme_name}"
+          end
 
-            region = if scheme_name == 'sigv4a'
-                       auth_scheme['signingRegionSet'].first
-                     else
-                       auth_scheme['signingRegion']
-                     end
-            Aws::Sigv4::Signer.new(
+          region = if scheme_name == 'sigv4a'
+                     auth_scheme['signingRegionSet'].first
+                   else
+                     auth_scheme['signingRegion']
+                   end
+          begin
+            @signer = Aws::Sigv4::Signer.new(
               service: config.sigv4_name || auth_scheme['signingName'],
               region: region_override || config.sigv4_region || region,
               credentials_provider: config.credentials,
@@ -99,63 +97,69 @@ module Aws
               uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
               unsigned_headers: %w[content-length user-agent x-amzn-trace-id]
             )
+          rescue Aws::Sigv4::Errors::MissingCredentialsError
+            raise Aws::Errors::MissingCredentialsError
           end
+        end
 
-          def apply_signature(signer, context)
-            req = context.http_request
+        def sign(context)
+          req = context.http_request
 
-            apply_authtype(context, req)
-            reset_signature(req)
-            apply_clock_skew(context, req)
+          apply_authtype(context, req)
+          reset_signature(req)
+          apply_clock_skew(context, req)
 
-            # compute the signature
-            begin
-              signature = signer.sign_request(
-                http_method: req.http_method,
-                url: req.endpoint,
-                headers: req.headers,
-                body: req.body
-              )
-            rescue Aws::Sigv4::Errors::MissingCredentialsError
-              # Necessary for when credentials is explicitly set to nil
-              raise Aws::Errors::MissingCredentialsError
-            end
-            # apply signature headers
-            req.headers.update(signature.headers)
-
-            # add request metadata with signature components for debugging
-            context[:canonical_request] = signature.canonical_request
-            context[:string_to_sign] = signature.string_to_sign
+          # compute the signature
+          begin
+            signature = @signer.sign_request(
+              http_method: req.http_method,
+              url: req.endpoint,
+              headers: req.headers,
+              body: req.body
+            )
+          rescue Aws::Sigv4::Errors::MissingCredentialsError
+            # Necessary for when credentials is explicitly set to nil
+            raise Aws::Errors::MissingCredentialsError
           end
+          # apply signature headers
+          req.headers.update(signature.headers)
 
-          private
+          # add request metadata with signature components for debugging
+          context[:canonical_request] = signature.canonical_request
+          context[:string_to_sign] = signature.string_to_sign
+        end
 
-          def apply_authtype(context, req)
-            if context.operation['authtype'].eql?('v4-unsigned-body') &&
-               req.endpoint.scheme.eql?('https')
-              req.headers['X-Amz-Content-Sha256'] ||= 'UNSIGNED-PAYLOAD'
-            end
+        def presign_url(*args)
+          @signer.presign_url(*args)
+        end
+
+        private
+
+        def apply_authtype(context, req)
+          if context.operation['authtype'].eql?('v4-unsigned-body') &&
+             req.endpoint.scheme.eql?('https')
+            req.headers['X-Amz-Content-Sha256'] ||= 'UNSIGNED-PAYLOAD'
           end
+        end
 
-          def reset_signature(req)
-            # in case this request is being re-signed
-            req.headers.delete('Authorization')
-            req.headers.delete('X-Amz-Security-Token')
-            req.headers.delete('X-Amz-Date')
-            req.headers.delete('x-Amz-Region-Set')
-          end
+        def reset_signature(req)
+          # in case this request is being re-signed
+          req.headers.delete('Authorization')
+          req.headers.delete('X-Amz-Security-Token')
+          req.headers.delete('X-Amz-Date')
+          req.headers.delete('x-Amz-Region-Set')
+        end
 
-          def apply_clock_skew(context, req)
-            if context.config.respond_to?(:clock_skew) &&
-               context.config.clock_skew &&
-               context.config.correct_clock_skew
+        def apply_clock_skew(context, req)
+          if context.config.respond_to?(:clock_skew) &&
+             context.config.clock_skew &&
+             context.config.correct_clock_skew
 
-              endpoint = context.http_request.endpoint
-              skew = context.config.clock_skew.clock_correction(endpoint)
-              if skew.abs.positive?
-                req.headers['X-Amz-Date'] =
-                  (Time.now.utc + skew).strftime('%Y%m%dT%H%M%SZ')
-              end
+            endpoint = context.http_request.endpoint
+            skew = context.config.clock_skew.clock_correction(endpoint)
+            if skew.abs.positive?
+              req.headers['X-Amz-Date'] =
+                (Time.now.utc + skew).strftime('%Y%m%dT%H%M%SZ')
             end
           end
         end

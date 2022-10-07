@@ -7,135 +7,56 @@ module Aws
     describe Sign do
 
       TestClient = ApiHelper.sample_service(
-        api: {
-        'metadata' => {
-          'protocol' => 'rest-xml',
-          'signatureVersion' => 'v4',
-          'endpointPrefix' => 'svc',
+        operations: {
+          'Operation' => {
+            'name' => 'Operation',
+            'http' => { 'method' => 'POST', 'requestUri' => '/' },
+          },
+          'StreamingOperation' => {
+            'name' => 'Operation',
+            'http' => { 'method' => 'POST', 'requestUri' => '/streaming' },
+            'authtype' => 'v4-unsigned-body'
+          },
         },
-        'operations' => {
-          'StreamingFoo' => {
-            'name' => 'StreamingFoo',
-            'http' => {
-              'method' => 'POST',
-              'requestUri' => '/foo/{fooName}'
-            },
-            'input' => {
-              'shape' => 'StreamingFooRequest'
-            },
-            'output' => {
-              'shape' => 'StreamingFooResponse'
-            },
-            'authtype'=> 'v4-unsigned-body'
-          },
-          'NonStreamingBar' => {
-            'name' => 'NonStreamingBar',
-            'http' => {
-              'method' => 'POST',
-              'requestUri' => '/bar/{barName}'
-            },
-            'input' => {
-              'shape' => 'NonStreamingBarRequest'
-            },
-            'output' => {
-              'shape' => 'NonStreamingBarResponse'
-            },
-          }
-        },
-        'shapes' => {
-          'FooName' => {
-            'type' => 'string'
-          },
-          'BarName' => {
-            'type' => 'string'
-          },
-          'Boolean' => {
-            'type' => 'boolean'
-          },
-          'StreamingFooRequest' => {
-            'type' => 'structure',
-            'members' => {
-              'fooName' => {
-                'shape' => 'FooName',
-                'location' => 'uri',
-                'locationName' => 'fooName'
-              }
-            }
-          },
-          'NonStreamingBarRequest' => {
-            'type' => 'structure',
-            'members' => {
-              'barName' => {
-                'shape' => 'BarName',
-                'location' => 'uri',
-                'locationName' => 'barName'
-              }
-            }
-          },
-          'StreamingFooResponse' => {
-            'type' => 'structure',
-            'members' => {
-              'Return' => {
-                'shape' => 'Boolean',
-                'locationName' => 'return'
-              }
-            }
-          },
-          'NonStreamingBarResponse' => {
-            'type' => 'structure',
-            'members' => {
-              'Return' => {
-                'shape' => 'Boolean',
-                'locationName' => 'return'
-              }
-            }
-          }
+        endpoint_rules: {
+          'version' => '1.0', 'parameters' => {}, 'rules' => []
         }
-      },
-        endpoint_rules:
-          ApiHelper.regionalized_endpoint_rules('svc')
       ).const_get(:Client)
 
-      class OverrideAuthScheme < Seahorse::Client::Plugin
-        option(:override_auth_scheme)
-
-        def add_handlers(handlers, cfg)
-          handlers.add(Handler, step: :sign, priority: 51)
-        end
-        class Handler < Seahorse::Client::Handler
-          def call(context)
-            if (context.config.override_auth_scheme)
-              context[:auth_scheme] = context.config.override_auth_scheme
-            end
-            @handler.call(context)
-          end
-        end
-      end
-
-      TestClient.add_plugin(OverrideAuthScheme)
-
       let(:region) { 'us-west-2' }
-      let(:auth_scheme) do
-        {
-          'name' => 'sigv4',
-          'signingRegion' => region,
-          'signingName' => 'svc',
-          'disableDoubleEncoding' => false
-        }
-      end
+      let(:auth_scheme) { {'name' => 'none'} }
+      let(:endpoint) { 'https://svc.amazonaws.com' }
       let(:client_options) do
         {
           stub_responses: true,
           region: region,
-          override_auth_scheme: auth_scheme
+          endpoint_provider:
+            double(
+              resolve_endpoint:
+                Aws::Endpoints::Endpoint.new(
+                  url: endpoint,
+                  properties: {
+                    'authSchemes' => [auth_scheme]
+                  }
+                )
+            )
         }
       end
 
+
       let(:client) { TestClient.new(client_options) }
       context 'sigv4' do
+        let(:auth_scheme) do
+          {
+            'name' => 'sigv4',
+            'signingRegion' => region,
+            'signingName' => 'svc',
+            'disableDoubleEncoding' => false
+          }
+        end
 
         it 'signs the request with sigv4' do
-          resp = client.non_streaming_bar(bar_name: 'bar')
+          resp = client.operation
           req = resp.context.http_request
           expect(req.headers['authorization']).to include('AWS4-HMAC-SHA256')
         end
@@ -143,7 +64,7 @@ module Aws
         it 'prefers the configured sigv4_name' do
           client = TestClient.new(
             client_options.merge(sigv4_name: 'override-name'))
-          resp = client.non_streaming_bar(bar_name: 'bar')
+          resp = client.operation
           req = resp.context.http_request
           expect(req.headers['authorization']).to include('override-name')
         end
@@ -151,7 +72,7 @@ module Aws
         it 'prefers the configured sigv4_region over the authscheme' do
           client = TestClient.new(
             client_options.merge(sigv4_region: 'config-region'))
-          resp = client.non_streaming_bar(bar_name: 'bar')
+          resp = client.operation
           req = resp.context.http_request
           expect(req.headers['authorization']).to include('config-region')
         end
@@ -165,37 +86,38 @@ module Aws
             m.call(*args)
           end
 
-          resp = client.non_streaming_bar(bar_name: 'bar')
+          resp = client.operation
           req = resp.context.http_request
           expect(req.headers['authorization']).to include('context-region')
         end
 
         it 'raises an error when attempting to sign a request w/out credentials' do
-          client = TestClient.new(region: 'us-west-1')
+          client = TestClient.new(client_options.tap { |o| o.delete(:stub_responses)} )
           expect {
-            client.non_streaming_bar(bar_name: 'bar')
+            client.operation
           }.to raise_error(Errors::MissingCredentialsError)
         end
 
         describe 'authtype trait' do
           it "uses unsigned payload for operations with 'v4-unsigned-payload' for 'authtype'" do
-            resp = client.streaming_foo(foo_name: 'foo')
+            resp = client.streaming_operation
             req = resp.context.http_request
             expect(req.headers['x-amz-content-sha256']).to eq('UNSIGNED-PAYLOAD')
           end
 
           it "signs payload for operations without 'v4-unsigned-payload' for 'authtype'" do
-            resp = client.non_streaming_bar(bar_name: 'bar')
+            resp = client.operation
             req = resp.context.http_request
             expect(req.headers['x-amz-content-sha256']).not_to eq('UNSIGNED-PAYLOAD')
           end
 
-          it "signs payload for HTTP request even when 'v4-unsigned-payload' is set" do
-            client = TestClient.new(
-              client_options.merge(endpoint: 'http://insecure.com'))
-            resp = client.streaming_foo(foo_name: 'foo')
-            req = resp.context.http_request
-            expect(req.headers['x-amz-content-sha256']).not_to eq('UNSIGNED-PAYLOAD')
+          context 'http endpoint' do
+            let(:endpoint) { 'http://insecure.com' }
+            it "signs payload for HTTP request even when 'v4-unsigned-payload' is set" do
+              resp = client.streaming_operation
+              req = resp.context.http_request
+              expect(req.headers['x-amz-content-sha256']).not_to eq('UNSIGNED-PAYLOAD')
+            end
           end
         end
 
@@ -215,7 +137,7 @@ module Aws
             client = TestClient.new(client_options.merge(
               clock_skew: nil,
             ))
-            resp = client.non_streaming_bar(bar_name: 'bar')
+            resp = client.operation
             expect(resp.context.http_request.headers['X-Amz-Date']).
               to eq now.utc.strftime("%Y%m%dT%H%M%SZ")
           end
@@ -226,7 +148,7 @@ module Aws
               correct_clock_skew: false
             ))
             expect(clock_skew).not_to receive(:clock_correction)
-            resp = client.non_streaming_bar(bar_name: 'bar')
+            resp = client.operation
             expect(resp.context.http_request.headers['X-Amz-Date']).
               to eq now.utc.strftime("%Y%m%dT%H%M%SZ")
           end
@@ -238,7 +160,7 @@ module Aws
             ))
             clock_skew = client.config.clock_skew
             expect(clock_skew).to receive(:clock_correction).and_return(0)
-            resp = client.non_streaming_bar(bar_name: 'bar')
+            resp = client.operation
             expect(resp.context.http_request.headers['X-Amz-Date']).
               to eq now.utc.strftime("%Y%m%dT%H%M%SZ")
           end
@@ -250,7 +172,7 @@ module Aws
             ))
             clock_skew = client.config.clock_skew
             expect(clock_skew).to receive(:clock_correction).and_return(1000)
-            resp = client.non_streaming_bar(bar_name: 'bar')
+            resp = client.operation
             expect(resp.context.http_request.headers['X-Amz-Date']).
               to eq (now.utc + 1000).strftime("%Y%m%dT%H%M%SZ")
           end

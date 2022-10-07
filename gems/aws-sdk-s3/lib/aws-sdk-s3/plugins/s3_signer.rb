@@ -134,7 +134,7 @@ module Aws
               actual_region
             )
 
-            Aws::Plugins::Sign::SignatureV4.apply_signature(signer, context)
+            signer.sign(context)
           end
 
           def region_from_body(body)
