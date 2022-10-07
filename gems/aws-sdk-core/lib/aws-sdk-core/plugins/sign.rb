@@ -23,16 +23,15 @@ module Aws
       end
 
       # @api private
-      # Return a signer with the `sign(context)` method or nil if no
-      # signature should be applied
+      # Return a signer with the `sign(context)` method
       def self.signer_for(auth_scheme, config, region_override = nil)
         case auth_scheme['name']
         when 'sigv4', 'sigv4a'
           SignatureV4.new(auth_scheme, config, region_override)
         when 'bearer'
-          Bearer.new(auth_scheme, config, region_override)
-        when 'none'
-          # don't sign
+          Bearer.new
+        else
+          NullSigner.new
         end
       end
 
@@ -44,14 +43,14 @@ module Aws
             context[:sigv4_region]
           )
 
-          signer.sign(context) if signer
+          signer.sign(context)
           @handler.call(context)
         end
       end
 
       # @!api private
       class Bearer
-        def initialize(auth_scheme, config, region_override = nil)
+        def initialize
         end
 
         def sign(context)
@@ -164,6 +163,16 @@ module Aws
           end
         end
 
+      end
+
+      # @api private
+      class NullSigner
+
+        def sign(context)
+        end
+
+        def presign_url(*args)
+        end
       end
     end
   end
