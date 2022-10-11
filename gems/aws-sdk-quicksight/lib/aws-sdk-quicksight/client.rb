@@ -1165,7 +1165,7 @@ module Aws::QuickSight
     #       {
     #         geo_spatial_column_group: {
     #           name: "ColumnGroupName", # required
-    #           country_code: "US", # required, accepts US
+    #           country_code: "US", # accepts US
     #           columns: ["ColumnName"], # required
     #         },
     #       },
@@ -1497,6 +1497,7 @@ module Aws::QuickSight
     #         ],
     #       },
     #       copy_source_arn: "CopySourceArn",
+    #       secret_arn: "SecretArn",
     #     },
     #     permissions: [
     #       {
@@ -3790,6 +3791,7 @@ module Aws::QuickSight
     #   resp.data_source.ssl_properties.disable_ssl #=> Boolean
     #   resp.data_source.error_info.type #=> String, one of "ACCESS_DENIED", "COPY_SOURCE_NOT_FOUND", "TIMEOUT", "ENGINE_VERSION_NOT_SUPPORTED", "UNKNOWN_HOST", "GENERIC_SQL_FAILURE", "CONFLICT", "UNKNOWN"
     #   resp.data_source.error_info.message #=> String
+    #   resp.data_source.secret_arn #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -5488,6 +5490,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].ssl_properties.disable_ssl #=> Boolean
     #   resp.data_sources[0].error_info.type #=> String, one of "ACCESS_DENIED", "COPY_SOURCE_NOT_FOUND", "TIMEOUT", "ENGINE_VERSION_NOT_SUPPORTED", "UNKNOWN_HOST", "GENERIC_SQL_FAILURE", "CONFLICT", "UNKNOWN"
     #   resp.data_sources[0].error_info.message #=> String
+    #   resp.data_sources[0].secret_arn #=> String
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -7548,7 +7551,8 @@ module Aws::QuickSight
     end
 
     # Updates a dataset. This operation doesn't support datasets that
-    # include uploaded files as a source.
+    # include uploaded files as a source. Partial updates are not supported
+    # by this operation.
     #
     # @option params [required, String] :aws_account_id
     #   The Amazon Web Services account ID.
@@ -7721,7 +7725,7 @@ module Aws::QuickSight
     #       {
     #         geo_spatial_column_group: {
     #           name: "ColumnGroupName", # required
-    #           country_code: "US", # required, accepts US
+    #           country_code: "US", # accepts US
     #           columns: ["ColumnName"], # required
     #         },
     #       },
@@ -8088,6 +8092,7 @@ module Aws::QuickSight
     #         ],
     #       },
     #       copy_source_arn: "CopySourceArn",
+    #       secret_arn: "SecretArn",
     #     },
     #     vpc_connection_properties: {
     #       vpc_connection_arn: "Arn", # required
@@ -9104,7 +9109,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

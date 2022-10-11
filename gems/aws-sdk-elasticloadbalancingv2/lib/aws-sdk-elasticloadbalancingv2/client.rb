@@ -3945,7 +3945,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Sets the type of IP addresses used by the subnets of the specified
-    # Application Load Balancer or Network Load Balancer.
+    # load balancer.
     #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
@@ -4313,7 +4313,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
