@@ -76,7 +76,7 @@ task 'build:aws-sdk-ssooidc' do
   writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/lib")
   writer.write_files(files)
   unless ssooidc.legacy_endpoints?
-    spec_writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/spec/aws/sts")
+    spec_writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/spec/aws/ssooidc")
     spec_writer.write_files(generator.spec_files)
   end
 end
