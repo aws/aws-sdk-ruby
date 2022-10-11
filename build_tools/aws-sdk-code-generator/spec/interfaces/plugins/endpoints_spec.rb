@@ -96,15 +96,15 @@ describe 'Plugins Interface:' do
           stub_responses: true,
           use_fips_endpoint: true
         )
-        expect(EndpointsBuiltIns::EndpointParameters).to receive(:new)
+        expect(EndpointsPrecedence::EndpointParameters).to receive(:new)
           .with(hash_including(use_fips: true)).and_call_original
         client.operation
       end
 
       it 'defaults to nil' do
         client = EndpointsPrecedence::Client.new(stub_responses: true)
-        expect(EndpointsBuiltIns::EndpointParameters).to receive(:new)
-          .with(hash_including(nothing: nil)).and_call_original
+        expect(EndpointsPrecedence::EndpointParameters).to receive(:new)
+           .with(hash_including(nothing: nil)).and_call_original
         client.operation
       end
     end
