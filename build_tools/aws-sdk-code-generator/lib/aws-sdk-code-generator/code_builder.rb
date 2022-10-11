@@ -62,7 +62,7 @@ module AwsSdkCodeGenerator
           y.yield("#{prefix}/plugins/apig_endpoint.rb", apig_endpoint_class)
         end
         y.yield("#{prefix}.rb", service_module(prefix, codegenerated_plugins))
-        unless %w[aws-sdk-sts aws-sdk-sso aws-sdk-ssooidc].include? prefix
+        unless @service.included_in_core?
           y.yield("#{prefix}/customizations.rb", '')
         end
         y.yield("#{prefix}/types.rb", types_module)
@@ -93,6 +93,18 @@ module AwsSdkCodeGenerator
             code = resource_class(name, @resources['resources'][name])
             y.yield(path, code)
           end
+        end
+      end
+    end
+
+    # @return [Enumerable<String<path>, String<code>>]
+    def spec_files(options = {})
+      prefix = options.fetch(:prefix, '')
+      Enumerator.new do |y|
+        y.yield("#{prefix}/spec_helper.rb", spec_helper_file)
+
+        if @service.endpoint_tests && !@service.legacy_endpoints?
+          y.yield("#{prefix}/endpoint_provider_spec.rb", endpoint_provider_spec_file)
         end
       end
     end
@@ -235,6 +247,10 @@ module AwsSdkCodeGenerator
       Views::EndpointsPlugin.new(service: @service).render
     end
 
+    def endpoint_provider_spec_file
+      Views::Spec::EndpointProviderSpecClass.new(service: @service).render
+    end
+
     def codegen_plugins(prefix)
       unless @service.legacy_endpoints?
         [
@@ -247,6 +263,10 @@ module AwsSdkCodeGenerator
       else
         []
       end
+    end
+
+    def spec_helper_file
+      Views::Spec::SpecHelper.new(service: @service).render
     end
 
     private

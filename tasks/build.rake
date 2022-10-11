@@ -37,6 +37,11 @@ task 'build:aws-sdk-sts' do
   files = generator.source_files(prefix: 'aws-sdk-sts')
   writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/lib")
   writer.write_files(files)
+
+  unless sts.legacy_endpoints?
+    spec_writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/spec/aws/sts")
+    spec_writer.write_files(generator.spec_files)
+  end
 end
 
 # Aws::SSO is generated directly into the `aws-sdk-core` gem.
@@ -52,6 +57,10 @@ task 'build:aws-sdk-sso' do
   files = generator.source_files(prefix: 'aws-sdk-sso')
   writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/lib")
   writer.write_files(files)
+  unless sso.legacy_endpoints?
+    spec_writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/spec/aws/sso")
+    spec_writer.write_files(generator.spec_files)
+  end
 end
 
 # Aws::SSOOIDC is generated directly into the `aws-sdk-core` gem.
@@ -66,4 +75,8 @@ task 'build:aws-sdk-ssooidc' do
   files = generator.source_files(prefix: 'aws-sdk-ssooidc')
   writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/lib")
   writer.write_files(files)
+  unless ssooidc.legacy_endpoints?
+    spec_writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/spec/aws/sts")
+    spec_writer.write_files(generator.spec_files)
+  end
 end

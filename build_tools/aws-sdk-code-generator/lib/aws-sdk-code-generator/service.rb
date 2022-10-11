@@ -88,6 +88,11 @@ module AwsSdkCodeGenerator
       !@endpoint_rules || @endpoint_rules.empty?
     end
 
+    # @return Boolean True if the service is inlined in core (ie not a stand alone gem)
+    def included_in_core?
+      %w[STS SSO SSOOIDC].include?(name)
+    end
+
     # @return [Hash, nil] The service endpoint rules.
     attr_reader :endpoint_rules
 
