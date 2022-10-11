@@ -1885,21 +1885,6 @@ module Aws::S3Control
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
-      it 'produces the correct output from the client when calling list_regional_buckets' do
-        client = Client.new(
-          region: 'us-east-1',
-          stub_responses: true
-        )
-        expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
-        resp = client.list_regional_buckets(
-          account_id: '0123456789012',
-        )
-        expected_uri = URI.parse(expected['endpoint']['url'])
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
-      end
     end
 
     context 'fips url @ us-east-1' do
@@ -1913,22 +1898,6 @@ module Aws::S3Control
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-
-      it 'produces the correct output from the client when calling list_regional_buckets' do
-        client = Client.new(
-          region: 'us-east-1',
-          use_fips_endpoint: true,
-          stub_responses: true
-        )
-        expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
-        resp = client.list_regional_buckets(
-          account_id: '0123456789012',
-        )
-        expected_uri = URI.parse(expected['endpoint']['url'])
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
       end
     end
 
@@ -1944,22 +1913,6 @@ module Aws::S3Control
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
-      it 'produces the correct output from the client when calling list_regional_buckets' do
-        client = Client.new(
-          region: 'us-east-1',
-          use_dualstack_endpoint: true,
-          stub_responses: true
-        )
-        expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
-        resp = client.list_regional_buckets(
-          account_id: '0123456789012',
-        )
-        expected_uri = URI.parse(expected['endpoint']['url'])
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
-      end
     end
 
     context 'fips,dualstack url @ us-east-1' do
@@ -1974,23 +1927,6 @@ module Aws::S3Control
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
-      it 'produces the correct output from the client when calling list_regional_buckets' do
-        client = Client.new(
-          region: 'us-east-1',
-          use_fips_endpoint: true,
-          use_dualstack_endpoint: true,
-          stub_responses: true
-        )
-        expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
-        resp = client.list_regional_buckets(
-          account_id: '0123456789012',
-        )
-        expected_uri = URI.parse(expected['endpoint']['url'])
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
-      end
     end
 
     context 'standard url @ cn-north-1' do
@@ -2004,21 +1940,6 @@ module Aws::S3Control
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-
-      it 'produces the correct output from the client when calling list_regional_buckets' do
-        client = Client.new(
-          region: 'cn-north-1',
-          stub_responses: true
-        )
-        expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true})
-        resp = client.list_regional_buckets(
-          account_id: '0123456789012',
-        )
-        expected_uri = URI.parse(expected['endpoint']['url'])
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
       end
     end
 
@@ -2275,23 +2196,6 @@ module Aws::S3Control
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
-      it 'produces the correct output from the client when calling list_regional_buckets' do
-        client = Client.new(
-          region: 'us-east-1',
-          use_fips_endpoint: true,
-          endpoint: 'https://example.com',
-          stub_responses: true
-        )
-        expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
-        resp = client.list_regional_buckets(
-          account_id: '0123456789012',
-        )
-        expected_uri = URI.parse(expected['endpoint']['url'])
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
-      end
     end
 
     context 'custom endpoint, fips' do
@@ -2306,23 +2210,6 @@ module Aws::S3Control
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
-      it 'produces the correct output from the client when calling list_regional_buckets' do
-        client = Client.new(
-          region: 'us-east-1',
-          use_fips_endpoint: true,
-          endpoint: 'https://example.com',
-          stub_responses: true
-        )
-        expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
-        resp = client.list_regional_buckets(
-          account_id: '0123456789012',
-        )
-        expected_uri = URI.parse(expected['endpoint']['url'])
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
-      end
     end
 
     context 'custom endpoint, dualstack' do
@@ -2336,22 +2223,6 @@ module Aws::S3Control
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-
-      it 'produces the correct output from the client when calling list_regional_buckets' do
-        client = Client.new(
-          region: 'us-east-1',
-          endpoint: 'https://example.com',
-          stub_responses: true
-        )
-        expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
-        resp = client.list_regional_buckets(
-          account_id: '0123456789012',
-        )
-        expected_uri = URI.parse(expected['endpoint']['url'])
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
       end
     end
 

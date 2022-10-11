@@ -2555,6 +2555,68 @@
             }
         },
         {
+            "documentation": "Endpoint override, accesspoint with HTTP, port",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3",
+                                "signingRegion": "us-west-2",
+                                "disableDoubleEncoding": true
+                            }
+                        ]
+                    },
+                    "url": "http://myendpoint-123456789012.beta.example.com:1234"
+                }
+            },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "SDK::Endpoint": "http://beta.example.com:1234"
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
+            "params": {
+                "Endpoint": "http://beta.example.com:1234",
+                "Region": "us-west-2",
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint"
+            }
+        },
+        {
+            "documentation": "Endpoint override, accesspoint with http, path, query, and port",
+            "expect": {
+                "endpoint": {
+                    "properties": {
+                        "authSchemes": [
+                            {
+                                "name": "sigv4",
+                                "signingName": "s3",
+                                "signingRegion": "us-west-2",
+                                "disableDoubleEncoding": true
+                            }
+                        ]
+                    },
+                    "url": "http://myendpoint-123456789012.beta.example.com:1234/path"
+                }
+            },
+            "params": {
+                "Region": "us-west-2",
+                "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+                "Endpoint": "http://beta.example.com:1234/path",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Accelerate": false
+            }
+        },
+        {
             "documentation": "vanilla virtual addressing@us-west-2",
             "expect": {
                 "endpoint": {
@@ -5913,6 +5975,36 @@
                 "UseArnRegion": false,
                 "Bucket": "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint/mybanner",
                 "Endpoint": "https://my-endpoint.com"
+            }
+        },
+        {
+            "documentation": "object lambda arn with region mismatch and UseArnRegion=false",
+            "expect": {
+                "error": "Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"
+            },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-west-2",
+                        "AWS::S3::UseArnRegion": false
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint",
+                        "Key": "key"
+                    }
+                }
+            ],
+            "params": {
+                "Accelerate": false,
+                "Bucket": "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner",
+                "ForcePathStyle": false,
+                "UseArnRegion": false,
+                "Region": "us-west-2",
+                "RequiresAccountId": true,
+                "UseDualStack": false,
+                "UseFIPS": false,
+                "___key": "key"
             }
         },
         {

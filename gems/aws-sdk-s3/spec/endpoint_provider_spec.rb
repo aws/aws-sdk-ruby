@@ -2247,6 +2247,52 @@ module Aws::S3
       end
     end
 
+    context 'Endpoint override, accesspoint with HTTP, port' do
+      let(:expected) do
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"http://myendpoint-123456789012.beta.example.com:1234"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:endpoint=>"http://beta.example.com:1234", :region=>"us-west-2", :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling get_object' do
+        client = Client.new(
+          region: 'us-west-2',
+          endpoint: 'http://beta.example.com:1234',
+          s3_us_east_1_regional_endpoint: 'regional',
+          stub_responses: true
+        )
+        expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
+        resp = client.get_object(
+          bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint',
+          key: 'key',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context 'Endpoint override, accesspoint with http, path, query, and port' do
+      let(:expected) do
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"http://myendpoint-123456789012.beta.example.com:1234/path"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-west-2", :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint", :endpoint=>"http://beta.example.com:1234/path", :use_fips=>false, :use_dual_stack=>false, :accelerate=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context 'vanilla virtual addressing@us-west-2' do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://bucket-name.s3.us-west-2.amazonaws.com"}}
@@ -5103,6 +5149,34 @@ module Aws::S3
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context 'object lambda arn with region mismatch and UseArnRegion=false' do
+      let(:expected) do
+        {"error"=>"Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner", :force_path_style=>false, :use_arn_region=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling get_object' do
+        client = Client.new(
+          region: 'us-west-2',
+          s3_use_arn_region: false,
+          s3_us_east_1_regional_endpoint: 'regional',
+          stub_responses: true
+        )
+        expect do
+          client.get_object(
+            bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint',
+            key: 'key',
+          )
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 

@@ -2385,17 +2385,6 @@
                     "url": "https://s3-control.us-east-1.amazonaws.com"
                 }
             },
-            "operationInputs": [
-                {
-                    "builtInParams": {
-                        "AWS::Region": "us-east-1"
-                    },
-                    "operationName": "ListRegionalBuckets",
-                    "operationParams": {
-                        "AccountId": "0123456789012"
-                    }
-                }
-            ],
             "params": {
                 "Region": "us-east-1"
             }
@@ -2417,18 +2406,6 @@
                     "url": "https://s3-control-fips.us-east-1.amazonaws.com"
                 }
             },
-            "operationInputs": [
-                {
-                    "builtInParams": {
-                        "AWS::Region": "us-east-1",
-                        "AWS::UseFIPS": true
-                    },
-                    "operationName": "ListRegionalBuckets",
-                    "operationParams": {
-                        "AccountId": "0123456789012"
-                    }
-                }
-            ],
             "params": {
                 "Region": "us-east-1",
                 "UseFIPS": true
@@ -2451,18 +2428,6 @@
                     "url": "https://s3-control.dualstack.us-east-1.amazonaws.com"
                 }
             },
-            "operationInputs": [
-                {
-                    "builtInParams": {
-                        "AWS::Region": "us-east-1",
-                        "AWS::UseDualStack": true
-                    },
-                    "operationName": "ListRegionalBuckets",
-                    "operationParams": {
-                        "AccountId": "0123456789012"
-                    }
-                }
-            ],
             "params": {
                 "Region": "us-east-1",
                 "UseDualStack": true
@@ -2485,19 +2450,6 @@
                     "url": "https://s3-control-fips.dualstack.us-east-1.amazonaws.com"
                 }
             },
-            "operationInputs": [
-                {
-                    "builtInParams": {
-                        "AWS::Region": "us-east-1",
-                        "AWS::UseFIPS": true,
-                        "AWS::UseDualStack": true
-                    },
-                    "operationName": "ListRegionalBuckets",
-                    "operationParams": {
-                        "AccountId": "0123456789012"
-                    }
-                }
-            ],
             "params": {
                 "Region": "us-east-1",
                 "UseDualStack": true,
@@ -2521,17 +2473,6 @@
                     "url": "https://s3-control.cn-north-1.amazonaws.com.cn"
                 }
             },
-            "operationInputs": [
-                {
-                    "builtInParams": {
-                        "AWS::Region": "cn-north-1"
-                    },
-                    "operationName": "ListRegionalBuckets",
-                    "operationParams": {
-                        "AccountId": "0123456789012"
-                    }
-                }
-            ],
             "params": {
                 "Region": "cn-north-1"
             }
@@ -2819,19 +2760,6 @@
                     "url": "https://example.com"
                 }
             },
-            "operationInputs": [
-                {
-                    "builtInParams": {
-                        "AWS::Region": "us-east-1",
-                        "AWS::UseFIPS": true,
-                        "SDK::Endpoint": "https://example.com"
-                    },
-                    "operationName": "ListRegionalBuckets",
-                    "operationParams": {
-                        "AccountId": "0123456789012"
-                    }
-                }
-            ],
             "params": {
                 "Region": "us-east-1",
                 "Endpoint": "https://example.com",
@@ -2856,19 +2784,6 @@
                     "url": "https://example.com"
                 }
             },
-            "operationInputs": [
-                {
-                    "builtInParams": {
-                        "AWS::Region": "us-east-1",
-                        "AWS::UseFIPS": true,
-                        "SDK::Endpoint": "https://example.com"
-                    },
-                    "operationName": "ListRegionalBuckets",
-                    "operationParams": {
-                        "AccountId": "0123456789012"
-                    }
-                }
-            ],
             "params": {
                 "Region": "us-east-1",
                 "Endpoint": "https://example.com",
@@ -2893,18 +2808,6 @@
                     "url": "https://example.com"
                 }
             },
-            "operationInputs": [
-                {
-                    "builtInParams": {
-                        "AWS::Region": "us-east-1",
-                        "SDK::Endpoint": "https://example.com"
-                    },
-                    "operationName": "ListRegionalBuckets",
-                    "operationParams": {
-                        "AccountId": "0123456789012"
-                    }
-                }
-            ],
             "params": {
                 "Region": "us-east-1",
                 "Endpoint": "https://example.com",
