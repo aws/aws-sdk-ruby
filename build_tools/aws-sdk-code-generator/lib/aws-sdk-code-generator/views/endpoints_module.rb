@@ -42,12 +42,18 @@ module AwsSdkCodeGenerator
 
         # @return [Array<EndpointParameter>]
         attr_reader :parameters
+
+        def has_endpoint_built_in?
+          parameters.any? { |p| p.param_data['builtIn'] == 'SDK::Endpoint' }
+        end
       end
 
       class EndpointParameter
         def initialize(options)
           @key = options[:key]
           @value = options[:value]
+          @source = options[:source]
+          @param_data = options[:param_data]
         end
 
         # @return [String]
@@ -55,17 +61,32 @@ module AwsSdkCodeGenerator
 
         # @return [String]
         attr_accessor :value
+
+        # @return [String]
+        attr_accessor :source
+
+        # @return [Hash]
+        attr_accessor :param_data
+
+        def static_string?
+          @source == 'staticContextParam' && value.is_a?(String)
+        end
       end
 
 
       private
 
       def endpoint_parameters_for_operation(operation)
-        @parameters.each.with_object([]) do
-          |(param_name, param_data), endpoint_parameters|
+        @parameters.each.with_object([]) do |(param_name, param_data), endpoint_parameters|
+          value, source = endpoint_parameter_value(
+            operation, param_name, param_data
+          )
+
           endpoint_parameters << EndpointParameter.new(
             key: Underscore.underscore(param_name),
-            value: endpoint_parameter_value(operation, param_name, param_data)
+            value: value,
+            source: source,
+            param_data: param_data
           )
         end
       end
@@ -77,11 +98,21 @@ module AwsSdkCodeGenerator
       # Built-In Bindings
       # Built-in binding default values
       def endpoint_parameter_value(operation, param_name, param_data)
-        value = static_context_param(operation, param_name)
-        value ||= context_param_value(operation, param_name)
-        value ||= client_context_param_value(param_name, param_data)
-        value ||= built_in_client_context_param_value(param_data)
-        value || 'nil'
+        value, source = [
+          static_context_param(operation, param_name), 'staticContextParam'
+        ]
+        value, source = [
+          context_param_value(operation, param_name), 'contextParam'
+        ] unless value
+        value, source = [
+          client_context_param_value(param_name, param_data),
+          'clientContextParam'
+        ] unless value
+        value, source = [
+          built_in_client_context_param_value(param_data), 'builtIn'
+        ] unless value
+
+        [value || 'nil', source]
       end
 
       def client_context_param_value(param_name, param_data)

@@ -89,6 +89,7 @@ module SpecHelper
         resources: model_path(:resources, api_dir),
         waiters: model_path(:waiters, api_dir),
         examples: model_path(:examples, api_dir),
+        endpoint_rules: model_path('endpoint-rule-set'.to_sym, api_dir)
       })
 
       # For APIG service
@@ -118,6 +119,7 @@ module SpecHelper
         tmpdir
       else
         code = generator.source
+        puts code
         begin
           Object.module_eval(code)
         rescue => error
