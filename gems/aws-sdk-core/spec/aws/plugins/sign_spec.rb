@@ -122,15 +122,13 @@ module Aws
 
         describe 'clock skew correction' do
           let(:clock_skew) { Retries::ClockSkew.new }
-          let(:datetime) { '20120101T10:11:12Z' }
-          let(:now) { Time.parse(datetime) }
+          let(:now) { Time.now }
           let(:utc) { now.utc }
 
-          before(:each) {
+          before(:each) do
             allow(Time).to receive(:now).and_return(now)
             allow(now).to receive(:utc).and_return(utc)
-            allow(utc).to receive(:strftime).and_return(datetime)
-          }
+          end
 
           it 'skips clock skew correction when clock_skew is not available on the configuration' do
             client = TestClient.new(client_options.merge(
