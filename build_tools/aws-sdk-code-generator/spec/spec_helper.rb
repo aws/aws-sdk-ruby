@@ -119,7 +119,6 @@ module SpecHelper
         tmpdir
       else
         code = generator.source
-        puts code
         begin
           Object.module_eval(code)
         rescue => error

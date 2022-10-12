@@ -15,7 +15,6 @@ module {{module_name}}
           endpoint = context.config.endpoint.to_s
         end
         {{/has_endpoint_built_in?}}
-        puts context.config.use_fips_endpoint
         {{module_name}}::EndpointParameters.new(
           {{#parameters}}
           {{#static_string?}}

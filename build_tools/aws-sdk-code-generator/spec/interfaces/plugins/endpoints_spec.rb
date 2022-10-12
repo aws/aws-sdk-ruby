@@ -6,7 +6,49 @@ describe 'Plugins Interface:' do
   describe 'Endpoints' do
 
     context 'General tests' do
-      # TODO
+      before(:all) do
+        SpecHelper.generate_service(['EndpointsPlugin'], multiple_files: false)
+      end
+
+      let(:client) do
+        EndpointsPlugin::Client.new(
+          stub_responses: true,
+          endpoint_discovery: true
+        )
+      end
+
+      it 'does not resolve endpoints for endpoint discovery' do
+        client.stub_responses(
+          :describe_endpoints,
+          {
+            endpoints: [
+              { address: 'https://foo.com/bar', cache_period_in_minutes: 60 }
+            ]
+          }
+        )
+        # once to discover endpoint
+        expect_any_instance_of(EndpointsPlugin::EndpointProvider)
+          .to receive(:resolve_endpoint).once.and_call_original
+        resp = client.endpoint_discovery_operation
+        expect(resp.context[:endpoint_params]).to be_nil
+        # should still have auth
+        expect(resp.context[:auth_scheme]).to be_a(Hash)
+      end
+
+      it 'uses endpoint provider with params to resolve endpoint' do
+        expect_any_instance_of(EndpointsPlugin::EndpointProvider)
+          .to receive(:resolve_endpoint)
+          .with(an_instance_of(EndpointsPlugin::EndpointParameters))
+          .and_call_original
+        client.operation
+      end
+
+      it 'applies the endpoint and headers' do
+        resp = client.operation
+        req = resp.context.http_request
+        expect(req.endpoint.to_s).to eq('https://endpoint.amazonaws.com/')
+        expect(req.headers['x-amz-multi']).to eq('val1,val2')
+      end
     end
 
     context 'Built In Mappings' do
