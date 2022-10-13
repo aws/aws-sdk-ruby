@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2022-10-13)
+------------------
+
+* Feature - Doc update to reflect no support for schema parameter on BatchExecuteStatement API
+
 1.37.0 (2022-08-31)
 ------------------
 

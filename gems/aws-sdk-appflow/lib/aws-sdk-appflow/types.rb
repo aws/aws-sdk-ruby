@@ -2020,6 +2020,7 @@ module Aws::Appflow
     #               object: "Object", # required
     #               enable_dynamic_field_update: false,
     #               include_deleted_records: false,
+    #               data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
     #             },
     #             service_now: {
     #               object: "Object", # required
@@ -2097,6 +2098,7 @@ module Aws::Appflow
     #                   bucket_name: "BucketName",
     #                 },
     #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #                 data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
     #               },
     #               snowflake: {
     #                 object: "Object", # required
@@ -3143,6 +3145,7 @@ module Aws::Appflow
     #             bucket_name: "BucketName",
     #           },
     #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #           data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
     #         },
     #         snowflake: {
     #           object: "Object", # required
@@ -3401,6 +3404,7 @@ module Aws::Appflow
     #               bucket_name: "BucketName",
     #             },
     #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #             data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
     #           },
     #           snowflake: {
     #             object: "Object", # required
@@ -5578,6 +5582,7 @@ module Aws::Appflow
     #           bucket_name: "BucketName",
     #         },
     #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #         data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
     #       }
     #
     # @!attribute [rw] object
@@ -5604,13 +5609,62 @@ module Aws::Appflow
     #   required.
     #   @return [String]
     #
+    # @!attribute [rw] data_transfer_api
+    #   Specifies which Salesforce API is used by Amazon AppFlow when your
+    #   flow transfers data to Salesforce.
+    #
+    #   AUTOMATIC
+    #
+    #   : The default. Amazon AppFlow selects which API to use based on the
+    #     number of records that your flow transfers to Salesforce. If your
+    #     flow transfers fewer than 1,000 records, Amazon AppFlow uses
+    #     Salesforce REST API. If your flow transfers 1,000 records or more,
+    #     Amazon AppFlow uses Salesforce Bulk API 2.0.
+    #
+    #     Each of these Salesforce APIs structures data differently. If
+    #     Amazon AppFlow selects the API automatically, be aware that, for
+    #     recurring flows, the data output might vary from one flow run to
+    #     the next. For example, if a flow runs daily, it might use REST API
+    #     on one day to transfer 900 records, and it might use Bulk API 2.0
+    #     on the next day to transfer 1,100 records. For each of these flow
+    #     runs, the respective Salesforce API formats the data differently.
+    #     Some of the differences include how dates are formatted and null
+    #     values are represented. Also, Bulk API 2.0 doesn't transfer
+    #     Salesforce compound fields.
+    #
+    #     By choosing this option, you optimize flow performance for both
+    #     small and large data transfers, but the tradeoff is inconsistent
+    #     formatting in the output.
+    #
+    #   BULKV2
+    #
+    #   : Amazon AppFlow uses only Salesforce Bulk API 2.0. This API runs
+    #     asynchronous data transfers, and it's optimal for large sets of
+    #     data. By choosing this option, you ensure that your flow writes
+    #     consistent output, but you optimize performance only for large
+    #     data transfers.
+    #
+    #     Note that Bulk API 2.0 does not transfer Salesforce compound
+    #     fields.
+    #
+    #   REST\_SYNC
+    #
+    #   : Amazon AppFlow uses only Salesforce REST API. By choosing this
+    #     option, you ensure that your flow writes consistent output, but
+    #     you decrease performance for large data transfers that are better
+    #     suited for Bulk API 2.0. In some cases, if your flow attempts to
+    #     transfer a vary large set of data, it might fail with a timed out
+    #     error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SalesforceDestinationProperties AWS API Documentation
     #
     class SalesforceDestinationProperties < Struct.new(
       :object,
       :id_field_names,
       :error_handling_config,
-      :write_operation_type)
+      :write_operation_type,
+      :data_transfer_api)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5621,10 +5675,16 @@ module Aws::Appflow
     #   The desired authorization scope for the Salesforce account.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] data_transfer_apis
+    #   The Salesforce APIs that you can have Amazon AppFlow use when your
+    #   flows transfers data to or from Salesforce.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SalesforceMetadata AWS API Documentation
     #
     class SalesforceMetadata < Struct.new(
-      :o_auth_scopes)
+      :o_auth_scopes,
+      :data_transfer_apis)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5639,6 +5699,7 @@ module Aws::Appflow
     #         object: "Object", # required
     #         enable_dynamic_field_update: false,
     #         include_deleted_records: false,
+    #         data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
     #       }
     #
     # @!attribute [rw] object
@@ -5655,12 +5716,61 @@ module Aws::Appflow
     #   run.
     #   @return [Boolean]
     #
+    # @!attribute [rw] data_transfer_api
+    #   Specifies which Salesforce API is used by Amazon AppFlow when your
+    #   flow transfers data from Salesforce.
+    #
+    #   AUTOMATIC
+    #
+    #   : The default. Amazon AppFlow selects which API to use based on the
+    #     number of records that your flow transfers from Salesforce. If
+    #     your flow transfers fewer than 1,000,000 records, Amazon AppFlow
+    #     uses Salesforce REST API. If your flow transfers 1,000,000 records
+    #     or more, Amazon AppFlow uses Salesforce Bulk API 2.0.
+    #
+    #     Each of these Salesforce APIs structures data differently. If
+    #     Amazon AppFlow selects the API automatically, be aware that, for
+    #     recurring flows, the data output might vary from one flow run to
+    #     the next. For example, if a flow runs daily, it might use REST API
+    #     on one day to transfer 900,000 records, and it might use Bulk API
+    #     2.0 on the next day to transfer 1,100,000 records. For each of
+    #     these flow runs, the respective Salesforce API formats the data
+    #     differently. Some of the differences include how dates are
+    #     formatted and null values are represented. Also, Bulk API 2.0
+    #     doesn't transfer Salesforce compound fields.
+    #
+    #     By choosing this option, you optimize flow performance for both
+    #     small and large data transfers, but the tradeoff is inconsistent
+    #     formatting in the output.
+    #
+    #   BULKV2
+    #
+    #   : Amazon AppFlow uses only Salesforce Bulk API 2.0. This API runs
+    #     asynchronous data transfers, and it's optimal for large sets of
+    #     data. By choosing this option, you ensure that your flow writes
+    #     consistent output, but you optimize performance only for large
+    #     data transfers.
+    #
+    #     Note that Bulk API 2.0 does not transfer Salesforce compound
+    #     fields.
+    #
+    #   REST\_SYNC
+    #
+    #   : Amazon AppFlow uses only Salesforce REST API. By choosing this
+    #     option, you ensure that your flow writes consistent output, but
+    #     you decrease performance for large data transfers that are better
+    #     suited for Bulk API 2.0. In some cases, if your flow attempts to
+    #     transfer a vary large set of data, it might fail with a timed out
+    #     error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SalesforceSourceProperties AWS API Documentation
     #
     class SalesforceSourceProperties < Struct.new(
       :object,
       :enable_dynamic_field_update,
-      :include_deleted_records)
+      :include_deleted_records,
+      :data_transfer_api)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6192,6 +6302,7 @@ module Aws::Appflow
     #           object: "Object", # required
     #           enable_dynamic_field_update: false,
     #           include_deleted_records: false,
+    #           data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
     #         },
     #         service_now: {
     #           object: "Object", # required
@@ -6382,6 +6493,7 @@ module Aws::Appflow
     #             object: "Object", # required
     #             enable_dynamic_field_update: false,
     #             include_deleted_records: false,
+    #             data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
     #           },
     #           service_now: {
     #             object: "Object", # required
@@ -7226,6 +7338,7 @@ module Aws::Appflow
     #               object: "Object", # required
     #               enable_dynamic_field_update: false,
     #               include_deleted_records: false,
+    #               data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
     #             },
     #             service_now: {
     #               object: "Object", # required
@@ -7303,6 +7416,7 @@ module Aws::Appflow
     #                   bucket_name: "BucketName",
     #                 },
     #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #                 data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
     #               },
     #               snowflake: {
     #                 object: "Object", # required

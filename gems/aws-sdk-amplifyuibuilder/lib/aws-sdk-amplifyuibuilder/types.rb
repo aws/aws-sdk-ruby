@@ -4540,6 +4540,7 @@ module Aws::AmplifyUIBuilder
     #               default_country_code: "String",
     #               default_value: "String",
     #               descriptive_text: "String",
+    #               is_array: false,
     #               max_value: 1.0,
     #               min_value: 1.0,
     #               name: "String",
@@ -4717,6 +4718,7 @@ module Aws::AmplifyUIBuilder
     #                 default_country_code: "String",
     #                 default_value: "String",
     #                 descriptive_text: "String",
+    #                 is_array: false,
     #                 max_value: 1.0,
     #                 min_value: 1.0,
     #                 name: "String",
@@ -5312,6 +5314,7 @@ module Aws::AmplifyUIBuilder
     #           default_country_code: "String",
     #           default_value: "String",
     #           descriptive_text: "String",
+    #           is_array: false,
     #           max_value: 1.0,
     #           min_value: 1.0,
     #           name: "String",
@@ -5394,6 +5397,7 @@ module Aws::AmplifyUIBuilder
     #         default_country_code: "String",
     #         default_value: "String",
     #         descriptive_text: "String",
+    #         is_array: false,
     #         max_value: 1.0,
     #         min_value: 1.0,
     #         name: "String",
@@ -5432,6 +5436,11 @@ module Aws::AmplifyUIBuilder
     # @!attribute [rw] descriptive_text
     #   The text to display to describe the field.
     #   @return [String]
+    #
+    # @!attribute [rw] is_array
+    #   Specifies whether to render the field as an array. This property is
+    #   ignored if the `dataSourceType` for the form is a Data Store.
+    #   @return [Boolean]
     #
     # @!attribute [rw] max_value
     #   The maximum value to display for the field.
@@ -5481,6 +5490,7 @@ module Aws::AmplifyUIBuilder
       :default_country_code,
       :default_value,
       :descriptive_text,
+      :is_array,
       :max_value,
       :min_value,
       :name,
@@ -5710,7 +5720,7 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
-    # Describes the call to action button configuration for the form..
+    # Describes the call to action button configuration for the form.
     #
     # @note When making an API call, you may pass FormCTA
     #   data as a hash:
@@ -8881,6 +8891,7 @@ module Aws::AmplifyUIBuilder
     #               default_country_code: "String",
     #               default_value: "String",
     #               descriptive_text: "String",
+    #               is_array: false,
     #               max_value: 1.0,
     #               min_value: 1.0,
     #               name: "String",
@@ -9051,6 +9062,7 @@ module Aws::AmplifyUIBuilder
     #                 default_country_code: "String",
     #                 default_value: "String",
     #                 descriptive_text: "String",
+    #                 is_array: false,
     #                 max_value: 1.0,
     #                 min_value: 1.0,
     #                 name: "String",

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2022-10-13)
+------------------
+
+* Feature - We are releasing the ability for fields to be configured as arrays.
+
 1.6.0 (2022-09-14)
 ------------------
 

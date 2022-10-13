@@ -1336,6 +1336,14 @@ module Aws::MediaLive
     #
     #       {
     #         avail_settings: {
+    #           esam: {
+    #             acquisition_point_id: "__stringMax256", # required
+    #             ad_avail_offset: 1,
+    #             password: "__string",
+    #             pois_endpoint: "__string", # required
+    #             username: "__string",
+    #             zone_identity: "__stringMax256",
+    #           },
     #           scte_35_splice_insert: {
     #             ad_avail_offset: 1,
     #             no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
@@ -1367,6 +1375,14 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         esam: {
+    #           acquisition_point_id: "__stringMax256", # required
+    #           ad_avail_offset: 1,
+    #           password: "__string",
+    #           pois_endpoint: "__string", # required
+    #           username: "__string",
+    #           zone_identity: "__stringMax256",
+    #         },
     #         scte_35_splice_insert: {
     #           ad_avail_offset: 1,
     #           no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
@@ -1379,6 +1395,10 @@ module Aws::MediaLive
     #         },
     #       }
     #
+    # @!attribute [rw] esam
+    #   Esam
+    #   @return [Types::Esam]
+    #
     # @!attribute [rw] scte_35_splice_insert
     #   Scte35 Splice Insert
     #   @return [Types::Scte35SpliceInsert]
@@ -1390,6 +1410,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AvailSettings AWS API Documentation
     #
     class AvailSettings < Struct.new(
+      :esam,
       :scte_35_splice_insert,
       :scte_35_time_signal_apos)
       SENSITIVE = []
@@ -1602,6 +1623,10 @@ module Aws::MediaLive
     #                     pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
     #                   },
     #                 ],
+    #               },
+    #               scte_35_input_settings: {
+    #                 input_attachment_name_reference: "__string",
+    #                 mode: "FIXED", # required, accepts FIXED, FOLLOW_ACTIVE
     #               },
     #               scte_35_return_to_network_settings: {
     #                 splice_event_id: 1, # required
@@ -1971,6 +1996,10 @@ module Aws::MediaLive
     #                       pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
     #                     },
     #                   ],
+    #                 },
+    #                 scte_35_input_settings: {
+    #                   input_attachment_name_reference: "__string",
+    #                   mode: "FIXED", # required, accepts FIXED, FOLLOW_ACTIVE
     #                 },
     #                 scte_35_return_to_network_settings: {
     #                   splice_event_id: 1, # required
@@ -3416,6 +3445,14 @@ module Aws::MediaLive
     #           },
     #           avail_configuration: {
     #             avail_settings: {
+    #               esam: {
+    #                 acquisition_point_id: "__stringMax256", # required
+    #                 ad_avail_offset: 1,
+    #                 password: "__string",
+    #                 pois_endpoint: "__string", # required
+    #                 username: "__string",
+    #                 zone_identity: "__stringMax256",
+    #               },
     #               scte_35_splice_insert: {
     #                 ad_avail_offset: 1,
     #                 no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
@@ -6831,6 +6868,14 @@ module Aws::MediaLive
     #         },
     #         avail_configuration: {
     #           avail_settings: {
+    #             esam: {
+    #               acquisition_point_id: "__stringMax256", # required
+    #               ad_avail_offset: 1,
+    #               password: "__string",
+    #               pois_endpoint: "__string", # required
+    #               username: "__string",
+    #               zone_identity: "__stringMax256",
+    #             },
     #             scte_35_splice_insert: {
     #               ad_avail_offset: 1,
     #               no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
@@ -7571,6 +7616,66 @@ module Aws::MediaLive
       :output_groups,
       :timecode_config,
       :video_descriptions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Esam
+    #
+    # @note When making an API call, you may pass Esam
+    #   data as a hash:
+    #
+    #       {
+    #         acquisition_point_id: "__stringMax256", # required
+    #         ad_avail_offset: 1,
+    #         password: "__string",
+    #         pois_endpoint: "__string", # required
+    #         username: "__string",
+    #         zone_identity: "__stringMax256",
+    #       }
+    #
+    # @!attribute [rw] acquisition_point_id
+    #   Sent as acquisitionPointIdentity to identify the MediaLive channel
+    #   to the POIS.
+    #   @return [String]
+    #
+    # @!attribute [rw] ad_avail_offset
+    #   When specified, this offset (in milliseconds) is added to the input
+    #   Ad Avail PTS time. This only applies to embedded SCTE 104/35
+    #   messages and does not apply to OOB messages.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] password
+    #   @return [String]
+    #
+    # @!attribute [rw] pois_endpoint
+    #   The URL of the signal conditioner endpoint on the Placement
+    #   Opportunity Information System (POIS). MediaLive sends
+    #   SignalProcessingEvents here when SCTE-35 messages are read.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   Username if credentials are required to access the POIS endpoint.
+    #   This can be either a plaintext username, or a reference to an AWS
+    #   parameter store name from which the username can be retrieved. AWS
+    #   Parameter store format: "ssm://<parameter name="">"</p>
+    #   </parameter>
+    #   @return [String]
+    #
+    # @!attribute [rw] zone_identity
+    #   Optional data sent as zoneIdentity to identify the MediaLive channel
+    #   to the POIS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Esam AWS API Documentation
+    #
+    class Esam < Struct.new(
+      :acquisition_point_id,
+      :ad_avail_offset,
+      :password,
+      :pois_endpoint,
+      :username,
+      :zone_identity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16069,6 +16174,10 @@ module Aws::MediaLive
     #               },
     #             ],
     #           },
+    #           scte_35_input_settings: {
+    #             input_attachment_name_reference: "__string",
+    #             mode: "FIXED", # required, accepts FIXED, FOLLOW_ACTIVE
+    #           },
     #           scte_35_return_to_network_settings: {
     #             splice_event_id: 1, # required
     #           },
@@ -16218,6 +16327,10 @@ module Aws::MediaLive
     #             },
     #           ],
     #         },
+    #         scte_35_input_settings: {
+    #           input_attachment_name_reference: "__string",
+    #           mode: "FIXED", # required, accepts FIXED, FOLLOW_ACTIVE
+    #         },
     #         scte_35_return_to_network_settings: {
     #           splice_event_id: 1, # required
     #         },
@@ -16301,6 +16414,10 @@ module Aws::MediaLive
     #   Action to pause or unpause one or both channel pipelines
     #   @return [Types::PauseStateScheduleActionSettings]
     #
+    # @!attribute [rw] scte_35_input_settings
+    #   Action to get scte35 input
+    #   @return [Types::Scte35InputScheduleActionSettings]
+    #
     # @!attribute [rw] scte_35_return_to_network_settings
     #   Action to insert SCTE-35 return\_to\_network message
     #   @return [Types::Scte35ReturnToNetworkScheduleActionSettings]
@@ -16331,6 +16448,7 @@ module Aws::MediaLive
       :motion_graphics_image_activate_settings,
       :motion_graphics_image_deactivate_settings,
       :pause_state_settings,
+      :scte_35_input_settings,
       :scte_35_return_to_network_settings,
       :scte_35_splice_insert_settings,
       :scte_35_time_signal_settings,
@@ -16604,6 +16722,35 @@ module Aws::MediaLive
     #
     class Scte35DescriptorSettings < Struct.new(
       :segmentation_descriptor_scte_35_descriptor_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for the "scte35 input" action
+    #
+    # @note When making an API call, you may pass Scte35InputScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         input_attachment_name_reference: "__string",
+    #         mode: "FIXED", # required, accepts FIXED, FOLLOW_ACTIVE
+    #       }
+    #
+    # @!attribute [rw] input_attachment_name_reference
+    #   In fixed mode, enter the name of the input attachment that you want
+    #   to use as a SCTE-35 input. (Don't enter the ID of the input.)"
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   Whether the SCTE-35 input should be the active input or a fixed
+    #   input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35InputScheduleActionSettings AWS API Documentation
+    #
+    class Scte35InputScheduleActionSettings < Struct.new(
+      :input_attachment_name_reference,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18319,6 +18466,14 @@ module Aws::MediaLive
     #           },
     #           avail_configuration: {
     #             avail_settings: {
+    #               esam: {
+    #                 acquisition_point_id: "__stringMax256", # required
+    #                 ad_avail_offset: 1,
+    #                 password: "__string",
+    #                 pois_endpoint: "__string", # required
+    #                 username: "__string",
+    #                 zone_identity: "__stringMax256",
+    #               },
     #               scte_35_splice_insert: {
     #                 ad_avail_offset: 1,
     #                 no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2022-10-13)
+------------------
+
+* Feature - Update RelatedItem enum to support Tasks
+
 1.15.0 (2022-07-05)
 ------------------
 

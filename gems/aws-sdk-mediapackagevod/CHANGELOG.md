@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2022-10-13)
+------------------
+
+* Feature - This release adds SPEKE v2 support for MediaPackage VOD. Speke v2 is an upgrade to the existing SPEKE API to support multiple encryption keys, based on an encryption contract selected by the customer.
+
 1.36.0 (2022-04-08)
 ------------------
 

@@ -37,6 +37,7 @@ module Aws::DirectoryService
   # * {DirectoryAlreadyInRegionException}
   # * {DirectoryAlreadySharedException}
   # * {DirectoryDoesNotExistException}
+  # * {DirectoryInDesiredStateException}
   # * {DirectoryLimitExceededException}
   # * {DirectoryNotSharedException}
   # * {DirectoryUnavailableException}
@@ -255,6 +256,26 @@ module Aws::DirectoryService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DirectoryService::Types::DirectoryDoesNotExistException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+    end
+
+    class DirectoryInDesiredStateException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DirectoryService::Types::DirectoryInDesiredStateException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

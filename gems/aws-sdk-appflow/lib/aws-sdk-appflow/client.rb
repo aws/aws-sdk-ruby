@@ -731,6 +731,7 @@ module Aws::Appflow
     #           object: "Object", # required
     #           enable_dynamic_field_update: false,
     #           include_deleted_records: false,
+    #           data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
     #         },
     #         service_now: {
     #           object: "Object", # required
@@ -808,6 +809,7 @@ module Aws::Appflow
     #               bucket_name: "BucketName",
     #             },
     #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #             data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
     #           },
     #           snowflake: {
     #             object: "Object", # required
@@ -1048,6 +1050,8 @@ module Aws::Appflow
     #   resp.connector_configuration.connector_metadata.google_analytics.o_auth_scopes[0] #=> String
     #   resp.connector_configuration.connector_metadata.salesforce.o_auth_scopes #=> Array
     #   resp.connector_configuration.connector_metadata.salesforce.o_auth_scopes[0] #=> String
+    #   resp.connector_configuration.connector_metadata.salesforce.data_transfer_apis #=> Array
+    #   resp.connector_configuration.connector_metadata.salesforce.data_transfer_apis[0] #=> String, one of "AUTOMATIC", "BULKV2", "REST_SYNC"
     #   resp.connector_configuration.connector_metadata.slack.o_auth_scopes #=> Array
     #   resp.connector_configuration.connector_metadata.slack.o_auth_scopes[0] #=> String
     #   resp.connector_configuration.connector_metadata.snowflake.supported_regions #=> Array
@@ -1357,6 +1361,8 @@ module Aws::Appflow
     #   resp.connector_configurations["ConnectorType"].connector_metadata.google_analytics.o_auth_scopes[0] #=> String
     #   resp.connector_configurations["ConnectorType"].connector_metadata.salesforce.o_auth_scopes #=> Array
     #   resp.connector_configurations["ConnectorType"].connector_metadata.salesforce.o_auth_scopes[0] #=> String
+    #   resp.connector_configurations["ConnectorType"].connector_metadata.salesforce.data_transfer_apis #=> Array
+    #   resp.connector_configurations["ConnectorType"].connector_metadata.salesforce.data_transfer_apis[0] #=> String, one of "AUTOMATIC", "BULKV2", "REST_SYNC"
     #   resp.connector_configurations["ConnectorType"].connector_metadata.slack.o_auth_scopes #=> Array
     #   resp.connector_configurations["ConnectorType"].connector_metadata.slack.o_auth_scopes[0] #=> String
     #   resp.connector_configurations["ConnectorType"].connector_metadata.snowflake.supported_regions #=> Array
@@ -1503,6 +1509,7 @@ module Aws::Appflow
     #   resp.source_flow_config.source_connector_properties.salesforce.object #=> String
     #   resp.source_flow_config.source_connector_properties.salesforce.enable_dynamic_field_update #=> Boolean
     #   resp.source_flow_config.source_connector_properties.salesforce.include_deleted_records #=> Boolean
+    #   resp.source_flow_config.source_connector_properties.salesforce.data_transfer_api #=> String, one of "AUTOMATIC", "BULKV2", "REST_SYNC"
     #   resp.source_flow_config.source_connector_properties.service_now.object #=> String
     #   resp.source_flow_config.source_connector_properties.singular.object #=> String
     #   resp.source_flow_config.source_connector_properties.slack.object #=> String
@@ -1542,6 +1549,7 @@ module Aws::Appflow
     #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.error_handling_config.bucket_prefix #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.error_handling_config.bucket_name #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.write_operation_type #=> String, one of "INSERT", "UPSERT", "UPDATE", "DELETE"
+    #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.data_transfer_api #=> String, one of "AUTOMATIC", "BULKV2", "REST_SYNC"
     #   resp.destination_flow_config_list[0].destination_connector_properties.snowflake.object #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.snowflake.intermediate_bucket_name #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.snowflake.bucket_prefix #=> String
@@ -2428,6 +2436,7 @@ module Aws::Appflow
     #           object: "Object", # required
     #           enable_dynamic_field_update: false,
     #           include_deleted_records: false,
+    #           data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
     #         },
     #         service_now: {
     #           object: "Object", # required
@@ -2505,6 +2514,7 @@ module Aws::Appflow
     #               bucket_name: "BucketName",
     #             },
     #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #             data_transfer_api: "AUTOMATIC", # accepts AUTOMATIC, BULKV2, REST_SYNC
     #           },
     #           snowflake: {
     #             object: "Object", # required
@@ -2656,7 +2666,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

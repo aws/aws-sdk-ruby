@@ -748,10 +748,16 @@ module Aws::GuardDuty
     #   The unique ID of the created detector.
     #   @return [String]
     #
+    # @!attribute [rw] unprocessed_data_sources
+    #   Specifies the data sources that couldn't be enabled when GuardDuty
+    #   was enabled for the first time.
+    #   @return [Types::UnprocessedDataSourcesResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetectorResponse AWS API Documentation
     #
     class CreateDetectorResponse < Struct.new(
-      :detector_id)
+      :detector_id,
+      :unprocessed_data_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1389,8 +1395,8 @@ module Aws::GuardDuty
     # GuardDuty member account.
     #
     # @!attribute [rw] cloud_trail
-    #   Describes whether any AWS CloudTrail management event logs are
-    #   enabled as data sources.
+    #   Describes whether any Amazon Web Services CloudTrail management
+    #   event logs are enabled as data sources.
     #   @return [Types::DataSourceFreeTrial]
     #
     # @!attribute [rw] dns_logs
@@ -2161,10 +2167,16 @@ module Aws::GuardDuty
     #   Describes whether scanning EBS volumes is enabled as a data source.
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   Specifies the reason why scanning EBS volumes (Malware Protection)
+    #   was not enabled as a data source.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EbsVolumesResult AWS API Documentation
     #
     class EbsVolumesResult < Struct.new(
-      :status)
+      :status,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2424,7 +2436,10 @@ module Aws::GuardDuty
     end
 
     # Represents a condition that when matched will be added to the response
-    # of the operation.
+    # of the operation. Irrespective of using any filter criteria, an
+    # administrator account can view the scan entries for all of its member
+    # accounts. However, each member account can view the scan entries only
+    # for their own account.
     #
     # @note When making an API call, you may pass FilterCriterion
     #   data as a hash:
@@ -2995,7 +3010,7 @@ module Aws::GuardDuty
     #   @return [Types::ScanResourceCriteria]
     #
     # @!attribute [rw] ebs_snapshot_preservation
-    #   An enum value representing possible snapshot preservations.
+    #   An enum value representing possible snapshot preservation settings.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMalwareScanSettingsResponse AWS API Documentation
@@ -4209,7 +4224,13 @@ module Aws::GuardDuty
     # @!attribute [rw] only_associated
     #   Specifies whether to only return associated members or to return all
     #   members (including members who haven't been invited yet or have
-    #   been disassociated).
+    #   been disassociated). Member accounts must have been previously
+    #   associated with the GuardDuty administrator account using [ `Create
+    #   Members` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembersRequest AWS API Documentation
@@ -6252,6 +6273,21 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Specifies the names of the data sources that couldn't be enabled.
+    #
+    # @!attribute [rw] malware_protection
+    #   An object that contains information on the status of all Malware
+    #   Protection data sources.
+    #   @return [Types::MalwareProtectionConfigurationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnprocessedDataSourcesResult AWS API Documentation
+    #
+    class UnprocessedDataSourcesResult < Struct.new(
+      :malware_protection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -6553,7 +6589,7 @@ module Aws::GuardDuty
     #   @return [Types::ScanResourceCriteria]
     #
     # @!attribute [rw] ebs_snapshot_preservation
-    #   An enum value representing possible snapshot preservations.
+    #   An enum value representing possible snapshot preservation settings.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMalwareScanSettingsRequest AWS API Documentation

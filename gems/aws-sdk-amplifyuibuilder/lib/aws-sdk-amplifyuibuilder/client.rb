@@ -1918,6 +1918,7 @@ module Aws::AmplifyUIBuilder
     #             default_country_code: "String",
     #             default_value: "String",
     #             descriptive_text: "String",
+    #             is_array: false,
     #             max_value: 1.0,
     #             min_value: 1.0,
     #             name: "String",
@@ -2020,6 +2021,7 @@ module Aws::AmplifyUIBuilder
     #   resp.entity.fields["String"].input_type.default_country_code #=> String
     #   resp.entity.fields["String"].input_type.default_value #=> String
     #   resp.entity.fields["String"].input_type.descriptive_text #=> String
+    #   resp.entity.fields["String"].input_type.is_array #=> Boolean
     #   resp.entity.fields["String"].input_type.max_value #=> Float
     #   resp.entity.fields["String"].input_type.min_value #=> Float
     #   resp.entity.fields["String"].input_type.name #=> String
@@ -2925,6 +2927,7 @@ module Aws::AmplifyUIBuilder
     #   resp.entities[0].fields["String"].input_type.default_country_code #=> String
     #   resp.entities[0].fields["String"].input_type.default_value #=> String
     #   resp.entities[0].fields["String"].input_type.descriptive_text #=> String
+    #   resp.entities[0].fields["String"].input_type.is_array #=> Boolean
     #   resp.entities[0].fields["String"].input_type.max_value #=> Float
     #   resp.entities[0].fields["String"].input_type.min_value #=> Float
     #   resp.entities[0].fields["String"].input_type.name #=> String
@@ -3661,6 +3664,7 @@ module Aws::AmplifyUIBuilder
     #   resp.form.fields["String"].input_type.default_country_code #=> String
     #   resp.form.fields["String"].input_type.default_value #=> String
     #   resp.form.fields["String"].input_type.descriptive_text #=> String
+    #   resp.form.fields["String"].input_type.is_array #=> Boolean
     #   resp.form.fields["String"].input_type.max_value #=> Float
     #   resp.form.fields["String"].input_type.min_value #=> Float
     #   resp.form.fields["String"].input_type.name #=> String
@@ -5595,6 +5599,7 @@ module Aws::AmplifyUIBuilder
     #             default_country_code: "String",
     #             default_value: "String",
     #             descriptive_text: "String",
+    #             is_array: false,
     #             max_value: 1.0,
     #             min_value: 1.0,
     #             name: "String",
@@ -5694,6 +5699,7 @@ module Aws::AmplifyUIBuilder
     #   resp.entity.fields["String"].input_type.default_country_code #=> String
     #   resp.entity.fields["String"].input_type.default_value #=> String
     #   resp.entity.fields["String"].input_type.descriptive_text #=> String
+    #   resp.entity.fields["String"].input_type.is_array #=> Boolean
     #   resp.entity.fields["String"].input_type.max_value #=> Float
     #   resp.entity.fields["String"].input_type.min_value #=> Float
     #   resp.entity.fields["String"].input_type.name #=> String
@@ -5847,7 +5853,7 @@ module Aws::AmplifyUIBuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifyuibuilder'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

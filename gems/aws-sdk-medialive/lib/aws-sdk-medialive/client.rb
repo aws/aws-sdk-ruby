@@ -569,6 +569,10 @@ module Aws::MediaLive
     #                 },
     #               ],
     #             },
+    #             scte_35_input_settings: {
+    #               input_attachment_name_reference: "__string",
+    #               mode: "FIXED", # required, accepts FIXED, FOLLOW_ACTIVE
+    #             },
     #             scte_35_return_to_network_settings: {
     #               splice_event_id: 1, # required
     #             },
@@ -668,6 +672,8 @@ module Aws::MediaLive
     #   resp.creates.schedule_actions[0].schedule_action_settings.motion_graphics_image_activate_settings.username #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines #=> Array
     #   resp.creates.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines[0].pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_input_settings.input_attachment_name_reference #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_input_settings.mode #=> String, one of "FIXED", "FOLLOW_ACTIVE"
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
@@ -727,6 +733,8 @@ module Aws::MediaLive
     #   resp.deletes.schedule_actions[0].schedule_action_settings.motion_graphics_image_activate_settings.username #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines #=> Array
     #   resp.deletes.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines[0].pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_input_settings.input_attachment_name_reference #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_input_settings.mode #=> String, one of "FIXED", "FOLLOW_ACTIVE"
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
@@ -1010,6 +1018,14 @@ module Aws::MediaLive
     #       },
     #       avail_configuration: {
     #         avail_settings: {
+    #           esam: {
+    #             acquisition_point_id: "__stringMax256", # required
+    #             ad_avail_offset: 1,
+    #             password: "__string",
+    #             pois_endpoint: "__string", # required
+    #             username: "__string",
+    #             zone_identity: "__stringMax256",
+    #           },
     #           scte_35_splice_insert: {
     #             ad_avail_offset: 1,
     #             no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
@@ -1937,6 +1953,12 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.avail_blanking.avail_blanking_image.uri #=> String
     #   resp.channel.encoder_settings.avail_blanking.avail_blanking_image.username #=> String
     #   resp.channel.encoder_settings.avail_blanking.state #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.acquisition_point_id #=> String
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.ad_avail_offset #=> Integer
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.password #=> String
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.pois_endpoint #=> String
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.username #=> String
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.zone_identity #=> String
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.ad_avail_offset #=> Integer
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.no_regional_blackout_flag #=> String, one of "FOLLOW", "IGNORE"
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.web_delivery_allowed_flag #=> String, one of "FOLLOW", "IGNORE"
@@ -3007,6 +3029,12 @@ module Aws::MediaLive
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.uri #=> String
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.username #=> String
     #   resp.encoder_settings.avail_blanking.state #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.acquisition_point_id #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.ad_avail_offset #=> Integer
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.password #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.pois_endpoint #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.username #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.zone_identity #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.ad_avail_offset #=> Integer
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.no_regional_blackout_flag #=> String, one of "FOLLOW", "IGNORE"
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.web_delivery_allowed_flag #=> String, one of "FOLLOW", "IGNORE"
@@ -3950,6 +3978,12 @@ module Aws::MediaLive
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.uri #=> String
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.username #=> String
     #   resp.encoder_settings.avail_blanking.state #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.acquisition_point_id #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.ad_avail_offset #=> Integer
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.password #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.pois_endpoint #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.username #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.zone_identity #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.ad_avail_offset #=> Integer
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.no_regional_blackout_flag #=> String, one of "FOLLOW", "IGNORE"
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.web_delivery_allowed_flag #=> String, one of "FOLLOW", "IGNORE"
@@ -5024,6 +5058,8 @@ module Aws::MediaLive
     #   resp.schedule_actions[0].schedule_action_settings.motion_graphics_image_activate_settings.username #=> String
     #   resp.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines #=> Array
     #   resp.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines[0].pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_input_settings.input_attachment_name_reference #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_input_settings.mode #=> String, one of "FIXED", "FOLLOW_ACTIVE"
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
@@ -5951,6 +5987,12 @@ module Aws::MediaLive
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.uri #=> String
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.username #=> String
     #   resp.encoder_settings.avail_blanking.state #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.acquisition_point_id #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.ad_avail_offset #=> Integer
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.password #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.pois_endpoint #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.username #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.zone_identity #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.ad_avail_offset #=> Integer
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.no_regional_blackout_flag #=> String, one of "FOLLOW", "IGNORE"
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.web_delivery_allowed_flag #=> String, one of "FOLLOW", "IGNORE"
@@ -6702,6 +6744,12 @@ module Aws::MediaLive
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.uri #=> String
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.username #=> String
     #   resp.encoder_settings.avail_blanking.state #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.acquisition_point_id #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.ad_avail_offset #=> Integer
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.password #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.pois_endpoint #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.username #=> String
+    #   resp.encoder_settings.avail_configuration.avail_settings.esam.zone_identity #=> String
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.ad_avail_offset #=> Integer
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.no_regional_blackout_flag #=> String, one of "FOLLOW", "IGNORE"
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.web_delivery_allowed_flag #=> String, one of "FOLLOW", "IGNORE"
@@ -7507,6 +7555,14 @@ module Aws::MediaLive
     #       },
     #       avail_configuration: {
     #         avail_settings: {
+    #           esam: {
+    #             acquisition_point_id: "__stringMax256", # required
+    #             ad_avail_offset: 1,
+    #             password: "__string",
+    #             pois_endpoint: "__string", # required
+    #             username: "__string",
+    #             zone_identity: "__stringMax256",
+    #           },
     #           scte_35_splice_insert: {
     #             ad_avail_offset: 1,
     #             no_regional_blackout_flag: "FOLLOW", # accepts FOLLOW, IGNORE
@@ -8425,6 +8481,12 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.avail_blanking.avail_blanking_image.uri #=> String
     #   resp.channel.encoder_settings.avail_blanking.avail_blanking_image.username #=> String
     #   resp.channel.encoder_settings.avail_blanking.state #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.acquisition_point_id #=> String
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.ad_avail_offset #=> Integer
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.password #=> String
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.pois_endpoint #=> String
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.username #=> String
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.zone_identity #=> String
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.ad_avail_offset #=> Integer
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.no_regional_blackout_flag #=> String, one of "FOLLOW", "IGNORE"
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.web_delivery_allowed_flag #=> String, one of "FOLLOW", "IGNORE"
@@ -9107,6 +9169,12 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.avail_blanking.avail_blanking_image.uri #=> String
     #   resp.channel.encoder_settings.avail_blanking.avail_blanking_image.username #=> String
     #   resp.channel.encoder_settings.avail_blanking.state #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.acquisition_point_id #=> String
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.ad_avail_offset #=> Integer
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.password #=> String
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.pois_endpoint #=> String
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.username #=> String
+    #   resp.channel.encoder_settings.avail_configuration.avail_settings.esam.zone_identity #=> String
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.ad_avail_offset #=> Integer
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.no_regional_blackout_flag #=> String, one of "FOLLOW", "IGNORE"
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_splice_insert.web_delivery_allowed_flag #=> String, one of "FOLLOW", "IGNORE"
@@ -10087,7 +10155,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

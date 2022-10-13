@@ -228,6 +228,7 @@ module Aws::MediaLive
     EmbeddedSourceSettings = Shapes::StructureShape.new(name: 'EmbeddedSourceSettings')
     Empty = Shapes::StructureShape.new(name: 'Empty')
     EncoderSettings = Shapes::StructureShape.new(name: 'EncoderSettings')
+    Esam = Shapes::StructureShape.new(name: 'Esam')
     FailoverCondition = Shapes::StructureShape.new(name: 'FailoverCondition')
     FailoverConditionSettings = Shapes::StructureShape.new(name: 'FailoverConditionSettings')
     FeatureActivations = Shapes::StructureShape.new(name: 'FeatureActivations')
@@ -588,6 +589,8 @@ module Aws::MediaLive
     Scte35Descriptor = Shapes::StructureShape.new(name: 'Scte35Descriptor')
     Scte35DescriptorSettings = Shapes::StructureShape.new(name: 'Scte35DescriptorSettings')
     Scte35DeviceRestrictions = Shapes::StringShape.new(name: 'Scte35DeviceRestrictions')
+    Scte35InputMode = Shapes::StringShape.new(name: 'Scte35InputMode')
+    Scte35InputScheduleActionSettings = Shapes::StructureShape.new(name: 'Scte35InputScheduleActionSettings')
     Scte35NoRegionalBlackoutFlag = Shapes::StringShape.new(name: 'Scte35NoRegionalBlackoutFlag')
     Scte35ReturnToNetworkScheduleActionSettings = Shapes::StructureShape.new(name: 'Scte35ReturnToNetworkScheduleActionSettings')
     Scte35SegmentationCancelIndicator = Shapes::StringShape.new(name: 'Scte35SegmentationCancelIndicator')
@@ -969,6 +972,7 @@ module Aws::MediaLive
     AvailConfiguration.add_member(:avail_settings, Shapes::ShapeRef.new(shape: AvailSettings, location_name: "availSettings"))
     AvailConfiguration.struct_class = Types::AvailConfiguration
 
+    AvailSettings.add_member(:esam, Shapes::ShapeRef.new(shape: Esam, location_name: "esam"))
     AvailSettings.add_member(:scte_35_splice_insert, Shapes::ShapeRef.new(shape: Scte35SpliceInsert, location_name: "scte35SpliceInsert"))
     AvailSettings.add_member(:scte_35_time_signal_apos, Shapes::ShapeRef.new(shape: Scte35TimeSignalApos, location_name: "scte35TimeSignalApos"))
     AvailSettings.struct_class = Types::AvailSettings
@@ -1693,6 +1697,14 @@ module Aws::MediaLive
     EncoderSettings.add_member(:timecode_config, Shapes::ShapeRef.new(shape: TimecodeConfig, required: true, location_name: "timecodeConfig"))
     EncoderSettings.add_member(:video_descriptions, Shapes::ShapeRef.new(shape: __listOfVideoDescription, required: true, location_name: "videoDescriptions"))
     EncoderSettings.struct_class = Types::EncoderSettings
+
+    Esam.add_member(:acquisition_point_id, Shapes::ShapeRef.new(shape: __stringMax256, required: true, location_name: "acquisitionPointId"))
+    Esam.add_member(:ad_avail_offset, Shapes::ShapeRef.new(shape: __integerMinNegative1000Max1000, location_name: "adAvailOffset"))
+    Esam.add_member(:password, Shapes::ShapeRef.new(shape: __string, location_name: "password"))
+    Esam.add_member(:pois_endpoint, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "poisEndpoint"))
+    Esam.add_member(:username, Shapes::ShapeRef.new(shape: __string, location_name: "username"))
+    Esam.add_member(:zone_identity, Shapes::ShapeRef.new(shape: __stringMax256, location_name: "zoneIdentity"))
+    Esam.struct_class = Types::Esam
 
     FailoverCondition.add_member(:failover_condition_settings, Shapes::ShapeRef.new(shape: FailoverConditionSettings, location_name: "failoverConditionSettings"))
     FailoverCondition.struct_class = Types::FailoverCondition
@@ -2784,6 +2796,7 @@ module Aws::MediaLive
     ScheduleActionSettings.add_member(:motion_graphics_image_activate_settings, Shapes::ShapeRef.new(shape: MotionGraphicsActivateScheduleActionSettings, location_name: "motionGraphicsImageActivateSettings"))
     ScheduleActionSettings.add_member(:motion_graphics_image_deactivate_settings, Shapes::ShapeRef.new(shape: MotionGraphicsDeactivateScheduleActionSettings, location_name: "motionGraphicsImageDeactivateSettings"))
     ScheduleActionSettings.add_member(:pause_state_settings, Shapes::ShapeRef.new(shape: PauseStateScheduleActionSettings, location_name: "pauseStateSettings"))
+    ScheduleActionSettings.add_member(:scte_35_input_settings, Shapes::ShapeRef.new(shape: Scte35InputScheduleActionSettings, location_name: "scte35InputSettings"))
     ScheduleActionSettings.add_member(:scte_35_return_to_network_settings, Shapes::ShapeRef.new(shape: Scte35ReturnToNetworkScheduleActionSettings, location_name: "scte35ReturnToNetworkSettings"))
     ScheduleActionSettings.add_member(:scte_35_splice_insert_settings, Shapes::ShapeRef.new(shape: Scte35SpliceInsertScheduleActionSettings, location_name: "scte35SpliceInsertSettings"))
     ScheduleActionSettings.add_member(:scte_35_time_signal_settings, Shapes::ShapeRef.new(shape: Scte35TimeSignalScheduleActionSettings, location_name: "scte35TimeSignalSettings"))
@@ -2825,6 +2838,10 @@ module Aws::MediaLive
 
     Scte35DescriptorSettings.add_member(:segmentation_descriptor_scte_35_descriptor_settings, Shapes::ShapeRef.new(shape: Scte35SegmentationDescriptor, required: true, location_name: "segmentationDescriptorScte35DescriptorSettings"))
     Scte35DescriptorSettings.struct_class = Types::Scte35DescriptorSettings
+
+    Scte35InputScheduleActionSettings.add_member(:input_attachment_name_reference, Shapes::ShapeRef.new(shape: __string, location_name: "inputAttachmentNameReference"))
+    Scte35InputScheduleActionSettings.add_member(:mode, Shapes::ShapeRef.new(shape: Scte35InputMode, required: true, location_name: "mode"))
+    Scte35InputScheduleActionSettings.struct_class = Types::Scte35InputScheduleActionSettings
 
     Scte35ReturnToNetworkScheduleActionSettings.add_member(:splice_event_id, Shapes::ShapeRef.new(shape: __longMin0Max4294967295, required: true, location_name: "spliceEventId"))
     Scte35ReturnToNetworkScheduleActionSettings.struct_class = Types::Scte35ReturnToNetworkScheduleActionSettings

@@ -45,7 +45,7 @@ module Aws::IAM
     #   The Region where the last service access attempt occurred.
     #
     #   This field is null if no principals in the reported Organizations
-    #   entity attempted to access the service within the [reporting
+    #   entity attempted to access the service within the [tracking
     #   period][1].
     #
     #
@@ -61,7 +61,7 @@ module Aws::IAM
     #
     #   This field is null if no principals (IAM users, IAM roles, or root
     #   users) in the reported Organizations entity attempted to access the
-    #   service within the [reporting period][1].
+    #   service within the [tracking period][1].
     #
     #
     #
@@ -75,7 +75,7 @@ module Aws::IAM
     #   requests.
     #
     #   This field is null if no principals in the reported Organizations
-    #   entity attempted to access the service within the [reporting
+    #   entity attempted to access the service within the [tracking
     #   period][2].
     #
     #
@@ -87,7 +87,7 @@ module Aws::IAM
     # @!attribute [rw] total_authenticated_entities
     #   The number of accounts with authenticated principals (root users,
     #   IAM users, and IAM roles) that attempted to access the service in
-    #   the reporting period.
+    #   the tracking period.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessDetail AWS API Documentation
@@ -2985,7 +2985,7 @@ module Aws::IAM
     #   Amazon Web Services does not report unauthenticated requests.
     #
     #   This field is null if no IAM entities attempted to access the
-    #   service within the [reporting period][2].
+    #   service within the [tracking period][2].
     #
     #
     #
@@ -10104,7 +10104,7 @@ module Aws::IAM
     #   Amazon Web Services does not report unauthenticated requests.
     #
     #   This field is null if no IAM entities attempted to access the
-    #   service within the [reporting period][2].
+    #   service within the [tracking period][2].
     #
     #
     #
@@ -10136,7 +10136,7 @@ module Aws::IAM
     #   unauthenticated requests.
     #
     #   This field is null if no IAM entities attempted to access the
-    #   service within the [reporting period][1].
+    #   service within the [tracking period][1].
     #
     #
     #
@@ -10149,7 +10149,7 @@ module Aws::IAM
     #   unauthenticated requests.
     #
     #   This field is null if no IAM entities attempted to access the
-    #   service within the [reporting period][1].
+    #   service within the [tracking period][1].
     #
     #
     #
@@ -10161,7 +10161,7 @@ module Aws::IAM
     #   or IAM roles) that have attempted to access the service.
     #
     #   This field is null if no principals attempted to access the service
-    #   within the [reporting period][1].
+    #   within the [tracking period][1].
     #
     #
     #
@@ -10173,7 +10173,7 @@ module Aws::IAM
     #   access a tracked action within the service.
     #
     #   This field is null if there no tracked actions or if the principal
-    #   did not use the tracked actions within the [reporting period][1].
+    #   did not use the tracked actions within the [tracking period][1].
     #   This field is also null if the report was generated at the service
     #   level and not the action level. For more information, see the
     #   `Granularity` field in GenerateServiceLastAccessedDetails.
@@ -11452,7 +11452,7 @@ module Aws::IAM
     #   requests.
     #
     #   This field is null if no IAM entities attempted to access the
-    #   service within the [reporting period][2].
+    #   service within the [tracking period][2].
     #
     #
     #
@@ -11466,7 +11466,7 @@ module Aws::IAM
     #   report unauthenticated requests.
     #
     #   This field is null if no IAM entities attempted to access the
-    #   service within the [reporting period][1].
+    #   service within the [tracking period][1].
     #
     #
     #

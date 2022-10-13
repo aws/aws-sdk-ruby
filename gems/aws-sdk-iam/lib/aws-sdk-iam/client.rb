@@ -2695,9 +2695,8 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Deletes the password for the specified IAM user, which terminates the
-    # user's ability to access Amazon Web Services services through the
-    # Amazon Web Services Management Console.
+    # Deletes the password for the specified IAM user, For more information,
+    # see [Managing passwords for IAM users][1].
     #
     # You can use the CLI, the Amazon Web Services API, or the **Users**
     # page in the IAM console to delete a password for any IAM user. You can
@@ -2710,6 +2709,10 @@ module Aws::IAM
     # prevent all user access, you must also either make any access keys
     # inactive or delete them. For more information about making keys
     # inactive or deleting them, see UpdateAccessKey and DeleteAccessKey.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_admin-change-user.html
     #
     # @option params [required, String] :user_name
     #   The name of the user whose password you want to delete.
@@ -13213,7 +13216,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -72,6 +72,10 @@ module Aws::Panorama
     #   The application instance's name.
     #   @return [String]
     #
+    # @!attribute [rw] runtime_context_states
+    #   The application's state.
+    #   @return [Array<Types::ReportedRuntimeContextState>]
+    #
     # @!attribute [rw] status
     #   The application instance's status.
     #   @return [String]
@@ -95,6 +99,7 @@ module Aws::Panorama
       :description,
       :health_status,
       :name,
+      :runtime_context_states,
       :status,
       :status_description,
       :tags)
@@ -238,12 +243,12 @@ module Aws::Panorama
     #
     #       {
     #         device_ids: ["DeviceId"], # required
-    #         device_job_config: { # required
+    #         device_job_config: {
     #           ota_job_config: {
     #             image_version: "ImageVersion", # required
     #           },
     #         },
-    #         job_type: "OTA", # required, accepts OTA
+    #         job_type: "OTA", # required, accepts OTA, REBOOT
     #       }
     #
     # @!attribute [rw] device_ids
@@ -251,7 +256,7 @@ module Aws::Panorama
     #   @return [Array<String>]
     #
     # @!attribute [rw] device_job_config
-    #   Configuration settings for the job.
+    #   Configuration settings for a software update job.
     #   @return [Types::DeviceJobConfig]
     #
     # @!attribute [rw] job_type
@@ -715,6 +720,10 @@ module Aws::Panorama
     #   The application instance's name.
     #   @return [String]
     #
+    # @!attribute [rw] runtime_context_states
+    #   The application instance's state.
+    #   @return [Array<Types::ReportedRuntimeContextState>]
+    #
     # @!attribute [rw] runtime_role_arn
     #   The application instance's runtime role ARN.
     #   @return [String]
@@ -744,6 +753,7 @@ module Aws::Panorama
       :health_status,
       :last_updated_time,
       :name,
+      :runtime_context_states,
       :runtime_role_arn,
       :status,
       :status_description,
@@ -799,6 +809,10 @@ module Aws::Panorama
     #   The job's ID.
     #   @return [String]
     #
+    # @!attribute [rw] job_type
+    #   The job's type.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The job's status.
     #   @return [String]
@@ -813,6 +827,7 @@ module Aws::Panorama
       :device_type,
       :image_version,
       :job_id,
+      :job_type,
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -1469,13 +1484,18 @@ module Aws::Panorama
     #   The job's ID.
     #   @return [String]
     #
+    # @!attribute [rw] job_type
+    #   The job's type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/DeviceJob AWS API Documentation
     #
     class DeviceJob < Struct.new(
       :created_time,
       :device_id,
       :device_name,
-      :job_id)
+      :job_id,
+      :job_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1632,6 +1652,10 @@ module Aws::Panorama
     #   The target version of the device software.
     #   @return [String]
     #
+    # @!attribute [rw] job_type
+    #   The job's type.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   Status of the latest device job.
     #   @return [String]
@@ -1640,6 +1664,7 @@ module Aws::Panorama
     #
     class LatestDeviceJob < Struct.new(
       :image_version,
+      :job_type,
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -1854,7 +1879,7 @@ module Aws::Panorama
     #   data as a hash:
     #
     #       {
-    #         device_aggregated_status_filter: "ERROR", # accepts ERROR, AWAITING_PROVISIONING, PENDING, FAILED, DELETING, ONLINE, OFFLINE, LEASE_EXPIRED, UPDATE_NEEDED
+    #         device_aggregated_status_filter: "ERROR", # accepts ERROR, AWAITING_PROVISIONING, PENDING, FAILED, DELETING, ONLINE, OFFLINE, LEASE_EXPIRED, UPDATE_NEEDED, REBOOTING
     #         max_results: 1,
     #         name_filter: "NameFilter",
     #         next_token: "NextToken",
@@ -2510,6 +2535,33 @@ module Aws::Panorama
       include Aws::Structure
     end
 
+    # A signal to a camera node to start or stop processing video.
+    #
+    # @note When making an API call, you may pass NodeSignal
+    #   data as a hash:
+    #
+    #       {
+    #         node_instance_id: "NodeInstanceId", # required
+    #         signal: "PAUSE", # required, accepts PAUSE, RESUME
+    #       }
+    #
+    # @!attribute [rw] node_instance_id
+    #   The camera node's name, from the application manifest.
+    #   @return [String]
+    #
+    # @!attribute [rw] signal
+    #   The signal value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/NodeSignal AWS API Documentation
+    #
+    class NodeSignal < Struct.new(
+      :node_instance_id,
+      :signal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Network time protocol (NTP) server settings. Use this option to
     # connect to local NTP servers instead of `pool.ntp.org`.
     #
@@ -2995,6 +3047,35 @@ module Aws::Panorama
     #
     class RemoveApplicationInstanceResponse < Aws::EmptyStructure; end
 
+    # An application instance's state.
+    #
+    # @!attribute [rw] desired_state
+    #   The application's desired state.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_reported_status
+    #   The application's reported status.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_reported_time
+    #   When the device reported the application's state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] runtime_context_name
+    #   The device's name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/ReportedRuntimeContextState AWS API Documentation
+    #
+    class ReportedRuntimeContextState < Struct.new(
+      :desired_state,
+      :device_reported_status,
+      :device_reported_time,
+      :runtime_context_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The target resource was not found.
     #
     # @!attribute [rw] message
@@ -3080,6 +3161,48 @@ module Aws::Panorama
       :resource_id,
       :resource_type,
       :service_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SignalApplicationInstanceNodeInstancesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_instance_id: "ApplicationInstanceId", # required
+    #         node_signals: [ # required
+    #           {
+    #             node_instance_id: "NodeInstanceId", # required
+    #             signal: "PAUSE", # required, accepts PAUSE, RESUME
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] application_instance_id
+    #   An application instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_signals
+    #   A list of signals.
+    #   @return [Array<Types::NodeSignal>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/SignalApplicationInstanceNodeInstancesRequest AWS API Documentation
+    #
+    class SignalApplicationInstanceNodeInstancesRequest < Struct.new(
+      :application_instance_id,
+      :node_signals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_instance_id
+    #   An application instance ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/SignalApplicationInstanceNodeInstancesResponse AWS API Documentation
+    #
+    class SignalApplicationInstanceNodeInstancesResponse < Struct.new(
+      :application_instance_id)
       SENSITIVE = []
       include Aws::Structure
     end
