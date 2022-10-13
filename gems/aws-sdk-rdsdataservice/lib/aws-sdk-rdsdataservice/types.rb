@@ -154,6 +154,10 @@ module Aws::RDSDataService
     #
     # @!attribute [rw] schema
     #   The name of the database schema.
+    #
+    #   <note markdown="1"> Currently, the `schema` parameter isn't supported.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] parameter_sets

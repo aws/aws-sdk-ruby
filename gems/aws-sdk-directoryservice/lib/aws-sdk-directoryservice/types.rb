@@ -2156,6 +2156,64 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeUpdateDirectoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         update_type: "OS", # required, accepts OS
+    #         region_name: "RegionName",
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The unique identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_type
+    #   The type of updates you want to describe for the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   The name of the Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `DescribeUpdateDirectoryResult`. NextToken value from a previous
+    #   call to DescribeUpdateDirectory. Pass null if this is the first
+    #   call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeUpdateDirectoryRequest AWS API Documentation
+    #
+    class DescribeUpdateDirectoryRequest < Struct.new(
+      :directory_id,
+      :update_type,
+      :region_name,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_activities
+    #   The list of update activities on a directory for the requested
+    #   update type.
+    #   @return [Array<Types::UpdateInfoEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   If not null, more results are available. Pass this value for the
+    #   `NextToken` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeUpdateDirectoryResult AWS API Documentation
+    #
+    class DescribeUpdateDirectoryResult < Struct.new(
+      :update_activities,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Region you specified is the same Region where the Managed
     # Microsoft AD directory was created. Specify a different Region and try
     # again.
@@ -2413,6 +2471,10 @@ module Aws::DirectoryService
     #   Lists the Regions where the directory has replicated.
     #   @return [Types::RegionsInfo]
     #
+    # @!attribute [rw] os_version
+    #   The operating system (OS) version of the directory.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryDescription AWS API Documentation
     #
     class DirectoryDescription < Struct.new(
@@ -2440,7 +2502,8 @@ module Aws::DirectoryService
       :sso_enabled,
       :desired_number_of_domain_controllers,
       :owner_directory_description,
-      :regions_info)
+      :regions_info,
+      :os_version)
       SENSITIVE = [:share_notes]
       include Aws::Structure
     end
@@ -2458,6 +2521,25 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryDoesNotExistException AWS API Documentation
     #
     class DirectoryDoesNotExistException < Struct.new(
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The directory is already updated to desired update type settings.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryInDesiredStateException AWS API Documentation
+    #
+    class DirectoryInDesiredStateException < Struct.new(
       :message,
       :request_id)
       SENSITIVE = []
@@ -3744,6 +3826,27 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # OS version that the directory needs to be updated to.
+    #
+    # @note When making an API call, you may pass OSUpdateSettings
+    #   data as a hash:
+    #
+    #       {
+    #         os_version: "SERVER_2012", # accepts SERVER_2012, SERVER_2019
+    #       }
+    #
+    # @!attribute [rw] os_version
+    #   OS version that the directory needs to be updated to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/OSUpdateSettings AWS API Documentation
+    #
+    class OSUpdateSettings < Struct.new(
+      :os_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Exception encountered while trying to access your Amazon Web Services
     # organization.
     #
@@ -4997,6 +5100,104 @@ module Aws::DirectoryService
     #
     class UpdateConditionalForwarderResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateDirectorySetupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         update_type: "OS", # required, accepts OS
+    #         os_update_settings: {
+    #           os_version: "SERVER_2012", # accepts SERVER_2012, SERVER_2019
+    #         },
+    #         create_snapshot_before_update: false,
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory on which you want to perform the
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_type
+    #   The type of update that needs to be performed on the directory. For
+    #   example, OS.
+    #   @return [String]
+    #
+    # @!attribute [rw] os_update_settings
+    #   The settings for the OS update that needs to be performed on the
+    #   directory.
+    #   @return [Types::OSUpdateSettings]
+    #
+    # @!attribute [rw] create_snapshot_before_update
+    #   The boolean that specifies if a snapshot for the directory needs to
+    #   be taken before updating the directory.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateDirectorySetupRequest AWS API Documentation
+    #
+    class UpdateDirectorySetupRequest < Struct.new(
+      :directory_id,
+      :update_type,
+      :os_update_settings,
+      :create_snapshot_before_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateDirectorySetupResult AWS API Documentation
+    #
+    class UpdateDirectorySetupResult < Aws::EmptyStructure; end
+
+    # An entry of update information related to a requested update type.
+    #
+    # @!attribute [rw] region
+    #   The name of the Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the update performed on the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current status of the update type activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] initiated_by
+    #   This specifies if the update was initiated by the customer or by the
+    #   service team.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_value
+    #   The new value of the target setting.
+    #   @return [Types::UpdateValue]
+    #
+    # @!attribute [rw] previous_value
+    #   The old value of the target setting.
+    #   @return [Types::UpdateValue]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the `UpdateDirectorySetup` for the particular
+    #   type.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The last updated date and time of a particular directory setting.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateInfoEntry AWS API Documentation
+    #
+    class UpdateInfoEntry < Struct.new(
+      :region,
+      :status,
+      :status_reason,
+      :initiated_by,
+      :new_value,
+      :previous_value,
+      :start_time,
+      :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateNumberOfDomainControllersRequest
     #   data as a hash:
     #
@@ -5151,6 +5352,20 @@ module Aws::DirectoryService
     class UpdateTrustResult < Struct.new(
       :request_id,
       :trust_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The value for a given type of `UpdateSettings`.
+    #
+    # @!attribute [rw] os_update_settings
+    #   The OS update related settings.
+    #   @return [Types::OSUpdateSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateValue AWS API Documentation
+    #
+    class UpdateValue < Struct.new(
+      :os_update_settings)
       SENSITIVE = []
       include Aws::Structure
     end

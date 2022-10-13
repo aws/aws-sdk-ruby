@@ -1719,7 +1719,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #         global_filters: {
     #           patch_filters: [ # required
     #             {
@@ -3581,11 +3581,11 @@ module Aws::SSM
     #   @return [Array<Hash<String,Array<String>>>]
     #
     # @!attribute [rw] tags
-    #   Optional metadata that you assign to a resource. Tags enable you to
-    #   categorize a resource in different ways, such as by purpose, owner,
-    #   or environment. For example, you might want to tag an association to
-    #   identify the type of resource to which it applies, the environment,
-    #   or the purpose of the association.
+    #   Adds or overwrites one or more tags for a State Manager association.
+    #   *Tags* are metadata that you can assign to your Amazon Web Services
+    #   resources. Tags enable you to categorize your resources in different
+    #   ways, for example, by purpose, owner, or environment. Each tag
+    #   consists of a key and an optional value, both of which you define.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] alarm_configuration
@@ -4223,7 +4223,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #         name: "BaselineName", # required
     #         global_filters: {
     #           patch_filters: [ # required
@@ -7212,7 +7212,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
+    #         operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #         property: "PRODUCT", # required, accepts PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PRIORITY, SEVERITY
     #         patch_set: "OS", # accepts OS, APPLICATION
     #         max_results: 1,
@@ -7884,9 +7884,14 @@ module Aws::SSM
     end
 
     # The document can't be shared with more Amazon Web Services user
-    # accounts. You can share a document with a maximum of 20 accounts. You
-    # can publicly share up to five documents. If you need to increase this
-    # limit, contact Amazon Web Services Support.
+    # accounts. You can specify a maximum of 20 accounts per API operation
+    # to share a private document.
+    #
+    # By default, you can share a private document with a maximum of 1,000
+    # accounts and publicly share up to five documents.
+    #
+    # If you need to increase the quota for privately or publicly shared
+    # Systems Manager documents, contact Amazon Web Services Support.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -8639,7 +8644,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #       }
     #
     # @!attribute [rw] operating_system
@@ -8679,7 +8684,7 @@ module Aws::SSM
     #         instance_id: "InstanceId", # required
     #         snapshot_id: "SnapshotId", # required
     #         baseline_override: {
-    #           operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
+    #           operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #           global_filters: {
     #             patch_filters: [ # required
     #               {
@@ -10085,7 +10090,7 @@ module Aws::SSM
     #
     #       {
     #         patch_group: "PatchGroup", # required
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #       }
     #
     # @!attribute [rw] patch_group
@@ -10746,18 +10751,30 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] key
-    #   The filter key name to describe your managed nodes. For example:
+    #   The filter key name to describe your managed nodes.
     #
-    #   "InstanceIds" \| "AgentVersion" \| "PingStatus" \|
-    #   "PlatformTypes" \| "ActivationIds" \| "IamRole" \|
-    #   "ResourceType" \| "AssociationStatus" \| "tag-key" \|
-    #   "tag:`\{keyname\}`
+    #   Valid filter key values: ActivationIds \| AgentVersion \|
+    #   AssociationStatus \| IamRole \| InstanceIds \| PingStatus \|
+    #   PlatformTypes \| ResourceType \| SourceIds \| SourceTypes \|
+    #   "tag-key" \| "tag:`\{keyname\}`
     #
-    #   `Tag Key` isn't a valid filter. You must specify either `tag-key`
-    #   or `tag:\{keyname\}` and a string. Here are some valid examples:
-    #   `tag-key`, `tag:123`, `tag:al!`, `tag:Windows`. Here are some
-    #   *invalid* examples: `tag-keys`, `Tag Key`, `tag:`, `tagKey`,
-    #   `abc:keyname`.
+    #   * Valid values for the `AssociationStatus` filter key: Success \|
+    #     Pending \| Failed
+    #
+    #   * Valid values for the `PingStatus` filter key: Online \|
+    #     ConnectionLost \| Inactive (deprecated)
+    #
+    #   * Valid values for the `PlatformType` filter key: Windows \| Linux
+    #     \| MacOS
+    #
+    #   * Valid values for the `ResourceType` filter key: EC2Instance \|
+    #     ManagedInstance
+    #
+    #   * Valid values for the `SourceType` filter key: AWS::EC2::Instance
+    #     \| AWS::SSM::ManagedInstance \| AWS::IoT::Thing
+    #
+    #   * Valid tag examples: `Key=tag-key,Values=Purpose` \|
+    #     `Key=tag:Purpose,Values=Test`.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -10912,26 +10929,25 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] critical_non_compliant_count
-    #   The number of managed nodes where patches that are specified as
-    #   `Critical` for compliance reporting in the patch baseline aren't
-    #   installed. These patches might be missing, have failed installation,
-    #   were rejected, or were installed but awaiting a required managed
-    #   node reboot. The status of these managed nodes is `NON_COMPLIANT`.
+    #   The number of patches per node that are specified as `Critical` for
+    #   compliance reporting in the patch baseline aren't installed. These
+    #   patches might be missing, have failed installation, were rejected,
+    #   or were installed but awaiting a required managed node reboot. The
+    #   status of these managed nodes is `NON_COMPLIANT`.
     #   @return [Integer]
     #
     # @!attribute [rw] security_non_compliant_count
-    #   The number of managed nodes where patches that are specified as
-    #   `Security` in a patch advisory aren't installed. These patches
-    #   might be missing, have failed installation, were rejected, or were
-    #   installed but awaiting a required managed node reboot. The status of
-    #   these managed nodes is `NON_COMPLIANT`.
+    #   The number of patches per node that are specified as `Security` in a
+    #   patch advisory aren't installed. These patches might be missing,
+    #   have failed installation, were rejected, or were installed but
+    #   awaiting a required managed node reboot. The status of these managed
+    #   nodes is `NON_COMPLIANT`.
     #   @return [Integer]
     #
     # @!attribute [rw] other_non_compliant_count
-    #   The number of managed nodes with patches installed that are
-    #   specified as other than `Critical` or `Security` but aren't
-    #   compliant with the patch baseline. The status of these managed nodes
-    #   is `NON_COMPLIANT`.
+    #   The number of patches per node that are specified as other than
+    #   `Critical` or `Security` but aren't compliant with the patch
+    #   baseline. The status of these managed nodes is `NON_COMPLIANT`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstancePatchState AWS API Documentation
@@ -11619,7 +11635,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The tag key or value isn't valid.
+    # The specified tag key or value isn't valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -13298,7 +13314,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] s3_bucket_name
-    #   The name of an S3 bucket where execution logs are stored .
+    #   The name of an S3 bucket where execution logs are stored.
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix

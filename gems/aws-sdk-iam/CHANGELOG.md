@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2022-10-13)
+------------------
+
+* Feature - Documentation updates for the AWS Identity and Access Management API Reference.
+
 1.70.0 (2022-08-24)
 ------------------
 

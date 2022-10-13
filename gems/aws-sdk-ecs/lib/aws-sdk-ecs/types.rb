@@ -7042,15 +7042,27 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] minimum_scaling_step_size
-    #   The minimum number of container instances that Amazon ECS scales in
-    #   or scales out at one time. If this parameter is omitted, the default
-    #   value of `1` is used.
+    #   The minimum number of Amazon EC2 instances that Amazon ECS will
+    #   scale out at one time. The scale in process is not affected by this
+    #   parameter If this parameter is omitted, the default value of `1` is
+    #   used.
+    #
+    #   When additional capacity is required, Amazon ECS will scale up the
+    #   minimum scaling step size even if the actual demand is less than the
+    #   minimum scaling step size.
+    #
+    #   If you use a capacity provider with an Auto Scaling group configured
+    #   with more than one Amazon EC2 instance type or Availability Zone,
+    #   Amazon ECS will scale up by the exact minimum scaling step size
+    #   value and will ignore both the maximum scaling step size as well as
+    #   the capacity demand.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_scaling_step_size
-    #   The maximum number of container instances that Amazon ECS scales in
-    #   or scales out at one time. If this parameter is omitted, the default
-    #   value of `10000` is used.
+    #   The maximum number of Amazon EC2 instances that Amazon ECS will
+    #   scale out at one time. The scale in process is not affected by this
+    #   parameter. If this parameter is omitted, the default value of
+    #   `10000` is used.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_warmup_period
@@ -9394,9 +9406,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] deployment_controller
-    #   The deployment controller type the service is using. When using the
-    #   DescribeServices API, this field is omitted if the service uses the
-    #   `ECS` deployment controller type.
+    #   The deployment controller type the service is using.
     #   @return [Types::DeploymentController]
     #
     # @!attribute [rw] tags

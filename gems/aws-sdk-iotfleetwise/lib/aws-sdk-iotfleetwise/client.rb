@@ -594,6 +594,12 @@ module Aws::IoTFleetWise
     # @option params [Array<String>] :data_extra_dimensions
     #   (Optional) A list of vehicle attributes to associate with a campaign.
     #
+    #   Enrich the data with specified vehicle attributes. For example, add
+    #   `make` and `model` to the campaign, and Amazon Web Services IoT
+    #   FleetWise will associate the data with those attributes as dimensions
+    #   in Amazon Timestream. You can then query the data against `make` and
+    #   `model`.
+    #
     #   Default: An empty array
     #
     # @option params [Array<Types::Tag>] :tags
@@ -3122,7 +3128,7 @@ module Aws::IoTFleetWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotfleetwise'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

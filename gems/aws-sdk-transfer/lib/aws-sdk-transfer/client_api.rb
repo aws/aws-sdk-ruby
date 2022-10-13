@@ -200,6 +200,7 @@ module Aws::Transfer
     MessageSubject = Shapes::StringShape.new(name: 'MessageSubject')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NullableRole = Shapes::StringShape.new(name: 'NullableRole')
+    OnPartialUploadWorkflowDetails = Shapes::ListShape.new(name: 'OnPartialUploadWorkflowDetails')
     OnUploadWorkflowDetails = Shapes::ListShape.new(name: 'OnUploadWorkflowDetails')
     OverwriteExisting = Shapes::StringShape.new(name: 'OverwriteExisting')
     PassiveIp = Shapes::StringShape.new(name: 'PassiveIp')
@@ -964,6 +965,8 @@ module Aws::Transfer
     LoggingConfiguration.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "LogGroupName"))
     LoggingConfiguration.struct_class = Types::LoggingConfiguration
 
+    OnPartialUploadWorkflowDetails.member = Shapes::ShapeRef.new(shape: WorkflowDetail)
+
     OnUploadWorkflowDetails.member = Shapes::ShapeRef.new(shape: WorkflowDetail)
 
     PosixProfile.add_member(:uid, Shapes::ShapeRef.new(shape: PosixId, required: true, location_name: "Uid"))
@@ -1189,7 +1192,8 @@ module Aws::Transfer
     WorkflowDetail.add_member(:execution_role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "ExecutionRole"))
     WorkflowDetail.struct_class = Types::WorkflowDetail
 
-    WorkflowDetails.add_member(:on_upload, Shapes::ShapeRef.new(shape: OnUploadWorkflowDetails, required: true, location_name: "OnUpload"))
+    WorkflowDetails.add_member(:on_upload, Shapes::ShapeRef.new(shape: OnUploadWorkflowDetails, location_name: "OnUpload"))
+    WorkflowDetails.add_member(:on_partial_upload, Shapes::ShapeRef.new(shape: OnPartialUploadWorkflowDetails, location_name: "OnPartialUpload"))
     WorkflowDetails.struct_class = Types::WorkflowDetails
 
     WorkflowStep.add_member(:type, Shapes::ShapeRef.new(shape: WorkflowStepType, location_name: "Type"))

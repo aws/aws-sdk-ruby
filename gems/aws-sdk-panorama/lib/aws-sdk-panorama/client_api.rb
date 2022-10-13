@@ -72,6 +72,7 @@ module Aws::Panorama
     DescribePackageVersionRequest = Shapes::StructureShape.new(name: 'DescribePackageVersionRequest')
     DescribePackageVersionResponse = Shapes::StructureShape.new(name: 'DescribePackageVersionResponse')
     Description = Shapes::StringShape.new(name: 'Description')
+    DesiredState = Shapes::StringShape.new(name: 'DesiredState')
     Device = Shapes::StructureShape.new(name: 'Device')
     DeviceAggregatedStatus = Shapes::StringShape.new(name: 'DeviceAggregatedStatus')
     DeviceArn = Shapes::StringShape.new(name: 'DeviceArn')
@@ -84,6 +85,7 @@ module Aws::Panorama
     DeviceJobList = Shapes::ListShape.new(name: 'DeviceJobList')
     DeviceList = Shapes::ListShape.new(name: 'DeviceList')
     DeviceName = Shapes::StringShape.new(name: 'DeviceName')
+    DeviceReportedStatus = Shapes::StringShape.new(name: 'DeviceReportedStatus')
     DeviceSerialNumber = Shapes::StringShape.new(name: 'DeviceSerialNumber')
     DeviceStatus = Shapes::StringShape.new(name: 'DeviceStatus')
     DeviceType = Shapes::StringShape.new(name: 'DeviceType')
@@ -165,6 +167,9 @@ module Aws::Panorama
     NodePackageName = Shapes::StringShape.new(name: 'NodePackageName')
     NodePackagePatchVersion = Shapes::StringShape.new(name: 'NodePackagePatchVersion')
     NodePackageVersion = Shapes::StringShape.new(name: 'NodePackageVersion')
+    NodeSignal = Shapes::StructureShape.new(name: 'NodeSignal')
+    NodeSignalList = Shapes::ListShape.new(name: 'NodeSignalList')
+    NodeSignalValue = Shapes::StringShape.new(name: 'NodeSignalValue')
     NodesList = Shapes::ListShape.new(name: 'NodesList')
     NtpPayload = Shapes::StructureShape.new(name: 'NtpPayload')
     NtpServerList = Shapes::ListShape.new(name: 'NtpServerList')
@@ -204,12 +209,17 @@ module Aws::Panorama
     RegisterPackageVersionResponse = Shapes::StructureShape.new(name: 'RegisterPackageVersionResponse')
     RemoveApplicationInstanceRequest = Shapes::StructureShape.new(name: 'RemoveApplicationInstanceRequest')
     RemoveApplicationInstanceResponse = Shapes::StructureShape.new(name: 'RemoveApplicationInstanceResponse')
+    ReportedRuntimeContextState = Shapes::StructureShape.new(name: 'ReportedRuntimeContextState')
+    ReportedRuntimeContextStates = Shapes::ListShape.new(name: 'ReportedRuntimeContextStates')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
+    RuntimeContextName = Shapes::StringShape.new(name: 'RuntimeContextName')
     RuntimeRoleArn = Shapes::StringShape.new(name: 'RuntimeRoleArn')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SignalApplicationInstanceNodeInstancesRequest = Shapes::StructureShape.new(name: 'SignalApplicationInstanceNodeInstancesRequest')
+    SignalApplicationInstanceNodeInstancesResponse = Shapes::StructureShape.new(name: 'SignalApplicationInstanceNodeInstancesResponse')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StaticIpConnectionInfo = Shapes::StructureShape.new(name: 'StaticIpConnectionInfo')
     StatusFilter = Shapes::StringShape.new(name: 'StatusFilter')
@@ -257,6 +267,7 @@ module Aws::Panorama
     ApplicationInstance.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     ApplicationInstance.add_member(:health_status, Shapes::ShapeRef.new(shape: ApplicationInstanceHealthStatus, location_name: "HealthStatus"))
     ApplicationInstance.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationInstanceName, location_name: "Name"))
+    ApplicationInstance.add_member(:runtime_context_states, Shapes::ShapeRef.new(shape: ReportedRuntimeContextStates, location_name: "RuntimeContextStates"))
     ApplicationInstance.add_member(:status, Shapes::ShapeRef.new(shape: ApplicationInstanceStatus, location_name: "Status"))
     ApplicationInstance.add_member(:status_description, Shapes::ShapeRef.new(shape: ApplicationInstanceStatusDescription, location_name: "StatusDescription"))
     ApplicationInstance.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -291,7 +302,7 @@ module Aws::Panorama
     CreateApplicationInstanceResponse.struct_class = Types::CreateApplicationInstanceResponse
 
     CreateJobForDevicesRequest.add_member(:device_ids, Shapes::ShapeRef.new(shape: DeviceIdList, required: true, location_name: "DeviceIds"))
-    CreateJobForDevicesRequest.add_member(:device_job_config, Shapes::ShapeRef.new(shape: DeviceJobConfig, required: true, location_name: "DeviceJobConfig"))
+    CreateJobForDevicesRequest.add_member(:device_job_config, Shapes::ShapeRef.new(shape: DeviceJobConfig, location_name: "DeviceJobConfig"))
     CreateJobForDevicesRequest.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, required: true, location_name: "JobType"))
     CreateJobForDevicesRequest.struct_class = Types::CreateJobForDevicesRequest
 
@@ -376,6 +387,7 @@ module Aws::Panorama
     DescribeApplicationInstanceResponse.add_member(:health_status, Shapes::ShapeRef.new(shape: ApplicationInstanceHealthStatus, location_name: "HealthStatus"))
     DescribeApplicationInstanceResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LastUpdatedTime"))
     DescribeApplicationInstanceResponse.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationInstanceName, location_name: "Name"))
+    DescribeApplicationInstanceResponse.add_member(:runtime_context_states, Shapes::ShapeRef.new(shape: ReportedRuntimeContextStates, location_name: "RuntimeContextStates"))
     DescribeApplicationInstanceResponse.add_member(:runtime_role_arn, Shapes::ShapeRef.new(shape: RuntimeRoleArn, location_name: "RuntimeRoleArn"))
     DescribeApplicationInstanceResponse.add_member(:status, Shapes::ShapeRef.new(shape: ApplicationInstanceStatus, location_name: "Status"))
     DescribeApplicationInstanceResponse.add_member(:status_description, Shapes::ShapeRef.new(shape: ApplicationInstanceStatusDescription, location_name: "StatusDescription"))
@@ -392,6 +404,7 @@ module Aws::Panorama
     DescribeDeviceJobResponse.add_member(:device_type, Shapes::ShapeRef.new(shape: DeviceType, location_name: "DeviceType"))
     DescribeDeviceJobResponse.add_member(:image_version, Shapes::ShapeRef.new(shape: ImageVersion, location_name: "ImageVersion"))
     DescribeDeviceJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    DescribeDeviceJobResponse.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "JobType"))
     DescribeDeviceJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: UpdateProgress, location_name: "Status"))
     DescribeDeviceJobResponse.struct_class = Types::DescribeDeviceJobResponse
 
@@ -525,6 +538,7 @@ module Aws::Panorama
     DeviceJob.add_member(:device_id, Shapes::ShapeRef.new(shape: DeviceId, location_name: "DeviceId"))
     DeviceJob.add_member(:device_name, Shapes::ShapeRef.new(shape: DeviceName, location_name: "DeviceName"))
     DeviceJob.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    DeviceJob.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "JobType"))
     DeviceJob.struct_class = Types::DeviceJob
 
     DeviceJobConfig.add_member(:ota_job_config, Shapes::ShapeRef.new(shape: OTAJobConfig, location_name: "OTAJobConfig"))
@@ -564,6 +578,7 @@ module Aws::Panorama
     JobTagsList.member = Shapes::ShapeRef.new(shape: JobResourceTags)
 
     LatestDeviceJob.add_member(:image_version, Shapes::ShapeRef.new(shape: ImageVersion, location_name: "ImageVersion"))
+    LatestDeviceJob.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "JobType"))
     LatestDeviceJob.add_member(:status, Shapes::ShapeRef.new(shape: UpdateProgress, location_name: "Status"))
     LatestDeviceJob.struct_class = Types::LatestDeviceJob
 
@@ -732,6 +747,12 @@ module Aws::Panorama
     NodeOutputPort.add_member(:type, Shapes::ShapeRef.new(shape: PortType, location_name: "Type"))
     NodeOutputPort.struct_class = Types::NodeOutputPort
 
+    NodeSignal.add_member(:node_instance_id, Shapes::ShapeRef.new(shape: NodeInstanceId, required: true, location_name: "NodeInstanceId"))
+    NodeSignal.add_member(:signal, Shapes::ShapeRef.new(shape: NodeSignalValue, required: true, location_name: "Signal"))
+    NodeSignal.struct_class = Types::NodeSignal
+
+    NodeSignalList.member = Shapes::ShapeRef.new(shape: NodeSignal)
+
     NodesList.member = Shapes::ShapeRef.new(shape: Node)
 
     NtpPayload.add_member(:ntp_servers, Shapes::ShapeRef.new(shape: NtpServerList, required: true, location_name: "NtpServers"))
@@ -828,6 +849,14 @@ module Aws::Panorama
 
     RemoveApplicationInstanceResponse.struct_class = Types::RemoveApplicationInstanceResponse
 
+    ReportedRuntimeContextState.add_member(:desired_state, Shapes::ShapeRef.new(shape: DesiredState, required: true, location_name: "DesiredState"))
+    ReportedRuntimeContextState.add_member(:device_reported_status, Shapes::ShapeRef.new(shape: DeviceReportedStatus, required: true, location_name: "DeviceReportedStatus"))
+    ReportedRuntimeContextState.add_member(:device_reported_time, Shapes::ShapeRef.new(shape: TimeStamp, required: true, location_name: "DeviceReportedTime"))
+    ReportedRuntimeContextState.add_member(:runtime_context_name, Shapes::ShapeRef.new(shape: RuntimeContextName, required: true, location_name: "RuntimeContextName"))
+    ReportedRuntimeContextState.struct_class = Types::ReportedRuntimeContextState
+
+    ReportedRuntimeContextStates.member = Shapes::ShapeRef.new(shape: ReportedRuntimeContextState)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
@@ -844,6 +873,13 @@ module Aws::Panorama
     ServiceQuotaExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
     ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    SignalApplicationInstanceNodeInstancesRequest.add_member(:application_instance_id, Shapes::ShapeRef.new(shape: ApplicationInstanceId, required: true, location: "uri", location_name: "ApplicationInstanceId"))
+    SignalApplicationInstanceNodeInstancesRequest.add_member(:node_signals, Shapes::ShapeRef.new(shape: NodeSignalList, required: true, location_name: "NodeSignals"))
+    SignalApplicationInstanceNodeInstancesRequest.struct_class = Types::SignalApplicationInstanceNodeInstancesRequest
+
+    SignalApplicationInstanceNodeInstancesResponse.add_member(:application_instance_id, Shapes::ShapeRef.new(shape: ApplicationInstanceId, required: true, location_name: "ApplicationInstanceId"))
+    SignalApplicationInstanceNodeInstancesResponse.struct_class = Types::SignalApplicationInstanceNodeInstancesResponse
 
     StaticIpConnectionInfo.add_member(:default_gateway, Shapes::ShapeRef.new(shape: DefaultGateway, required: true, location_name: "DefaultGateway"))
     StaticIpConnectionInfo.add_member(:dns, Shapes::ShapeRef.new(shape: DnsList, required: true, location_name: "Dns"))
@@ -1340,6 +1376,18 @@ module Aws::Panorama
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:signal_application_instance_node_instances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SignalApplicationInstanceNodeInstances"
+        o.http_method = "PUT"
+        o.http_request_uri = "/application-instances/{ApplicationInstanceId}/node-signals"
+        o.input = Shapes::ShapeRef.new(shape: SignalApplicationInstanceNodeInstancesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SignalApplicationInstanceNodeInstancesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

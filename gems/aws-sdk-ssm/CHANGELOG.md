@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2022-10-13)
+------------------
+
+* Feature - Support of AmazonLinux2022 by Patch Manager
+
 1.141.0 (2022-09-26)
 ------------------
 

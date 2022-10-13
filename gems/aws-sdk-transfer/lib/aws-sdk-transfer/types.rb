@@ -333,13 +333,13 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] server_id
-    #   The ID of the server that the user is attached to.
+    #   The identifier of the server that the user is attached to.
     #   @return [String]
     #
     # @!attribute [rw] external_id
-    #   The external ID of the group whose users have access to your Amazon
-    #   S3 or Amazon EFS resources over the enabled protocols using Transfer
-    #   Family.
+    #   The external identifier of the group whose users have access to your
+    #   Amazon S3 or Amazon EFS resources over the enabled protocols using
+    #   Transfer Family.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateAccessResponse AWS API Documentation
@@ -391,8 +391,8 @@ module Aws::Transfer
     #   The landing directory (folder) for files transferred by using the
     #   AS2 protocol.
     #
-    #   A `BaseDirectory` example is `/DOC-EXAMPLE-BUCKET/home/mydirectory
-    #   `.
+    #   A `BaseDirectory` example is
+    #   *DOC-EXAMPLE-BUCKET*/*home*/*mydirectory*.
     #   @return [String]
     #
     # @!attribute [rw] access_role
@@ -561,9 +561,14 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] profile_type
-    #   Indicates whether to list only `LOCAL` type profiles or only
-    #   `PARTNER` type profiles. If not supplied in the request, the command
-    #   lists all types of profiles.
+    #   Determines the type of profile to create:
+    #
+    #   * Specify `LOCAL` to create a local profile. A local profile
+    #     represents the AS2-enabled Transfer Family server organization or
+    #     party.
+    #
+    #   * Specify `PARTNER` to create a partner profile. A partner profile
+    #     represents a remote organization, external to Transfer Family.
     #   @return [String]
     #
     # @!attribute [rw] certificate_ids
@@ -640,7 +645,13 @@ module Aws::Transfer
     #           },
     #         ],
     #         workflow_details: {
-    #           on_upload: [ # required
+    #           on_upload: [
+    #             {
+    #               workflow_id: "WorkflowId", # required
+    #               execution_role: "Role", # required
+    #             },
+    #           ],
+    #           on_partial_upload: [
     #             {
     #               workflow_id: "WorkflowId", # required
     #               execution_role: "Role", # required
@@ -737,7 +748,9 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] host_key
-    #   The RSA, ECDSA, or ED25519 private key to use for your server.
+    #   The RSA, ECDSA, or ED25519 private key to use for your SFTP-enabled
+    #   server. You can add multiple host keys, in case you want to rotate
+    #   keys, or have a set of active keys that use different algorithms.
     #
     #   Use the following command to generate an RSA 2048 bit key with no
     #   passphrase:
@@ -766,7 +779,7 @@ module Aws::Transfer
     #   SFTP-enabled server to a new server, don't update the host key.
     #   Accidentally changing a server's host key can be disruptive.
     #
-    #   For more information, see [Change the host key for your SFTP-enabled
+    #   For more information, see [Update host keys for your SFTP-enabled
     #   server][1] in the *Transfer Family User Guide*.
     #
     #
@@ -909,6 +922,12 @@ module Aws::Transfer
     # @!attribute [rw] workflow_details
     #   Specifies the workflow ID for the workflow to assign and the
     #   execution role that's used for executing the workflow.
+    #
+    #   In additon to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
+    #   execution role) for a workflow to execute on partial upload. A
+    #   partial upload occurs when a file is open when the session
+    #   disconnects.
     #   @return [Types::WorkflowDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerRequest AWS API Documentation
@@ -934,7 +953,7 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] server_id
-    #   The service-assigned ID of the server that is created.
+    #   The service-assigned identifier of the server that is created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerResponse AWS API Documentation
@@ -1109,7 +1128,7 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] server_id
-    #   The ID of the server that the user is attached to.
+    #   The identifier of the server that the user is attached to.
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -1390,7 +1409,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   The server ID associated with the agreement that you are deleting.
+    #   The server identifier associated with the agreement that you are
+    #   deleting.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteAgreementRequest AWS API Documentation
@@ -1410,7 +1430,7 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate object that you are deleting.
+    #   The identifier of the certificate object that you are deleting.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteCertificateRequest AWS API Documentation
@@ -1449,12 +1469,12 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   Provide the ID of the server that contains the host key that you are
+    #   The identifier of the server that contains the host key that you are
     #   deleting.
     #   @return [String]
     #
     # @!attribute [rw] host_key_id
-    #   The ID of the host key that you are deleting.
+    #   The identifier of the host key that you are deleting.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteHostKeyRequest AWS API Documentation
@@ -1474,7 +1494,7 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] profile_id
-    #   The ID of the profile that you are deleting.
+    #   The identifier of the profile that you are deleting.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteProfileRequest AWS API Documentation
@@ -1667,7 +1687,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] access
-    #   The external ID of the server that the access is attached to.
+    #   The external identifier of the server that the access is attached
+    #   to.
     #   @return [Types::DescribedAccess]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeAccessResponse AWS API Documentation
@@ -1693,7 +1714,7 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   The server ID that's associated with the agreement.
+    #   The server identifier that's associated with the agreement.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeAgreementRequest AWS API Documentation
@@ -1832,12 +1853,12 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   Provide the ID of the server that contains the host key that you
+    #   The identifier of the server that contains the host key that you
     #   want described.
     #   @return [String]
     #
     # @!attribute [rw] host_key_id
-    #   Provide the ID of the host key that you want described.
+    #   The identifier of the host key that you want described.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeHostKeyRequest AWS API Documentation
@@ -2434,18 +2455,18 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The encryption algorithm used for the host key. The `Type` is one of
-    #   the following values:
+    #   The encryption algorithm that is used for the host key. The `Type`
+    #   parameter is specified by using one of the following values:
     #
-    #   * ssh-rsa
+    #   * `ssh-rsa`
     #
-    #   * ssh-ed25519
+    #   * `ssh-ed25519`
     #
-    #   * ecdsa-sha2-nistp256
+    #   * `ecdsa-sha2-nistp256`
     #
-    #   * ecdsa-sha2-nistp384
+    #   * `ecdsa-sha2-nistp384`
     #
-    #   * ecdsa-sha2-nistp521
+    #   * `ecdsa-sha2-nistp521`
     #   @return [String]
     #
     # @!attribute [rw] date_imported
@@ -2470,7 +2491,7 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # The details for a local or partner AS2 profile. profile.
+    # The details for a local or partner AS2 profile.
     #
     # @!attribute [rw] arn
     #   The unique Amazon Resource Name (ARN) for the profile.
@@ -2766,6 +2787,12 @@ module Aws::Transfer
     # @!attribute [rw] workflow_details
     #   Specifies the workflow ID for the workflow to assign and the
     #   execution role that's used for executing the workflow.
+    #
+    #   In additon to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
+    #   execution role) for a workflow to execute on partial upload. A
+    #   partial upload occurs when a file is open when the session
+    #   disconnects.
     #   @return [Types::WorkflowDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedServer AWS API Documentation
@@ -2951,7 +2978,7 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] file_system_id
-    #   The ID of the file system, assigned by Amazon EFS.
+    #   The identifier of the file system, assigned by Amazon EFS.
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -3016,7 +3043,7 @@ module Aws::Transfer
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_endpoint_id
-    #   The ID of the VPC endpoint.
+    #   The identifier of the VPC endpoint.
     #
     #   <note markdown="1"> This property can only be set when `EndpointType` is set to
     #   `VPC_ENDPOINT`.
@@ -3028,7 +3055,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
-    #   The VPC ID of the VPC in which a server's endpoint will be hosted.
+    #   The VPC identifier of the VPC in which a server's endpoint will be
+    #   hosted.
     #
     #   <note markdown="1"> This property can only be set when `EndpointType` is set to `VPC`.
     #
@@ -3184,7 +3212,8 @@ module Aws::Transfer
     #   @return [Types::S3FileLocation]
     #
     # @!attribute [rw] efs_file_location
-    #   Specifies the Amazon EFS ID and the path for the file being used.
+    #   Specifies the Amazon EFS identifier and the path for the file being
+    #   used.
     #   @return [Types::EfsFileLocation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/FileLocation AWS API Documentation
@@ -3372,7 +3401,7 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   Provide the ID of the server that contains the host key that you are
+    #   The identifier of the server that contains the host key that you are
     #   importing.
     #   @return [String]
     #
@@ -3383,7 +3412,7 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Enter a text description to identify this host key.
+    #   The text description that identifies this host key.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3402,11 +3431,11 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] server_id
-    #   Returns the server ID that contains the imported key.
+    #   Returns the server identifier that contains the imported key.
     #   @return [String]
     #
     # @!attribute [rw] host_key_id
-    #   Returns the host key ID for the imported key.
+    #   Returns the host key identifier for the imported key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ImportHostKeyResponse AWS API Documentation
@@ -3868,7 +3897,7 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   Provide the ID of the server that contains the host keys that you
+    #   The identifier of the server that contains the host keys that you
     #   want to view.
     #   @return [String]
     #
@@ -3888,7 +3917,7 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   Returns the server ID that contains the listed host keys.
+    #   Returns the server identifier that contains the listed host keys.
     #   @return [String]
     #
     # @!attribute [rw] host_keys
@@ -4454,13 +4483,14 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # Returns properties of the host key that is specified.
+    # Returns properties of the host key that's specified.
     #
     # @!attribute [rw] arn
-    #   Specifies the unique Amazon Resource Name (ARN) of the host key.
+    #   The unique Amazon Resource Name (ARN) of the host key.
     #   @return [String]
     #
     # @!attribute [rw] host_key_id
+    #   A unique identifier for the host key.
     #   @return [String]
     #
     # @!attribute [rw] fingerprint
@@ -4475,18 +4505,18 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The encryption algorithm used for the host key. The `Type` is one of
-    #   the following values:
+    #   The encryption algorithm that is used for the host key. The `Type`
+    #   parameter is specified by using one of the following values:
     #
-    #   * ssh-rsa
+    #   * `ssh-rsa`
     #
-    #   * ssh-ed25519
+    #   * `ssh-ed25519`
     #
-    #   * ecdsa-sha2-nistp256
+    #   * `ecdsa-sha2-nistp256`
     #
-    #   * ecdsa-sha2-nistp384
+    #   * `ecdsa-sha2-nistp384`
     #
-    #   * ecdsa-sha2-nistp521
+    #   * `ecdsa-sha2-nistp521`
     #   @return [String]
     #
     # @!attribute [rw] date_imported
@@ -4699,8 +4729,8 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # Contains the ID, text description, and Amazon Resource Name (ARN) for
-    # the workflow.
+    # Contains the identifier, text description, and Amazon Resource Name
+    # (ARN) for the workflow.
     #
     # @!attribute [rw] workflow_id
     #   A unique identifier for the workflow.
@@ -4803,9 +4833,9 @@ module Aws::Transfer
     #   IPv4 address, such as the public IP address of a firewall, router,
     #   or load balancer. For example:
     #
-    #   ` aws transfer update-server --protocol-details PassiveIp=0.0.0.0 `
+    #   `aws transfer update-server --protocol-details PassiveIp=0.0.0.0`
     #
-    #   Replace ` 0.0.0.0 ` in the example above with the actual IP address
+    #   Replace `0.0.0.0` in the example above with the actual IP address
     #   you want to use.
     #
     #   <note markdown="1"> If you change the `PassiveIp` value, you must stop and then restart
@@ -4815,6 +4845,24 @@ module Aws::Transfer
     #   Family][1].
     #
     #    </note>
+    #
+    #   *Special values*
+    #
+    #   The `AUTO` and `0.0.0.0` are special values for the `PassiveIp`
+    #   parameter. The value `PassiveIp=AUTO` is assigned by default to FTP
+    #   and FTPS type servers. In this case, the server automatically
+    #   responds with one of the endpoint IPs within the PASV response.
+    #   `PassiveIp=0.0.0.0` has a more unique application for its usage. For
+    #   example, if you have a High Availability (HA) Network Load Balancer
+    #   (NLB) environment, where you have 3 subnets, you can only specify a
+    #   single IP address using the `PassiveIp` parameter. This reduces the
+    #   effectiveness of having High Availability. In this case, you can
+    #   specify `PassiveIp=0.0.0.0`. This tells the client to use the same
+    #   IP address as the Control connection and utilize all AZs for their
+    #   connections. Note, however, that not all FTP clients support the
+    #   `PassiveIp=0.0.0.0` response. FileZilla and WinSCP do support it. If
+    #   you are using other clients, check to see if your client supports
+    #   the `PassiveIp=0.0.0.0` response.
     #
     #
     #
@@ -5625,13 +5673,13 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] server_id
-    #   The ID of the server that the user is attached to.
+    #   The identifier of the server that the user is attached to.
     #   @return [String]
     #
     # @!attribute [rw] external_id
-    #   The external ID of the group whose users have access to your Amazon
-    #   S3 or Amazon EFS resources over the enabled protocols using Amazon
-    #   Web ServicesTransfer Family.
+    #   The external identifier of the group whose users have access to your
+    #   Amazon S3 or Amazon EFS resources over the enabled protocols using
+    #   Amazon Web ServicesTransfer Family.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateAccessResponse AWS API Documentation
@@ -5877,16 +5925,16 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   Provide the ID of the server that contains the host key that you are
+    #   The identifier of the server that contains the host key that you are
     #   updating.
     #   @return [String]
     #
     # @!attribute [rw] host_key_id
-    #   Provide the ID of the host key that you are updating.
+    #   The identifier of the host key that you are updating.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Provide an updated description for the host key.
+    #   An updated description for the host key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateHostKeyRequest AWS API Documentation
@@ -5900,12 +5948,12 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] server_id
-    #   Returns the server ID for the server that contains the updated host
-    #   key.
+    #   Returns the server identifier for the server that contains the
+    #   updated host key.
     #   @return [String]
     #
     # @!attribute [rw] host_key_id
-    #   Returns the host key ID for the updated host key.
+    #   Returns the host key identifier for the updated host key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateHostKeyResponse AWS API Documentation
@@ -5988,7 +6036,13 @@ module Aws::Transfer
     #         security_policy_name: "SecurityPolicyName",
     #         server_id: "ServerId", # required
     #         workflow_details: {
-    #           on_upload: [ # required
+    #           on_upload: [
+    #             {
+    #               workflow_id: "WorkflowId", # required
+    #               execution_role: "Role", # required
+    #             },
+    #           ],
+    #           on_partial_upload: [
     #             {
     #               workflow_id: "WorkflowId", # required
     #               execution_role: "Role", # required
@@ -6103,7 +6157,9 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] host_key
-    #   The RSA, ECDSA, or ED25519 private key to use for your server.
+    #   The RSA, ECDSA, or ED25519 private key to use for your SFTP-enabled
+    #   server. You can add multiple host keys, in case you want to rotate
+    #   keys, or have a set of active keys that use different algorithms.
     #
     #   Use the following command to generate an RSA 2048 bit key with no
     #   passphrase:
@@ -6132,7 +6188,7 @@ module Aws::Transfer
     #   SFTP-enabled server to a new server, don't update the host key.
     #   Accidentally changing a server's host key can be disruptive.
     #
-    #   For more information, see [Change the host key for your SFTP-enabled
+    #   For more information, see [Update host keys for your SFTP-enabled
     #   server][1] in the *Transfer Family User Guide*.
     #
     #
@@ -6223,6 +6279,12 @@ module Aws::Transfer
     # @!attribute [rw] workflow_details
     #   Specifies the workflow ID for the workflow to assign and the
     #   execution role that's used for executing the workflow.
+    #
+    #   In additon to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
+    #   execution role) for a workflow to execute on partial upload. A
+    #   partial upload occurs when a file is open when the session
+    #   disconnects.
     #
     #   To remove an associated workflow from a server, you can provide an
     #   empty `OnUpload` object, as in the following example.
@@ -6461,6 +6523,11 @@ module Aws::Transfer
     # Specifies the workflow ID for the workflow to assign and the execution
     # role that's used for executing the workflow.
     #
+    # In additon to a workflow to execute when a file is uploaded
+    # completely, `WorkflowDeatails` can also contain a workflow ID (and
+    # execution role) for a workflow to execute on partial upload. A partial
+    # upload occurs when a file is open when the session disconnects.
+    #
     # @note When making an API call, you may pass WorkflowDetail
     #   data as a hash:
     #
@@ -6495,7 +6562,13 @@ module Aws::Transfer
     #   data as a hash:
     #
     #       {
-    #         on_upload: [ # required
+    #         on_upload: [
+    #           {
+    #             workflow_id: "WorkflowId", # required
+    #             execution_role: "Role", # required
+    #           },
+    #         ],
+    #         on_partial_upload: [
     #           {
     #             workflow_id: "WorkflowId", # required
     #             execution_role: "Role", # required
@@ -6514,10 +6587,20 @@ module Aws::Transfer
     #   --workflow-details '\{"OnUpload":[]\}'`
     #   @return [Array<Types::WorkflowDetail>]
     #
+    # @!attribute [rw] on_partial_upload
+    #   A trigger that starts a workflow if a file is only partially
+    #   uploaded. You can attach a workflow to a server that executes
+    #   whenever there is a partial upload.
+    #
+    #   A *partial upload* occurs when a file is open when the session
+    #   disconnects.
+    #   @return [Array<Types::WorkflowDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/WorkflowDetails AWS API Documentation
     #
     class WorkflowDetails < Struct.new(
-      :on_upload)
+      :on_upload,
+      :on_partial_upload)
       SENSITIVE = []
       include Aws::Structure
     end

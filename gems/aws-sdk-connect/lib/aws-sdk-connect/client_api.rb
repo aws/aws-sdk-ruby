@@ -2769,6 +2769,8 @@ module Aws::Connect
     UserIdentityInfo.add_member(:first_name, Shapes::ShapeRef.new(shape: AgentFirstName, location_name: "FirstName"))
     UserIdentityInfo.add_member(:last_name, Shapes::ShapeRef.new(shape: AgentLastName, location_name: "LastName"))
     UserIdentityInfo.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "Email"))
+    UserIdentityInfo.add_member(:secondary_email, Shapes::ShapeRef.new(shape: Email, location_name: "SecondaryEmail"))
+    UserIdentityInfo.add_member(:mobile, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "Mobile"))
     UserIdentityInfo.struct_class = Types::UserIdentityInfo
 
     UserIdentityInfoLite.add_member(:first_name, Shapes::ShapeRef.new(shape: AgentFirstName, location_name: "FirstName"))

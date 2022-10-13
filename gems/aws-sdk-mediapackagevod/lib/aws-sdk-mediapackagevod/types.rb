@@ -209,6 +209,10 @@ module Aws::MediaPackageVod
     #       {
     #         constant_initialization_vector: "__string",
     #         speke_key_provider: { # required
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
+    #           },
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
     #           url: "__string", # required
@@ -246,6 +250,10 @@ module Aws::MediaPackageVod
     #         encryption: {
     #           constant_initialization_vector: "__string",
     #           speke_key_provider: { # required
+    #             encryption_contract_configuration: {
+    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
+    #             },
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
     #             url: "__string", # required
@@ -474,6 +482,10 @@ module Aws::MediaPackageVod
     #           encryption: {
     #             constant_initialization_vector: "__string",
     #             speke_key_provider: { # required
+    #               encryption_contract_configuration: {
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
+    #               },
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
     #               url: "__string", # required
@@ -513,6 +525,10 @@ module Aws::MediaPackageVod
     #           ],
     #           encryption: {
     #             speke_key_provider: { # required
+    #               encryption_contract_configuration: {
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
+    #               },
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
     #               url: "__string", # required
@@ -528,6 +544,10 @@ module Aws::MediaPackageVod
     #             constant_initialization_vector: "__string",
     #             encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
     #             speke_key_provider: { # required
+    #               encryption_contract_configuration: {
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
+    #               },
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
     #               url: "__string", # required
@@ -555,6 +575,10 @@ module Aws::MediaPackageVod
     #         mss_package: {
     #           encryption: {
     #             speke_key_provider: { # required
+    #               encryption_contract_configuration: {
+    #                 preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #                 preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
+    #               },
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
     #               url: "__string", # required
@@ -749,6 +773,10 @@ module Aws::MediaPackageVod
     #
     #       {
     #         speke_key_provider: { # required
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
+    #           },
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
     #           url: "__string", # required
@@ -855,6 +883,10 @@ module Aws::MediaPackageVod
     #         ],
     #         encryption: {
     #           speke_key_provider: { # required
+    #             encryption_contract_configuration: {
+    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
+    #             },
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
     #             url: "__string", # required
@@ -1213,6 +1245,42 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
+    # Use encryptionContractConfiguration to configure one or more content
+    # encryption keys for your endpoints that use SPEKE 2.0. The encryption
+    # contract defines which content keys are used to encrypt the audio and
+    # video tracks in your stream. To configure the encryption contract,
+    # specify which audio and video encryption presets to use. Note the
+    # following considerations when using encryptionContractConfiguration:
+    # encryptionContractConfiguration can be used for DASH endpoints that
+    # use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3 specification. You
+    # must disable key rotation for this endpoint by setting
+    # keyRotationIntervalSeconds to 0.
+    #
+    # @note When making an API call, you may pass EncryptionContractConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #         preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
+    #       }
+    #
+    # @!attribute [rw] preset_speke_20_audio
+    #   A collection of audio encryption presets.
+    #   @return [String]
+    #
+    # @!attribute [rw] preset_speke_20_video
+    #   A collection of video encryption presets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/EncryptionContractConfiguration AWS API Documentation
+    #
+    class EncryptionContractConfiguration < Struct.new(
+      :preset_speke_20_audio,
+      :preset_speke_20_video)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -1233,6 +1301,10 @@ module Aws::MediaPackageVod
     #         constant_initialization_vector: "__string",
     #         encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
     #         speke_key_provider: { # required
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
+    #           },
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
     #           url: "__string", # required
@@ -1344,6 +1416,10 @@ module Aws::MediaPackageVod
     #           constant_initialization_vector: "__string",
     #           encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
     #           speke_key_provider: { # required
+    #             encryption_contract_configuration: {
+    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
+    #             },
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
     #             url: "__string", # required
@@ -1574,6 +1650,10 @@ module Aws::MediaPackageVod
     #
     #       {
     #         speke_key_provider: { # required
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
+    #           },
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
     #           url: "__string", # required
@@ -1633,6 +1713,10 @@ module Aws::MediaPackageVod
     #       {
     #         encryption: {
     #           speke_key_provider: { # required
+    #             encryption_contract_configuration: {
+    #               preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #               preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
+    #             },
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
     #             url: "__string", # required
@@ -1921,10 +2005,27 @@ module Aws::MediaPackageVod
     #   data as a hash:
     #
     #       {
+    #         encryption_contract_configuration: {
+    #           preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1, PRESET-AUDIO-2, PRESET-AUDIO-3, SHARED, UNENCRYPTED
+    #           preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1, PRESET-VIDEO-2, PRESET-VIDEO-3, PRESET-VIDEO-4, PRESET-VIDEO-5, PRESET-VIDEO-6, PRESET-VIDEO-7, PRESET-VIDEO-8, SHARED, UNENCRYPTED
+    #         },
     #         role_arn: "__string", # required
     #         system_ids: ["__string"], # required
     #         url: "__string", # required
     #       }
+    #
+    # @!attribute [rw] encryption_contract_configuration
+    #   Use encryptionContractConfiguration to configure one or more content
+    #   encryption keys for your endpoints that use SPEKE 2.0. The
+    #   encryption contract defines which content keys are used to encrypt
+    #   the audio and video tracks in your stream. To configure the
+    #   encryption contract, specify which audio and video encryption
+    #   presets to use. Note the following considerations when using
+    #   encryptionContractConfiguration: encryptionContractConfiguration can
+    #   be used for DASH endpoints that use SPEKE 2.0. SPEKE 2.0 relies on
+    #   the CPIX 2.3 specification. You must disable key rotation for this
+    #   endpoint by setting keyRotationIntervalSeconds to 0.
+    #   @return [Types::EncryptionContractConfiguration]
     #
     # @!attribute [rw] role_arn
     #   An Amazon Resource Name (ARN) of an IAM role that AWS Elemental
@@ -1942,6 +2043,7 @@ module Aws::MediaPackageVod
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/SpekeKeyProvider AWS API Documentation
     #
     class SpekeKeyProvider < Struct.new(
+      :encryption_contract_configuration,
       :role_arn,
       :system_ids,
       :url)

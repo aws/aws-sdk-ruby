@@ -389,6 +389,13 @@ module Aws::Translate
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with this resource. A tag is a key-value pair
+    #   that adds metadata to a resource. Each tag key for the resource must
+    #   be unique. For more information, see [ Tagging your resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/tagging.html
     #
     # @return [Types::CreateParallelDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -686,6 +693,13 @@ module Aws::Translate
     #   The encryption key for the custom terminology being imported.
     #
     # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with this resource. A tag is a key-value pair
+    #   that adds metadata to a resource. Each tag key for the resource must
+    #   be unique. For more information, see [ Tagging your resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/tagging.html
     #
     # @return [Types::ImportTerminologyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -850,7 +864,16 @@ module Aws::Translate
       req.send_request(options)
     end
 
+    # Lists all tags associated with a given Amazon Translate resource. For
+    # more information, see [ Tagging your resources][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/translate/latest/dg/tagging.html
+    #
     # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Translate resource
+    #   you are querying.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1002,9 +1025,13 @@ module Aws::Translate
       req.send_request(options)
     end
 
-    # Starts an asynchronous batch translation job. Batch translation jobs
-    # can be used to translate large volumes of text across multiple
-    # documents at once. For more information, see async.
+    # Starts an asynchronous batch translation job. Use batch translation
+    # jobs to translate large volumes of text across multiple documents at
+    # once. For batch translation, the input documents must share the same
+    # source language. You can specify one or more target languages. Batch
+    # translation translates each input document into each of the target
+    # languages. For more information, see [Asynchronous batch
+    # processing][1]
     #
     # Batch translation jobs can be described with the
     # DescribeTextTranslationJob operation, listed with the
@@ -1015,6 +1042,10 @@ module Aws::Translate
     # languages at once.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/translate/latest/dg/async.html
     #
     # @option params [String] :job_name
     #   The name of the batch translation job to be performed.
@@ -1029,17 +1060,34 @@ module Aws::Translate
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of an AWS Identity Access and
     #   Management (IAM) role that grants Amazon Translate read access to your
-    #   input data. For more information, see identity-and-access-management.
+    #   input data. For more information, see [Identity and access management
+    #   ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/identity-and-access-management.html
     #
     # @option params [required, String] :source_language_code
     #   The language code of the input language. For a list of language codes,
-    #   see what-is-languages.
+    #   see [Supported languages][1].
     #
     #   Amazon Translate does not automatically detect a source language
     #   during batch translation jobs.
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
+    #
     # @option params [required, Array<String>] :target_language_codes
-    #   The language code of the output language.
+    #   The target languages of the translation job. Enter up to 10 language
+    #   codes. Each input file is translated into each target language.
+    #
+    #   Each language code is two or five characters long. For a list of
+    #   language codes, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
     #
     # @option params [Array<String>] :terminology_names
     #   The name of a custom terminology resource to add to the translation
@@ -1048,16 +1096,28 @@ module Aws::Translate
     #
     #   This parameter accepts only one custom terminology resource.
     #
+    #   If you specify multiple target languages for the job, translate uses
+    #   the designated terminology for each requested target language that has
+    #   an entry for the source term in the terminology file.
+    #
     #   For a list of available custom terminology resources, use the
     #   ListTerminologies operation.
     #
-    #   For more information, see how-custom-terminology.
+    #   For more information, see [Custom terminology][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/how-custom-terminology.html
     #
     # @option params [Array<String>] :parallel_data_names
     #   The name of a parallel data resource to add to the translation job.
     #   This resource consists of examples that show how you want segments of
-    #   text to be translated. When you add parallel data to a translation
-    #   job, you create an *Active Custom Translation* job.
+    #   text to be translated. If you specify multiple target languages for
+    #   the job, the parallel data file must include translations for all the
+    #   target languages.
+    #
+    #   When you add parallel data to a translation job, you create an *Active
+    #   Custom Translation* job.
     #
     #   This parameter accepts only one parallel data resource.
     #
@@ -1070,11 +1130,13 @@ module Aws::Translate
     #   For a list of available parallel data resources, use the
     #   ListParallelData operation.
     #
-    #   For more information, see customizing-translations-parallel-data.
+    #   For more information, see [ Customizing your translations with
+    #   parallel data][2].
     #
     #
     #
     #   [1]: http://aws.amazon.com/translate/pricing/
+    #   [2]: https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-parallel-data.html
     #
     # @option params [required, String] :client_token
     #   A unique identifier for the request. This token is generated for you
@@ -1085,8 +1147,8 @@ module Aws::Translate
     #
     # @option params [Types::TranslationSettings] :settings
     #   Settings to configure your translation output, including the option to
-    #   mask profane words and phrases. `StartTextTranslationJob` does not
-    #   support the formality setting.
+    #   set the formality level of the output text and the option to mask
+    #   profane words and phrases.
     #
     # @return [Types::StartTextTranslationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1174,9 +1236,22 @@ module Aws::Translate
       req.send_request(options)
     end
 
+    # Associates a specific tag with a resource. A tag is a key-value pair
+    # that adds as a metadata to a resource. For more information, see [
+    # Tagging your resources][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/translate/latest/dg/tagging.html
+    #
     # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Translate resource
+    #   to which you want to associate the tags.
     #
     # @option params [required, Array<Types::Tag>] :tags
+    #   Tags being associated with a specific Amazon Translate resource. There
+    #   can be a maximum of 50 tags (both existing and pending) associated
+    #   with a specific resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1202,8 +1277,12 @@ module Aws::Translate
     end
 
     # Translates input text from the source language to the target language.
-    # For a list of available languages and language codes, see
-    # what-is-languages.
+    # For a list of available languages and language codes, see [Supported
+    # languages][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
     #
     # @option params [required, String] :text
     #   The text to translate. The text string can be a maximum of 5,000 bytes
@@ -1218,11 +1297,11 @@ module Aws::Translate
     # @option params [required, String] :source_language_code
     #   The language code for the language of the source text. The language
     #   must be a language supported by Amazon Translate. For a list of
-    #   language codes, see what-is-languages.
+    #   language codes, see [Supported languages][1].
     #
     #   To have Amazon Translate determine the source language of your text,
     #   you can specify `auto` in the `SourceLanguageCode` field. If you
-    #   specify `auto`, Amazon Translate will call [Amazon Comprehend][1] to
+    #   specify `auto`, Amazon Translate will call [Amazon Comprehend][2] to
     #   determine the source language.
     #
     #   <note markdown="1"> If you specify `auto`, you must send the `TranslateText` request in a
@@ -1233,7 +1312,8 @@ module Aws::Translate
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
+    #   [2]: https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html
     #
     # @option params [required, String] :target_language_code
     #   The language code requested for the language of the target text. The
@@ -1287,9 +1367,21 @@ module Aws::Translate
       req.send_request(options)
     end
 
+    # Removes a specific tag associated with an Amazon Translate resource.
+    # For more information, see [ Tagging your resources][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/translate/latest/dg/tagging.html
+    #
     # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Translate resource
+    #   from which you want to remove the tags.
     #
     # @option params [required, Array<String>] :tag_keys
+    #   The initial part of a key-value pair that forms a tag being removed
+    #   from a given resource. Keys must be unique and cannot be duplicated
+    #   for a particular resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1377,7 +1469,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

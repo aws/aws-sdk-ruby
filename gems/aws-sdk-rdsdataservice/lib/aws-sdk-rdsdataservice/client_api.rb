@@ -186,10 +186,10 @@ module Aws::RDSDataService
     ExecuteStatementResponse.add_member(:formatted_records, Shapes::ShapeRef.new(shape: FormattedSqlRecords, location_name: "formattedRecords"))
     ExecuteStatementResponse.struct_class = Types::ExecuteStatementResponse
 
-    Field.add_member(:is_null, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "isNull"))
-    Field.add_member(:boolean_value, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "booleanValue"))
-    Field.add_member(:long_value, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "longValue"))
-    Field.add_member(:double_value, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "doubleValue"))
+    Field.add_member(:is_null, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "isNull", metadata: {"box"=>true}))
+    Field.add_member(:boolean_value, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "booleanValue", metadata: {"box"=>true}))
+    Field.add_member(:long_value, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "longValue", metadata: {"box"=>true}))
+    Field.add_member(:double_value, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "doubleValue", metadata: {"box"=>true}))
     Field.add_member(:string_value, Shapes::ShapeRef.new(shape: String, location_name: "stringValue"))
     Field.add_member(:blob_value, Shapes::ShapeRef.new(shape: Blob, location_name: "blobValue"))
     Field.add_member(:array_value, Shapes::ShapeRef.new(shape: ArrayValue, location_name: "arrayValue"))
@@ -278,12 +278,12 @@ module Aws::RDSDataService
 
     UpdateResults.member = Shapes::ShapeRef.new(shape: UpdateResult)
 
-    Value.add_member(:is_null, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "isNull"))
-    Value.add_member(:bit_value, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "bitValue"))
-    Value.add_member(:big_int_value, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "bigIntValue"))
-    Value.add_member(:int_value, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "intValue"))
-    Value.add_member(:double_value, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "doubleValue"))
-    Value.add_member(:real_value, Shapes::ShapeRef.new(shape: BoxedFloat, location_name: "realValue"))
+    Value.add_member(:is_null, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "isNull", metadata: {"box"=>true}))
+    Value.add_member(:bit_value, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "bitValue", metadata: {"box"=>true}))
+    Value.add_member(:big_int_value, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "bigIntValue", metadata: {"box"=>true}))
+    Value.add_member(:int_value, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "intValue", metadata: {"box"=>true}))
+    Value.add_member(:double_value, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "doubleValue", metadata: {"box"=>true}))
+    Value.add_member(:real_value, Shapes::ShapeRef.new(shape: BoxedFloat, location_name: "realValue", metadata: {"box"=>true}))
     Value.add_member(:string_value, Shapes::ShapeRef.new(shape: String, location_name: "stringValue"))
     Value.add_member(:blob_value, Shapes::ShapeRef.new(shape: Blob, location_name: "blobValue"))
     Value.add_member(:array_values, Shapes::ShapeRef.new(shape: ArrayValueList, location_name: "arrayValues"))

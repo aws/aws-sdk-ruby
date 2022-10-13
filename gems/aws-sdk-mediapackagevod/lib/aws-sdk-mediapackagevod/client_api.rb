@@ -47,6 +47,7 @@ module Aws::MediaPackageVod
     DescribePackagingGroupResponse = Shapes::StructureShape.new(name: 'DescribePackagingGroupResponse')
     EgressAccessLogs = Shapes::StructureShape.new(name: 'EgressAccessLogs')
     EgressEndpoint = Shapes::StructureShape.new(name: 'EgressEndpoint')
+    EncryptionContractConfiguration = Shapes::StructureShape.new(name: 'EncryptionContractConfiguration')
     EncryptionMethod = Shapes::StringShape.new(name: 'EncryptionMethod')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     HlsEncryption = Shapes::StructureShape.new(name: 'HlsEncryption')
@@ -74,6 +75,8 @@ module Aws::MediaPackageVod
     PackagingGroupCreateParameters = Shapes::StructureShape.new(name: 'PackagingGroupCreateParameters')
     PackagingGroupList = Shapes::StructureShape.new(name: 'PackagingGroupList')
     PackagingGroupUpdateParameters = Shapes::StructureShape.new(name: 'PackagingGroupUpdateParameters')
+    PresetSpeke20Audio = Shapes::StringShape.new(name: 'PresetSpeke20Audio')
+    PresetSpeke20Video = Shapes::StringShape.new(name: 'PresetSpeke20Video')
     Profile = Shapes::StringShape.new(name: 'Profile')
     ScteMarkersSource = Shapes::StringShape.new(name: 'ScteMarkersSource')
     SegmentTemplateFormat = Shapes::StringShape.new(name: 'SegmentTemplateFormat')
@@ -300,6 +303,10 @@ module Aws::MediaPackageVod
     EgressEndpoint.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     EgressEndpoint.struct_class = Types::EgressEndpoint
 
+    EncryptionContractConfiguration.add_member(:preset_speke_20_audio, Shapes::ShapeRef.new(shape: PresetSpeke20Audio, required: true, location_name: "presetSpeke20Audio"))
+    EncryptionContractConfiguration.add_member(:preset_speke_20_video, Shapes::ShapeRef.new(shape: PresetSpeke20Video, required: true, location_name: "presetSpeke20Video"))
+    EncryptionContractConfiguration.struct_class = Types::EncryptionContractConfiguration
+
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
 
@@ -420,6 +427,7 @@ module Aws::MediaPackageVod
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
+    SpekeKeyProvider.add_member(:encryption_contract_configuration, Shapes::ShapeRef.new(shape: EncryptionContractConfiguration, location_name: "encryptionContractConfiguration"))
     SpekeKeyProvider.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "roleArn"))
     SpekeKeyProvider.add_member(:system_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "systemIds"))
     SpekeKeyProvider.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "url"))

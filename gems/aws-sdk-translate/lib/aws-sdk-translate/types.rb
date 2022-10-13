@@ -115,6 +115,13 @@ module Aws::Translate
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   Tags to be associated with this resource. A tag is a key-value pair
+    #   that adds metadata to a resource. Each tag key for the resource must
+    #   be unique. For more information, see [ Tagging your resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/CreateParallelDataRequest AWS API Documentation
@@ -486,6 +493,13 @@ module Aws::Translate
     #   @return [Types::EncryptionKey]
     #
     # @!attribute [rw] tags
+    #   Tags to be associated with this resource. A tag is a key-value pair
+    #   that adds metadata to a resource. Each tag key for the resource must
+    #   be unique. For more information, see [ Tagging your resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ImportTerminologyRequest AWS API Documentation
@@ -819,6 +833,8 @@ module Aws::Translate
     #       }
     #
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Translate
+    #   resource you are querying.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListTagsForResourceRequest AWS API Documentation
@@ -830,6 +846,11 @@ module Aws::Translate
     end
 
     # @!attribute [rw] tags
+    #   Tags associated with the Amazon Translate resource being queried. A
+    #   tag is a key-value pair that adds as a metadata to a resource used
+    #   by Amazon Translate. For example, a tag with "Sales" as the key
+    #   might be added to a resource to indicate its use by the sales
+    #   department.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListTagsForResourceResponse AWS API Documentation
@@ -1221,20 +1242,36 @@ module Aws::Translate
     # @!attribute [rw] data_access_role_arn
     #   The Amazon Resource Name (ARN) of an AWS Identity Access and
     #   Management (IAM) role that grants Amazon Translate read access to
-    #   your input data. For more information, see
-    #   identity-and-access-management.
+    #   your input data. For more information, see [Identity and access
+    #   management ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/identity-and-access-management.html
     #   @return [String]
     #
     # @!attribute [rw] source_language_code
     #   The language code of the input language. For a list of language
-    #   codes, see what-is-languages.
+    #   codes, see [Supported languages][1].
     #
     #   Amazon Translate does not automatically detect a source language
     #   during batch translation jobs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
     #   @return [String]
     #
     # @!attribute [rw] target_language_codes
-    #   The language code of the output language.
+    #   The target languages of the translation job. Enter up to 10 language
+    #   codes. Each input file is translated into each target language.
+    #
+    #   Each language code is two or five characters long. For a list of
+    #   language codes, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] terminology_names
@@ -1244,17 +1281,29 @@ module Aws::Translate
     #
     #   This parameter accepts only one custom terminology resource.
     #
+    #   If you specify multiple target languages for the job, translate uses
+    #   the designated terminology for each requested target language that
+    #   has an entry for the source term in the terminology file.
+    #
     #   For a list of available custom terminology resources, use the
     #   ListTerminologies operation.
     #
-    #   For more information, see how-custom-terminology.
+    #   For more information, see [Custom terminology][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/how-custom-terminology.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] parallel_data_names
     #   The name of a parallel data resource to add to the translation job.
     #   This resource consists of examples that show how you want segments
-    #   of text to be translated. When you add parallel data to a
-    #   translation job, you create an *Active Custom Translation* job.
+    #   of text to be translated. If you specify multiple target languages
+    #   for the job, the parallel data file must include translations for
+    #   all the target languages.
+    #
+    #   When you add parallel data to a translation job, you create an
+    #   *Active Custom Translation* job.
     #
     #   This parameter accepts only one parallel data resource.
     #
@@ -1267,11 +1316,13 @@ module Aws::Translate
     #   For a list of available parallel data resources, use the
     #   ListParallelData operation.
     #
-    #   For more information, see customizing-translations-parallel-data.
+    #   For more information, see [ Customizing your translations with
+    #   parallel data][2].
     #
     #
     #
     #   [1]: http://aws.amazon.com/translate/pricing/
+    #   [2]: https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-parallel-data.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
@@ -1284,8 +1335,8 @@ module Aws::Translate
     #
     # @!attribute [rw] settings
     #   Settings to configure your translation output, including the option
-    #   to mask profane words and phrases. `StartTextTranslationJob` does
-    #   not support the formality setting.
+    #   to set the formality level of the output text and the option to mask
+    #   profane words and phrases.
     #   @return [Types::TranslationSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/StartTextTranslationJobRequest AWS API Documentation
@@ -1379,6 +1430,9 @@ module Aws::Translate
       include Aws::Structure
     end
 
+    # A key-value pair that adds as a metadata to a resource used by Amazon
+    # Translate.
+    #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
     #
@@ -1388,9 +1442,13 @@ module Aws::Translate
     #       }
     #
     # @!attribute [rw] key
+    #   The initial part of a key-value pair that forms a tag associated
+    #   with a given resource.
     #   @return [String]
     #
     # @!attribute [rw] value
+    #   The second part of a key-value pair that forms a tag associated with
+    #   a given resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/Tag AWS API Documentation
@@ -1416,9 +1474,14 @@ module Aws::Translate
     #       }
     #
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Translate
+    #   resource to which you want to associate the tags.
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   Tags being associated with a specific Amazon Translate resource.
+    #   There can be a maximum of 50 tags (both existing and pending)
+    #   associated with a specific resource.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TagResourceRequest AWS API Documentation
@@ -1820,6 +1883,8 @@ module Aws::Translate
       include Aws::Structure
     end
 
+    # You have added too many tags to this resource. The maximum is 50 tags.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -1865,11 +1930,11 @@ module Aws::Translate
     # @!attribute [rw] source_language_code
     #   The language code for the language of the source text. The language
     #   must be a language supported by Amazon Translate. For a list of
-    #   language codes, see what-is-languages.
+    #   language codes, see [Supported languages][1].
     #
     #   To have Amazon Translate determine the source language of your text,
     #   you can specify `auto` in the `SourceLanguageCode` field. If you
-    #   specify `auto`, Amazon Translate will call [Amazon Comprehend][1] to
+    #   specify `auto`, Amazon Translate will call [Amazon Comprehend][2] to
     #   determine the source language.
     #
     #   <note markdown="1"> If you specify `auto`, you must send the `TranslateText` request in
@@ -1880,7 +1945,8 @@ module Aws::Translate
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
+    #   [2]: https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html
     #   @return [String]
     #
     # @!attribute [rw] target_language_code
@@ -1939,7 +2005,8 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # Settings that configure the translation output.
+    # Optional settings that configure the translation output. Use these
+    # settings for real time translations and asynchronous translation jobs.
     #
     # @note When making an API call, you may pass TranslationSettings
     #   data as a hash:
@@ -1951,25 +2018,23 @@ module Aws::Translate
     #
     # @!attribute [rw] formality
     #   You can optionally specify the desired level of formality for
-    #   real-time translations to supported target languages. The formality
-    #   setting controls the level of formal language usage (also known as
+    #   translations to supported target languages. The formality setting
+    #   controls the level of formal language usage (also known as
     #   [register][1]) in the translation output. You can set the value to
     #   informal or formal. If you don't specify a value for formality, or
     #   if the target language doesn't support formality, the translation
     #   will ignore the formality setting.
     #
-    #   Note that asynchronous translation jobs don't support formality. If
-    #   you provide a value for formality, the `StartTextTranslationJob` API
-    #   throws an exception (InvalidRequestException).
+    #   If you specify multiple target languages for the job, translate
+    #   ignores the formality setting for any unsupported target language.
     #
-    #   For target languages that support formality, see [Supported
-    #   Languages and Language Codes in the Amazon Translate Developer
-    #   Guide][2].
+    #   For a list of target languages that support formality, see [Setting
+    #   Formality][2] in the Amazon Translate Developer Guide.
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Register_(sociolinguistics)
-    #   [2]: https://docs.aws.amazon.com/translate/latest/dg/what-is.html
+    #   [2]: https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html
     #   @return [String]
     #
     # @!attribute [rw] profanity
@@ -1983,12 +2048,16 @@ module Aws::Translate
     #
     #   Amazon Translate doesn't detect profanity in all of its supported
     #   languages. For languages that support profanity detection, see
-    #   [Supported Languages and Language Codes in the Amazon Translate
-    #   Developer Guide][1].
+    #   [Masking profanity][1] in the Amazon Translate Developer Guide.
+    #
+    #   If you specify multiple target languages for the job, all the target
+    #   languages must support profanity masking. If any of the target
+    #   languages don't support profanity masking, the translation job
+    #   won't mask profanity for any target language.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is.html
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-profanity.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslationSettings AWS API Documentation
@@ -2020,7 +2089,11 @@ module Aws::Translate
 
     # Amazon Translate does not support translation from the language of the
     # source text into the requested target language. For more information,
-    # see how-to-error-msg.
+    # see [Error messages][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/translate/latest/dg/how-to-error-msg.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2052,9 +2125,14 @@ module Aws::Translate
     #       }
     #
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Translate
+    #   resource from which you want to remove the tags.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
+    #   The initial part of a key-value pair that forms a tag being removed
+    #   from a given resource. Keys must be unique and cannot be duplicated
+    #   for a particular resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/UntagResourceRequest AWS API Documentation
