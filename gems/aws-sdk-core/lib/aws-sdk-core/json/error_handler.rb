@@ -41,7 +41,8 @@ module Aws
       end
 
       def aws_query_error?(context)
-        context.config.api.metadata['awsQueryCompatible'] and context.http_response.headers['x-amzn-query-error']
+        context.config.api.metadata['awsQueryCompatible'] &&
+          context.http_response.headers['x-amzn-query-error']
       end
 
       def error_message(code, json)

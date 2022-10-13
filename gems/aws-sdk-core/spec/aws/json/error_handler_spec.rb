@@ -6,13 +6,13 @@ module Aws
   module Json
     describe ErrorHandler do
 
-      let(:client) {
+      let(:client) do
         ApiHelper.sample_json::Client.new(
           region: 'us-west-2',
           retry_limit: 0,
           credentials: Aws::Credentials.new('akid', 'secret')
         )
-      }
+      end
 
       let(:error_resp) { <<-JSON.strip }
 {
@@ -125,13 +125,13 @@ module Aws
           }
         ).const_get(:Client)
 
-        let(:client_aws_query_compatible) {
+        let(:client_aws_query_compatible) do
           AwsQueryCompatibleClient.new(
             region: 'us-west-2',
             retry_limit: 0,
             credentials: Aws::Credentials.new('akid', 'secret')
           )
-        }
+        end
 
         it 'extracts code and message from x-amzn-query-error' do
           stub_request(:post, "https://svc.us-west-2.amazonaws.com/").
