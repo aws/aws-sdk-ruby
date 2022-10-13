@@ -98,6 +98,45 @@ module Aws
         }
       end
 
+      describe 'AwsQueryCompatible' do
+        let(:client_aws_query_compatible) {
+          ApiHelper.sample_json_aws_query_compatible::Client.new(
+            region: 'us-west-2',
+            retry_limit: 0,
+            credentials: Aws::Credentials.new('akid', 'secret')
+          )
+        }
+
+        it 'extracts code and message from x-amzn-query-error' do
+          stub_request(:post, "https://sqs.us-west-2.amazonaws.com/").
+            to_return(:status => 400, headers: {
+              'x-amzn-query-error': 'AwsQueryError;Sender'
+            }, :body => error_resp)
+          expect {
+            client_aws_query_compatible.send_message(
+              queue_url: 'https://queue.url',
+              message_body: 'message body'
+            )
+          }.to raise_error {|e|
+            expect(e.code).to eq('AwsQueryError')
+            expect(e.message).to eq('foo')
+          }
+        end
+
+        it 'fallback to default if missing x-amzn-query-error' do
+          stub_request(:post, "https://sqs.us-west-2.amazonaws.com/").
+            to_return(:status => 400, headers: {}, :body => error_resp)
+          expect {
+            client_aws_query_compatible.send_message(
+              queue_url: 'https://queue.url',
+              message_body: 'message body'
+            )
+          }.to raise_error {|e|
+            expect(e.code).to eq('ProvisionedThroughputExceededException')
+            expect(e.message).to eq('foo')
+          }
+        end
+      end
     end
   end
 end

@@ -26,7 +26,11 @@ module Aws
       end
 
       def error_code(json, context)
-        code = json['__type']
+        code = if context.config.api.metadata['awsQueryCompatible'] and context.http_response.headers['x-amzn-query-error']
+          context.http_response.headers['x-amzn-query-error'].split(';')[0]
+        else
+          json['__type']
+        end
         code ||= json['code']
         code ||= context.http_response.headers['x-amzn-errortype']
         if code
