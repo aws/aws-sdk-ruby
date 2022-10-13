@@ -26,7 +26,7 @@ module Aws
       end
 
       def error_code(json, context)
-        code = if context.config.api.metadata['awsQueryCompatible'] and context.http_response.headers['x-amzn-query-error']
+        code = if aws_query_error?(context)
           context.http_response.headers['x-amzn-query-error'].split(';')[0]
         else
           json['__type']
@@ -38,6 +38,10 @@ module Aws
         else
           http_status_error_code(context)
         end
+      end
+
+      def aws_query_error?(context)
+        context.config.api.metadata['awsQueryCompatible'] and context.http_response.headers['x-amzn-query-error']
       end
 
       def error_message(code, json)

@@ -13,14 +13,6 @@ module ApiHelper
       end
     end
 
-    def sample_json_aws_query_compatible # sqs
-      @sample_json_aws_query_compatible ||= begin
-        api = File.expand_path('../fixtures/apis/sqs.json', __FILE__)
-        api = JSON.load(File.read(api))
-        sample_service(api: api)
-      end
-    end
-
     def sample_query # iam
       @sample_query ||= begin
         api = File.expand_path('../fixtures/apis/iam.json', __FILE__)
