@@ -544,7 +544,8 @@ module Aws::Transfer
     #   The landing directory (folder) for files transferred by using the AS2
     #   protocol.
     #
-    #   A `BaseDirectory` example is `/DOC-EXAMPLE-BUCKET/home/mydirectory `.
+    #   A `BaseDirectory` example is
+    #   *DOC-EXAMPLE-BUCKET*/*home*/*mydirectory*.
     #
     # @option params [required, String] :access_role
     #   With AS2, you can send files by calling `StartFileTransfer` and
@@ -604,7 +605,12 @@ module Aws::Transfer
 
     # Creates the connector, which captures the parameters for an outbound
     # connection for the AS2 protocol. The connector is required for sending
-    # files from a customer's non Amazon Web Services server.
+    # files to an externally hosted AS2 server. For more details about
+    # connectors, see [Create AS2 connectors][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/create-b2b-server.html#configure-as2-connector
     #
     # @option params [required, String] :url
     #   The URL of the partner's AS2 endpoint.
@@ -677,8 +683,7 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Creates the profile for the AS2 process. The agreement is between the
-    # partner and the AS2 process.
+    # Creates the local or partner profile to use for AS2 transfers.
     #
     # @option params [required, String] :as_2_id
     #   The `As2Id` is the *AS2-name*, as defined in the [RFC 4130][1]. For
@@ -692,9 +697,14 @@ module Aws::Transfer
     #   [1]: https://datatracker.ietf.org/doc/html/rfc4130
     #
     # @option params [required, String] :profile_type
-    #   Indicates whether to list only `LOCAL` type profiles or only `PARTNER`
-    #   type profiles. If not supplied in the request, the command lists all
-    #   types of profiles.
+    #   Determines the type of profile to create:
+    #
+    #   * Specify `LOCAL` to create a local profile. A local profile
+    #     represents the AS2-enabled Transfer Family server organization or
+    #     party.
+    #
+    #   * Specify `PARTNER` to create a partner profile. A partner profile
+    #     represents a remote organization, external to Transfer Family.
     #
     # @option params [Array<String>] :certificate_ids
     #   An array of identifiers for the imported certificates. You use this
@@ -824,7 +834,9 @@ module Aws::Transfer
     #    </note>
     #
     # @option params [String] :host_key
-    #   The RSA, ECDSA, or ED25519 private key to use for your server.
+    #   The RSA, ECDSA, or ED25519 private key to use for your SFTP-enabled
+    #   server. You can add multiple host keys, in case you want to rotate
+    #   keys, or have a set of active keys that use different algorithms.
     #
     #   Use the following command to generate an RSA 2048 bit key with no
     #   passphrase:
@@ -853,7 +865,7 @@ module Aws::Transfer
     #   SFTP-enabled server to a new server, don't update the host key.
     #   Accidentally changing a server's host key can be disruptive.
     #
-    #   For more information, see [Change the host key for your SFTP-enabled
+    #   For more information, see [Update host keys for your SFTP-enabled
     #   server][1] in the *Transfer Family User Guide*.
     #
     #
@@ -985,6 +997,11 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the execution
     #   role that's used for executing the workflow.
     #
+    #   In additon to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
+    #   execution role) for a workflow to execute on partial upload. A partial
+    #   upload occurs when a file is open when the session disconnects.
+    #
     # @return [Types::CreateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServerResponse#server_id #server_id} => String
@@ -1028,7 +1045,13 @@ module Aws::Transfer
     #       },
     #     ],
     #     workflow_details: {
-    #       on_upload: [ # required
+    #       on_upload: [
+    #         {
+    #           workflow_id: "WorkflowId", # required
+    #           execution_role: "Role", # required
+    #         },
+    #       ],
+    #       on_partial_upload: [
     #         {
     #           workflow_id: "WorkflowId", # required
     #           execution_role: "Role", # required
@@ -1418,7 +1441,8 @@ module Aws::Transfer
     #   when you create an agreement.
     #
     # @option params [required, String] :server_id
-    #   The server ID associated with the agreement that you are deleting.
+    #   The server identifier associated with the agreement that you are
+    #   deleting.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1442,7 +1466,7 @@ module Aws::Transfer
     # parameter.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate object that you are deleting.
+    #   The identifier of the certificate object that you are deleting.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1486,11 +1510,11 @@ module Aws::Transfer
     # Deletes the host key that's specified in the `HoskKeyId` parameter.
     #
     # @option params [required, String] :server_id
-    #   Provide the ID of the server that contains the host key that you are
+    #   The identifier of the server that contains the host key that you are
     #   deleting.
     #
     # @option params [required, String] :host_key_id
-    #   The ID of the host key that you are deleting.
+    #   The identifier of the host key that you are deleting.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1513,7 +1537,7 @@ module Aws::Transfer
     # Deletes the profile that's specified in the `ProfileId` parameter.
     #
     # @option params [required, String] :profile_id
-    #   The ID of the profile that you are deleting.
+    #   The identifier of the profile that you are deleting.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1719,7 +1743,7 @@ module Aws::Transfer
     #   when you create an agreement.
     #
     # @option params [required, String] :server_id
-    #   The server ID that's associated with the agreement.
+    #   The server identifier that's associated with the agreement.
     #
     # @return [Types::DescribeAgreementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1909,11 +1933,11 @@ module Aws::Transfer
     # `HostKeyId` and `ServerId`.
     #
     # @option params [required, String] :server_id
-    #   Provide the ID of the server that contains the host key that you want
+    #   The identifier of the server that contains the host key that you want
     #   described.
     #
     # @option params [required, String] :host_key_id
-    #   Provide the ID of the host key that you want described.
+    #   The identifier of the host key that you want described.
     #
     # @return [Types::DescribeHostKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2089,6 +2113,9 @@ module Aws::Transfer
     #   resp.server.workflow_details.on_upload #=> Array
     #   resp.server.workflow_details.on_upload[0].workflow_id #=> String
     #   resp.server.workflow_details.on_upload[0].execution_role #=> String
+    #   resp.server.workflow_details.on_partial_upload #=> Array
+    #   resp.server.workflow_details.on_partial_upload[0].workflow_id #=> String
+    #   resp.server.workflow_details.on_partial_upload[0].execution_role #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2302,10 +2329,11 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Adds a host key to the server specified by the `ServerId` parameter.
+    # Adds a host key to the server that's specified by the `ServerId`
+    # parameter.
     #
     # @option params [required, String] :server_id
-    #   Provide the ID of the server that contains the host key that you are
+    #   The identifier of the server that contains the host key that you are
     #   importing.
     #
     # @option params [required, String] :host_key_body
@@ -2314,7 +2342,7 @@ module Aws::Transfer
     #   Transfer Family accepts RSA, ECDSA, and ED25519 keys.
     #
     # @option params [String] :description
-    #   Enter a text description to identify this host key.
+    #   The text description that identifies this host key.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that can be used to group and search for host keys.
@@ -2670,8 +2698,8 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Returns a list of host keys for the server specified by the `ServerId`
-    # paramter.
+    # Returns a list of host keys for the server that's specified by the
+    # `ServerId` parameter.
     #
     # @option params [Integer] :max_results
     #   The maximum number of host keys to return.
@@ -2682,7 +2710,7 @@ module Aws::Transfer
     #   subsequent call to `ListHostKeys` to continue listing results.
     #
     # @option params [required, String] :server_id
-    #   Provide the ID of the server that contains the host keys that you want
+    #   The identifier of the server that contains the host keys that you want
     #   to view.
     #
     # @return [Types::ListHostKeysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3048,8 +3076,8 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Begins an outbound file transfer. You specify the `ConnectorId` and
-    # the file paths for where to send the files.
+    # Begins an outbound file transfer to a remote AS2 server. You specify
+    # the `ConnectorId` and the file paths for where to send the files.
     #
     # @option params [required, String] :connector_id
     #   The unique identifier for the connector.
@@ -3651,18 +3679,18 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Updates the description for the host key specified by the specified by
-    # the `ServerId` and `HostKeyId` parameters.
+    # Updates the description for the host key that's specified by the
+    # `ServerId` and `HostKeyId` parameters.
     #
     # @option params [required, String] :server_id
-    #   Provide the ID of the server that contains the host key that you are
+    #   The identifier of the server that contains the host key that you are
     #   updating.
     #
     # @option params [required, String] :host_key_id
-    #   Provide the ID of the host key that you are updating.
+    #   The identifier of the host key that you are updating.
     #
     # @option params [required, String] :description
-    #   Provide an updated description for the host key.
+    #   An updated description for the host key.
     #
     # @return [Types::UpdateHostKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3832,7 +3860,9 @@ module Aws::Transfer
     #    </note>
     #
     # @option params [String] :host_key
-    #   The RSA, ECDSA, or ED25519 private key to use for your server.
+    #   The RSA, ECDSA, or ED25519 private key to use for your SFTP-enabled
+    #   server. You can add multiple host keys, in case you want to rotate
+    #   keys, or have a set of active keys that use different algorithms.
     #
     #   Use the following command to generate an RSA 2048 bit key with no
     #   passphrase:
@@ -3861,7 +3891,7 @@ module Aws::Transfer
     #   SFTP-enabled server to a new server, don't update the host key.
     #   Accidentally changing a server's host key can be disruptive.
     #
-    #   For more information, see [Change the host key for your SFTP-enabled
+    #   For more information, see [Update host keys for your SFTP-enabled
     #   server][1] in the *Transfer Family User Guide*.
     #
     #
@@ -3945,6 +3975,11 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the execution
     #   role that's used for executing the workflow.
     #
+    #   In additon to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
+    #   execution role) for a workflow to execute on partial upload. A partial
+    #   upload occurs when a file is open when the session disconnects.
+    #
     #   To remove an associated workflow from a server, you can provide an
     #   empty `OnUpload` object, as in the following example.
     #
@@ -3987,7 +4022,13 @@ module Aws::Transfer
     #     security_policy_name: "SecurityPolicyName",
     #     server_id: "ServerId", # required
     #     workflow_details: {
-    #       on_upload: [ # required
+    #       on_upload: [
+    #         {
+    #           workflow_id: "WorkflowId", # required
+    #           execution_role: "Role", # required
+    #         },
+    #       ],
+    #       on_partial_upload: [
     #         {
     #           workflow_id: "WorkflowId", # required
     #           execution_role: "Role", # required
@@ -4167,7 +4208,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

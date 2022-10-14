@@ -285,6 +285,8 @@ module Aws::Appflow
     SalesforceConnectorOperator = Shapes::StringShape.new(name: 'SalesforceConnectorOperator')
     SalesforceConnectorProfileCredentials = Shapes::StructureShape.new(name: 'SalesforceConnectorProfileCredentials')
     SalesforceConnectorProfileProperties = Shapes::StructureShape.new(name: 'SalesforceConnectorProfileProperties')
+    SalesforceDataTransferApi = Shapes::StringShape.new(name: 'SalesforceDataTransferApi')
+    SalesforceDataTransferApiList = Shapes::ListShape.new(name: 'SalesforceDataTransferApiList')
     SalesforceDestinationProperties = Shapes::StructureShape.new(name: 'SalesforceDestinationProperties')
     SalesforceMetadata = Shapes::StructureShape.new(name: 'SalesforceMetadata')
     SalesforceSourceProperties = Shapes::StructureShape.new(name: 'SalesforceSourceProperties')
@@ -1162,18 +1164,23 @@ module Aws::Appflow
     SalesforceConnectorProfileProperties.add_member(:is_sandbox_environment, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSandboxEnvironment"))
     SalesforceConnectorProfileProperties.struct_class = Types::SalesforceConnectorProfileProperties
 
+    SalesforceDataTransferApiList.member = Shapes::ShapeRef.new(shape: SalesforceDataTransferApi)
+
     SalesforceDestinationProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
     SalesforceDestinationProperties.add_member(:id_field_names, Shapes::ShapeRef.new(shape: IdFieldNameList, location_name: "idFieldNames"))
     SalesforceDestinationProperties.add_member(:error_handling_config, Shapes::ShapeRef.new(shape: ErrorHandlingConfig, location_name: "errorHandlingConfig"))
     SalesforceDestinationProperties.add_member(:write_operation_type, Shapes::ShapeRef.new(shape: WriteOperationType, location_name: "writeOperationType"))
+    SalesforceDestinationProperties.add_member(:data_transfer_api, Shapes::ShapeRef.new(shape: SalesforceDataTransferApi, location_name: "dataTransferApi"))
     SalesforceDestinationProperties.struct_class = Types::SalesforceDestinationProperties
 
     SalesforceMetadata.add_member(:o_auth_scopes, Shapes::ShapeRef.new(shape: OAuthScopeList, location_name: "oAuthScopes"))
+    SalesforceMetadata.add_member(:data_transfer_apis, Shapes::ShapeRef.new(shape: SalesforceDataTransferApiList, location_name: "dataTransferApis"))
     SalesforceMetadata.struct_class = Types::SalesforceMetadata
 
     SalesforceSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
     SalesforceSourceProperties.add_member(:enable_dynamic_field_update, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableDynamicFieldUpdate"))
     SalesforceSourceProperties.add_member(:include_deleted_records, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeDeletedRecords"))
+    SalesforceSourceProperties.add_member(:data_transfer_api, Shapes::ShapeRef.new(shape: SalesforceDataTransferApi, location_name: "dataTransferApi"))
     SalesforceSourceProperties.struct_class = Types::SalesforceSourceProperties
 
     ScheduledTriggerProperties.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, required: true, location_name: "scheduleExpression"))

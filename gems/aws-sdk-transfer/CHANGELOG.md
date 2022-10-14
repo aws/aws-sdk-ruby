@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2022-10-13)
+------------------
+
+* Feature - This release adds an option for customers to configure workflows that are triggered when files are only partially received from a client due to premature session disconnect.
+
 1.59.0 (2022-09-13)
 ------------------
 

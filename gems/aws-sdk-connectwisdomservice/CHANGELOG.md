@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2022-10-13)
+------------------
+
+* Feature - This release updates the GetRecommendations API to include a trigger event list for classifying and grouping recommendations.
+
 1.8.0 (2022-08-15)
 ------------------
 

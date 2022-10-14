@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2022-10-13)
+------------------
+
+* Feature - This release enables customers to specify multiple target languages in asynchronous batch translation requests.
+
 1.46.0 (2022-09-29)
 ------------------
 

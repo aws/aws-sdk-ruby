@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2022-10-13)
+------------------
+
+* Feature - This release adds support for a secondary email and a mobile number for Amazon Connect instance users.
+
 1.77.0 (2022-10-04)
 ------------------
 

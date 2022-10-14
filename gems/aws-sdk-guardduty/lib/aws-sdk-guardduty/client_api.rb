@@ -338,6 +338,7 @@ module Aws::GuardDuty
     UnarchiveFindingsResponse = Shapes::StructureShape.new(name: 'UnarchiveFindingsResponse')
     UnprocessedAccount = Shapes::StructureShape.new(name: 'UnprocessedAccount')
     UnprocessedAccounts = Shapes::ListShape.new(name: 'UnprocessedAccounts')
+    UnprocessedDataSourcesResult = Shapes::StructureShape.new(name: 'UnprocessedDataSourcesResult')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDetectorRequest = Shapes::StructureShape.new(name: 'UpdateDetectorRequest')
@@ -520,6 +521,7 @@ module Aws::GuardDuty
     CreateDetectorRequest.struct_class = Types::CreateDetectorRequest
 
     CreateDetectorResponse.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, location_name: "detectorId"))
+    CreateDetectorResponse.add_member(:unprocessed_data_sources, Shapes::ShapeRef.new(shape: UnprocessedDataSourcesResult, location_name: "unprocessedDataSources"))
     CreateDetectorResponse.struct_class = Types::CreateDetectorResponse
 
     CreateFilterRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
@@ -751,6 +753,7 @@ module Aws::GuardDuty
     EbsVolumeScanDetails.struct_class = Types::EbsVolumeScanDetails
 
     EbsVolumesResult.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, location_name: "status"))
+    EbsVolumesResult.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
     EbsVolumesResult.struct_class = Types::EbsVolumesResult
 
     EcsClusterDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -1532,6 +1535,9 @@ module Aws::GuardDuty
     UnprocessedAccount.struct_class = Types::UnprocessedAccount
 
     UnprocessedAccounts.member = Shapes::ShapeRef.new(shape: UnprocessedAccount)
+
+    UnprocessedDataSourcesResult.add_member(:malware_protection, Shapes::ShapeRef.new(shape: MalwareProtectionConfigurationResult, location_name: "malwareProtection"))
+    UnprocessedDataSourcesResult.struct_class = Types::UnprocessedDataSourcesResult
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GuardDutyArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))

@@ -477,6 +477,7 @@ module Aws::GuardDuty
     # @return [Types::CreateDetectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDetectorResponse#detector_id #detector_id} => String
+    #   * {Types::CreateDetectorResponse#unprocessed_data_sources #unprocessed_data_sources} => Types::UnprocessedDataSourcesResult
     #
     # @example Request syntax with placeholder values
     #
@@ -507,6 +508,9 @@ module Aws::GuardDuty
     # @example Response structure
     #
     #   resp.detector_id #=> String
+    #   resp.unprocessed_data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.unprocessed_data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.reason #=> String
+    #   resp.unprocessed_data_sources.malware_protection.service_role #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetector AWS API Documentation
     #
@@ -1227,7 +1231,9 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Returns a list of malware scans.
+    # Returns a list of malware scans. Each member account can view the
+    # malware scans for their own accounts. An administrator can view the
+    # malware scans for all the member accounts.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that the request is associated with.
@@ -1467,8 +1473,8 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Disassociates GuardDuty member accounts (to the current GuardDuty
-    # administrator account) specified by the account IDs.
+    # Disassociates GuardDuty member accounts (to the current administrator
+    # account) specified by the account IDs.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
@@ -1594,6 +1600,7 @@ module Aws::GuardDuty
     #   resp.data_sources.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.data_sources.kubernetes.audit_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.reason #=> String
     #   resp.data_sources.malware_protection.service_role #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -2201,6 +2208,7 @@ module Aws::GuardDuty
     #   resp.member_data_source_configurations[0].data_sources.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].data_sources.kubernetes.audit_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.member_data_source_configurations[0].data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.reason #=> String
     #   resp.member_data_source_configurations[0].data_sources.malware_protection.service_role #=> String
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
@@ -2874,7 +2882,13 @@ module Aws::GuardDuty
     # @option params [String] :only_associated
     #   Specifies whether to only return associated members or to return all
     #   members (including members who haven't been invited yet or have been
-    #   disassociated).
+    #   disassociated). Member accounts must have been previously associated
+    #   with the GuardDuty administrator account using [ `Create Members`
+    #   ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html
     #
     # @return [Types::ListMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3448,7 +3462,7 @@ module Aws::GuardDuty
     #   resources to scan.
     #
     # @option params [String] :ebs_snapshot_preservation
-    #   An enum value representing possible snapshot preservations.
+    #   An enum value representing possible snapshot preservation settings.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3680,7 +3694,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Add a metadata method to `Partition` to supplement endpoint generation in service gems.
 
+1.645.0 (2022-10-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.644.0 (2022-10-07)
 ------------------
 

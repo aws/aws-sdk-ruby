@@ -400,6 +400,10 @@ module Aws::RDSDataService
     # @option params [String] :schema
     #   The name of the database schema.
     #
+    #   <note markdown="1"> Currently, the `schema` parameter isn't supported.
+    #
+    #    </note>
+    #
     # @option params [Array<Array>] :parameter_sets
     #   The parameter set for the batch operation.
     #
@@ -929,7 +933,7 @@ module Aws::RDSDataService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rdsdataservice'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

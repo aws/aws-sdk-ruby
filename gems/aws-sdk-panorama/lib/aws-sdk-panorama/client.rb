@@ -413,13 +413,14 @@ module Aws::Panorama
       req.send_request(options)
     end
 
-    # Creates a job to run on one or more devices.
+    # Creates a job to run on one or more devices. A job can update a
+    # device's software or reboot it.
     #
     # @option params [required, Array<String>] :device_ids
     #   IDs of target devices.
     #
-    # @option params [required, Types::DeviceJobConfig] :device_job_config
-    #   Configuration settings for the job.
+    # @option params [Types::DeviceJobConfig] :device_job_config
+    #   Configuration settings for a software update job.
     #
     # @option params [required, String] :job_type
     #   The type of job to run.
@@ -432,12 +433,12 @@ module Aws::Panorama
     #
     #   resp = client.create_job_for_devices({
     #     device_ids: ["DeviceId"], # required
-    #     device_job_config: { # required
+    #     device_job_config: {
     #       ota_job_config: {
     #         image_version: "ImageVersion", # required
     #       },
     #     },
-    #     job_type: "OTA", # required, accepts OTA
+    #     job_type: "OTA", # required, accepts OTA, REBOOT
     #   })
     #
     # @example Response structure
@@ -738,6 +739,7 @@ module Aws::Panorama
     #   * {Types::DescribeApplicationInstanceResponse#health_status #health_status} => String
     #   * {Types::DescribeApplicationInstanceResponse#last_updated_time #last_updated_time} => Time
     #   * {Types::DescribeApplicationInstanceResponse#name #name} => String
+    #   * {Types::DescribeApplicationInstanceResponse#runtime_context_states #runtime_context_states} => Array&lt;Types::ReportedRuntimeContextState&gt;
     #   * {Types::DescribeApplicationInstanceResponse#runtime_role_arn #runtime_role_arn} => String
     #   * {Types::DescribeApplicationInstanceResponse#status #status} => String
     #   * {Types::DescribeApplicationInstanceResponse#status_description #status_description} => String
@@ -761,6 +763,11 @@ module Aws::Panorama
     #   resp.health_status #=> String, one of "RUNNING", "ERROR", "NOT_AVAILABLE"
     #   resp.last_updated_time #=> Time
     #   resp.name #=> String
+    #   resp.runtime_context_states #=> Array
+    #   resp.runtime_context_states[0].desired_state #=> String, one of "RUNNING", "STOPPED", "REMOVED"
+    #   resp.runtime_context_states[0].device_reported_status #=> String, one of "STOPPING", "STOPPED", "STOP_ERROR", "REMOVAL_FAILED", "REMOVAL_IN_PROGRESS", "STARTING", "RUNNING", "INSTALL_ERROR", "LAUNCHED", "LAUNCH_ERROR", "INSTALL_IN_PROGRESS"
+    #   resp.runtime_context_states[0].device_reported_time #=> Time
+    #   resp.runtime_context_states[0].runtime_context_name #=> String
     #   resp.runtime_role_arn #=> String
     #   resp.status #=> String, one of "DEPLOYMENT_PENDING", "DEPLOYMENT_REQUESTED", "DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_ERROR", "DEPLOYMENT_SUCCEEDED", "REMOVAL_PENDING", "REMOVAL_REQUESTED", "REMOVAL_IN_PROGRESS", "REMOVAL_FAILED", "REMOVAL_SUCCEEDED", "DEPLOYMENT_FAILED"
     #   resp.status_description #=> String
@@ -872,11 +879,12 @@ module Aws::Panorama
     #   resp.current_networking_status.ntp_status.ntp_server_name #=> String
     #   resp.current_software #=> String
     #   resp.description #=> String
-    #   resp.device_aggregated_status #=> String, one of "ERROR", "AWAITING_PROVISIONING", "PENDING", "FAILED", "DELETING", "ONLINE", "OFFLINE", "LEASE_EXPIRED", "UPDATE_NEEDED"
+    #   resp.device_aggregated_status #=> String, one of "ERROR", "AWAITING_PROVISIONING", "PENDING", "FAILED", "DELETING", "ONLINE", "OFFLINE", "LEASE_EXPIRED", "UPDATE_NEEDED", "REBOOTING"
     #   resp.device_connection_status #=> String, one of "ONLINE", "OFFLINE", "AWAITING_CREDENTIALS", "NOT_AVAILABLE", "ERROR"
     #   resp.device_id #=> String
     #   resp.latest_alternate_software #=> String
     #   resp.latest_device_job.image_version #=> String
+    #   resp.latest_device_job.job_type #=> String, one of "OTA", "REBOOT"
     #   resp.latest_device_job.status #=> String, one of "PENDING", "IN_PROGRESS", "VERIFYING", "REBOOTING", "DOWNLOADING", "COMPLETED", "FAILED"
     #   resp.latest_software #=> String
     #   resp.lease_expiration_time #=> Time
@@ -924,6 +932,7 @@ module Aws::Panorama
     #   * {Types::DescribeDeviceJobResponse#device_type #device_type} => String
     #   * {Types::DescribeDeviceJobResponse#image_version #image_version} => String
     #   * {Types::DescribeDeviceJobResponse#job_id #job_id} => String
+    #   * {Types::DescribeDeviceJobResponse#job_type #job_type} => String
     #   * {Types::DescribeDeviceJobResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
@@ -941,6 +950,7 @@ module Aws::Panorama
     #   resp.device_type #=> String, one of "PANORAMA_APPLIANCE_DEVELOPER_KIT", "PANORAMA_APPLIANCE"
     #   resp.image_version #=> String
     #   resp.job_id #=> String
+    #   resp.job_type #=> String, one of "OTA", "REBOOT"
     #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "VERIFYING", "REBOOTING", "DOWNLOADING", "COMPLETED", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/DescribeDeviceJob AWS API Documentation
@@ -1315,7 +1325,7 @@ module Aws::Panorama
     #
     #   resp.next_token #=> String
     #   resp.node_instances #=> Array
-    #   resp.node_instances[0].current_status #=> String, one of "RUNNING", "ERROR", "NOT_AVAILABLE"
+    #   resp.node_instances[0].current_status #=> String, one of "RUNNING", "ERROR", "NOT_AVAILABLE", "PAUSED"
     #   resp.node_instances[0].node_id #=> String
     #   resp.node_instances[0].node_instance_id #=> String
     #   resp.node_instances[0].node_name #=> String
@@ -1375,6 +1385,11 @@ module Aws::Panorama
     #   resp.application_instances[0].description #=> String
     #   resp.application_instances[0].health_status #=> String, one of "RUNNING", "ERROR", "NOT_AVAILABLE"
     #   resp.application_instances[0].name #=> String
+    #   resp.application_instances[0].runtime_context_states #=> Array
+    #   resp.application_instances[0].runtime_context_states[0].desired_state #=> String, one of "RUNNING", "STOPPED", "REMOVED"
+    #   resp.application_instances[0].runtime_context_states[0].device_reported_status #=> String, one of "STOPPING", "STOPPED", "STOP_ERROR", "REMOVAL_FAILED", "REMOVAL_IN_PROGRESS", "STARTING", "RUNNING", "INSTALL_ERROR", "LAUNCHED", "LAUNCH_ERROR", "INSTALL_IN_PROGRESS"
+    #   resp.application_instances[0].runtime_context_states[0].device_reported_time #=> Time
+    #   resp.application_instances[0].runtime_context_states[0].runtime_context_name #=> String
     #   resp.application_instances[0].status #=> String, one of "DEPLOYMENT_PENDING", "DEPLOYMENT_REQUESTED", "DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_ERROR", "DEPLOYMENT_SUCCEEDED", "REMOVAL_PENDING", "REMOVAL_REQUESTED", "REMOVAL_IN_PROGRESS", "REMOVAL_FAILED", "REMOVAL_SUCCEEDED", "DEPLOYMENT_FAILED"
     #   resp.application_instances[0].status_description #=> String
     #   resp.application_instances[0].tags #=> Hash
@@ -1423,7 +1438,7 @@ module Aws::Panorama
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_devices({
-    #     device_aggregated_status_filter: "ERROR", # accepts ERROR, AWAITING_PROVISIONING, PENDING, FAILED, DELETING, ONLINE, OFFLINE, LEASE_EXPIRED, UPDATE_NEEDED
+    #     device_aggregated_status_filter: "ERROR", # accepts ERROR, AWAITING_PROVISIONING, PENDING, FAILED, DELETING, ONLINE, OFFLINE, LEASE_EXPIRED, UPDATE_NEEDED, REBOOTING
     #     max_results: 1,
     #     name_filter: "NameFilter",
     #     next_token: "NextToken",
@@ -1438,10 +1453,11 @@ module Aws::Panorama
     #   resp.devices[0].created_time #=> Time
     #   resp.devices[0].current_software #=> String
     #   resp.devices[0].description #=> String
-    #   resp.devices[0].device_aggregated_status #=> String, one of "ERROR", "AWAITING_PROVISIONING", "PENDING", "FAILED", "DELETING", "ONLINE", "OFFLINE", "LEASE_EXPIRED", "UPDATE_NEEDED"
+    #   resp.devices[0].device_aggregated_status #=> String, one of "ERROR", "AWAITING_PROVISIONING", "PENDING", "FAILED", "DELETING", "ONLINE", "OFFLINE", "LEASE_EXPIRED", "UPDATE_NEEDED", "REBOOTING"
     #   resp.devices[0].device_id #=> String
     #   resp.devices[0].last_updated_time #=> Time
     #   resp.devices[0].latest_device_job.image_version #=> String
+    #   resp.devices[0].latest_device_job.job_type #=> String, one of "OTA", "REBOOT"
     #   resp.devices[0].latest_device_job.status #=> String, one of "PENDING", "IN_PROGRESS", "VERIFYING", "REBOOTING", "DOWNLOADING", "COMPLETED", "FAILED"
     #   resp.devices[0].lease_expiration_time #=> Time
     #   resp.devices[0].name #=> String
@@ -1494,6 +1510,7 @@ module Aws::Panorama
     #   resp.device_jobs[0].device_id #=> String
     #   resp.device_jobs[0].device_name #=> String
     #   resp.device_jobs[0].job_id #=> String
+    #   resp.device_jobs[0].job_type #=> String, one of "OTA", "REBOOT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/ListDevicesJobs AWS API Documentation
@@ -1870,6 +1887,43 @@ module Aws::Panorama
       req.send_request(options)
     end
 
+    # Signal camera nodes to stop or resume.
+    #
+    # @option params [required, String] :application_instance_id
+    #   An application instance ID.
+    #
+    # @option params [required, Array<Types::NodeSignal>] :node_signals
+    #   A list of signals.
+    #
+    # @return [Types::SignalApplicationInstanceNodeInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SignalApplicationInstanceNodeInstancesResponse#application_instance_id #application_instance_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.signal_application_instance_node_instances({
+    #     application_instance_id: "ApplicationInstanceId", # required
+    #     node_signals: [ # required
+    #       {
+    #         node_instance_id: "NodeInstanceId", # required
+    #         signal: "PAUSE", # required, accepts PAUSE, RESUME
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_instance_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/SignalApplicationInstanceNodeInstances AWS API Documentation
+    #
+    # @overload signal_application_instance_node_instances(params = {})
+    # @param [Hash] params ({})
+    def signal_application_instance_node_instances(params = {}, options = {})
+      req = build_request(:signal_application_instance_node_instances, params)
+      req.send_request(options)
+    end
+
     # Tags a resource.
     #
     # @option params [required, String] :resource_arn
@@ -1969,7 +2023,7 @@ module Aws::Panorama
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-panorama'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

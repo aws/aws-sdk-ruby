@@ -256,7 +256,7 @@ module Aws::AmplifyUIBuilder
     ComponentProperty.add_member(:component_name, Shapes::ShapeRef.new(shape: String, location_name: "componentName"))
     ComponentProperty.add_member(:concat, Shapes::ShapeRef.new(shape: ComponentPropertyList, location_name: "concat"))
     ComponentProperty.add_member(:condition, Shapes::ShapeRef.new(shape: ComponentConditionProperty, location_name: "condition"))
-    ComponentProperty.add_member(:configured, Shapes::ShapeRef.new(shape: Boolean, location_name: "configured", metadata: {"box"=>true}))
+    ComponentProperty.add_member(:configured, Shapes::ShapeRef.new(shape: Boolean, location_name: "configured"))
     ComponentProperty.add_member(:default_value, Shapes::ShapeRef.new(shape: String, location_name: "defaultValue"))
     ComponentProperty.add_member(:event, Shapes::ShapeRef.new(shape: String, location_name: "event"))
     ComponentProperty.add_member(:imported_value, Shapes::ShapeRef.new(shape: String, location_name: "importedValue"))
@@ -387,7 +387,7 @@ module Aws::AmplifyUIBuilder
     ExchangeCodeForTokenRequestBody.struct_class = Types::ExchangeCodeForTokenRequestBody
 
     ExchangeCodeForTokenResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "accessToken"))
-    ExchangeCodeForTokenResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "expiresIn", metadata: {"box"=>true}))
+    ExchangeCodeForTokenResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "expiresIn"))
     ExchangeCodeForTokenResponse.add_member(:refresh_token, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "refreshToken"))
     ExchangeCodeForTokenResponse.struct_class = Types::ExchangeCodeForTokenResponse
 
@@ -421,24 +421,25 @@ module Aws::AmplifyUIBuilder
     FeaturesMap.key = Shapes::ShapeRef.new(shape: String)
     FeaturesMap.value = Shapes::ShapeRef.new(shape: String)
 
-    FieldConfig.add_member(:excluded, Shapes::ShapeRef.new(shape: Boolean, location_name: "excluded", metadata: {"box"=>true}))
+    FieldConfig.add_member(:excluded, Shapes::ShapeRef.new(shape: Boolean, location_name: "excluded"))
     FieldConfig.add_member(:input_type, Shapes::ShapeRef.new(shape: FieldInputConfig, location_name: "inputType"))
     FieldConfig.add_member(:label, Shapes::ShapeRef.new(shape: String, location_name: "label"))
     FieldConfig.add_member(:position, Shapes::ShapeRef.new(shape: FieldPosition, location_name: "position"))
     FieldConfig.add_member(:validations, Shapes::ShapeRef.new(shape: ValidationsList, location_name: "validations"))
     FieldConfig.struct_class = Types::FieldConfig
 
-    FieldInputConfig.add_member(:default_checked, Shapes::ShapeRef.new(shape: Boolean, location_name: "defaultChecked", metadata: {"box"=>true}))
+    FieldInputConfig.add_member(:default_checked, Shapes::ShapeRef.new(shape: Boolean, location_name: "defaultChecked"))
     FieldInputConfig.add_member(:default_country_code, Shapes::ShapeRef.new(shape: String, location_name: "defaultCountryCode"))
     FieldInputConfig.add_member(:default_value, Shapes::ShapeRef.new(shape: String, location_name: "defaultValue"))
     FieldInputConfig.add_member(:descriptive_text, Shapes::ShapeRef.new(shape: String, location_name: "descriptiveText"))
-    FieldInputConfig.add_member(:max_value, Shapes::ShapeRef.new(shape: Float, location_name: "maxValue", metadata: {"box"=>true}))
-    FieldInputConfig.add_member(:min_value, Shapes::ShapeRef.new(shape: Float, location_name: "minValue", metadata: {"box"=>true}))
+    FieldInputConfig.add_member(:is_array, Shapes::ShapeRef.new(shape: Boolean, location_name: "isArray"))
+    FieldInputConfig.add_member(:max_value, Shapes::ShapeRef.new(shape: Float, location_name: "maxValue"))
+    FieldInputConfig.add_member(:min_value, Shapes::ShapeRef.new(shape: Float, location_name: "minValue"))
     FieldInputConfig.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     FieldInputConfig.add_member(:placeholder, Shapes::ShapeRef.new(shape: String, location_name: "placeholder"))
-    FieldInputConfig.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "readOnly", metadata: {"box"=>true}))
-    FieldInputConfig.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, location_name: "required", metadata: {"box"=>true}))
-    FieldInputConfig.add_member(:step, Shapes::ShapeRef.new(shape: Float, location_name: "step", metadata: {"box"=>true}))
+    FieldInputConfig.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "readOnly"))
+    FieldInputConfig.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, location_name: "required"))
+    FieldInputConfig.add_member(:step, Shapes::ShapeRef.new(shape: Float, location_name: "step"))
     FieldInputConfig.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "type"))
     FieldInputConfig.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     FieldInputConfig.add_member(:value_mappings, Shapes::ShapeRef.new(shape: ValueMappings, location_name: "valueMappings"))
@@ -485,7 +486,7 @@ module Aws::AmplifyUIBuilder
     FormBindings.value = Shapes::ShapeRef.new(shape: FormBindingElement)
 
     FormButton.add_member(:children, Shapes::ShapeRef.new(shape: String, location_name: "children"))
-    FormButton.add_member(:excluded, Shapes::ShapeRef.new(shape: Boolean, location_name: "excluded", metadata: {"box"=>true}))
+    FormButton.add_member(:excluded, Shapes::ShapeRef.new(shape: Boolean, location_name: "excluded"))
     FormButton.add_member(:position, Shapes::ShapeRef.new(shape: FieldPosition, location_name: "position"))
     FormButton.struct_class = Types::FormButton
 
@@ -574,7 +575,7 @@ module Aws::AmplifyUIBuilder
 
     ListComponentsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     ListComponentsRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
-    ListComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListComponentsLimit, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListComponentsLimit, location: "querystring", location_name: "maxResults"))
     ListComponentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListComponentsRequest.struct_class = Types::ListComponentsRequest
 
@@ -584,7 +585,7 @@ module Aws::AmplifyUIBuilder
 
     ListFormsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     ListFormsRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
-    ListFormsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFormsLimit, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListFormsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFormsLimit, location: "querystring", location_name: "maxResults"))
     ListFormsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListFormsRequest.struct_class = Types::ListFormsRequest
 
@@ -594,7 +595,7 @@ module Aws::AmplifyUIBuilder
 
     ListThemesRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     ListThemesRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
-    ListThemesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListThemesLimit, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListThemesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListThemesLimit, location: "querystring", location_name: "maxResults"))
     ListThemesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListThemesRequest.struct_class = Types::ListThemesRequest
 
@@ -639,7 +640,7 @@ module Aws::AmplifyUIBuilder
     RefreshTokenRequestBody.struct_class = Types::RefreshTokenRequestBody
 
     RefreshTokenResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "accessToken"))
-    RefreshTokenResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "expiresIn", metadata: {"box"=>true}))
+    RefreshTokenResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "expiresIn"))
     RefreshTokenResponse.struct_class = Types::RefreshTokenResponse
 
     ResourceConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -648,7 +649,7 @@ module Aws::AmplifyUIBuilder
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    SectionalElement.add_member(:level, Shapes::ShapeRef.new(shape: Integer, location_name: "level", metadata: {"box"=>true}))
+    SectionalElement.add_member(:level, Shapes::ShapeRef.new(shape: Integer, location_name: "level"))
     SectionalElement.add_member(:orientation, Shapes::ShapeRef.new(shape: String, location_name: "orientation"))
     SectionalElement.add_member(:position, Shapes::ShapeRef.new(shape: FieldPosition, location_name: "position"))
     SectionalElement.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))

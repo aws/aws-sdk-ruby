@@ -1417,6 +1417,8 @@ module Aws::DirectoryService
     #   * {Types::DescribeClientAuthenticationSettingsResult#client_authentication_settings_info #client_authentication_settings_info} => Array&lt;Types::ClientAuthenticationSettingInfo&gt;
     #   * {Types::DescribeClientAuthenticationSettingsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_client_authentication_settings({
@@ -1522,6 +1524,8 @@ module Aws::DirectoryService
     #   * {Types::DescribeDirectoriesResult#directory_descriptions #directory_descriptions} => Array&lt;Types::DirectoryDescription&gt;
     #   * {Types::DescribeDirectoriesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_directories({
@@ -1601,6 +1605,7 @@ module Aws::DirectoryService
     #   resp.directory_descriptions[0].regions_info.primary_region #=> String
     #   resp.directory_descriptions[0].regions_info.additional_regions #=> Array
     #   resp.directory_descriptions[0].regions_info.additional_regions[0] #=> String
+    #   resp.directory_descriptions[0].os_version #=> String, one of "SERVER_2012", "SERVER_2019"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectories AWS API Documentation
@@ -1736,6 +1741,8 @@ module Aws::DirectoryService
     #   * {Types::DescribeLDAPSSettingsResult#ldaps_settings_info #ldaps_settings_info} => Array&lt;Types::LDAPSSettingInfo&gt;
     #   * {Types::DescribeLDAPSSettingsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_ldaps_settings({
@@ -1779,6 +1786,8 @@ module Aws::DirectoryService
     #
     #   * {Types::DescribeRegionsResult#regions_description #regions_description} => Array&lt;Types::RegionDescription&gt;
     #   * {Types::DescribeRegionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1889,6 +1898,8 @@ module Aws::DirectoryService
     #   * {Types::DescribeSharedDirectoriesResult#shared_directories #shared_directories} => Array&lt;Types::SharedDirectory&gt;
     #   * {Types::DescribeSharedDirectoriesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_shared_directories({
@@ -1953,6 +1964,8 @@ module Aws::DirectoryService
     #   * {Types::DescribeSnapshotsResult#snapshots #snapshots} => Array&lt;Types::Snapshot&gt;
     #   * {Types::DescribeSnapshotsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_snapshots({
@@ -2011,6 +2024,8 @@ module Aws::DirectoryService
     #   * {Types::DescribeTrustsResult#trusts #trusts} => Array&lt;Types::Trust&gt;
     #   * {Types::DescribeTrustsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_trusts({
@@ -2042,6 +2057,59 @@ module Aws::DirectoryService
     # @param [Hash] params ({})
     def describe_trusts(params = {}, options = {})
       req = build_request(:describe_trusts, params)
+      req.send_request(options)
+    end
+
+    # Describes the updates of a directory for a particular update type.
+    #
+    # @option params [required, String] :directory_id
+    #   The unique identifier of the directory.
+    #
+    # @option params [required, String] :update_type
+    #   The type of updates you want to describe for the directory.
+    #
+    # @option params [String] :region_name
+    #   The name of the Region.
+    #
+    # @option params [String] :next_token
+    #   The `DescribeUpdateDirectoryResult`. NextToken value from a previous
+    #   call to DescribeUpdateDirectory. Pass null if this is the first call.
+    #
+    # @return [Types::DescribeUpdateDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeUpdateDirectoryResult#update_activities #update_activities} => Array&lt;Types::UpdateInfoEntry&gt;
+    #   * {Types::DescribeUpdateDirectoryResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_update_directory({
+    #     directory_id: "DirectoryId", # required
+    #     update_type: "OS", # required, accepts OS
+    #     region_name: "RegionName",
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_activities #=> Array
+    #   resp.update_activities[0].region #=> String
+    #   resp.update_activities[0].status #=> String, one of "Updated", "Updating", "UpdateFailed"
+    #   resp.update_activities[0].status_reason #=> String
+    #   resp.update_activities[0].initiated_by #=> String
+    #   resp.update_activities[0].new_value.os_update_settings.os_version #=> String, one of "SERVER_2012", "SERVER_2019"
+    #   resp.update_activities[0].previous_value.os_update_settings.os_version #=> String, one of "SERVER_2012", "SERVER_2019"
+    #   resp.update_activities[0].start_time #=> Time
+    #   resp.update_activities[0].last_updated_date_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeUpdateDirectory AWS API Documentation
+    #
+    # @overload describe_update_directory(params = {})
+    # @param [Hash] params ({})
+    def describe_update_directory(params = {}, options = {})
+      req = build_request(:describe_update_directory, params)
       req.send_request(options)
     end
 
@@ -2380,6 +2448,8 @@ module Aws::DirectoryService
     #   * {Types::ListCertificatesResult#next_token #next_token} => String
     #   * {Types::ListCertificatesResult#certificates_info #certificates_info} => Array&lt;Types::CertificateInfo&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_certificates({
@@ -2425,6 +2495,8 @@ module Aws::DirectoryService
     #
     #   * {Types::ListIpRoutesResult#ip_routes_info #ip_routes_info} => Array&lt;Types::IpRouteInfo&gt;
     #   * {Types::ListIpRoutesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2475,6 +2547,8 @@ module Aws::DirectoryService
     #   * {Types::ListLogSubscriptionsResult#log_subscriptions #log_subscriptions} => Array&lt;Types::LogSubscription&gt;
     #   * {Types::ListLogSubscriptionsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_log_subscriptions({
@@ -2517,6 +2591,8 @@ module Aws::DirectoryService
     #
     #   * {Types::ListSchemaExtensionsResult#schema_extensions_info #schema_extensions_info} => Array&lt;Types::SchemaExtensionInfo&gt;
     #   * {Types::ListSchemaExtensionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2562,6 +2638,8 @@ module Aws::DirectoryService
     #
     #   * {Types::ListTagsForResourceResult#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsForResourceResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3044,6 +3122,46 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Updates the directory for a particular update type.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory on which you want to perform the
+    #   update.
+    #
+    # @option params [required, String] :update_type
+    #   The type of update that needs to be performed on the directory. For
+    #   example, OS.
+    #
+    # @option params [Types::OSUpdateSettings] :os_update_settings
+    #   The settings for the OS update that needs to be performed on the
+    #   directory.
+    #
+    # @option params [Boolean] :create_snapshot_before_update
+    #   The boolean that specifies if a snapshot for the directory needs to be
+    #   taken before updating the directory.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_directory_setup({
+    #     directory_id: "DirectoryId", # required
+    #     update_type: "OS", # required, accepts OS
+    #     os_update_settings: {
+    #       os_version: "SERVER_2012", # accepts SERVER_2012, SERVER_2019
+    #     },
+    #     create_snapshot_before_update: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateDirectorySetup AWS API Documentation
+    #
+    # @overload update_directory_setup(params = {})
+    # @param [Hash] params ({})
+    def update_directory_setup(params = {}, options = {})
+      req = build_request(:update_directory_setup, params)
+      req.send_request(options)
+    end
+
     # Adds or removes domain controllers to or from the directory. Based on
     # the difference between current value and new value (provided through
     # this API call), domain controllers will be added or removed. It may
@@ -3231,7 +3349,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

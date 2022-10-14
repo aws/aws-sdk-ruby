@@ -2282,6 +2282,8 @@ module Aws::Connect
     #           first_name: "AgentFirstName",
     #           last_name: "AgentLastName",
     #           email: "Email",
+    #           secondary_email: "Email",
+    #           mobile: "PhoneNumber",
     #         },
     #         phone_config: { # required
     #           phone_type: "SOFT_PHONE", # required, accepts SOFT_PHONE, DESK_PHONE
@@ -12230,6 +12232,8 @@ module Aws::Connect
     #           first_name: "AgentFirstName",
     #           last_name: "AgentLastName",
     #           email: "Email",
+    #           secondary_email: "Email",
+    #           mobile: "PhoneNumber",
     #         },
     #         user_id: "UserId", # required
     #         instance_id: "InstanceId", # required
@@ -12567,6 +12571,8 @@ module Aws::Connect
     #         first_name: "AgentFirstName",
     #         last_name: "AgentLastName",
     #         email: "Email",
+    #         secondary_email: "Email",
+    #         mobile: "PhoneNumber",
     #       }
     #
     # @!attribute [rw] first_name
@@ -12584,12 +12590,25 @@ module Aws::Connect
     #   include this parameter, an error is returned.
     #   @return [String]
     #
+    # @!attribute [rw] secondary_email
+    #   The user's secondary email address. If you provide a secondary
+    #   email, the user receives email notifications -- other than password
+    #   reset notifications -- to this email address instead of to their
+    #   primary email address.
+    #   @return [String]
+    #
+    # @!attribute [rw] mobile
+    #   The user's mobile number.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserIdentityInfo AWS API Documentation
     #
     class UserIdentityInfo < Struct.new(
       :first_name,
       :last_name,
-      :email)
+      :email,
+      :secondary_email,
+      :mobile)
       SENSITIVE = []
       include Aws::Structure
     end

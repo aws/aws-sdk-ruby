@@ -1685,6 +1685,8 @@ module Aws::Connect
     #       first_name: "AgentFirstName",
     #       last_name: "AgentLastName",
     #       email: "Email",
+    #       secondary_email: "Email",
+    #       mobile: "PhoneNumber",
     #     },
     #     phone_config: { # required
     #       phone_type: "SOFT_PHONE", # required, accepts SOFT_PHONE, DESK_PHONE
@@ -2829,6 +2831,8 @@ module Aws::Connect
     #   resp.user.identity_info.first_name #=> String
     #   resp.user.identity_info.last_name #=> String
     #   resp.user.identity_info.email #=> String
+    #   resp.user.identity_info.secondary_email #=> String
+    #   resp.user.identity_info.mobile #=> String
     #   resp.user.phone_config.phone_type #=> String, one of "SOFT_PHONE", "DESK_PHONE"
     #   resp.user.phone_config.auto_accept #=> Boolean
     #   resp.user.phone_config.after_contact_work_time_limit #=> Integer
@@ -8438,6 +8442,8 @@ module Aws::Connect
     #       first_name: "AgentFirstName",
     #       last_name: "AgentLastName",
     #       email: "Email",
+    #       secondary_email: "Email",
+    #       mobile: "PhoneNumber",
     #     },
     #     user_id: "UserId", # required
     #     instance_id: "InstanceId", # required
@@ -8563,7 +8569,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

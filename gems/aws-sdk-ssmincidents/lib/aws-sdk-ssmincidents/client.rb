@@ -1028,7 +1028,7 @@ module Aws::SSMIncidents
     #
     #   resp.next_token #=> String
     #   resp.related_items #=> Array
-    #   resp.related_items[0].identifier.type #=> String, one of "ANALYSIS", "INCIDENT", "METRIC", "PARENT", "ATTACHMENT", "OTHER", "AUTOMATION", "INVOLVED_RESOURCE"
+    #   resp.related_items[0].identifier.type #=> String, one of "ANALYSIS", "INCIDENT", "METRIC", "PARENT", "ATTACHMENT", "OTHER", "AUTOMATION", "INVOLVED_RESOURCE", "TASK"
     #   resp.related_items[0].identifier.value.arn #=> String
     #   resp.related_items[0].identifier.value.metric_definition #=> String
     #   resp.related_items[0].identifier.value.url #=> String
@@ -1335,7 +1335,7 @@ module Aws::SSMIncidents
     #     related_items: [
     #       {
     #         identifier: { # required
-    #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE
+    #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE, TASK
     #           value: { # required
     #             arn: "Arn",
     #             metric_definition: "MetricDefinition",
@@ -1579,7 +1579,7 @@ module Aws::SSMIncidents
     #     related_items_update: { # required
     #       item_to_add: {
     #         identifier: { # required
-    #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE
+    #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE, TASK
     #           value: { # required
     #             arn: "Arn",
     #             metric_definition: "MetricDefinition",
@@ -1589,7 +1589,7 @@ module Aws::SSMIncidents
     #         title: "RelatedItemTitleString",
     #       },
     #       item_to_remove: {
-    #         type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE
+    #         type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE, TASK
     #         value: { # required
     #           arn: "Arn",
     #           metric_definition: "MetricDefinition",
@@ -1837,7 +1837,7 @@ module Aws::SSMIncidents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmincidents'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
