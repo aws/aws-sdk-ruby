@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2022-10-14)
+------------------
+
+* Feature - MediaConvert now supports specifying the minimum percentage of the HRD buffer available at the end of each encoded video segment.
+
 1.92.0 (2022-06-23)
 ------------------
 
