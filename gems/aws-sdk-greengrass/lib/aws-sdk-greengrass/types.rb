@@ -911,6 +911,7 @@ module Aws::Greengrass
     #                 memory_size: 1,
     #                 pinned: false,
     #                 timeout: 1,
+    #                 function_runtime_override: "__string",
     #               },
     #               id: "__string", # required
     #             },
@@ -1026,6 +1027,7 @@ module Aws::Greengrass
     #               memory_size: 1,
     #               pinned: false,
     #               timeout: 1,
+    #               function_runtime_override: "__string",
     #             },
     #             id: "__string", # required
     #           },
@@ -2287,6 +2289,7 @@ module Aws::Greengrass
     #           memory_size: 1,
     #           pinned: false,
     #           timeout: 1,
+    #           function_runtime_override: "__string",
     #         },
     #         id: "__string", # required
     #       }
@@ -2346,6 +2349,7 @@ module Aws::Greengrass
     #         memory_size: 1,
     #         pinned: false,
     #         timeout: 1,
+    #         function_runtime_override: "__string",
     #       }
     #
     # @!attribute [rw] encoding_type
@@ -2382,6 +2386,11 @@ module Aws::Greengrass
     #   functions for each request.
     #   @return [Integer]
     #
+    # @!attribute [rw] function_runtime_override
+    #   The Lambda runtime supported by Greengrass which is to be used
+    #   instead of the one specified in the Lambda function.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -2391,7 +2400,8 @@ module Aws::Greengrass
       :executable,
       :memory_size,
       :pinned,
-      :timeout)
+      :timeout,
+      :function_runtime_override)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2567,6 +2577,7 @@ module Aws::Greengrass
     #               memory_size: 1,
     #               pinned: false,
     #               timeout: 1,
+    #               function_runtime_override: "__string",
     #             },
     #             id: "__string", # required
     #           },

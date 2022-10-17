@@ -868,6 +868,7 @@ module Aws::Greengrass
     #             memory_size: 1,
     #             pinned: false,
     #             timeout: 1,
+    #             function_runtime_override: "__string",
     #           },
     #           id: "__string", # required
     #         },
@@ -961,6 +962,7 @@ module Aws::Greengrass
     #           memory_size: 1,
     #           pinned: false,
     #           timeout: 1,
+    #           function_runtime_override: "__string",
     #         },
     #         id: "__string", # required
     #       },
@@ -2320,6 +2322,7 @@ module Aws::Greengrass
     #   resp.definition.functions[0].function_configuration.memory_size #=> Integer
     #   resp.definition.functions[0].function_configuration.pinned #=> Boolean
     #   resp.definition.functions[0].function_configuration.timeout #=> Integer
+    #   resp.definition.functions[0].function_configuration.function_runtime_override #=> String
     #   resp.definition.functions[0].id #=> String
     #   resp.id #=> String
     #   resp.next_token #=> String
@@ -4118,7 +4121,7 @@ module Aws::Greengrass
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrass'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
