@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.144.0 (2022-10-17)
+------------------
+
+* Feature - This release adds support for C7g, C6g, C6gd, C6gn, M6g, M6gd, R6g, and R6gn Graviton instance types in Amazon SageMaker Inference.
+
 1.143.0 (2022-09-30)
 ------------------
 

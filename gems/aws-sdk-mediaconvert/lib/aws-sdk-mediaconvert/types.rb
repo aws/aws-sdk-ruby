@@ -4807,6 +4807,7 @@ module Aws::MediaConvert
     #                         gop_closed_cadence: 1,
     #                         gop_size: 1.0,
     #                         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                         hrd_buffer_final_fill_percentage: 1,
     #                         hrd_buffer_initial_fill_percentage: 1,
     #                         hrd_buffer_size: 1,
     #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -4852,6 +4853,7 @@ module Aws::MediaConvert
     #                         gop_closed_cadence: 1,
     #                         gop_size: 1.0,
     #                         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                         hrd_buffer_final_fill_percentage: 1,
     #                         hrd_buffer_initial_fill_percentage: 1,
     #                         hrd_buffer_size: 1,
     #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -4895,6 +4897,7 @@ module Aws::MediaConvert
     #                         gop_closed_cadence: 1,
     #                         gop_size: 1.0,
     #                         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                         hrd_buffer_final_fill_percentage: 1,
     #                         hrd_buffer_initial_fill_percentage: 1,
     #                         hrd_buffer_size: 1,
     #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -6235,6 +6238,7 @@ module Aws::MediaConvert
     #                         gop_closed_cadence: 1,
     #                         gop_size: 1.0,
     #                         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                         hrd_buffer_final_fill_percentage: 1,
     #                         hrd_buffer_initial_fill_percentage: 1,
     #                         hrd_buffer_size: 1,
     #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -6280,6 +6284,7 @@ module Aws::MediaConvert
     #                         gop_closed_cadence: 1,
     #                         gop_size: 1.0,
     #                         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                         hrd_buffer_final_fill_percentage: 1,
     #                         hrd_buffer_initial_fill_percentage: 1,
     #                         hrd_buffer_size: 1,
     #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -6323,6 +6328,7 @@ module Aws::MediaConvert
     #                         gop_closed_cadence: 1,
     #                         gop_size: 1.0,
     #                         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                         hrd_buffer_final_fill_percentage: 1,
     #                         hrd_buffer_initial_fill_percentage: 1,
     #                         hrd_buffer_size: 1,
     #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -7090,6 +7096,7 @@ module Aws::MediaConvert
     #                 gop_closed_cadence: 1,
     #                 gop_size: 1.0,
     #                 gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                 hrd_buffer_final_fill_percentage: 1,
     #                 hrd_buffer_initial_fill_percentage: 1,
     #                 hrd_buffer_size: 1,
     #                 interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -7135,6 +7142,7 @@ module Aws::MediaConvert
     #                 gop_closed_cadence: 1,
     #                 gop_size: 1.0,
     #                 gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                 hrd_buffer_final_fill_percentage: 1,
     #                 hrd_buffer_initial_fill_percentage: 1,
     #                 hrd_buffer_size: 1,
     #                 interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -7178,6 +7186,7 @@ module Aws::MediaConvert
     #                 gop_closed_cadence: 1,
     #                 gop_size: 1.0,
     #                 gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                 hrd_buffer_final_fill_percentage: 1,
     #                 hrd_buffer_initial_fill_percentage: 1,
     #                 hrd_buffer_size: 1,
     #                 interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -9985,6 +9994,7 @@ module Aws::MediaConvert
     #         gop_closed_cadence: 1,
     #         gop_size: 1.0,
     #         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #         hrd_buffer_final_fill_percentage: 1,
     #         hrd_buffer_initial_fill_percentage: 1,
     #         hrd_buffer_size: 1,
     #         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -10183,6 +10193,14 @@ module Aws::MediaConvert
     #   frames (FRAMES) or Specified, seconds (SECONDS) and then provide the
     #   GOP length in the related setting GOP size (GopSize).
     #   @return [String]
+    #
+    # @!attribute [rw] hrd_buffer_final_fill_percentage
+    #   If your downstream systems have strict buffer requirements: Specify
+    #   the minimum percentage of the HRD buffer that's available at the
+    #   end of each encoded video segment. For the best video quality: Set
+    #   to 0 or leave blank to automatically determine the final buffer fill
+    #   percentage.
+    #   @return [Integer]
     #
     # @!attribute [rw] hrd_buffer_initial_fill_percentage
     #   Percentage of the buffer that should initially be filled (HRD buffer
@@ -10463,6 +10481,7 @@ module Aws::MediaConvert
       :gop_closed_cadence,
       :gop_size,
       :gop_size_units,
+      :hrd_buffer_final_fill_percentage,
       :hrd_buffer_initial_fill_percentage,
       :hrd_buffer_size,
       :interlace_mode,
@@ -10573,6 +10592,7 @@ module Aws::MediaConvert
     #         gop_closed_cadence: 1,
     #         gop_size: 1.0,
     #         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #         hrd_buffer_final_fill_percentage: 1,
     #         hrd_buffer_initial_fill_percentage: 1,
     #         hrd_buffer_size: 1,
     #         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -10755,6 +10775,14 @@ module Aws::MediaConvert
     #   frames (FRAMES) or Specified, seconds (SECONDS) and then provide the
     #   GOP length in the related setting GOP size (GopSize).
     #   @return [String]
+    #
+    # @!attribute [rw] hrd_buffer_final_fill_percentage
+    #   If your downstream systems have strict buffer requirements: Specify
+    #   the minimum percentage of the HRD buffer that's available at the
+    #   end of each encoded video segment. For the best video quality: Set
+    #   to 0 or leave blank to automatically determine the final buffer fill
+    #   percentage.
+    #   @return [Integer]
     #
     # @!attribute [rw] hrd_buffer_initial_fill_percentage
     #   Percentage of the buffer that should initially be filled (HRD buffer
@@ -11023,6 +11051,7 @@ module Aws::MediaConvert
       :gop_closed_cadence,
       :gop_size,
       :gop_size_units,
+      :hrd_buffer_final_fill_percentage,
       :hrd_buffer_initial_fill_percentage,
       :hrd_buffer_size,
       :interlace_mode,
@@ -14213,6 +14242,7 @@ module Aws::MediaConvert
     #                       gop_closed_cadence: 1,
     #                       gop_size: 1.0,
     #                       gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                       hrd_buffer_final_fill_percentage: 1,
     #                       hrd_buffer_initial_fill_percentage: 1,
     #                       hrd_buffer_size: 1,
     #                       interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -14258,6 +14288,7 @@ module Aws::MediaConvert
     #                       gop_closed_cadence: 1,
     #                       gop_size: 1.0,
     #                       gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                       hrd_buffer_final_fill_percentage: 1,
     #                       hrd_buffer_initial_fill_percentage: 1,
     #                       hrd_buffer_size: 1,
     #                       interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -14301,6 +14332,7 @@ module Aws::MediaConvert
     #                       gop_closed_cadence: 1,
     #                       gop_size: 1.0,
     #                       gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                       hrd_buffer_final_fill_percentage: 1,
     #                       hrd_buffer_initial_fill_percentage: 1,
     #                       hrd_buffer_size: 1,
     #                       interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -15691,6 +15723,7 @@ module Aws::MediaConvert
     #                       gop_closed_cadence: 1,
     #                       gop_size: 1.0,
     #                       gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                       hrd_buffer_final_fill_percentage: 1,
     #                       hrd_buffer_initial_fill_percentage: 1,
     #                       hrd_buffer_size: 1,
     #                       interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -15736,6 +15769,7 @@ module Aws::MediaConvert
     #                       gop_closed_cadence: 1,
     #                       gop_size: 1.0,
     #                       gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                       hrd_buffer_final_fill_percentage: 1,
     #                       hrd_buffer_initial_fill_percentage: 1,
     #                       hrd_buffer_size: 1,
     #                       interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -15779,6 +15813,7 @@ module Aws::MediaConvert
     #                       gop_closed_cadence: 1,
     #                       gop_size: 1.0,
     #                       gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                       hrd_buffer_final_fill_percentage: 1,
     #                       hrd_buffer_initial_fill_percentage: 1,
     #                       hrd_buffer_size: 1,
     #                       interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -17777,6 +17812,7 @@ module Aws::MediaConvert
     #         gop_closed_cadence: 1,
     #         gop_size: 1.0,
     #         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #         hrd_buffer_final_fill_percentage: 1,
     #         hrd_buffer_initial_fill_percentage: 1,
     #         hrd_buffer_size: 1,
     #         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -17906,6 +17942,14 @@ module Aws::MediaConvert
     #   Specify the units for GOP size (GopSize). If you don't specify a
     #   value here, by default the encoder measures GOP size in frames.
     #   @return [String]
+    #
+    # @!attribute [rw] hrd_buffer_final_fill_percentage
+    #   If your downstream systems have strict buffer requirements: Specify
+    #   the minimum percentage of the HRD buffer that's available at the
+    #   end of each encoded video segment. For the best video quality: Set
+    #   to 0 or leave blank to automatically determine the final buffer fill
+    #   percentage.
+    #   @return [Integer]
     #
     # @!attribute [rw] hrd_buffer_initial_fill_percentage
     #   Percentage of the buffer that should initially be filled (HRD buffer
@@ -18132,6 +18176,7 @@ module Aws::MediaConvert
       :gop_closed_cadence,
       :gop_size,
       :gop_size_units,
+      :hrd_buffer_final_fill_percentage,
       :hrd_buffer_initial_fill_percentage,
       :hrd_buffer_size,
       :interlace_mode,
@@ -19330,6 +19375,7 @@ module Aws::MediaConvert
     #               gop_closed_cadence: 1,
     #               gop_size: 1.0,
     #               gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #               hrd_buffer_final_fill_percentage: 1,
     #               hrd_buffer_initial_fill_percentage: 1,
     #               hrd_buffer_size: 1,
     #               interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -19375,6 +19421,7 @@ module Aws::MediaConvert
     #               gop_closed_cadence: 1,
     #               gop_size: 1.0,
     #               gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #               hrd_buffer_final_fill_percentage: 1,
     #               hrd_buffer_initial_fill_percentage: 1,
     #               hrd_buffer_size: 1,
     #               interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -19418,6 +19465,7 @@ module Aws::MediaConvert
     #               gop_closed_cadence: 1,
     #               gop_size: 1.0,
     #               gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #               hrd_buffer_final_fill_percentage: 1,
     #               hrd_buffer_initial_fill_percentage: 1,
     #               hrd_buffer_size: 1,
     #               interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -20488,6 +20536,7 @@ module Aws::MediaConvert
     #                   gop_closed_cadence: 1,
     #                   gop_size: 1.0,
     #                   gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                   hrd_buffer_final_fill_percentage: 1,
     #                   hrd_buffer_initial_fill_percentage: 1,
     #                   hrd_buffer_size: 1,
     #                   interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -20533,6 +20582,7 @@ module Aws::MediaConvert
     #                   gop_closed_cadence: 1,
     #                   gop_size: 1.0,
     #                   gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                   hrd_buffer_final_fill_percentage: 1,
     #                   hrd_buffer_initial_fill_percentage: 1,
     #                   hrd_buffer_size: 1,
     #                   interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -20576,6 +20626,7 @@ module Aws::MediaConvert
     #                   gop_closed_cadence: 1,
     #                   gop_size: 1.0,
     #                   gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                   hrd_buffer_final_fill_percentage: 1,
     #                   hrd_buffer_initial_fill_percentage: 1,
     #                   hrd_buffer_size: 1,
     #                   interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -21745,6 +21796,7 @@ module Aws::MediaConvert
     #               gop_closed_cadence: 1,
     #               gop_size: 1.0,
     #               gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #               hrd_buffer_final_fill_percentage: 1,
     #               hrd_buffer_initial_fill_percentage: 1,
     #               hrd_buffer_size: 1,
     #               interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -21790,6 +21842,7 @@ module Aws::MediaConvert
     #               gop_closed_cadence: 1,
     #               gop_size: 1.0,
     #               gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #               hrd_buffer_final_fill_percentage: 1,
     #               hrd_buffer_initial_fill_percentage: 1,
     #               hrd_buffer_size: 1,
     #               interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -21833,6 +21886,7 @@ module Aws::MediaConvert
     #               gop_closed_cadence: 1,
     #               gop_size: 1.0,
     #               gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #               hrd_buffer_final_fill_percentage: 1,
     #               hrd_buffer_initial_fill_percentage: 1,
     #               hrd_buffer_size: 1,
     #               interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -24358,6 +24412,7 @@ module Aws::MediaConvert
     #                         gop_closed_cadence: 1,
     #                         gop_size: 1.0,
     #                         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                         hrd_buffer_final_fill_percentage: 1,
     #                         hrd_buffer_initial_fill_percentage: 1,
     #                         hrd_buffer_size: 1,
     #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -24403,6 +24458,7 @@ module Aws::MediaConvert
     #                         gop_closed_cadence: 1,
     #                         gop_size: 1.0,
     #                         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                         hrd_buffer_final_fill_percentage: 1,
     #                         hrd_buffer_initial_fill_percentage: 1,
     #                         hrd_buffer_size: 1,
     #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -24446,6 +24502,7 @@ module Aws::MediaConvert
     #                         gop_closed_cadence: 1,
     #                         gop_size: 1.0,
     #                         gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                         hrd_buffer_final_fill_percentage: 1,
     #                         hrd_buffer_initial_fill_percentage: 1,
     #                         hrd_buffer_size: 1,
     #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -25200,6 +25257,7 @@ module Aws::MediaConvert
     #                 gop_closed_cadence: 1,
     #                 gop_size: 1.0,
     #                 gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                 hrd_buffer_final_fill_percentage: 1,
     #                 hrd_buffer_initial_fill_percentage: 1,
     #                 hrd_buffer_size: 1,
     #                 interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -25245,6 +25303,7 @@ module Aws::MediaConvert
     #                 gop_closed_cadence: 1,
     #                 gop_size: 1.0,
     #                 gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #                 hrd_buffer_final_fill_percentage: 1,
     #                 hrd_buffer_initial_fill_percentage: 1,
     #                 hrd_buffer_size: 1,
     #                 interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -25288,6 +25347,7 @@ module Aws::MediaConvert
     #                 gop_closed_cadence: 1,
     #                 gop_size: 1.0,
     #                 gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                 hrd_buffer_final_fill_percentage: 1,
     #                 hrd_buffer_initial_fill_percentage: 1,
     #                 hrd_buffer_size: 1,
     #                 interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -25848,6 +25908,7 @@ module Aws::MediaConvert
     #           gop_closed_cadence: 1,
     #           gop_size: 1.0,
     #           gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #           hrd_buffer_final_fill_percentage: 1,
     #           hrd_buffer_initial_fill_percentage: 1,
     #           hrd_buffer_size: 1,
     #           interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -25893,6 +25954,7 @@ module Aws::MediaConvert
     #           gop_closed_cadence: 1,
     #           gop_size: 1.0,
     #           gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #           hrd_buffer_final_fill_percentage: 1,
     #           hrd_buffer_initial_fill_percentage: 1,
     #           hrd_buffer_size: 1,
     #           interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -25936,6 +25998,7 @@ module Aws::MediaConvert
     #           gop_closed_cadence: 1,
     #           gop_size: 1.0,
     #           gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #           hrd_buffer_final_fill_percentage: 1,
     #           hrd_buffer_initial_fill_percentage: 1,
     #           hrd_buffer_size: 1,
     #           interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -26208,6 +26271,7 @@ module Aws::MediaConvert
     #             gop_closed_cadence: 1,
     #             gop_size: 1.0,
     #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #             hrd_buffer_final_fill_percentage: 1,
     #             hrd_buffer_initial_fill_percentage: 1,
     #             hrd_buffer_size: 1,
     #             interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -26253,6 +26317,7 @@ module Aws::MediaConvert
     #             gop_closed_cadence: 1,
     #             gop_size: 1.0,
     #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
+    #             hrd_buffer_final_fill_percentage: 1,
     #             hrd_buffer_initial_fill_percentage: 1,
     #             hrd_buffer_size: 1,
     #             interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -26296,6 +26361,7 @@ module Aws::MediaConvert
     #             gop_closed_cadence: 1,
     #             gop_size: 1.0,
     #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #             hrd_buffer_final_fill_percentage: 1,
     #             hrd_buffer_initial_fill_percentage: 1,
     #             hrd_buffer_size: 1,
     #             interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD

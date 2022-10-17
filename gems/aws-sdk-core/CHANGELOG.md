@@ -16,7 +16,7 @@ Unreleased Changes
 3.158.1 (2022-10-06)
 ------------------
 
-* Issue - Ensure that the ReadCallbackIO is always unwrapped (#2761). 
+* Issue - Ensure that the ReadCallbackIO is always unwrapped (#2761).
 
 3.158.0 (2022-09-30)
 ------------------
@@ -148,12 +148,13 @@ Unreleased Changes
 * Feature - Updated Aws::SSO::Client with the latest API changes.
 
 * Feature - Add support for Bearer Token Authentication and TokenProviders.
+
 * Issue - Validate that `_X_AMZN_TRACE_ID` ENV value contains only valid, non-control characters.
 
 3.133.0 (2022-08-22)
 ------------------
 
-* Feature - Moved functionality from `aws-sdk-ssoidc` into core.
+* Feature - Moved functionality from `aws-sdk-ssooidc` into core.
 
 3.132.0 (2022-08-08)
 ------------------

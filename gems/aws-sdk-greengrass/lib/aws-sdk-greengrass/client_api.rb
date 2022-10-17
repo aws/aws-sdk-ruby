@@ -700,6 +700,7 @@ module Aws::Greengrass
     FunctionConfiguration.add_member(:memory_size, Shapes::ShapeRef.new(shape: __integer, location_name: "MemorySize"))
     FunctionConfiguration.add_member(:pinned, Shapes::ShapeRef.new(shape: __boolean, location_name: "Pinned"))
     FunctionConfiguration.add_member(:timeout, Shapes::ShapeRef.new(shape: __integer, location_name: "Timeout"))
+    FunctionConfiguration.add_member(:function_runtime_override, Shapes::ShapeRef.new(shape: __string, location_name: "FunctionRuntimeOverride"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     FunctionConfigurationEnvironment.add_member(:access_sysfs, Shapes::ShapeRef.new(shape: __boolean, location_name: "AccessSysfs"))
