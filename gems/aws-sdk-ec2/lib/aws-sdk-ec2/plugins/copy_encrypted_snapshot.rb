@@ -21,6 +21,10 @@ module Aws
 
           def call(context)
             params = context.params
+            unless params[:source_region]
+              raise ArgumentError,
+                    'Source region is required for copy_snapshot'
+            end
             params[:destination_region] = context.config.region
             params[:presigned_url] = presigned_url(context, params)
             @handler.call(context)
