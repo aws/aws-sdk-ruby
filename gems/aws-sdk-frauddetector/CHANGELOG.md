@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2022-10-18)
+------------------
+
+* Feature - Documentation Updates for Amazon Fraud Detector
+
 1.34.0 (2022-07-21)
 ------------------
 

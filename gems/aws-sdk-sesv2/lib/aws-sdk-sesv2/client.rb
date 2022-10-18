@@ -585,14 +585,14 @@ module Aws::SESV2
     # Creates a new custom verification email template.
     #
     # For more information about custom verification email templates, see
-    # [Using Custom Verification Email Templates][1] in the *Amazon SES
+    # [Using custom verification email templates][1] in the *Amazon SES
     # Developer Guide*.
     #
     # You can execute this operation no more than once per second.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #
     # @option params [required, String] :template_name
     #   The name of the custom verification email template.
@@ -606,12 +606,12 @@ module Aws::SESV2
     # @option params [required, String] :template_content
     #   The content of the custom verification email. The total size of the
     #   email must be less than 10 MB. The message body may contain HTML, with
-    #   some limitations. For more information, see [Custom Verification Email
-    #   Frequently Asked Questions][1] in the *Amazon SES Developer Guide*.
+    #   some limitations. For more information, see [Custom verification email
+    #   frequently asked questions][1] in the *Amazon SES Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html#custom-verification-emails-faq
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom-faq
     #
     # @option params [required, String] :success_redirection_url
     #   The URL that the recipient of the verification email is sent to if his
@@ -656,6 +656,9 @@ module Aws::SESV2
     #   An object that defines the tags (keys and values) that you want to
     #   associate with the pool.
     #
+    # @option params [String] :scaling_mode
+    #   The type of scaling mode.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -668,6 +671,7 @@ module Aws::SESV2
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     scaling_mode: "STANDARD", # accepts STANDARD, MANAGED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateDedicatedIpPool AWS API Documentation
@@ -1126,14 +1130,14 @@ module Aws::SESV2
     # Deletes an existing custom verification email template.
     #
     # For more information about custom verification email templates, see
-    # [Using Custom Verification Email Templates][1] in the *Amazon SES
+    # [Using custom verification email templates][1] in the *Amazon SES
     # Developer Guide*.
     #
     # You can execute this operation no more than once per second.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #
     # @option params [required, String] :template_name
     #   The name of the custom verification email template that you want to
@@ -1571,14 +1575,14 @@ module Aws::SESV2
     # you specify.
     #
     # For more information about custom verification email templates, see
-    # [Using Custom Verification Email Templates][1] in the *Amazon SES
+    # [Using custom verification email templates][1] in the *Amazon SES
     # Developer Guide*.
     #
     # You can execute this operation no more than once per second.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #
     # @option params [required, String] :template_name
     #   The name of the custom verification email template that you want to
@@ -1649,6 +1653,35 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def get_dedicated_ip(params = {}, options = {})
       req = build_request(:get_dedicated_ip, params)
+      req.send_request(options)
+    end
+
+    # Retrieve information about the dedicated pool.
+    #
+    # @option params [required, String] :pool_name
+    #   The name of the dedicated IP pool to retrieve.
+    #
+    # @return [Types::GetDedicatedIpPoolResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDedicatedIpPoolResponse#dedicated_ip_pool #dedicated_ip_pool} => Types::DedicatedIpPool
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_dedicated_ip_pool({
+    #     pool_name: "PoolName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dedicated_ip_pool.pool_name #=> String
+    #   resp.dedicated_ip_pool.scaling_mode #=> String, one of "STANDARD", "MANAGED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetDedicatedIpPool AWS API Documentation
+    #
+    # @overload get_dedicated_ip_pool(params = {})
+    # @param [Hash] params ({})
+    def get_dedicated_ip_pool(params = {}, options = {})
+      req = build_request(:get_dedicated_ip_pool, params)
       req.send_request(options)
     end
 
@@ -1932,6 +1965,7 @@ module Aws::SESV2
     #   * {Types::GetEmailIdentityResponse#policies #policies} => Hash&lt;String,String&gt;
     #   * {Types::GetEmailIdentityResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::GetEmailIdentityResponse#configuration_set_name #configuration_set_name} => String
+    #   * {Types::GetEmailIdentityResponse#verification_status #verification_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1961,6 +1995,7 @@ module Aws::SESV2
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.configuration_set_name #=> String
+    #   resp.verification_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE", "NOT_STARTED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetEmailIdentity AWS API Documentation
     #
@@ -2298,14 +2333,14 @@ module Aws::SESV2
     # account in the current Amazon Web Services Region.
     #
     # For more information about custom verification email templates, see
-    # [Using Custom Verification Email Templates][1] in the *Amazon SES
+    # [Using custom verification email templates][1] in the *Amazon SES
     # Developer Guide*.
     #
     # You can execute this operation no more than once per second.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #
     # @option params [String] :next_token
     #   A token returned from a previous call to
@@ -2457,13 +2492,12 @@ module Aws::SESV2
     # dashboard for the domain.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_date
-    #   The first day, in Unix time format, that you want to obtain
-    #   deliverability data for.
+    #   The first day that you want to obtain deliverability data for.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_date
-    #   The last day, in Unix time format, that you want to obtain
-    #   deliverability data for. This value has to be less than or equal to 30
-    #   days after the value of the `StartDate` parameter.
+    #   The last day that you want to obtain deliverability data for. This
+    #   value has to be less than or equal to 30 days after the value of the
+    #   `StartDate` parameter.
     #
     # @option params [required, String] :subscribed_domain
     #   The domain to obtain deliverability data for.
@@ -2566,6 +2600,7 @@ module Aws::SESV2
     #   resp.email_identities[0].identity_type #=> String, one of "EMAIL_ADDRESS", "DOMAIN", "MANAGED_DOMAIN"
     #   resp.email_identities[0].identity_name #=> String
     #   resp.email_identities[0].sending_enabled #=> Boolean
+    #   resp.email_identities[0].verification_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE", "NOT_STARTED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListEmailIdentities AWS API Documentation
@@ -2668,6 +2703,8 @@ module Aws::SESV2
     #   resp.import_jobs[0].import_destination.contact_list_destination.contact_list_import_action #=> String, one of "DELETE", "PUT"
     #   resp.import_jobs[0].job_status #=> String, one of "CREATED", "PROCESSING", "COMPLETED", "FAILED"
     #   resp.import_jobs[0].created_timestamp #=> Time
+    #   resp.import_jobs[0].processed_records_count #=> Integer
+    #   resp.import_jobs[0].failed_records_count #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListImportJobs AWS API Documentation
@@ -2688,12 +2725,12 @@ module Aws::SESV2
     # @option params [Time,DateTime,Date,Integer,String] :start_date
     #   Used to filter the list of suppressed email destinations so that it
     #   only includes addresses that were added to the list after a specific
-    #   date. The date that you specify should be in Unix time format.
+    #   date.
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_date
     #   Used to filter the list of suppressed email destinations so that it
     #   only includes addresses that were added to the list before a specific
-    #   date. The date that you specify should be in Unix time format.
+    #   date.
     #
     # @option params [String] :next_token
     #   A token returned from a previous call to `ListSuppressedDestinations`
@@ -3591,14 +3628,14 @@ module Aws::SESV2
     #
     # To use this operation, you must first create a custom verification
     # email template. For more information about creating and using custom
-    # verification email templates, see [Using Custom Verification Email
-    # Templates][1] in the *Amazon SES Developer Guide*.
+    # verification email templates, see [Using custom verification email
+    # templates][1] in the *Amazon SES Developer Guide*.
     #
     # You can execute this operation no more than once per second.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #
     # @option params [required, String] :email_address
     #   The email address to verify.
@@ -4063,14 +4100,14 @@ module Aws::SESV2
     # Updates an existing custom verification email template.
     #
     # For more information about custom verification email templates, see
-    # [Using Custom Verification Email Templates][1] in the *Amazon SES
+    # [Using custom verification email templates][1] in the *Amazon SES
     # Developer Guide*.
     #
     # You can execute this operation no more than once per second.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #
     # @option params [required, String] :template_name
     #   The name of the custom verification email template that you want to
@@ -4085,12 +4122,12 @@ module Aws::SESV2
     # @option params [required, String] :template_content
     #   The content of the custom verification email. The total size of the
     #   email must be less than 10 MB. The message body may contain HTML, with
-    #   some limitations. For more information, see [Custom Verification Email
-    #   Frequently Asked Questions][1] in the *Amazon SES Developer Guide*.
+    #   some limitations. For more information, see [Custom verification email
+    #   frequently asked questions][1] in the *Amazon SES Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html#custom-verification-emails-faq
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom-faq
     #
     # @option params [required, String] :success_redirection_url
     #   The URL that the recipient of the verification email is sent to if his
@@ -4232,7 +4269,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -105,7 +105,7 @@ module Aws::ServiceDiscovery
     # @!attribute [rw] name
     #   The name that you want to assign to this namespace. When you create
     #   a private DNS namespace, Cloud Map automatically creates an Amazon
-    #   Route 53 private hosted zone that has the same name as the
+    #   Route 53 private hosted zone that has the same name as the
     #   namespace.
     #   @return [String]
     #
@@ -194,6 +194,11 @@ module Aws::ServiceDiscovery
     #
     # @!attribute [rw] name
     #   The name that you want to assign to this namespace.
+    #
+    #   <note markdown="1"> Do not include sensitive information in the name. The name is
+    #   publicly available using DNS queries.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] creator_request_id
@@ -289,6 +294,11 @@ module Aws::ServiceDiscovery
     # @!attribute [rw] name
     #   The name that you want to assign to the service.
     #
+    #   <note markdown="1"> Do not include sensitive information in the name if the namespace is
+    #   discoverable by public DNS queries.
+    #
+    #    </note>
+    #
     #   If you want Cloud Map to create an `SRV` record when you register an
     #   instance and you're using a system that requires a specific `SRV`
     #   format, such as [HAProxy][1], specify the following for `Name`\:
@@ -338,16 +348,16 @@ module Aws::ServiceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] dns_config
-    #   A complex type that contains information about the Amazon Route 53
+    #   A complex type that contains information about the Amazon Route 53
     #   records that you want Cloud Map to create when you register an
     #   instance.
     #   @return [Types::DnsConfig]
     #
     # @!attribute [rw] health_check_config
     #   *Public DNS and HTTP namespaces only.* A complex type that contains
-    #   settings for an optional Route 53 health check. If you specify
+    #   settings for an optional Route 53 health check. If you specify
     #   settings for a health check, Cloud Map associates the health check
-    #   with all the Route 53 DNS records that you specify in `DnsConfig`.
+    #   with all the Route 53 DNS records that you specify in `DnsConfig`.
     #
     #   If you specify a health check configuration, you can specify either
     #   `HealthCheckCustomConfig` or `HealthCheckConfig` but not both.
@@ -632,9 +642,12 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # A complex type that contains information about the Amazon Route 53 DNS
+    # A complex type that contains information about the Amazon Route 53 DNS
     # records that you want Cloud Map to create when you register an
     # instance.
+    #
+    # The record types of a service can only be changed by deleting the
+    # service and recreating it with a new `Dnsconfig`.
     #
     # @note When making an API call, you may pass DnsConfig
     #   data as a hash:
@@ -651,11 +664,17 @@ module Aws::ServiceDiscovery
     #       }
     #
     # @!attribute [rw] namespace_id
+    #   *Use NamespaceId in [Service][1] instead.*
+    #
     #   The ID of the namespace to use for DNS configuration.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_Service.html
     #   @return [String]
     #
     # @!attribute [rw] routing_policy
-    #   The routing policy that you want to apply to all Route 53 DNS
+    #   The routing policy that you want to apply to all Route 53 DNS
     #   records that Cloud Map creates when you register an instance and
     #   specify this service.
     #
@@ -669,43 +688,43 @@ module Aws::ServiceDiscovery
     #   MULTIVALUE
     #
     #   : If you define a health check for the service and the health check
-    #     is healthy, Route 53 returns the applicable value for up to eight
+    #     is healthy, Route 53 returns the applicable value for up to eight
     #     instances.
     #
     #     For example, suppose that the service includes configurations for
     #     one `A` record and a health check. You use the service to register
-    #     10 instances. Route 53 responds to DNS queries with IP addresses
+    #     10 instances. Route 53 responds to DNS queries with IP addresses
     #     for up to eight healthy instances. If fewer than eight instances
-    #     are healthy, Route 53 responds to every DNS query with the IP
+    #     are healthy, Route 53 responds to every DNS query with the IP
     #     addresses for all of the healthy instances.
     #
-    #     If you don't define a health check for the service, Route 53
+    #     If you don't define a health check for the service, Route 53
     #     assumes that all instances are healthy and returns the values for
     #     up to eight instances.
     #
     #     For more information about the multivalue routing policy, see
-    #     [Multivalue Answer Routing][1] in the *Route 53 Developer Guide*.
+    #     [Multivalue Answer Routing][1] in the *Route 53 Developer Guide*.
     #
     #   WEIGHTED
     #
-    #   : Route 53 returns the applicable value from one randomly selected
+    #   : Route 53 returns the applicable value from one randomly selected
     #     instance from among the instances that you registered using the
     #     same service. Currently, all records have the same weight, so you
     #     can't route more or less traffic to any instances.
     #
     #     For example, suppose that the service includes configurations for
     #     one `A` record and a health check. You use the service to register
-    #     10 instances. Route 53 responds to DNS queries with the IP address
+    #     10 instances. Route 53 responds to DNS queries with the IP address
     #     for one randomly selected instance from among the healthy
-    #     instances. If no instances are healthy, Route 53 responds to DNS
+    #     instances. If no instances are healthy, Route 53 responds to DNS
     #     queries as if all of the instances were healthy.
     #
-    #     If you don't define a health check for the service, Route 53
+    #     If you don't define a health check for the service, Route 53
     #     assumes that all instances are healthy and returns the applicable
     #     value for one randomly selected instance.
     #
     #     For more information about the weighted routing policy, see
-    #     [Weighted Routing][2] in the *Route 53 Developer Guide*.
+    #     [Weighted Routing][2] in the *Route 53 Developer Guide*.
     #
     #
     #
@@ -714,7 +733,7 @@ module Aws::ServiceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] dns_records
-    #   An array that contains one `DnsRecord` object for each Route 53 DNS
+    #   An array that contains one `DnsRecord` object for each Route 53 DNS
     #   record that you want Cloud Map to create when you register an
     #   instance.
     #   @return [Array<Types::DnsRecord>]
@@ -729,7 +748,7 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # A complex type that contains information about changes to the Route 53
+    # A complex type that contains information about changes to the Route 53
     # DNS records that Cloud Map creates when you register an instance.
     #
     # @note When making an API call, you may pass DnsConfigChange
@@ -745,7 +764,7 @@ module Aws::ServiceDiscovery
     #       }
     #
     # @!attribute [rw] dns_records
-    #   An array that contains one `DnsRecord` object for each Route 53
+    #   An array that contains one `DnsRecord` object for each Route 53
     #   record that you want Cloud Map to create when you register an
     #   instance.
     #   @return [Array<Types::DnsRecord>]
@@ -758,11 +777,11 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # A complex type that contains the ID for the Route 53 hosted zone that
+    # A complex type that contains the ID for the Route 53 hosted zone that
     # Cloud Map creates when you create a namespace.
     #
     # @!attribute [rw] hosted_zone_id
-    #   The ID for the Route 53 hosted zone that Cloud Map creates when you
+    #   The ID for the Route 53 hosted zone that Cloud Map creates when you
     #   create a namespace.
     #   @return [String]
     #
@@ -779,7 +798,7 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # A complex type that contains information about the Route 53 DNS
+    # A complex type that contains information about the Route 53 DNS
     # records that you want Cloud Map to create when you register an
     # instance.
     #
@@ -793,7 +812,7 @@ module Aws::ServiceDiscovery
     #
     # @!attribute [rw] type
     #   The type of the resource, which indicates the type of value that
-    #   Route 53 returns in response to DNS queries. You can specify values
+    #   Route 53 returns in response to DNS queries. You can specify values
     #   for `Type` in the following combinations:
     #
     #   * <b> <code>A</code> </b>
@@ -806,7 +825,7 @@ module Aws::ServiceDiscovery
     #
     #   * <b> <code>CNAME</code> </b>
     #
-    #   If you want Cloud Map to create a Route 53 alias record when you
+    #   If you want Cloud Map to create a Route 53 alias record when you
     #   register an instance, specify `A` or `AAAA` for `Type`.
     #
     #   You specify other settings, such as the IP address for `A` and
@@ -817,17 +836,17 @@ module Aws::ServiceDiscovery
     #
     #   A
     #
-    #   : Route 53 returns the IP address of the resource in IPv4 format,
+    #   : Route 53 returns the IP address of the resource in IPv4 format,
     #     such as 192.0.2.44.
     #
     #   AAAA
     #
-    #   : Route 53 returns the IP address of the resource in IPv6 format,
+    #   : Route 53 returns the IP address of the resource in IPv6 format,
     #     such as 2001:0db8:85a3:0000:0000:abcd:0001:2345.
     #
     #   CNAME
     #
-    #   : Route 53 returns the domain name of the resource, such as
+    #   : Route 53 returns the domain name of the resource, such as
     #     www.example.com. Note the following:
     #
     #     * You specify the domain name that you want to route traffic to
@@ -842,7 +861,7 @@ module Aws::ServiceDiscovery
     #
     #   SRV
     #
-    #   : Route 53 returns the value for an `SRV` record. The value for an
+    #   : Route 53 returns the value for an `SRV` record. The value for an
     #     `SRV` record uses the following values:
     #
     #     `priority weight port service-hostname`
@@ -896,7 +915,7 @@ module Aws::ServiceDiscovery
     #   The amount of time, in seconds, that you want DNS resolvers to cache
     #   the settings for this record.
     #
-    #   <note markdown="1"> Alias records don't include a TTL because Route 53 uses the TTL for
+    #   <note markdown="1"> Alias records don't include a TTL because Route 53 uses the TTL for
     #   the Amazon Web Services resource that an alias record routes traffic
     #   to. If you include the `AWS_ALIAS_DNS_NAME` attribute when you
     #   submit a [RegisterInstance][1] request, the `TTL` value is ignored.
@@ -1156,9 +1175,9 @@ module Aws::ServiceDiscovery
     # If you specify a health check configuration, you can specify either
     # `HealthCheckCustomConfig` or `HealthCheckConfig` but not both.
     #
-    # Health checks are basic Route 53 health checks that monitor an Amazon
+    # Health checks are basic Route 53 health checks that monitor an Amazon
     # Web Services endpoint. For information about pricing for health
-    # checks, see [Amazon Route 53 Pricing][1].
+    # checks, see [Amazon Route 53 Pricing][1].
     #
     # Note the following about configuring health checks.
     #
@@ -1167,7 +1186,7 @@ module Aws::ServiceDiscovery
     # : If `DnsConfig` includes configurations for both `A` and `AAAA`
     #   records, Cloud Map creates a health check that uses the IPv4 address
     #   to check the health of the resource. If the endpoint tthat's
-    #   specified by the IPv4 address is unhealthy, Route 53 considers both
+    #   specified by the IPv4 address is unhealthy, Route 53 considers both
     #   the `A` and `AAAA` records to be unhealthy.
     #
     # CNAME records
@@ -1178,7 +1197,7 @@ module Aws::ServiceDiscovery
     #
     # Request interval
     #
-    # : A Route 53 health checker in each health-checking Amazon Web
+    # : A Route 53 health checker in each health-checking Amazon Web
     #   Services Region sends a health check request to an endpoint every 30
     #   seconds. On average, your endpoint receives a health check request
     #   about every two seconds. However, health checkers don't coordinate
@@ -1188,30 +1207,30 @@ module Aws::ServiceDiscovery
     #
     # Health checking regions
     #
-    # : Health checkers perform checks from all Route 53 health-checking
+    # : Health checkers perform checks from all Route 53 health-checking
     #   Regions. For a list of the current Regions, see [Regions][2].
     #
     # Alias records
     #
     # : When you register an instance, if you include the
-    #   `AWS_ALIAS_DNS_NAME` attribute, Cloud Map creates a Route 53 alias
+    #   `AWS_ALIAS_DNS_NAME` attribute, Cloud Map creates a Route 53 alias
     #   record. Note the following:
     #
-    #   * Route 53 automatically sets `EvaluateTargetHealth` to true for
+    #   * Route 53 automatically sets `EvaluateTargetHealth` to true for
     #     alias records. When `EvaluateTargetHealth` is true, the alias
     #     record inherits the health of the referenced Amazon Web Services
     #     resource. such as an ELB load balancer. For more information, see
     #     [EvaluateTargetHealth][3].
     #
     #   * If you include `HealthCheckConfig` and then use the service to
-    #     register an instance that creates an alias record, Route 53
+    #     register an instance that creates an alias record, Route 53
     #     doesn't create the health check.
     #
     # Charges for health checks
     #
-    # : Health checks are basic Route 53 health checks that monitor an
+    # : Health checks are basic Route 53 health checks that monitor an
     #   Amazon Web Services endpoint. For information about pricing for
-    #   health checks, see [Amazon Route 53 Pricing][1].
+    #   health checks, see [Amazon Route 53 Pricing][1].
     #
     #
     #
@@ -1230,31 +1249,31 @@ module Aws::ServiceDiscovery
     #
     # @!attribute [rw] type
     #   The type of health check that you want to create, which indicates
-    #   how Route 53 determines whether an endpoint is healthy.
+    #   how Route 53 determines whether an endpoint is healthy.
     #
     #   You can't change the value of `Type` after you create a health
     #   check.
     #
     #   You can create the following types of health checks:
     #
-    #   * **HTTP**\: Route 53 tries to establish a TCP connection. If
-    #     successful, Route 53 submits an HTTP request and waits for an HTTP
+    #   * **HTTP**\: Route 53 tries to establish a TCP connection. If
+    #     successful, Route 53 submits an HTTP request and waits for an HTTP
     #     status code of 200 or greater and less than 400.
     #
-    #   * **HTTPS**\: Route 53 tries to establish a TCP connection. If
-    #     successful, Route 53 submits an HTTPS request and waits for an
+    #   * **HTTPS**\: Route 53 tries to establish a TCP connection. If
+    #     successful, Route 53 submits an HTTPS request and waits for an
     #     HTTP status code of 200 or greater and less than 400.
     #
     #     If you specify HTTPS for the value of `Type`, the endpoint must
     #     support TLS v1.0 or later.
     #
-    #   * **TCP**\: Route 53 tries to establish a TCP connection.
+    #   * **TCP**\: Route 53 tries to establish a TCP connection.
     #
     #     If you specify `TCP` for `Type`, don't specify a value for
     #     `ResourcePath`.
     #
-    #   For more information, see [How Route 53 Determines Whether an
-    #   Endpoint Is Healthy][1] in the *Route 53 Developer Guide*.
+    #   For more information, see [How Route 53 Determines Whether an
+    #   Endpoint Is Healthy][1] in the *Route 53 Developer Guide*.
     #
     #
     #
@@ -1262,10 +1281,10 @@ module Aws::ServiceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] resource_path
-    #   The path that you want Route 53 to request when performing health
+    #   The path that you want Route 53 to request when performing health
     #   checks. The path can be any value that your endpoint returns an HTTP
     #   status code of a 2xx or 3xx format for when the endpoint is healthy.
-    #   An example file is `/docs/route53-health-check.html`. Route 53
+    #   An example file is `/docs/route53-health-check.html`. Route 53
     #   automatically adds the DNS name for the service. If you don't
     #   specify a value for `ResourcePath`, the default value is `/`.
     #
@@ -1275,10 +1294,10 @@ module Aws::ServiceDiscovery
     #
     # @!attribute [rw] failure_threshold
     #   The number of consecutive health checks that an endpoint must pass
-    #   or fail for Route 53 to change the current status of the endpoint
+    #   or fail for Route 53 to change the current status of the endpoint
     #   from unhealthy to healthy or the other way around. For more
-    #   information, see [How Route 53 Determines Whether an Endpoint Is
-    #   Healthy][1] in the *Route 53 Developer Guide*.
+    #   information, see [How Route 53 Determines Whether an Endpoint Is
+    #   Healthy][1] in the *Route 53 Developer Guide*.
     #
     #
     #
@@ -1508,15 +1527,20 @@ module Aws::ServiceDiscovery
     #
     #   * For each attribute, the applicable value.
     #
+    #   <note markdown="1"> Do not include sensitive information in the attributes if the
+    #   namespace is discoverable by public DNS queries.
+    #
+    #    </note>
+    #
     #   Supported attribute keys include the following:
     #
     #   AWS\_ALIAS\_DNS\_NAME
     #
-    #   : If you want Cloud Map to create a Route 53 alias record that
+    #   : If you want Cloud Map to create a Route 53 alias record that
     #     routes traffic to an Elastic Load Balancing load balancer, specify
     #     the DNS name that's associated with the load balancer. For
     #     information about how to get the DNS name, see
-    #     [AliasTarget-&gt;DNSName][1] in the *Route 53 API Reference*.
+    #     [AliasTarget-&gt;DNSName][1] in the *Route 53 API Reference*.
     #
     #     Note the following:
     #
@@ -1556,7 +1580,7 @@ module Aws::ServiceDiscovery
     #   AWS\_INSTANCE\_CNAME
     #
     #   : If the service configuration includes a `CNAME` record, the domain
-    #     name that you want Route 53 to return in response to DNS queries
+    #     name that you want Route 53 to return in response to DNS queries
     #     (for example, `example.com`).
     #
     #     This value is required if the service specified by `ServiceId`
@@ -1565,7 +1589,7 @@ module Aws::ServiceDiscovery
     #   AWS\_INSTANCE\_IPV4
     #
     #   : If the service configuration includes an `A` record, the IPv4
-    #     address that you want Route 53 to return in response to DNS
+    #     address that you want Route 53 to return in response to DNS
     #     queries (for example, `192.0.2.44`).
     #
     #     This value is required if the service specified by `ServiceId`
@@ -1576,7 +1600,7 @@ module Aws::ServiceDiscovery
     #   AWS\_INSTANCE\_IPV6
     #
     #   : If the service configuration includes an `AAAA` record, the IPv6
-    #     address that you want Route 53 to return in response to DNS
+    #     address that you want Route 53 to return in response to DNS
     #     queries (for example, `2001:0db8:85a3:0000:0000:abcd:0001:2345`).
     #
     #     This value is required if the service specified by `ServiceId`
@@ -1587,13 +1611,13 @@ module Aws::ServiceDiscovery
     #   AWS\_INSTANCE\_PORT
     #
     #   : If the service includes an `SRV` record, the value that you want
-    #     Route 53 to return for the port.
+    #     Route 53 to return for the port.
     #
     #     If the service includes `HealthCheckConfig`, the port on the
-    #     endpoint that you want Route 53 to send requests to.
+    #     endpoint that you want Route 53 to send requests to.
     #
     #     This value is required if you specified settings for an `SRV`
-    #     record or a Route 53 health check when you created the service.
+    #     record or a Route 53 health check when you created the service.
     #
     #
     #
@@ -1664,25 +1688,25 @@ module Aws::ServiceDiscovery
     #
     #   AWS\_INSTANCE\_CNAME
     #
-    #   : For a `CNAME` record, the domain name that Route 53 returns in
+    #   : For a `CNAME` record, the domain name that Route 53 returns in
     #     response to DNS queries (for example, `example.com`).
     #
     #   AWS\_INSTANCE\_IPV4
     #
-    #   : For an `A` record, the IPv4 address that Route 53 returns in
+    #   : For an `A` record, the IPv4 address that Route 53 returns in
     #     response to DNS queries (for example, `192.0.2.44`).
     #
     #   AWS\_INSTANCE\_IPV6
     #
-    #   : For an `AAAA` record, the IPv6 address that Route 53 returns in
+    #   : For an `AAAA` record, the IPv6 address that Route 53 returns in
     #     response to DNS queries (for example,
     #     `2001:0db8:85a3:0000:0000:abcd:0001:2345`).
     #
     #   AWS\_INSTANCE\_PORT
     #
-    #   : For an `SRV` record, the value that Route 53 returns for the port.
+    #   : For an `SRV` record, the value that Route 53 returns for the port.
     #     In addition, if the service includes `HealthCheckConfig`, the port
-    #     on the endpoint that Route 53 sends requests to.
+    #     on the endpoint that Route 53 sends requests to.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/InstanceSummary AWS API Documentation
@@ -1776,9 +1800,9 @@ module Aws::ServiceDiscovery
     #         max_results: 1,
     #         filters: [
     #           {
-    #             name: "TYPE", # required, accepts TYPE
+    #             name: "TYPE", # required, accepts TYPE, NAME, HTTP_NAME
     #             values: ["FilterValue"], # required
-    #             condition: "EQ", # accepts EQ, IN, BETWEEN
+    #             condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
     #           },
     #         ],
     #       }
@@ -1863,7 +1887,7 @@ module Aws::ServiceDiscovery
     #           {
     #             name: "NAMESPACE_ID", # required, accepts NAMESPACE_ID, SERVICE_ID, STATUS, TYPE, UPDATE_DATE
     #             values: ["FilterValue"], # required
-    #             condition: "EQ", # accepts EQ, IN, BETWEEN
+    #             condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
     #           },
     #         ],
     #       }
@@ -1949,7 +1973,7 @@ module Aws::ServiceDiscovery
     #           {
     #             name: "NAMESPACE_ID", # required, accepts NAMESPACE_ID
     #             values: ["FilterValue"], # required
-    #             condition: "EQ", # accepts EQ, IN, BETWEEN
+    #             condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
     #           },
     #         ],
     #       }
@@ -2162,42 +2186,47 @@ module Aws::ServiceDiscovery
     #   data as a hash:
     #
     #       {
-    #         name: "TYPE", # required, accepts TYPE
+    #         name: "TYPE", # required, accepts TYPE, NAME, HTTP_NAME
     #         values: ["FilterValue"], # required
-    #         condition: "EQ", # accepts EQ, IN, BETWEEN
+    #         condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
     #       }
     #
     # @!attribute [rw] name
-    #   Specify `TYPE`.
+    #   Specify the namespaces that you want to get using one of the
+    #   following.
+    #
+    #   * `TYPE`\: Gets the namespaces of the specified type.
+    #
+    #   * `NAME`\: Gets the namespaces with the specified name.
+    #
+    #   * `HTTP_NAME`\: Gets the namespaces with the specified HTTP name.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   If you specify `EQ` for `Condition`, specify either `DNS_PUBLIC` or
-    #   `DNS_PRIVATE`.
+    #   Specify the values that are applicable to the value that you specify
+    #   for `Name`.
     #
-    #   If you specify `IN` for `Condition`, you can specify `DNS_PUBLIC`,
-    #   `DNS_PRIVATE`, or both.
+    #   * `TYPE`\: Specify `HTTP`, `DNS_PUBLIC`, or `DNS_PRIVATE`.
+    #
+    #   * `NAME`\: Specify the name of the namespace, which is found in
+    #     `Namespace.Name`.
+    #
+    #   * `HTTP_NAME`\: Specify the HTTP name of the namespace, which is
+    #     found in `Namespace.Properties.HttpProperties.HttpName`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] condition
-    #   The operator that you want to use to determine whether
-    #   `ListNamespaces` returns a namespace. Valid values for `condition`
-    #   include:
+    #   Specify the operator that you want to use to determine whether a
+    #   namespace matches the specified value. Valid values for `Condition`
+    #   are one of the following.
     #
-    #   EQ
+    #   * `EQ`\: When you specify `EQ` for `Condition`, you can specify only
+    #     one value. `EQ` is supported for `TYPE`, `NAME`, and `HTTP_NAME`.
+    #     `EQ` is the default condition and can be omitted.
     #
-    #   : When you specify `EQ` for the condition, you can choose to list
-    #     only public namespaces or private namespaces, but not both. `EQ`
-    #     is the default condition and can be omitted.
-    #
-    #   IN
-    #
-    #   : When you specify `IN` for the condition, you can choose to list
-    #     public namespaces, private namespaces, or both.
-    #
-    #   BETWEEN
-    #
-    #   : Not applicable
+    #   * `BEGINS_WITH`\: When you specify `BEGINS_WITH` for `Condition`,
+    #     you can specify only one value. `BEGINS_WITH` is supported for
+    #     `TYPE`, `NAME`, and `HTTP_NAME`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/NamespaceFilter AWS API Documentation
@@ -2227,7 +2256,7 @@ module Aws::ServiceDiscovery
     # namespace type.
     #
     # @!attribute [rw] dns_properties
-    #   A complex type that contains the ID for the Route 53 hosted zone
+    #   A complex type that contains the ID for the Route 53 hosted zone
     #   that Cloud Map creates when you create a namespace.
     #   @return [Types::DnsProperties]
     #
@@ -2257,7 +2286,7 @@ module Aws::ServiceDiscovery
     #
     # @!attribute [rw] name
     #   The name of the namespace. When you create a namespace, Cloud Map
-    #   automatically creates a Route 53 hosted zone that has the same name
+    #   automatically creates a Route 53 hosted zone that has the same name
     #   as the namespace.
     #   @return [String]
     #
@@ -2407,7 +2436,7 @@ module Aws::ServiceDiscovery
     #       {
     #         name: "NAMESPACE_ID", # required, accepts NAMESPACE_ID, SERVICE_ID, STATUS, TYPE, UPDATE_DATE
     #         values: ["FilterValue"], # required
-    #         condition: "EQ", # accepts EQ, IN, BETWEEN
+    #         condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
     #       }
     #
     # @!attribute [rw] name
@@ -2830,6 +2859,13 @@ module Aws::ServiceDiscovery
     #
     #      </note>
     #
+    #   <note markdown="1"> Do not include sensitive information in `InstanceId` if the
+    #   namespace is discoverable by public DNS queries and any `Type`
+    #   member of `DnsRecord` for the service contains `SRV` because the
+    #   `InstanceId` is discoverable by public DNS queries.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type
@@ -2857,15 +2893,20 @@ module Aws::ServiceDiscovery
     #
     #   * For each attribute, the applicable value.
     #
+    #   <note markdown="1"> Do not include sensitive information in the attributes if the
+    #   namespace is discoverable by public DNS queries.
+    #
+    #    </note>
+    #
     #   Supported attribute keys include the following:
     #
     #   AWS\_ALIAS\_DNS\_NAME
     #
-    #   : If you want Cloud Map to create an Amazon Route 53 alias record
+    #   : If you want Cloud Map to create an Amazon Route 53 alias record
     #     that routes traffic to an Elastic Load Balancing load balancer,
     #     specify the DNS name that's associated with the load balancer.
     #     For information about how to get the DNS name, see "DNSName" in
-    #     the topic [AliasTarget][1] in the *Route 53 API Reference*.
+    #     the topic [AliasTarget][1] in the *Route 53 API Reference*.
     #
     #     Note the following:
     #
@@ -2877,7 +2918,7 @@ module Aws::ServiceDiscovery
     #       `RoutingPolicy` must be `WEIGHTED`.
     #
     #     * If the service that's specified by `ServiceId` includes
-    #       `HealthCheckConfig` settings, Cloud Map will create the Route 53
+    #       `HealthCheckConfig` settings, Cloud Map will create the Route 53
     #       health check, but it doesn't associate the health check with
     #       the alias record.
     #
@@ -2908,7 +2949,7 @@ module Aws::ServiceDiscovery
     #   AWS\_INSTANCE\_CNAME
     #
     #   : If the service configuration includes a `CNAME` record, the domain
-    #     name that you want Route 53 to return in response to DNS queries
+    #     name that you want Route 53 to return in response to DNS queries
     #     (for example, `example.com`).
     #
     #     This value is required if the service specified by `ServiceId`
@@ -2917,7 +2958,7 @@ module Aws::ServiceDiscovery
     #   AWS\_INSTANCE\_IPV4
     #
     #   : If the service configuration includes an `A` record, the IPv4
-    #     address that you want Route 53 to return in response to DNS
+    #     address that you want Route 53 to return in response to DNS
     #     queries (for example, `192.0.2.44`).
     #
     #     This value is required if the service specified by `ServiceId`
@@ -2928,7 +2969,7 @@ module Aws::ServiceDiscovery
     #   AWS\_INSTANCE\_IPV6
     #
     #   : If the service configuration includes an `AAAA` record, the IPv6
-    #     address that you want Route 53 to return in response to DNS
+    #     address that you want Route 53 to return in response to DNS
     #     queries (for example, `2001:0db8:85a3:0000:0000:abcd:0001:2345`).
     #
     #     This value is required if the service specified by `ServiceId`
@@ -2939,13 +2980,13 @@ module Aws::ServiceDiscovery
     #   AWS\_INSTANCE\_PORT
     #
     #   : If the service includes an `SRV` record, the value that you want
-    #     Route 53 to return for the port.
+    #     Route 53 to return for the port.
     #
     #     If the service includes `HealthCheckConfig`, the port on the
-    #     endpoint that you want Route 53 to send requests to.
+    #     endpoint that you want Route 53 to send requests to.
     #
     #     This value is required if you specified settings for an `SRV`
-    #     record or a Route 53 health check when you created the service.
+    #     record or a Route 53 health check when you created the service.
     #
     #   Custom attributes
     #
@@ -3125,9 +3166,12 @@ module Aws::ServiceDiscovery
     #   @return [Integer]
     #
     # @!attribute [rw] dns_config
-    #   A complex type that contains information about the Route 53 DNS
+    #   A complex type that contains information about the Route 53 DNS
     #   records that you want Cloud Map to create when you register an
     #   instance.
+    #
+    #   The record types of a service can only be changed by deleting the
+    #   service and recreating it with a new `Dnsconfig`.
     #   @return [Types::DnsConfig]
     #
     # @!attribute [rw] type
@@ -3156,7 +3200,7 @@ module Aws::ServiceDiscovery
     #   that you specify in `DnsConfig`.
     #
     #   For information about the charges for health checks, see [Amazon
-    #   Route 53 Pricing][1].
+    #   Route 53 Pricing][1].
     #
     #
     #
@@ -3255,7 +3299,7 @@ module Aws::ServiceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] dns_config
-    #   Information about the Route 53 DNS records that you want Cloud Map
+    #   Information about the Route 53 DNS records that you want Cloud Map
     #   to create when you register an instance.
     #   @return [Types::DnsConfigChange]
     #
@@ -3285,7 +3329,7 @@ module Aws::ServiceDiscovery
     #       {
     #         name: "NAMESPACE_ID", # required, accepts NAMESPACE_ID
     #         values: ["FilterValue"], # required
-    #         condition: "EQ", # accepts EQ, IN, BETWEEN
+    #         condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
     #       }
     #
     # @!attribute [rw] name
@@ -3305,11 +3349,7 @@ module Aws::ServiceDiscovery
     #   * `EQ`\: When you specify `EQ`, specify one namespace ID for
     #     `Values`. `EQ` is the default condition and can be omitted.
     #
-    #   * `IN`\: When you specify `IN`, specify a list of the IDs for the
-    #     namespaces that you want `ListServices` to return a list of
-    #     services for.
-    #
-    #   * `BETWEEN`\: Not applicable.
+    #   ^
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ServiceFilter AWS API Documentation
@@ -3381,7 +3421,7 @@ module Aws::ServiceDiscovery
     #   @return [Integer]
     #
     # @!attribute [rw] dns_config
-    #   Information about the Route 53 DNS records that you want Cloud Map
+    #   Information about the Route 53 DNS records that you want Cloud Map
     #   to create when you register an instance.
     #   @return [Types::DnsConfig]
     #

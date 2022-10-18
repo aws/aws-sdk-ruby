@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2022-10-18)
+------------------
+
+* Feature - This release allows subscribers to enable Dedicated IPs (managed) to send email via a fully managed dedicated IP experience. It also adds identities' VerificationStatus in the response of GetEmailIdentity and ListEmailIdentities APIs, and ImportJobs counts in the response of ListImportJobs API.
+
 1.27.0 (2022-02-24)
 ------------------
 

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.161.0 (2022-10-18)
+------------------
+
 * Feature - Support AwsQueryCompatible trait to read error code from x-amzn-query-error header.
 
 3.160.0 (2022-10-13)

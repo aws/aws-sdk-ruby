@@ -87,8 +87,7 @@ module Aws::SESV2
     #   @return [String]
     #
     # @!attribute [rw] listing_time
-    #   The time when the blacklisting event occurred, shown in Unix time
-    #   format.
+    #   The time when the blacklisting event occurred.
     #   @return [Time]
     #
     # @!attribute [rw] description
@@ -379,8 +378,8 @@ module Aws::SESV2
     #   CloudWatch if you don't provide the value of the dimension when you
     #   send an email. This value has to meet the following criteria:
     #
-    #   * It can only contain ASCII letters (a–z, A–Z), numbers (0–9),
-    #     underscores (\_), or dashes (-).
+    #   * Can only contain ASCII letters (a–z, A–Z), numbers (0–9),
+    #     underscores (\_), or dashes (-), at signs (@), and periods (.).
     #
     #   * It can contain no more than 256 characters.
     #   @return [String]
@@ -819,12 +818,12 @@ module Aws::SESV2
     #   The content of the custom verification email. The total size of the
     #   email must be less than 10 MB. The message body may contain HTML,
     #   with some limitations. For more information, see [Custom
-    #   Verification Email Frequently Asked Questions][1] in the *Amazon SES
+    #   verification email frequently asked questions][1] in the *Amazon SES
     #   Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html#custom-verification-emails-faq
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom-faq
     #   @return [String]
     #
     # @!attribute [rw] success_redirection_url
@@ -870,6 +869,7 @@ module Aws::SESV2
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         scaling_mode: "STANDARD", # accepts STANDARD, MANAGED
     #       }
     #
     # @!attribute [rw] pool_name
@@ -881,11 +881,16 @@ module Aws::SESV2
     #   associate with the pool.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] scaling_mode
+    #   The type of scaling mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateDedicatedIpPoolRequest AWS API Documentation
     #
     class CreateDedicatedIpPoolRequest < Struct.new(
       :pool_name,
-      :tags)
+      :tags,
+      :scaling_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1369,6 +1374,31 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # Contains information about a dedicated IP pool.
+    #
+    # @!attribute [rw] pool_name
+    #   The name of the dedicated IP pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_mode
+    #   The type of the dedicated IP pool.
+    #
+    #   * `STANDARD` – A dedicated IP pool where the customer can control
+    #     which IPs are part of the pool.
+    #
+    #   * `MANAGED` – A dedicated IP pool where the reputation and number of
+    #     IPs is automatically managed by Amazon SES.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DedicatedIpPool AWS API Documentation
+    #
+    class DedicatedIpPool < Struct.new(
+      :pool_name,
+      :scaling_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request to delete an event destination from a configuration set.
     #
     # @note When making an API call, you may pass DeleteConfigurationSetEventDestinationRequest
@@ -1705,7 +1735,7 @@ module Aws::SESV2
     #
     # @!attribute [rw] create_date
     #   The date and time when the predictive inbox placement test was
-    #   created, in Unix time format.
+    #   created.
     #   @return [Time]
     #
     # @!attribute [rw] deliverability_test_status
@@ -1990,17 +2020,15 @@ module Aws::SESV2
     #   @return [Array<String>]
     #
     # @!attribute [rw] first_seen_date_time
-    #   The first time, in Unix time format, when the email message was
-    #   delivered to any recipient's inbox. This value can help you
-    #   determine how long it took for a campaign to deliver an email
-    #   message.
+    #   The first time when the email message was delivered to any
+    #   recipient's inbox. This value can help you determine how long it
+    #   took for a campaign to deliver an email message.
     #   @return [Time]
     #
     # @!attribute [rw] last_seen_date_time
-    #   The last time, in Unix time format, when the email message was
-    #   delivered to any recipient's inbox. This value can help you
-    #   determine how long it took for a campaign to deliver an email
-    #   message.
+    #   The last time when the email message was delivered to any
+    #   recipient's inbox. This value can help you determine how long it
+    #   took for a campaign to deliver an email message.
     #   @return [Time]
     #
     # @!attribute [rw] inbox_count
@@ -2089,8 +2117,8 @@ module Aws::SESV2
     #   @return [String]
     #
     # @!attribute [rw] subscription_start_date
-    #   The date, in Unix time format, when you enabled the Deliverability
-    #   dashboard for the domain.
+    #   The date when you enabled the Deliverability dashboard for the
+    #   domain.
     #   @return [Time]
     #
     # @!attribute [rw] inbox_placement_tracking_option
@@ -2904,6 +2932,41 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # A request to obtain more information about a dedicated IP pool.
+    #
+    # @note When making an API call, you may pass GetDedicatedIpPoolRequest
+    #   data as a hash:
+    #
+    #       {
+    #         pool_name: "PoolName", # required
+    #       }
+    #
+    # @!attribute [rw] pool_name
+    #   The name of the dedicated IP pool to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetDedicatedIpPoolRequest AWS API Documentation
+    #
+    class GetDedicatedIpPoolRequest < Struct.new(
+      :pool_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The following element is returned by the service.
+    #
+    # @!attribute [rw] dedicated_ip_pool
+    #   An object that contains information about a dedicated IP pool.
+    #   @return [Types::DedicatedIpPool]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetDedicatedIpPoolResponse AWS API Documentation
+    #
+    class GetDedicatedIpPoolResponse < Struct.new(
+      :dedicated_ip_pool)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request to obtain more information about a dedicated IP address.
     #
     # @note When making an API call, you may pass GetDedicatedIpRequest
@@ -3035,11 +3098,11 @@ module Aws::SESV2
     #   @return [Boolean]
     #
     # @!attribute [rw] subscription_expiry_date
-    #   The date, in Unix time format, when your current subscription to the
-    #   Deliverability dashboard is scheduled to expire, if your
-    #   subscription is scheduled to expire at the end of the current
-    #   calendar month. This value is null if you have an active
-    #   subscription that isn’t due to expire at the end of the month.
+    #   The date when your current subscription to the Deliverability
+    #   dashboard is scheduled to expire, if your subscription is scheduled
+    #   to expire at the end of the current calendar month. This value is
+    #   null if you have an active subscription that isn’t due to expire at
+    #   the end of the month.
     #   @return [Time]
     #
     # @!attribute [rw] account_status
@@ -3351,6 +3414,24 @@ module Aws::SESV2
     #   identity.
     #   @return [String]
     #
+    # @!attribute [rw] verification_status
+    #   The verification status of the identity. The status can be one of
+    #   the following:
+    #
+    #   * `PENDING` – The verification process was initiated, but Amazon SES
+    #     hasn't yet been able to verify the identity.
+    #
+    #   * `SUCCESS` – The verification process completed successfully.
+    #
+    #   * `FAILED` – The verification process failed.
+    #
+    #   * `TEMPORARY_FAILURE` – A temporary issue is preventing Amazon SES
+    #     from determining the verification status of the identity.
+    #
+    #   * `NOT_STARTED` – The verification process hasn't been initiated
+    #     for the identity.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetEmailIdentityResponse AWS API Documentation
     #
     class GetEmailIdentityResponse < Struct.new(
@@ -3361,7 +3442,8 @@ module Aws::SESV2
       :mail_from_attributes,
       :policies,
       :tags,
-      :configuration_set_name)
+      :configuration_set_name,
+      :verification_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3543,12 +3625,31 @@ module Aws::SESV2
     #   SES to send email from that identity.
     #   @return [Boolean]
     #
+    # @!attribute [rw] verification_status
+    #   The verification status of the identity. The status can be one of
+    #   the following:
+    #
+    #   * `PENDING` – The verification process was initiated, but Amazon SES
+    #     hasn't yet been able to verify the identity.
+    #
+    #   * `SUCCESS` – The verification process completed successfully.
+    #
+    #   * `FAILED` – The verification process failed.
+    #
+    #   * `TEMPORARY_FAILURE` – A temporary issue is preventing Amazon SES
+    #     from determining the verification status of the identity.
+    #
+    #   * `NOT_STARTED` – The verification process hasn't been initiated
+    #     for the identity.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/IdentityInfo AWS API Documentation
     #
     class IdentityInfo < Struct.new(
       :identity_type,
       :identity_name,
-      :sending_enabled)
+      :sending_enabled,
+      :verification_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3636,13 +3737,24 @@ module Aws::SESV2
     #   The date and time when the import job was created.
     #   @return [Time]
     #
+    # @!attribute [rw] processed_records_count
+    #   The current number of records processed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_records_count
+    #   The number of records that failed processing because of invalid
+    #   input or other reasons.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ImportJobSummary AWS API Documentation
     #
     class ImportJobSummary < Struct.new(
       :job_id,
       :import_destination,
       :job_status,
-      :created_timestamp)
+      :created_timestamp,
+      :processed_records_count,
+      :failed_records_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4148,14 +4260,13 @@ module Aws::SESV2
     #       }
     #
     # @!attribute [rw] start_date
-    #   The first day, in Unix time format, that you want to obtain
-    #   deliverability data for.
+    #   The first day that you want to obtain deliverability data for.
     #   @return [Time]
     #
     # @!attribute [rw] end_date
-    #   The last day, in Unix time format, that you want to obtain
-    #   deliverability data for. This value has to be less than or equal to
-    #   30 days after the value of the `StartDate` parameter.
+    #   The last day that you want to obtain deliverability data for. This
+    #   value has to be less than or equal to 30 days after the value of the
+    #   `StartDate` parameter.
     #   @return [Time]
     #
     # @!attribute [rw] subscribed_domain
@@ -4451,14 +4562,13 @@ module Aws::SESV2
     # @!attribute [rw] start_date
     #   Used to filter the list of suppressed email destinations so that it
     #   only includes addresses that were added to the list after a specific
-    #   date. The date that you specify should be in Unix time format.
+    #   date.
     #   @return [Time]
     #
     # @!attribute [rw] end_date
     #   Used to filter the list of suppressed email destinations so that it
     #   only includes addresses that were added to the list before a
-    #   specific date. The date that you specify should be in Unix time
-    #   format.
+    #   specific date.
     #   @return [Time]
     #
     # @!attribute [rw] next_token
@@ -4570,11 +4680,11 @@ module Aws::SESV2
     #
     # @!attribute [rw] behavior_on_mx_failure
     #   The action to take if the required MX record can't be found when
-    #   you send an email. When you set this value to `UseDefaultValue`, the
-    #   mail is sent using *amazonses.com* as the MAIL FROM domain. When you
-    #   set this value to `RejectMessage`, the Amazon SES API v2 returns a
-    #   `MailFromDomainNotVerified` error, and doesn't attempt to deliver
-    #   the email.
+    #   you send an email. When you set this value to `USE_DEFAULT_VALUE`,
+    #   the mail is sent using *amazonses.com* as the MAIL FROM domain. When
+    #   you set this value to `REJECT_MESSAGE`, the Amazon SES API v2
+    #   returns a `MailFromDomainNotVerified` error, and doesn't attempt to
+    #   deliver the email.
     #
     #   These behaviors are taken when the custom MAIL FROM domain
     #   configuration is in the `Pending`, `Failed`, and `TemporaryFailure`
@@ -6214,8 +6324,9 @@ module Aws::SESV2
     #
     # @!attribute [rw] max_24_hour_send
     #   The maximum number of emails that you can send in the current Amazon
-    #   Web Services Region over a 24-hour period. This value is also called
-    #   your *sending quota*.
+    #   Web Services Region over a 24-hour period. A value of -1 signifies
+    #   an unlimited quota. (This value is also referred to as your *sending
+    #   quota*.)
     #   @return [Float]
     #
     # @!attribute [rw] max_send_rate
@@ -7020,12 +7131,12 @@ module Aws::SESV2
     #   The content of the custom verification email. The total size of the
     #   email must be less than 10 MB. The message body may contain HTML,
     #   with some limitations. For more information, see [Custom
-    #   Verification Email Frequently Asked Questions][1] in the *Amazon SES
+    #   verification email frequently asked questions][1] in the *Amazon SES
     #   Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html#custom-verification-emails-faq
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom-faq
     #   @return [String]
     #
     # @!attribute [rw] success_redirection_url
