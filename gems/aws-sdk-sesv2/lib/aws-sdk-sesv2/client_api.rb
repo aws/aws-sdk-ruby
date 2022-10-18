@@ -82,6 +82,7 @@ module Aws::SESV2
     DataFormat = Shapes::StringShape.new(name: 'DataFormat')
     DedicatedIp = Shapes::StructureShape.new(name: 'DedicatedIp')
     DedicatedIpList = Shapes::ListShape.new(name: 'DedicatedIpList')
+    DedicatedIpPool = Shapes::StructureShape.new(name: 'DedicatedIpPool')
     DefaultDimensionValue = Shapes::StringShape.new(name: 'DefaultDimensionValue')
     DeleteConfigurationSetEventDestinationRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationSetEventDestinationRequest')
     DeleteConfigurationSetEventDestinationResponse = Shapes::StructureShape.new(name: 'DeleteConfigurationSetEventDestinationResponse')
@@ -170,6 +171,8 @@ module Aws::SESV2
     GetContactResponse = Shapes::StructureShape.new(name: 'GetContactResponse')
     GetCustomVerificationEmailTemplateRequest = Shapes::StructureShape.new(name: 'GetCustomVerificationEmailTemplateRequest')
     GetCustomVerificationEmailTemplateResponse = Shapes::StructureShape.new(name: 'GetCustomVerificationEmailTemplateResponse')
+    GetDedicatedIpPoolRequest = Shapes::StructureShape.new(name: 'GetDedicatedIpPoolRequest')
+    GetDedicatedIpPoolResponse = Shapes::StructureShape.new(name: 'GetDedicatedIpPoolResponse')
     GetDedicatedIpRequest = Shapes::StructureShape.new(name: 'GetDedicatedIpRequest')
     GetDedicatedIpResponse = Shapes::StructureShape.new(name: 'GetDedicatedIpResponse')
     GetDedicatedIpsRequest = Shapes::StructureShape.new(name: 'GetDedicatedIpsRequest')
@@ -322,6 +325,7 @@ module Aws::SESV2
     ReviewDetails = Shapes::StructureShape.new(name: 'ReviewDetails')
     ReviewStatus = Shapes::StringShape.new(name: 'ReviewStatus')
     S3Url = Shapes::StringShape.new(name: 'S3Url')
+    ScalingMode = Shapes::StringShape.new(name: 'ScalingMode')
     Selector = Shapes::StringShape.new(name: 'Selector')
     SendBulkEmailRequest = Shapes::StructureShape.new(name: 'SendBulkEmailRequest')
     SendBulkEmailResponse = Shapes::StructureShape.new(name: 'SendBulkEmailResponse')
@@ -386,6 +390,7 @@ module Aws::SESV2
     UpdateEmailTemplateResponse = Shapes::StructureShape.new(name: 'UpdateEmailTemplateResponse')
     UseCaseDescription = Shapes::StringShape.new(name: 'UseCaseDescription')
     UseDefaultIfPreferenceUnavailable = Shapes::BooleanShape.new(name: 'UseDefaultIfPreferenceUnavailable')
+    VerificationStatus = Shapes::StringShape.new(name: 'VerificationStatus')
     Volume = Shapes::IntegerShape.new(name: 'Volume')
     VolumeStatistics = Shapes::StructureShape.new(name: 'VolumeStatistics')
     WarmupStatus = Shapes::StringShape.new(name: 'WarmupStatus')
@@ -522,6 +527,7 @@ module Aws::SESV2
 
     CreateDedicatedIpPoolRequest.add_member(:pool_name, Shapes::ShapeRef.new(shape: PoolName, required: true, location_name: "PoolName"))
     CreateDedicatedIpPoolRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDedicatedIpPoolRequest.add_member(:scaling_mode, Shapes::ShapeRef.new(shape: ScalingMode, location_name: "ScalingMode"))
     CreateDedicatedIpPoolRequest.struct_class = Types::CreateDedicatedIpPoolRequest
 
     CreateDedicatedIpPoolResponse.struct_class = Types::CreateDedicatedIpPoolResponse
@@ -590,6 +596,10 @@ module Aws::SESV2
     DedicatedIp.struct_class = Types::DedicatedIp
 
     DedicatedIpList.member = Shapes::ShapeRef.new(shape: DedicatedIp)
+
+    DedicatedIpPool.add_member(:pool_name, Shapes::ShapeRef.new(shape: PoolName, required: true, location_name: "PoolName"))
+    DedicatedIpPool.add_member(:scaling_mode, Shapes::ShapeRef.new(shape: ScalingMode, required: true, location_name: "ScalingMode"))
+    DedicatedIpPool.struct_class = Types::DedicatedIpPool
 
     DeleteConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location: "uri", location_name: "ConfigurationSetName"))
     DeleteConfigurationSetEventDestinationRequest.add_member(:event_destination_name, Shapes::ShapeRef.new(shape: EventDestinationName, required: true, location: "uri", location_name: "EventDestinationName"))
@@ -829,6 +839,12 @@ module Aws::SESV2
     GetCustomVerificationEmailTemplateResponse.add_member(:failure_redirection_url, Shapes::ShapeRef.new(shape: FailureRedirectionURL, location_name: "FailureRedirectionURL"))
     GetCustomVerificationEmailTemplateResponse.struct_class = Types::GetCustomVerificationEmailTemplateResponse
 
+    GetDedicatedIpPoolRequest.add_member(:pool_name, Shapes::ShapeRef.new(shape: PoolName, required: true, location: "uri", location_name: "PoolName"))
+    GetDedicatedIpPoolRequest.struct_class = Types::GetDedicatedIpPoolRequest
+
+    GetDedicatedIpPoolResponse.add_member(:dedicated_ip_pool, Shapes::ShapeRef.new(shape: DedicatedIpPool, location_name: "DedicatedIpPool"))
+    GetDedicatedIpPoolResponse.struct_class = Types::GetDedicatedIpPoolResponse
+
     GetDedicatedIpRequest.add_member(:ip, Shapes::ShapeRef.new(shape: Ip, required: true, location: "uri", location_name: "IP"))
     GetDedicatedIpRequest.struct_class = Types::GetDedicatedIpRequest
 
@@ -895,6 +911,7 @@ module Aws::SESV2
     GetEmailIdentityResponse.add_member(:policies, Shapes::ShapeRef.new(shape: PolicyMap, location_name: "Policies"))
     GetEmailIdentityResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     GetEmailIdentityResponse.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    GetEmailIdentityResponse.add_member(:verification_status, Shapes::ShapeRef.new(shape: VerificationStatus, location_name: "VerificationStatus"))
     GetEmailIdentityResponse.struct_class = Types::GetEmailIdentityResponse
 
     GetEmailTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: EmailTemplateName, required: true, location: "uri", location_name: "TemplateName"))
@@ -927,6 +944,7 @@ module Aws::SESV2
     IdentityInfo.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, location_name: "IdentityType"))
     IdentityInfo.add_member(:identity_name, Shapes::ShapeRef.new(shape: Identity, location_name: "IdentityName"))
     IdentityInfo.add_member(:sending_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "SendingEnabled"))
+    IdentityInfo.add_member(:verification_status, Shapes::ShapeRef.new(shape: VerificationStatus, location_name: "VerificationStatus"))
     IdentityInfo.struct_class = Types::IdentityInfo
 
     IdentityInfoList.member = Shapes::ShapeRef.new(shape: IdentityInfo)
@@ -943,6 +961,8 @@ module Aws::SESV2
     ImportJobSummary.add_member(:import_destination, Shapes::ShapeRef.new(shape: ImportDestination, location_name: "ImportDestination"))
     ImportJobSummary.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     ImportJobSummary.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    ImportJobSummary.add_member(:processed_records_count, Shapes::ShapeRef.new(shape: ProcessedRecordsCount, location_name: "ProcessedRecordsCount"))
+    ImportJobSummary.add_member(:failed_records_count, Shapes::ShapeRef.new(shape: FailedRecordsCount, location_name: "FailedRecordsCount"))
     ImportJobSummary.struct_class = Types::ImportJobSummary
 
     ImportJobSummaryList.member = Shapes::ShapeRef.new(shape: ImportJobSummary)
@@ -1800,6 +1820,17 @@ module Aws::SESV2
         o.http_request_uri = "/v2/email/dedicated-ips/{IP}"
         o.input = Shapes::ShapeRef.new(shape: GetDedicatedIpRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDedicatedIpResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:get_dedicated_ip_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDedicatedIpPool"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/email/dedicated-ip-pools/{PoolName}"
+        o.input = Shapes::ShapeRef.new(shape: GetDedicatedIpPoolRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDedicatedIpPoolResponse)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)

@@ -366,8 +366,8 @@ module Aws::ServiceDiscovery
     # can't be discovered using DNS.
     #
     # For the current quota on the number of namespaces that you can create
-    # using the same account, see [Cloud Map quotas][1] in the *Cloud Map
-    # Developer Guide*.
+    # using the same Amazon Web Services account, see [Cloud Map quotas][1]
+    # in the *Cloud Map Developer Guide*.
     #
     #
     #
@@ -447,8 +447,9 @@ module Aws::ServiceDiscovery
     # `backend.example.com`. Service instances that are registered using a
     # private DNS namespace can be discovered using either a
     # `DiscoverInstances` request or using DNS. For the current quota on the
-    # number of namespaces that you can create using the same account, see
-    # [Cloud Map quotas][1] in the *Cloud Map Developer Guide*.
+    # number of namespaces that you can create using the same Amazon Web
+    # Services account, see [Cloud Map quotas][1] in the *Cloud Map
+    # Developer Guide*.
     #
     #
     #
@@ -456,8 +457,8 @@ module Aws::ServiceDiscovery
     #
     # @option params [required, String] :name
     #   The name that you want to assign to this namespace. When you create a
-    #   private DNS namespace, Cloud Map automatically creates an Amazon Route
-    #   53 private hosted zone that has the same name as the namespace.
+    #   private DNS namespace, Cloud Map automatically creates an Amazon
+    #   Route 53 private hosted zone that has the same name as the namespace.
     #
     # @option params [String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
@@ -545,8 +546,11 @@ module Aws::ServiceDiscovery
     # `backend.example.com`. You can discover instances that were registered
     # with a public DNS namespace by using either a `DiscoverInstances`
     # request or using DNS. For the current quota on the number of
-    # namespaces that you can create using the same account, see [Cloud Map
-    # quotas][1] in the *Cloud Map Developer Guide*.
+    # namespaces that you can create using the same Amazon Web Services
+    # account, see [Cloud Map quotas][1] in the *Cloud Map Developer Guide*.
+    #
+    # The `CreatePublicDnsNamespace` API operation is not supported in the
+    # Amazon Web Services GovCloud (US) Regions.
     #
     #
     #
@@ -554,6 +558,11 @@ module Aws::ServiceDiscovery
     #
     # @option params [required, String] :name
     #   The name that you want to assign to this namespace.
+    #
+    #   <note markdown="1"> Do not include sensitive information in the name. The name is publicly
+    #   available using DNS queries.
+    #
+    #    </note>
     #
     # @option params [String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
@@ -633,7 +642,7 @@ module Aws::ServiceDiscovery
     # following entities:
     #
     # * For public and private DNS namespaces, one of the following
-    #   combinations of DNS records in Amazon Route 53:
+    #   combinations of DNS records in Amazon Route 53:
     #
     #   * `A`
     #
@@ -662,6 +671,11 @@ module Aws::ServiceDiscovery
     #
     # @option params [required, String] :name
     #   The name that you want to assign to the service.
+    #
+    #   <note markdown="1"> Do not include sensitive information in the name if the namespace is
+    #   discoverable by public DNS queries.
+    #
+    #    </note>
     #
     #   If you want Cloud Map to create an `SRV` record when you register an
     #   instance and you're using a system that requires a specific `SRV`
@@ -708,15 +722,15 @@ module Aws::ServiceDiscovery
     #   A description for the service.
     #
     # @option params [Types::DnsConfig] :dns_config
-    #   A complex type that contains information about the Amazon Route 53
+    #   A complex type that contains information about the Amazon Route 53
     #   records that you want Cloud Map to create when you register an
     #   instance.
     #
     # @option params [Types::HealthCheckConfig] :health_check_config
     #   *Public DNS and HTTP namespaces only.* A complex type that contains
-    #   settings for an optional Route 53 health check. If you specify
+    #   settings for an optional Route 53 health check. If you specify
     #   settings for a health check, Cloud Map associates the health check
-    #   with all the Route 53 DNS records that you specify in `DnsConfig`.
+    #   with all the Route 53 DNS records that you specify in `DnsConfig`.
     #
     #   If you specify a health check configuration, you can specify either
     #   `HealthCheckCustomConfig` or `HealthCheckConfig` but not both.
@@ -938,7 +952,7 @@ module Aws::ServiceDiscovery
       req.send_request(options)
     end
 
-    # Deletes the Amazon Route 53 DNS records and health check, if any, that
+    # Deletes the Amazon Route 53 DNS records and health check, if any, that
     # Cloud Map created for the specified instance.
     #
     # @option params [required, String] :service_id
@@ -1280,7 +1294,7 @@ module Aws::ServiceDiscovery
     #   resp.to_h outputs the following:
     #   {
     #     namespace: {
-    #       arn: "arn:aws:servicediscovery:us-west-2: 123456789120:namespace/ns-e1tpmexample0001", 
+    #       arn: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-e1tpmexample0001", 
     #       create_date: Time.parse("20181118T211712Z"), 
     #       creator_request_id: "example-creator-request-id-0001", 
     #       description: "Example.com AWS Cloud Map HTTP Namespace", 
@@ -1416,7 +1430,7 @@ module Aws::ServiceDiscovery
     #   resp.to_h outputs the following:
     #   {
     #     service: {
-    #       arn: "arn:aws:servicediscovery:us-west-2:123456789120:service/srv-e4anhexample0004", 
+    #       arn: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-e4anhexample0004", 
     #       create_date: Time.parse("20181118T211707Z"), 
     #       creator_request_id: "example-creator-request-id-0004", 
     #       description: "Example.com AWS Cloud Map HTTP Service", 
@@ -1541,7 +1555,7 @@ module Aws::ServiceDiscovery
     end
 
     # Lists summary information about the namespaces that were created by
-    # the current account.
+    # the current Amazon Web Services account.
     #
     # @option params [String] :next_token
     #   For the first `ListNamespaces` request, omit this value.
@@ -1643,9 +1657,9 @@ module Aws::ServiceDiscovery
     #     max_results: 1,
     #     filters: [
     #       {
-    #         name: "TYPE", # required, accepts TYPE
+    #         name: "TYPE", # required, accepts TYPE, NAME, HTTP_NAME
     #         values: ["FilterValue"], # required
-    #         condition: "EQ", # accepts EQ, IN, BETWEEN
+    #         condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
     #       },
     #     ],
     #   })
@@ -1756,7 +1770,7 @@ module Aws::ServiceDiscovery
     #       {
     #         name: "NAMESPACE_ID", # required, accepts NAMESPACE_ID, SERVICE_ID, STATUS, TYPE, UPDATE_DATE
     #         values: ["FilterValue"], # required
-    #         condition: "EQ", # accepts EQ, IN, BETWEEN
+    #         condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
     #       },
     #     ],
     #   })
@@ -1852,7 +1866,7 @@ module Aws::ServiceDiscovery
     #       {
     #         name: "NAMESPACE_ID", # required, accepts NAMESPACE_ID
     #         values: ["FilterValue"], # required
-    #         condition: "EQ", # accepts EQ, IN, BETWEEN
+    #         condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
     #       },
     #     ],
     #   })
@@ -2008,6 +2022,13 @@ module Aws::ServiceDiscovery
     #
     #      </note>
     #
+    #   <note markdown="1"> Do not include sensitive information in `InstanceId` if the namespace
+    #   is discoverable by public DNS queries and any `Type` member of
+    #   `DnsRecord` for the service contains `SRV` because the `InstanceId` is
+    #   discoverable by public DNS queries.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type
@@ -2033,15 +2054,20 @@ module Aws::ServiceDiscovery
     #
     #   * For each attribute, the applicable value.
     #
+    #   <note markdown="1"> Do not include sensitive information in the attributes if the
+    #   namespace is discoverable by public DNS queries.
+    #
+    #    </note>
+    #
     #   Supported attribute keys include the following:
     #
     #   AWS\_ALIAS\_DNS\_NAME
     #
-    #   : If you want Cloud Map to create an Amazon Route 53 alias record that
+    #   : If you want Cloud Map to create an Amazon Route 53 alias record that
     #     routes traffic to an Elastic Load Balancing load balancer, specify
     #     the DNS name that's associated with the load balancer. For
     #     information about how to get the DNS name, see "DNSName" in the
-    #     topic [AliasTarget][1] in the *Route 53 API Reference*.
+    #     topic [AliasTarget][1] in the *Route 53 API Reference*.
     #
     #     Note the following:
     #
@@ -2053,7 +2079,7 @@ module Aws::ServiceDiscovery
     #       `RoutingPolicy` must be `WEIGHTED`.
     #
     #     * If the service that's specified by `ServiceId` includes
-    #       `HealthCheckConfig` settings, Cloud Map will create the Route 53
+    #       `HealthCheckConfig` settings, Cloud Map will create the Route 53
     #       health check, but it doesn't associate the health check with the
     #       alias record.
     #
@@ -2084,7 +2110,7 @@ module Aws::ServiceDiscovery
     #   AWS\_INSTANCE\_CNAME
     #
     #   : If the service configuration includes a `CNAME` record, the domain
-    #     name that you want Route 53 to return in response to DNS queries
+    #     name that you want Route 53 to return in response to DNS queries
     #     (for example, `example.com`).
     #
     #     This value is required if the service specified by `ServiceId`
@@ -2093,7 +2119,7 @@ module Aws::ServiceDiscovery
     #   AWS\_INSTANCE\_IPV4
     #
     #   : If the service configuration includes an `A` record, the IPv4
-    #     address that you want Route 53 to return in response to DNS queries
+    #     address that you want Route 53 to return in response to DNS queries
     #     (for example, `192.0.2.44`).
     #
     #     This value is required if the service specified by `ServiceId`
@@ -2104,7 +2130,7 @@ module Aws::ServiceDiscovery
     #   AWS\_INSTANCE\_IPV6
     #
     #   : If the service configuration includes an `AAAA` record, the IPv6
-    #     address that you want Route 53 to return in response to DNS queries
+    #     address that you want Route 53 to return in response to DNS queries
     #     (for example, `2001:0db8:85a3:0000:0000:abcd:0001:2345`).
     #
     #     This value is required if the service specified by `ServiceId`
@@ -2115,13 +2141,13 @@ module Aws::ServiceDiscovery
     #   AWS\_INSTANCE\_PORT
     #
     #   : If the service includes an `SRV` record, the value that you want
-    #     Route 53 to return for the port.
+    #     Route 53 to return for the port.
     #
     #     If the service includes `HealthCheckConfig`, the port on the
-    #     endpoint that you want Route 53 to send requests to.
+    #     endpoint that you want Route 53 to send requests to.
     #
     #     This value is required if you specified settings for an `SRV` record
-    #     or a Route 53 health check when you created the service.
+    #     or a Route 53 health check when you created the service.
     #
     #   Custom attributes
     #
@@ -2334,7 +2360,7 @@ module Aws::ServiceDiscovery
     # You can use `UpdateInstanceCustomHealthStatus` to change the status
     # only for custom health checks, which you define using
     # `HealthCheckCustomConfig` when you create a service. You can't use it
-    # to change the status for Route 53 health checks, which you define
+    # to change the status for Route 53 health checks, which you define
     # using `HealthCheckConfig`.
     #
     # For more information, see [HealthCheckCustomConfig][1].
@@ -2598,7 +2624,7 @@ module Aws::ServiceDiscovery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicediscovery'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

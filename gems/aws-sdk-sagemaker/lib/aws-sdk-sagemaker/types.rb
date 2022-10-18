@@ -2726,6 +2726,55 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Configuration to control how SageMaker captures inference data for
+    # batch transform jobs.
+    #
+    # @note When making an API call, you may pass BatchDataCaptureConfig
+    #   data as a hash:
+    #
+    #       {
+    #         destination_s3_uri: "S3Uri", # required
+    #         kms_key_id: "KmsKeyId",
+    #         generate_inference_id: false,
+    #       }
+    #
+    # @!attribute [rw] destination_s3_uri
+    #   The Amazon S3 location being used to capture the data.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
+    #   Management Service key that SageMaker uses to encrypt data on the
+    #   storage volume attached to the ML compute instance that hosts the
+    #   batch transform job.
+    #
+    #   The KmsKeyId can be any of the following formats:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias name ARN:
+    #     `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
+    #   @return [String]
+    #
+    # @!attribute [rw] generate_inference_id
+    #   Flag that indicates whether to append inference id to the output.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchDataCaptureConfig AWS API Documentation
+    #
+    class BatchDataCaptureConfig < Struct.new(
+      :destination_s3_uri,
+      :kms_key_id,
+      :generate_inference_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The error code and error description associated with the resource.
     #
     # @!attribute [rw] error_code
@@ -2826,6 +2875,116 @@ module Aws::SageMaker
       :inference_specification,
       :model_package_status,
       :model_approval_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input object for the batch transform job.
+    #
+    # @note When making an API call, you may pass BatchTransformInput
+    #   data as a hash:
+    #
+    #       {
+    #         data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #         dataset_format: { # required
+    #           csv: {
+    #             header: false,
+    #           },
+    #           json: {
+    #             line: false,
+    #           },
+    #           parquet: {
+    #           },
+    #         },
+    #         local_path: "ProcessingLocalPath", # required
+    #         s3_input_mode: "Pipe", # accepts Pipe, File
+    #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #         features_attribute: "String",
+    #         inference_attribute: "String",
+    #         probability_attribute: "String",
+    #         probability_threshold_attribute: 1.0,
+    #         start_time_offset: "MonitoringTimeOffsetString",
+    #         end_time_offset: "MonitoringTimeOffsetString",
+    #       }
+    #
+    # @!attribute [rw] data_captured_destination_s3_uri
+    #   The Amazon S3 location being used to capture the data.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_format
+    #   The dataset format for your batch transform job.
+    #   @return [Types::MonitoringDatasetFormat]
+    #
+    # @!attribute [rw] local_path
+    #   Path to the filesystem where the batch transform data is available
+    #   to the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_input_mode
+    #   Whether the `Pipe` or `File` is used as the input mode for
+    #   transferring data for the monitoring job. `Pipe` mode is recommended
+    #   for large datasets. `File` mode is useful for small files that fit
+    #   in memory. Defaults to `File`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_data_distribution_type
+    #   Whether input data distributed in Amazon S3 is fully replicated or
+    #   sharded by an S3 key. Defaults to `FullyReplicated`
+    #   @return [String]
+    #
+    # @!attribute [rw] features_attribute
+    #   The attributes of the input data that are the input features.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_attribute
+    #   The attribute of the input data that represents the ground truth
+    #   label.
+    #   @return [String]
+    #
+    # @!attribute [rw] probability_attribute
+    #   In a classification problem, the attribute that represents the class
+    #   probability.
+    #   @return [String]
+    #
+    # @!attribute [rw] probability_threshold_attribute
+    #   The threshold for the class probability to be evaluated as a
+    #   positive result.
+    #   @return [Float]
+    #
+    # @!attribute [rw] start_time_offset
+    #   If specified, monitoring jobs substract this time from the start
+    #   time. For information about using offsets for scheduling monitoring
+    #   jobs, see [Schedule Model Quality Monitoring Jobs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time_offset
+    #   If specified, monitoring jobs substract this time from the end time.
+    #   For information about using offsets for scheduling monitoring jobs,
+    #   see [Schedule Model Quality Monitoring Jobs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchTransformInput AWS API Documentation
+    #
+    class BatchTransformInput < Struct.new(
+      :data_captured_destination_s3_uri,
+      :dataset_format,
+      :local_path,
+      :s3_input_mode,
+      :s3_data_distribution_type,
+      :features_attribute,
+      :inference_attribute,
+      :probability_attribute,
+      :probability_threshold_attribute,
+      :start_time_offset,
+      :end_time_offset)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5502,8 +5661,30 @@ module Aws::SageMaker
     #           },
     #         },
     #         data_quality_job_input: { # required
-    #           endpoint_input: { # required
+    #           endpoint_input: {
     #             endpoint_name: "EndpointName", # required
+    #             local_path: "ProcessingLocalPath", # required
+    #             s3_input_mode: "Pipe", # accepts Pipe, File
+    #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #             features_attribute: "String",
+    #             inference_attribute: "String",
+    #             probability_attribute: "String",
+    #             probability_threshold_attribute: 1.0,
+    #             start_time_offset: "MonitoringTimeOffsetString",
+    #             end_time_offset: "MonitoringTimeOffsetString",
+    #           },
+    #           batch_transform_input: {
+    #             data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #             dataset_format: { # required
+    #               csv: {
+    #                 header: false,
+    #               },
+    #               json: {
+    #                 line: false,
+    #               },
+    #               parquet: {
+    #               },
+    #             },
     #             local_path: "ProcessingLocalPath", # required
     #             s3_input_mode: "Pipe", # accepts Pipe, File
     #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -7778,8 +7959,30 @@ module Aws::SageMaker
     #           },
     #         },
     #         model_bias_job_input: { # required
-    #           endpoint_input: { # required
+    #           endpoint_input: {
     #             endpoint_name: "EndpointName", # required
+    #             local_path: "ProcessingLocalPath", # required
+    #             s3_input_mode: "Pipe", # accepts Pipe, File
+    #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #             features_attribute: "String",
+    #             inference_attribute: "String",
+    #             probability_attribute: "String",
+    #             probability_threshold_attribute: 1.0,
+    #             start_time_offset: "MonitoringTimeOffsetString",
+    #             end_time_offset: "MonitoringTimeOffsetString",
+    #           },
+    #           batch_transform_input: {
+    #             data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #             dataset_format: { # required
+    #               csv: {
+    #                 header: false,
+    #               },
+    #               json: {
+    #                 line: false,
+    #               },
+    #               parquet: {
+    #               },
+    #             },
     #             local_path: "ProcessingLocalPath", # required
     #             s3_input_mode: "Pipe", # accepts Pipe, File
     #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -7932,8 +8135,30 @@ module Aws::SageMaker
     #           },
     #         },
     #         model_explainability_job_input: { # required
-    #           endpoint_input: { # required
+    #           endpoint_input: {
     #             endpoint_name: "EndpointName", # required
+    #             local_path: "ProcessingLocalPath", # required
+    #             s3_input_mode: "Pipe", # accepts Pipe, File
+    #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #             features_attribute: "String",
+    #             inference_attribute: "String",
+    #             probability_attribute: "String",
+    #             probability_threshold_attribute: 1.0,
+    #             start_time_offset: "MonitoringTimeOffsetString",
+    #             end_time_offset: "MonitoringTimeOffsetString",
+    #           },
+    #           batch_transform_input: {
+    #             data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #             dataset_format: { # required
+    #               csv: {
+    #                 header: false,
+    #               },
+    #               json: {
+    #                 line: false,
+    #               },
+    #               parquet: {
+    #               },
+    #             },
     #             local_path: "ProcessingLocalPath", # required
     #             s3_input_mode: "Pipe", # accepts Pipe, File
     #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -8703,8 +8928,30 @@ module Aws::SageMaker
     #           },
     #         },
     #         model_quality_job_input: { # required
-    #           endpoint_input: { # required
+    #           endpoint_input: {
     #             endpoint_name: "EndpointName", # required
+    #             local_path: "ProcessingLocalPath", # required
+    #             s3_input_mode: "Pipe", # accepts Pipe, File
+    #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #             features_attribute: "String",
+    #             inference_attribute: "String",
+    #             probability_attribute: "String",
+    #             probability_threshold_attribute: 1.0,
+    #             start_time_offset: "MonitoringTimeOffsetString",
+    #             end_time_offset: "MonitoringTimeOffsetString",
+    #           },
+    #           batch_transform_input: {
+    #             data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #             dataset_format: { # required
+    #               csv: {
+    #                 header: false,
+    #               },
+    #               json: {
+    #                 line: false,
+    #               },
+    #               parquet: {
+    #               },
+    #             },
     #             local_path: "ProcessingLocalPath", # required
     #             s3_input_mode: "Pipe", # accepts Pipe, File
     #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -8858,8 +9105,30 @@ module Aws::SageMaker
     #             },
     #             monitoring_inputs: [ # required
     #               {
-    #                 endpoint_input: { # required
+    #                 endpoint_input: {
     #                   endpoint_name: "EndpointName", # required
+    #                   local_path: "ProcessingLocalPath", # required
+    #                   s3_input_mode: "Pipe", # accepts Pipe, File
+    #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #                   features_attribute: "String",
+    #                   inference_attribute: "String",
+    #                   probability_attribute: "String",
+    #                   probability_threshold_attribute: 1.0,
+    #                   start_time_offset: "MonitoringTimeOffsetString",
+    #                   end_time_offset: "MonitoringTimeOffsetString",
+    #                 },
+    #                 batch_transform_input: {
+    #                   data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #                   dataset_format: { # required
+    #                     csv: {
+    #                       header: false,
+    #                     },
+    #                     json: {
+    #                       line: false,
+    #                     },
+    #                     parquet: {
+    #                     },
+    #                   },
     #                   local_path: "ProcessingLocalPath", # required
     #                   s3_input_mode: "Pipe", # accepts Pipe, File
     #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -10219,6 +10488,11 @@ module Aws::SageMaker
     #           assemble_with: "None", # accepts None, Line
     #           kms_key_id: "KmsKeyId",
     #         },
+    #         data_capture_config: {
+    #           destination_s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
+    #           generate_inference_id: false,
+    #         },
     #         transform_resources: { # required
     #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #           instance_count: 1, # required
@@ -10326,6 +10600,10 @@ module Aws::SageMaker
     #   Describes the results of the transform job.
     #   @return [Types::TransformOutput]
     #
+    # @!attribute [rw] data_capture_config
+    #   Configuration to control how SageMaker captures inference data.
+    #   @return [Types::BatchDataCaptureConfig]
+    #
     # @!attribute [rw] transform_resources
     #   Describes the resources, including ML instance types and ML instance
     #   count, to use for the transform job.
@@ -10379,6 +10657,7 @@ module Aws::SageMaker
       :environment,
       :transform_input,
       :transform_output,
+      :data_capture_config,
       :transform_resources,
       :data_processing,
       :tags,
@@ -11339,8 +11618,30 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         endpoint_input: { # required
+    #         endpoint_input: {
     #           endpoint_name: "EndpointName", # required
+    #           local_path: "ProcessingLocalPath", # required
+    #           s3_input_mode: "Pipe", # accepts Pipe, File
+    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #           features_attribute: "String",
+    #           inference_attribute: "String",
+    #           probability_attribute: "String",
+    #           probability_threshold_attribute: 1.0,
+    #           start_time_offset: "MonitoringTimeOffsetString",
+    #           end_time_offset: "MonitoringTimeOffsetString",
+    #         },
+    #         batch_transform_input: {
+    #           data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #           dataset_format: { # required
+    #             csv: {
+    #               header: false,
+    #             },
+    #             json: {
+    #               line: false,
+    #             },
+    #             parquet: {
+    #             },
+    #           },
     #           local_path: "ProcessingLocalPath", # required
     #           s3_input_mode: "Pipe", # accepts Pipe, File
     #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -11357,10 +11658,15 @@ module Aws::SageMaker
     #   Input object for the endpoint
     #   @return [Types::EndpointInput]
     #
+    # @!attribute [rw] batch_transform_input
+    #   Input object for the batch transform job.
+    #   @return [Types::BatchTransformInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataQualityJobInput AWS API Documentation
     #
     class DataQualityJobInput < Struct.new(
-      :endpoint_input)
+      :endpoint_input,
+      :batch_transform_input)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17424,6 +17730,10 @@ module Aws::SageMaker
     #   save the results from the transform job.
     #   @return [Types::TransformOutput]
     #
+    # @!attribute [rw] data_capture_config
+    #   Configuration to control how SageMaker captures inference data.
+    #   @return [Types::BatchDataCaptureConfig]
+    #
     # @!attribute [rw] transform_resources
     #   Describes the resources, including ML instance types and ML instance
     #   count, to use for the transform job.
@@ -17495,6 +17805,7 @@ module Aws::SageMaker
       :environment,
       :transform_input,
       :transform_output,
+      :data_capture_config,
       :transform_resources,
       :creation_time,
       :transform_start_time,
@@ -30005,8 +30316,30 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         endpoint_input: { # required
+    #         endpoint_input: {
     #           endpoint_name: "EndpointName", # required
+    #           local_path: "ProcessingLocalPath", # required
+    #           s3_input_mode: "Pipe", # accepts Pipe, File
+    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #           features_attribute: "String",
+    #           inference_attribute: "String",
+    #           probability_attribute: "String",
+    #           probability_threshold_attribute: 1.0,
+    #           start_time_offset: "MonitoringTimeOffsetString",
+    #           end_time_offset: "MonitoringTimeOffsetString",
+    #         },
+    #         batch_transform_input: {
+    #           data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #           dataset_format: { # required
+    #             csv: {
+    #               header: false,
+    #             },
+    #             json: {
+    #               line: false,
+    #             },
+    #             parquet: {
+    #             },
+    #           },
     #           local_path: "ProcessingLocalPath", # required
     #           s3_input_mode: "Pipe", # accepts Pipe, File
     #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -30026,6 +30359,10 @@ module Aws::SageMaker
     #   Input object for the endpoint
     #   @return [Types::EndpointInput]
     #
+    # @!attribute [rw] batch_transform_input
+    #   Input object for the batch transform job.
+    #   @return [Types::BatchTransformInput]
+    #
     # @!attribute [rw] ground_truth_s3_input
     #   Location of ground truth labels to use in model bias job.
     #   @return [Types::MonitoringGroundTruthS3Input]
@@ -30034,6 +30371,7 @@ module Aws::SageMaker
     #
     class ModelBiasJobInput < Struct.new(
       :endpoint_input,
+      :batch_transform_input,
       :ground_truth_s3_input)
       SENSITIVE = []
       include Aws::Structure
@@ -30278,8 +30616,30 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         endpoint_input: { # required
+    #         endpoint_input: {
     #           endpoint_name: "EndpointName", # required
+    #           local_path: "ProcessingLocalPath", # required
+    #           s3_input_mode: "Pipe", # accepts Pipe, File
+    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #           features_attribute: "String",
+    #           inference_attribute: "String",
+    #           probability_attribute: "String",
+    #           probability_threshold_attribute: 1.0,
+    #           start_time_offset: "MonitoringTimeOffsetString",
+    #           end_time_offset: "MonitoringTimeOffsetString",
+    #         },
+    #         batch_transform_input: {
+    #           data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #           dataset_format: { # required
+    #             csv: {
+    #               header: false,
+    #             },
+    #             json: {
+    #               line: false,
+    #             },
+    #             parquet: {
+    #             },
+    #           },
     #           local_path: "ProcessingLocalPath", # required
     #           s3_input_mode: "Pipe", # accepts Pipe, File
     #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -30296,10 +30656,15 @@ module Aws::SageMaker
     #   Input object for the endpoint
     #   @return [Types::EndpointInput]
     #
+    # @!attribute [rw] batch_transform_input
+    #   Input object for the batch transform job.
+    #   @return [Types::BatchTransformInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelExplainabilityJobInput AWS API Documentation
     #
     class ModelExplainabilityJobInput < Struct.new(
-      :endpoint_input)
+      :endpoint_input,
+      :batch_transform_input)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31283,8 +31648,30 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         endpoint_input: { # required
+    #         endpoint_input: {
     #           endpoint_name: "EndpointName", # required
+    #           local_path: "ProcessingLocalPath", # required
+    #           s3_input_mode: "Pipe", # accepts Pipe, File
+    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #           features_attribute: "String",
+    #           inference_attribute: "String",
+    #           probability_attribute: "String",
+    #           probability_threshold_attribute: 1.0,
+    #           start_time_offset: "MonitoringTimeOffsetString",
+    #           end_time_offset: "MonitoringTimeOffsetString",
+    #         },
+    #         batch_transform_input: {
+    #           data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #           dataset_format: { # required
+    #             csv: {
+    #               header: false,
+    #             },
+    #             json: {
+    #               line: false,
+    #             },
+    #             parquet: {
+    #             },
+    #           },
     #           local_path: "ProcessingLocalPath", # required
     #           s3_input_mode: "Pipe", # accepts Pipe, File
     #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -31304,6 +31691,10 @@ module Aws::SageMaker
     #   Input object for the endpoint
     #   @return [Types::EndpointInput]
     #
+    # @!attribute [rw] batch_transform_input
+    #   Input object for the batch transform job.
+    #   @return [Types::BatchTransformInput]
+    #
     # @!attribute [rw] ground_truth_s3_input
     #   The ground truth label provided for the model.
     #   @return [Types::MonitoringGroundTruthS3Input]
@@ -31312,6 +31703,7 @@ module Aws::SageMaker
     #
     class ModelQualityJobInput < Struct.new(
       :endpoint_input,
+      :batch_transform_input,
       :ground_truth_s3_input)
       SENSITIVE = []
       include Aws::Structure
@@ -31515,6 +31907,65 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Represents the CSV dataset format used when running a monitoring job.
+    #
+    # @note When making an API call, you may pass MonitoringCsvDatasetFormat
+    #   data as a hash:
+    #
+    #       {
+    #         header: false,
+    #       }
+    #
+    # @!attribute [rw] header
+    #   Indicates if the CSV data has a header.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringCsvDatasetFormat AWS API Documentation
+    #
+    class MonitoringCsvDatasetFormat < Struct.new(
+      :header)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the dataset format used when running a monitoring job.
+    #
+    # @note When making an API call, you may pass MonitoringDatasetFormat
+    #   data as a hash:
+    #
+    #       {
+    #         csv: {
+    #           header: false,
+    #         },
+    #         json: {
+    #           line: false,
+    #         },
+    #         parquet: {
+    #         },
+    #       }
+    #
+    # @!attribute [rw] csv
+    #   The CSV dataset used in the monitoring job.
+    #   @return [Types::MonitoringCsvDatasetFormat]
+    #
+    # @!attribute [rw] json
+    #   The JSON dataset used in the monitoring job
+    #   @return [Types::MonitoringJsonDatasetFormat]
+    #
+    # @!attribute [rw] parquet
+    #   The Parquet dataset used in the monitoring job
+    #   @return [Types::MonitoringParquetDatasetFormat]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringDatasetFormat AWS API Documentation
+    #
+    class MonitoringDatasetFormat < Struct.new(
+      :csv,
+      :json,
+      :parquet)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary of information about the last monitoring job to run.
     #
     # @!attribute [rw] monitoring_schedule_name
@@ -31602,8 +32053,30 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         endpoint_input: { # required
+    #         endpoint_input: {
     #           endpoint_name: "EndpointName", # required
+    #           local_path: "ProcessingLocalPath", # required
+    #           s3_input_mode: "Pipe", # accepts Pipe, File
+    #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #           features_attribute: "String",
+    #           inference_attribute: "String",
+    #           probability_attribute: "String",
+    #           probability_threshold_attribute: 1.0,
+    #           start_time_offset: "MonitoringTimeOffsetString",
+    #           end_time_offset: "MonitoringTimeOffsetString",
+    #         },
+    #         batch_transform_input: {
+    #           data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #           dataset_format: { # required
+    #             csv: {
+    #               header: false,
+    #             },
+    #             json: {
+    #               line: false,
+    #             },
+    #             parquet: {
+    #             },
+    #           },
     #           local_path: "ProcessingLocalPath", # required
     #           s3_input_mode: "Pipe", # accepts Pipe, File
     #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -31620,10 +32093,15 @@ module Aws::SageMaker
     #   The endpoint for a monitoring job.
     #   @return [Types::EndpointInput]
     #
+    # @!attribute [rw] batch_transform_input
+    #   Input object for the batch transform job.
+    #   @return [Types::BatchTransformInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringInput AWS API Documentation
     #
     class MonitoringInput < Struct.new(
-      :endpoint_input)
+      :endpoint_input,
+      :batch_transform_input)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31645,8 +32123,30 @@ module Aws::SageMaker
     #         },
     #         monitoring_inputs: [ # required
     #           {
-    #             endpoint_input: { # required
+    #             endpoint_input: {
     #               endpoint_name: "EndpointName", # required
+    #               local_path: "ProcessingLocalPath", # required
+    #               s3_input_mode: "Pipe", # accepts Pipe, File
+    #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #               features_attribute: "String",
+    #               inference_attribute: "String",
+    #               probability_attribute: "String",
+    #               probability_threshold_attribute: 1.0,
+    #               start_time_offset: "MonitoringTimeOffsetString",
+    #               end_time_offset: "MonitoringTimeOffsetString",
+    #             },
+    #             batch_transform_input: {
+    #               data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #               dataset_format: { # required
+    #                 csv: {
+    #                   header: false,
+    #                 },
+    #                 json: {
+    #                   line: false,
+    #                 },
+    #                 parquet: {
+    #                 },
+    #               },
     #               local_path: "ProcessingLocalPath", # required
     #               s3_input_mode: "Pipe", # accepts Pipe, File
     #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -31792,6 +32292,27 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Represents the JSON dataset format used when running a monitoring job.
+    #
+    # @note When making an API call, you may pass MonitoringJsonDatasetFormat
+    #   data as a hash:
+    #
+    #       {
+    #         line: false,
+    #       }
+    #
+    # @!attribute [rw] line
+    #   Indicates if the file should be read as a json object per line.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringJsonDatasetFormat AWS API Documentation
+    #
+    class MonitoringJsonDatasetFormat < Struct.new(
+      :line)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The networking configuration for the monitoring job.
     #
     # @note When making an API call, you may pass MonitoringNetworkConfig
@@ -31904,6 +32425,15 @@ module Aws::SageMaker
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Represents the Parquet dataset format used when running a monitoring
+    # job.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringParquetDatasetFormat AWS API Documentation
+    #
+    class MonitoringParquetDatasetFormat < Aws::EmptyStructure; end
 
     # Identifies the resources to deploy for a monitoring job.
     #
@@ -32075,8 +32605,30 @@ module Aws::SageMaker
     #           },
     #           monitoring_inputs: [ # required
     #             {
-    #               endpoint_input: { # required
+    #               endpoint_input: {
     #                 endpoint_name: "EndpointName", # required
+    #                 local_path: "ProcessingLocalPath", # required
+    #                 s3_input_mode: "Pipe", # accepts Pipe, File
+    #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #                 features_attribute: "String",
+    #                 inference_attribute: "String",
+    #                 probability_attribute: "String",
+    #                 probability_threshold_attribute: 1.0,
+    #                 start_time_offset: "MonitoringTimeOffsetString",
+    #                 end_time_offset: "MonitoringTimeOffsetString",
+    #               },
+    #               batch_transform_input: {
+    #                 data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #                 dataset_format: { # required
+    #                   csv: {
+    #                     header: false,
+    #                   },
+    #                   json: {
+    #                     line: false,
+    #                   },
+    #                   parquet: {
+    #                   },
+    #                 },
     #                 local_path: "ProcessingLocalPath", # required
     #                 s3_input_mode: "Pipe", # accepts Pipe, File
     #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -42291,8 +42843,30 @@ module Aws::SageMaker
     #             },
     #             monitoring_inputs: [ # required
     #               {
-    #                 endpoint_input: { # required
+    #                 endpoint_input: {
     #                   endpoint_name: "EndpointName", # required
+    #                   local_path: "ProcessingLocalPath", # required
+    #                   s3_input_mode: "Pipe", # accepts Pipe, File
+    #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #                   features_attribute: "String",
+    #                   inference_attribute: "String",
+    #                   probability_attribute: "String",
+    #                   probability_threshold_attribute: 1.0,
+    #                   start_time_offset: "MonitoringTimeOffsetString",
+    #                   end_time_offset: "MonitoringTimeOffsetString",
+    #                 },
+    #                 batch_transform_input: {
+    #                   data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #                   dataset_format: { # required
+    #                     csv: {
+    #                       header: false,
+    #                     },
+    #                     json: {
+    #                       line: false,
+    #                     },
+    #                     parquet: {
+    #                     },
+    #                   },
     #                   local_path: "ProcessingLocalPath", # required
     #                   s3_input_mode: "Pipe", # accepts Pipe, File
     #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key

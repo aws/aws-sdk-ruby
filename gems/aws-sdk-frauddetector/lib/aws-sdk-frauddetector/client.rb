@@ -517,8 +517,16 @@ module Aws::FraudDetector
     #
     # @option params [required, String] :iam_role_arn
     #   The ARN of the IAM role created for Amazon S3 bucket that holds your
-    #   data file. The IAM role must have read and write permissions to both
-    #   input and output S3 buckets.
+    #   data file.
+    #
+    #   The IAM role must have read permissions to your input S3 bucket and
+    #   write permissions to your output S3 bucket. For more information about
+    #   bucket permissions, see [User policy examples][1] in the *Amazon S3
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-policies-s3.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A collection of key-value pairs associated with this request.
@@ -572,6 +580,15 @@ module Aws::FraudDetector
     #
     # @option params [required, String] :iam_role_arn
     #   The ARN of the IAM role to use for this job request.
+    #
+    #   The IAM Role must have read permissions to your input S3 bucket and
+    #   write permissions to your output S3 bucket. For more information about
+    #   bucket permissions, see [User policy examples][1] in the *Amazon S3
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-policies-s3.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A collection of key and value pairs.
@@ -2973,6 +2990,9 @@ module Aws::FraudDetector
     # @option params [required, String] :kms_encryption_key_arn
     #   The KMS encryption key ARN.
     #
+    #   The KMS key must be single-Region key. Amazon Fraud Detector does not
+    #   support multi-Region KMS key.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3297,6 +3317,8 @@ module Aws::FraudDetector
     #
     # @option params [required, String] :status
     #   The new status.
+    #
+    #   The only supported values are `ACTIVE` and `INACTIVE`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3639,7 +3661,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

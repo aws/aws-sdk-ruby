@@ -85,6 +85,7 @@ module AwsSdkCodeGenerator
         'globalEndpoint' => true,
         'serviceAbbreviation' => true,
         'uid' => true,
+        'awsQueryCompatible' => true, # AwsQuery migration
         # ignore
         'ripServiceName' => true
       }

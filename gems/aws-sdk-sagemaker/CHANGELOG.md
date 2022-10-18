@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2022-10-18)
+------------------
+
+* Feature - This change allows customers to enable data capturing while running a batch transform job, and configure monitoring schedule to monitoring the captured data.
+
 1.144.0 (2022-10-17)
 ------------------
 

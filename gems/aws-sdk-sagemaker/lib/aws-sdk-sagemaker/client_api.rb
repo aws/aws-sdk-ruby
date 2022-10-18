@@ -133,12 +133,14 @@ module Aws::SageMaker
     AutoMLSortOrder = Shapes::StringShape.new(name: 'AutoMLSortOrder')
     AutoRollbackConfig = Shapes::StructureShape.new(name: 'AutoRollbackConfig')
     AwsManagedHumanLoopRequestSource = Shapes::StringShape.new(name: 'AwsManagedHumanLoopRequestSource')
+    BatchDataCaptureConfig = Shapes::StructureShape.new(name: 'BatchDataCaptureConfig')
     BatchDescribeModelPackageError = Shapes::StructureShape.new(name: 'BatchDescribeModelPackageError')
     BatchDescribeModelPackageErrorMap = Shapes::MapShape.new(name: 'BatchDescribeModelPackageErrorMap')
     BatchDescribeModelPackageInput = Shapes::StructureShape.new(name: 'BatchDescribeModelPackageInput')
     BatchDescribeModelPackageOutput = Shapes::StructureShape.new(name: 'BatchDescribeModelPackageOutput')
     BatchDescribeModelPackageSummary = Shapes::StructureShape.new(name: 'BatchDescribeModelPackageSummary')
     BatchStrategy = Shapes::StringShape.new(name: 'BatchStrategy')
+    BatchTransformInput = Shapes::StructureShape.new(name: 'BatchTransformInput')
     Bias = Shapes::StructureShape.new(name: 'Bias')
     BillableTimeInSeconds = Shapes::IntegerShape.new(name: 'BillableTimeInSeconds')
     BlockedReason = Shapes::StringShape.new(name: 'BlockedReason')
@@ -1132,6 +1134,8 @@ module Aws::SageMaker
     MonitoringClusterConfig = Shapes::StructureShape.new(name: 'MonitoringClusterConfig')
     MonitoringConstraintsResource = Shapes::StructureShape.new(name: 'MonitoringConstraintsResource')
     MonitoringContainerArguments = Shapes::ListShape.new(name: 'MonitoringContainerArguments')
+    MonitoringCsvDatasetFormat = Shapes::StructureShape.new(name: 'MonitoringCsvDatasetFormat')
+    MonitoringDatasetFormat = Shapes::StructureShape.new(name: 'MonitoringDatasetFormat')
     MonitoringEnvironmentMap = Shapes::MapShape.new(name: 'MonitoringEnvironmentMap')
     MonitoringExecutionSortKey = Shapes::StringShape.new(name: 'MonitoringExecutionSortKey')
     MonitoringExecutionSummary = Shapes::StructureShape.new(name: 'MonitoringExecutionSummary')
@@ -1145,11 +1149,13 @@ module Aws::SageMaker
     MonitoringJobDefinitionSortKey = Shapes::StringShape.new(name: 'MonitoringJobDefinitionSortKey')
     MonitoringJobDefinitionSummary = Shapes::StructureShape.new(name: 'MonitoringJobDefinitionSummary')
     MonitoringJobDefinitionSummaryList = Shapes::ListShape.new(name: 'MonitoringJobDefinitionSummaryList')
+    MonitoringJsonDatasetFormat = Shapes::StructureShape.new(name: 'MonitoringJsonDatasetFormat')
     MonitoringMaxRuntimeInSeconds = Shapes::IntegerShape.new(name: 'MonitoringMaxRuntimeInSeconds')
     MonitoringNetworkConfig = Shapes::StructureShape.new(name: 'MonitoringNetworkConfig')
     MonitoringOutput = Shapes::StructureShape.new(name: 'MonitoringOutput')
     MonitoringOutputConfig = Shapes::StructureShape.new(name: 'MonitoringOutputConfig')
     MonitoringOutputs = Shapes::ListShape.new(name: 'MonitoringOutputs')
+    MonitoringParquetDatasetFormat = Shapes::StructureShape.new(name: 'MonitoringParquetDatasetFormat')
     MonitoringProblemType = Shapes::StringShape.new(name: 'MonitoringProblemType')
     MonitoringResources = Shapes::StructureShape.new(name: 'MonitoringResources')
     MonitoringS3Output = Shapes::StructureShape.new(name: 'MonitoringS3Output')
@@ -2032,6 +2038,11 @@ module Aws::SageMaker
     AutoRollbackConfig.add_member(:alarms, Shapes::ShapeRef.new(shape: AlarmList, location_name: "Alarms"))
     AutoRollbackConfig.struct_class = Types::AutoRollbackConfig
 
+    BatchDataCaptureConfig.add_member(:destination_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "DestinationS3Uri"))
+    BatchDataCaptureConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    BatchDataCaptureConfig.add_member(:generate_inference_id, Shapes::ShapeRef.new(shape: Boolean, location_name: "GenerateInferenceId"))
+    BatchDataCaptureConfig.struct_class = Types::BatchDataCaptureConfig
+
     BatchDescribeModelPackageError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorCode"))
     BatchDescribeModelPackageError.add_member(:error_response, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorResponse"))
     BatchDescribeModelPackageError.struct_class = Types::BatchDescribeModelPackageError
@@ -2055,6 +2066,19 @@ module Aws::SageMaker
     BatchDescribeModelPackageSummary.add_member(:model_package_status, Shapes::ShapeRef.new(shape: ModelPackageStatus, required: true, location_name: "ModelPackageStatus"))
     BatchDescribeModelPackageSummary.add_member(:model_approval_status, Shapes::ShapeRef.new(shape: ModelApprovalStatus, location_name: "ModelApprovalStatus"))
     BatchDescribeModelPackageSummary.struct_class = Types::BatchDescribeModelPackageSummary
+
+    BatchTransformInput.add_member(:data_captured_destination_s3_uri, Shapes::ShapeRef.new(shape: DestinationS3Uri, required: true, location_name: "DataCapturedDestinationS3Uri"))
+    BatchTransformInput.add_member(:dataset_format, Shapes::ShapeRef.new(shape: MonitoringDatasetFormat, required: true, location_name: "DatasetFormat"))
+    BatchTransformInput.add_member(:local_path, Shapes::ShapeRef.new(shape: ProcessingLocalPath, required: true, location_name: "LocalPath"))
+    BatchTransformInput.add_member(:s3_input_mode, Shapes::ShapeRef.new(shape: ProcessingS3InputMode, location_name: "S3InputMode"))
+    BatchTransformInput.add_member(:s3_data_distribution_type, Shapes::ShapeRef.new(shape: ProcessingS3DataDistributionType, location_name: "S3DataDistributionType"))
+    BatchTransformInput.add_member(:features_attribute, Shapes::ShapeRef.new(shape: String, location_name: "FeaturesAttribute"))
+    BatchTransformInput.add_member(:inference_attribute, Shapes::ShapeRef.new(shape: String, location_name: "InferenceAttribute"))
+    BatchTransformInput.add_member(:probability_attribute, Shapes::ShapeRef.new(shape: String, location_name: "ProbabilityAttribute"))
+    BatchTransformInput.add_member(:probability_threshold_attribute, Shapes::ShapeRef.new(shape: ProbabilityThresholdAttribute, location_name: "ProbabilityThresholdAttribute"))
+    BatchTransformInput.add_member(:start_time_offset, Shapes::ShapeRef.new(shape: MonitoringTimeOffsetString, location_name: "StartTimeOffset"))
+    BatchTransformInput.add_member(:end_time_offset, Shapes::ShapeRef.new(shape: MonitoringTimeOffsetString, location_name: "EndTimeOffset"))
+    BatchTransformInput.struct_class = Types::BatchTransformInput
 
     Bias.add_member(:report, Shapes::ShapeRef.new(shape: MetricsSource, location_name: "Report"))
     Bias.add_member(:pre_training_report, Shapes::ShapeRef.new(shape: MetricsSource, location_name: "PreTrainingReport"))
@@ -2804,6 +2828,7 @@ module Aws::SageMaker
     CreateTransformJobRequest.add_member(:environment, Shapes::ShapeRef.new(shape: TransformEnvironmentMap, location_name: "Environment"))
     CreateTransformJobRequest.add_member(:transform_input, Shapes::ShapeRef.new(shape: TransformInput, required: true, location_name: "TransformInput"))
     CreateTransformJobRequest.add_member(:transform_output, Shapes::ShapeRef.new(shape: TransformOutput, required: true, location_name: "TransformOutput"))
+    CreateTransformJobRequest.add_member(:data_capture_config, Shapes::ShapeRef.new(shape: BatchDataCaptureConfig, location_name: "DataCaptureConfig"))
     CreateTransformJobRequest.add_member(:transform_resources, Shapes::ShapeRef.new(shape: TransformResources, required: true, location_name: "TransformResources"))
     CreateTransformJobRequest.add_member(:data_processing, Shapes::ShapeRef.new(shape: DataProcessing, location_name: "DataProcessing"))
     CreateTransformJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -2923,7 +2948,8 @@ module Aws::SageMaker
     DataQualityBaselineConfig.add_member(:statistics_resource, Shapes::ShapeRef.new(shape: MonitoringStatisticsResource, location_name: "StatisticsResource"))
     DataQualityBaselineConfig.struct_class = Types::DataQualityBaselineConfig
 
-    DataQualityJobInput.add_member(:endpoint_input, Shapes::ShapeRef.new(shape: EndpointInput, required: true, location_name: "EndpointInput"))
+    DataQualityJobInput.add_member(:endpoint_input, Shapes::ShapeRef.new(shape: EndpointInput, location_name: "EndpointInput"))
+    DataQualityJobInput.add_member(:batch_transform_input, Shapes::ShapeRef.new(shape: BatchTransformInput, location_name: "BatchTransformInput"))
     DataQualityJobInput.struct_class = Types::DataQualityJobInput
 
     DataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: S3DataSource, location_name: "S3DataSource"))
@@ -3955,6 +3981,7 @@ module Aws::SageMaker
     DescribeTransformJobResponse.add_member(:environment, Shapes::ShapeRef.new(shape: TransformEnvironmentMap, location_name: "Environment"))
     DescribeTransformJobResponse.add_member(:transform_input, Shapes::ShapeRef.new(shape: TransformInput, required: true, location_name: "TransformInput"))
     DescribeTransformJobResponse.add_member(:transform_output, Shapes::ShapeRef.new(shape: TransformOutput, location_name: "TransformOutput"))
+    DescribeTransformJobResponse.add_member(:data_capture_config, Shapes::ShapeRef.new(shape: BatchDataCaptureConfig, location_name: "DataCaptureConfig"))
     DescribeTransformJobResponse.add_member(:transform_resources, Shapes::ShapeRef.new(shape: TransformResources, required: true, location_name: "TransformResources"))
     DescribeTransformJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     DescribeTransformJobResponse.add_member(:transform_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TransformStartTime"))
@@ -5760,7 +5787,8 @@ module Aws::SageMaker
     ModelBiasBaselineConfig.add_member(:constraints_resource, Shapes::ShapeRef.new(shape: MonitoringConstraintsResource, location_name: "ConstraintsResource"))
     ModelBiasBaselineConfig.struct_class = Types::ModelBiasBaselineConfig
 
-    ModelBiasJobInput.add_member(:endpoint_input, Shapes::ShapeRef.new(shape: EndpointInput, required: true, location_name: "EndpointInput"))
+    ModelBiasJobInput.add_member(:endpoint_input, Shapes::ShapeRef.new(shape: EndpointInput, location_name: "EndpointInput"))
+    ModelBiasJobInput.add_member(:batch_transform_input, Shapes::ShapeRef.new(shape: BatchTransformInput, location_name: "BatchTransformInput"))
     ModelBiasJobInput.add_member(:ground_truth_s3_input, Shapes::ShapeRef.new(shape: MonitoringGroundTruthS3Input, required: true, location_name: "GroundTruthS3Input"))
     ModelBiasJobInput.struct_class = Types::ModelBiasJobInput
 
@@ -5795,7 +5823,8 @@ module Aws::SageMaker
     ModelExplainabilityBaselineConfig.add_member(:constraints_resource, Shapes::ShapeRef.new(shape: MonitoringConstraintsResource, location_name: "ConstraintsResource"))
     ModelExplainabilityBaselineConfig.struct_class = Types::ModelExplainabilityBaselineConfig
 
-    ModelExplainabilityJobInput.add_member(:endpoint_input, Shapes::ShapeRef.new(shape: EndpointInput, required: true, location_name: "EndpointInput"))
+    ModelExplainabilityJobInput.add_member(:endpoint_input, Shapes::ShapeRef.new(shape: EndpointInput, location_name: "EndpointInput"))
+    ModelExplainabilityJobInput.add_member(:batch_transform_input, Shapes::ShapeRef.new(shape: BatchTransformInput, location_name: "BatchTransformInput"))
     ModelExplainabilityJobInput.struct_class = Types::ModelExplainabilityJobInput
 
     ModelInput.add_member(:data_input_config, Shapes::ShapeRef.new(shape: DataInputConfig, required: true, location_name: "DataInputConfig"))
@@ -5946,7 +5975,8 @@ module Aws::SageMaker
     ModelQualityBaselineConfig.add_member(:constraints_resource, Shapes::ShapeRef.new(shape: MonitoringConstraintsResource, location_name: "ConstraintsResource"))
     ModelQualityBaselineConfig.struct_class = Types::ModelQualityBaselineConfig
 
-    ModelQualityJobInput.add_member(:endpoint_input, Shapes::ShapeRef.new(shape: EndpointInput, required: true, location_name: "EndpointInput"))
+    ModelQualityJobInput.add_member(:endpoint_input, Shapes::ShapeRef.new(shape: EndpointInput, location_name: "EndpointInput"))
+    ModelQualityJobInput.add_member(:batch_transform_input, Shapes::ShapeRef.new(shape: BatchTransformInput, location_name: "BatchTransformInput"))
     ModelQualityJobInput.add_member(:ground_truth_s3_input, Shapes::ShapeRef.new(shape: MonitoringGroundTruthS3Input, required: true, location_name: "GroundTruthS3Input"))
     ModelQualityJobInput.struct_class = Types::ModelQualityJobInput
 
@@ -5983,6 +6013,14 @@ module Aws::SageMaker
 
     MonitoringContainerArguments.member = Shapes::ShapeRef.new(shape: ContainerArgument)
 
+    MonitoringCsvDatasetFormat.add_member(:header, Shapes::ShapeRef.new(shape: Boolean, location_name: "Header"))
+    MonitoringCsvDatasetFormat.struct_class = Types::MonitoringCsvDatasetFormat
+
+    MonitoringDatasetFormat.add_member(:csv, Shapes::ShapeRef.new(shape: MonitoringCsvDatasetFormat, location_name: "Csv"))
+    MonitoringDatasetFormat.add_member(:json, Shapes::ShapeRef.new(shape: MonitoringJsonDatasetFormat, location_name: "Json"))
+    MonitoringDatasetFormat.add_member(:parquet, Shapes::ShapeRef.new(shape: MonitoringParquetDatasetFormat, location_name: "Parquet"))
+    MonitoringDatasetFormat.struct_class = Types::MonitoringDatasetFormat
+
     MonitoringEnvironmentMap.key = Shapes::ShapeRef.new(shape: ProcessingEnvironmentKey)
     MonitoringEnvironmentMap.value = Shapes::ShapeRef.new(shape: ProcessingEnvironmentValue)
 
@@ -6003,7 +6041,8 @@ module Aws::SageMaker
     MonitoringGroundTruthS3Input.add_member(:s3_uri, Shapes::ShapeRef.new(shape: MonitoringS3Uri, location_name: "S3Uri"))
     MonitoringGroundTruthS3Input.struct_class = Types::MonitoringGroundTruthS3Input
 
-    MonitoringInput.add_member(:endpoint_input, Shapes::ShapeRef.new(shape: EndpointInput, required: true, location_name: "EndpointInput"))
+    MonitoringInput.add_member(:endpoint_input, Shapes::ShapeRef.new(shape: EndpointInput, location_name: "EndpointInput"))
+    MonitoringInput.add_member(:batch_transform_input, Shapes::ShapeRef.new(shape: BatchTransformInput, location_name: "BatchTransformInput"))
     MonitoringInput.struct_class = Types::MonitoringInput
 
     MonitoringInputs.member = Shapes::ShapeRef.new(shape: MonitoringInput)
@@ -6027,6 +6066,9 @@ module Aws::SageMaker
 
     MonitoringJobDefinitionSummaryList.member = Shapes::ShapeRef.new(shape: MonitoringJobDefinitionSummary)
 
+    MonitoringJsonDatasetFormat.add_member(:line, Shapes::ShapeRef.new(shape: Boolean, location_name: "Line"))
+    MonitoringJsonDatasetFormat.struct_class = Types::MonitoringJsonDatasetFormat
+
     MonitoringNetworkConfig.add_member(:enable_inter_container_traffic_encryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInterContainerTrafficEncryption"))
     MonitoringNetworkConfig.add_member(:enable_network_isolation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNetworkIsolation"))
     MonitoringNetworkConfig.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
@@ -6040,6 +6082,8 @@ module Aws::SageMaker
     MonitoringOutputConfig.struct_class = Types::MonitoringOutputConfig
 
     MonitoringOutputs.member = Shapes::ShapeRef.new(shape: MonitoringOutput)
+
+    MonitoringParquetDatasetFormat.struct_class = Types::MonitoringParquetDatasetFormat
 
     MonitoringResources.add_member(:cluster_config, Shapes::ShapeRef.new(shape: MonitoringClusterConfig, required: true, location_name: "ClusterConfig"))
     MonitoringResources.struct_class = Types::MonitoringResources

@@ -1652,8 +1652,30 @@ module Aws::SageMaker
     #       },
     #     },
     #     data_quality_job_input: { # required
-    #       endpoint_input: { # required
+    #       endpoint_input: {
     #         endpoint_name: "EndpointName", # required
+    #         local_path: "ProcessingLocalPath", # required
+    #         s3_input_mode: "Pipe", # accepts Pipe, File
+    #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #         features_attribute: "String",
+    #         inference_attribute: "String",
+    #         probability_attribute: "String",
+    #         probability_threshold_attribute: 1.0,
+    #         start_time_offset: "MonitoringTimeOffsetString",
+    #         end_time_offset: "MonitoringTimeOffsetString",
+    #       },
+    #       batch_transform_input: {
+    #         data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #         dataset_format: { # required
+    #           csv: {
+    #             header: false,
+    #           },
+    #           json: {
+    #             line: false,
+    #           },
+    #           parquet: {
+    #           },
+    #         },
     #         local_path: "ProcessingLocalPath", # required
     #         s3_input_mode: "Pipe", # accepts Pipe, File
     #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -4177,8 +4199,30 @@ module Aws::SageMaker
     #       },
     #     },
     #     model_bias_job_input: { # required
-    #       endpoint_input: { # required
+    #       endpoint_input: {
     #         endpoint_name: "EndpointName", # required
+    #         local_path: "ProcessingLocalPath", # required
+    #         s3_input_mode: "Pipe", # accepts Pipe, File
+    #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #         features_attribute: "String",
+    #         inference_attribute: "String",
+    #         probability_attribute: "String",
+    #         probability_threshold_attribute: 1.0,
+    #         start_time_offset: "MonitoringTimeOffsetString",
+    #         end_time_offset: "MonitoringTimeOffsetString",
+    #       },
+    #       batch_transform_input: {
+    #         data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #         dataset_format: { # required
+    #           csv: {
+    #             header: false,
+    #           },
+    #           json: {
+    #             line: false,
+    #           },
+    #           parquet: {
+    #           },
+    #         },
     #         local_path: "ProcessingLocalPath", # required
     #         s3_input_mode: "Pipe", # accepts Pipe, File
     #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -4311,8 +4355,30 @@ module Aws::SageMaker
     #       },
     #     },
     #     model_explainability_job_input: { # required
-    #       endpoint_input: { # required
+    #       endpoint_input: {
     #         endpoint_name: "EndpointName", # required
+    #         local_path: "ProcessingLocalPath", # required
+    #         s3_input_mode: "Pipe", # accepts Pipe, File
+    #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #         features_attribute: "String",
+    #         inference_attribute: "String",
+    #         probability_attribute: "String",
+    #         probability_threshold_attribute: 1.0,
+    #         start_time_offset: "MonitoringTimeOffsetString",
+    #         end_time_offset: "MonitoringTimeOffsetString",
+    #       },
+    #       batch_transform_input: {
+    #         data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #         dataset_format: { # required
+    #           csv: {
+    #             header: false,
+    #           },
+    #           json: {
+    #             line: false,
+    #           },
+    #           parquet: {
+    #           },
+    #         },
     #         local_path: "ProcessingLocalPath", # required
     #         s3_input_mode: "Pipe", # accepts Pipe, File
     #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -4882,8 +4948,30 @@ module Aws::SageMaker
     #       },
     #     },
     #     model_quality_job_input: { # required
-    #       endpoint_input: { # required
+    #       endpoint_input: {
     #         endpoint_name: "EndpointName", # required
+    #         local_path: "ProcessingLocalPath", # required
+    #         s3_input_mode: "Pipe", # accepts Pipe, File
+    #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #         features_attribute: "String",
+    #         inference_attribute: "String",
+    #         probability_attribute: "String",
+    #         probability_threshold_attribute: 1.0,
+    #         start_time_offset: "MonitoringTimeOffsetString",
+    #         end_time_offset: "MonitoringTimeOffsetString",
+    #       },
+    #       batch_transform_input: {
+    #         data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #         dataset_format: { # required
+    #           csv: {
+    #             header: false,
+    #           },
+    #           json: {
+    #             line: false,
+    #           },
+    #           parquet: {
+    #           },
+    #         },
     #         local_path: "ProcessingLocalPath", # required
     #         s3_input_mode: "Pipe", # accepts Pipe, File
     #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -4992,8 +5080,30 @@ module Aws::SageMaker
     #         },
     #         monitoring_inputs: [ # required
     #           {
-    #             endpoint_input: { # required
+    #             endpoint_input: {
     #               endpoint_name: "EndpointName", # required
+    #               local_path: "ProcessingLocalPath", # required
+    #               s3_input_mode: "Pipe", # accepts Pipe, File
+    #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #               features_attribute: "String",
+    #               inference_attribute: "String",
+    #               probability_attribute: "String",
+    #               probability_threshold_attribute: 1.0,
+    #               start_time_offset: "MonitoringTimeOffsetString",
+    #               end_time_offset: "MonitoringTimeOffsetString",
+    #             },
+    #             batch_transform_input: {
+    #               data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #               dataset_format: { # required
+    #                 csv: {
+    #                   header: false,
+    #                 },
+    #                 json: {
+    #                   line: false,
+    #                 },
+    #                 parquet: {
+    #                 },
+    #               },
     #               local_path: "ProcessingLocalPath", # required
     #               s3_input_mode: "Pipe", # accepts Pipe, File
     #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -6420,6 +6530,9 @@ module Aws::SageMaker
     # @option params [required, Types::TransformOutput] :transform_output
     #   Describes the results of the transform job.
     #
+    # @option params [Types::BatchDataCaptureConfig] :data_capture_config
+    #   Configuration to control how SageMaker captures inference data.
+    #
     # @option params [required, Types::TransformResources] :transform_resources
     #   Describes the resources, including ML instance types and ML instance
     #   count, to use for the transform job.
@@ -6492,6 +6605,11 @@ module Aws::SageMaker
     #       accept: "Accept",
     #       assemble_with: "None", # accepts None, Line
     #       kms_key_id: "KmsKeyId",
+    #     },
+    #     data_capture_config: {
+    #       destination_s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
+    #       generate_inference_id: false,
     #     },
     #     transform_resources: { # required
     #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
@@ -8931,6 +9049,18 @@ module Aws::SageMaker
     #   resp.data_quality_job_input.endpoint_input.probability_threshold_attribute #=> Float
     #   resp.data_quality_job_input.endpoint_input.start_time_offset #=> String
     #   resp.data_quality_job_input.endpoint_input.end_time_offset #=> String
+    #   resp.data_quality_job_input.batch_transform_input.data_captured_destination_s3_uri #=> String
+    #   resp.data_quality_job_input.batch_transform_input.dataset_format.csv.header #=> Boolean
+    #   resp.data_quality_job_input.batch_transform_input.dataset_format.json.line #=> Boolean
+    #   resp.data_quality_job_input.batch_transform_input.local_path #=> String
+    #   resp.data_quality_job_input.batch_transform_input.s3_input_mode #=> String, one of "Pipe", "File"
+    #   resp.data_quality_job_input.batch_transform_input.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.data_quality_job_input.batch_transform_input.features_attribute #=> String
+    #   resp.data_quality_job_input.batch_transform_input.inference_attribute #=> String
+    #   resp.data_quality_job_input.batch_transform_input.probability_attribute #=> String
+    #   resp.data_quality_job_input.batch_transform_input.probability_threshold_attribute #=> Float
+    #   resp.data_quality_job_input.batch_transform_input.start_time_offset #=> String
+    #   resp.data_quality_job_input.batch_transform_input.end_time_offset #=> String
     #   resp.data_quality_job_output_config.monitoring_outputs #=> Array
     #   resp.data_quality_job_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
     #   resp.data_quality_job_output_config.monitoring_outputs[0].s3_output.local_path #=> String
@@ -10539,6 +10669,18 @@ module Aws::SageMaker
     #   resp.model_bias_job_input.endpoint_input.probability_threshold_attribute #=> Float
     #   resp.model_bias_job_input.endpoint_input.start_time_offset #=> String
     #   resp.model_bias_job_input.endpoint_input.end_time_offset #=> String
+    #   resp.model_bias_job_input.batch_transform_input.data_captured_destination_s3_uri #=> String
+    #   resp.model_bias_job_input.batch_transform_input.dataset_format.csv.header #=> Boolean
+    #   resp.model_bias_job_input.batch_transform_input.dataset_format.json.line #=> Boolean
+    #   resp.model_bias_job_input.batch_transform_input.local_path #=> String
+    #   resp.model_bias_job_input.batch_transform_input.s3_input_mode #=> String, one of "Pipe", "File"
+    #   resp.model_bias_job_input.batch_transform_input.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.model_bias_job_input.batch_transform_input.features_attribute #=> String
+    #   resp.model_bias_job_input.batch_transform_input.inference_attribute #=> String
+    #   resp.model_bias_job_input.batch_transform_input.probability_attribute #=> String
+    #   resp.model_bias_job_input.batch_transform_input.probability_threshold_attribute #=> Float
+    #   resp.model_bias_job_input.batch_transform_input.start_time_offset #=> String
+    #   resp.model_bias_job_input.batch_transform_input.end_time_offset #=> String
     #   resp.model_bias_job_input.ground_truth_s3_input.s3_uri #=> String
     #   resp.model_bias_job_output_config.monitoring_outputs #=> Array
     #   resp.model_bias_job_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
@@ -10615,6 +10757,18 @@ module Aws::SageMaker
     #   resp.model_explainability_job_input.endpoint_input.probability_threshold_attribute #=> Float
     #   resp.model_explainability_job_input.endpoint_input.start_time_offset #=> String
     #   resp.model_explainability_job_input.endpoint_input.end_time_offset #=> String
+    #   resp.model_explainability_job_input.batch_transform_input.data_captured_destination_s3_uri #=> String
+    #   resp.model_explainability_job_input.batch_transform_input.dataset_format.csv.header #=> Boolean
+    #   resp.model_explainability_job_input.batch_transform_input.dataset_format.json.line #=> Boolean
+    #   resp.model_explainability_job_input.batch_transform_input.local_path #=> String
+    #   resp.model_explainability_job_input.batch_transform_input.s3_input_mode #=> String, one of "Pipe", "File"
+    #   resp.model_explainability_job_input.batch_transform_input.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.model_explainability_job_input.batch_transform_input.features_attribute #=> String
+    #   resp.model_explainability_job_input.batch_transform_input.inference_attribute #=> String
+    #   resp.model_explainability_job_input.batch_transform_input.probability_attribute #=> String
+    #   resp.model_explainability_job_input.batch_transform_input.probability_threshold_attribute #=> Float
+    #   resp.model_explainability_job_input.batch_transform_input.start_time_offset #=> String
+    #   resp.model_explainability_job_input.batch_transform_input.end_time_offset #=> String
     #   resp.model_explainability_job_output_config.monitoring_outputs #=> Array
     #   resp.model_explainability_job_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
     #   resp.model_explainability_job_output_config.monitoring_outputs[0].s3_output.local_path #=> String
@@ -10946,6 +11100,18 @@ module Aws::SageMaker
     #   resp.model_quality_job_input.endpoint_input.probability_threshold_attribute #=> Float
     #   resp.model_quality_job_input.endpoint_input.start_time_offset #=> String
     #   resp.model_quality_job_input.endpoint_input.end_time_offset #=> String
+    #   resp.model_quality_job_input.batch_transform_input.data_captured_destination_s3_uri #=> String
+    #   resp.model_quality_job_input.batch_transform_input.dataset_format.csv.header #=> Boolean
+    #   resp.model_quality_job_input.batch_transform_input.dataset_format.json.line #=> Boolean
+    #   resp.model_quality_job_input.batch_transform_input.local_path #=> String
+    #   resp.model_quality_job_input.batch_transform_input.s3_input_mode #=> String, one of "Pipe", "File"
+    #   resp.model_quality_job_input.batch_transform_input.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.model_quality_job_input.batch_transform_input.features_attribute #=> String
+    #   resp.model_quality_job_input.batch_transform_input.inference_attribute #=> String
+    #   resp.model_quality_job_input.batch_transform_input.probability_attribute #=> String
+    #   resp.model_quality_job_input.batch_transform_input.probability_threshold_attribute #=> Float
+    #   resp.model_quality_job_input.batch_transform_input.start_time_offset #=> String
+    #   resp.model_quality_job_input.batch_transform_input.end_time_offset #=> String
     #   resp.model_quality_job_input.ground_truth_s3_input.s3_uri #=> String
     #   resp.model_quality_job_output_config.monitoring_outputs #=> Array
     #   resp.model_quality_job_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
@@ -11022,6 +11188,18 @@ module Aws::SageMaker
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.probability_threshold_attribute #=> Float
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.start_time_offset #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.end_time_offset #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.data_captured_destination_s3_uri #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.dataset_format.csv.header #=> Boolean
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.dataset_format.json.line #=> Boolean
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.local_path #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.s3_input_mode #=> String, one of "Pipe", "File"
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.features_attribute #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.inference_attribute #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.probability_attribute #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.probability_threshold_attribute #=> Float
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.start_time_offset #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.end_time_offset #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs #=> Array
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs[0].s3_output.local_path #=> String
@@ -11819,6 +11997,7 @@ module Aws::SageMaker
     #   * {Types::DescribeTransformJobResponse#environment #environment} => Hash&lt;String,String&gt;
     #   * {Types::DescribeTransformJobResponse#transform_input #transform_input} => Types::TransformInput
     #   * {Types::DescribeTransformJobResponse#transform_output #transform_output} => Types::TransformOutput
+    #   * {Types::DescribeTransformJobResponse#data_capture_config #data_capture_config} => Types::BatchDataCaptureConfig
     #   * {Types::DescribeTransformJobResponse#transform_resources #transform_resources} => Types::TransformResources
     #   * {Types::DescribeTransformJobResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeTransformJobResponse#transform_start_time #transform_start_time} => Time
@@ -11857,6 +12036,9 @@ module Aws::SageMaker
     #   resp.transform_output.accept #=> String
     #   resp.transform_output.assemble_with #=> String, one of "None", "Line"
     #   resp.transform_output.kms_key_id #=> String
+    #   resp.data_capture_config.destination_s3_uri #=> String
+    #   resp.data_capture_config.kms_key_id #=> String
+    #   resp.data_capture_config.generate_inference_id #=> Boolean
     #   resp.transform_resources.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #   resp.transform_resources.instance_count #=> Integer
     #   resp.transform_resources.volume_kms_key_id #=> String
@@ -17773,6 +17955,18 @@ module Aws::SageMaker
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.probability_threshold_attribute #=> Float
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.start_time_offset #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.end_time_offset #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.data_captured_destination_s3_uri #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.dataset_format.csv.header #=> Boolean
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.dataset_format.json.line #=> Boolean
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.local_path #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.s3_input_mode #=> String, one of "Pipe", "File"
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.features_attribute #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.inference_attribute #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.probability_attribute #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.probability_threshold_attribute #=> Float
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.start_time_offset #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.end_time_offset #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs #=> Array
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs[0].s3_output.local_path #=> String
@@ -19780,8 +19974,30 @@ module Aws::SageMaker
     #         },
     #         monitoring_inputs: [ # required
     #           {
-    #             endpoint_input: { # required
+    #             endpoint_input: {
     #               endpoint_name: "EndpointName", # required
+    #               local_path: "ProcessingLocalPath", # required
+    #               s3_input_mode: "Pipe", # accepts Pipe, File
+    #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #               features_attribute: "String",
+    #               inference_attribute: "String",
+    #               probability_attribute: "String",
+    #               probability_threshold_attribute: 1.0,
+    #               start_time_offset: "MonitoringTimeOffsetString",
+    #               end_time_offset: "MonitoringTimeOffsetString",
+    #             },
+    #             batch_transform_input: {
+    #               data_captured_destination_s3_uri: "DestinationS3Uri", # required
+    #               dataset_format: { # required
+    #                 csv: {
+    #                   header: false,
+    #                 },
+    #                 json: {
+    #                   line: false,
+    #                 },
+    #                 parquet: {
+    #                 },
+    #               },
     #               local_path: "ProcessingLocalPath", # required
     #               s3_input_mode: "Pipe", # accepts Pipe, File
     #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -20759,7 +20975,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.144.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
