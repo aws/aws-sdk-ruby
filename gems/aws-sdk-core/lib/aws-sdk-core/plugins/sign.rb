@@ -70,6 +70,10 @@ module Aws
         def presign_url(*args)
           raise ArgumentError, 'Bearer auth does not support presigned urls'
         end
+
+        def sign_event(*args)
+          raise ArgumentError, 'Bearer auth does not support presigned urls'
+        end
       end
 
       # @api private
@@ -132,6 +136,10 @@ module Aws
           @signer.presign_url(*args)
         end
 
+        def sign_event(*args)
+          @signer.sign_event(*args)
+        end
+
         private
 
         def apply_authtype(context, req)
@@ -169,6 +177,9 @@ module Aws
       class NullSigner
 
         def sign(context)
+        end
+
+        def presign_url(*args)
         end
 
         def presign_url(*args)
