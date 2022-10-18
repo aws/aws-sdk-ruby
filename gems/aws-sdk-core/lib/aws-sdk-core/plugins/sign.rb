@@ -72,7 +72,7 @@ module Aws
         end
 
         def sign_event(*args)
-          raise ArgumentError, 'Bearer auth does not support presigned urls'
+          raise ArgumentError, 'Bearer auth does not support event signing'
         end
       end
 
