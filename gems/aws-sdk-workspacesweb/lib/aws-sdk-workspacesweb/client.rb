@@ -453,6 +453,40 @@ module Aws::WorkSpacesWeb
       req.send_request(options)
     end
 
+    # Associates a user access logging settings resource with a web portal.
+    #
+    # @option params [required, String] :portal_arn
+    #   The ARN of the web portal.
+    #
+    # @option params [required, String] :user_access_logging_settings_arn
+    #   The ARN of the user access logging settings.
+    #
+    # @return [Types::AssociateUserAccessLoggingSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateUserAccessLoggingSettingsResponse#portal_arn #portal_arn} => String
+    #   * {Types::AssociateUserAccessLoggingSettingsResponse#user_access_logging_settings_arn #user_access_logging_settings_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_user_access_logging_settings({
+    #     portal_arn: "ARN", # required
+    #     user_access_logging_settings_arn: "ARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.portal_arn #=> String
+    #   resp.user_access_logging_settings_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/AssociateUserAccessLoggingSettings AWS API Documentation
+    #
+    # @overload associate_user_access_logging_settings(params = {})
+    # @param [Hash] params ({})
+    def associate_user_access_logging_settings(params = {}, options = {})
+      req = build_request(:associate_user_access_logging_settings, params)
+      req.send_request(options)
+    end
+
     # Associates a user settings resource with a web portal.
     #
     # @option params [required, String] :portal_arn
@@ -857,6 +891,59 @@ module Aws::WorkSpacesWeb
       req.send_request(options)
     end
 
+    # Creates a user access logging settings resource that can be associated
+    # with a web portal.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, subsequent retries with the same
+    #   client token returns the result from the original successful request.
+    #
+    #   If you do not specify a client token, one is automatically generated
+    #   by the AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :kinesis_stream_arn
+    #   The ARN of the Kinesis stream.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the user settings resource. A tag is a key-value
+    #   pair.
+    #
+    # @return [Types::CreateUserAccessLoggingSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUserAccessLoggingSettingsResponse#user_access_logging_settings_arn #user_access_logging_settings_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_user_access_logging_settings({
+    #     client_token: "ClientToken",
+    #     kinesis_stream_arn: "KinesisStreamArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_access_logging_settings_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CreateUserAccessLoggingSettings AWS API Documentation
+    #
+    # @overload create_user_access_logging_settings(params = {})
+    # @param [Hash] params ({})
+    def create_user_access_logging_settings(params = {}, options = {})
+      req = build_request(:create_user_access_logging_settings, params)
+      req.send_request(options)
+    end
+
     # Creates a user settings resource that can be associated with a web
     # portal. Once associated with a web portal, user settings control how
     # users can transfer data between a streaming session and the their
@@ -1053,6 +1140,28 @@ module Aws::WorkSpacesWeb
       req.send_request(options)
     end
 
+    # Deletes user access logging settings.
+    #
+    # @option params [required, String] :user_access_logging_settings_arn
+    #   The ARN of the user access logging settings.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_user_access_logging_settings({
+    #     user_access_logging_settings_arn: "ARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DeleteUserAccessLoggingSettings AWS API Documentation
+    #
+    # @overload delete_user_access_logging_settings(params = {})
+    # @param [Hash] params ({})
+    def delete_user_access_logging_settings(params = {}, options = {})
+      req = build_request(:delete_user_access_logging_settings, params)
+      req.send_request(options)
+    end
+
     # Deletes user settings.
     #
     # @option params [required, String] :user_settings_arn
@@ -1138,6 +1247,28 @@ module Aws::WorkSpacesWeb
     # @param [Hash] params ({})
     def disassociate_trust_store(params = {}, options = {})
       req = build_request(:disassociate_trust_store, params)
+      req.send_request(options)
+    end
+
+    # Disassociates user access logging settings from a web portal.
+    #
+    # @option params [required, String] :portal_arn
+    #   The ARN of the web portal.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_user_access_logging_settings({
+    #     portal_arn: "ARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DisassociateUserAccessLoggingSettings AWS API Documentation
+    #
+    # @overload disassociate_user_access_logging_settings(params = {})
+    # @param [Hash] params ({})
+    def disassociate_user_access_logging_settings(params = {}, options = {})
+      req = build_request(:disassociate_user_access_logging_settings, params)
       req.send_request(options)
     end
 
@@ -1289,6 +1420,7 @@ module Aws::WorkSpacesWeb
     #   resp.portal.renderer_type #=> String, one of "AppStream"
     #   resp.portal.status_reason #=> String
     #   resp.portal.trust_store_arn #=> String
+    #   resp.portal.user_access_logging_settings_arn #=> String
     #   resp.portal.user_settings_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetPortal AWS API Documentation
@@ -1396,6 +1528,37 @@ module Aws::WorkSpacesWeb
     # @param [Hash] params ({})
     def get_trust_store_certificate(params = {}, options = {})
       req = build_request(:get_trust_store_certificate, params)
+      req.send_request(options)
+    end
+
+    # Gets user access logging settings.
+    #
+    # @option params [required, String] :user_access_logging_settings_arn
+    #   The ARN of the user access logging settings.
+    #
+    # @return [Types::GetUserAccessLoggingSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUserAccessLoggingSettingsResponse#user_access_logging_settings #user_access_logging_settings} => Types::UserAccessLoggingSettings
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_user_access_logging_settings({
+    #     user_access_logging_settings_arn: "ARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_access_logging_settings.associated_portal_arns #=> Array
+    #   resp.user_access_logging_settings.associated_portal_arns[0] #=> String
+    #   resp.user_access_logging_settings.kinesis_stream_arn #=> String
+    #   resp.user_access_logging_settings.user_access_logging_settings_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetUserAccessLoggingSettings AWS API Documentation
+    #
+    # @overload get_user_access_logging_settings(params = {})
+    # @param [Hash] params ({})
+    def get_user_access_logging_settings(params = {}, options = {})
+      req = build_request(:get_user_access_logging_settings, params)
       req.send_request(options)
     end
 
@@ -1594,6 +1757,7 @@ module Aws::WorkSpacesWeb
     #   resp.portals[0].portal_status #=> String, one of "Incomplete", "Pending", "Active"
     #   resp.portals[0].renderer_type #=> String, one of "AppStream"
     #   resp.portals[0].trust_store_arn #=> String
+    #   resp.portals[0].user_access_logging_settings_arn #=> String
     #   resp.portals[0].user_settings_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListPortals AWS API Documentation
@@ -1718,6 +1882,45 @@ module Aws::WorkSpacesWeb
     # @param [Hash] params ({})
     def list_trust_stores(params = {}, options = {})
       req = build_request(:list_trust_stores, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of user access logging settings.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #
+    # @return [Types::ListUserAccessLoggingSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUserAccessLoggingSettingsResponse#next_token #next_token} => String
+    #   * {Types::ListUserAccessLoggingSettingsResponse#user_access_logging_settings #user_access_logging_settings} => Array&lt;Types::UserAccessLoggingSettingsSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_user_access_logging_settings({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.user_access_logging_settings #=> Array
+    #   resp.user_access_logging_settings[0].kinesis_stream_arn #=> String
+    #   resp.user_access_logging_settings[0].user_access_logging_settings_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListUserAccessLoggingSettings AWS API Documentation
+    #
+    # @overload list_user_access_logging_settings(params = {})
+    # @param [Hash] params ({})
+    def list_user_access_logging_settings(params = {}, options = {})
+      req = build_request(:list_user_access_logging_settings, params)
       req.send_request(options)
     end
 
@@ -2105,6 +2308,7 @@ module Aws::WorkSpacesWeb
     #   resp.portal.renderer_type #=> String, one of "AppStream"
     #   resp.portal.status_reason #=> String
     #   resp.portal.trust_store_arn #=> String
+    #   resp.portal.user_access_logging_settings_arn #=> String
     #   resp.portal.user_settings_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdatePortal AWS API Documentation
@@ -2163,6 +2367,55 @@ module Aws::WorkSpacesWeb
     # @param [Hash] params ({})
     def update_trust_store(params = {}, options = {})
       req = build_request(:update_trust_store, params)
+      req.send_request(options)
+    end
+
+    # Updates the user access logging settings.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, subsequent retries with the same
+    #   client token return the result from the original successful request.
+    #
+    #   If you do not specify a client token, one is automatically generated
+    #   by the AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :kinesis_stream_arn
+    #   The ARN of the Kinesis stream.
+    #
+    # @option params [required, String] :user_access_logging_settings_arn
+    #   The ARN of the user access logging settings.
+    #
+    # @return [Types::UpdateUserAccessLoggingSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateUserAccessLoggingSettingsResponse#user_access_logging_settings #user_access_logging_settings} => Types::UserAccessLoggingSettings
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_access_logging_settings({
+    #     client_token: "ClientToken",
+    #     kinesis_stream_arn: "KinesisStreamArn",
+    #     user_access_logging_settings_arn: "ARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_access_logging_settings.associated_portal_arns #=> Array
+    #   resp.user_access_logging_settings.associated_portal_arns[0] #=> String
+    #   resp.user_access_logging_settings.kinesis_stream_arn #=> String
+    #   resp.user_access_logging_settings.user_access_logging_settings_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateUserAccessLoggingSettings AWS API Documentation
+    #
+    # @overload update_user_access_logging_settings(params = {})
+    # @param [Hash] params ({})
+    def update_user_access_logging_settings(params = {}, options = {})
+      req = build_request(:update_user_access_logging_settings, params)
       req.send_request(options)
     end
 
@@ -2265,7 +2518,7 @@ module Aws::WorkSpacesWeb
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

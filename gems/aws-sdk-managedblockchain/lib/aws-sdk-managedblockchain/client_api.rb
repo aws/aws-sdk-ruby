@@ -14,10 +14,19 @@ module Aws::ManagedBlockchain
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    Accessor = Shapes::StructureShape.new(name: 'Accessor')
+    AccessorBillingTokenString = Shapes::StringShape.new(name: 'AccessorBillingTokenString')
+    AccessorListMaxResults = Shapes::IntegerShape.new(name: 'AccessorListMaxResults')
+    AccessorStatus = Shapes::StringShape.new(name: 'AccessorStatus')
+    AccessorSummary = Shapes::StructureShape.new(name: 'AccessorSummary')
+    AccessorSummaryList = Shapes::ListShape.new(name: 'AccessorSummaryList')
+    AccessorType = Shapes::StringShape.new(name: 'AccessorType')
     ApprovalThresholdPolicy = Shapes::StructureShape.new(name: 'ApprovalThresholdPolicy')
     ArnString = Shapes::StringShape.new(name: 'ArnString')
     AvailabilityZoneString = Shapes::StringShape.new(name: 'AvailabilityZoneString')
     ClientRequestTokenString = Shapes::StringShape.new(name: 'ClientRequestTokenString')
+    CreateAccessorInput = Shapes::StructureShape.new(name: 'CreateAccessorInput')
+    CreateAccessorOutput = Shapes::StructureShape.new(name: 'CreateAccessorOutput')
     CreateMemberInput = Shapes::StructureShape.new(name: 'CreateMemberInput')
     CreateMemberOutput = Shapes::StructureShape.new(name: 'CreateMemberOutput')
     CreateNetworkInput = Shapes::StructureShape.new(name: 'CreateNetworkInput')
@@ -26,6 +35,8 @@ module Aws::ManagedBlockchain
     CreateNodeOutput = Shapes::StructureShape.new(name: 'CreateNodeOutput')
     CreateProposalInput = Shapes::StructureShape.new(name: 'CreateProposalInput')
     CreateProposalOutput = Shapes::StructureShape.new(name: 'CreateProposalOutput')
+    DeleteAccessorInput = Shapes::StructureShape.new(name: 'DeleteAccessorInput')
+    DeleteAccessorOutput = Shapes::StructureShape.new(name: 'DeleteAccessorOutput')
     DeleteMemberInput = Shapes::StructureShape.new(name: 'DeleteMemberInput')
     DeleteMemberOutput = Shapes::StructureShape.new(name: 'DeleteMemberOutput')
     DeleteNodeInput = Shapes::StructureShape.new(name: 'DeleteNodeInput')
@@ -36,6 +47,8 @@ module Aws::ManagedBlockchain
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     Framework = Shapes::StringShape.new(name: 'Framework')
     FrameworkVersionString = Shapes::StringShape.new(name: 'FrameworkVersionString')
+    GetAccessorInput = Shapes::StructureShape.new(name: 'GetAccessorInput')
+    GetAccessorOutput = Shapes::StructureShape.new(name: 'GetAccessorOutput')
     GetMemberInput = Shapes::StructureShape.new(name: 'GetMemberInput')
     GetMemberOutput = Shapes::StructureShape.new(name: 'GetMemberOutput')
     GetNetworkInput = Shapes::StructureShape.new(name: 'GetNetworkInput')
@@ -55,6 +68,8 @@ module Aws::ManagedBlockchain
     InviteAction = Shapes::StructureShape.new(name: 'InviteAction')
     InviteActionList = Shapes::ListShape.new(name: 'InviteActionList')
     IsOwned = Shapes::BooleanShape.new(name: 'IsOwned')
+    ListAccessorsInput = Shapes::StructureShape.new(name: 'ListAccessorsInput')
+    ListAccessorsOutput = Shapes::StructureShape.new(name: 'ListAccessorsOutput')
     ListInvitationsInput = Shapes::StructureShape.new(name: 'ListInvitationsInput')
     ListInvitationsOutput = Shapes::StructureShape.new(name: 'ListInvitationsOutput')
     ListMembersInput = Shapes::StructureShape.new(name: 'ListMembersInput')
@@ -156,10 +171,35 @@ module Aws::ManagedBlockchain
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    Accessor.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "Id"))
+    Accessor.add_member(:type, Shapes::ShapeRef.new(shape: AccessorType, location_name: "Type"))
+    Accessor.add_member(:billing_token, Shapes::ShapeRef.new(shape: AccessorBillingTokenString, location_name: "BillingToken"))
+    Accessor.add_member(:status, Shapes::ShapeRef.new(shape: AccessorStatus, location_name: "Status"))
+    Accessor.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
+    Accessor.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
+    Accessor.struct_class = Types::Accessor
+
+    AccessorSummary.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "Id"))
+    AccessorSummary.add_member(:type, Shapes::ShapeRef.new(shape: AccessorType, location_name: "Type"))
+    AccessorSummary.add_member(:status, Shapes::ShapeRef.new(shape: AccessorStatus, location_name: "Status"))
+    AccessorSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
+    AccessorSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
+    AccessorSummary.struct_class = Types::AccessorSummary
+
+    AccessorSummaryList.member = Shapes::ShapeRef.new(shape: AccessorSummary)
+
     ApprovalThresholdPolicy.add_member(:threshold_percentage, Shapes::ShapeRef.new(shape: ThresholdPercentageInt, location_name: "ThresholdPercentage"))
     ApprovalThresholdPolicy.add_member(:proposal_duration_in_hours, Shapes::ShapeRef.new(shape: ProposalDurationInt, location_name: "ProposalDurationInHours"))
     ApprovalThresholdPolicy.add_member(:threshold_comparator, Shapes::ShapeRef.new(shape: ThresholdComparator, location_name: "ThresholdComparator"))
     ApprovalThresholdPolicy.struct_class = Types::ApprovalThresholdPolicy
+
+    CreateAccessorInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAccessorInput.add_member(:accessor_type, Shapes::ShapeRef.new(shape: AccessorType, required: true, location_name: "AccessorType"))
+    CreateAccessorInput.struct_class = Types::CreateAccessorInput
+
+    CreateAccessorOutput.add_member(:accessor_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "AccessorId"))
+    CreateAccessorOutput.add_member(:billing_token, Shapes::ShapeRef.new(shape: AccessorBillingTokenString, location_name: "BillingToken"))
+    CreateAccessorOutput.struct_class = Types::CreateAccessorOutput
 
     CreateMemberInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateMemberInput.add_member(:invitation_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location_name: "InvitationId"))
@@ -206,6 +246,11 @@ module Aws::ManagedBlockchain
     CreateProposalOutput.add_member(:proposal_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "ProposalId"))
     CreateProposalOutput.struct_class = Types::CreateProposalOutput
 
+    DeleteAccessorInput.add_member(:accessor_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "AccessorId"))
+    DeleteAccessorInput.struct_class = Types::DeleteAccessorInput
+
+    DeleteAccessorOutput.struct_class = Types::DeleteAccessorOutput
+
     DeleteMemberInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
     DeleteMemberInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "memberId"))
     DeleteMemberInput.struct_class = Types::DeleteMemberInput
@@ -218,6 +263,12 @@ module Aws::ManagedBlockchain
     DeleteNodeInput.struct_class = Types::DeleteNodeInput
 
     DeleteNodeOutput.struct_class = Types::DeleteNodeOutput
+
+    GetAccessorInput.add_member(:accessor_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "AccessorId"))
+    GetAccessorInput.struct_class = Types::GetAccessorInput
+
+    GetAccessorOutput.add_member(:accessor, Shapes::ShapeRef.new(shape: Accessor, location_name: "Accessor"))
+    GetAccessorOutput.struct_class = Types::GetAccessorOutput
 
     GetMemberInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
     GetMemberInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "memberId"))
@@ -272,6 +323,14 @@ module Aws::ManagedBlockchain
     InviteAction.struct_class = Types::InviteAction
 
     InviteActionList.member = Shapes::ShapeRef.new(shape: InviteAction)
+
+    ListAccessorsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: AccessorListMaxResults, location: "querystring", location_name: "maxResults"))
+    ListAccessorsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListAccessorsInput.struct_class = Types::ListAccessorsInput
+
+    ListAccessorsOutput.add_member(:accessors, Shapes::ShapeRef.new(shape: AccessorSummaryList, location_name: "Accessors"))
+    ListAccessorsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAccessorsOutput.struct_class = Types::ListAccessorsOutput
 
     ListInvitationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ProposalListMaxResults, location: "querystring", location_name: "maxResults"))
     ListInvitationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -621,6 +680,20 @@ module Aws::ManagedBlockchain
         "uid" => "managedblockchain-2018-09-24",
       }
 
+      api.add_operation(:create_accessor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccessor"
+        o.http_method = "POST"
+        o.http_request_uri = "/accessors"
+        o.input = Shapes::ShapeRef.new(shape: CreateAccessorInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateAccessorOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
       api.add_operation(:create_member, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMember"
         o.http_method = "POST"
@@ -685,6 +758,19 @@ module Aws::ManagedBlockchain
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
+      api.add_operation(:delete_accessor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccessor"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accessors/{AccessorId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccessorInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAccessorOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
       api.add_operation(:delete_member, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteMember"
         o.http_method = "DELETE"
@@ -709,6 +795,19 @@ module Aws::ManagedBlockchain
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:get_accessor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccessor"
+        o.http_method = "GET"
+        o.http_request_uri = "/accessors/{AccessorId}"
+        o.input = Shapes::ShapeRef.new(shape: GetAccessorInput)
+        o.output = Shapes::ShapeRef.new(shape: GetAccessorOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
       end)
@@ -763,6 +862,24 @@ module Aws::ManagedBlockchain
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:list_accessors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccessors"
+        o.http_method = "GET"
+        o.http_request_uri = "/accessors"
+        o.input = Shapes::ShapeRef.new(shape: ListAccessorsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListAccessorsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_invitations, Seahorse::Model::Operation.new.tap do |o|

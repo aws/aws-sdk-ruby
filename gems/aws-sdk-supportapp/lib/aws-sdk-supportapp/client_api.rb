@@ -14,6 +14,7 @@ module Aws::SupportApp
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountType = Shapes::StringShape.new(name: 'AccountType')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateSlackChannelConfigurationRequest = Shapes::StructureShape.new(name: 'CreateSlackChannelConfigurationRequest')
     CreateSlackChannelConfigurationResult = Shapes::StructureShape.new(name: 'CreateSlackChannelConfigurationResult')
@@ -33,6 +34,8 @@ module Aws::SupportApp
     NotificationSeverityLevel = Shapes::StringShape.new(name: 'NotificationSeverityLevel')
     PutAccountAliasRequest = Shapes::StructureShape.new(name: 'PutAccountAliasRequest')
     PutAccountAliasResult = Shapes::StructureShape.new(name: 'PutAccountAliasResult')
+    RegisterSlackWorkspaceForOrganizationRequest = Shapes::StructureShape.new(name: 'RegisterSlackWorkspaceForOrganizationRequest')
+    RegisterSlackWorkspaceForOrganizationResult = Shapes::StructureShape.new(name: 'RegisterSlackWorkspaceForOrganizationResult')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SlackChannelConfiguration = Shapes::StructureShape.new(name: 'SlackChannelConfiguration')
@@ -50,6 +53,7 @@ module Aws::SupportApp
     roleArn = Shapes::StringShape.new(name: 'roleArn')
     slackChannelConfigurationList = Shapes::ListShape.new(name: 'slackChannelConfigurationList')
     teamId = Shapes::StringShape.new(name: 'teamId')
+    teamName = Shapes::StringShape.new(name: 'teamName')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -111,6 +115,14 @@ module Aws::SupportApp
 
     PutAccountAliasResult.struct_class = Types::PutAccountAliasResult
 
+    RegisterSlackWorkspaceForOrganizationRequest.add_member(:team_id, Shapes::ShapeRef.new(shape: teamId, required: true, location_name: "teamId"))
+    RegisterSlackWorkspaceForOrganizationRequest.struct_class = Types::RegisterSlackWorkspaceForOrganizationRequest
+
+    RegisterSlackWorkspaceForOrganizationResult.add_member(:account_type, Shapes::ShapeRef.new(shape: AccountType, location_name: "accountType"))
+    RegisterSlackWorkspaceForOrganizationResult.add_member(:team_id, Shapes::ShapeRef.new(shape: teamId, location_name: "teamId"))
+    RegisterSlackWorkspaceForOrganizationResult.add_member(:team_name, Shapes::ShapeRef.new(shape: teamName, location_name: "teamName"))
+    RegisterSlackWorkspaceForOrganizationResult.struct_class = Types::RegisterSlackWorkspaceForOrganizationResult
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -127,7 +139,9 @@ module Aws::SupportApp
     SlackChannelConfiguration.add_member(:team_id, Shapes::ShapeRef.new(shape: teamId, required: true, location_name: "teamId"))
     SlackChannelConfiguration.struct_class = Types::SlackChannelConfiguration
 
+    SlackWorkspaceConfiguration.add_member(:allow_organization_member_account, Shapes::ShapeRef.new(shape: booleanValue, location_name: "allowOrganizationMemberAccount"))
     SlackWorkspaceConfiguration.add_member(:team_id, Shapes::ShapeRef.new(shape: teamId, required: true, location_name: "teamId"))
+    SlackWorkspaceConfiguration.add_member(:team_name, Shapes::ShapeRef.new(shape: teamName, location_name: "teamName"))
     SlackWorkspaceConfiguration.struct_class = Types::SlackWorkspaceConfiguration
 
     SlackWorkspaceConfigurationList.member = Shapes::ShapeRef.new(shape: SlackWorkspaceConfiguration)
@@ -271,6 +285,19 @@ module Aws::SupportApp
         o.http_request_uri = "/control/put-account-alias"
         o.input = Shapes::ShapeRef.new(shape: PutAccountAliasRequest)
         o.output = Shapes::ShapeRef.new(shape: PutAccountAliasResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:register_slack_workspace_for_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterSlackWorkspaceForOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/control/register-slack-workspace-for-organization"
+        o.input = Shapes::ShapeRef.new(shape: RegisterSlackWorkspaceForOrganizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterSlackWorkspaceForOrganizationResult)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

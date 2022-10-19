@@ -373,7 +373,7 @@ module Aws::CloudTrail
     # Contains information about a returned CloudTrail channel.
     #
     # @!attribute [rw] channel_arn
-    #   The Amazon Resource Name (ARN) of the channel.
+    #   The Amazon Resource Name (ARN) of a channel.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -393,8 +393,8 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # The specified channel ARN is not valid or does not map to a channel in
-    # your account.
+    # This exception is thrown when the specified value of `ChannelARN` is
+    # not valid.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ChannelARNInvalidException AWS API Documentation
     #
@@ -720,7 +720,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] kms_key_id
     #   Specifies the KMS key ID to use to encrypt the logs delivered by
-    #   CloudTrail. The value can be an alias name prefixed by "alias/", a
+    #   CloudTrail. The value can be an alias name prefixed by `alias/`, a
     #   fully specified ARN to an alias, a fully specified ARN to a key, or
     #   a globally unique identifier.
     #
@@ -730,13 +730,13 @@ module Aws::CloudTrail
     #
     #   Examples:
     #
-    #   * alias/MyAliasName
+    #   * `alias/MyAliasName`
     #
-    #   * arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
+    #   * `arn:aws:kms:us-east-2:123456789012:alias/MyAliasName`
     #
-    #   * arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   * `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
     #
-    #   * 12345678-1234-1234-1234-123456789012
+    #   * `12345678-1234-1234-1234-123456789012`
     #
     #
     #
@@ -839,7 +839,7 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   Specifies the KMS key ID that encrypts the logs delivered by
+    #   Specifies the KMS key ID that encrypts the events delivered by
     #   CloudTrail. The value is a fully specified ARN to a KMS key in the
     #   following format.
     #
@@ -945,7 +945,7 @@ module Aws::CloudTrail
     #
     #   * `AWS::DynamoDB::Table`
     #
-    #   The following resource types are also availble through *advanced*
+    #   The following resource types are also available through *advanced*
     #   event selectors. Basic event selector resource types are valid in
     #   advanced event selectors, but advanced event selector resource types
     #   are not valid in basic event selectors. For more information, see
@@ -1129,6 +1129,15 @@ module Aws::CloudTrail
     #   The error message returned if a query failed.
     #   @return [String]
     #
+    # @!attribute [rw] delivery_s3_uri
+    #   The URI for the S3 bucket where CloudTrail delivered query results,
+    #   if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_status
+    #   The delivery status.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeQueryResponse AWS API Documentation
     #
     class DescribeQueryResponse < Struct.new(
@@ -1136,7 +1145,9 @@ module Aws::CloudTrail
       :query_string,
       :query_status,
       :query_statistics,
-      :error_message)
+      :error_message,
+      :delivery_s3_uri,
+      :delivery_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1218,13 +1229,13 @@ module Aws::CloudTrail
     # events.
     #
     # @!attribute [rw] type
-    #   The type of service. For service-linked channels, the value is
-    #   `AWS_SERVICE`.
+    #   The type of destination for events arriving from a channel. For
+    #   service-linked channels, the value is `AWS_SERVICE`.
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The location of the service. For service-linked channels, this is
-    #   the name of the Amazon Web Services service.
+    #   For service-linked channels, the value is the name of the Amazon Web
+    #   Services service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/Destination AWS API Documentation
@@ -1515,8 +1526,7 @@ module Aws::CloudTrail
     #       }
     #
     # @!attribute [rw] channel
-    #   The Amazon Resource Name (ARN) of the CloudTrail service-linked
-    #   channel.
+    #   The ARN or `UUID` of a channel.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetChannelRequest AWS API Documentation
@@ -1528,32 +1538,30 @@ module Aws::CloudTrail
     end
 
     # @!attribute [rw] channel_arn
-    #   The ARN of the CloudTrail service-linked channel.
+    #   The ARN of an channel returned by a `GetChannel` request.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the CloudTrail service-linked channel. For
-    #   service-linked channels, the value is
-    #   `aws-service-channel/service-name/custom-suffix` where
+    #   The name of the CloudTrail channel. For service-linked channels, the
+    #   value is `aws-service-channel/service-name/custom-suffix` where
     #   `service-name` represents the name of the Amazon Web Services
     #   service that created the channel and `custom-suffix` represents the
     #   suffix generated by the Amazon Web Services service.
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   The trail or event data store for the CloudTrail service-linked
-    #   channel.
+    #   The event source for the CloudTrail channel.
     #   @return [String]
     #
     # @!attribute [rw] source_config
     #   Provides information about the advanced event selectors configured
-    #   for the service-linked channel, and whether the service-linked
-    #   channel applies to all regions or one region.
+    #   for the channel, and whether the channel applies to all regions or a
+    #   single region.
     #   @return [Types::SourceConfig]
     #
     # @!attribute [rw] destinations
-    #   The Amazon Web Services service that created the CloudTrail
-    #   service-linked channel.
+    #   The Amazon Web Services service that created the service-linked
+    #   channel.
     #   @return [Array<Types::Destination>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetChannelResponse AWS API Documentation
@@ -1733,7 +1741,7 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] destinations
-    #   The destination event data store.
+    #   The ARN of the destination event data store.
     #   @return [Array<String>]
     #
     # @!attribute [rw] import_source
@@ -1765,7 +1773,11 @@ module Aws::CloudTrail
     #   @return [Time]
     #
     # @!attribute [rw] import_statistics
-    #   Provides statistics for the import.
+    #   Provides statistics for the import. CloudTrail does not update
+    #   import statistics in real-time. Returned values for parameters such
+    #   as `EventsCompleted` may be lower than the actual value, because
+    #   CloudTrail updates statistics incrementally over the course of the
+    #   import.
     #   @return [Types::ImportStatistics]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetImportResponse AWS API Documentation
@@ -2174,7 +2186,11 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # Provides statistics for the specified `ImportID`.
+    # Provides statistics for the specified `ImportID`. CloudTrail does not
+    # update import statistics in real-time. Returned values for parameters
+    # such as `EventsCompleted` may be lower than the actual value, because
+    # CloudTrail updates statistics incrementally over the course of the
+    # import.
     #
     # @!attribute [rw] prefixes_found
     #   The number of S3 prefixes found for the import.
@@ -2185,11 +2201,11 @@ module Aws::CloudTrail
     #   @return [Integer]
     #
     # @!attribute [rw] files_completed
-    #   The number of files that completed import.
+    #   The number of log files that completed import.
     #   @return [Integer]
     #
     # @!attribute [rw] events_completed
-    #   The number of trail events imported.
+    #   The number of trail events imported into the event data store.
     #   @return [Integer]
     #
     # @!attribute [rw] failed_entries
@@ -2220,7 +2236,7 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] destinations
-    #   The destination event data store.
+    #   The ARN of the destination event data store.
     #   @return [Array<String>]
     #
     # @!attribute [rw] created_timestamp
@@ -2297,7 +2313,7 @@ module Aws::CloudTrail
     class InsufficientDependencyServiceAccessPermissionException < Aws::EmptyStructure; end
 
     # This exception is thrown when the policy on the S3 bucket or KMS key
-    # is not sufficient.
+    # does not have sufficient permissions for the operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsufficientEncryptionPolicyException AWS API Documentation
     #
@@ -2350,8 +2366,8 @@ module Aws::CloudTrail
     #
     class InvalidEventCategoryException < Aws::EmptyStructure; end
 
-    # This exception is thrown when the event data store category is not
-    # valid for the import.
+    # This exception is thrown when event categories of specified event data
+    # stores are not valid.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidEventDataStoreCategoryException AWS API Documentation
     #
@@ -2570,7 +2586,12 @@ module Aws::CloudTrail
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token you can use to get the next page of results.
+    #   The token to use to get the next page of results after a previous
+    #   API call. This token must be passed in with the same parameters that
+    #   were specified in the original call. For example, if the original
+    #   call specified an AttributeKey of 'Username' with a value of
+    #   'root', the call with NextToken should include those same
+    #   parameters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListChannelsRequest AWS API Documentation
@@ -2583,11 +2604,12 @@ module Aws::CloudTrail
     end
 
     # @!attribute [rw] channels
-    #   The list of CloudTrail channels.
+    #   The list of channels in the account.
     #   @return [Array<Types::Channel>]
     #
     # @!attribute [rw] next_token
-    #   A token used to get the next page of results.
+    #   The token to use to get the next page of results after a previous
+    #   API call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListChannelsResponse AWS API Documentation
@@ -2706,7 +2728,7 @@ module Aws::CloudTrail
     #   @return [Integer]
     #
     # @!attribute [rw] destination
-    #   The destination event data store.
+    #   The ARN of the destination event data store.
     #   @return [String]
     #
     # @!attribute [rw] import_status
@@ -3674,16 +3696,15 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # Contains configuration information about the service-linked channel.
+    # Contains configuration information about the channel.
     #
     # @!attribute [rw] apply_to_all_regions
-    #   Specifies whether the service-linked channel applies to one region
-    #   or all regions.
+    #   Specifies whether the channel applies to a single region or to all
+    #   regions.
     #   @return [Boolean]
     #
     # @!attribute [rw] advanced_event_selectors
-    #   The advanced event selectors configured for the service-linked
-    #   channel.
+    #   The advanced event selectors that are configured for the channel.
     #   @return [Array<Types::AdvancedEventSelector>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/SourceConfig AWS API Documentation
@@ -3713,8 +3734,8 @@ module Aws::CloudTrail
     #       }
     #
     # @!attribute [rw] destinations
-    #   The destination event data store. Use this parameter for a new
-    #   import.
+    #   The ARN of the destination event data store. Use this parameter for
+    #   a new import.
     #   @return [Array<String>]
     #
     # @!attribute [rw] import_source
@@ -3725,13 +3746,19 @@ module Aws::CloudTrail
     # @!attribute [rw] start_event_time
     #   Use with `EndEventTime` to bound a `StartImport` request, and limit
     #   imported trail events to only those events logged within a specified
-    #   time period.
+    #   time period. When you specify a time range, CloudTrail checks the
+    #   prefix and log file names to verify the names contain a date between
+    #   the specified `StartEventTime` and `EndEventTime` before attempting
+    #   to import events.
     #   @return [Time]
     #
     # @!attribute [rw] end_event_time
     #   Use with `StartEventTime` to bound a `StartImport` request, and
     #   limit imported trail events to only those events logged within a
-    #   specified time period.
+    #   specified time period. When you specify a time range, CloudTrail
+    #   checks the prefix and log file names to verify the names contain a
+    #   date between the specified `StartEventTime` and `EndEventTime`
+    #   before attempting to import events.
     #   @return [Time]
     #
     # @!attribute [rw] import_id
@@ -3756,11 +3783,11 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] destinations
-    #   The destination event data store.
+    #   The ARN of the destination event data store.
     #   @return [Array<String>]
     #
     # @!attribute [rw] import_source
-    #   The source S3 bucket.
+    #   The source S3 bucket for the import.
     #   @return [Types::ImportSource]
     #
     # @!attribute [rw] start_event_time
@@ -3842,16 +3869,23 @@ module Aws::CloudTrail
     #
     #       {
     #         query_statement: "QueryStatement", # required
+    #         delivery_s3_uri: "DeliveryS3Uri",
     #       }
     #
     # @!attribute [rw] query_statement
     #   The SQL code of your query.
     #   @return [String]
     #
+    # @!attribute [rw] delivery_s3_uri
+    #   The URI for the S3 bucket where CloudTrail delivers the query
+    #   results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartQueryRequest AWS API Documentation
     #
     class StartQueryRequest < Struct.new(
-      :query_statement)
+      :query_statement,
+      :delivery_s3_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3892,11 +3926,11 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] import_source
-    #   The source S3 bucket.
+    #   The source S3 bucket for the import.
     #   @return [Types::ImportSource]
     #
     # @!attribute [rw] destinations
-    #   The destination event data store.
+    #   The ARN of the destination event data store.
     #   @return [Array<String>]
     #
     # @!attribute [rw] import_status

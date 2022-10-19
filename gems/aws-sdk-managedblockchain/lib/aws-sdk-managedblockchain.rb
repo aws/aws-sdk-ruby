@@ -28,7 +28,7 @@ require_relative 'aws-sdk-managedblockchain/customizations'
 # structure.
 #
 #     managed_blockchain = Aws::ManagedBlockchain::Client.new
-#     resp = managed_blockchain.create_member(params)
+#     resp = managed_blockchain.create_accessor(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-managedblockchain/customizations'
 # @!group service
 module Aws::ManagedBlockchain
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.33.0'
 
 end

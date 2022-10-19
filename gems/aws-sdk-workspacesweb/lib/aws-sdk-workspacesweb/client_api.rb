@@ -22,6 +22,8 @@ module Aws::WorkSpacesWeb
     AssociateNetworkSettingsResponse = Shapes::StructureShape.new(name: 'AssociateNetworkSettingsResponse')
     AssociateTrustStoreRequest = Shapes::StructureShape.new(name: 'AssociateTrustStoreRequest')
     AssociateTrustStoreResponse = Shapes::StructureShape.new(name: 'AssociateTrustStoreResponse')
+    AssociateUserAccessLoggingSettingsRequest = Shapes::StructureShape.new(name: 'AssociateUserAccessLoggingSettingsRequest')
+    AssociateUserAccessLoggingSettingsResponse = Shapes::StructureShape.new(name: 'AssociateUserAccessLoggingSettingsResponse')
     AssociateUserSettingsRequest = Shapes::StructureShape.new(name: 'AssociateUserSettingsRequest')
     AssociateUserSettingsResponse = Shapes::StructureShape.new(name: 'AssociateUserSettingsResponse')
     BrowserPolicy = Shapes::StringShape.new(name: 'BrowserPolicy')
@@ -49,6 +51,8 @@ module Aws::WorkSpacesWeb
     CreatePortalResponse = Shapes::StructureShape.new(name: 'CreatePortalResponse')
     CreateTrustStoreRequest = Shapes::StructureShape.new(name: 'CreateTrustStoreRequest')
     CreateTrustStoreResponse = Shapes::StructureShape.new(name: 'CreateTrustStoreResponse')
+    CreateUserAccessLoggingSettingsRequest = Shapes::StructureShape.new(name: 'CreateUserAccessLoggingSettingsRequest')
+    CreateUserAccessLoggingSettingsResponse = Shapes::StructureShape.new(name: 'CreateUserAccessLoggingSettingsResponse')
     CreateUserSettingsRequest = Shapes::StructureShape.new(name: 'CreateUserSettingsRequest')
     CreateUserSettingsResponse = Shapes::StructureShape.new(name: 'CreateUserSettingsResponse')
     DeleteBrowserSettingsRequest = Shapes::StructureShape.new(name: 'DeleteBrowserSettingsRequest')
@@ -61,6 +65,8 @@ module Aws::WorkSpacesWeb
     DeletePortalResponse = Shapes::StructureShape.new(name: 'DeletePortalResponse')
     DeleteTrustStoreRequest = Shapes::StructureShape.new(name: 'DeleteTrustStoreRequest')
     DeleteTrustStoreResponse = Shapes::StructureShape.new(name: 'DeleteTrustStoreResponse')
+    DeleteUserAccessLoggingSettingsRequest = Shapes::StructureShape.new(name: 'DeleteUserAccessLoggingSettingsRequest')
+    DeleteUserAccessLoggingSettingsResponse = Shapes::StructureShape.new(name: 'DeleteUserAccessLoggingSettingsResponse')
     DeleteUserSettingsRequest = Shapes::StructureShape.new(name: 'DeleteUserSettingsRequest')
     DeleteUserSettingsResponse = Shapes::StructureShape.new(name: 'DeleteUserSettingsResponse')
     DisassociateBrowserSettingsRequest = Shapes::StructureShape.new(name: 'DisassociateBrowserSettingsRequest')
@@ -69,6 +75,8 @@ module Aws::WorkSpacesWeb
     DisassociateNetworkSettingsResponse = Shapes::StructureShape.new(name: 'DisassociateNetworkSettingsResponse')
     DisassociateTrustStoreRequest = Shapes::StructureShape.new(name: 'DisassociateTrustStoreRequest')
     DisassociateTrustStoreResponse = Shapes::StructureShape.new(name: 'DisassociateTrustStoreResponse')
+    DisassociateUserAccessLoggingSettingsRequest = Shapes::StructureShape.new(name: 'DisassociateUserAccessLoggingSettingsRequest')
+    DisassociateUserAccessLoggingSettingsResponse = Shapes::StructureShape.new(name: 'DisassociateUserAccessLoggingSettingsResponse')
     DisassociateUserSettingsRequest = Shapes::StructureShape.new(name: 'DisassociateUserSettingsRequest')
     DisassociateUserSettingsResponse = Shapes::StructureShape.new(name: 'DisassociateUserSettingsResponse')
     DisconnectTimeoutInMinutes = Shapes::IntegerShape.new(name: 'DisconnectTimeoutInMinutes')
@@ -91,6 +99,8 @@ module Aws::WorkSpacesWeb
     GetTrustStoreCertificateResponse = Shapes::StructureShape.new(name: 'GetTrustStoreCertificateResponse')
     GetTrustStoreRequest = Shapes::StructureShape.new(name: 'GetTrustStoreRequest')
     GetTrustStoreResponse = Shapes::StructureShape.new(name: 'GetTrustStoreResponse')
+    GetUserAccessLoggingSettingsRequest = Shapes::StructureShape.new(name: 'GetUserAccessLoggingSettingsRequest')
+    GetUserAccessLoggingSettingsResponse = Shapes::StructureShape.new(name: 'GetUserAccessLoggingSettingsResponse')
     GetUserSettingsRequest = Shapes::StructureShape.new(name: 'GetUserSettingsRequest')
     GetUserSettingsResponse = Shapes::StructureShape.new(name: 'GetUserSettingsResponse')
     IdentityProvider = Shapes::StructureShape.new(name: 'IdentityProvider')
@@ -101,6 +111,7 @@ module Aws::WorkSpacesWeb
     IdentityProviderType = Shapes::StringShape.new(name: 'IdentityProviderType')
     IdleDisconnectTimeoutInMinutes = Shapes::IntegerShape.new(name: 'IdleDisconnectTimeoutInMinutes')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    KinesisStreamArn = Shapes::StringShape.new(name: 'KinesisStreamArn')
     ListBrowserSettingsRequest = Shapes::StructureShape.new(name: 'ListBrowserSettingsRequest')
     ListBrowserSettingsResponse = Shapes::StructureShape.new(name: 'ListBrowserSettingsResponse')
     ListIdentityProvidersRequest = Shapes::StructureShape.new(name: 'ListIdentityProvidersRequest')
@@ -115,6 +126,8 @@ module Aws::WorkSpacesWeb
     ListTrustStoreCertificatesResponse = Shapes::StructureShape.new(name: 'ListTrustStoreCertificatesResponse')
     ListTrustStoresRequest = Shapes::StructureShape.new(name: 'ListTrustStoresRequest')
     ListTrustStoresResponse = Shapes::StructureShape.new(name: 'ListTrustStoresResponse')
+    ListUserAccessLoggingSettingsRequest = Shapes::StructureShape.new(name: 'ListUserAccessLoggingSettingsRequest')
+    ListUserAccessLoggingSettingsResponse = Shapes::StructureShape.new(name: 'ListUserAccessLoggingSettingsResponse')
     ListUserSettingsRequest = Shapes::StructureShape.new(name: 'ListUserSettingsRequest')
     ListUserSettingsResponse = Shapes::StructureShape.new(name: 'ListUserSettingsResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -168,8 +181,13 @@ module Aws::WorkSpacesWeb
     UpdatePortalResponse = Shapes::StructureShape.new(name: 'UpdatePortalResponse')
     UpdateTrustStoreRequest = Shapes::StructureShape.new(name: 'UpdateTrustStoreRequest')
     UpdateTrustStoreResponse = Shapes::StructureShape.new(name: 'UpdateTrustStoreResponse')
+    UpdateUserAccessLoggingSettingsRequest = Shapes::StructureShape.new(name: 'UpdateUserAccessLoggingSettingsRequest')
+    UpdateUserAccessLoggingSettingsResponse = Shapes::StructureShape.new(name: 'UpdateUserAccessLoggingSettingsResponse')
     UpdateUserSettingsRequest = Shapes::StructureShape.new(name: 'UpdateUserSettingsRequest')
     UpdateUserSettingsResponse = Shapes::StructureShape.new(name: 'UpdateUserSettingsResponse')
+    UserAccessLoggingSettings = Shapes::StructureShape.new(name: 'UserAccessLoggingSettings')
+    UserAccessLoggingSettingsList = Shapes::ListShape.new(name: 'UserAccessLoggingSettingsList')
+    UserAccessLoggingSettingsSummary = Shapes::StructureShape.new(name: 'UserAccessLoggingSettingsSummary')
     UserSettings = Shapes::StructureShape.new(name: 'UserSettings')
     UserSettingsList = Shapes::ListShape.new(name: 'UserSettingsList')
     UserSettingsSummary = Shapes::StructureShape.new(name: 'UserSettingsSummary')
@@ -208,6 +226,14 @@ module Aws::WorkSpacesWeb
     AssociateTrustStoreResponse.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "portalArn"))
     AssociateTrustStoreResponse.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "trustStoreArn"))
     AssociateTrustStoreResponse.struct_class = Types::AssociateTrustStoreResponse
+
+    AssociateUserAccessLoggingSettingsRequest.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "portalArn"))
+    AssociateUserAccessLoggingSettingsRequest.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "userAccessLoggingSettingsArn"))
+    AssociateUserAccessLoggingSettingsRequest.struct_class = Types::AssociateUserAccessLoggingSettingsRequest
+
+    AssociateUserAccessLoggingSettingsResponse.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "portalArn"))
+    AssociateUserAccessLoggingSettingsResponse.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "userAccessLoggingSettingsArn"))
+    AssociateUserAccessLoggingSettingsResponse.struct_class = Types::AssociateUserAccessLoggingSettingsResponse
 
     AssociateUserSettingsRequest.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "portalArn"))
     AssociateUserSettingsRequest.add_member(:user_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "userSettingsArn"))
@@ -302,6 +328,14 @@ module Aws::WorkSpacesWeb
     CreateTrustStoreResponse.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "trustStoreArn"))
     CreateTrustStoreResponse.struct_class = Types::CreateTrustStoreResponse
 
+    CreateUserAccessLoggingSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateUserAccessLoggingSettingsRequest.add_member(:kinesis_stream_arn, Shapes::ShapeRef.new(shape: KinesisStreamArn, required: true, location_name: "kinesisStreamArn"))
+    CreateUserAccessLoggingSettingsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateUserAccessLoggingSettingsRequest.struct_class = Types::CreateUserAccessLoggingSettingsRequest
+
+    CreateUserAccessLoggingSettingsResponse.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "userAccessLoggingSettingsArn"))
+    CreateUserAccessLoggingSettingsResponse.struct_class = Types::CreateUserAccessLoggingSettingsResponse
+
     CreateUserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateUserSettingsRequest.add_member(:copy_allowed, Shapes::ShapeRef.new(shape: EnabledType, required: true, location_name: "copyAllowed"))
     CreateUserSettingsRequest.add_member(:disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: DisconnectTimeoutInMinutes, location_name: "disconnectTimeoutInMinutes"))
@@ -341,6 +375,11 @@ module Aws::WorkSpacesWeb
 
     DeleteTrustStoreResponse.struct_class = Types::DeleteTrustStoreResponse
 
+    DeleteUserAccessLoggingSettingsRequest.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "userAccessLoggingSettingsArn"))
+    DeleteUserAccessLoggingSettingsRequest.struct_class = Types::DeleteUserAccessLoggingSettingsRequest
+
+    DeleteUserAccessLoggingSettingsResponse.struct_class = Types::DeleteUserAccessLoggingSettingsResponse
+
     DeleteUserSettingsRequest.add_member(:user_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "userSettingsArn"))
     DeleteUserSettingsRequest.struct_class = Types::DeleteUserSettingsRequest
 
@@ -360,6 +399,11 @@ module Aws::WorkSpacesWeb
     DisassociateTrustStoreRequest.struct_class = Types::DisassociateTrustStoreRequest
 
     DisassociateTrustStoreResponse.struct_class = Types::DisassociateTrustStoreResponse
+
+    DisassociateUserAccessLoggingSettingsRequest.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "portalArn"))
+    DisassociateUserAccessLoggingSettingsRequest.struct_class = Types::DisassociateUserAccessLoggingSettingsRequest
+
+    DisassociateUserAccessLoggingSettingsResponse.struct_class = Types::DisassociateUserAccessLoggingSettingsResponse
 
     DisassociateUserSettingsRequest.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "portalArn"))
     DisassociateUserSettingsRequest.struct_class = Types::DisassociateUserSettingsRequest
@@ -413,6 +457,12 @@ module Aws::WorkSpacesWeb
 
     GetTrustStoreResponse.add_member(:trust_store, Shapes::ShapeRef.new(shape: TrustStore, location_name: "trustStore"))
     GetTrustStoreResponse.struct_class = Types::GetTrustStoreResponse
+
+    GetUserAccessLoggingSettingsRequest.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "userAccessLoggingSettingsArn"))
+    GetUserAccessLoggingSettingsRequest.struct_class = Types::GetUserAccessLoggingSettingsRequest
+
+    GetUserAccessLoggingSettingsResponse.add_member(:user_access_logging_settings, Shapes::ShapeRef.new(shape: UserAccessLoggingSettings, location_name: "userAccessLoggingSettings"))
+    GetUserAccessLoggingSettingsResponse.struct_class = Types::GetUserAccessLoggingSettingsResponse
 
     GetUserSettingsRequest.add_member(:user_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "userSettingsArn"))
     GetUserSettingsRequest.struct_class = Types::GetUserSettingsRequest
@@ -497,6 +547,14 @@ module Aws::WorkSpacesWeb
     ListTrustStoresResponse.add_member(:trust_stores, Shapes::ShapeRef.new(shape: TrustStoreSummaryList, location_name: "trustStores"))
     ListTrustStoresResponse.struct_class = Types::ListTrustStoresResponse
 
+    ListUserAccessLoggingSettingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListUserAccessLoggingSettingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListUserAccessLoggingSettingsRequest.struct_class = Types::ListUserAccessLoggingSettingsRequest
+
+    ListUserAccessLoggingSettingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListUserAccessLoggingSettingsResponse.add_member(:user_access_logging_settings, Shapes::ShapeRef.new(shape: UserAccessLoggingSettingsList, location_name: "userAccessLoggingSettings"))
+    ListUserAccessLoggingSettingsResponse.struct_class = Types::ListUserAccessLoggingSettingsResponse
+
     ListUserSettingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListUserSettingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListUserSettingsRequest.struct_class = Types::ListUserSettingsRequest
@@ -529,6 +587,7 @@ module Aws::WorkSpacesWeb
     Portal.add_member(:renderer_type, Shapes::ShapeRef.new(shape: RendererType, location_name: "rendererType"))
     Portal.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "statusReason"))
     Portal.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "trustStoreArn"))
+    Portal.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "userAccessLoggingSettingsArn"))
     Portal.add_member(:user_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "userSettingsArn"))
     Portal.struct_class = Types::Portal
 
@@ -544,6 +603,7 @@ module Aws::WorkSpacesWeb
     PortalSummary.add_member(:portal_status, Shapes::ShapeRef.new(shape: PortalStatus, location_name: "portalStatus"))
     PortalSummary.add_member(:renderer_type, Shapes::ShapeRef.new(shape: RendererType, location_name: "rendererType"))
     PortalSummary.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "trustStoreArn"))
+    PortalSummary.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "userAccessLoggingSettingsArn"))
     PortalSummary.add_member(:user_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "userSettingsArn"))
     PortalSummary.struct_class = Types::PortalSummary
 
@@ -647,6 +707,14 @@ module Aws::WorkSpacesWeb
     UpdateTrustStoreResponse.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "trustStoreArn"))
     UpdateTrustStoreResponse.struct_class = Types::UpdateTrustStoreResponse
 
+    UpdateUserAccessLoggingSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateUserAccessLoggingSettingsRequest.add_member(:kinesis_stream_arn, Shapes::ShapeRef.new(shape: KinesisStreamArn, location_name: "kinesisStreamArn"))
+    UpdateUserAccessLoggingSettingsRequest.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "userAccessLoggingSettingsArn"))
+    UpdateUserAccessLoggingSettingsRequest.struct_class = Types::UpdateUserAccessLoggingSettingsRequest
+
+    UpdateUserAccessLoggingSettingsResponse.add_member(:user_access_logging_settings, Shapes::ShapeRef.new(shape: UserAccessLoggingSettings, required: true, location_name: "userAccessLoggingSettings"))
+    UpdateUserAccessLoggingSettingsResponse.struct_class = Types::UpdateUserAccessLoggingSettingsResponse
+
     UpdateUserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateUserSettingsRequest.add_member(:copy_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "copyAllowed"))
     UpdateUserSettingsRequest.add_member(:disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: DisconnectTimeoutInMinutes, location_name: "disconnectTimeoutInMinutes"))
@@ -660,6 +728,17 @@ module Aws::WorkSpacesWeb
 
     UpdateUserSettingsResponse.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettings, required: true, location_name: "userSettings"))
     UpdateUserSettingsResponse.struct_class = Types::UpdateUserSettingsResponse
+
+    UserAccessLoggingSettings.add_member(:associated_portal_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "associatedPortalArns"))
+    UserAccessLoggingSettings.add_member(:kinesis_stream_arn, Shapes::ShapeRef.new(shape: KinesisStreamArn, location_name: "kinesisStreamArn"))
+    UserAccessLoggingSettings.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "userAccessLoggingSettingsArn"))
+    UserAccessLoggingSettings.struct_class = Types::UserAccessLoggingSettings
+
+    UserAccessLoggingSettingsList.member = Shapes::ShapeRef.new(shape: UserAccessLoggingSettingsSummary)
+
+    UserAccessLoggingSettingsSummary.add_member(:kinesis_stream_arn, Shapes::ShapeRef.new(shape: KinesisStreamArn, location_name: "kinesisStreamArn"))
+    UserAccessLoggingSettingsSummary.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "userAccessLoggingSettingsArn"))
+    UserAccessLoggingSettingsSummary.struct_class = Types::UserAccessLoggingSettingsSummary
 
     UserSettings.add_member(:associated_portal_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "associatedPortalArns"))
     UserSettings.add_member(:copy_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "copyAllowed"))
@@ -754,6 +833,20 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:associate_user_access_logging_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateUserAccessLoggingSettings"
+        o.http_method = "PUT"
+        o.http_request_uri = "/portals/{portalArn+}/userAccessLoggingSettings"
+        o.input = Shapes::ShapeRef.new(shape: AssociateUserAccessLoggingSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateUserAccessLoggingSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:associate_user_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateUserSettings"
         o.http_method = "PUT"
@@ -841,6 +934,20 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:create_user_access_logging_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateUserAccessLoggingSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/userAccessLoggingSettings"
+        o.input = Shapes::ShapeRef.new(shape: CreateUserAccessLoggingSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateUserAccessLoggingSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:create_user_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateUserSettings"
         o.http_method = "POST"
@@ -920,6 +1027,19 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_user_access_logging_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteUserAccessLoggingSettings"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/userAccessLoggingSettings/{userAccessLoggingSettingsArn+}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteUserAccessLoggingSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteUserAccessLoggingSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:delete_user_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteUserSettings"
         o.http_method = "DELETE"
@@ -965,6 +1085,19 @@ module Aws::WorkSpacesWeb
         o.http_request_uri = "/portals/{portalArn+}/trustStores"
         o.input = Shapes::ShapeRef.new(shape: DisassociateTrustStoreRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateTrustStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:disassociate_user_access_logging_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateUserAccessLoggingSettings"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/portals/{portalArn+}/userAccessLoggingSettings"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateUserAccessLoggingSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateUserAccessLoggingSettingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1069,6 +1202,19 @@ module Aws::WorkSpacesWeb
         o.http_request_uri = "/trustStores/{trustStoreArn+}/certificate"
         o.input = Shapes::ShapeRef.new(shape: GetTrustStoreCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTrustStoreCertificateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_user_access_logging_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetUserAccessLoggingSettings"
+        o.http_method = "GET"
+        o.http_request_uri = "/userAccessLoggingSettings/{userAccessLoggingSettingsArn+}"
+        o.input = Shapes::ShapeRef.new(shape: GetUserAccessLoggingSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetUserAccessLoggingSettingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1211,6 +1357,24 @@ module Aws::WorkSpacesWeb
         )
       end)
 
+      api.add_operation(:list_user_access_logging_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListUserAccessLoggingSettings"
+        o.http_method = "GET"
+        o.http_request_uri = "/userAccessLoggingSettings"
+        o.input = Shapes::ShapeRef.new(shape: ListUserAccessLoggingSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListUserAccessLoggingSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_user_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListUserSettings"
         o.http_method = "GET"
@@ -1319,6 +1483,19 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_user_access_logging_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateUserAccessLoggingSettings"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/userAccessLoggingSettings/{userAccessLoggingSettingsArn+}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateUserAccessLoggingSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateUserAccessLoggingSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 

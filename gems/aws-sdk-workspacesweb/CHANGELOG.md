@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2022-10-19)
+------------------
+
+* Feature - WorkSpaces Web now supports user access logging for recording session start, stop, and URL navigation.
+
 1.4.0 (2022-05-16)
 ------------------
 

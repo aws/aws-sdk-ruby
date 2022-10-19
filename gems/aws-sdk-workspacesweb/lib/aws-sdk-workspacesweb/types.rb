@@ -149,6 +149,48 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateUserAccessLoggingSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         portal_arn: "ARN", # required
+    #         user_access_logging_settings_arn: "ARN", # required
+    #       }
+    #
+    # @!attribute [rw] portal_arn
+    #   The ARN of the web portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_access_logging_settings_arn
+    #   The ARN of the user access logging settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/AssociateUserAccessLoggingSettingsRequest AWS API Documentation
+    #
+    class AssociateUserAccessLoggingSettingsRequest < Struct.new(
+      :portal_arn,
+      :user_access_logging_settings_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] portal_arn
+    #   The ARN of the web portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_access_logging_settings_arn
+    #   The ARN of the user access logging settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/AssociateUserAccessLoggingSettingsResponse AWS API Documentation
+    #
+    class AssociateUserAccessLoggingSettingsResponse < Struct.new(
+      :portal_arn,
+      :user_access_logging_settings_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateUserSettingsRequest
     #   data as a hash:
     #
@@ -748,6 +790,66 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateUserAccessLoggingSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "ClientToken",
+    #         kinesis_stream_arn: "KinesisStreamArn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, subsequent retries with the same
+    #   client token returns the result from the original successful
+    #   request.
+    #
+    #   If you do not specify a client token, one is automatically generated
+    #   by the AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] kinesis_stream_arn
+    #   The ARN of the Kinesis stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the user settings resource. A tag is a key-value
+    #   pair.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CreateUserAccessLoggingSettingsRequest AWS API Documentation
+    #
+    class CreateUserAccessLoggingSettingsRequest < Struct.new(
+      :client_token,
+      :kinesis_stream_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_access_logging_settings_arn
+    #   The ARN of the user access logging settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CreateUserAccessLoggingSettingsResponse AWS API Documentation
+    #
+    class CreateUserAccessLoggingSettingsResponse < Struct.new(
+      :user_access_logging_settings_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateUserSettingsRequest
     #   data as a hash:
     #
@@ -966,6 +1068,29 @@ module Aws::WorkSpacesWeb
     #
     class DeleteTrustStoreResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteUserAccessLoggingSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_access_logging_settings_arn: "ARN", # required
+    #       }
+    #
+    # @!attribute [rw] user_access_logging_settings_arn
+    #   The ARN of the user access logging settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DeleteUserAccessLoggingSettingsRequest AWS API Documentation
+    #
+    class DeleteUserAccessLoggingSettingsRequest < Struct.new(
+      :user_access_logging_settings_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DeleteUserAccessLoggingSettingsResponse AWS API Documentation
+    #
+    class DeleteUserAccessLoggingSettingsResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteUserSettingsRequest
     #   data as a hash:
     #
@@ -1057,6 +1182,29 @@ module Aws::WorkSpacesWeb
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DisassociateTrustStoreResponse AWS API Documentation
     #
     class DisassociateTrustStoreResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DisassociateUserAccessLoggingSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         portal_arn: "ARN", # required
+    #       }
+    #
+    # @!attribute [rw] portal_arn
+    #   The ARN of the web portal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DisassociateUserAccessLoggingSettingsRequest AWS API Documentation
+    #
+    class DisassociateUserAccessLoggingSettingsRequest < Struct.new(
+      :portal_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DisassociateUserAccessLoggingSettingsResponse AWS API Documentation
+    #
+    class DisassociateUserAccessLoggingSettingsResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DisassociateUserSettingsRequest
     #   data as a hash:
@@ -1310,6 +1458,37 @@ module Aws::WorkSpacesWeb
     #
     class GetTrustStoreResponse < Struct.new(
       :trust_store)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetUserAccessLoggingSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_access_logging_settings_arn: "ARN", # required
+    #       }
+    #
+    # @!attribute [rw] user_access_logging_settings_arn
+    #   The ARN of the user access logging settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetUserAccessLoggingSettingsRequest AWS API Documentation
+    #
+    class GetUserAccessLoggingSettingsRequest < Struct.new(
+      :user_access_logging_settings_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_access_logging_settings
+    #   The user access logging settings.
+    #   @return [Types::UserAccessLoggingSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetUserAccessLoggingSettingsResponse AWS API Documentation
+    #
+    class GetUserAccessLoggingSettingsResponse < Struct.new(
+      :user_access_logging_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1789,6 +1968,50 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListUserAccessLoggingSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be included in the next page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListUserAccessLoggingSettingsRequest AWS API Documentation
+    #
+    class ListUserAccessLoggingSettingsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_access_logging_settings
+    #   The user access logging settings.
+    #   @return [Array<Types::UserAccessLoggingSettingsSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListUserAccessLoggingSettingsResponse AWS API Documentation
+    #
+    class ListUserAccessLoggingSettingsResponse < Struct.new(
+      :next_token,
+      :user_access_logging_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListUserSettingsRequest
     #   data as a hash:
     #
@@ -1941,8 +2164,13 @@ module Aws::WorkSpacesWeb
     #   The ARN of the trust store that is associated with the web portal.
     #   @return [String]
     #
+    # @!attribute [rw] user_access_logging_settings_arn
+    #   The ARN of the user access logging settings that is associated with
+    #   the web portal.
+    #   @return [String]
+    #
     # @!attribute [rw] user_settings_arn
-    #   The ARN of the trust store that is associated with the web portal.
+    #   The ARN of the user settings that is associated with the web portal.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/Portal AWS API Documentation
@@ -1959,6 +2187,7 @@ module Aws::WorkSpacesWeb
       :renderer_type,
       :status_reason,
       :trust_store_arn,
+      :user_access_logging_settings_arn,
       :user_settings_arn)
       SENSITIVE = [:display_name]
       include Aws::Structure
@@ -2009,6 +2238,11 @@ module Aws::WorkSpacesWeb
     #   The ARN of the trust that is associated with this web portal.
     #   @return [String]
     #
+    # @!attribute [rw] user_access_logging_settings_arn
+    #   The ARN of the user access logging settings that is associated with
+    #   the web portal.
+    #   @return [String]
+    #
     # @!attribute [rw] user_settings_arn
     #   The ARN of the user settings that is associated with the web portal.
     #   @return [String]
@@ -2026,6 +2260,7 @@ module Aws::WorkSpacesWeb
       :portal_status,
       :renderer_type,
       :trust_store_arn,
+      :user_access_logging_settings_arn,
       :user_settings_arn)
       SENSITIVE = [:display_name]
       include Aws::Structure
@@ -2626,6 +2861,59 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateUserAccessLoggingSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "ClientToken",
+    #         kinesis_stream_arn: "KinesisStreamArn",
+    #         user_access_logging_settings_arn: "ARN", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, subsequent retries with the same
+    #   client token return the result from the original successful request.
+    #
+    #   If you do not specify a client token, one is automatically generated
+    #   by the AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] kinesis_stream_arn
+    #   The ARN of the Kinesis stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_access_logging_settings_arn
+    #   The ARN of the user access logging settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateUserAccessLoggingSettingsRequest AWS API Documentation
+    #
+    class UpdateUserAccessLoggingSettingsRequest < Struct.new(
+      :client_token,
+      :kinesis_stream_arn,
+      :user_access_logging_settings_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_access_logging_settings
+    #   The user access logging settings.
+    #   @return [Types::UserAccessLoggingSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateUserAccessLoggingSettingsResponse AWS API Documentation
+    #
+    class UpdateUserAccessLoggingSettingsResponse < Struct.new(
+      :user_access_logging_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateUserSettingsRequest
     #   data as a hash:
     #
@@ -2718,6 +3006,51 @@ module Aws::WorkSpacesWeb
     #
     class UpdateUserSettingsResponse < Struct.new(
       :user_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A user access logging settings resource that can be associated with a
+    # web portal.
+    #
+    # @!attribute [rw] associated_portal_arns
+    #   A list of web portal ARNs that this user access logging settings is
+    #   associated with.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] kinesis_stream_arn
+    #   The ARN of the Kinesis stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_access_logging_settings_arn
+    #   The ARN of the user access logging settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UserAccessLoggingSettings AWS API Documentation
+    #
+    class UserAccessLoggingSettings < Struct.new(
+      :associated_portal_arns,
+      :kinesis_stream_arn,
+      :user_access_logging_settings_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of user access logging settings.
+    #
+    # @!attribute [rw] kinesis_stream_arn
+    #   The ARN of the Kinesis stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_access_logging_settings_arn
+    #   The ARN of the user access logging settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UserAccessLoggingSettingsSummary AWS API Documentation
+    #
+    class UserAccessLoggingSettingsSummary < Struct.new(
+      :kinesis_stream_arn,
+      :user_access_logging_settings_arn)
       SENSITIVE = []
       include Aws::Structure
     end

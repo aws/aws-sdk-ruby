@@ -10,7 +10,7 @@
 module Aws::ManagedBlockchain
   module Types
 
-    # You do not have sufficient access to perform this action.
+    # You don't have sufficient access to perform this action.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -19,6 +19,112 @@ module Aws::ManagedBlockchain
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The token based access feature is in preview release for Ethereum on
+    # Amazon Managed Blockchain and is subject to change. We recommend that
+    # you use this feature only with test scenarios, and not in production
+    # environments.
+    #
+    # The properties of the Accessor.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the accessor.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the accessor.
+    #
+    #   <note markdown="1"> Currently accessor type is restricted to `BILLING_TOKEN`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_token
+    #   The billing token is a property of the accessor. Use this token to
+    #   make Ethereum API calls to your Ethereum node. The billing token is
+    #   used to track your accessor object for billing Ethereum API requests
+    #   made to your Ethereum nodes.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the accessor.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The creation date and time of the accessor.
+    #   @return [Time]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the accessor. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
+    #   in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Accessor AWS API Documentation
+    #
+    class Accessor < Struct.new(
+      :id,
+      :type,
+      :billing_token,
+      :status,
+      :creation_date,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The token based access feature is in preview release for Ethereum on
+    # Amazon Managed Blockchain and is subject to change. We recommend that
+    # you use this feature only with test scenarios, and not in production
+    # environments.
+    #
+    # A summary of accessor properties.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the accessor.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the accessor.
+    #
+    #   <note markdown="1"> Currently accessor type is restricted to `BILLING_TOKEN`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the accessor.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The creation date and time of the accessor.
+    #   @return [Time]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the accessor. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
+    #   in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/AccessorSummary AWS API Documentation
+    #
+    class AccessorSummary < Struct.new(
+      :id,
+      :type,
+      :status,
+      :creation_date,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -55,7 +161,7 @@ module Aws::ManagedBlockchain
     #   expires. If members cast neither the required number of `YES` votes
     #   to approve the proposal nor the number of `NO` votes required to
     #   reject it before the duration expires, the proposal is `EXPIRED` and
-    #   `ProposalActions` are not carried out.
+    #   `ProposalActions` aren't carried out.
     #   @return [Integer]
     #
     # @!attribute [rw] threshold_comparator
@@ -70,6 +176,63 @@ module Aws::ManagedBlockchain
       :threshold_percentage,
       :proposal_duration_in_hours,
       :threshold_comparator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAccessorInput
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestTokenString", # required
+    #         accessor_type: "BILLING_TOKEN", # required, accepts BILLING_TOKEN
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   This is a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the operation. An idempotent operation
+    #   completes no more than once. This identifier is required only if you
+    #   make a service request directly using an HTTP client. It is
+    #   generated automatically if you use an Amazon Web Services SDK or the
+    #   Amazon Web Services CLI.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] accessor_type
+    #   The type of accessor.
+    #
+    #   <note markdown="1"> Currently accessor type is restricted to `BILLING_TOKEN`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateAccessorInput AWS API Documentation
+    #
+    class CreateAccessorInput < Struct.new(
+      :client_request_token,
+      :accessor_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] accessor_id
+    #   The unique identifier of the accessor.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_token
+    #   The billing token is a property of the Accessor. Use this token to
+    #   make Ethereum API calls to your Ethereum node. The billing token is
+    #   used to track your accessor object for billing Ethereum API requests
+    #   made to your Ethereum nodes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateAccessorOutput AWS API Documentation
+    #
+    class CreateAccessorOutput < Struct.new(
+      :accessor_id,
+      :billing_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -111,7 +274,7 @@ module Aws::ManagedBlockchain
     #   idempotency of the operation. An idempotent operation completes no
     #   more than one time. This identifier is required only if you make a
     #   service request directly using an HTTP client. It is generated
-    #   automatically if you use an AWS SDK or the AWS CLI.
+    #   automatically if you use an Amazon Web Services SDK or the CLI.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -203,11 +366,12 @@ module Aws::ManagedBlockchain
     #       }
     #
     # @!attribute [rw] client_request_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the operation. An idempotent operation completes no
-    #   more than one time. This identifier is required only if you make a
-    #   service request directly using an HTTP client. It is generated
-    #   automatically if you use an AWS SDK or the AWS CLI.
+    #   This is a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the operation. An idempotent operation
+    #   completes no more than once. This identifier is required only if you
+    #   make a service request directly using an HTTP client. It is
+    #   generated automatically if you use an Amazon Web Services SDK or the
+    #   Amazon Web Services CLI.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -331,7 +495,7 @@ module Aws::ManagedBlockchain
     #   idempotency of the operation. An idempotent operation completes no
     #   more than one time. This identifier is required only if you make a
     #   service request directly using an HTTP client. It is generated
-    #   automatically if you use an AWS SDK or the AWS CLI.
+    #   automatically if you use an Amazon Web Services SDK or the CLI.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -432,7 +596,7 @@ module Aws::ManagedBlockchain
     #   idempotency of the operation. An idempotent operation completes no
     #   more than one time. This identifier is required only if you make a
     #   service request directly using an HTTP client. It is generated
-    #   automatically if you use an AWS SDK or the AWS CLI.
+    #   automatically if you use an Amazon Web Services SDK or the CLI.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -445,8 +609,8 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] member_id
     #   The unique identifier of the member that is creating the proposal.
     #   This identifier is especially useful for identifying the member
-    #   making the proposal when multiple members exist in a single AWS
-    #   account.
+    #   making the proposal when multiple members exist in a single Amazon
+    #   Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] actions
@@ -505,6 +669,29 @@ module Aws::ManagedBlockchain
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteAccessorInput
+    #   data as a hash:
+    #
+    #       {
+    #         accessor_id: "ResourceIdString", # required
+    #       }
+    #
+    # @!attribute [rw] accessor_id
+    #   The unique identifier of the accessor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/DeleteAccessorInput AWS API Documentation
+    #
+    class DeleteAccessorInput < Struct.new(
+      :accessor_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/DeleteAccessorOutput AWS API Documentation
+    #
+    class DeleteAccessorOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteMemberInput
     #   data as a hash:
@@ -581,6 +768,37 @@ module Aws::ManagedBlockchain
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/DeleteNodeOutput AWS API Documentation
     #
     class DeleteNodeOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass GetAccessorInput
+    #   data as a hash:
+    #
+    #       {
+    #         accessor_id: "ResourceIdString", # required
+    #       }
+    #
+    # @!attribute [rw] accessor_id
+    #   The unique identifier of the accessor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/GetAccessorInput AWS API Documentation
+    #
+    class GetAccessorInput < Struct.new(
+      :accessor_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] accessor
+    #   The properties of the accessor.
+    #   @return [Types::Accessor]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/GetAccessorOutput AWS API Documentation
+    #
+    class GetAccessorOutput < Struct.new(
+      :accessor)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass GetMemberInput
     #   data as a hash:
@@ -765,8 +983,8 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # An invitation to an AWS account to create a member and join the
-    # network.
+    # An invitation to an Amazon Web Services account to create a member and
+    # join the network.
     #
     # Applies only to Hyperledger Fabric.
     #
@@ -789,11 +1007,11 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] status
     #   The status of the invitation:
     #
-    #   * `PENDING` - The invitee has not created a member to join the
-    #     network, and the invitation has not yet expired.
+    #   * `PENDING` - The invitee hasn't created a member to join the
+    #     network, and the invitation hasn't yet expired.
     #
     #   * `ACCEPTING` - The invitee has begun creating a member, and
-    #     creation has not yet completed.
+    #     creation hasn't yet completed.
     #
     #   * `ACCEPTED` - The invitee created a member and joined the network
     #     using the `InvitationID`.
@@ -811,7 +1029,7 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the invitation. For more
     #   information about ARNs and their format, see [Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference*.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -831,9 +1049,9 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # An action to invite a specific AWS account to create a member and join
-    # the network. The `InviteAction` is carried out when a `Proposal` is
-    # `APPROVED`.
+    # An action to invite a specific Amazon Web Services account to create a
+    # member and join the network. The `InviteAction` is carried out when a
+    # `Proposal` is `APPROVED`.
     #
     # Applies only to Hyperledger Fabric.
     #
@@ -845,13 +1063,58 @@ module Aws::ManagedBlockchain
     #       }
     #
     # @!attribute [rw] principal
-    #   The AWS account ID to invite.
+    #   The Amazon Web Services account ID to invite.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/InviteAction AWS API Documentation
     #
     class InviteAction < Struct.new(
       :principal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAccessorsInput
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of accessors to list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListAccessorsInput AWS API Documentation
+    #
+    class ListAccessorsInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] accessors
+    #   An array of AccessorSummary objects that contain configuration
+    #   properties for each accessor.
+    #   @return [Array<Types::AccessorSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListAccessorsOutput AWS API Documentation
+    #
+    class ListAccessorsOutput < Struct.new(
+      :accessors,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -927,9 +1190,9 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] is_owned
     #   An optional Boolean value. If provided, the request is limited
-    #   either to members that the current AWS account owns (`true`) or that
-    #   other AWS accounts own (`false`). If omitted, all members are
-    #   listed.
+    #   either to members that the current Amazon Web Services account owns
+    #   (`true`) or that other Amazon Web Services accountsn own (`false`).
+    #   If omitted, all members are listed.
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
@@ -1223,7 +1486,7 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource. For more information
     #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference*.
+    #   in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1327,37 +1590,38 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] status
     #   The status of a member.
     #
-    #   * `CREATING` - The AWS account is in the process of creating a
-    #     member.
+    #   * `CREATING` - The Amazon Web Services account is in the process of
+    #     creating a member.
     #
     #   * `AVAILABLE` - The member has been created and can participate in
     #     the network.
     #
-    #   * `CREATE_FAILED` - The AWS account attempted to create a member and
-    #     creation failed.
+    #   * `CREATE_FAILED` - The Amazon Web Services account attempted to
+    #     create a member and creation failed.
     #
     #   * `UPDATING` - The member is in the process of being updated.
     #
     #   * `DELETING` - The member and all associated resources are in the
-    #     process of being deleted. Either the AWS account that owns the
-    #     member deleted it, or the member is being deleted as the result of
-    #     an `APPROVED` `PROPOSAL` to remove the member.
-    #
-    #   * `DELETED` - The member can no longer participate on the network
-    #     and all associated resources are deleted. Either the AWS account
+    #     process of being deleted. Either the Amazon Web Services account
     #     that owns the member deleted it, or the member is being deleted as
     #     the result of an `APPROVED` `PROPOSAL` to remove the member.
     #
+    #   * `DELETED` - The member can no longer participate on the network
+    #     and all associated resources are deleted. Either the Amazon Web
+    #     Services account that owns the member deleted it, or the member is
+    #     being deleted as the result of an `APPROVED` `PROPOSAL` to remove
+    #     the member.
+    #
     #   * `INACCESSIBLE_ENCRYPTION_KEY` - The member is impaired and might
     #     not function as expected because it cannot access the specified
-    #     customer managed key in AWS KMS for encryption at rest. Either the
-    #     KMS key was disabled or deleted, or the grants on the key were
+    #     customer managed key in KMS for encryption at rest. Either the KMS
+    #     key was disabled or deleted, or the grants on the key were
     #     revoked.
     #
-    #     The effect of disabling or deleting a key, or revoking a grant is
-    #     not immediate. The member resource might take some time to find
-    #     that the key is inaccessible. When a resource is in this state, we
-    #     recommend deleting and recreating the resource.
+    #     The effect of disabling or deleting a key or of revoking a grant
+    #     isn't immediate. It might take some time for the member resource
+    #     to discover that the key is inaccessible. When a resource is in
+    #     this state, we recommend deleting and recreating the resource.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -1378,7 +1642,7 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the member. For more information
     #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference*.
+    #   in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1386,11 +1650,18 @@ module Aws::ManagedBlockchain
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the customer managed key in AWS
-    #   Key Management Service (AWS KMS) that the member uses for encryption
-    #   at rest. If the value of this parameter is `"AWS Owned KMS Key"`,
-    #   the member uses an AWS owned KMS key for encryption. This parameter
-    #   is inherited by the nodes that this member owns.
+    #   The Amazon Resource Name (ARN) of the customer managed key in Key
+    #   Management Service (KMS) that the member uses for encryption at
+    #   rest. If the value of this parameter is `"AWS Owned KMS Key"`, the
+    #   member uses an Amazon Web Services owned KMS key for encryption.
+    #   This parameter is inherited by the nodes that this member owns.
+    #
+    #   For more information, see [Encryption at Rest][1] in the *Amazon
+    #   Managed Blockchain Hyperledger Fabric Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/managed-blockchain-encryption-at-rest.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Member AWS API Documentation
@@ -1476,29 +1747,31 @@ module Aws::ManagedBlockchain
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the customer managed key in AWS
-    #   Key Management Service (AWS KMS) to use for encryption at rest in
-    #   the member. This parameter is inherited by any nodes that this
-    #   member creates.
+    #   The Amazon Resource Name (ARN) of the customer managed key in Key
+    #   Management Service (KMS) to use for encryption at rest in the
+    #   member. This parameter is inherited by any nodes that this member
+    #   creates. For more information, see [Encryption at Rest][1] in the
+    #   *Amazon Managed Blockchain Hyperledger Fabric Developer Guide*.
     #
     #   Use one of the following options to specify this parameter:
     #
-    #   * **Undefined or empty string** - The member uses an AWS owned KMS
-    #     key for encryption by default.
+    #   * **Undefined or empty string** - By default, use an KMS key that is
+    #     owned and managed by Amazon Web Services on your behalf.
     #
-    #   * **A valid symmetric customer managed KMS key** - The member uses
-    #     the specified key for encryption.
+    #   * **A valid symmetric customer managed KMS key** - Use the specified
+    #     KMS key in your account that you create, own, and manage.
     #
     #     Amazon Managed Blockchain doesn't support asymmetric keys. For
-    #     more information, see [Using symmetric and asymmetric keys][1] in
-    #     the *AWS Key Management Service Developer Guide*.
+    #     more information, see [Using symmetric and asymmetric keys][2] in
+    #     the *Key Management Service Developer Guide*.
     #
     #     The following is an example of a KMS key ARN:
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/managed-blockchain-encryption-at-rest.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberConfiguration AWS API Documentation
@@ -1688,37 +1961,38 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] status
     #   The status of the member.
     #
-    #   * `CREATING` - The AWS account is in the process of creating a
-    #     member.
+    #   * `CREATING` - The Amazon Web Services account is in the process of
+    #     creating a member.
     #
     #   * `AVAILABLE` - The member has been created and can participate in
     #     the network.
     #
-    #   * `CREATE_FAILED` - The AWS account attempted to create a member and
-    #     creation failed.
+    #   * `CREATE_FAILED` - The Amazon Web Services account attempted to
+    #     create a member and creation failed.
     #
     #   * `UPDATING` - The member is in the process of being updated.
     #
     #   * `DELETING` - The member and all associated resources are in the
-    #     process of being deleted. Either the AWS account that owns the
-    #     member deleted it, or the member is being deleted as the result of
-    #     an `APPROVED` `PROPOSAL` to remove the member.
-    #
-    #   * `DELETED` - The member can no longer participate on the network
-    #     and all associated resources are deleted. Either the AWS account
+    #     process of being deleted. Either the Amazon Web Services account
     #     that owns the member deleted it, or the member is being deleted as
     #     the result of an `APPROVED` `PROPOSAL` to remove the member.
     #
+    #   * `DELETED` - The member can no longer participate on the network
+    #     and all associated resources are deleted. Either the Amazon Web
+    #     Services account that owns the member deleted it, or the member is
+    #     being deleted as the result of an `APPROVED` `PROPOSAL` to remove
+    #     the member.
+    #
     #   * `INACCESSIBLE_ENCRYPTION_KEY` - The member is impaired and might
     #     not function as expected because it cannot access the specified
-    #     customer managed key in AWS Key Management Service (AWS KMS) for
+    #     customer managed key in Key Management Service (KMS) for
     #     encryption at rest. Either the KMS key was disabled or deleted, or
     #     the grants on the key were revoked.
     #
-    #     The effect of disabling or deleting a key, or revoking a grant is
-    #     not immediate. The member resource might take some time to find
-    #     that the key is inaccessible. When a resource is in this state, we
-    #     recommend deleting and recreating the resource.
+    #     The effect of disabling or deleting a key or of revoking a grant
+    #     isn't immediate. It might take some time for the member resource
+    #     to discover that the key is inaccessible. When a resource is in
+    #     this state, we recommend deleting and recreating the resource.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -1726,14 +2000,14 @@ module Aws::ManagedBlockchain
     #   @return [Time]
     #
     # @!attribute [rw] is_owned
-    #   An indicator of whether the member is owned by your AWS account or a
-    #   different AWS account.
+    #   An indicator of whether the member is owned by your Amazon Web
+    #   Services account or a different Amazon Web Services account.
     #   @return [Boolean]
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the member. For more information
     #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference*.
+    #   in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1817,7 +2091,7 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the network. For more information
     #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference*.
+    #   in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1995,7 +2269,7 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the network. For more information
     #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference*.
+    #   in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -2061,7 +2335,8 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] status
     #   The status of the node.
     #
-    #   * `CREATING` - The AWS account is in the process of creating a node.
+    #   * `CREATING` - The Amazon Web Services account is in the process of
+    #     creating a node.
     #
     #   * `AVAILABLE` - The node has been created and can participate in the
     #     network.
@@ -2071,8 +2346,8 @@ module Aws::ManagedBlockchain
     #     this state and tries to recover them. If a node is recoverable, it
     #     returns to `AVAILABLE`. Otherwise, it moves to `FAILED` status.
     #
-    #   * `CREATE_FAILED` - The AWS account attempted to create a node and
-    #     creation failed.
+    #   * `CREATE_FAILED` - The Amazon Web Services account attempted to
+    #     create a node and creation failed.
     #
     #   * `UPDATING` - The node is in the process of being updated.
     #
@@ -2085,14 +2360,14 @@ module Aws::ManagedBlockchain
     #
     #   * `INACCESSIBLE_ENCRYPTION_KEY` - The node is impaired and might not
     #     function as expected because it cannot access the specified
-    #     customer managed key in AWS KMS for encryption at rest. Either the
-    #     KMS key was disabled or deleted, or the grants on the key were
+    #     customer managed key in KMS for encryption at rest. Either the KMS
+    #     key was disabled or deleted, or the grants on the key were
     #     revoked.
     #
-    #     The effect of disabling or deleting a key, or revoking a grant is
-    #     not immediate. The node resource might take some time to find that
-    #     the key is inaccessible. When a resource is in this state, we
-    #     recommend deleting and recreating the resource.
+    #     The effect of disabling or deleting a key or of revoking a grant
+    #     isn't immediate. It might take some time for the node resource to
+    #     discover that the key is inaccessible. When a resource is in this
+    #     state, we recommend deleting and recreating the resource.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -2117,7 +2392,7 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the node. For more information
     #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference*.
+    #   in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -2125,13 +2400,20 @@ module Aws::ManagedBlockchain
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the customer managed key in AWS
-    #   Key Management Service (AWS KMS) that the node uses for encryption
-    #   at rest. If the value of this parameter is `"AWS Owned KMS Key"`,
-    #   the node uses an AWS owned KMS key for encryption. The node inherits
-    #   this parameter from the member that it belongs to.
+    #   The Amazon Resource Name (ARN) of the customer managed key in Key
+    #   Management Service (KMS) that the node uses for encryption at rest.
+    #   If the value of this parameter is `"AWS Owned KMS Key"`, the node
+    #   uses an Amazon Web Services owned KMS key for encryption. The node
+    #   inherits this parameter from the member that it belongs to.
+    #
+    #   For more information, see [Encryption at Rest][1] in the *Amazon
+    #   Managed Blockchain Hyperledger Fabric Developer Guide*.
     #
     #   Applies only to Hyperledger Fabric.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/managed-blockchain-encryption-at-rest.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Node AWS API Documentation
@@ -2215,11 +2497,11 @@ module Aws::ManagedBlockchain
     # Attributes of an Ethereum node.
     #
     # @!attribute [rw] http_endpoint
-    #   The endpoint on which the Ethereum node listens to run Ethereum
-    #   JSON-RPC methods over HTTP connections from a client. Use this
-    #   endpoint in client code for smart contracts when using an HTTP
-    #   connection. Connections to this endpoint are authenticated using
-    #   [Signature Version 4][1].
+    #   The endpoint on which the Ethereum node listens to run Ethereum API
+    #   methods over HTTP connections from a client. Use this endpoint in
+    #   client code for smart contracts when using an HTTP connection.
+    #   Connections to this endpoint are authenticated using [Signature
+    #   Version 4][1].
     #
     #
     #
@@ -2395,7 +2677,7 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the node. For more information
     #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference*.
+    #   in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -2454,15 +2736,15 @@ module Aws::ManagedBlockchain
     #
     #   * `REJECTED` - The proposal was rejected with insufficient `YES`
     #     votes among members according to the `VotingPolicy` specified for
-    #     the `Network`. The specified `ProposalActions` are not carried
+    #     the `Network`. The specified `ProposalActions` aren't carried
     #     out.
     #
-    #   * `EXPIRED` - Members did not cast the number of votes required to
+    #   * `EXPIRED` - Members didn't cast the number of votes required to
     #     determine the proposal outcome before the proposal expired. The
-    #     specified `ProposalActions` are not carried out.
+    #     specified `ProposalActions` aren't carried out.
     #
     #   * `ACTION_FAILED` - One or more of the specified `ProposalActions`
-    #     in a proposal that was approved could not be completed because of
+    #     in a proposal that was approved couldn't be completed because of
     #     an error. The `ACTION_FAILED` status occurs even if only one
     #     ProposalAction fails and other actions are successful.
     #   @return [String]
@@ -2475,9 +2757,9 @@ module Aws::ManagedBlockchain
     #   The date and time that the proposal expires. This is the
     #   `CreationDate` plus the `ProposalDurationInHours` that is specified
     #   in the `ProposalThresholdPolicy`. After this date and time, if
-    #   members have not cast enough votes to determine the outcome
+    #   members haven't cast enough votes to determine the outcome
     #   according to the voting policy, the proposal is `EXPIRED` and
-    #   `Actions` are not carried out.
+    #   `Actions` aren't carried out.
     #   @return [Time]
     #
     # @!attribute [rw] yes_vote_count
@@ -2512,7 +2794,7 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the proposal. For more information
     #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference*.
+    #   in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -2561,8 +2843,8 @@ module Aws::ManagedBlockchain
     #       }
     #
     # @!attribute [rw] invitations
-    #   The actions to perform for an `APPROVED` proposal to invite an AWS
-    #   account to create a member and join the network.
+    #   The actions to perform for an `APPROVED` proposal to invite an
+    #   Amazon Web Services account to create a member and join the network.
     #   @return [Array<Types::InviteAction>]
     #
     # @!attribute [rw] removals
@@ -2611,15 +2893,15 @@ module Aws::ManagedBlockchain
     #
     #   * `REJECTED` - The proposal was rejected with insufficient `YES`
     #     votes among members according to the `VotingPolicy` specified for
-    #     the `Network`. The specified `ProposalActions` are not carried
+    #     the `Network`. The specified `ProposalActions` aren't carried
     #     out.
     #
-    #   * `EXPIRED` - Members did not cast the number of votes required to
+    #   * `EXPIRED` - Members didn't cast the number of votes required to
     #     determine the proposal outcome before the proposal expired. The
-    #     specified `ProposalActions` are not carried out.
+    #     specified `ProposalActions` aren't carried out.
     #
     #   * `ACTION_FAILED` - One or more of the specified `ProposalActions`
-    #     in a proposal that was approved could not be completed because of
+    #     in a proposal that was approved couldn't be completed because of
     #     an error.
     #   @return [String]
     #
@@ -2631,15 +2913,15 @@ module Aws::ManagedBlockchain
     #   The date and time that the proposal expires. This is the
     #   `CreationDate` plus the `ProposalDurationInHours` that is specified
     #   in the `ProposalThresholdPolicy`. After this date and time, if
-    #   members have not cast enough votes to determine the outcome
+    #   members haven't cast enough votes to determine the outcome
     #   according to the voting policy, the proposal is `EXPIRED` and
-    #   `Actions` are not carried out.
+    #   `Actions` aren't carried out.
     #   @return [Time]
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the proposal. For more information
     #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference*.
+    #   in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -2737,14 +3019,14 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # A requested resource does not exist. It may have been deleted or
-    # referenced inaccurately.
+    # A requested resource doesn't exist. It may have been deleted or
+    # referenced incorrectly.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] resource_name
-    #   A requested resource does not exist. It may have been deleted or
+    #   A requested resource doesn't exist. It may have been deleted or
     #   referenced inaccurately.
     #   @return [String]
     #
@@ -2757,7 +3039,7 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # The requested resource exists but is not in a status that can complete
+    # The requested resource exists but isn't in a status that can complete
     # the operation.
     #
     # @!attribute [rw] message
@@ -2784,7 +3066,7 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource. For more information
     #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference*.
+    #   in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -2811,11 +3093,10 @@ module Aws::ManagedBlockchain
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # The request or operation could not be performed because a service is
+    # The request or operation couldn't be performed because a service is
     # throttling requests. The most common source of throttling errors is
-    # launching EC2 instances such that your service limit for EC2 instances
-    # is exceeded. Request a limit increase or delete unused resources if
-    # possible.
+    # creating resources that exceed your service limit for this resource
+    # type. Request a limit increase or delete unused resources if possible.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ThrottlingException AWS API Documentation
     #
@@ -2847,7 +3128,7 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource. For more information
     #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference*.
+    #   in the *Amazon Web Services General Reference*.
     #
     #
     #

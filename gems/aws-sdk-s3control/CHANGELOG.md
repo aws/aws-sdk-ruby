@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2022-10-19)
+------------------
+
+* Feature - Updates internal logic for constructing API endpoints. We have added rule-based endpoints and internal model parameters.
+
 1.52.0 (2022-10-04)
 ------------------
 

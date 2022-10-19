@@ -2490,10 +2490,9 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
-    # Allows an `AppInstanceUser` to search the channels that they belong
-    # to. The `AppInstanceUser` can search by membership or external ID. An
-    # `AppInstanceAdmin` can search across all channels within the
-    # `AppInstance`.
+    # Allows `ChimeBearer` to search channels by channel members.
+    # AppInstanceUsers can search across the channels that they belong to.
+    # AppInstanceAdmins can search across all channels.
     #
     # @option params [String] :chime_bearer
     #   The `AppInstanceUserArn` of the user making the API call.
@@ -2926,7 +2925,7 @@ module Aws::ChimeSDKMessaging
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmessaging'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
