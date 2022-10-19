@@ -37,6 +37,13 @@ module Aws::SupportApp
     # * Delete a Slack workspace from your Amazon Web Services account that
     #   has an active live chat channel.
     #
+    # * Call the `RegisterSlackWorkspaceForOrganization` API from an Amazon
+    #   Web Services account that doesn't belong to an organization.
+    #
+    # * Call the `RegisterSlackWorkspaceForOrganization` API from a member
+    #   account, but the management account hasn't registered that
+    #   workspace yet for the organization.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -92,7 +99,28 @@ module Aws::SupportApp
     #   The case severity for a support case that you want to receive
     #   notifications.
     #
-    #        <p>If you specify <code>high</code> or <code>all</code>, you must specify <code>true</code> for at least one of the following parameters:</p> <ul> <li> <p> <code>notifyOnAddCorrespondenceToCase</code> </p> </li> <li> <p> <code>notifyOnCreateOrReopenCase</code> </p> </li> <li> <p> <code>notifyOnResolveCase</code> </p> </li> </ul> <p>If you specify <code>none</code>, the following parameters must be null or <code>false</code>:</p> <ul> <li> <p> <code>notifyOnAddCorrespondenceToCase</code> </p> </li> <li> <p> <code>notifyOnCreateOrReopenCase</code> </p> </li> <li> <p> <code>notifyOnResolveCase</code> </p> </li> </ul> <note> <p>If you don't specify these parameters in your request, they default to <code>false</code>.</p> </note>
+    #   If you specify `high` or `all`, you must specify `true` for at least
+    #   one of the following parameters:
+    #
+    #   * `notifyOnAddCorrespondenceToCase`
+    #
+    #   * `notifyOnCreateOrReopenCase`
+    #
+    #   * `notifyOnResolveCase`
+    #
+    #   If you specify `none`, the following parameters must be null or
+    #   `false`\:
+    #
+    #   * `notifyOnAddCorrespondenceToCase`
+    #
+    #   * `notifyOnCreateOrReopenCase`
+    #
+    #   * `notifyOnResolveCase`
+    #
+    #   <note markdown="1"> If you don't specify these parameters in your request, they default
+    #   to `false`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] notify_on_create_or_reopen_case
@@ -105,7 +133,8 @@ module Aws::SupportApp
     #   @return [Boolean]
     #
     # @!attribute [rw] team_id
-    #   The team ID in Slack. This ID uniquely identifies a Slack workspace.
+    #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
+    #   such as `T012ABCDEFG`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-app-2021-08-20/CreateSlackChannelConfigurationRequest AWS API Documentation
@@ -151,7 +180,8 @@ module Aws::SupportApp
     #   @return [String]
     #
     # @!attribute [rw] team_id
-    #   The team ID in Slack. This ID uniquely identifies a Slack workspace.
+    #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
+    #   such as `T012ABCDEFG`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-app-2021-08-20/DeleteSlackChannelConfigurationRequest AWS API Documentation
@@ -175,7 +205,8 @@ module Aws::SupportApp
     #       }
     #
     # @!attribute [rw] team_id
-    #   The team ID in Slack. This ID uniquely identifies a Slack workspace.
+    #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
+    #   such as `T012ABCDEFG`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-app-2021-08-20/DeleteSlackWorkspaceConfigurationRequest AWS API Documentation
@@ -329,8 +360,54 @@ module Aws::SupportApp
     #
     class PutAccountAliasResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass RegisterSlackWorkspaceForOrganizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         team_id: "teamId", # required
+    #       }
+    #
+    # @!attribute [rw] team_id
+    #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
+    #   such as `T012ABCDEFG`. Specify the Slack workspace that you want to
+    #   use for your organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-app-2021-08-20/RegisterSlackWorkspaceForOrganizationRequest AWS API Documentation
+    #
+    class RegisterSlackWorkspaceForOrganizationRequest < Struct.new(
+      :team_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_type
+    #   Whether the Amazon Web Services account is a management or member
+    #   account that's part of an organization in Organizations.
+    #   @return [String]
+    #
+    # @!attribute [rw] team_id
+    #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
+    #   such as `T012ABCDEFG`.
+    #   @return [String]
+    #
+    # @!attribute [rw] team_name
+    #   The name of the Slack workspace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-app-2021-08-20/RegisterSlackWorkspaceForOrganizationResult AWS API Documentation
+    #
+    class RegisterSlackWorkspaceForOrganizationResult < Struct.new(
+      :account_type,
+      :team_id,
+      :team_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified resource is missing or doesn't exist, such as an
-    # account alias or Slack channel configuration.
+    # account alias, Slack channel configuration, or Slack workspace
+    # configuration.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -359,8 +436,8 @@ module Aws::SupportApp
       include Aws::Structure
     end
 
-    # The configuration for a Slack channel that you added to an Amazon Web
-    # Services account.
+    # The configuration for a Slack channel that you added for your Amazon
+    # Web Services account.
     #
     # @!attribute [rw] channel_id
     #   The channel ID in Slack. This ID identifies a channel within a Slack
@@ -369,7 +446,7 @@ module Aws::SupportApp
     #
     # @!attribute [rw] channel_name
     #   The name of the Slack channel that you configured with the Amazon
-    #   Web Services Support App.
+    #   Web Services Support App for your Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] channel_role_arn
@@ -403,7 +480,8 @@ module Aws::SupportApp
     #   @return [Boolean]
     #
     # @!attribute [rw] team_id
-    #   The team ID in Slack. This ID uniquely identifies a Slack workspace.
+    #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
+    #   such as `T012ABCDEFG`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-app-2021-08-20/SlackChannelConfiguration AWS API Documentation
@@ -424,14 +502,26 @@ module Aws::SupportApp
     # The configuration for a Slack workspace that you added to an Amazon
     # Web Services account.
     #
+    # @!attribute [rw] allow_organization_member_account
+    #   Whether to allow member accounts to authorize Slack workspaces.
+    #   Member accounts must be part of an organization in Organizations.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] team_id
-    #   The team ID in Slack. This ID uniquely identifies a Slack workspace.
+    #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
+    #   such as `T012ABCDEFG`.
+    #   @return [String]
+    #
+    # @!attribute [rw] team_name
+    #   The name of the Slack workspace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-app-2021-08-20/SlackWorkspaceConfiguration AWS API Documentation
     #
     class SlackWorkspaceConfiguration < Struct.new(
-      :team_id)
+      :allow_organization_member_account,
+      :team_id,
+      :team_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -479,7 +569,28 @@ module Aws::SupportApp
     #   The case severity for a support case that you want to receive
     #   notifications.
     #
-    #        <p>If you specify <code>high</code> or <code>all</code>, at least one of the following parameters must be <code>true</code>:</p> <ul> <li> <p> <code>notifyOnAddCorrespondenceToCase</code> </p> </li> <li> <p> <code>notifyOnCreateOrReopenCase</code> </p> </li> <li> <p> <code>notifyOnResolveCase</code> </p> </li> </ul> <p>If you specify <code>none</code>, any of the following parameters that you specify in your request must be <code>false</code>:</p> <ul> <li> <p> <code>notifyOnAddCorrespondenceToCase</code> </p> </li> <li> <p> <code>notifyOnCreateOrReopenCase</code> </p> </li> <li> <p> <code>notifyOnResolveCase</code> </p> </li> </ul> <note> <p>If you don't specify these parameters in your request, the Amazon Web Services Support App uses the current values by default.</p> </note>
+    #   If you specify `high` or `all`, at least one of the following
+    #   parameters must be `true`\:
+    #
+    #   * `notifyOnAddCorrespondenceToCase`
+    #
+    #   * `notifyOnCreateOrReopenCase`
+    #
+    #   * `notifyOnResolveCase`
+    #
+    #   If you specify `none`, any of the following parameters that you
+    #   specify in your request must be `false`\:
+    #
+    #   * `notifyOnAddCorrespondenceToCase`
+    #
+    #   * `notifyOnCreateOrReopenCase`
+    #
+    #   * `notifyOnResolveCase`
+    #
+    #   <note markdown="1"> If you don't specify these parameters in your request, the Amazon
+    #   Web Services Support App uses the current values by default.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] notify_on_create_or_reopen_case
@@ -492,7 +603,8 @@ module Aws::SupportApp
     #   @return [Boolean]
     #
     # @!attribute [rw] team_id
-    #   The team ID in Slack. This ID uniquely identifies a Slack workspace.
+    #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
+    #   such as `T012ABCDEFG`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-app-2021-08-20/UpdateSlackChannelConfigurationRequest AWS API Documentation
@@ -551,7 +663,8 @@ module Aws::SupportApp
     #   @return [Boolean]
     #
     # @!attribute [rw] team_id
-    #   The team ID in Slack. This ID uniquely identifies a Slack workspace.
+    #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
+    #   such as `T012ABCDEFG`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-app-2021-08-20/UpdateSlackChannelConfigurationResult AWS API Documentation

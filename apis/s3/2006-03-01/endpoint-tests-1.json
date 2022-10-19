@@ -5377,6 +5377,19 @@
                     "url": "https://mybanner-123456789012.s3-object-lambda.us-east-1.amazonaws.com"
                 }
             },
+            "operationInputs": [
+                {
+                    "builtInParams": {
+                        "AWS::Region": "us-east-1",
+                        "AWS::S3::UseArnRegion": false
+                    },
+                    "operationName": "GetObject",
+                    "operationParams": {
+                        "Bucket": "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner",
+                        "Key": "key"
+                    }
+                }
+            ],
             "params": {
                 "Region": "us-east-1",
                 "UseFIPS": false,
@@ -5990,7 +6003,7 @@
                     },
                     "operationName": "GetObject",
                     "operationParams": {
-                        "Bucket": "arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint",
+                        "Bucket": "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner",
                         "Key": "key"
                     }
                 }

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2022-10-19)
+------------------
+
+* Feature - Documentation updates for Chime Messaging SDK
+
 1.12.0 (2022-08-12)
 ------------------
 

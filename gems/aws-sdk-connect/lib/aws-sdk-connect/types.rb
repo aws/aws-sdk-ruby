@@ -733,8 +733,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances that
-    #   phone numbers are claimed to.
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances or
+    #   traffic distribution groups that phone numbers are claimed to.
     #   @return [String]
     #
     # @!attribute [rw] phone_number
@@ -754,10 +754,16 @@ module Aws::Connect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ClaimPhoneNumberRequest AWS API Documentation
@@ -790,7 +796,7 @@ module Aws::Connect
     end
 
     # Information about a phone number that has been claimed to your Amazon
-    # Connect instance.
+    # Connect instance or traffic distribution group.
     #
     # @!attribute [rw] phone_number_id
     #   A unique identifier for the phone number.
@@ -818,8 +824,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances that
-    #   phone numbers are claimed to.
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances or
+    #   traffic distribution groups that phone numbers are claimed to.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -830,6 +836,35 @@ module Aws::Connect
     #
     # @!attribute [rw] phone_number_status
     #   The status of the phone number.
+    #
+    #   * `CLAIMED` means the previous [ClaimedPhoneNumber][1] or
+    #     [UpdatePhoneNumber][2] operation succeeded.
+    #
+    #   * `IN_PROGRESS` means a [ClaimedPhoneNumber][1] or
+    #     [UpdatePhoneNumber][2] operation is still in progress and has not
+    #     yet completed. You can call [DescribePhoneNumber][3] at a later
+    #     time to verify if the previous operation has completed.
+    #
+    #   * `FAILED` indicates that the previous [ClaimedPhoneNumber][1] or
+    #     [UpdatePhoneNumber][2] operation has failed. It will include a
+    #     message indicating the failure reason. A common reason for a
+    #     failure may be that the `TargetArn` value you are claiming or
+    #     updating a phone number to has reached its limit of total claimed
+    #     numbers. If you received a `FAILED` status from a
+    #     `ClaimPhoneNumber` API call, you have one day to retry claiming
+    #     the phone number before the number is released back to the
+    #     inventory for other customers to claim.
+    #
+    #   <note markdown="1"> You will not be billed for the phone number during the 1-day period
+    #   if number claiming fails.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html
+    #   [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html
+    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
     #   @return [Types::PhoneNumberStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ClaimedPhoneNumberSummary AWS API Documentation
@@ -1339,10 +1374,16 @@ module Aws::Connect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowModuleRequest AWS API Documentation
@@ -2111,10 +2152,16 @@ module Aws::Connect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateTaskTemplateRequest AWS API Documentation
@@ -2144,6 +2191,85 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateTaskTemplateResponse AWS API Documentation
     #
     class CreateTaskTemplateResponse < Struct.new(
+      :id,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTrafficDistributionGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name128", # required
+    #         description: "Description250",
+    #         instance_id: "InstanceIdOrArn", # required
+    #         client_token: "ClientToken",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name for the traffic distribution group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the traffic distribution group.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that has been
+    #   replicated. You can find the `instanceId` in the ARN of the
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateTrafficDistributionGroupRequest AWS API Documentation
+    #
+    class CreateTrafficDistributionGroupRequest < Struct.new(
+      :name,
+      :description,
+      :instance_id,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the
+    #   traffic distribution group was created. The ARN must be provided if
+    #   the call is from the replicated Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the traffic distribution group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateTrafficDistributionGroupResponse AWS API Documentation
+    #
+    class CreateTrafficDistributionGroupResponse < Struct.new(
       :id,
       :arn)
       SENSITIVE = []
@@ -2410,12 +2536,19 @@ module Aws::Connect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If a create request is received more
-    #   than once with same client token, subsequent requests return the
-    #   previous response without creating a vocabulary again.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1]. If a create
+    #   request is received more than once with same client token,
+    #   subsequent requests return the previous response without creating a
+    #   vocabulary again.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -2859,6 +2992,32 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteTaskTemplateResponse AWS API Documentation
     #
     class DeleteTaskTemplateResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteTrafficDistributionGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_distribution_group_id: "TrafficDistributionGroupIdOrArn", # required
+    #       }
+    #
+    # @!attribute [rw] traffic_distribution_group_id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the
+    #   traffic distribution group was created. The ARN must be provided if
+    #   the call is from the replicated Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteTrafficDistributionGroupRequest AWS API Documentation
+    #
+    class DeleteTrafficDistributionGroupRequest < Struct.new(
+      :traffic_distribution_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteTrafficDistributionGroupResponse AWS API Documentation
+    #
+    class DeleteTrafficDistributionGroupResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteUseCaseRequest
     #   data as a hash:
@@ -3317,7 +3476,7 @@ module Aws::Connect
 
     # @!attribute [rw] claimed_phone_number_summary
     #   Information about a phone number that's been claimed to your Amazon
-    #   Connect instance.
+    #   Connect instance or traffic distribution group.
     #   @return [Types::ClaimedPhoneNumberSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePhoneNumberResponse AWS API Documentation
@@ -3476,6 +3635,40 @@ module Aws::Connect
     #
     class DescribeSecurityProfileResponse < Struct.new(
       :security_profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTrafficDistributionGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_distribution_group_id: "TrafficDistributionGroupIdOrArn", # required
+    #       }
+    #
+    # @!attribute [rw] traffic_distribution_group_id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the
+    #   traffic distribution group was created. The ARN must be provided if
+    #   the call is from the replicated Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeTrafficDistributionGroupRequest AWS API Documentation
+    #
+    class DescribeTrafficDistributionGroupRequest < Struct.new(
+      :traffic_distribution_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_distribution_group
+    #   Information about the traffic distribution group.
+    #   @return [Types::TrafficDistributionGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeTrafficDistributionGroupResponse AWS API Documentation
+    #
+    class DescribeTrafficDistributionGroupResponse < Struct.new(
+      :traffic_distribution_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3804,7 +3997,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] lex_region
-    #   The Region in which the Amazon Lex bot has been created.
+    #   The Amazon Web Services Region in which the Amazon Lex bot has been
+    #   created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateLexBotRequest AWS API Documentation
@@ -3935,6 +4129,34 @@ module Aws::Connect
     class DisassociateSecurityKeyRequest < Struct.new(
       :instance_id,
       :association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a traffic distribution.
+    #
+    # @note When making an API call, you may pass Distribution
+    #   data as a hash:
+    #
+    #       {
+    #         region: "AwsRegion", # required
+    #         percentage: 1, # required
+    #       }
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region where the traffic is distributed.
+    #   @return [String]
+    #
+    # @!attribute [rw] percentage
+    #   The percentage of the traffic that is distributed, in increments of
+    #   10.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Distribution AWS API Documentation
+    #
+    class Distribution < Struct.new(
+      :region,
+      :percentage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4786,6 +5008,50 @@ module Aws::Connect
       :last_modified_time,
       :created_time,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTrafficDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "TrafficDistributionGroupIdOrArn", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the traffic distribution group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTrafficDistributionRequest AWS API Documentation
+    #
+    class GetTrafficDistributionRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] telephony_config
+    #   The distribution of traffic between the instance and its replicas.
+    #   @return [Types::TelephonyConfig]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the
+    #   traffic distribution group was created. The ARN must be provided if
+    #   the call is from the replicated Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the traffic distribution group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTrafficDistributionResponse AWS API Documentation
+    #
+    class GetTrafficDistributionResponse < Struct.new(
+      :telephony_config,
+      :id,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5780,7 +6046,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] lex_region
-    #   The Region that the Amazon Lex bot was created in.
+    #   The Amazon Web Services Region where the Amazon Lex bot was created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/LexBot AWS API Documentation
@@ -5997,8 +6263,8 @@ module Aws::Connect
     end
 
     # @!attribute [rw] lex_bots
-    #   The names and Regions of the Amazon Lex or Amazon Lex V2 bots
-    #   associated with the specified instance.
+    #   The names and Amazon Web Services Regions of the Amazon Lex or
+    #   Amazon Lex V2 bots associated with the specified instance.
     #   @return [Array<Types::LexBotConfig>]
     #
     # @!attribute [rw] next_token
@@ -6613,8 +6879,8 @@ module Aws::Connect
     end
 
     # @!attribute [rw] lex_bots
-    #   The names and Regions of the Amazon Lex bots associated with the
-    #   specified instance.
+    #   The names and Amazon Web Services Regions of the Amazon Lex bots
+    #   associated with the specified instance.
     #   @return [Array<Types::LexBot>]
     #
     # @!attribute [rw] next_token
@@ -6697,7 +6963,7 @@ module Aws::Connect
     end
 
     # Information about phone numbers that have been claimed to your Amazon
-    # Connect instance.
+    # Connect instance or traffic distribution group.
     #
     # @!attribute [rw] phone_number_id
     #   A unique identifier for the phone number.
@@ -6721,8 +6987,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances that
-    #   phone numbers are claimed to.
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances or
+    #   traffic distribution groups that phone numbers are claimed to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersSummary AWS API Documentation
@@ -6751,10 +7017,11 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances that
-    #   phone numbers are claimed to. If `TargetArn` input is not provided,
-    #   this API lists numbers claimed to all the Amazon Connect instances
-    #   belonging to your account.
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances or
+    #   traffic distribution groups that phone numbers are claimed to. If
+    #   `TargetArn` input is not provided, this API lists numbers claimed to
+    #   all the Amazon Connect instances belonging to your account in the
+    #   same Amazon Web Services Region as the request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6800,7 +7067,7 @@ module Aws::Connect
     #
     # @!attribute [rw] list_phone_numbers_summary_list
     #   Information about phone numbers that have been claimed to your
-    #   Amazon Connect instances.
+    #   Amazon Connect instances or traffic distribution groups.
     #   @return [Array<Types::ListPhoneNumbersSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersV2Response AWS API Documentation
@@ -7430,6 +7697,58 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTrafficDistributionGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         instance_id: "InstanceIdOrArn",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTrafficDistributionGroupsRequest AWS API Documentation
+    #
+    class ListTrafficDistributionGroupsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_distribution_group_summary_list
+    #   A list of traffic distribution groups.
+    #   @return [Array<Types::TrafficDistributionGroupSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTrafficDistributionGroupsResponse AWS API Documentation
+    #
+    class ListTrafficDistributionGroupsResponse < Struct.new(
+      :next_token,
+      :traffic_distribution_group_summary_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides summary information about the use cases for the specified
     # integration association.
     #
@@ -7744,6 +8063,30 @@ module Aws::Connect
 
     # The status of the phone number.
     #
+    # * `CLAIMED` means the previous [ClaimedPhoneNumber][1] or
+    #   [UpdatePhoneNumber][2] operation succeeded.
+    #
+    # * `IN_PROGRESS` means a [ClaimedPhoneNumber][1] or
+    #   [UpdatePhoneNumber][2] operation is still in progress and has not
+    #   yet completed. You can call [DescribePhoneNumber][3] at a later time
+    #   to verify if the previous operation has completed.
+    #
+    # * `FAILED` indicates that the previous [ClaimedPhoneNumber][1] or
+    #   [UpdatePhoneNumber][2] operation has failed. It will include a
+    #   message indicating the failure reason. A common reason for a failure
+    #   may be that the `TargetArn` value you are claiming or updating a
+    #   phone number to has reached its limit of total claimed numbers. If
+    #   you received a `FAILED` status from a `ClaimPhoneNumber` API call,
+    #   you have one day to retry claiming the phone number before the
+    #   number is released back to the inventory for other customers to
+    #   claim.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
+    #
     # @!attribute [rw] status
     #   The status.
     #   @return [String]
@@ -7971,7 +8314,7 @@ module Aws::Connect
     # If this contact was queued, this contains information about the queue.
     #
     # @!attribute [rw] id
-    #   The identifier of the agent who accepted the contact.
+    #   The unique identifier for the queue.
     #   @return [String]
     #
     # @!attribute [rw] enqueue_timestamp
@@ -8093,7 +8436,11 @@ module Aws::Connect
     #
     # @!attribute [rw] string_condition
     #   A leaf node condition which can be used to specify a string
-    #   condition, for example, `username = 'abc'`.
+    #   condition.
+    #
+    #   <note markdown="1"> The currently supported value for `FieldName`\: `name`
+    #
+    #    </note>
     #   @return [Types::StringCondition]
     #
     # @!attribute [rw] queue_type_condition
@@ -8356,7 +8703,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the reference.
+    #   The type of the reference. `DATE` must be of type Epoch timestamp.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Reference AWS API Documentation
@@ -8441,10 +8788,16 @@ module Aws::Connect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReleasePhoneNumberRequest AWS API Documentation
@@ -8452,6 +8805,75 @@ module Aws::Connect
     class ReleasePhoneNumberRequest < Struct.new(
       :phone_number_id,
       :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ReplicateInstanceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceIdOrArn", # required
+    #         replica_region: "AwsRegion", # required
+    #         client_token: "ClientToken",
+    #         replica_alias: "DirectoryAlias", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_region
+    #   The Amazon Web Services Region where to replicate the Amazon Connect
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_alias
+    #   The alias for the replicated instance. The `ReplicaAlias` must be
+    #   unique.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReplicateInstanceRequest AWS API Documentation
+    #
+    class ReplicateInstanceRequest < Struct.new(
+      :instance_id,
+      :replica_region,
+      :client_token,
+      :replica_alias)
+      SENSITIVE = [:replica_alias]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the replicated instance. You can find the
+    #   `instanceId` in the ARN of the instance. The replicated instance has
+    #   the same identifier as the instance it was replicated from.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the replicated instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReplicateInstanceResponse AWS API Documentation
+    #
+    class ReplicateInstanceResponse < Struct.new(
+      :id,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8524,6 +8946,19 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resource is not ready.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResourceNotReadyException AWS API Documentation
+    #
+    class ResourceNotReadyException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -8831,7 +9266,11 @@ module Aws::Connect
     #
     # @!attribute [rw] string_condition
     #   A leaf node condition which can be used to specify a string
-    #   condition, for example, `username = 'abc'`.
+    #   condition.
+    #
+    #   <note markdown="1"> The currently supported value for `FieldName`\: `name`
+    #
+    #    </note>
     #   @return [Types::StringCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileSearchCriteria AWS API Documentation
@@ -8966,8 +9405,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances that
-    #   phone numbers are claimed to.
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances or
+    #   traffic distribution groups that phone numbers are claimed to.
     #   @return [String]
     #
     # @!attribute [rw] phone_number_country_code
@@ -9012,8 +9451,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] available_numbers_list
-    #   A list of available phone numbers that you can claim for your Amazon
-    #   Connect instance.
+    #   A list of available phone numbers that you can claim to your Amazon
+    #   Connect instance or traffic distribution group.
     #   @return [Array<Types::AvailableNumberSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchAvailablePhoneNumbersResponse AWS API Documentation
@@ -9304,6 +9743,10 @@ module Aws::Connect
     #
     # @!attribute [rw] search_criteria
     #   The search criteria to be used to return security profiles.
+    #
+    #   <note markdown="1"> The currently supported value for `FieldName`\: `name`
+    #
+    #    </note>
     #   @return [Types::SecurityProfileSearchCriteria]
     #
     # @!attribute [rw] search_filter
@@ -9660,7 +10103,11 @@ module Aws::Connect
     #
     # @!attribute [rw] string_condition
     #   A leaf node condition which can be used to specify a string
-    #   condition, for example, `username = 'abc'`.
+    #   condition.
+    #
+    #   <note markdown="1"> The currently supported value for `FieldName`\: `name`
+    #
+    #    </note>
     #   @return [Types::StringCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfileSearchCriteria AWS API Documentation
@@ -9856,10 +10303,16 @@ module Aws::Connect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] chat_duration_in_minutes
@@ -9992,10 +10445,16 @@ module Aws::Connect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartContactStreamingRequest AWS API Documentation
@@ -10064,12 +10523,18 @@ module Aws::Connect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. The token is valid for 7 days after
-    #   creation. If a contact is already started, the contact ID is
-    #   returned.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1]. The token is
+    #   valid for 7 days after creation. If a contact is already started,
+    #   the contact ID is returned.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] source_phone_number
@@ -10211,10 +10676,16 @@ module Aws::Connect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] scheduled_time
@@ -10366,8 +10837,11 @@ module Aws::Connect
     #
     class StopContactStreamingResponse < Aws::EmptyStructure; end
 
-    # A leaf node condition which can be used to specify a string condition,
-    # for example, `username = 'abc'`.
+    # A leaf node condition which can be used to specify a string condition.
+    #
+    # <note markdown="1"> The currently supported value for `FieldName`\: `name`
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass StringCondition
     #   data as a hash:
@@ -10732,6 +11206,32 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The distribution of traffic between the instance and its replicas.
+    #
+    # @note When making an API call, you may pass TelephonyConfig
+    #   data as a hash:
+    #
+    #       {
+    #         distributions: [ # required
+    #           {
+    #             region: "AwsRegion", # required
+    #             percentage: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] distributions
+    #   Information about traffic distributions.
+    #   @return [Array<Types::Distribution>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TelephonyConfig AWS API Documentation
+    #
+    class TelephonyConfig < Struct.new(
+      :distributions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the threshold for service level metrics.
     #
     # @note When making an API call, you may pass Threshold
@@ -10773,6 +11273,146 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about a traffic distribution group.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the
+    #   traffic distribution group was created. The ARN must be provided if
+    #   the call is from the replicated Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the traffic distribution group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the traffic distribution group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the traffic distribution group.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   The Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the traffic distribution group.
+    #
+    #   * `CREATION_IN_PROGRESS` means the previous
+    #     [CreateTrafficDistributionGroup][1] operation is still in progress
+    #     and has not yet completed.
+    #
+    #   * `ACTIVE` means the previous [CreateTrafficDistributionGroup][1]
+    #     operation has succeeded.
+    #
+    #   * `CREATION_FAILED` indicates that the previous
+    #     [CreateTrafficDistributionGroup][1] operation has failed.
+    #
+    #   * `PENDING_DELETION` means the previous
+    #     [DeleteTrafficDistributionGroup][2] operation is still in progress
+    #     and has not yet completed.
+    #
+    #   * `DELETION_FAILED` means the previous
+    #     [DeleteTrafficDistributionGroup][2] operation has failed.
+    #
+    #   * `UPDATE_IN_PROGRESS` means the previous
+    #     [UpdateTrafficDistributionGroup][3] operation is still in progress
+    #     and has not yet completed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html
+    #   [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html
+    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TrafficDistributionGroup AWS API Documentation
+    #
+    class TrafficDistributionGroup < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :description,
+      :instance_arn,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about traffic distribution groups.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the
+    #   traffic distribution group was created. The ARN must be provided if
+    #   the call is from the replicated Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the traffic distribution group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the traffic distribution group.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   The Amazon Resource Name (ARN) of the traffic distribution group.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the traffic distribution group.
+    #
+    #   * `CREATION_IN_PROGRESS` means the previous
+    #     [CreateTrafficDistributionGroup][1] operation is still in progress
+    #     and has not yet completed.
+    #
+    #   * `ACTIVE` means the previous [CreateTrafficDistributionGroup][1]
+    #     operation has succeeded.
+    #
+    #   * `CREATION_FAILED` indicates that the previous
+    #     [CreateTrafficDistributionGroup][1] operation has failed.
+    #
+    #   * `PENDING_DELETION` means the previous
+    #     [DeleteTrafficDistributionGroup][2] operation is still in progress
+    #     and has not yet completed.
+    #
+    #   * `DELETION_FAILED` means the previous
+    #     [DeleteTrafficDistributionGroup][2] operation has failed.
+    #
+    #   * `UPDATE_IN_PROGRESS` means the previous
+    #     [UpdateTrafficDistributionGroup][3] operation is still in progress
+    #     and has not yet completed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html
+    #   [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html
+    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TrafficDistributionGroupSummary AWS API Documentation
+    #
+    class TrafficDistributionGroupSummary < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :instance_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TransferContactRequest
     #   data as a hash:
     #
@@ -10808,10 +11448,16 @@ module Aws::Connect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TransferContactRequest AWS API Documentation
@@ -11442,16 +12088,22 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances that
-    #   phone numbers are claimed to.
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances or
+    #   traffic distribution groups that phone numbers are claimed to.
     #   @return [String]
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePhoneNumberRequest AWS API Documentation
@@ -12117,6 +12769,45 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateTrafficDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "TrafficDistributionGroupIdOrArn", # required
+    #         telephony_config: {
+    #           distributions: [ # required
+    #             {
+    #               region: "AwsRegion", # required
+    #               percentage: 1, # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the
+    #   traffic distribution group was created. The ARN must be provided if
+    #   the call is from the replicated Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] telephony_config
+    #   The distribution of traffic between the instance and its replica(s).
+    #   @return [Types::TelephonyConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateTrafficDistributionRequest AWS API Documentation
+    #
+    class UpdateTrafficDistributionRequest < Struct.new(
+      :id,
+      :telephony_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateTrafficDistributionResponse AWS API Documentation
+    #
+    class UpdateTrafficDistributionResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateUserHierarchyGroupNameRequest
     #   data as a hash:
     #
@@ -12408,7 +13099,7 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Contains information about a user account for a Amazon Connect
+    # Contains information about a user account for an Amazon Connect
     # instance.
     #
     # @!attribute [rw] id
@@ -12473,7 +13164,7 @@ module Aws::Connect
     #
     # @!attribute [rw] user
     #   Information about the user for the data that is returned. It
-    #   contains resourceId and ARN of the user.
+    #   contains the `resourceId` and ARN of the user.
     #   @return [Types::UserReference]
     #
     # @!attribute [rw] routing_profile
@@ -12499,7 +13190,7 @@ module Aws::Connect
     # @!attribute [rw] max_slots_by_channel
     #   A map of maximum slots by channel. The key is a channel name. The
     #   value is an integer: the maximum number of slots. This is calculated
-    #   from [MediaConcurrency][1] of the RoutingProfile assigned to the
+    #   from [MediaConcurrency][1] of the `RoutingProfile` assigned to the
     #   agent.
     #
     #
@@ -12592,9 +13283,12 @@ module Aws::Connect
     #
     # @!attribute [rw] secondary_email
     #   The user's secondary email address. If you provide a secondary
-    #   email, the user receives email notifications -- other than password
-    #   reset notifications -- to this email address instead of to their
+    #   email, the user receives email notifications - other than password
+    #   reset notifications - to this email address instead of to their
     #   primary email address.
+    #
+    #   Pattern:
+    #   `(?=^.\{0,265\}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]\{2,63\}`
     #   @return [String]
     #
     # @!attribute [rw] mobile
@@ -12669,6 +13363,11 @@ module Aws::Connect
     #
     # @!attribute [rw] after_contact_work_time_limit
     #   The After Call Work (ACW) timeout setting, in seconds.
+    #
+    #   <note markdown="1"> When returned by a `SearchUsers` call, `AfterContactWorkTimeLimit`
+    #   is returned in milliseconds.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] desk_phone_number

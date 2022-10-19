@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2022-10-19)
+------------------
+
+* Feature - This release adds API support for managing phone numbers that can be used across multiple AWS regions through telephony traffic distribution.
+
 1.78.0 (2022-10-13)
 ------------------
 

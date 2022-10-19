@@ -401,7 +401,28 @@ module Aws::SupportApp
     #   The case severity for a support case that you want to receive
     #   notifications.
     #
-    #        <p>If you specify <code>high</code> or <code>all</code>, you must specify <code>true</code> for at least one of the following parameters:</p> <ul> <li> <p> <code>notifyOnAddCorrespondenceToCase</code> </p> </li> <li> <p> <code>notifyOnCreateOrReopenCase</code> </p> </li> <li> <p> <code>notifyOnResolveCase</code> </p> </li> </ul> <p>If you specify <code>none</code>, the following parameters must be null or <code>false</code>:</p> <ul> <li> <p> <code>notifyOnAddCorrespondenceToCase</code> </p> </li> <li> <p> <code>notifyOnCreateOrReopenCase</code> </p> </li> <li> <p> <code>notifyOnResolveCase</code> </p> </li> </ul> <note> <p>If you don't specify these parameters in your request, they default to <code>false</code>.</p> </note>
+    #   If you specify `high` or `all`, you must specify `true` for at least
+    #   one of the following parameters:
+    #
+    #   * `notifyOnAddCorrespondenceToCase`
+    #
+    #   * `notifyOnCreateOrReopenCase`
+    #
+    #   * `notifyOnResolveCase`
+    #
+    #   If you specify `none`, the following parameters must be null or
+    #   `false`\:
+    #
+    #   * `notifyOnAddCorrespondenceToCase`
+    #
+    #   * `notifyOnCreateOrReopenCase`
+    #
+    #   * `notifyOnResolveCase`
+    #
+    #   <note markdown="1"> If you don't specify these parameters in your request, they default
+    #   to `false`.
+    #
+    #    </note>
     #
     # @option params [Boolean] :notify_on_create_or_reopen_case
     #   Whether you want to get notified when a support case is created or
@@ -411,7 +432,8 @@ module Aws::SupportApp
     #   Whether you want to get notified when a support case is resolved.
     #
     # @option params [required, String] :team_id
-    #   The team ID in Slack. This ID uniquely identifies a Slack workspace.
+    #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
+    #   such as `T012ABCDEFG`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -461,7 +483,8 @@ module Aws::SupportApp
     #   workspace.
     #
     # @option params [required, String] :team_id
-    #   The team ID in Slack. This ID uniquely identifies a Slack workspace.
+    #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
+    #   such as `T012ABCDEFG`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -485,7 +508,8 @@ module Aws::SupportApp
     # account. This operation doesn't delete your Slack workspace.
     #
     # @option params [required, String] :team_id
-    #   The team ID in Slack. This ID uniquely identifies a Slack workspace.
+    #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
+    #   such as `T012ABCDEFG`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -600,7 +624,9 @@ module Aws::SupportApp
     #
     #   resp.next_token #=> String
     #   resp.slack_workspace_configurations #=> Array
+    #   resp.slack_workspace_configurations[0].allow_organization_member_account #=> Boolean
     #   resp.slack_workspace_configurations[0].team_id #=> String
+    #   resp.slack_workspace_configurations[0].team_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-app-2021-08-20/ListSlackWorkspaceConfigurations AWS API Documentation
     #
@@ -636,6 +662,78 @@ module Aws::SupportApp
       req.send_request(options)
     end
 
+    # Registers a Slack workspace for your Amazon Web Services account. To
+    # call this API, your account must be part of an organization in
+    # Organizations.
+    #
+    # If you're the *management account* and you want to register Slack
+    # workspaces for your organization, you must complete the following
+    # tasks:
+    #
+    # 1.  Sign in to the [Amazon Web Services Support Center][1] and
+    #     authorize the Slack workspaces where you want your organization to
+    #     have access to. See [Authorize a Slack workspace][2] in the
+    #     *Amazon Web Services Support User Guide*.
+    #
+    # 2.  Call the `RegisterSlackWorkspaceForOrganization` API to authorize
+    #     each Slack workspace for the organization.
+    #
+    # After the management account authorizes the Slack workspace, member
+    # accounts can call this API to authorize the same Slack workspace for
+    # their individual accounts. Member accounts don't need to authorize
+    # the Slack workspace manually through the [Amazon Web Services Support
+    # Center][1].
+    #
+    # To use the Amazon Web Services Support App, each account must then
+    # complete the following tasks:
+    #
+    # * Create an Identity and Access Management (IAM) role with the
+    #   required permission. For more information, see [Managing access to
+    #   the Amazon Web Services Support App][3].
+    #
+    # * Configure a Slack channel to use the Amazon Web Services Support App
+    #   for support cases for that account. For more information, see
+    #   [Configuring a Slack channel][4].
+    #
+    #
+    #
+    # [1]: https://console.aws.amazon.com/support/app
+    # [2]: https://docs.aws.amazon.com/awssupport/latest/user/authorize-slack-workspace.html
+    # [3]: https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html
+    # [4]: https://docs.aws.amazon.com/awssupport/latest/user/add-your-slack-channel.html
+    #
+    # @option params [required, String] :team_id
+    #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
+    #   such as `T012ABCDEFG`. Specify the Slack workspace that you want to
+    #   use for your organization.
+    #
+    # @return [Types::RegisterSlackWorkspaceForOrganizationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterSlackWorkspaceForOrganizationResult#account_type #account_type} => String
+    #   * {Types::RegisterSlackWorkspaceForOrganizationResult#team_id #team_id} => String
+    #   * {Types::RegisterSlackWorkspaceForOrganizationResult#team_name #team_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_slack_workspace_for_organization({
+    #     team_id: "teamId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_type #=> String, one of "management", "member"
+    #   resp.team_id #=> String
+    #   resp.team_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-app-2021-08-20/RegisterSlackWorkspaceForOrganization AWS API Documentation
+    #
+    # @overload register_slack_workspace_for_organization(params = {})
+    # @param [Hash] params ({})
+    def register_slack_workspace_for_organization(params = {}, options = {})
+      req = build_request(:register_slack_workspace_for_organization, params)
+      req.send_request(options)
+    end
+
     # Updates the configuration for a Slack channel, such as case update
     # notifications.
     #
@@ -664,7 +762,28 @@ module Aws::SupportApp
     #   The case severity for a support case that you want to receive
     #   notifications.
     #
-    #        <p>If you specify <code>high</code> or <code>all</code>, at least one of the following parameters must be <code>true</code>:</p> <ul> <li> <p> <code>notifyOnAddCorrespondenceToCase</code> </p> </li> <li> <p> <code>notifyOnCreateOrReopenCase</code> </p> </li> <li> <p> <code>notifyOnResolveCase</code> </p> </li> </ul> <p>If you specify <code>none</code>, any of the following parameters that you specify in your request must be <code>false</code>:</p> <ul> <li> <p> <code>notifyOnAddCorrespondenceToCase</code> </p> </li> <li> <p> <code>notifyOnCreateOrReopenCase</code> </p> </li> <li> <p> <code>notifyOnResolveCase</code> </p> </li> </ul> <note> <p>If you don't specify these parameters in your request, the Amazon Web Services Support App uses the current values by default.</p> </note>
+    #   If you specify `high` or `all`, at least one of the following
+    #   parameters must be `true`\:
+    #
+    #   * `notifyOnAddCorrespondenceToCase`
+    #
+    #   * `notifyOnCreateOrReopenCase`
+    #
+    #   * `notifyOnResolveCase`
+    #
+    #   If you specify `none`, any of the following parameters that you
+    #   specify in your request must be `false`\:
+    #
+    #   * `notifyOnAddCorrespondenceToCase`
+    #
+    #   * `notifyOnCreateOrReopenCase`
+    #
+    #   * `notifyOnResolveCase`
+    #
+    #   <note markdown="1"> If you don't specify these parameters in your request, the Amazon Web
+    #   Services Support App uses the current values by default.
+    #
+    #    </note>
     #
     # @option params [Boolean] :notify_on_create_or_reopen_case
     #   Whether you want to get notified when a support case is created or
@@ -674,7 +793,8 @@ module Aws::SupportApp
     #   Whether you want to get notified when a support case is resolved.
     #
     # @option params [required, String] :team_id
-    #   The team ID in Slack. This ID uniquely identifies a Slack workspace.
+    #   The team ID in Slack. This ID uniquely identifies a Slack workspace,
+    #   such as `T012ABCDEFG`.
     #
     # @return [Types::UpdateSlackChannelConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -733,7 +853,7 @@ module Aws::SupportApp
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-supportapp'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2022-10-19)
+------------------
+
+* Feature - Adding new Accessor APIs for Amazon Managed Blockchain
+
 1.32.0 (2022-02-24)
 ------------------
 

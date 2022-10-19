@@ -644,7 +644,7 @@ module Aws::CloudTrail
     #
     # @option params [String] :kms_key_id
     #   Specifies the KMS key ID to use to encrypt the logs delivered by
-    #   CloudTrail. The value can be an alias name prefixed by "alias/", a
+    #   CloudTrail. The value can be an alias name prefixed by `alias/`, a
     #   fully specified ARN to an alias, a fully specified ARN to a key, or a
     #   globally unique identifier.
     #
@@ -654,13 +654,13 @@ module Aws::CloudTrail
     #
     #   Examples:
     #
-    #   * alias/MyAliasName
+    #   * `alias/MyAliasName`
     #
-    #   * arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
+    #   * `arn:aws:kms:us-east-2:123456789012:alias/MyAliasName`
     #
-    #   * arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   * `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
     #
-    #   * 12345678-1234-1234-1234-123456789012
+    #   * `12345678-1234-1234-1234-123456789012`
     #
     #
     #
@@ -820,6 +820,8 @@ module Aws::CloudTrail
     #   * {Types::DescribeQueryResponse#query_status #query_status} => String
     #   * {Types::DescribeQueryResponse#query_statistics #query_statistics} => Types::QueryStatisticsForDescribeQuery
     #   * {Types::DescribeQueryResponse#error_message #error_message} => String
+    #   * {Types::DescribeQueryResponse#delivery_s3_uri #delivery_s3_uri} => String
+    #   * {Types::DescribeQueryResponse#delivery_status #delivery_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -839,6 +841,8 @@ module Aws::CloudTrail
     #   resp.query_statistics.execution_time_in_millis #=> Integer
     #   resp.query_statistics.creation_time #=> Time
     #   resp.error_message #=> String
+    #   resp.delivery_s3_uri #=> String
+    #   resp.delivery_status #=> String, one of "SUCCESS", "FAILED", "FAILED_SIGNING_FILE", "PENDING", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "ACCESS_DENIED_SIGNING_FILE", "CANCELLED", "UNKNOWN"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeQuery AWS API Documentation
     #
@@ -923,13 +927,18 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Returns the specified CloudTrail service-linked channel. Amazon Web
-    # Services services create service-linked channels to view CloudTrail
-    # events.
+    # Returns information about a specific channel. Amazon Web Services
+    # services create service-linked channels to get information about
+    # CloudTrail events on your behalf. For more information about
+    # service-linked channels, see [Viewing service-linked channels for
+    # CloudTrail by using the CLI.][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/viewing-service-linked-channels.html
     #
     # @option params [required, String] :channel
-    #   The Amazon Resource Name (ARN) of the CloudTrail service-linked
-    #   channel.
+    #   The ARN or `UUID` of a channel.
     #
     # @return [Types::GetChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1138,7 +1147,7 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Returns information for the specified import.
+    # Returns information about a specific import.
     #
     # @option params [required, String] :import_id
     #   The ID for the import.
@@ -1421,13 +1430,25 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Returns all CloudTrail channels.
+    # Lists the channels in the current account, and their source names.
+    # Amazon Web Services services create service-linked channels get
+    # information about CloudTrail events on your behalf. For more
+    # information about service-linked channels, see [Viewing service-linked
+    # channels for CloudTrail by using the CLI][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/viewing-service-linked-channels.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of CloudTrail channels to display on a single page.
     #
     # @option params [String] :next_token
-    #   A token you can use to get the next page of results.
+    #   The token to use to get the next page of results after a previous API
+    #   call. This token must be passed in with the same parameters that were
+    #   specified in the original call. For example, if the original call
+    #   specified an AttributeKey of 'Username' with a value of 'root',
+    #   the call with NextToken should include those same parameters.
     #
     # @return [Types::ListChannelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1573,7 +1594,7 @@ module Aws::CloudTrail
     #   The maximum number of imports to display on a single page.
     #
     # @option params [String] :destination
-    #   The destination event data store.
+    #   The ARN of the destination event data store.
     #
     # @option params [String] :import_status
     #   The status of the import.
@@ -2264,22 +2285,30 @@ module Aws::CloudTrail
     end
 
     # Starts an import of logged trail events from a source S3 bucket to a
-    # destination event data store.
+    # destination event data store. By default, CloudTrail only imports
+    # events contained in the S3 bucket's `CloudTrail` prefix and the
+    # prefixes inside the `CloudTrail` prefix, and does not check prefixes
+    # for other Amazon Web Services services. If you want to import
+    # CloudTrail events contained in another prefix, you must include the
+    # prefix in the `S3LocationUri`. For more considerations about importing
+    # trail events, see [Considerations][1].
     #
     # When you start a new import, the `Destinations` and `ImportSource`
     # parameters are required. Before starting a new import, disable any
     # access control lists (ACLs) attached to the source S3 bucket. For more
     # information about disabling ACLs, see [Controlling ownership of
-    # objects and disabling ACLs for your bucket][1].
+    # objects and disabling ACLs for your bucket][2].
     #
     # When you retry an import, the `ImportID` parameter is required.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-copy-trail-to-lake.html#cloudtrail-trail-copy-considerations
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
     #
     # @option params [Array<String>] :destinations
-    #   The destination event data store. Use this parameter for a new import.
+    #   The ARN of the destination event data store. Use this parameter for a
+    #   new import.
     #
     # @option params [Types::ImportSource] :import_source
     #   The source S3 bucket for the import. Use this parameter for a new
@@ -2288,12 +2317,18 @@ module Aws::CloudTrail
     # @option params [Time,DateTime,Date,Integer,String] :start_event_time
     #   Use with `EndEventTime` to bound a `StartImport` request, and limit
     #   imported trail events to only those events logged within a specified
-    #   time period.
+    #   time period. When you specify a time range, CloudTrail checks the
+    #   prefix and log file names to verify the names contain a date between
+    #   the specified `StartEventTime` and `EndEventTime` before attempting to
+    #   import events.
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_event_time
     #   Use with `StartEventTime` to bound a `StartImport` request, and limit
     #   imported trail events to only those events logged within a specified
-    #   time period.
+    #   time period. When you specify a time range, CloudTrail checks the
+    #   prefix and log file names to verify the names contain a date between
+    #   the specified `StartEventTime` and `EndEventTime` before attempting to
+    #   import events.
     #
     # @option params [String] :import_id
     #   The ID of the import. Use this parameter when you are retrying an
@@ -2382,9 +2417,14 @@ module Aws::CloudTrail
 
     # Starts a CloudTrail Lake query. The required `QueryStatement`
     # parameter provides your SQL query, enclosed in single quotation marks.
+    # Use the optional `DeliveryS3Uri` parameter to deliver the query
+    # results to an S3 bucket.
     #
     # @option params [required, String] :query_statement
     #   The SQL code of your query.
+    #
+    # @option params [String] :delivery_s3_uri
+    #   The URI for the S3 bucket where CloudTrail delivers the query results.
     #
     # @return [Types::StartQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2394,6 +2434,7 @@ module Aws::CloudTrail
     #
     #   resp = client.start_query({
     #     query_statement: "QueryStatement", # required
+    #     delivery_s3_uri: "DeliveryS3Uri",
     #   })
     #
     # @example Response structure
@@ -2804,7 +2845,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

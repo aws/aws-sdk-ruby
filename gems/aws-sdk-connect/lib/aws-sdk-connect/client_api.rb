@@ -60,6 +60,7 @@ module Aws::Connect
     AutoAccept = Shapes::BooleanShape.new(name: 'AutoAccept')
     AvailableNumberSummary = Shapes::StructureShape.new(name: 'AvailableNumberSummary')
     AvailableNumbersList = Shapes::ListShape.new(name: 'AvailableNumbersList')
+    AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BotName = Shapes::StringShape.new(name: 'BotName')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
@@ -131,6 +132,8 @@ module Aws::Connect
     CreateSecurityProfileResponse = Shapes::StructureShape.new(name: 'CreateSecurityProfileResponse')
     CreateTaskTemplateRequest = Shapes::StructureShape.new(name: 'CreateTaskTemplateRequest')
     CreateTaskTemplateResponse = Shapes::StructureShape.new(name: 'CreateTaskTemplateResponse')
+    CreateTrafficDistributionGroupRequest = Shapes::StructureShape.new(name: 'CreateTrafficDistributionGroupRequest')
+    CreateTrafficDistributionGroupResponse = Shapes::StructureShape.new(name: 'CreateTrafficDistributionGroupResponse')
     CreateUseCaseRequest = Shapes::StructureShape.new(name: 'CreateUseCaseRequest')
     CreateUseCaseResponse = Shapes::StructureShape.new(name: 'CreateUseCaseResponse')
     CreateUserHierarchyGroupRequest = Shapes::StructureShape.new(name: 'CreateUserHierarchyGroupRequest')
@@ -161,6 +164,8 @@ module Aws::Connect
     DeleteSecurityProfileRequest = Shapes::StructureShape.new(name: 'DeleteSecurityProfileRequest')
     DeleteTaskTemplateRequest = Shapes::StructureShape.new(name: 'DeleteTaskTemplateRequest')
     DeleteTaskTemplateResponse = Shapes::StructureShape.new(name: 'DeleteTaskTemplateResponse')
+    DeleteTrafficDistributionGroupRequest = Shapes::StructureShape.new(name: 'DeleteTrafficDistributionGroupRequest')
+    DeleteTrafficDistributionGroupResponse = Shapes::StructureShape.new(name: 'DeleteTrafficDistributionGroupResponse')
     DeleteUseCaseRequest = Shapes::StructureShape.new(name: 'DeleteUseCaseRequest')
     DeleteUserHierarchyGroupRequest = Shapes::StructureShape.new(name: 'DeleteUserHierarchyGroupRequest')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
@@ -192,6 +197,8 @@ module Aws::Connect
     DescribeRoutingProfileResponse = Shapes::StructureShape.new(name: 'DescribeRoutingProfileResponse')
     DescribeSecurityProfileRequest = Shapes::StructureShape.new(name: 'DescribeSecurityProfileRequest')
     DescribeSecurityProfileResponse = Shapes::StructureShape.new(name: 'DescribeSecurityProfileResponse')
+    DescribeTrafficDistributionGroupRequest = Shapes::StructureShape.new(name: 'DescribeTrafficDistributionGroupRequest')
+    DescribeTrafficDistributionGroupResponse = Shapes::StructureShape.new(name: 'DescribeTrafficDistributionGroupResponse')
     DescribeUserHierarchyGroupRequest = Shapes::StructureShape.new(name: 'DescribeUserHierarchyGroupRequest')
     DescribeUserHierarchyGroupResponse = Shapes::StructureShape.new(name: 'DescribeUserHierarchyGroupResponse')
     DescribeUserHierarchyStructureRequest = Shapes::StructureShape.new(name: 'DescribeUserHierarchyStructureRequest')
@@ -201,6 +208,7 @@ module Aws::Connect
     DescribeVocabularyRequest = Shapes::StructureShape.new(name: 'DescribeVocabularyRequest')
     DescribeVocabularyResponse = Shapes::StructureShape.new(name: 'DescribeVocabularyResponse')
     Description = Shapes::StringShape.new(name: 'Description')
+    Description250 = Shapes::StringShape.new(name: 'Description250')
     DestinationNotAllowedException = Shapes::StructureShape.new(name: 'DestinationNotAllowedException')
     Dimensions = Shapes::StructureShape.new(name: 'Dimensions')
     DirectoryAlias = Shapes::StringShape.new(name: 'DirectoryAlias')
@@ -217,6 +225,8 @@ module Aws::Connect
     DisassociateRoutingProfileQueuesRequest = Shapes::StructureShape.new(name: 'DisassociateRoutingProfileQueuesRequest')
     DisassociateSecurityKeyRequest = Shapes::StructureShape.new(name: 'DisassociateSecurityKeyRequest')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
+    Distribution = Shapes::StructureShape.new(name: 'Distribution')
+    DistributionList = Shapes::ListShape.new(name: 'DistributionList')
     DuplicateResourceException = Shapes::StructureShape.new(name: 'DuplicateResourceException')
     Email = Shapes::StringShape.new(name: 'Email')
     EmailReference = Shapes::StructureShape.new(name: 'EmailReference')
@@ -237,6 +247,8 @@ module Aws::Connect
     GetMetricDataResponse = Shapes::StructureShape.new(name: 'GetMetricDataResponse')
     GetTaskTemplateRequest = Shapes::StructureShape.new(name: 'GetTaskTemplateRequest')
     GetTaskTemplateResponse = Shapes::StructureShape.new(name: 'GetTaskTemplateResponse')
+    GetTrafficDistributionRequest = Shapes::StructureShape.new(name: 'GetTrafficDistributionRequest')
+    GetTrafficDistributionResponse = Shapes::StructureShape.new(name: 'GetTrafficDistributionResponse')
     Grouping = Shapes::StringShape.new(name: 'Grouping')
     Groupings = Shapes::ListShape.new(name: 'Groupings')
     HierarchyGroup = Shapes::StructureShape.new(name: 'HierarchyGroup')
@@ -277,9 +289,11 @@ module Aws::Connect
     IdempotencyException = Shapes::StructureShape.new(name: 'IdempotencyException')
     InboundCallsEnabled = Shapes::BooleanShape.new(name: 'InboundCallsEnabled')
     Instance = Shapes::StructureShape.new(name: 'Instance')
+    InstanceArn = Shapes::StringShape.new(name: 'InstanceArn')
     InstanceAttributeType = Shapes::StringShape.new(name: 'InstanceAttributeType')
     InstanceAttributeValue = Shapes::StringShape.new(name: 'InstanceAttributeValue')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
+    InstanceIdOrArn = Shapes::StringShape.new(name: 'InstanceIdOrArn')
     InstanceStatus = Shapes::StringShape.new(name: 'InstanceStatus')
     InstanceStatusReason = Shapes::StructureShape.new(name: 'InstanceStatusReason')
     InstanceStorageConfig = Shapes::StructureShape.new(name: 'InstanceStorageConfig')
@@ -368,6 +382,8 @@ module Aws::Connect
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTaskTemplatesRequest = Shapes::StructureShape.new(name: 'ListTaskTemplatesRequest')
     ListTaskTemplatesResponse = Shapes::StructureShape.new(name: 'ListTaskTemplatesResponse')
+    ListTrafficDistributionGroupsRequest = Shapes::StructureShape.new(name: 'ListTrafficDistributionGroupsRequest')
+    ListTrafficDistributionGroupsResponse = Shapes::StructureShape.new(name: 'ListTrafficDistributionGroupsResponse')
     ListUseCasesRequest = Shapes::StructureShape.new(name: 'ListUseCasesRequest')
     ListUseCasesResponse = Shapes::StructureShape.new(name: 'ListUseCasesResponse')
     ListUserHierarchyGroupsRequest = Shapes::StructureShape.new(name: 'ListUserHierarchyGroupsRequest')
@@ -386,6 +402,7 @@ module Aws::Connect
     Message = Shapes::StringShape.new(name: 'Message')
     MinutesLimit60 = Shapes::IntegerShape.new(name: 'MinutesLimit60')
     Name = Shapes::StringShape.new(name: 'Name')
+    Name128 = Shapes::StringShape.new(name: 'Name128')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NextToken2500 = Shapes::StringShape.new(name: 'NextToken2500')
     NumberReference = Shapes::StructureShape.new(name: 'NumberReference')
@@ -400,6 +417,7 @@ module Aws::Connect
     ParticipantId = Shapes::StringShape.new(name: 'ParticipantId')
     ParticipantToken = Shapes::StringShape.new(name: 'ParticipantToken')
     Password = Shapes::StringShape.new(name: 'Password')
+    Percentage = Shapes::IntegerShape.new(name: 'Percentage')
     PermissionsList = Shapes::ListShape.new(name: 'PermissionsList')
     PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
     PhoneNumberCountryCode = Shapes::StringShape.new(name: 'PhoneNumberCountryCode')
@@ -470,11 +488,14 @@ module Aws::Connect
     ReferenceTypes = Shapes::ListShape.new(name: 'ReferenceTypes')
     ReferenceValue = Shapes::StringShape.new(name: 'ReferenceValue')
     ReleasePhoneNumberRequest = Shapes::StructureShape.new(name: 'ReleasePhoneNumberRequest')
+    ReplicateInstanceRequest = Shapes::StructureShape.new(name: 'ReplicateInstanceRequest')
+    ReplicateInstanceResponse = Shapes::StructureShape.new(name: 'ReplicateInstanceResponse')
     RequiredFieldInfo = Shapes::StructureShape.new(name: 'RequiredFieldInfo')
     RequiredTaskTemplateFields = Shapes::ListShape.new(name: 'RequiredTaskTemplateFields')
     ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResumeContactRecordingRequest = Shapes::StructureShape.new(name: 'ResumeContactRecordingRequest')
     ResumeContactRecordingResponse = Shapes::StructureShape.new(name: 'ResumeContactRecordingResponse')
@@ -584,11 +605,19 @@ module Aws::Connect
     TaskTemplateName = Shapes::StringShape.new(name: 'TaskTemplateName')
     TaskTemplateSingleSelectOption = Shapes::StringShape.new(name: 'TaskTemplateSingleSelectOption')
     TaskTemplateStatus = Shapes::StringShape.new(name: 'TaskTemplateStatus')
+    TelephonyConfig = Shapes::StructureShape.new(name: 'TelephonyConfig')
     Threshold = Shapes::StructureShape.new(name: 'Threshold')
     ThresholdValue = Shapes::FloatShape.new(name: 'ThresholdValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeZone = Shapes::StringShape.new(name: 'TimeZone')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TrafficDistributionGroup = Shapes::StructureShape.new(name: 'TrafficDistributionGroup')
+    TrafficDistributionGroupArn = Shapes::StringShape.new(name: 'TrafficDistributionGroupArn')
+    TrafficDistributionGroupId = Shapes::StringShape.new(name: 'TrafficDistributionGroupId')
+    TrafficDistributionGroupIdOrArn = Shapes::StringShape.new(name: 'TrafficDistributionGroupIdOrArn')
+    TrafficDistributionGroupStatus = Shapes::StringShape.new(name: 'TrafficDistributionGroupStatus')
+    TrafficDistributionGroupSummary = Shapes::StructureShape.new(name: 'TrafficDistributionGroupSummary')
+    TrafficDistributionGroupSummaryList = Shapes::ListShape.new(name: 'TrafficDistributionGroupSummaryList')
     TrafficType = Shapes::StringShape.new(name: 'TrafficType')
     TransferContactRequest = Shapes::StructureShape.new(name: 'TransferContactRequest')
     TransferContactResponse = Shapes::StructureShape.new(name: 'TransferContactResponse')
@@ -631,6 +660,8 @@ module Aws::Connect
     UpdateSecurityProfileRequest = Shapes::StructureShape.new(name: 'UpdateSecurityProfileRequest')
     UpdateTaskTemplateRequest = Shapes::StructureShape.new(name: 'UpdateTaskTemplateRequest')
     UpdateTaskTemplateResponse = Shapes::StructureShape.new(name: 'UpdateTaskTemplateResponse')
+    UpdateTrafficDistributionRequest = Shapes::StructureShape.new(name: 'UpdateTrafficDistributionRequest')
+    UpdateTrafficDistributionResponse = Shapes::StructureShape.new(name: 'UpdateTrafficDistributionResponse')
     UpdateUserHierarchyGroupNameRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyGroupNameRequest')
     UpdateUserHierarchyRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyRequest')
     UpdateUserHierarchyStructureRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyStructureRequest')
@@ -1043,6 +1074,17 @@ module Aws::Connect
     CreateTaskTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TaskTemplateArn, required: true, location_name: "Arn"))
     CreateTaskTemplateResponse.struct_class = Types::CreateTaskTemplateResponse
 
+    CreateTrafficDistributionGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name128, required: true, location_name: "Name"))
+    CreateTrafficDistributionGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description250, location_name: "Description"))
+    CreateTrafficDistributionGroupRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location_name: "InstanceId"))
+    CreateTrafficDistributionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTrafficDistributionGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateTrafficDistributionGroupRequest.struct_class = Types::CreateTrafficDistributionGroupRequest
+
+    CreateTrafficDistributionGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: TrafficDistributionGroupId, location_name: "Id"))
+    CreateTrafficDistributionGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TrafficDistributionGroupArn, location_name: "Arn"))
+    CreateTrafficDistributionGroupResponse.struct_class = Types::CreateTrafficDistributionGroupResponse
+
     CreateUseCaseRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreateUseCaseRequest.add_member(:integration_association_id, Shapes::ShapeRef.new(shape: IntegrationAssociationId, required: true, location: "uri", location_name: "IntegrationAssociationId"))
     CreateUseCaseRequest.add_member(:use_case_type, Shapes::ShapeRef.new(shape: UseCaseType, required: true, location_name: "UseCaseType"))
@@ -1163,6 +1205,11 @@ module Aws::Connect
 
     DeleteTaskTemplateResponse.struct_class = Types::DeleteTaskTemplateResponse
 
+    DeleteTrafficDistributionGroupRequest.add_member(:traffic_distribution_group_id, Shapes::ShapeRef.new(shape: TrafficDistributionGroupIdOrArn, required: true, location: "uri", location_name: "TrafficDistributionGroupId"))
+    DeleteTrafficDistributionGroupRequest.struct_class = Types::DeleteTrafficDistributionGroupRequest
+
+    DeleteTrafficDistributionGroupResponse.struct_class = Types::DeleteTrafficDistributionGroupResponse
+
     DeleteUseCaseRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteUseCaseRequest.add_member(:integration_association_id, Shapes::ShapeRef.new(shape: IntegrationAssociationId, required: true, location: "uri", location_name: "IntegrationAssociationId"))
     DeleteUseCaseRequest.add_member(:use_case_id, Shapes::ShapeRef.new(shape: UseCaseId, required: true, location: "uri", location_name: "UseCaseId"))
@@ -1275,6 +1322,12 @@ module Aws::Connect
     DescribeSecurityProfileResponse.add_member(:security_profile, Shapes::ShapeRef.new(shape: SecurityProfile, location_name: "SecurityProfile"))
     DescribeSecurityProfileResponse.struct_class = Types::DescribeSecurityProfileResponse
 
+    DescribeTrafficDistributionGroupRequest.add_member(:traffic_distribution_group_id, Shapes::ShapeRef.new(shape: TrafficDistributionGroupIdOrArn, required: true, location: "uri", location_name: "TrafficDistributionGroupId"))
+    DescribeTrafficDistributionGroupRequest.struct_class = Types::DescribeTrafficDistributionGroupRequest
+
+    DescribeTrafficDistributionGroupResponse.add_member(:traffic_distribution_group, Shapes::ShapeRef.new(shape: TrafficDistributionGroup, location_name: "TrafficDistributionGroup"))
+    DescribeTrafficDistributionGroupResponse.struct_class = Types::DescribeTrafficDistributionGroupResponse
+
     DescribeUserHierarchyGroupRequest.add_member(:hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, required: true, location: "uri", location_name: "HierarchyGroupId"))
     DescribeUserHierarchyGroupRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DescribeUserHierarchyGroupRequest.struct_class = Types::DescribeUserHierarchyGroupRequest
@@ -1349,6 +1402,12 @@ module Aws::Connect
     DisassociateSecurityKeyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DisassociateSecurityKeyRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, required: true, location: "uri", location_name: "AssociationId"))
     DisassociateSecurityKeyRequest.struct_class = Types::DisassociateSecurityKeyRequest
+
+    Distribution.add_member(:region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "Region"))
+    Distribution.add_member(:percentage, Shapes::ShapeRef.new(shape: Percentage, required: true, location_name: "Percentage"))
+    Distribution.struct_class = Types::Distribution
+
+    DistributionList.member = Shapes::ShapeRef.new(shape: Distribution)
 
     DuplicateResourceException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     DuplicateResourceException.struct_class = Types::DuplicateResourceException
@@ -1436,6 +1495,14 @@ module Aws::Connect
     GetTaskTemplateResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedTime"))
     GetTaskTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetTaskTemplateResponse.struct_class = Types::GetTaskTemplateResponse
+
+    GetTrafficDistributionRequest.add_member(:id, Shapes::ShapeRef.new(shape: TrafficDistributionGroupIdOrArn, required: true, location: "uri", location_name: "Id"))
+    GetTrafficDistributionRequest.struct_class = Types::GetTrafficDistributionRequest
+
+    GetTrafficDistributionResponse.add_member(:telephony_config, Shapes::ShapeRef.new(shape: TelephonyConfig, location_name: "TelephonyConfig"))
+    GetTrafficDistributionResponse.add_member(:id, Shapes::ShapeRef.new(shape: TrafficDistributionGroupId, location_name: "Id"))
+    GetTrafficDistributionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TrafficDistributionGroupArn, location_name: "Arn"))
+    GetTrafficDistributionResponse.struct_class = Types::GetTrafficDistributionResponse
 
     Groupings.member = Shapes::ShapeRef.new(shape: Grouping)
 
@@ -1916,6 +1983,15 @@ module Aws::Connect
     ListTaskTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTaskTemplatesResponse.struct_class = Types::ListTaskTemplatesResponse
 
+    ListTrafficDistributionGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult10, location: "querystring", location_name: "maxResults"))
+    ListTrafficDistributionGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListTrafficDistributionGroupsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, location: "querystring", location_name: "instanceId"))
+    ListTrafficDistributionGroupsRequest.struct_class = Types::ListTrafficDistributionGroupsRequest
+
+    ListTrafficDistributionGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTrafficDistributionGroupsResponse.add_member(:traffic_distribution_group_summary_list, Shapes::ShapeRef.new(shape: TrafficDistributionGroupSummaryList, location_name: "TrafficDistributionGroupSummaryList"))
+    ListTrafficDistributionGroupsResponse.struct_class = Types::ListTrafficDistributionGroupsResponse
+
     ListUseCasesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListUseCasesRequest.add_member(:integration_association_id, Shapes::ShapeRef.new(shape: IntegrationAssociationId, required: true, location: "uri", location_name: "IntegrationAssociationId"))
     ListUseCasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -2126,6 +2202,16 @@ module Aws::Connect
     ReleasePhoneNumberRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     ReleasePhoneNumberRequest.struct_class = Types::ReleasePhoneNumberRequest
 
+    ReplicateInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
+    ReplicateInstanceRequest.add_member(:replica_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "ReplicaRegion"))
+    ReplicateInstanceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ReplicateInstanceRequest.add_member(:replica_alias, Shapes::ShapeRef.new(shape: DirectoryAlias, required: true, location_name: "ReplicaAlias"))
+    ReplicateInstanceRequest.struct_class = Types::ReplicateInstanceRequest
+
+    ReplicateInstanceResponse.add_member(:id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "Id"))
+    ReplicateInstanceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    ReplicateInstanceResponse.struct_class = Types::ReplicateInstanceResponse
+
     RequiredFieldInfo.add_member(:id, Shapes::ShapeRef.new(shape: TaskTemplateFieldIdentifier, location_name: "Id"))
     RequiredFieldInfo.struct_class = Types::RequiredFieldInfo
 
@@ -2141,6 +2227,9 @@ module Aws::Connect
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ResourceNotReadyException.struct_class = Types::ResourceNotReadyException
 
     ResumeContactRecordingRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     ResumeContactRecordingRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
@@ -2487,12 +2576,33 @@ module Aws::Connect
     TaskTemplateMetadata.add_member(:created_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedTime"))
     TaskTemplateMetadata.struct_class = Types::TaskTemplateMetadata
 
+    TelephonyConfig.add_member(:distributions, Shapes::ShapeRef.new(shape: DistributionList, required: true, location_name: "Distributions"))
+    TelephonyConfig.struct_class = Types::TelephonyConfig
+
     Threshold.add_member(:comparison, Shapes::ShapeRef.new(shape: Comparison, location_name: "Comparison"))
     Threshold.add_member(:threshold_value, Shapes::ShapeRef.new(shape: ThresholdValue, location_name: "ThresholdValue", metadata: {"box"=>true}))
     Threshold.struct_class = Types::Threshold
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TrafficDistributionGroup.add_member(:id, Shapes::ShapeRef.new(shape: TrafficDistributionGroupId, location_name: "Id"))
+    TrafficDistributionGroup.add_member(:arn, Shapes::ShapeRef.new(shape: TrafficDistributionGroupArn, location_name: "Arn"))
+    TrafficDistributionGroup.add_member(:name, Shapes::ShapeRef.new(shape: Name128, location_name: "Name"))
+    TrafficDistributionGroup.add_member(:description, Shapes::ShapeRef.new(shape: Description250, location_name: "Description"))
+    TrafficDistributionGroup.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "InstanceArn"))
+    TrafficDistributionGroup.add_member(:status, Shapes::ShapeRef.new(shape: TrafficDistributionGroupStatus, location_name: "Status"))
+    TrafficDistributionGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    TrafficDistributionGroup.struct_class = Types::TrafficDistributionGroup
+
+    TrafficDistributionGroupSummary.add_member(:id, Shapes::ShapeRef.new(shape: TrafficDistributionGroupId, location_name: "Id"))
+    TrafficDistributionGroupSummary.add_member(:arn, Shapes::ShapeRef.new(shape: TrafficDistributionGroupArn, location_name: "Arn"))
+    TrafficDistributionGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name128, location_name: "Name"))
+    TrafficDistributionGroupSummary.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "InstanceArn"))
+    TrafficDistributionGroupSummary.add_member(:status, Shapes::ShapeRef.new(shape: TrafficDistributionGroupStatus, location_name: "Status"))
+    TrafficDistributionGroupSummary.struct_class = Types::TrafficDistributionGroupSummary
+
+    TrafficDistributionGroupSummaryList.member = Shapes::ShapeRef.new(shape: TrafficDistributionGroupSummary)
 
     TransferContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     TransferContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
@@ -2692,6 +2802,12 @@ module Aws::Connect
     UpdateTaskTemplateResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastModifiedTime"))
     UpdateTaskTemplateResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedTime"))
     UpdateTaskTemplateResponse.struct_class = Types::UpdateTaskTemplateResponse
+
+    UpdateTrafficDistributionRequest.add_member(:id, Shapes::ShapeRef.new(shape: TrafficDistributionGroupIdOrArn, required: true, location: "uri", location_name: "Id"))
+    UpdateTrafficDistributionRequest.add_member(:telephony_config, Shapes::ShapeRef.new(shape: TelephonyConfig, location_name: "TelephonyConfig"))
+    UpdateTrafficDistributionRequest.struct_class = Types::UpdateTrafficDistributionRequest
+
+    UpdateTrafficDistributionResponse.struct_class = Types::UpdateTrafficDistributionResponse
 
     UpdateUserHierarchyGroupNameRequest.add_member(:name, Shapes::ShapeRef.new(shape: HierarchyGroupName, required: true, location_name: "Name"))
     UpdateUserHierarchyGroupNameRequest.add_member(:hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, required: true, location: "uri", location_name: "HierarchyGroupId"))
@@ -3190,6 +3306,22 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:create_traffic_distribution_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTrafficDistributionGroup"
+        o.http_method = "PUT"
+        o.http_request_uri = "/traffic-distribution-group"
+        o.input = Shapes::ShapeRef.new(shape: CreateTrafficDistributionGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTrafficDistributionGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
+      end)
+
       api.add_operation(:create_use_case, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateUseCase"
         o.http_method = "PUT"
@@ -3349,6 +3481,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:delete_traffic_distribution_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTrafficDistributionGroup"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/traffic-distribution-group/{TrafficDistributionGroupId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTrafficDistributionGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTrafficDistributionGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
@@ -3573,6 +3718,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:describe_traffic_distribution_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTrafficDistributionGroup"
+        o.http_method = "GET"
+        o.http_request_uri = "/traffic-distribution-group/{TrafficDistributionGroupId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTrafficDistributionGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTrafficDistributionGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:describe_user, Seahorse::Model::Operation.new.tap do |o|
@@ -3836,6 +3994,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:get_traffic_distribution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTrafficDistribution"
+        o.http_method = "GET"
+        o.http_request_uri = "/traffic-distribution/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: GetTrafficDistributionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTrafficDistributionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:list_agent_statuses, Seahorse::Model::Operation.new.tap do |o|
@@ -4339,6 +4510,24 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:list_traffic_distribution_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTrafficDistributionGroups"
+        o.http_method = "GET"
+        o.http_request_uri = "/traffic-distribution-groups"
+        o.input = Shapes::ShapeRef.new(shape: ListTrafficDistributionGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTrafficDistributionGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_use_cases, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListUseCases"
         o.http_method = "GET"
@@ -4422,6 +4611,22 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: IdempotencyException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:replicate_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ReplicateInstance"
+        o.http_method = "POST"
+        o.http_request_uri = "/instance/{InstanceId}/replicate"
+        o.input = Shapes::ShapeRef.new(shape: ReplicateInstanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ReplicateInstanceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
 
       api.add_operation(:resume_contact_recording, Seahorse::Model::Operation.new.tap do |o|
@@ -5051,6 +5256,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_traffic_distribution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTrafficDistribution"
+        o.http_method = "PUT"
+        o.http_request_uri = "/traffic-distribution/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTrafficDistributionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTrafficDistributionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 

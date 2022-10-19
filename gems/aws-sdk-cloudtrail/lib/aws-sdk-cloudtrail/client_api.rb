@@ -47,6 +47,8 @@ module Aws::CloudTrail
     DeleteEventDataStoreResponse = Shapes::StructureShape.new(name: 'DeleteEventDataStoreResponse')
     DeleteTrailRequest = Shapes::StructureShape.new(name: 'DeleteTrailRequest')
     DeleteTrailResponse = Shapes::StructureShape.new(name: 'DeleteTrailResponse')
+    DeliveryS3Uri = Shapes::StringShape.new(name: 'DeliveryS3Uri')
+    DeliveryStatus = Shapes::StringShape.new(name: 'DeliveryStatus')
     DescribeQueryRequest = Shapes::StructureShape.new(name: 'DescribeQueryRequest')
     DescribeQueryResponse = Shapes::StructureShape.new(name: 'DescribeQueryResponse')
     DescribeTrailsRequest = Shapes::StructureShape.new(name: 'DescribeTrailsRequest')
@@ -377,6 +379,8 @@ module Aws::CloudTrail
     DescribeQueryResponse.add_member(:query_status, Shapes::ShapeRef.new(shape: QueryStatus, location_name: "QueryStatus"))
     DescribeQueryResponse.add_member(:query_statistics, Shapes::ShapeRef.new(shape: QueryStatisticsForDescribeQuery, location_name: "QueryStatistics"))
     DescribeQueryResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    DescribeQueryResponse.add_member(:delivery_s3_uri, Shapes::ShapeRef.new(shape: DeliveryS3Uri, location_name: "DeliveryS3Uri"))
+    DescribeQueryResponse.add_member(:delivery_status, Shapes::ShapeRef.new(shape: DeliveryStatus, location_name: "DeliveryStatus"))
     DescribeQueryResponse.struct_class = Types::DescribeQueryResponse
 
     DescribeTrailsRequest.add_member(:trail_name_list, Shapes::ShapeRef.new(shape: TrailNameList, location_name: "trailNameList"))
@@ -873,6 +877,7 @@ module Aws::CloudTrail
     StartLoggingResponse.struct_class = Types::StartLoggingResponse
 
     StartQueryRequest.add_member(:query_statement, Shapes::ShapeRef.new(shape: QueryStatement, required: true, location_name: "QueryStatement"))
+    StartQueryRequest.add_member(:delivery_s3_uri, Shapes::ShapeRef.new(shape: DeliveryS3Uri, location_name: "DeliveryS3Uri"))
     StartQueryRequest.struct_class = Types::StartQueryRequest
 
     StartQueryResponse.add_member(:query_id, Shapes::ShapeRef.new(shape: UUID, location_name: "QueryId"))
@@ -1562,6 +1567,10 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStatementException)
         o.errors << Shapes::ShapeRef.new(shape: MaxConcurrentQueriesException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3PrefixException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3BucketNameException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientS3BucketPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: S3BucketDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)

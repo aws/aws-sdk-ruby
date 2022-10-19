@@ -603,6 +603,17 @@ module Aws::Connect
     # Associates a flow with a phone number claimed to your Amazon Connect
     # instance.
     #
+    # If the number is claimed to a traffic distribution group, and you are
+    # calling this API using an instance in the Amazon Web Services Region
+    # where the traffic distribution group was created, you can use either a
+    # full phone number ARN or UUID value for the `PhoneNumberId` URI
+    # request parameter. However, if the number is claimed to a traffic
+    # distribution group and you are calling this API using an instance in
+    # the alternate Amazon Web Services Region associated with the traffic
+    # distribution group, you must provide a full phone number ARN. If a
+    # UUID is provided in this scenario, you will receive a
+    # `ResourceNotFoundException`.
+    #
     # @option params [required, String] :phone_number_id
     #   A unique identifier for the phone number.
     #
@@ -742,11 +753,22 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Claims an available phone number to your Amazon Connect instance.
+    # Claims an available phone number to your Amazon Connect instance or
+    # traffic distribution group. You can call this API only in the same
+    # Amazon Web Services Region where the Amazon Connect instance or
+    # traffic distribution group was created.
+    #
+    # You can call the [DescribePhoneNumber][1] API to verify the status of
+    # a previous [ClaimPhoneNumber][2] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html
     #
     # @option params [required, String] :target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances that phone
-    #   numbers are claimed to.
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+    #   distribution groups that phone numbers are claimed to.
     #
     # @option params [required, String] :phone_number
     #   The phone number you want to claim. Phone numbers are formatted `[+]
@@ -762,10 +784,16 @@ module Aws::Connect
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @return [Types::ClaimPhoneNumberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -944,10 +972,16 @@ module Aws::Connect
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @return [Types::CreateContactFlowModuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1187,6 +1221,22 @@ module Aws::Connect
     # change.
     #
     # Creates a new queue for the specified Amazon Connect instance.
+    #
+    # If the number being used in the input is claimed to a traffic
+    # distribution group, and you are calling this API using an instance in
+    # the Amazon Web Services Region where the traffic distribution group
+    # was created, you can use either a full phone number ARN or UUID value
+    # for the `OutboundCallerIdNumberId` value of the
+    # [OutboundCallerConfig][1] request body parameter. However, if the
+    # number is claimed to a traffic distribution group and you are calling
+    # this API using an instance in the alternate Amazon Web Services Region
+    # associated with the traffic distribution group, you must provide a
+    # full phone number ARN. If a UUID is provided in this scenario, you
+    # will receive a `ResourceNotFoundException`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_OutboundCallerConfig
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -1487,10 +1537,16 @@ module Aws::Connect
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @return [Types::CreateTaskTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1562,6 +1618,76 @@ module Aws::Connect
     # @param [Hash] params ({})
     def create_task_template(params = {}, options = {})
       req = build_request(:create_task_template, params)
+      req.send_request(options)
+    end
+
+    # Creates a traffic distribution group given an Amazon Connect instance
+    # that has been replicated.
+    #
+    # For more information about creating traffic distribution groups, see
+    # [Set up traffic distribution groups][1] in the *Amazon Connect
+    # Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html
+    #
+    # @option params [required, String] :name
+    #   The name for the traffic distribution group.
+    #
+    # @option params [String] :description
+    #   A description for the traffic distribution group.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance that has been
+    #   replicated. You can find the `instanceId` in the ARN of the instance.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #
+    # @return [Types::CreateTrafficDistributionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTrafficDistributionGroupResponse#id #id} => String
+    #   * {Types::CreateTrafficDistributionGroupResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_traffic_distribution_group({
+    #     name: "Name128", # required
+    #     description: "Description250",
+    #     instance_id: "InstanceIdOrArn", # required
+    #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateTrafficDistributionGroup AWS API Documentation
+    #
+    # @overload create_traffic_distribution_group(params = {})
+    # @param [Hash] params ({})
+    def create_traffic_distribution_group(params = {}, options = {})
+      req = build_request(:create_traffic_distribution_group, params)
       req.send_request(options)
     end
 
@@ -1775,12 +1901,18 @@ module Aws::Connect
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If a create request is received more than
-    #   once with same client token, subsequent requests return the previous
-    #   response without creating a vocabulary again.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1]. If a create request is
+    #   received more than once with same client token, subsequent requests
+    #   return the previous response without creating a vocabulary again.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -2075,6 +2207,40 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_task_template(params = {}, options = {})
       req = build_request(:delete_task_template, params)
+      req.send_request(options)
+    end
+
+    # Deletes a traffic distribution group. This API can be called only in
+    # the Region where the traffic distribution group is created.
+    #
+    # For more information about deleting traffic distribution groups, see
+    # [Delete traffic distribution groups][1] in the *Amazon Connect
+    # Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/delete-traffic-distribution-groups.html
+    #
+    # @option params [required, String] :traffic_distribution_group_id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the traffic
+    #   distribution group was created. The ARN must be provided if the call
+    #   is from the replicated Region.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_traffic_distribution_group({
+    #     traffic_distribution_group_id: "TrafficDistributionGroupIdOrArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteTrafficDistributionGroup AWS API Documentation
+    #
+    # @overload delete_traffic_distribution_group(params = {})
+    # @param [Hash] params ({})
+    def delete_traffic_distribution_group(params = {}, options = {})
+      req = build_request(:delete_traffic_distribution_group, params)
       req.send_request(options)
     end
 
@@ -2584,7 +2750,17 @@ module Aws::Connect
     end
 
     # Gets details and status of a phone number that’s claimed to your
-    # Amazon Connect instance
+    # Amazon Connect instance or traffic distribution group.
+    #
+    # If the number is claimed to a traffic distribution group, and you are
+    # calling in the Amazon Web Services Region where the traffic
+    # distribution group was created, you can use either a phone number ARN
+    # or UUID value for the `PhoneNumberId` URI request parameter. However,
+    # if the number is claimed to a traffic distribution group and you are
+    # calling this API in the alternate Amazon Web Services Region
+    # associated with the traffic distribution group, you must provide a
+    # full phone number ARN. If a UUID is provided in this scenario, you
+    # will receive a `ResourceNotFoundException`.
     #
     # @option params [required, String] :phone_number_id
     #   A unique identifier for the phone number.
@@ -2797,6 +2973,44 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_security_profile(params = {}, options = {})
       req = build_request(:describe_security_profile, params)
+      req.send_request(options)
+    end
+
+    # Gets details and status of a traffic distribution group.
+    #
+    # @option params [required, String] :traffic_distribution_group_id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the traffic
+    #   distribution group was created. The ARN must be provided if the call
+    #   is from the replicated Region.
+    #
+    # @return [Types::DescribeTrafficDistributionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTrafficDistributionGroupResponse#traffic_distribution_group #traffic_distribution_group} => Types::TrafficDistributionGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_traffic_distribution_group({
+    #     traffic_distribution_group_id: "TrafficDistributionGroupIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.traffic_distribution_group.id #=> String
+    #   resp.traffic_distribution_group.arn #=> String
+    #   resp.traffic_distribution_group.name #=> String
+    #   resp.traffic_distribution_group.description #=> String
+    #   resp.traffic_distribution_group.instance_arn #=> String
+    #   resp.traffic_distribution_group.status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "CREATION_FAILED", "PENDING_DELETION", "DELETION_FAILED", "UPDATE_IN_PROGRESS"
+    #   resp.traffic_distribution_group.tags #=> Hash
+    #   resp.traffic_distribution_group.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeTrafficDistributionGroup AWS API Documentation
+    #
+    # @overload describe_traffic_distribution_group(params = {})
+    # @param [Hash] params ({})
+    def describe_traffic_distribution_group(params = {}, options = {})
+      req = build_request(:describe_traffic_distribution_group, params)
       req.send_request(options)
     end
 
@@ -3145,7 +3359,8 @@ module Aws::Connect
     #   The name of the Amazon Lex bot. Maximum character limit of 50.
     #
     # @option params [required, String] :lex_region
-    #   The Region in which the Amazon Lex bot has been created.
+    #   The Amazon Web Services Region in which the Amazon Lex bot has been
+    #   created.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3167,7 +3382,18 @@ module Aws::Connect
     end
 
     # Removes the flow association from a phone number claimed to your
-    # Amazon Connect instance, if a flow association exists.
+    # Amazon Connect instance.
+    #
+    # If the number is claimed to a traffic distribution group, and you are
+    # calling this API using an instance in the Amazon Web Services Region
+    # where the traffic distribution group was created, you can use either a
+    # full phone number ARN or UUID value for the `PhoneNumberId` URI
+    # request parameter. However, if the number is claimed to a traffic
+    # distribution group and you are calling this API using an instance in
+    # the alternate Amazon Web Services Region associated with the traffic
+    # distribution group, you must provide a full phone number ARN. If a
+    # UUID is provided in this scenario, you will receive a
+    # `ResourceNotFoundException`.
     #
     # @option params [required, String] :phone_number_id
     #   A unique identifier for the phone number.
@@ -4024,6 +4250,41 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Retrieves the current traffic distribution for a given traffic
+    # distribution group.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the traffic distribution group.
+    #
+    # @return [Types::GetTrafficDistributionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTrafficDistributionResponse#telephony_config #telephony_config} => Types::TelephonyConfig
+    #   * {Types::GetTrafficDistributionResponse#id #id} => String
+    #   * {Types::GetTrafficDistributionResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_traffic_distribution({
+    #     id: "TrafficDistributionGroupIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.telephony_config.distributions #=> Array
+    #   resp.telephony_config.distributions[0].region #=> String
+    #   resp.telephony_config.distributions[0].percentage #=> Integer
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTrafficDistribution AWS API Documentation
+    #
+    # @overload get_traffic_distribution(params = {})
+    # @param [Hash] params ({})
+    def get_traffic_distribution(params = {}, options = {})
+      req = build_request(:get_traffic_distribution, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -4809,9 +5070,17 @@ module Aws::Connect
     # for Your Contact Center][1] in the *Amazon Connect Administrator
     # Guide*.
     #
+    # The phone number `Arn` value that is returned from each of the items
+    # in the [PhoneNumberSummaryList][2] cannot be used to tag phone number
+    # resources. It will fail with a `ResourceNotFoundException`. Instead,
+    # use the [ListPhoneNumbersV2][3] API. It returns the new phone number
+    # ARN that can be used to tag phone number resources.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList
+    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -4868,7 +5137,10 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Lists phone numbers claimed to your Amazon Connect instance.
+    # Lists phone numbers claimed to your Amazon Connect instance or traffic
+    # distribution group. If the provided `TargetArn` is a traffic
+    # distribution group, you can call this API in both Amazon Web Services
+    # Regions associated with traffic distribution group.
     #
     # For more information about phone numbers, see [Set Up Phone Numbers
     # for Your Contact Center][1] in the *Amazon Connect Administrator
@@ -4879,10 +5151,11 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html
     #
     # @option params [String] :target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances that phone
-    #   numbers are claimed to. If `TargetArn` input is not provided, this API
-    #   lists numbers claimed to all the Amazon Connect instances belonging to
-    #   your account.
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+    #   distribution groups that phone numbers are claimed to. If `TargetArn`
+    #   input is not provided, this API lists numbers claimed to all the
+    #   Amazon Connect instances belonging to your account in the same Amazon
+    #   Web Services Region as the request.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -5532,6 +5805,54 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists traffic distribution groups.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @return [Types::ListTrafficDistributionGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTrafficDistributionGroupsResponse#next_token #next_token} => String
+    #   * {Types::ListTrafficDistributionGroupsResponse#traffic_distribution_group_summary_list #traffic_distribution_group_summary_list} => Array&lt;Types::TrafficDistributionGroupSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_traffic_distribution_groups({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     instance_id: "InstanceIdOrArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.traffic_distribution_group_summary_list #=> Array
+    #   resp.traffic_distribution_group_summary_list[0].id #=> String
+    #   resp.traffic_distribution_group_summary_list[0].arn #=> String
+    #   resp.traffic_distribution_group_summary_list[0].name #=> String
+    #   resp.traffic_distribution_group_summary_list[0].instance_arn #=> String
+    #   resp.traffic_distribution_group_summary_list[0].status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "CREATION_FAILED", "PENDING_DELETION", "DELETION_FAILED", "UPDATE_IN_PROGRESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTrafficDistributionGroups AWS API Documentation
+    #
+    # @overload list_traffic_distribution_groups(params = {})
+    # @param [Hash] params ({})
+    def list_traffic_distribution_groups(params = {}, options = {})
+      req = build_request(:list_traffic_distribution_groups, params)
+      req.send_request(options)
+    end
+
     # Lists the use cases for the integration association.
     #
     # @option params [required, String] :instance_id
@@ -5727,17 +6048,32 @@ module Aws::Connect
     end
 
     # Releases a phone number previously claimed to an Amazon Connect
-    # instance.
+    # instance or traffic distribution group. You can call this API only in
+    # the Amazon Web Services Region where the number was claimed.
+    #
+    # To release phone numbers from a traffic distribution group, use the
+    # `ReleasePhoneNumber` API, not the Amazon Connect console.
+    #
+    #  After releasing a phone number, the phone number enters into a
+    # cooldown period of 30 days. It cannot be searched for or claimed again
+    # until the period has ended. If you accidentally release a phone
+    # number, contact Amazon Web Services Support.
     #
     # @option params [required, String] :phone_number_id
     #   A unique identifier for the phone number.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5754,6 +6090,70 @@ module Aws::Connect
     # @param [Hash] params ({})
     def release_phone_number(params = {}, options = {})
       req = build_request(:release_phone_number, params)
+      req.send_request(options)
+    end
+
+    # Replicates an Amazon Connect instance in the specified Amazon Web
+    # Services Region.
+    #
+    # For more information about replicating an Amazon Connect instance, see
+    # [Create a replica of your existing Amazon Connect instance][1] in the
+    # *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :replica_region
+    #   The Amazon Web Services Region where to replicate the Amazon Connect
+    #   instance.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [required, String] :replica_alias
+    #   The alias for the replicated instance. The `ReplicaAlias` must be
+    #   unique.
+    #
+    # @return [Types::ReplicateInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ReplicateInstanceResponse#id #id} => String
+    #   * {Types::ReplicateInstanceResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.replicate_instance({
+    #     instance_id: "InstanceIdOrArn", # required
+    #     replica_region: "AwsRegion", # required
+    #     client_token: "ClientToken",
+    #     replica_alias: "DirectoryAlias", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReplicateInstance AWS API Documentation
+    #
+    # @overload replicate_instance(params = {})
+    # @param [Hash] params ({})
+    def replicate_instance(params = {}, options = {})
+      req = build_request(:replicate_instance, params)
       req.send_request(options)
     end
 
@@ -5793,11 +6193,14 @@ module Aws::Connect
     end
 
     # Searches for available phone numbers that you can claim to your Amazon
-    # Connect instance.
+    # Connect instance or traffic distribution group. If the provided
+    # `TargetArn` is a traffic distribution group, you can call this API in
+    # both Amazon Web Services Regions associated with the traffic
+    # distribution group.
     #
     # @option params [required, String] :target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances that phone
-    #   numbers are claimed to.
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+    #   distribution groups that phone numbers are claimed to.
     #
     # @option params [required, String] :phone_number_country_code
     #   The ISO country code.
@@ -6087,6 +6490,10 @@ module Aws::Connect
     # @option params [Types::SecurityProfileSearchCriteria] :search_criteria
     #   The search criteria to be used to return security profiles.
     #
+    #   <note markdown="1"> The currently supported value for `FieldName`\: `name`
+    #
+    #    </note>
+    #
     # @option params [Types::SecurityProfilesSearchFilter] :search_filter
     #   Filters to be applied to search results.
     #
@@ -6168,6 +6575,10 @@ module Aws::Connect
     end
 
     # Searches users in an Amazon Connect instance, with optional filtering.
+    #
+    # <note markdown="1"> `AfterContactWorkTimeLimit` is returned in milliseconds.
+    #
+    #  </note>
     #
     # @option params [String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -6417,10 +6828,16 @@ module Aws::Connect
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [Integer] :chat_duration_in_minutes
     #   The total duration of the newly started chat session. If not
@@ -6557,10 +6974,16 @@ module Aws::Connect
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @return [Types::StartContactStreamingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6639,11 +7062,18 @@ module Aws::Connect
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. The token is valid for 7 days after
-    #   creation. If a contact is already started, the contact ID is returned.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1]. The token is valid for
+    #   7 days after creation. If a contact is already started, the contact ID
+    #   is returned.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [String] :source_phone_number
     #   The phone number associated with the Amazon Connect instance, in E.164
@@ -6757,10 +7187,16 @@ module Aws::Connect
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [Time,DateTime,Date,Integer,String] :scheduled_time
     #   The timestamp, in Unix Epoch seconds format, at which to start running
@@ -7045,10 +7481,16 @@ module Aws::Connect
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @return [Types::TransferContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7662,21 +8104,37 @@ module Aws::Connect
     end
 
     # Updates your claimed phone number from its current Amazon Connect
-    # instance to another Amazon Connect instance in the same Region.
+    # instance or traffic distribution group to another Amazon Connect
+    # instance or traffic distribution group in the same Amazon Web Services
+    # Region.
+    #
+    # You can call [DescribePhoneNumber][1] API to verify the status of a
+    # previous [UpdatePhoneNumber][2] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html
     #
     # @option params [required, String] :phone_number_id
     #   A unique identifier for the phone number.
     #
     # @option params [required, String] :target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances that phone
-    #   numbers are claimed to.
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+    #   distribution groups that phone numbers are claimed to.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @return [Types::UpdatePhoneNumberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7819,6 +8277,22 @@ module Aws::Connect
     #
     # Updates the outbound caller ID name, number, and outbound whisper flow
     # for a specified queue.
+    #
+    # If the number being used in the input is claimed to a traffic
+    # distribution group, and you are calling this API using an instance in
+    # the Amazon Web Services Region where the traffic distribution group
+    # was created, you can use either a full phone number ARN or UUID value
+    # for the `OutboundCallerIdNumberId` value of the
+    # [OutboundCallerConfig][1] request body parameter. However, if the
+    # number is claimed to a traffic distribution group and you are calling
+    # this API using an instance in the alternate Amazon Web Services Region
+    # associated with the traffic distribution group, you must provide a
+    # full phone number ARN. If a UUID is provided in this scenario, you
+    # will receive a `ResourceNotFoundException`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_OutboundCallerConfig
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -8303,6 +8777,49 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates the traffic distribution for a given traffic distribution
+    # group. For more information about updating a traffic distribution
+    # group see [Update telephony traffic distribution across Amazon Web
+    # Services Regions ][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html
+    #
+    # @option params [required, String] :id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the traffic
+    #   distribution group was created. The ARN must be provided if the call
+    #   is from the replicated Region.
+    #
+    # @option params [Types::TelephonyConfig] :telephony_config
+    #   The distribution of traffic between the instance and its replica(s).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_traffic_distribution({
+    #     id: "TrafficDistributionGroupIdOrArn", # required
+    #     telephony_config: {
+    #       distributions: [ # required
+    #         {
+    #           region: "AwsRegion", # required
+    #           percentage: 1, # required
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateTrafficDistribution AWS API Documentation
+    #
+    # @overload update_traffic_distribution(params = {})
+    # @param [Hash] params ({})
+    def update_traffic_distribution(params = {}, options = {})
+      req = build_request(:update_traffic_distribution, params)
+      req.send_request(options)
+    end
+
     # Assigns the specified hierarchy group to the specified user.
     #
     # @option params [String] :hierarchy_group_id
@@ -8569,7 +9086,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2220,6 +2220,7 @@
       "members":{
         "AccountId":{
           "shape":"AccountId",
+          "contextParam":{"name":"AccountId"},
           "hostLabel":true,
           "location":"header",
           "locationName":"x-amz-account-id"

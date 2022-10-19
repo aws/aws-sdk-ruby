@@ -895,7 +895,7 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] last_message_timestamp
-    #   The time at which the last message in a channel was sent.
+    #   The time at which the last persistent message in a channel was sent.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelSummary AWS API Documentation

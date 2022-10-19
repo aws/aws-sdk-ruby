@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2022-10-19)
+------------------
+
+* Feature - This release adds resourceType enums for AppConfig, AppSync, DataSync, EC2, EKS, Glue, GuardDuty, SageMaker, ServiceDiscovery, SES, Route53 types.
+
 1.83.0 (2022-08-24)
 ------------------
 
