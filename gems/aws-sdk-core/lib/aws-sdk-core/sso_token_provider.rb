@@ -44,7 +44,7 @@ module Aws
       super
     end
 
-    # @return [SSO::Client]
+    # @return [SSOOIDC::Client]
     attr_reader :client
 
     private

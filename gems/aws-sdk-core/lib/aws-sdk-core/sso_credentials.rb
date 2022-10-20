@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Aws
+  # TODO: Update documentation
+
   # An auto-refreshing credential provider that assumes a role via
   # {Aws::SSO::Client#get_role_credentials} using a cached access
   # token. This class does NOT implement the SSO login token flow - tokens
@@ -35,7 +37,8 @@ module Aws
     include RefreshingCredentials
 
     # @api private
-    SSO_REQUIRED_OPTS = [:sso_account_id, :sso_region, :sso_role_name, :sso_start_url].freeze
+    LEGACY_REQUIRED_OPTS =         [:sso_start_url, :sso_account_id, :sso_region, :sso_role_name].freeze
+    TOKEN_PROVIDER_REQUIRED_OPTS = [:sso_session, :sso_account_id, :sso_region, :sso_role_name].freeze
 
     # @api private
     SSO_LOGIN_GUIDANCE = 'The SSO session associated with this profile has '\
@@ -45,17 +48,23 @@ module Aws
     # @option options [required, String] :sso_account_id The AWS account ID
     #   that temporary AWS credentials will be resolved for
     #
-    # @option options [required, String] :sso_region The AWS region where the
-    #   SSO directory for the given sso_start_url is hosted.
-    #
     # @option options [required, String] :sso_role_name The corresponding
     #   IAM role in the AWS account that temporary AWS credentials
     #   will be resolved for.
     #
-    # @option options [required, String] :sso_start_url The start URL is
-    #   provided by the SSO service via the console and is the URL used to
+    # @option options [required, String] :sso_region The AWS region where the
+    #   SSO directory for the given sso_start_url is hosted.
+    #
+    # @option options [String] :sso_session The SSO Token used for fetching
+    #   the token. If provided, refresh logic from the {Aws::SSOTokenProvider}
+    #   will be used.
+    #
+    # @option options [String] :sso_start_url (legacy profiles) If provided,
+    #   legacy token fetch behavior will be used, which does not support
+    #   token refreshing.  The start URL is provided by the SSO
+    #   service via the console and is the URL used to
     #   login to the SSO directory. This is also sometimes referred to as
-    #   the "User Portal URL"
+    #   the "User Portal URL".
     #
     # @option options [SSO::Client] :client Optional `SSO::Client`.  If not
     #   provided, a client will be constructed.
@@ -66,26 +75,50 @@ module Aws
     #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
 
-      missing_keys = SSO_REQUIRED_OPTS.select { |k| options[k].nil? }
-      unless missing_keys.empty?
-        raise ArgumentError, "Missing required keys: #{missing_keys}"
+      if (options.include?(:sso_session))
+        missing_keys = TOKEN_PROVIDER_REQUIRED_OPTS.select { |k| options[k].nil? }
+        unless missing_keys.empty?
+          raise ArgumentError, "Missing required keys: #{missing_keys}"
+        end
+        @legacy = false
+        @sso_role_name = options.delete(:sso_role_name)
+        @sso_account_id = options.delete(:sso_account_id)
+
+        # if client has been passed, don't pass through to SSOTokenProvider
+        @client = options.delete(:client)
+        @token_provider = Aws::SSOTokenProvider.new(options.dup)
+        @sso_session = options.delete(:sso_session)
+        @sso_region = options.delete(:sso_region)
+
+        unless @client
+          client_opts = {}
+          options.each_pair { |k,v| client_opts[k] = v unless CLIENT_EXCLUDE_OPTIONS.include?(k) }
+          client_opts[:region] = @sso_region
+          client_opts[:credentials] = nil
+          @client = Aws::SSO::Client.new(client_opts)
+        end
+      else # legacy behavior
+        missing_keys = LEGACY_REQUIRED_OPTS.select { |k| options[k].nil? }
+        unless missing_keys.empty?
+          raise ArgumentError, "Missing required keys: #{missing_keys}"
+        end
+        @legacy = true
+        @sso_start_url = options.delete(:sso_start_url)
+        @sso_region = options.delete(:sso_region)
+        @sso_role_name = options.delete(:sso_role_name)
+        @sso_account_id = options.delete(:sso_account_id)
+
+        # validate we can read the token file
+        read_cached_token
+
+        client_opts = {}
+        options.each_pair { |k,v| client_opts[k] = v unless CLIENT_EXCLUDE_OPTIONS.include?(k) }
+        client_opts[:region] = @sso_region
+        client_opts[:credentials] = nil
+
+        @client = options[:client] || Aws::SSO::Client.new(client_opts)
       end
 
-      @sso_start_url = options.delete(:sso_start_url)
-      @sso_region = options.delete(:sso_region)
-      @sso_role_name = options.delete(:sso_role_name)
-      @sso_account_id = options.delete(:sso_account_id)
-
-      # validate we can read the token file
-      read_cached_token
-
-
-      client_opts = {}
-      options.each_pair { |k,v| client_opts[k] = v unless CLIENT_EXCLUDE_OPTIONS.include?(k) }
-      client_opts[:region] = @sso_region
-      client_opts[:credentials] = nil
-
-      @client = options[:client] || Aws::SSO::Client.new(client_opts)
       @async_refresh = true
       super
     end
@@ -111,12 +144,20 @@ module Aws
     end
 
     def refresh
-      cached_token = read_cached_token
-      c = @client.get_role_credentials(
-        account_id: @sso_account_id,
-        role_name: @sso_role_name,
-        access_token: cached_token['accessToken']
-      ).role_credentials
+      c = if @legacy
+            cached_token = read_cached_token
+            @client.get_role_credentials(
+              account_id: @sso_account_id,
+              role_name: @sso_role_name,
+              access_token: cached_token['accessToken']
+            ).role_credentials
+          else
+            @client.get_role_credentials(
+              account_id: @sso_account_id,
+              role_name: @sso_role_name,
+              access_token: @token_provider.token.token
+            ).role_credentials
+          end
 
       @credentials = Credentials.new(
         c.access_key_id,
