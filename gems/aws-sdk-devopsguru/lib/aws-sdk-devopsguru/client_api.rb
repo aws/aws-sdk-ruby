@@ -21,6 +21,7 @@ module Aws::DevOpsGuru
     AddNotificationChannelRequest = Shapes::StructureShape.new(name: 'AddNotificationChannelRequest')
     AddNotificationChannelResponse = Shapes::StructureShape.new(name: 'AddNotificationChannelResponse')
     AmazonCodeGuruProfilerIntegration = Shapes::StructureShape.new(name: 'AmazonCodeGuruProfilerIntegration')
+    AnalyzedResourceCount = Shapes::IntegerShape.new(name: 'AnalyzedResourceCount')
     AnomalousLogGroup = Shapes::StructureShape.new(name: 'AnomalousLogGroup')
     AnomalousLogGroups = Shapes::ListShape.new(name: 'AnomalousLogGroups')
     AnomalyDescription = Shapes::StringShape.new(name: 'AnomalyDescription')
@@ -414,6 +415,7 @@ module Aws::DevOpsGuru
 
     CloudFormationHealth.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "StackName"))
     CloudFormationHealth.add_member(:insight, Shapes::ShapeRef.new(shape: InsightHealth, location_name: "Insight"))
+    CloudFormationHealth.add_member(:analyzed_resource_count, Shapes::ShapeRef.new(shape: AnalyzedResourceCount, location_name: "AnalyzedResourceCount"))
     CloudFormationHealth.struct_class = Types::CloudFormationHealth
 
     CloudFormationHealths.member = Shapes::ShapeRef.new(shape: CloudFormationHealth)
@@ -467,6 +469,7 @@ module Aws::DevOpsGuru
     DescribeAccountHealthResponse.add_member(:open_proactive_insights, Shapes::ShapeRef.new(shape: NumOpenProactiveInsights, required: true, location_name: "OpenProactiveInsights"))
     DescribeAccountHealthResponse.add_member(:metrics_analyzed, Shapes::ShapeRef.new(shape: NumMetricsAnalyzed, required: true, location_name: "MetricsAnalyzed"))
     DescribeAccountHealthResponse.add_member(:resource_hours, Shapes::ShapeRef.new(shape: ResourceHours, required: true, location_name: "ResourceHours"))
+    DescribeAccountHealthResponse.add_member(:analyzed_resource_count, Shapes::ShapeRef.new(shape: AnalyzedResourceCount, location_name: "AnalyzedResourceCount"))
     DescribeAccountHealthResponse.struct_class = Types::DescribeAccountHealthResponse
 
     DescribeAccountOverviewRequest.add_member(:from_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "FromTime"))
@@ -698,7 +701,7 @@ module Aws::DevOpsGuru
     ListMonitoredResourcesFilters.add_member(:resource_type_filters, Shapes::ShapeRef.new(shape: ResourceTypeFilters, required: true, location_name: "ResourceTypeFilters"))
     ListMonitoredResourcesFilters.struct_class = Types::ListMonitoredResourcesFilters
 
-    ListMonitoredResourcesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListMonitoredResourcesFilters, required: true, location_name: "Filters"))
+    ListMonitoredResourcesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListMonitoredResourcesFilters, location_name: "Filters"))
     ListMonitoredResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMonitoredResourcesMaxResults, location_name: "MaxResults"))
     ListMonitoredResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
     ListMonitoredResourcesRequest.struct_class = Types::ListMonitoredResourcesRequest
@@ -761,6 +764,8 @@ module Aws::DevOpsGuru
     MonitoredResourceIdentifier.add_member(:monitored_resource_name, Shapes::ShapeRef.new(shape: MonitoredResourceName, location_name: "MonitoredResourceName"))
     MonitoredResourceIdentifier.add_member(:type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "Type"))
     MonitoredResourceIdentifier.add_member(:resource_permission, Shapes::ShapeRef.new(shape: ResourcePermission, location_name: "ResourcePermission"))
+    MonitoredResourceIdentifier.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdated"))
+    MonitoredResourceIdentifier.add_member(:resource_collection, Shapes::ShapeRef.new(shape: ResourceCollection, location_name: "ResourceCollection"))
     MonitoredResourceIdentifier.struct_class = Types::MonitoredResourceIdentifier
 
     MonitoredResourceIdentifiers.member = Shapes::ShapeRef.new(shape: MonitoredResourceIdentifier)
@@ -1091,6 +1096,7 @@ module Aws::DevOpsGuru
 
     ServiceHealth.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, location_name: "ServiceName"))
     ServiceHealth.add_member(:insight, Shapes::ShapeRef.new(shape: ServiceInsightHealth, location_name: "Insight"))
+    ServiceHealth.add_member(:analyzed_resource_count, Shapes::ShapeRef.new(shape: AnalyzedResourceCount, location_name: "AnalyzedResourceCount"))
     ServiceHealth.struct_class = Types::ServiceHealth
 
     ServiceHealths.member = Shapes::ShapeRef.new(shape: ServiceHealth)
@@ -1153,6 +1159,7 @@ module Aws::DevOpsGuru
     TagHealth.add_member(:app_boundary_key, Shapes::ShapeRef.new(shape: AppBoundaryKey, location_name: "AppBoundaryKey"))
     TagHealth.add_member(:tag_value, Shapes::ShapeRef.new(shape: TagValue, location_name: "TagValue"))
     TagHealth.add_member(:insight, Shapes::ShapeRef.new(shape: InsightHealth, location_name: "Insight"))
+    TagHealth.add_member(:analyzed_resource_count, Shapes::ShapeRef.new(shape: AnalyzedResourceCount, location_name: "AnalyzedResourceCount"))
     TagHealth.struct_class = Types::TagHealth
 
     TagHealths.member = Shapes::ShapeRef.new(shape: TagHealth)

@@ -23,6 +23,16 @@ module Aws::CloudWatchRUM
     AppMonitorSummary = Shapes::StructureShape.new(name: 'AppMonitorSummary')
     AppMonitorSummaryList = Shapes::ListShape.new(name: 'AppMonitorSummaryList')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    BatchCreateRumMetricDefinitionsError = Shapes::StructureShape.new(name: 'BatchCreateRumMetricDefinitionsError')
+    BatchCreateRumMetricDefinitionsErrors = Shapes::ListShape.new(name: 'BatchCreateRumMetricDefinitionsErrors')
+    BatchCreateRumMetricDefinitionsRequest = Shapes::StructureShape.new(name: 'BatchCreateRumMetricDefinitionsRequest')
+    BatchCreateRumMetricDefinitionsResponse = Shapes::StructureShape.new(name: 'BatchCreateRumMetricDefinitionsResponse')
+    BatchDeleteRumMetricDefinitionsError = Shapes::StructureShape.new(name: 'BatchDeleteRumMetricDefinitionsError')
+    BatchDeleteRumMetricDefinitionsErrors = Shapes::ListShape.new(name: 'BatchDeleteRumMetricDefinitionsErrors')
+    BatchDeleteRumMetricDefinitionsRequest = Shapes::StructureShape.new(name: 'BatchDeleteRumMetricDefinitionsRequest')
+    BatchDeleteRumMetricDefinitionsResponse = Shapes::StructureShape.new(name: 'BatchDeleteRumMetricDefinitionsResponse')
+    BatchGetRumMetricDefinitionsRequest = Shapes::StructureShape.new(name: 'BatchGetRumMetricDefinitionsRequest')
+    BatchGetRumMetricDefinitionsResponse = Shapes::StructureShape.new(name: 'BatchGetRumMetricDefinitionsResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAppMonitorRequest = Shapes::StructureShape.new(name: 'CreateAppMonitorRequest')
@@ -31,26 +41,49 @@ module Aws::CloudWatchRUM
     DataStorage = Shapes::StructureShape.new(name: 'DataStorage')
     DeleteAppMonitorRequest = Shapes::StructureShape.new(name: 'DeleteAppMonitorRequest')
     DeleteAppMonitorResponse = Shapes::StructureShape.new(name: 'DeleteAppMonitorResponse')
+    DeleteRumMetricsDestinationRequest = Shapes::StructureShape.new(name: 'DeleteRumMetricsDestinationRequest')
+    DeleteRumMetricsDestinationResponse = Shapes::StructureShape.new(name: 'DeleteRumMetricsDestinationResponse')
+    DestinationArn = Shapes::StringShape.new(name: 'DestinationArn')
+    DimensionKey = Shapes::StringShape.new(name: 'DimensionKey')
+    DimensionKeysMap = Shapes::MapShape.new(name: 'DimensionKeysMap')
+    DimensionName = Shapes::StringShape.new(name: 'DimensionName')
     EventData = Shapes::StringShape.new(name: 'EventData')
     EventDataList = Shapes::ListShape.new(name: 'EventDataList')
+    EventPattern = Shapes::StringShape.new(name: 'EventPattern')
     FavoritePages = Shapes::ListShape.new(name: 'FavoritePages')
     GetAppMonitorDataRequest = Shapes::StructureShape.new(name: 'GetAppMonitorDataRequest')
     GetAppMonitorDataResponse = Shapes::StructureShape.new(name: 'GetAppMonitorDataResponse')
     GetAppMonitorRequest = Shapes::StructureShape.new(name: 'GetAppMonitorRequest')
     GetAppMonitorResponse = Shapes::StructureShape.new(name: 'GetAppMonitorResponse')
     ISOTimestampString = Shapes::StringShape.new(name: 'ISOTimestampString')
+    IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IdentityPoolId = Shapes::StringShape.new(name: 'IdentityPoolId')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JsonValue = Shapes::StringShape.new(name: 'JsonValue')
     ListAppMonitorsRequest = Shapes::StructureShape.new(name: 'ListAppMonitorsRequest')
     ListAppMonitorsResponse = Shapes::StructureShape.new(name: 'ListAppMonitorsResponse')
+    ListRumMetricsDestinationsRequest = Shapes::StructureShape.new(name: 'ListRumMetricsDestinationsRequest')
+    ListRumMetricsDestinationsResponse = Shapes::StructureShape.new(name: 'ListRumMetricsDestinationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxQueryResults = Shapes::IntegerShape.new(name: 'MaxQueryResults')
+    MaxResultsInteger = Shapes::IntegerShape.new(name: 'MaxResultsInteger')
+    MetricDefinition = Shapes::StructureShape.new(name: 'MetricDefinition')
+    MetricDefinitionId = Shapes::StringShape.new(name: 'MetricDefinitionId')
+    MetricDefinitionIds = Shapes::ListShape.new(name: 'MetricDefinitionIds')
+    MetricDefinitionRequest = Shapes::StructureShape.new(name: 'MetricDefinitionRequest')
+    MetricDefinitions = Shapes::ListShape.new(name: 'MetricDefinitions')
+    MetricDefinitionsRequest = Shapes::ListShape.new(name: 'MetricDefinitionsRequest')
+    MetricDestination = Shapes::StringShape.new(name: 'MetricDestination')
+    MetricDestinationSummary = Shapes::StructureShape.new(name: 'MetricDestinationSummary')
+    MetricDestinationSummaryList = Shapes::ListShape.new(name: 'MetricDestinationSummaryList')
+    MetricName = Shapes::StringShape.new(name: 'MetricName')
     Pages = Shapes::ListShape.new(name: 'Pages')
     PutRumEventsRequest = Shapes::StructureShape.new(name: 'PutRumEventsRequest')
     PutRumEventsResponse = Shapes::StructureShape.new(name: 'PutRumEventsResponse')
+    PutRumMetricsDestinationRequest = Shapes::StructureShape.new(name: 'PutRumMetricsDestinationRequest')
+    PutRumMetricsDestinationResponse = Shapes::StructureShape.new(name: 'PutRumMetricsDestinationResponse')
     QueryFilter = Shapes::StructureShape.new(name: 'QueryFilter')
     QueryFilterKey = Shapes::StringShape.new(name: 'QueryFilterKey')
     QueryFilterValue = Shapes::StringShape.new(name: 'QueryFilterValue')
@@ -76,13 +109,17 @@ module Aws::CloudWatchRUM
     TimeRange = Shapes::StructureShape.new(name: 'TimeRange')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
+    UnitLabel = Shapes::StringShape.new(name: 'UnitLabel')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAppMonitorRequest = Shapes::StructureShape.new(name: 'UpdateAppMonitorRequest')
     UpdateAppMonitorResponse = Shapes::StructureShape.new(name: 'UpdateAppMonitorResponse')
+    UpdateRumMetricDefinitionRequest = Shapes::StructureShape.new(name: 'UpdateRumMetricDefinitionRequest')
+    UpdateRumMetricDefinitionResponse = Shapes::StructureShape.new(name: 'UpdateRumMetricDefinitionResponse')
     Url = Shapes::StringShape.new(name: 'Url')
     UserDetails = Shapes::StructureShape.new(name: 'UserDetails')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    ValueKey = Shapes::StringShape.new(name: 'ValueKey')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -123,6 +160,51 @@ module Aws::CloudWatchRUM
 
     AppMonitorSummaryList.member = Shapes::ShapeRef.new(shape: AppMonitorSummary)
 
+    BatchCreateRumMetricDefinitionsError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorCode"))
+    BatchCreateRumMetricDefinitionsError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorMessage"))
+    BatchCreateRumMetricDefinitionsError.add_member(:metric_definition, Shapes::ShapeRef.new(shape: MetricDefinitionRequest, required: true, location_name: "MetricDefinition"))
+    BatchCreateRumMetricDefinitionsError.struct_class = Types::BatchCreateRumMetricDefinitionsError
+
+    BatchCreateRumMetricDefinitionsErrors.member = Shapes::ShapeRef.new(shape: BatchCreateRumMetricDefinitionsError)
+
+    BatchCreateRumMetricDefinitionsRequest.add_member(:app_monitor_name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "AppMonitorName"))
+    BatchCreateRumMetricDefinitionsRequest.add_member(:destination, Shapes::ShapeRef.new(shape: MetricDestination, required: true, location_name: "Destination"))
+    BatchCreateRumMetricDefinitionsRequest.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DestinationArn, location_name: "DestinationArn"))
+    BatchCreateRumMetricDefinitionsRequest.add_member(:metric_definitions, Shapes::ShapeRef.new(shape: MetricDefinitionsRequest, required: true, location_name: "MetricDefinitions"))
+    BatchCreateRumMetricDefinitionsRequest.struct_class = Types::BatchCreateRumMetricDefinitionsRequest
+
+    BatchCreateRumMetricDefinitionsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchCreateRumMetricDefinitionsErrors, required: true, location_name: "Errors"))
+    BatchCreateRumMetricDefinitionsResponse.add_member(:metric_definitions, Shapes::ShapeRef.new(shape: MetricDefinitions, location_name: "MetricDefinitions"))
+    BatchCreateRumMetricDefinitionsResponse.struct_class = Types::BatchCreateRumMetricDefinitionsResponse
+
+    BatchDeleteRumMetricDefinitionsError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorCode"))
+    BatchDeleteRumMetricDefinitionsError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorMessage"))
+    BatchDeleteRumMetricDefinitionsError.add_member(:metric_definition_id, Shapes::ShapeRef.new(shape: MetricDefinitionId, required: true, location_name: "MetricDefinitionId"))
+    BatchDeleteRumMetricDefinitionsError.struct_class = Types::BatchDeleteRumMetricDefinitionsError
+
+    BatchDeleteRumMetricDefinitionsErrors.member = Shapes::ShapeRef.new(shape: BatchDeleteRumMetricDefinitionsError)
+
+    BatchDeleteRumMetricDefinitionsRequest.add_member(:app_monitor_name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "AppMonitorName"))
+    BatchDeleteRumMetricDefinitionsRequest.add_member(:destination, Shapes::ShapeRef.new(shape: MetricDestination, required: true, location: "querystring", location_name: "destination"))
+    BatchDeleteRumMetricDefinitionsRequest.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DestinationArn, location: "querystring", location_name: "destinationArn"))
+    BatchDeleteRumMetricDefinitionsRequest.add_member(:metric_definition_ids, Shapes::ShapeRef.new(shape: MetricDefinitionIds, required: true, location: "querystring", location_name: "metricDefinitionIds"))
+    BatchDeleteRumMetricDefinitionsRequest.struct_class = Types::BatchDeleteRumMetricDefinitionsRequest
+
+    BatchDeleteRumMetricDefinitionsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchDeleteRumMetricDefinitionsErrors, required: true, location_name: "Errors"))
+    BatchDeleteRumMetricDefinitionsResponse.add_member(:metric_definition_ids, Shapes::ShapeRef.new(shape: MetricDefinitionIds, location_name: "MetricDefinitionIds"))
+    BatchDeleteRumMetricDefinitionsResponse.struct_class = Types::BatchDeleteRumMetricDefinitionsResponse
+
+    BatchGetRumMetricDefinitionsRequest.add_member(:app_monitor_name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "AppMonitorName"))
+    BatchGetRumMetricDefinitionsRequest.add_member(:destination, Shapes::ShapeRef.new(shape: MetricDestination, required: true, location: "querystring", location_name: "destination"))
+    BatchGetRumMetricDefinitionsRequest.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DestinationArn, location: "querystring", location_name: "destinationArn"))
+    BatchGetRumMetricDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    BatchGetRumMetricDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    BatchGetRumMetricDefinitionsRequest.struct_class = Types::BatchGetRumMetricDefinitionsRequest
+
+    BatchGetRumMetricDefinitionsResponse.add_member(:metric_definitions, Shapes::ShapeRef.new(shape: MetricDefinitions, location_name: "MetricDefinitions"))
+    BatchGetRumMetricDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    BatchGetRumMetricDefinitionsResponse.struct_class = Types::BatchGetRumMetricDefinitionsResponse
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceName"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
@@ -150,6 +232,16 @@ module Aws::CloudWatchRUM
 
     DeleteAppMonitorResponse.struct_class = Types::DeleteAppMonitorResponse
 
+    DeleteRumMetricsDestinationRequest.add_member(:app_monitor_name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "AppMonitorName"))
+    DeleteRumMetricsDestinationRequest.add_member(:destination, Shapes::ShapeRef.new(shape: MetricDestination, required: true, location: "querystring", location_name: "destination"))
+    DeleteRumMetricsDestinationRequest.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DestinationArn, location: "querystring", location_name: "destinationArn"))
+    DeleteRumMetricsDestinationRequest.struct_class = Types::DeleteRumMetricsDestinationRequest
+
+    DeleteRumMetricsDestinationResponse.struct_class = Types::DeleteRumMetricsDestinationResponse
+
+    DimensionKeysMap.key = Shapes::ShapeRef.new(shape: DimensionKey)
+    DimensionKeysMap.value = Shapes::ShapeRef.new(shape: DimensionName)
+
     EventDataList.member = Shapes::ShapeRef.new(shape: EventData)
 
     FavoritePages.member = Shapes::ShapeRef.new(shape: String)
@@ -175,7 +267,7 @@ module Aws::CloudWatchRUM
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    ListAppMonitorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "maxResults"))
+    ListAppMonitorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListAppMonitorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListAppMonitorsRequest.struct_class = Types::ListAppMonitorsRequest
 
@@ -183,12 +275,49 @@ module Aws::CloudWatchRUM
     ListAppMonitorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListAppMonitorsResponse.struct_class = Types::ListAppMonitorsResponse
 
+    ListRumMetricsDestinationsRequest.add_member(:app_monitor_name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "AppMonitorName"))
+    ListRumMetricsDestinationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListRumMetricsDestinationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListRumMetricsDestinationsRequest.struct_class = Types::ListRumMetricsDestinationsRequest
+
+    ListRumMetricsDestinationsResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: MetricDestinationSummaryList, location_name: "Destinations"))
+    ListRumMetricsDestinationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListRumMetricsDestinationsResponse.struct_class = Types::ListRumMetricsDestinationsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
     ListTagsForResourceResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    MetricDefinition.add_member(:dimension_keys, Shapes::ShapeRef.new(shape: DimensionKeysMap, location_name: "DimensionKeys"))
+    MetricDefinition.add_member(:event_pattern, Shapes::ShapeRef.new(shape: EventPattern, location_name: "EventPattern"))
+    MetricDefinition.add_member(:metric_definition_id, Shapes::ShapeRef.new(shape: MetricDefinitionId, required: true, location_name: "MetricDefinitionId"))
+    MetricDefinition.add_member(:name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "Name"))
+    MetricDefinition.add_member(:unit_label, Shapes::ShapeRef.new(shape: UnitLabel, location_name: "UnitLabel"))
+    MetricDefinition.add_member(:value_key, Shapes::ShapeRef.new(shape: ValueKey, location_name: "ValueKey"))
+    MetricDefinition.struct_class = Types::MetricDefinition
+
+    MetricDefinitionIds.member = Shapes::ShapeRef.new(shape: MetricDefinitionId)
+
+    MetricDefinitionRequest.add_member(:dimension_keys, Shapes::ShapeRef.new(shape: DimensionKeysMap, location_name: "DimensionKeys"))
+    MetricDefinitionRequest.add_member(:event_pattern, Shapes::ShapeRef.new(shape: EventPattern, location_name: "EventPattern"))
+    MetricDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "Name"))
+    MetricDefinitionRequest.add_member(:unit_label, Shapes::ShapeRef.new(shape: UnitLabel, location_name: "UnitLabel"))
+    MetricDefinitionRequest.add_member(:value_key, Shapes::ShapeRef.new(shape: ValueKey, location_name: "ValueKey"))
+    MetricDefinitionRequest.struct_class = Types::MetricDefinitionRequest
+
+    MetricDefinitions.member = Shapes::ShapeRef.new(shape: MetricDefinition)
+
+    MetricDefinitionsRequest.member = Shapes::ShapeRef.new(shape: MetricDefinitionRequest)
+
+    MetricDestinationSummary.add_member(:destination, Shapes::ShapeRef.new(shape: MetricDestination, location_name: "Destination"))
+    MetricDestinationSummary.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DestinationArn, location_name: "DestinationArn"))
+    MetricDestinationSummary.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "IamRoleArn"))
+    MetricDestinationSummary.struct_class = Types::MetricDestinationSummary
+
+    MetricDestinationSummaryList.member = Shapes::ShapeRef.new(shape: MetricDestinationSummary)
 
     Pages.member = Shapes::ShapeRef.new(shape: Url)
 
@@ -200,6 +329,14 @@ module Aws::CloudWatchRUM
     PutRumEventsRequest.struct_class = Types::PutRumEventsRequest
 
     PutRumEventsResponse.struct_class = Types::PutRumEventsResponse
+
+    PutRumMetricsDestinationRequest.add_member(:app_monitor_name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "AppMonitorName"))
+    PutRumMetricsDestinationRequest.add_member(:destination, Shapes::ShapeRef.new(shape: MetricDestination, required: true, location_name: "Destination"))
+    PutRumMetricsDestinationRequest.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DestinationArn, location_name: "DestinationArn"))
+    PutRumMetricsDestinationRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "IamRoleArn"))
+    PutRumMetricsDestinationRequest.struct_class = Types::PutRumMetricsDestinationRequest
+
+    PutRumMetricsDestinationResponse.struct_class = Types::PutRumMetricsDestinationResponse
 
     QueryFilter.add_member(:name, Shapes::ShapeRef.new(shape: QueryFilterKey, location_name: "Name"))
     QueryFilter.add_member(:values, Shapes::ShapeRef.new(shape: QueryFilterValueList, location_name: "Values"))
@@ -263,6 +400,15 @@ module Aws::CloudWatchRUM
 
     UpdateAppMonitorResponse.struct_class = Types::UpdateAppMonitorResponse
 
+    UpdateRumMetricDefinitionRequest.add_member(:app_monitor_name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "AppMonitorName"))
+    UpdateRumMetricDefinitionRequest.add_member(:destination, Shapes::ShapeRef.new(shape: MetricDestination, required: true, location_name: "Destination"))
+    UpdateRumMetricDefinitionRequest.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DestinationArn, location_name: "DestinationArn"))
+    UpdateRumMetricDefinitionRequest.add_member(:metric_definition, Shapes::ShapeRef.new(shape: MetricDefinitionRequest, required: true, location_name: "MetricDefinition"))
+    UpdateRumMetricDefinitionRequest.add_member(:metric_definition_id, Shapes::ShapeRef.new(shape: MetricDefinitionId, required: true, location_name: "MetricDefinitionId"))
+    UpdateRumMetricDefinitionRequest.struct_class = Types::UpdateRumMetricDefinitionRequest
+
+    UpdateRumMetricDefinitionResponse.struct_class = Types::UpdateRumMetricDefinitionResponse
+
     UserDetails.add_member(:session_id, Shapes::ShapeRef.new(shape: String, location_name: "sessionId"))
     UserDetails.add_member(:user_id, Shapes::ShapeRef.new(shape: String, location_name: "userId"))
     UserDetails.struct_class = Types::UserDetails
@@ -288,6 +434,53 @@ module Aws::CloudWatchRUM
         "uid" => "rum-2018-05-10",
       }
 
+      api.add_operation(:batch_create_rum_metric_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchCreateRumMetricDefinitions"
+        o.http_method = "POST"
+        o.http_request_uri = "/rummetrics/{AppMonitorName}/metrics"
+        o.input = Shapes::ShapeRef.new(shape: BatchCreateRumMetricDefinitionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchCreateRumMetricDefinitionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:batch_delete_rum_metric_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDeleteRumMetricDefinitions"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/rummetrics/{AppMonitorName}/metrics"
+        o.input = Shapes::ShapeRef.new(shape: BatchDeleteRumMetricDefinitionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDeleteRumMetricDefinitionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:batch_get_rum_metric_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetRumMetricDefinitions"
+        o.http_method = "GET"
+        o.http_request_uri = "/rummetrics/{AppMonitorName}/metrics"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetRumMetricDefinitionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetRumMetricDefinitionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:create_app_monitor, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAppMonitor"
         o.http_method = "POST"
@@ -296,6 +489,7 @@ module Aws::CloudWatchRUM
         o.output = Shapes::ShapeRef.new(shape: CreateAppMonitorResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -308,6 +502,20 @@ module Aws::CloudWatchRUM
         o.http_request_uri = "/appmonitor/{Name}"
         o.input = Shapes::ShapeRef.new(shape: DeleteAppMonitorRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAppMonitorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_rum_metrics_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRumMetricsDestination"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/rummetrics/{AppMonitorName}/metricsdestination"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRumMetricsDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRumMetricsDestinationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -366,6 +574,24 @@ module Aws::CloudWatchRUM
         )
       end)
 
+      api.add_operation(:list_rum_metrics_destinations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRumMetricsDestinations"
+        o.http_method = "GET"
+        o.http_request_uri = "/rummetrics/{AppMonitorName}/metricsdestination"
+        o.input = Shapes::ShapeRef.new(shape: ListRumMetricsDestinationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRumMetricsDestinationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -386,6 +612,20 @@ module Aws::CloudWatchRUM
         }
         o.input = Shapes::ShapeRef.new(shape: PutRumEventsRequest)
         o.output = Shapes::ShapeRef.new(shape: PutRumEventsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:put_rum_metrics_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutRumMetricsDestination"
+        o.http_method = "POST"
+        o.http_request_uri = "/rummetrics/{AppMonitorName}/metricsdestination"
+        o.input = Shapes::ShapeRef.new(shape: PutRumMetricsDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutRumMetricsDestinationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -422,6 +662,21 @@ module Aws::CloudWatchRUM
         o.input = Shapes::ShapeRef.new(shape: UpdateAppMonitorRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAppMonitorResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_rum_metric_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRumMetricDefinition"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/rummetrics/{AppMonitorName}/metrics"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRumMetricDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRumMetricDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

@@ -421,6 +421,69 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
+    # Add endpoints to an endpoint group. The `AddEndpoints` API operation
+    # is the recommended option for adding endpoints. The alternative
+    # options are to add endpoints when you create an endpoint group (with
+    # the [CreateEndpointGroup][1] API) or when you update an endpoint group
+    # (with the [UpdateEndpointGroup][2] API).
+    #
+    # There are two advantages to using `AddEndpoints` to add endpoints:
+    #
+    # * It's faster, because Global Accelerator only has to resolve the new
+    #   endpoints that you're adding.
+    #
+    # * It's more convenient, because you don't need to specify all of the
+    #   current endpoints that are already in the endpoint group in addition
+    #   to the new endpoints that you want to add.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_CreateEndpointGroup.html
+    # [2]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_UpdateEndpointGroup.html
+    #
+    # @option params [required, Array<Types::EndpointConfiguration>] :endpoint_configurations
+    #   The list of endpoint objects.
+    #
+    # @option params [required, String] :endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group.
+    #
+    # @return [Types::AddEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddEndpointsResponse#endpoint_descriptions #endpoint_descriptions} => Array&lt;Types::EndpointDescription&gt;
+    #   * {Types::AddEndpointsResponse#endpoint_group_arn #endpoint_group_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_endpoints({
+    #     endpoint_configurations: [ # required
+    #       {
+    #         endpoint_id: "GenericString",
+    #         weight: 1,
+    #         client_ip_preservation_enabled: false,
+    #       },
+    #     ],
+    #     endpoint_group_arn: "GenericString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_descriptions #=> Array
+    #   resp.endpoint_descriptions[0].endpoint_id #=> String
+    #   resp.endpoint_descriptions[0].weight #=> Integer
+    #   resp.endpoint_descriptions[0].health_state #=> String, one of "INITIAL", "HEALTHY", "UNHEALTHY"
+    #   resp.endpoint_descriptions[0].health_reason #=> String
+    #   resp.endpoint_descriptions[0].client_ip_preservation_enabled #=> Boolean
+    #   resp.endpoint_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AddEndpoints AWS API Documentation
+    #
+    # @overload add_endpoints(params = {})
+    # @param [Hash] params ({})
+    def add_endpoints(params = {}, options = {})
+      req = build_request(:add_endpoints, params)
+      req.send_request(options)
+    end
+
     # Advertises an IPv4 address range that is provisioned for use with your
     # Amazon Web Services resources through bring your own IP addresses
     # (BYOIP). It can take a few minutes before traffic to the specified
@@ -2325,6 +2388,57 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
+    # Remove endpoints from an endpoint group.
+    #
+    # The `RemoveEndpoints` API operation is the recommended option for
+    # removing endpoints. The alternative is to remove endpoints by updating
+    # an endpoint group by using the [UpdateEndpointGroup][1] API operation.
+    # There are two advantages to using `AddEndpoints` to remove endpoints
+    # instead:
+    #
+    # * It's more convenient, because you only need to specify the
+    #   endpoints that you want to remove. With the `UpdateEndpointGroup`
+    #   API operation, you must specify all of the endpoints in the endpoint
+    #   group except the ones that you want to remove from the group.
+    #
+    # * It's faster, because Global Accelerator doesn't need to resolve
+    #   any endpoints. With the `UpdateEndpointGroup` API operation, Global
+    #   Accelerator must resolve all of the endpoints that remain in the
+    #   group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_UpdateEndpointGroup.html
+    #
+    # @option params [required, Array<Types::EndpointIdentifier>] :endpoint_identifiers
+    #   The identifiers of the endpoints that you want to remove.
+    #
+    # @option params [required, String] :endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_endpoints({
+    #     endpoint_identifiers: [ # required
+    #       {
+    #         endpoint_id: "GenericString", # required
+    #         client_ip_preservation_enabled: false,
+    #       },
+    #     ],
+    #     endpoint_group_arn: "GenericString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/RemoveEndpoints AWS API Documentation
+    #
+    # @overload remove_endpoints(params = {})
+    # @param [Hash] params ({})
+    def remove_endpoints(params = {}, options = {})
+      req = build_request(:remove_endpoints, params)
+      req.send_request(options)
+    end
+
     # Add tags to an accelerator resource.
     #
     # For more information, see [Tagging in Global Accelerator][1] in the
@@ -2953,7 +3067,7 @@ module Aws::GlobalAccelerator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

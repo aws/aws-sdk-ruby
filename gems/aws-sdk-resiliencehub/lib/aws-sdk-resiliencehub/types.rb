@@ -221,7 +221,7 @@ module Aws::ResilienceHub
     #   @return [Float]
     #
     # @!attribute [rw] status
-    #   The status of the action.
+    #   The status of the application.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -540,6 +540,10 @@ module Aws::ResilienceHub
     #   The current resiliency score for the application.
     #   @return [Float]
     #
+    # @!attribute [rw] status
+    #   The status of the application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/AppSummary AWS API Documentation
     #
     class AppSummary < Struct.new(
@@ -549,7 +553,8 @@ module Aws::ResilienceHub
       :creation_time,
       :description,
       :name,
-      :resiliency_score)
+      :resiliency_score,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3968,12 +3973,6 @@ module Aws::ResilienceHub
     # @!attribute [rw] policy
     #   The type of resiliency policy to be created, including the recovery
     #   time objective (RTO) and recovery point objective (RPO) in seconds.
-    #
-    #   <note markdown="1"> If you do not want to specify regional targets for a regional
-    #   policy, you must set the values of `rpoInSecs` and `rtoInSecs` to
-    #   `-1`.
-    #
-    #    </note>
     #   @return [Hash<String,Types::FailurePolicy>]
     #
     # @!attribute [rw] policy_arn

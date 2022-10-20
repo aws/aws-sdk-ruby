@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2022-10-20)
+------------------
+
+* Feature - This release adds information about the resources DevOps Guru is analyzing.
+
 1.25.0 (2022-09-30)
 ------------------
 
