@@ -3,9 +3,10 @@
 module Aws
   # @api private
   class SharedConfig
-    SSO_PROFILE_KEYS = %w[sso_start_url sso_region sso_account_id sso_role_name].freeze
+    SSO_CREDENTIAL_PROFILE_KEYS = %w[sso_account_id sso_role_name].freeze
+    SSO_PROFILE_KEYS = %w[sso_session sso_start_url sso_region sso_account_id sso_role_name].freeze # TODO: Do we need this one?
     SSO_TOKEN_PROFILE_KEYS = %w[sso_session].freeze
-    SSO_SESSION_KEYS = %w[sso_region]
+    SSO_SESSION_KEYS = %w[sso_region sso_start_url].freeze # TODO: Is this needed?
 
 
     # @return [String]
@@ -331,14 +332,41 @@ module Aws
     def sso_credentials_from_profile(cfg, profile)
       if @parsed_config &&
          (prof_config = cfg[profile]) &&
-         !(prof_config.keys & SSO_PROFILE_KEYS).empty?
+         !(prof_config.keys & SSO_CREDENTIAL_PROFILE_KEYS).empty?
+
+        if sso_session_name = prof_config['sso_session']
+          sso_session = cfg["sso-session #{sso_session_name}"]
+          unless sso_session
+            raise ArgumentError,
+                  "sso-session #{sso_session_name} must be defined in the config file." /
+                    "Referenced by profile #{profile}"
+          end
+          sso_region = sso_session['sso_region']
+          sso_start_url = sso_session['sso_start_url']
+
+          # validate sso_region and sso_start_url don't conflict if set on profile and session
+          if prof_config['sso_region'] &&  prof_config['sso_region'] != sso_region
+            raise ArgumentError,
+                  "sso-session #{sso_session_name}'s sso_region (#{sso_region}) " /
+                    "does not match the profile #{profile}'s sso_region (#{prof_config['sso_region']}'"
+          end
+          if prof_config['sso_start_url'] &&  prof_config['sso_start_url'] != sso_start_url
+            raise ArgumentError,
+                  "sso-session #{sso_session_name}'s sso_start_url (#{sso_start_url}) " /
+                    "does not match the profile #{profile}'s sso_start_url (#{prof_config['sso_start_url']}'"
+          end
+        else
+          sso_region = prof_config['sso_region']
+          sso_start_url = prof_config['sso_start_url']
+        end
 
         SSOCredentials.new(
-          sso_start_url: prof_config['sso_start_url'],
-          sso_region: prof_config['sso_region'],
           sso_account_id: prof_config['sso_account_id'],
-          sso_role_name: prof_config['sso_role_name']
-        )
+          sso_role_name: prof_config['sso_role_name'],
+          sso_session: prof_config['sso_session'],
+          sso_region: sso_region,
+          sso_start_url: prof_config['sso_start_url']
+          )
       end
     end
 

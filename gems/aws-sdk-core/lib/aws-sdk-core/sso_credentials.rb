@@ -74,8 +74,8 @@ module Aws
     #   with an instance of this object when
     #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
-
-      if (options.include?(:sso_session))
+      options.compact!
+      if (options['sso_session'])
         missing_keys = TOKEN_PROVIDER_REQUIRED_OPTS.select { |k| options[k].nil? }
         unless missing_keys.empty?
           raise ArgumentError, "Missing required keys: #{missing_keys}"
@@ -86,6 +86,7 @@ module Aws
 
         # if client has been passed, don't pass through to SSOTokenProvider
         @client = options.delete(:client)
+        options.delete(:sso_start_url)
         @token_provider = Aws::SSOTokenProvider.new(options.dup)
         @sso_session = options.delete(:sso_session)
         @sso_region = options.delete(:sso_region)
