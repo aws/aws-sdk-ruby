@@ -7553,6 +7553,11 @@ module Aws::SageMaker
     #             nearest_model_name: "String",
     #             supported_instance_types: ["String"],
     #           },
+    #           endpoints: [
+    #             {
+    #               endpoint_name: "EndpointName", # required
+    #             },
+    #           ],
     #         },
     #         job_description: "RecommendationJobDescription",
     #         stopping_conditions: {
@@ -15535,6 +15540,11 @@ module Aws::SageMaker
     #   The recommendations made by Inference Recommender.
     #   @return [Array<Types::InferenceRecommendation>]
     #
+    # @!attribute [rw] endpoint_performances
+    #   The performance results from running an Inference Recommender job on
+    #   an existing endpoint.
+    #   @return [Array<Types::EndpointPerformance>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeInferenceRecommendationsJobResponse AWS API Documentation
     #
     class DescribeInferenceRecommendationsJobResponse < Struct.new(
@@ -15550,7 +15560,8 @@ module Aws::SageMaker
       :failure_reason,
       :input_config,
       :stopping_conditions,
-      :inference_recommendations)
+      :inference_recommendations,
+      :endpoint_performances)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19451,6 +19462,28 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Details about a customer endpoint that was compared in an Inference
+    # Recommender job.
+    #
+    # @note When making an API call, you may pass EndpointInfo
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_name: "EndpointName", # required
+    #       }
+    #
+    # @!attribute [rw] endpoint_name
+    #   The name of a customer's endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointInfo AWS API Documentation
+    #
+    class EndpointInfo < Struct.new(
+      :endpoint_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input object for the endpoint
     #
     # @note When making an API call, you may pass EndpointInput
@@ -19615,6 +19648,27 @@ module Aws::SageMaker
       :variant_name,
       :instance_type,
       :initial_instance_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The performance results from running an Inference Recommender job on
+    # an existing endpoint.
+    #
+    # @!attribute [rw] metrics
+    #   The metrics for an existing endpoint.
+    #   @return [Types::InferenceMetrics]
+    #
+    # @!attribute [rw] endpoint_info
+    #   Details about a customer endpoint that was compared in an Inference
+    #   Recommender job.
+    #   @return [Types::EndpointInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointPerformance AWS API Documentation
+    #
+    class EndpointPerformance < Struct.new(
+      :metrics,
+      :endpoint_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23570,6 +23624,27 @@ module Aws::SageMaker
     #
     class InferenceExecutionConfig < Struct.new(
       :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metrics for an existing endpoint compared in an Inference
+    # Recommender job.
+    #
+    # @!attribute [rw] max_invocations
+    #   The expected maximum number of requests per minute for the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] model_latency
+    #   The expected model latency at maximum invocations per minute for the
+    #   instance.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceMetrics AWS API Documentation
+    #
+    class InferenceMetrics < Struct.new(
+      :max_invocations,
+      :model_latency)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36889,6 +36964,11 @@ module Aws::SageMaker
     #           nearest_model_name: "String",
     #           supported_instance_types: ["String"],
     #         },
+    #         endpoints: [
+    #           {
+    #             endpoint_name: "EndpointName", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] model_package_version_arn
@@ -36957,6 +37037,11 @@ module Aws::SageMaker
     #   fields in the model package.
     #   @return [Types::RecommendationJobContainerConfig]
     #
+    # @!attribute [rw] endpoints
+    #   Existing customer endpoints on which to run an Inference Recommender
+    #   job.
+    #   @return [Array<Types::EndpointInfo>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobInputConfig AWS API Documentation
     #
     class RecommendationJobInputConfig < Struct.new(
@@ -36966,7 +37051,8 @@ module Aws::SageMaker
       :resource_limit,
       :endpoint_configurations,
       :volume_kms_key_id,
-      :container_config)
+      :container_config,
+      :endpoints)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41021,9 +41107,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] instance_count
-    #   The number of ML compute instances to use in the transform job. For
-    #   distributed transform jobs, specify a value greater than 1. The
-    #   default value is `1`.
+    #   The number of ML compute instances to use in the transform job. The
+    #   default value is `1`, and the maximum is `100`. For distributed
+    #   transform jobs, specify a value greater than `1`.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2022-10-20)
+------------------
+
+* Feature - Global Accelerator now supports AddEndpoints and RemoveEndpoints operations for standard endpoint groups.
+
 1.40.0 (2022-07-27)
 ------------------
 

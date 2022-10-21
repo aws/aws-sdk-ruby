@@ -392,11 +392,17 @@ module Aws::DevOpsGuru
     #   insights.
     #   @return [Types::InsightHealth]
     #
+    # @!attribute [rw] analyzed_resource_count
+    #   Number of resources that DevOps Guru is monitoring in your account
+    #   that are specified by an Amazon Web Services CloudFormation stack.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CloudFormationHealth AWS API Documentation
     #
     class CloudFormationHealth < Struct.new(
       :stack_name,
-      :insight)
+      :insight,
+      :analyzed_resource_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -678,13 +684,19 @@ module Aws::DevOpsGuru
     #   the current Amazon Web Services account in the last hour.
     #   @return [Integer]
     #
+    # @!attribute [rw] analyzed_resource_count
+    #   Number of resources that DevOps Guru is monitoring in your Amazon
+    #   Web Services account.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAccountHealthResponse AWS API Documentation
     #
     class DescribeAccountHealthResponse < Struct.new(
       :open_reactive_insights,
       :open_proactive_insights,
       :metrics_analyzed,
-      :resource_hours)
+      :resource_hours,
+      :analyzed_resource_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2132,7 +2144,7 @@ module Aws::DevOpsGuru
     #
     #       {
     #         resource_permission: "FULL_PERMISSION", # required, accepts FULL_PERMISSION, MISSING_PERMISSION
-    #         resource_type_filters: ["LOG_GROUPS"], # required, accepts LOG_GROUPS
+    #         resource_type_filters: ["LOG_GROUPS"], # required, accepts LOG_GROUPS, CLOUDFRONT_DISTRIBUTION, DYNAMODB_TABLE, EC2_NAT_GATEWAY, ECS_CLUSTER, ECS_SERVICE, EKS_CLUSTER, ELASTIC_BEANSTALK_ENVIRONMENT, ELASTIC_LOAD_BALANCER_LOAD_BALANCER, ELASTIC_LOAD_BALANCING_V2_LOAD_BALANCER, ELASTIC_LOAD_BALANCING_V2_TARGET_GROUP, ELASTICACHE_CACHE_CLUSTER, ELASTICSEARCH_DOMAIN, KINESIS_STREAM, LAMBDA_FUNCTION, OPEN_SEARCH_SERVICE_DOMAIN, RDS_DB_INSTANCE, RDS_DB_CLUSTER, REDSHIFT_CLUSTER, ROUTE53_HOSTED_ZONE, ROUTE53_HEALTH_CHECK, S3_BUCKET, SAGEMAKER_ENDPOINT, SNS_TOPIC, SQS_QUEUE, STEP_FUNCTIONS_ACTIVITY, STEP_FUNCTIONS_STATE_MACHINE
     #       }
     #
     # @!attribute [rw] resource_permission
@@ -2156,9 +2168,9 @@ module Aws::DevOpsGuru
     #   data as a hash:
     #
     #       {
-    #         filters: { # required
+    #         filters: {
     #           resource_permission: "FULL_PERMISSION", # required, accepts FULL_PERMISSION, MISSING_PERMISSION
-    #           resource_type_filters: ["LOG_GROUPS"], # required, accepts LOG_GROUPS
+    #           resource_type_filters: ["LOG_GROUPS"], # required, accepts LOG_GROUPS, CLOUDFRONT_DISTRIBUTION, DYNAMODB_TABLE, EC2_NAT_GATEWAY, ECS_CLUSTER, ECS_SERVICE, EKS_CLUSTER, ELASTIC_BEANSTALK_ENVIRONMENT, ELASTIC_LOAD_BALANCER_LOAD_BALANCER, ELASTIC_LOAD_BALANCING_V2_LOAD_BALANCER, ELASTIC_LOAD_BALANCING_V2_TARGET_GROUP, ELASTICACHE_CACHE_CLUSTER, ELASTICSEARCH_DOMAIN, KINESIS_STREAM, LAMBDA_FUNCTION, OPEN_SEARCH_SERVICE_DOMAIN, RDS_DB_INSTANCE, RDS_DB_CLUSTER, REDSHIFT_CLUSTER, ROUTE53_HOSTED_ZONE, ROUTE53_HEALTH_CHECK, S3_BUCKET, SAGEMAKER_ENDPOINT, SNS_TOPIC, SQS_QUEUE, STEP_FUNCTIONS_ACTIVITY, STEP_FUNCTIONS_STATE_MACHINE
     #         },
     #         max_results: 1,
     #         next_token: "UuidNextToken",
@@ -2511,12 +2523,29 @@ module Aws::DevOpsGuru
     #   The permission status of a resource.
     #   @return [String]
     #
+    # @!attribute [rw] last_updated
+    #   The time at which DevOps Guru last updated this resource.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resource_collection
+    #   A collection of Amazon Web Services resources supported by DevOps
+    #   Guru. The two types of Amazon Web Services resource collections
+    #   supported are Amazon Web Services CloudFormation stacks and Amazon
+    #   Web Services resources that contain the same Amazon Web Services
+    #   tag. DevOps Guru can be configured to analyze the Amazon Web
+    #   Services resources that are defined in the stacks or that are tagged
+    #   using the same tag *key*. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
+    #   @return [Types::ResourceCollection]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/MonitoredResourceIdentifier AWS API Documentation
     #
     class MonitoredResourceIdentifier < Struct.new(
       :monitored_resource_name,
       :type,
-      :resource_permission)
+      :resource_permission,
+      :last_updated,
+      :resource_collection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4682,11 +4711,17 @@ module Aws::DevOpsGuru
     #   and reactive insights for this service.
     #   @return [Types::ServiceInsightHealth]
     #
+    # @!attribute [rw] analyzed_resource_count
+    #   Number of resources that DevOps Guru is monitoring in an analyzed
+    #   Amazon Web Services service.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ServiceHealth AWS API Documentation
     #
     class ServiceHealth < Struct.new(
       :service_name,
-      :insight)
+      :insight,
+      :analyzed_resource_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5148,12 +5183,18 @@ module Aws::DevOpsGuru
     #   the Mean Time to Recover (MTTR) of closed insights.
     #   @return [Types::InsightHealth]
     #
+    # @!attribute [rw] analyzed_resource_count
+    #   Number of resources that DevOps Guru is monitoring in your account
+    #   that are specified by an Amazon Web Services tag.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/TagHealth AWS API Documentation
     #
     class TagHealth < Struct.new(
       :app_boundary_key,
       :tag_value,
-      :insight)
+      :insight,
+      :analyzed_resource_count)
       SENSITIVE = []
       include Aws::Structure
     end

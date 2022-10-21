@@ -3617,6 +3617,11 @@ module Aws::SageMaker
     #         nearest_model_name: "String",
     #         supported_instance_types: ["String"],
     #       },
+    #       endpoints: [
+    #         {
+    #           endpoint_name: "EndpointName", # required
+    #         },
+    #       ],
     #     },
     #     job_description: "RecommendationJobDescription",
     #     stopping_conditions: {
@@ -10331,6 +10336,7 @@ module Aws::SageMaker
     #   * {Types::DescribeInferenceRecommendationsJobResponse#input_config #input_config} => Types::RecommendationJobInputConfig
     #   * {Types::DescribeInferenceRecommendationsJobResponse#stopping_conditions #stopping_conditions} => Types::RecommendationJobStoppingConditions
     #   * {Types::DescribeInferenceRecommendationsJobResponse#inference_recommendations #inference_recommendations} => Array&lt;Types::InferenceRecommendation&gt;
+    #   * {Types::DescribeInferenceRecommendationsJobResponse#endpoint_performances #endpoint_performances} => Array&lt;Types::EndpointPerformance&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -10377,6 +10383,8 @@ module Aws::SageMaker
     #   resp.input_config.container_config.nearest_model_name #=> String
     #   resp.input_config.container_config.supported_instance_types #=> Array
     #   resp.input_config.container_config.supported_instance_types[0] #=> String
+    #   resp.input_config.endpoints #=> Array
+    #   resp.input_config.endpoints[0].endpoint_name #=> String
     #   resp.stopping_conditions.max_invocations #=> Integer
     #   resp.stopping_conditions.model_latency_thresholds #=> Array
     #   resp.stopping_conditions.model_latency_thresholds[0].percentile #=> String
@@ -10395,6 +10403,10 @@ module Aws::SageMaker
     #   resp.inference_recommendations[0].model_configuration.environment_parameters[0].key #=> String
     #   resp.inference_recommendations[0].model_configuration.environment_parameters[0].value_type #=> String
     #   resp.inference_recommendations[0].model_configuration.environment_parameters[0].value #=> String
+    #   resp.endpoint_performances #=> Array
+    #   resp.endpoint_performances[0].metrics.max_invocations #=> Integer
+    #   resp.endpoint_performances[0].metrics.model_latency #=> Integer
+    #   resp.endpoint_performances[0].endpoint_info.endpoint_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeInferenceRecommendationsJob AWS API Documentation
     #
@@ -20975,7 +20987,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.145.0'
+      context[:gem_version] = '1.146.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

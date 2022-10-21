@@ -52,12 +52,12 @@ module Aws::GlobalAccelerator
     #   a1234567890abcdef.awsglobalaccelerator.com.
     #
     #   If you have a dual-stack accelerator, you also have a second DNS
-    #   name, DualStackDnsName, that points to both the A record and the
-    #   AAAA record for all four static addresses for the accelerator (two
-    #   IPv4 addresses and two IPv6 addresses).
+    #   name, `DualStackDnsName`, that points to both the A record and the
+    #   AAAA record for all four static addresses for the accelerator: two
+    #   IPv4 addresses and two IPv6 addresses.
     #
     #   For more information about the default DNS name, see [ Support for
-    #   DNS Addressing in Global Accelerator][1] in the *Global Accelerator
+    #   DNS addressing in Global Accelerator][1] in the *Global Accelerator
     #   Developer Guide*.
     #
     #
@@ -87,10 +87,10 @@ module Aws::GlobalAccelerator
     #   followed by .dualstack.awsglobalaccelerator.com. For example:
     #   a1234567890abcdef.dualstack.awsglobalaccelerator.com.
     #
-    #   Note: Global Accelerator also assigns a default DNS name, DnsName,
+    #   Note: Global Accelerator also assigns a default DNS name, `DnsName`,
     #   to your accelerator that points just to the static IPv4 addresses.
     #
-    #   For more information, see [ Support for DNS Addressing in Global
+    #   For more information, see [ Support for DNS addressing in Global
     #   Accelerator][1] in the *Global Accelerator Developer Guide*.
     #
     #
@@ -271,6 +271,54 @@ module Aws::GlobalAccelerator
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AddCustomRoutingEndpointsResponse AWS API Documentation
     #
     class AddCustomRoutingEndpointsResponse < Struct.new(
+      :endpoint_descriptions,
+      :endpoint_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AddEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_configurations: [ # required
+    #           {
+    #             endpoint_id: "GenericString",
+    #             weight: 1,
+    #             client_ip_preservation_enabled: false,
+    #           },
+    #         ],
+    #         endpoint_group_arn: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] endpoint_configurations
+    #   The list of endpoint objects.
+    #   @return [Array<Types::EndpointConfiguration>]
+    #
+    # @!attribute [rw] endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AddEndpointsRequest AWS API Documentation
+    #
+    class AddEndpointsRequest < Struct.new(
+      :endpoint_configurations,
+      :endpoint_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_descriptions
+    #   The list of endpoint objects.
+    #   @return [Array<Types::EndpointDescription>]
+    #
+    # @!attribute [rw] endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AddEndpointsResponse AWS API Documentation
+    #
+    class AddEndpointsResponse < Struct.new(
       :endpoint_descriptions,
       :endpoint_group_arn)
       SENSITIVE = []
@@ -1183,12 +1231,12 @@ module Aws::GlobalAccelerator
     #   a1234567890abcdef.awsglobalaccelerator.com.
     #
     #   If you have a dual-stack accelerator, you also have a second DNS
-    #   name, DualStackDnsName, that points to both the A record and the
-    #   AAAA record for all four static addresses for the accelerator (two
-    #   IPv4 addresses and two IPv6 addresses).
+    #   name, `DualStackDnsName`, that points to both the A record and the
+    #   AAAA record for all four static addresses for the accelerator: two
+    #   IPv4 addresses and two IPv6 addresses.
     #
     #   For more information about the default DNS name, see [ Support for
-    #   DNS Addressing in Global Accelerator][1] in the *Global Accelerator
+    #   DNS addressing in Global Accelerator][1] in the *Global Accelerator
     #   Developer Guide*.
     #
     #
@@ -2216,6 +2264,46 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # A complex type for an endpoint. Specifies information about the
+    # endpoint to remove from the endpoint group.
+    #
+    # @note When making an API call, you may pass EndpointIdentifier
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_id: "GenericString", # required
+    #         client_ip_preservation_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] endpoint_id
+    #   An ID for the endpoint. If the endpoint is a Network Load Balancer
+    #   or Application Load Balancer, this is the Amazon Resource Name (ARN)
+    #   of the resource. If the endpoint is an Elastic IP address, this is
+    #   the Elastic IP address allocation ID. For Amazon EC2 instances, this
+    #   is the EC2 instance ID.
+    #
+    #   An Application Load Balancer can be either internal or
+    #   internet-facing.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_ip_preservation_enabled
+    #   Indicates whether client IP address preservation is enabled for an
+    #   endpoint. The value is true or false.
+    #
+    #   If the value is set to true, the client's IP address is preserved
+    #   in the `X-Forwarded-For` request header as traffic travels to
+    #   applications on the endpoint fronted by the accelerator.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointIdentifier AWS API Documentation
+    #
+    class EndpointIdentifier < Struct.new(
+      :endpoint_id,
+      :client_ip_preservation_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The endpoint that you specified doesn't exist.
     #
     # @!attribute [rw] message
@@ -3079,6 +3167,36 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RemoveEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_identifiers: [ # required
+    #           {
+    #             endpoint_id: "GenericString", # required
+    #             client_ip_preservation_enabled: false,
+    #           },
+    #         ],
+    #         endpoint_group_arn: "GenericString", # required
+    #       }
+    #
+    # @!attribute [rw] endpoint_identifiers
+    #   The identifiers of the endpoints that you want to remove.
+    #   @return [Array<Types::EndpointIdentifier>]
+    #
+    # @!attribute [rw] endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/RemoveEndpointsRequest AWS API Documentation
+    #
+    class RemoveEndpointsRequest < Struct.new(
+      :endpoint_identifiers,
+      :endpoint_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An IP address/port combination.
     #
     # @!attribute [rw] ip_address
@@ -3160,6 +3278,20 @@ module Aws::GlobalAccelerator
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # There's already a transaction in progress. Another transaction can't
+    # be processed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/TransactionInProgressException AWS API Documentation
+    #
+    class TransactionInProgressException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:

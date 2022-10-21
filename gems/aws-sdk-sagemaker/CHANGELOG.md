@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.146.0 (2022-10-21)
+------------------
+
+* Feature - CreateInferenceRecommenderjob API now supports passing endpoint details directly, that will help customers to identify the max invocation and max latency they can achieve for their model and the associated endpoint along with getting recommendations on other instances.
+
 1.145.0 (2022-10-18)
 ------------------
 

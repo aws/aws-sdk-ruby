@@ -309,6 +309,7 @@ module Aws::ResilienceHub
     AppSummary.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
     AppSummary.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "name"))
     AppSummary.add_member(:resiliency_score, Shapes::ShapeRef.new(shape: Double, location_name: "resiliencyScore"))
+    AppSummary.add_member(:status, Shapes::ShapeRef.new(shape: AppStatusType, location_name: "status"))
     AppSummary.struct_class = Types::AppSummary
 
     AppSummaryList.member = Shapes::ShapeRef.new(shape: AppSummary)

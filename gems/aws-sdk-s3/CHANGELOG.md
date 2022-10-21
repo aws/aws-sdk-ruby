@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2022-10-21)
+------------------
+
+* Feature - S3 on Outposts launches support for automatic bucket-style alias. You can use the automatic access point alias instead of an access point ARN for any object-level operation in an Outposts bucket.
+
 1.115.0 (2022-10-19)
 ------------------
 
