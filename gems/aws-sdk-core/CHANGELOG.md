@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.164.0 (2022-10-21)
+------------------
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
 3.163.0 (2022-10-20)
 ------------------
 
