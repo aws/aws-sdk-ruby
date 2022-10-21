@@ -75,7 +75,7 @@ module Aws
     #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
       options.compact!
-      if (options['sso_session'])
+      if (options[:sso_session])
         missing_keys = TOKEN_PROVIDER_REQUIRED_OPTS.select { |k| options[k].nil? }
         unless missing_keys.empty?
           raise ArgumentError, "Missing required keys: #{missing_keys}"

@@ -338,7 +338,7 @@ module Aws
           sso_session = cfg["sso-session #{sso_session_name}"]
           unless sso_session
             raise ArgumentError,
-                  "sso-session #{sso_session_name} must be defined in the config file." /
+                  "sso-session #{sso_session_name} must be defined in the config file. " \
                     "Referenced by profile #{profile}"
           end
           sso_region = sso_session['sso_region']
@@ -347,12 +347,12 @@ module Aws
           # validate sso_region and sso_start_url don't conflict if set on profile and session
           if prof_config['sso_region'] &&  prof_config['sso_region'] != sso_region
             raise ArgumentError,
-                  "sso-session #{sso_session_name}'s sso_region (#{sso_region}) " /
+                  "sso-session #{sso_session_name}'s sso_region (#{sso_region}) " \
                     "does not match the profile #{profile}'s sso_region (#{prof_config['sso_region']}'"
           end
           if prof_config['sso_start_url'] &&  prof_config['sso_start_url'] != sso_start_url
             raise ArgumentError,
-                  "sso-session #{sso_session_name}'s sso_start_url (#{sso_start_url}) " /
+                  "sso-session #{sso_session_name}'s sso_start_url (#{sso_start_url}) " \
                     "does not match the profile #{profile}'s sso_start_url (#{prof_config['sso_start_url']}'"
           end
         else
@@ -381,7 +381,7 @@ module Aws
         sso_session = cfg["sso-session #{sso_session_name}"]
         unless sso_session
           raise ArgumentError,
-                "sso-session #{sso_session_name} must be defined in the config file." /
+                "sso-session #{sso_session_name} must be defined in the config file." \
                   "Referenced by profile #{profile}"
         end
 
