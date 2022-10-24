@@ -188,19 +188,18 @@ module BuildTools
     api('S3Control') do |api|
       # handled by endpoints 2.0
       api['operations'].each do |_key, operation|
-        if operation['http'] && operation['http']['requestUri']
-          operation['http']['requestUri'].gsub!('/{Bucket}', '/')
-          operation['http']['requestUri'].gsub!('//', '/')
-        end
-
-        # removes host prefix trait and requiredness
-        # defensive - checks host perfix labels and removes only those from API
+        # removes accountId host prefix trait and requiredness
+        # defensive - checks host prefix labels and removes only those from API
         next unless operation['endpoint'] &&
-                    (host_prefix = operation['endpoint'].delete('hostPrefix'))
+                    (host_prefix = operation['endpoint']['hostPrefix'])
+                    host_prefix != '{AccountId}.'
+
+        operation['endpoint'].delete('hostPrefix')
 
         host_prefix.gsub(/\{.+?\}/) do |label|
           label = label.delete('{}')
           input_shape = api['shapes'][operation['input']['shape']]
+          input_shape['members'][label].delete('hostLabel')
           input_shape['required']&.delete(label)
         end
       end

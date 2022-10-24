@@ -701,7 +701,7 @@ module Aws::S3Control
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
           endpoint: endpoint,
-          account_id: nil,
+          account_id: context.params[:account_id],
           requires_account_id: true,
           outpost_id: nil,
           bucket: nil,
