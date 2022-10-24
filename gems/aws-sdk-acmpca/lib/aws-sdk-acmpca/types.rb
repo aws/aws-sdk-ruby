@@ -496,6 +496,15 @@ module Aws::ACMPCA
     #   region with the specified security standard."
     #   @return [String]
     #
+    # @!attribute [rw] usage_mode
+    #   Specifies whether the CA issues general-purpose certificates that
+    #   typically require a revocation mechanism, or short-lived
+    #   certificates that may optionally omit revocation because they expire
+    #   quickly. Short-lived certificate validity is limited to seven days.
+    #
+    #   The default value is GENERAL\_PURPOSE.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CertificateAuthority AWS API Documentation
     #
     class CertificateAuthority < Struct.new(
@@ -512,7 +521,8 @@ module Aws::ACMPCA
       :certificate_authority_configuration,
       :revocation_configuration,
       :restorable_until,
-      :key_storage_security_standard)
+      :key_storage_security_standard,
+      :usage_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -844,6 +854,7 @@ module Aws::ACMPCA
     #             value: "TagValue",
     #           },
     #         ],
+    #         usage_mode: "GENERAL_PURPOSE", # accepts GENERAL_PURPOSE, SHORT_LIVED_CERTIFICATE
     #       }
     #
     # @!attribute [rw] certificate_authority_configuration
@@ -913,6 +924,15 @@ module Aws::ACMPCA
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] usage_mode
+    #   Specifies whether the CA issues general-purpose certificates that
+    #   typically require a revocation mechanism, or short-lived
+    #   certificates that may optionally omit revocation because they expire
+    #   quickly. Short-lived certificate validity is limited to seven days.
+    #
+    #   The default value is GENERAL\_PURPOSE.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CreateCertificateAuthorityRequest AWS API Documentation
     #
     class CreateCertificateAuthorityRequest < Struct.new(
@@ -921,7 +941,8 @@ module Aws::ACMPCA
       :certificate_authority_type,
       :idempotency_token,
       :key_storage_security_standard,
-      :tags)
+      :tags,
+      :usage_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1066,8 +1087,7 @@ module Aws::ACMPCA
     # `openssl crl -inform DER -text -in crl_path -noout`
     #
     # For more information, see [Planning a certificate revocation list
-    # (CRL)][2] in the *Certificate Manager Private Certificate Authority
-    # (PCA) User Guide*
+    # (CRL)][2] in the *Private Certificate Authority (PCA) User Guide*
     #
     #
     #
@@ -2812,8 +2832,8 @@ module Aws::ACMPCA
     #   as "http://" or "https://".
     #
     #   For more information, see [Customizing Online Certificate Status
-    #   Protocol (OCSP) ][1] in the *Certificate Manager Private Certificate
-    #   Authority (PCA) User Guide*.
+    #   Protocol (OCSP) ][1] in the *Private Certificate Authority (PCA)
+    #   User Guide*.
     #
     #
     #
@@ -3162,8 +3182,7 @@ module Aws::ACMPCA
     # about certificates as requested by clients, and a CRL contains an
     # updated list of certificates revoked by your CA. For more information,
     # see [RevokeCertificate][3] and [Setting up a certificate revocation
-    # method][4] in the *Certificate Manager Private Certificate Authority
-    # (PCA) User Guide*.
+    # method][4] in the *Private Certificate Authority (PCA) User Guide*.
     #
     #
     #
@@ -3463,7 +3482,7 @@ module Aws::ACMPCA
     #
     #
     #
-    # [1]: https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.5
+    # [1]: https://tools.ietf.org/html/rfc5280#section-4.1.2.5
     #
     # @note When making an API call, you may pass Validity
     #   data as a hash:

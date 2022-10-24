@@ -361,20 +361,20 @@ module Aws::DataSync
 
     # @!group API Operations
 
-    # Cancels execution of a task.
+    # Stops an DataSync task execution that's in progress. The transfer of
+    # some files are abruptly interrupted. File contents that're
+    # transferred to the destination might be incomplete or inconsistent
+    # with the source files.
     #
-    # When you cancel a task execution, the transfer of some files is
-    # abruptly interrupted. The contents of files that are transferred to
-    # the destination might be incomplete or inconsistent with the source
-    # files. However, if you start a new task execution on the same task and
-    # you allow the task execution to complete, file content on the
-    # destination is complete and consistent. This applies to other
-    # unexpected failures that interrupt a task execution. In all of these
-    # cases, DataSync successfully complete the transfer when you start the
-    # next task execution.
+    # However, if you start a new task execution using the same task and
+    # allow it to finish, file content on the destination will be complete
+    # and consistent. This applies to other unexpected failures that
+    # interrupt a task execution. In all of these cases, DataSync
+    # successfully completes the transfer when you start the next task
+    # execution.
     #
     # @option params [required, String] :task_execution_arn
-    #   The Amazon Resource Name (ARN) of the task execution to cancel.
+    #   The Amazon Resource Name (ARN) of the task execution to stop.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -393,13 +393,13 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Activates an DataSync agent that you have deployed on your host. The
-    # activation process associates your agent with your account. In the
-    # activation process, you specify information such as the Amazon Web
-    # Services Region that you want to activate the agent in. You activate
-    # the agent in the Amazon Web Services Region where your target
-    # locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created
-    # in this Amazon Web Services Region.
+    # Activates an DataSync agent that you have deployed in your storage
+    # environment. The activation process associates your agent with your
+    # account. In the activation process, you specify information such as
+    # the Amazon Web Services Region that you want to activate the agent in.
+    # You activate the agent in the Amazon Web Services Region where your
+    # target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are
+    # created in this Amazon Web Services Region.
     #
     # You can activate the agent in a VPC (virtual private cloud) or provide
     # the agent access to a VPC endpoint so you can run tasks without going
@@ -740,7 +740,18 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Creates an endpoint for an Amazon FSx for OpenZFS file system.
+    # Creates an endpoint for an Amazon FSx for OpenZFS file system that
+    # DataSync can access for a transfer. For more information, see
+    # [Creating a location for FSx for OpenZFS][1].
+    #
+    # <note markdown="1"> Request parameters related to `SMB` aren't supported with the
+    # `CreateLocationFsxOpenZfs` operation.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-openzfs-location.html
     #
     # @option params [required, String] :fsx_filesystem_arn
     #   The Amazon Resource Name (ARN) of the FSx for OpenZFS file system.
@@ -1181,6 +1192,15 @@ module Aws::DataSync
     #   add to the resource. Tags can help you manage, filter, and search for
     #   your resources. We recommend creating a name tag for your location.
     #
+    # @option params [String, StringIO, File] :server_certificate
+    #   Specifies a certificate to authenticate with an object storage system
+    #   that uses a private or self-signed certificate authority (CA). You
+    #   must specify a Base64-encoded `.pem` file (for example,
+    #   `file:///home/user/.ssh/storage_sys_certificate.pem`). The certificate
+    #   can be up to 32768 bytes (before Base64 encoding).
+    #
+    #   To use this parameter, configure `ServerProtocol` to `HTTPS`.
+    #
     # @return [Types::CreateLocationObjectStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLocationObjectStorageResponse#location_arn #location_arn} => String
@@ -1202,6 +1222,7 @@ module Aws::DataSync
     #         value: "TagValue",
     #       },
     #     ],
+    #     server_certificate: "data",
     #   })
     #
     # @example Response structure
@@ -1217,7 +1238,8 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Creates an endpoint for an Amazon S3 bucket.
+    # Creates an endpoint for an Amazon S3 bucket that DataSync can access
+    # for a transfer.
     #
     # For more information, see [Create an Amazon S3 location][1] in the
     # *DataSync User Guide*.
@@ -1714,8 +1736,8 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns metadata about an Amazon FSx for Lustre location, such as
-    # information about its path.
+    # Provides details about how an DataSync location for an Amazon FSx for
+    # Lustre file system is configured.
     #
     # @option params [required, String] :location_arn
     #   The Amazon Resource Name (ARN) of the FSx for Lustre location to
@@ -1753,6 +1775,11 @@ module Aws::DataSync
 
     # Provides details about how an DataSync location for an Amazon FSx for
     # NetApp ONTAP file system is configured.
+    #
+    # <note markdown="1"> If your location uses SMB, the `DescribeLocationFsxOntap` operation
+    # doesn't actually return a `Password`.
+    #
+    #  </note>
     #
     # @option params [required, String] :location_arn
     #   Specifies the Amazon Resource Name (ARN) of the FSx for ONTAP file
@@ -1798,8 +1825,13 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns metadata about an Amazon FSx for OpenZFS location, such as
-    # information about its path.
+    # Provides details about how an DataSync location for an Amazon FSx for
+    # OpenZFS file system is configured.
+    #
+    # <note markdown="1"> Response elements related to `SMB` aren't supported with the
+    # `DescribeLocationFsxOpenZfs` operation.
+    #
+    #  </note>
     #
     # @option params [required, String] :location_arn
     #   The Amazon Resource Name (ARN) of the FSx for OpenZFS location to
@@ -1991,6 +2023,7 @@ module Aws::DataSync
     #   * {Types::DescribeLocationObjectStorageResponse#server_protocol #server_protocol} => String
     #   * {Types::DescribeLocationObjectStorageResponse#agent_arns #agent_arns} => Array&lt;String&gt;
     #   * {Types::DescribeLocationObjectStorageResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeLocationObjectStorageResponse#server_certificate #server_certificate} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2008,6 +2041,7 @@ module Aws::DataSync
     #   resp.agent_arns #=> Array
     #   resp.agent_arns[0] #=> String
     #   resp.creation_time #=> Time
+    #   resp.server_certificate #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationObjectStorage AWS API Documentation
     #
@@ -2198,6 +2232,7 @@ module Aws::DataSync
     #   * {Types::DescribeTaskExecutionResponse#bytes_written #bytes_written} => Integer
     #   * {Types::DescribeTaskExecutionResponse#bytes_transferred #bytes_transferred} => Integer
     #   * {Types::DescribeTaskExecutionResponse#result #result} => Types::TaskExecutionResultDetail
+    #   * {Types::DescribeTaskExecutionResponse#bytes_compressed #bytes_compressed} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -2245,6 +2280,7 @@ module Aws::DataSync
     #   resp.result.verify_status #=> String, one of "PENDING", "SUCCESS", "ERROR"
     #   resp.result.error_code #=> String
     #   resp.result.error_detail #=> String
+    #   resp.bytes_compressed #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskExecution AWS API Documentation
     #
@@ -2848,48 +2884,56 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Updates some of the parameters of a previously created location for
-    # self-managed object storage server access. For information about
-    # creating a self-managed object storage location, see [Creating a
-    # location for object storage][1].
+    # Updates some parameters of an existing object storage location that
+    # DataSync accesses for a transfer. For information about creating a
+    # self-managed object storage location, see [Creating a location for
+    # object storage][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html
     #
     # @option params [required, String] :location_arn
-    #   The Amazon Resource Name (ARN) of the self-managed object storage
-    #   server location to be updated.
+    #   Specifies the ARN of the object storage system location that you're
+    #   updating.
     #
     # @option params [Integer] :server_port
-    #   The port that your self-managed object storage server accepts inbound
-    #   network traffic on. The server port is set by default to TCP 80 (HTTP)
-    #   or TCP 443 (HTTPS). You can specify a custom port if your self-managed
-    #   object storage server requires one.
+    #   Specifies the port that your object storage server accepts inbound
+    #   network traffic on (for example, port 443).
     #
     # @option params [String] :server_protocol
-    #   The protocol that the object storage server uses to communicate. Valid
-    #   values are `HTTP` or `HTTPS`.
+    #   Specifies the protocol that your object storage server uses to
+    #   communicate.
     #
     # @option params [String] :subdirectory
-    #   The subdirectory in the self-managed object storage server that is
-    #   used to read data from.
+    #   Specifies the object prefix for your object storage server. If this is
+    #   a source location, DataSync only copies objects with this prefix. If
+    #   this is a destination location, DataSync writes all objects with this
+    #   prefix.
     #
     # @option params [String] :access_key
-    #   Optional. The access key is used if credentials are required to access
-    #   the self-managed object storage server. If your object storage
-    #   requires a user name and password to authenticate, use `AccessKey` and
-    #   `SecretKey` to provide the user name and password, respectively.
+    #   Specifies the access key (for example, a user name) if credentials are
+    #   required to authenticate with the object storage server.
     #
     # @option params [String] :secret_key
-    #   Optional. The secret key is used if credentials are required to access
-    #   the self-managed object storage server. If your object storage
-    #   requires a user name and password to authenticate, use `AccessKey` and
-    #   `SecretKey` to provide the user name and password, respectively.
+    #   Specifies the secret key (for example, a password) if credentials are
+    #   required to authenticate with the object storage server.
     #
     # @option params [Array<String>] :agent_arns
-    #   The Amazon Resource Name (ARN) of the agents associated with the
-    #   self-managed object storage server location.
+    #   Specifies the Amazon Resource Names (ARNs) of the DataSync agents that
+    #   can securely connect with your location.
+    #
+    # @option params [String, StringIO, File] :server_certificate
+    #   Specifies a certificate to authenticate with an object storage system
+    #   that uses a private or self-signed certificate authority (CA). You
+    #   must specify a Base64-encoded `.pem` file (for example,
+    #   `file:///home/user/.ssh/storage_sys_certificate.pem`). The certificate
+    #   can be up to 32768 bytes (before Base64 encoding).
+    #
+    #   To use this parameter, configure `ServerProtocol` to `HTTPS`.
+    #
+    #   Updating the certificate doesn't interfere with tasks that you have
+    #   in progress.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2903,6 +2947,7 @@ module Aws::DataSync
     #     access_key: "ObjectStorageAccessKey",
     #     secret_key: "ObjectStorageSecretKey",
     #     agent_arns: ["AgentArn"],
+    #     server_certificate: "data",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationObjectStorage AWS API Documentation
@@ -3181,7 +3226,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
