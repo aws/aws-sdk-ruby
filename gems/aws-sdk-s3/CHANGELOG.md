@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Apply checksums to MultipartStreamUploader (#2769).
+
 1.116.0 (2022-10-21)
 ------------------
 
