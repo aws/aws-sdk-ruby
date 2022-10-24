@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2022-10-24)
+------------------
+
+* Feature - This release adds support for AWS Batch on Amazon EKS.
+
 1.62.0 (2022-05-18)
 ------------------
 

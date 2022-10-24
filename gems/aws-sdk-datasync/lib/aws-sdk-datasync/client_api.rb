@@ -153,6 +153,7 @@ module Aws::DataSync
     NfsVersion = Shapes::StringShape.new(name: 'NfsVersion')
     ObjectStorageAccessKey = Shapes::StringShape.new(name: 'ObjectStorageAccessKey')
     ObjectStorageBucketName = Shapes::StringShape.new(name: 'ObjectStorageBucketName')
+    ObjectStorageCertificate = Shapes::BlobShape.new(name: 'ObjectStorageCertificate')
     ObjectStorageSecretKey = Shapes::StringShape.new(name: 'ObjectStorageSecretKey')
     ObjectStorageServerPort = Shapes::IntegerShape.new(name: 'ObjectStorageServerPort')
     ObjectStorageServerProtocol = Shapes::StringShape.new(name: 'ObjectStorageServerProtocol')
@@ -347,6 +348,7 @@ module Aws::DataSync
     CreateLocationObjectStorageRequest.add_member(:secret_key, Shapes::ShapeRef.new(shape: ObjectStorageSecretKey, location_name: "SecretKey"))
     CreateLocationObjectStorageRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, required: true, location_name: "AgentArns"))
     CreateLocationObjectStorageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationObjectStorageRequest.add_member(:server_certificate, Shapes::ShapeRef.new(shape: ObjectStorageCertificate, location_name: "ServerCertificate"))
     CreateLocationObjectStorageRequest.struct_class = Types::CreateLocationObjectStorageRequest
 
     CreateLocationObjectStorageResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
@@ -508,6 +510,7 @@ module Aws::DataSync
     DescribeLocationObjectStorageResponse.add_member(:server_protocol, Shapes::ShapeRef.new(shape: ObjectStorageServerProtocol, location_name: "ServerProtocol"))
     DescribeLocationObjectStorageResponse.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
     DescribeLocationObjectStorageResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationObjectStorageResponse.add_member(:server_certificate, Shapes::ShapeRef.new(shape: ObjectStorageCertificate, location_name: "ServerCertificate"))
     DescribeLocationObjectStorageResponse.struct_class = Types::DescribeLocationObjectStorageResponse
 
     DescribeLocationS3Request.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
@@ -548,6 +551,7 @@ module Aws::DataSync
     DescribeTaskExecutionResponse.add_member(:bytes_written, Shapes::ShapeRef.new(shape: long, location_name: "BytesWritten"))
     DescribeTaskExecutionResponse.add_member(:bytes_transferred, Shapes::ShapeRef.new(shape: long, location_name: "BytesTransferred"))
     DescribeTaskExecutionResponse.add_member(:result, Shapes::ShapeRef.new(shape: TaskExecutionResultDetail, location_name: "Result"))
+    DescribeTaskExecutionResponse.add_member(:bytes_compressed, Shapes::ShapeRef.new(shape: long, location_name: "BytesCompressed"))
     DescribeTaskExecutionResponse.struct_class = Types::DescribeTaskExecutionResponse
 
     DescribeTaskRequest.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, required: true, location_name: "TaskArn"))
@@ -820,6 +824,7 @@ module Aws::DataSync
     UpdateLocationObjectStorageRequest.add_member(:access_key, Shapes::ShapeRef.new(shape: ObjectStorageAccessKey, location_name: "AccessKey"))
     UpdateLocationObjectStorageRequest.add_member(:secret_key, Shapes::ShapeRef.new(shape: ObjectStorageSecretKey, location_name: "SecretKey"))
     UpdateLocationObjectStorageRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
+    UpdateLocationObjectStorageRequest.add_member(:server_certificate, Shapes::ShapeRef.new(shape: ObjectStorageCertificate, location_name: "ServerCertificate"))
     UpdateLocationObjectStorageRequest.struct_class = Types::UpdateLocationObjectStorageRequest
 
     UpdateLocationObjectStorageResponse.struct_class = Types::UpdateLocationObjectStorageResponse

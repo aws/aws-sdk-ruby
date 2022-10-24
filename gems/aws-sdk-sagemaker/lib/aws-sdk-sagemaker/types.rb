@@ -23734,6 +23734,43 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A returned array object for the `Steps` response field in the
+    # [ListInferenceRecommendationsJobSteps][1] API command.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InferenceRecommendationsJobStep.html
+    #
+    # @!attribute [rw] step_type
+    #   The type of the subtask.
+    #
+    #   `BENCHMARK`\: Evaluate the performance of your model on different
+    #   instance types.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the Inference Recommender job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the benchmark.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_benchmark
+    #   The details for a specific benchmark.
+    #   @return [Types::RecommendationJobInferenceBenchmark]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceRecommendationsJobStep AWS API Documentation
+    #
+    class InferenceRecommendationsJobStep < Struct.new(
+      :step_type,
+      :job_name,
+      :status,
+      :inference_benchmark)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines how to perform inference generation after a training job is
     # run.
     #
@@ -27254,6 +27291,73 @@ module Aws::SageMaker
     #
     class ListImagesResponse < Struct.new(
       :images,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListInferenceRecommendationsJobStepsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "RecommendationJobName", # required
+    #         status: "PENDING", # accepts PENDING, IN_PROGRESS, COMPLETED, FAILED, STOPPING, STOPPED
+    #         step_type: "BENCHMARK", # accepts BENCHMARK
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   The name for the Inference Recommender job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A filter to return benchmarks of a specified status. If this field
+    #   is left empty, then all benchmarks are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_type
+    #   A filter to return details about the specified type of subtask.
+    #
+    #   `BENCHMARK`\: Evaluate the performance of your model on different
+    #   instance types.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token that you can specify to return more results from the list.
+    #   Specify this field if you have a token that was returned from a
+    #   previous request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceRecommendationsJobStepsRequest AWS API Documentation
+    #
+    class ListInferenceRecommendationsJobStepsRequest < Struct.new(
+      :job_name,
+      :status,
+      :step_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] steps
+    #   A list of all subtask details in Inference Recommender.
+    #   @return [Array<Types::InferenceRecommendationsJobStep>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that you can specify in your next request to return more
+    #   results from the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceRecommendationsJobStepsResponse AWS API Documentation
+    #
+    class ListInferenceRecommendationsJobStepsResponse < Struct.new(
+      :steps,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -36911,6 +37015,38 @@ module Aws::SageMaker
       :payload_config,
       :nearest_model_name,
       :supported_instance_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details for a specific benchmark from an Inference Recommender
+    # job.
+    #
+    # @!attribute [rw] metrics
+    #   The metrics of recommendations.
+    #   @return [Types::RecommendationMetrics]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   The endpoint configuration made by Inference Recommender during a
+    #   recommendation job.
+    #   @return [Types::EndpointOutputConfiguration]
+    #
+    # @!attribute [rw] model_configuration
+    #   Defines the model configuration. Includes the specification name and
+    #   environment parameters.
+    #   @return [Types::ModelConfiguration]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason why a benchmark failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobInferenceBenchmark AWS API Documentation
+    #
+    class RecommendationJobInferenceBenchmark < Struct.new(
+      :metrics,
+      :endpoint_configuration,
+      :model_configuration,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -76,6 +76,36 @@ module Aws::Batch
     EFSVolumeConfiguration = Shapes::StructureShape.new(name: 'EFSVolumeConfiguration')
     Ec2Configuration = Shapes::StructureShape.new(name: 'Ec2Configuration')
     Ec2ConfigurationList = Shapes::ListShape.new(name: 'Ec2ConfigurationList')
+    EksAttemptContainerDetail = Shapes::StructureShape.new(name: 'EksAttemptContainerDetail')
+    EksAttemptContainerDetails = Shapes::ListShape.new(name: 'EksAttemptContainerDetails')
+    EksAttemptDetail = Shapes::StructureShape.new(name: 'EksAttemptDetail')
+    EksAttemptDetails = Shapes::ListShape.new(name: 'EksAttemptDetails')
+    EksConfiguration = Shapes::StructureShape.new(name: 'EksConfiguration')
+    EksContainer = Shapes::StructureShape.new(name: 'EksContainer')
+    EksContainerDetail = Shapes::StructureShape.new(name: 'EksContainerDetail')
+    EksContainerDetails = Shapes::ListShape.new(name: 'EksContainerDetails')
+    EksContainerEnvironmentVariable = Shapes::StructureShape.new(name: 'EksContainerEnvironmentVariable')
+    EksContainerEnvironmentVariables = Shapes::ListShape.new(name: 'EksContainerEnvironmentVariables')
+    EksContainerOverride = Shapes::StructureShape.new(name: 'EksContainerOverride')
+    EksContainerOverrideList = Shapes::ListShape.new(name: 'EksContainerOverrideList')
+    EksContainerResourceRequirements = Shapes::StructureShape.new(name: 'EksContainerResourceRequirements')
+    EksContainerSecurityContext = Shapes::StructureShape.new(name: 'EksContainerSecurityContext')
+    EksContainerVolumeMount = Shapes::StructureShape.new(name: 'EksContainerVolumeMount')
+    EksContainerVolumeMounts = Shapes::ListShape.new(name: 'EksContainerVolumeMounts')
+    EksContainers = Shapes::ListShape.new(name: 'EksContainers')
+    EksEmptyDir = Shapes::StructureShape.new(name: 'EksEmptyDir')
+    EksHostPath = Shapes::StructureShape.new(name: 'EksHostPath')
+    EksLimits = Shapes::MapShape.new(name: 'EksLimits')
+    EksPodProperties = Shapes::StructureShape.new(name: 'EksPodProperties')
+    EksPodPropertiesDetail = Shapes::StructureShape.new(name: 'EksPodPropertiesDetail')
+    EksPodPropertiesOverride = Shapes::StructureShape.new(name: 'EksPodPropertiesOverride')
+    EksProperties = Shapes::StructureShape.new(name: 'EksProperties')
+    EksPropertiesDetail = Shapes::StructureShape.new(name: 'EksPropertiesDetail')
+    EksPropertiesOverride = Shapes::StructureShape.new(name: 'EksPropertiesOverride')
+    EksRequests = Shapes::MapShape.new(name: 'EksRequests')
+    EksSecret = Shapes::StructureShape.new(name: 'EksSecret')
+    EksVolume = Shapes::StructureShape.new(name: 'EksVolume')
+    EksVolumes = Shapes::ListShape.new(name: 'EksVolumes')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     EvaluateOnExit = Shapes::StructureShape.new(name: 'EvaluateOnExit')
     EvaluateOnExitList = Shapes::ListShape.new(name: 'EvaluateOnExitList')
@@ -104,6 +134,7 @@ module Aws::Batch
     JobTimeout = Shapes::StructureShape.new(name: 'JobTimeout')
     KeyValuePair = Shapes::StructureShape.new(name: 'KeyValuePair')
     KeyValuesPair = Shapes::StructureShape.new(name: 'KeyValuesPair')
+    KubernetesVersion = Shapes::StringShape.new(name: 'KubernetesVersion')
     LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
     LinuxParameters = Shapes::StructureShape.new(name: 'LinuxParameters')
     ListJobsFilterList = Shapes::ListShape.new(name: 'ListJobsFilterList')
@@ -130,9 +161,11 @@ module Aws::Batch
     NodePropertyOverrides = Shapes::ListShape.new(name: 'NodePropertyOverrides')
     NodeRangeProperties = Shapes::ListShape.new(name: 'NodeRangeProperties')
     NodeRangeProperty = Shapes::StructureShape.new(name: 'NodeRangeProperty')
+    OrchestrationType = Shapes::StringShape.new(name: 'OrchestrationType')
     ParametersMap = Shapes::MapShape.new(name: 'ParametersMap')
     PlatformCapability = Shapes::StringShape.new(name: 'PlatformCapability')
     PlatformCapabilityList = Shapes::ListShape.new(name: 'PlatformCapabilityList')
+    Quantity = Shapes::StringShape.new(name: 'Quantity')
     RegisterJobDefinitionRequest = Shapes::StructureShape.new(name: 'RegisterJobDefinitionRequest')
     RegisterJobDefinitionResponse = Shapes::StructureShape.new(name: 'RegisterJobDefinitionResponse')
     ResourceRequirement = Shapes::StructureShape.new(name: 'ResourceRequirement')
@@ -230,6 +263,9 @@ module Aws::Batch
     ComputeEnvironmentDetail.add_member(:compute_resources, Shapes::ShapeRef.new(shape: ComputeResource, location_name: "computeResources"))
     ComputeEnvironmentDetail.add_member(:service_role, Shapes::ShapeRef.new(shape: String, location_name: "serviceRole"))
     ComputeEnvironmentDetail.add_member(:update_policy, Shapes::ShapeRef.new(shape: UpdatePolicy, location_name: "updatePolicy"))
+    ComputeEnvironmentDetail.add_member(:eks_configuration, Shapes::ShapeRef.new(shape: EksConfiguration, location_name: "eksConfiguration"))
+    ComputeEnvironmentDetail.add_member(:container_orchestration_type, Shapes::ShapeRef.new(shape: OrchestrationType, location_name: "containerOrchestrationType"))
+    ComputeEnvironmentDetail.add_member(:uuid, Shapes::ShapeRef.new(shape: String, location_name: "uuid"))
     ComputeEnvironmentDetail.struct_class = Types::ComputeEnvironmentDetail
 
     ComputeEnvironmentDetailList.member = Shapes::ShapeRef.new(shape: ComputeEnvironmentDetail)
@@ -347,6 +383,7 @@ module Aws::Batch
     CreateComputeEnvironmentRequest.add_member(:compute_resources, Shapes::ShapeRef.new(shape: ComputeResource, location_name: "computeResources"))
     CreateComputeEnvironmentRequest.add_member(:service_role, Shapes::ShapeRef.new(shape: String, location_name: "serviceRole"))
     CreateComputeEnvironmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
+    CreateComputeEnvironmentRequest.add_member(:eks_configuration, Shapes::ShapeRef.new(shape: EksConfiguration, location_name: "eksConfiguration"))
     CreateComputeEnvironmentRequest.struct_class = Types::CreateComputeEnvironmentRequest
 
     CreateComputeEnvironmentResponse.add_member(:compute_environment_name, Shapes::ShapeRef.new(shape: String, location_name: "computeEnvironmentName"))
@@ -457,9 +494,144 @@ module Aws::Batch
 
     Ec2Configuration.add_member(:image_type, Shapes::ShapeRef.new(shape: ImageType, required: true, location_name: "imageType"))
     Ec2Configuration.add_member(:image_id_override, Shapes::ShapeRef.new(shape: ImageIdOverride, location_name: "imageIdOverride"))
+    Ec2Configuration.add_member(:image_kubernetes_version, Shapes::ShapeRef.new(shape: KubernetesVersion, location_name: "imageKubernetesVersion"))
     Ec2Configuration.struct_class = Types::Ec2Configuration
 
     Ec2ConfigurationList.member = Shapes::ShapeRef.new(shape: Ec2Configuration)
+
+    EksAttemptContainerDetail.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
+    EksAttemptContainerDetail.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    EksAttemptContainerDetail.struct_class = Types::EksAttemptContainerDetail
+
+    EksAttemptContainerDetails.member = Shapes::ShapeRef.new(shape: EksAttemptContainerDetail)
+
+    EksAttemptDetail.add_member(:containers, Shapes::ShapeRef.new(shape: EksAttemptContainerDetails, location_name: "containers"))
+    EksAttemptDetail.add_member(:pod_name, Shapes::ShapeRef.new(shape: String, location_name: "podName"))
+    EksAttemptDetail.add_member(:node_name, Shapes::ShapeRef.new(shape: String, location_name: "nodeName"))
+    EksAttemptDetail.add_member(:started_at, Shapes::ShapeRef.new(shape: Long, location_name: "startedAt"))
+    EksAttemptDetail.add_member(:stopped_at, Shapes::ShapeRef.new(shape: Long, location_name: "stoppedAt"))
+    EksAttemptDetail.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    EksAttemptDetail.struct_class = Types::EksAttemptDetail
+
+    EksAttemptDetails.member = Shapes::ShapeRef.new(shape: EksAttemptDetail)
+
+    EksConfiguration.add_member(:eks_cluster_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "eksClusterArn"))
+    EksConfiguration.add_member(:kubernetes_namespace, Shapes::ShapeRef.new(shape: String, required: true, location_name: "kubernetesNamespace"))
+    EksConfiguration.struct_class = Types::EksConfiguration
+
+    EksContainer.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    EksContainer.add_member(:image, Shapes::ShapeRef.new(shape: String, required: true, location_name: "image"))
+    EksContainer.add_member(:image_pull_policy, Shapes::ShapeRef.new(shape: String, location_name: "imagePullPolicy"))
+    EksContainer.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
+    EksContainer.add_member(:args, Shapes::ShapeRef.new(shape: StringList, location_name: "args"))
+    EksContainer.add_member(:env, Shapes::ShapeRef.new(shape: EksContainerEnvironmentVariables, location_name: "env"))
+    EksContainer.add_member(:resources, Shapes::ShapeRef.new(shape: EksContainerResourceRequirements, location_name: "resources"))
+    EksContainer.add_member(:volume_mounts, Shapes::ShapeRef.new(shape: EksContainerVolumeMounts, location_name: "volumeMounts"))
+    EksContainer.add_member(:security_context, Shapes::ShapeRef.new(shape: EksContainerSecurityContext, location_name: "securityContext"))
+    EksContainer.struct_class = Types::EksContainer
+
+    EksContainerDetail.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    EksContainerDetail.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
+    EksContainerDetail.add_member(:image_pull_policy, Shapes::ShapeRef.new(shape: String, location_name: "imagePullPolicy"))
+    EksContainerDetail.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
+    EksContainerDetail.add_member(:args, Shapes::ShapeRef.new(shape: StringList, location_name: "args"))
+    EksContainerDetail.add_member(:env, Shapes::ShapeRef.new(shape: EksContainerEnvironmentVariables, location_name: "env"))
+    EksContainerDetail.add_member(:resources, Shapes::ShapeRef.new(shape: EksContainerResourceRequirements, location_name: "resources"))
+    EksContainerDetail.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
+    EksContainerDetail.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    EksContainerDetail.add_member(:volume_mounts, Shapes::ShapeRef.new(shape: EksContainerVolumeMounts, location_name: "volumeMounts"))
+    EksContainerDetail.add_member(:security_context, Shapes::ShapeRef.new(shape: EksContainerSecurityContext, location_name: "securityContext"))
+    EksContainerDetail.struct_class = Types::EksContainerDetail
+
+    EksContainerDetails.member = Shapes::ShapeRef.new(shape: EksContainerDetail)
+
+    EksContainerEnvironmentVariable.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    EksContainerEnvironmentVariable.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    EksContainerEnvironmentVariable.struct_class = Types::EksContainerEnvironmentVariable
+
+    EksContainerEnvironmentVariables.member = Shapes::ShapeRef.new(shape: EksContainerEnvironmentVariable)
+
+    EksContainerOverride.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
+    EksContainerOverride.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
+    EksContainerOverride.add_member(:args, Shapes::ShapeRef.new(shape: StringList, location_name: "args"))
+    EksContainerOverride.add_member(:env, Shapes::ShapeRef.new(shape: EksContainerEnvironmentVariables, location_name: "env"))
+    EksContainerOverride.add_member(:resources, Shapes::ShapeRef.new(shape: EksContainerResourceRequirements, location_name: "resources"))
+    EksContainerOverride.struct_class = Types::EksContainerOverride
+
+    EksContainerOverrideList.member = Shapes::ShapeRef.new(shape: EksContainerOverride)
+
+    EksContainerResourceRequirements.add_member(:limits, Shapes::ShapeRef.new(shape: EksLimits, location_name: "limits"))
+    EksContainerResourceRequirements.add_member(:requests, Shapes::ShapeRef.new(shape: EksRequests, location_name: "requests"))
+    EksContainerResourceRequirements.struct_class = Types::EksContainerResourceRequirements
+
+    EksContainerSecurityContext.add_member(:run_as_user, Shapes::ShapeRef.new(shape: Long, location_name: "runAsUser"))
+    EksContainerSecurityContext.add_member(:run_as_group, Shapes::ShapeRef.new(shape: Long, location_name: "runAsGroup"))
+    EksContainerSecurityContext.add_member(:privileged, Shapes::ShapeRef.new(shape: Boolean, location_name: "privileged"))
+    EksContainerSecurityContext.add_member(:read_only_root_filesystem, Shapes::ShapeRef.new(shape: Boolean, location_name: "readOnlyRootFilesystem"))
+    EksContainerSecurityContext.add_member(:run_as_non_root, Shapes::ShapeRef.new(shape: Boolean, location_name: "runAsNonRoot"))
+    EksContainerSecurityContext.struct_class = Types::EksContainerSecurityContext
+
+    EksContainerVolumeMount.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    EksContainerVolumeMount.add_member(:mount_path, Shapes::ShapeRef.new(shape: String, location_name: "mountPath"))
+    EksContainerVolumeMount.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "readOnly"))
+    EksContainerVolumeMount.struct_class = Types::EksContainerVolumeMount
+
+    EksContainerVolumeMounts.member = Shapes::ShapeRef.new(shape: EksContainerVolumeMount)
+
+    EksContainers.member = Shapes::ShapeRef.new(shape: EksContainer)
+
+    EksEmptyDir.add_member(:medium, Shapes::ShapeRef.new(shape: String, location_name: "medium"))
+    EksEmptyDir.add_member(:size_limit, Shapes::ShapeRef.new(shape: Quantity, location_name: "sizeLimit"))
+    EksEmptyDir.struct_class = Types::EksEmptyDir
+
+    EksHostPath.add_member(:path, Shapes::ShapeRef.new(shape: String, location_name: "path"))
+    EksHostPath.struct_class = Types::EksHostPath
+
+    EksLimits.key = Shapes::ShapeRef.new(shape: String)
+    EksLimits.value = Shapes::ShapeRef.new(shape: Quantity)
+
+    EksPodProperties.add_member(:service_account_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccountName"))
+    EksPodProperties.add_member(:host_network, Shapes::ShapeRef.new(shape: Boolean, location_name: "hostNetwork"))
+    EksPodProperties.add_member(:dns_policy, Shapes::ShapeRef.new(shape: String, location_name: "dnsPolicy"))
+    EksPodProperties.add_member(:containers, Shapes::ShapeRef.new(shape: EksContainers, location_name: "containers"))
+    EksPodProperties.add_member(:volumes, Shapes::ShapeRef.new(shape: EksVolumes, location_name: "volumes"))
+    EksPodProperties.struct_class = Types::EksPodProperties
+
+    EksPodPropertiesDetail.add_member(:service_account_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccountName"))
+    EksPodPropertiesDetail.add_member(:host_network, Shapes::ShapeRef.new(shape: Boolean, location_name: "hostNetwork"))
+    EksPodPropertiesDetail.add_member(:dns_policy, Shapes::ShapeRef.new(shape: String, location_name: "dnsPolicy"))
+    EksPodPropertiesDetail.add_member(:containers, Shapes::ShapeRef.new(shape: EksContainerDetails, location_name: "containers"))
+    EksPodPropertiesDetail.add_member(:volumes, Shapes::ShapeRef.new(shape: EksVolumes, location_name: "volumes"))
+    EksPodPropertiesDetail.add_member(:pod_name, Shapes::ShapeRef.new(shape: String, location_name: "podName"))
+    EksPodPropertiesDetail.add_member(:node_name, Shapes::ShapeRef.new(shape: String, location_name: "nodeName"))
+    EksPodPropertiesDetail.struct_class = Types::EksPodPropertiesDetail
+
+    EksPodPropertiesOverride.add_member(:containers, Shapes::ShapeRef.new(shape: EksContainerOverrideList, location_name: "containers"))
+    EksPodPropertiesOverride.struct_class = Types::EksPodPropertiesOverride
+
+    EksProperties.add_member(:pod_properties, Shapes::ShapeRef.new(shape: EksPodProperties, location_name: "podProperties"))
+    EksProperties.struct_class = Types::EksProperties
+
+    EksPropertiesDetail.add_member(:pod_properties, Shapes::ShapeRef.new(shape: EksPodPropertiesDetail, location_name: "podProperties"))
+    EksPropertiesDetail.struct_class = Types::EksPropertiesDetail
+
+    EksPropertiesOverride.add_member(:pod_properties, Shapes::ShapeRef.new(shape: EksPodPropertiesOverride, location_name: "podProperties"))
+    EksPropertiesOverride.struct_class = Types::EksPropertiesOverride
+
+    EksRequests.key = Shapes::ShapeRef.new(shape: String)
+    EksRequests.value = Shapes::ShapeRef.new(shape: Quantity)
+
+    EksSecret.add_member(:secret_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "secretName"))
+    EksSecret.add_member(:optional, Shapes::ShapeRef.new(shape: Boolean, location_name: "optional"))
+    EksSecret.struct_class = Types::EksSecret
+
+    EksVolume.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    EksVolume.add_member(:host_path, Shapes::ShapeRef.new(shape: EksHostPath, location_name: "hostPath"))
+    EksVolume.add_member(:empty_dir, Shapes::ShapeRef.new(shape: EksEmptyDir, location_name: "emptyDir"))
+    EksVolume.add_member(:secret, Shapes::ShapeRef.new(shape: EksSecret, location_name: "secret"))
+    EksVolume.struct_class = Types::EksVolume
+
+    EksVolumes.member = Shapes::ShapeRef.new(shape: EksVolume)
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: KeyValuePair)
 
@@ -496,6 +668,8 @@ module Aws::Batch
     JobDefinition.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
     JobDefinition.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "propagateTags"))
     JobDefinition.add_member(:platform_capabilities, Shapes::ShapeRef.new(shape: PlatformCapabilityList, location_name: "platformCapabilities"))
+    JobDefinition.add_member(:eks_properties, Shapes::ShapeRef.new(shape: EksProperties, location_name: "eksProperties"))
+    JobDefinition.add_member(:container_orchestration_type, Shapes::ShapeRef.new(shape: OrchestrationType, location_name: "containerOrchestrationType"))
     JobDefinition.struct_class = Types::JobDefinition
 
     JobDefinitionList.member = Shapes::ShapeRef.new(shape: JobDefinition)
@@ -530,6 +704,8 @@ module Aws::Batch
     JobDetail.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
     JobDetail.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "propagateTags"))
     JobDetail.add_member(:platform_capabilities, Shapes::ShapeRef.new(shape: PlatformCapabilityList, location_name: "platformCapabilities"))
+    JobDetail.add_member(:eks_properties, Shapes::ShapeRef.new(shape: EksPropertiesDetail, location_name: "eksProperties"))
+    JobDetail.add_member(:eks_attempts, Shapes::ShapeRef.new(shape: EksAttemptDetails, location_name: "eksAttempts"))
     JobDetail.struct_class = Types::JobDetail
 
     JobDetailList.member = Shapes::ShapeRef.new(shape: JobDetail)
@@ -687,6 +863,7 @@ module Aws::Batch
     RegisterJobDefinitionRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: JobTimeout, location_name: "timeout"))
     RegisterJobDefinitionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
     RegisterJobDefinitionRequest.add_member(:platform_capabilities, Shapes::ShapeRef.new(shape: PlatformCapabilityList, location_name: "platformCapabilities"))
+    RegisterJobDefinitionRequest.add_member(:eks_properties, Shapes::ShapeRef.new(shape: EksProperties, location_name: "eksProperties"))
     RegisterJobDefinitionRequest.struct_class = Types::RegisterJobDefinitionRequest
 
     RegisterJobDefinitionResponse.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionName"))
@@ -748,6 +925,7 @@ module Aws::Batch
     SubmitJobRequest.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "propagateTags"))
     SubmitJobRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: JobTimeout, location_name: "timeout"))
     SubmitJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
+    SubmitJobRequest.add_member(:eks_properties_override, Shapes::ShapeRef.new(shape: EksPropertiesOverride, location_name: "eksPropertiesOverride"))
     SubmitJobRequest.struct_class = Types::SubmitJobRequest
 
     SubmitJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobArn"))
