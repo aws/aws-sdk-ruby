@@ -66,7 +66,7 @@ module Aws
           resp = @client.create_token(
             grant_type: 'refresh_token',
             client_id: token_json['clientId'],
-            client_secret: token_json['client_secret'],
+            client_secret: token_json['clientSecret'],
             refresh_token: token_json['refreshToken']
           )
           token_json['accessToken'] = resp.access_token
