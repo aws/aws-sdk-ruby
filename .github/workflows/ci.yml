@@ -8,6 +8,7 @@ on:
   pull_request:
     branches:
       - version-3
+      - dynamic-endpoints
 
 permissions:
   contents: read
