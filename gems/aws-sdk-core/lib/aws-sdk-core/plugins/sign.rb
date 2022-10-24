@@ -182,9 +182,6 @@ module Aws
         def presign_url(*args)
         end
 
-        def presign_url(*args)
-        end
-
         def sign_event(*args)
         end
       end
