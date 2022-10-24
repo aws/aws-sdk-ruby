@@ -12,7 +12,7 @@ module Aws
             endpoint: 'https://beta.example.com'
           )
           name = 'apname'
-          expect_auth({ 'signingName' => 's3' })
+          expect_sigv4_service('s3')
           resp = client.get_access_point(name: name, account_id: '123456789012')
           host = '123456789012.beta.example.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -26,7 +26,7 @@ module Aws
             endpoint: 'https://beta.example.com'
           )
           name = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
-          expect_auth({ 'signingName' => 's3-outposts' })
+          expect_sigv4_service('s3-outposts')
           resp = client.get_access_point(name: name)
           host = 'beta.example.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -40,7 +40,7 @@ module Aws
             endpoint: 'https://beta.example.com'
           )
           bucket = 'bucketname'
-          expect_auth({ 'signingName' => 's3-outposts' })
+          expect_sigv4_service('s3-outposts')
           resp = client.create_bucket(bucket: bucket, outpost_id: 'op-123')
           host = 'beta.example.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -54,7 +54,7 @@ module Aws
             endpoint: 'https://beta.example.com'
           )
           bucket = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket'
-          expect_auth({ 'signingName' => 's3-outposts' })
+          expect_sigv4_service('s3-outposts')
           resp = client.get_bucket(bucket: bucket)
           host = 'beta.example.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)

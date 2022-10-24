@@ -77,6 +77,11 @@ module Aws
             expect(partitions.partition(p).regions.map(&:name)).to include(r)
           end
         end
+
+        it 'does not include the partition global endpoint name' do
+          regions = partitions.partition('aws').regions
+          expect(regions.map(&:name)).not_to include('aws-global')
+        end
       end
 
       describe '#region?' do
@@ -237,44 +242,6 @@ module Aws
             end
           end
         end
-      end
-    end
-
-    describe 'metadata' do
-      let(:partition_metadata_json) do
-        path = File.expand_path('../test_partitions_metadata.json', __FILE__)
-        JSON.load(File.read(path))
-      end
-
-      before do
-        Partitions.merge_metadata(partition_metadata_json)
-      end
-
-      it 'adds new partitions and regions' do
-        partition = Aws::Partitions.partition('test')
-        expect(partition.regions.map(&:name)).to eq(['us-peccy-1'])
-      end
-
-      it 'merges existing partitions and regions' do
-        partition = Aws::Partitions.partition('aws')
-        expect(partition.regions.map(&:name)).to eq(['new-region'])
-      end
-
-      it 'appends metadata for endpoint matching' do
-        partition = Aws::Partitions.partition('test')
-        expect(partition.metadata['name']).to eq('test')
-        expect(partition.metadata['dnsSuffix']).to eq('test.com')
-      end
-
-      after do
-        path = File.expand_path('../../partitions.json', __FILE__)
-        original_json = JSON.load(File.read(path))
-        Partitions.clear
-        Partitions.add(original_json)
-        Partitions.merge_metadata(
-          JSON.load(File.read(
-            File.expand_path('../../partitions-metadata.json', __FILE__)))
-        )
       end
     end
 
@@ -442,10 +409,6 @@ module Aws
         original_json = JSON.load(File.read(path))
         Partitions.clear
         Partitions.add(original_json)
-        Partitions.merge_metadata(
-          JSON.load(File.read(
-            File.expand_path('../../partitions-metadata.json', __FILE__)))
-        )
       end
 
       path = File.expand_path('../variant_test_cases.json', __FILE__)

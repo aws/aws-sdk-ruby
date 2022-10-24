@@ -42,10 +42,6 @@ module AwsSdkCodeGenerator
         @custom ? false : true
       end
 
-      def files
-        ['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb']
-      end
-
       # @return [String]
       def description
         if @custom

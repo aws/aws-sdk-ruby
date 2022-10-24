@@ -14,8 +14,6 @@ module AwsSdkCodeGenerator
     # @option options [Hash, String] :waiters
     # @option options [Hash, String] :resources
     # @option options [Hash, String] :examples
-    # @option options [Hash, String] :endpoint_rules
-    # @option options [Hash, String] :endpoint_tests
     # @option options [Hash, String] :smoke_tests
     # @option options [Hash<gem,version>] :gem_dependencies ({})
     # @option options [Hash] :add_plugins ({})
@@ -36,10 +34,6 @@ module AwsSdkCodeGenerator
       @resources = load_json(options[:resources])
       @examples = load_json(options[:examples])
       @smoke_tests = load_json(options[:smoke_tests])
-      unless options[:legacy_endpoints]
-        @endpoint_rules = load_json(options[:endpoint_rules])
-        @endpoint_tests = load_json(options[:endpoint_tests])
-      end
       @gem_dependencies = options[:gem_dependencies] || {}
       @add_plugins = options[:add_plugins] || {}
       @remove_plugins = options[:remove_plugins] || []
@@ -82,22 +76,6 @@ module AwsSdkCodeGenerator
 
     # @return [Hash, nil] The service smoke test model.
     attr_reader :smoke_tests
-
-    # @return Boolean True if the service should use legacy endpoints
-    def legacy_endpoints?
-      !@endpoint_rules || @endpoint_rules.empty?
-    end
-
-    # @return Boolean True if the service is inlined in core (ie not a stand alone gem)
-    def included_in_core?
-      %w[STS SSO SSOOIDC].include?(name)
-    end
-
-    # @return [Hash, nil] The service endpoint rules.
-    attr_reader :endpoint_rules
-
-    # @return [Hash, nil] The service endpoint tests.
-    attr_reader :endpoint_tests
 
     # @return [Hash<String,String>] A hash of gem dependencies. Hash keys
     #   are gem names, values are versions.

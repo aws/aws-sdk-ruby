@@ -28,21 +28,17 @@ module Aws
       it 'correctly extracts the sigv4 signing region' do
         client = Client.new(
           region: "us-east-1",
-          endpoint: "https://FOOBARFOOBAR.iot.us-east-1.amazonaws.com",
-          stub_responses: true
+          endpoint: "https://FOOBARFOOBAR.iot.us-east-1.amazonaws.com"
         )
-        expect_auth({ 'signingRegion' => 'us-east-1' })
-        client.get_thing_shadow(thing_name: 'thing')
+        expect(client.config.sigv4_region).to eq("us-east-1")
       end
 
       it 'correctly extracts the sigv4 signing region outside of us-east-1' do
         client = Client.new(
           region: "eu-west-1",
-          endpoint: "https://FOOBARFOOBAR.iot.eu-west-1.amazonaws.com",
-          stub_responses: true
+          endpoint: "https://FOOBARFOOBAR.iot.eu-west-1.amazonaws.com"
         )
-        expect_auth({ 'signingRegion' => 'eu-west-1' })
-        client.get_thing_shadow(thing_name: 'thing')
+        expect(client.config.sigv4_region).to eq("eu-west-1")
       end
 
       it 'can be constructed with a region and endpoint' do

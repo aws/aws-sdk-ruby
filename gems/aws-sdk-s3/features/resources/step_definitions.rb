@@ -244,7 +244,7 @@ Then(/^I should be able to multipart copy the object$/) do
   target_bucket = @s3.bucket(@bucket_name)
   target_object = target_bucket.object("test object-copy")
   target_object.copy_from("#{@bucket_name}/test object", multipart_copy: true)
-  expect(ApiCallTracker.called_operations).to include(:create_multipart_upload)
+  expect(ApiCallTracker.called_operations).to include(:create_multiparty_upload)
 end
 
 Given(/^I have a (\d+)M file$/) do |mb|

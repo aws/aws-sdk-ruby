@@ -13,14 +13,10 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-neptune/types'
 require_relative 'aws-sdk-neptune/client_api'
-require_relative 'aws-sdk-neptune/plugins/endpoints.rb'
 require_relative 'aws-sdk-neptune/client'
 require_relative 'aws-sdk-neptune/errors'
 require_relative 'aws-sdk-neptune/waiters'
 require_relative 'aws-sdk-neptune/resource'
-require_relative 'aws-sdk-neptune/endpoint_parameters'
-require_relative 'aws-sdk-neptune/endpoint_provider'
-require_relative 'aws-sdk-neptune/endpoints'
 require_relative 'aws-sdk-neptune/customizations'
 
 # This module provides support for Amazon Neptune. This module is available in the

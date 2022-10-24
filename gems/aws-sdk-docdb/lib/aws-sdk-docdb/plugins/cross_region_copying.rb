@@ -36,23 +36,22 @@ module Aws
               context.operation.input,
               params
             )
-
-            endpoint_params = Aws::DocDB::EndpointParameters.new(
+            signer = Aws::Sigv4::Signer.new(
+              service: 'rds',
               region: source_region,
-              use_dual_stack: context.config.use_dualstack_endpoint,
-              use_fips: context.config.use_fips_endpoint
+              credentials_provider: context.config.credentials
             )
-            endpoint = context.config.endpoint_provider
-                              .resolve_endpoint(endpoint_params)
-            auth_scheme = Aws::Endpoints.resolve_auth_scheme(context, endpoint)
-
-            signer = Aws::Plugins::Sign.signer_for(
-              auth_scheme, context.config, source_region
+            url = Aws::Partitions::EndpointProvider.resolve(
+              signer.region, 'rds', 'regional',
+              {
+                dualstack: context.config.use_dualstack_endpoint,
+                fips: context.config.use_fips_endpoint
+              }
             )
-
+            url += "?#{param_list}"
             signer.presign_url(
               http_method: 'GET',
-              url: "#{endpoint.url}?#{param_list}",
+              url: url,
               expires_in: 3600
             ).to_s
           end

@@ -30,10 +30,10 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-s3control/plugins/arn.rb'
 require 'aws-sdk-s3control/plugins/dualstack.rb'
+require 'aws-sdk-s3control/plugins/s3_control_signer.rb'
 require 'aws-sdk-s3control/plugins/s3_host_id.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:s3control)
@@ -82,12 +82,11 @@ module Aws::S3Control
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestXml)
     add_plugin(Aws::S3Control::Plugins::ARN)
     add_plugin(Aws::S3Control::Plugins::Dualstack)
+    add_plugin(Aws::S3Control::Plugins::S3ControlSigner)
     add_plugin(Aws::S3Control::Plugins::S3HostId)
-    add_plugin(Aws::S3Control::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -300,19 +299,6 @@ module Aws::S3Control
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
-    #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
-    #     following classes:
-    #
-    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
-    #       tokens.
-    #
-    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
-    #       access token generated from `aws login`.
-    #
-    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
-    #     will be used to search for tokens configured for your profile in shared configuration files.
-    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -325,9 +311,6 @@ module Aws::S3Control
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
-    #
-    #   @option options [Aws::S3Control::EndpointProvider] :endpoint_provider
-    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::S3Control::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -421,7 +404,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID for the owner of the bucket for
     #   which you want to create an access point.
     #
@@ -466,7 +449,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_access_point({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "AccessPointName", # required
     #     bucket: "BucketName", # required
     #     vpc_configuration: {
@@ -514,7 +497,7 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID for owner of the specified Object
     #   Lambda Access Point.
     #
@@ -531,7 +514,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_access_point_for_object_lambda({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "ObjectLambdaAccessPointName", # required
     #     configuration: { # required
     #       supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
@@ -752,7 +735,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobOperation.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID that creates the job.
     #
     # @option params [Boolean] :confirmation_required
@@ -812,7 +795,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_job({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     confirmation_required: false,
     #     operation: { # required
     #       lambda_invoke: {
@@ -1019,7 +1002,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point. The owner of the Multi-Region Access Point also must own
     #   the underlying buckets.
@@ -1042,7 +1025,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_multi_region_access_point({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     client_token: "MultiRegionAccessPointClientToken", # required
     #     details: { # required
     #       name: "MultiRegionAccessPointName", # required
@@ -1098,7 +1081,7 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified access point.
     #
     # @option params [required, String] :name
@@ -1122,7 +1105,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_access_point({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "AccessPointName", # required
     #   })
     #
@@ -1152,7 +1135,7 @@ module Aws::S3Control
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
     #
@@ -1164,7 +1147,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_access_point_for_object_lambda({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "ObjectLambdaAccessPointName", # required
     #   })
     #
@@ -1201,7 +1184,7 @@ module Aws::S3Control
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified access point.
     #
     # @option params [required, String] :name
@@ -1225,7 +1208,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_access_point_policy({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "AccessPointName", # required
     #   })
     #
@@ -1252,7 +1235,7 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicyForObjectLambda.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicyForObjectLambda.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
     #
@@ -1265,7 +1248,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_access_point_policy_for_object_lambda({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "ObjectLambdaAccessPointName", # required
     #   })
     #
@@ -1313,7 +1296,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID that owns the Outposts bucket.
     #
     # @option params [required, String] :bucket
@@ -1337,7 +1320,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_bucket({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     bucket: "BucketName", # required
     #   })
     #
@@ -1395,7 +1378,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID of the lifecycle configuration to delete.
     #
     # @option params [required, String] :bucket
@@ -1419,7 +1402,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_bucket_lifecycle_configuration({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     bucket: "BucketName", # required
     #   })
     #
@@ -1483,7 +1466,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
@@ -1507,7 +1490,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_bucket_policy({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     bucket: "BucketName", # required
     #   })
     #
@@ -1555,7 +1538,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID of the Outposts bucket tag set to
     #   be removed.
     #
@@ -1580,7 +1563,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_bucket_tagging({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     bucket: "BucketName", # required
     #   })
     #
@@ -1615,7 +1598,7 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetJobTagging.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutJobTagging.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
     #   Operations job.
     #
@@ -1627,7 +1610,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_job_tagging({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     job_id: "JobId", # required
     #   })
     #
@@ -1672,7 +1655,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
     #
@@ -1694,7 +1677,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_multi_region_access_point({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     client_token: "MultiRegionAccessPointClientToken", # required
     #     details: { # required
     #       name: "MultiRegionAccessPointName", # required
@@ -1730,7 +1713,7 @@ module Aws::S3Control
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the Amazon Web Services account whose
     #   `PublicAccessBlock` configuration you want to remove.
     #
@@ -1739,7 +1722,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_public_access_block({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeletePublicAccessBlock AWS API Documentation
@@ -1770,7 +1753,7 @@ module Aws::S3Control
     # @option params [required, String] :config_id
     #   The ID of the S3 Storage Lens configuration.
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID of the requester.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1779,7 +1762,7 @@ module Aws::S3Control
     #
     #   resp = client.delete_storage_lens_configuration({
     #     config_id: "ConfigId", # required
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensConfiguration AWS API Documentation
@@ -1811,7 +1794,7 @@ module Aws::S3Control
     # @option params [required, String] :config_id
     #   The ID of the S3 Storage Lens configuration.
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID of the requester.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1820,7 +1803,7 @@ module Aws::S3Control
     #
     #   resp = client.delete_storage_lens_configuration_tagging({
     #     config_id: "ConfigId", # required
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensConfigurationTagging AWS API Documentation
@@ -1856,7 +1839,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
     #   Operations job.
     #
@@ -1870,7 +1853,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_job({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     job_id: "JobId", # required
     #   })
     #
@@ -2010,7 +1993,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
     #
@@ -2027,7 +2010,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_multi_region_access_point_operation({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     request_token_arn: "AsyncRequestTokenARN", # required
     #   })
     #
@@ -2091,7 +2074,7 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified access point.
     #
     # @option params [required, String] :name
@@ -2126,7 +2109,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_access_point({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "AccessPointName", # required
     #   })
     #
@@ -2168,7 +2151,7 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointConfigurationForObjectLambda.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
     #
@@ -2183,7 +2166,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_access_point_configuration_for_object_lambda({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "ObjectLambdaAccessPointName", # required
     #   })
     #
@@ -2225,7 +2208,7 @@ module Aws::S3Control
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
     #
@@ -2241,7 +2224,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_access_point_for_object_lambda({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "ObjectLambdaAccessPointName", # required
     #   })
     #
@@ -2277,7 +2260,7 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified access point.
     #
     # @option params [required, String] :name
@@ -2303,7 +2286,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_access_point_policy({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "AccessPointName", # required
     #   })
     #
@@ -2334,7 +2317,7 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicyForObjectLambda.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicyForObjectLambda.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
     #
@@ -2348,7 +2331,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_access_point_policy_for_object_lambda({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "ObjectLambdaAccessPointName", # required
     #   })
     #
@@ -2374,7 +2357,7 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified access point.
     #
     # @option params [required, String] :name
@@ -2387,7 +2370,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_access_point_policy_status({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "AccessPointName", # required
     #   })
     #
@@ -2407,7 +2390,7 @@ module Aws::S3Control
     # Returns the status of the resource policy associated with an Object
     # Lambda Access Point.
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
     #
@@ -2421,7 +2404,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_access_point_policy_status_for_object_lambda({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "ObjectLambdaAccessPointName", # required
     #   })
     #
@@ -2478,7 +2461,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
@@ -2506,7 +2489,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bucket({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     bucket: "BucketName", # required
     #   })
     #
@@ -2579,7 +2562,7 @@ module Aws::S3Control
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
@@ -2605,7 +2588,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bucket_lifecycle_configuration({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     bucket: "BucketName", # required
     #   })
     #
@@ -2698,7 +2681,7 @@ module Aws::S3Control
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
@@ -2724,7 +2707,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bucket_policy({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     bucket: "BucketName", # required
     #   })
     #
@@ -2785,7 +2768,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
@@ -2811,7 +2794,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bucket_tagging({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     bucket: "BucketName", # required
     #   })
     #
@@ -2873,7 +2856,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID of the S3 on Outposts bucket.
     #
     # @option params [required, String] :bucket
@@ -2887,7 +2870,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bucket_versioning({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     bucket: "BucketName", # required
     #   })
     #
@@ -2927,7 +2910,7 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutJobTagging.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteJobTagging.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
     #   Operations job.
     #
@@ -2942,7 +2925,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_job_tagging({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     job_id: "JobId", # required
     #   })
     #
@@ -2987,7 +2970,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
     #
@@ -3010,7 +2993,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_multi_region_access_point({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "MultiRegionAccessPointName", # required
     #   })
     #
@@ -3058,7 +3041,7 @@ module Aws::S3Control
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
     #
@@ -3080,7 +3063,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_multi_region_access_point_policy({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "MultiRegionAccessPointName", # required
     #   })
     #
@@ -3119,7 +3102,7 @@ module Aws::S3Control
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
     #
@@ -3141,7 +3124,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_multi_region_access_point_policy_status({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "MultiRegionAccessPointName", # required
     #   })
     #
@@ -3174,7 +3157,7 @@ module Aws::S3Control
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the Amazon Web Services account whose
     #   `PublicAccessBlock` configuration you want to retrieve.
     #
@@ -3185,7 +3168,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_public_access_block({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #   })
     #
     # @example Response structure
@@ -3223,7 +3206,7 @@ module Aws::S3Control
     # @option params [required, String] :config_id
     #   The ID of the Amazon S3 Storage Lens configuration.
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID of the requester.
     #
     # @return [Types::GetStorageLensConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3234,7 +3217,7 @@ module Aws::S3Control
     #
     #   resp = client.get_storage_lens_configuration({
     #     config_id: "ConfigId", # required
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #   })
     #
     # @example Response structure
@@ -3294,7 +3277,7 @@ module Aws::S3Control
     # @option params [required, String] :config_id
     #   The ID of the Amazon S3 Storage Lens configuration.
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID of the requester.
     #
     # @return [Types::GetStorageLensConfigurationTaggingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3305,7 +3288,7 @@ module Aws::S3Control
     #
     #   resp = client.get_storage_lens_configuration_tagging({
     #     config_id: "ConfigId", # required
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #   })
     #
     # @example Response structure
@@ -3355,7 +3338,7 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID for owner of the bucket whose
     #   access points you want to list.
     #
@@ -3398,7 +3381,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_access_points({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     bucket: "BucketName",
     #     next_token: "NonEmptyMaxLength1024String",
     #     max_results: 1,
@@ -3445,7 +3428,7 @@ module Aws::S3Control
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
     #
@@ -3472,7 +3455,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_access_points_for_object_lambda({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     next_token: "NonEmptyMaxLength1024String",
     #     max_results: 1,
     #   })
@@ -3518,7 +3501,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
     #   Operations job.
     #
@@ -3547,7 +3530,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     job_statuses: ["Active"], # accepts Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended
     #     next_token: "StringForNextToken",
     #     max_results: 1,
@@ -3607,7 +3590,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
     #
@@ -3627,7 +3610,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_multi_region_access_points({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     next_token: "NonEmptyMaxLength1024String",
     #     max_results: 1,
     #   })
@@ -3670,7 +3653,7 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [String] :next_token
@@ -3694,7 +3677,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_regional_buckets({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     next_token: "NonEmptyMaxLength1024String",
     #     max_results: 1,
     #     outpost_id: "NonEmptyMaxLength64String",
@@ -3736,7 +3719,7 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID of the requester.
     #
     # @option params [String] :next_token
@@ -3752,7 +3735,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_storage_lens_configurations({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     next_token: "ContinuationToken",
     #   })
     #
@@ -3787,7 +3770,7 @@ module Aws::S3Control
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointConfigurationForObjectLambda.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
     #
@@ -3802,7 +3785,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_access_point_configuration_for_object_lambda({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "ObjectLambdaAccessPointName", # required
     #     configuration: { # required
     #       supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
@@ -3858,7 +3841,7 @@ module Aws::S3Control
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID for owner of the bucket associated
     #   with the specified access point.
     #
@@ -3893,7 +3876,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_access_point_policy({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "AccessPointName", # required
     #     policy: "Policy", # required
     #   })
@@ -3924,7 +3907,7 @@ module Aws::S3Control
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicyForObjectLambda.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicyForObjectLambda.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
     #
@@ -3939,7 +3922,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_access_point_policy_for_object_lambda({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     name: "ObjectLambdaAccessPointName", # required
     #     policy: "ObjectLambdaPolicy", # required
     #   })
@@ -3988,7 +3971,7 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
@@ -4002,7 +3985,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_bucket_lifecycle_configuration({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     bucket: "BucketName", # required
     #     lifecycle_configuration: {
     #       rules: [
@@ -4115,7 +4098,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
@@ -4150,7 +4133,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_bucket_policy({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     bucket: "BucketName", # required
     #     confirm_remove_self_bucket_access: false,
     #     policy: "Policy", # required
@@ -4257,7 +4240,7 @@ module Aws::S3Control
     # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html
     # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
@@ -4283,7 +4266,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_bucket_tagging({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     bucket: "BucketName", # required
     #     tagging: { # required
     #       tag_set: [ # required
@@ -4368,7 +4351,7 @@ module Aws::S3Control
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID of the S3 on Outposts bucket.
     #
     # @option params [required, String] :bucket
@@ -4386,7 +4369,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_bucket_versioning({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     bucket: "BucketName", # required
     #     mfa: "MFA",
     #     versioning_configuration: { # required
@@ -4467,7 +4450,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
     #   Operations job.
     #
@@ -4482,7 +4465,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_job_tagging({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     job_id: "JobId", # required
     #     tags: [ # required
     #       {
@@ -4524,7 +4507,7 @@ module Aws::S3Control
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
     #   Access Point.
     #
@@ -4546,7 +4529,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_multi_region_access_point_policy({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     client_token: "MultiRegionAccessPointClientToken", # required
     #     details: { # required
     #       name: "MultiRegionAccessPointName", # required
@@ -4588,7 +4571,7 @@ module Aws::S3Control
     #   The `PublicAccessBlock` configuration that you want to apply to the
     #   specified Amazon Web Services account.
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID for the Amazon Web Services account whose
     #   `PublicAccessBlock` configuration you want to set.
     #
@@ -4603,7 +4586,7 @@ module Aws::S3Control
     #       block_public_policy: false,
     #       restrict_public_buckets: false,
     #     },
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutPublicAccessBlock AWS API Documentation
@@ -4634,7 +4617,7 @@ module Aws::S3Control
     # @option params [required, String] :config_id
     #   The ID of the S3 Storage Lens configuration.
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID of the requester.
     #
     # @option params [required, Types::StorageLensConfiguration] :storage_lens_configuration
@@ -4653,7 +4636,7 @@ module Aws::S3Control
     #
     #   resp = client.put_storage_lens_configuration({
     #     config_id: "ConfigId", # required
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     storage_lens_configuration: { # required
     #       id: "ConfigId", # required
     #       account_level: { # required
@@ -4746,7 +4729,7 @@ module Aws::S3Control
     # @option params [required, String] :config_id
     #   The ID of the S3 Storage Lens configuration.
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The account ID of the requester.
     #
     # @option params [required, Array<Types::StorageLensTag>] :tags
@@ -4762,7 +4745,7 @@ module Aws::S3Control
     #
     #   resp = client.put_storage_lens_configuration_tagging({
     #     config_id: "ConfigId", # required
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     tags: [ # required
     #       {
     #         key: "TagKeyString", # required
@@ -4804,7 +4787,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
     #   Operations job.
     #
@@ -4822,7 +4805,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_job_priority({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     job_id: "JobId", # required
     #     priority: 1, # required
     #   })
@@ -4866,7 +4849,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
-    # @option params [String] :account_id
+    # @option params [required, String] :account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
     #   Operations job.
     #
@@ -4889,7 +4872,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_job_status({
-    #     account_id: "AccountId",
+    #     account_id: "AccountId", # required
     #     job_id: "JobId", # required
     #     requested_job_status: "Cancelled", # required, accepts Cancelled, Ready
     #     status_update_reason: "JobStatusUpdateReason",

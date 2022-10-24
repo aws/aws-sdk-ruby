@@ -72,7 +72,7 @@ module Aws
                 use_accelerate_endpoint: true, endpoint: 'https://amazon.com'
               )
             ).put_object(bucket: 'bucket-name', key: 'key')
-          end.to raise_error(ArgumentError)
+          end.to raise_error(ArgumentError, /:endpoint/)
         end
 
         it 'raises when accelerate and use_fips_endpoint are configured' do
@@ -82,7 +82,7 @@ module Aws
                 use_accelerate_endpoint: true, use_fips_endpoint: true
               )
             ).put_object(bucket: 'bucket-name', key: 'key')
-          end.to raise_error(ArgumentError)
+          end.to raise_error(ArgumentError, /:use_fips_endpoint/)
         end
 
         it 'does not apply to #create_bucket' do

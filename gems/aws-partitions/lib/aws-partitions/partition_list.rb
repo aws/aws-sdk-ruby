@@ -42,60 +42,10 @@ module Aws
         end
       end
 
-      # @param [Partition] partition
-      # @api private
-      def merge_metadata(partitions_metadata)
-        partitions_metadata['partitions'].each do |partition_metadata|
-          outputs = partition_metadata['outputs']
-
-          if existing = @partitions[partition_metadata['id']]
-            @partitions[partition_metadata['id']] = Partition.new(
-              name: existing.name,
-              regions: build_metadata_regions(
-                partition_metadata['id'],
-                partition_metadata['regions'],
-                existing),
-              region_regex: partition_metadata['regionRegex'],
-              services: existing.services.each_with_object({}) do |s, services|
-                services[s.name] = s
-              end,
-              metadata: outputs
-            )
-          else
-            @partitions[partition_metadata['id']] = Partition.new(
-              name: partition_metadata['id'],
-              regions: build_metadata_regions(
-                partition_metadata['id'], partition_metadata['regions']
-              ),
-              region_regex: partition_metadata['regionRegex'],
-              services: {},
-              metadata: outputs
-            )
-          end
-        end
-      end
-
       # Removed all partitions.
       # @api private
       def clear
         @partitions = {}
-      end
-
-      private
-
-      def build_metadata_regions(partition_name, metadata_regions, existing = nil)
-        metadata_regions.each_with_object({}) do |(region_name, region), regions|
-          if existing && existing.region?(region_name)
-            regions[region_name] = existing.region(region_name)
-          else
-            regions[region_name] = Region.new(
-              name: region_name,
-              description: region['description'],
-              partition_name: partition_name,
-              services: Set.new
-            )
-          end
-        end
       end
 
       class << self

@@ -88,18 +88,5 @@ module Aws
         resource: @resource
       }
     end
-
-    # Return the ARN as JSON
-    #
-    # @return [Hash]
-    def as_json(_options = nil)
-      {
-        'partition' => @partition,
-        'service' => @service,
-        'region' => @region,
-        'accountId' => @account_id,
-        'resource' => @resource
-      }
-    end
   end
 end

@@ -53,8 +53,12 @@ module Aws
           return if !value || value.empty?
           headers[ref.location_name] = value
             .compact
-            .map { |s| Seahorse::Util.escape_header_list_string(s.to_s) }
-            .join(',')
+            .map { |s| escape_header_list_string(s.to_s) }
+            .join(",")
+        end
+
+        def escape_header_list_string(s)
+          (s.include?('"') || s.include?(",")) ? "\"#{s.gsub('"', '\"')}\"" : s
         end
 
         def apply_header_map(headers, ref, values)

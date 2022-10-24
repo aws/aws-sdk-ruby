@@ -5,7 +5,6 @@ require 'aws-sigv4'
 module Aws
   module Plugins
     # @api private
-    # Necessary to exist after endpoints 2.0
     class SignatureV4 < Seahorse::Client::Plugin
 
       V4_AUTH = %w[v4 v4-unsigned-payload v4-unsigned-body]

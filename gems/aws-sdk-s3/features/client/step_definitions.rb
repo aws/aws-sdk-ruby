@@ -24,10 +24,8 @@ After('@s3', '@client') do
 end
 
 def create_bucket(options = {})
-  unless options[:bucket]
-    @bucket_name = "aws-sdk-test-#{Time.now.to_i}-#{rand(1000)}"
-    options[:bucket] = @bucket_name
-  end
+  @bucket_name = "aws-sdk-test-#{Time.now.to_i}-#{rand(1000)}"
+  options[:bucket] = @bucket_name
   if @client.config.region != 'us-east-1' &&
      !options[:create_bucket_configuration]
     options[:create_bucket_configuration] = {
@@ -104,12 +102,14 @@ When(/^I put the test png to the key "(.*?)"$/) do |key|
   file.close
 end
 
-Then(/^the object with the key "(.*?)" should have a content length of (\d+)$/) do |key, size|
+Then(/^the object with the key "(.*?)" |
+      should have a content length of (\d+)$/x) do |key, size|
   resp = @client.head_object(bucket: @bucket_name, key: key)
   expect(resp.data.content_length).to eq(size.to_i)
 end
 
-When(/^I page s3 objects prefixed "(.*?)" delimited "(.*?)" limit (\d+)$/) do |prefix, delimiter, max_keys|
+When(/^I page s3 objects prefixed "(.*?)" |
+      delimited "(.*?)" limit (\d+)$/x) do |prefix, delimiter, max_keys|
   @responses = []
   @client.list_objects(
     bucket: @bucket_name,
@@ -149,16 +149,6 @@ Then(/^the bucket name should not be in the request host$/) do
   expect(endpoint.host).not_to include(@bucket_name)
 end
 
-Then(/^the bucket name should be in the request host$/) do
-  endpoint = @response.context.http_request.endpoint
-  expect(endpoint.host).to include(@bucket_name)
-end
-
-Then(/^the bucket name should not be in the request path$/) do
-  endpoint = @response.context.http_request.endpoint
-  expect(endpoint.path).not_to include(@bucket_name)
-end
-
 When(/^I put "(.*?)" to the key "(.*?)" with an aes key$/) do |body, key|
   @aes_key = OpenSSL::Cipher.new('aes-256-cbc').random_key
   @client.put_object(
@@ -187,7 +177,7 @@ Then(/^the body should be an IO object$/) do
   expect(@response.body).to be_kind_of(StringIO)
 end
 
-Then(/^the body #read method should return "(.*?)"$/) do |str|
+Then(/^the body\#read method should return "(.*?)"$/) do |str|
   expect(@response.body.read).to eq(str)
 end
 
@@ -217,7 +207,8 @@ Then(/^the object should exist$/) do
   @client.head_object(bucket: @bucket_name, key: @key)
 end
 
-When(/^I create a (non-secure )?presigned url for "(.*?)" with:$/) do |non_secure, method, params|
+When(/^I create a (non-secure )?presigned url |
+      for "(.*?)" with:$/x) do |non_secure, method, params|
   presigner = Aws::S3::Presigner.new(client: @client)
   params = symbolized_params(params)
   params[:bucket] = @bucket_name
@@ -234,7 +225,8 @@ Then(/^the response should be "(.*?)"$/) do |expected|
   expect(@resp.body).to eq(expected)
 end
 
-When(/^I send an HTTP put request for the presigned url with body "(.*?)"$/) do |body|
+When(/^I send an HTTP put request for the |
+      presigned url with body "(.*?)"$/x) do |body|
   uri = URI(@url)
   http = Net::HTTP.new(uri.host)
   req = Net::HTTP::Put.new(
@@ -278,7 +270,8 @@ Then(/^the response content\-type should be "(.*?)"$/) do |_arg1|
   expect(@resp.to_hash['content-type']).to eq(['text/plain'])
 end
 
-When(/^I send an HTTP put request with the content type as "(.*?)"$/) do |content_type|
+When(/^I send an HTTP put request with the |
+      content type as "(.*?)"$/x) do |content_type|
   uri = URI(@url)
   http = Net::HTTP.new(uri.host)
   req = Net::HTTP::Put.new(uri.request_uri, 'content-type' => content_type)
@@ -290,7 +283,8 @@ When(/^the response should have a (\d+) status code$/) do |code|
   expect(@resp.code.to_i).to eq(code)
 end
 
-Then(/^the object "([^"]*)" should have a "([^"]*)" storage class$/) do |key, sc|
+Then(/^the object "([^"]*)" should have a |
+      "([^"]*)" storage class$/x) do |key, sc|
   resp = @client.list_objects(bucket: @bucket_name, prefix: key, max_keys: 1)
   expect(resp.contents.first.storage_class).to eq(sc)
 end
@@ -359,7 +353,8 @@ Then(/^response should contain "([^"]*)" event$/) do |type|
   expect(@tracker[:records]).not_to be_nil
 end
 
-Then(/^the event should have payload member with content "([^"]*)"$/) do |payload|
+Then(/^the event should have payload member |
+      with content "([^"]*)"$/x) do |payload|
   @tracker[:records].each do |e|
     # same event process twice, same string IO
     e.payload.rewind
@@ -387,7 +382,8 @@ When(/^I select it with query "([^"]*)" with block$/) do |query|
   end
 end
 
-Then(/^"([^"]*)" event should be processed "(\d+)" times when it arrives$/) do |type, times|
+Then(/^"([^"]*)" event should be processed "(\d+)" |
+      times when it arrives$/x) do |type, times|
   expect(@tracker[type.to_sym].size).to eq(times.to_i)
 end
 
@@ -457,17 +453,4 @@ When(/^I select it with query "([^"]*)" with handler and block$/) do |query|
       @tracker[:records] << e
     end
   end
-end
-
-When(/I have access to an MRAP bucket and CRT/) do
-  unless Aws::Sigv4::Signer.use_crt?
-    pending("CRT is not available")
-  end
-
-  begin
-    @client.head_bucket(bucket: 'ruby-sdk-integtest-mrap-bucket')
-  rescue
-    pending("Account does not have access to the MRAP test bucket: ruby-sdk-integtest-mrap-bucket")
-  end
-  @bucket_name = "arn:aws:s3::469596866844:accesspoint/mpatcdsojq97c.mrap"
 end

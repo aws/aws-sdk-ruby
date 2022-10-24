@@ -156,17 +156,6 @@ module BuildTools
 
     api('S3') do |api|
       api['metadata'].delete('signatureVersion')
-
-      # handled by endpoints 2.0
-      api['operations'].each do |_key, operation|
-        # requestUri should always exist. Remove bucket from path
-        # and preserve request uri as /
-        if operation['http'] && operation['http']['requestUri']
-          operation['http']['requestUri'].gsub!('/{Bucket}', '/')
-          operation['http']['requestUri'].gsub!('//', '/')
-        end
-      end
-
       api['shapes']['ExpiresString'] = { 'type' => 'string' }
       %w(HeadObjectOutput GetObjectOutput).each do |shape|
         members = api['shapes'][shape]['members']
@@ -181,26 +170,6 @@ module BuildTools
             }
           end
           h
-        end
-      end
-    end
-
-    api('S3Control') do |api|
-      # handled by endpoints 2.0
-      api['operations'].each do |_key, operation|
-        # removes accountId host prefix trait and requiredness
-        # defensive - checks host prefix labels and removes only those from API
-        next unless operation['endpoint'] &&
-                    (host_prefix = operation['endpoint']['hostPrefix'])
-                    host_prefix != '{AccountId}.'
-
-        operation['endpoint'].delete('hostPrefix')
-
-        host_prefix.gsub(/\{.+?\}/) do |label|
-          label = label.delete('{}')
-          input_shape = api['shapes'][operation['input']['shape']]
-          input_shape['members'][label].delete('hostLabel')
-          input_shape['required']&.delete(label)
         end
       end
     end

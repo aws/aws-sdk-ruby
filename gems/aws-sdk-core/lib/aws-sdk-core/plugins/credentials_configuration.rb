@@ -76,30 +76,6 @@ locations will be searched for credentials:
 
       option(:instance_profile_credentials_timeout, 1)
 
-      option(:token_provider,
-             required: false,
-             doc_type: 'Aws::TokenProvider',
-             docstring: <<-DOCS
-A Bearer Token Provider. This can be an instance of any one of the
-following classes:
-
-* `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
-  tokens.
-
-* `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
-  access token generated from `aws login`.
-
-When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
-will be used to search for tokens configured for your profile in shared configuration files.
-      DOCS
-      ) do |config|
-        if config.stub_responses
-          StaticTokenProvider.new('token')
-        else
-          TokenProviderChain.new(config).resolve
-        end
-      end
-
     end
   end
 end
