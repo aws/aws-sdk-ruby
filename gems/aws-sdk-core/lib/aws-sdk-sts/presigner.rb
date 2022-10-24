@@ -38,8 +38,7 @@ module Aws
       # {https://ruby-doc.org/stdlib-2.3.1/libdoc/base64/rdoc/Base64.html#method-i-encode64}
       # "k8s-aws-v1." + Base64.urlsafe_encode64(url).chomp("==")
       def get_caller_identity_presigned_url(options = {})
-        req = @client.build_request(:get_caller_identity, {})
-        context = req.context
+        req = @client.build_request(:get_session_token, {})
 
         param_list = Aws::Query::ParamList.new
         param_list.set('Action', 'GetCallerIdentity')
@@ -47,23 +46,26 @@ module Aws
         Aws::Query::EC2ParamBuilder.new(param_list)
           .apply(req.context.operation.input, {})
 
-        endpoint_params = Aws::STS::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          use_global_endpoint: context.config.sts_regional_endpoints == 'legacy'
+        signer = Aws::Sigv4::Signer.new(
+          service: 'sts',
+          region: req.context.config.region,
+          credentials_provider: req.context.config.credentials
         )
-        endpoint = context.config.endpoint_provider
-                          .resolve_endpoint(endpoint_params)
-        auth_scheme = Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
-        signer = Aws::Plugins::Sign.signer_for(
-          auth_scheme, context.config
+        url = Aws::Partitions::EndpointProvider.resolve(
+          req.context.config.region,
+          'sts',
+          req.context.config.sts_regional_endpoints,
+          {
+            dualstack: req.context.config.use_dualstack_endpoint,
+            fips: req.context.config.use_fips_endpoint
+          }
         )
+        url += "/?#{param_list}"
 
         signer.presign_url(
           http_method: 'GET',
-          url: "#{endpoint.url}/?#{param_list}",
+          url: url,
           body: '',
           headers: options[:headers]
         ).to_s

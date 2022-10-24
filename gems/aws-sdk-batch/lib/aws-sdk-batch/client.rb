@@ -352,10 +352,10 @@ module Aws::Batch
     # @!group API Operations
 
     # Cancels a job in an Batch job queue. Jobs that are in the `SUBMITTED`,
-    # `PENDING`, or `RUNNABLE` state are canceled. Jobs that have progressed
-    # to `STARTING` or `RUNNING` aren't canceled, but the API operation
-    # still succeeds, even if no job is canceled. These jobs must be
-    # terminated with the TerminateJob operation.
+    # `PENDING`, or `RUNNABLE` state are canceled. Jobs that progressed to
+    # the `STARTING` or `RUNNING` state aren't canceled. However, the API
+    # operation still succeeds, even if no job is canceled. These jobs must
+    # be terminated with the TerminateJob operation.
     #
     # @option params [required, String] :job_id
     #   The Batch job ID of the job to cancel.
@@ -417,9 +417,9 @@ module Aws::Batch
     #  </note>
     #
     # In an unmanaged compute environment, you can manage your own EC2
-    # compute resources and have a lot of flexibility with how you configure
-    # your compute resources. For example, you can use custom AMIs. However,
-    # you must verify that each of your AMIs meet the Amazon ECS container
+    # compute resources and have flexibility with how you configure your
+    # compute resources. For example, you can use custom AMIs. However, you
+    # must verify that each of your AMIs meet the Amazon ECS container
     # instance AMI specification. For more information, see [container
     # instance AMIs][2] in the *Amazon Elastic Container Service Developer
     # Guide*. After you created your unmanaged compute environment, you can
@@ -452,7 +452,7 @@ module Aws::Batch
     # environments][4]. To use the enhanced updating of compute environments
     # to update AMIs, follow these rules:
     #
-    #  * Either do not set the service role (`serviceRole`) parameter or set
+    #  * Either don't set the service role (`serviceRole`) parameter or set
     #   it to the **AWSBatchServiceRole** service-linked role.
     #
     # * Set the allocation strategy (`allocationStrategy`) parameter to
@@ -461,28 +461,28 @@ module Aws::Batch
     # * Set the update to latest image version
     #   (`updateToLatestImageVersion`) parameter to `true`.
     #
-    # * Do not specify an AMI ID in `imageId`, `imageIdOverride` (in [
+    # * Don't specify an AMI ID in `imageId`, `imageIdOverride` (in [
     #   `ec2Configuration` ][5]), or in the launch template
-    #   (`launchTemplate`). In that case Batch will select the latest Amazon
-    #   ECS optimized AMI supported by Batch at the time the infrastructure
-    #   update is initiated. Alternatively you can specify the AMI ID in the
-    #   `imageId` or `imageIdOverride` parameters, or the launch template
-    #   identified by the `LaunchTemplate` properties. Changing any of these
-    #   properties will trigger an infrastructure update. If the AMI ID is
-    #   specified in the launch template, it can not be replaced by
-    #   specifying an AMI ID in either the `imageId` or `imageIdOverride`
-    #   parameters. It can only be replaced by specifying a different launch
-    #   template, or if the launch template version is set to `$Default` or
-    #   `$Latest`, by setting either a new default version for the launch
-    #   template (if `$Default`)or by adding a new version to the launch
-    #   template (if `$Latest`).
+    #   (`launchTemplate`). In that case, Batch selects the latest Amazon
+    #   ECS optimized AMI that's supported by Batch at the time the
+    #   infrastructure update is initiated. Alternatively, you can specify
+    #   the AMI ID in the `imageId` or `imageIdOverride` parameters, or the
+    #   launch template identified by the `LaunchTemplate` properties.
+    #   Changing any of these properties starts an infrastructure update. If
+    #   the AMI ID is specified in the launch template, it can't be
+    #   replaced by specifying an AMI ID in either the `imageId` or
+    #   `imageIdOverride` parameters. It can only be replaced by specifying
+    #   a different launch template, or if the launch template version is
+    #   set to `$Default` or `$Latest`, by setting either a new default
+    #   version for the launch template (if `$Default`) or by adding a new
+    #   version to the launch template (if `$Latest`).
     #
-    #  If these rules are followed, any update that triggers an
-    # infrastructure update will cause the AMI ID to be re-selected. If the
-    # `version` setting in the launch template (`launchTemplate`) is set to
-    # `$Latest` or `$Default`, the latest or default version of the launch
-    # template will be evaluated up at the time of the infrastructure
-    # update, even if the `launchTemplate` was not updated.
+    #  If these rules are followed, any update that starts an infrastructure
+    # update causes the AMI ID to be re-selected. If the `version` setting
+    # in the launch template (`launchTemplate`) is set to `$Latest` or
+    # `$Default`, the latest or default version of the launch template is
+    # evaluated up at the time of the infrastructure update, even if the
+    # `launchTemplate` wasn't updated.
     #
     #  </note>
     #
@@ -495,7 +495,7 @@ module Aws::Batch
     # [5]: https://docs.aws.amazon.com/batch/latest/APIReference/API_Ec2Configuration.html
     #
     # @option params [required, String] :compute_environment_name
-    #   The name for your compute environment. It can be up to 128 letters
+    #   The name for your compute environment. It can be up to 128 characters
     #   long. It can contain uppercase and lowercase letters, numbers, hyphens
     #   (-), and underscores (\_).
     #
@@ -562,9 +562,8 @@ module Aws::Batch
     #   If your specified role has a path other than `/`, then you must
     #   specify either the full role ARN (recommended) or prefix the role name
     #   with the path. For example, if a role with the name `bar` has a path
-    #   of `/foo/` then you would specify `/foo/bar` as the role name. For
-    #   more information, see [Friendly names and paths][2] in the *IAM User
-    #   Guide*.
+    #   of `/foo/`, specify `/foo/bar` as the role name. For more information,
+    #   see [Friendly names and paths][2] in the *IAM User Guide*.
     #
     #   <note markdown="1"> Depending on how you created your Batch service role, its ARN might
     #   contain the `service-role` path prefix. When you only specify the name
@@ -595,6 +594,10 @@ module Aws::Batch
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   [2]: https://docs.aws.amazon.com/batch/latest/APIReference/API_TagResource.html
     #   [3]: https://docs.aws.amazon.com/batch/latest/APIReference/API_UntagResource.html
+    #
+    # @option params [Types::EksConfiguration] :eks_configuration
+    #   The details for the Amazon EKS cluster that supports the compute
+    #   environment.
     #
     # @return [Types::CreateComputeEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -722,12 +725,17 @@ module Aws::Batch
     #         {
     #           image_type: "ImageType", # required
     #           image_id_override: "ImageIdOverride",
+    #           image_kubernetes_version: "KubernetesVersion",
     #         },
     #       ],
     #     },
     #     service_role: "String",
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     eks_configuration: {
+    #       eks_cluster_arn: "String", # required
+    #       kubernetes_namespace: "String", # required
     #     },
     #   })
     #
@@ -775,7 +783,7 @@ module Aws::Batch
     #   scheduling policy. The format is
     #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. An
     #   example is
-    #   `aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy`.
+    #   `aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy`.
     #
     # @option params [required, Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
@@ -1139,9 +1147,8 @@ module Aws::Batch
     #   from the end of the previous results that returned the `nextToken`
     #   value. This value is `null` when there are no more results to return.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that's only used
-    #   to retrieve the next items in a list and not for other programmatic
-    #   purposes.
+    #   <note markdown="1"> Treat this token as an opaque identifier that's only used to retrieve
+    #   the next items in a list and not for other programmatic purposes.
     #
     #    </note>
     #
@@ -1247,9 +1254,14 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.ec2_configuration #=> Array
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_type #=> String
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_id_override #=> String
+    #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_kubernetes_version #=> String
     #   resp.compute_environments[0].service_role #=> String
     #   resp.compute_environments[0].update_policy.terminate_jobs_on_update #=> Boolean
     #   resp.compute_environments[0].update_policy.job_execution_timeout_minutes #=> Integer
+    #   resp.compute_environments[0].eks_configuration.eks_cluster_arn #=> String
+    #   resp.compute_environments[0].eks_configuration.kubernetes_namespace #=> String
+    #   resp.compute_environments[0].container_orchestration_type #=> String, one of "ECS", "EKS"
+    #   resp.compute_environments[0].uuid #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironments AWS API Documentation
@@ -1295,9 +1307,8 @@ module Aws::Batch
     #   from the end of the previous results that returned the `nextToken`
     #   value. This value is `null` when there are no more results to return.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that's only used
-    #   to retrieve the next items in a list and not for other programmatic
-    #   purposes.
+    #   <note markdown="1"> Treat this token as an opaque identifier that's only used to retrieve
+    #   the next items in a list and not for other programmatic purposes.
     #
     #    </note>
     #
@@ -1510,6 +1521,41 @@ module Aws::Batch
     #   resp.job_definitions[0].propagate_tags #=> Boolean
     #   resp.job_definitions[0].platform_capabilities #=> Array
     #   resp.job_definitions[0].platform_capabilities[0] #=> String, one of "EC2", "FARGATE"
+    #   resp.job_definitions[0].eks_properties.pod_properties.service_account_name #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.host_network #=> Boolean
+    #   resp.job_definitions[0].eks_properties.pod_properties.dns_policy #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers #=> Array
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].name #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].image #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].image_pull_policy #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].command #=> Array
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].command[0] #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].args #=> Array
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].args[0] #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].env #=> Array
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].env[0].name #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].env[0].value #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].resources.limits #=> Hash
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].resources.limits["String"] #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].resources.requests #=> Hash
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].resources.requests["String"] #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].volume_mounts #=> Array
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].volume_mounts[0].name #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].volume_mounts[0].mount_path #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].volume_mounts[0].read_only #=> Boolean
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.run_as_user #=> Integer
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.run_as_group #=> Integer
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.privileged #=> Boolean
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.read_only_root_filesystem #=> Boolean
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.job_definitions[0].eks_properties.pod_properties.volumes #=> Array
+    #   resp.job_definitions[0].eks_properties.pod_properties.volumes[0].name #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.volumes[0].host_path.path #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.volumes[0].empty_dir.medium #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.volumes[0].empty_dir.size_limit #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.volumes[0].secret.secret_name #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.volumes[0].secret.optional #=> Boolean
+    #   resp.job_definitions[0].container_orchestration_type #=> String, one of "ECS", "EKS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions AWS API Documentation
@@ -1544,9 +1590,8 @@ module Aws::Batch
     #   from the end of the previous results that returned the `nextToken`
     #   value. This value is `null` when there are no more results to return.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that's only used
-    #   to retrieve the next items in a list and not for other programmatic
-    #   purposes.
+    #   <note markdown="1"> Treat this token as an opaque identifier that's only used to retrieve
+    #   the next items in a list and not for other programmatic purposes.
     #
     #    </note>
     #
@@ -1869,6 +1914,53 @@ module Aws::Batch
     #   resp.jobs[0].propagate_tags #=> Boolean
     #   resp.jobs[0].platform_capabilities #=> Array
     #   resp.jobs[0].platform_capabilities[0] #=> String, one of "EC2", "FARGATE"
+    #   resp.jobs[0].eks_properties.pod_properties.service_account_name #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.host_network #=> Boolean
+    #   resp.jobs[0].eks_properties.pod_properties.dns_policy #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.containers #=> Array
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].name #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].image #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].image_pull_policy #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].command #=> Array
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].command[0] #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].args #=> Array
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].args[0] #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].env #=> Array
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].env[0].name #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].env[0].value #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].resources.limits #=> Hash
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].resources.limits["String"] #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].resources.requests #=> Hash
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].resources.requests["String"] #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].exit_code #=> Integer
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].reason #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].volume_mounts #=> Array
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].volume_mounts[0].name #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].volume_mounts[0].mount_path #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].volume_mounts[0].read_only #=> Boolean
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.run_as_user #=> Integer
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.run_as_group #=> Integer
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.privileged #=> Boolean
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.read_only_root_filesystem #=> Boolean
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.jobs[0].eks_properties.pod_properties.volumes #=> Array
+    #   resp.jobs[0].eks_properties.pod_properties.volumes[0].name #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.volumes[0].host_path.path #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.volumes[0].empty_dir.medium #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.volumes[0].empty_dir.size_limit #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.volumes[0].secret.secret_name #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.volumes[0].secret.optional #=> Boolean
+    #   resp.jobs[0].eks_properties.pod_properties.pod_name #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.node_name #=> String
+    #   resp.jobs[0].eks_attempts #=> Array
+    #   resp.jobs[0].eks_attempts[0].containers #=> Array
+    #   resp.jobs[0].eks_attempts[0].containers[0].exit_code #=> Integer
+    #   resp.jobs[0].eks_attempts[0].containers[0].reason #=> String
+    #   resp.jobs[0].eks_attempts[0].pod_name #=> String
+    #   resp.jobs[0].eks_attempts[0].node_name #=> String
+    #   resp.jobs[0].eks_attempts[0].started_at #=> Integer
+    #   resp.jobs[0].eks_attempts[0].stopped_at #=> Integer
+    #   resp.jobs[0].eks_attempts[0].status_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobs AWS API Documentation
     #
@@ -1967,9 +2059,8 @@ module Aws::Batch
     #   results that returned the `nextToken` value. This value is `null` when
     #   there are no more results to return.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that's only used
-    #   to retrieve the next items in a list and not for other programmatic
-    #   purposes.
+    #   <note markdown="1"> Treat this token as an opaque identifier that's only used to retrieve
+    #   the next items in a list and not for other programmatic purposes.
     #
     #    </note>
     #
@@ -1983,7 +2074,7 @@ module Aws::Batch
     #   JOB\_NAME
     #
     #   : The value of the filter is a case-insensitive match for the job
-    #     name. If the value ends with an asterisk (*), the filter will match
+    #     name. If the value ends with an asterisk (*), the filter matches
     #     any job name that begins with the string before the '*'. This
     #     corresponds to the `jobName` value. For example, `test1` matches
     #     both `Test1` and `test1`, and `test1*` matches both `test1` and
@@ -1997,7 +2088,7 @@ module Aws::Batch
     #     value. The value is case sensitive. When the value for the filter is
     #     the job definition name, the results include all the jobs that used
     #     any revision of that job definition name. If the value ends with an
-    #     asterisk (*), the filter will match any job definition name that
+    #     asterisk (*), the filter matches any job definition name that
     #     begins with the string before the '*'. For example, `jd1` matches
     #     only `jd1`, and `jd1*` matches both `jd1` and `jd1A`. The version of
     #     the job definition that's used doesn't affect the sort order. When
@@ -2005,7 +2096,7 @@ module Aws::Batch
     #     the form
     #     `arn:$\{Partition\}:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`),
     #     the results include jobs that used the specified revision of the job
-    #     definition. Asterisk (*) is not supported when the ARN is used.
+    #     definition. Asterisk (*) isn't supported when the ARN is used.
     #
     #   BEFORE\_CREATED\_AT
     #
@@ -2133,9 +2224,8 @@ module Aws::Batch
     #   from the end of the previous results that returned the `nextToken`
     #   value. This value is `null` when there are no more results to return.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that's only used
-    #   to retrieve the next items in a list and not for other programmatic
-    #   purposes.
+    #   <note markdown="1"> Treat this token as an opaque identifier that's only used to retrieve
+    #   the next items in a list and not for other programmatic purposes.
     #
     #    </note>
     #
@@ -2171,14 +2261,14 @@ module Aws::Batch
     # Lists the tags for an Batch resource. Batch resources that support
     # tags are compute environments, jobs, job definitions, job queues, and
     # scheduling policies. ARNs for child jobs of array and multi-node
-    # parallel (MNP) jobs are not supported.
+    # parallel (MNP) jobs aren't supported.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource that tags
     #   are listed for. Batch resources that support tags are compute
     #   environments, jobs, job definitions, job queues, and scheduling
     #   policies. ARNs for child jobs of array and multi-node parallel (MNP)
-    #   jobs are not supported.
+    #   jobs aren't supported.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2251,18 +2341,19 @@ module Aws::Batch
     #
     # @option params [Integer] :scheduling_priority
     #   The scheduling priority for jobs that are submitted with this job
-    #   definition. This will only affect jobs in job queues with a fair share
-    #   policy. Jobs with a higher scheduling priority will be scheduled
-    #   before jobs with a lower scheduling priority.
+    #   definition. This only affects jobs in job queues with a fair share
+    #   policy. Jobs with a higher scheduling priority are scheduled before
+    #   jobs with a lower scheduling priority.
     #
     #   The minimum supported value is 0 and the maximum supported value is
     #   9999.
     #
     # @option params [Types::ContainerProperties] :container_properties
-    #   An object with various properties specific to single-node
-    #   container-based jobs. If the job definition's `type` parameter is
-    #   `container`, then you must specify either `containerProperties` or
-    #   `nodeProperties`.
+    #   An object with various properties specific to Amazon ECS based
+    #   single-node container-based jobs. If the job definition's `type`
+    #   parameter is `container`, then you must specify either
+    #   `containerProperties` or `nodeProperties`. This must not be specified
+    #   for Amazon EKS based job definitions.
     #
     #   <note markdown="1"> If the job runs on Fargate resources, then you must not specify
     #   `nodeProperties`; use only `containerProperties`.
@@ -2279,6 +2370,11 @@ module Aws::Batch
     #
     #   <note markdown="1"> If the job runs on Fargate resources, then you must not specify
     #   `nodeProperties`; use `containerProperties` instead.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> If the job runs on Amazon EKS resources, then you must not specify
+    #   `nodeProperties`.
     #
     #    </note>
     #
@@ -2300,6 +2396,11 @@ module Aws::Batch
     #   priority over job definitions tags. If the total number of combined
     #   tags from the job and job definition is over 50, the job is moved to
     #   the `FAILED` state.
+    #
+    #   <note markdown="1"> If the job runs on Amazon EKS resources, then you must not specify
+    #   `propagateTags`.
+    #
+    #    </note>
     #
     # @option params [Types::JobTimeout] :timeout
     #   The timeout configuration for jobs that are submitted with this job
@@ -2328,6 +2429,16 @@ module Aws::Batch
     #   The platform capabilities required by the job definition. If no value
     #   is specified, it defaults to `EC2`. To run the job on Fargate
     #   resources, specify `FARGATE`.
+    #
+    #   <note markdown="1"> If the job runs on Amazon EKS resources, then you must not specify
+    #   `platformCapabilities`.
+    #
+    #    </note>
+    #
+    # @option params [Types::EksProperties] :eks_properties
+    #   An object with various properties that are specific to Amazon EKS
+    #   based jobs. This must not be specified for Amazon ECS based job
+    #   definitions.
     #
     # @return [Types::RegisterJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2643,6 +2754,66 @@ module Aws::Batch
     #       "TagKey" => "TagValue",
     #     },
     #     platform_capabilities: ["EC2"], # accepts EC2, FARGATE
+    #     eks_properties: {
+    #       pod_properties: {
+    #         service_account_name: "String",
+    #         host_network: false,
+    #         dns_policy: "String",
+    #         containers: [
+    #           {
+    #             name: "String",
+    #             image: "String", # required
+    #             image_pull_policy: "String",
+    #             command: ["String"],
+    #             args: ["String"],
+    #             env: [
+    #               {
+    #                 name: "String", # required
+    #                 value: "String",
+    #               },
+    #             ],
+    #             resources: {
+    #               limits: {
+    #                 "String" => "Quantity",
+    #               },
+    #               requests: {
+    #                 "String" => "Quantity",
+    #               },
+    #             },
+    #             volume_mounts: [
+    #               {
+    #                 name: "String",
+    #                 mount_path: "String",
+    #                 read_only: false,
+    #               },
+    #             ],
+    #             security_context: {
+    #               run_as_user: 1,
+    #               run_as_group: 1,
+    #               privileged: false,
+    #               read_only_root_filesystem: false,
+    #               run_as_non_root: false,
+    #             },
+    #           },
+    #         ],
+    #         volumes: [
+    #           {
+    #             name: "String", # required
+    #             host_path: {
+    #               path: "String",
+    #             },
+    #             empty_dir: {
+    #               medium: "String",
+    #               size_limit: "Quantity",
+    #             },
+    #             secret: {
+    #               secret_name: "String", # required
+    #               optional: false,
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2688,17 +2859,16 @@ module Aws::Batch
     #   name or the Amazon Resource Name (ARN) of the queue.
     #
     # @option params [String] :share_identifier
-    #   The share identifier for the job. If the job queue does not have a
+    #   The share identifier for the job. If the job queue doesn't have a
     #   scheduling policy, then this parameter must not be specified. If the
     #   job queue has a scheduling policy, then this parameter must be
     #   specified.
     #
     # @option params [Integer] :scheduling_priority_override
-    #   The scheduling priority for the job. This will only affect jobs in job
+    #   The scheduling priority for the job. This only affects jobs in job
     #   queues with a fair share policy. Jobs with a higher scheduling
-    #   priority will be scheduled before jobs with a lower scheduling
-    #   priority. This will override any scheduling priority in the job
-    #   definition.
+    #   priority are scheduled before jobs with a lower scheduling priority.
+    #   This overrides any scheduling priority in the job definition.
     #
     #   The minimum supported value is 0 and the maximum supported value is
     #   9999.
@@ -2736,13 +2906,13 @@ module Aws::Batch
     #   from the job definition.
     #
     # @option params [Types::ContainerOverrides] :container_overrides
-    #   A list of container overrides in the JSON format that specify the name
-    #   of a container in the specified job definition and the overrides it
-    #   receives. You can override the default command for a container, which
-    #   is specified in the job definition or the Docker image, with a
-    #   `command` override. You can also override existing environment
-    #   variables on a container or add new environment variables to it with
-    #   an `environment` override.
+    #   An object with various properties that override the defaults for the
+    #   job definition that specify the name of a container in the specified
+    #   job definition and the overrides it should receive. You can override
+    #   the default command for a container, which is specified in the job
+    #   definition or the Docker image, with a `command` override. You can
+    #   also override existing environment variables on a container or add new
+    #   environment variables to it with an `environment` override.
     #
     # @option params [Types::NodeOverrides] :node_overrides
     #   A list of node overrides in JSON format that specify the node range to
@@ -2792,6 +2962,11 @@ module Aws::Batch
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @option params [Types::EksPropertiesOverride] :eks_properties_override
+    #   An object that can only be specified for jobs that are run on Amazon
+    #   EKS resources with various properties that override defaults for the
+    #   job definition.
     #
     # @return [Types::SubmitJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2898,6 +3073,31 @@ module Aws::Batch
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     eks_properties_override: {
+    #       pod_properties: {
+    #         containers: [
+    #           {
+    #             image: "String",
+    #             command: ["String"],
+    #             args: ["String"],
+    #             env: [
+    #               {
+    #                 name: "String", # required
+    #                 value: "String",
+    #               },
+    #             ],
+    #             resources: {
+    #               limits: {
+    #                 "String" => "Quantity",
+    #               },
+    #               requests: {
+    #                 "String" => "Quantity",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2921,13 +3121,13 @@ module Aws::Batch
     # the tags that are associated with that resource are deleted as well.
     # Batch resources that support tags are compute environments, jobs, job
     # definitions, job queues, and scheduling policies. ARNs for child jobs
-    # of array and multi-node parallel (MNP) jobs are not supported.
+    # of array and multi-node parallel (MNP) jobs aren't supported.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource that tags are added to.
     #   Batch resources that support tags are compute environments, jobs, job
     #   definitions, job queues, and scheduling policies. ARNs for child jobs
-    #   of array and multi-node parallel (MNP) jobs are not supported.
+    #   of array and multi-node parallel (MNP) jobs aren't supported.
     #
     # @option params [required, Hash<String,String>] :tags
     #   The tags that you apply to the resource to help you categorize and
@@ -3026,7 +3226,7 @@ module Aws::Batch
     #   The Amazon Resource Name (ARN) of the resource from which to delete
     #   tags. Batch resources that support tags are compute environments,
     #   jobs, job definitions, job queues, and scheduling policies. ARNs for
-    #   child jobs of array and multi-node parallel (MNP) jobs are not
+    #   child jobs of array and multi-node parallel (MNP) jobs aren't
     #   supported.
     #
     # @option params [required, Array<String>] :tag_keys
@@ -3091,11 +3291,11 @@ module Aws::Batch
     #
     # @option params [Integer] :unmanagedv_cpus
     #   The maximum number of vCPUs expected to be used for an unmanaged
-    #   compute environment. Do not specify this parameter for a managed
+    #   compute environment. Don't specify this parameter for a managed
     #   compute environment. This parameter is only used for fair share
     #   scheduling to reserve vCPU capacity for new share identifiers. If this
-    #   parameter is not provided for a fair share job queue, no vCPU capacity
-    #   will be reserved.
+    #   parameter isn't provided for a fair share job queue, no vCPU capacity
+    #   is reserved.
     #
     # @option params [Types::ComputeResourceUpdate] :compute_resources
     #   Details of the compute resources managed by the compute environment.
@@ -3199,6 +3399,7 @@ module Aws::Batch
     #         {
     #           image_type: "ImageType", # required
     #           image_id_override: "ImageIdOverride",
+    #           image_kubernetes_version: "KubernetesVersion",
     #         },
     #       ],
     #       update_to_latest_image_version: false,
@@ -3243,7 +3444,7 @@ module Aws::Batch
     #   but not removed. The format is
     #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. For
     #   example,
-    #   `aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy`.
+    #   `aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy`.
     #
     # @option params [Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
@@ -3369,7 +3570,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

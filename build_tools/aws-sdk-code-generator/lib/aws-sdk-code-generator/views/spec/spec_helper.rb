@@ -9,14 +9,13 @@ module AwsSdkCodeGenerator
 
         # @param [Hash] options
         # @option options [required, Service] :service
-        # @option options[required, String] :aws_sdk_core_lib_path
         def initialize(options)
-          @service = options.fetch(:service)
-          @gem_name = @service.gem_name
-          @gem_dependencies = @service.gem_dependencies.map do |gem_name, _|
+          service = options.fetch(:service)
+          @gem_name = service.gem_name
+          @gem_dependencies = service.gem_dependencies.map do |gem_name, _|
             { dependency: gem_name }
           end
-          @custom = @service.protocol == 'api-gateway'
+          @custom = service.protocol == 'api-gateway'
         end
 
         attr_reader :gem_name
@@ -26,10 +25,6 @@ module AwsSdkCodeGenerator
         def generated_src_warning
           return if @custom
           GENERATED_SRC_WARNING
-        end
-
-        def included_in_core
-          @service.included_in_core?
         end
 
       end

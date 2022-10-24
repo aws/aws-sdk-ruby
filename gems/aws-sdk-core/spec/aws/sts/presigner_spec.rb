@@ -54,12 +54,12 @@ module Aws
                          '?Action=GetCallerIdentity&Version=2011-06-15'\
                          '&X-Amz-Algorithm=AWS4-HMAC-SHA256'\
                          '&X-Amz-Credential=akid%2F20160101'\
-                         '%2Fus-east-1%2Fsts%2Faws4_request'\
+                         '%2Fus-west-2%2Fsts%2Faws4_request'\
                          '&X-Amz-Date=20160101T112233Z'\
                          '&X-Amz-Expires=900'\
                          '&X-Amz-SignedHeaders=host%3Bx-k8s-aws-id'\
-                         '&X-Amz-Signature=4b5508cfe576b613148fd6cae3a8216021'\
-                         '12c41ede0fa8afe75710ac63230017'
+                         '&X-Amz-Signature=eb82f89680e51b8f315703878fb360674f6'\
+                         '0998df071047f95ea52dfd4f101db'
           actual_url = pre.get_caller_identity_presigned_url(
             headers: { 'X-K8s-Aws-Id' => 'my-eks-cluster' }
           )

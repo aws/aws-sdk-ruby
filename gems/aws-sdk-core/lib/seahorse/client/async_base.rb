@@ -49,3 +49,4 @@ module Seahorse
     end
   end
 end
+

@@ -629,15 +629,22 @@ module Aws
       end
 
       def bucket_url
-        # Taken from Aws::S3::Endpoints module
-        params = Aws::S3::EndpointParameters.new(
-          bucket: @bucket_name,
-          region: @bucket_region,
-          accelerate: @accelerate,
-          use_global_endpoint: true
-        )
-        endpoint = Aws::S3::EndpointProvider.new.resolve_endpoint(params)
-        endpoint.url
+        url = Aws::Partitions::EndpointProvider.resolve(@bucket_region, 's3')
+        url = URI.parse(url)
+        if Plugins::BucketDns.dns_compatible?(@bucket_name, _ssl = true)
+          if @accelerate
+            url.host = "#{@bucket_name}.s3-accelerate.amazonaws.com"
+          else
+            url.host = "#{@bucket_name}.#{url.host}"
+          end
+        else
+          url.path = "/#{@bucket_name}"
+        end
+        if @bucket_region == 'us-east-1'
+          # keep legacy behavior by default
+          url.host = Plugins::IADRegionalEndpoint.legacy_host(url.host)
+        end
+        url.to_s
       end
 
       # @return [Hash]

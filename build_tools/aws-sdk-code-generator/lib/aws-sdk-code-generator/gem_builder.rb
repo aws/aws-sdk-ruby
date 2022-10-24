@@ -23,19 +23,16 @@ module AwsSdkCodeGenerator
         y.yield("#{@service.gem_name}.gemspec", gemspec_file)
         y.yield('features/env.rb', features_env_file)
         y.yield('features/step_definitions.rb', features_step_definitions_file)
+        y.yield('spec/spec_helper.rb', spec_helper_file)
         if @service.smoke_tests
           y.yield('features/smoke.feature', smoke_file)
           y.yield('features/smoke_step_definitions.rb', smoke_step_definitions_file)
         end
         y.yield('VERSION', version_file)
         y.yield('LICENSE.txt', license_file)
-
         code = CodeBuilder.new(@options)
         code.source_files.each do |path, code|
           y.yield("lib/#{path}", code)
-        end
-        code.spec_files.each do |path, code|
-          y.yield("spec/#{path}", code)
         end
       end.each(&block)
     end
@@ -60,6 +57,10 @@ module AwsSdkCodeGenerator
 
     def features_step_definitions_file
       Views::Features::StepDefinitions.new(options).render
+    end
+
+    def spec_helper_file
+      Views::Spec::SpecHelper.new(options).render
     end
 
     def version_file

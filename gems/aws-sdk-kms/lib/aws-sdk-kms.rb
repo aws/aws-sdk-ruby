@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-kms/types'
 require_relative 'aws-sdk-kms/client_api'
-require_relative 'aws-sdk-kms/plugins/endpoints.rb'
 require_relative 'aws-sdk-kms/client'
 require_relative 'aws-sdk-kms/errors'
 require_relative 'aws-sdk-kms/resource'
-require_relative 'aws-sdk-kms/endpoint_parameters'
-require_relative 'aws-sdk-kms/endpoint_provider'
-require_relative 'aws-sdk-kms/endpoints'
 require_relative 'aws-sdk-kms/customizations'
 
 # This module provides support for AWS Key Management Service. This module is available in the

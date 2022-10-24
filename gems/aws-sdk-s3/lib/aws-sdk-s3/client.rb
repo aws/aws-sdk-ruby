@@ -30,7 +30,6 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-s3/plugins/accelerate.rb'
 require 'aws-sdk-s3/plugins/arn.rb'
@@ -43,6 +42,7 @@ require 'aws-sdk-s3/plugins/http_200_errors.rb'
 require 'aws-sdk-s3/plugins/iad_regional_endpoint.rb'
 require 'aws-sdk-s3/plugins/location_constraint.rb'
 require 'aws-sdk-s3/plugins/md5s.rb'
+require 'aws-sdk-s3/plugins/object_lambda_endpoint.rb'
 require 'aws-sdk-s3/plugins/redirects.rb'
 require 'aws-sdk-s3/plugins/s3_host_id.rb'
 require 'aws-sdk-s3/plugins/s3_signer.rb'
@@ -98,7 +98,6 @@ module Aws::S3
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestXml)
     add_plugin(Aws::S3::Plugins::Accelerate)
     add_plugin(Aws::S3::Plugins::ARN)
@@ -111,6 +110,7 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::IADRegionalEndpoint)
     add_plugin(Aws::S3::Plugins::LocationConstraint)
     add_plugin(Aws::S3::Plugins::Md5s)
+    add_plugin(Aws::S3::Plugins::ObjectLambdaEndpoint)
     add_plugin(Aws::S3::Plugins::Redirects)
     add_plugin(Aws::S3::Plugins::S3HostId)
     add_plugin(Aws::S3::Plugins::S3Signer)
@@ -119,7 +119,6 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::UrlEncodedKeys)
     add_plugin(Aws::S3::Plugins::SkipWholeMultipartGetChecksums)
     add_plugin(Aws::Plugins::EventStreamConfiguration)
-    add_plugin(Aws::S3::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -369,19 +368,6 @@ module Aws::S3
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
-    #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
-    #     following classes:
-    #
-    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
-    #       tokens.
-    #
-    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
-    #       access token generated from `aws login`.
-    #
-    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
-    #     will be used to search for tokens configured for your profile in shared configuration files.
-    #
     #   @option options [Boolean] :use_accelerate_endpoint (false)
     #     When set to `true`, accelerated bucket endpoints will be used
     #     for all object operations. You must first enable accelerate for
@@ -399,9 +385,6 @@ module Aws::S3
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
-    #
-    #   @option options [Aws::S3::EndpointProvider] :endpoint_provider
-    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::S3::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.

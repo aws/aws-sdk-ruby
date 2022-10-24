@@ -153,7 +153,6 @@
   "CloudSearchDomain": {
     "models": "cloudsearchdomain/2013-01-01",
     "partitionsKey": null,
-    "legacyEndpoints": true,
     "addPlugins": [
       "Aws::CloudSearchDomain::Plugins::ConditionalSigning",
       "Aws::CloudSearchDomain::Plugins::SwitchToPost"
@@ -381,7 +380,10 @@
     "models": "es/2015-01-01"
   },
   "EventBridge": {
-    "models": "eventbridge/2015-10-07"
+    "models": "eventbridge/2015-10-07",
+    "addPlugins": [
+      "Aws::EventBridge::Plugins::MultiRegionEndpoint"
+    ]
   },
   "FIS": {
     "models": "fis/2020-12-01"
@@ -854,6 +856,9 @@
       "aws-sdk-kms": "~> 1",
       "aws-sigv4": "~> 1.4"
     },
+    "removePlugins": [
+      "Aws::Plugins::SignatureV4"
+    ],
     "addPlugins": [
       "Aws::S3::Plugins::Accelerate",
       "Aws::S3::Plugins::ARN",
@@ -866,6 +871,7 @@
       "Aws::S3::Plugins::IADRegionalEndpoint",
       "Aws::S3::Plugins::LocationConstraint",
       "Aws::S3::Plugins::Md5s",
+      "Aws::S3::Plugins::ObjectLambdaEndpoint",
       "Aws::S3::Plugins::Redirects",
       "Aws::S3::Plugins::S3HostId",
       "Aws::S3::Plugins::S3Signer",
@@ -880,9 +886,13 @@
     "dependencies": {
       "aws-sigv4": "~> 1.1"
     },
+    "removePlugins": [
+      "Aws::Plugins::SignatureV4"
+    ],
     "addPlugins": [
       "Aws::S3Control::Plugins::ARN",
       "Aws::S3Control::Plugins::Dualstack",
+      "Aws::S3Control::Plugins::S3ControlSigner",
       "Aws::S3Control::Plugins::S3HostId"
     ]
   },
@@ -984,8 +994,7 @@
     "models": "signer/2017-08-25"
   },
   "SimpleDB": {
-    "models": "sdb/2009-04-15",
-    "legacyEndpoints": true
+    "models": "sdb/2009-04-15"
   },
   "SnowDeviceManagement": {
     "models": "snow-device-management/2021-08-04"

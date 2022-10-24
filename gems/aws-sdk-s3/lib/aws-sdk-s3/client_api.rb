@@ -2677,7 +2677,7 @@ module Aws::S3
       api.add_operation(:abort_multipart_upload, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AbortMultipartUpload"
         o.http_method = "DELETE"
-        o.http_request_uri = "/{Key+}"
+        o.http_request_uri = "/{Bucket}/{Key+}"
         o.input = Shapes::ShapeRef.new(shape: AbortMultipartUploadRequest)
         o.output = Shapes::ShapeRef.new(shape: AbortMultipartUploadOutput)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchUpload)
@@ -2686,7 +2686,7 @@ module Aws::S3
       api.add_operation(:complete_multipart_upload, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CompleteMultipartUpload"
         o.http_method = "POST"
-        o.http_request_uri = "/{Key+}"
+        o.http_request_uri = "/{Bucket}/{Key+}"
         o.input = Shapes::ShapeRef.new(shape: CompleteMultipartUploadRequest)
         o.output = Shapes::ShapeRef.new(shape: CompleteMultipartUploadOutput)
       end)
@@ -2694,7 +2694,7 @@ module Aws::S3
       api.add_operation(:copy_object, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CopyObject"
         o.http_method = "PUT"
-        o.http_request_uri = "/{Key+}"
+        o.http_request_uri = "/{Bucket}/{Key+}"
         o.input = Shapes::ShapeRef.new(shape: CopyObjectRequest)
         o.output = Shapes::ShapeRef.new(shape: CopyObjectOutput)
         o.errors << Shapes::ShapeRef.new(shape: ObjectNotInActiveTierError)
@@ -2703,7 +2703,7 @@ module Aws::S3
       api.add_operation(:create_bucket, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateBucket"
         o.http_method = "PUT"
-        o.http_request_uri = "/"
+        o.http_request_uri = "/{Bucket}"
         o.input = Shapes::ShapeRef.new(shape: CreateBucketRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateBucketOutput)
         o.errors << Shapes::ShapeRef.new(shape: BucketAlreadyExists)
@@ -2713,7 +2713,7 @@ module Aws::S3
       api.add_operation(:create_multipart_upload, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMultipartUpload"
         o.http_method = "POST"
-        o.http_request_uri = "/{Key+}?uploads"
+        o.http_request_uri = "/{Bucket}/{Key+}?uploads"
         o.input = Shapes::ShapeRef.new(shape: CreateMultipartUploadRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateMultipartUploadOutput)
       end)
@@ -2721,7 +2721,7 @@ module Aws::S3
       api.add_operation(:delete_bucket, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucket"
         o.http_method = "DELETE"
-        o.http_request_uri = "/"
+        o.http_request_uri = "/{Bucket}"
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2729,7 +2729,7 @@ module Aws::S3
       api.add_operation(:delete_bucket_analytics_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucketAnalyticsConfiguration"
         o.http_method = "DELETE"
-        o.http_request_uri = "/?analytics"
+        o.http_request_uri = "/{Bucket}?analytics"
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketAnalyticsConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2737,7 +2737,7 @@ module Aws::S3
       api.add_operation(:delete_bucket_cors, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucketCors"
         o.http_method = "DELETE"
-        o.http_request_uri = "/?cors"
+        o.http_request_uri = "/{Bucket}?cors"
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketCorsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2745,7 +2745,7 @@ module Aws::S3
       api.add_operation(:delete_bucket_encryption, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucketEncryption"
         o.http_method = "DELETE"
-        o.http_request_uri = "/?encryption"
+        o.http_request_uri = "/{Bucket}?encryption"
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketEncryptionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2753,7 +2753,7 @@ module Aws::S3
       api.add_operation(:delete_bucket_intelligent_tiering_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucketIntelligentTieringConfiguration"
         o.http_method = "DELETE"
-        o.http_request_uri = "/?intelligent-tiering"
+        o.http_request_uri = "/{Bucket}?intelligent-tiering"
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketIntelligentTieringConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2761,7 +2761,7 @@ module Aws::S3
       api.add_operation(:delete_bucket_inventory_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucketInventoryConfiguration"
         o.http_method = "DELETE"
-        o.http_request_uri = "/?inventory"
+        o.http_request_uri = "/{Bucket}?inventory"
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketInventoryConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2769,7 +2769,7 @@ module Aws::S3
       api.add_operation(:delete_bucket_lifecycle, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucketLifecycle"
         o.http_method = "DELETE"
-        o.http_request_uri = "/?lifecycle"
+        o.http_request_uri = "/{Bucket}?lifecycle"
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketLifecycleRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2777,7 +2777,7 @@ module Aws::S3
       api.add_operation(:delete_bucket_metrics_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucketMetricsConfiguration"
         o.http_method = "DELETE"
-        o.http_request_uri = "/?metrics"
+        o.http_request_uri = "/{Bucket}?metrics"
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketMetricsConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2785,7 +2785,7 @@ module Aws::S3
       api.add_operation(:delete_bucket_ownership_controls, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucketOwnershipControls"
         o.http_method = "DELETE"
-        o.http_request_uri = "/?ownershipControls"
+        o.http_request_uri = "/{Bucket}?ownershipControls"
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketOwnershipControlsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2793,7 +2793,7 @@ module Aws::S3
       api.add_operation(:delete_bucket_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucketPolicy"
         o.http_method = "DELETE"
-        o.http_request_uri = "/?policy"
+        o.http_request_uri = "/{Bucket}?policy"
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2801,7 +2801,7 @@ module Aws::S3
       api.add_operation(:delete_bucket_replication, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucketReplication"
         o.http_method = "DELETE"
-        o.http_request_uri = "/?replication"
+        o.http_request_uri = "/{Bucket}?replication"
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketReplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2809,7 +2809,7 @@ module Aws::S3
       api.add_operation(:delete_bucket_tagging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucketTagging"
         o.http_method = "DELETE"
-        o.http_request_uri = "/?tagging"
+        o.http_request_uri = "/{Bucket}?tagging"
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2817,7 +2817,7 @@ module Aws::S3
       api.add_operation(:delete_bucket_website, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucketWebsite"
         o.http_method = "DELETE"
-        o.http_request_uri = "/?website"
+        o.http_request_uri = "/{Bucket}?website"
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketWebsiteRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2825,7 +2825,7 @@ module Aws::S3
       api.add_operation(:delete_object, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteObject"
         o.http_method = "DELETE"
-        o.http_request_uri = "/{Key+}"
+        o.http_request_uri = "/{Bucket}/{Key+}"
         o.input = Shapes::ShapeRef.new(shape: DeleteObjectRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteObjectOutput)
       end)
@@ -2833,7 +2833,7 @@ module Aws::S3
       api.add_operation(:delete_object_tagging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteObjectTagging"
         o.http_method = "DELETE"
-        o.http_request_uri = "/{Key+}?tagging"
+        o.http_request_uri = "/{Bucket}/{Key+}?tagging"
         o.input = Shapes::ShapeRef.new(shape: DeleteObjectTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteObjectTaggingOutput)
       end)
@@ -2841,7 +2841,7 @@ module Aws::S3
       api.add_operation(:delete_objects, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteObjects"
         o.http_method = "POST"
-        o.http_request_uri = "/?delete"
+        o.http_request_uri = "/{Bucket}?delete"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -2857,7 +2857,7 @@ module Aws::S3
       api.add_operation(:delete_public_access_block, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePublicAccessBlock"
         o.http_method = "DELETE"
-        o.http_request_uri = "/?publicAccessBlock"
+        o.http_request_uri = "/{Bucket}?publicAccessBlock"
         o.input = Shapes::ShapeRef.new(shape: DeletePublicAccessBlockRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -2865,7 +2865,7 @@ module Aws::S3
       api.add_operation(:get_bucket_accelerate_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketAccelerateConfiguration"
         o.http_method = "GET"
-        o.http_request_uri = "/?accelerate"
+        o.http_request_uri = "/{Bucket}?accelerate"
         o.input = Shapes::ShapeRef.new(shape: GetBucketAccelerateConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketAccelerateConfigurationOutput)
       end)
@@ -2873,7 +2873,7 @@ module Aws::S3
       api.add_operation(:get_bucket_acl, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketAcl"
         o.http_method = "GET"
-        o.http_request_uri = "/?acl"
+        o.http_request_uri = "/{Bucket}?acl"
         o.input = Shapes::ShapeRef.new(shape: GetBucketAclRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketAclOutput)
       end)
@@ -2881,7 +2881,7 @@ module Aws::S3
       api.add_operation(:get_bucket_analytics_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketAnalyticsConfiguration"
         o.http_method = "GET"
-        o.http_request_uri = "/?analytics"
+        o.http_request_uri = "/{Bucket}?analytics"
         o.input = Shapes::ShapeRef.new(shape: GetBucketAnalyticsConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketAnalyticsConfigurationOutput)
       end)
@@ -2889,7 +2889,7 @@ module Aws::S3
       api.add_operation(:get_bucket_cors, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketCors"
         o.http_method = "GET"
-        o.http_request_uri = "/?cors"
+        o.http_request_uri = "/{Bucket}?cors"
         o.input = Shapes::ShapeRef.new(shape: GetBucketCorsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketCorsOutput)
       end)
@@ -2897,7 +2897,7 @@ module Aws::S3
       api.add_operation(:get_bucket_encryption, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketEncryption"
         o.http_method = "GET"
-        o.http_request_uri = "/?encryption"
+        o.http_request_uri = "/{Bucket}?encryption"
         o.input = Shapes::ShapeRef.new(shape: GetBucketEncryptionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketEncryptionOutput)
       end)
@@ -2905,7 +2905,7 @@ module Aws::S3
       api.add_operation(:get_bucket_intelligent_tiering_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketIntelligentTieringConfiguration"
         o.http_method = "GET"
-        o.http_request_uri = "/?intelligent-tiering"
+        o.http_request_uri = "/{Bucket}?intelligent-tiering"
         o.input = Shapes::ShapeRef.new(shape: GetBucketIntelligentTieringConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketIntelligentTieringConfigurationOutput)
       end)
@@ -2913,7 +2913,7 @@ module Aws::S3
       api.add_operation(:get_bucket_inventory_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketInventoryConfiguration"
         o.http_method = "GET"
-        o.http_request_uri = "/?inventory"
+        o.http_request_uri = "/{Bucket}?inventory"
         o.input = Shapes::ShapeRef.new(shape: GetBucketInventoryConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketInventoryConfigurationOutput)
       end)
@@ -2921,7 +2921,7 @@ module Aws::S3
       api.add_operation(:get_bucket_lifecycle, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketLifecycle"
         o.http_method = "GET"
-        o.http_request_uri = "/?lifecycle"
+        o.http_request_uri = "/{Bucket}?lifecycle"
         o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetBucketLifecycleRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketLifecycleOutput)
@@ -2930,7 +2930,7 @@ module Aws::S3
       api.add_operation(:get_bucket_lifecycle_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketLifecycleConfiguration"
         o.http_method = "GET"
-        o.http_request_uri = "/?lifecycle"
+        o.http_request_uri = "/{Bucket}?lifecycle"
         o.input = Shapes::ShapeRef.new(shape: GetBucketLifecycleConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketLifecycleConfigurationOutput)
       end)
@@ -2938,7 +2938,7 @@ module Aws::S3
       api.add_operation(:get_bucket_location, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketLocation"
         o.http_method = "GET"
-        o.http_request_uri = "/?location"
+        o.http_request_uri = "/{Bucket}?location"
         o.input = Shapes::ShapeRef.new(shape: GetBucketLocationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketLocationOutput)
       end)
@@ -2946,7 +2946,7 @@ module Aws::S3
       api.add_operation(:get_bucket_logging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketLogging"
         o.http_method = "GET"
-        o.http_request_uri = "/?logging"
+        o.http_request_uri = "/{Bucket}?logging"
         o.input = Shapes::ShapeRef.new(shape: GetBucketLoggingRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketLoggingOutput)
       end)
@@ -2954,7 +2954,7 @@ module Aws::S3
       api.add_operation(:get_bucket_metrics_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketMetricsConfiguration"
         o.http_method = "GET"
-        o.http_request_uri = "/?metrics"
+        o.http_request_uri = "/{Bucket}?metrics"
         o.input = Shapes::ShapeRef.new(shape: GetBucketMetricsConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketMetricsConfigurationOutput)
       end)
@@ -2962,7 +2962,7 @@ module Aws::S3
       api.add_operation(:get_bucket_notification, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketNotification"
         o.http_method = "GET"
-        o.http_request_uri = "/?notification"
+        o.http_request_uri = "/{Bucket}?notification"
         o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetBucketNotificationConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: NotificationConfigurationDeprecated)
@@ -2971,7 +2971,7 @@ module Aws::S3
       api.add_operation(:get_bucket_notification_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketNotificationConfiguration"
         o.http_method = "GET"
-        o.http_request_uri = "/?notification"
+        o.http_request_uri = "/{Bucket}?notification"
         o.input = Shapes::ShapeRef.new(shape: GetBucketNotificationConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: NotificationConfiguration)
       end)
@@ -2979,7 +2979,7 @@ module Aws::S3
       api.add_operation(:get_bucket_ownership_controls, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketOwnershipControls"
         o.http_method = "GET"
-        o.http_request_uri = "/?ownershipControls"
+        o.http_request_uri = "/{Bucket}?ownershipControls"
         o.input = Shapes::ShapeRef.new(shape: GetBucketOwnershipControlsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketOwnershipControlsOutput)
       end)
@@ -2987,7 +2987,7 @@ module Aws::S3
       api.add_operation(:get_bucket_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketPolicy"
         o.http_method = "GET"
-        o.http_request_uri = "/?policy"
+        o.http_request_uri = "/{Bucket}?policy"
         o.input = Shapes::ShapeRef.new(shape: GetBucketPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketPolicyOutput)
       end)
@@ -2995,7 +2995,7 @@ module Aws::S3
       api.add_operation(:get_bucket_policy_status, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketPolicyStatus"
         o.http_method = "GET"
-        o.http_request_uri = "/?policyStatus"
+        o.http_request_uri = "/{Bucket}?policyStatus"
         o.input = Shapes::ShapeRef.new(shape: GetBucketPolicyStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketPolicyStatusOutput)
       end)
@@ -3003,7 +3003,7 @@ module Aws::S3
       api.add_operation(:get_bucket_replication, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketReplication"
         o.http_method = "GET"
-        o.http_request_uri = "/?replication"
+        o.http_request_uri = "/{Bucket}?replication"
         o.input = Shapes::ShapeRef.new(shape: GetBucketReplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketReplicationOutput)
       end)
@@ -3011,7 +3011,7 @@ module Aws::S3
       api.add_operation(:get_bucket_request_payment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketRequestPayment"
         o.http_method = "GET"
-        o.http_request_uri = "/?requestPayment"
+        o.http_request_uri = "/{Bucket}?requestPayment"
         o.input = Shapes::ShapeRef.new(shape: GetBucketRequestPaymentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketRequestPaymentOutput)
       end)
@@ -3019,7 +3019,7 @@ module Aws::S3
       api.add_operation(:get_bucket_tagging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketTagging"
         o.http_method = "GET"
-        o.http_request_uri = "/?tagging"
+        o.http_request_uri = "/{Bucket}?tagging"
         o.input = Shapes::ShapeRef.new(shape: GetBucketTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketTaggingOutput)
       end)
@@ -3027,7 +3027,7 @@ module Aws::S3
       api.add_operation(:get_bucket_versioning, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketVersioning"
         o.http_method = "GET"
-        o.http_request_uri = "/?versioning"
+        o.http_request_uri = "/{Bucket}?versioning"
         o.input = Shapes::ShapeRef.new(shape: GetBucketVersioningRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketVersioningOutput)
       end)
@@ -3035,7 +3035,7 @@ module Aws::S3
       api.add_operation(:get_bucket_website, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketWebsite"
         o.http_method = "GET"
-        o.http_request_uri = "/?website"
+        o.http_request_uri = "/{Bucket}?website"
         o.input = Shapes::ShapeRef.new(shape: GetBucketWebsiteRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketWebsiteOutput)
       end)
@@ -3043,7 +3043,7 @@ module Aws::S3
       api.add_operation(:get_object, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetObject"
         o.http_method = "GET"
-        o.http_request_uri = "/{Key+}"
+        o.http_request_uri = "/{Bucket}/{Key+}"
         o.http_checksum = {
           "requestValidationModeMember" => "checksum_mode",
           "responseAlgorithms" => ["CRC32", "CRC32C", "SHA256", "SHA1"],
@@ -3061,7 +3061,7 @@ module Aws::S3
       api.add_operation(:get_object_acl, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetObjectAcl"
         o.http_method = "GET"
-        o.http_request_uri = "/{Key+}?acl"
+        o.http_request_uri = "/{Bucket}/{Key+}?acl"
         o.input = Shapes::ShapeRef.new(shape: GetObjectAclRequest)
         o.output = Shapes::ShapeRef.new(shape: GetObjectAclOutput)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchKey)
@@ -3070,7 +3070,7 @@ module Aws::S3
       api.add_operation(:get_object_attributes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetObjectAttributes"
         o.http_method = "GET"
-        o.http_request_uri = "/{Key+}?attributes"
+        o.http_request_uri = "/{Bucket}/{Key+}?attributes"
         o.input = Shapes::ShapeRef.new(shape: GetObjectAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetObjectAttributesOutput)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchKey)
@@ -3079,7 +3079,7 @@ module Aws::S3
       api.add_operation(:get_object_legal_hold, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetObjectLegalHold"
         o.http_method = "GET"
-        o.http_request_uri = "/{Key+}?legal-hold"
+        o.http_request_uri = "/{Bucket}/{Key+}?legal-hold"
         o.input = Shapes::ShapeRef.new(shape: GetObjectLegalHoldRequest)
         o.output = Shapes::ShapeRef.new(shape: GetObjectLegalHoldOutput)
       end)
@@ -3087,7 +3087,7 @@ module Aws::S3
       api.add_operation(:get_object_lock_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetObjectLockConfiguration"
         o.http_method = "GET"
-        o.http_request_uri = "/?object-lock"
+        o.http_request_uri = "/{Bucket}?object-lock"
         o.input = Shapes::ShapeRef.new(shape: GetObjectLockConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetObjectLockConfigurationOutput)
       end)
@@ -3095,7 +3095,7 @@ module Aws::S3
       api.add_operation(:get_object_retention, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetObjectRetention"
         o.http_method = "GET"
-        o.http_request_uri = "/{Key+}?retention"
+        o.http_request_uri = "/{Bucket}/{Key+}?retention"
         o.input = Shapes::ShapeRef.new(shape: GetObjectRetentionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetObjectRetentionOutput)
       end)
@@ -3103,7 +3103,7 @@ module Aws::S3
       api.add_operation(:get_object_tagging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetObjectTagging"
         o.http_method = "GET"
-        o.http_request_uri = "/{Key+}?tagging"
+        o.http_request_uri = "/{Bucket}/{Key+}?tagging"
         o.input = Shapes::ShapeRef.new(shape: GetObjectTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: GetObjectTaggingOutput)
       end)
@@ -3111,7 +3111,7 @@ module Aws::S3
       api.add_operation(:get_object_torrent, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetObjectTorrent"
         o.http_method = "GET"
-        o.http_request_uri = "/{Key+}?torrent"
+        o.http_request_uri = "/{Bucket}/{Key+}?torrent"
         o.input = Shapes::ShapeRef.new(shape: GetObjectTorrentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetObjectTorrentOutput)
       end)
@@ -3119,7 +3119,7 @@ module Aws::S3
       api.add_operation(:get_public_access_block, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPublicAccessBlock"
         o.http_method = "GET"
-        o.http_request_uri = "/?publicAccessBlock"
+        o.http_request_uri = "/{Bucket}?publicAccessBlock"
         o.input = Shapes::ShapeRef.new(shape: GetPublicAccessBlockRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPublicAccessBlockOutput)
       end)
@@ -3127,7 +3127,7 @@ module Aws::S3
       api.add_operation(:head_bucket, Seahorse::Model::Operation.new.tap do |o|
         o.name = "HeadBucket"
         o.http_method = "HEAD"
-        o.http_request_uri = "/"
+        o.http_request_uri = "/{Bucket}"
         o.input = Shapes::ShapeRef.new(shape: HeadBucketRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NoSuchBucket)
@@ -3136,7 +3136,7 @@ module Aws::S3
       api.add_operation(:head_object, Seahorse::Model::Operation.new.tap do |o|
         o.name = "HeadObject"
         o.http_method = "HEAD"
-        o.http_request_uri = "/{Key+}"
+        o.http_request_uri = "/{Bucket}/{Key+}"
         o.input = Shapes::ShapeRef.new(shape: HeadObjectRequest)
         o.output = Shapes::ShapeRef.new(shape: HeadObjectOutput)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchKey)
@@ -3145,7 +3145,7 @@ module Aws::S3
       api.add_operation(:list_bucket_analytics_configurations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListBucketAnalyticsConfigurations"
         o.http_method = "GET"
-        o.http_request_uri = "/?analytics"
+        o.http_request_uri = "/{Bucket}?analytics"
         o.input = Shapes::ShapeRef.new(shape: ListBucketAnalyticsConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListBucketAnalyticsConfigurationsOutput)
       end)
@@ -3153,7 +3153,7 @@ module Aws::S3
       api.add_operation(:list_bucket_intelligent_tiering_configurations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListBucketIntelligentTieringConfigurations"
         o.http_method = "GET"
-        o.http_request_uri = "/?intelligent-tiering"
+        o.http_request_uri = "/{Bucket}?intelligent-tiering"
         o.input = Shapes::ShapeRef.new(shape: ListBucketIntelligentTieringConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListBucketIntelligentTieringConfigurationsOutput)
       end)
@@ -3161,7 +3161,7 @@ module Aws::S3
       api.add_operation(:list_bucket_inventory_configurations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListBucketInventoryConfigurations"
         o.http_method = "GET"
-        o.http_request_uri = "/?inventory"
+        o.http_request_uri = "/{Bucket}?inventory"
         o.input = Shapes::ShapeRef.new(shape: ListBucketInventoryConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListBucketInventoryConfigurationsOutput)
       end)
@@ -3169,7 +3169,7 @@ module Aws::S3
       api.add_operation(:list_bucket_metrics_configurations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListBucketMetricsConfigurations"
         o.http_method = "GET"
-        o.http_request_uri = "/?metrics"
+        o.http_request_uri = "/{Bucket}?metrics"
         o.input = Shapes::ShapeRef.new(shape: ListBucketMetricsConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListBucketMetricsConfigurationsOutput)
       end)
@@ -3185,7 +3185,7 @@ module Aws::S3
       api.add_operation(:list_multipart_uploads, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListMultipartUploads"
         o.http_method = "GET"
-        o.http_request_uri = "/?uploads"
+        o.http_request_uri = "/{Bucket}?uploads"
         o.input = Shapes::ShapeRef.new(shape: ListMultipartUploadsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListMultipartUploadsOutput)
         o[:pager] = Aws::Pager.new(
@@ -3201,7 +3201,7 @@ module Aws::S3
       api.add_operation(:list_object_versions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListObjectVersions"
         o.http_method = "GET"
-        o.http_request_uri = "/?versions"
+        o.http_request_uri = "/{Bucket}?versions"
         o.input = Shapes::ShapeRef.new(shape: ListObjectVersionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListObjectVersionsOutput)
         o[:pager] = Aws::Pager.new(
@@ -3217,7 +3217,7 @@ module Aws::S3
       api.add_operation(:list_objects, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListObjects"
         o.http_method = "GET"
-        o.http_request_uri = "/"
+        o.http_request_uri = "/{Bucket}"
         o.input = Shapes::ShapeRef.new(shape: ListObjectsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListObjectsOutput)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchBucket)
@@ -3233,7 +3233,7 @@ module Aws::S3
       api.add_operation(:list_objects_v2, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListObjectsV2"
         o.http_method = "GET"
-        o.http_request_uri = "/?list-type=2"
+        o.http_request_uri = "/{Bucket}?list-type=2"
         o.input = Shapes::ShapeRef.new(shape: ListObjectsV2Request)
         o.output = Shapes::ShapeRef.new(shape: ListObjectsV2Output)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchBucket)
@@ -3248,7 +3248,7 @@ module Aws::S3
       api.add_operation(:list_parts, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListParts"
         o.http_method = "GET"
-        o.http_request_uri = "/{Key+}"
+        o.http_request_uri = "/{Bucket}/{Key+}"
         o.input = Shapes::ShapeRef.new(shape: ListPartsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPartsOutput)
         o[:pager] = Aws::Pager.new(
@@ -3263,7 +3263,7 @@ module Aws::S3
       api.add_operation(:put_bucket_accelerate_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketAccelerateConfiguration"
         o.http_method = "PUT"
-        o.http_request_uri = "/?accelerate"
+        o.http_request_uri = "/{Bucket}?accelerate"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => false,
@@ -3279,7 +3279,7 @@ module Aws::S3
       api.add_operation(:put_bucket_acl, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketAcl"
         o.http_method = "PUT"
-        o.http_request_uri = "/?acl"
+        o.http_request_uri = "/{Bucket}?acl"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3295,7 +3295,7 @@ module Aws::S3
       api.add_operation(:put_bucket_analytics_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketAnalyticsConfiguration"
         o.http_method = "PUT"
-        o.http_request_uri = "/?analytics"
+        o.http_request_uri = "/{Bucket}?analytics"
         o.input = Shapes::ShapeRef.new(shape: PutBucketAnalyticsConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -3303,7 +3303,7 @@ module Aws::S3
       api.add_operation(:put_bucket_cors, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketCors"
         o.http_method = "PUT"
-        o.http_request_uri = "/?cors"
+        o.http_request_uri = "/{Bucket}?cors"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3319,7 +3319,7 @@ module Aws::S3
       api.add_operation(:put_bucket_encryption, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketEncryption"
         o.http_method = "PUT"
-        o.http_request_uri = "/?encryption"
+        o.http_request_uri = "/{Bucket}?encryption"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3335,7 +3335,7 @@ module Aws::S3
       api.add_operation(:put_bucket_intelligent_tiering_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketIntelligentTieringConfiguration"
         o.http_method = "PUT"
-        o.http_request_uri = "/?intelligent-tiering"
+        o.http_request_uri = "/{Bucket}?intelligent-tiering"
         o.input = Shapes::ShapeRef.new(shape: PutBucketIntelligentTieringConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -3343,7 +3343,7 @@ module Aws::S3
       api.add_operation(:put_bucket_inventory_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketInventoryConfiguration"
         o.http_method = "PUT"
-        o.http_request_uri = "/?inventory"
+        o.http_request_uri = "/{Bucket}?inventory"
         o.input = Shapes::ShapeRef.new(shape: PutBucketInventoryConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -3351,7 +3351,7 @@ module Aws::S3
       api.add_operation(:put_bucket_lifecycle, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketLifecycle"
         o.http_method = "PUT"
-        o.http_request_uri = "/?lifecycle"
+        o.http_request_uri = "/{Bucket}?lifecycle"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3368,7 +3368,7 @@ module Aws::S3
       api.add_operation(:put_bucket_lifecycle_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketLifecycleConfiguration"
         o.http_method = "PUT"
-        o.http_request_uri = "/?lifecycle"
+        o.http_request_uri = "/{Bucket}?lifecycle"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3384,7 +3384,7 @@ module Aws::S3
       api.add_operation(:put_bucket_logging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketLogging"
         o.http_method = "PUT"
-        o.http_request_uri = "/?logging"
+        o.http_request_uri = "/{Bucket}?logging"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3400,7 +3400,7 @@ module Aws::S3
       api.add_operation(:put_bucket_metrics_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketMetricsConfiguration"
         o.http_method = "PUT"
-        o.http_request_uri = "/?metrics"
+        o.http_request_uri = "/{Bucket}?metrics"
         o.input = Shapes::ShapeRef.new(shape: PutBucketMetricsConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -3408,7 +3408,7 @@ module Aws::S3
       api.add_operation(:put_bucket_notification, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketNotification"
         o.http_method = "PUT"
-        o.http_request_uri = "/?notification"
+        o.http_request_uri = "/{Bucket}?notification"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3425,7 +3425,7 @@ module Aws::S3
       api.add_operation(:put_bucket_notification_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketNotificationConfiguration"
         o.http_method = "PUT"
-        o.http_request_uri = "/?notification"
+        o.http_request_uri = "/{Bucket}?notification"
         o.input = Shapes::ShapeRef.new(shape: PutBucketNotificationConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -3433,7 +3433,7 @@ module Aws::S3
       api.add_operation(:put_bucket_ownership_controls, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketOwnershipControls"
         o.http_method = "PUT"
-        o.http_request_uri = "/?ownershipControls"
+        o.http_request_uri = "/{Bucket}?ownershipControls"
         o.http_checksum = {
           "requestChecksumRequired" => true,
         }
@@ -3444,7 +3444,7 @@ module Aws::S3
       api.add_operation(:put_bucket_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketPolicy"
         o.http_method = "PUT"
-        o.http_request_uri = "/?policy"
+        o.http_request_uri = "/{Bucket}?policy"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3460,7 +3460,7 @@ module Aws::S3
       api.add_operation(:put_bucket_replication, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketReplication"
         o.http_method = "PUT"
-        o.http_request_uri = "/?replication"
+        o.http_request_uri = "/{Bucket}?replication"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3476,7 +3476,7 @@ module Aws::S3
       api.add_operation(:put_bucket_request_payment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketRequestPayment"
         o.http_method = "PUT"
-        o.http_request_uri = "/?requestPayment"
+        o.http_request_uri = "/{Bucket}?requestPayment"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3492,7 +3492,7 @@ module Aws::S3
       api.add_operation(:put_bucket_tagging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketTagging"
         o.http_method = "PUT"
-        o.http_request_uri = "/?tagging"
+        o.http_request_uri = "/{Bucket}?tagging"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3508,7 +3508,7 @@ module Aws::S3
       api.add_operation(:put_bucket_versioning, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketVersioning"
         o.http_method = "PUT"
-        o.http_request_uri = "/?versioning"
+        o.http_request_uri = "/{Bucket}?versioning"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3524,7 +3524,7 @@ module Aws::S3
       api.add_operation(:put_bucket_website, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBucketWebsite"
         o.http_method = "PUT"
-        o.http_request_uri = "/?website"
+        o.http_request_uri = "/{Bucket}?website"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3540,7 +3540,7 @@ module Aws::S3
       api.add_operation(:put_object, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutObject"
         o.http_method = "PUT"
-        o.http_request_uri = "/{Key+}"
+        o.http_request_uri = "/{Bucket}/{Key+}"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => false,
@@ -3556,7 +3556,7 @@ module Aws::S3
       api.add_operation(:put_object_acl, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutObjectAcl"
         o.http_method = "PUT"
-        o.http_request_uri = "/{Key+}?acl"
+        o.http_request_uri = "/{Bucket}/{Key+}?acl"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3573,7 +3573,7 @@ module Aws::S3
       api.add_operation(:put_object_legal_hold, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutObjectLegalHold"
         o.http_method = "PUT"
-        o.http_request_uri = "/{Key+}?legal-hold"
+        o.http_request_uri = "/{Bucket}/{Key+}?legal-hold"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3589,7 +3589,7 @@ module Aws::S3
       api.add_operation(:put_object_lock_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutObjectLockConfiguration"
         o.http_method = "PUT"
-        o.http_request_uri = "/?object-lock"
+        o.http_request_uri = "/{Bucket}?object-lock"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3605,7 +3605,7 @@ module Aws::S3
       api.add_operation(:put_object_retention, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutObjectRetention"
         o.http_method = "PUT"
-        o.http_request_uri = "/{Key+}?retention"
+        o.http_request_uri = "/{Bucket}/{Key+}?retention"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3621,7 +3621,7 @@ module Aws::S3
       api.add_operation(:put_object_tagging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutObjectTagging"
         o.http_method = "PUT"
-        o.http_request_uri = "/{Key+}?tagging"
+        o.http_request_uri = "/{Bucket}/{Key+}?tagging"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3637,7 +3637,7 @@ module Aws::S3
       api.add_operation(:put_public_access_block, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutPublicAccessBlock"
         o.http_method = "PUT"
-        o.http_request_uri = "/?publicAccessBlock"
+        o.http_request_uri = "/{Bucket}?publicAccessBlock"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
@@ -3653,7 +3653,7 @@ module Aws::S3
       api.add_operation(:restore_object, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RestoreObject"
         o.http_method = "POST"
-        o.http_request_uri = "/{Key+}?restore"
+        o.http_request_uri = "/{Bucket}/{Key+}?restore"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => false,
@@ -3670,7 +3670,7 @@ module Aws::S3
       api.add_operation(:select_object_content, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SelectObjectContent"
         o.http_method = "POST"
-        o.http_request_uri = "/{Key+}?select&select-type=2"
+        o.http_request_uri = "/{Bucket}/{Key+}?select&select-type=2"
         o.input = Shapes::ShapeRef.new(shape: SelectObjectContentRequest,
           location_name: "SelectObjectContentRequest",
           metadata: {
@@ -3683,7 +3683,7 @@ module Aws::S3
       api.add_operation(:upload_part, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UploadPart"
         o.http_method = "PUT"
-        o.http_request_uri = "/{Key+}"
+        o.http_request_uri = "/{Bucket}/{Key+}"
         o.http_checksum = {
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => false,
@@ -3699,7 +3699,7 @@ module Aws::S3
       api.add_operation(:upload_part_copy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UploadPartCopy"
         o.http_method = "PUT"
-        o.http_request_uri = "/{Key+}"
+        o.http_request_uri = "/{Bucket}/{Key+}"
         o.input = Shapes::ShapeRef.new(shape: UploadPartCopyRequest)
         o.output = Shapes::ShapeRef.new(shape: UploadPartCopyOutput)
       end)

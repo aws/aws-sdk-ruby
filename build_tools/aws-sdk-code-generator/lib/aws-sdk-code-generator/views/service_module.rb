@@ -11,7 +11,6 @@ module AwsSdkCodeGenerator
       def initialize(options)
         @service = options.fetch(:service)
         @prefix = options.fetch(:prefix)
-        @codegenerated_plugins = options.fetch(:codegenerated_plugins)
       end
 
       # @return [String|nil]
@@ -57,7 +56,7 @@ module AwsSdkCodeGenerator
       # This is required to support backwards compatibility for SSO which was
       # moved from the aws-sdk-sso gem into aws-sdk-core.
       def require_core_guard?
-        @service.included_in_core?
+        name == 'SSO' || name == 'STS' || name == 'SSOOIDC'
       end
 
       # @return [Array<String>]
@@ -65,23 +64,10 @@ module AwsSdkCodeGenerator
         paths = Set.new
         paths << "#{@prefix}/types"
         paths << "#{@prefix}/client_api"
-
-        # these must be required before the client
-        if @codegenerated_plugins
-          paths += @codegenerated_plugins.map { | p| p.path }
-        end
-
         paths << "#{@prefix}/client"
         paths << "#{@prefix}/errors"
         paths << "#{@prefix}/waiters" if @service.waiters
         paths << "#{@prefix}/resource"
-
-        unless @service.legacy_endpoints?
-          paths << "#{@prefix}/endpoint_parameters"
-          paths << "#{@prefix}/endpoint_provider"
-          paths << "#{@prefix}/endpoints"
-        end
-
         if @service.resources && @service.resources['resources']
           @service.resources['resources'].keys.each do |resource_name|
             path = "#{@prefix}/#{underscore(resource_name)}"

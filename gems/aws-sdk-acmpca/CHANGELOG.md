@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2022-10-24)
+------------------
+
+* Feature - AWS Private Certificate Authority (AWS Private CA) now offers usage modes which are combination of features to address specific use cases.
+
 1.49.0 (2022-07-20)
 ------------------
 

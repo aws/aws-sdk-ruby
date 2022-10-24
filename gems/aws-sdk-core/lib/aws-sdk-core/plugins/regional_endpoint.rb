@@ -43,13 +43,8 @@ is set to `true`.
         resolve_use_fips_endpoint(cfg)
       end
 
-      # This option signals whether :endpoint was provided or not.
-      # Legacy endpoints must continue to be generated at client time.
       option(:regional_endpoint, false)
 
-      # NOTE: All of the defaults block code is effectively deprecated.
-      # Because old services can depend on this new core version, we must
-      # retain it.
       option(:endpoint, doc_type: String, docstring: <<-DOCS) do |cfg|
 The client endpoint is normally constructed from the `:region`
 option. You should only configure an `:endpoint` when connecting

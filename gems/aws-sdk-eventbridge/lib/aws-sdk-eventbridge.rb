@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-eventbridge/types'
 require_relative 'aws-sdk-eventbridge/client_api'
-require_relative 'aws-sdk-eventbridge/plugins/endpoints.rb'
 require_relative 'aws-sdk-eventbridge/client'
 require_relative 'aws-sdk-eventbridge/errors'
 require_relative 'aws-sdk-eventbridge/resource'
-require_relative 'aws-sdk-eventbridge/endpoint_parameters'
-require_relative 'aws-sdk-eventbridge/endpoint_provider'
-require_relative 'aws-sdk-eventbridge/endpoints'
 require_relative 'aws-sdk-eventbridge/customizations'
 
 # This module provides support for Amazon EventBridge. This module is available in the

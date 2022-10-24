@@ -21,13 +21,23 @@ module Aws
       end
       let(:entries) { [event] }
 
+      def expect_sigv4a_signer(region='*')
+        mock_signature = Aws::Sigv4::Signature.new(headers: {})
+        mock_signer = double('sigv4a_signer', sign_request: mock_signature)
+
+        # a base signer is always created
+        # multi-region endpoints result in a second signer being created with :sigv4a
+        allow(Aws::Sigv4::Signer).to receive(:new).and_call_original
+        allow(Aws::Sigv4::Signer).to receive(:new).with(hash_including(region: region, signing_algorithm: :sigv4a)).and_return(mock_signer)
+      end
+
       it 'does not update the endpoint when endpoint_id is not set' do
         resp = client.put_events(entries: entries)
         expect(resp.context.http_request.endpoint.host).to eq('events.us-east-1.amazonaws.com')
       end
 
       it 'it updates the endpoint, signs with sigv4a and uses the global region when endpoint_id is set ' do
-        expect_auth({ 'name' => 'sigv4a', 'signingRegionSet' => ['*'] })
+        expect_sigv4a_signer('*')
         resp = client.put_events(entries: entries, endpoint_id: 'abc123.456def')
         expect(resp.context.http_request.endpoint.host).to eq('abc123.456def.endpoint.events.amazonaws.com')
       end
@@ -35,13 +45,13 @@ module Aws
       it 'raises when given an invalid endpoint_id' do
         expect do
           client.put_events(entries: entries, endpoint_id: 'badactor.com?foo=bar')
-        end.to raise_error(ArgumentError, /valid host label/)
+        end.to raise_error(ArgumentError)
       end
 
       it 'raises when given an empty endpoint_id' do
         expect do
           client.put_events(entries: entries, endpoint_id: '')
-        end.to raise_error(ArgumentError, /valid host label/)
+        end.to raise_error(ArgumentError)
       end
 
       context 'use_dualstack_endpoint' do
@@ -53,7 +63,7 @@ module Aws
         end
 
         it 'uses the dualstack dnsSuffix when endpoint_id is set' do
-          expect_auth({ 'name' => 'sigv4a', 'signingRegionSet' => ['*'] })
+          expect_sigv4a_signer('*')
           resp = client.put_events(entries: entries, endpoint_id: 'abc123.456def')
           expect(resp.context.http_request.endpoint.host).to eq('abc123.456def.endpoint.events.api.aws')
         end
@@ -99,7 +109,7 @@ module Aws
         end
 
         it 'it updates the endpoint, signs with sigv4a and uses the global region when endpoint_id is set ' do
-          expect_auth({ 'name' => 'sigv4a', 'signingRegionSet' => ['*'] })
+          expect_sigv4a_signer('*')
           resp = client.put_events(entries: entries, endpoint_id: 'abc123.456def')
           expect(resp.context.http_request.endpoint.host).to eq('abc123.456def.endpoint.events.c2s.ic.gov')
         end
@@ -115,7 +125,7 @@ module Aws
         end
 
         it 'does not modify the custom endpoint when endpoint_id is set' do
-          expect_auth({ 'name' => 'sigv4a', 'signingRegionSet' => ['*'] })
+          expect_sigv4a_signer('*')
           resp = client.put_events(entries: entries, endpoint_id: 'abc123.456def')
           expect(resp.context.http_request.endpoint.host).to eq('example.org')
         end

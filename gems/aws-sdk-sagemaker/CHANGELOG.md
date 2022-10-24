@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.147.0 (2022-10-24)
+------------------
+
+* Feature - SageMaker Inference Recommender now supports a new API ListInferenceRecommendationJobSteps to return the details of all the benchmark we create for an inference recommendation job.
+
 1.146.0 (2022-10-21)
 ------------------
 

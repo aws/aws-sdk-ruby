@@ -10,19 +10,11 @@ module Aws
       def initialize(options = {})
         @name = options[:name]
         @regions = options[:regions]
-        @region_regex = options[:region_regex]
         @services = options[:services]
-        @metadata = options[:metadata]
       end
 
       # @return [String] The partition name, e.g. "aws", "aws-cn", "aws-us-gov".
       attr_reader :name
-
-      # @return [String] The regex representing the region format.
-      attr_reader :region_regex
-
-      # @return [Metadata] The metadata for the partition.
-      attr_reader :metadata
 
       # @param [String] region_name The name of the region, e.g. "us-east-1".
       # @return [Region]
@@ -78,7 +70,6 @@ module Aws
           Partition.new(
             name: partition['partition'],
             regions: build_regions(partition),
-            region_regex: partition['regionRegex'],
             services: build_services(partition)
           )
         end
@@ -88,7 +79,8 @@ module Aws
         # @param [Hash] partition
         # @return [Hash<String,Region>]
         def build_regions(partition)
-          partition['regions'].each_with_object({}) do |(region_name, region), regions|
+          partition['regions'].each_with_object({}) do
+            |(region_name, region), regions|
             next if region_name == "#{partition['partition']}-global"
 
             regions[region_name] = Region.build(

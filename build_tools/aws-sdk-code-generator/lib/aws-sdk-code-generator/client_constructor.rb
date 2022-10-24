@@ -4,11 +4,8 @@ module AwsSdkCodeGenerator
   class ClientConstructor
 
     # @option options [required, PluginList] :plugins
-    # @option options [required, Array<CodegeneratedPlugin>] :codegenerated_plugins
-
     def initialize(options)
-      plugin_options = documented_plugin_options(options.fetch(:plugins)) +
-        documented_plugin_options(options.fetch(:codegenerated_plugins))
+      plugin_options = documented_plugin_options(options.fetch(:plugins))
       documentation = {}
       plugin_options.each do |option|
         documentation[option.name] = YardOptionTag.new(
