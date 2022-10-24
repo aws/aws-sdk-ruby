@@ -51,15 +51,18 @@ module AwsSdkCodeGenerator
 
     # @return [Enumerable<String<path>, String<code>>]
     def source_files(options = {})
+
       prefix = options.fetch(:prefix, @service.gem_name)
+      codegenerated_plugins = codegen_plugins(prefix)
+
       Enumerator.new do |y|
         if @service.protocol == 'api-gateway'
           y.yield("#{prefix}/../../README.md", apig_readme)
           y.yield("#{prefix}/plugins/authorizer.rb", authorizer_class)
           y.yield("#{prefix}/plugins/apig_endpoint.rb", apig_endpoint_class)
         end
-        y.yield("#{prefix}.rb", service_module(prefix))
-        unless %w[aws-sdk-sts aws-sdk-sso aws-sdk-ssooidc].include? prefix
+        y.yield("#{prefix}.rb", service_module(prefix, codegenerated_plugins))
+        unless @service.included_in_core?
           y.yield("#{prefix}/customizations.rb", '')
         end
         y.yield("#{prefix}/types.rb", types_module)
@@ -67,13 +70,23 @@ module AwsSdkCodeGenerator
           y.yield("#{prefix}/event_streams.rb", event_streams_module)
         end
         y.yield("#{prefix}/client_api.rb", client_api_module)
-        y.yield("#{prefix}/client.rb", client_class)
+
+        codegenerated_plugins.each { |p| y.yield(p.path, p.source) }
+
+        y.yield("#{prefix}/client.rb", client_class(codegenerated_plugins))
         if @service.protocol_settings['h2'] == 'eventstream'
-          y.yield("#{prefix}/async_client.rb", async_client_class)
+          y.yield("#{prefix}/async_client.rb", async_client_class(codegenerated_plugins))
         end
         y.yield("#{prefix}/errors.rb", errors_module)
         y.yield("#{prefix}/waiters.rb", waiters_module) if @waiters
         y.yield("#{prefix}/resource.rb", root_resource_class)
+
+        unless @service.legacy_endpoints?
+          y.yield("#{prefix}/endpoint_parameters.rb", endpoint_parameters)
+          y.yield("#{prefix}/endpoints.rb", endpoints_module)
+          y.yield("#{prefix}/endpoint_provider.rb", endpoint_provider)
+        end
+
         if @resources
           @resources['resources'].keys.sort.each do |name|
             path = "#{prefix}/#{Underscore.underscore(name)}.rb"
@@ -84,10 +97,24 @@ module AwsSdkCodeGenerator
       end
     end
 
+    # @return [Enumerable<String<path>, String<code>>]
+    def spec_files(options = {})
+      prefix = options.fetch(:prefix, '')
+      Enumerator.new do |y|
+        y.yield("#{prefix}/spec_helper.rb", spec_helper_file)
+
+        if @service.endpoint_tests && !@service.legacy_endpoints?
+          y.yield("#{prefix}/endpoint_provider_spec.rb", endpoint_provider_spec_file)
+        end
+      end
+    end
+
     private
 
-    def service_module(prefix)
-      Views::ServiceModule.new(service: @service, prefix: prefix).render
+    def service_module(prefix, codegenerated_plugins)
+      Views::ServiceModule.new(
+        service: @service, prefix: prefix,
+        codegenerated_plugins: codegenerated_plugins).render
     end
 
     def types_module
@@ -102,7 +129,7 @@ module AwsSdkCodeGenerator
       Views::ClientApiModule.new(service: @service).render
     end
 
-    def client_class
+    def client_class(codegenerated_plugins)
       Views::ClientClass.new(
         service_identifier: @service.identifier,
         service_name: @service.name,
@@ -121,11 +148,13 @@ module AwsSdkCodeGenerator
         paginators: @service.paginators,
         waiters: @service.waiters,
         examples: @service.examples,
-        custom: @service.protocol == 'api-gateway'
+        custom: @service.protocol == 'api-gateway',
+        legacy_endpoints: @service.legacy_endpoints?,
+        codegenerated_plugins: codegenerated_plugins
       ).render
     end
 
-    def async_client_class
+    def async_client_class(codegenerated_plugins)
       Views::AsyncClientClass.new(
         service_identifier: @service.identifier,
         service_name: @service.name,
@@ -139,6 +168,8 @@ module AwsSdkCodeGenerator
         add_plugins: @service.add_plugins,
         remove_plugins: @service.remove_plugins,
         api: @service.api,
+        legacy_endpoints: @service.legacy_endpoints?,
+        codegenerated_plugins: codegenerated_plugins,
         async_client: true
       ).render
     end
@@ -198,6 +229,44 @@ module AwsSdkCodeGenerator
         gem_name: @service.gem_name,
         module_name: @service.module_name
       ).render
+    end
+
+    def endpoint_parameters
+      Views::EndpointParametersClass.new(service: @service).render
+    end
+
+    def endpoint_provider
+      Views::EndpointProviderClass.new(service: @service).render
+    end
+
+    def endpoints_module
+      Views::EndpointsModule.new(service: @service).render
+    end
+
+    def endpoints_plugin
+      Views::EndpointsPlugin.new(service: @service).render
+    end
+
+    def endpoint_provider_spec_file
+      Views::Spec::EndpointProviderSpecClass.new(service: @service).render
+    end
+
+    def codegen_plugins(prefix)
+      unless @service.legacy_endpoints?
+        [
+          CodegeneratedPlugin.new(
+            source: endpoints_plugin,
+            class_name: "#{@service.module_name}::Plugins::Endpoints",
+            path: "#{prefix}/plugins/endpoints.rb"
+          )
+        ]
+      else
+        []
+      end
+    end
+
+    def spec_helper_file
+      Views::Spec::SpecHelper.new(service: @service).render
     end
 
     private

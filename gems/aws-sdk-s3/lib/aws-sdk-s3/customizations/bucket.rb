@@ -5,22 +5,6 @@ require 'uri'
 module Aws
   module S3
     class Bucket
-      # Save the old initialize method so that we can call 'super'.
-      old_initialize = instance_method(:initialize)
-      # Make the method redefinable
-      alias_method :initialize, :initialize
-      # Define a new initialize method that extracts out a bucket ARN.
-      define_method(:initialize) do |*args|
-        old_initialize.bind(self).call(*args)
-        resolved_region, arn = Plugins::ARN.resolve_arn!(
-          name,
-          client.config.region,
-          client.config.s3_use_arn_region
-        )
-        @resolved_region = resolved_region
-        @arn = arn
-      end
-
       # Deletes all objects and versioned objects from this bucket
       #
       # @example
@@ -105,14 +89,27 @@ module Aws
         if options[:virtual_host]
           scheme = options.fetch(:secure, true) ? 'https' : 'http'
           "#{scheme}://#{name}"
-        elsif @arn
-          Plugins::ARN.resolve_url!(
-            client.config.endpoint.dup,
-            @arn,
-            @resolved_region
-          ).to_s
         else
-          s3_bucket_url
+          # Taken from Aws::S3::Endpoints module
+          unless client.config.regional_endpoint
+            endpoint = client.config.endpoint.to_s
+          end
+          params = Aws::S3::EndpointParameters.new(
+            bucket: name,
+            region: client.config.region,
+            use_fips: client.config.use_fips_endpoint,
+            use_dual_stack: client.config.use_dualstack_endpoint,
+            endpoint: endpoint,
+            force_path_style: client.config.force_path_style,
+            accelerate: client.config.use_accelerate_endpoint,
+            use_global_endpoint: client.config.s3_us_east_1_regional_endpoint == 'legacy',
+            use_object_lambda_endpoint: nil,
+            disable_access_points: nil,
+            disable_multi_region_access_points: client.config.s3_disable_multiregion_access_points,
+            use_arn_region: client.config.s3_use_arn_region,
+          )
+          endpoint = Aws::S3::EndpointProvider.new.resolve_endpoint(params)
+          endpoint.url
         end
       end
 
@@ -142,29 +139,6 @@ module Aws
 
         self
       end
-
-      private
-
-      def s3_bucket_url
-        url = client.config.endpoint.dup
-        if bucket_as_hostname?(url.scheme == 'https')
-          url.host = "#{name}.#{url.host}"
-        else
-          url.path += '/' unless url.path[-1] == '/'
-          url.path += Seahorse::Util.uri_escape(name)
-        end
-        if (client.config.region == 'us-east-1') &&
-           (client.config.s3_us_east_1_regional_endpoint == 'legacy')
-          url.host = Plugins::IADRegionalEndpoint.legacy_host(url.host)
-        end
-        url.to_s
-      end
-
-      def bucket_as_hostname?(https)
-        Plugins::BucketDns.dns_compatible?(name, https) &&
-          !client.config.force_path_style
-      end
-
     end
   end
 end

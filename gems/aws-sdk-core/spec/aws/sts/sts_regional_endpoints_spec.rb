@@ -165,8 +165,9 @@ module Aws
           )
           expect(client.config.sts_regional_endpoints).to eq('legacy')
           expect(client.config.region).to eq('us-west-2')
-          expect(client.config.sigv4_region).to eq('us-east-1')
           expect(client.config.endpoint.to_s).to eq('https://sts.amazonaws.com')
+          expect_auth({ 'signingRegion' => 'us-east-1' })
+          client.get_caller_identity
 
           client = Client.new(
             stub_responses: true,
@@ -174,9 +175,10 @@ module Aws
           )
           expect(client.config.sts_regional_endpoints).to eq('regional')
           expect(client.config.region).to eq('us-west-2')
-          expect(client.config.sigv4_region).to eq('us-west-2')
           expect(client.config.endpoint.to_s).to eq(
             'https://sts.us-west-2.amazonaws.com')
+          expect_auth({ 'signingRegion' => 'us-west-2' })
+          client.get_caller_identity
         end
 
       end

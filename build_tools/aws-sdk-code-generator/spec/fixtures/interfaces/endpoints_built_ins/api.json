@@ -1,0 +1,16 @@
+{
+  "metadata": {
+    "endpointPrefix": "svcname",
+    "serviceId": "sample_svc",
+    "protocol": "rest-json"
+  },
+  "operations": {
+    "Operation": {
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      }
+    }
+  },
+  "shapes": {}
+}

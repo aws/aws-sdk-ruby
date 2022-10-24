@@ -49,6 +49,7 @@ module Aws
       #  operation.
       def synthesize_speech_presigned_url(params = {})
         req = @client.build_request(:synthesize_speech, params)
+        context = req.context
 
         parts = []
         req.context.operation.input.shape.members.each do |name, ref|
@@ -56,23 +57,22 @@ module Aws
         end
         query = Aws::Rest::Request::QuerystringBuilder.new.build(parts)
 
-        signer = Aws::Sigv4::Signer.new(
-          service: 'polly',
-          region: req.context.config.region,
-          credentials_provider: req.context.config.credentials
+        endpoint_params = Aws::Polly::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint
+        )
+        endpoint = context.config.endpoint_provider
+                          .resolve_endpoint(endpoint_params)
+        auth_scheme = Aws::Endpoints.resolve_auth_scheme(context, endpoint)
+
+        signer = Aws::Plugins::Sign.signer_for(
+          auth_scheme, context.config
         )
 
-        url = Aws::Partitions::EndpointProvider.resolve(
-          signer.region, 'polly', 'regional',
-          {
-            dualstack: req.context.config.use_dualstack_endpoint,
-            fips: req.context.config.use_fips_endpoint
-          }
-        )
-        url += "/v1/speech?#{query}"
         pre_signed_url = signer.presign_url(
           http_method: 'GET',
-          url: url,
+          url: "#{endpoint.url}/v1/speech?#{query}",
           body: '',
           expires_in: 900
         ).to_s

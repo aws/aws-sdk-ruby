@@ -23,45 +23,10 @@ When set to `true`, the bucket name is always left in the
 request URI and never moved to the host as a sub-domain.
           DOCS
 
-        def add_handlers(handlers, config)
-          handlers.add(Handler, priority: 48) unless config.force_path_style
-        end
-
-        # @api private
-        class Handler < Seahorse::Client::Handler
-
-          def call(context)
-            move_dns_compat_bucket_to_subdomain(context)
-            @handler.call(context)
-          end
-
-          private
-
-          def move_dns_compat_bucket_to_subdomain(context)
-            bucket_name = context.params[:bucket]
-            endpoint = context.http_request.endpoint
-            if bucket_name &&
-               BucketDns.dns_compatible?(bucket_name, https?(endpoint)) &&
-               context.operation_name.to_s != 'get_bucket_location'
-              move_bucket_to_subdomain(bucket_name, endpoint)
-            end
-          end
-
-          def move_bucket_to_subdomain(bucket_name, endpoint)
-            endpoint.host = "#{bucket_name}.#{endpoint.host}"
-            path = endpoint.path.sub("/#{bucket_name}", '')
-            path = "/#{path}" unless path.match(/^\//)
-            endpoint.path = path
-          end
-
-          def https?(uri)
-            uri.scheme == 'https'
-          end
-
-        end
-
+        # These class methods were originally used in a handler in this plugin.
+        # SigV2 legacy signer needs this logic so we keep it here as utility.
+        # New endpoint resolution will check this as a matcher.
         class << self
-
           # @param [String] bucket_name
           # @param [Boolean] ssl
           # @return [Boolean]
@@ -81,7 +46,6 @@ request URI and never moved to the host as a sub-domain.
             bucket_name !~ /(\d+\.){3}\d+/ &&
             bucket_name !~ /[.-]{2}/
           end
-
         end
       end
     end

@@ -13,12 +13,7 @@ module Aws
           def call(context)
             bucket_member = _bucket_member(context.operation.input.shape)
             if bucket_member && (bucket = context.params[bucket_member])
-              _resolved_region, arn = ARN.resolve_arn!(
-                bucket,
-                context.config.region,
-                context.config.s3_use_arn_region
-              )
-              if !arn && bucket.include?('/')
+              if !Aws::ARNParser.arn?(bucket) && bucket.include?('/')
                 raise ArgumentError,
                       'bucket name must not contain a forward-slash (/)'
               end
