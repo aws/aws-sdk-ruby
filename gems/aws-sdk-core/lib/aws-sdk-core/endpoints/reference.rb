@@ -11,8 +11,8 @@ module Aws
       attr_reader :ref
 
       def resolve(parameters, assigns)
-        if parameters.class::PARAM_MAP.key?(@ref)
-          member_name = parameters.class::PARAM_MAP[@ref]
+        if parameters.class.singleton_class::PARAM_MAP.key?(@ref)
+          member_name = parameters.class.singleton_class::PARAM_MAP[@ref]
           parameters[member_name]
         elsif assigns.key?(@ref)
           assigns[@ref]

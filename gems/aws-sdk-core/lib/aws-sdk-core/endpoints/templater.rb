@@ -39,8 +39,8 @@ module Aws
         def extract_value(key, parameters, assigns)
           if assigns.key?(key)
             assigns[key]
-          elsif parameters.class::PARAM_MAP.key?(key)
-            member_name = parameters.class::PARAM_MAP[key]
+          elsif parameters.class.singleton_class::PARAM_MAP.key?(key)
+            member_name = parameters.class.singleton_class::PARAM_MAP[key]
             parameters[member_name]
           else
             raise "Templatable value not found: #{key}"
