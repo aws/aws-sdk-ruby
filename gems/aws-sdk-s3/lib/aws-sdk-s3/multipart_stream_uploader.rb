@@ -27,7 +27,7 @@ module Aws
         Set.new(Client.api.operation(:upload_part).input.shape.member_names)
 
       # @api private
-      COMPLETE_OPTIONS =
+      COMPLETE_UPLOAD_OPTIONS =
         Set.new(Client.api.operation(:complete_multipart_upload).input.shape.member_names)
 
       # @option options [Client] :client
@@ -119,7 +119,7 @@ module Aws
       end
 
       def complete_opts(options)
-        COMPLETE_OPTIONS.inject({}) do |hash, key|
+        COMPLETE_UPLOAD_OPTIONS.inject({}) do |hash, key|
           hash[key] = options[key] if options.key?(key)
           hash
         end
