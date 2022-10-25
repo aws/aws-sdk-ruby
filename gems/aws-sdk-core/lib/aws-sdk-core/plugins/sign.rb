@@ -48,7 +48,7 @@ module Aws
         end
       end
 
-      # @!api private
+      # @api private
       class Bearer
         def initialize
         end

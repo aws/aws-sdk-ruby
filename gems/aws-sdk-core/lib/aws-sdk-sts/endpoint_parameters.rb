@@ -45,13 +45,15 @@ module Aws::STS
     include Aws::Structure
 
     # @api private
-    self::PARAM_MAP = {
-      'Region' => :region,
-      'UseDualStack' => :use_dual_stack,
-      'UseFIPS' => :use_fips,
-      'Endpoint' => :endpoint,
-      'UseGlobalEndpoint' => :use_global_endpoint,
-    }.freeze
+    class << self
+      PARAM_MAP = {
+        'Region' => :region,
+        'UseDualStack' => :use_dual_stack,
+        'UseFIPS' => :use_fips,
+        'Endpoint' => :endpoint,
+        'UseGlobalEndpoint' => :use_global_endpoint,
+      }.freeze
+    end
 
     def initialize(options = {})
       self[:region] = options[:region]

@@ -75,18 +75,20 @@ module Aws::S3Control
     include Aws::Structure
 
     # @api private
-    self::PARAM_MAP = {
-      'Region' => :region,
-      'UseFIPS' => :use_fips,
-      'UseDualStack' => :use_dual_stack,
-      'Endpoint' => :endpoint,
-      'AccountId' => :account_id,
-      'RequiresAccountId' => :requires_account_id,
-      'OutpostId' => :outpost_id,
-      'Bucket' => :bucket,
-      'AccessPointName' => :access_point_name,
-      'UseArnRegion' => :use_arn_region,
-    }.freeze
+    class << self
+      PARAM_MAP = {
+        'Region' => :region,
+        'UseFIPS' => :use_fips,
+        'UseDualStack' => :use_dual_stack,
+        'Endpoint' => :endpoint,
+        'AccountId' => :account_id,
+        'RequiresAccountId' => :requires_account_id,
+        'OutpostId' => :outpost_id,
+        'Bucket' => :bucket,
+        'AccessPointName' => :access_point_name,
+        'UseArnRegion' => :use_arn_region,
+      }.freeze
+    end
 
     def initialize(options = {})
       self[:region] = options[:region]

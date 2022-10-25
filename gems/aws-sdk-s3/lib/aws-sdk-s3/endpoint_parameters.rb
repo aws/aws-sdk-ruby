@@ -87,20 +87,22 @@ module Aws::S3
     include Aws::Structure
 
     # @api private
-    self::PARAM_MAP = {
-      'Bucket' => :bucket,
-      'Region' => :region,
-      'UseFIPS' => :use_fips,
-      'UseDualStack' => :use_dual_stack,
-      'Endpoint' => :endpoint,
-      'ForcePathStyle' => :force_path_style,
-      'Accelerate' => :accelerate,
-      'UseGlobalEndpoint' => :use_global_endpoint,
-      'UseObjectLambdaEndpoint' => :use_object_lambda_endpoint,
-      'DisableAccessPoints' => :disable_access_points,
-      'DisableMultiRegionAccessPoints' => :disable_multi_region_access_points,
-      'UseArnRegion' => :use_arn_region,
-    }.freeze
+    class << self
+      PARAM_MAP = {
+        'Bucket' => :bucket,
+        'Region' => :region,
+        'UseFIPS' => :use_fips,
+        'UseDualStack' => :use_dual_stack,
+        'Endpoint' => :endpoint,
+        'ForcePathStyle' => :force_path_style,
+        'Accelerate' => :accelerate,
+        'UseGlobalEndpoint' => :use_global_endpoint,
+        'UseObjectLambdaEndpoint' => :use_object_lambda_endpoint,
+        'DisableAccessPoints' => :disable_access_points,
+        'DisableMultiRegionAccessPoints' => :disable_multi_region_access_points,
+        'UseArnRegion' => :use_arn_region,
+      }.freeze
+    end
 
     def initialize(options = {})
       self[:bucket] = options[:bucket]

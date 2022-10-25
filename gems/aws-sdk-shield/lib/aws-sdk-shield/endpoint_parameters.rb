@@ -39,12 +39,14 @@ module Aws::Shield
     include Aws::Structure
 
     # @api private
-    self::PARAM_MAP = {
-      'Region' => :region,
-      'UseDualStack' => :use_dual_stack,
-      'UseFIPS' => :use_fips,
-      'Endpoint' => :endpoint,
-    }.freeze
+    class << self
+      PARAM_MAP = {
+        'Region' => :region,
+        'UseDualStack' => :use_dual_stack,
+        'UseFIPS' => :use_fips,
+        'Endpoint' => :endpoint,
+      }.freeze
+    end
 
     def initialize(options = {})
       self[:region] = options[:region]

@@ -45,13 +45,15 @@ module Aws::EventBridge
     include Aws::Structure
 
     # @api private
-    self::PARAM_MAP = {
-      'Region' => :region,
-      'UseDualStack' => :use_dual_stack,
-      'UseFIPS' => :use_fips,
-      'Endpoint' => :endpoint,
-      'EndpointId' => :endpoint_id,
-    }.freeze
+    class << self
+      PARAM_MAP = {
+        'Region' => :region,
+        'UseDualStack' => :use_dual_stack,
+        'UseFIPS' => :use_fips,
+        'Endpoint' => :endpoint,
+        'EndpointId' => :endpoint_id,
+      }.freeze
+    end
 
     def initialize(options = {})
       self[:region] = options[:region]
