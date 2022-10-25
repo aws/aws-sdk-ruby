@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-forecastqueryservice/types'
 require_relative 'aws-sdk-forecastqueryservice/client_api'
-require_relative 'aws-sdk-forecastqueryservice/plugins/endpoints.rb'
 require_relative 'aws-sdk-forecastqueryservice/client'
 require_relative 'aws-sdk-forecastqueryservice/errors'
 require_relative 'aws-sdk-forecastqueryservice/resource'
-require_relative 'aws-sdk-forecastqueryservice/endpoint_parameters'
-require_relative 'aws-sdk-forecastqueryservice/endpoint_provider'
-require_relative 'aws-sdk-forecastqueryservice/endpoints'
 require_relative 'aws-sdk-forecastqueryservice/customizations'
 
 # This module provides support for Amazon Forecast Query Service. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-forecastqueryservice/customizations'
 # @!group service
 module Aws::ForecastQueryService
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.22.0'
 
 end

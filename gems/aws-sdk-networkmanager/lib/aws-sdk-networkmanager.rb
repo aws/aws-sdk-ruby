@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-networkmanager/types'
 require_relative 'aws-sdk-networkmanager/client_api'
-require_relative 'aws-sdk-networkmanager/plugins/endpoints.rb'
 require_relative 'aws-sdk-networkmanager/client'
 require_relative 'aws-sdk-networkmanager/errors'
 require_relative 'aws-sdk-networkmanager/resource'
-require_relative 'aws-sdk-networkmanager/endpoint_parameters'
-require_relative 'aws-sdk-networkmanager/endpoint_provider'
-require_relative 'aws-sdk-networkmanager/endpoints'
 require_relative 'aws-sdk-networkmanager/customizations'
 
 # This module provides support for AWS Network Manager. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-networkmanager/customizations'
 # @!group service
 module Aws::NetworkManager
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.25.0'
 
 end

@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-route53recoveryreadiness/types'
 require_relative 'aws-sdk-route53recoveryreadiness/client_api'
-require_relative 'aws-sdk-route53recoveryreadiness/plugins/endpoints.rb'
 require_relative 'aws-sdk-route53recoveryreadiness/client'
 require_relative 'aws-sdk-route53recoveryreadiness/errors'
 require_relative 'aws-sdk-route53recoveryreadiness/resource'
-require_relative 'aws-sdk-route53recoveryreadiness/endpoint_parameters'
-require_relative 'aws-sdk-route53recoveryreadiness/endpoint_provider'
-require_relative 'aws-sdk-route53recoveryreadiness/endpoints'
 require_relative 'aws-sdk-route53recoveryreadiness/customizations'
 
 # This module provides support for AWS Route53 Recovery Readiness. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-route53recoveryreadiness/customizations'
 # @!group service
 module Aws::Route53RecoveryReadiness
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.10.0'
 
 end

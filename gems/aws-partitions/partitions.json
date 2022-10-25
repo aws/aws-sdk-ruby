@@ -3496,7 +3496,6 @@
             "deprecated" : true,
             "hostname" : "data.iot-fips.us-west-2.amazonaws.com"
           },
-          "me-central-1" : { },
           "me-south-1" : { },
           "sa-east-1" : { },
           "us-east-1" : {
@@ -7247,7 +7246,6 @@
             "deprecated" : true,
             "hostname" : "iot-fips.us-west-2.amazonaws.com"
           },
-          "me-central-1" : { },
           "me-south-1" : { },
           "sa-east-1" : { },
           "us-east-1" : {
@@ -10531,7 +10529,6 @@
             "deprecated" : true,
             "hostname" : "ram-fips.us-west-2.amazonaws.com"
           },
-          "me-central-1" : { },
           "me-south-1" : { },
           "sa-east-1" : { },
           "us-east-1" : {
@@ -15061,12 +15058,6 @@
           "fips-us-west-2" : {
             "deprecated" : true
           },
-          "ui-ap-northeast-1" : { },
-          "ui-ap-southeast-2" : { },
-          "ui-eu-central-1" : { },
-          "ui-eu-west-2" : { },
-          "ui-us-east-1" : { },
-          "ui-us-west-2" : { },
           "us-east-1" : {
             "variants" : [ {
               "tags" : [ "fips" ]

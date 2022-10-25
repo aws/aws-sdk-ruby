@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-securityhub/types'
 require_relative 'aws-sdk-securityhub/client_api'
-require_relative 'aws-sdk-securityhub/plugins/endpoints.rb'
 require_relative 'aws-sdk-securityhub/client'
 require_relative 'aws-sdk-securityhub/errors'
 require_relative 'aws-sdk-securityhub/resource'
-require_relative 'aws-sdk-securityhub/endpoint_parameters'
-require_relative 'aws-sdk-securityhub/endpoint_provider'
-require_relative 'aws-sdk-securityhub/endpoints'
 require_relative 'aws-sdk-securityhub/customizations'
 
 # This module provides support for AWS SecurityHub. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-securityhub/customizations'
 # @!group service
 module Aws::SecurityHub
 
-  GEM_VERSION = '1.70.0'
+  GEM_VERSION = '1.69.0'
 
 end

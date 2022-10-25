@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-lookoutequipment/types'
 require_relative 'aws-sdk-lookoutequipment/client_api'
-require_relative 'aws-sdk-lookoutequipment/plugins/endpoints.rb'
 require_relative 'aws-sdk-lookoutequipment/client'
 require_relative 'aws-sdk-lookoutequipment/errors'
 require_relative 'aws-sdk-lookoutequipment/resource'
-require_relative 'aws-sdk-lookoutequipment/endpoint_parameters'
-require_relative 'aws-sdk-lookoutequipment/endpoint_provider'
-require_relative 'aws-sdk-lookoutequipment/endpoints'
 require_relative 'aws-sdk-lookoutequipment/customizations'
 
 # This module provides support for Amazon Lookout for Equipment. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-lookoutequipment/customizations'
 # @!group service
 module Aws::LookoutEquipment
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.13.0'
 
 end

@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-managedgrafana/types'
 require_relative 'aws-sdk-managedgrafana/client_api'
-require_relative 'aws-sdk-managedgrafana/plugins/endpoints.rb'
 require_relative 'aws-sdk-managedgrafana/client'
 require_relative 'aws-sdk-managedgrafana/errors'
 require_relative 'aws-sdk-managedgrafana/resource'
-require_relative 'aws-sdk-managedgrafana/endpoint_parameters'
-require_relative 'aws-sdk-managedgrafana/endpoint_provider'
-require_relative 'aws-sdk-managedgrafana/endpoints'
 require_relative 'aws-sdk-managedgrafana/customizations'
 
 # This module provides support for Amazon Managed Grafana. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-managedgrafana/customizations'
 # @!group service
 module Aws::ManagedGrafana
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.8.0'
 
 end

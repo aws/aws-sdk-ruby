@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-codestarnotifications/types'
 require_relative 'aws-sdk-codestarnotifications/client_api'
-require_relative 'aws-sdk-codestarnotifications/plugins/endpoints.rb'
 require_relative 'aws-sdk-codestarnotifications/client'
 require_relative 'aws-sdk-codestarnotifications/errors'
 require_relative 'aws-sdk-codestarnotifications/resource'
-require_relative 'aws-sdk-codestarnotifications/endpoint_parameters'
-require_relative 'aws-sdk-codestarnotifications/endpoint_provider'
-require_relative 'aws-sdk-codestarnotifications/endpoints'
 require_relative 'aws-sdk-codestarnotifications/customizations'
 
 # This module provides support for AWS CodeStar Notifications. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-codestarnotifications/customizations'
 # @!group service
 module Aws::CodeStarNotifications
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.20.0'
 
 end

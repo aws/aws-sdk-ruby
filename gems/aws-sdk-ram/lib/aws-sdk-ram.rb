@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-ram/types'
 require_relative 'aws-sdk-ram/client_api'
-require_relative 'aws-sdk-ram/plugins/endpoints.rb'
 require_relative 'aws-sdk-ram/client'
 require_relative 'aws-sdk-ram/errors'
 require_relative 'aws-sdk-ram/resource'
-require_relative 'aws-sdk-ram/endpoint_parameters'
-require_relative 'aws-sdk-ram/endpoint_provider'
-require_relative 'aws-sdk-ram/endpoints'
 require_relative 'aws-sdk-ram/customizations'
 
 # This module provides support for AWS Resource Access Manager. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-ram/customizations'
 # @!group service
 module Aws::RAM
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.39.0'
 
 end

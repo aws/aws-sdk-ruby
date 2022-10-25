@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-directoryservice/types'
 require_relative 'aws-sdk-directoryservice/client_api'
-require_relative 'aws-sdk-directoryservice/plugins/endpoints.rb'
 require_relative 'aws-sdk-directoryservice/client'
 require_relative 'aws-sdk-directoryservice/errors'
 require_relative 'aws-sdk-directoryservice/resource'
-require_relative 'aws-sdk-directoryservice/endpoint_parameters'
-require_relative 'aws-sdk-directoryservice/endpoint_provider'
-require_relative 'aws-sdk-directoryservice/endpoints'
 require_relative 'aws-sdk-directoryservice/customizations'
 
 # This module provides support for AWS Directory Service. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-directoryservice/customizations'
 # @!group service
 module Aws::DirectoryService
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.51.0'
 
 end

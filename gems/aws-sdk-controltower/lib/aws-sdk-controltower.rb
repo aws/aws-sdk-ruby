@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-controltower/types'
 require_relative 'aws-sdk-controltower/client_api'
-require_relative 'aws-sdk-controltower/plugins/endpoints.rb'
 require_relative 'aws-sdk-controltower/client'
 require_relative 'aws-sdk-controltower/errors'
 require_relative 'aws-sdk-controltower/resource'
-require_relative 'aws-sdk-controltower/endpoint_parameters'
-require_relative 'aws-sdk-controltower/endpoint_provider'
-require_relative 'aws-sdk-controltower/endpoints'
 require_relative 'aws-sdk-controltower/customizations'
 
 # This module provides support for AWS Control Tower. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-controltower/customizations'
 # @!group service
 module Aws::ControlTower
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.0.0'
 
 end

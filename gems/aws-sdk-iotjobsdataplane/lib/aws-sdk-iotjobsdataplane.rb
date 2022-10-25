@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-iotjobsdataplane/types'
 require_relative 'aws-sdk-iotjobsdataplane/client_api'
-require_relative 'aws-sdk-iotjobsdataplane/plugins/endpoints.rb'
 require_relative 'aws-sdk-iotjobsdataplane/client'
 require_relative 'aws-sdk-iotjobsdataplane/errors'
 require_relative 'aws-sdk-iotjobsdataplane/resource'
-require_relative 'aws-sdk-iotjobsdataplane/endpoint_parameters'
-require_relative 'aws-sdk-iotjobsdataplane/endpoint_provider'
-require_relative 'aws-sdk-iotjobsdataplane/endpoints'
 require_relative 'aws-sdk-iotjobsdataplane/customizations'
 
 # This module provides support for AWS IoT Jobs Data Plane. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-iotjobsdataplane/customizations'
 # @!group service
 module Aws::IoTJobsDataPlane
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.36.0'
 
 end

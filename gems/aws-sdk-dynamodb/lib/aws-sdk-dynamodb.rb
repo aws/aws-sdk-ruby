@@ -13,14 +13,10 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-dynamodb/types'
 require_relative 'aws-sdk-dynamodb/client_api'
-require_relative 'aws-sdk-dynamodb/plugins/endpoints.rb'
 require_relative 'aws-sdk-dynamodb/client'
 require_relative 'aws-sdk-dynamodb/errors'
 require_relative 'aws-sdk-dynamodb/waiters'
 require_relative 'aws-sdk-dynamodb/resource'
-require_relative 'aws-sdk-dynamodb/endpoint_parameters'
-require_relative 'aws-sdk-dynamodb/endpoint_provider'
-require_relative 'aws-sdk-dynamodb/endpoints'
 require_relative 'aws-sdk-dynamodb/table'
 require_relative 'aws-sdk-dynamodb/customizations'
 
@@ -54,6 +50,6 @@ require_relative 'aws-sdk-dynamodb/customizations'
 # @!group service
 module Aws::DynamoDB
 
-  GEM_VERSION = '1.78.0'
+  GEM_VERSION = '1.77.0'
 
 end

@@ -13,14 +13,10 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-iottwinmaker/types'
 require_relative 'aws-sdk-iottwinmaker/client_api'
-require_relative 'aws-sdk-iottwinmaker/plugins/endpoints.rb'
 require_relative 'aws-sdk-iottwinmaker/client'
 require_relative 'aws-sdk-iottwinmaker/errors'
 require_relative 'aws-sdk-iottwinmaker/waiters'
 require_relative 'aws-sdk-iottwinmaker/resource'
-require_relative 'aws-sdk-iottwinmaker/endpoint_parameters'
-require_relative 'aws-sdk-iottwinmaker/endpoint_provider'
-require_relative 'aws-sdk-iottwinmaker/endpoints'
 require_relative 'aws-sdk-iottwinmaker/customizations'
 
 # This module provides support for AWS IoT TwinMaker. This module is available in the
@@ -53,6 +49,6 @@ require_relative 'aws-sdk-iottwinmaker/customizations'
 # @!group service
 module Aws::IoTTwinMaker
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.5.0'
 
 end

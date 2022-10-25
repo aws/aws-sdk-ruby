@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-drs/types'
 require_relative 'aws-sdk-drs/client_api'
-require_relative 'aws-sdk-drs/plugins/endpoints.rb'
 require_relative 'aws-sdk-drs/client'
 require_relative 'aws-sdk-drs/errors'
 require_relative 'aws-sdk-drs/resource'
-require_relative 'aws-sdk-drs/endpoint_parameters'
-require_relative 'aws-sdk-drs/endpoint_provider'
-require_relative 'aws-sdk-drs/endpoints'
 require_relative 'aws-sdk-drs/customizations'
 
 # This module provides support for Elastic Disaster Recovery Service. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-drs/customizations'
 # @!group service
 module Aws::Drs
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.7.0'
 
 end

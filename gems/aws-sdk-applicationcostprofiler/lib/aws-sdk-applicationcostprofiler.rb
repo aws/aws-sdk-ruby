@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-applicationcostprofiler/types'
 require_relative 'aws-sdk-applicationcostprofiler/client_api'
-require_relative 'aws-sdk-applicationcostprofiler/plugins/endpoints.rb'
 require_relative 'aws-sdk-applicationcostprofiler/client'
 require_relative 'aws-sdk-applicationcostprofiler/errors'
 require_relative 'aws-sdk-applicationcostprofiler/resource'
-require_relative 'aws-sdk-applicationcostprofiler/endpoint_parameters'
-require_relative 'aws-sdk-applicationcostprofiler/endpoint_provider'
-require_relative 'aws-sdk-applicationcostprofiler/endpoints'
 require_relative 'aws-sdk-applicationcostprofiler/customizations'
 
 # This module provides support for AWS Application Cost Profiler. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-applicationcostprofiler/customizations'
 # @!group service
 module Aws::ApplicationCostProfiler
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.9.0'
 
 end

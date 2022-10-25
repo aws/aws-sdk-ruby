@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-mwaa/types'
 require_relative 'aws-sdk-mwaa/client_api'
-require_relative 'aws-sdk-mwaa/plugins/endpoints.rb'
 require_relative 'aws-sdk-mwaa/client'
 require_relative 'aws-sdk-mwaa/errors'
 require_relative 'aws-sdk-mwaa/resource'
-require_relative 'aws-sdk-mwaa/endpoint_parameters'
-require_relative 'aws-sdk-mwaa/endpoint_provider'
-require_relative 'aws-sdk-mwaa/endpoints'
 require_relative 'aws-sdk-mwaa/customizations'
 
 # This module provides support for AmazonMWAA. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-mwaa/customizations'
 # @!group service
 module Aws::MWAA
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.16.0'
 
 end

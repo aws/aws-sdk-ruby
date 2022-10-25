@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-clouddirectory/types'
 require_relative 'aws-sdk-clouddirectory/client_api'
-require_relative 'aws-sdk-clouddirectory/plugins/endpoints.rb'
 require_relative 'aws-sdk-clouddirectory/client'
 require_relative 'aws-sdk-clouddirectory/errors'
 require_relative 'aws-sdk-clouddirectory/resource'
-require_relative 'aws-sdk-clouddirectory/endpoint_parameters'
-require_relative 'aws-sdk-clouddirectory/endpoint_provider'
-require_relative 'aws-sdk-clouddirectory/endpoints'
 require_relative 'aws-sdk-clouddirectory/customizations'
 
 # This module provides support for Amazon CloudDirectory. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-clouddirectory/customizations'
 # @!group service
 module Aws::CloudDirectory
 
-  GEM_VERSION = '1.42.0'
+  GEM_VERSION = '1.41.0'
 
 end

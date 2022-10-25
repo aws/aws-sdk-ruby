@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-iotwireless/types'
 require_relative 'aws-sdk-iotwireless/client_api'
-require_relative 'aws-sdk-iotwireless/plugins/endpoints.rb'
 require_relative 'aws-sdk-iotwireless/client'
 require_relative 'aws-sdk-iotwireless/errors'
 require_relative 'aws-sdk-iotwireless/resource'
-require_relative 'aws-sdk-iotwireless/endpoint_parameters'
-require_relative 'aws-sdk-iotwireless/endpoint_provider'
-require_relative 'aws-sdk-iotwireless/endpoints'
 require_relative 'aws-sdk-iotwireless/customizations'
 
 # This module provides support for AWS IoT Wireless. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-iotwireless/customizations'
 # @!group service
 module Aws::IoTWireless
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.26.0'
 
 end

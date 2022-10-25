@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-serverlessapplicationrepository/types'
 require_relative 'aws-sdk-serverlessapplicationrepository/client_api'
-require_relative 'aws-sdk-serverlessapplicationrepository/plugins/endpoints.rb'
 require_relative 'aws-sdk-serverlessapplicationrepository/client'
 require_relative 'aws-sdk-serverlessapplicationrepository/errors'
 require_relative 'aws-sdk-serverlessapplicationrepository/resource'
-require_relative 'aws-sdk-serverlessapplicationrepository/endpoint_parameters'
-require_relative 'aws-sdk-serverlessapplicationrepository/endpoint_provider'
-require_relative 'aws-sdk-serverlessapplicationrepository/endpoints'
 require_relative 'aws-sdk-serverlessapplicationrepository/customizations'
 
 # This module provides support for AWSServerlessApplicationRepository. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-serverlessapplicationrepository/customizations'
 # @!group service
 module Aws::ServerlessApplicationRepository
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.43.0'
 
 end

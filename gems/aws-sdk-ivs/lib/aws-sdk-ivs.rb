@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-ivs/types'
 require_relative 'aws-sdk-ivs/client_api'
-require_relative 'aws-sdk-ivs/plugins/endpoints.rb'
 require_relative 'aws-sdk-ivs/client'
 require_relative 'aws-sdk-ivs/errors'
 require_relative 'aws-sdk-ivs/resource'
-require_relative 'aws-sdk-ivs/endpoint_parameters'
-require_relative 'aws-sdk-ivs/endpoint_provider'
-require_relative 'aws-sdk-ivs/endpoints'
 require_relative 'aws-sdk-ivs/customizations'
 
 # This module provides support for Amazon Interactive Video Service. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-ivs/customizations'
 # @!group service
 module Aws::IVS
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.23.0'
 
 end

@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-applicationautoscaling/types'
 require_relative 'aws-sdk-applicationautoscaling/client_api'
-require_relative 'aws-sdk-applicationautoscaling/plugins/endpoints.rb'
 require_relative 'aws-sdk-applicationautoscaling/client'
 require_relative 'aws-sdk-applicationautoscaling/errors'
 require_relative 'aws-sdk-applicationautoscaling/resource'
-require_relative 'aws-sdk-applicationautoscaling/endpoint_parameters'
-require_relative 'aws-sdk-applicationautoscaling/endpoint_provider'
-require_relative 'aws-sdk-applicationautoscaling/endpoints'
 require_relative 'aws-sdk-applicationautoscaling/customizations'
 
 # This module provides support for Application Auto Scaling. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-applicationautoscaling/customizations'
 # @!group service
 module Aws::ApplicationAutoScaling
 
-  GEM_VERSION = '1.63.0'
+  GEM_VERSION = '1.62.0'
 
 end

@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-pinpoint/types'
 require_relative 'aws-sdk-pinpoint/client_api'
-require_relative 'aws-sdk-pinpoint/plugins/endpoints.rb'
 require_relative 'aws-sdk-pinpoint/client'
 require_relative 'aws-sdk-pinpoint/errors'
 require_relative 'aws-sdk-pinpoint/resource'
-require_relative 'aws-sdk-pinpoint/endpoint_parameters'
-require_relative 'aws-sdk-pinpoint/endpoint_provider'
-require_relative 'aws-sdk-pinpoint/endpoints'
 require_relative 'aws-sdk-pinpoint/customizations'
 
 # This module provides support for Amazon Pinpoint. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-pinpoint/customizations'
 # @!group service
 module Aws::Pinpoint
 
-  GEM_VERSION = '1.69.0'
+  GEM_VERSION = '1.68.0'
 
 end

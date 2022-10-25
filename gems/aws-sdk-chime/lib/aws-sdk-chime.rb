@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-chime/types'
 require_relative 'aws-sdk-chime/client_api'
-require_relative 'aws-sdk-chime/plugins/endpoints.rb'
 require_relative 'aws-sdk-chime/client'
 require_relative 'aws-sdk-chime/errors'
 require_relative 'aws-sdk-chime/resource'
-require_relative 'aws-sdk-chime/endpoint_parameters'
-require_relative 'aws-sdk-chime/endpoint_provider'
-require_relative 'aws-sdk-chime/endpoints'
 require_relative 'aws-sdk-chime/customizations'
 
 # This module provides support for Amazon Chime. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-chime/customizations'
 # @!group service
 module Aws::Chime
 
-  GEM_VERSION = '1.69.0'
+  GEM_VERSION = '1.68.0'
 
 end

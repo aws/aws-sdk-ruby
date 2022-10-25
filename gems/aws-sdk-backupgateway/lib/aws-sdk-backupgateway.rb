@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-backupgateway/types'
 require_relative 'aws-sdk-backupgateway/client_api'
-require_relative 'aws-sdk-backupgateway/plugins/endpoints.rb'
 require_relative 'aws-sdk-backupgateway/client'
 require_relative 'aws-sdk-backupgateway/errors'
 require_relative 'aws-sdk-backupgateway/resource'
-require_relative 'aws-sdk-backupgateway/endpoint_parameters'
-require_relative 'aws-sdk-backupgateway/endpoint_provider'
-require_relative 'aws-sdk-backupgateway/endpoints'
 require_relative 'aws-sdk-backupgateway/customizations'
 
 # This module provides support for AWS Backup Gateway. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-backupgateway/customizations'
 # @!group service
 module Aws::BackupGateway
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.5.0'
 
 end

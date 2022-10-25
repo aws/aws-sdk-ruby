@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-customerprofiles/types'
 require_relative 'aws-sdk-customerprofiles/client_api'
-require_relative 'aws-sdk-customerprofiles/plugins/endpoints.rb'
 require_relative 'aws-sdk-customerprofiles/client'
 require_relative 'aws-sdk-customerprofiles/errors'
 require_relative 'aws-sdk-customerprofiles/resource'
-require_relative 'aws-sdk-customerprofiles/endpoint_parameters'
-require_relative 'aws-sdk-customerprofiles/endpoint_provider'
-require_relative 'aws-sdk-customerprofiles/endpoints'
 require_relative 'aws-sdk-customerprofiles/customizations'
 
 # This module provides support for Amazon Connect Customer Profiles. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-customerprofiles/customizations'
 # @!group service
 module Aws::CustomerProfiles
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.22.0'
 
 end

@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-mediapackage/types'
 require_relative 'aws-sdk-mediapackage/client_api'
-require_relative 'aws-sdk-mediapackage/plugins/endpoints.rb'
 require_relative 'aws-sdk-mediapackage/client'
 require_relative 'aws-sdk-mediapackage/errors'
 require_relative 'aws-sdk-mediapackage/resource'
-require_relative 'aws-sdk-mediapackage/endpoint_parameters'
-require_relative 'aws-sdk-mediapackage/endpoint_provider'
-require_relative 'aws-sdk-mediapackage/endpoints'
 require_relative 'aws-sdk-mediapackage/customizations'
 
 # This module provides support for AWS Elemental MediaPackage. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-mediapackage/customizations'
 # @!group service
 module Aws::MediaPackage
 
-  GEM_VERSION = '1.57.0'
+  GEM_VERSION = '1.56.0'
 
 end

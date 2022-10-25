@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-pinpointsmsvoice/types'
 require_relative 'aws-sdk-pinpointsmsvoice/client_api'
-require_relative 'aws-sdk-pinpointsmsvoice/plugins/endpoints.rb'
 require_relative 'aws-sdk-pinpointsmsvoice/client'
 require_relative 'aws-sdk-pinpointsmsvoice/errors'
 require_relative 'aws-sdk-pinpointsmsvoice/resource'
-require_relative 'aws-sdk-pinpointsmsvoice/endpoint_parameters'
-require_relative 'aws-sdk-pinpointsmsvoice/endpoint_provider'
-require_relative 'aws-sdk-pinpointsmsvoice/endpoints'
 require_relative 'aws-sdk-pinpointsmsvoice/customizations'
 
 # This module provides support for Amazon Pinpoint SMS and Voice Service. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-pinpointsmsvoice/customizations'
 # @!group service
 module Aws::PinpointSMSVoice
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.32.0'
 
 end

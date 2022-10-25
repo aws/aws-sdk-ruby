@@ -15,13 +15,9 @@ end
 
 require_relative 'aws-sdk-sso/types'
 require_relative 'aws-sdk-sso/client_api'
-require_relative 'aws-sdk-sso/plugins/endpoints.rb'
 require_relative 'aws-sdk-sso/client'
 require_relative 'aws-sdk-sso/errors'
 require_relative 'aws-sdk-sso/resource'
-require_relative 'aws-sdk-sso/endpoint_parameters'
-require_relative 'aws-sdk-sso/endpoint_provider'
-require_relative 'aws-sdk-sso/endpoints'
 require_relative 'aws-sdk-sso/customizations'
 
 # This module provides support for AWS Single Sign-On. This module is available in the
@@ -54,6 +50,6 @@ require_relative 'aws-sdk-sso/customizations'
 # @!group service
 module Aws::SSO
 
-  GEM_VERSION = '3.165.0'
+  GEM_VERSION = '3.164.0'
 
 end

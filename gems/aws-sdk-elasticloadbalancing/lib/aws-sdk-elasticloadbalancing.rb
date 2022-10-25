@@ -13,14 +13,10 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-elasticloadbalancing/types'
 require_relative 'aws-sdk-elasticloadbalancing/client_api'
-require_relative 'aws-sdk-elasticloadbalancing/plugins/endpoints.rb'
 require_relative 'aws-sdk-elasticloadbalancing/client'
 require_relative 'aws-sdk-elasticloadbalancing/errors'
 require_relative 'aws-sdk-elasticloadbalancing/waiters'
 require_relative 'aws-sdk-elasticloadbalancing/resource'
-require_relative 'aws-sdk-elasticloadbalancing/endpoint_parameters'
-require_relative 'aws-sdk-elasticloadbalancing/endpoint_provider'
-require_relative 'aws-sdk-elasticloadbalancing/endpoints'
 require_relative 'aws-sdk-elasticloadbalancing/customizations'
 
 # This module provides support for Elastic Load Balancing. This module is available in the
@@ -53,6 +49,6 @@ require_relative 'aws-sdk-elasticloadbalancing/customizations'
 # @!group service
 module Aws::ElasticLoadBalancing
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.40.0'
 
 end

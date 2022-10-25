@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-finspace/types'
 require_relative 'aws-sdk-finspace/client_api'
-require_relative 'aws-sdk-finspace/plugins/endpoints.rb'
 require_relative 'aws-sdk-finspace/client'
 require_relative 'aws-sdk-finspace/errors'
 require_relative 'aws-sdk-finspace/resource'
-require_relative 'aws-sdk-finspace/endpoint_parameters'
-require_relative 'aws-sdk-finspace/endpoint_provider'
-require_relative 'aws-sdk-finspace/endpoints'
 require_relative 'aws-sdk-finspace/customizations'
 
 # This module provides support for FinSpace User Environment Management service. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-finspace/customizations'
 # @!group service
 module Aws::Finspace
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.11.0'
 
 end

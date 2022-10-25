@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-personalize/types'
 require_relative 'aws-sdk-personalize/client_api'
-require_relative 'aws-sdk-personalize/plugins/endpoints.rb'
 require_relative 'aws-sdk-personalize/client'
 require_relative 'aws-sdk-personalize/errors'
 require_relative 'aws-sdk-personalize/resource'
-require_relative 'aws-sdk-personalize/endpoint_parameters'
-require_relative 'aws-sdk-personalize/endpoint_provider'
-require_relative 'aws-sdk-personalize/endpoints'
 require_relative 'aws-sdk-personalize/customizations'
 
 # This module provides support for Amazon Personalize. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-personalize/customizations'
 # @!group service
 module Aws::Personalize
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.43.0'
 
 end

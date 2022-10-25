@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-gamesparks/types'
 require_relative 'aws-sdk-gamesparks/client_api'
-require_relative 'aws-sdk-gamesparks/plugins/endpoints.rb'
 require_relative 'aws-sdk-gamesparks/client'
 require_relative 'aws-sdk-gamesparks/errors'
 require_relative 'aws-sdk-gamesparks/resource'
-require_relative 'aws-sdk-gamesparks/endpoint_parameters'
-require_relative 'aws-sdk-gamesparks/endpoint_provider'
-require_relative 'aws-sdk-gamesparks/endpoints'
 require_relative 'aws-sdk-gamesparks/customizations'
 
 # This module provides support for GameSparks. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-gamesparks/customizations'
 # @!group service
 module Aws::GameSparks
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.1.0'
 
 end

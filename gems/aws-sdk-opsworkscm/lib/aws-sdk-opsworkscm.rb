@@ -13,14 +13,10 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-opsworkscm/types'
 require_relative 'aws-sdk-opsworkscm/client_api'
-require_relative 'aws-sdk-opsworkscm/plugins/endpoints.rb'
 require_relative 'aws-sdk-opsworkscm/client'
 require_relative 'aws-sdk-opsworkscm/errors'
 require_relative 'aws-sdk-opsworkscm/waiters'
 require_relative 'aws-sdk-opsworkscm/resource'
-require_relative 'aws-sdk-opsworkscm/endpoint_parameters'
-require_relative 'aws-sdk-opsworkscm/endpoint_provider'
-require_relative 'aws-sdk-opsworkscm/endpoints'
 require_relative 'aws-sdk-opsworkscm/customizations'
 
 # This module provides support for AWS OpsWorks CM. This module is available in the
@@ -53,6 +49,6 @@ require_relative 'aws-sdk-opsworkscm/customizations'
 # @!group service
 module Aws::OpsWorksCM
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.52.0'
 
 end

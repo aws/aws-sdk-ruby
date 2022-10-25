@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-worklink/types'
 require_relative 'aws-sdk-worklink/client_api'
-require_relative 'aws-sdk-worklink/plugins/endpoints.rb'
 require_relative 'aws-sdk-worklink/client'
 require_relative 'aws-sdk-worklink/errors'
 require_relative 'aws-sdk-worklink/resource'
-require_relative 'aws-sdk-worklink/endpoint_parameters'
-require_relative 'aws-sdk-worklink/endpoint_provider'
-require_relative 'aws-sdk-worklink/endpoints'
 require_relative 'aws-sdk-worklink/customizations'
 
 # This module provides support for Amazon WorkLink. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-worklink/customizations'
 # @!group service
 module Aws::WorkLink
 
-  GEM_VERSION = '1.34.0'
+  GEM_VERSION = '1.33.0'
 
 end

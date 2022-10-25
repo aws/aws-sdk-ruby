@@ -26,10 +26,10 @@ module Aws::MediaTailor
     #
     # @!attribute [rw] access_type
     #   The type of authentication used to access content from
-    #   `HttpConfiguration::BaseUrl` on your source location. Accepted
-    #   value: `S3_SIGV4`.
+    #   HttpConfiguration::BaseUrl on your source location. Accepted value:
+    #   S3\_SIGV4.
     #
-    #   `S3_SIGV4` - AWS Signature Version 4 authentication for Amazon S3
+    #   S3\_SIGV4 - AWS Signature Version 4 authentication for Amazon S3
     #   hosted virtual-style access. If your source location base URL is an
     #   Amazon S3 bucket, MediaTailor can use AWS Signature Version 4
     #   (SigV4) authentication to access the bucket where your source
@@ -37,7 +37,7 @@ module Aws::MediaTailor
     #   follow the S3 virtual hosted-style request URL format. For example,
     #   https://bucket-name.s3.Region.amazonaws.com/key-name.
     #
-    #   Before you can use `S3_SIGV4`, you must meet these requirements:
+    #   Before you can use S3\_SIGV4, you must meet these requirements:
     #
     #   • You must allow MediaTailor to access your S3 bucket by granting
     #   mediatailor.amazonaws.com principal access in IAM. For information
@@ -87,8 +87,7 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] message_type
-    #   The SCTE-35 ad insertion type. Accepted value: `SPLICE_INSERT`,
-    #   `TIME_SIGNAL`.
+    #   The SCTE-35 ad insertion type. Accepted value: SPLICE\_INSERT.
     #   @return [String]
     #
     # @!attribute [rw] offset_millis
@@ -102,8 +101,8 @@ module Aws::MediaTailor
     #   @return [Types::SlateSource]
     #
     # @!attribute [rw] splice_insert_message
-    #   This defines the SCTE-35 `splice_insert()` message inserted around
-    #   the ad. For information about using `splice_insert()`, see the
+    #   This defines the SCTE-35 splice\_insert() message inserted around
+    #   the ad. For information about using splice\_insert(), see the
     #   SCTE-35 specficiaiton, section 9.7.3.1.
     #   @return [Types::SpliceInsertMessage]
     #
@@ -118,14 +117,13 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # For HLS, when set to `true`, MediaTailor passes through
-    # `EXT-X-CUE-IN`, `EXT-X-CUE-OUT`, and `EXT-X-SPLICEPOINT-SCTE35` ad
-    # markers from the origin manifest to the MediaTailor personalized
-    # manifest.
+    # For HLS, when set to true, MediaTailor passes through EXT-X-CUE-IN,
+    # EXT-X-CUE-OUT, and EXT-X-SPLICEPOINT-SCTE35 ad markers from the origin
+    # manifest to the MediaTailor personalized manifest.
     #
-    # No logic is applied to these ad markers. For example, if
-    # `EXT-X-CUE-OUT` has a value of `60`, but no ads are filled for that ad
-    # break, MediaTailor will not set the value to `0`.
+    # No logic is applied to these ad markers. For example, if EXT-X-CUE-OUT
+    # has a value of 60, but no ads are filled for that ad break,
+    # MediaTailor will not set the value to 0.
     #
     # @note When making an API call, you may pass AdMarkerPassthrough
     #   data as a hash:
@@ -149,7 +147,7 @@ module Aws::MediaTailor
     # Alert configuration parameters.
     #
     # @!attribute [rw] alert_code
-    #   The code for the alert. For example, `NOT_PROCESSED`.
+    #   The code for the alert. For example, NOT\_PROCESSED.
     #   @return [String]
     #
     # @!attribute [rw] alert_message
@@ -185,20 +183,20 @@ module Aws::MediaTailor
     # meets the criteria defined by the dynamic variables. This gives you
     # granular control over which ad break to place the prefetched ads into.
     #
-    # As an example, let's say that you set `DynamicVariable` to
-    # `scte.event_id` and `Operator` to `EQUALS`, and your playback
-    # configuration has an ADS URL of
-    # `https://my.ads.server.com/path?&podId=[scte.avail_num]&event=[scte.event_id]&duration=[session.avail_duration_secs]`.
+    # As an example, let's say that you set DynamicVariable to
+    # scte.event\_id and Operator to EQUALS, and your playback configuration
+    # has an ADS URL of
+    # https://my.ads.server.com/path?&amp;podId=\[scte.avail\_num\]&amp;event=\[scte.event\_id\]&amp;duration=\[session.avail\_duration\_secs\].
     # And the prefetch request to the ADS contains these values
-    # `https://my.ads.server.com/path?&podId=3&event=my-awesome-event&duration=30`.
+    # https://my.ads.server.com/path?&amp;podId=3&amp;event=my-awesome-event&amp;duration=30.
     # MediaTailor will only insert the prefetched ads into the ad break if
-    # has a SCTE marker with an event id of `my-awesome-event`, since it
-    # must match the event id that MediaTailor uses to query the ADS.
+    # has a SCTE marker with an event id of my-awesome-event, since it must
+    # match the event id that MediaTailor uses to query the ADS.
     #
-    # You can specify up to five `AvailMatchingCriteria`. If you specify
-    # multiple `AvailMatchingCriteria`, MediaTailor combines them to match
-    # using a logical `AND`. You can model logical `OR` combinations by
-    # creating multiple prefetch schedules.
+    # You can specify up to five AvailMatchingCriteria. If you specify
+    # multiple AvailMatchingCriteria, MediaTailor combines them to match
+    # using a logical AND. You can model logical OR combinations by creating
+    # multiple prefetch schedules.
     #
     # @note When making an API call, you may pass AvailMatchingCriteria
     #   data as a hash:
@@ -223,7 +221,7 @@ module Aws::MediaTailor
     #   @return [String]
     #
     # @!attribute [rw] operator
-    #   For the `DynamicVariable` specified in `AvailMatchingCriteria`, the
+    #   For the DynamicVariable specified in AvailMatchingCriteria, the
     #   Operator that is used for the comparison.
     #   @return [String]
     #
@@ -254,7 +252,7 @@ module Aws::MediaTailor
     # @!attribute [rw] mode
     #   Sets the ad suppression mode. By default, ad suppression is off and
     #   all ad breaks are filled with ads or slate. When Mode is set to
-    #   `BEHIND_LIVE_EDGE`, ad suppression is active and MediaTailor won't
+    #   BEHIND\_LIVE\_EDGE, ad suppression is active and MediaTailor won't
     #   fill ad breaks on or behind the ad suppression Value time in the
     #   manifest lookback window.
     #   @return [String]
@@ -283,6 +281,8 @@ module Aws::MediaTailor
     # A request contains unexpected data.
     #
     # @!attribute [rw] message
+    #   Constructs a new BadRequestException with the specified error
+    #   message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/BadRequestException AWS API Documentation
@@ -342,8 +342,8 @@ module Aws::MediaTailor
     #   By default, AWS Elemental MediaTailor uses Amazon CloudFront with
     #   default cache settings as its CDN for ad segments. To set up an
     #   alternate CDN, create a rule in your CDN for the origin
-    #   ads.mediatailor.*&lt;region&gt;*.amazonaws.com. Then specify the
-    #   rule's name in this `AdSegmentUrlPrefix`. When AWS Elemental
+    #   ads.mediatailor.&amp;lt;region>.amazonaws.com. Then specify the
+    #   rule's name in this AdSegmentUrlPrefix. When AWS Elemental
     #   MediaTailor serves a manifest, it reports your CDN as the source for
     #   ad segments.
     #   @return [String]
@@ -353,7 +353,7 @@ module Aws::MediaTailor
     #   content requests don’t always have to go to the origin server.
     #   First, create a rule in your CDN for the content segment origin
     #   server. Then specify the rule's name in this
-    #   `ContentSegmentUrlPrefix`. When AWS Elemental MediaTailor serves a
+    #   ContentSegmentUrlPrefix. When AWS Elemental MediaTailor serves a
     #   manifest, it reports your CDN as the source for content segments.
     #   @return [String]
     #
@@ -366,13 +366,7 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # The configuration parameters for a channel. For information about
-    # MediaTailor channels, see [Working with channels][1] in the
-    # *MediaTailor User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html
+    # The configuration parameters for a channel.
     #
     # @!attribute [rw] arn
     #   The ARN of the channel.
@@ -392,9 +386,9 @@ module Aws::MediaTailor
     #
     # @!attribute [rw] filler_slate
     #   The slate used to fill gaps between programs in the schedule. You
-    #   must configure filler slate if your channel uses the `LINEAR`
-    #   `PlaybackMode`. MediaTailor doesn't support filler slate for
-    #   channels using the `LOOP` `PlaybackMode`.
+    #   must configure filler slate if your channel uses the LINEAR
+    #   PlaybackMode. MediaTailor doesn't support filler slate for channels
+    #   using the LOOP PlaybackMode.
     #   @return [Types::SlateSource]
     #
     # @!attribute [rw] last_modified_time
@@ -408,22 +402,15 @@ module Aws::MediaTailor
     # @!attribute [rw] playback_mode
     #   The type of playback mode for this channel.
     #
-    #   `LINEAR` - Programs play back-to-back only once.
+    #   LINEAR - Programs play back-to-back only once.
     #
-    #   `LOOP` - Programs play back-to-back in an endless loop. When the
-    #   last program in the schedule plays, playback loops back to the first
+    #   LOOP - Programs play back-to-back in an endless loop. When the last
+    #   program in the schedule plays, playback loops back to the first
     #   program in the schedule.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the channel. Tags are key-value pairs that you
-    #   can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   The tags to assign to the channel.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tier
@@ -448,8 +435,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # Configures Amazon CloudWatch log settings for a playback
-    # configuration.
+    # Configures Amazon CloudWatch log settings for an existing MediaTailor
+    # playback configuration.
     #
     # @note When making an API call, you may pass ConfigureLogsForPlaybackConfigurationRequest
     #   data as a hash:
@@ -462,13 +449,13 @@ module Aws::MediaTailor
     # @!attribute [rw] percent_enabled
     #   The percentage of session logs that MediaTailor sends to your
     #   Cloudwatch Logs account. For example, if your playback configuration
-    #   has 1000 sessions and percentEnabled is set to `60`, MediaTailor
-    #   sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor
-    #   decides at random which of the playback configuration sessions to
-    #   send logs for. If you want to view logs for a specific session, you
-    #   can use the [debug log mode][1].
+    #   has 1000 sessions and percentEnabled is set to 60, MediaTailor sends
+    #   logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides
+    #   at random which of the playback configuration sessions to send logs
+    #   for. If you want to view logs for a specific session, you can use
+    #   the [debug log mode][1].
     #
-    #   Valid values: `0` - `100`
+    #   Valid values: 0 - 100
     #
     #
     #
@@ -488,6 +475,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Amazon CloudWatch log settings for a playback configuration.
+    #
     # @!attribute [rw] percent_enabled
     #   The percentage of session logs that MediaTailor sends to your
     #   Cloudwatch Logs account.
@@ -506,6 +495,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The configuration for this channel.
+    #
     # @note When making an API call, you may pass CreateChannelRequest
     #   data as a hash:
     #
@@ -538,14 +529,13 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] channel_name
-    #   The name of the channel.
     #   @return [String]
     #
     # @!attribute [rw] filler_slate
     #   The slate used to fill gaps between programs in the schedule. You
-    #   must configure filler slate if your channel uses the `LINEAR`
-    #   `PlaybackMode`. MediaTailor doesn't support filler slate for
-    #   channels using the `LOOP` `PlaybackMode`.
+    #   must configure filler slate if your channel uses the LINEAR
+    #   PlaybackMode. MediaTailor doesn't support filler slate for channels
+    #   using the LOOP PlaybackMode.
     #   @return [Types::SlateSource]
     #
     # @!attribute [rw] outputs
@@ -555,23 +545,16 @@ module Aws::MediaTailor
     # @!attribute [rw] playback_mode
     #   The type of playback mode to use for this channel.
     #
-    #   `LINEAR` - The programs in the schedule play once back-to-back in
-    #   the schedule.
+    #   LINEAR - The programs in the schedule play once back-to-back in the
+    #   schedule.
     #
-    #   `LOOP` - The programs in the schedule play back-to-back in an
-    #   endless loop. When the last program in the schedule stops playing,
-    #   playback loops back to the first program in the schedule.
+    #   LOOP - The programs in the schedule play back-to-back in an endless
+    #   loop. When the last program in the schedule stops playing, playback
+    #   loops back to the first program in the schedule.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the channel. Tags are key-value pairs that you
-    #   can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   The tags to assign to the channel.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tier
@@ -592,51 +575,34 @@ module Aws::MediaTailor
     end
 
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) to assign to the channel.
     #   @return [String]
     #
     # @!attribute [rw] channel_name
-    #   The name to assign to the channel.
     #   @return [String]
     #
     # @!attribute [rw] channel_state
-    #   Indicates whether the channel is in a running state or not.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The timestamp of when the channel was created.
     #   @return [Time]
     #
     # @!attribute [rw] filler_slate
-    #   Contains information about the slate used to fill gaps between
-    #   programs in the schedule.
+    #   Slate VOD source configuration.
     #   @return [Types::SlateSource]
     #
     # @!attribute [rw] last_modified_time
-    #   The timestamp of when the channel was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] outputs
-    #   The output properties to assign to the channel.
     #   @return [Array<Types::ResponseOutputItem>]
     #
     # @!attribute [rw] playback_mode
-    #   The playback mode to assign to the channel.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the channel. Tags are key-value pairs that you
-    #   can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tier
-    #   The tier of the channel.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateChannelResponse AWS API Documentation
@@ -656,6 +622,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The live source configuration parameters.
+    #
     # @note When making an API call, you may pass CreateLiveSourceRequest
     #   data as a hash:
     #
@@ -680,22 +648,13 @@ module Aws::MediaTailor
     #   @return [Array<Types::HttpPackageConfiguration>]
     #
     # @!attribute [rw] live_source_name
-    #   The name of the live source.
     #   @return [String]
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the live source. Tags are key-value pairs that
-    #   you can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   The tags to assign to the live source.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateLiveSourceRequest AWS API Documentation
@@ -710,39 +669,25 @@ module Aws::MediaTailor
     end
 
     # @!attribute [rw] arn
-    #   The ARN to assign to the live source.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The time the live source was created.
     #   @return [Time]
     #
     # @!attribute [rw] http_package_configurations
-    #   A list of HTTP package configuration parameters for this live
-    #   source.
+    #   The VOD source's HTTP package configuration settings.
     #   @return [Array<Types::HttpPackageConfiguration>]
     #
     # @!attribute [rw] last_modified_time
-    #   The time the live source was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] live_source_name
-    #   The name to assign to the live source.
     #   @return [String]
     #
     # @!attribute [rw] source_location_name
-    #   The name to assign to the source location of the live source.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the live source. Tags are key-value pairs that
-    #   you can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateLiveSourceResponse AWS API Documentation
@@ -759,6 +704,9 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # A complex type that contains configuration settings for retrieval,
+    # consumption, and an optional stream ID.
+    #
     # @note When making an API call, you may pass CreatePrefetchScheduleRequest
     #   data as a hash:
     #
@@ -794,11 +742,9 @@ module Aws::MediaTailor
     #   @return [Types::PrefetchConsumption]
     #
     # @!attribute [rw] name
-    #   The name to assign to the schedule request.
     #   @return [String]
     #
     # @!attribute [rw] playback_configuration_name
-    #   The name to assign to the playback configuration.
     #   @return [String]
     #
     # @!attribute [rw] retrieval
@@ -810,10 +756,10 @@ module Aws::MediaTailor
     # @!attribute [rw] stream_id
     #   An optional stream identifier that MediaTailor uses to prefetch ads
     #   for multiple streams that use the same playback configuration. If
-    #   `StreamId` is specified, MediaTailor returns all of the prefetch
-    #   schedules with an exact match on `StreamId`. If not specified,
+    #   StreamId is specified, MediaTailor returns all of the prefetch
+    #   schedules with an exact match on StreamId. If not specified,
     #   MediaTailor returns all of the prefetch schedules for the playback
-    #   configuration, regardless of `StreamId`.
+    #   configuration, regardless of StreamId.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreatePrefetchScheduleRequest AWS API Documentation
@@ -829,38 +775,26 @@ module Aws::MediaTailor
     end
 
     # @!attribute [rw] arn
-    #   The ARN to assign to the prefetch schedule.
     #   @return [String]
     #
     # @!attribute [rw] consumption
-    #   The configuration settings for MediaTailor's *consumption* of the
-    #   prefetched ads from the ad decision server. Each consumption
-    #   configuration contains an end time and an optional start time that
-    #   define the *consumption window*. Prefetch schedules automatically
-    #   expire no earlier than seven days after the end time.
+    #   A complex type that contains settings that determine how and when
+    #   that MediaTailor places prefetched ads into upcoming ad breaks.
     #   @return [Types::PrefetchConsumption]
     #
     # @!attribute [rw] name
-    #   The name to assign to the prefetch schedule.
     #   @return [String]
     #
     # @!attribute [rw] playback_configuration_name
-    #   The name to assign to the playback configuration.
     #   @return [String]
     #
     # @!attribute [rw] retrieval
-    #   The configuration settings for retrieval of prefetched ads from the
-    #   ad decision server. Only one set of prefetched ads will be retrieved
-    #   and subsequently consumed for each ad break.
+    #   A complex type that contains settings governing when MediaTailor
+    #   prefetches ads, and which dynamic variables that MediaTailor
+    #   includes in the request to the ad decision server.
     #   @return [Types::PrefetchRetrieval]
     #
     # @!attribute [rw] stream_id
-    #   An optional stream identifier that MediaTailor uses to prefetch ads
-    #   for multiple streams that use the same playback configuration. If
-    #   `StreamId` is specified, MediaTailor returns all of the prefetch
-    #   schedules with an exact match on `StreamId`. If not specified,
-    #   MediaTailor returns all of the prefetch schedules for the playback
-    #   configuration, regardless of `StreamId`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreatePrefetchScheduleResponse AWS API Documentation
@@ -876,6 +810,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Program configuration parameters.
+    #
     # @note When making an API call, you may pass CreateProgramRequest
     #   data as a hash:
     #
@@ -917,7 +853,6 @@ module Aws::MediaTailor
     #   @return [Array<Types::AdBreak>]
     #
     # @!attribute [rw] channel_name
-    #   The name of the channel for this Program.
     #   @return [String]
     #
     # @!attribute [rw] live_source_name
@@ -925,7 +860,6 @@ module Aws::MediaTailor
     #   @return [String]
     #
     # @!attribute [rw] program_name
-    #   The name of the Program.
     #   @return [String]
     #
     # @!attribute [rw] schedule_configuration
@@ -955,39 +889,30 @@ module Aws::MediaTailor
     end
 
     # @!attribute [rw] ad_breaks
-    #   The ad break configuration settings.
     #   @return [Array<Types::AdBreak>]
     #
     # @!attribute [rw] arn
-    #   The ARN to assign to the program.
     #   @return [String]
     #
     # @!attribute [rw] channel_name
-    #   The name to assign to the channel for this program.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The time the program was created.
     #   @return [Time]
     #
     # @!attribute [rw] live_source_name
-    #   The name of the LiveSource for this Program.
     #   @return [String]
     #
     # @!attribute [rw] program_name
-    #   The name to assign to this program.
     #   @return [String]
     #
     # @!attribute [rw] scheduled_start_time
-    #   The scheduled start time for this Program.
     #   @return [Time]
     #
     # @!attribute [rw] source_location_name
-    #   The name to assign to the source location for this program.
     #   @return [String]
     #
     # @!attribute [rw] vod_source_name
-    #   The name that's used to refer to a VOD source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateProgramResponse AWS API Documentation
@@ -1006,6 +931,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Source location configuration parameters.
+    #
     # @note When making an API call, you may pass CreateSourceLocationRequest
     #   data as a hash:
     #
@@ -1055,18 +982,10 @@ module Aws::MediaTailor
     #   @return [Array<Types::SegmentDeliveryConfiguration>]
     #
     # @!attribute [rw] source_location_name
-    #   The name associated with the source location.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the source location. Tags are key-value pairs
-    #   that you can associate with Amazon resources to help with
-    #   organization, access control, and cost tracking. For more
-    #   information, see [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   The tags to assign to the source location.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateSourceLocationRequest AWS API Documentation
@@ -1083,53 +1002,39 @@ module Aws::MediaTailor
     end
 
     # @!attribute [rw] access_configuration
-    #   Access configuration parameters. Configures the type of
-    #   authentication used to access content from your source location.
+    #   Access configuration parameters.
     #   @return [Types::AccessConfiguration]
     #
     # @!attribute [rw] arn
-    #   The ARN to assign to the source location.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The time the source location was created.
     #   @return [Time]
     #
     # @!attribute [rw] default_segment_delivery_configuration
-    #   The optional configuration for the server that serves segments.
+    #   The optional configuration for a server that serves segments. Use
+    #   this if you want the segment delivery server to be different from
+    #   the source location server. For example, you can configure your
+    #   source location server to be an origination server, such as
+    #   MediaPackage, and the segment delivery server to be a content
+    #   delivery network (CDN), such as CloudFront. If you don't specify a
+    #   segment delivery server, then the source location server is used.
     #   @return [Types::DefaultSegmentDeliveryConfiguration]
     #
     # @!attribute [rw] http_configuration
-    #   The source's HTTP package configurations.
+    #   The HTTP configuration for the source location.
     #   @return [Types::HttpConfiguration]
     #
     # @!attribute [rw] last_modified_time
-    #   The time the source location was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] segment_delivery_configurations
-    #   The segment delivery configurations for the source location. For
-    #   information about MediaTailor configurations, see [Working with
-    #   configurations in AWS Elemental MediaTailor][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html
     #   @return [Array<Types::SegmentDeliveryConfiguration>]
     #
     # @!attribute [rw] source_location_name
-    #   The name to assign to the source location.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the source location. Tags are key-value pairs
-    #   that you can associate with Amazon resources to help with
-    #   organization, access control, and cost tracking. For more
-    #   information, see [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateSourceLocationResponse AWS API Documentation
@@ -1148,6 +1053,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The VOD source configuration parameters.
+    #
     # @note When making an API call, you may pass CreateVodSourceRequest
     #   data as a hash:
     #
@@ -1171,22 +1078,13 @@ module Aws::MediaTailor
     #   @return [Array<Types::HttpPackageConfiguration>]
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location for this VOD source.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the VOD source. Tags are key-value pairs that
-    #   you can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   The tags to assign to the VOD source.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] vod_source_name
-    #   The name associated with the VOD source.&gt;
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateVodSourceRequest AWS API Documentation
@@ -1201,38 +1099,25 @@ module Aws::MediaTailor
     end
 
     # @!attribute [rw] arn
-    #   The ARN to assign to this VOD source.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The time the VOD source was created.
     #   @return [Time]
     #
     # @!attribute [rw] http_package_configurations
-    #   A list of HTTP package configuration parameters for this VOD source.
+    #   The VOD source's HTTP package configuration settings.
     #   @return [Array<Types::HttpPackageConfiguration>]
     #
     # @!attribute [rw] last_modified_time
-    #   The time the VOD source was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] source_location_name
-    #   The name to assign to the source location for this VOD source.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the VOD source. Tags are key-value pairs that
-    #   you can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] vod_source_name
-    #   The name to assign to the VOD source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateVodSourceResponse AWS API Documentation
@@ -1264,18 +1149,18 @@ module Aws::MediaTailor
     #   don't support sticky redirects. Disable this if you have CDN
     #   routing rules set up for accessing MediaTailor manifests, and you
     #   are either using client-side reporting or your players support
-    #   sticky HTTP redirects. Valid values are `DISABLED` and
-    #   `EMT_DEFAULT`. The `EMT_DEFAULT` setting enables the inclusion of
-    #   the tag and is the default value.
+    #   sticky HTTP redirects. Valid values are DISABLED and EMT\_DEFAULT.
+    #   The EMT\_DEFAULT setting enables the inclusion of the tag and is the
+    #   default value.
     #   @return [String]
     #
     # @!attribute [rw] origin_manifest_type
     #   The setting that controls whether MediaTailor handles manifests from
     #   the origin server as multi-period manifests or single-period
     #   manifests. If your origin server produces single-period manifests,
-    #   set this to `SINGLE_PERIOD`. The default setting is `MULTI_PERIOD`.
+    #   set this to SINGLE\_PERIOD. The default setting is MULTI\_PERIOD.
     #   For multi-period manifests, omit this setting or set it to
-    #   `MULTI_PERIOD`.
+    #   MULTI\_PERIOD.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DashConfiguration AWS API Documentation
@@ -1305,18 +1190,18 @@ module Aws::MediaTailor
     #   don't support sticky redirects. Disable this if you have CDN
     #   routing rules set up for accessing MediaTailor manifests, and you
     #   are either using client-side reporting or your players support
-    #   sticky HTTP redirects. Valid values are `DISABLED` and
-    #   `EMT_DEFAULT`. The `EMT_DEFAULT` setting enables the inclusion of
-    #   the tag and is the default value.
+    #   sticky HTTP redirects. Valid values are DISABLED and EMT\_DEFAULT.
+    #   The EMT\_DEFAULT setting enables the inclusion of the tag and is the
+    #   default value.
     #   @return [String]
     #
     # @!attribute [rw] origin_manifest_type
     #   The setting that controls whether MediaTailor handles manifests from
     #   the origin server as multi-period manifests or single-period
     #   manifests. If your origin server produces single-period manifests,
-    #   set this to `SINGLE_PERIOD`. The default setting is `MULTI_PERIOD`.
+    #   set this to SINGLE\_PERIOD. The default setting is MULTI\_PERIOD.
     #   For multi-period manifests, omit this setting or set it to
-    #   `MULTI_PERIOD`.
+    #   MULTI\_PERIOD.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DashConfigurationForPut AWS API Documentation
@@ -1341,26 +1226,26 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] manifest_window_seconds
-    #   The total duration (in seconds) of each manifest. Minimum value:
-    #   `30` seconds. Maximum value: `3600` seconds.
+    #   The total duration (in seconds) of each manifest. Minimum value: 30
+    #   seconds. Maximum value: 3600 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] min_buffer_time_seconds
     #   Minimum amount of content (measured in seconds) that a player must
-    #   keep available in the buffer. Minimum value: `2` seconds. Maximum
-    #   value: `60` seconds.
+    #   keep available in the buffer. Minimum value: 2 seconds. Maximum
+    #   value: 60 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] min_update_period_seconds
     #   Minimum amount of time (in seconds) that the player should wait
-    #   before requesting updates to the manifest. Minimum value: `2`
-    #   seconds. Maximum value: `60` seconds.
+    #   before requesting updates to the manifest. Minimum value: 2 seconds.
+    #   Maximum value: 60 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] suggested_presentation_delay_seconds
     #   Amount of time (in seconds) that the player should be from the live
-    #   point at the end of the manifest. Minimum value: `2` seconds.
-    #   Maximum value: `60` seconds.
+    #   point at the end of the manifest. Minimum value: 2 seconds. Maximum
+    #   value: 60 seconds.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DashPlaylistSettings AWS API Documentation
@@ -1402,6 +1287,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # This response includes only the "type" : "object" property.
+    #
     # @note When making an API call, you may pass DeleteChannelPolicyRequest
     #   data as a hash:
     #
@@ -1410,7 +1297,6 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] channel_name
-    #   The name of the channel associated with this channel policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteChannelPolicyRequest AWS API Documentation
@@ -1421,6 +1307,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # This response includes only the "type" : "object" property.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteChannelPolicyResponse AWS API Documentation
     #
     class DeleteChannelPolicyResponse < Aws::EmptyStructure; end
@@ -1433,7 +1321,6 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] channel_name
-    #   The name of the channel.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteChannelRequest AWS API Documentation
@@ -1444,6 +1331,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # This response includes only the "type" : "object" property.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteChannelResponse AWS API Documentation
     #
     class DeleteChannelResponse < Aws::EmptyStructure; end
@@ -1457,11 +1346,9 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] live_source_name
-    #   The name of the live source.
     #   @return [String]
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location associated with this Live Source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteLiveSourceRequest AWS API Documentation
@@ -1473,6 +1360,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # This response includes only the "type" : "object" property.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteLiveSourceResponse AWS API Documentation
     #
     class DeleteLiveSourceResponse < Aws::EmptyStructure; end
@@ -1485,7 +1374,6 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the playback configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeletePlaybackConfigurationRequest AWS API Documentation
@@ -1509,12 +1397,9 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the prefetch schedule. If the action is successful, the
-    #   service sends back an HTTP 204 response with an empty HTTP body.
     #   @return [String]
     #
     # @!attribute [rw] playback_configuration_name
-    #   The name of the playback configuration for this prefetch schedule.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeletePrefetchScheduleRequest AWS API Documentation
@@ -1526,6 +1411,9 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # If the action is successful, the service sends back an HTTP 204
+    # response with an empty HTTP body.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeletePrefetchScheduleResponse AWS API Documentation
     #
     class DeletePrefetchScheduleResponse < Aws::EmptyStructure; end
@@ -1539,11 +1427,9 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] channel_name
-    #   The name of the channel.
     #   @return [String]
     #
     # @!attribute [rw] program_name
-    #   The name of the program.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteProgramRequest AWS API Documentation
@@ -1555,6 +1441,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # This response includes only the "type" : "object" property.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteProgramResponse AWS API Documentation
     #
     class DeleteProgramResponse < Aws::EmptyStructure; end
@@ -1567,7 +1455,6 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteSourceLocationRequest AWS API Documentation
@@ -1578,6 +1465,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # This response includes only the "type" : "object" property.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteSourceLocationResponse AWS API Documentation
     #
     class DeleteSourceLocationResponse < Aws::EmptyStructure; end
@@ -1591,11 +1480,9 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location associated with this VOD Source.
     #   @return [String]
     #
     # @!attribute [rw] vod_source_name
-    #   The name of the VOD source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteVodSourceRequest AWS API Documentation
@@ -1607,6 +1494,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # This response includes only the "type" : "object" property.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteVodSourceResponse AWS API Documentation
     #
     class DeleteVodSourceResponse < Aws::EmptyStructure; end
@@ -1619,7 +1508,6 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] channel_name
-    #   The name of the channel.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeChannelRequest AWS API Documentation
@@ -1630,6 +1518,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Returns a channel's properties.
+    #
     # @!attribute [rw] arn
     #   The ARN of the channel.
     #   @return [String]
@@ -1664,14 +1554,7 @@ module Aws::MediaTailor
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags assigned to the channel. Tags are key-value pairs that you
-    #   can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   The tags assigned to the channel.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tier
@@ -1704,11 +1587,9 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] live_source_name
-    #   The name of the live source.
     #   @return [String]
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location associated with this Live Source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeLiveSourceRequest AWS API Documentation
@@ -1720,6 +1601,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # This response includes only the "type" : "object" property.
+    #
     # @!attribute [rw] arn
     #   The ARN of the live source.
     #   @return [String]
@@ -1741,18 +1624,11 @@ module Aws::MediaTailor
     #   @return [String]
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location associated with the live source.
+    #   The name of the source location associated with the VOD source.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags assigned to the live source. Tags are key-value pairs that
-    #   you can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   The tags assigned to the live source.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeLiveSourceResponse AWS API Documentation
@@ -1778,11 +1654,9 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] channel_name
-    #   The name of the channel associated with this Program.
     #   @return [String]
     #
     # @!attribute [rw] program_name
-    #   The name of the program.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeProgramRequest AWS API Documentation
@@ -1794,6 +1668,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # This program's configuration parameters.
+    #
     # @!attribute [rw] ad_breaks
     #   The ad break configuration settings.
     #   @return [Array<Types::AdBreak>]
@@ -1857,7 +1733,6 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeSourceLocationRequest AWS API Documentation
@@ -1868,6 +1743,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # This response includes only the "type" : "object" property.
+    #
     # @!attribute [rw] access_configuration
     #   The access configuration for the source location.
     #   @return [Types::AccessConfiguration]
@@ -1903,14 +1780,7 @@ module Aws::MediaTailor
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags assigned to the source location. Tags are key-value pairs
-    #   that you can associate with Amazon resources to help with
-    #   organization, access control, and cost tracking. For more
-    #   information, see [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   The tags assigned to the source location.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeSourceLocationResponse AWS API Documentation
@@ -1938,11 +1808,9 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location associated with this VOD Source.
     #   @return [String]
     #
     # @!attribute [rw] vod_source_name
-    #   The name of the VOD Source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeVodSourceRequest AWS API Documentation
@@ -1954,6 +1822,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # This response includes only the "type" : "object" property.
+    #
     # @!attribute [rw] arn
     #   The ARN of the VOD source.
     #   @return [String]
@@ -1975,14 +1845,7 @@ module Aws::MediaTailor
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags assigned to the VOD source. Tags are key-value pairs that
-    #   you can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   The tags assigned to the VOD source.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] vod_source_name
@@ -2011,7 +1874,6 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] channel_name
-    #   The name of the channel associated with this Channel Policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetChannelPolicyRequest AWS API Documentation
@@ -2022,9 +1884,10 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Returns the channel's IAM policy.
+    #
     # @!attribute [rw] policy
-    #   The IAM policy for the channel. IAM policies are used to control
-    #   access to your channel.
+    #   The IAM policy for the channel.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetChannelPolicyResponse AWS API Documentation
@@ -2046,33 +1909,15 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] channel_name
-    #   The name of the channel associated with this Channel Schedule.
     #   @return [String]
     #
     # @!attribute [rw] duration_minutes
-    #   The duration in minutes of the channel schedule.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of channel schedules that you want MediaTailor to
-    #   return in response to the current request. If there are more than
-    #   `MaxResults` channel schedules, use the value of `NextToken` in the
-    #   response to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   (Optional) If the playback configuration has more than `MaxResults`
-    #   channel schedules, use `NextToken` to get the second and subsequent
-    #   pages of results.
-    #
-    #   For the first `GetChannelScheduleRequest` request, omit this value.
-    #
-    #   For the second and subsequent requests, get the value of `NextToken`
-    #   from the previous response and specify that value for `NextToken` in
-    #   the request.
-    #
-    #   If the previous response didn't include a `NextToken` element,
-    #   there are no more channel schedules to get.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetChannelScheduleRequest AWS API Documentation
@@ -2086,14 +1931,15 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Returns the schedule entries for the channel.
+    #
     # @!attribute [rw] items
     #   A list of schedule entries for the channel.
     #   @return [Array<Types::ScheduleEntry>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token returned by the list request when results exceed
-    #   the maximum allowed. Use the token to fetch the next page of
-    #   results.
+    #   Pagination token from the GET list request. Use the token to fetch
+    #   the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetChannelScheduleResponse AWS API Documentation
@@ -2113,7 +1959,6 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] name
-    #   The identifier for the playback configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPlaybackConfigurationRequest AWS API Documentation
@@ -2124,6 +1969,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Returns the playback configuration for the specified name.
+    #
     # @!attribute [rw] ad_decision_server_url
     #   The URL for the ad decision server (ADS). This includes the
     #   specification of static parameters and placeholders for dynamic
@@ -2235,14 +2082,7 @@ module Aws::MediaTailor
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags assigned to the playback configuration. Tags are key-value
-    #   pairs that you can associate with Amazon resources to help with
-    #   organization, access control, and cost tracking. For more
-    #   information, see [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   The tags assigned to the playback configuration.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] transcode_profile_name
@@ -2292,16 +2132,9 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the prefetch schedule. The name must be unique among all
-    #   prefetch schedules that are associated with the specified playback
-    #   configuration.
     #   @return [String]
     #
     # @!attribute [rw] playback_configuration_name
-    #   Returns information about the prefetch schedule for a specific
-    #   playback configuration. If you call `GetPrefetchSchedule` on an
-    #   expired prefetch schedule, MediaTailor returns an HTTP 404 status
-    #   code.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPrefetchScheduleRequest AWS API Documentation
@@ -2314,37 +2147,26 @@ module Aws::MediaTailor
     end
 
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the prefetch schedule.
     #   @return [String]
     #
     # @!attribute [rw] consumption
-    #   Consumption settings determine how, and when, MediaTailor places the
-    #   prefetched ads into ad breaks. Ad consumption occurs within a span
-    #   of time that you define, called a *consumption window*. You can
-    #   designate which ad breaks that MediaTailor fills with prefetch ads
-    #   by setting avail matching criteria.
+    #   A complex type that contains settings that determine how and when
+    #   that MediaTailor places prefetched ads into upcoming ad breaks.
     #   @return [Types::PrefetchConsumption]
     #
     # @!attribute [rw] name
-    #   The name of the prefetch schedule. The name must be unique among all
-    #   prefetch schedules that are associated with the specified playback
-    #   configuration.
     #   @return [String]
     #
     # @!attribute [rw] playback_configuration_name
-    #   The name of the playback configuration to create the prefetch
-    #   schedule for.
     #   @return [String]
     #
     # @!attribute [rw] retrieval
-    #   A complex type that contains settings for prefetch retrieval from
-    #   the ad decision server (ADS).
+    #   A complex type that contains settings governing when MediaTailor
+    #   prefetches ads, and which dynamic variables that MediaTailor
+    #   includes in the request to the ad decision server.
     #   @return [Types::PrefetchRetrieval]
     #
     # @!attribute [rw] stream_id
-    #   An optional stream identifier that you can specify in order to
-    #   prefetch for multiple streams that use the same playback
-    #   configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPrefetchScheduleResponse AWS API Documentation
@@ -2385,8 +2207,8 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] manifest_window_seconds
-    #   The total duration (in seconds) of each manifest. Minimum value:
-    #   `30` seconds. Maximum value: `3600` seconds.
+    #   The total duration (in seconds) of each manifest. Minimum value: 30
+    #   seconds. Maximum value: 3600 seconds.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/HlsPlaylistSettings AWS API Documentation
@@ -2433,18 +2255,17 @@ module Aws::MediaTailor
     #
     # @!attribute [rw] path
     #   The relative path to the URL for this VOD source. This is combined
-    #   with `SourceLocation::HttpConfiguration::BaseUrl` to form a valid
-    #   URL.
+    #   with SourceLocation::HttpConfiguration::BaseUrl to form a valid URL.
     #   @return [String]
     #
     # @!attribute [rw] source_group
     #   The name of the source group. This has to match one of the
-    #   `Channel::Outputs::SourceGroup`.
+    #   Channel::Outputs::SourceGroup.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The streaming protocol for this package configuration. Supported
-    #   values are `HLS` and `DASH`.
+    #   values are HLS and DASH.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/HttpPackageConfiguration AWS API Documentation
@@ -2467,20 +2288,12 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] max_results
-    #   The maximum number of alerts that you want MediaTailor to return in
-    #   response to the current request. If there are more than `MaxResults`
-    #   alerts, use the value of `NextToken` in the response to get the next
-    #   page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Pagination token returned by the list request when results exceed
-    #   the maximum allowed. Use the token to fetch the next page of
-    #   results.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListAlertsRequest AWS API Documentation
@@ -2493,14 +2306,15 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Lists the alerts for a given resource.
+    #
     # @!attribute [rw] items
     #   A list of alerts that are associated with this resource.
     #   @return [Array<Types::Alert>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token returned by the list request when results exceed
-    #   the maximum allowed. Use the token to fetch the next page of
-    #   results.
+    #   Pagination token from the list request. Use the token to fetch the
+    #   next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListAlertsResponse AWS API Documentation
@@ -2521,16 +2335,9 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] max_results
-    #   The maximum number of channels that you want MediaTailor to return
-    #   in response to the current request. If there are more than
-    #   `MaxResults` channels, use the value of `NextToken` in the response
-    #   to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Pagination token returned by the list request when results exceed
-    #   the maximum allowed. Use the token to fetch the next page of
-    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListChannelsRequest AWS API Documentation
@@ -2542,6 +2349,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Returns a list of channels.
+    #
     # @!attribute [rw] items
     #   A list of channels that are associated with this account.
     #   @return [Array<Types::Channel>]
@@ -2571,21 +2380,12 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] max_results
-    #   The maximum number of live sources that you want MediaTailor to
-    #   return in response to the current request. If there are more than
-    #   `MaxResults` live sources, use the value of `NextToken` in the
-    #   response to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Pagination token returned by the list request when results exceed
-    #   the maximum allowed. Use the token to fetch the next page of
-    #   results.
     #   @return [String]
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location associated with this Live Sources
-    #   list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListLiveSourcesRequest AWS API Documentation
@@ -2598,14 +2398,15 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # A list of your live sources.
+    #
     # @!attribute [rw] items
     #   Lists the live sources.
     #   @return [Array<Types::LiveSource>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token returned by the list request when results exceed
-    #   the maximum allowed. Use the token to fetch the next page of
-    #   results.
+    #   Pagination token from the list request. Use the token to fetch the
+    #   next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListLiveSourcesResponse AWS API Documentation
@@ -2626,16 +2427,9 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] max_results
-    #   The maximum number of playback configurations that you want
-    #   MediaTailor to return in response to the current request. If there
-    #   are more than `MaxResults` playback configurations, use the value of
-    #   `NextToken` in the response to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Pagination token returned by the list request when results exceed
-    #   the maximum allowed. Use the token to fetch the next page of
-    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPlaybackConfigurationsRequest AWS API Documentation
@@ -2647,6 +2441,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Returns a list of playback configurations.
+    #
     # @!attribute [rw] items
     #   Array of playback configurations. This might be all the available
     #   configurations or a subset, depending on the settings that you
@@ -2668,6 +2464,9 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Retrieves the prefetch schedule(s) for a specific playback
+    # configuration.
+    #
     # @note When making an API call, you may pass ListPrefetchSchedulesRequest
     #   data as a hash:
     #
@@ -2680,30 +2479,27 @@ module Aws::MediaTailor
     #
     # @!attribute [rw] max_results
     #   The maximum number of prefetch schedules that you want MediaTailor
-    #   to return in response to the current request. If there are more than
-    #   `MaxResults` prefetch schedules, use the value of `NextToken` in the
-    #   response to get the next page of results.
+    #   to return in response to the current request. If the playback
+    #   configuration has more than MaxResults prefetch schedules, use the
+    #   value of NextToken in the response to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   (Optional) If the playback configuration has more than `MaxResults`
-    #   prefetch schedules, use `NextToken` to get the second and subsequent
+    #   (Optional) If the playback configuration has more than MaxResults
+    #   prefetch schedules, use NextToken to get the second and subsequent
     #   pages of results.
     #
-    #   For the first `ListPrefetchSchedulesRequest` request, omit this
-    #   value.
+    #   For the first ListPrefetchSchedulesRequest request, omit this value.
     #
-    #   For the second and subsequent requests, get the value of `NextToken`
-    #   from the previous response and specify that value for `NextToken` in
+    #   For the second and subsequent requests, get the value of NextToken
+    #   from the previous response and specify that value for NextToken in
     #   the request.
     #
-    #   If the previous response didn't include a `NextToken` element,
-    #   there are no more prefetch schedules to get.
+    #   If the previous response didn't include a NextToken element, there
+    #   are no more prefetch schedules to get.
     #   @return [String]
     #
     # @!attribute [rw] playback_configuration_name
-    #   Retrieves the prefetch schedule(s) for a specific playback
-    #   configuration.
     #   @return [String]
     #
     # @!attribute [rw] stream_id
@@ -2722,15 +2518,16 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The list of prefetch schedules.
+    #
     # @!attribute [rw] items
-    #   Lists the prefetch schedules. An empty `Items` list doesn't mean
+    #   Lists the prefetch schedules. An empty Items list doesn't mean
     #   there aren't more items to fetch, just that that page was empty.
     #   @return [Array<Types::PrefetchSchedule>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token returned by the list request when results exceed
-    #   the maximum allowed. Use the token to fetch the next page of
-    #   results.
+    #   The value that you will use forNextToken in the next
+    #   ListPrefetchSchedulesRequest request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPrefetchSchedulesResponse AWS API Documentation
@@ -2751,16 +2548,9 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] max_results
-    #   The maximum number of source locations that you want MediaTailor to
-    #   return in response to the current request. If there are more than
-    #   `MaxResults` source locations, use the value of `NextToken` in the
-    #   response to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Pagination token returned by the list request when results exceed
-    #   the maximum allowed. Use the token to fetch the next page of
-    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListSourceLocationsRequest AWS API Documentation
@@ -2772,14 +2562,15 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Lists the source locations.
+    #
     # @!attribute [rw] items
     #   A list of source locations.
     #   @return [Array<Types::SourceLocation>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token returned by the list request when results exceed
-    #   the maximum allowed. Use the token to fetch the next page of
-    #   results.
+    #   Pagination token from the list request. Use the token to fetch the
+    #   next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListSourceLocationsResponse AWS API Documentation
@@ -2799,7 +2590,6 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) associated with this resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListTagsForResourceRequest AWS API Documentation
@@ -2811,14 +2601,6 @@ module Aws::MediaTailor
     end
 
     # @!attribute [rw] tags
-    #   The tags associated with this resource. Tags are key-value pairs
-    #   that you can associate with Amazon resources to help with
-    #   organization, access control, and cost tracking. For more
-    #   information, see [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListTagsForResourceResponse AWS API Documentation
@@ -2839,21 +2621,12 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] max_results
-    #   The maximum number of VOD sources that you want MediaTailor to
-    #   return in response to the current request. If there are more than
-    #   `MaxResults` VOD sources, use the value of `NextToken` in the
-    #   response to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Pagination token returned by the list request when results exceed
-    #   the maximum allowed. Use the token to fetch the next page of
-    #   results.
     #   @return [String]
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location associated with this VOD Source
-    #   list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListVodSourcesRequest AWS API Documentation
@@ -2866,14 +2639,15 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # A list of VOD sources.
+    #
     # @!attribute [rw] items
     #   Lists the VOD sources.
     #   @return [Array<Types::VodSource>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token returned by the list request when results exceed
-    #   the maximum allowed. Use the token to fetch the next page of
-    #   results.
+    #   Pagination token from the list request. Use the token to fetch the
+    #   next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListVodSourcesResponse AWS API Documentation
@@ -2947,14 +2721,7 @@ module Aws::MediaTailor
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags assigned to the live source. Tags are key-value pairs that
-    #   you can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   The tags assigned to the live source.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/LiveSource AWS API Documentation
@@ -2976,13 +2743,13 @@ module Aws::MediaTailor
     # @!attribute [rw] percent_enabled
     #   The percentage of session logs that MediaTailor sends to your
     #   Cloudwatch Logs account. For example, if your playback configuration
-    #   has 1000 sessions and `percentEnabled` is set to `60`, MediaTailor
-    #   sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor
-    #   decides at random which of the playback configuration sessions to
-    #   send logs for. If you want to view logs for a specific session, you
-    #   can use the [debug log mode][1].
+    #   has 1000 sessions and percentEnabled is set to 60, MediaTailor sends
+    #   logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides
+    #   at random which of the playback configuration sessions to send logs
+    #   for. If you want to view logs for a specific session, you can use
+    #   the [debug log mode][1].
     #
-    #   Valid values: `0` - `100`
+    #   Valid values: 0 - 100
     #
     #
     #
@@ -3011,14 +2778,13 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] ad_marker_passthrough
-    #   For HLS, when set to `true`, MediaTailor passes through
-    #   `EXT-X-CUE-IN`, `EXT-X-CUE-OUT`, and `EXT-X-SPLICEPOINT-SCTE35` ad
-    #   markers from the origin manifest to the MediaTailor personalized
-    #   manifest.
+    #   For HLS, when set to true, MediaTailor passes through EXT-X-CUE-IN,
+    #   EXT-X-CUE-OUT, and EXT-X-SPLICEPOINT-SCTE35 ad markers from the
+    #   origin manifest to the MediaTailor personalized manifest.
     #
     #   No logic is applied to these ad markers. For example, if
-    #   `EXT-X-CUE-OUT` has a value of `60`, but no ads are filled for that
-    #   ad break, MediaTailor will not set the value to `0`.
+    #   EXT-X-CUE-OUT has a value of 60, but no ads are filled for that ad
+    #   break, MediaTailor will not set the value to 0.
     #   @return [Types::AdMarkerPassthrough]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ManifestProcessingRules AWS API Documentation
@@ -3029,7 +2795,7 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # A playback configuration. For information about MediaTailor
+    # Creates a playback configuration. For information about MediaTailor
     # configurations, see [Working with configurations in AWS Elemental
     # MediaTailor][1].
     #
@@ -3148,14 +2914,7 @@ module Aws::MediaTailor
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the playback configuration. Tags are key-value
-    #   pairs that you can associate with Amazon resources to help with
-    #   organization, access control, and cost tracking. For more
-    #   information, see [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   The tags to assign to the playback configuration.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] transcode_profile_name
@@ -3216,7 +2975,7 @@ module Aws::MediaTailor
     # @!attribute [rw] avail_matching_criteria
     #   If you only want MediaTailor to insert prefetched ads into avails
     #   (ad breaks) that match specific dynamic variables, such as
-    #   `scte.event_id`, set the avail matching criteria.
+    #   scte.event\_id, set the avail matching criteria.
     #   @return [Array<Types::AvailMatchingCriteria>]
     #
     # @!attribute [rw] end_time
@@ -3224,12 +2983,12 @@ module Aws::MediaTailor
     #   use in an ad break. MediaTailor automatically deletes prefetch
     #   schedules no less than seven days after the end time. If you'd like
     #   to manually delete the prefetch schedule, you can call
-    #   `DeletePrefetchSchedule`.
+    #   DeletePrefetchSchedule.
     #   @return [Time]
     #
     # @!attribute [rw] start_time
     #   The time when prefetched ads are considered for use in an ad break.
-    #   If you don't specify `StartTime`, the prefetched ads are available
+    #   If you don't specify StartTime, the prefetched ads are available
     #   after MediaTailor retrives them from the ad decision server.
     #   @return [Time]
     #
@@ -3262,9 +3021,9 @@ module Aws::MediaTailor
     #   The dynamic variables to use for substitution during prefetch
     #   requests to the ad decision server (ADS).
     #
-    #   You initially configure [dynamic variables][1] for the ADS URL when
+    #   You intially configure [dynamic variables][1] for the ADS URL when
     #   you set up your playback configuration. When you specify
-    #   `DynamicVariables` for prefetch retrieval, MediaTailor includes the
+    #   DynamicVariables for prefetch retrieval, MediaTailor includes the
     #   dynamic variables in the request to the ADS.
     #
     #
@@ -3295,14 +3054,7 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # A prefetch schedule allows you to tell MediaTailor to fetch and
-    # prepare certain ads before an ad break happens. For more information
-    # about ad prefetching, see [Using ad prefetching][1] in the
-    # *MediaTailor User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html
+    # A complex type that contains prefetch schedule information.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the prefetch schedule.
@@ -3351,6 +3103,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Adds an IAM policy for the channel.
+    #
     # @note When making an API call, you may pass PutChannelPolicyRequest
     #   data as a hash:
     #
@@ -3360,7 +3114,6 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] channel_name
-    #   The channel name associated with this Channel Policy.
     #   @return [String]
     #
     # @!attribute [rw] policy
@@ -3376,10 +3129,14 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # This response includes only the "type" : "object" property.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutChannelPolicyResponse AWS API Documentation
     #
     class PutChannelPolicyResponse < Aws::EmptyStructure; end
 
+    # The configuration for creating a playback configuration.
+    #
     # @note When making an API call, you may pass PutPlaybackConfigurationRequest
     #   data as a hash:
     #
@@ -3415,7 +3172,7 @@ module Aws::MediaTailor
     #             enabled: false,
     #           },
     #         },
-    #         name: "__string", # required
+    #         name: "__string",
     #         personalization_threshold_seconds: 1,
     #         slate_ad_url: "__string",
     #         tags: {
@@ -3514,14 +3271,7 @@ module Aws::MediaTailor
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the playback configuration. Tags are key-value
-    #   pairs that you can associate with Amazon resources to help with
-    #   organization, access control, and cost tracking. For more
-    #   information, see [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   The tags to assign to the playback configuration.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] transcode_profile_name
@@ -3558,12 +3308,6 @@ module Aws::MediaTailor
     end
 
     # @!attribute [rw] ad_decision_server_url
-    #   The URL for the ad decision server (ADS). This includes the
-    #   specification of static parameters and placeholders for dynamic
-    #   parameters. AWS Elemental MediaTailor substitutes player-specific
-    #   and session-specific parameters as needed when calling the ADS.
-    #   Alternately, for testing you can provide a static VAST URL. The
-    #   maximum length is 25,000 characters.
     #   @return [String]
     #
     # @!attribute [rw] avail_suppression
@@ -3592,13 +3336,7 @@ module Aws::MediaTailor
     #   @return [Types::CdnConfiguration]
     #
     # @!attribute [rw] configuration_aliases
-    #   The player parameters and aliases used as dynamic variables during
-    #   session initialization. For more information, see [Domain
-    #   Variables][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domain.html
+    #   The predefined aliases for dynamic variables.
     #   @return [Hash<String,Hash<String,String>>]
     #
     # @!attribute [rw] dash_configuration
@@ -3614,7 +3352,7 @@ module Aws::MediaTailor
     #   @return [Types::LivePreRollConfiguration]
     #
     # @!attribute [rw] log_configuration
-    #   The Amazon CloudWatch log settings for a playback configuration.
+    #   Returns Amazon CloudWatch log settings for a playback configuration.
     #   @return [Types::LogConfiguration]
     #
     # @!attribute [rw] manifest_processing_rules
@@ -3624,71 +3362,30 @@ module Aws::MediaTailor
     #   @return [Types::ManifestProcessingRules]
     #
     # @!attribute [rw] name
-    #   The identifier for the playback configuration.
     #   @return [String]
     #
     # @!attribute [rw] personalization_threshold_seconds
-    #   Defines the maximum duration of underfilled ad time (in seconds)
-    #   allowed in an ad break. If the duration of underfilled ad time
-    #   exceeds the personalization threshold, then the personalization of
-    #   the ad break is abandoned and the underlying content is shown. This
-    #   feature applies to *ad replacement* in live and VOD streams, rather
-    #   than ad insertion, because it relies on an underlying content
-    #   stream. For more information about ad break behavior, including ad
-    #   replacement and insertion, see [Ad Behavior in AWS Elemental
-    #   MediaTailor][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html
     #   @return [Integer]
     #
     # @!attribute [rw] playback_configuration_arn
-    #   The Amazon Resource Name (ARN) associated with the playback
-    #   configuration.
     #   @return [String]
     #
     # @!attribute [rw] playback_endpoint_prefix
-    #   The playback endpoint prefix associated with the playback
-    #   configuration.
     #   @return [String]
     #
     # @!attribute [rw] session_initialization_endpoint_prefix
-    #   The session initialization endpoint prefix associated with the
-    #   playback configuration.
     #   @return [String]
     #
     # @!attribute [rw] slate_ad_url
-    #   The URL for a high-quality video asset to transcode and use to fill
-    #   in time that's not used by ads. AWS Elemental MediaTailor shows the
-    #   slate to fill in gaps in media content. Configuring the slate is
-    #   optional for non-VPAID configurations. For VPAID, the slate is
-    #   required because MediaTailor provides it in the slots that are
-    #   designated for dynamic ad content. The slate must be a high-quality
-    #   asset that contains both audio and video.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the playback configuration. Tags are key-value
-    #   pairs that you can associate with Amazon resources to help with
-    #   organization, access control, and cost tracking. For more
-    #   information, see [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] transcode_profile_name
-    #   The name that is used to associate this playback configuration with
-    #   a custom transcode profile. This overrides the dynamic transcoding
-    #   defaults of MediaTailor. Use this only if you have already set up
-    #   custom profiles with the help of AWS Support.
     #   @return [String]
     #
     # @!attribute [rw] video_content_source_url
-    #   The URL prefix for the parent manifest for the stream, minus the
-    #   asset ID. The maximum length is 512 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutPlaybackConfigurationResponse AWS API Documentation
@@ -3746,12 +3443,12 @@ module Aws::MediaTailor
     #
     # @!attribute [rw] manifest_name
     #   The name of the manifest for the channel. The name appears in the
-    #   `PlaybackUrl`.
+    #   PlaybackUrl.
     #   @return [String]
     #
     # @!attribute [rw] source_group
-    #   A string used to match which `HttpPackageConfiguration` is used for
-    #   each `VodSource`.
+    #   A string used to match which HttpPackageConfiguration is used for
+    #   each VodSource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/RequestOutputItem AWS API Documentation
@@ -3765,7 +3462,7 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # The output item response.
+    # This response includes only the "property" : "type" property.
     #
     # @!attribute [rw] dash_playlist_settings
     #   DASH manifest configuration settings.
@@ -3891,6 +3588,8 @@ module Aws::MediaTailor
     #
     # @!attribute [rw] schedule_entry_type
     #   The type of schedule entry.
+    #
+    #   Valid values: PROGRAM or FILLER\_SLATE.
     #   @return [String]
     #
     # @!attribute [rw] source_location_name
@@ -3965,7 +3664,11 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # The segment delivery configuration settings.
+    # The base URL of the host or path of the segment delivery server that
+    # you're using to serve segments. This is typically a content delivery
+    # network (CDN). The URL can be absolute or relative. To use an absolute
+    # URL include the protocol, such as https://example.com/some/path. To
+    # use a relative URL specify the relative path, such as /some/path*.
     #
     # @note When making an API call, you may pass SegmentDeliveryConfiguration
     #   data as a hash:
@@ -3980,8 +3683,8 @@ module Aws::MediaTailor
     #   you're using to serve segments. This is typically a content
     #   delivery network (CDN). The URL can be absolute or relative. To use
     #   an absolute URL include the protocol, such as
-    #   `https://example.com/some/path`. To use a relative URL specify the
-    #   relative path, such as `/some/path*`.
+    #   https://example.com/some/path. To use a relative URL specify the
+    #   relative path, such as /some/path*.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4027,13 +3730,7 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # A source location is a container for sources. For more information
-    # about source locations, see [Working with source locations][1] in the
-    # *MediaTailor User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-source-locations.html
+    # This response includes only the "type" : "object" property.
     #
     # @!attribute [rw] access_configuration
     #   The access configuration for the source location.
@@ -4069,14 +3766,7 @@ module Aws::MediaTailor
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags assigned to the source location. Tags are key-value pairs
-    #   that you can associate with Amazon resources to help with
-    #   organization, access control, and cost tracking. For more
-    #   information, see [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   The tags assigned to the source location.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/SourceLocation AWS API Documentation
@@ -4108,27 +3798,27 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] avail_num
-    #   This is written to `splice_insert.avail_num`, as defined in section
-    #   9.7.3.1 of the SCTE-35 specification. The default value is `0`.
-    #   Values must be between `0` and `256`, inclusive.
+    #   This is written to splice\_insert.avail\_num, as defined in section
+    #   9.7.3.1 of the SCTE-35 specification. The default value is 0. Values
+    #   must be between 0 and 256, inclusive.
     #   @return [Integer]
     #
     # @!attribute [rw] avails_expected
-    #   This is written to `splice_insert.avails_expected`, as defined in
+    #   This is written to splice\_insert.avails\_expected, as defined in
     #   section 9.7.3.1 of the SCTE-35 specification. The default value is
-    #   `0`. Values must be between `0` and `256`, inclusive.
+    #   0. Values must be between 0 and 256, inclusive.
     #   @return [Integer]
     #
     # @!attribute [rw] splice_event_id
-    #   This is written to `splice_insert.splice_event_id`, as defined in
+    #   This is written to splice\_insert.splice\_event\_id, as defined in
     #   section 9.7.3.1 of the SCTE-35 specification. The default value is
-    #   `1`.
+    #   1.
     #   @return [Integer]
     #
     # @!attribute [rw] unique_program_id
-    #   This is written to `splice_insert.unique_program_id`, as defined in
+    #   This is written to splice\_insert.unique\_program\_id, as defined in
     #   section 9.7.3.1 of the SCTE-35 specification. The default value is
-    #   `0`. Values must be between `0` and `256`, inclusive.
+    #   0. Values must be between 0 and 256, inclusive.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/SpliceInsertMessage AWS API Documentation
@@ -4150,7 +3840,6 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] channel_name
-    #   The name of the channel.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/StartChannelRequest AWS API Documentation
@@ -4173,7 +3862,6 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] channel_name
-    #   The name of the channel.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/StopChannelRequest AWS API Documentation
@@ -4199,18 +3887,9 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) associated with the resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the resource. Tags are key-value pairs that
-    #   you can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/TagResourceRequest AWS API Documentation
@@ -4241,12 +3920,12 @@ module Aws::MediaTailor
     #
     # @!attribute [rw] relative_position
     #   The position where this program will be inserted relative to the
-    #   `RelativePosition`.
+    #   RelativePosition.
     #   @return [String]
     #
     # @!attribute [rw] relative_program
     #   The name of the program that this program will be inserted next to,
-    #   as defined by `RelativePosition`.
+    #   as defined by RelativePosition.
     #   @return [String]
     #
     # @!attribute [rw] scheduled_start_time_millis
@@ -4256,23 +3935,22 @@ module Aws::MediaTailor
     #
     # @!attribute [rw] type
     #   Defines when the program plays in the schedule. You can set the
-    #   value to `ABSOLUTE` or `RELATIVE`.
+    #   value to ABSOLUTE or RELATIVE.
     #
-    #   `ABSOLUTE` - The program plays at a specific wall clock time. This
-    #   setting can only be used for channels using the `LINEAR`
-    #   `PlaybackMode`.
+    #   ABSOLUTE - The program plays at a specific wall clock time. This
+    #   setting can only be used for channels using the LINEAR PlaybackMode.
     #
-    #   Note the following considerations when using `ABSOLUTE` transitions:
+    #   Note the following considerations when using ABSOLUTE transitions:
     #
     #   If the preceding program in the schedule has a duration that extends
     #   past the wall clock time, MediaTailor truncates the preceding
     #   program on a common segment boundary.
     #
-    #   If there are gaps in playback, MediaTailor plays the `FillerSlate`
-    #   you configured for your linear channel.
+    #   If there are gaps in playback, MediaTailor plays the FillerSlate you
+    #   configured for your linear channel.
     #
-    #   `RELATIVE` - The program is inserted into the schedule either before
-    #   or after a program that you specify via `RelativePosition`.
+    #   RELATIVE - The program is inserted into the schedule either before
+    #   or after a program that you specify via RelativePosition.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/Transition AWS API Documentation
@@ -4296,11 +3974,9 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource to untag.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The tag keys associated with the resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UntagResourceRequest AWS API Documentation
@@ -4312,6 +3988,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Updates a channel's Outputs.
+    #
     # @note When making an API call, you may pass UpdateChannelRequest
     #   data as a hash:
     #
@@ -4339,14 +4017,13 @@ module Aws::MediaTailor
     #       }
     #
     # @!attribute [rw] channel_name
-    #   The name of the channel.
     #   @return [String]
     #
     # @!attribute [rw] filler_slate
     #   The slate used to fill gaps between programs in the schedule. You
-    #   must configure filler slate if your channel uses the `LINEAR`
-    #   `PlaybackMode`. MediaTailor doesn't support filler slate for
-    #   channels using the `LOOP` `PlaybackMode`.
+    #   must configure filler slate if your channel uses the LINEAR
+    #   PlaybackMode. MediaTailor doesn't support filler slate for channels
+    #   using the LOOP PlaybackMode.
     #   @return [Types::SlateSource]
     #
     # @!attribute [rw] outputs
@@ -4364,59 +4041,34 @@ module Aws::MediaTailor
     end
 
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) associated with the channel.
     #   @return [String]
     #
     # @!attribute [rw] channel_name
-    #   The name of the channel.
     #   @return [String]
     #
     # @!attribute [rw] channel_state
-    #   Returns the state whether the channel is running or not.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The timestamp of when the channel was created.
     #   @return [Time]
     #
     # @!attribute [rw] filler_slate
-    #   The slate used to fill gaps between programs in the schedule. You
-    #   must configure filler slate if your channel uses the `LINEAR`
-    #   `PlaybackMode`. MediaTailor doesn't support filler slate for
-    #   channels using the `LOOP` `PlaybackMode`.
+    #   Slate VOD source configuration.
     #   @return [Types::SlateSource]
     #
     # @!attribute [rw] last_modified_time
-    #   The timestamp that indicates when the channel was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] outputs
-    #   The channel's output properties.
     #   @return [Array<Types::ResponseOutputItem>]
     #
     # @!attribute [rw] playback_mode
-    #   The type of playback mode for this channel.
-    #
-    #   `LINEAR` - Programs play back-to-back only once.
-    #
-    #   `LOOP` - Programs play back-to-back in an endless loop. When the
-    #   last program in the schedule plays, playback loops back to the first
-    #   program in the schedule.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the channel. Tags are key-value pairs that you
-    #   can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tier
-    #   The tier associated with this Channel.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateChannelResponse AWS API Documentation
@@ -4436,6 +4088,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Updates a live source's configuration.
+    #
     # @note When making an API call, you may pass UpdateLiveSourceRequest
     #   data as a hash:
     #
@@ -4457,11 +4111,9 @@ module Aws::MediaTailor
     #   @return [Array<Types::HttpPackageConfiguration>]
     #
     # @!attribute [rw] live_source_name
-    #   The name of the live source.
     #   @return [String]
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location associated with this Live Source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateLiveSourceRequest AWS API Documentation
@@ -4475,39 +4127,25 @@ module Aws::MediaTailor
     end
 
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) associated with this live source.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The timestamp that indicates when the live source was created.
     #   @return [Time]
     #
     # @!attribute [rw] http_package_configurations
-    #   A list of HTTP package configurations for the live source on this
-    #   account.
+    #   The VOD source's HTTP package configuration settings.
     #   @return [Array<Types::HttpPackageConfiguration>]
     #
     # @!attribute [rw] last_modified_time
-    #   The timestamp that indicates when the live source was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] live_source_name
-    #   The name of the live source.
     #   @return [String]
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location associated with the live source.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the live source. Tags are key-value pairs that
-    #   you can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateLiveSourceResponse AWS API Documentation
@@ -4524,6 +4162,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Source location configuration parameters.
+    #
     # @note When making an API call, you may pass UpdateSourceLocationRequest
     #   data as a hash:
     #
@@ -4570,7 +4210,6 @@ module Aws::MediaTailor
     #   @return [Array<Types::SegmentDeliveryConfiguration>]
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateSourceLocationRequest AWS API Documentation
@@ -4586,20 +4225,23 @@ module Aws::MediaTailor
     end
 
     # @!attribute [rw] access_configuration
-    #   Access configuration parameters. Configures the type of
-    #   authentication used to access content from your source location.
+    #   Access configuration parameters.
     #   @return [Types::AccessConfiguration]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) associated with the source location.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The timestamp that indicates when the source location was created.
     #   @return [Time]
     #
     # @!attribute [rw] default_segment_delivery_configuration
-    #   The optional configuration for the host server that serves segments.
+    #   The optional configuration for a server that serves segments. Use
+    #   this if you want the segment delivery server to be different from
+    #   the source location server. For example, you can configure your
+    #   source location server to be an origination server, such as
+    #   MediaPackage, and the segment delivery server to be a content
+    #   delivery network (CDN), such as CloudFront. If you don't specify a
+    #   segment delivery server, then the source location server is used.
     #   @return [Types::DefaultSegmentDeliveryConfiguration]
     #
     # @!attribute [rw] http_configuration
@@ -4607,33 +4249,15 @@ module Aws::MediaTailor
     #   @return [Types::HttpConfiguration]
     #
     # @!attribute [rw] last_modified_time
-    #   The timestamp that indicates when the source location was last
-    #   modified.
     #   @return [Time]
     #
     # @!attribute [rw] segment_delivery_configurations
-    #   The segment delivery configurations for the source location. For
-    #   information about MediaTailor configurations, see [Working with
-    #   configurations in AWS Elemental MediaTailor][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html
     #   @return [Array<Types::SegmentDeliveryConfiguration>]
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the source location. Tags are key-value pairs
-    #   that you can associate with Amazon resources to help with
-    #   organization, access control, and cost tracking. For more
-    #   information, see [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateSourceLocationResponse AWS API Documentation
@@ -4652,6 +4276,8 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Updates a VOD source's configuration.
+    #
     # @note When making an API call, you may pass UpdateVodSourceRequest
     #   data as a hash:
     #
@@ -4673,11 +4299,9 @@ module Aws::MediaTailor
     #   @return [Array<Types::HttpPackageConfiguration>]
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location associated with this VOD Source.
     #   @return [String]
     #
     # @!attribute [rw] vod_source_name
-    #   The name of the VOD source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateVodSourceRequest AWS API Documentation
@@ -4691,39 +4315,25 @@ module Aws::MediaTailor
     end
 
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) associated with the VOD source.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The timestamp that indicates when the VOD source was created.
     #   @return [Time]
     #
     # @!attribute [rw] http_package_configurations
-    #   A list of HTTP package configurations for the VOD source on this
-    #   account.
+    #   The VOD source's HTTP package configuration settings.
     #   @return [Array<Types::HttpPackageConfiguration>]
     #
     # @!attribute [rw] last_modified_time
-    #   The timestamp that indicates when the VOD source was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] source_location_name
-    #   The name of the source location associated with the VOD source.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the VOD source. Tags are key-value pairs that
-    #   you can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] vod_source_name
-    #   The name of the VOD source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateVodSourceResponse AWS API Documentation
@@ -4764,14 +4374,7 @@ module Aws::MediaTailor
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags assigned to the VOD source. Tags are key-value pairs that
-    #   you can associate with Amazon resources to help with organization,
-    #   access control, and cost tracking. For more information, see
-    #   [Tagging AWS Elemental MediaTailor Resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   The tags assigned to the VOD source.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] vod_source_name

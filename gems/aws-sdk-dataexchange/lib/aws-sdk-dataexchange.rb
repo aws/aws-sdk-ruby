@@ -13,14 +13,10 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-dataexchange/types'
 require_relative 'aws-sdk-dataexchange/client_api'
-require_relative 'aws-sdk-dataexchange/plugins/endpoints.rb'
 require_relative 'aws-sdk-dataexchange/client'
 require_relative 'aws-sdk-dataexchange/errors'
 require_relative 'aws-sdk-dataexchange/waiters'
 require_relative 'aws-sdk-dataexchange/resource'
-require_relative 'aws-sdk-dataexchange/endpoint_parameters'
-require_relative 'aws-sdk-dataexchange/endpoint_provider'
-require_relative 'aws-sdk-dataexchange/endpoints'
 require_relative 'aws-sdk-dataexchange/customizations'
 
 # This module provides support for AWS Data Exchange. This module is available in the
@@ -53,6 +49,6 @@ require_relative 'aws-sdk-dataexchange/customizations'
 # @!group service
 module Aws::DataExchange
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.27.0'
 
 end

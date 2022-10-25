@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-wellarchitected/types'
 require_relative 'aws-sdk-wellarchitected/client_api'
-require_relative 'aws-sdk-wellarchitected/plugins/endpoints.rb'
 require_relative 'aws-sdk-wellarchitected/client'
 require_relative 'aws-sdk-wellarchitected/errors'
 require_relative 'aws-sdk-wellarchitected/resource'
-require_relative 'aws-sdk-wellarchitected/endpoint_parameters'
-require_relative 'aws-sdk-wellarchitected/endpoint_provider'
-require_relative 'aws-sdk-wellarchitected/endpoints'
 require_relative 'aws-sdk-wellarchitected/customizations'
 
 # This module provides support for AWS Well-Architected Tool. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-wellarchitected/customizations'
 # @!group service
 module Aws::WellArchitected
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.17.0'
 
 end

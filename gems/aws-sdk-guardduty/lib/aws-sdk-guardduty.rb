@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-guardduty/types'
 require_relative 'aws-sdk-guardduty/client_api'
-require_relative 'aws-sdk-guardduty/plugins/endpoints.rb'
 require_relative 'aws-sdk-guardduty/client'
 require_relative 'aws-sdk-guardduty/errors'
 require_relative 'aws-sdk-guardduty/resource'
-require_relative 'aws-sdk-guardduty/endpoint_parameters'
-require_relative 'aws-sdk-guardduty/endpoint_provider'
-require_relative 'aws-sdk-guardduty/endpoints'
 require_relative 'aws-sdk-guardduty/customizations'
 
 # This module provides support for Amazon GuardDuty. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-guardduty/customizations'
 # @!group service
 module Aws::GuardDuty
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.60.0'
 
 end

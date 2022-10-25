@@ -13,14 +13,10 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-elasticache/types'
 require_relative 'aws-sdk-elasticache/client_api'
-require_relative 'aws-sdk-elasticache/plugins/endpoints.rb'
 require_relative 'aws-sdk-elasticache/client'
 require_relative 'aws-sdk-elasticache/errors'
 require_relative 'aws-sdk-elasticache/waiters'
 require_relative 'aws-sdk-elasticache/resource'
-require_relative 'aws-sdk-elasticache/endpoint_parameters'
-require_relative 'aws-sdk-elasticache/endpoint_provider'
-require_relative 'aws-sdk-elasticache/endpoints'
 require_relative 'aws-sdk-elasticache/customizations'
 
 # This module provides support for Amazon ElastiCache. This module is available in the
@@ -53,6 +49,6 @@ require_relative 'aws-sdk-elasticache/customizations'
 # @!group service
 module Aws::ElastiCache
 
-  GEM_VERSION = '1.80.0'
+  GEM_VERSION = '1.79.0'
 
 end

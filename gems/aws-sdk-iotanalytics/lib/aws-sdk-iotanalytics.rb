@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-iotanalytics/types'
 require_relative 'aws-sdk-iotanalytics/client_api'
-require_relative 'aws-sdk-iotanalytics/plugins/endpoints.rb'
 require_relative 'aws-sdk-iotanalytics/client'
 require_relative 'aws-sdk-iotanalytics/errors'
 require_relative 'aws-sdk-iotanalytics/resource'
-require_relative 'aws-sdk-iotanalytics/endpoint_parameters'
-require_relative 'aws-sdk-iotanalytics/endpoint_provider'
-require_relative 'aws-sdk-iotanalytics/endpoints'
 require_relative 'aws-sdk-iotanalytics/customizations'
 
 # This module provides support for AWS IoT Analytics. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-iotanalytics/customizations'
 # @!group service
 module Aws::IoTAnalytics
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.49.0'
 
 end

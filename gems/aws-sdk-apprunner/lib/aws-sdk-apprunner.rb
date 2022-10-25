@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-apprunner/types'
 require_relative 'aws-sdk-apprunner/client_api'
-require_relative 'aws-sdk-apprunner/plugins/endpoints.rb'
 require_relative 'aws-sdk-apprunner/client'
 require_relative 'aws-sdk-apprunner/errors'
 require_relative 'aws-sdk-apprunner/resource'
-require_relative 'aws-sdk-apprunner/endpoint_parameters'
-require_relative 'aws-sdk-apprunner/endpoint_provider'
-require_relative 'aws-sdk-apprunner/endpoints'
 require_relative 'aws-sdk-apprunner/customizations'
 
 # This module provides support for AWS App Runner. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-apprunner/customizations'
 # @!group service
 module Aws::AppRunner
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.15.0'
 
 end

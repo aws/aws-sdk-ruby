@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-codecommit/types'
 require_relative 'aws-sdk-codecommit/client_api'
-require_relative 'aws-sdk-codecommit/plugins/endpoints.rb'
 require_relative 'aws-sdk-codecommit/client'
 require_relative 'aws-sdk-codecommit/errors'
 require_relative 'aws-sdk-codecommit/resource'
-require_relative 'aws-sdk-codecommit/endpoint_parameters'
-require_relative 'aws-sdk-codecommit/endpoint_provider'
-require_relative 'aws-sdk-codecommit/endpoints'
 require_relative 'aws-sdk-codecommit/customizations'
 
 # This module provides support for AWS CodeCommit. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-codecommit/customizations'
 # @!group service
 module Aws::CodeCommit
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.51.0'
 
 end

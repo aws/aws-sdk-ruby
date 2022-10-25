@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-states/types'
 require_relative 'aws-sdk-states/client_api'
-require_relative 'aws-sdk-states/plugins/endpoints.rb'
 require_relative 'aws-sdk-states/client'
 require_relative 'aws-sdk-states/errors'
 require_relative 'aws-sdk-states/resource'
-require_relative 'aws-sdk-states/endpoint_parameters'
-require_relative 'aws-sdk-states/endpoint_provider'
-require_relative 'aws-sdk-states/endpoints'
 require_relative 'aws-sdk-states/customizations'
 
 # This module provides support for AWS Step Functions. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-states/customizations'
 # @!group service
 module Aws::States
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.48.0'
 
 end

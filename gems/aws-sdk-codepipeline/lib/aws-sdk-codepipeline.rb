@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-codepipeline/types'
 require_relative 'aws-sdk-codepipeline/client_api'
-require_relative 'aws-sdk-codepipeline/plugins/endpoints.rb'
 require_relative 'aws-sdk-codepipeline/client'
 require_relative 'aws-sdk-codepipeline/errors'
 require_relative 'aws-sdk-codepipeline/resource'
-require_relative 'aws-sdk-codepipeline/endpoint_parameters'
-require_relative 'aws-sdk-codepipeline/endpoint_provider'
-require_relative 'aws-sdk-codepipeline/endpoints'
 require_relative 'aws-sdk-codepipeline/customizations'
 
 # This module provides support for AWS CodePipeline. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-codepipeline/customizations'
 # @!group service
 module Aws::CodePipeline
 
-  GEM_VERSION = '1.54.0'
+  GEM_VERSION = '1.53.0'
 
 end

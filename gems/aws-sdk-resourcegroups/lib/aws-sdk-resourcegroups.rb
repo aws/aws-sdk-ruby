@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-resourcegroups/types'
 require_relative 'aws-sdk-resourcegroups/client_api'
-require_relative 'aws-sdk-resourcegroups/plugins/endpoints.rb'
 require_relative 'aws-sdk-resourcegroups/client'
 require_relative 'aws-sdk-resourcegroups/errors'
 require_relative 'aws-sdk-resourcegroups/resource'
-require_relative 'aws-sdk-resourcegroups/endpoint_parameters'
-require_relative 'aws-sdk-resourcegroups/endpoint_provider'
-require_relative 'aws-sdk-resourcegroups/endpoints'
 require_relative 'aws-sdk-resourcegroups/customizations'
 
 # This module provides support for AWS Resource Groups. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-resourcegroups/customizations'
 # @!group service
 module Aws::ResourceGroups
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.45.0'
 
 end

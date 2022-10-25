@@ -13,14 +13,10 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-autoscaling/types'
 require_relative 'aws-sdk-autoscaling/client_api'
-require_relative 'aws-sdk-autoscaling/plugins/endpoints.rb'
 require_relative 'aws-sdk-autoscaling/client'
 require_relative 'aws-sdk-autoscaling/errors'
 require_relative 'aws-sdk-autoscaling/waiters'
 require_relative 'aws-sdk-autoscaling/resource'
-require_relative 'aws-sdk-autoscaling/endpoint_parameters'
-require_relative 'aws-sdk-autoscaling/endpoint_provider'
-require_relative 'aws-sdk-autoscaling/endpoints'
 require_relative 'aws-sdk-autoscaling/activity'
 require_relative 'aws-sdk-autoscaling/auto_scaling_group'
 require_relative 'aws-sdk-autoscaling/instance'
@@ -63,6 +59,6 @@ require_relative 'aws-sdk-autoscaling/customizations'
 # @!group service
 module Aws::AutoScaling
 
-  GEM_VERSION = '1.81.0'
+  GEM_VERSION = '1.80.0'
 
 end

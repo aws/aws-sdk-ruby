@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-route53resolver/types'
 require_relative 'aws-sdk-route53resolver/client_api'
-require_relative 'aws-sdk-route53resolver/plugins/endpoints.rb'
 require_relative 'aws-sdk-route53resolver/client'
 require_relative 'aws-sdk-route53resolver/errors'
 require_relative 'aws-sdk-route53resolver/resource'
-require_relative 'aws-sdk-route53resolver/endpoint_parameters'
-require_relative 'aws-sdk-route53resolver/endpoint_provider'
-require_relative 'aws-sdk-route53resolver/endpoints'
 require_relative 'aws-sdk-route53resolver/customizations'
 
 # This module provides support for Amazon Route 53 Resolver. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-route53resolver/customizations'
 # @!group service
 module Aws::Route53Resolver
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.37.0'
 
 end

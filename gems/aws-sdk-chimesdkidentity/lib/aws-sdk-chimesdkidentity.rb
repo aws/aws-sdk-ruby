@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-chimesdkidentity/types'
 require_relative 'aws-sdk-chimesdkidentity/client_api'
-require_relative 'aws-sdk-chimesdkidentity/plugins/endpoints.rb'
 require_relative 'aws-sdk-chimesdkidentity/client'
 require_relative 'aws-sdk-chimesdkidentity/errors'
 require_relative 'aws-sdk-chimesdkidentity/resource'
-require_relative 'aws-sdk-chimesdkidentity/endpoint_parameters'
-require_relative 'aws-sdk-chimesdkidentity/endpoint_provider'
-require_relative 'aws-sdk-chimesdkidentity/endpoints'
 require_relative 'aws-sdk-chimesdkidentity/customizations'
 
 # This module provides support for Amazon Chime SDK Identity. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-chimesdkidentity/customizations'
 # @!group service
 module Aws::ChimeSDKIdentity
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.9.0'
 
 end

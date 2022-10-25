@@ -13,14 +13,10 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-databasemigrationservice/types'
 require_relative 'aws-sdk-databasemigrationservice/client_api'
-require_relative 'aws-sdk-databasemigrationservice/plugins/endpoints.rb'
 require_relative 'aws-sdk-databasemigrationservice/client'
 require_relative 'aws-sdk-databasemigrationservice/errors'
 require_relative 'aws-sdk-databasemigrationservice/waiters'
 require_relative 'aws-sdk-databasemigrationservice/resource'
-require_relative 'aws-sdk-databasemigrationservice/endpoint_parameters'
-require_relative 'aws-sdk-databasemigrationservice/endpoint_provider'
-require_relative 'aws-sdk-databasemigrationservice/endpoints'
 require_relative 'aws-sdk-databasemigrationservice/customizations'
 
 # This module provides support for AWS Database Migration Service. This module is available in the
@@ -53,6 +49,6 @@ require_relative 'aws-sdk-databasemigrationservice/customizations'
 # @!group service
 module Aws::DatabaseMigrationService
 
-  GEM_VERSION = '1.73.0'
+  GEM_VERSION = '1.72.0'
 
 end

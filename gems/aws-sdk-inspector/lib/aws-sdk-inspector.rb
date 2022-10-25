@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-inspector/types'
 require_relative 'aws-sdk-inspector/client_api'
-require_relative 'aws-sdk-inspector/plugins/endpoints.rb'
 require_relative 'aws-sdk-inspector/client'
 require_relative 'aws-sdk-inspector/errors'
 require_relative 'aws-sdk-inspector/resource'
-require_relative 'aws-sdk-inspector/endpoint_parameters'
-require_relative 'aws-sdk-inspector/endpoint_provider'
-require_relative 'aws-sdk-inspector/endpoints'
 require_relative 'aws-sdk-inspector/customizations'
 
 # This module provides support for Amazon Inspector. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-inspector/customizations'
 # @!group service
 module Aws::Inspector
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.43.0'
 
 end

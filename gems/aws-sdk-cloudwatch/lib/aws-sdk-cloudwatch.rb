@@ -13,14 +13,10 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-cloudwatch/types'
 require_relative 'aws-sdk-cloudwatch/client_api'
-require_relative 'aws-sdk-cloudwatch/plugins/endpoints.rb'
 require_relative 'aws-sdk-cloudwatch/client'
 require_relative 'aws-sdk-cloudwatch/errors'
 require_relative 'aws-sdk-cloudwatch/waiters'
 require_relative 'aws-sdk-cloudwatch/resource'
-require_relative 'aws-sdk-cloudwatch/endpoint_parameters'
-require_relative 'aws-sdk-cloudwatch/endpoint_provider'
-require_relative 'aws-sdk-cloudwatch/endpoints'
 require_relative 'aws-sdk-cloudwatch/alarm'
 require_relative 'aws-sdk-cloudwatch/composite_alarm'
 require_relative 'aws-sdk-cloudwatch/metric'
@@ -56,6 +52,6 @@ require_relative 'aws-sdk-cloudwatch/customizations'
 # @!group service
 module Aws::CloudWatch
 
-  GEM_VERSION = '1.68.0'
+  GEM_VERSION = '1.67.0'
 
 end

@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-devicefarm/types'
 require_relative 'aws-sdk-devicefarm/client_api'
-require_relative 'aws-sdk-devicefarm/plugins/endpoints.rb'
 require_relative 'aws-sdk-devicefarm/client'
 require_relative 'aws-sdk-devicefarm/errors'
 require_relative 'aws-sdk-devicefarm/resource'
-require_relative 'aws-sdk-devicefarm/endpoint_parameters'
-require_relative 'aws-sdk-devicefarm/endpoint_provider'
-require_relative 'aws-sdk-devicefarm/endpoints'
 require_relative 'aws-sdk-devicefarm/customizations'
 
 # This module provides support for AWS Device Farm. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-devicefarm/customizations'
 # @!group service
 module Aws::DeviceFarm
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.52.0'
 
 end

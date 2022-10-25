@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-amplifybackend/types'
 require_relative 'aws-sdk-amplifybackend/client_api'
-require_relative 'aws-sdk-amplifybackend/plugins/endpoints.rb'
 require_relative 'aws-sdk-amplifybackend/client'
 require_relative 'aws-sdk-amplifybackend/errors'
 require_relative 'aws-sdk-amplifybackend/resource'
-require_relative 'aws-sdk-amplifybackend/endpoint_parameters'
-require_relative 'aws-sdk-amplifybackend/endpoint_provider'
-require_relative 'aws-sdk-amplifybackend/endpoints'
 require_relative 'aws-sdk-amplifybackend/customizations'
 
 # This module provides support for AmplifyBackend. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-amplifybackend/customizations'
 # @!group service
 module Aws::AmplifyBackend
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.17.0'
 
 end

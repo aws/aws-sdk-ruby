@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-codebuild/types'
 require_relative 'aws-sdk-codebuild/client_api'
-require_relative 'aws-sdk-codebuild/plugins/endpoints.rb'
 require_relative 'aws-sdk-codebuild/client'
 require_relative 'aws-sdk-codebuild/errors'
 require_relative 'aws-sdk-codebuild/resource'
-require_relative 'aws-sdk-codebuild/endpoint_parameters'
-require_relative 'aws-sdk-codebuild/endpoint_provider'
-require_relative 'aws-sdk-codebuild/endpoints'
 require_relative 'aws-sdk-codebuild/customizations'
 
 # This module provides support for AWS CodeBuild. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-codebuild/customizations'
 # @!group service
 module Aws::CodeBuild
 
-  GEM_VERSION = '1.89.0'
+  GEM_VERSION = '1.88.0'
 
 end

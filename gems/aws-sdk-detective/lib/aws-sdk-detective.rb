@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-detective/types'
 require_relative 'aws-sdk-detective/client_api'
-require_relative 'aws-sdk-detective/plugins/endpoints.rb'
 require_relative 'aws-sdk-detective/client'
 require_relative 'aws-sdk-detective/errors'
 require_relative 'aws-sdk-detective/resource'
-require_relative 'aws-sdk-detective/endpoint_parameters'
-require_relative 'aws-sdk-detective/endpoint_provider'
-require_relative 'aws-sdk-detective/endpoints'
 require_relative 'aws-sdk-detective/customizations'
 
 # This module provides support for Amazon Detective. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-detective/customizations'
 # @!group service
 module Aws::Detective
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.29.0'
 
 end

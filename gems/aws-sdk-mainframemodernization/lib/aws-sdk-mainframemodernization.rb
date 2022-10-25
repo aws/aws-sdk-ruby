@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-mainframemodernization/types'
 require_relative 'aws-sdk-mainframemodernization/client_api'
-require_relative 'aws-sdk-mainframemodernization/plugins/endpoints.rb'
 require_relative 'aws-sdk-mainframemodernization/client'
 require_relative 'aws-sdk-mainframemodernization/errors'
 require_relative 'aws-sdk-mainframemodernization/resource'
-require_relative 'aws-sdk-mainframemodernization/endpoint_parameters'
-require_relative 'aws-sdk-mainframemodernization/endpoint_provider'
-require_relative 'aws-sdk-mainframemodernization/endpoints'
 require_relative 'aws-sdk-mainframemodernization/customizations'
 
 # This module provides support for AWSMainframeModernization. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-mainframemodernization/customizations'
 # @!group service
 module Aws::MainframeModernization
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.0.0'
 
 end

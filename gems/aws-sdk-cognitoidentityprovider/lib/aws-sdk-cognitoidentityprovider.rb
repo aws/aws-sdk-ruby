@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-cognitoidentityprovider/types'
 require_relative 'aws-sdk-cognitoidentityprovider/client_api'
-require_relative 'aws-sdk-cognitoidentityprovider/plugins/endpoints.rb'
 require_relative 'aws-sdk-cognitoidentityprovider/client'
 require_relative 'aws-sdk-cognitoidentityprovider/errors'
 require_relative 'aws-sdk-cognitoidentityprovider/resource'
-require_relative 'aws-sdk-cognitoidentityprovider/endpoint_parameters'
-require_relative 'aws-sdk-cognitoidentityprovider/endpoint_provider'
-require_relative 'aws-sdk-cognitoidentityprovider/endpoints'
 require_relative 'aws-sdk-cognitoidentityprovider/customizations'
 
 # This module provides support for Amazon Cognito Identity Provider. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-cognitoidentityprovider/customizations'
 # @!group service
 module Aws::CognitoIdentityProvider
 
-  GEM_VERSION = '1.72.0'
+  GEM_VERSION = '1.71.0'
 
 end

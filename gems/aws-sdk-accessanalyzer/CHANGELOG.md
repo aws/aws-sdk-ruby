@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.31.0 (2022-10-25)
-------------------
-
-* Feature - This release adds support for six new resource types in IAM Access Analyzer to help you easily identify public and cross-account access to your AWS resources. Updated service API, documentation, and paginators.
-
 1.30.0 (2022-10-03)
 ------------------
 

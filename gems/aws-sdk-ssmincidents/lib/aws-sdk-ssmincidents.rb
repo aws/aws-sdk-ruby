@@ -13,14 +13,10 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-ssmincidents/types'
 require_relative 'aws-sdk-ssmincidents/client_api'
-require_relative 'aws-sdk-ssmincidents/plugins/endpoints.rb'
 require_relative 'aws-sdk-ssmincidents/client'
 require_relative 'aws-sdk-ssmincidents/errors'
 require_relative 'aws-sdk-ssmincidents/waiters'
 require_relative 'aws-sdk-ssmincidents/resource'
-require_relative 'aws-sdk-ssmincidents/endpoint_parameters'
-require_relative 'aws-sdk-ssmincidents/endpoint_provider'
-require_relative 'aws-sdk-ssmincidents/endpoints'
 require_relative 'aws-sdk-ssmincidents/customizations'
 
 # This module provides support for AWS Systems Manager Incident Manager. This module is available in the
@@ -53,6 +49,6 @@ require_relative 'aws-sdk-ssmincidents/customizations'
 # @!group service
 module Aws::SSMIncidents
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.16.0'
 
 end

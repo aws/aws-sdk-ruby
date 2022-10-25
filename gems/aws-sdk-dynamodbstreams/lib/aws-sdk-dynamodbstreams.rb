@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-dynamodbstreams/types'
 require_relative 'aws-sdk-dynamodbstreams/client_api'
-require_relative 'aws-sdk-dynamodbstreams/plugins/endpoints.rb'
 require_relative 'aws-sdk-dynamodbstreams/client'
 require_relative 'aws-sdk-dynamodbstreams/errors'
 require_relative 'aws-sdk-dynamodbstreams/resource'
-require_relative 'aws-sdk-dynamodbstreams/endpoint_parameters'
-require_relative 'aws-sdk-dynamodbstreams/endpoint_provider'
-require_relative 'aws-sdk-dynamodbstreams/endpoints'
 require_relative 'aws-sdk-dynamodbstreams/customizations'
 
 # This module provides support for Amazon DynamoDB Streams. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-dynamodbstreams/customizations'
 # @!group service
 module Aws::DynamoDBStreams
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.39.0'
 
 end

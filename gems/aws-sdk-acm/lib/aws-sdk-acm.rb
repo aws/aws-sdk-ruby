@@ -13,14 +13,10 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-acm/types'
 require_relative 'aws-sdk-acm/client_api'
-require_relative 'aws-sdk-acm/plugins/endpoints.rb'
 require_relative 'aws-sdk-acm/client'
 require_relative 'aws-sdk-acm/errors'
 require_relative 'aws-sdk-acm/waiters'
 require_relative 'aws-sdk-acm/resource'
-require_relative 'aws-sdk-acm/endpoint_parameters'
-require_relative 'aws-sdk-acm/endpoint_provider'
-require_relative 'aws-sdk-acm/endpoints'
 require_relative 'aws-sdk-acm/customizations'
 
 # This module provides support for AWS Certificate Manager. This module is available in the
@@ -53,6 +49,6 @@ require_relative 'aws-sdk-acm/customizations'
 # @!group service
 module Aws::ACM
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.52.0'
 
 end

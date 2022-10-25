@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-chimesdkmeetings/types'
 require_relative 'aws-sdk-chimesdkmeetings/client_api'
-require_relative 'aws-sdk-chimesdkmeetings/plugins/endpoints.rb'
 require_relative 'aws-sdk-chimesdkmeetings/client'
 require_relative 'aws-sdk-chimesdkmeetings/errors'
 require_relative 'aws-sdk-chimesdkmeetings/resource'
-require_relative 'aws-sdk-chimesdkmeetings/endpoint_parameters'
-require_relative 'aws-sdk-chimesdkmeetings/endpoint_provider'
-require_relative 'aws-sdk-chimesdkmeetings/endpoints'
 require_relative 'aws-sdk-chimesdkmeetings/customizations'
 
 # This module provides support for Amazon Chime SDK Meetings. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-chimesdkmeetings/customizations'
 # @!group service
 module Aws::ChimeSDKMeetings
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.14.0'
 
 end

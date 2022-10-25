@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-synthetics/types'
 require_relative 'aws-sdk-synthetics/client_api'
-require_relative 'aws-sdk-synthetics/plugins/endpoints.rb'
 require_relative 'aws-sdk-synthetics/client'
 require_relative 'aws-sdk-synthetics/errors'
 require_relative 'aws-sdk-synthetics/resource'
-require_relative 'aws-sdk-synthetics/endpoint_parameters'
-require_relative 'aws-sdk-synthetics/endpoint_provider'
-require_relative 'aws-sdk-synthetics/endpoints'
 require_relative 'aws-sdk-synthetics/customizations'
 
 # This module provides support for Synthetics. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-synthetics/customizations'
 # @!group service
 module Aws::Synthetics
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.28.0'
 
 end

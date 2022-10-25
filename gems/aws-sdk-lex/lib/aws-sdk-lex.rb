@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-lex/types'
 require_relative 'aws-sdk-lex/client_api'
-require_relative 'aws-sdk-lex/plugins/endpoints.rb'
 require_relative 'aws-sdk-lex/client'
 require_relative 'aws-sdk-lex/errors'
 require_relative 'aws-sdk-lex/resource'
-require_relative 'aws-sdk-lex/endpoint_parameters'
-require_relative 'aws-sdk-lex/endpoint_provider'
-require_relative 'aws-sdk-lex/endpoints'
 require_relative 'aws-sdk-lex/customizations'
 
 # This module provides support for Amazon Lex Runtime Service. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-lex/customizations'
 # @!group service
 module Aws::Lex
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.45.0'
 
 end

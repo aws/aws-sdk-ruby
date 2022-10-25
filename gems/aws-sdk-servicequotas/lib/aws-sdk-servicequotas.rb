@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-servicequotas/types'
 require_relative 'aws-sdk-servicequotas/client_api'
-require_relative 'aws-sdk-servicequotas/plugins/endpoints.rb'
 require_relative 'aws-sdk-servicequotas/client'
 require_relative 'aws-sdk-servicequotas/errors'
 require_relative 'aws-sdk-servicequotas/resource'
-require_relative 'aws-sdk-servicequotas/endpoint_parameters'
-require_relative 'aws-sdk-servicequotas/endpoint_provider'
-require_relative 'aws-sdk-servicequotas/endpoints'
 require_relative 'aws-sdk-servicequotas/customizations'
 
 # This module provides support for Service Quotas. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-servicequotas/customizations'
 # @!group service
 module Aws::ServiceQuotas
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.23.0'
 
 end

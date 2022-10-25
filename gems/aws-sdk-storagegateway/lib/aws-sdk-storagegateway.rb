@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-storagegateway/types'
 require_relative 'aws-sdk-storagegateway/client_api'
-require_relative 'aws-sdk-storagegateway/plugins/endpoints.rb'
 require_relative 'aws-sdk-storagegateway/client'
 require_relative 'aws-sdk-storagegateway/errors'
 require_relative 'aws-sdk-storagegateway/resource'
-require_relative 'aws-sdk-storagegateway/endpoint_parameters'
-require_relative 'aws-sdk-storagegateway/endpoint_provider'
-require_relative 'aws-sdk-storagegateway/endpoints'
 require_relative 'aws-sdk-storagegateway/customizations'
 
 # This module provides support for AWS Storage Gateway. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-storagegateway/customizations'
 # @!group service
 module Aws::StorageGateway
 
-  GEM_VERSION = '1.69.0'
+  GEM_VERSION = '1.68.0'
 
 end

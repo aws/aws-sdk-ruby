@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-greengrassv2/types'
 require_relative 'aws-sdk-greengrassv2/client_api'
-require_relative 'aws-sdk-greengrassv2/plugins/endpoints.rb'
 require_relative 'aws-sdk-greengrassv2/client'
 require_relative 'aws-sdk-greengrassv2/errors'
 require_relative 'aws-sdk-greengrassv2/resource'
-require_relative 'aws-sdk-greengrassv2/endpoint_parameters'
-require_relative 'aws-sdk-greengrassv2/endpoint_provider'
-require_relative 'aws-sdk-greengrassv2/endpoints'
 require_relative 'aws-sdk-greengrassv2/customizations'
 
 # This module provides support for AWS IoT Greengrass V2. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-greengrassv2/customizations'
 # @!group service
 module Aws::GreengrassV2
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.20.0'
 
 end

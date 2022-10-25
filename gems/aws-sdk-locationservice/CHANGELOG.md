@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.25.0 (2022-10-25)
-------------------
-
-* Feature - Added new map styles with satellite imagery for map resources using HERE as a data provider.
-
 1.24.0 (2022-09-27)
 ------------------
 

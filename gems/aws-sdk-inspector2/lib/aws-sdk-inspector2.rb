@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-inspector2/types'
 require_relative 'aws-sdk-inspector2/client_api'
-require_relative 'aws-sdk-inspector2/plugins/endpoints.rb'
 require_relative 'aws-sdk-inspector2/client'
 require_relative 'aws-sdk-inspector2/errors'
 require_relative 'aws-sdk-inspector2/resource'
-require_relative 'aws-sdk-inspector2/endpoint_parameters'
-require_relative 'aws-sdk-inspector2/endpoint_provider'
-require_relative 'aws-sdk-inspector2/endpoints'
 require_relative 'aws-sdk-inspector2/customizations'
 
 # This module provides support for Inspector2. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-inspector2/customizations'
 # @!group service
 module Aws::Inspector2
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.6.0'
 
 end

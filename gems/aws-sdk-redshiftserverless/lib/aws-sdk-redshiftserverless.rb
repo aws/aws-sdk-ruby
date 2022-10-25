@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-redshiftserverless/types'
 require_relative 'aws-sdk-redshiftserverless/client_api'
-require_relative 'aws-sdk-redshiftserverless/plugins/endpoints.rb'
 require_relative 'aws-sdk-redshiftserverless/client'
 require_relative 'aws-sdk-redshiftserverless/errors'
 require_relative 'aws-sdk-redshiftserverless/resource'
-require_relative 'aws-sdk-redshiftserverless/endpoint_parameters'
-require_relative 'aws-sdk-redshiftserverless/endpoint_provider'
-require_relative 'aws-sdk-redshiftserverless/endpoints'
 require_relative 'aws-sdk-redshiftserverless/customizations'
 
 # This module provides support for Redshift Serverless. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-redshiftserverless/customizations'
 # @!group service
 module Aws::RedshiftServerless
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.3.0'
 
 end

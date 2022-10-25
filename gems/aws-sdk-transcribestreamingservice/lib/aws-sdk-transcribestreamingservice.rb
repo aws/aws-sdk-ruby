@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-transcribestreamingservice/types'
 require_relative 'aws-sdk-transcribestreamingservice/client_api'
-require_relative 'aws-sdk-transcribestreamingservice/plugins/endpoints.rb'
 require_relative 'aws-sdk-transcribestreamingservice/client'
 require_relative 'aws-sdk-transcribestreamingservice/errors'
 require_relative 'aws-sdk-transcribestreamingservice/resource'
-require_relative 'aws-sdk-transcribestreamingservice/endpoint_parameters'
-require_relative 'aws-sdk-transcribestreamingservice/endpoint_provider'
-require_relative 'aws-sdk-transcribestreamingservice/endpoints'
 require_relative 'aws-sdk-transcribestreamingservice/customizations'
 require_relative 'aws-sdk-transcribestreamingservice/async_client'
 require_relative 'aws-sdk-transcribestreamingservice/event_streams'
@@ -54,6 +50,6 @@ require_relative 'aws-sdk-transcribestreamingservice/event_streams'
 # @!group service
 module Aws::TranscribeStreamingService
 
-  GEM_VERSION = '1.43.0'
+  GEM_VERSION = '1.42.0'
 
 end

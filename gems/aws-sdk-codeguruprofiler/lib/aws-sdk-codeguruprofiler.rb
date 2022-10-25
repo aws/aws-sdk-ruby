@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-codeguruprofiler/types'
 require_relative 'aws-sdk-codeguruprofiler/client_api'
-require_relative 'aws-sdk-codeguruprofiler/plugins/endpoints.rb'
 require_relative 'aws-sdk-codeguruprofiler/client'
 require_relative 'aws-sdk-codeguruprofiler/errors'
 require_relative 'aws-sdk-codeguruprofiler/resource'
-require_relative 'aws-sdk-codeguruprofiler/endpoint_parameters'
-require_relative 'aws-sdk-codeguruprofiler/endpoint_provider'
-require_relative 'aws-sdk-codeguruprofiler/endpoints'
 require_relative 'aws-sdk-codeguruprofiler/customizations'
 
 # This module provides support for Amazon CodeGuru Profiler. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-codeguruprofiler/customizations'
 # @!group service
 module Aws::CodeGuruProfiler
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.24.0'
 
 end

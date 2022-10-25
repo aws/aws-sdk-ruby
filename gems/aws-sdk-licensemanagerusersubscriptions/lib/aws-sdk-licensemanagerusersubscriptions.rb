@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-licensemanagerusersubscriptions/types'
 require_relative 'aws-sdk-licensemanagerusersubscriptions/client_api'
-require_relative 'aws-sdk-licensemanagerusersubscriptions/plugins/endpoints.rb'
 require_relative 'aws-sdk-licensemanagerusersubscriptions/client'
 require_relative 'aws-sdk-licensemanagerusersubscriptions/errors'
 require_relative 'aws-sdk-licensemanagerusersubscriptions/resource'
-require_relative 'aws-sdk-licensemanagerusersubscriptions/endpoint_parameters'
-require_relative 'aws-sdk-licensemanagerusersubscriptions/endpoint_provider'
-require_relative 'aws-sdk-licensemanagerusersubscriptions/endpoints'
 require_relative 'aws-sdk-licensemanagerusersubscriptions/customizations'
 
 # This module provides support for AWS License Manager User Subscriptions. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-licensemanagerusersubscriptions/customizations'
 # @!group service
 module Aws::LicenseManagerUserSubscriptions
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.0.0'
 
 end

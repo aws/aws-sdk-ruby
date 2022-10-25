@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-cognitosync/types'
 require_relative 'aws-sdk-cognitosync/client_api'
-require_relative 'aws-sdk-cognitosync/plugins/endpoints.rb'
 require_relative 'aws-sdk-cognitosync/client'
 require_relative 'aws-sdk-cognitosync/errors'
 require_relative 'aws-sdk-cognitosync/resource'
-require_relative 'aws-sdk-cognitosync/endpoint_parameters'
-require_relative 'aws-sdk-cognitosync/endpoint_provider'
-require_relative 'aws-sdk-cognitosync/endpoints'
 require_relative 'aws-sdk-cognitosync/customizations'
 
 # This module provides support for Amazon Cognito Sync. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-cognitosync/customizations'
 # @!group service
 module Aws::CognitoSync
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.36.0'
 
 end

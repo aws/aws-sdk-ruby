@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-voiceid/types'
 require_relative 'aws-sdk-voiceid/client_api'
-require_relative 'aws-sdk-voiceid/plugins/endpoints.rb'
 require_relative 'aws-sdk-voiceid/client'
 require_relative 'aws-sdk-voiceid/errors'
 require_relative 'aws-sdk-voiceid/resource'
-require_relative 'aws-sdk-voiceid/endpoint_parameters'
-require_relative 'aws-sdk-voiceid/endpoint_provider'
-require_relative 'aws-sdk-voiceid/endpoints'
 require_relative 'aws-sdk-voiceid/customizations'
 
 # This module provides support for Amazon Voice ID. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-voiceid/customizations'
 # @!group service
 module Aws::VoiceID
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.9.0'
 
 end

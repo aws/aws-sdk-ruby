@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-amplifyuibuilder/types'
 require_relative 'aws-sdk-amplifyuibuilder/client_api'
-require_relative 'aws-sdk-amplifyuibuilder/plugins/endpoints.rb'
 require_relative 'aws-sdk-amplifyuibuilder/client'
 require_relative 'aws-sdk-amplifyuibuilder/errors'
 require_relative 'aws-sdk-amplifyuibuilder/resource'
-require_relative 'aws-sdk-amplifyuibuilder/endpoint_parameters'
-require_relative 'aws-sdk-amplifyuibuilder/endpoint_provider'
-require_relative 'aws-sdk-amplifyuibuilder/endpoints'
 require_relative 'aws-sdk-amplifyuibuilder/customizations'
 
 # This module provides support for AWS Amplify UI Builder. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-amplifyuibuilder/customizations'
 # @!group service
 module Aws::AmplifyUIBuilder
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.7.0'
 
 end

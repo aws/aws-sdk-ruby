@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-iot1clickdevicesservice/types'
 require_relative 'aws-sdk-iot1clickdevicesservice/client_api'
-require_relative 'aws-sdk-iot1clickdevicesservice/plugins/endpoints.rb'
 require_relative 'aws-sdk-iot1clickdevicesservice/client'
 require_relative 'aws-sdk-iot1clickdevicesservice/errors'
 require_relative 'aws-sdk-iot1clickdevicesservice/resource'
-require_relative 'aws-sdk-iot1clickdevicesservice/endpoint_parameters'
-require_relative 'aws-sdk-iot1clickdevicesservice/endpoint_provider'
-require_relative 'aws-sdk-iot1clickdevicesservice/endpoints'
 require_relative 'aws-sdk-iot1clickdevicesservice/customizations'
 
 # This module provides support for AWS IoT 1-Click Devices Service. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-iot1clickdevicesservice/customizations'
 # @!group service
 module Aws::IoT1ClickDevicesService
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.37.0'
 
 end

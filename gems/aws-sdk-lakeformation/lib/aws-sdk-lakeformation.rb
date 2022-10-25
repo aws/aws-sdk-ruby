@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-lakeformation/types'
 require_relative 'aws-sdk-lakeformation/client_api'
-require_relative 'aws-sdk-lakeformation/plugins/endpoints.rb'
 require_relative 'aws-sdk-lakeformation/client'
 require_relative 'aws-sdk-lakeformation/errors'
 require_relative 'aws-sdk-lakeformation/resource'
-require_relative 'aws-sdk-lakeformation/endpoint_parameters'
-require_relative 'aws-sdk-lakeformation/endpoint_provider'
-require_relative 'aws-sdk-lakeformation/endpoints'
 require_relative 'aws-sdk-lakeformation/customizations'
 
 # This module provides support for AWS Lake Formation. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-lakeformation/customizations'
 # @!group service
 module Aws::LakeFormation
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.27.0'
 
 end

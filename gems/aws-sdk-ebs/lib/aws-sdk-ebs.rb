@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-ebs/types'
 require_relative 'aws-sdk-ebs/client_api'
-require_relative 'aws-sdk-ebs/plugins/endpoints.rb'
 require_relative 'aws-sdk-ebs/client'
 require_relative 'aws-sdk-ebs/errors'
 require_relative 'aws-sdk-ebs/resource'
-require_relative 'aws-sdk-ebs/endpoint_parameters'
-require_relative 'aws-sdk-ebs/endpoint_provider'
-require_relative 'aws-sdk-ebs/endpoints'
 require_relative 'aws-sdk-ebs/customizations'
 
 # This module provides support for Amazon Elastic Block Store. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-ebs/customizations'
 # @!group service
 module Aws::EBS
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.26.0'
 
 end

@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-appsync/types'
 require_relative 'aws-sdk-appsync/client_api'
-require_relative 'aws-sdk-appsync/plugins/endpoints.rb'
 require_relative 'aws-sdk-appsync/client'
 require_relative 'aws-sdk-appsync/errors'
 require_relative 'aws-sdk-appsync/resource'
-require_relative 'aws-sdk-appsync/endpoint_parameters'
-require_relative 'aws-sdk-appsync/endpoint_provider'
-require_relative 'aws-sdk-appsync/endpoints'
 require_relative 'aws-sdk-appsync/customizations'
 
 # This module provides support for AWS AppSync. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-appsync/customizations'
 # @!group service
 module Aws::AppSync
 
-  GEM_VERSION = '1.54.0'
+  GEM_VERSION = '1.53.0'
 
 end

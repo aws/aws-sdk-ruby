@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-lightsail/types'
 require_relative 'aws-sdk-lightsail/client_api'
-require_relative 'aws-sdk-lightsail/plugins/endpoints.rb'
 require_relative 'aws-sdk-lightsail/client'
 require_relative 'aws-sdk-lightsail/errors'
 require_relative 'aws-sdk-lightsail/resource'
-require_relative 'aws-sdk-lightsail/endpoint_parameters'
-require_relative 'aws-sdk-lightsail/endpoint_provider'
-require_relative 'aws-sdk-lightsail/endpoints'
 require_relative 'aws-sdk-lightsail/customizations'
 
 # This module provides support for Amazon Lightsail. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-lightsail/customizations'
 # @!group service
 module Aws::Lightsail
 
-  GEM_VERSION = '1.70.0'
+  GEM_VERSION = '1.69.0'
 
 end

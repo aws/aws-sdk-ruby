@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-savingsplans/types'
 require_relative 'aws-sdk-savingsplans/client_api'
-require_relative 'aws-sdk-savingsplans/plugins/endpoints.rb'
 require_relative 'aws-sdk-savingsplans/client'
 require_relative 'aws-sdk-savingsplans/errors'
 require_relative 'aws-sdk-savingsplans/resource'
-require_relative 'aws-sdk-savingsplans/endpoint_parameters'
-require_relative 'aws-sdk-savingsplans/endpoint_provider'
-require_relative 'aws-sdk-savingsplans/endpoints'
 require_relative 'aws-sdk-savingsplans/customizations'
 
 # This module provides support for AWS Savings Plans. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-savingsplans/customizations'
 # @!group service
 module Aws::SavingsPlans
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.26.0'
 
 end

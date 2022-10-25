@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-cloudhsm/types'
 require_relative 'aws-sdk-cloudhsm/client_api'
-require_relative 'aws-sdk-cloudhsm/plugins/endpoints.rb'
 require_relative 'aws-sdk-cloudhsm/client'
 require_relative 'aws-sdk-cloudhsm/errors'
 require_relative 'aws-sdk-cloudhsm/resource'
-require_relative 'aws-sdk-cloudhsm/endpoint_parameters'
-require_relative 'aws-sdk-cloudhsm/endpoint_provider'
-require_relative 'aws-sdk-cloudhsm/endpoints'
 require_relative 'aws-sdk-cloudhsm/customizations'
 
 # This module provides support for Amazon CloudHSM. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-cloudhsm/customizations'
 # @!group service
 module Aws::CloudHSM
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.39.0'
 
 end

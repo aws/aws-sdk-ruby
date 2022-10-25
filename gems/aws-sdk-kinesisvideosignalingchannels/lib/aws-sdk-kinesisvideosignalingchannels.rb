@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-kinesisvideosignalingchannels/types'
 require_relative 'aws-sdk-kinesisvideosignalingchannels/client_api'
-require_relative 'aws-sdk-kinesisvideosignalingchannels/plugins/endpoints.rb'
 require_relative 'aws-sdk-kinesisvideosignalingchannels/client'
 require_relative 'aws-sdk-kinesisvideosignalingchannels/errors'
 require_relative 'aws-sdk-kinesisvideosignalingchannels/resource'
-require_relative 'aws-sdk-kinesisvideosignalingchannels/endpoint_parameters'
-require_relative 'aws-sdk-kinesisvideosignalingchannels/endpoint_provider'
-require_relative 'aws-sdk-kinesisvideosignalingchannels/endpoints'
 require_relative 'aws-sdk-kinesisvideosignalingchannels/customizations'
 
 # This module provides support for Amazon Kinesis Video Signaling Channels. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-kinesisvideosignalingchannels/customizations'
 # @!group service
 module Aws::KinesisVideoSignalingChannels
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.19.0'
 
 end

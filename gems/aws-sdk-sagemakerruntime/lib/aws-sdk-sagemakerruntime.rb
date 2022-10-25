@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-sagemakerruntime/types'
 require_relative 'aws-sdk-sagemakerruntime/client_api'
-require_relative 'aws-sdk-sagemakerruntime/plugins/endpoints.rb'
 require_relative 'aws-sdk-sagemakerruntime/client'
 require_relative 'aws-sdk-sagemakerruntime/errors'
 require_relative 'aws-sdk-sagemakerruntime/resource'
-require_relative 'aws-sdk-sagemakerruntime/endpoint_parameters'
-require_relative 'aws-sdk-sagemakerruntime/endpoint_provider'
-require_relative 'aws-sdk-sagemakerruntime/endpoints'
 require_relative 'aws-sdk-sagemakerruntime/customizations'
 
 # This module provides support for Amazon SageMaker Runtime. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-sagemakerruntime/customizations'
 # @!group service
 module Aws::SageMakerRuntime
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.43.0'
 
 end

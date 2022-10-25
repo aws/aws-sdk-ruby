@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-kendra/types'
 require_relative 'aws-sdk-kendra/client_api'
-require_relative 'aws-sdk-kendra/plugins/endpoints.rb'
 require_relative 'aws-sdk-kendra/client'
 require_relative 'aws-sdk-kendra/errors'
 require_relative 'aws-sdk-kendra/resource'
-require_relative 'aws-sdk-kendra/endpoint_parameters'
-require_relative 'aws-sdk-kendra/endpoint_provider'
-require_relative 'aws-sdk-kendra/endpoints'
 require_relative 'aws-sdk-kendra/customizations'
 
 # This module provides support for AWSKendraFrontendService. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-kendra/customizations'
 # @!group service
 module Aws::Kendra
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.59.0'
 
 end

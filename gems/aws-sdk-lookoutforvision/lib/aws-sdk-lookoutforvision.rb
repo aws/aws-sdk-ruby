@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-lookoutforvision/types'
 require_relative 'aws-sdk-lookoutforvision/client_api'
-require_relative 'aws-sdk-lookoutforvision/plugins/endpoints.rb'
 require_relative 'aws-sdk-lookoutforvision/client'
 require_relative 'aws-sdk-lookoutforvision/errors'
 require_relative 'aws-sdk-lookoutforvision/resource'
-require_relative 'aws-sdk-lookoutforvision/endpoint_parameters'
-require_relative 'aws-sdk-lookoutforvision/endpoint_provider'
-require_relative 'aws-sdk-lookoutforvision/endpoints'
 require_relative 'aws-sdk-lookoutforvision/customizations'
 
 # This module provides support for Amazon Lookout for Vision. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-lookoutforvision/customizations'
 # @!group service
 module Aws::LookoutforVision
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.16.0'
 
 end

@@ -13,14 +13,10 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-nimblestudio/types'
 require_relative 'aws-sdk-nimblestudio/client_api'
-require_relative 'aws-sdk-nimblestudio/plugins/endpoints.rb'
 require_relative 'aws-sdk-nimblestudio/client'
 require_relative 'aws-sdk-nimblestudio/errors'
 require_relative 'aws-sdk-nimblestudio/waiters'
 require_relative 'aws-sdk-nimblestudio/resource'
-require_relative 'aws-sdk-nimblestudio/endpoint_parameters'
-require_relative 'aws-sdk-nimblestudio/endpoint_provider'
-require_relative 'aws-sdk-nimblestudio/endpoints'
 require_relative 'aws-sdk-nimblestudio/customizations'
 
 # This module provides support for AmazonNimbleStudio. This module is available in the
@@ -53,6 +49,6 @@ require_relative 'aws-sdk-nimblestudio/customizations'
 # @!group service
 module Aws::NimbleStudio
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.15.0'
 
 end

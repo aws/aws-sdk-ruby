@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-wafregional/types'
 require_relative 'aws-sdk-wafregional/client_api'
-require_relative 'aws-sdk-wafregional/plugins/endpoints.rb'
 require_relative 'aws-sdk-wafregional/client'
 require_relative 'aws-sdk-wafregional/errors'
 require_relative 'aws-sdk-wafregional/resource'
-require_relative 'aws-sdk-wafregional/endpoint_parameters'
-require_relative 'aws-sdk-wafregional/endpoint_provider'
-require_relative 'aws-sdk-wafregional/endpoints'
 require_relative 'aws-sdk-wafregional/customizations'
 
 # This module provides support for AWS WAF Regional. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-wafregional/customizations'
 # @!group service
 module Aws::WAFRegional
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.48.0'
 
 end

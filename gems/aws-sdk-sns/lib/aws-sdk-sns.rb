@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-sns/types'
 require_relative 'aws-sdk-sns/client_api'
-require_relative 'aws-sdk-sns/plugins/endpoints.rb'
 require_relative 'aws-sdk-sns/client'
 require_relative 'aws-sdk-sns/errors'
 require_relative 'aws-sdk-sns/resource'
-require_relative 'aws-sdk-sns/endpoint_parameters'
-require_relative 'aws-sdk-sns/endpoint_provider'
-require_relative 'aws-sdk-sns/endpoints'
 require_relative 'aws-sdk-sns/platform_application'
 require_relative 'aws-sdk-sns/platform_endpoint'
 require_relative 'aws-sdk-sns/subscription'
@@ -56,6 +52,6 @@ require_relative 'aws-sdk-sns/customizations'
 # @!group service
 module Aws::SNS
 
-  GEM_VERSION = '1.56.0'
+  GEM_VERSION = '1.55.0'
 
 end

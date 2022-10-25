@@ -1,58 +1,6 @@
 {
     "testCases": [
         {
-            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
-            "expect": {
-                "endpoint": {
-                    "url": "https://api.mediatailor-fips.ap-south-1.api.aws"
-                }
-            },
-            "params": {
-                "Region": "ap-south-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-            }
-        },
-        {
-            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
-            "expect": {
-                "endpoint": {
-                    "url": "https://api.mediatailor-fips.ap-south-1.amazonaws.com"
-                }
-            },
-            "params": {
-                "Region": "ap-south-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-            }
-        },
-        {
-            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
-            "expect": {
-                "endpoint": {
-                    "url": "https://api.mediatailor.ap-south-1.api.aws"
-                }
-            },
-            "params": {
-                "Region": "ap-south-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-            }
-        },
-        {
-            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-            "expect": {
-                "endpoint": {
-                    "url": "https://api.mediatailor.ap-south-1.amazonaws.com"
-                }
-            },
-            "params": {
-                "Region": "ap-south-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-            }
-        },
-        {
             "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
             "expect": {
                 "endpoint": {
@@ -61,8 +9,8 @@
             },
             "params": {
                 "Region": "eu-central-1",
-                "UseFIPS": true,
-                "UseDualStack": true
+                "UseDualStack": true,
+                "UseFIPS": true
             }
         },
         {
@@ -74,8 +22,8 @@
             },
             "params": {
                 "Region": "eu-central-1",
-                "UseFIPS": true,
-                "UseDualStack": false
+                "UseDualStack": false,
+                "UseFIPS": true
             }
         },
         {
@@ -87,8 +35,8 @@
             },
             "params": {
                 "Region": "eu-central-1",
-                "UseFIPS": false,
-                "UseDualStack": true
+                "UseDualStack": true,
+                "UseFIPS": false
             }
         },
         {
@@ -100,8 +48,8 @@
             },
             "params": {
                 "Region": "eu-central-1",
-                "UseFIPS": false,
-                "UseDualStack": false
+                "UseDualStack": false,
+                "UseFIPS": false
             }
         },
         {
@@ -113,8 +61,8 @@
             },
             "params": {
                 "Region": "us-west-2",
-                "UseFIPS": true,
-                "UseDualStack": true
+                "UseDualStack": true,
+                "UseFIPS": true
             }
         },
         {
@@ -126,8 +74,8 @@
             },
             "params": {
                 "Region": "us-west-2",
-                "UseFIPS": true,
-                "UseDualStack": false
+                "UseDualStack": false,
+                "UseFIPS": true
             }
         },
         {
@@ -139,8 +87,8 @@
             },
             "params": {
                 "Region": "us-west-2",
-                "UseFIPS": false,
-                "UseDualStack": true
+                "UseDualStack": true,
+                "UseFIPS": false
             }
         },
         {
@@ -152,60 +100,8 @@
             },
             "params": {
                 "Region": "us-west-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-            }
-        },
-        {
-            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
-            "expect": {
-                "endpoint": {
-                    "url": "https://api.mediatailor-fips.af-south-1.api.aws"
-                }
-            },
-            "params": {
-                "Region": "af-south-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-            }
-        },
-        {
-            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
-            "expect": {
-                "endpoint": {
-                    "url": "https://api.mediatailor-fips.af-south-1.amazonaws.com"
-                }
-            },
-            "params": {
-                "Region": "af-south-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-            }
-        },
-        {
-            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
-            "expect": {
-                "endpoint": {
-                    "url": "https://api.mediatailor.af-south-1.api.aws"
-                }
-            },
-            "params": {
-                "Region": "af-south-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-            }
-        },
-        {
-            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
-            "expect": {
-                "endpoint": {
-                    "url": "https://api.mediatailor.af-south-1.amazonaws.com"
-                }
-            },
-            "params": {
-                "Region": "af-south-1",
-                "UseFIPS": false,
-                "UseDualStack": false
+                "UseDualStack": false,
+                "UseFIPS": false
             }
         },
         {
@@ -217,8 +113,8 @@
             },
             "params": {
                 "Region": "eu-west-1",
-                "UseFIPS": true,
-                "UseDualStack": true
+                "UseDualStack": true,
+                "UseFIPS": true
             }
         },
         {
@@ -230,8 +126,8 @@
             },
             "params": {
                 "Region": "eu-west-1",
-                "UseFIPS": true,
-                "UseDualStack": false
+                "UseDualStack": false,
+                "UseFIPS": true
             }
         },
         {
@@ -243,8 +139,8 @@
             },
             "params": {
                 "Region": "eu-west-1",
-                "UseFIPS": false,
-                "UseDualStack": true
+                "UseDualStack": true,
+                "UseFIPS": false
             }
         },
         {
@@ -256,8 +152,8 @@
             },
             "params": {
                 "Region": "eu-west-1",
-                "UseFIPS": false,
-                "UseDualStack": false
+                "UseDualStack": false,
+                "UseFIPS": false
             }
         },
         {
@@ -269,8 +165,8 @@
             },
             "params": {
                 "Region": "ap-northeast-1",
-                "UseFIPS": true,
-                "UseDualStack": true
+                "UseDualStack": true,
+                "UseFIPS": true
             }
         },
         {
@@ -282,8 +178,8 @@
             },
             "params": {
                 "Region": "ap-northeast-1",
-                "UseFIPS": true,
-                "UseDualStack": false
+                "UseDualStack": false,
+                "UseFIPS": true
             }
         },
         {
@@ -295,8 +191,8 @@
             },
             "params": {
                 "Region": "ap-northeast-1",
-                "UseFIPS": false,
-                "UseDualStack": true
+                "UseDualStack": true,
+                "UseFIPS": false
             }
         },
         {
@@ -308,8 +204,8 @@
             },
             "params": {
                 "Region": "ap-northeast-1",
-                "UseFIPS": false,
-                "UseDualStack": false
+                "UseDualStack": false,
+                "UseFIPS": false
             }
         },
         {
@@ -321,8 +217,8 @@
             },
             "params": {
                 "Region": "ap-southeast-1",
-                "UseFIPS": true,
-                "UseDualStack": true
+                "UseDualStack": true,
+                "UseFIPS": true
             }
         },
         {
@@ -334,8 +230,8 @@
             },
             "params": {
                 "Region": "ap-southeast-1",
-                "UseFIPS": true,
-                "UseDualStack": false
+                "UseDualStack": false,
+                "UseFIPS": true
             }
         },
         {
@@ -347,8 +243,8 @@
             },
             "params": {
                 "Region": "ap-southeast-1",
-                "UseFIPS": false,
-                "UseDualStack": true
+                "UseDualStack": true,
+                "UseFIPS": false
             }
         },
         {
@@ -360,8 +256,8 @@
             },
             "params": {
                 "Region": "ap-southeast-1",
-                "UseFIPS": false,
-                "UseDualStack": false
+                "UseDualStack": false,
+                "UseFIPS": false
             }
         },
         {
@@ -373,8 +269,8 @@
             },
             "params": {
                 "Region": "ap-southeast-2",
-                "UseFIPS": true,
-                "UseDualStack": true
+                "UseDualStack": true,
+                "UseFIPS": true
             }
         },
         {
@@ -386,8 +282,8 @@
             },
             "params": {
                 "Region": "ap-southeast-2",
-                "UseFIPS": true,
-                "UseDualStack": false
+                "UseDualStack": false,
+                "UseFIPS": true
             }
         },
         {
@@ -399,8 +295,8 @@
             },
             "params": {
                 "Region": "ap-southeast-2",
-                "UseFIPS": false,
-                "UseDualStack": true
+                "UseDualStack": true,
+                "UseFIPS": false
             }
         },
         {
@@ -412,8 +308,8 @@
             },
             "params": {
                 "Region": "ap-southeast-2",
-                "UseFIPS": false,
-                "UseDualStack": false
+                "UseDualStack": false,
+                "UseFIPS": false
             }
         },
         {
@@ -425,8 +321,8 @@
             },
             "params": {
                 "Region": "us-east-1",
-                "UseFIPS": true,
-                "UseDualStack": true
+                "UseDualStack": true,
+                "UseFIPS": true
             }
         },
         {
@@ -438,8 +334,8 @@
             },
             "params": {
                 "Region": "us-east-1",
-                "UseFIPS": true,
-                "UseDualStack": false
+                "UseDualStack": false,
+                "UseFIPS": true
             }
         },
         {
@@ -451,8 +347,8 @@
             },
             "params": {
                 "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": true
+                "UseDualStack": true,
+                "UseFIPS": false
             }
         },
         {
@@ -464,60 +360,8 @@
             },
             "params": {
                 "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-            }
-        },
-        {
-            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
-            "expect": {
-                "endpoint": {
-                    "url": "https://api.mediatailor-fips.us-east-2.api.aws"
-                }
-            },
-            "params": {
-                "Region": "us-east-2",
-                "UseFIPS": true,
-                "UseDualStack": true
-            }
-        },
-        {
-            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-            "expect": {
-                "endpoint": {
-                    "url": "https://api.mediatailor-fips.us-east-2.amazonaws.com"
-                }
-            },
-            "params": {
-                "Region": "us-east-2",
-                "UseFIPS": true,
-                "UseDualStack": false
-            }
-        },
-        {
-            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
-            "expect": {
-                "endpoint": {
-                    "url": "https://api.mediatailor.us-east-2.api.aws"
-                }
-            },
-            "params": {
-                "Region": "us-east-2",
-                "UseFIPS": false,
-                "UseDualStack": true
-            }
-        },
-        {
-            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
-            "expect": {
-                "endpoint": {
-                    "url": "https://api.mediatailor.us-east-2.amazonaws.com"
-                }
-            },
-            "params": {
-                "Region": "us-east-2",
-                "UseFIPS": false,
-                "UseDualStack": false
+                "UseDualStack": false,
+                "UseFIPS": false
             }
         },
         {
@@ -529,8 +373,8 @@
             },
             "params": {
                 "Region": "us-east-1",
-                "UseFIPS": false,
                 "UseDualStack": false,
+                "UseFIPS": false,
                 "Endpoint": "https://example.com"
             }
         },
@@ -541,8 +385,8 @@
             },
             "params": {
                 "Region": "us-east-1",
-                "UseFIPS": true,
                 "UseDualStack": false,
+                "UseFIPS": true,
                 "Endpoint": "https://example.com"
             }
         },
@@ -553,8 +397,8 @@
             },
             "params": {
                 "Region": "us-east-1",
-                "UseFIPS": false,
                 "UseDualStack": true,
+                "UseFIPS": false,
                 "Endpoint": "https://example.com"
             }
         }

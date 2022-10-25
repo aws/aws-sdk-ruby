@@ -13,14 +13,10 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-kinesis/types'
 require_relative 'aws-sdk-kinesis/client_api'
-require_relative 'aws-sdk-kinesis/plugins/endpoints.rb'
 require_relative 'aws-sdk-kinesis/client'
 require_relative 'aws-sdk-kinesis/errors'
 require_relative 'aws-sdk-kinesis/waiters'
 require_relative 'aws-sdk-kinesis/resource'
-require_relative 'aws-sdk-kinesis/endpoint_parameters'
-require_relative 'aws-sdk-kinesis/endpoint_provider'
-require_relative 'aws-sdk-kinesis/endpoints'
 require_relative 'aws-sdk-kinesis/customizations'
 require_relative 'aws-sdk-kinesis/async_client'
 require_relative 'aws-sdk-kinesis/event_streams'
@@ -55,6 +51,6 @@ require_relative 'aws-sdk-kinesis/event_streams'
 # @!group service
 module Aws::Kinesis
 
-  GEM_VERSION = '1.42.0'
+  GEM_VERSION = '1.41.0'
 
 end

@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-ssoadmin/types'
 require_relative 'aws-sdk-ssoadmin/client_api'
-require_relative 'aws-sdk-ssoadmin/plugins/endpoints.rb'
 require_relative 'aws-sdk-ssoadmin/client'
 require_relative 'aws-sdk-ssoadmin/errors'
 require_relative 'aws-sdk-ssoadmin/resource'
-require_relative 'aws-sdk-ssoadmin/endpoint_parameters'
-require_relative 'aws-sdk-ssoadmin/endpoint_provider'
-require_relative 'aws-sdk-ssoadmin/endpoints'
 require_relative 'aws-sdk-ssoadmin/customizations'
 
 # This module provides support for AWS Single Sign-On Admin. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-ssoadmin/customizations'
 # @!group service
 module Aws::SSOAdmin
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.20.0'
 
 end

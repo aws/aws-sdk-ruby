@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-athena/types'
 require_relative 'aws-sdk-athena/client_api'
-require_relative 'aws-sdk-athena/plugins/endpoints.rb'
 require_relative 'aws-sdk-athena/client'
 require_relative 'aws-sdk-athena/errors'
 require_relative 'aws-sdk-athena/resource'
-require_relative 'aws-sdk-athena/endpoint_parameters'
-require_relative 'aws-sdk-athena/endpoint_provider'
-require_relative 'aws-sdk-athena/endpoints'
 require_relative 'aws-sdk-athena/customizations'
 
 # This module provides support for Amazon Athena. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-athena/customizations'
 # @!group service
 module Aws::Athena
 
-  GEM_VERSION = '1.57.0'
+  GEM_VERSION = '1.56.0'
 
 end

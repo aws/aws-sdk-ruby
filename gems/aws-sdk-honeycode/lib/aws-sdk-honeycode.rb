@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-honeycode/types'
 require_relative 'aws-sdk-honeycode/client_api'
-require_relative 'aws-sdk-honeycode/plugins/endpoints.rb'
 require_relative 'aws-sdk-honeycode/client'
 require_relative 'aws-sdk-honeycode/errors'
 require_relative 'aws-sdk-honeycode/resource'
-require_relative 'aws-sdk-honeycode/endpoint_parameters'
-require_relative 'aws-sdk-honeycode/endpoint_provider'
-require_relative 'aws-sdk-honeycode/endpoints'
 require_relative 'aws-sdk-honeycode/customizations'
 
 # This module provides support for Amazon Honeycode. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-honeycode/customizations'
 # @!group service
 module Aws::Honeycode
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.17.0'
 
 end

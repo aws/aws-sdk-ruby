@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-directconnect/types'
 require_relative 'aws-sdk-directconnect/client_api'
-require_relative 'aws-sdk-directconnect/plugins/endpoints.rb'
 require_relative 'aws-sdk-directconnect/client'
 require_relative 'aws-sdk-directconnect/errors'
 require_relative 'aws-sdk-directconnect/resource'
-require_relative 'aws-sdk-directconnect/endpoint_parameters'
-require_relative 'aws-sdk-directconnect/endpoint_provider'
-require_relative 'aws-sdk-directconnect/endpoints'
 require_relative 'aws-sdk-directconnect/customizations'
 
 # This module provides support for AWS Direct Connect. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-directconnect/customizations'
 # @!group service
 module Aws::DirectConnect
 
-  GEM_VERSION = '1.55.0'
+  GEM_VERSION = '1.54.0'
 
 end

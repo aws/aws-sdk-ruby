@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-rdsdataservice/types'
 require_relative 'aws-sdk-rdsdataservice/client_api'
-require_relative 'aws-sdk-rdsdataservice/plugins/endpoints.rb'
 require_relative 'aws-sdk-rdsdataservice/client'
 require_relative 'aws-sdk-rdsdataservice/errors'
 require_relative 'aws-sdk-rdsdataservice/resource'
-require_relative 'aws-sdk-rdsdataservice/endpoint_parameters'
-require_relative 'aws-sdk-rdsdataservice/endpoint_provider'
-require_relative 'aws-sdk-rdsdataservice/endpoints'
 require_relative 'aws-sdk-rdsdataservice/customizations'
 
 # This module provides support for AWS RDS DataService. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-rdsdataservice/customizations'
 # @!group service
 module Aws::RDSDataService
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.38.0'
 
 end

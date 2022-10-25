@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-resourcegroupstaggingapi/types'
 require_relative 'aws-sdk-resourcegroupstaggingapi/client_api'
-require_relative 'aws-sdk-resourcegroupstaggingapi/plugins/endpoints.rb'
 require_relative 'aws-sdk-resourcegroupstaggingapi/client'
 require_relative 'aws-sdk-resourcegroupstaggingapi/errors'
 require_relative 'aws-sdk-resourcegroupstaggingapi/resource'
-require_relative 'aws-sdk-resourcegroupstaggingapi/endpoint_parameters'
-require_relative 'aws-sdk-resourcegroupstaggingapi/endpoint_provider'
-require_relative 'aws-sdk-resourcegroupstaggingapi/endpoints'
 require_relative 'aws-sdk-resourcegroupstaggingapi/customizations'
 
 # This module provides support for AWS Resource Groups Tagging API. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-resourcegroupstaggingapi/customizations'
 # @!group service
 module Aws::ResourceGroupsTaggingAPI
 
-  GEM_VERSION = '1.48.0'
+  GEM_VERSION = '1.47.0'
 
 end

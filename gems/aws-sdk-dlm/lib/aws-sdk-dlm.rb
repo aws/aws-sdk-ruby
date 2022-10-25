@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-dlm/types'
 require_relative 'aws-sdk-dlm/client_api'
-require_relative 'aws-sdk-dlm/plugins/endpoints.rb'
 require_relative 'aws-sdk-dlm/client'
 require_relative 'aws-sdk-dlm/errors'
 require_relative 'aws-sdk-dlm/resource'
-require_relative 'aws-sdk-dlm/endpoint_parameters'
-require_relative 'aws-sdk-dlm/endpoint_provider'
-require_relative 'aws-sdk-dlm/endpoints'
 require_relative 'aws-sdk-dlm/customizations'
 
 # This module provides support for Amazon Data Lifecycle Manager. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-dlm/customizations'
 # @!group service
 module Aws::DLM
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.52.0'
 
 end

@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-recyclebin/types'
 require_relative 'aws-sdk-recyclebin/client_api'
-require_relative 'aws-sdk-recyclebin/plugins/endpoints.rb'
 require_relative 'aws-sdk-recyclebin/client'
 require_relative 'aws-sdk-recyclebin/errors'
 require_relative 'aws-sdk-recyclebin/resource'
-require_relative 'aws-sdk-recyclebin/endpoint_parameters'
-require_relative 'aws-sdk-recyclebin/endpoint_provider'
-require_relative 'aws-sdk-recyclebin/endpoints'
 require_relative 'aws-sdk-recyclebin/customizations'
 
 # This module provides support for Amazon Recycle Bin. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-recyclebin/customizations'
 # @!group service
 module Aws::RecycleBin
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.5.0'
 
 end

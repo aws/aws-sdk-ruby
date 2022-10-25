@@ -13,14 +13,10 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-codegurureviewer/types'
 require_relative 'aws-sdk-codegurureviewer/client_api'
-require_relative 'aws-sdk-codegurureviewer/plugins/endpoints.rb'
 require_relative 'aws-sdk-codegurureviewer/client'
 require_relative 'aws-sdk-codegurureviewer/errors'
 require_relative 'aws-sdk-codegurureviewer/waiters'
 require_relative 'aws-sdk-codegurureviewer/resource'
-require_relative 'aws-sdk-codegurureviewer/endpoint_parameters'
-require_relative 'aws-sdk-codegurureviewer/endpoint_provider'
-require_relative 'aws-sdk-codegurureviewer/endpoints'
 require_relative 'aws-sdk-codegurureviewer/customizations'
 
 # This module provides support for Amazon CodeGuru Reviewer. This module is available in the
@@ -53,6 +49,6 @@ require_relative 'aws-sdk-codegurureviewer/customizations'
 # @!group service
 module Aws::CodeGuruReviewer
 
-  GEM_VERSION = '1.34.0'
+  GEM_VERSION = '1.33.0'
 
 end

@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-marketplacecatalog/types'
 require_relative 'aws-sdk-marketplacecatalog/client_api'
-require_relative 'aws-sdk-marketplacecatalog/plugins/endpoints.rb'
 require_relative 'aws-sdk-marketplacecatalog/client'
 require_relative 'aws-sdk-marketplacecatalog/errors'
 require_relative 'aws-sdk-marketplacecatalog/resource'
-require_relative 'aws-sdk-marketplacecatalog/endpoint_parameters'
-require_relative 'aws-sdk-marketplacecatalog/endpoint_provider'
-require_relative 'aws-sdk-marketplacecatalog/endpoints'
 require_relative 'aws-sdk-marketplacecatalog/customizations'
 
 # This module provides support for AWS Marketplace Catalog Service. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-marketplacecatalog/customizations'
 # @!group service
 module Aws::MarketplaceCatalog
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.22.0'
 
 end

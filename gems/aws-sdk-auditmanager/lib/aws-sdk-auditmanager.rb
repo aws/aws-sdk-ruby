@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-auditmanager/types'
 require_relative 'aws-sdk-auditmanager/client_api'
-require_relative 'aws-sdk-auditmanager/plugins/endpoints.rb'
 require_relative 'aws-sdk-auditmanager/client'
 require_relative 'aws-sdk-auditmanager/errors'
 require_relative 'aws-sdk-auditmanager/resource'
-require_relative 'aws-sdk-auditmanager/endpoint_parameters'
-require_relative 'aws-sdk-auditmanager/endpoint_provider'
-require_relative 'aws-sdk-auditmanager/endpoints'
 require_relative 'aws-sdk-auditmanager/customizations'
 
 # This module provides support for AWS Audit Manager. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-auditmanager/customizations'
 # @!group service
 module Aws::AuditManager
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.26.0'
 
 end

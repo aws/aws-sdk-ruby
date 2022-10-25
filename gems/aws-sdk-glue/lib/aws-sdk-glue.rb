@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-glue/types'
 require_relative 'aws-sdk-glue/client_api'
-require_relative 'aws-sdk-glue/plugins/endpoints.rb'
 require_relative 'aws-sdk-glue/client'
 require_relative 'aws-sdk-glue/errors'
 require_relative 'aws-sdk-glue/resource'
-require_relative 'aws-sdk-glue/endpoint_parameters'
-require_relative 'aws-sdk-glue/endpoint_provider'
-require_relative 'aws-sdk-glue/endpoints'
 require_relative 'aws-sdk-glue/customizations'
 
 # This module provides support for AWS Glue. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-glue/customizations'
 # @!group service
 module Aws::Glue
 
-  GEM_VERSION = '1.121.0'
+  GEM_VERSION = '1.120.0'
 
 end

@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/sign.rb'
+require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:dax)
@@ -79,9 +79,8 @@ module Aws::DAX
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::Sign)
+    add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
-    add_plugin(Aws::DAX::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -298,19 +297,6 @@ module Aws::DAX
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
-    #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
-    #     following classes:
-    #
-    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
-    #       tokens.
-    #
-    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
-    #       access token generated from `aws login`.
-    #
-    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
-    #     will be used to search for tokens configured for your profile in shared configuration files.
-    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -323,9 +309,6 @@ module Aws::DAX
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
-    #
-    #   @option options [Aws::DAX::EndpointProvider] :endpoint_provider
-    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::DAX::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -1706,7 +1689,7 @@ module Aws::DAX
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dax'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-alexaforbusiness/types'
 require_relative 'aws-sdk-alexaforbusiness/client_api'
-require_relative 'aws-sdk-alexaforbusiness/plugins/endpoints.rb'
 require_relative 'aws-sdk-alexaforbusiness/client'
 require_relative 'aws-sdk-alexaforbusiness/errors'
 require_relative 'aws-sdk-alexaforbusiness/resource'
-require_relative 'aws-sdk-alexaforbusiness/endpoint_parameters'
-require_relative 'aws-sdk-alexaforbusiness/endpoint_provider'
-require_relative 'aws-sdk-alexaforbusiness/endpoints'
 require_relative 'aws-sdk-alexaforbusiness/customizations'
 
 # This module provides support for Alexa For Business. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-alexaforbusiness/customizations'
 # @!group service
 module Aws::AlexaForBusiness
 
-  GEM_VERSION = '1.57.0'
+  GEM_VERSION = '1.56.0'
 
 end

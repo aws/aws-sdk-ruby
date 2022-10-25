@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-emrcontainers/types'
 require_relative 'aws-sdk-emrcontainers/client_api'
-require_relative 'aws-sdk-emrcontainers/plugins/endpoints.rb'
 require_relative 'aws-sdk-emrcontainers/client'
 require_relative 'aws-sdk-emrcontainers/errors'
 require_relative 'aws-sdk-emrcontainers/resource'
-require_relative 'aws-sdk-emrcontainers/endpoint_parameters'
-require_relative 'aws-sdk-emrcontainers/endpoint_provider'
-require_relative 'aws-sdk-emrcontainers/endpoints'
 require_relative 'aws-sdk-emrcontainers/customizations'
 
 # This module provides support for Amazon EMR Containers. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-emrcontainers/customizations'
 # @!group service
 module Aws::EMRContainers
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.15.0'
 
 end

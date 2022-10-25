@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-s3outposts/types'
 require_relative 'aws-sdk-s3outposts/client_api'
-require_relative 'aws-sdk-s3outposts/plugins/endpoints.rb'
 require_relative 'aws-sdk-s3outposts/client'
 require_relative 'aws-sdk-s3outposts/errors'
 require_relative 'aws-sdk-s3outposts/resource'
-require_relative 'aws-sdk-s3outposts/endpoint_parameters'
-require_relative 'aws-sdk-s3outposts/endpoint_provider'
-require_relative 'aws-sdk-s3outposts/endpoints'
 require_relative 'aws-sdk-s3outposts/customizations'
 
 # This module provides support for Amazon S3 on Outposts. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-s3outposts/customizations'
 # @!group service
 module Aws::S3Outposts
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.13.0'
 
 end

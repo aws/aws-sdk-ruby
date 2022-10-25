@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-apigatewaymanagementapi/types'
 require_relative 'aws-sdk-apigatewaymanagementapi/client_api'
-require_relative 'aws-sdk-apigatewaymanagementapi/plugins/endpoints.rb'
 require_relative 'aws-sdk-apigatewaymanagementapi/client'
 require_relative 'aws-sdk-apigatewaymanagementapi/errors'
 require_relative 'aws-sdk-apigatewaymanagementapi/resource'
-require_relative 'aws-sdk-apigatewaymanagementapi/endpoint_parameters'
-require_relative 'aws-sdk-apigatewaymanagementapi/endpoint_provider'
-require_relative 'aws-sdk-apigatewaymanagementapi/endpoints'
 require_relative 'aws-sdk-apigatewaymanagementapi/customizations'
 
 # This module provides support for AmazonApiGatewayManagementApi. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-apigatewaymanagementapi/customizations'
 # @!group service
 module Aws::ApiGatewayManagementApi
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.30.0'
 
 end
