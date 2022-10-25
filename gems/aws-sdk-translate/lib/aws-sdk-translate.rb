@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-translate/types'
 require_relative 'aws-sdk-translate/client_api'
+require_relative 'aws-sdk-translate/plugins/endpoints.rb'
 require_relative 'aws-sdk-translate/client'
 require_relative 'aws-sdk-translate/errors'
 require_relative 'aws-sdk-translate/resource'
+require_relative 'aws-sdk-translate/endpoint_parameters'
+require_relative 'aws-sdk-translate/endpoint_provider'
+require_relative 'aws-sdk-translate/endpoints'
 require_relative 'aws-sdk-translate/customizations'
 
 # This module provides support for Amazon Translate. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-translate/customizations'
 # @!group service
 module Aws::Translate
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end

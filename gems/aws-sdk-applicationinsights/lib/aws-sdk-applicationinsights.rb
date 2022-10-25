@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-applicationinsights/types'
 require_relative 'aws-sdk-applicationinsights/client_api'
+require_relative 'aws-sdk-applicationinsights/plugins/endpoints.rb'
 require_relative 'aws-sdk-applicationinsights/client'
 require_relative 'aws-sdk-applicationinsights/errors'
 require_relative 'aws-sdk-applicationinsights/resource'
+require_relative 'aws-sdk-applicationinsights/endpoint_parameters'
+require_relative 'aws-sdk-applicationinsights/endpoint_provider'
+require_relative 'aws-sdk-applicationinsights/endpoints'
 require_relative 'aws-sdk-applicationinsights/customizations'
 
 # This module provides support for Amazon CloudWatch Application Insights. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-applicationinsights/customizations'
 # @!group service
 module Aws::ApplicationInsights
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end

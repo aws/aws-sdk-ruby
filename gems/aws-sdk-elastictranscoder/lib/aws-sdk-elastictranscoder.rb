@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-elastictranscoder/types'
 require_relative 'aws-sdk-elastictranscoder/client_api'
+require_relative 'aws-sdk-elastictranscoder/plugins/endpoints.rb'
 require_relative 'aws-sdk-elastictranscoder/client'
 require_relative 'aws-sdk-elastictranscoder/errors'
 require_relative 'aws-sdk-elastictranscoder/waiters'
 require_relative 'aws-sdk-elastictranscoder/resource'
+require_relative 'aws-sdk-elastictranscoder/endpoint_parameters'
+require_relative 'aws-sdk-elastictranscoder/endpoint_provider'
+require_relative 'aws-sdk-elastictranscoder/endpoints'
 require_relative 'aws-sdk-elastictranscoder/customizations'
 
 # This module provides support for Amazon Elastic Transcoder. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-elastictranscoder/customizations'
 # @!group service
 module Aws::ElasticTranscoder
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end

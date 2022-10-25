@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-backup/types'
 require_relative 'aws-sdk-backup/client_api'
+require_relative 'aws-sdk-backup/plugins/endpoints.rb'
 require_relative 'aws-sdk-backup/client'
 require_relative 'aws-sdk-backup/errors'
 require_relative 'aws-sdk-backup/resource'
+require_relative 'aws-sdk-backup/endpoint_parameters'
+require_relative 'aws-sdk-backup/endpoint_provider'
+require_relative 'aws-sdk-backup/endpoints'
 require_relative 'aws-sdk-backup/customizations'
 
 # This module provides support for AWS Backup. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-backup/customizations'
 # @!group service
 module Aws::Backup
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.46.0'
 
 end

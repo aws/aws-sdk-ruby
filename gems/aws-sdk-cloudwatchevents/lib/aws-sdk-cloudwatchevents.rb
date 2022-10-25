@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-cloudwatchevents/types'
 require_relative 'aws-sdk-cloudwatchevents/client_api'
+require_relative 'aws-sdk-cloudwatchevents/plugins/endpoints.rb'
 require_relative 'aws-sdk-cloudwatchevents/client'
 require_relative 'aws-sdk-cloudwatchevents/errors'
 require_relative 'aws-sdk-cloudwatchevents/resource'
+require_relative 'aws-sdk-cloudwatchevents/endpoint_parameters'
+require_relative 'aws-sdk-cloudwatchevents/endpoint_provider'
+require_relative 'aws-sdk-cloudwatchevents/endpoints'
 require_relative 'aws-sdk-cloudwatchevents/customizations'
 
 # This module provides support for Amazon CloudWatch Events. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-cloudwatchevents/customizations'
 # @!group service
 module Aws::CloudWatchEvents
 
-  GEM_VERSION = '1.57.0'
+  GEM_VERSION = '1.58.0'
 
 end

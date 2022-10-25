@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-panorama/types'
 require_relative 'aws-sdk-panorama/client_api'
+require_relative 'aws-sdk-panorama/plugins/endpoints.rb'
 require_relative 'aws-sdk-panorama/client'
 require_relative 'aws-sdk-panorama/errors'
 require_relative 'aws-sdk-panorama/resource'
+require_relative 'aws-sdk-panorama/endpoint_parameters'
+require_relative 'aws-sdk-panorama/endpoint_provider'
+require_relative 'aws-sdk-panorama/endpoints'
 require_relative 'aws-sdk-panorama/customizations'
 
 # This module provides support for AWS Panorama. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-panorama/customizations'
 # @!group service
 module Aws::Panorama
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.10.0'
 
 end

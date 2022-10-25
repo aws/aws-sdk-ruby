@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-cloudcontrolapi/types'
 require_relative 'aws-sdk-cloudcontrolapi/client_api'
+require_relative 'aws-sdk-cloudcontrolapi/plugins/endpoints.rb'
 require_relative 'aws-sdk-cloudcontrolapi/client'
 require_relative 'aws-sdk-cloudcontrolapi/errors'
 require_relative 'aws-sdk-cloudcontrolapi/waiters'
 require_relative 'aws-sdk-cloudcontrolapi/resource'
+require_relative 'aws-sdk-cloudcontrolapi/endpoint_parameters'
+require_relative 'aws-sdk-cloudcontrolapi/endpoint_provider'
+require_relative 'aws-sdk-cloudcontrolapi/endpoints'
 require_relative 'aws-sdk-cloudcontrolapi/customizations'
 
 # This module provides support for AWS Cloud Control API. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-cloudcontrolapi/customizations'
 # @!group service
 module Aws::CloudControlApi
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.9.0'
 
 end

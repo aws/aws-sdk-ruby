@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-ssm/types'
 require_relative 'aws-sdk-ssm/client_api'
+require_relative 'aws-sdk-ssm/plugins/endpoints.rb'
 require_relative 'aws-sdk-ssm/client'
 require_relative 'aws-sdk-ssm/errors'
 require_relative 'aws-sdk-ssm/waiters'
 require_relative 'aws-sdk-ssm/resource'
+require_relative 'aws-sdk-ssm/endpoint_parameters'
+require_relative 'aws-sdk-ssm/endpoint_provider'
+require_relative 'aws-sdk-ssm/endpoints'
 require_relative 'aws-sdk-ssm/customizations'
 
 # This module provides support for Amazon Simple Systems Manager (SSM). This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-ssm/customizations'
 # @!group service
 module Aws::SSM
 
-  GEM_VERSION = '1.142.0'
+  GEM_VERSION = '1.143.0'
 
 end

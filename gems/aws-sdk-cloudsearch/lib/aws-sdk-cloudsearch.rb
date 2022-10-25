@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-cloudsearch/types'
 require_relative 'aws-sdk-cloudsearch/client_api'
+require_relative 'aws-sdk-cloudsearch/plugins/endpoints.rb'
 require_relative 'aws-sdk-cloudsearch/client'
 require_relative 'aws-sdk-cloudsearch/errors'
 require_relative 'aws-sdk-cloudsearch/resource'
+require_relative 'aws-sdk-cloudsearch/endpoint_parameters'
+require_relative 'aws-sdk-cloudsearch/endpoint_provider'
+require_relative 'aws-sdk-cloudsearch/endpoints'
 require_relative 'aws-sdk-cloudsearch/customizations'
 
 # This module provides support for Amazon CloudSearch. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-cloudsearch/customizations'
 # @!group service
 module Aws::CloudSearch
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.41.0'
 
 end

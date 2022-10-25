@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-xray/types'
 require_relative 'aws-sdk-xray/client_api'
+require_relative 'aws-sdk-xray/plugins/endpoints.rb'
 require_relative 'aws-sdk-xray/client'
 require_relative 'aws-sdk-xray/errors'
 require_relative 'aws-sdk-xray/resource'
+require_relative 'aws-sdk-xray/endpoint_parameters'
+require_relative 'aws-sdk-xray/endpoint_provider'
+require_relative 'aws-sdk-xray/endpoints'
 require_relative 'aws-sdk-xray/customizations'
 
 # This module provides support for AWS X-Ray. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-xray/customizations'
 # @!group service
 module Aws::XRay
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end

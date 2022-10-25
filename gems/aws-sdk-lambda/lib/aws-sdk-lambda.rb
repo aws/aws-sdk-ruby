@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-lambda/types'
 require_relative 'aws-sdk-lambda/client_api'
+require_relative 'aws-sdk-lambda/plugins/endpoints.rb'
 require_relative 'aws-sdk-lambda/client'
 require_relative 'aws-sdk-lambda/errors'
 require_relative 'aws-sdk-lambda/waiters'
 require_relative 'aws-sdk-lambda/resource'
+require_relative 'aws-sdk-lambda/endpoint_parameters'
+require_relative 'aws-sdk-lambda/endpoint_provider'
+require_relative 'aws-sdk-lambda/endpoints'
 require_relative 'aws-sdk-lambda/customizations'
 
 # This module provides support for AWS Lambda. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-lambda/customizations'
 # @!group service
 module Aws::Lambda
 
-  GEM_VERSION = '1.85.0'
+  GEM_VERSION = '1.86.0'
 
 end

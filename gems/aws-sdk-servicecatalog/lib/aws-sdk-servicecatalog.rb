@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-servicecatalog/types'
 require_relative 'aws-sdk-servicecatalog/client_api'
+require_relative 'aws-sdk-servicecatalog/plugins/endpoints.rb'
 require_relative 'aws-sdk-servicecatalog/client'
 require_relative 'aws-sdk-servicecatalog/errors'
 require_relative 'aws-sdk-servicecatalog/resource'
+require_relative 'aws-sdk-servicecatalog/endpoint_parameters'
+require_relative 'aws-sdk-servicecatalog/endpoint_provider'
+require_relative 'aws-sdk-servicecatalog/endpoints'
 require_relative 'aws-sdk-servicecatalog/customizations'
 
 # This module provides support for AWS Service Catalog. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-servicecatalog/customizations'
 # @!group service
 module Aws::ServiceCatalog
 
-  GEM_VERSION = '1.72.0'
+  GEM_VERSION = '1.73.0'
 
 end

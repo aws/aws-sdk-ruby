@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-personalizeevents/types'
 require_relative 'aws-sdk-personalizeevents/client_api'
+require_relative 'aws-sdk-personalizeevents/plugins/endpoints.rb'
 require_relative 'aws-sdk-personalizeevents/client'
 require_relative 'aws-sdk-personalizeevents/errors'
 require_relative 'aws-sdk-personalizeevents/resource'
+require_relative 'aws-sdk-personalizeevents/endpoint_parameters'
+require_relative 'aws-sdk-personalizeevents/endpoint_provider'
+require_relative 'aws-sdk-personalizeevents/endpoints'
 require_relative 'aws-sdk-personalizeevents/customizations'
 
 # This module provides support for Amazon Personalize Events. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-personalizeevents/customizations'
 # @!group service
 module Aws::PersonalizeEvents
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.28.0'
 
 end

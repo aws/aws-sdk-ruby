@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-networkfirewall/types'
 require_relative 'aws-sdk-networkfirewall/client_api'
+require_relative 'aws-sdk-networkfirewall/plugins/endpoints.rb'
 require_relative 'aws-sdk-networkfirewall/client'
 require_relative 'aws-sdk-networkfirewall/errors'
 require_relative 'aws-sdk-networkfirewall/resource'
+require_relative 'aws-sdk-networkfirewall/endpoint_parameters'
+require_relative 'aws-sdk-networkfirewall/endpoint_provider'
+require_relative 'aws-sdk-networkfirewall/endpoints'
 require_relative 'aws-sdk-networkfirewall/customizations'
 
 # This module provides support for AWS Network Firewall. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-networkfirewall/customizations'
 # @!group service
 module Aws::NetworkFirewall
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.20.0'
 
 end

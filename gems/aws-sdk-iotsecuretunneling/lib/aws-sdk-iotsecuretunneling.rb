@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-iotsecuretunneling/types'
 require_relative 'aws-sdk-iotsecuretunneling/client_api'
+require_relative 'aws-sdk-iotsecuretunneling/plugins/endpoints.rb'
 require_relative 'aws-sdk-iotsecuretunneling/client'
 require_relative 'aws-sdk-iotsecuretunneling/errors'
 require_relative 'aws-sdk-iotsecuretunneling/resource'
+require_relative 'aws-sdk-iotsecuretunneling/endpoint_parameters'
+require_relative 'aws-sdk-iotsecuretunneling/endpoint_provider'
+require_relative 'aws-sdk-iotsecuretunneling/endpoints'
 require_relative 'aws-sdk-iotsecuretunneling/customizations'
 
 # This module provides support for AWS IoT Secure Tunneling. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-iotsecuretunneling/customizations'
 # @!group service
 module Aws::IoTSecureTunneling
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.22.0'
 
 end

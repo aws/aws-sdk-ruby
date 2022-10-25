@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-sagemakeredgemanager/types'
 require_relative 'aws-sdk-sagemakeredgemanager/client_api'
+require_relative 'aws-sdk-sagemakeredgemanager/plugins/endpoints.rb'
 require_relative 'aws-sdk-sagemakeredgemanager/client'
 require_relative 'aws-sdk-sagemakeredgemanager/errors'
 require_relative 'aws-sdk-sagemakeredgemanager/resource'
+require_relative 'aws-sdk-sagemakeredgemanager/endpoint_parameters'
+require_relative 'aws-sdk-sagemakeredgemanager/endpoint_provider'
+require_relative 'aws-sdk-sagemakeredgemanager/endpoints'
 require_relative 'aws-sdk-sagemakeredgemanager/customizations'
 
 # This module provides support for Amazon Sagemaker Edge Manager. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-sagemakeredgemanager/customizations'
 # @!group service
 module Aws::SagemakerEdgeManager
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end

@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-lexruntimev2/types'
 require_relative 'aws-sdk-lexruntimev2/client_api'
+require_relative 'aws-sdk-lexruntimev2/plugins/endpoints.rb'
 require_relative 'aws-sdk-lexruntimev2/client'
 require_relative 'aws-sdk-lexruntimev2/errors'
 require_relative 'aws-sdk-lexruntimev2/resource'
+require_relative 'aws-sdk-lexruntimev2/endpoint_parameters'
+require_relative 'aws-sdk-lexruntimev2/endpoint_provider'
+require_relative 'aws-sdk-lexruntimev2/endpoints'
 require_relative 'aws-sdk-lexruntimev2/customizations'
 require_relative 'aws-sdk-lexruntimev2/async_client'
 require_relative 'aws-sdk-lexruntimev2/event_streams'
@@ -50,6 +54,6 @@ require_relative 'aws-sdk-lexruntimev2/event_streams'
 # @!group service
 module Aws::LexRuntimeV2
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.17.0'
 
 end

@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-mobile/types'
 require_relative 'aws-sdk-mobile/client_api'
+require_relative 'aws-sdk-mobile/plugins/endpoints.rb'
 require_relative 'aws-sdk-mobile/client'
 require_relative 'aws-sdk-mobile/errors'
 require_relative 'aws-sdk-mobile/resource'
+require_relative 'aws-sdk-mobile/endpoint_parameters'
+require_relative 'aws-sdk-mobile/endpoint_provider'
+require_relative 'aws-sdk-mobile/endpoints'
 require_relative 'aws-sdk-mobile/customizations'
 
 # This module provides support for AWS Mobile. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-mobile/customizations'
 # @!group service
 module Aws::Mobile
 
-  GEM_VERSION = '1.35.0'
+  GEM_VERSION = '1.36.0'
 
 end

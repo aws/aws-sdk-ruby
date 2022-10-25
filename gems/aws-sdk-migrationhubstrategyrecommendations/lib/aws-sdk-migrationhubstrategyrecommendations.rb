@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-migrationhubstrategyrecommendations/types'
 require_relative 'aws-sdk-migrationhubstrategyrecommendations/client_api'
+require_relative 'aws-sdk-migrationhubstrategyrecommendations/plugins/endpoints.rb'
 require_relative 'aws-sdk-migrationhubstrategyrecommendations/client'
 require_relative 'aws-sdk-migrationhubstrategyrecommendations/errors'
 require_relative 'aws-sdk-migrationhubstrategyrecommendations/resource'
+require_relative 'aws-sdk-migrationhubstrategyrecommendations/endpoint_parameters'
+require_relative 'aws-sdk-migrationhubstrategyrecommendations/endpoint_provider'
+require_relative 'aws-sdk-migrationhubstrategyrecommendations/endpoints'
 require_relative 'aws-sdk-migrationhubstrategyrecommendations/customizations'
 
 # This module provides support for Migration Hub Strategy Recommendations. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-migrationhubstrategyrecommendations/customizations'
 # @!group service
 module Aws::MigrationHubStrategyRecommendations
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end

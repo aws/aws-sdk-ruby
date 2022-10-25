@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-groundstation/types'
 require_relative 'aws-sdk-groundstation/client_api'
+require_relative 'aws-sdk-groundstation/plugins/endpoints.rb'
 require_relative 'aws-sdk-groundstation/client'
 require_relative 'aws-sdk-groundstation/errors'
 require_relative 'aws-sdk-groundstation/resource'
+require_relative 'aws-sdk-groundstation/endpoint_parameters'
+require_relative 'aws-sdk-groundstation/endpoint_provider'
+require_relative 'aws-sdk-groundstation/endpoints'
 require_relative 'aws-sdk-groundstation/customizations'
 
 # This module provides support for AWS Ground Station. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-groundstation/customizations'
 # @!group service
 module Aws::GroundStation
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.28.0'
 
 end

@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-applicationdiscoveryservice/types'
 require_relative 'aws-sdk-applicationdiscoveryservice/client_api'
+require_relative 'aws-sdk-applicationdiscoveryservice/plugins/endpoints.rb'
 require_relative 'aws-sdk-applicationdiscoveryservice/client'
 require_relative 'aws-sdk-applicationdiscoveryservice/errors'
 require_relative 'aws-sdk-applicationdiscoveryservice/resource'
+require_relative 'aws-sdk-applicationdiscoveryservice/endpoint_parameters'
+require_relative 'aws-sdk-applicationdiscoveryservice/endpoint_provider'
+require_relative 'aws-sdk-applicationdiscoveryservice/endpoints'
 require_relative 'aws-sdk-applicationdiscoveryservice/customizations'
 
 # This module provides support for AWS Application Discovery Service. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-applicationdiscoveryservice/customizations'
 # @!group service
 module Aws::ApplicationDiscoveryService
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.47.0'
 
 end

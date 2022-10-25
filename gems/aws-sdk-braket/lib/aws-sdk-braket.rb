@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-braket/types'
 require_relative 'aws-sdk-braket/client_api'
+require_relative 'aws-sdk-braket/plugins/endpoints.rb'
 require_relative 'aws-sdk-braket/client'
 require_relative 'aws-sdk-braket/errors'
 require_relative 'aws-sdk-braket/resource'
+require_relative 'aws-sdk-braket/endpoint_parameters'
+require_relative 'aws-sdk-braket/endpoint_provider'
+require_relative 'aws-sdk-braket/endpoints'
 require_relative 'aws-sdk-braket/customizations'
 
 # This module provides support for Braket. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-braket/customizations'
 # @!group service
 module Aws::Braket
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.20.0'
 
 end

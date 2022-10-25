@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-fms/types'
 require_relative 'aws-sdk-fms/client_api'
+require_relative 'aws-sdk-fms/plugins/endpoints.rb'
 require_relative 'aws-sdk-fms/client'
 require_relative 'aws-sdk-fms/errors'
 require_relative 'aws-sdk-fms/resource'
+require_relative 'aws-sdk-fms/endpoint_parameters'
+require_relative 'aws-sdk-fms/endpoint_provider'
+require_relative 'aws-sdk-fms/endpoints'
 require_relative 'aws-sdk-fms/customizations'
 
 # This module provides support for Firewall Management Service. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-fms/customizations'
 # @!group service
 module Aws::FMS
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.51.0'
 
 end

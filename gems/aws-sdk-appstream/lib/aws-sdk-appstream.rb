@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-appstream/types'
 require_relative 'aws-sdk-appstream/client_api'
+require_relative 'aws-sdk-appstream/plugins/endpoints.rb'
 require_relative 'aws-sdk-appstream/client'
 require_relative 'aws-sdk-appstream/errors'
 require_relative 'aws-sdk-appstream/waiters'
 require_relative 'aws-sdk-appstream/resource'
+require_relative 'aws-sdk-appstream/endpoint_parameters'
+require_relative 'aws-sdk-appstream/endpoint_provider'
+require_relative 'aws-sdk-appstream/endpoints'
 require_relative 'aws-sdk-appstream/customizations'
 
 # This module provides support for Amazon AppStream. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-appstream/customizations'
 # @!group service
 module Aws::AppStream
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end

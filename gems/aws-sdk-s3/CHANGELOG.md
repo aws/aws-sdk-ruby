@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Issue - Apply checksums to MultipartStreamUploader (#2769).
 
 1.116.0 (2022-10-21)

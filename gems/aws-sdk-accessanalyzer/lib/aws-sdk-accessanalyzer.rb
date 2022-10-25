@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-accessanalyzer/types'
 require_relative 'aws-sdk-accessanalyzer/client_api'
+require_relative 'aws-sdk-accessanalyzer/plugins/endpoints.rb'
 require_relative 'aws-sdk-accessanalyzer/client'
 require_relative 'aws-sdk-accessanalyzer/errors'
 require_relative 'aws-sdk-accessanalyzer/resource'
+require_relative 'aws-sdk-accessanalyzer/endpoint_parameters'
+require_relative 'aws-sdk-accessanalyzer/endpoint_provider'
+require_relative 'aws-sdk-accessanalyzer/endpoints'
 require_relative 'aws-sdk-accessanalyzer/customizations'
 
 # This module provides support for Access Analyzer. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-accessanalyzer/customizations'
 # @!group service
 module Aws::AccessAnalyzer
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.31.0'
 
 end

@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-ioteventsdata/types'
 require_relative 'aws-sdk-ioteventsdata/client_api'
+require_relative 'aws-sdk-ioteventsdata/plugins/endpoints.rb'
 require_relative 'aws-sdk-ioteventsdata/client'
 require_relative 'aws-sdk-ioteventsdata/errors'
 require_relative 'aws-sdk-ioteventsdata/resource'
+require_relative 'aws-sdk-ioteventsdata/endpoint_parameters'
+require_relative 'aws-sdk-ioteventsdata/endpoint_provider'
+require_relative 'aws-sdk-ioteventsdata/endpoints'
 require_relative 'aws-sdk-ioteventsdata/customizations'
 
 # This module provides support for AWS IoT Events Data. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-ioteventsdata/customizations'
 # @!group service
 module Aws::IoTEventsData
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.28.0'
 
 end

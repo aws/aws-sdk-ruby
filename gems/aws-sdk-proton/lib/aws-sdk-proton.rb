@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-proton/types'
 require_relative 'aws-sdk-proton/client_api'
+require_relative 'aws-sdk-proton/plugins/endpoints.rb'
 require_relative 'aws-sdk-proton/client'
 require_relative 'aws-sdk-proton/errors'
 require_relative 'aws-sdk-proton/waiters'
 require_relative 'aws-sdk-proton/resource'
+require_relative 'aws-sdk-proton/endpoint_parameters'
+require_relative 'aws-sdk-proton/endpoint_provider'
+require_relative 'aws-sdk-proton/endpoints'
 require_relative 'aws-sdk-proton/customizations'
 
 # This module provides support for AWS Proton. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-proton/customizations'
 # @!group service
 module Aws::Proton
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.18.0'
 
 end

@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-iotdeviceadvisor/types'
 require_relative 'aws-sdk-iotdeviceadvisor/client_api'
+require_relative 'aws-sdk-iotdeviceadvisor/plugins/endpoints.rb'
 require_relative 'aws-sdk-iotdeviceadvisor/client'
 require_relative 'aws-sdk-iotdeviceadvisor/errors'
 require_relative 'aws-sdk-iotdeviceadvisor/resource'
+require_relative 'aws-sdk-iotdeviceadvisor/endpoint_parameters'
+require_relative 'aws-sdk-iotdeviceadvisor/endpoint_provider'
+require_relative 'aws-sdk-iotdeviceadvisor/endpoints'
 require_relative 'aws-sdk-iotdeviceadvisor/customizations'
 
 # This module provides support for AWS IoT Core Device Advisor. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-iotdeviceadvisor/customizations'
 # @!group service
 module Aws::IoTDeviceAdvisor
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.16.0'
 
 end

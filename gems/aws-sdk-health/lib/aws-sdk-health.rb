@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-health/types'
 require_relative 'aws-sdk-health/client_api'
+require_relative 'aws-sdk-health/plugins/endpoints.rb'
 require_relative 'aws-sdk-health/client'
 require_relative 'aws-sdk-health/errors'
 require_relative 'aws-sdk-health/resource'
+require_relative 'aws-sdk-health/endpoint_parameters'
+require_relative 'aws-sdk-health/endpoint_provider'
+require_relative 'aws-sdk-health/endpoints'
 require_relative 'aws-sdk-health/customizations'
 
 # This module provides support for AWS Health APIs and Notifications. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-health/customizations'
 # @!group service
 module Aws::Health
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end

@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-outposts/types'
 require_relative 'aws-sdk-outposts/client_api'
+require_relative 'aws-sdk-outposts/plugins/endpoints.rb'
 require_relative 'aws-sdk-outposts/client'
 require_relative 'aws-sdk-outposts/errors'
 require_relative 'aws-sdk-outposts/resource'
+require_relative 'aws-sdk-outposts/endpoint_parameters'
+require_relative 'aws-sdk-outposts/endpoint_provider'
+require_relative 'aws-sdk-outposts/endpoints'
 require_relative 'aws-sdk-outposts/customizations'
 
 # This module provides support for AWS Outposts. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-outposts/customizations'
 # @!group service
 module Aws::Outposts
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end

@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-billingconductor/types'
 require_relative 'aws-sdk-billingconductor/client_api'
+require_relative 'aws-sdk-billingconductor/plugins/endpoints.rb'
 require_relative 'aws-sdk-billingconductor/client'
 require_relative 'aws-sdk-billingconductor/errors'
 require_relative 'aws-sdk-billingconductor/waiters'
 require_relative 'aws-sdk-billingconductor/resource'
+require_relative 'aws-sdk-billingconductor/endpoint_parameters'
+require_relative 'aws-sdk-billingconductor/endpoint_provider'
+require_relative 'aws-sdk-billingconductor/endpoints'
 require_relative 'aws-sdk-billingconductor/customizations'
 
 # This module provides support for AWSBillingConductor. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-billingconductor/customizations'
 # @!group service
 module Aws::BillingConductor
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end

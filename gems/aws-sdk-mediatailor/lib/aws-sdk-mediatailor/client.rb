@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:mediatailor)
@@ -79,8 +79,9 @@ module Aws::MediaTailor
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
+    add_plugin(Aws::MediaTailor::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -287,6 +288,19 @@ module Aws::MediaTailor
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -299,6 +313,9 @@ module Aws::MediaTailor
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::MediaTailor::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::MediaTailor::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -351,19 +368,18 @@ module Aws::MediaTailor
 
     # @!group API Operations
 
-    # Configures Amazon CloudWatch log settings for a playback
-    # configuration.
+    # Amazon CloudWatch log settings for a playback configuration.
     #
     # @option params [required, Integer] :percent_enabled
     #   The percentage of session logs that MediaTailor sends to your
     #   Cloudwatch Logs account. For example, if your playback configuration
-    #   has 1000 sessions and percentEnabled is set to 60, MediaTailor sends
+    #   has 1000 sessions and percentEnabled is set to `60`, MediaTailor sends
     #   logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides
     #   at random which of the playback configuration sessions to send logs
     #   for. If you want to view logs for a specific session, you can use the
     #   [debug log mode][1].
     #
-    #   Valid values: 0 - 100
+    #   Valid values: `0` - `100`
     #
     #
     #
@@ -398,15 +414,21 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Creates a channel.
+    # Creates a channel. For information about MediaTailor channels, see
+    # [Working with channels][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html
     #
     # @option params [required, String] :channel_name
+    #   The name of the channel.
     #
     # @option params [Types::SlateSource] :filler_slate
     #   The slate used to fill gaps between programs in the schedule. You must
-    #   configure filler slate if your channel uses the LINEAR PlaybackMode.
-    #   MediaTailor doesn't support filler slate for channels using the LOOP
-    #   PlaybackMode.
+    #   configure filler slate if your channel uses the `LINEAR`
+    #   `PlaybackMode`. MediaTailor doesn't support filler slate for channels
+    #   using the `LOOP` `PlaybackMode`.
     #
     # @option params [required, Array<Types::RequestOutputItem>] :outputs
     #   The channel's output properties.
@@ -414,15 +436,22 @@ module Aws::MediaTailor
     # @option params [required, String] :playback_mode
     #   The type of playback mode to use for this channel.
     #
-    #   LINEAR - The programs in the schedule play once back-to-back in the
+    #   `LINEAR` - The programs in the schedule play once back-to-back in the
     #   schedule.
     #
-    #   LOOP - The programs in the schedule play back-to-back in an endless
+    #   `LOOP` - The programs in the schedule play back-to-back in an endless
     #   loop. When the last program in the schedule stops playing, playback
     #   loops back to the first program in the schedule.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags to assign to the channel.
+    #   The tags to assign to the channel. Tags are key-value pairs that you
+    #   can associate with Amazon resources to help with organization, access
+    #   control, and cost tracking. For more information, see [Tagging AWS
+    #   Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #
     # @option params [String] :tier
     #   The tier of the channel.
@@ -502,17 +531,26 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Creates name for a specific live source in a source location.
+    # The live source configuration.
     #
     # @option params [required, Array<Types::HttpPackageConfiguration>] :http_package_configurations
     #   A list of HTTP package configuration parameters for this live source.
     #
     # @option params [required, String] :live_source_name
+    #   The name of the live source.
     #
     # @option params [required, String] :source_location_name
+    #   The name of the source location.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags to assign to the live source.
+    #   The tags to assign to the live source. Tags are key-value pairs that
+    #   you can associate with Amazon resources to help with organization,
+    #   access control, and cost tracking. For more information, see [Tagging
+    #   AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #
     # @return [Types::CreateLiveSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -564,8 +602,15 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Creates a new prefetch schedule for the specified playback
-    # configuration.
+    # Creates a prefetch schedule for a playback configuration. A prefetch
+    # schedule allows you to tell MediaTailor to fetch and prepare certain
+    # ads before an ad break happens. For more information about ad
+    # prefetching, see [Using ad prefetching][1] in the *MediaTailor User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html
     #
     # @option params [required, Types::PrefetchConsumption] :consumption
     #   The configuration settings for MediaTailor's *consumption* of the
@@ -575,8 +620,10 @@ module Aws::MediaTailor
     #   expire no earlier than seven days after the end time.
     #
     # @option params [required, String] :name
+    #   The name to assign to the schedule request.
     #
     # @option params [required, String] :playback_configuration_name
+    #   The name to assign to the playback configuration.
     #
     # @option params [required, Types::PrefetchRetrieval] :retrieval
     #   The configuration settings for retrieval of prefetched ads from the ad
@@ -586,10 +633,10 @@ module Aws::MediaTailor
     # @option params [String] :stream_id
     #   An optional stream identifier that MediaTailor uses to prefetch ads
     #   for multiple streams that use the same playback configuration. If
-    #   StreamId is specified, MediaTailor returns all of the prefetch
-    #   schedules with an exact match on StreamId. If not specified,
+    #   `StreamId` is specified, MediaTailor returns all of the prefetch
+    #   schedules with an exact match on `StreamId`. If not specified,
     #   MediaTailor returns all of the prefetch schedules for the playback
-    #   configuration, regardless of StreamId.
+    #   configuration, regardless of `StreamId`.
     #
     # @return [Types::CreatePrefetchScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -650,17 +697,24 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Creates a program.
+    # Creates a program within a channel. For information about programs,
+    # see [Working with programs][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-programs.html
     #
     # @option params [Array<Types::AdBreak>] :ad_breaks
     #   The ad break configuration settings.
     #
     # @option params [required, String] :channel_name
+    #   The name of the channel for this Program.
     #
     # @option params [String] :live_source_name
     #   The name of the LiveSource for this Program.
     #
     # @option params [required, String] :program_name
+    #   The name of the Program.
     #
     # @option params [required, Types::ScheduleConfiguration] :schedule_configuration
     #   The schedule configuration settings.
@@ -747,7 +801,13 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Creates a source location on a specific channel.
+    # Creates a source location. A source location is a container for
+    # sources. For more information about source locations, see [Working
+    # with source locations][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-source-locations.html
     #
     # @option params [Types::AccessConfiguration] :access_configuration
     #   Access configuration parameters. Configures the type of authentication
@@ -764,9 +824,17 @@ module Aws::MediaTailor
     #   resource.
     #
     # @option params [required, String] :source_location_name
+    #   The name associated with the source location.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags to assign to the source location.
+    #   The tags to assign to the source location. Tags are key-value pairs
+    #   that you can associate with Amazon resources to help with
+    #   organization, access control, and cost tracking. For more information,
+    #   see [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #
     # @return [Types::CreateSourceLocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -836,17 +904,26 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Creates name for a specific VOD source in a source location.
+    # The VOD source configuration parameters.
     #
     # @option params [required, Array<Types::HttpPackageConfiguration>] :http_package_configurations
     #   A list of HTTP package configuration parameters for this VOD source.
     #
     # @option params [required, String] :source_location_name
+    #   The name of the source location for this VOD source.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags to assign to the VOD source.
+    #   The tags to assign to the VOD source. Tags are key-value pairs that
+    #   you can associate with Amazon resources to help with organization,
+    #   access control, and cost tracking. For more information, see [Tagging
+    #   AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #
     # @option params [required, String] :vod_source_name
+    #   The name associated with the VOD source.&gt;
     #
     # @return [Types::CreateVodSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -898,9 +975,15 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Deletes a channel. You must stop the channel before it can be deleted.
+    # Deletes a channel. For information about MediaTailor channels, see
+    # [Working with channels][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html
     #
     # @option params [required, String] :channel_name
+    #   The name of the channel.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -919,9 +1002,10 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Deletes a channel's IAM policy.
+    # The channel policy to delete.
     #
     # @option params [required, String] :channel_name
+    #   The name of the channel associated with this channel policy.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -940,11 +1024,13 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Deletes a specific live source in a specific source location.
+    # The live source to delete.
     #
     # @option params [required, String] :live_source_name
+    #   The name of the live source.
     #
     # @option params [required, String] :source_location_name
+    #   The name of the source location associated with this Live Source.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -964,9 +1050,16 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Deletes the playback configuration for the specified name.
+    # Deletes a playback configuration. For information about MediaTailor
+    # configurations, see [Working with configurations in AWS Elemental
+    # MediaTailor][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html
     #
     # @option params [required, String] :name
+    #   The name of the playback configuration.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -986,12 +1079,21 @@ module Aws::MediaTailor
     end
 
     # Deletes a prefetch schedule for a specific playback configuration. If
-    # you call DeletePrefetchSchedule on an expired prefetch schedule,
-    # MediaTailor returns an HTTP 404 status code.
+    # you call `DeletePrefetchSchedule` on an expired prefetch schedule,
+    # MediaTailor returns an HTTP 404 status code. For more information
+    # about ad prefetching, see [Using ad prefetching][1] in the
+    # *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html
     #
     # @option params [required, String] :name
+    #   The name of the prefetch schedule. If the action is successful, the
+    #   service sends back an HTTP 204 response with an empty HTTP body.
     #
     # @option params [required, String] :playback_configuration_name
+    #   The name of the playback configuration for this prefetch schedule.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1011,11 +1113,18 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Deletes a specific program on a specific channel.
+    # Deletes a program within a channel. For information about programs,
+    # see [Working with programs][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-programs.html
     #
     # @option params [required, String] :channel_name
+    #   The name of the channel.
     #
     # @option params [required, String] :program_name
+    #   The name of the program.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1035,9 +1144,16 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Deletes a source location on a specific channel.
+    # Deletes a source location. A source location is a container for
+    # sources. For more information about source locations, see [Working
+    # with source locations][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-source-locations.html
     #
     # @option params [required, String] :source_location_name
+    #   The name of the source location.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1056,11 +1172,13 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Deletes a specific VOD source in a specific source location.
+    # The video on demand (VOD) source to delete.
     #
     # @option params [required, String] :source_location_name
+    #   The name of the source location associated with this VOD Source.
     #
     # @option params [required, String] :vod_source_name
+    #   The name of the VOD source.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1080,9 +1198,15 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Describes the properties of a specific channel.
+    # Describes a channel. For information about MediaTailor channels, see
+    # [Working with channels][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html
     #
     # @option params [required, String] :channel_name
+    #   The name of the channel.
     #
     # @return [Types::DescribeChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1135,12 +1259,13 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Provides details about a specific live source in a specific source
-    # location.
+    # The live source to describe.
     #
     # @option params [required, String] :live_source_name
+    #   The name of the live source.
     #
     # @option params [required, String] :source_location_name
+    #   The name of the source location associated with this Live Source.
     #
     # @return [Types::DescribeLiveSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1182,11 +1307,18 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Retrieves the properties of the requested program.
+    # Describes a program within a channel. For information about programs,
+    # see [Working with programs][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-programs.html
     #
     # @option params [required, String] :channel_name
+    #   The name of the channel associated with this Program.
     #
     # @option params [required, String] :program_name
+    #   The name of the program.
     #
     # @return [Types::DescribeProgramResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1236,9 +1368,16 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Retrieves the properties of the requested source location.
+    # Describes a source location. A source location is a container for
+    # sources. For more information about source locations, see [Working
+    # with source locations][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-source-locations.html
     #
     # @option params [required, String] :source_location_name
+    #   The name of the source location.
     #
     # @return [Types::DescribeSourceLocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1285,12 +1424,14 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Provides details about a specific VOD source in a specific source
-    # location.
+    # Provides details about a specific video on demand (VOD) source in a
+    # specific source location.
     #
     # @option params [required, String] :source_location_name
+    #   The name of the source location associated with this VOD Source.
     #
     # @option params [required, String] :vod_source_name
+    #   The name of the VOD Source.
     #
     # @return [Types::DescribeVodSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1332,9 +1473,11 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Retrieves information about a channel's IAM policy.
+    # Returns the channel's IAM policy. IAM policies are used to control
+    # access to your channel.
     #
     # @option params [required, String] :channel_name
+    #   The name of the channel associated with this Channel Policy.
     #
     # @return [Types::GetChannelPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1362,12 +1505,30 @@ module Aws::MediaTailor
     # Retrieves information about your channel's schedule.
     #
     # @option params [required, String] :channel_name
+    #   The name of the channel associated with this Channel Schedule.
     #
     # @option params [String] :duration_minutes
+    #   The duration in minutes of the channel schedule.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of channel schedules that you want MediaTailor to
+    #   return in response to the current request. If there are more than
+    #   `MaxResults` channel schedules, use the value of `NextToken` in the
+    #   response to get the next page of results.
     #
     # @option params [String] :next_token
+    #   (Optional) If the playback configuration has more than `MaxResults`
+    #   channel schedules, use `NextToken` to get the second and subsequent
+    #   pages of results.
+    #
+    #   For the first `GetChannelScheduleRequest` request, omit this value.
+    #
+    #   For the second and subsequent requests, get the value of `NextToken`
+    #   from the previous response and specify that value for `NextToken` in
+    #   the request.
+    #
+    #   If the previous response didn't include a `NextToken` element, there
+    #   are no more channel schedules to get.
     #
     # @return [Types::GetChannelScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1413,9 +1574,16 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Returns the playback configuration for the specified name.
+    # Retrieves a playback configuration. For information about MediaTailor
+    # configurations, see [Working with configurations in AWS Elemental
+    # MediaTailor][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html
     #
     # @option params [required, String] :name
+    #   The identifier for the playback configuration.
     #
     # @return [Types::GetPlaybackConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1485,13 +1653,26 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Returns information about the prefetch schedule for a specific
-    # playback configuration. If you call GetPrefetchSchedule on an expired
-    # prefetch schedule, MediaTailor returns an HTTP 404 status code.
+    # Retrieves a prefetch schedule for a playback configuration. A prefetch
+    # schedule allows you to tell MediaTailor to fetch and prepare certain
+    # ads before an ad break happens. For more information about ad
+    # prefetching, see [Using ad prefetching][1] in the *MediaTailor User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html
     #
     # @option params [required, String] :name
+    #   The name of the prefetch schedule. The name must be unique among all
+    #   prefetch schedules that are associated with the specified playback
+    #   configuration.
     #
     # @option params [required, String] :playback_configuration_name
+    #   Returns information about the prefetch schedule for a specific
+    #   playback configuration. If you call `GetPrefetchSchedule` on an
+    #   expired prefetch schedule, MediaTailor returns an HTTP 404 status
+    #   code.
     #
     # @return [Types::GetPrefetchScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1534,13 +1715,21 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Returns a list of alerts for the given resource.
+    # Lists the alerts that are associated with a MediaTailor channel
+    # assembly resource.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of alerts that you want MediaTailor to return in
+    #   response to the current request. If there are more than `MaxResults`
+    #   alerts, use the value of `NextToken` in the response to get the next
+    #   page of results.
     #
     # @option params [String] :next_token
+    #   Pagination token returned by the list request when results exceed the
+    #   maximum allowed. Use the token to fetch the next page of results.
     #
     # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
     #
     # @return [Types::ListAlertsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1577,11 +1766,18 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Retrieves a list of channels that are associated with this account.
+    # Retrieves information about the channels that are associated with the
+    # current AWS account.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of channels that you want MediaTailor to return in
+    #   response to the current request. If there are more than `MaxResults`
+    #   channels, use the value of `NextToken` in the response to get the next
+    #   page of results.
     #
     # @option params [String] :next_token
+    #   Pagination token returned by the list request when results exceed the
+    #   maximum allowed. Use the token to fetch the next page of results.
     #
     # @return [Types::ListChannelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1631,13 +1827,22 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # lists all the live sources in a source location.
+    # Lists the live sources contained in a source location. A source
+    # represents a piece of content.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of live sources that you want MediaTailor to return
+    #   in response to the current request. If there are more than
+    #   `MaxResults` live sources, use the value of `NextToken` in the
+    #   response to get the next page of results.
     #
     # @option params [String] :next_token
+    #   Pagination token returned by the list request when results exceed the
+    #   maximum allowed. Use the token to fetch the next page of results.
     #
     # @option params [required, String] :source_location_name
+    #   The name of the source location associated with this Live Sources
+    #   list.
     #
     # @return [Types::ListLiveSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1679,16 +1884,23 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Returns a list of the playback configurations defined in AWS Elemental
-    # MediaTailor. You can specify a maximum number of configurations to
-    # return at a time. The default maximum is 50. Results are returned in
-    # pagefuls. If MediaTailor has more configurations than the specified
-    # maximum, it provides parameters in the response that you can use to
-    # retrieve the next pageful.
+    # Retrieves existing playback configurations. For information about
+    # MediaTailor configurations, see [Working with Configurations in AWS
+    # Elemental MediaTailor][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html
     #
     # @option params [Integer] :max_results
+    #   The maximum number of playback configurations that you want
+    #   MediaTailor to return in response to the current request. If there are
+    #   more than `MaxResults` playback configurations, use the value of
+    #   `NextToken` in the response to get the next page of results.
     #
     # @option params [String] :next_token
+    #   Pagination token returned by the list request when results exceed the
+    #   maximum allowed. Use the token to fetch the next page of results.
     #
     # @return [Types::ListPlaybackConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1746,29 +1958,31 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Creates a new prefetch schedule.
+    # Lists the prefetch schedules for a playback configuration.
     #
     # @option params [Integer] :max_results
     #   The maximum number of prefetch schedules that you want MediaTailor to
-    #   return in response to the current request. If the playback
-    #   configuration has more than MaxResults prefetch schedules, use the
-    #   value of NextToken in the response to get the next page of results.
+    #   return in response to the current request. If there are more than
+    #   `MaxResults` prefetch schedules, use the value of `NextToken` in the
+    #   response to get the next page of results.
     #
     # @option params [String] :next_token
-    #   (Optional) If the playback configuration has more than MaxResults
-    #   prefetch schedules, use NextToken to get the second and subsequent
+    #   (Optional) If the playback configuration has more than `MaxResults`
+    #   prefetch schedules, use `NextToken` to get the second and subsequent
     #   pages of results.
     #
-    #   For the first ListPrefetchSchedulesRequest request, omit this value.
+    #   For the first `ListPrefetchSchedulesRequest` request, omit this value.
     #
-    #   For the second and subsequent requests, get the value of NextToken
-    #   from the previous response and specify that value for NextToken in the
-    #   request.
+    #   For the second and subsequent requests, get the value of `NextToken`
+    #   from the previous response and specify that value for `NextToken` in
+    #   the request.
     #
-    #   If the previous response didn't include a NextToken element, there
+    #   If the previous response didn't include a `NextToken` element, there
     #   are no more prefetch schedules to get.
     #
     # @option params [required, String] :playback_configuration_name
+    #   Retrieves the prefetch schedule(s) for a specific playback
+    #   configuration.
     #
     # @option params [String] :stream_id
     #   An optional filtering parameter whereby MediaTailor filters the
@@ -1817,11 +2031,18 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Retrieves a list of source locations.
+    # Lists the source locations for a channel. A source location defines
+    # the host server URL, and contains a list of sources.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of source locations that you want MediaTailor to
+    #   return in response to the current request. If there are more than
+    #   `MaxResults` source locations, use the value of `NextToken` in the
+    #   response to get the next page of results.
     #
     # @option params [String] :next_token
+    #   Pagination token returned by the list request when results exceed the
+    #   maximum allowed. Use the token to fetch the next page of results.
     #
     # @return [Types::ListSourceLocationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1866,10 +2087,17 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Returns a list of the tags assigned to the specified playback
-    # configuration resource.
+    # A list of tags that are associated with this resource. Tags are
+    # key-value pairs that you can associate with Amazon resources to help
+    # with organization, access control, and cost tracking. For more
+    # information, see [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #
     # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) associated with this resource.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1895,13 +2123,21 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Lists all the VOD sources in a source location.
+    # Lists the VOD sources contained in a source location. A source
+    # represents a piece of content.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of VOD sources that you want MediaTailor to return
+    #   in response to the current request. If there are more than
+    #   `MaxResults` VOD sources, use the value of `NextToken` in the response
+    #   to get the next page of results.
     #
     # @option params [String] :next_token
+    #   Pagination token returned by the list request when results exceed the
+    #   maximum allowed. Use the token to fetch the next page of results.
     #
     # @option params [required, String] :source_location_name
+    #   The name of the source location associated with this VOD Source list.
     #
     # @return [Types::ListVodSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1943,9 +2179,11 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Creates an IAM policy for the channel.
+    # Creates an IAM policy for the channel. IAM policies are used to
+    # control access to your channel.
     #
     # @option params [required, String] :channel_name
+    #   The channel name associated with this Channel Policy.
     #
     # @option params [required, String] :policy
     #   Adds an IAM role that determines the permissions of your channel.
@@ -1968,7 +2206,13 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Adds a new playback configuration to AWS Elemental MediaTailor.
+    # Creates a playback configuration. For information about MediaTailor
+    # configurations, see [Working with configurations in AWS Elemental
+    # MediaTailor][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html
     #
     # @option params [String] :ad_decision_server_url
     #   The URL for the ad decision server (ADS). This includes the
@@ -2019,7 +2263,7 @@ module Aws::MediaTailor
     #   rules enable customization of the personalized manifests created by
     #   MediaTailor.
     #
-    # @option params [String] :name
+    # @option params [required, String] :name
     #   The identifier for the playback configuration.
     #
     # @option params [Integer] :personalization_threshold_seconds
@@ -2046,7 +2290,14 @@ module Aws::MediaTailor
     #   asset that contains both audio and video.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags to assign to the playback configuration.
+    #   The tags to assign to the playback configuration. Tags are key-value
+    #   pairs that you can associate with Amazon resources to help with
+    #   organization, access control, and cost tracking. For more information,
+    #   see [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #
     # @option params [String] :transcode_profile_name
     #   The name that is used to associate this playback configuration with a
@@ -2114,7 +2365,7 @@ module Aws::MediaTailor
     #         enabled: false,
     #       },
     #     },
-    #     name: "__string",
+    #     name: "__string", # required
     #     personalization_threshold_seconds: 1,
     #     slate_ad_url: "__string",
     #     tags: {
@@ -2164,9 +2415,15 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Starts a specific channel.
+    # Starts a channel. For information about MediaTailor channels, see
+    # [Working with channels][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html
     #
     # @option params [required, String] :channel_name
+    #   The name of the channel.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2185,9 +2442,15 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Stops a specific channel.
+    # Stops a channel. For information about MediaTailor channels, see
+    # [Working with channels][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html
     #
     # @option params [required, String] :channel_name
+    #   The name of the channel.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2206,12 +2469,27 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Adds tags to the specified playback configuration resource. You can
-    # specify one or more tags to add.
+    # The resource to tag. Tags are key-value pairs that you can associate
+    # with Amazon resources to help with organization, access control, and
+    # cost tracking. For more information, see [Tagging AWS Elemental
+    # MediaTailor Resources][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #
     # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) associated with the resource.
     #
     # @option params [required, Hash<String,String>] :tags
+    #   The tags to assign to the resource. Tags are key-value pairs that you
+    #   can associate with Amazon resources to help with organization, access
+    #   control, and cost tracking. For more information, see [Tagging AWS
+    #   Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2233,12 +2511,13 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Removes tags from the specified playback configuration resource. You
-    # can specify one or more tags to remove.
+    # The resource to untag.
     #
     # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to untag.
     #
     # @option params [required, Array<String>] :tag_keys
+    #   The tag keys associated with the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2258,15 +2537,21 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Updates an existing channel.
+    # Updates a channel. For information about MediaTailor channels, see
+    # [Working with channels][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html
     #
     # @option params [required, String] :channel_name
+    #   The name of the channel.
     #
     # @option params [Types::SlateSource] :filler_slate
     #   The slate used to fill gaps between programs in the schedule. You must
-    #   configure filler slate if your channel uses the LINEAR PlaybackMode.
-    #   MediaTailor doesn't support filler slate for channels using the LOOP
-    #   PlaybackMode.
+    #   configure filler slate if your channel uses the `LINEAR`
+    #   `PlaybackMode`. MediaTailor doesn't support filler slate for channels
+    #   using the `LOOP` `PlaybackMode`.
     #
     # @option params [required, Array<Types::RequestOutputItem>] :outputs
     #   The channel's output properties.
@@ -2341,15 +2626,17 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Updates a specific live source in a specific source location.
+    # Updates a live source's configuration.
     #
     # @option params [required, Array<Types::HttpPackageConfiguration>] :http_package_configurations
     #   A list of HTTP package configurations for the live source on this
     #   account.
     #
     # @option params [required, String] :live_source_name
+    #   The name of the live source.
     #
     # @option params [required, String] :source_location_name
+    #   The name of the source location associated with this Live Source.
     #
     # @return [Types::UpdateLiveSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2398,7 +2685,13 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Updates a source location on a specific channel.
+    # Updates a source location. A source location is a container for
+    # sources. For more information about source locations, see [Working
+    # with source locations][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-source-locations.html
     #
     # @option params [Types::AccessConfiguration] :access_configuration
     #   Access configuration parameters. Configures the type of authentication
@@ -2415,6 +2708,7 @@ module Aws::MediaTailor
     #   resource.
     #
     # @option params [required, String] :source_location_name
+    #   The name of the source location.
     #
     # @return [Types::UpdateSourceLocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2481,15 +2775,17 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Updates a specific VOD source in a specific source location.
+    # Updates a VOD source's configuration.
     #
     # @option params [required, Array<Types::HttpPackageConfiguration>] :http_package_configurations
     #   A list of HTTP package configurations for the VOD source on this
     #   account.
     #
     # @option params [required, String] :source_location_name
+    #   The name of the source location associated with this VOD Source.
     #
     # @option params [required, String] :vod_source_name
+    #   The name of the VOD source.
     #
     # @return [Types::UpdateVodSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2551,7 +2847,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

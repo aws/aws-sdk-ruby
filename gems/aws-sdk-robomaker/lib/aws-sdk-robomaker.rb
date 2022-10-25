@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-robomaker/types'
 require_relative 'aws-sdk-robomaker/client_api'
+require_relative 'aws-sdk-robomaker/plugins/endpoints.rb'
 require_relative 'aws-sdk-robomaker/client'
 require_relative 'aws-sdk-robomaker/errors'
 require_relative 'aws-sdk-robomaker/resource'
+require_relative 'aws-sdk-robomaker/endpoint_parameters'
+require_relative 'aws-sdk-robomaker/endpoint_provider'
+require_relative 'aws-sdk-robomaker/endpoints'
 require_relative 'aws-sdk-robomaker/customizations'
 
 # This module provides support for AWS RoboMaker. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-robomaker/customizations'
 # @!group service
 module Aws::RoboMaker
 
-  GEM_VERSION = '1.51.0'
+  GEM_VERSION = '1.52.0'
 
 end
