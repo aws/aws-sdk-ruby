@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-devopsguru/types'
 require_relative 'aws-sdk-devopsguru/client_api'
+require_relative 'aws-sdk-devopsguru/plugins/endpoints.rb'
 require_relative 'aws-sdk-devopsguru/client'
 require_relative 'aws-sdk-devopsguru/errors'
 require_relative 'aws-sdk-devopsguru/resource'
+require_relative 'aws-sdk-devopsguru/endpoint_parameters'
+require_relative 'aws-sdk-devopsguru/endpoint_provider'
+require_relative 'aws-sdk-devopsguru/endpoints'
 require_relative 'aws-sdk-devopsguru/customizations'
 
 # This module provides support for Amazon DevOps Guru. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-devopsguru/customizations'
 # @!group service
 module Aws::DevOpsGuru
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end

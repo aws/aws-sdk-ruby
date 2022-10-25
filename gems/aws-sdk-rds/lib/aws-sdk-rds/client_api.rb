@@ -332,6 +332,7 @@ module Aws::RDS
     EventSubscriptionsList = Shapes::ListShape.new(name: 'EventSubscriptionsList')
     EventSubscriptionsMessage = Shapes::StructureShape.new(name: 'EventSubscriptionsMessage')
     EventsMessage = Shapes::StructureShape.new(name: 'EventsMessage')
+    ExportSourceType = Shapes::StringShape.new(name: 'ExportSourceType')
     ExportTask = Shapes::StructureShape.new(name: 'ExportTask')
     ExportTaskAlreadyExistsFault = Shapes::StructureShape.new(name: 'ExportTaskAlreadyExistsFault')
     ExportTaskNotFoundFault = Shapes::StructureShape.new(name: 'ExportTaskNotFoundFault')
@@ -2029,6 +2030,7 @@ module Aws::RDS
     DescribeExportTasksMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeExportTasksMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeExportTasksMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
+    DescribeExportTasksMessage.add_member(:source_type, Shapes::ShapeRef.new(shape: ExportSourceType, location_name: "SourceType"))
     DescribeExportTasksMessage.struct_class = Types::DescribeExportTasksMessage
 
     DescribeGlobalClustersMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "GlobalClusterIdentifier"))
@@ -2212,6 +2214,7 @@ module Aws::RDS
     ExportTask.add_member(:total_extracted_data_in_gb, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalExtractedDataInGB"))
     ExportTask.add_member(:failure_cause, Shapes::ShapeRef.new(shape: String, location_name: "FailureCause"))
     ExportTask.add_member(:warning_message, Shapes::ShapeRef.new(shape: String, location_name: "WarningMessage"))
+    ExportTask.add_member(:source_type, Shapes::ShapeRef.new(shape: ExportSourceType, location_name: "SourceType"))
     ExportTask.struct_class = Types::ExportTask
 
     ExportTaskAlreadyExistsFault.struct_class = Types::ExportTaskAlreadyExistsFault
@@ -5254,6 +5257,7 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: ExportTask)
         o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ExportTaskAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3BucketFault)
         o.errors << Shapes::ShapeRef.new(shape: IamRoleNotFoundFault)

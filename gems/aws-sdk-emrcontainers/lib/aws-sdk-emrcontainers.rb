@@ -48,6 +48,6 @@ require_relative 'aws-sdk-emrcontainers/customizations'
 # @!group service
 module Aws::EMRContainers
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.16.0'
 
 end

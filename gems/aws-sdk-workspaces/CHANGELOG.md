@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2022-10-25)
+------------------
+
+* Feature - This release adds new enums for supporting Workspaces Core features, including creating Manual running mode workspaces, importing regular Workspaces Core images and importing g4dn Workspaces Core images.
+
 1.73.0 (2022-09-29)
 ------------------
 

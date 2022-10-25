@@ -625,13 +625,35 @@ module Aws::AccessAnalyzer
     #
     # @note Configuration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Configuration corresponding to the set member.
     #
+    # @!attribute [rw] ebs_snapshot
+    #   The access control configuration is for an Amazon EBS volume
+    #   snapshot.
+    #   @return [Types::EbsSnapshotConfiguration]
+    #
+    # @!attribute [rw] ecr_repository
+    #   The access control configuration is for an Amazon ECR repository.
+    #   @return [Types::EcrRepositoryConfiguration]
+    #
     # @!attribute [rw] iam_role
     #   The access control configuration is for an IAM role.
     #   @return [Types::IamRoleConfiguration]
     #
+    # @!attribute [rw] efs_file_system
+    #   The access control configuration is for an Amazon EFS file system.
+    #   @return [Types::EfsFileSystemConfiguration]
+    #
     # @!attribute [rw] kms_key
     #   The access control configuration is for a KMS key.
     #   @return [Types::KmsKeyConfiguration]
+    #
+    # @!attribute [rw] rds_db_cluster_snapshot
+    #   The access control configuration is for an Amazon RDS DB cluster
+    #   snapshot.
+    #   @return [Types::RdsDbClusterSnapshotConfiguration]
+    #
+    # @!attribute [rw] rds_db_snapshot
+    #   The access control configuration is for an Amazon RDS DB snapshot.
+    #   @return [Types::RdsDbSnapshotConfiguration]
     #
     # @!attribute [rw] secrets_manager_secret
     #   The access control configuration is for a Secrets Manager secret.
@@ -641,6 +663,10 @@ module Aws::AccessAnalyzer
     #   The access control configuration is for an Amazon S3 Bucket.
     #   @return [Types::S3BucketConfiguration]
     #
+    # @!attribute [rw] sns_topic
+    #   The access control configuration is for an Amazon SNS topic
+    #   @return [Types::SnsTopicConfiguration]
+    #
     # @!attribute [rw] sqs_queue
     #   The access control configuration is for an Amazon SQS queue.
     #   @return [Types::SqsQueueConfiguration]
@@ -648,20 +674,32 @@ module Aws::AccessAnalyzer
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/Configuration AWS API Documentation
     #
     class Configuration < Struct.new(
+      :ebs_snapshot,
+      :ecr_repository,
       :iam_role,
+      :efs_file_system,
       :kms_key,
+      :rds_db_cluster_snapshot,
+      :rds_db_snapshot,
       :secrets_manager_secret,
       :s3_bucket,
+      :sns_topic,
       :sqs_queue,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
+      class EbsSnapshot < Configuration; end
+      class EcrRepository < Configuration; end
       class IamRole < Configuration; end
+      class EfsFileSystem < Configuration; end
       class KmsKey < Configuration; end
+      class RdsDbClusterSnapshot < Configuration; end
+      class RdsDbSnapshot < Configuration; end
       class SecretsManagerSecret < Configuration; end
       class S3Bucket < Configuration; end
+      class SnsTopic < Configuration; end
       class SqsQueue < Configuration; end
       class Unknown < Configuration; end
     end
@@ -696,8 +734,19 @@ module Aws::AccessAnalyzer
     #         analyzer_arn: "AnalyzerArn", # required
     #         configurations: { # required
     #           "ConfigurationsMapKey" => {
+    #             ebs_snapshot: {
+    #               user_ids: ["EbsUserId"],
+    #               groups: ["EbsGroup"],
+    #               kms_key_id: "EbsSnapshotDataEncryptionKeyId",
+    #             },
+    #             ecr_repository: {
+    #               repository_policy: "EcrRepositoryPolicy",
+    #             },
     #             iam_role: {
     #               trust_policy: "IamTrustPolicy",
+    #             },
+    #             efs_file_system: {
+    #               file_system_policy: "EfsFileSystemPolicy",
     #             },
     #             kms_key: {
     #               key_policies: {
@@ -719,6 +768,22 @@ module Aws::AccessAnalyzer
     #                   issuing_account: "IssuingAccount", # required
     #                 },
     #               ],
+    #             },
+    #             rds_db_cluster_snapshot: {
+    #               attributes: {
+    #                 "RdsDbClusterSnapshotAttributeName" => {
+    #                   account_ids: ["RdsDbClusterSnapshotAccountId"],
+    #                 },
+    #               },
+    #               kms_key_id: "RdsDbClusterSnapshotKmsKeyId",
+    #             },
+    #             rds_db_snapshot: {
+    #               attributes: {
+    #                 "RdsDbSnapshotAttributeName" => {
+    #                   account_ids: ["RdsDbSnapshotAccountId"],
+    #                 },
+    #               },
+    #               kms_key_id: "RdsDbSnapshotKmsKeyId",
     #             },
     #             secrets_manager_secret: {
     #               kms_key_id: "SecretsManagerSecretKmsId",
@@ -755,6 +820,9 @@ module Aws::AccessAnalyzer
     #                   },
     #                 },
     #               },
+    #             },
+    #             sns_topic: {
+    #               topic_policy: "SnsTopicPolicy",
     #             },
     #             sqs_queue: {
     #               queue_policy: "SqsQueuePolicy",
@@ -1047,6 +1115,175 @@ module Aws::AccessAnalyzer
       :analyzer_name,
       :rule_name,
       :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The proposed access control configuration for an Amazon EBS volume
+    # snapshot. You can propose a configuration for a new Amazon EBS volume
+    # snapshot or an Amazon EBS volume snapshot that you own by specifying
+    # the user IDs, groups, and optional KMS encryption key. For more
+    # information, see [ModifySnapshotAttribute][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifySnapshotAttribute.html
+    #
+    # @note When making an API call, you may pass EbsSnapshotConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         user_ids: ["EbsUserId"],
+    #         groups: ["EbsGroup"],
+    #         kms_key_id: "EbsSnapshotDataEncryptionKeyId",
+    #       }
+    #
+    # @!attribute [rw] user_ids
+    #   The IDs of the Amazon Web Services accounts that have access to the
+    #   Amazon EBS volume snapshot.
+    #
+    #   * If the configuration is for an existing Amazon EBS volume snapshot
+    #     and you do not specify the `userIds`, then the access preview uses
+    #     the existing shared `userIds` for the snapshot.
+    #
+    #   * If the access preview is for a new resource and you do not specify
+    #     the `userIds`, then the access preview considers the snapshot
+    #     without any `userIds`.
+    #
+    #   * To propose deletion of existing shared `accountIds`, you can
+    #     specify an empty list for `userIds`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] groups
+    #   The groups that have access to the Amazon EBS volume snapshot. If
+    #   the value `all` is specified, then the Amazon EBS volume snapshot is
+    #   public.
+    #
+    #   * If the configuration is for an existing Amazon EBS volume snapshot
+    #     and you do not specify the `groups`, then the access preview uses
+    #     the existing shared `groups` for the snapshot.
+    #
+    #   * If the access preview is for a new resource and you do not specify
+    #     the `groups`, then the access preview considers the snapshot
+    #     without any `groups`.
+    #
+    #   * To propose deletion of existing shared `groups`, you can specify
+    #     an empty list for `groups`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The KMS key identifier for an encrypted Amazon EBS volume snapshot.
+    #   The KMS key identifier is the key ARN, key ID, alias ARN, or alias
+    #   name for the KMS key.
+    #
+    #   * If the configuration is for an existing Amazon EBS volume snapshot
+    #     and you do not specify the `kmsKeyId`, or you specify an empty
+    #     string, then the access preview uses the existing `kmsKeyId` of
+    #     the snapshot.
+    #
+    #   * If the access preview is for a new resource and you do not specify
+    #     the `kmsKeyId`, the access preview considers the snapshot as
+    #     unencrypted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/EbsSnapshotConfiguration AWS API Documentation
+    #
+    class EbsSnapshotConfiguration < Struct.new(
+      :user_ids,
+      :groups,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The proposed access control configuration for an Amazon ECR
+    # repository. You can propose a configuration for a new Amazon ECR
+    # repository or an existing Amazon ECR repository that you own by
+    # specifying the Amazon ECR policy. For more information, see
+    # [Repository][1].
+    #
+    # * If the configuration is for an existing Amazon ECR repository and
+    #   you do not specify the Amazon ECR policy, then the access preview
+    #   uses the existing Amazon ECR policy for the repository.
+    #
+    # * If the access preview is for a new resource and you do not specify
+    #   the policy, then the access preview assumes an Amazon ECR repository
+    #   without a policy.
+    #
+    # * To propose deletion of an existing Amazon ECR repository policy, you
+    #   can specify an empty string for the Amazon ECR policy.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_Repository.html
+    #
+    # @note When making an API call, you may pass EcrRepositoryConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         repository_policy: "EcrRepositoryPolicy",
+    #       }
+    #
+    # @!attribute [rw] repository_policy
+    #   The JSON repository policy text to apply to the Amazon ECR
+    #   repository. For more information, see [Private repository policy
+    #   examples][1] in the *Amazon ECR User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/EcrRepositoryConfiguration AWS API Documentation
+    #
+    class EcrRepositoryConfiguration < Struct.new(
+      :repository_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The proposed access control configuration for an Amazon EFS file
+    # system. You can propose a configuration for a new Amazon EFS file
+    # system or an existing Amazon EFS file system that you own by
+    # specifying the Amazon EFS policy. For more information, see [Using
+    # file systems in Amazon EFS][1].
+    #
+    # * If the configuration is for an existing Amazon EFS file system and
+    #   you do not specify the Amazon EFS policy, then the access preview
+    #   uses the existing Amazon EFS policy for the file system.
+    #
+    # * If the access preview is for a new resource and you do not specify
+    #   the policy, then the access preview assumes an Amazon EFS file
+    #   system without a policy.
+    #
+    # * To propose deletion of an existing Amazon EFS file system policy,
+    #   you can specify an empty string for the Amazon EFS policy.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/using-fs.html
+    #
+    # @note When making an API call, you may pass EfsFileSystemConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         file_system_policy: "EfsFileSystemPolicy",
+    #       }
+    #
+    # @!attribute [rw] file_system_policy
+    #   The JSON policy definition to apply to the Amazon EFS file system.
+    #   For more information on the elements that make up a file system
+    #   policy, see [Amazon EFS Resource-based policies][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/EfsFileSystemConfiguration AWS API Documentation
+    #
+    class EfsFileSystemConfiguration < Struct.new(
+      :file_system_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2086,7 +2323,7 @@ module Aws::AccessAnalyzer
     #
     #       {
     #         analyzer_arn: "AnalyzerArn", # required
-    #         resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::IAM::Role, AWS::SQS::Queue, AWS::Lambda::Function, AWS::Lambda::LayerVersion, AWS::KMS::Key, AWS::SecretsManager::Secret
+    #         resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::IAM::Role, AWS::SQS::Queue, AWS::Lambda::Function, AWS::Lambda::LayerVersion, AWS::KMS::Key, AWS::SecretsManager::Secret, AWS::EFS::FileSystem, AWS::EC2::Snapshot, AWS::ECR::Repository, AWS::RDS::DBSnapshot, AWS::RDS::DBClusterSnapshot, AWS::SNS::Topic
     #         next_token: "Token",
     #         max_results: 1,
     #       }
@@ -2604,6 +2841,196 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # The values for a manual Amazon RDS DB cluster snapshot attribute.
+    #
+    # @note RdsDbClusterSnapshotAttributeValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note RdsDbClusterSnapshotAttributeValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RdsDbClusterSnapshotAttributeValue corresponding to the set member.
+    #
+    # @!attribute [rw] account_ids
+    #   The Amazon Web Services account IDs that have access to the manual
+    #   Amazon RDS DB cluster snapshot. If the value `all` is specified,
+    #   then the Amazon RDS DB cluster snapshot is public and can be copied
+    #   or restored by all Amazon Web Services accounts.
+    #
+    #   * If the configuration is for an existing Amazon RDS DB cluster
+    #     snapshot and you do not specify the `accountIds` in
+    #     `RdsDbClusterSnapshotAttributeValue`, then the access preview uses
+    #     the existing shared `accountIds` for the snapshot.
+    #
+    #   * If the access preview is for a new resource and you do not specify
+    #     the specify the `accountIds` in
+    #     `RdsDbClusterSnapshotAttributeValue`, then the access preview
+    #     considers the snapshot without any attributes.
+    #
+    #   * To propose deletion of existing shared `accountIds`, you can
+    #     specify an empty list for `accountIds` in the
+    #     `RdsDbClusterSnapshotAttributeValue`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/RdsDbClusterSnapshotAttributeValue AWS API Documentation
+    #
+    class RdsDbClusterSnapshotAttributeValue < Struct.new(
+      :account_ids,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AccountIds < RdsDbClusterSnapshotAttributeValue; end
+      class Unknown < RdsDbClusterSnapshotAttributeValue; end
+    end
+
+    # The proposed access control configuration for an Amazon RDS DB cluster
+    # snapshot. You can propose a configuration for a new Amazon RDS DB
+    # cluster snapshot or an Amazon RDS DB cluster snapshot that you own by
+    # specifying the `RdsDbClusterSnapshotAttributeValue` and optional KMS
+    # encryption key. For more information, see
+    # [ModifyDBClusterSnapshotAttribute][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterSnapshotAttribute.html
+    #
+    # @note When making an API call, you may pass RdsDbClusterSnapshotConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         attributes: {
+    #           "RdsDbClusterSnapshotAttributeName" => {
+    #             account_ids: ["RdsDbClusterSnapshotAccountId"],
+    #           },
+    #         },
+    #         kms_key_id: "RdsDbClusterSnapshotKmsKeyId",
+    #       }
+    #
+    # @!attribute [rw] attributes
+    #   The names and values of manual DB cluster snapshot attributes.
+    #   Manual DB cluster snapshot attributes are used to authorize other
+    #   Amazon Web Services accounts to restore a manual DB cluster
+    #   snapshot. The only valid value for `AttributeName` for the attribute
+    #   map is `restore`
+    #   @return [Hash<String,Types::RdsDbClusterSnapshotAttributeValue>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The KMS key identifier for an encrypted Amazon RDS DB cluster
+    #   snapshot. The KMS key identifier is the key ARN, key ID, alias ARN,
+    #   or alias name for the KMS key.
+    #
+    #   * If the configuration is for an existing Amazon RDS DB cluster
+    #     snapshot and you do not specify the `kmsKeyId`, or you specify an
+    #     empty string, then the access preview uses the existing `kmsKeyId`
+    #     of the snapshot.
+    #
+    #   * If the access preview is for a new resource and you do not specify
+    #     the specify the `kmsKeyId`, then the access preview considers the
+    #     snapshot as unencrypted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/RdsDbClusterSnapshotConfiguration AWS API Documentation
+    #
+    class RdsDbClusterSnapshotConfiguration < Struct.new(
+      :attributes,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The name and values of a manual Amazon RDS DB snapshot attribute.
+    # Manual DB snapshot attributes are used to authorize other Amazon Web
+    # Services accounts to restore a manual DB snapshot.
+    #
+    # @note RdsDbSnapshotAttributeValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note RdsDbSnapshotAttributeValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RdsDbSnapshotAttributeValue corresponding to the set member.
+    #
+    # @!attribute [rw] account_ids
+    #   The Amazon Web Services account IDs that have access to the manual
+    #   Amazon RDS DB snapshot. If the value `all` is specified, then the
+    #   Amazon RDS DB snapshot is public and can be copied or restored by
+    #   all Amazon Web Services accounts.
+    #
+    #   * If the configuration is for an existing Amazon RDS DB snapshot and
+    #     you do not specify the `accountIds` in
+    #     `RdsDbSnapshotAttributeValue`, then the access preview uses the
+    #     existing shared `accountIds` for the snapshot.
+    #
+    #   * If the access preview is for a new resource and you do not specify
+    #     the specify the `accountIds` in `RdsDbSnapshotAttributeValue`,
+    #     then the access preview considers the snapshot without any
+    #     attributes.
+    #
+    #   * To propose deletion of an existing shared `accountIds`, you can
+    #     specify an empty list for `accountIds` in the
+    #     `RdsDbSnapshotAttributeValue`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/RdsDbSnapshotAttributeValue AWS API Documentation
+    #
+    class RdsDbSnapshotAttributeValue < Struct.new(
+      :account_ids,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AccountIds < RdsDbSnapshotAttributeValue; end
+      class Unknown < RdsDbSnapshotAttributeValue; end
+    end
+
+    # The proposed access control configuration for an Amazon RDS DB
+    # snapshot. You can propose a configuration for a new Amazon RDS DB
+    # snapshot or an Amazon RDS DB snapshot that you own by specifying the
+    # `RdsDbSnapshotAttributeValue` and optional KMS encryption key. For
+    # more information, see [ModifyDBSnapshotAttribute][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBSnapshotAttribute.html
+    #
+    # @note When making an API call, you may pass RdsDbSnapshotConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         attributes: {
+    #           "RdsDbSnapshotAttributeName" => {
+    #             account_ids: ["RdsDbSnapshotAccountId"],
+    #           },
+    #         },
+    #         kms_key_id: "RdsDbSnapshotKmsKeyId",
+    #       }
+    #
+    # @!attribute [rw] attributes
+    #   The names and values of manual DB snapshot attributes. Manual DB
+    #   snapshot attributes are used to authorize other Amazon Web Services
+    #   accounts to restore a manual DB snapshot. The only valid value for
+    #   `attributeName` for the attribute map is restore.
+    #   @return [Hash<String,Types::RdsDbSnapshotAttributeValue>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The KMS key identifier for an encrypted Amazon RDS DB snapshot. The
+    #   KMS key identifier is the key ARN, key ID, alias ARN, or alias name
+    #   for the KMS key.
+    #
+    #   * If the configuration is for an existing Amazon RDS DB snapshot and
+    #     you do not specify the `kmsKeyId`, or you specify an empty string,
+    #     then the access preview uses the existing `kmsKeyId` of the
+    #     snapshot.
+    #
+    #   * If the access preview is for a new resource and you do not specify
+    #     the specify the `kmsKeyId`, then the access preview considers the
+    #     snapshot as unencrypted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/RdsDbSnapshotConfiguration AWS API Documentation
+    #
+    class RdsDbSnapshotConfiguration < Struct.new(
+      :attributes,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified resource could not be found.
     #
     # @!attribute [rw] message
@@ -2927,6 +3354,47 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # The proposed access control configuration for an Amazon SNS topic. You
+    # can propose a configuration for a new Amazon SNS topic or an existing
+    # Amazon SNS topic that you own by specifying the policy. If the
+    # configuration is for an existing Amazon SNS topic and you do not
+    # specify the Amazon SNS policy, then the access preview uses the
+    # existing Amazon SNS policy for the topic. If the access preview is for
+    # a new resource and you do not specify the policy, then the access
+    # preview assumes an Amazon SNS topic without a policy. To propose
+    # deletion of an existing Amazon SNS topic policy, you can specify an
+    # empty string for the Amazon SNS policy. For more information, see
+    # [Topic][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/api/API_Topic.html
+    #
+    # @note When making an API call, you may pass SnsTopicConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         topic_policy: "SnsTopicPolicy",
+    #       }
+    #
+    # @!attribute [rw] topic_policy
+    #   The JSON policy text that defines who can access an Amazon SNS
+    #   topic. For more information, see [Example cases for Amazon SNS
+    #   access control][1] in the *Amazon SNS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-access-policy-use-cases.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/SnsTopicConfiguration AWS API Documentation
+    #
+    class SnsTopicConfiguration < Struct.new(
+      :topic_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The criteria used to sort.
     #
     # @note When making an API call, you may pass SortCriteria
@@ -3089,6 +3557,7 @@ module Aws::AccessAnalyzer
     #       {
     #         analyzer_arn: "AnalyzerArn", # required
     #         resource_arn: "ResourceArn", # required
+    #         resource_owner_account: "String",
     #       }
     #
     # @!attribute [rw] analyzer_arn
@@ -3104,11 +3573,18 @@ module Aws::AccessAnalyzer
     #   The ARN of the resource to scan.
     #   @return [String]
     #
+    # @!attribute [rw] resource_owner_account
+    #   The Amazon Web Services account ID that owns the resource. For most
+    #   Amazon Web Services resources, the owning account is the account in
+    #   which the resource was created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/StartResourceScanRequest AWS API Documentation
     #
     class StartResourceScanRequest < Struct.new(
       :analyzer_arn,
-      :resource_arn)
+      :resource_arn,
+      :resource_owner_account)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2022-10-25)
+------------------
+
+* Feature - This release is a documentation update
+
 1.55.0 (2022-04-21)
 ------------------
 

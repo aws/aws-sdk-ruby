@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-workspaces/types'
 require_relative 'aws-sdk-workspaces/client_api'
+require_relative 'aws-sdk-workspaces/plugins/endpoints.rb'
 require_relative 'aws-sdk-workspaces/client'
 require_relative 'aws-sdk-workspaces/errors'
 require_relative 'aws-sdk-workspaces/resource'
+require_relative 'aws-sdk-workspaces/endpoint_parameters'
+require_relative 'aws-sdk-workspaces/endpoint_provider'
+require_relative 'aws-sdk-workspaces/endpoints'
 require_relative 'aws-sdk-workspaces/customizations'
 
 # This module provides support for Amazon WorkSpaces. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-workspaces/customizations'
 # @!group service
 module Aws::WorkSpaces
 
-  GEM_VERSION = '1.73.0'
+  GEM_VERSION = '1.74.0'
 
 end
