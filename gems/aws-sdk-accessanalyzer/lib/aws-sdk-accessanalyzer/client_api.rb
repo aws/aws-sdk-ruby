@@ -60,16 +60,6 @@ module Aws::AccessAnalyzer
     Criterion = Shapes::StructureShape.new(name: 'Criterion')
     DeleteAnalyzerRequest = Shapes::StructureShape.new(name: 'DeleteAnalyzerRequest')
     DeleteArchiveRuleRequest = Shapes::StructureShape.new(name: 'DeleteArchiveRuleRequest')
-    EbsGroup = Shapes::StringShape.new(name: 'EbsGroup')
-    EbsGroupList = Shapes::ListShape.new(name: 'EbsGroupList')
-    EbsSnapshotConfiguration = Shapes::StructureShape.new(name: 'EbsSnapshotConfiguration')
-    EbsSnapshotDataEncryptionKeyId = Shapes::StringShape.new(name: 'EbsSnapshotDataEncryptionKeyId')
-    EbsUserId = Shapes::StringShape.new(name: 'EbsUserId')
-    EbsUserIdList = Shapes::ListShape.new(name: 'EbsUserIdList')
-    EcrRepositoryConfiguration = Shapes::StructureShape.new(name: 'EcrRepositoryConfiguration')
-    EcrRepositoryPolicy = Shapes::StringShape.new(name: 'EcrRepositoryPolicy')
-    EfsFileSystemConfiguration = Shapes::StructureShape.new(name: 'EfsFileSystemConfiguration')
-    EfsFileSystemPolicy = Shapes::StringShape.new(name: 'EfsFileSystemPolicy')
     FilterCriteriaMap = Shapes::MapShape.new(name: 'FilterCriteriaMap')
     Finding = Shapes::StructureShape.new(name: 'Finding')
     FindingChangeType = Shapes::StringShape.new(name: 'FindingChangeType')
@@ -160,20 +150,6 @@ module Aws::AccessAnalyzer
     Position = Shapes::StructureShape.new(name: 'Position')
     PrincipalArn = Shapes::StringShape.new(name: 'PrincipalArn')
     PrincipalMap = Shapes::MapShape.new(name: 'PrincipalMap')
-    RdsDbClusterSnapshotAccountId = Shapes::StringShape.new(name: 'RdsDbClusterSnapshotAccountId')
-    RdsDbClusterSnapshotAccountIdsList = Shapes::ListShape.new(name: 'RdsDbClusterSnapshotAccountIdsList')
-    RdsDbClusterSnapshotAttributeName = Shapes::StringShape.new(name: 'RdsDbClusterSnapshotAttributeName')
-    RdsDbClusterSnapshotAttributeValue = Shapes::UnionShape.new(name: 'RdsDbClusterSnapshotAttributeValue')
-    RdsDbClusterSnapshotAttributesMap = Shapes::MapShape.new(name: 'RdsDbClusterSnapshotAttributesMap')
-    RdsDbClusterSnapshotConfiguration = Shapes::StructureShape.new(name: 'RdsDbClusterSnapshotConfiguration')
-    RdsDbClusterSnapshotKmsKeyId = Shapes::StringShape.new(name: 'RdsDbClusterSnapshotKmsKeyId')
-    RdsDbSnapshotAccountId = Shapes::StringShape.new(name: 'RdsDbSnapshotAccountId')
-    RdsDbSnapshotAccountIdsList = Shapes::ListShape.new(name: 'RdsDbSnapshotAccountIdsList')
-    RdsDbSnapshotAttributeName = Shapes::StringShape.new(name: 'RdsDbSnapshotAttributeName')
-    RdsDbSnapshotAttributeValue = Shapes::UnionShape.new(name: 'RdsDbSnapshotAttributeValue')
-    RdsDbSnapshotAttributesMap = Shapes::MapShape.new(name: 'RdsDbSnapshotAttributesMap')
-    RdsDbSnapshotConfiguration = Shapes::StructureShape.new(name: 'RdsDbSnapshotConfiguration')
-    RdsDbSnapshotKmsKeyId = Shapes::StringShape.new(name: 'RdsDbSnapshotKmsKeyId')
     ReasonCode = Shapes::StringShape.new(name: 'ReasonCode')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
@@ -193,8 +169,6 @@ module Aws::AccessAnalyzer
     SecretsManagerSecretPolicy = Shapes::StringShape.new(name: 'SecretsManagerSecretPolicy')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SharedViaList = Shapes::ListShape.new(name: 'SharedViaList')
-    SnsTopicConfiguration = Shapes::StructureShape.new(name: 'SnsTopicConfiguration')
-    SnsTopicPolicy = Shapes::StringShape.new(name: 'SnsTopicPolicy')
     SortCriteria = Shapes::StructureShape.new(name: 'SortCriteria')
     Span = Shapes::StructureShape.new(name: 'Span')
     SqsQueueConfiguration = Shapes::StructureShape.new(name: 'SqsQueueConfiguration')
@@ -352,28 +326,16 @@ module Aws::AccessAnalyzer
     ConditionKeyMap.key = Shapes::ShapeRef.new(shape: String)
     ConditionKeyMap.value = Shapes::ShapeRef.new(shape: String)
 
-    Configuration.add_member(:ebs_snapshot, Shapes::ShapeRef.new(shape: EbsSnapshotConfiguration, location_name: "ebsSnapshot"))
-    Configuration.add_member(:ecr_repository, Shapes::ShapeRef.new(shape: EcrRepositoryConfiguration, location_name: "ecrRepository"))
     Configuration.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRoleConfiguration, location_name: "iamRole"))
-    Configuration.add_member(:efs_file_system, Shapes::ShapeRef.new(shape: EfsFileSystemConfiguration, location_name: "efsFileSystem"))
     Configuration.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKeyConfiguration, location_name: "kmsKey"))
-    Configuration.add_member(:rds_db_cluster_snapshot, Shapes::ShapeRef.new(shape: RdsDbClusterSnapshotConfiguration, location_name: "rdsDbClusterSnapshot"))
-    Configuration.add_member(:rds_db_snapshot, Shapes::ShapeRef.new(shape: RdsDbSnapshotConfiguration, location_name: "rdsDbSnapshot"))
     Configuration.add_member(:secrets_manager_secret, Shapes::ShapeRef.new(shape: SecretsManagerSecretConfiguration, location_name: "secretsManagerSecret"))
     Configuration.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3BucketConfiguration, location_name: "s3Bucket"))
-    Configuration.add_member(:sns_topic, Shapes::ShapeRef.new(shape: SnsTopicConfiguration, location_name: "snsTopic"))
     Configuration.add_member(:sqs_queue, Shapes::ShapeRef.new(shape: SqsQueueConfiguration, location_name: "sqsQueue"))
     Configuration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    Configuration.add_member_subclass(:ebs_snapshot, Types::Configuration::EbsSnapshot)
-    Configuration.add_member_subclass(:ecr_repository, Types::Configuration::EcrRepository)
     Configuration.add_member_subclass(:iam_role, Types::Configuration::IamRole)
-    Configuration.add_member_subclass(:efs_file_system, Types::Configuration::EfsFileSystem)
     Configuration.add_member_subclass(:kms_key, Types::Configuration::KmsKey)
-    Configuration.add_member_subclass(:rds_db_cluster_snapshot, Types::Configuration::RdsDbClusterSnapshot)
-    Configuration.add_member_subclass(:rds_db_snapshot, Types::Configuration::RdsDbSnapshot)
     Configuration.add_member_subclass(:secrets_manager_secret, Types::Configuration::SecretsManagerSecret)
     Configuration.add_member_subclass(:s3_bucket, Types::Configuration::S3Bucket)
-    Configuration.add_member_subclass(:sns_topic, Types::Configuration::SnsTopic)
     Configuration.add_member_subclass(:sqs_queue, Types::Configuration::SqsQueue)
     Configuration.add_member_subclass(:unknown, Types::Configuration::Unknown)
     Configuration.struct_class = Types::Configuration
@@ -424,21 +386,6 @@ module Aws::AccessAnalyzer
     DeleteArchiveRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "ruleName"))
     DeleteArchiveRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DeleteArchiveRuleRequest.struct_class = Types::DeleteArchiveRuleRequest
-
-    EbsGroupList.member = Shapes::ShapeRef.new(shape: EbsGroup)
-
-    EbsSnapshotConfiguration.add_member(:user_ids, Shapes::ShapeRef.new(shape: EbsUserIdList, location_name: "userIds"))
-    EbsSnapshotConfiguration.add_member(:groups, Shapes::ShapeRef.new(shape: EbsGroupList, location_name: "groups"))
-    EbsSnapshotConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EbsSnapshotDataEncryptionKeyId, location_name: "kmsKeyId"))
-    EbsSnapshotConfiguration.struct_class = Types::EbsSnapshotConfiguration
-
-    EbsUserIdList.member = Shapes::ShapeRef.new(shape: EbsUserId)
-
-    EcrRepositoryConfiguration.add_member(:repository_policy, Shapes::ShapeRef.new(shape: EcrRepositoryPolicy, location_name: "repositoryPolicy"))
-    EcrRepositoryConfiguration.struct_class = Types::EcrRepositoryConfiguration
-
-    EfsFileSystemConfiguration.add_member(:file_system_policy, Shapes::ShapeRef.new(shape: EfsFileSystemPolicy, location_name: "fileSystemPolicy"))
-    EfsFileSystemConfiguration.struct_class = Types::EfsFileSystemConfiguration
 
     FilterCriteriaMap.key = Shapes::ShapeRef.new(shape: String)
     FilterCriteriaMap.value = Shapes::ShapeRef.new(shape: Criterion)
@@ -684,7 +631,7 @@ module Aws::AccessAnalyzer
     NetworkOriginConfiguration.add_member_subclass(:unknown, Types::NetworkOriginConfiguration::Unknown)
     NetworkOriginConfiguration.struct_class = Types::NetworkOriginConfiguration
 
-    PathElement.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "index", metadata: {"box"=>true}))
+    PathElement.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "index"))
     PathElement.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
     PathElement.add_member(:substring, Shapes::ShapeRef.new(shape: Substring, location_name: "substring"))
     PathElement.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
@@ -717,36 +664,6 @@ module Aws::AccessAnalyzer
 
     PrincipalMap.key = Shapes::ShapeRef.new(shape: String)
     PrincipalMap.value = Shapes::ShapeRef.new(shape: String)
-
-    RdsDbClusterSnapshotAccountIdsList.member = Shapes::ShapeRef.new(shape: RdsDbClusterSnapshotAccountId)
-
-    RdsDbClusterSnapshotAttributeValue.add_member(:account_ids, Shapes::ShapeRef.new(shape: RdsDbClusterSnapshotAccountIdsList, location_name: "accountIds"))
-    RdsDbClusterSnapshotAttributeValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    RdsDbClusterSnapshotAttributeValue.add_member_subclass(:account_ids, Types::RdsDbClusterSnapshotAttributeValue::AccountIds)
-    RdsDbClusterSnapshotAttributeValue.add_member_subclass(:unknown, Types::RdsDbClusterSnapshotAttributeValue::Unknown)
-    RdsDbClusterSnapshotAttributeValue.struct_class = Types::RdsDbClusterSnapshotAttributeValue
-
-    RdsDbClusterSnapshotAttributesMap.key = Shapes::ShapeRef.new(shape: RdsDbClusterSnapshotAttributeName)
-    RdsDbClusterSnapshotAttributesMap.value = Shapes::ShapeRef.new(shape: RdsDbClusterSnapshotAttributeValue)
-
-    RdsDbClusterSnapshotConfiguration.add_member(:attributes, Shapes::ShapeRef.new(shape: RdsDbClusterSnapshotAttributesMap, location_name: "attributes"))
-    RdsDbClusterSnapshotConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: RdsDbClusterSnapshotKmsKeyId, location_name: "kmsKeyId"))
-    RdsDbClusterSnapshotConfiguration.struct_class = Types::RdsDbClusterSnapshotConfiguration
-
-    RdsDbSnapshotAccountIdsList.member = Shapes::ShapeRef.new(shape: RdsDbSnapshotAccountId)
-
-    RdsDbSnapshotAttributeValue.add_member(:account_ids, Shapes::ShapeRef.new(shape: RdsDbSnapshotAccountIdsList, location_name: "accountIds"))
-    RdsDbSnapshotAttributeValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    RdsDbSnapshotAttributeValue.add_member_subclass(:account_ids, Types::RdsDbSnapshotAttributeValue::AccountIds)
-    RdsDbSnapshotAttributeValue.add_member_subclass(:unknown, Types::RdsDbSnapshotAttributeValue::Unknown)
-    RdsDbSnapshotAttributeValue.struct_class = Types::RdsDbSnapshotAttributeValue
-
-    RdsDbSnapshotAttributesMap.key = Shapes::ShapeRef.new(shape: RdsDbSnapshotAttributeName)
-    RdsDbSnapshotAttributesMap.value = Shapes::ShapeRef.new(shape: RdsDbSnapshotAttributeValue)
-
-    RdsDbSnapshotConfiguration.add_member(:attributes, Shapes::ShapeRef.new(shape: RdsDbSnapshotAttributesMap, location_name: "attributes"))
-    RdsDbSnapshotConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: RdsDbSnapshotKmsKeyId, location_name: "kmsKeyId"))
-    RdsDbSnapshotConfiguration.struct_class = Types::RdsDbSnapshotConfiguration
 
     RegionList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -790,9 +707,6 @@ module Aws::AccessAnalyzer
 
     SharedViaList.member = Shapes::ShapeRef.new(shape: String)
 
-    SnsTopicConfiguration.add_member(:topic_policy, Shapes::ShapeRef.new(shape: SnsTopicPolicy, location_name: "topicPolicy"))
-    SnsTopicConfiguration.struct_class = Types::SnsTopicConfiguration
-
     SortCriteria.add_member(:attribute_name, Shapes::ShapeRef.new(shape: String, location_name: "attributeName"))
     SortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
     SortCriteria.struct_class = Types::SortCriteria
@@ -814,7 +728,6 @@ module Aws::AccessAnalyzer
 
     StartResourceScanRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "analyzerArn"))
     StartResourceScanRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
-    StartResourceScanRequest.add_member(:resource_owner_account, Shapes::ShapeRef.new(shape: String, location_name: "resourceOwnerAccount"))
     StartResourceScanRequest.struct_class = Types::StartResourceScanRequest
 
     StatusReason.add_member(:code, Shapes::ShapeRef.new(shape: ReasonCode, required: true, location_name: "code"))

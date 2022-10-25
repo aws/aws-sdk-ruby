@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-batch/types'
 require_relative 'aws-sdk-batch/client_api'
-require_relative 'aws-sdk-batch/plugins/endpoints.rb'
 require_relative 'aws-sdk-batch/client'
 require_relative 'aws-sdk-batch/errors'
 require_relative 'aws-sdk-batch/resource'
-require_relative 'aws-sdk-batch/endpoint_parameters'
-require_relative 'aws-sdk-batch/endpoint_provider'
-require_relative 'aws-sdk-batch/endpoints'
 require_relative 'aws-sdk-batch/customizations'
 
 # This module provides support for AWS Batch. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-batch/customizations'
 # @!group service
 module Aws::Batch
 
-  GEM_VERSION = '1.64.0'
+  GEM_VERSION = '1.63.0'
 
 end

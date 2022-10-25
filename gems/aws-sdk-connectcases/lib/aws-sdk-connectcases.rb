@@ -48,6 +48,6 @@ require_relative 'aws-sdk-connectcases/customizations'
 # @!group service
 module Aws::ConnectCases
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.0.0'
 
 end

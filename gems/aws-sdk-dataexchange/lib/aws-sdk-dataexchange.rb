@@ -49,6 +49,6 @@ require_relative 'aws-sdk-dataexchange/customizations'
 # @!group service
 module Aws::DataExchange
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.27.0'
 
 end

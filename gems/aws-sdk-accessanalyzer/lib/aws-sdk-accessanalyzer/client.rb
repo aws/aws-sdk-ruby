@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/sign.rb'
+require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:accessanalyzer)
@@ -79,9 +79,8 @@ module Aws::AccessAnalyzer
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::Sign)
+    add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
-    add_plugin(Aws::AccessAnalyzer::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -288,19 +287,6 @@ module Aws::AccessAnalyzer
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
-    #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
-    #     following classes:
-    #
-    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
-    #       tokens.
-    #
-    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
-    #       access token generated from `aws login`.
-    #
-    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
-    #     will be used to search for tokens configured for your profile in shared configuration files.
-    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -313,9 +299,6 @@ module Aws::AccessAnalyzer
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
-    #
-    #   @option options [Aws::AccessAnalyzer::EndpointProvider] :endpoint_provider
-    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::AccessAnalyzer::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -463,19 +446,8 @@ module Aws::AccessAnalyzer
     #     analyzer_arn: "AnalyzerArn", # required
     #     configurations: { # required
     #       "ConfigurationsMapKey" => {
-    #         ebs_snapshot: {
-    #           user_ids: ["EbsUserId"],
-    #           groups: ["EbsGroup"],
-    #           kms_key_id: "EbsSnapshotDataEncryptionKeyId",
-    #         },
-    #         ecr_repository: {
-    #           repository_policy: "EcrRepositoryPolicy",
-    #         },
     #         iam_role: {
     #           trust_policy: "IamTrustPolicy",
-    #         },
-    #         efs_file_system: {
-    #           file_system_policy: "EfsFileSystemPolicy",
     #         },
     #         kms_key: {
     #           key_policies: {
@@ -497,22 +469,6 @@ module Aws::AccessAnalyzer
     #               issuing_account: "IssuingAccount", # required
     #             },
     #           ],
-    #         },
-    #         rds_db_cluster_snapshot: {
-    #           attributes: {
-    #             "RdsDbClusterSnapshotAttributeName" => {
-    #               account_ids: ["RdsDbClusterSnapshotAccountId"],
-    #             },
-    #           },
-    #           kms_key_id: "RdsDbClusterSnapshotKmsKeyId",
-    #         },
-    #         rds_db_snapshot: {
-    #           attributes: {
-    #             "RdsDbSnapshotAttributeName" => {
-    #               account_ids: ["RdsDbSnapshotAccountId"],
-    #             },
-    #           },
-    #           kms_key_id: "RdsDbSnapshotKmsKeyId",
     #         },
     #         secrets_manager_secret: {
     #           kms_key_id: "SecretsManagerSecretKmsId",
@@ -549,9 +505,6 @@ module Aws::AccessAnalyzer
     #               },
     #             },
     #           },
-    #         },
-    #         sns_topic: {
-    #           topic_policy: "SnsTopicPolicy",
     #         },
     #         sqs_queue: {
     #           queue_policy: "SqsQueuePolicy",
@@ -788,14 +741,7 @@ module Aws::AccessAnalyzer
     #   resp.access_preview.id #=> String
     #   resp.access_preview.analyzer_arn #=> String
     #   resp.access_preview.configurations #=> Hash
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].ebs_snapshot.user_ids #=> Array
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].ebs_snapshot.user_ids[0] #=> String
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].ebs_snapshot.groups #=> Array
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].ebs_snapshot.groups[0] #=> String
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].ebs_snapshot.kms_key_id #=> String
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].ecr_repository.repository_policy #=> String
     #   resp.access_preview.configurations["ConfigurationsMapKey"].iam_role.trust_policy #=> String
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].efs_file_system.file_system_policy #=> String
     #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.key_policies #=> Hash
     #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.key_policies["PolicyName"] #=> String
     #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.grants #=> Array
@@ -808,14 +754,6 @@ module Aws::AccessAnalyzer
     #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.grants[0].constraints.encryption_context_subset #=> Hash
     #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.grants[0].constraints.encryption_context_subset["KmsConstraintsKey"] #=> String
     #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.grants[0].issuing_account #=> String
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].rds_db_cluster_snapshot.attributes #=> Hash
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].rds_db_cluster_snapshot.attributes["RdsDbClusterSnapshotAttributeName"].account_ids #=> Array
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].rds_db_cluster_snapshot.attributes["RdsDbClusterSnapshotAttributeName"].account_ids[0] #=> String
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].rds_db_cluster_snapshot.kms_key_id #=> String
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].rds_db_snapshot.attributes #=> Hash
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].rds_db_snapshot.attributes["RdsDbSnapshotAttributeName"].account_ids #=> Array
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].rds_db_snapshot.attributes["RdsDbSnapshotAttributeName"].account_ids[0] #=> String
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].rds_db_snapshot.kms_key_id #=> String
     #   resp.access_preview.configurations["ConfigurationsMapKey"].secrets_manager_secret.kms_key_id #=> String
     #   resp.access_preview.configurations["ConfigurationsMapKey"].secrets_manager_secret.secret_policy #=> String
     #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.bucket_policy #=> String
@@ -830,7 +768,6 @@ module Aws::AccessAnalyzer
     #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.access_points["AccessPointArn"].public_access_block.ignore_public_acls #=> Boolean
     #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.access_points["AccessPointArn"].public_access_block.restrict_public_buckets #=> Boolean
     #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.access_points["AccessPointArn"].network_origin.vpc_configuration.vpc_id #=> String
-    #   resp.access_preview.configurations["ConfigurationsMapKey"].sns_topic.topic_policy #=> String
     #   resp.access_preview.configurations["ConfigurationsMapKey"].sqs_queue.queue_policy #=> String
     #   resp.access_preview.created_at #=> Time
     #   resp.access_preview.status #=> String, one of "COMPLETED", "CREATING", "FAILED"
@@ -871,7 +808,7 @@ module Aws::AccessAnalyzer
     # @example Response structure
     #
     #   resp.resource.resource_arn #=> String
-    #   resp.resource.resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic"
+    #   resp.resource.resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret"
     #   resp.resource.created_at #=> Time
     #   resp.resource.analyzed_at #=> Time
     #   resp.resource.updated_at #=> Time
@@ -1011,7 +948,7 @@ module Aws::AccessAnalyzer
     #   resp.finding.action[0] #=> String
     #   resp.finding.resource #=> String
     #   resp.finding.is_public #=> Boolean
-    #   resp.finding.resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic"
+    #   resp.finding.resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret"
     #   resp.finding.condition #=> Hash
     #   resp.finding.condition["String"] #=> String
     #   resp.finding.created_at #=> Time
@@ -1160,7 +1097,7 @@ module Aws::AccessAnalyzer
     #   resp.findings[0].condition["String"] #=> String
     #   resp.findings[0].resource #=> String
     #   resp.findings[0].is_public #=> Boolean
-    #   resp.findings[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic"
+    #   resp.findings[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret"
     #   resp.findings[0].created_at #=> Time
     #   resp.findings[0].change_type #=> String, one of "CHANGED", "NEW", "UNCHANGED"
     #   resp.findings[0].status #=> String, one of "ACTIVE", "ARCHIVED", "RESOLVED"
@@ -1260,7 +1197,7 @@ module Aws::AccessAnalyzer
     #
     #   resp = client.list_analyzed_resources({
     #     analyzer_arn: "AnalyzerArn", # required
-    #     resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::IAM::Role, AWS::SQS::Queue, AWS::Lambda::Function, AWS::Lambda::LayerVersion, AWS::KMS::Key, AWS::SecretsManager::Secret, AWS::EFS::FileSystem, AWS::EC2::Snapshot, AWS::ECR::Repository, AWS::RDS::DBSnapshot, AWS::RDS::DBClusterSnapshot, AWS::SNS::Topic
+    #     resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::IAM::Role, AWS::SQS::Queue, AWS::Lambda::Function, AWS::Lambda::LayerVersion, AWS::KMS::Key, AWS::SecretsManager::Secret
     #     next_token: "Token",
     #     max_results: 1,
     #   })
@@ -1270,7 +1207,7 @@ module Aws::AccessAnalyzer
     #   resp.analyzed_resources #=> Array
     #   resp.analyzed_resources[0].resource_arn #=> String
     #   resp.analyzed_resources[0].resource_owner_account #=> String
-    #   resp.analyzed_resources[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic"
+    #   resp.analyzed_resources[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListAnalyzedResources AWS API Documentation
@@ -1449,7 +1386,7 @@ module Aws::AccessAnalyzer
     #   resp.findings[0].action[0] #=> String
     #   resp.findings[0].resource #=> String
     #   resp.findings[0].is_public #=> Boolean
-    #   resp.findings[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic"
+    #   resp.findings[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret"
     #   resp.findings[0].condition #=> Hash
     #   resp.findings[0].condition["String"] #=> String
     #   resp.findings[0].created_at #=> Time
@@ -1624,11 +1561,6 @@ module Aws::AccessAnalyzer
     # @option params [required, String] :resource_arn
     #   The ARN of the resource to scan.
     #
-    # @option params [String] :resource_owner_account
-    #   The Amazon Web Services account ID that owns the resource. For most
-    #   Amazon Web Services resources, the owning account is the account in
-    #   which the resource was created.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1636,7 +1568,6 @@ module Aws::AccessAnalyzer
     #   resp = client.start_resource_scan({
     #     analyzer_arn: "AnalyzerArn", # required
     #     resource_arn: "ResourceArn", # required
-    #     resource_owner_account: "String",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/StartResourceScan AWS API Documentation
@@ -1899,7 +1830,7 @@ module Aws::AccessAnalyzer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-accessanalyzer'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

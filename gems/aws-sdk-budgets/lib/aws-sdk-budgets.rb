@@ -48,6 +48,6 @@ require_relative 'aws-sdk-budgets/customizations'
 # @!group service
 module Aws::Budgets
 
-  GEM_VERSION = '1.51.0'
+  GEM_VERSION = '1.50.0'
 
 end
