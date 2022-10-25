@@ -1,9 +1,9 @@
 {
-    "version": "1.3",
+    "version": "1.0",
     "parameters": {
         "Region": {
             "builtIn": "AWS::Region",
-            "required": true,
+            "required": false,
             "documentation": "The AWS region used to dispatch the request.",
             "type": "String"
         },
@@ -105,15 +105,7 @@
                                         "url": {
                                             "ref": "Endpoint"
                                         },
-                                        "properties": {
-                                            "authSchemes": [
-                                                {
-                                                    "name": "sigv4",
-                                                    "signingRegion": "{Region}",
-                                                    "signingName": "kms"
-                                                }
-                                            ]
-                                        },
+                                        "properties": {},
                                         "headers": {}
                                     },
                                     "type": "endpoint"
@@ -184,15 +176,7 @@
                                     "conditions": [],
                                     "endpoint": {
                                         "url": "https://kms-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": {
-                                            "authSchemes": [
-                                                {
-                                                    "name": "sigv4",
-                                                    "signingRegion": "{Region}",
-                                                    "signingName": "kms"
-                                                }
-                                            ]
-                                        },
+                                        "properties": {},
                                         "headers": {}
                                     },
                                     "type": "endpoint"
@@ -248,15 +232,7 @@
                                             "conditions": [],
                                             "endpoint": {
                                                 "url": "https://kms-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                "properties": {
-                                                    "authSchemes": [
-                                                        {
-                                                            "name": "sigv4",
-                                                            "signingRegion": "{Region}",
-                                                            "signingName": "kms"
-                                                        }
-                                                    ]
-                                                },
+                                                "properties": {},
                                                 "headers": {}
                                             },
                                             "type": "endpoint"
@@ -310,15 +286,7 @@
                                     "conditions": [],
                                     "endpoint": {
                                         "url": "https://kms.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": {
-                                            "authSchemes": [
-                                                {
-                                                    "name": "sigv4",
-                                                    "signingRegion": "{Region}",
-                                                    "signingName": "kms"
-                                                }
-                                            ]
-                                        },
+                                        "properties": {},
                                         "headers": {}
                                     },
                                     "type": "endpoint"
@@ -336,15 +304,7 @@
                     "conditions": [],
                     "endpoint": {
                         "url": "https://kms.{Region}.{PartitionResult#dnsSuffix}",
-                        "properties": {
-                            "authSchemes": [
-                                {
-                                    "name": "sigv4",
-                                    "signingRegion": "{Region}",
-                                    "signingName": "kms"
-                                }
-                            ]
-                        },
+                        "properties": {},
                         "headers": {}
                     },
                     "type": "endpoint"
