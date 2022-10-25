@@ -1,0 +1,22 @@
+{
+    "version": "1.3",
+    "parameters": {
+        "UseFIPS": {
+            "builtIn": "AWS::UseFIPS",
+            "type": "String"
+        },
+        "ClientContextParam": { "type": "Boolean" },
+        "Nothing": { "type": "String" }
+    },
+    "rules": [
+        {
+            "conditions": [],
+            "endpoint": {
+                "url": "https://endpoint.amazonaws.com",
+                "properties": {},
+                "headers": {}
+            },
+            "type": "endpoint"
+        }
+    ]
+}

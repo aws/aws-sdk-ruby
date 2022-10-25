@@ -3,6 +3,7 @@
 module Aws
   module Plugins
     # @api private
+    # Necessary to keep after Endpoints 2.0
     class SignatureV2 < Seahorse::Client::Plugin
 
       option(:v2_signer) do |cfg|

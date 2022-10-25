@@ -51,8 +51,8 @@ module Aws
             s3_use_arn_region: false
           )
           arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
-          expect_sigv4_service('s3-outposts')
-          resp = client.get_bucket(bucket: arn)
+          expect_auth({ 'signingName' => 's3-outposts' })
+          resp = client.get_access_point(name: arn)
           host = 's3-outposts.us-west-2.amazonaws.com'
           outpost_header = 'op-01234567890123456'
           account_header = '123456789012'
@@ -67,8 +67,8 @@ module Aws
             region: 'us-west-2'
           )
           arn = 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
-          expect_sigv4_service('s3-outposts')
-          resp = client.get_bucket(bucket: arn)
+          expect_auth({ 'signingName' => 's3-outposts' })
+          resp = client.get_access_point(name: arn)
           host = 's3-outposts.us-east-1.amazonaws.com'
           outpost_header = 'op-01234567890123456'
           account_header = '123456789012'
@@ -85,8 +85,8 @@ module Aws
           )
           arn = 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
           expect do
-            client.get_bucket(bucket: arn)
-          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+            client.get_access_point(name: arn)
+          end.to raise_error(ArgumentError)
         end
 
         it 'raises when given a cross partition outpost access point arn' do
@@ -96,8 +96,8 @@ module Aws
           )
           arn = 'arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
           expect do
-            client.get_bucket(bucket: arn)
-          end.to raise_error(Aws::Errors::InvalidARNPartitionError)
+            client.get_access_point(name: arn)
+          end.to raise_error(ArgumentError)
         end
 
         it 'accepts an access point arn in us-gov' do
@@ -106,8 +106,8 @@ module Aws
             region: 'us-gov-east-1'
           )
           arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
-          expect_sigv4_service('s3-outposts')
-          resp = client.get_bucket(bucket: arn)
+          expect_auth({ 'signingName' => 's3-outposts' })
+          resp = client.get_access_point(name: arn)
           host = 's3-outposts.us-gov-east-1.amazonaws.com'
           outpost_header = 'op-01234567890123456'
           account_header = '123456789012'
@@ -124,8 +124,8 @@ module Aws
             use_fips_endpoint: true
           )
           arn = 'arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
-          expect_sigv4_service('s3-outposts')
-          resp = client.get_bucket(bucket: arn)
+          expect_auth({ 'signingName' => 's3-outposts' })
+          resp = client.get_access_point(name: arn)
           host = 's3-outposts-fips.us-gov-west-1.amazonaws.com'
           outpost_header = 'op-01234567890123456'
           account_header = '123456789012'
@@ -141,8 +141,8 @@ module Aws
             use_fips_endpoint: true
           )
           arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
-          expect_sigv4_service('s3-outposts')
-          resp = client.get_bucket(bucket: arn)
+          expect_auth({ 'signingName' => 's3-outposts' })
+          resp = client.get_access_point(name: arn)
           host = 's3-outposts-fips.us-gov-east-1.amazonaws.com'
           outpost_header = 'op-01234567890123456'
           account_header = '123456789012'
@@ -158,7 +158,7 @@ module Aws
           )
           arn = 'arn:aws-us-gov:s3-outposts:us-gov-west-1-fips:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
           expect do
-            client.get_bucket(bucket: arn)
+            client.get_access_point(name: arn)
           end.to raise_error(ArgumentError)
         end
 
@@ -170,7 +170,7 @@ module Aws
           )
           arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
           expect do
-            client.get_bucket(bucket: arn)
+            client.get_access_point(name: arn)
           end.to raise_error(ArgumentError)
         end
 
@@ -192,17 +192,17 @@ module Aws
           )
           arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost'
           expect do
-            client.get_bucket(bucket: arn)
+            client.get_access_point(name: arn)
           end.to raise_error(ArgumentError)
 
           arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456'
           expect do
-            client.get_bucket(bucket: arn)
+            client.get_access_point(name: arn)
           end.to raise_error(ArgumentError)
 
           arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:myaccesspoint'
           expect do
-            client.get_bucket(bucket: arn)
+            client.get_access_point(name: arn)
           end.to raise_error(ArgumentError)
         end
 
@@ -211,7 +211,7 @@ module Aws
             stub_responses: true,
             region: 'us-west-2'
           )
-          expect_sigv4_service('s3')
+          expect_auth({ 'signingName' => 's3' })
           resp = client.get_access_point(
             name: 'myaccesspoint', account_id: '123456789012'
           )
@@ -230,7 +230,7 @@ module Aws
             s3_use_arn_region: false
           )
           arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket'
-          expect_sigv4_service('s3-outposts')
+          expect_auth({ 'signingName' => 's3-outposts' })
           resp = client.get_bucket(bucket: arn)
           host = 's3-outposts.us-west-2.amazonaws.com'
           outpost_header = 'op-01234567890123456'
@@ -246,7 +246,7 @@ module Aws
             region: 'us-west-2'
           )
           arn = 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
-          expect_sigv4_service('s3-outposts')
+          expect_auth({ 'signingName' => 's3-outposts' })
           resp = client.get_bucket(bucket: arn)
           host = 's3-outposts.us-east-1.amazonaws.com'
           outpost_header = 'op-01234567890123456'
@@ -265,7 +265,7 @@ module Aws
           arn = 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
           expect do
             client.get_bucket(bucket: arn)
-          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+          end.to raise_error(ArgumentError)
         end
 
         it 'raises when given a cross partition outpost bucket' do
@@ -276,7 +276,7 @@ module Aws
           arn = 'arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
           expect do
             client.get_bucket(bucket: arn)
-          end.to raise_error(Aws::Errors::InvalidARNPartitionError)
+          end.to raise_error(ArgumentError)
         end
 
         it 'accepts an outposts bucket arn in us-gov' do
@@ -285,7 +285,7 @@ module Aws
             region: 'us-gov-east-1'
           )
           arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
-          expect_sigv4_service('s3-outposts')
+          expect_auth({ 'signingName' => 's3-outposts' })
           resp = client.get_bucket(bucket: arn)
           host = 's3-outposts.us-gov-east-1.amazonaws.com'
           outpost_header = 'op-01234567890123456'
@@ -303,7 +303,7 @@ module Aws
             use_fips_endpoint: true
           )
           arn = 'arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
-          expect_sigv4_service('s3-outposts')
+          expect_auth({ 'signingName' => 's3-outposts' })
           resp = client.get_bucket(bucket: arn)
           host = 's3-outposts-fips.us-gov-west-1.amazonaws.com'
           outpost_header = 'op-01234567890123456'
@@ -320,7 +320,7 @@ module Aws
             use_fips_endpoint: true
           )
           arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
-          expect_sigv4_service('s3-outposts')
+          expect_auth({ 'signingName' => 's3-outposts' })
           resp = client.get_bucket(bucket: arn)
           host = 's3-outposts-fips.us-gov-east-1.amazonaws.com'
           outpost_header = 'op-01234567890123456'
@@ -388,7 +388,7 @@ module Aws
             stub_responses: true,
             region: 'us-west-2'
           )
-          arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+          arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
           resp = client.get_access_point(name: arn)
           account_header = '123456789012'
           expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
@@ -399,7 +399,7 @@ module Aws
             stub_responses: true,
             region: 'us-west-2'
           )
-          arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+          arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
           resp = client.get_access_point(name: arn, account_id: '123456789012')
           account_header = '123456789012'
           expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
@@ -432,7 +432,7 @@ module Aws
             stub_responses: true,
             region: 'us-west-2'
           )
-          arn = 'arn:aws:s3-outposts:us-west-2::outpost:op-01234567890123456:bucket:mybucket'
+          arn = 'arn:aws:s3-outposts:us-west-2::outpost:op-01234567890123456:accesspoint:myaccesspoint'
           expect do
             client.get_access_point(name: arn)
           end.to raise_error(ArgumentError)
@@ -443,7 +443,7 @@ module Aws
             stub_responses: true,
             region: 'us-west-2'
           )
-          arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+          arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
           expect do
             client.get_access_point(name: arn, account_id: '923456789012')
           end.to raise_error(ArgumentError)
@@ -457,7 +457,7 @@ module Aws
               stub_responses: true,
               region: 'us-west-2'
             )
-            expect_sigv4_service('s3-outposts')
+            expect_auth({ 'signingName' => 's3-outposts' })
             resp = client.create_bucket(
               bucket: 'bucket', outpost_id: 'op-01234567890123456'
             )
@@ -473,7 +473,7 @@ module Aws
               region: 'us-west-2',
               use_fips_endpoint: true
             )
-            expect_sigv4_service('s3-outposts')
+            expect_auth({ 'signingName' => 's3-outposts' })
             resp = client.create_bucket(
               bucket: 'bucket', outpost_id: 'op-01234567890123456'
             )
@@ -490,7 +490,7 @@ module Aws
               stub_responses: true,
               region: 'us-west-2'
             )
-            expect_sigv4_service('s3-outposts')
+            expect_auth({ 'signingName' => 's3-outposts' })
             resp = client.list_regional_buckets(
               outpost_id: 'op-01234567890123456', account_id: '123456789012'
             )
@@ -506,7 +506,7 @@ module Aws
               region: 'us-west-2',
               use_fips_endpoint: true
             )
-            expect_sigv4_service('s3-outposts')
+            expect_auth({ 'signingName' => 's3-outposts' })
             resp = client.list_regional_buckets(
               outpost_id: 'op-01234567890123456', account_id: '123456789012'
             )
@@ -523,15 +523,13 @@ module Aws
               stub_responses: true,
               region: 'us-west-2'
             )
-            expect_sigv4_service('s3-outposts')
+            expect_auth({ 'signingName' => 's3-outposts' })
             arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket'
             resp = client.create_access_point(bucket: arn, name: 'myaccesspoint')
             host = 's3-outposts.us-west-2.amazonaws.com'
             outpost_header = 'op-01234567890123456'
             expect(resp.context.http_request.endpoint.host).to eq(host)
             expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
-            resp.context.http_request.body.rewind
-            expect(resp.context.http_request.body.read).to match(/<Bucket>mybucket<\/Bucket>/)
           end
 
           it 'creates a fips outposts access point with an outposts bucket arn' do
@@ -540,15 +538,13 @@ module Aws
               region: 'us-west-2',
               use_fips_endpoint: true
             )
-            expect_sigv4_service('s3-outposts')
+            expect_auth({ 'signingName' => 's3-outposts' })
             arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket'
             resp = client.create_access_point(bucket: arn, name: 'myaccesspoint')
             host = 's3-outposts-fips.us-west-2.amazonaws.com'
             outpost_header = 'op-01234567890123456'
             expect(resp.context.http_request.endpoint.host).to eq(host)
             expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
-            resp.context.http_request.body.rewind
-            expect(resp.context.http_request.body.read).to match(/<Bucket>mybucket<\/Bucket>/)
           end
         end
       end

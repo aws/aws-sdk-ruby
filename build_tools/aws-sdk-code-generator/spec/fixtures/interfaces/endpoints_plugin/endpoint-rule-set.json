@@ -1,0 +1,29 @@
+{
+    "version": "1.3",
+    "parameters": {},
+    "rules": [
+        {
+            "conditions": [],
+            "endpoint": {
+                "url": "https://endpoint.amazonaws.com",
+                "properties": {
+                  "authSchemes": [
+                      {
+                          "name": "sigv4",
+                          "signingRegion": "us-east-1",
+                          "signingName": "s3",
+                          "disableDoubleEncoding": true
+                      }
+                  ]
+                },
+                "headers": {
+                  "x-amz-multi": [
+                    "val1",
+                    "val2"
+                  ]
+                }
+            },
+            "type": "endpoint"
+        }
+    ]
+}

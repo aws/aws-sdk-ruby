@@ -11,7 +11,7 @@ module Aws
             stub_responses: true,
             region: 'us-west-2'
           )
-          expect_sigv4_service('s3-object-lambda')
+          expect_auth({ 'signingName' => 's3-object-lambda' })
           resp = client.write_get_object_response(
             request_token: 'token',
             request_route: 'route'
@@ -26,7 +26,7 @@ module Aws
             region: 'us-west-2',
             endpoint: 'https://my-endpoint.com'
           )
-          expect_sigv4_service('s3-object-lambda')
+          expect_auth({ 'signingName' => 's3-object-lambda' })
           resp = client.write_get_object_response(
             request_token: 'token',
             request_route: 'route'
@@ -40,7 +40,7 @@ module Aws
             stub_responses: true,
             region: 'us-east-1'
           )
-          expect_sigv4_service('s3-object-lambda')
+          expect_auth({ 'signingName' => 's3-object-lambda' })
           resp = client.write_get_object_response(
             request_token: 'token',
             request_route: 'route'

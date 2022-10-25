@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add a metadata method to `Partition` to supplement endpoint generation in service gems.
+
 1.650.0 (2022-10-24)
 ------------------
 

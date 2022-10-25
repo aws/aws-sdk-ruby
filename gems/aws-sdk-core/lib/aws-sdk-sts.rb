@@ -15,9 +15,13 @@ end
 
 require_relative 'aws-sdk-sts/types'
 require_relative 'aws-sdk-sts/client_api'
+require_relative 'aws-sdk-sts/plugins/endpoints.rb'
 require_relative 'aws-sdk-sts/client'
 require_relative 'aws-sdk-sts/errors'
 require_relative 'aws-sdk-sts/resource'
+require_relative 'aws-sdk-sts/endpoint_parameters'
+require_relative 'aws-sdk-sts/endpoint_provider'
+require_relative 'aws-sdk-sts/endpoints'
 require_relative 'aws-sdk-sts/customizations'
 
 # This module provides support for AWS Security Token Service. This module is available in the

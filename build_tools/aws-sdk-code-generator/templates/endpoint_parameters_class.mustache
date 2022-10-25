@@ -1,0 +1,48 @@
+# frozen_string_literal: true
+
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
+module {{module_name}}
+  # Endpoint parameters used to influence endpoints per request.
+  #
+  {{#parameters}}
+  {{documentation}}
+  {{/parameters}}
+  EndpointParameters = Struct.new(
+    {{#parameters}}
+    :{{underscore_name}},
+    {{/parameters}}
+    {{^parameters}}
+    nil
+    {{/parameters}}
+  ) do
+    include Aws::Structure
+
+    # @api private
+    self::PARAM_MAP = {
+      {{#parameters}}
+      '{{name}}' => :{{underscore_name}},
+      {{/parameters}}
+    }.freeze
+
+    def initialize(options = {})
+      {{#parameters}}
+      self[:{{underscore_name}}] = options[:{{underscore_name}}]
+      {{#default?}}
+      {{#boolean_default?}}
+      self[:{{underscore_name}}] = {{default}} if self[:{{underscore_name}}].nil?
+      {{/boolean_default?}}
+      {{^boolean_default?}}
+      self[:{{underscore_name}}] ||= '{{default}}' if self[:{{underscore_name}}].nil?
+      {{/boolean_default?}}
+      {{/default?}}
+      {{#required}}
+      if self[:{{underscore_name}}].nil?
+        raise ArgumentError, "Missing required EndpointParameter: :{{underscore_name}}"
+      end
+      {{/required}}
+      {{/parameters}}
+    end
+  end
+end
