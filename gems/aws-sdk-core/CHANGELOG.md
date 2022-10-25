@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.165.1 (2022-10-25)
+------------------
+
+* Issue - Require the SignatureV4 plugin to fix compatability with older `aws-sdk-s3` versions (#2774).
+
 3.165.0 (2022-10-25)
 ------------------
 
