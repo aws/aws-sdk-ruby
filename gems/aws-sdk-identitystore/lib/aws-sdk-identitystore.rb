@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-identitystore/types'
 require_relative 'aws-sdk-identitystore/client_api'
+require_relative 'aws-sdk-identitystore/plugins/endpoints.rb'
 require_relative 'aws-sdk-identitystore/client'
 require_relative 'aws-sdk-identitystore/errors'
 require_relative 'aws-sdk-identitystore/resource'
+require_relative 'aws-sdk-identitystore/endpoint_parameters'
+require_relative 'aws-sdk-identitystore/endpoint_provider'
+require_relative 'aws-sdk-identitystore/endpoints'
 require_relative 'aws-sdk-identitystore/customizations'
 
 # This module provides support for AWS SSO Identity Store. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-identitystore/customizations'
 # @!group service
 module Aws::IdentityStore
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.22.0'
 
 end

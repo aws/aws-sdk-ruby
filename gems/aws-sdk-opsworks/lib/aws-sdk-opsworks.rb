@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-opsworks/types'
 require_relative 'aws-sdk-opsworks/client_api'
+require_relative 'aws-sdk-opsworks/plugins/endpoints.rb'
 require_relative 'aws-sdk-opsworks/client'
 require_relative 'aws-sdk-opsworks/errors'
 require_relative 'aws-sdk-opsworks/waiters'
 require_relative 'aws-sdk-opsworks/resource'
+require_relative 'aws-sdk-opsworks/endpoint_parameters'
+require_relative 'aws-sdk-opsworks/endpoint_provider'
+require_relative 'aws-sdk-opsworks/endpoints'
 require_relative 'aws-sdk-opsworks/layer'
 require_relative 'aws-sdk-opsworks/stack'
 require_relative 'aws-sdk-opsworks/stack_summary'
@@ -52,6 +56,6 @@ require_relative 'aws-sdk-opsworks/customizations'
 # @!group service
 module Aws::OpsWorks
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end

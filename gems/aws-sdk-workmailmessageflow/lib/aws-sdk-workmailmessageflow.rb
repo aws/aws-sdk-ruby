@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-workmailmessageflow/types'
 require_relative 'aws-sdk-workmailmessageflow/client_api'
+require_relative 'aws-sdk-workmailmessageflow/plugins/endpoints.rb'
 require_relative 'aws-sdk-workmailmessageflow/client'
 require_relative 'aws-sdk-workmailmessageflow/errors'
 require_relative 'aws-sdk-workmailmessageflow/resource'
+require_relative 'aws-sdk-workmailmessageflow/endpoint_parameters'
+require_relative 'aws-sdk-workmailmessageflow/endpoint_provider'
+require_relative 'aws-sdk-workmailmessageflow/endpoints'
 require_relative 'aws-sdk-workmailmessageflow/customizations'
 
 # This module provides support for Amazon WorkMail Message Flow. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-workmailmessageflow/customizations'
 # @!group service
 module Aws::WorkMailMessageFlow
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.22.0'
 
 end

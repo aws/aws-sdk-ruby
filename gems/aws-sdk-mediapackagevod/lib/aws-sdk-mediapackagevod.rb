@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-mediapackagevod/types'
 require_relative 'aws-sdk-mediapackagevod/client_api'
+require_relative 'aws-sdk-mediapackagevod/plugins/endpoints.rb'
 require_relative 'aws-sdk-mediapackagevod/client'
 require_relative 'aws-sdk-mediapackagevod/errors'
 require_relative 'aws-sdk-mediapackagevod/resource'
+require_relative 'aws-sdk-mediapackagevod/endpoint_parameters'
+require_relative 'aws-sdk-mediapackagevod/endpoint_provider'
+require_relative 'aws-sdk-mediapackagevod/endpoints'
 require_relative 'aws-sdk-mediapackagevod/customizations'
 
 # This module provides support for AWS Elemental MediaPackage VOD. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-mediapackagevod/customizations'
 # @!group service
 module Aws::MediaPackageVod
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.38.0'
 
 end

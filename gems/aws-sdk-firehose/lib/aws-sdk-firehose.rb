@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-firehose/types'
 require_relative 'aws-sdk-firehose/client_api'
+require_relative 'aws-sdk-firehose/plugins/endpoints.rb'
 require_relative 'aws-sdk-firehose/client'
 require_relative 'aws-sdk-firehose/errors'
 require_relative 'aws-sdk-firehose/resource'
+require_relative 'aws-sdk-firehose/endpoint_parameters'
+require_relative 'aws-sdk-firehose/endpoint_provider'
+require_relative 'aws-sdk-firehose/endpoints'
 require_relative 'aws-sdk-firehose/customizations'
 
 # This module provides support for Amazon Kinesis Firehose. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-firehose/customizations'
 # @!group service
 module Aws::Firehose
 
-  GEM_VERSION = '1.48.0'
+  GEM_VERSION = '1.49.0'
 
 end

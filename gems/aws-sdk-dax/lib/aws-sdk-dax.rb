@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-dax/types'
 require_relative 'aws-sdk-dax/client_api'
+require_relative 'aws-sdk-dax/plugins/endpoints.rb'
 require_relative 'aws-sdk-dax/client'
 require_relative 'aws-sdk-dax/errors'
 require_relative 'aws-sdk-dax/resource'
+require_relative 'aws-sdk-dax/endpoint_parameters'
+require_relative 'aws-sdk-dax/endpoint_provider'
+require_relative 'aws-sdk-dax/endpoints'
 require_relative 'aws-sdk-dax/customizations'
 
 # This module provides support for Amazon DynamoDB Accelerator (DAX). This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-dax/customizations'
 # @!group service
 module Aws::DAX
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.40.0'
 
 end

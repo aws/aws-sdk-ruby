@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-macie/types'
 require_relative 'aws-sdk-macie/client_api'
+require_relative 'aws-sdk-macie/plugins/endpoints.rb'
 require_relative 'aws-sdk-macie/client'
 require_relative 'aws-sdk-macie/errors'
 require_relative 'aws-sdk-macie/resource'
+require_relative 'aws-sdk-macie/endpoint_parameters'
+require_relative 'aws-sdk-macie/endpoint_provider'
+require_relative 'aws-sdk-macie/endpoints'
 require_relative 'aws-sdk-macie/customizations'
 
 # This module provides support for Amazon Macie. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-macie/customizations'
 # @!group service
 module Aws::Macie
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end

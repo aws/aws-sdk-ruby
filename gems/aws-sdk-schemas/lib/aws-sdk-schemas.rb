@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-schemas/types'
 require_relative 'aws-sdk-schemas/client_api'
+require_relative 'aws-sdk-schemas/plugins/endpoints.rb'
 require_relative 'aws-sdk-schemas/client'
 require_relative 'aws-sdk-schemas/errors'
 require_relative 'aws-sdk-schemas/waiters'
 require_relative 'aws-sdk-schemas/resource'
+require_relative 'aws-sdk-schemas/endpoint_parameters'
+require_relative 'aws-sdk-schemas/endpoint_provider'
+require_relative 'aws-sdk-schemas/endpoints'
 require_relative 'aws-sdk-schemas/customizations'
 
 # This module provides support for Schemas. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-schemas/customizations'
 # @!group service
 module Aws::Schemas
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.24.0'
 
 end

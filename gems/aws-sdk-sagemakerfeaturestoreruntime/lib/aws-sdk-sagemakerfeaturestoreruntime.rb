@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-sagemakerfeaturestoreruntime/types'
 require_relative 'aws-sdk-sagemakerfeaturestoreruntime/client_api'
+require_relative 'aws-sdk-sagemakerfeaturestoreruntime/plugins/endpoints.rb'
 require_relative 'aws-sdk-sagemakerfeaturestoreruntime/client'
 require_relative 'aws-sdk-sagemakerfeaturestoreruntime/errors'
 require_relative 'aws-sdk-sagemakerfeaturestoreruntime/resource'
+require_relative 'aws-sdk-sagemakerfeaturestoreruntime/endpoint_parameters'
+require_relative 'aws-sdk-sagemakerfeaturestoreruntime/endpoint_provider'
+require_relative 'aws-sdk-sagemakerfeaturestoreruntime/endpoints'
 require_relative 'aws-sdk-sagemakerfeaturestoreruntime/customizations'
 
 # This module provides support for Amazon SageMaker Feature Store Runtime. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-sagemakerfeaturestoreruntime/customizations'
 # @!group service
 module Aws::SageMakerFeatureStoreRuntime
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end

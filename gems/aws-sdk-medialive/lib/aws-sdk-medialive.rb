@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-medialive/types'
 require_relative 'aws-sdk-medialive/client_api'
+require_relative 'aws-sdk-medialive/plugins/endpoints.rb'
 require_relative 'aws-sdk-medialive/client'
 require_relative 'aws-sdk-medialive/errors'
 require_relative 'aws-sdk-medialive/waiters'
 require_relative 'aws-sdk-medialive/resource'
+require_relative 'aws-sdk-medialive/endpoint_parameters'
+require_relative 'aws-sdk-medialive/endpoint_provider'
+require_relative 'aws-sdk-medialive/endpoints'
 require_relative 'aws-sdk-medialive/customizations'
 
 # This module provides support for AWS Elemental MediaLive. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-medialive/customizations'
 # @!group service
 module Aws::MediaLive
 
-  GEM_VERSION = '1.90.0'
+  GEM_VERSION = '1.91.0'
 
 end

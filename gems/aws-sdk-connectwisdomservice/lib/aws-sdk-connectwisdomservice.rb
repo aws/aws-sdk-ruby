@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-connectwisdomservice/types'
 require_relative 'aws-sdk-connectwisdomservice/client_api'
+require_relative 'aws-sdk-connectwisdomservice/plugins/endpoints.rb'
 require_relative 'aws-sdk-connectwisdomservice/client'
 require_relative 'aws-sdk-connectwisdomservice/errors'
 require_relative 'aws-sdk-connectwisdomservice/resource'
+require_relative 'aws-sdk-connectwisdomservice/endpoint_parameters'
+require_relative 'aws-sdk-connectwisdomservice/endpoint_provider'
+require_relative 'aws-sdk-connectwisdomservice/endpoints'
 require_relative 'aws-sdk-connectwisdomservice/customizations'
 
 # This module provides support for Amazon Connect Wisdom Service. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-connectwisdomservice/customizations'
 # @!group service
 module Aws::ConnectWisdomService
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.10.0'
 
 end

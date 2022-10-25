@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-ivschat/types'
 require_relative 'aws-sdk-ivschat/client_api'
+require_relative 'aws-sdk-ivschat/plugins/endpoints.rb'
 require_relative 'aws-sdk-ivschat/client'
 require_relative 'aws-sdk-ivschat/errors'
 require_relative 'aws-sdk-ivschat/resource'
+require_relative 'aws-sdk-ivschat/endpoint_parameters'
+require_relative 'aws-sdk-ivschat/endpoint_provider'
+require_relative 'aws-sdk-ivschat/endpoints'
 require_relative 'aws-sdk-ivschat/customizations'
 
 # This module provides support for Amazon Interactive Video Service Chat. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-ivschat/customizations'
 # @!group service
 module Aws::Ivschat
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end

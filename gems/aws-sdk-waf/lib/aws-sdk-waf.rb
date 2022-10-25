@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-waf/types'
 require_relative 'aws-sdk-waf/client_api'
+require_relative 'aws-sdk-waf/plugins/endpoints.rb'
 require_relative 'aws-sdk-waf/client'
 require_relative 'aws-sdk-waf/errors'
 require_relative 'aws-sdk-waf/resource'
+require_relative 'aws-sdk-waf/endpoint_parameters'
+require_relative 'aws-sdk-waf/endpoint_provider'
+require_relative 'aws-sdk-waf/endpoints'
 require_relative 'aws-sdk-waf/customizations'
 
 # This module provides support for AWS WAF. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-waf/customizations'
 # @!group service
 module Aws::WAF
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end

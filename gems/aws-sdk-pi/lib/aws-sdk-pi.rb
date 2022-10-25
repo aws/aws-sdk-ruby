@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-pi/types'
 require_relative 'aws-sdk-pi/client_api'
+require_relative 'aws-sdk-pi/plugins/endpoints.rb'
 require_relative 'aws-sdk-pi/client'
 require_relative 'aws-sdk-pi/errors'
 require_relative 'aws-sdk-pi/resource'
+require_relative 'aws-sdk-pi/endpoint_parameters'
+require_relative 'aws-sdk-pi/endpoint_provider'
+require_relative 'aws-sdk-pi/endpoints'
 require_relative 'aws-sdk-pi/customizations'
 
 # This module provides support for AWS Performance Insights. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-pi/customizations'
 # @!group service
 module Aws::PI
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.41.0'
 
 end

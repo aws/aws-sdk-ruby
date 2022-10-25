@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-amplify/types'
 require_relative 'aws-sdk-amplify/client_api'
+require_relative 'aws-sdk-amplify/plugins/endpoints.rb'
 require_relative 'aws-sdk-amplify/client'
 require_relative 'aws-sdk-amplify/errors'
 require_relative 'aws-sdk-amplify/resource'
+require_relative 'aws-sdk-amplify/endpoint_parameters'
+require_relative 'aws-sdk-amplify/endpoint_provider'
+require_relative 'aws-sdk-amplify/endpoints'
 require_relative 'aws-sdk-amplify/customizations'
 
 # This module provides support for AWS Amplify. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-amplify/customizations'
 # @!group service
 module Aws::Amplify
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end

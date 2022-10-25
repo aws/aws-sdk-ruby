@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.157.0 (2022-10-25)
+------------------
+
+* Feature - Relational Database Service - This release adds support for exporting DB cluster data to Amazon S3.
+
 1.156.0 (2022-09-19)
 ------------------
 

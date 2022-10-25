@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-kinesisanalytics/types'
 require_relative 'aws-sdk-kinesisanalytics/client_api'
+require_relative 'aws-sdk-kinesisanalytics/plugins/endpoints.rb'
 require_relative 'aws-sdk-kinesisanalytics/client'
 require_relative 'aws-sdk-kinesisanalytics/errors'
 require_relative 'aws-sdk-kinesisanalytics/resource'
+require_relative 'aws-sdk-kinesisanalytics/endpoint_parameters'
+require_relative 'aws-sdk-kinesisanalytics/endpoint_provider'
+require_relative 'aws-sdk-kinesisanalytics/endpoints'
 require_relative 'aws-sdk-kinesisanalytics/customizations'
 
 # This module provides support for Amazon Kinesis Analytics. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-kinesisanalytics/customizations'
 # @!group service
 module Aws::KinesisAnalytics
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.41.0'
 
 end

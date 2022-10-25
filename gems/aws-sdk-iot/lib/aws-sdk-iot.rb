@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-iot/types'
 require_relative 'aws-sdk-iot/client_api'
+require_relative 'aws-sdk-iot/plugins/endpoints.rb'
 require_relative 'aws-sdk-iot/client'
 require_relative 'aws-sdk-iot/errors'
 require_relative 'aws-sdk-iot/resource'
+require_relative 'aws-sdk-iot/endpoint_parameters'
+require_relative 'aws-sdk-iot/endpoint_provider'
+require_relative 'aws-sdk-iot/endpoints'
 require_relative 'aws-sdk-iot/customizations'
 
 # This module provides support for AWS IoT. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-iot/customizations'
 # @!group service
 module Aws::IoT
 
-  GEM_VERSION = '1.94.0'
+  GEM_VERSION = '1.95.0'
 
 end

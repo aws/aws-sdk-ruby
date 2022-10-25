@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-computeoptimizer/types'
 require_relative 'aws-sdk-computeoptimizer/client_api'
+require_relative 'aws-sdk-computeoptimizer/plugins/endpoints.rb'
 require_relative 'aws-sdk-computeoptimizer/client'
 require_relative 'aws-sdk-computeoptimizer/errors'
 require_relative 'aws-sdk-computeoptimizer/resource'
+require_relative 'aws-sdk-computeoptimizer/endpoint_parameters'
+require_relative 'aws-sdk-computeoptimizer/endpoint_provider'
+require_relative 'aws-sdk-computeoptimizer/endpoints'
 require_relative 'aws-sdk-computeoptimizer/customizations'
 
 # This module provides support for AWS Compute Optimizer. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-computeoptimizer/customizations'
 # @!group service
 module Aws::ComputeOptimizer
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end

@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-iotfleetwise/types'
 require_relative 'aws-sdk-iotfleetwise/client_api'
+require_relative 'aws-sdk-iotfleetwise/plugins/endpoints.rb'
 require_relative 'aws-sdk-iotfleetwise/client'
 require_relative 'aws-sdk-iotfleetwise/errors'
 require_relative 'aws-sdk-iotfleetwise/waiters'
 require_relative 'aws-sdk-iotfleetwise/resource'
+require_relative 'aws-sdk-iotfleetwise/endpoint_parameters'
+require_relative 'aws-sdk-iotfleetwise/endpoint_provider'
+require_relative 'aws-sdk-iotfleetwise/endpoints'
 require_relative 'aws-sdk-iotfleetwise/customizations'
 
 # This module provides support for AWS IoT FleetWise. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-iotfleetwise/customizations'
 # @!group service
 module Aws::IoTFleetWise
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.2.0'
 
 end

@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-appflow/types'
 require_relative 'aws-sdk-appflow/client_api'
+require_relative 'aws-sdk-appflow/plugins/endpoints.rb'
 require_relative 'aws-sdk-appflow/client'
 require_relative 'aws-sdk-appflow/errors'
 require_relative 'aws-sdk-appflow/resource'
+require_relative 'aws-sdk-appflow/endpoint_parameters'
+require_relative 'aws-sdk-appflow/endpoint_provider'
+require_relative 'aws-sdk-appflow/endpoints'
 require_relative 'aws-sdk-appflow/customizations'
 
 # This module provides support for Amazon Appflow. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-appflow/customizations'
 # @!group service
 module Aws::Appflow
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.29.0'
 
 end

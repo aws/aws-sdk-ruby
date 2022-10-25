@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-emr/types'
 require_relative 'aws-sdk-emr/client_api'
+require_relative 'aws-sdk-emr/plugins/endpoints.rb'
 require_relative 'aws-sdk-emr/client'
 require_relative 'aws-sdk-emr/errors'
 require_relative 'aws-sdk-emr/waiters'
 require_relative 'aws-sdk-emr/resource'
+require_relative 'aws-sdk-emr/endpoint_parameters'
+require_relative 'aws-sdk-emr/endpoint_provider'
+require_relative 'aws-sdk-emr/endpoints'
 require_relative 'aws-sdk-emr/customizations'
 
 # This module provides support for Amazon EMR. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-emr/customizations'
 # @!group service
 module Aws::EMR
 
-  GEM_VERSION = '1.62.0'
+  GEM_VERSION = '1.63.0'
 
 end

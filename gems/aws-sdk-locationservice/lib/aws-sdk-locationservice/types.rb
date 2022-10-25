@@ -1456,7 +1456,9 @@ module Aws::LocationService
     #       }
     #
     # @!attribute [rw] configuration
-    #   Specifies the map style selected from an available data provider.
+    #   Specifies the `MapConfiguration`, including the map style, for the
+    #   map resource that you create. The map style defines the look of maps
+    #   and the data provider for your map resource.
     #   @return [Types::MapConfiguration]
     #
     # @!attribute [rw] description
@@ -1529,7 +1531,7 @@ module Aws::LocationService
     #   The Amazon Resource Name (ARN) for the map resource. Used to specify
     #   a resource across all AWS.
     #
-    #   * Format example: `arn:aws:geo:region:account-id:maps/ExampleMap`
+    #   * Format example: `arn:aws:geo:region:account-id:map/ExampleMap`
     #
     #   ^
     #   @return [String]
@@ -2297,7 +2299,7 @@ module Aws::LocationService
     #   The Amazon Resource Name (ARN) for the map resource. Used to specify
     #   a resource across all AWS.
     #
-    #   * Format example: `arn:aws:geo:region:account-id:maps/ExampleMap`
+    #   * Format example: `arn:aws:geo:region:account-id:map/ExampleMap`
     #
     #   ^
     #   @return [String]
@@ -2818,20 +2820,27 @@ module Aws::LocationService
     #   @return [Types::Circle]
     #
     # @!attribute [rw] polygon
-    #   An array of 1 or more linear rings. A linear ring is an array of 4
-    #   or more vertices, where the first and last vertex are the same to
-    #   form a closed boundary. Each vertex is a 2-dimensional point of the
-    #   form: `[longitude, latitude]`.
+    #   A polygon is a list of linear rings which are each made up of a list
+    #   of vertices.
     #
-    #   The first linear ring is an outer ring, describing the polygon's
-    #   boundary. Subsequent linear rings may be inner or outer rings to
-    #   describe holes and islands. Outer rings must list their vertices in
-    #   counter-clockwise order around the ring's center, where the left
-    #   side is the polygon's exterior. Inner rings must list their
-    #   vertices in clockwise order, where the left side is the polygon's
-    #   interior.
+    #   Each vertex is a 2-dimensional point of the form: `[longitude,
+    #   latitude]`. This is represented as an array of doubles of length 2
+    #   (so `[double, double]`).
     #
-    #   A geofence polygon can consist of between 4 and 1,000 vertices.
+    #   An array of 4 or more vertices, where the first and last vertex are
+    #   the same (to form a closed boundary), is called a linear ring. The
+    #   linear ring vertices must be listed in counter-clockwise order
+    #   around the ring’s interior. The linear ring is represented as an
+    #   array of vertices, or an array of arrays of doubles (`[[double,
+    #   double], ...]`).
+    #
+    #   A geofence consists of a single linear ring. To allow for future
+    #   expansion, the Polygon parameter takes an array of linear rings,
+    #   which is represented as an array of arrays of arrays of doubles
+    #   (`[[[double, double], ...], ...]`).
+    #
+    #   A linear ring for use in geofences can consist of between 4 and
+    #   1,000 vertices.
     #   @return [Array<Array<Array<Float>>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GeofenceGeometry AWS API Documentation
@@ -3131,9 +3140,10 @@ module Aws::LocationService
     #
     #   * VectorHereContrast – `Fira GO Regular` \| `Fira GO Bold`
     #
-    #   * VectorHereExplore, VectorHereExploreTruck – `Firo GO Italic` \|
-    #     `Fira GO Map` \| `Fira GO Map Bold` \| `Noto Sans CJK JP Bold` \|
-    #     `Noto Sans CJK JP Light` \| `Noto Sans CJK JP Regular`
+    #   * VectorHereExplore, VectorHereExploreTruck,
+    #     HybridHereExploreSatellite – `Fira GO Italic` \| `Fira GO Map` \|
+    #     `Fira GO Map Bold` \| `Noto Sans CJK JP Bold` \| `Noto Sans CJK JP
+    #     Light` \| `Noto Sans CJK JP Regular`
     #
     #
     #
@@ -4417,6 +4427,12 @@ module Aws::LocationService
     #     high contrast detailed base map of the world that blends 3D and 2D
     #     rendering.
     #
+    #     <note markdown="1"> The `VectorHereContrast` style has been renamed from
+    #     `VectorHereBerlin`. `VectorHereBerlin` has been deprecated, but
+    #     will continue to work in applications that use it.
+    #
+    #      </note>
+    #
     #   * `VectorHereExplore` – A default HERE map style containing a
     #     neutral, global map and its features including roads, buildings,
     #     landmarks, and water features. It also now includes a fully
@@ -4427,11 +4443,20 @@ module Aws::LocationService
     #     symbolized with highlighted segments and icons on top of HERE
     #     Explore to support use cases within transport and logistics.
     #
-    #   <note markdown="1"> The `VectorHereContrast` style has been renamed from
-    #   `VectorHereBerlin`. `VectorHereBerlin` has been deprecated, but will
-    #   continue to work in applications that use it.
+    #   * `RasterHereExploreSatellite` – A global map containing high
+    #     resolution satellite imagery.
     #
-    #    </note>
+    #   * `HybridHereExploreSatellite` – A global map displaying the road
+    #     network, street names, and city labels over satellite imagery.
+    #     This style will automatically retrieve both raster and vector
+    #     tiles, and your charges will be based on total tiles retrieved.
+    #
+    #     <note markdown="1"> Hybrid styles use both vector and raster tiles when rendering the
+    #     map that you see. This means that more tiles are retrieved than
+    #     when using either vector or raster tiles alone. Your charges will
+    #     include all tiles retrieved.
+    #
+    #      </note>
     #
     #
     #
@@ -4519,7 +4544,7 @@ module Aws::LocationService
     #
     # @!attribute [rw] time_zone
     #   The time zone in which the `Place` is located. Returned only when
-    #   using Here as the selected partner.
+    #   using HERE as the selected partner.
     #   @return [Types::TimeZone]
     #
     # @!attribute [rw] unit_number
@@ -5880,7 +5905,7 @@ module Aws::LocationService
     #   The Amazon Resource Name (ARN) of the updated map resource. Used to
     #   specify a resource across AWS.
     #
-    #   * Format example: `arn:aws:geo:region:account-id:maps/ExampleMap`
+    #   * Format example: `arn:aws:geo:region:account-id:map/ExampleMap`
     #
     #   ^
     #   @return [String]

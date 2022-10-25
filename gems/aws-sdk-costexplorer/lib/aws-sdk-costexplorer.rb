@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-costexplorer/types'
 require_relative 'aws-sdk-costexplorer/client_api'
+require_relative 'aws-sdk-costexplorer/plugins/endpoints.rb'
 require_relative 'aws-sdk-costexplorer/client'
 require_relative 'aws-sdk-costexplorer/errors'
 require_relative 'aws-sdk-costexplorer/resource'
+require_relative 'aws-sdk-costexplorer/endpoint_parameters'
+require_relative 'aws-sdk-costexplorer/endpoint_provider'
+require_relative 'aws-sdk-costexplorer/endpoints'
 require_relative 'aws-sdk-costexplorer/customizations'
 
 # This module provides support for AWS Cost Explorer Service. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-costexplorer/customizations'
 # @!group service
 module Aws::CostExplorer
 
-  GEM_VERSION = '1.78.0'
+  GEM_VERSION = '1.79.0'
 
 end

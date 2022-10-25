@@ -10,14 +10,16 @@
 module Aws::S3Control
   class EndpointProvider
     def initialize(rule_set = nil)
-      @@endpoint_rules ||= Aws::Json.load(Base64.decode64(RULES))
-      rule_set ||= Aws::Endpoints::RuleSet.new(
-        version: @@endpoint_rules['version'],
-        service_id: @@endpoint_rules['serviceId'],
-        parameters: @@endpoint_rules['parameters'],
-        rules: @@endpoint_rules['rules']
-      )
-      @provider = Aws::Endpoints::RulesProvider.new(rule_set)
+      @@rule_set ||= begin
+        endpoint_rules = Aws::Json.load(Base64.decode64(RULES))
+        Aws::Endpoints::RuleSet.new(
+          version: endpoint_rules['version'],
+          service_id: endpoint_rules['serviceId'],
+          parameters: endpoint_rules['parameters'],
+          rules: endpoint_rules['rules']
+        )
+      end
+      @provider = Aws::Endpoints::RulesProvider.new(rule_set || @@rule_set)
     end
 
     def resolve_endpoint(parameters)

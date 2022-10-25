@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-glacier/types'
 require_relative 'aws-sdk-glacier/client_api'
+require_relative 'aws-sdk-glacier/plugins/endpoints.rb'
 require_relative 'aws-sdk-glacier/client'
 require_relative 'aws-sdk-glacier/errors'
 require_relative 'aws-sdk-glacier/waiters'
 require_relative 'aws-sdk-glacier/resource'
+require_relative 'aws-sdk-glacier/endpoint_parameters'
+require_relative 'aws-sdk-glacier/endpoint_provider'
+require_relative 'aws-sdk-glacier/endpoints'
 require_relative 'aws-sdk-glacier/account'
 require_relative 'aws-sdk-glacier/archive'
 require_relative 'aws-sdk-glacier/job'
@@ -55,6 +59,6 @@ require_relative 'aws-sdk-glacier/customizations'
 # @!group service
 module Aws::Glacier
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.47.0'
 
 end

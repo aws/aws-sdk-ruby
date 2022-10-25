@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-datapipeline/types'
 require_relative 'aws-sdk-datapipeline/client_api'
+require_relative 'aws-sdk-datapipeline/plugins/endpoints.rb'
 require_relative 'aws-sdk-datapipeline/client'
 require_relative 'aws-sdk-datapipeline/errors'
 require_relative 'aws-sdk-datapipeline/resource'
+require_relative 'aws-sdk-datapipeline/endpoint_parameters'
+require_relative 'aws-sdk-datapipeline/endpoint_provider'
+require_relative 'aws-sdk-datapipeline/endpoints'
 require_relative 'aws-sdk-datapipeline/customizations'
 
 # This module provides support for AWS Data Pipeline. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-datapipeline/customizations'
 # @!group service
 module Aws::DataPipeline
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end

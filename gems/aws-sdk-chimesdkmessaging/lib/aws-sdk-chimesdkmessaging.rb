@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-chimesdkmessaging/types'
 require_relative 'aws-sdk-chimesdkmessaging/client_api'
+require_relative 'aws-sdk-chimesdkmessaging/plugins/endpoints.rb'
 require_relative 'aws-sdk-chimesdkmessaging/client'
 require_relative 'aws-sdk-chimesdkmessaging/errors'
 require_relative 'aws-sdk-chimesdkmessaging/resource'
+require_relative 'aws-sdk-chimesdkmessaging/endpoint_parameters'
+require_relative 'aws-sdk-chimesdkmessaging/endpoint_provider'
+require_relative 'aws-sdk-chimesdkmessaging/endpoints'
 require_relative 'aws-sdk-chimesdkmessaging/customizations'
 
 # This module provides support for Amazon Chime SDK Messaging. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-chimesdkmessaging/customizations'
 # @!group service
 module Aws::ChimeSDKMessaging
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end

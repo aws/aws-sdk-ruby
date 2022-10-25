@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-elasticinference/types'
 require_relative 'aws-sdk-elasticinference/client_api'
+require_relative 'aws-sdk-elasticinference/plugins/endpoints.rb'
 require_relative 'aws-sdk-elasticinference/client'
 require_relative 'aws-sdk-elasticinference/errors'
 require_relative 'aws-sdk-elasticinference/resource'
+require_relative 'aws-sdk-elasticinference/endpoint_parameters'
+require_relative 'aws-sdk-elasticinference/endpoint_provider'
+require_relative 'aws-sdk-elasticinference/endpoints'
 require_relative 'aws-sdk-elasticinference/customizations'
 
 # This module provides support for Amazon Elastic  Inference. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-elasticinference/customizations'
 # @!group service
 module Aws::ElasticInference
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.22.0'
 
 end

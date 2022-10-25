@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-connectcampaignservice/types'
 require_relative 'aws-sdk-connectcampaignservice/client_api'
+require_relative 'aws-sdk-connectcampaignservice/plugins/endpoints.rb'
 require_relative 'aws-sdk-connectcampaignservice/client'
 require_relative 'aws-sdk-connectcampaignservice/errors'
 require_relative 'aws-sdk-connectcampaignservice/resource'
+require_relative 'aws-sdk-connectcampaignservice/endpoint_parameters'
+require_relative 'aws-sdk-connectcampaignservice/endpoint_provider'
+require_relative 'aws-sdk-connectcampaignservice/endpoints'
 require_relative 'aws-sdk-connectcampaignservice/customizations'
 
 # This module provides support for AmazonConnectCampaignService. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-connectcampaignservice/customizations'
 # @!group service
 module Aws::ConnectCampaignService
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.2.0'
 
 end

@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-fis/types'
 require_relative 'aws-sdk-fis/client_api'
+require_relative 'aws-sdk-fis/plugins/endpoints.rb'
 require_relative 'aws-sdk-fis/client'
 require_relative 'aws-sdk-fis/errors'
 require_relative 'aws-sdk-fis/resource'
+require_relative 'aws-sdk-fis/endpoint_parameters'
+require_relative 'aws-sdk-fis/endpoint_provider'
+require_relative 'aws-sdk-fis/endpoints'
 require_relative 'aws-sdk-fis/customizations'
 
 # This module provides support for AWS Fault Injection Simulator. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-fis/customizations'
 # @!group service
 module Aws::FIS
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end

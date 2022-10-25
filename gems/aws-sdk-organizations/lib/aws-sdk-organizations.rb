@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-organizations/types'
 require_relative 'aws-sdk-organizations/client_api'
+require_relative 'aws-sdk-organizations/plugins/endpoints.rb'
 require_relative 'aws-sdk-organizations/client'
 require_relative 'aws-sdk-organizations/errors'
 require_relative 'aws-sdk-organizations/resource'
+require_relative 'aws-sdk-organizations/endpoint_parameters'
+require_relative 'aws-sdk-organizations/endpoint_provider'
+require_relative 'aws-sdk-organizations/endpoints'
 require_relative 'aws-sdk-organizations/customizations'
 
 # This module provides support for AWS Organizations. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-organizations/customizations'
 # @!group service
 module Aws::Organizations
 
-  GEM_VERSION = '1.70.0'
+  GEM_VERSION = '1.71.0'
 
 end

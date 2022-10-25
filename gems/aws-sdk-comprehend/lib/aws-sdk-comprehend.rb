@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-comprehend/types'
 require_relative 'aws-sdk-comprehend/client_api'
+require_relative 'aws-sdk-comprehend/plugins/endpoints.rb'
 require_relative 'aws-sdk-comprehend/client'
 require_relative 'aws-sdk-comprehend/errors'
 require_relative 'aws-sdk-comprehend/resource'
+require_relative 'aws-sdk-comprehend/endpoint_parameters'
+require_relative 'aws-sdk-comprehend/endpoint_provider'
+require_relative 'aws-sdk-comprehend/endpoints'
 require_relative 'aws-sdk-comprehend/customizations'
 
 # This module provides support for Amazon Comprehend. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-comprehend/customizations'
 # @!group service
 module Aws::Comprehend
 
-  GEM_VERSION = '1.62.0'
+  GEM_VERSION = '1.63.0'
 
 end

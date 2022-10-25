@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-migrationhuborchestrator/types'
 require_relative 'aws-sdk-migrationhuborchestrator/client_api'
+require_relative 'aws-sdk-migrationhuborchestrator/plugins/endpoints.rb'
 require_relative 'aws-sdk-migrationhuborchestrator/client'
 require_relative 'aws-sdk-migrationhuborchestrator/errors'
 require_relative 'aws-sdk-migrationhuborchestrator/waiters'
 require_relative 'aws-sdk-migrationhuborchestrator/resource'
+require_relative 'aws-sdk-migrationhuborchestrator/endpoint_parameters'
+require_relative 'aws-sdk-migrationhuborchestrator/endpoint_provider'
+require_relative 'aws-sdk-migrationhuborchestrator/endpoints'
 require_relative 'aws-sdk-migrationhuborchestrator/customizations'
 
 # This module provides support for AWS Migration Hub Orchestrator. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-migrationhuborchestrator/customizations'
 # @!group service
 module Aws::MigrationHubOrchestrator
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end

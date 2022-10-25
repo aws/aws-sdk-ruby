@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-comprehendmedical/types'
 require_relative 'aws-sdk-comprehendmedical/client_api'
+require_relative 'aws-sdk-comprehendmedical/plugins/endpoints.rb'
 require_relative 'aws-sdk-comprehendmedical/client'
 require_relative 'aws-sdk-comprehendmedical/errors'
 require_relative 'aws-sdk-comprehendmedical/resource'
+require_relative 'aws-sdk-comprehendmedical/endpoint_parameters'
+require_relative 'aws-sdk-comprehendmedical/endpoint_provider'
+require_relative 'aws-sdk-comprehendmedical/endpoints'
 require_relative 'aws-sdk-comprehendmedical/customizations'
 
 # This module provides support for AWS Comprehend Medical. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-comprehendmedical/customizations'
 # @!group service
 module Aws::ComprehendMedical
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end
