@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-supportapp/types'
 require_relative 'aws-sdk-supportapp/client_api'
-require_relative 'aws-sdk-supportapp/plugins/endpoints.rb'
 require_relative 'aws-sdk-supportapp/client'
 require_relative 'aws-sdk-supportapp/errors'
 require_relative 'aws-sdk-supportapp/resource'
-require_relative 'aws-sdk-supportapp/endpoint_parameters'
-require_relative 'aws-sdk-supportapp/endpoint_provider'
-require_relative 'aws-sdk-supportapp/endpoints'
 require_relative 'aws-sdk-supportapp/customizations'
 
 # This module provides support for AWS Support App. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-supportapp/customizations'
 # @!group service
 module Aws::SupportApp
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.1.0'
 
 end

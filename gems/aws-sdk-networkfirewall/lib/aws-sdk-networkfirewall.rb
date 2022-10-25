@@ -48,6 +48,6 @@ require_relative 'aws-sdk-networkfirewall/customizations'
 # @!group service
 module Aws::NetworkFirewall
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.19.0'
 
 end

@@ -7300,8 +7300,12 @@ module Aws::Chime
     #       }
     #
     # @!attribute [rw] enable_sip_logs
-    #   When true, enables SIP message logs for sending to Amazon CloudWatch
-    #   Logs.
+    #   Boolean that enables SIP message logs to CloudWatch logs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_media_metric_logs
+    #   Boolean that enables logging of detailed media metrics for Voice
+    #   Connectors to CloudWatch logs.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_media_metric_logs

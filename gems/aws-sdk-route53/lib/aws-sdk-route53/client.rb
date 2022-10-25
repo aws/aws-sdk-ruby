@@ -289,19 +289,6 @@ module Aws::Route53
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
-    #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
-    #     following classes:
-    #
-    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
-    #       tokens.
-    #
-    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
-    #       access token generated from `aws login`.
-    #
-    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
-    #     will be used to search for tokens configured for your profile in shared configuration files.
-    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -6056,7 +6043,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

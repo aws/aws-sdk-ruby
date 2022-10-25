@@ -48,6 +48,6 @@ require_relative 'aws-sdk-pi/customizations'
 # @!group service
 module Aws::PI
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.40.0'
 
 end

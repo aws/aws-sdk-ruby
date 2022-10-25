@@ -820,9 +820,6 @@ module Aws::RDS
     #   `max_connections` setting for the RDS DB instance or Aurora DB
     #   cluster used by the target group.
     #
-    #   If you specify `MaxIdleConnectionsPercent`, then you must also
-    #   include a value for this parameter.
-    #
     #   Default: 10 for RDS for Microsoft SQL Server, and 100 for all other
     #   engines
     #
@@ -837,9 +834,6 @@ module Aws::RDS
     #   leaves a high percentage of idle database connections open. A low
     #   value causes the proxy to close more idle connections and return
     #   them to the database.
-    #
-    #   If you specify this parameter, then you must also include a value
-    #   for `MaxConnectionsPercent`.
     #
     #   Default: The default value is half of the value of
     #   `MaxConnectionsPercent`. For example, if `MaxConnectionsPercent` is
@@ -12134,10 +12128,6 @@ module Aws::RDS
     #
     #   * `aurora-postgresql13`
     #
-    #   * `aurora-postgresql14`
-    #
-    #   * `custom-oracle-ee-19`
-    #
     #   * `mariadb10.2`
     #
     #   * `mariadb10.3`
@@ -12151,18 +12141,6 @@ module Aws::RDS
     #   * `mysql5.7`
     #
     #   * `mysql8.0`
-    #
-    #   * `oracle-ee-19`
-    #
-    #   * `oracle-ee-cdb-19`
-    #
-    #   * `oracle-ee-cdb-21`
-    #
-    #   * `oracle-se2-19`
-    #
-    #   * `oracle-se2-cdb-19`
-    #
-    #   * `oracle-se2-cdb-21`
     #
     #   * `postgres10`
     #
@@ -12494,7 +12472,6 @@ module Aws::RDS
     #         ],
     #         marker: "String",
     #         max_records: 1,
-    #         source_type: "SNAPSHOT", # accepts SNAPSHOT, CLUSTER
     #       }
     #
     # @!attribute [rw] export_task_identifier
@@ -12556,10 +12533,6 @@ module Aws::RDS
     #   Constraints: Minimum 20, maximum 100.
     #   @return [Integer]
     #
-    # @!attribute [rw] source_type
-    #   The type of source for the export.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeExportTasksMessage AWS API Documentation
     #
     class DescribeExportTasksMessage < Struct.new(
@@ -12567,8 +12540,7 @@ module Aws::RDS
       :source_arn,
       :filters,
       :marker,
-      :max_records,
-      :source_type)
+      :max_records)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13856,10 +13828,6 @@ module Aws::RDS
     #   A warning about the snapshot export task.
     #   @return [String]
     #
-    # @!attribute [rw] source_type
-    #   The type of source for the export.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ExportTask AWS API Documentation
     #
     class ExportTask < Struct.new(
@@ -13877,8 +13845,7 @@ module Aws::RDS
       :percent_progress,
       :total_extracted_data_in_gb,
       :failure_cause,
-      :warning_message,
-      :source_type)
+      :warning_message)
       SENSITIVE = []
       include Aws::Structure
     end

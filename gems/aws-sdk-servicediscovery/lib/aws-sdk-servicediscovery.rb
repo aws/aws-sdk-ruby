@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-servicediscovery/types'
 require_relative 'aws-sdk-servicediscovery/client_api'
-require_relative 'aws-sdk-servicediscovery/plugins/endpoints.rb'
 require_relative 'aws-sdk-servicediscovery/client'
 require_relative 'aws-sdk-servicediscovery/errors'
 require_relative 'aws-sdk-servicediscovery/resource'
-require_relative 'aws-sdk-servicediscovery/endpoint_parameters'
-require_relative 'aws-sdk-servicediscovery/endpoint_provider'
-require_relative 'aws-sdk-servicediscovery/endpoints'
 require_relative 'aws-sdk-servicediscovery/customizations'
 
 # This module provides support for AWS Cloud Map. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-servicediscovery/customizations'
 # @!group service
 module Aws::ServiceDiscovery
 
-  GEM_VERSION = '1.48.0'
+  GEM_VERSION = '1.47.0'
 
 end

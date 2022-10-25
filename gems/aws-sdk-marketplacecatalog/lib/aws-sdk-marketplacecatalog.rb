@@ -48,6 +48,6 @@ require_relative 'aws-sdk-marketplacecatalog/customizations'
 # @!group service
 module Aws::MarketplaceCatalog
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.22.0'
 
 end

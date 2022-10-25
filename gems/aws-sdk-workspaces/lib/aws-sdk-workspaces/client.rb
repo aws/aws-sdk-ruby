@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/sign.rb'
+require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:workspaces)
@@ -79,9 +79,8 @@ module Aws::WorkSpaces
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::Sign)
+    add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
-    add_plugin(Aws::WorkSpaces::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -298,19 +297,6 @@ module Aws::WorkSpaces
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
-    #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
-    #     following classes:
-    #
-    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
-    #       tokens.
-    #
-    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
-    #       access token generated from `aws login`.
-    #
-    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
-    #     will be used to search for tokens configured for your profile in shared configuration files.
-    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -323,9 +309,6 @@ module Aws::WorkSpaces
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
-    #
-    #   @option options [Aws::WorkSpaces::EndpointProvider] :endpoint_provider
-    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::WorkSpaces::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -964,16 +947,6 @@ module Aws::WorkSpaces
     # This operation is asynchronous and returns before the WorkSpaces are
     # created.
     #
-    # <note markdown="1"> The `MANUAL` running mode value is only supported by Amazon WorkSpaces
-    # Core. Contact your account team to be allow-listed to use this value.
-    # For more information, see [Amazon WorkSpaces Core][1].
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: http://aws.amazon.com/workspaces/core/
-    #
     # @option params [required, Array<Types::WorkspaceRequest>] :workspaces
     #   The WorkSpaces to create. You can specify up to 25 WorkSpaces.
     #
@@ -994,7 +967,7 @@ module Aws::WorkSpaces
     #         user_volume_encryption_enabled: false,
     #         root_volume_encryption_enabled: false,
     #         workspace_properties: {
-    #           running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON, MANUAL
+    #           running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
     #           running_mode_auto_stop_timeout_in_minutes: 1,
     #           root_volume_size_gib: 1,
     #           user_volume_size_gib: 1,
@@ -1019,7 +992,7 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_request.volume_encryption_key #=> String
     #   resp.failed_requests[0].workspace_request.user_volume_encryption_enabled #=> Boolean
     #   resp.failed_requests[0].workspace_request.root_volume_encryption_enabled #=> Boolean
-    #   resp.failed_requests[0].workspace_request.workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON", "MANUAL"
+    #   resp.failed_requests[0].workspace_request.workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
     #   resp.failed_requests[0].workspace_request.workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.failed_requests[0].workspace_request.workspace_properties.root_volume_size_gib #=> Integer
     #   resp.failed_requests[0].workspace_request.workspace_properties.user_volume_size_gib #=> Integer
@@ -1043,7 +1016,7 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].volume_encryption_key #=> String
     #   resp.pending_requests[0].user_volume_encryption_enabled #=> Boolean
     #   resp.pending_requests[0].root_volume_encryption_enabled #=> Boolean
-    #   resp.pending_requests[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON", "MANUAL"
+    #   resp.pending_requests[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
     #   resp.pending_requests[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.pending_requests[0].workspace_properties.root_volume_size_gib #=> Integer
     #   resp.pending_requests[0].workspace_properties.user_volume_size_gib #=> Integer
@@ -2059,7 +2032,7 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].volume_encryption_key #=> String
     #   resp.workspaces[0].user_volume_encryption_enabled #=> Boolean
     #   resp.workspaces[0].root_volume_encryption_enabled #=> Boolean
-    #   resp.workspaces[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON", "MANUAL"
+    #   resp.workspaces[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
     #   resp.workspaces[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.workspaces[0].workspace_properties.root_volume_size_gib #=> Integer
     #   resp.workspaces[0].workspace_properties.user_volume_size_gib #=> Integer
@@ -2348,12 +2321,11 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Imports the specified Windows 10 Bring Your Own License (BYOL) or
-    # Windows Server 2016 BYOL image into Amazon WorkSpaces. The image must
-    # be an already licensed Amazon EC2 image that is in your Amazon Web
-    # Services account, and you must own the image. For more information
-    # about creating BYOL images, see [ Bring Your Own Windows Desktop
-    # Licenses][1].
+    # Imports the specified Windows 10 Bring Your Own License (BYOL) image
+    # into Amazon WorkSpaces. The image must be an already licensed Amazon
+    # EC2 image that is in your Amazon Web Services account, and you must
+    # own the image. For more information about creating BYOL images, see [
+    # Bring Your Own Windows Desktop Licenses][1].
     #
     #
     #
@@ -2365,25 +2337,13 @@ module Aws::WorkSpaces
     # @option params [required, String] :ingestion_process
     #   The ingestion process to be used when importing the image, depending
     #   on which protocol you want to use for your BYOL Workspace image,
-    #   either PCoIP, WorkSpaces Streaming Protocol (WSP), or bring your own
-    #   protocol (BYOP). To use WSP, specify a value that ends in `_WSP`. To
-    #   use PCoIP, specify a value that does not end in `_WSP`. To use BYOP,
-    #   specify a value that ends in `_BYOP`.
+    #   either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP,
+    #   specify a value that ends in `_WSP`. To use PCoIP, specify a value
+    #   that does not end in `_WSP`.
     #
     #   For non-GPU-enabled bundles (bundles other than Graphics or
-    #   GraphicsPro), specify `BYOL_REGULAR`, `BYOL_REGULAR_WSP`, or
-    #   `BYOL_REGULAR_BYOP`, depending on the protocol.
-    #
-    #   <note markdown="1"> The `BYOL_REGULAR_BYOP` and `BYOL_GRAPHICS_G4DN_BYOP` values are only
-    #   supported by Amazon WorkSpaces Core. Contact your account team to be
-    #   allow-listed to use these values. For more information, see [Amazon
-    #   WorkSpaces Core][1].
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/workspaces/core/
+    #   GraphicsPro), specify `BYOL_REGULAR` or `BYOL_REGULAR_WSP`, depending
+    #   on the protocol.
     #
     # @option params [required, String] :image_name
     #   The name of the WorkSpace image.
@@ -2417,7 +2377,7 @@ module Aws::WorkSpaces
     #
     #   resp = client.import_workspace_image({
     #     ec2_image_id: "Ec2ImageId", # required
-    #     ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO, BYOL_GRAPHICS_G4DN, BYOL_REGULAR_WSP, BYOL_REGULAR_BYOP, BYOL_GRAPHICS_G4DN_BYOP
+    #     ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO, BYOL_GRAPHICS_G4DN, BYOL_REGULAR_WSP
     #     image_name: "WorkspaceImageName", # required
     #     image_description: "WorkspaceImageDescription", # required
     #     tags: [
@@ -2768,16 +2728,9 @@ module Aws::WorkSpaces
     # about how to modify the size of the root and user volumes, see [
     # Modify a WorkSpace][1].
     #
-    # <note markdown="1"> The `MANUAL` running mode value is only supported by Amazon WorkSpaces
-    # Core. Contact your account team to be allow-listed to use this value.
-    # For more information, see [Amazon WorkSpaces Core][2].
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html
-    # [2]: http://aws.amazon.com/workspaces/core/
     #
     # @option params [required, String] :workspace_id
     #   The identifier of the WorkSpace.
@@ -2792,7 +2745,7 @@ module Aws::WorkSpaces
     #   resp = client.modify_workspace_properties({
     #     workspace_id: "WorkspaceId", # required
     #     workspace_properties: { # required
-    #       running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON, MANUAL
+    #       running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
     #       running_mode_auto_stop_timeout_in_minutes: 1,
     #       root_volume_size_gib: 1,
     #       user_volume_size_gib: 1,
@@ -3454,7 +3407,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

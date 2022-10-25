@@ -13,13 +13,9 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-greengrass/types'
 require_relative 'aws-sdk-greengrass/client_api'
-require_relative 'aws-sdk-greengrass/plugins/endpoints.rb'
 require_relative 'aws-sdk-greengrass/client'
 require_relative 'aws-sdk-greengrass/errors'
 require_relative 'aws-sdk-greengrass/resource'
-require_relative 'aws-sdk-greengrass/endpoint_parameters'
-require_relative 'aws-sdk-greengrass/endpoint_provider'
-require_relative 'aws-sdk-greengrass/endpoints'
 require_relative 'aws-sdk-greengrass/customizations'
 
 # This module provides support for AWS Greengrass. This module is available in the
@@ -52,6 +48,6 @@ require_relative 'aws-sdk-greengrass/customizations'
 # @!group service
 module Aws::Greengrass
 
-  GEM_VERSION = '1.51.0'
+  GEM_VERSION = '1.50.0'
 
 end
