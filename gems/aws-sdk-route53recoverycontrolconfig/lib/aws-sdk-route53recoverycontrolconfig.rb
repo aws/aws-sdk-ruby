@@ -49,6 +49,6 @@ require_relative 'aws-sdk-route53recoverycontrolconfig/customizations'
 # @!group service
 module Aws::Route53RecoveryControlConfig
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.11.0'
 
 end

@@ -909,6 +909,7 @@ module Aws::RDS
     #   * {Types::ExportTask#total_extracted_data_in_gb #total_extracted_data_in_gb} => Integer
     #   * {Types::ExportTask#failure_cause #failure_cause} => String
     #   * {Types::ExportTask#warning_message #warning_message} => String
+    #   * {Types::ExportTask#source_type #source_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -934,6 +935,7 @@ module Aws::RDS
     #   resp.total_extracted_data_in_gb #=> Integer
     #   resp.failure_cause #=> String
     #   resp.warning_message #=> String
+    #   resp.source_type #=> String, one of "SNAPSHOT", "CLUSTER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CancelExportTask AWS API Documentation
     #
@@ -10837,6 +10839,10 @@ module Aws::RDS
     #
     #   * `aurora-postgresql13`
     #
+    #   * `aurora-postgresql14`
+    #
+    #   * `custom-oracle-ee-19`
+    #
     #   * `mariadb10.2`
     #
     #   * `mariadb10.3`
@@ -10850,6 +10856,18 @@ module Aws::RDS
     #   * `mysql5.7`
     #
     #   * `mysql8.0`
+    #
+    #   * `oracle-ee-19`
+    #
+    #   * `oracle-ee-cdb-19`
+    #
+    #   * `oracle-ee-cdb-21`
+    #
+    #   * `oracle-se2-19`
+    #
+    #   * `oracle-se2-cdb-19`
+    #
+    #   * `oracle-se2-cdb-21`
     #
     #   * `postgres10`
     #
@@ -11366,6 +11384,9 @@ module Aws::RDS
     #
     #   Constraints: Minimum 20, maximum 100.
     #
+    # @option params [String] :source_type
+    #   The type of source for the export.
+    #
     # @return [Types::ExportTasksMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ExportTasksMessage#marker #marker} => String
@@ -11386,6 +11407,7 @@ module Aws::RDS
     #     ],
     #     marker: "String",
     #     max_records: 1,
+    #     source_type: "SNAPSHOT", # accepts SNAPSHOT, CLUSTER
     #   })
     #
     # @example Response structure
@@ -11408,6 +11430,7 @@ module Aws::RDS
     #   resp.export_tasks[0].total_extracted_data_in_gb #=> Integer
     #   resp.export_tasks[0].failure_cause #=> String
     #   resp.export_tasks[0].warning_message #=> String
+    #   resp.export_tasks[0].source_type #=> String, one of "SNAPSHOT", "CLUSTER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeExportTasks AWS API Documentation
     #
@@ -22363,6 +22386,7 @@ module Aws::RDS
     #   * {Types::ExportTask#total_extracted_data_in_gb #total_extracted_data_in_gb} => Integer
     #   * {Types::ExportTask#failure_cause #failure_cause} => String
     #   * {Types::ExportTask#warning_message #warning_message} => String
+    #   * {Types::ExportTask#source_type #source_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -22394,6 +22418,7 @@ module Aws::RDS
     #   resp.total_extracted_data_in_gb #=> Integer
     #   resp.failure_cause #=> String
     #   resp.warning_message #=> String
+    #   resp.source_type #=> String, one of "SNAPSHOT", "CLUSTER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartExportTask AWS API Documentation
     #
@@ -23044,7 +23069,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.156.0'
+      context[:gem_version] = '1.157.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-configservice/types'
 require_relative 'aws-sdk-configservice/client_api'
+require_relative 'aws-sdk-configservice/plugins/endpoints.rb'
 require_relative 'aws-sdk-configservice/client'
 require_relative 'aws-sdk-configservice/errors'
 require_relative 'aws-sdk-configservice/resource'
+require_relative 'aws-sdk-configservice/endpoint_parameters'
+require_relative 'aws-sdk-configservice/endpoint_provider'
+require_relative 'aws-sdk-configservice/endpoints'
 require_relative 'aws-sdk-configservice/customizations'
 
 # This module provides support for AWS Config. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-configservice/customizations'
 # @!group service
 module Aws::ConfigService
 
-  GEM_VERSION = '1.84.0'
+  GEM_VERSION = '1.85.0'
 
 end
