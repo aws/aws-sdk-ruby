@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Fix custom endpoint and port regression with `presigned_url`.
+* Issue - Fix custom endpoint and port regression with `presigned_url` (#2776).
 
 1.117.0 (2022-10-25)
 ------------------
