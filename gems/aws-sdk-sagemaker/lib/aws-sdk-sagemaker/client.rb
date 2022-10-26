@@ -3109,7 +3109,7 @@ module Aws::SageMaker
     #   resp = client.create_hyper_parameter_tuning_job({
     #     hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
     #     hyper_parameter_tuning_job_config: { # required
-    #       strategy: "Bayesian", # required, accepts Bayesian, Random, Hyperband
+    #       strategy: "Bayesian", # required, accepts Bayesian, Random, Hyperband, Grid
     #       strategy_config: {
     #         hyperband_strategy_config: {
     #           min_resource: 1,
@@ -3121,7 +3121,7 @@ module Aws::SageMaker
     #         metric_name: "MetricName", # required
     #       },
     #       resource_limits: { # required
-    #         max_number_of_training_jobs: 1, # required
+    #         max_number_of_training_jobs: 1,
     #         max_parallel_training_jobs: 1, # required
     #       },
     #       parameter_ranges: {
@@ -9993,7 +9993,7 @@ module Aws::SageMaker
     #
     #   resp.hyper_parameter_tuning_job_name #=> String
     #   resp.hyper_parameter_tuning_job_arn #=> String
-    #   resp.hyper_parameter_tuning_job_config.strategy #=> String, one of "Bayesian", "Random", "Hyperband"
+    #   resp.hyper_parameter_tuning_job_config.strategy #=> String, one of "Bayesian", "Random", "Hyperband", "Grid"
     #   resp.hyper_parameter_tuning_job_config.strategy_config.hyperband_strategy_config.min_resource #=> Integer
     #   resp.hyper_parameter_tuning_job_config.strategy_config.hyperband_strategy_config.max_resource #=> Integer
     #   resp.hyper_parameter_tuning_job_config.hyper_parameter_tuning_job_objective.type #=> String, one of "Maximize", "Minimize"
@@ -14419,7 +14419,7 @@ module Aws::SageMaker
     #   resp.hyper_parameter_tuning_job_summaries[0].hyper_parameter_tuning_job_name #=> String
     #   resp.hyper_parameter_tuning_job_summaries[0].hyper_parameter_tuning_job_arn #=> String
     #   resp.hyper_parameter_tuning_job_summaries[0].hyper_parameter_tuning_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
-    #   resp.hyper_parameter_tuning_job_summaries[0].strategy #=> String, one of "Bayesian", "Random", "Hyperband"
+    #   resp.hyper_parameter_tuning_job_summaries[0].strategy #=> String, one of "Bayesian", "Random", "Hyperband", "Grid"
     #   resp.hyper_parameter_tuning_job_summaries[0].creation_time #=> Time
     #   resp.hyper_parameter_tuning_job_summaries[0].hyper_parameter_tuning_end_time #=> Time
     #   resp.hyper_parameter_tuning_job_summaries[0].last_modified_time #=> Time
@@ -18384,7 +18384,7 @@ module Aws::SageMaker
     #   resp.results[0].feature_metadata.parameters[0].value #=> String
     #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_name #=> String
     #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_arn #=> String
-    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.strategy #=> String, one of "Bayesian", "Random", "Hyperband"
+    #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.strategy #=> String, one of "Bayesian", "Random", "Hyperband", "Grid"
     #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.strategy_config.hyperband_strategy_config.min_resource #=> Integer
     #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.strategy_config.hyperband_strategy_config.max_resource #=> Integer
     #   resp.results[0].hyper_parameter_tuning_job.hyper_parameter_tuning_job_config.hyper_parameter_tuning_job_objective.type #=> String, one of "Maximize", "Minimize"
@@ -21078,7 +21078,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.148.0'
+      context[:gem_version] = '1.149.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

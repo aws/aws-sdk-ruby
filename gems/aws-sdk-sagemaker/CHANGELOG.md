@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.149.0 (2022-10-26)
+------------------
+
+* Feature - Amazon SageMaker Automatic Model Tuning now supports specifying Grid Search strategy for tuning jobs, which evaluates all hyperparameter combinations exhaustively based on the categorical hyperparameters provided.
+
 1.148.0 (2022-10-25)
 ------------------
 

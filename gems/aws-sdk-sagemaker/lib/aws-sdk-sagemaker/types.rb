@@ -6983,7 +6983,7 @@ module Aws::SageMaker
     #       {
     #         hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
     #         hyper_parameter_tuning_job_config: { # required
-    #           strategy: "Bayesian", # required, accepts Bayesian, Random, Hyperband
+    #           strategy: "Bayesian", # required, accepts Bayesian, Random, Hyperband, Grid
     #           strategy_config: {
     #             hyperband_strategy_config: {
     #               min_resource: 1,
@@ -6995,7 +6995,7 @@ module Aws::SageMaker
     #             metric_name: "MetricName", # required
     #           },
     #           resource_limits: { # required
-    #             max_number_of_training_jobs: 1, # required
+    #             max_number_of_training_jobs: 1,
     #             max_parallel_training_jobs: 1, # required
     #           },
     #           parameter_ranges: {
@@ -22804,7 +22804,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         strategy: "Bayesian", # required, accepts Bayesian, Random, Hyperband
+    #         strategy: "Bayesian", # required, accepts Bayesian, Random, Hyperband, Grid
     #         strategy_config: {
     #           hyperband_strategy_config: {
     #             min_resource: 1,
@@ -22816,7 +22816,7 @@ module Aws::SageMaker
     #           metric_name: "MetricName", # required
     #         },
     #         resource_limits: { # required
-    #           max_number_of_training_jobs: 1, # required
+    #           max_number_of_training_jobs: 1,
     #           max_parallel_training_jobs: 1, # required
     #         },
     #         parameter_ranges: {
@@ -37859,7 +37859,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         max_number_of_training_jobs: 1, # required
+    #         max_number_of_training_jobs: 1,
     #         max_parallel_training_jobs: 1, # required
     #       }
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2022-10-26)
+------------------
+
+* Feature - Doc only update that corrects instances of CLI not using an entity.
+
 1.72.0 (2022-10-25)
 ------------------
 

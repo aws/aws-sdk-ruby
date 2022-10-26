@@ -441,6 +441,9 @@ module Aws::Kafka
     # @option params [Hash<String,String>] :tags
     #   Create tags when creating the cluster.
     #
+    # @option params [String] :storage_mode
+    #   This controls storage mode for supported storage tiers.
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster_arn #cluster_arn} => String
@@ -534,6 +537,7 @@ module Aws::Kafka
     #     tags: {
     #       "__string" => "__string",
     #     },
+    #     storage_mode: "LOCAL", # accepts LOCAL, TIERED
     #   })
     #
     # @example Response structure
@@ -661,6 +665,7 @@ module Aws::Kafka
     #         },
     #       },
     #       number_of_broker_nodes: 1, # required
+    #       storage_mode: "LOCAL", # accepts LOCAL, TIERED
     #     },
     #     serverless: {
     #       vpc_configs: [ # required
@@ -872,6 +877,7 @@ module Aws::Kafka
     #   resp.cluster_info.tags["__string"] #=> String
     #   resp.cluster_info.zookeeper_connect_string #=> String
     #   resp.cluster_info.zookeeper_connect_string_tls #=> String
+    #   resp.cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeCluster AWS API Documentation
     #
@@ -947,6 +953,7 @@ module Aws::Kafka
     #   resp.cluster_info.provisioned.number_of_broker_nodes #=> Integer
     #   resp.cluster_info.provisioned.zookeeper_connect_string #=> String
     #   resp.cluster_info.provisioned.zookeeper_connect_string_tls #=> String
+    #   resp.cluster_info.provisioned.storage_mode #=> String, one of "LOCAL", "TIERED"
     #   resp.cluster_info.serverless.vpc_configs #=> Array
     #   resp.cluster_info.serverless.vpc_configs[0].subnet_ids #=> Array
     #   resp.cluster_info.serverless.vpc_configs[0].subnet_ids[0] #=> String
@@ -1021,6 +1028,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.source_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_operation_info.source_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_operation_info.source_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info[0].provisioned_throughput.enabled #=> Boolean
@@ -1051,6 +1059,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.target_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_operation_info.target_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_operation_info.target_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterOperation AWS API Documentation
     #
@@ -1316,6 +1325,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].source_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_operation_info_list[0].source_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_operation_info_list[0].source_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info[0].provisioned_throughput.enabled #=> Boolean
@@ -1346,6 +1356,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].target_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_operation_info_list[0].target_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_operation_info_list[0].target_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusterOperations AWS API Documentation
@@ -1428,6 +1439,7 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].tags["__string"] #=> String
     #   resp.cluster_info_list[0].zookeeper_connect_string #=> String
     #   resp.cluster_info_list[0].zookeeper_connect_string_tls #=> String
+    #   resp.cluster_info_list[0].storage_mode #=> String, one of "LOCAL", "TIERED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusters AWS API Documentation
@@ -1522,6 +1534,7 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].provisioned.number_of_broker_nodes #=> Integer
     #   resp.cluster_info_list[0].provisioned.zookeeper_connect_string #=> String
     #   resp.cluster_info_list[0].provisioned.zookeeper_connect_string_tls #=> String
+    #   resp.cluster_info_list[0].provisioned.storage_mode #=> String, one of "LOCAL", "TIERED"
     #   resp.cluster_info_list[0].serverless.vpc_configs #=> Array
     #   resp.cluster_info_list[0].serverless.vpc_configs[0].subnet_ids #=> Array
     #   resp.cluster_info_list[0].serverless.vpc_configs[0].subnet_ids[0] #=> String
@@ -2308,6 +2321,56 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Updates cluster broker volume size (or) sets cluster storage mode to
+    # TIERED.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, String] :current_version
+    #   The version of cluster to update from. A successful operation will
+    #   then generate a new version.
+    #
+    # @option params [Types::ProvisionedThroughput] :provisioned_throughput
+    #   EBS volume provisioned throughput information.
+    #
+    # @option params [String] :storage_mode
+    #   Controls storage mode for supported storage tiers.
+    #
+    # @option params [Integer] :volume_size_gb
+    #   size of the EBS volume to update.
+    #
+    # @return [Types::UpdateStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateStorageResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::UpdateStorageResponse#cluster_operation_arn #cluster_operation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_storage({
+    #     cluster_arn: "__string", # required
+    #     current_version: "__string", # required
+    #     provisioned_throughput: {
+    #       enabled: false,
+    #       volume_throughput: 1,
+    #     },
+    #     storage_mode: "LOCAL", # accepts LOCAL, TIERED
+    #     volume_size_gb: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.cluster_operation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateStorage AWS API Documentation
+    #
+    # @overload update_storage(params = {})
+    # @param [Hash] params ({})
+    def update_storage(params = {}, options = {})
+      req = build_request(:update_storage, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2321,7 +2384,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

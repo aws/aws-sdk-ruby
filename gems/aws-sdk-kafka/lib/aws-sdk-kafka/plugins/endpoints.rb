@@ -126,6 +126,8 @@ module Aws::Kafka
             Aws::Kafka::Endpoints::UpdateMonitoring.build(context)
           when :update_security
             Aws::Kafka::Endpoints::UpdateSecurity.build(context)
+          when :update_storage
+            Aws::Kafka::Endpoints::UpdateStorage.build(context)
           end
         end
       end

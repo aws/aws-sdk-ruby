@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2022-10-26)
+------------------
+
+* Feature - This release adds support for Tiered Storage. UpdateStorage allows you to control the Storage Mode for supported storage tiers.
+
 1.51.0 (2022-10-25)
 ------------------
 

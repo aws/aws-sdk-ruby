@@ -126,6 +126,7 @@ module Aws::Kafka
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StateInfo = Shapes::StructureShape.new(name: 'StateInfo')
     StorageInfo = Shapes::StructureShape.new(name: 'StorageInfo')
+    StorageMode = Shapes::StringShape.new(name: 'StorageMode')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     Tls = Shapes::StructureShape.new(name: 'Tls')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -151,6 +152,8 @@ module Aws::Kafka
     UpdateMonitoringResponse = Shapes::StructureShape.new(name: 'UpdateMonitoringResponse')
     UpdateSecurityRequest = Shapes::StructureShape.new(name: 'UpdateSecurityRequest')
     UpdateSecurityResponse = Shapes::StructureShape.new(name: 'UpdateSecurityResponse')
+    UpdateStorageRequest = Shapes::StructureShape.new(name: 'UpdateStorageRequest')
+    UpdateStorageResponse = Shapes::StructureShape.new(name: 'UpdateStorageResponse')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     ZookeeperNodeInfo = Shapes::StructureShape.new(name: 'ZookeeperNodeInfo')
     __blob = Shapes::BlobShape.new(name: '__blob')
@@ -271,6 +274,7 @@ module Aws::Kafka
     ClusterInfo.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     ClusterInfo.add_member(:zookeeper_connect_string, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperConnectString"))
     ClusterInfo.add_member(:zookeeper_connect_string_tls, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperConnectStringTls"))
+    ClusterInfo.add_member(:storage_mode, Shapes::ShapeRef.new(shape: StorageMode, location_name: "storageMode"))
     ClusterInfo.struct_class = Types::ClusterInfo
 
     ClusterOperationInfo.add_member(:client_request_id, Shapes::ShapeRef.new(shape: __string, location_name: "clientRequestId"))
@@ -333,6 +337,7 @@ module Aws::Kafka
     CreateClusterRequest.add_member(:number_of_broker_nodes, Shapes::ShapeRef.new(shape: __integerMin1Max15, required: true, location_name: "numberOfBrokerNodes"))
     CreateClusterRequest.add_member(:open_monitoring, Shapes::ShapeRef.new(shape: OpenMonitoringInfo, location_name: "openMonitoring"))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    CreateClusterRequest.add_member(:storage_mode, Shapes::ShapeRef.new(shape: StorageMode, location_name: "storageMode"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
@@ -578,6 +583,7 @@ module Aws::Kafka
     MutableClusterInfo.add_member(:client_authentication, Shapes::ShapeRef.new(shape: ClientAuthentication, location_name: "clientAuthentication"))
     MutableClusterInfo.add_member(:encryption_info, Shapes::ShapeRef.new(shape: EncryptionInfo, location_name: "encryptionInfo"))
     MutableClusterInfo.add_member(:connectivity_info, Shapes::ShapeRef.new(shape: ConnectivityInfo, location_name: "connectivityInfo"))
+    MutableClusterInfo.add_member(:storage_mode, Shapes::ShapeRef.new(shape: StorageMode, location_name: "storageMode"))
     MutableClusterInfo.struct_class = Types::MutableClusterInfo
 
     NodeExporter.add_member(:enabled_in_broker, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabledInBroker"))
@@ -622,6 +628,7 @@ module Aws::Kafka
     Provisioned.add_member(:number_of_broker_nodes, Shapes::ShapeRef.new(shape: __integerMin1Max15, required: true, location_name: "numberOfBrokerNodes"))
     Provisioned.add_member(:zookeeper_connect_string, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperConnectString"))
     Provisioned.add_member(:zookeeper_connect_string_tls, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperConnectStringTls"))
+    Provisioned.add_member(:storage_mode, Shapes::ShapeRef.new(shape: StorageMode, location_name: "storageMode"))
     Provisioned.struct_class = Types::Provisioned
 
     ProvisionedRequest.add_member(:broker_node_group_info, Shapes::ShapeRef.new(shape: BrokerNodeGroupInfo, required: true, location_name: "brokerNodeGroupInfo"))
@@ -633,6 +640,7 @@ module Aws::Kafka
     ProvisionedRequest.add_member(:kafka_version, Shapes::ShapeRef.new(shape: __stringMin1Max128, required: true, location_name: "kafkaVersion"))
     ProvisionedRequest.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "loggingInfo"))
     ProvisionedRequest.add_member(:number_of_broker_nodes, Shapes::ShapeRef.new(shape: __integerMin1Max15, required: true, location_name: "numberOfBrokerNodes"))
+    ProvisionedRequest.add_member(:storage_mode, Shapes::ShapeRef.new(shape: StorageMode, location_name: "storageMode"))
     ProvisionedRequest.struct_class = Types::ProvisionedRequest
 
     ProvisionedThroughput.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "enabled"))
@@ -799,6 +807,17 @@ module Aws::Kafka
     UpdateSecurityResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
     UpdateSecurityResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
     UpdateSecurityResponse.struct_class = Types::UpdateSecurityResponse
+
+    UpdateStorageRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    UpdateStorageRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "currentVersion"))
+    UpdateStorageRequest.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "provisionedThroughput"))
+    UpdateStorageRequest.add_member(:storage_mode, Shapes::ShapeRef.new(shape: StorageMode, location_name: "storageMode"))
+    UpdateStorageRequest.add_member(:volume_size_gb, Shapes::ShapeRef.new(shape: __integer, location_name: "volumeSizeGB"))
+    UpdateStorageRequest.struct_class = Types::UpdateStorageRequest
+
+    UpdateStorageResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
+    UpdateStorageResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
+    UpdateStorageResponse.struct_class = Types::UpdateStorageResponse
 
     VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "subnetIds"))
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroupIds"))
@@ -1368,6 +1387,21 @@ module Aws::Kafka
         o.http_request_uri = "/v1/clusters/{clusterArn}/security"
         o.input = Shapes::ShapeRef.new(shape: UpdateSecurityRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSecurityResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:update_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateStorage"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/storage"
+        o.input = Shapes::ShapeRef.new(shape: UpdateStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateStorageResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
