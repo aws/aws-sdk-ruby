@@ -199,9 +199,11 @@ module Aws
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
 
         req.handle(step: :send) do |context|
-          # preserve existing scheme if default
-          http_req.endpoint.scheme = secure ? context.config.endpoint.scheme : 'http'
-          http_req.endpoint.port = secure ? 443 : 80
+          # if an endpoint was not provided, force secure or insecure
+          if context.config.regional_endpoint
+            http_req.endpoint.scheme = secure ? 'https' : 'http'
+            http_req.endpoint.port = secure ? 443 : 80
+          end
 
           query = http_req.endpoint.query ? http_req.endpoint.query.split('&') : []
           http_req.headers.each do |key, value|

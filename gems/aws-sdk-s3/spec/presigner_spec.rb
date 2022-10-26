@@ -5,15 +5,17 @@ require_relative 'spec_helper'
 module Aws
   module S3
     describe Presigner do
-      let(:client) do
-        Aws::S3::Client.new(
+      let(:client) { Aws::S3::Client.new(**client_opts) }
+
+      let(:client_opts) do
+        {
           region: 'us-east-1',
           credentials: Credentials.new(
             'ACCESS_KEY_ID',
             'SECRET_ACCESS_KEY'
           ),
           stub_responses: true
-        )
+        }
       end
 
       subject { Presigner.new(client: client) }
@@ -128,13 +130,25 @@ module Aws
         end
 
         it 'uses the configured :endpoint scheme' do
-          client.config.endpoint = URI('http://example.com')
+          client_opts[:endpoint] = 'http://example.com'
+          client_opts[:force_path_style] = true
           url = subject.presigned_url(
             :get_object,
             bucket: 'aws-sdk',
             key: 'foo'
           )
-          expect(url).to match(/^http:/)
+          expect(url).to start_with('http://example.com')
+        end
+
+        it 'uses the configured :endpoint port' do
+          client_opts[:endpoint] = 'http://localhost:9000'
+          client_opts[:force_path_style] = true
+          url = subject.presigned_url(
+            :get_object,
+            bucket: 'aws-sdk',
+            key: 'foo'
+          )
+          expect(url).to start_with('http://localhost:9000')
         end
 
         it 'supports virtual hosting' do
@@ -253,13 +267,25 @@ module Aws
         end
 
         it 'uses the configured :endpoint scheme' do
-          client.config.endpoint = URI('http://example.com')
+          client_opts[:endpoint] = 'http://example.com'
+          client_opts[:force_path_style] = true
           url, = subject.presigned_request(
             :get_object,
             bucket: 'aws-sdk',
             key: 'foo'
           )
-          expect(url).to match(/^http:/)
+          expect(url).to start_with('http://example.com')
+        end
+
+        it 'uses the configured :endpoint port' do
+          client_opts[:endpoint] = 'http://localhost:9000'
+          client_opts[:force_path_style] = true
+          url, = subject.presigned_request(
+            :get_object,
+            bucket: 'aws-sdk',
+            key: 'foo'
+          )
+          expect(url).to start_with('http://localhost:9000')
         end
 
         it 'supports virtual hosting' do
