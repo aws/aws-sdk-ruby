@@ -11326,6 +11326,8 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
+    #         image_id: "ImageId",
+    #         delete_replaced_root_volume: false,
     #       }
     #
     # @!attribute [rw] instance_id
@@ -11334,8 +11336,12 @@ module Aws::EC2
     #
     # @!attribute [rw] snapshot_id
     #   The ID of the snapshot from which to restore the replacement root
-    #   volume. If you want to restore the volume to the initial launch
-    #   state, omit this parameter.
+    #   volume. The specified snapshot must be a snapshot that you
+    #   previously created from the original root volume.
+    #
+    #   If you want to restore the replacement root volume to the initial
+    #   launch state, or if you want to restore the replacement root volume
+    #   from an AMI, omit this parameter.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -11363,6 +11369,24 @@ module Aws::EC2
     #   The tags to apply to the root volume replacement task.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI to use to restore the root volume. The specified
+    #   AMI must have the same product code, billing information,
+    #   architecture type, and virtualization type as that of the instance.
+    #
+    #   If you want to restore the replacement volume from a specific
+    #   snapshot, or if you want to restore it to its launch state, omit
+    #   this parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_replaced_root_volume
+    #   Indicates whether to automatically delete the original root volume
+    #   after the root volume replacement task completes. To delete the
+    #   original root volume, specify `true`. If you choose to keep the
+    #   original root volume after the replacement task completes, you must
+    #   manually delete it when you no longer need it.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReplaceRootVolumeTaskRequest AWS API Documentation
     #
     class CreateReplaceRootVolumeTaskRequest < Struct.new(
@@ -11370,7 +11394,9 @@ module Aws::EC2
       :snapshot_id,
       :client_token,
       :dry_run,
-      :tag_specifications)
+      :tag_specifications,
+      :image_id,
+      :delete_replaced_root_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -57568,6 +57594,19 @@ module Aws::EC2
     #   The tags assigned to the task.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI used to create the replacement root volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot used to create the replacement root volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_replaced_root_volume
+    #   Indicates whether the original root volume is to be deleted after
+    #   the root volume replacement task completes.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRootVolumeTask AWS API Documentation
     #
     class ReplaceRootVolumeTask < Struct.new(
@@ -57576,7 +57615,10 @@ module Aws::EC2
       :task_state,
       :start_time,
       :complete_time,
-      :tags)
+      :tags,
+      :image_id,
+      :snapshot_id,
+      :delete_replaced_root_volume)
       SENSITIVE = []
       include Aws::Structure
     end

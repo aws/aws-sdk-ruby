@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2022-10-27)
+------------------
+
+* Feature - This release clarifies use for the ElasticIp parameter of the CreateCluster and RestoreFromClusterSnapshot APIs.
+
 1.86.0 (2022-10-25)
 ------------------
 

@@ -2207,10 +2207,12 @@ module Aws::Redshift
     #   The Elastic IP (EIP) address for the cluster.
     #
     #   Constraints: The cluster must be provisioned in EC2-VPC and
-    #   publicly-accessible through an Internet gateway. For more
-    #   information about provisioning clusters in EC2-VPC, go to [Supported
-    #   Platforms to Launch Your Cluster][1] in the Amazon Redshift Cluster
-    #   Management Guide.
+    #   publicly-accessible through an Internet gateway. Don't specify the
+    #   Elastic IP address for a publicly accessible cluster with
+    #   availability zone relocation turned on. For more information about
+    #   provisioning clusters in EC2-VPC, go to [Supported Platforms to
+    #   Launch Your Cluster][1] in the Amazon Redshift Cluster Management
+    #   Guide.
     #
     #
     #
@@ -10298,7 +10300,9 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] elastic_ip
-    #   The elastic IP (EIP) address for the cluster.
+    #   The Elastic IP (EIP) address for the cluster. Don't specify the
+    #   Elastic IP address for a publicly accessible cluster with
+    #   availability zone relocation turned on.
     #   @return [String]
     #
     # @!attribute [rw] cluster_parameter_group_name

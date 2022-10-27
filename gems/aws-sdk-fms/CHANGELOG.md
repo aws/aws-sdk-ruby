@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2022-10-27)
+------------------
+
+* Feature - Add support NetworkFirewall Managed Rule Group Override flag in GetViolationDetails API
+
 1.51.0 (2022-10-25)
 ------------------
 

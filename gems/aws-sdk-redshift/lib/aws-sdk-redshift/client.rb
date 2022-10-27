@@ -1412,10 +1412,11 @@ module Aws::Redshift
     #   The Elastic IP (EIP) address for the cluster.
     #
     #   Constraints: The cluster must be provisioned in EC2-VPC and
-    #   publicly-accessible through an Internet gateway. For more information
-    #   about provisioning clusters in EC2-VPC, go to [Supported Platforms to
-    #   Launch Your Cluster][1] in the Amazon Redshift Cluster Management
-    #   Guide.
+    #   publicly-accessible through an Internet gateway. Don't specify the
+    #   Elastic IP address for a publicly accessible cluster with availability
+    #   zone relocation turned on. For more information about provisioning
+    #   clusters in EC2-VPC, go to [Supported Platforms to Launch Your
+    #   Cluster][1] in the Amazon Redshift Cluster Management Guide.
     #
     #
     #
@@ -10130,7 +10131,9 @@ module Aws::Redshift
     #   keys in an HSM.
     #
     # @option params [String] :elastic_ip
-    #   The elastic IP (EIP) address for the cluster.
+    #   The Elastic IP (EIP) address for the cluster. Don't specify the
+    #   Elastic IP address for a publicly accessible cluster with availability
+    #   zone relocation turned on.
     #
     # @option params [String] :cluster_parameter_group_name
     #   The name of the parameter group to be associated with this cluster.
@@ -11161,7 +11164,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

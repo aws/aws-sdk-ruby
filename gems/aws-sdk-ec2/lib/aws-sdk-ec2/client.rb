@@ -9777,9 +9777,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a root volume replacement task for an Amazon EC2 instance. The
-    # root volume can either be restored to its initial launch state, or it
-    # can be restored using a specific snapshot.
+    # Replaces the EBS-backed root volume for a `running` instance with a
+    # new volume that is restored to the original root volume's launch
+    # state, that is restored to a specific snapshot taken from the original
+    # root volume, or that is restored from an AMI that has the same key
+    # characteristics as that of the instance.
     #
     # For more information, see [Replace a root volume][1] in the *Amazon
     # Elastic Compute Cloud User Guide*.
@@ -9793,8 +9795,12 @@ module Aws::EC2
     #
     # @option params [String] :snapshot_id
     #   The ID of the snapshot from which to restore the replacement root
-    #   volume. If you want to restore the volume to the initial launch state,
-    #   omit this parameter.
+    #   volume. The specified snapshot must be a snapshot that you previously
+    #   created from the original root volume.
+    #
+    #   If you want to restore the replacement root volume to the initial
+    #   launch state, or if you want to restore the replacement root volume
+    #   from an AMI, omit this parameter.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
@@ -9818,6 +9824,22 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the root volume replacement task.
     #
+    # @option params [String] :image_id
+    #   The ID of the AMI to use to restore the root volume. The specified AMI
+    #   must have the same product code, billing information, architecture
+    #   type, and virtualization type as that of the instance.
+    #
+    #   If you want to restore the replacement volume from a specific
+    #   snapshot, or if you want to restore it to its launch state, omit this
+    #   parameter.
+    #
+    # @option params [Boolean] :delete_replaced_root_volume
+    #   Indicates whether to automatically delete the original root volume
+    #   after the root volume replacement task completes. To delete the
+    #   original root volume, specify `true`. If you choose to keep the
+    #   original root volume after the replacement task completes, you must
+    #   manually delete it when you no longer need it.
+    #
     # @return [Types::CreateReplaceRootVolumeTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateReplaceRootVolumeTaskResult#replace_root_volume_task #replace_root_volume_task} => Types::ReplaceRootVolumeTask
@@ -9840,6 +9862,8 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     image_id: "ImageId",
+    #     delete_replaced_root_volume: false,
     #   })
     #
     # @example Response structure
@@ -9852,6 +9876,9 @@ module Aws::EC2
     #   resp.replace_root_volume_task.tags #=> Array
     #   resp.replace_root_volume_task.tags[0].key #=> String
     #   resp.replace_root_volume_task.tags[0].value #=> String
+    #   resp.replace_root_volume_task.image_id #=> String
+    #   resp.replace_root_volume_task.snapshot_id #=> String
+    #   resp.replace_root_volume_task.delete_replaced_root_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReplaceRootVolumeTask AWS API Documentation
     #
@@ -27178,6 +27205,9 @@ module Aws::EC2
     #   resp.replace_root_volume_tasks[0].tags #=> Array
     #   resp.replace_root_volume_tasks[0].tags[0].key #=> String
     #   resp.replace_root_volume_tasks[0].tags[0].value #=> String
+    #   resp.replace_root_volume_tasks[0].image_id #=> String
+    #   resp.replace_root_volume_tasks[0].snapshot_id #=> String
+    #   resp.replace_root_volume_tasks[0].delete_replaced_root_volume #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReplaceRootVolumeTasks AWS API Documentation
@@ -52181,7 +52211,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.342.0'
+      context[:gem_version] = '1.343.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

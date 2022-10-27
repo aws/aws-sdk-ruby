@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.150.0 (2022-10-27)
+------------------
+
+* Feature - This change allows customers to provide a custom entrypoint script for the docker container to be run while executing training jobs, and provide custom arguments to the entrypoint script.
+
 1.149.0 (2022-10-26)
 ------------------
 

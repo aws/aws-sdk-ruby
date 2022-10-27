@@ -13,6 +13,7 @@ module Aws::WAFV2
 
     include Seahorse::Model
 
+    AWSManagedRulesBotControlRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesBotControlRuleSet')
     Action = Shapes::StringShape.new(name: 'Action')
     ActionCondition = Shapes::StructureShape.new(name: 'ActionCondition')
     ActionValue = Shapes::StringShape.new(name: 'ActionValue')
@@ -31,6 +32,9 @@ module Aws::WAFV2
     CaptchaAction = Shapes::StructureShape.new(name: 'CaptchaAction')
     CaptchaConfig = Shapes::StructureShape.new(name: 'CaptchaConfig')
     CaptchaResponse = Shapes::StructureShape.new(name: 'CaptchaResponse')
+    ChallengeAction = Shapes::StructureShape.new(name: 'ChallengeAction')
+    ChallengeConfig = Shapes::StructureShape.new(name: 'ChallengeConfig')
+    ChallengeResponse = Shapes::StructureShape.new(name: 'ChallengeResponse')
     CheckCapacityRequest = Shapes::StructureShape.new(name: 'CheckCapacityRequest')
     CheckCapacityResponse = Shapes::StructureShape.new(name: 'CheckCapacityResponse')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
@@ -147,6 +151,7 @@ module Aws::WAFV2
     IPSetSummary = Shapes::StructureShape.new(name: 'IPSetSummary')
     IPString = Shapes::StringShape.new(name: 'IPString')
     ImmunityTimeProperty = Shapes::StructureShape.new(name: 'ImmunityTimeProperty')
+    InspectionLevel = Shapes::StringShape.new(name: 'InspectionLevel')
     JsonBody = Shapes::StructureShape.new(name: 'JsonBody')
     JsonMatchPattern = Shapes::StructureShape.new(name: 'JsonMatchPattern')
     JsonMatchScope = Shapes::StringShape.new(name: 'JsonMatchScope')
@@ -254,6 +259,8 @@ module Aws::WAFV2
     ResponseStatusCode = Shapes::IntegerShape.new(name: 'ResponseStatusCode')
     Rule = Shapes::StructureShape.new(name: 'Rule')
     RuleAction = Shapes::StructureShape.new(name: 'RuleAction')
+    RuleActionOverride = Shapes::StructureShape.new(name: 'RuleActionOverride')
+    RuleActionOverrides = Shapes::ListShape.new(name: 'RuleActionOverrides')
     RuleGroup = Shapes::StructureShape.new(name: 'RuleGroup')
     RuleGroupReferenceStatement = Shapes::StructureShape.new(name: 'RuleGroupReferenceStatement')
     RuleGroupSummaries = Shapes::ListShape.new(name: 'RuleGroupSummaries')
@@ -293,6 +300,8 @@ module Aws::WAFV2
     TimeWindowDay = Shapes::IntegerShape.new(name: 'TimeWindowDay')
     TimeWindowSecond = Shapes::IntegerShape.new(name: 'TimeWindowSecond')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TokenDomain = Shapes::StringShape.new(name: 'TokenDomain')
+    TokenDomains = Shapes::ListShape.new(name: 'TokenDomains')
     URIString = Shapes::StringShape.new(name: 'URIString')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -336,6 +345,9 @@ module Aws::WAFV2
     WebACLSummary = Shapes::StructureShape.new(name: 'WebACLSummary')
     XssMatchStatement = Shapes::StructureShape.new(name: 'XssMatchStatement')
 
+    AWSManagedRulesBotControlRuleSet.add_member(:inspection_level, Shapes::ShapeRef.new(shape: InspectionLevel, required: true, location_name: "InspectionLevel"))
+    AWSManagedRulesBotControlRuleSet.struct_class = Types::AWSManagedRulesBotControlRuleSet
+
     ActionCondition.add_member(:action, Shapes::ShapeRef.new(shape: ActionValue, required: true, location_name: "Action"))
     ActionCondition.struct_class = Types::ActionCondition
 
@@ -377,6 +389,17 @@ module Aws::WAFV2
     CaptchaResponse.add_member(:solve_timestamp, Shapes::ShapeRef.new(shape: SolveTimestamp, location_name: "SolveTimestamp"))
     CaptchaResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     CaptchaResponse.struct_class = Types::CaptchaResponse
+
+    ChallengeAction.add_member(:custom_request_handling, Shapes::ShapeRef.new(shape: CustomRequestHandling, location_name: "CustomRequestHandling"))
+    ChallengeAction.struct_class = Types::ChallengeAction
+
+    ChallengeConfig.add_member(:immunity_time_property, Shapes::ShapeRef.new(shape: ImmunityTimeProperty, location_name: "ImmunityTimeProperty"))
+    ChallengeConfig.struct_class = Types::ChallengeConfig
+
+    ChallengeResponse.add_member(:response_code, Shapes::ShapeRef.new(shape: ResponseCode, location_name: "ResponseCode"))
+    ChallengeResponse.add_member(:solve_timestamp, Shapes::ShapeRef.new(shape: SolveTimestamp, location_name: "SolveTimestamp"))
+    ChallengeResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    ChallengeResponse.struct_class = Types::ChallengeResponse
 
     CheckCapacityRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     CheckCapacityRequest.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, required: true, location_name: "Rules"))
@@ -451,6 +474,8 @@ module Aws::WAFV2
     CreateWebACLRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateWebACLRequest.add_member(:custom_response_bodies, Shapes::ShapeRef.new(shape: CustomResponseBodies, location_name: "CustomResponseBodies"))
     CreateWebACLRequest.add_member(:captcha_config, Shapes::ShapeRef.new(shape: CaptchaConfig, location_name: "CaptchaConfig"))
+    CreateWebACLRequest.add_member(:challenge_config, Shapes::ShapeRef.new(shape: ChallengeConfig, location_name: "ChallengeConfig"))
+    CreateWebACLRequest.add_member(:token_domains, Shapes::ShapeRef.new(shape: TokenDomains, location_name: "TokenDomains"))
     CreateWebACLRequest.struct_class = Types::CreateWebACLRequest
 
     CreateWebACLResponse.add_member(:summary, Shapes::ShapeRef.new(shape: WebACLSummary, location_name: "Summary"))
@@ -902,6 +927,7 @@ module Aws::WAFV2
     ManagedRuleGroupConfig.add_member(:payload_type, Shapes::ShapeRef.new(shape: PayloadType, location_name: "PayloadType"))
     ManagedRuleGroupConfig.add_member(:username_field, Shapes::ShapeRef.new(shape: UsernameField, location_name: "UsernameField"))
     ManagedRuleGroupConfig.add_member(:password_field, Shapes::ShapeRef.new(shape: PasswordField, location_name: "PasswordField"))
+    ManagedRuleGroupConfig.add_member(:aws_managed_rules_bot_control_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesBotControlRuleSet, location_name: "AWSManagedRulesBotControlRuleSet"))
     ManagedRuleGroupConfig.struct_class = Types::ManagedRuleGroupConfig
 
     ManagedRuleGroupConfigs.member = Shapes::ShapeRef.new(shape: ManagedRuleGroupConfig)
@@ -912,6 +938,7 @@ module Aws::WAFV2
     ManagedRuleGroupStatement.add_member(:excluded_rules, Shapes::ShapeRef.new(shape: ExcludedRules, location_name: "ExcludedRules"))
     ManagedRuleGroupStatement.add_member(:scope_down_statement, Shapes::ShapeRef.new(shape: Statement, location_name: "ScopeDownStatement"))
     ManagedRuleGroupStatement.add_member(:managed_rule_group_configs, Shapes::ShapeRef.new(shape: ManagedRuleGroupConfigs, location_name: "ManagedRuleGroupConfigs"))
+    ManagedRuleGroupStatement.add_member(:rule_action_overrides, Shapes::ShapeRef.new(shape: RuleActionOverrides, location_name: "RuleActionOverrides"))
     ManagedRuleGroupStatement.struct_class = Types::ManagedRuleGroupStatement
 
     ManagedRuleGroupSummaries.member = Shapes::ShapeRef.new(shape: ManagedRuleGroupSummary)
@@ -1065,13 +1092,21 @@ module Aws::WAFV2
     Rule.add_member(:rule_labels, Shapes::ShapeRef.new(shape: Labels, location_name: "RuleLabels"))
     Rule.add_member(:visibility_config, Shapes::ShapeRef.new(shape: VisibilityConfig, required: true, location_name: "VisibilityConfig"))
     Rule.add_member(:captcha_config, Shapes::ShapeRef.new(shape: CaptchaConfig, location_name: "CaptchaConfig"))
+    Rule.add_member(:challenge_config, Shapes::ShapeRef.new(shape: ChallengeConfig, location_name: "ChallengeConfig"))
     Rule.struct_class = Types::Rule
 
     RuleAction.add_member(:block, Shapes::ShapeRef.new(shape: BlockAction, location_name: "Block"))
     RuleAction.add_member(:allow, Shapes::ShapeRef.new(shape: AllowAction, location_name: "Allow"))
     RuleAction.add_member(:count, Shapes::ShapeRef.new(shape: CountAction, location_name: "Count"))
     RuleAction.add_member(:captcha, Shapes::ShapeRef.new(shape: CaptchaAction, location_name: "Captcha"))
+    RuleAction.add_member(:challenge, Shapes::ShapeRef.new(shape: ChallengeAction, location_name: "Challenge"))
     RuleAction.struct_class = Types::RuleAction
+
+    RuleActionOverride.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
+    RuleActionOverride.add_member(:action_to_use, Shapes::ShapeRef.new(shape: RuleAction, required: true, location_name: "ActionToUse"))
+    RuleActionOverride.struct_class = Types::RuleActionOverride
+
+    RuleActionOverrides.member = Shapes::ShapeRef.new(shape: RuleActionOverride)
 
     RuleGroup.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
     RuleGroup.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "Id"))
@@ -1088,6 +1123,7 @@ module Aws::WAFV2
 
     RuleGroupReferenceStatement.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ARN"))
     RuleGroupReferenceStatement.add_member(:excluded_rules, Shapes::ShapeRef.new(shape: ExcludedRules, location_name: "ExcludedRules"))
+    RuleGroupReferenceStatement.add_member(:rule_action_overrides, Shapes::ShapeRef.new(shape: RuleActionOverrides, location_name: "RuleActionOverrides"))
     RuleGroupReferenceStatement.struct_class = Types::RuleGroupReferenceStatement
 
     RuleGroupSummaries.member = Shapes::ShapeRef.new(shape: RuleGroupSummary)
@@ -1116,6 +1152,8 @@ module Aws::WAFV2
     SampledHTTPRequest.add_member(:response_code_sent, Shapes::ShapeRef.new(shape: ResponseStatusCode, location_name: "ResponseCodeSent"))
     SampledHTTPRequest.add_member(:labels, Shapes::ShapeRef.new(shape: Labels, location_name: "Labels"))
     SampledHTTPRequest.add_member(:captcha_response, Shapes::ShapeRef.new(shape: CaptchaResponse, location_name: "CaptchaResponse"))
+    SampledHTTPRequest.add_member(:challenge_response, Shapes::ShapeRef.new(shape: ChallengeResponse, location_name: "ChallengeResponse"))
+    SampledHTTPRequest.add_member(:overridden_action, Shapes::ShapeRef.new(shape: Action, location_name: "OverriddenAction"))
     SampledHTTPRequest.struct_class = Types::SampledHTTPRequest
 
     SampledHTTPRequests.member = Shapes::ShapeRef.new(shape: SampledHTTPRequest)
@@ -1184,6 +1222,8 @@ module Aws::WAFV2
     TimeWindow.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
     TimeWindow.struct_class = Types::TimeWindow
 
+    TokenDomains.member = Shapes::ShapeRef.new(shape: TokenDomain)
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceARN"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -1248,6 +1288,8 @@ module Aws::WAFV2
     UpdateWebACLRequest.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, required: true, location_name: "LockToken"))
     UpdateWebACLRequest.add_member(:custom_response_bodies, Shapes::ShapeRef.new(shape: CustomResponseBodies, location_name: "CustomResponseBodies"))
     UpdateWebACLRequest.add_member(:captcha_config, Shapes::ShapeRef.new(shape: CaptchaConfig, location_name: "CaptchaConfig"))
+    UpdateWebACLRequest.add_member(:challenge_config, Shapes::ShapeRef.new(shape: ChallengeConfig, location_name: "ChallengeConfig"))
+    UpdateWebACLRequest.add_member(:token_domains, Shapes::ShapeRef.new(shape: TokenDomains, location_name: "TokenDomains"))
     UpdateWebACLRequest.struct_class = Types::UpdateWebACLRequest
 
     UpdateWebACLResponse.add_member(:next_lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "NextLockToken"))
@@ -1341,6 +1383,8 @@ module Aws::WAFV2
     WebACL.add_member(:label_namespace, Shapes::ShapeRef.new(shape: LabelName, location_name: "LabelNamespace"))
     WebACL.add_member(:custom_response_bodies, Shapes::ShapeRef.new(shape: CustomResponseBodies, location_name: "CustomResponseBodies"))
     WebACL.add_member(:captcha_config, Shapes::ShapeRef.new(shape: CaptchaConfig, location_name: "CaptchaConfig"))
+    WebACL.add_member(:challenge_config, Shapes::ShapeRef.new(shape: ChallengeConfig, location_name: "ChallengeConfig"))
+    WebACL.add_member(:token_domains, Shapes::ShapeRef.new(shape: TokenDomains, location_name: "TokenDomains"))
     WebACL.struct_class = Types::WebACL
 
     WebACLSummaries.member = Shapes::ShapeRef.new(shape: WebACLSummary)
@@ -1475,6 +1519,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFConfigurationWarningException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFExpiredManagedRuleGroupVersionException)
       end)
 
       api.add_operation(:delete_firewall_manager_rule_groups, Seahorse::Model::Operation.new.tap do |o|

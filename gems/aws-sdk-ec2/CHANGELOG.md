@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.343.0 (2022-10-27)
+------------------
+
+* Feature - Feature supports the replacement of instance root volume using an updated AMI without requiring customers to stop their instance.
+
 1.342.0 (2022-10-25)
 ------------------
 

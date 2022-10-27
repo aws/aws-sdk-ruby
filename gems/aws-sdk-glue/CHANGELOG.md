@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2022-10-27)
+------------------
+
+* Feature - Added support for custom datatypes when using custom csv classifier.
+
 1.121.0 (2022-10-25)
 ------------------
 

@@ -1591,6 +1591,10 @@ module Aws::SageMaker
     TrafficRoutingConfig = Shapes::StructureShape.new(name: 'TrafficRoutingConfig')
     TrafficRoutingConfigType = Shapes::StringShape.new(name: 'TrafficRoutingConfigType')
     TrafficType = Shapes::StringShape.new(name: 'TrafficType')
+    TrainingContainerArgument = Shapes::StringShape.new(name: 'TrainingContainerArgument')
+    TrainingContainerArguments = Shapes::ListShape.new(name: 'TrainingContainerArguments')
+    TrainingContainerEntrypoint = Shapes::ListShape.new(name: 'TrainingContainerEntrypoint')
+    TrainingContainerEntrypointString = Shapes::StringShape.new(name: 'TrainingContainerEntrypointString')
     TrainingEnvironmentKey = Shapes::StringShape.new(name: 'TrainingEnvironmentKey')
     TrainingEnvironmentMap = Shapes::MapShape.new(name: 'TrainingEnvironmentMap')
     TrainingEnvironmentValue = Shapes::StringShape.new(name: 'TrainingEnvironmentValue')
@@ -1823,6 +1827,8 @@ module Aws::SageMaker
     AlgorithmSpecification.add_member(:training_input_mode, Shapes::ShapeRef.new(shape: TrainingInputMode, required: true, location_name: "TrainingInputMode"))
     AlgorithmSpecification.add_member(:metric_definitions, Shapes::ShapeRef.new(shape: MetricDefinitionList, location_name: "MetricDefinitions"))
     AlgorithmSpecification.add_member(:enable_sage_maker_metrics_time_series, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableSageMakerMetricsTimeSeries"))
+    AlgorithmSpecification.add_member(:container_entrypoint, Shapes::ShapeRef.new(shape: TrainingContainerEntrypoint, location_name: "ContainerEntrypoint"))
+    AlgorithmSpecification.add_member(:container_arguments, Shapes::ShapeRef.new(shape: TrainingContainerArguments, location_name: "ContainerArguments"))
     AlgorithmSpecification.struct_class = Types::AlgorithmSpecification
 
     AlgorithmStatusDetails.add_member(:validation_statuses, Shapes::ShapeRef.new(shape: AlgorithmStatusItemList, location_name: "ValidationStatuses"))
@@ -7111,6 +7117,10 @@ module Aws::SageMaker
     TrafficRoutingConfig.add_member(:canary_size, Shapes::ShapeRef.new(shape: CapacitySize, location_name: "CanarySize"))
     TrafficRoutingConfig.add_member(:linear_step_size, Shapes::ShapeRef.new(shape: CapacitySize, location_name: "LinearStepSize"))
     TrafficRoutingConfig.struct_class = Types::TrafficRoutingConfig
+
+    TrainingContainerArguments.member = Shapes::ShapeRef.new(shape: TrainingContainerArgument)
+
+    TrainingContainerEntrypoint.member = Shapes::ShapeRef.new(shape: TrainingContainerEntrypointString)
 
     TrainingEnvironmentMap.key = Shapes::ShapeRef.new(shape: TrainingEnvironmentKey)
     TrainingEnvironmentMap.value = Shapes::ShapeRef.new(shape: TrainingEnvironmentValue)

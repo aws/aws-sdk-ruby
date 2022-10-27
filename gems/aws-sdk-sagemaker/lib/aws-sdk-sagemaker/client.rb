@@ -6035,8 +6035,8 @@ module Aws::SageMaker
     #   use of security-sensitive credentials are detected, SageMaker will
     #   reject your training job request and return an exception error.
     #
-    # * `InputDataConfig` - Describes the training dataset and the Amazon
-    #   S3, EFS, or FSx location where it is stored.
+    # * `InputDataConfig` - Describes the input required by the training job
+    #   and the Amazon S3, EFS, or FSx location where it is stored.
     #
     # * `OutputDataConfig` - Identifies the Amazon S3 bucket where you want
     #   SageMaker to save the results of model training.
@@ -6297,6 +6297,8 @@ module Aws::SageMaker
     #         },
     #       ],
     #       enable_sage_maker_metrics_time_series: false,
+    #       container_entrypoint: ["TrainingContainerEntrypointString"],
+    #       container_arguments: ["TrainingContainerArgument"],
     #     },
     #     role_arn: "RoleArn", # required
     #     input_data_config: [
@@ -11882,6 +11884,10 @@ module Aws::SageMaker
     #   resp.algorithm_specification.metric_definitions[0].name #=> String
     #   resp.algorithm_specification.metric_definitions[0].regex #=> String
     #   resp.algorithm_specification.enable_sage_maker_metrics_time_series #=> Boolean
+    #   resp.algorithm_specification.container_entrypoint #=> Array
+    #   resp.algorithm_specification.container_entrypoint[0] #=> String
+    #   resp.algorithm_specification.container_arguments #=> Array
+    #   resp.algorithm_specification.container_arguments[0] #=> String
     #   resp.role_arn #=> String
     #   resp.input_data_config #=> Array
     #   resp.input_data_config[0].channel_name #=> String
@@ -17600,6 +17606,10 @@ module Aws::SageMaker
     #   resp.results[0].training_job.algorithm_specification.metric_definitions[0].name #=> String
     #   resp.results[0].training_job.algorithm_specification.metric_definitions[0].regex #=> String
     #   resp.results[0].training_job.algorithm_specification.enable_sage_maker_metrics_time_series #=> Boolean
+    #   resp.results[0].training_job.algorithm_specification.container_entrypoint #=> Array
+    #   resp.results[0].training_job.algorithm_specification.container_entrypoint[0] #=> String
+    #   resp.results[0].training_job.algorithm_specification.container_arguments #=> Array
+    #   resp.results[0].training_job.algorithm_specification.container_arguments[0] #=> String
     #   resp.results[0].training_job.role_arn #=> String
     #   resp.results[0].training_job.input_data_config #=> Array
     #   resp.results[0].training_job.input_data_config[0].channel_name #=> String
@@ -17796,6 +17806,10 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.metric_definitions[0].name #=> String
     #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.metric_definitions[0].regex #=> String
     #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.enable_sage_maker_metrics_time_series #=> Boolean
+    #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.container_entrypoint #=> Array
+    #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.container_entrypoint[0] #=> String
+    #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.container_arguments #=> Array
+    #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.container_arguments[0] #=> String
     #   resp.results[0].trial_component.source_detail.training_job.role_arn #=> String
     #   resp.results[0].trial_component.source_detail.training_job.input_data_config #=> Array
     #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].channel_name #=> String
@@ -21078,7 +21092,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.149.0'
+      context[:gem_version] = '1.150.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

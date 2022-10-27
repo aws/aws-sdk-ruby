@@ -351,6 +351,8 @@ module Aws::SageMaker
     #           },
     #         ],
     #         enable_sage_maker_metrics_time_series: false,
+    #         container_entrypoint: ["TrainingContainerEntrypointString"],
+    #         container_arguments: ["TrainingContainerArgument"],
     #       }
     #
     # @!attribute [rw] training_image
@@ -473,6 +475,28 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/pre-built-containers-frameworks-deep-learning.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] container_entrypoint
+    #   The [entrypoint script for a Docker container][1] used to run a
+    #   training job. This script takes precedence over the default train
+    #   processing instructions. See [How Amazon SageMaker Runs Your
+    #   Training Image][2] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/builder/
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] container_arguments
+    #   The arguments for a container used to run a training job. See [How
+    #   Amazon SageMaker Runs Your Training Image][1] for additional
+    #   information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmSpecification AWS API Documentation
     #
     class AlgorithmSpecification < Struct.new(
@@ -480,7 +504,9 @@ module Aws::SageMaker
       :algorithm_name,
       :training_input_mode,
       :metric_definitions,
-      :enable_sage_maker_metrics_time_series)
+      :enable_sage_maker_metrics_time_series,
+      :container_entrypoint,
+      :container_arguments)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10059,6 +10085,8 @@ module Aws::SageMaker
     #             },
     #           ],
     #           enable_sage_maker_metrics_time_series: false,
+    #           container_entrypoint: ["TrainingContainerEntrypointString"],
+    #           container_arguments: ["TrainingContainerArgument"],
     #         },
     #         role_arn: "RoleArn", # required
     #         input_data_config: [
