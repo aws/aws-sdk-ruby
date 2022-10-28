@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2022-10-28)
+------------------
+
+* Feature - Add LATEST as a possible GameSDK Version on snapshot
+
 1.2.0 (2022-10-25)
 ------------------
 

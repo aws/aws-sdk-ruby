@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2022-10-28)
+------------------
+
+* Feature - This release introduces support for SCTE-35 segmentation descriptor messages which can be sent within time signal messages.
+
 1.56.0 (2022-10-25)
 ------------------
 

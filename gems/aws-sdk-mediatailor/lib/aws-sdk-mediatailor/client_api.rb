@@ -84,6 +84,7 @@ module Aws::MediaTailor
     HttpConfiguration = Shapes::StructureShape.new(name: 'HttpConfiguration')
     HttpPackageConfiguration = Shapes::StructureShape.new(name: 'HttpPackageConfiguration')
     HttpPackageConfigurations = Shapes::ListShape.new(name: 'HttpPackageConfigurations')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     ListAlertsRequest = Shapes::StructureShape.new(name: 'ListAlertsRequest')
     ListAlertsResponse = Shapes::StructureShape.new(name: 'ListAlertsResponse')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
@@ -129,6 +130,8 @@ module Aws::MediaTailor
     ScheduleEntryType = Shapes::StringShape.new(name: 'ScheduleEntryType')
     SecretsManagerAccessTokenConfiguration = Shapes::StructureShape.new(name: 'SecretsManagerAccessTokenConfiguration')
     SegmentDeliveryConfiguration = Shapes::StructureShape.new(name: 'SegmentDeliveryConfiguration')
+    SegmentationDescriptor = Shapes::StructureShape.new(name: 'SegmentationDescriptor')
+    SegmentationDescriptorList = Shapes::ListShape.new(name: 'SegmentationDescriptorList')
     SlateSource = Shapes::StructureShape.new(name: 'SlateSource')
     SourceLocation = Shapes::StructureShape.new(name: 'SourceLocation')
     SpliceInsertMessage = Shapes::StructureShape.new(name: 'SpliceInsertMessage')
@@ -136,8 +139,10 @@ module Aws::MediaTailor
     StartChannelResponse = Shapes::StructureShape.new(name: 'StartChannelResponse')
     StopChannelRequest = Shapes::StructureShape.new(name: 'StopChannelRequest')
     StopChannelResponse = Shapes::StructureShape.new(name: 'StopChannelResponse')
+    String = Shapes::StringShape.new(name: 'String')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     Tier = Shapes::StringShape.new(name: 'Tier')
+    TimeSignalMessage = Shapes::StructureShape.new(name: 'TimeSignalMessage')
     Transition = Shapes::StructureShape.new(name: 'Transition')
     Type = Shapes::StringShape.new(name: 'Type')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -180,6 +185,7 @@ module Aws::MediaTailor
     AdBreak.add_member(:offset_millis, Shapes::ShapeRef.new(shape: __long, location_name: "OffsetMillis"))
     AdBreak.add_member(:slate, Shapes::ShapeRef.new(shape: SlateSource, location_name: "Slate"))
     AdBreak.add_member(:splice_insert_message, Shapes::ShapeRef.new(shape: SpliceInsertMessage, location_name: "SpliceInsertMessage"))
+    AdBreak.add_member(:time_signal_message, Shapes::ShapeRef.new(shape: TimeSignalMessage, location_name: "TimeSignalMessage"))
     AdBreak.struct_class = Types::AdBreak
 
     AdMarkerPassthrough.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
@@ -756,6 +762,18 @@ module Aws::MediaTailor
     SegmentDeliveryConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
     SegmentDeliveryConfiguration.struct_class = Types::SegmentDeliveryConfiguration
 
+    SegmentationDescriptor.add_member(:segment_num, Shapes::ShapeRef.new(shape: Integer, location_name: "SegmentNum"))
+    SegmentationDescriptor.add_member(:segmentation_event_id, Shapes::ShapeRef.new(shape: Integer, location_name: "SegmentationEventId"))
+    SegmentationDescriptor.add_member(:segmentation_type_id, Shapes::ShapeRef.new(shape: Integer, location_name: "SegmentationTypeId"))
+    SegmentationDescriptor.add_member(:segmentation_upid, Shapes::ShapeRef.new(shape: String, location_name: "SegmentationUpid"))
+    SegmentationDescriptor.add_member(:segmentation_upid_type, Shapes::ShapeRef.new(shape: Integer, location_name: "SegmentationUpidType"))
+    SegmentationDescriptor.add_member(:segments_expected, Shapes::ShapeRef.new(shape: Integer, location_name: "SegmentsExpected"))
+    SegmentationDescriptor.add_member(:sub_segment_num, Shapes::ShapeRef.new(shape: Integer, location_name: "SubSegmentNum"))
+    SegmentationDescriptor.add_member(:sub_segments_expected, Shapes::ShapeRef.new(shape: Integer, location_name: "SubSegmentsExpected"))
+    SegmentationDescriptor.struct_class = Types::SegmentationDescriptor
+
+    SegmentationDescriptorList.member = Shapes::ShapeRef.new(shape: SegmentationDescriptor)
+
     SlateSource.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
     SlateSource.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
     SlateSource.struct_class = Types::SlateSource
@@ -790,6 +808,9 @@ module Aws::MediaTailor
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ResourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TimeSignalMessage.add_member(:segmentation_descriptors, Shapes::ShapeRef.new(shape: SegmentationDescriptorList, location_name: "SegmentationDescriptors"))
+    TimeSignalMessage.struct_class = Types::TimeSignalMessage
 
     Transition.add_member(:duration_millis, Shapes::ShapeRef.new(shape: __long, location_name: "DurationMillis"))
     Transition.add_member(:relative_position, Shapes::ShapeRef.new(shape: RelativePosition, required: true, location_name: "RelativePosition"))

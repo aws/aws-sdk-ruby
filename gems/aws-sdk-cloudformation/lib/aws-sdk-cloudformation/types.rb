@@ -2295,8 +2295,8 @@ module Aws::CloudFormation
     #     `Accounts` parameter. This enables user to avoid certain accounts
     #     within an OU such as suspended accounts.
     #
-    #   * `UNION`\: (default value) StackSets includes additional accounts
-    #     deployment targets.
+    #   * `UNION`\: StackSets includes additional accounts deployment
+    #     targets.
     #
     #     This is the default value if `AccountFilterType` is not provided.
     #     This enables user to update an entire OU and individual accounts
@@ -4708,7 +4708,7 @@ module Aws::CloudFormation
     #         max_results: 1,
     #         filters: [
     #           {
-    #             name: "DETAILED_STATUS", # accepts DETAILED_STATUS
+    #             name: "DETAILED_STATUS", # accepts DETAILED_STATUS, LAST_OPERATION_ID
     #             values: "StackInstanceFilterValues",
     #           },
     #         ],
@@ -4739,7 +4739,7 @@ module Aws::CloudFormation
     #   @return [Integer]
     #
     # @!attribute [rw] filters
-    #   The status that stack instances are filtered by.
+    #   The filter to apply to stack instances
     #   @return [Array<Types::StackInstanceFilter>]
     #
     # @!attribute [rw] stack_instance_account
@@ -4876,6 +4876,12 @@ module Aws::CloudFormation
     #         next_token: "NextToken",
     #         max_results: 1,
     #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
+    #         filters: [
+    #           {
+    #             name: "OPERATION_RESULT_STATUS", # accepts OPERATION_RESULT_STATUS
+    #             values: "OperationResultFilterValues",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] stack_set_name
@@ -4927,6 +4933,10 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   The filter to apply to operation results.
+    #   @return [Array<Types::OperationResultFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationResultsInput AWS API Documentation
     #
     class ListStackSetOperationResultsInput < Struct.new(
@@ -4934,7 +4944,8 @@ module Aws::CloudFormation
       :operation_id,
       :next_token,
       :max_results,
-      :call_as)
+      :call_as,
+      :filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5666,6 +5677,33 @@ module Aws::CloudFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/OperationNotFoundException AWS API Documentation
     #
     class OperationNotFoundException < Aws::EmptyStructure; end
+
+    # The status that operation results are filtered by.
+    #
+    # @note When making an API call, you may pass OperationResultFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "OPERATION_RESULT_STATUS", # accepts OPERATION_RESULT_STATUS
+    #         values: "OperationResultFilterValues",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The type of filter to apply.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The value to filter by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/OperationResultFilter AWS API Documentation
+    #
+    class OperationResultFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Error reserved for use by the [CloudFormation CLI][1]. CloudFormation
     # doesn't return this error to users.
@@ -7435,6 +7473,11 @@ module Aws::CloudFormation
     #   stack instance on which drift detection hasn't yet been performed.
     #   @return [Time]
     #
+    # @!attribute [rw] last_operation_id
+    #   The last unique ID of a StackSet operation performed on a stack
+    #   instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstance AWS API Documentation
     #
     class StackInstance < Struct.new(
@@ -7448,7 +7491,8 @@ module Aws::CloudFormation
       :status_reason,
       :organizational_unit_id,
       :drift_status,
-      :last_drift_check_timestamp)
+      :last_drift_check_timestamp,
+      :last_operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7491,13 +7535,13 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # The status that stack instances are filtered by.
+    # The filter to apply to stack instances
     #
     # @note When making an API call, you may pass StackInstanceFilter
     #   data as a hash:
     #
     #       {
-    #         name: "DETAILED_STATUS", # accepts DETAILED_STATUS
+    #         name: "DETAILED_STATUS", # accepts DETAILED_STATUS, LAST_OPERATION_ID
     #         values: "StackInstanceFilterValues",
     #       }
     #
@@ -7614,6 +7658,11 @@ module Aws::CloudFormation
     #   stack instance on which drift detection hasn't yet been performed.
     #   @return [Time]
     #
+    # @!attribute [rw] last_operation_id
+    #   The last unique ID of a StackSet operation performed on a stack
+    #   instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstanceSummary AWS API Documentation
     #
     class StackInstanceSummary < Struct.new(
@@ -7626,7 +7675,8 @@ module Aws::CloudFormation
       :stack_instance_status,
       :organizational_unit_id,
       :drift_status,
-      :last_drift_check_timestamp)
+      :last_drift_check_timestamp,
+      :last_operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8480,6 +8530,10 @@ module Aws::CloudFormation
     #   The status of the operation in details.
     #   @return [String]
     #
+    # @!attribute [rw] status_details
+    #   Detailed information about the StackSet operation.
+    #   @return [Types::StackSetOperationStatusDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperation AWS API Documentation
     #
     class StackSetOperation < Struct.new(
@@ -8495,7 +8549,8 @@ module Aws::CloudFormation
       :end_timestamp,
       :deployment_targets,
       :stack_set_drift_detection_details,
-      :status_reason)
+      :status_reason,
+      :status_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8680,6 +8735,21 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # Detailed information about the StackSet operation.
+    #
+    # @!attribute [rw] failed_stack_instances_count
+    #   The number of stack instances for which the StackSet operation
+    #   failed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationStatusDetails AWS API Documentation
+    #
+    class StackSetOperationStatusDetails < Struct.new(
+      :failed_stack_instances_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The structures that contain summary information about the specified
     # operation.
     #
@@ -8747,6 +8817,22 @@ module Aws::CloudFormation
     #   The status of the operation in details.
     #   @return [String]
     #
+    # @!attribute [rw] status_details
+    #   Detailed information about the stack set operation.
+    #   @return [Types::StackSetOperationStatusDetails]
+    #
+    # @!attribute [rw] operation_preferences
+    #   The user-specified preferences for how CloudFormation performs a
+    #   stack set operation.
+    #
+    #   For more information about maximum concurrent accounts and failure
+    #   tolerance, see [Stack set operation options][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
+    #   @return [Types::StackSetOperationPreferences]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationSummary AWS API Documentation
     #
     class StackSetOperationSummary < Struct.new(
@@ -8755,7 +8841,9 @@ module Aws::CloudFormation
       :status,
       :creation_timestamp,
       :end_timestamp,
-      :status_reason)
+      :status_reason,
+      :status_details,
+      :operation_preferences)
       SENSITIVE = []
       include Aws::Structure
     end

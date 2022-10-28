@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2022-10-28)
+------------------
+
+* Feature - Update to the documentation section of the Cloud9 API Reference guide.
+
 1.46.0 (2022-10-25)
 ------------------
 

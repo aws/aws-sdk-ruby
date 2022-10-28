@@ -416,10 +416,13 @@ module Aws::Cloud9
     #   specify a valid AMI alias or a valid Amazon EC2 Systems Manager (SSM)
     #   path.
     #
-    #   The default AMI is used if the parameter isn't explicitly assigned a
-    #   value in the request. Because Amazon Linux AMI has ended standard
-    #   support as of December 31, 2020, we recommend you choose Amazon Linux
-    #   2, which includes long term support through 2023.
+    #   The default Amazon Linux AMI is currently used if the parameter isn't
+    #   explicitly assigned a value in the request.
+    #
+    #   In the future the parameter for Amazon Linux will no longer be
+    #   available when you specify an AMI for your instance. Amazon Linux 2
+    #   will then become the default AMI, which is used to launch your
+    #   instance if no parameter is explicitly defined.
     #
     #   <b>AMI aliases </b>
     #
@@ -627,7 +630,7 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
-    # Deletes an environment member from an Cloud9 development environment.
+    # Deletes an environment member from a development environment.
     #
     # @option params [required, String] :environment_id
     #   The ID of the environment to delete the environment member from.
@@ -1228,7 +1231,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

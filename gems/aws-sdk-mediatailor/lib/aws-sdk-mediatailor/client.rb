@@ -742,7 +742,7 @@ module Aws::MediaTailor
     #   resp = client.create_program({
     #     ad_breaks: [
     #       {
-    #         message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT
+    #         message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT, TIME_SIGNAL
     #         offset_millis: 1,
     #         slate: {
     #           source_location_name: "__string",
@@ -753,6 +753,20 @@ module Aws::MediaTailor
     #           avails_expected: 1,
     #           splice_event_id: 1,
     #           unique_program_id: 1,
+    #         },
+    #         time_signal_message: {
+    #           segmentation_descriptors: [
+    #             {
+    #               segment_num: 1,
+    #               segmentation_event_id: 1,
+    #               segmentation_type_id: 1,
+    #               segmentation_upid: "String",
+    #               segmentation_upid_type: 1,
+    #               segments_expected: 1,
+    #               sub_segment_num: 1,
+    #               sub_segments_expected: 1,
+    #             },
+    #           ],
     #         },
     #       },
     #     ],
@@ -775,7 +789,7 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.ad_breaks #=> Array
-    #   resp.ad_breaks[0].message_type #=> String, one of "SPLICE_INSERT"
+    #   resp.ad_breaks[0].message_type #=> String, one of "SPLICE_INSERT", "TIME_SIGNAL"
     #   resp.ad_breaks[0].offset_millis #=> Integer
     #   resp.ad_breaks[0].slate.source_location_name #=> String
     #   resp.ad_breaks[0].slate.vod_source_name #=> String
@@ -783,6 +797,15 @@ module Aws::MediaTailor
     #   resp.ad_breaks[0].splice_insert_message.avails_expected #=> Integer
     #   resp.ad_breaks[0].splice_insert_message.splice_event_id #=> Integer
     #   resp.ad_breaks[0].splice_insert_message.unique_program_id #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors #=> Array
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segment_num #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_event_id #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_type_id #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_upid #=> String
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_upid_type #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segments_expected #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segment_num #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segments_expected #=> Integer
     #   resp.arn #=> String
     #   resp.channel_name #=> String
     #   resp.creation_time #=> Time
@@ -1342,7 +1365,7 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.ad_breaks #=> Array
-    #   resp.ad_breaks[0].message_type #=> String, one of "SPLICE_INSERT"
+    #   resp.ad_breaks[0].message_type #=> String, one of "SPLICE_INSERT", "TIME_SIGNAL"
     #   resp.ad_breaks[0].offset_millis #=> Integer
     #   resp.ad_breaks[0].slate.source_location_name #=> String
     #   resp.ad_breaks[0].slate.vod_source_name #=> String
@@ -1350,6 +1373,15 @@ module Aws::MediaTailor
     #   resp.ad_breaks[0].splice_insert_message.avails_expected #=> Integer
     #   resp.ad_breaks[0].splice_insert_message.splice_event_id #=> Integer
     #   resp.ad_breaks[0].splice_insert_message.unique_program_id #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors #=> Array
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segment_num #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_event_id #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_type_id #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_upid #=> String
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_upid_type #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].segments_expected #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segment_num #=> Integer
+    #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segments_expected #=> Integer
     #   resp.arn #=> String
     #   resp.channel_name #=> String
     #   resp.creation_time #=> Time
@@ -2847,7 +2879,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2022-10-28)
+------------------
+
+* Feature - Fix incorrect endpoint-prefix in endpoint ruleset.
+
 1.2.0 (2022-10-25)
 ------------------
 

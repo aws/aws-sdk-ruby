@@ -48,6 +48,8 @@ module Aws::AppStream
     BatchDisassociateUserStackResult = Shapes::StructureShape.new(name: 'BatchDisassociateUserStackResult')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
+    CertificateBasedAuthProperties = Shapes::StructureShape.new(name: 'CertificateBasedAuthProperties')
+    CertificateBasedAuthStatus = Shapes::StringShape.new(name: 'CertificateBasedAuthStatus')
     ComputeCapacity = Shapes::StructureShape.new(name: 'ComputeCapacity')
     ComputeCapacityStatus = Shapes::StructureShape.new(name: 'ComputeCapacityStatus')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
@@ -388,6 +390,10 @@ module Aws::AppStream
     BatchDisassociateUserStackResult.add_member(:errors, Shapes::ShapeRef.new(shape: UserStackAssociationErrorList, location_name: "errors"))
     BatchDisassociateUserStackResult.struct_class = Types::BatchDisassociateUserStackResult
 
+    CertificateBasedAuthProperties.add_member(:status, Shapes::ShapeRef.new(shape: CertificateBasedAuthStatus, location_name: "Status"))
+    CertificateBasedAuthProperties.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
+    CertificateBasedAuthProperties.struct_class = Types::CertificateBasedAuthProperties
+
     ComputeCapacity.add_member(:desired_instances, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "DesiredInstances"))
     ComputeCapacity.struct_class = Types::ComputeCapacity
 
@@ -439,6 +445,7 @@ module Aws::AppStream
     CreateDirectoryConfigRequest.add_member(:directory_name, Shapes::ShapeRef.new(shape: DirectoryName, required: true, location_name: "DirectoryName"))
     CreateDirectoryConfigRequest.add_member(:organizational_unit_distinguished_names, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedNamesList, required: true, location_name: "OrganizationalUnitDistinguishedNames"))
     CreateDirectoryConfigRequest.add_member(:service_account_credentials, Shapes::ShapeRef.new(shape: ServiceAccountCredentials, location_name: "ServiceAccountCredentials"))
+    CreateDirectoryConfigRequest.add_member(:certificate_based_auth_properties, Shapes::ShapeRef.new(shape: CertificateBasedAuthProperties, location_name: "CertificateBasedAuthProperties"))
     CreateDirectoryConfigRequest.struct_class = Types::CreateDirectoryConfigRequest
 
     CreateDirectoryConfigResult.add_member(:directory_config, Shapes::ShapeRef.new(shape: DirectoryConfig, location_name: "DirectoryConfig"))
@@ -759,6 +766,7 @@ module Aws::AppStream
     DirectoryConfig.add_member(:organizational_unit_distinguished_names, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedNamesList, location_name: "OrganizationalUnitDistinguishedNames"))
     DirectoryConfig.add_member(:service_account_credentials, Shapes::ShapeRef.new(shape: ServiceAccountCredentials, location_name: "ServiceAccountCredentials"))
     DirectoryConfig.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    DirectoryConfig.add_member(:certificate_based_auth_properties, Shapes::ShapeRef.new(shape: CertificateBasedAuthProperties, location_name: "CertificateBasedAuthProperties"))
     DirectoryConfig.struct_class = Types::DirectoryConfig
 
     DirectoryConfigList.member = Shapes::ShapeRef.new(shape: DirectoryConfig)
@@ -1150,6 +1158,7 @@ module Aws::AppStream
     UpdateDirectoryConfigRequest.add_member(:directory_name, Shapes::ShapeRef.new(shape: DirectoryName, required: true, location_name: "DirectoryName"))
     UpdateDirectoryConfigRequest.add_member(:organizational_unit_distinguished_names, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedNamesList, location_name: "OrganizationalUnitDistinguishedNames"))
     UpdateDirectoryConfigRequest.add_member(:service_account_credentials, Shapes::ShapeRef.new(shape: ServiceAccountCredentials, location_name: "ServiceAccountCredentials"))
+    UpdateDirectoryConfigRequest.add_member(:certificate_based_auth_properties, Shapes::ShapeRef.new(shape: CertificateBasedAuthProperties, location_name: "CertificateBasedAuthProperties"))
     UpdateDirectoryConfigRequest.struct_class = Types::UpdateDirectoryConfigRequest
 
     UpdateDirectoryConfigResult.add_member(:directory_config, Shapes::ShapeRef.new(shape: DirectoryConfig, location_name: "DirectoryConfig"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2022-10-28)
+------------------
+
+* Feature - AWS App Runner adds .NET 6, Go 1, PHP 8.1 and Ruby 3.1 runtimes.
+
 1.16.0 (2022-10-25)
 ------------------
 

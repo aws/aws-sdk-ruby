@@ -72,7 +72,7 @@ module Aws::MediaTailor
     #   data as a hash:
     #
     #       {
-    #         message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT
+    #         message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT, TIME_SIGNAL
     #         offset_millis: 1,
     #         slate: {
     #           source_location_name: "__string",
@@ -83,6 +83,20 @@ module Aws::MediaTailor
     #           avails_expected: 1,
     #           splice_event_id: 1,
     #           unique_program_id: 1,
+    #         },
+    #         time_signal_message: {
+    #           segmentation_descriptors: [
+    #             {
+    #               segment_num: 1,
+    #               segmentation_event_id: 1,
+    #               segmentation_type_id: 1,
+    #               segmentation_upid: "String",
+    #               segmentation_upid_type: 1,
+    #               segments_expected: 1,
+    #               sub_segment_num: 1,
+    #               sub_segments_expected: 1,
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -107,13 +121,25 @@ module Aws::MediaTailor
     #   SCTE-35 specficiaiton, section 9.7.3.1.
     #   @return [Types::SpliceInsertMessage]
     #
+    # @!attribute [rw] time_signal_message
+    #   Defines the SCTE-35 `time_signal` message inserted around the ad.
+    #
+    #   Programs on a channel's schedule can be configured with one or more
+    #   ad breaks. You can attach a `splice_insert` SCTE-35 message to the
+    #   ad break. This message provides basic metadata about the ad break.
+    #
+    #   See section 9.7.4 of the 2022 SCTE-35 specification for more
+    #   information.
+    #   @return [Types::TimeSignalMessage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AdBreak AWS API Documentation
     #
     class AdBreak < Struct.new(
       :message_type,
       :offset_millis,
       :slate,
-      :splice_insert_message)
+      :splice_insert_message,
+      :time_signal_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -882,7 +908,7 @@ module Aws::MediaTailor
     #       {
     #         ad_breaks: [
     #           {
-    #             message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT
+    #             message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT, TIME_SIGNAL
     #             offset_millis: 1,
     #             slate: {
     #               source_location_name: "__string",
@@ -893,6 +919,20 @@ module Aws::MediaTailor
     #               avails_expected: 1,
     #               splice_event_id: 1,
     #               unique_program_id: 1,
+    #             },
+    #             time_signal_message: {
+    #               segmentation_descriptors: [
+    #                 {
+    #                   segment_num: 1,
+    #                   segmentation_event_id: 1,
+    #                   segmentation_type_id: 1,
+    #                   segmentation_upid: "String",
+    #                   segmentation_upid_type: 1,
+    #                   segments_expected: 1,
+    #                   sub_segment_num: 1,
+    #                   sub_segments_expected: 1,
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -3998,6 +4038,104 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The `segmentation_descriptor` message can contain advanced metadata
+    # fields, like content identifiers, to convey a wide range of
+    # information about the ad break. MediaTailor writes the ad metadata in
+    # the egress manifest as part of the `EXT-X-DATERANGE` or `EventStream`
+    # ad marker's SCTE-35 data.
+    #
+    # `segmentation_descriptor` messages must be sent with the `time_signal`
+    # message type.
+    #
+    # See the `segmentation_descriptor()` table of the 2022 SCTE-35
+    # specification for more information.
+    #
+    # @note When making an API call, you may pass SegmentationDescriptor
+    #   data as a hash:
+    #
+    #       {
+    #         segment_num: 1,
+    #         segmentation_event_id: 1,
+    #         segmentation_type_id: 1,
+    #         segmentation_upid: "String",
+    #         segmentation_upid_type: 1,
+    #         segments_expected: 1,
+    #         sub_segment_num: 1,
+    #         sub_segments_expected: 1,
+    #       }
+    #
+    # @!attribute [rw] segment_num
+    #   The segment number to assign to the
+    #   `segmentation_descriptor.segment_num` message, as defined in section
+    #   10.3.3.1 of the 2022 SCTE-35 specification Values must be between 0
+    #   and 256, inclusive. The default value is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segmentation_event_id
+    #   The Event Identifier to assign to the
+    #   `segmentation_descriptor.segmentation_event_id` message, as defined
+    #   in section 10.3.3.1 of the 2022 SCTE-35 specification. The default
+    #   value is 1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segmentation_type_id
+    #   The Type Identifier to assign to the
+    #   `segmentation_descriptor.segmentation_type_id` message, as defined
+    #   in section 10.3.3.1 of the 2022 SCTE-35 specification. Values must
+    #   be between 0 and 256, inclusive. The default value is 48.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segmentation_upid
+    #   The Upid to assign to the
+    #   `segmentation_descriptor.segmentation_upid` message, as defined in
+    #   section 10.3.3.1 of the 2022 SCTE-35 specification. The value must
+    #   be a hexadecimal string containing only the characters 0 though 9
+    #   and A through F. The default value is "" (an empty string).
+    #   @return [String]
+    #
+    # @!attribute [rw] segmentation_upid_type
+    #   The Upid Type to assign to the
+    #   `segmentation_descriptor.segmentation_upid_type` message, as defined
+    #   in section 10.3.3.1 of the 2022 SCTE-35 specification. Values must
+    #   be between 0 and 256, inclusive. The default value is 14.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segments_expected
+    #   The number of segments expected, which is assigned to the
+    #   `segmentation_descriptor.segments_expectedS` message, as defined in
+    #   section 10.3.3.1 of the 2022 SCTE-35 specification Values must be
+    #   between 0 and 256, inclusive. The default value is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sub_segment_num
+    #   The sub-segment number to assign to the
+    #   `segmentation_descriptor.sub_segment_num` message, as defined in
+    #   section 10.3.3.1 of the 2022 SCTE-35 specification. Values must be
+    #   between 0 and 256, inclusive. The defualt value is null.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sub_segments_expected
+    #   The number of sub-segments expected, which is assigned to the
+    #   `segmentation_descriptor.sub_segments_expected` message, as defined
+    #   in section 10.3.3.1 of the 2022 SCTE-35 specification. Values must
+    #   be between 0 and 256, inclusive. The default value is null.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/SegmentationDescriptor AWS API Documentation
+    #
+    class SegmentationDescriptor < Struct.new(
+      :segment_num,
+      :segmentation_event_id,
+      :segmentation_type_id,
+      :segmentation_upid,
+      :segmentation_upid_type,
+      :segments_expected,
+      :sub_segment_num,
+      :sub_segments_expected)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Slate VOD source configuration.
     #
     # @note When making an API call, you may pass SlateSource
@@ -4218,6 +4356,49 @@ module Aws::MediaTailor
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The SCTE-35 `time_signal` message can be sent with one or more
+    # `segmentation_descriptor` messages. A `time_signal` message can be
+    # sent only if a single `segmentation_descriptor` message is sent.
+    #
+    # The `time_signal` message contains only the `splice_time` field which
+    # is constructed using a given presentation timestamp. When sending a
+    # `time_signal` message, the `splice_command_type` field in the
+    # `splice_info_section` message is set to 6 (0x06).
+    #
+    # See the `time_signal()` table of the 2022 SCTE-35 specification for
+    # more information.
+    #
+    # @note When making an API call, you may pass TimeSignalMessage
+    #   data as a hash:
+    #
+    #       {
+    #         segmentation_descriptors: [
+    #           {
+    #             segment_num: 1,
+    #             segmentation_event_id: 1,
+    #             segmentation_type_id: 1,
+    #             segmentation_upid: "String",
+    #             segmentation_upid_type: 1,
+    #             segments_expected: 1,
+    #             sub_segment_num: 1,
+    #             sub_segments_expected: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] segmentation_descriptors
+    #   The configurations for the SCTE-35 `segmentation_descriptor`
+    #   message(s) sent with the `time_signal` message.
+    #   @return [Array<Types::SegmentationDescriptor>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/TimeSignalMessage AWS API Documentation
+    #
+    class TimeSignalMessage < Struct.new(
+      :segmentation_descriptors)
       SENSITIVE = []
       include Aws::Structure
     end
