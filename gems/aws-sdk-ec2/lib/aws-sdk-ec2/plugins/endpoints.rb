@@ -56,6 +56,8 @@ module Aws::EC2
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :accept_address_transfer
+            Aws::EC2::Endpoints::AcceptAddressTransfer.build(context)
           when :accept_reserved_instances_exchange_quote
             Aws::EC2::Endpoints::AcceptReservedInstancesExchangeQuote.build(context)
           when :accept_transit_gateway_multicast_domain_associations
@@ -456,6 +458,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DeregisterTransitGatewayMulticastGroupSources.build(context)
           when :describe_account_attributes
             Aws::EC2::Endpoints::DescribeAccountAttributes.build(context)
+          when :describe_address_transfers
+            Aws::EC2::Endpoints::DescribeAddressTransfers.build(context)
           when :describe_addresses
             Aws::EC2::Endpoints::DescribeAddresses.build(context)
           when :describe_addresses_attribute
@@ -734,6 +738,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DetachVolume.build(context)
           when :detach_vpn_gateway
             Aws::EC2::Endpoints::DetachVpnGateway.build(context)
+          when :disable_address_transfer
+            Aws::EC2::Endpoints::DisableAddressTransfer.build(context)
           when :disable_ebs_encryption_by_default
             Aws::EC2::Endpoints::DisableEbsEncryptionByDefault.build(context)
           when :disable_fast_launch
@@ -778,6 +784,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DisassociateTrunkInterface.build(context)
           when :disassociate_vpc_cidr_block
             Aws::EC2::Endpoints::DisassociateVpcCidrBlock.build(context)
+          when :enable_address_transfer
+            Aws::EC2::Endpoints::EnableAddressTransfer.build(context)
           when :enable_ebs_encryption_by_default
             Aws::EC2::Endpoints::EnableEbsEncryptionByDefault.build(context)
           when :enable_fast_launch

@@ -464,12 +464,6 @@ module Aws::CloudWatchLogs
     # permission to write to the S3 bucket that you specify as the
     # destination.
     #
-    # Exporting log data to Amazon S3 buckets that are encrypted by KMS is
-    # not supported. Exporting log data to Amazon S3 buckets that have S3
-    # Object Lock enabled with a retention period is not supported.
-    #
-    #  Exporting to S3 buckets that are encrypted with AES-256 is supported.
-    #
     # This is an asynchronous call. If all the required information is
     # provided, this operation initiates an export task and responds with
     # the ID of the task. After the task has started, you can use
@@ -482,11 +476,8 @@ module Aws::CloudWatchLogs
     # you can specify a prefix to be used as the Amazon S3 key prefix for
     # all exported objects.
     #
-    # <note markdown="1"> Time-based sorting on chunks of log data inside an exported file is
-    # not guaranteed. You can sort the exported log fild data by using Linux
-    # utilities.
-    #
-    #  </note>
+    # Exporting to S3 buckets that are encrypted with AES-256 is supported.
+    # Exporting to S3 buckets encrypted with SSE-KMS is not supported.
     #
     #
     #
@@ -1793,7 +1784,57 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Displays the tags associated with a CloudWatch Logs resource.
+    # Currently, log groups and destinations support tagging.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource that you want to view tags for.
+    #
+    #   The ARN format of a log group is
+    #   `arn:aws:logs:Region:account-id:log-group:log-group-name `
+    #
+    #   The ARN format of a destination is
+    #   `arn:aws:logs:Region:account-id:destination:destination-name `
+    #
+    #   For more information about ARN format, see [CloudWatch Logs resources
+    #   and operations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # The ListTagsLogGroup operation is on the path to deprecation. We
+    # recommend that you use [ListTagsForResource][1] instead.
+    #
     # Lists the tags for the specified log group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -1856,6 +1897,16 @@ module Aws::CloudWatchLogs
     #   The ARN of an IAM role that grants CloudWatch Logs permissions to call
     #   the Amazon Kinesis `PutRecord` operation on the destination stream.
     #
+    # @option params [Hash<String,String>] :tags
+    #   An optional list of key-value pairs to associate with the resource.
+    #
+    #   For more information about tagging, see [Tagging Amazon Web Services
+    #   resources][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
     # @return [Types::PutDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutDestinationResponse#destination #destination} => Types::Destination
@@ -1866,6 +1917,9 @@ module Aws::CloudWatchLogs
     #     destination_name: "DestinationName", # required
     #     target_arn: "TargetArn", # required
     #     role_arn: "RoleArn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2277,7 +2331,7 @@ module Aws::CloudWatchLogs
     # @option params [required, Integer] :retention_in_days
     #   The number of days to retain the log events in the specified log
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180,
-    #   365, 400, 545, 731, 1827, 2192, 2557, 2922, 3288, and 3653.
+    #   365, 400, 545, 731, 1827, and 3653.
     #
     #   To set a log group to never have log events expire, use
     #   [DeleteRetentionPolicy][1].
@@ -2520,26 +2574,30 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # The TagLogGroup operation is on the path to deprecation. We recommend
+    # that you use [TagResource][1] instead.
+    #
     # Adds or updates the specified tags for the specified log group.
     #
-    # To list the tags for a log group, use [ListTagsLogGroup][1]. To remove
-    # tags, use [UntagLogGroup][2].
+    # To list the tags for a log group, use [ListTagsForResource][2]. To
+    # remove tags, use [UntagResource][3].
     #
     # For more information about tags, see [Tag Log Groups in Amazon
-    # CloudWatch Logs][3] in the *Amazon CloudWatch Logs User Guide*.
+    # CloudWatch Logs][4] in the *Amazon CloudWatch Logs User Guide*.
     #
     # CloudWatch Logs doesn’t support IAM policies that prevent users from
     # assigning specified tags to log groups using the
     # `aws:Resource/key-name ` or `aws:TagKeys` condition keys. For more
     # information about using tags to control access, see [Controlling
-    # access to Amazon Web Services resources using tags][4].
+    # access to Amazon Web Services resources using tags][5].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html
-    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagLogGroup.html
-    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#log-group-tagging
-    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#log-group-tagging
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -2564,6 +2622,64 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def tag_log_group(params = {}, options = {})
       req = build_request(:tag_log_group, params)
+      req.send_request(options)
+    end
+
+    # Assigns one or more tags (key-value pairs) to the specified CloudWatch
+    # Logs resource. Currently, the only CloudWatch Logs resources that can
+    # be tagged are log groups and destinations.
+    #
+    # Tags can help you organize and categorize your resources. You can also
+    # use them to scope user permissions by granting a user permission to
+    # access or change only resources with certain tag values.
+    #
+    # Tags don't have any semantic meaning to Amazon Web Services and are
+    # interpreted strictly as strings of characters.
+    #
+    # You can use the `TagResource` action with a resource that already has
+    # tags. If you specify a new tag key for the alarm, this tag is appended
+    # to the list of tags associated with the alarm. If you specify a tag
+    # key that is already associated with the alarm, the new tag value that
+    # you specify replaces the previous value for that tag.
+    #
+    # You can associate as many as 50 tags with a CloudWatch Logs resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource that you're adding tags to.
+    #
+    #   The ARN format of a log group is
+    #   `arn:aws:logs:Region:account-id:log-group:log-group-name `
+    #
+    #   The ARN format of a destination is
+    #   `arn:aws:logs:Region:account-id:destination:destination-name `
+    #
+    #   For more information about ARN format, see [CloudWatch Logs resources
+    #   and operations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The list of key-value pairs to associate with the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
       req.send_request(options)
     end
 
@@ -2608,10 +2724,13 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # The UntagLogGroup operation is on the path to deprecation. We
+    # recommend that you use [UntagResource][1] instead.
+    #
     # Removes the specified tags from the specified log group.
     #
-    # To list the tags for a log group, use [ListTagsLogGroup][1]. To add
-    # tags, use [TagLogGroup][2].
+    # To list the tags for a log group, use [ListTagsForResource][2]. To add
+    # tags, use [TagResource][3].
     #
     # CloudWatch Logs doesn’t support IAM policies that prevent users from
     # assigning specified tags to log groups using the
@@ -2619,8 +2738,9 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html
-    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagLogGroup.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -2646,6 +2766,46 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Removes one or more tags from the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the CloudWatch Logs resource that you're removing tags
+    #   from.
+    #
+    #   The ARN format of a log group is
+    #   `arn:aws:logs:Region:account-id:log-group:log-group-name `
+    #
+    #   The ARN format of a destination is
+    #   `arn:aws:logs:Region:account-id:destination:destination-name `
+    #
+    #   For more information about ARN format, see [CloudWatch Logs resources
+    #   and operations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of tag keys to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2659,7 +2819,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -224,6 +224,8 @@ module Aws::Connect
     DisassociateQueueQuickConnectsRequest = Shapes::StructureShape.new(name: 'DisassociateQueueQuickConnectsRequest')
     DisassociateRoutingProfileQueuesRequest = Shapes::StructureShape.new(name: 'DisassociateRoutingProfileQueuesRequest')
     DisassociateSecurityKeyRequest = Shapes::StructureShape.new(name: 'DisassociateSecurityKeyRequest')
+    DismissUserContactRequest = Shapes::StructureShape.new(name: 'DismissUserContactRequest')
+    DismissUserContactResponse = Shapes::StructureShape.new(name: 'DismissUserContactResponse')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     Distribution = Shapes::StructureShape.new(name: 'Distribution')
     DistributionList = Shapes::ListShape.new(name: 'DistributionList')
@@ -1402,6 +1404,13 @@ module Aws::Connect
     DisassociateSecurityKeyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DisassociateSecurityKeyRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, required: true, location: "uri", location_name: "AssociationId"))
     DisassociateSecurityKeyRequest.struct_class = Types::DisassociateSecurityKeyRequest
+
+    DismissUserContactRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
+    DismissUserContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DismissUserContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    DismissUserContactRequest.struct_class = Types::DismissUserContactRequest
+
+    DismissUserContactResponse.struct_class = Types::DismissUserContactResponse
 
     Distribution.add_member(:region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "Region"))
     Distribution.add_member(:percentage, Shapes::ShapeRef.new(shape: Percentage, required: true, location_name: "Percentage"))
@@ -3899,6 +3908,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:dismiss_user_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DismissUserContact"
+        o.http_method = "POST"
+        o.http_request_uri = "/users/{InstanceId}/{UserId}/contact"
+        o.input = Shapes::ShapeRef.new(shape: DismissUserContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: DismissUserContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:get_contact_attributes, Seahorse::Model::Operation.new.tap do |o|

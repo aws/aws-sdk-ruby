@@ -68,6 +68,8 @@ module Aws::AppRunner
             Aws::AppRunner::Endpoints::CreateService.build(context)
           when :create_vpc_connector
             Aws::AppRunner::Endpoints::CreateVpcConnector.build(context)
+          when :create_vpc_ingress_connection
+            Aws::AppRunner::Endpoints::CreateVpcIngressConnection.build(context)
           when :delete_auto_scaling_configuration
             Aws::AppRunner::Endpoints::DeleteAutoScalingConfiguration.build(context)
           when :delete_connection
@@ -78,6 +80,8 @@ module Aws::AppRunner
             Aws::AppRunner::Endpoints::DeleteService.build(context)
           when :delete_vpc_connector
             Aws::AppRunner::Endpoints::DeleteVpcConnector.build(context)
+          when :delete_vpc_ingress_connection
+            Aws::AppRunner::Endpoints::DeleteVpcIngressConnection.build(context)
           when :describe_auto_scaling_configuration
             Aws::AppRunner::Endpoints::DescribeAutoScalingConfiguration.build(context)
           when :describe_custom_domains
@@ -88,6 +92,8 @@ module Aws::AppRunner
             Aws::AppRunner::Endpoints::DescribeService.build(context)
           when :describe_vpc_connector
             Aws::AppRunner::Endpoints::DescribeVpcConnector.build(context)
+          when :describe_vpc_ingress_connection
+            Aws::AppRunner::Endpoints::DescribeVpcIngressConnection.build(context)
           when :disassociate_custom_domain
             Aws::AppRunner::Endpoints::DisassociateCustomDomain.build(context)
           when :list_auto_scaling_configurations
@@ -104,6 +110,8 @@ module Aws::AppRunner
             Aws::AppRunner::Endpoints::ListTagsForResource.build(context)
           when :list_vpc_connectors
             Aws::AppRunner::Endpoints::ListVpcConnectors.build(context)
+          when :list_vpc_ingress_connections
+            Aws::AppRunner::Endpoints::ListVpcIngressConnections.build(context)
           when :pause_service
             Aws::AppRunner::Endpoints::PauseService.build(context)
           when :resume_service
@@ -116,6 +124,8 @@ module Aws::AppRunner
             Aws::AppRunner::Endpoints::UntagResource.build(context)
           when :update_service
             Aws::AppRunner::Endpoints::UpdateService.build(context)
+          when :update_vpc_ingress_connection
+            Aws::AppRunner::Endpoints::UpdateVpcIngressConnection.build(context)
           end
         end
       end

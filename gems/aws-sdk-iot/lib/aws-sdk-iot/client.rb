@@ -2490,7 +2490,13 @@ module Aws::IoT
     #   This IoT role grants permission to provision a device.
     #
     # @option params [Types::ProvisioningHook] :pre_provisioning_hook
-    #   Creates a pre-provisioning hook template.
+    #   Creates a pre-provisioning hook template. Only supports template of
+    #   type `FLEET_PROVISIONING`. For more information about provisioning
+    #   template types, see [type][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_CreateProvisioningTemplate.html#iot-CreateProvisioningTemplate-request-type
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the provisioning template.
@@ -3334,6 +3340,17 @@ module Aws::IoT
     #             type: "ElasticsearchType", # required
     #             id: "ElasticsearchId", # required
     #           },
+    #           location: {
+    #             role_arn: "AwsArn", # required
+    #             tracker_name: "String", # required
+    #             device_id: "String", # required
+    #             timestamp: {
+    #               value: "String", # required
+    #               unit: "String",
+    #             },
+    #             latitude: "String", # required
+    #             longitude: "String", # required
+    #           },
     #         },
     #       ],
     #       rule_disabled: false,
@@ -3511,6 +3528,17 @@ module Aws::IoT
     #           index: "ElasticsearchIndex", # required
     #           type: "ElasticsearchType", # required
     #           id: "ElasticsearchId", # required
+    #         },
+    #         location: {
+    #           role_arn: "AwsArn", # required
+    #           tracker_name: "String", # required
+    #           device_id: "String", # required
+    #           timestamp: {
+    #             value: "String", # required
+    #             unit: "String",
+    #           },
+    #           latitude: "String", # required
+    #           longitude: "String", # required
     #         },
     #       },
     #     },
@@ -6509,7 +6537,7 @@ module Aws::IoT
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time. The default is
-    #   25.
+    #   10.
     #
     # @option params [String] :next_token
     #   The token for the next set of results.
@@ -7246,6 +7274,13 @@ module Aws::IoT
     #   resp.rule.actions[0].open_search.index #=> String
     #   resp.rule.actions[0].open_search.type #=> String
     #   resp.rule.actions[0].open_search.id #=> String
+    #   resp.rule.actions[0].location.role_arn #=> String
+    #   resp.rule.actions[0].location.tracker_name #=> String
+    #   resp.rule.actions[0].location.device_id #=> String
+    #   resp.rule.actions[0].location.timestamp.value #=> String
+    #   resp.rule.actions[0].location.timestamp.unit #=> String
+    #   resp.rule.actions[0].location.latitude #=> String
+    #   resp.rule.actions[0].location.longitude #=> String
     #   resp.rule.rule_disabled #=> Boolean
     #   resp.rule.aws_iot_sql_version #=> String
     #   resp.rule.error_action.dynamo_db.table_name #=> String
@@ -7352,6 +7387,13 @@ module Aws::IoT
     #   resp.rule.error_action.open_search.index #=> String
     #   resp.rule.error_action.open_search.type #=> String
     #   resp.rule.error_action.open_search.id #=> String
+    #   resp.rule.error_action.location.role_arn #=> String
+    #   resp.rule.error_action.location.tracker_name #=> String
+    #   resp.rule.error_action.location.device_id #=> String
+    #   resp.rule.error_action.location.timestamp.value #=> String
+    #   resp.rule.error_action.location.timestamp.unit #=> String
+    #   resp.rule.error_action.location.latitude #=> String
+    #   resp.rule.error_action.location.longitude #=> String
     #
     # @overload get_topic_rule(params = {})
     # @param [Hash] params ({})
@@ -11256,6 +11298,17 @@ module Aws::IoT
     #             type: "ElasticsearchType", # required
     #             id: "ElasticsearchId", # required
     #           },
+    #           location: {
+    #             role_arn: "AwsArn", # required
+    #             tracker_name: "String", # required
+    #             device_id: "String", # required
+    #             timestamp: {
+    #               value: "String", # required
+    #               unit: "String",
+    #             },
+    #             latitude: "String", # required
+    #             longitude: "String", # required
+    #           },
     #         },
     #       ],
     #       rule_disabled: false,
@@ -11433,6 +11486,17 @@ module Aws::IoT
     #           index: "ElasticsearchIndex", # required
     #           type: "ElasticsearchType", # required
     #           id: "ElasticsearchId", # required
+    #         },
+    #         location: {
+    #           role_arn: "AwsArn", # required
+    #           tracker_name: "String", # required
+    #           device_id: "String", # required
+    #           timestamp: {
+    #             value: "String", # required
+    #             unit: "String",
+    #           },
+    #           latitude: "String", # required
+    #           longitude: "String", # required
     #         },
     #       },
     #     },
@@ -13100,7 +13164,13 @@ module Aws::IoT
     #   IoT role grants permission to provision a device.
     #
     # @option params [Types::ProvisioningHook] :pre_provisioning_hook
-    #   Updates the pre-provisioning hook template.
+    #   Updates the pre-provisioning hook template. Only supports template of
+    #   type `FLEET_PROVISIONING`. For more information about provisioning
+    #   template types, see [type][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_CreateProvisioningTemplate.html#iot-CreateProvisioningTemplate-request-type
     #
     # @option params [Boolean] :remove_pre_provisioning_hook
     #   Removes pre-provisioning hook template.
@@ -13763,7 +13833,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

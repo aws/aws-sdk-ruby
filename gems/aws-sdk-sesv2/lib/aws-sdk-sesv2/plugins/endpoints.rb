@@ -56,6 +56,8 @@ module Aws::SESV2
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :batch_get_metric_data
+            Aws::SESV2::Endpoints::BatchGetMetricData.build(context)
           when :create_configuration_set
             Aws::SESV2::Endpoints::CreateConfigurationSet.build(context)
           when :create_configuration_set_event_destination
@@ -156,6 +158,8 @@ module Aws::SESV2
             Aws::SESV2::Endpoints::ListEmailTemplates.build(context)
           when :list_import_jobs
             Aws::SESV2::Endpoints::ListImportJobs.build(context)
+          when :list_recommendations
+            Aws::SESV2::Endpoints::ListRecommendations.build(context)
           when :list_suppressed_destinations
             Aws::SESV2::Endpoints::ListSuppressedDestinations.build(context)
           when :list_tags_for_resource
@@ -168,6 +172,8 @@ module Aws::SESV2
             Aws::SESV2::Endpoints::PutAccountSendingAttributes.build(context)
           when :put_account_suppression_attributes
             Aws::SESV2::Endpoints::PutAccountSuppressionAttributes.build(context)
+          when :put_account_vdm_attributes
+            Aws::SESV2::Endpoints::PutAccountVdmAttributes.build(context)
           when :put_configuration_set_delivery_options
             Aws::SESV2::Endpoints::PutConfigurationSetDeliveryOptions.build(context)
           when :put_configuration_set_reputation_options
@@ -178,6 +184,8 @@ module Aws::SESV2
             Aws::SESV2::Endpoints::PutConfigurationSetSuppressionOptions.build(context)
           when :put_configuration_set_tracking_options
             Aws::SESV2::Endpoints::PutConfigurationSetTrackingOptions.build(context)
+          when :put_configuration_set_vdm_options
+            Aws::SESV2::Endpoints::PutConfigurationSetVdmOptions.build(context)
           when :put_dedicated_ip_in_pool
             Aws::SESV2::Endpoints::PutDedicatedIpInPool.build(context)
           when :put_dedicated_ip_warmup_attributes

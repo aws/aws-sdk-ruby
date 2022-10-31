@@ -56,7 +56,7 @@ require_relative 'aws-sdk-ec2/customizations'
 # structure.
 #
 #     ec2 = Aws::EC2::Client.new
-#     resp = ec2.accept_reserved_instances_exchange_quote(params)
+#     resp = ec2.accept_address_transfer(params)
 #
 # See {Client} for more information.
 #
@@ -76,6 +76,6 @@ require_relative 'aws-sdk-ec2/customizations'
 # @!group service
 module Aws::EC2
 
-  GEM_VERSION = '1.343.0'
+  GEM_VERSION = '1.344.0'
 
 end

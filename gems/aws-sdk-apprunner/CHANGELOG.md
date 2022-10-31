@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2022-10-31)
+------------------
+
+* Feature - This release adds support for private App Runner services. Services may now be configured to be made private and only accessible from a VPC. The changes include a new VpcIngressConnection resource and several new and modified APIs.
+
 1.17.0 (2022-10-28)
 ------------------
 

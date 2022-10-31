@@ -39,11 +39,14 @@ module Aws::Textract
     EntityType = Shapes::StringShape.new(name: 'EntityType')
     EntityTypes = Shapes::ListShape.new(name: 'EntityTypes')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    ExpenseCurrency = Shapes::StructureShape.new(name: 'ExpenseCurrency')
     ExpenseDetection = Shapes::StructureShape.new(name: 'ExpenseDetection')
     ExpenseDocument = Shapes::StructureShape.new(name: 'ExpenseDocument')
     ExpenseDocumentList = Shapes::ListShape.new(name: 'ExpenseDocumentList')
     ExpenseField = Shapes::StructureShape.new(name: 'ExpenseField')
     ExpenseFieldList = Shapes::ListShape.new(name: 'ExpenseFieldList')
+    ExpenseGroupProperty = Shapes::StructureShape.new(name: 'ExpenseGroupProperty')
+    ExpenseGroupPropertyList = Shapes::ListShape.new(name: 'ExpenseGroupPropertyList')
     ExpenseType = Shapes::StructureShape.new(name: 'ExpenseType')
     FeatureType = Shapes::StringShape.new(name: 'FeatureType')
     FeatureTypes = Shapes::ListShape.new(name: 'FeatureTypes')
@@ -121,6 +124,7 @@ module Aws::Textract
     StartExpenseAnalysisResponse = Shapes::StructureShape.new(name: 'StartExpenseAnalysisResponse')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
     TextType = Shapes::StringShape.new(name: 'TextType')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UInteger = Shapes::IntegerShape.new(name: 'UInteger')
@@ -216,6 +220,10 @@ module Aws::Textract
 
     EntityTypes.member = Shapes::ShapeRef.new(shape: EntityType)
 
+    ExpenseCurrency.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
+    ExpenseCurrency.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    ExpenseCurrency.struct_class = Types::ExpenseCurrency
+
     ExpenseDetection.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
     ExpenseDetection.add_member(:geometry, Shapes::ShapeRef.new(shape: Geometry, location_name: "Geometry"))
     ExpenseDetection.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -224,6 +232,7 @@ module Aws::Textract
     ExpenseDocument.add_member(:expense_index, Shapes::ShapeRef.new(shape: UInteger, location_name: "ExpenseIndex"))
     ExpenseDocument.add_member(:summary_fields, Shapes::ShapeRef.new(shape: ExpenseFieldList, location_name: "SummaryFields"))
     ExpenseDocument.add_member(:line_item_groups, Shapes::ShapeRef.new(shape: LineItemGroupList, location_name: "LineItemGroups"))
+    ExpenseDocument.add_member(:blocks, Shapes::ShapeRef.new(shape: BlockList, location_name: "Blocks"))
     ExpenseDocument.struct_class = Types::ExpenseDocument
 
     ExpenseDocumentList.member = Shapes::ShapeRef.new(shape: ExpenseDocument)
@@ -232,9 +241,17 @@ module Aws::Textract
     ExpenseField.add_member(:label_detection, Shapes::ShapeRef.new(shape: ExpenseDetection, location_name: "LabelDetection"))
     ExpenseField.add_member(:value_detection, Shapes::ShapeRef.new(shape: ExpenseDetection, location_name: "ValueDetection"))
     ExpenseField.add_member(:page_number, Shapes::ShapeRef.new(shape: UInteger, location_name: "PageNumber"))
+    ExpenseField.add_member(:currency, Shapes::ShapeRef.new(shape: ExpenseCurrency, location_name: "Currency"))
+    ExpenseField.add_member(:group_properties, Shapes::ShapeRef.new(shape: ExpenseGroupPropertyList, location_name: "GroupProperties"))
     ExpenseField.struct_class = Types::ExpenseField
 
     ExpenseFieldList.member = Shapes::ShapeRef.new(shape: ExpenseField)
+
+    ExpenseGroupProperty.add_member(:types, Shapes::ShapeRef.new(shape: StringList, location_name: "Types"))
+    ExpenseGroupProperty.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
+    ExpenseGroupProperty.struct_class = Types::ExpenseGroupProperty
+
+    ExpenseGroupPropertyList.member = Shapes::ShapeRef.new(shape: ExpenseGroupProperty)
 
     ExpenseType.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
     ExpenseType.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -426,6 +443,8 @@ module Aws::Textract
 
     StartExpenseAnalysisResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     StartExpenseAnalysisResponse.struct_class = Types::StartExpenseAnalysisResponse
+
+    StringList.member = Shapes::ShapeRef.new(shape: String)
 
     ThrottlingException.struct_class = Types::ThrottlingException
 

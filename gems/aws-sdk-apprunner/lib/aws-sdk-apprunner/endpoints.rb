@@ -95,6 +95,20 @@ module Aws::AppRunner
       end
     end
 
+    class CreateVpcIngressConnection
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::AppRunner::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteAutoScalingConfiguration
       def self.build(context)
         unless context.config.regional_endpoint
@@ -165,6 +179,20 @@ module Aws::AppRunner
       end
     end
 
+    class DeleteVpcIngressConnection
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::AppRunner::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribeAutoScalingConfiguration
       def self.build(context)
         unless context.config.regional_endpoint
@@ -222,6 +250,20 @@ module Aws::AppRunner
     end
 
     class DescribeVpcConnector
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::AppRunner::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DescribeVpcIngressConnection
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -347,6 +389,20 @@ module Aws::AppRunner
       end
     end
 
+    class ListVpcIngressConnections
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::AppRunner::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class PauseService
       def self.build(context)
         unless context.config.regional_endpoint
@@ -418,6 +474,20 @@ module Aws::AppRunner
     end
 
     class UpdateService
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::AppRunner::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateVpcIngressConnection
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

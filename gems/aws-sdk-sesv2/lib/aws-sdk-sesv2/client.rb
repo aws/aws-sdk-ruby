@@ -368,6 +368,59 @@ module Aws::SESV2
 
     # @!group API Operations
 
+    # Retrieves batches of metric data collected based on your sending
+    # activity.
+    #
+    # You can execute this operation no more than 16 times per second, and
+    # with at most 160 queries from the batches per second (cumulative).
+    #
+    # @option params [required, Array<Types::BatchGetMetricDataQuery>] :queries
+    #   A list of queries for metrics to be retrieved.
+    #
+    # @return [Types::BatchGetMetricDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetMetricDataResponse#results #results} => Array&lt;Types::MetricDataResult&gt;
+    #   * {Types::BatchGetMetricDataResponse#errors #errors} => Array&lt;Types::MetricDataError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_metric_data({
+    #     queries: [ # required
+    #       {
+    #         id: "QueryIdentifier", # required
+    #         namespace: "VDM", # required, accepts VDM
+    #         metric: "SEND", # required, accepts SEND, COMPLAINT, PERMANENT_BOUNCE, TRANSIENT_BOUNCE, OPEN, CLICK, DELIVERY, DELIVERY_OPEN, DELIVERY_CLICK, DELIVERY_COMPLAINT
+    #         dimensions: {
+    #           "EMAIL_IDENTITY" => "MetricDimensionValue",
+    #         },
+    #         start_date: Time.now, # required
+    #         end_date: Time.now, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].id #=> String
+    #   resp.results[0].timestamps #=> Array
+    #   resp.results[0].timestamps[0] #=> Time
+    #   resp.results[0].values #=> Array
+    #   resp.results[0].values[0] #=> Integer
+    #   resp.errors #=> Array
+    #   resp.errors[0].id #=> String
+    #   resp.errors[0].code #=> String, one of "INTERNAL_FAILURE", "ACCESS_DENIED"
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/BatchGetMetricData AWS API Documentation
+    #
+    # @overload batch_get_metric_data(params = {})
+    # @param [Hash] params ({})
+    def batch_get_metric_data(params = {}, options = {})
+      req = build_request(:batch_get_metric_data, params)
+      req.send_request(options)
+    end
+
     # Create a configuration set. *Configuration sets* are groups of rules
     # that you can apply to the emails that you send. You apply a
     # configuration set to an email by specifying the name of the
@@ -404,6 +457,10 @@ module Aws::SESV2
     #   An object that contains information about the suppression list
     #   preferences for your account.
     #
+    # @option params [Types::VdmOptions] :vdm_options
+    #   An object that defines the VDM options for emails that you send using
+    #   the configuration set.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -432,6 +489,14 @@ module Aws::SESV2
     #     ],
     #     suppression_options: {
     #       suppressed_reasons: ["BOUNCE"], # accepts BOUNCE, COMPLAINT
+    #     },
+    #     vdm_options: {
+    #       dashboard_options: {
+    #         engagement_metrics: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #       guardian_options: {
+    #         optimized_shared_delivery: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
     #     },
     #   })
     #
@@ -1327,6 +1392,7 @@ module Aws::SESV2
     #   * {Types::GetAccountResponse#sending_enabled #sending_enabled} => Boolean
     #   * {Types::GetAccountResponse#suppression_attributes #suppression_attributes} => Types::SuppressionAttributes
     #   * {Types::GetAccountResponse#details #details} => Types::AccountDetails
+    #   * {Types::GetAccountResponse#vdm_attributes #vdm_attributes} => Types::VdmAttributes
     #
     # @example Response structure
     #
@@ -1347,6 +1413,9 @@ module Aws::SESV2
     #   resp.details.additional_contact_email_addresses[0] #=> String
     #   resp.details.review_details.status #=> String, one of "PENDING", "FAILED", "GRANTED", "DENIED"
     #   resp.details.review_details.case_id #=> String
+    #   resp.vdm_attributes.vdm_enabled #=> String, one of "ENABLED", "DISABLED"
+    #   resp.vdm_attributes.dashboard_attributes.engagement_metrics #=> String, one of "ENABLED", "DISABLED"
+    #   resp.vdm_attributes.guardian_attributes.optimized_shared_delivery #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetAccount AWS API Documentation
     #
@@ -1414,6 +1483,7 @@ module Aws::SESV2
     #   * {Types::GetConfigurationSetResponse#sending_options #sending_options} => Types::SendingOptions
     #   * {Types::GetConfigurationSetResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::GetConfigurationSetResponse#suppression_options #suppression_options} => Types::SuppressionOptions
+    #   * {Types::GetConfigurationSetResponse#vdm_options #vdm_options} => Types::VdmOptions
     #
     # @example Request syntax with placeholder values
     #
@@ -1435,6 +1505,8 @@ module Aws::SESV2
     #   resp.tags[0].value #=> String
     #   resp.suppression_options.suppressed_reasons #=> Array
     #   resp.suppression_options.suppressed_reasons[0] #=> String, one of "BOUNCE", "COMPLAINT"
+    #   resp.vdm_options.dashboard_options.engagement_metrics #=> String, one of "ENABLED", "DISABLED"
+    #   resp.vdm_options.guardian_options.optimized_shared_delivery #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetConfigurationSet AWS API Documentation
     #
@@ -2733,6 +2805,67 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Lists the recommendations present in your Amazon SES account in the
+    # current Amazon Web Services Region.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    # @option params [Hash<String,String>] :filter
+    #   Filters applied when retrieving recommendations. Can eiter be an
+    #   individual filter, or combinations of `STATUS` and `IMPACT` or
+    #   `STATUS` and `TYPE`
+    #
+    # @option params [String] :next_token
+    #   A token returned from a previous call to `ListRecommendations` to
+    #   indicate the position in the list of recommendations.
+    #
+    # @option params [Integer] :page_size
+    #   The number of results to show in a single call to
+    #   `ListRecommendations`. If the number of results is larger than the
+    #   number you specified in this parameter, then the response includes a
+    #   `NextToken` element, which you can use to obtain additional results.
+    #
+    #   The value you specify has to be at least 1, and can be no more than
+    #   100.
+    #
+    # @return [Types::ListRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRecommendationsResponse#recommendations #recommendations} => Array&lt;Types::Recommendation&gt;
+    #   * {Types::ListRecommendationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_recommendations({
+    #     filter: {
+    #       "TYPE" => "ListRecommendationFilterValue",
+    #     },
+    #     next_token: "NextToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recommendations #=> Array
+    #   resp.recommendations[0].resource_arn #=> String
+    #   resp.recommendations[0].type #=> String, one of "DKIM", "DMARC", "SPF"
+    #   resp.recommendations[0].description #=> String
+    #   resp.recommendations[0].status #=> String, one of "OPEN", "FIXED"
+    #   resp.recommendations[0].created_timestamp #=> Time
+    #   resp.recommendations[0].last_updated_timestamp #=> Time
+    #   resp.recommendations[0].impact #=> String, one of "LOW", "HIGH"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListRecommendations AWS API Documentation
+    #
+    # @overload list_recommendations(params = {})
+    # @param [Hash] params ({})
+    def list_recommendations(params = {}, options = {})
+      req = build_request(:list_recommendations, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of email addresses that are on the suppression list
     # for your account.
     #
@@ -2973,6 +3106,38 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Update your Amazon SES account VDM attributes.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    # @option params [required, Types::VdmAttributes] :vdm_attributes
+    #   The VDM attributes that you wish to apply to your Amazon SES account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_vdm_attributes({
+    #     vdm_attributes: { # required
+    #       vdm_enabled: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       dashboard_attributes: {
+    #         engagement_metrics: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #       guardian_attributes: {
+    #         optimized_shared_delivery: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountVdmAttributes AWS API Documentation
+    #
+    # @overload put_account_vdm_attributes(params = {})
+    # @param [Hash] params ({})
+    def put_account_vdm_attributes(params = {}, options = {})
+      req = build_request(:put_account_vdm_attributes, params)
+      req.send_request(options)
+    end
+
     # Associate a configuration set with a dedicated IP pool. You can use
     # dedicated IP pools to create groups of dedicated IP addresses for
     # sending specific types of email.
@@ -3132,6 +3297,42 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def put_configuration_set_tracking_options(params = {}, options = {})
       req = build_request(:put_configuration_set_tracking_options, params)
+      req.send_request(options)
+    end
+
+    # Specify VDM preferences for email that you send using the
+    # configuration set.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    # @option params [required, String] :configuration_set_name
+    #   The name of the configuration set.
+    #
+    # @option params [Types::VdmOptions] :vdm_options
+    #   The VDM options to apply to the configuration set.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_configuration_set_vdm_options({
+    #     configuration_set_name: "ConfigurationSetName", # required
+    #     vdm_options: {
+    #       dashboard_options: {
+    #         engagement_metrics: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #       guardian_options: {
+    #         optimized_shared_delivery: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetVdmOptions AWS API Documentation
+    #
+    # @overload put_configuration_set_vdm_options(params = {})
+    # @param [Hash] params ({})
+    def put_configuration_set_vdm_options(params = {}, options = {})
+      req = build_request(:put_configuration_set_vdm_options, params)
       req.send_request(options)
     end
 
@@ -4286,7 +4487,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

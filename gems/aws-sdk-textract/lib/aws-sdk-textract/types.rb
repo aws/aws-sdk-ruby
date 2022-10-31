@@ -332,7 +332,7 @@ module Aws::Textract
     #     status of the selection element.
     #
     #   * *QUERY* - A question asked during the call of AnalyzeDocument.
-    #     Contains an alias and an ID that attachs it to its answer.
+    #     Contains an alias and an ID that attaches it to its answer.
     #
     #   * *QUERY\_RESULT* - A response to a question asked during the call
     #     of analyze document. Comes with an alias and ID for ease of
@@ -422,13 +422,14 @@ module Aws::Textract
     #
     # @!attribute [rw] page
     #   The page on which a block was detected. `Page` is returned by
-    #   asynchronous operations. Page values greater than 1 are only
-    #   returned for multipage documents that are in PDF or TIFF format. A
-    #   scanned image (JPEG/PNG), even if it contains multiple document
-    #   pages, is considered to be a single-page document. The value of
-    #   `Page` is always 1. Synchronous operations don't return `Page`
-    #   because every input document is considered to be a single-page
-    #   document.
+    #   synchronous and asynchronous operations. Page values greater than 1
+    #   are only returned for multipage documents that are in PDF or TIFF
+    #   format. A scanned image (JPEG/PNG) provided to an asynchronous
+    #   operation, even if it contains multiple document pages, is
+    #   considered a single-page document. This means that for scanned
+    #   images the value of `Page` is always 1. Synchronous operations
+    #   operations will also return a `Page` value of 1 because every input
+    #   document is considered to be a single-page document.
     #   @return [Integer]
     #
     # @!attribute [rw] query
@@ -670,6 +671,25 @@ module Aws::Textract
     #
     class DocumentTooLargeException < Aws::EmptyStructure; end
 
+    # Returns the kind of currency detected.
+    #
+    # @!attribute [rw] code
+    #   Currency code for detected currency.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   Percentage confideence in the detected currency.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ExpenseCurrency AWS API Documentation
+    #
+    class ExpenseCurrency < Struct.new(
+      :code,
+      :confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object used to store information about the Value or Label detected
     # by Amazon Textract.
     #
@@ -713,12 +733,18 @@ module Aws::Textract
     #   `LineItems`.
     #   @return [Array<Types::LineItemGroup>]
     #
+    # @!attribute [rw] blocks
+    #   This is a block object, the same as reported when DetectDocumentText
+    #   is run on a document. It provides word level recognition of text.
+    #   @return [Array<Types::Block>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ExpenseDocument AWS API Documentation
     #
     class ExpenseDocument < Struct.new(
       :expense_index,
       :summary_fields,
-      :line_item_groups)
+      :line_item_groups,
+      :blocks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -744,13 +770,48 @@ module Aws::Textract
     #   The page number the value was detected on.
     #   @return [Integer]
     #
+    # @!attribute [rw] currency
+    #   Shows the kind of currency, both the code and confidence associated
+    #   with any monatary value detected.
+    #   @return [Types::ExpenseCurrency]
+    #
+    # @!attribute [rw] group_properties
+    #   Shows which group a response object belongs to, such as whether an
+    #   address line belongs to the vendor's address or the recipent's
+    #   address.
+    #   @return [Array<Types::ExpenseGroupProperty>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ExpenseField AWS API Documentation
     #
     class ExpenseField < Struct.new(
       :type,
       :label_detection,
       :value_detection,
-      :page_number)
+      :page_number,
+      :currency,
+      :group_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Shows the group that a certain key belongs to. This helps
+    # differentiate responses like addresses that can appear similar in
+    # response JSON.
+    #
+    # @!attribute [rw] types
+    #   Informs you on the kind of label associated with the group
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] id
+    #   Provides a group Id number, which will be the same for each in the
+    #   group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ExpenseGroupProperty AWS API Documentation
+    #
+    class ExpenseGroupProperty < Struct.new(
+      :types,
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1500,16 +1561,17 @@ module Aws::Textract
     #   @return [String]
     #
     # @!attribute [rw] pages
-    #   List of pages associated with the query. The following is a list of
-    #   rules for using this parameter.
+    #   Pages is a parameter that the user inputs to specify which pages to
+    #   apply a query to. The following is a list of rules for using this
+    #   parameter.
     #
     #   * If a page is not specified, it is set to `["1"]` by default.
     #
     #   * The following characters are allowed in the parameter's string:
     #     `0 1 2 3 4 5 6 7 8 9 - *`. No whitespace is allowed.
     #
-    #   * When using `*` to indicate all pages, it must be the only element
-    #     in the string.
+    #   * When using * to indicate all pages, it must be the only element
+    #     in the list.
     #
     #   * You can use page intervals, such as `[“1-3”, “1-1”, “4-*”]`. Where
     #     `*` indicates last page of document.

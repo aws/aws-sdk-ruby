@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.344.0 (2022-10-31)
+------------------
+
+* Feature - Elastic IP transfer is a new Amazon VPC feature that allows you to transfer your Elastic IP addresses from one AWS Account to another.
+
 1.343.0 (2022-10-27)
 ------------------
 

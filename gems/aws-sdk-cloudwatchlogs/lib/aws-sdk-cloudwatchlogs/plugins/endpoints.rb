@@ -112,6 +112,8 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::GetLogRecord.build(context)
           when :get_query_results
             Aws::CloudWatchLogs::Endpoints::GetQueryResults.build(context)
+          when :list_tags_for_resource
+            Aws::CloudWatchLogs::Endpoints::ListTagsForResource.build(context)
           when :list_tags_log_group
             Aws::CloudWatchLogs::Endpoints::ListTagsLogGroup.build(context)
           when :put_destination
@@ -136,10 +138,14 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::StopQuery.build(context)
           when :tag_log_group
             Aws::CloudWatchLogs::Endpoints::TagLogGroup.build(context)
+          when :tag_resource
+            Aws::CloudWatchLogs::Endpoints::TagResource.build(context)
           when :test_metric_filter
             Aws::CloudWatchLogs::Endpoints::TestMetricFilter.build(context)
           when :untag_log_group
             Aws::CloudWatchLogs::Endpoints::UntagLogGroup.build(context)
+          when :untag_resource
+            Aws::CloudWatchLogs::Endpoints::UntagResource.build(context)
           end
         end
       end

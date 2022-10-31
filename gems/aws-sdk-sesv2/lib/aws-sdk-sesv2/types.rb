@@ -78,6 +78,158 @@ module Aws::SESV2
     #
     class BadRequestException < Aws::EmptyStructure; end
 
+    # Represents a single metric data query to include in a batch.
+    #
+    # @note When making an API call, you may pass BatchGetMetricDataQuery
+    #   data as a hash:
+    #
+    #       {
+    #         id: "QueryIdentifier", # required
+    #         namespace: "VDM", # required, accepts VDM
+    #         metric: "SEND", # required, accepts SEND, COMPLAINT, PERMANENT_BOUNCE, TRANSIENT_BOUNCE, OPEN, CLICK, DELIVERY, DELIVERY_OPEN, DELIVERY_CLICK, DELIVERY_COMPLAINT
+    #         dimensions: {
+    #           "EMAIL_IDENTITY" => "MetricDimensionValue",
+    #         },
+    #         start_date: Time.now, # required
+    #         end_date: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The query identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The query namespace - e.g. `VDM`
+    #   @return [String]
+    #
+    # @!attribute [rw] metric
+    #   The queried metric. This can be one of the following:
+    #
+    #   * `SEND` – Emails sent eligible for tracking in the VDM dashboard.
+    #     This excludes emails sent to the mailbox simulator and emails
+    #     addressed to more than one recipient.
+    #
+    #   * `COMPLAINT` – Complaints received for your account. This excludes
+    #     complaints from the mailbox simulator, those originating from your
+    #     account-level suppression list (if enabled), and those for emails
+    #     addressed to more than one recipient
+    #
+    #   * `PERMANENT_BOUNCE` – Permanent bounces - i.e. feedback received
+    #     for emails sent to non-existent mailboxes. Excludes bounces from
+    #     the mailbox simulator, those originating from your account-level
+    #     suppression list (if enabled), and those for emails addressed to
+    #     more than one recipient.
+    #
+    #   * `TRANSIENT_BOUNCE` – Transient bounces - i.e. feedback received
+    #     for delivery failures excluding issues with non-existent
+    #     mailboxes. Excludes bounces from the mailbox simulator, and those
+    #     for emails addressed to more than one recipient.
+    #
+    #   * `OPEN` – Unique open events for emails including open trackers.
+    #     Excludes opens for emails addressed to more than one recipient.
+    #
+    #   * `CLICK` – Unique click events for emails including wrapped links.
+    #     Excludes clicks for emails addressed to more than one recipient.
+    #
+    #   * `DELIVERY` – Successful deliveries for email sending attempts.
+    #     Excludes deliveries to the mailbox simulator and for emails
+    #     addressed to more than one recipient.
+    #
+    #   * `DELIVERY_OPEN` – Successful deliveries for email sending
+    #     attempts. Excludes deliveries to the mailbox simulator, for emails
+    #     addressed to more than one recipient, and emails without open
+    #     trackers.
+    #
+    #   * `DELIVERY_CLICK` – Successful deliveries for email sending
+    #     attempts. Excludes deliveries to the mailbox simulator, for emails
+    #     addressed to more than one recipient, and emails without click
+    #     trackers.
+    #
+    #   * `DELIVERY_COMPLAINT` – Successful deliveries for email sending
+    #     attempts. Excludes deliveries to the mailbox simulator, for emails
+    #     addressed to more than one recipient, and emails addressed to
+    #     recipients hosted by ISPs with which Amazon SES does not have a
+    #     feedback loop agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimensions
+    #   An object that contains mapping between `MetricDimensionName` and
+    #   `MetricDimensionValue` to filter metrics by.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] start_date
+    #   Represents the start date for the query interval.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   Represents the end date for the query interval.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/BatchGetMetricDataQuery AWS API Documentation
+    #
+    class BatchGetMetricDataQuery < Struct.new(
+      :id,
+      :namespace,
+      :metric,
+      :dimensions,
+      :start_date,
+      :end_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a request to retrieve a batch of metric data.
+    #
+    # @note When making an API call, you may pass BatchGetMetricDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         queries: [ # required
+    #           {
+    #             id: "QueryIdentifier", # required
+    #             namespace: "VDM", # required, accepts VDM
+    #             metric: "SEND", # required, accepts SEND, COMPLAINT, PERMANENT_BOUNCE, TRANSIENT_BOUNCE, OPEN, CLICK, DELIVERY, DELIVERY_OPEN, DELIVERY_CLICK, DELIVERY_COMPLAINT
+    #             dimensions: {
+    #               "EMAIL_IDENTITY" => "MetricDimensionValue",
+    #             },
+    #             start_date: Time.now, # required
+    #             end_date: Time.now, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] queries
+    #   A list of queries for metrics to be retrieved.
+    #   @return [Array<Types::BatchGetMetricDataQuery>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/BatchGetMetricDataRequest AWS API Documentation
+    #
+    class BatchGetMetricDataRequest < Struct.new(
+      :queries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the result of processing your metric data batch request
+    #
+    # @!attribute [rw] results
+    #   A list of successfully retrieved `MetricDataResult`.
+    #   @return [Array<Types::MetricDataResult>]
+    #
+    # @!attribute [rw] errors
+    #   A list of `MetricDataError` encountered while processing your metric
+    #   data batch request.
+    #   @return [Array<Types::MetricDataError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/BatchGetMetricDataResponse AWS API Documentation
+    #
+    class BatchGetMetricDataResponse < Struct.new(
+      :results,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that contains information about a blacklisting event that
     # impacts one of the dedicated IP addresses that is associated with your
     # account.
@@ -621,6 +773,14 @@ module Aws::SESV2
     #         suppression_options: {
     #           suppressed_reasons: ["BOUNCE"], # accepts BOUNCE, COMPLAINT
     #         },
+    #         vdm_options: {
+    #           dashboard_options: {
+    #             engagement_metrics: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #           guardian_options: {
+    #             optimized_shared_delivery: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] configuration_set_name
@@ -659,6 +819,11 @@ module Aws::SESV2
     #   preferences for your account.
     #   @return [Types::SuppressionOptions]
     #
+    # @!attribute [rw] vdm_options
+    #   An object that defines the VDM options for emails that you send
+    #   using the configuration set.
+    #   @return [Types::VdmOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateConfigurationSetRequest AWS API Documentation
     #
     class CreateConfigurationSetRequest < Struct.new(
@@ -668,7 +833,8 @@ module Aws::SESV2
       :reputation_options,
       :sending_options,
       :tags,
-      :suppression_options)
+      :suppression_options,
+      :vdm_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1322,6 +1488,64 @@ module Aws::SESV2
       :start_date,
       :volume_statistics,
       :domain_isp_placements)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing additional settings for your VDM configuration as
+    # applicable to the Dashboard.
+    #
+    # @note When making an API call, you may pass DashboardAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         engagement_metrics: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] engagement_metrics
+    #   Specifies the status of your VDM engagement metrics collection. Can
+    #   be one of the following:
+    #
+    #   * `ENABLED` – Amazon SES enables engagement metrics for your
+    #     account.
+    #
+    #   * `DISABLED` – Amazon SES disables engagement metrics for your
+    #     account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DashboardAttributes AWS API Documentation
+    #
+    class DashboardAttributes < Struct.new(
+      :engagement_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing additional settings for your VDM configuration as
+    # applicable to the Dashboard.
+    #
+    # @note When making an API call, you may pass DashboardOptions
+    #   data as a hash:
+    #
+    #       {
+    #         engagement_metrics: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] engagement_metrics
+    #   Specifies the status of your VDM engagement metrics collection. Can
+    #   be one of the following:
+    #
+    #   * `ENABLED` – Amazon SES enables engagement metrics for the
+    #     configuration set.
+    #
+    #   * `DISABLED` – Amazon SES disables engagement metrics for the
+    #     configuration set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DashboardOptions AWS API Documentation
+    #
+    class DashboardOptions < Struct.new(
+      :engagement_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2574,6 +2798,10 @@ module Aws::SESV2
     #   An object that defines your account details.
     #   @return [Types::AccountDetails]
     #
+    # @!attribute [rw] vdm_attributes
+    #   The VDM attributes that apply to your Amazon SES account.
+    #   @return [Types::VdmAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetAccountResponse AWS API Documentation
     #
     class GetAccountResponse < Struct.new(
@@ -2583,7 +2811,8 @@ module Aws::SESV2
       :send_quota,
       :sending_enabled,
       :suppression_attributes,
-      :details)
+      :details,
+      :vdm_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2722,6 +2951,11 @@ module Aws::SESV2
     #   preferences for your account.
     #   @return [Types::SuppressionOptions]
     #
+    # @!attribute [rw] vdm_options
+    #   An object that contains information about the VDM preferences for
+    #   your configuration set.
+    #   @return [Types::VdmOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetConfigurationSetResponse AWS API Documentation
     #
     class GetConfigurationSetResponse < Struct.new(
@@ -2731,7 +2965,8 @@ module Aws::SESV2
       :reputation_options,
       :sending_options,
       :tags,
-      :suppression_options)
+      :suppression_options,
+      :vdm_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3605,6 +3840,64 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # An object containing additional settings for your VDM configuration as
+    # applicable to the Guardian.
+    #
+    # @note When making an API call, you may pass GuardianAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         optimized_shared_delivery: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] optimized_shared_delivery
+    #   Specifies the status of your VDM optimized shared delivery. Can be
+    #   one of the following:
+    #
+    #   * `ENABLED` – Amazon SES enables optimized shared delivery for your
+    #     account.
+    #
+    #   * `DISABLED` – Amazon SES disables optimized shared delivery for
+    #     your account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GuardianAttributes AWS API Documentation
+    #
+    class GuardianAttributes < Struct.new(
+      :optimized_shared_delivery)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing additional settings for your VDM configuration as
+    # applicable to the Guardian.
+    #
+    # @note When making an API call, you may pass GuardianOptions
+    #   data as a hash:
+    #
+    #       {
+    #         optimized_shared_delivery: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] optimized_shared_delivery
+    #   Specifies the status of your VDM optimized shared delivery. Can be
+    #   one of the following:
+    #
+    #   * `ENABLED` – Amazon SES enables optimized shared delivery for the
+    #     configuration set.
+    #
+    #   * `DISABLED` – Amazon SES disables optimized shared delivery for the
+    #     configuration set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GuardianOptions AWS API Documentation
+    #
+    class GuardianOptions < Struct.new(
+      :optimized_shared_delivery)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an email identity.
     #
     # @!attribute [rw] identity_type
@@ -3790,6 +4083,13 @@ module Aws::SESV2
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The request couldn't be processed because an error occurred with the
+    # Amazon SES API v2.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/InternalServiceErrorException AWS API Documentation
+    #
+    class InternalServiceErrorException < Aws::EmptyStructure; end
 
     # The specified request includes an invalid or expired token.
     #
@@ -4541,6 +4841,75 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # Represents a request to list the existing recommendations for your
+    # account.
+    #
+    # @note When making an API call, you may pass ListRecommendationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           "TYPE" => "ListRecommendationFilterValue",
+    #         },
+    #         next_token: "NextToken",
+    #         page_size: 1,
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Filters applied when retrieving recommendations. Can eiter be an
+    #   individual filter, or combinations of `STATUS` and `IMPACT` or
+    #   `STATUS` and `TYPE`
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a previous call to `ListRecommendations` to
+    #   indicate the position in the list of recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The number of results to show in a single call to
+    #   `ListRecommendations`. If the number of results is larger than the
+    #   number you specified in this parameter, then the response includes a
+    #   `NextToken` element, which you can use to obtain additional results.
+    #
+    #   The value you specify has to be at least 1, and can be no more than
+    #   100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListRecommendationsRequest AWS API Documentation
+    #
+    class ListRecommendationsRequest < Struct.new(
+      :filter,
+      :next_token,
+      :page_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the response to your request to retrieve the list of
+    # recommendations for your account.
+    #
+    # @!attribute [rw] recommendations
+    #   The recommendations applicable to your account.
+    #   @return [Array<Types::Recommendation>]
+    #
+    # @!attribute [rw] next_token
+    #   A string token indicating that there might be additional
+    #   recommendations available to be listed. Use the token provided in
+    #   the `ListRecommendationsResponse` to use in the subsequent call to
+    #   `ListRecommendations` with the same parameters to retrieve the next
+    #   page of recommendations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListRecommendationsResponse AWS API Documentation
+    #
+    class ListRecommendationsResponse < Struct.new(
+      :recommendations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request to obtain a list of email destinations that are on the
     # suppression list for your account.
     #
@@ -4797,6 +5166,61 @@ module Aws::SESV2
     class MessageTag < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An error corresponding to the unsuccessful processing of a single
+    # metric data query.
+    #
+    # @!attribute [rw] id
+    #   The query identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The query error code. Can be one of:
+    #
+    #   * `INTERNAL_FAILURE` – Amazon SES has failed to process one of the
+    #     queries.
+    #
+    #   * `ACCESS_DENIED` – You have insufficient access to retrieve metrics
+    #     based on the given query.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the current query error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MetricDataError AWS API Documentation
+    #
+    class MetricDataError < Struct.new(
+      :id,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a single metric data query.
+    #
+    # @!attribute [rw] id
+    #   The query identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamps
+    #   A list of timestamps for the metric data results.
+    #   @return [Array<Time>]
+    #
+    # @!attribute [rw] values
+    #   A list of values (cumulative / sum) for the metric data results.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MetricDataResult AWS API Documentation
+    #
+    class MetricDataResult < Struct.new(
+      :id,
+      :timestamps,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5084,6 +5508,40 @@ module Aws::SESV2
     #
     class PutAccountSuppressionAttributesResponse < Aws::EmptyStructure; end
 
+    # A request to submit new account VDM attributes.
+    #
+    # @note When making an API call, you may pass PutAccountVdmAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vdm_attributes: { # required
+    #           vdm_enabled: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           dashboard_attributes: {
+    #             engagement_metrics: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #           guardian_attributes: {
+    #             optimized_shared_delivery: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] vdm_attributes
+    #   The VDM attributes that you wish to apply to your Amazon SES
+    #   account.
+    #   @return [Types::VdmAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountVdmAttributesRequest AWS API Documentation
+    #
+    class PutAccountVdmAttributesRequest < Struct.new(
+      :vdm_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountVdmAttributesResponse AWS API Documentation
+    #
+    class PutAccountVdmAttributesResponse < Aws::EmptyStructure; end
+
     # A request to associate a configuration set with a dedicated IP pool.
     #
     # @note When making an API call, you may pass PutConfigurationSetDeliveryOptionsRequest
@@ -5284,6 +5742,47 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetTrackingOptionsResponse AWS API Documentation
     #
     class PutConfigurationSetTrackingOptionsResponse < Aws::EmptyStructure; end
+
+    # A request to add specific VDM settings to a configuration set.
+    #
+    # @note When making an API call, you may pass PutConfigurationSetVdmOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_set_name: "ConfigurationSetName", # required
+    #         vdm_options: {
+    #           dashboard_options: {
+    #             engagement_metrics: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #           guardian_options: {
+    #             optimized_shared_delivery: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set.
+    #   @return [String]
+    #
+    # @!attribute [rw] vdm_options
+    #   The VDM options to apply to the configuration set.
+    #   @return [Types::VdmOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetVdmOptionsRequest AWS API Documentation
+    #
+    class PutConfigurationSetVdmOptionsRequest < Struct.new(
+      :configuration_set_name,
+      :vdm_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetVdmOptionsResponse AWS API Documentation
+    #
+    class PutConfigurationSetVdmOptionsResponse < Aws::EmptyStructure; end
 
     # A request to move a dedicated IP address to a dedicated IP pool.
     #
@@ -5800,6 +6299,53 @@ module Aws::SESV2
     #
     class RawMessage < Struct.new(
       :data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A recommendation generated for your account.
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource affected by the recommendation, with values like
+    #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The recommendation type, with values like `DKIM`, `SPF` or `DMARC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The recommendation description / disambiguator - e.g. `DKIM1` and
+    #   `DKIM2` are different recommendations about your DKIM setup.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The recommendation status, with values like `OPEN` or `FIXED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The first time this issue was encountered and the recommendation was
+    #   generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The last time the recommendation was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] impact
+    #   The recommendation impact, with values like `HIGH` or `LOW`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/Recommendation AWS API Documentation
+    #
+    class Recommendation < Struct.new(
+      :resource_arn,
+      :type,
+      :description,
+      :status,
+      :created_timestamp,
+      :last_updated_timestamp,
+      :impact)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7270,6 +7816,84 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateEmailTemplateResponse AWS API Documentation
     #
     class UpdateEmailTemplateResponse < Aws::EmptyStructure; end
+
+    # The VDM attributes that apply to your Amazon SES account.
+    #
+    # @note When making an API call, you may pass VdmAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         vdm_enabled: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         dashboard_attributes: {
+    #           engagement_metrics: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         guardian_attributes: {
+    #           optimized_shared_delivery: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] vdm_enabled
+    #   Specifies the status of your VDM configuration. Can be one of the
+    #   following:
+    #
+    #   * `ENABLED` – Amazon SES enables VDM for your account.
+    #
+    #   * `DISABLED` – Amazon SES disables VDM for your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_attributes
+    #   Specifies additional settings for your VDM configuration as
+    #   applicable to the Dashboard.
+    #   @return [Types::DashboardAttributes]
+    #
+    # @!attribute [rw] guardian_attributes
+    #   Specifies additional settings for your VDM configuration as
+    #   applicable to the Guardian.
+    #   @return [Types::GuardianAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/VdmAttributes AWS API Documentation
+    #
+    class VdmAttributes < Struct.new(
+      :vdm_enabled,
+      :dashboard_attributes,
+      :guardian_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that defines the VDM settings that apply to emails that you
+    # send using the configuration set.
+    #
+    # @note When making an API call, you may pass VdmOptions
+    #   data as a hash:
+    #
+    #       {
+    #         dashboard_options: {
+    #           engagement_metrics: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         guardian_options: {
+    #           optimized_shared_delivery: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] dashboard_options
+    #   Specifies additional settings for your VDM configuration as
+    #   applicable to the Dashboard.
+    #   @return [Types::DashboardOptions]
+    #
+    # @!attribute [rw] guardian_options
+    #   Specifies additional settings for your VDM configuration as
+    #   applicable to the Guardian.
+    #   @return [Types::GuardianOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/VdmOptions AWS API Documentation
+    #
+    class VdmOptions < Struct.new(
+      :dashboard_options,
+      :guardian_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # An object that contains information about the amount of email that was
     # delivered to recipients.

@@ -11,6 +11,20 @@
 module Aws::SESV2
   module Endpoints
 
+    class BatchGetMetricData
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SESV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateConfigurationSet
       def self.build(context)
         unless context.config.regional_endpoint
@@ -711,6 +725,20 @@ module Aws::SESV2
       end
     end
 
+    class ListRecommendations
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SESV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListSuppressedDestinations
       def self.build(context)
         unless context.config.regional_endpoint
@@ -795,6 +823,20 @@ module Aws::SESV2
       end
     end
 
+    class PutAccountVdmAttributes
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SESV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class PutConfigurationSetDeliveryOptions
       def self.build(context)
         unless context.config.regional_endpoint
@@ -852,6 +894,20 @@ module Aws::SESV2
     end
 
     class PutConfigurationSetTrackingOptions
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SESV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class PutConfigurationSetVdmOptions
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

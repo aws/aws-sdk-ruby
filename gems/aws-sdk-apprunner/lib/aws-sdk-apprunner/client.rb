@@ -415,6 +415,7 @@ module Aws::AppRunner
     #   * {Types::AssociateCustomDomainResponse#dns_target #dns_target} => String
     #   * {Types::AssociateCustomDomainResponse#service_arn #service_arn} => String
     #   * {Types::AssociateCustomDomainResponse#custom_domain #custom_domain} => Types::CustomDomain
+    #   * {Types::AssociateCustomDomainResponse#vpc_dns_targets #vpc_dns_targets} => Array&lt;Types::VpcDNSTarget&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -436,6 +437,10 @@ module Aws::AppRunner
     #   resp.custom_domain.certificate_validation_records[0].value #=> String
     #   resp.custom_domain.certificate_validation_records[0].status #=> String, one of "PENDING_VALIDATION", "SUCCESS", "FAILED"
     #   resp.custom_domain.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "DELETING", "DELETE_FAILED", "PENDING_CERTIFICATE_DNS_VALIDATION", "BINDING_CERTIFICATE"
+    #   resp.vpc_dns_targets #=> Array
+    #   resp.vpc_dns_targets[0].vpc_ingress_connection_arn #=> String
+    #   resp.vpc_dns_targets[0].vpc_id #=> String
+    #   resp.vpc_dns_targets[0].domain_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/AssociateCustomDomain AWS API Documentation
     #
@@ -827,6 +832,9 @@ module Aws::AppRunner
     #         egress_type: "DEFAULT", # accepts DEFAULT, VPC
     #         vpc_connector_arn: "AppRunnerResourceArn",
     #       },
+    #       ingress_configuration: {
+    #         is_publicly_accessible: false,
+    #       },
     #     },
     #     observability_configuration: {
     #       observability_enabled: false, # required
@@ -878,6 +886,7 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
+    #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
@@ -955,6 +964,71 @@ module Aws::AppRunner
     # @param [Hash] params ({})
     def create_vpc_connector(params = {}, options = {})
       req = build_request(:create_vpc_connector, params)
+      req.send_request(options)
+    end
+
+    # Create an App Runner VPC Ingress Connection resource. App Runner
+    # requires this resource when you want to associate your App Runner
+    # service with an Amazon VPC endpoint.
+    #
+    # @option params [required, String] :service_arn
+    #   The Amazon Resource Name (ARN) for this App Runner service that is
+    #   used to create the VPC Ingress Connection resource.
+    #
+    # @option params [required, String] :vpc_ingress_connection_name
+    #   A name for the VPC Ingress Connection resource. It must be unique
+    #   across all the active VPC Ingress Connections in your Amazon Web
+    #   Services account in the Amazon Web Services Region.
+    #
+    # @option params [required, Types::IngressVpcConfiguration] :ingress_vpc_configuration
+    #   Specifications for the customer’s Amazon VPC and the related Amazon
+    #   Web Services PrivateLink VPC endpoint that are used to create the VPC
+    #   Ingress Connection resource.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An optional list of metadata items that you can associate with the VPC
+    #   Ingress Connection resource. A tag is a key-value pair.
+    #
+    # @return [Types::CreateVpcIngressConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVpcIngressConnectionResponse#vpc_ingress_connection #vpc_ingress_connection} => Types::VpcIngressConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vpc_ingress_connection({
+    #     service_arn: "AppRunnerResourceArn", # required
+    #     vpc_ingress_connection_name: "VpcIngressConnectionName", # required
+    #     ingress_vpc_configuration: { # required
+    #       vpc_id: "String",
+    #       vpc_endpoint_id: "String",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_ingress_connection.vpc_ingress_connection_arn #=> String
+    #   resp.vpc_ingress_connection.vpc_ingress_connection_name #=> String
+    #   resp.vpc_ingress_connection.service_arn #=> String
+    #   resp.vpc_ingress_connection.status #=> String, one of "AVAILABLE", "PENDING_CREATION", "PENDING_UPDATE", "PENDING_DELETION", "FAILED_CREATION", "FAILED_UPDATE", "FAILED_DELETION", "DELETED"
+    #   resp.vpc_ingress_connection.account_id #=> String
+    #   resp.vpc_ingress_connection.domain_name #=> String
+    #   resp.vpc_ingress_connection.ingress_vpc_configuration.vpc_id #=> String
+    #   resp.vpc_ingress_connection.ingress_vpc_configuration.vpc_endpoint_id #=> String
+    #   resp.vpc_ingress_connection.created_at #=> Time
+    #   resp.vpc_ingress_connection.deleted_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CreateVpcIngressConnection AWS API Documentation
+    #
+    # @overload create_vpc_ingress_connection(params = {})
+    # @param [Hash] params ({})
+    def create_vpc_ingress_connection(params = {}, options = {})
+      req = build_request(:create_vpc_ingress_connection, params)
       req.send_request(options)
     end
 
@@ -1087,6 +1161,11 @@ module Aws::AppRunner
     # the returned `OperationId` and the ListOperations call to track the
     # operation's progress.
     #
+    # <note markdown="1"> Make sure that you don't have any active VPCIngressConnections
+    # associated with the service you want to delete.
+    #
+    #  </note>
+    #
     # @option params [required, String] :service_arn
     #   The Amazon Resource Name (ARN) of the App Runner service that you want
     #   to delete.
@@ -1146,6 +1225,7 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
+    #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
@@ -1197,6 +1277,54 @@ module Aws::AppRunner
     # @param [Hash] params ({})
     def delete_vpc_connector(params = {}, options = {})
       req = build_request(:delete_vpc_connector, params)
+      req.send_request(options)
+    end
+
+    # Delete an App Runner VPC Ingress Connection resource that's
+    # associated with an App Runner service. The VPC Ingress Connection must
+    # be in one of the following states to be deleted:
+    #
+    # * `AVAILABLE`
+    #
+    # * `FAILED_CREATION`
+    #
+    # * `FAILED_UPDATE`
+    #
+    # * `FAILED_DELETION`
+    #
+    # @option params [required, String] :vpc_ingress_connection_arn
+    #   The Amazon Resource Name (ARN) of the App Runner VPC Ingress
+    #   Connection that you want to delete.
+    #
+    # @return [Types::DeleteVpcIngressConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVpcIngressConnectionResponse#vpc_ingress_connection #vpc_ingress_connection} => Types::VpcIngressConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vpc_ingress_connection({
+    #     vpc_ingress_connection_arn: "AppRunnerResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_ingress_connection.vpc_ingress_connection_arn #=> String
+    #   resp.vpc_ingress_connection.vpc_ingress_connection_name #=> String
+    #   resp.vpc_ingress_connection.service_arn #=> String
+    #   resp.vpc_ingress_connection.status #=> String, one of "AVAILABLE", "PENDING_CREATION", "PENDING_UPDATE", "PENDING_DELETION", "FAILED_CREATION", "FAILED_UPDATE", "FAILED_DELETION", "DELETED"
+    #   resp.vpc_ingress_connection.account_id #=> String
+    #   resp.vpc_ingress_connection.domain_name #=> String
+    #   resp.vpc_ingress_connection.ingress_vpc_configuration.vpc_id #=> String
+    #   resp.vpc_ingress_connection.ingress_vpc_configuration.vpc_endpoint_id #=> String
+    #   resp.vpc_ingress_connection.created_at #=> Time
+    #   resp.vpc_ingress_connection.deleted_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DeleteVpcIngressConnection AWS API Documentation
+    #
+    # @overload delete_vpc_ingress_connection(params = {})
+    # @param [Hash] params ({})
+    def delete_vpc_ingress_connection(params = {}, options = {})
+      req = build_request(:delete_vpc_ingress_connection, params)
       req.send_request(options)
     end
 
@@ -1271,6 +1399,7 @@ module Aws::AppRunner
     #   * {Types::DescribeCustomDomainsResponse#dns_target #dns_target} => String
     #   * {Types::DescribeCustomDomainsResponse#service_arn #service_arn} => String
     #   * {Types::DescribeCustomDomainsResponse#custom_domains #custom_domains} => Array&lt;Types::CustomDomain&gt;
+    #   * {Types::DescribeCustomDomainsResponse#vpc_dns_targets #vpc_dns_targets} => Array&lt;Types::VpcDNSTarget&gt;
     #   * {Types::DescribeCustomDomainsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -1296,6 +1425,10 @@ module Aws::AppRunner
     #   resp.custom_domains[0].certificate_validation_records[0].value #=> String
     #   resp.custom_domains[0].certificate_validation_records[0].status #=> String, one of "PENDING_VALIDATION", "SUCCESS", "FAILED"
     #   resp.custom_domains[0].status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "DELETING", "DELETE_FAILED", "PENDING_CERTIFICATE_DNS_VALIDATION", "BINDING_CERTIFICATE"
+    #   resp.vpc_dns_targets #=> Array
+    #   resp.vpc_dns_targets[0].vpc_ingress_connection_arn #=> String
+    #   resp.vpc_dns_targets[0].vpc_id #=> String
+    #   resp.vpc_dns_targets[0].domain_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DescribeCustomDomains AWS API Documentation
@@ -1408,6 +1541,7 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
+    #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #
@@ -1460,6 +1594,45 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
+    # Return a full description of an App Runner VPC Ingress Connection
+    # resource.
+    #
+    # @option params [required, String] :vpc_ingress_connection_arn
+    #   The Amazon Resource Name (ARN) of the App Runner VPC Ingress
+    #   Connection that you want a description for.
+    #
+    # @return [Types::DescribeVpcIngressConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVpcIngressConnectionResponse#vpc_ingress_connection #vpc_ingress_connection} => Types::VpcIngressConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_vpc_ingress_connection({
+    #     vpc_ingress_connection_arn: "AppRunnerResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_ingress_connection.vpc_ingress_connection_arn #=> String
+    #   resp.vpc_ingress_connection.vpc_ingress_connection_name #=> String
+    #   resp.vpc_ingress_connection.service_arn #=> String
+    #   resp.vpc_ingress_connection.status #=> String, one of "AVAILABLE", "PENDING_CREATION", "PENDING_UPDATE", "PENDING_DELETION", "FAILED_CREATION", "FAILED_UPDATE", "FAILED_DELETION", "DELETED"
+    #   resp.vpc_ingress_connection.account_id #=> String
+    #   resp.vpc_ingress_connection.domain_name #=> String
+    #   resp.vpc_ingress_connection.ingress_vpc_configuration.vpc_id #=> String
+    #   resp.vpc_ingress_connection.ingress_vpc_configuration.vpc_endpoint_id #=> String
+    #   resp.vpc_ingress_connection.created_at #=> Time
+    #   resp.vpc_ingress_connection.deleted_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DescribeVpcIngressConnection AWS API Documentation
+    #
+    # @overload describe_vpc_ingress_connection(params = {})
+    # @param [Hash] params ({})
+    def describe_vpc_ingress_connection(params = {}, options = {})
+      req = build_request(:describe_vpc_ingress_connection, params)
+      req.send_request(options)
+    end
+
     # Disassociate a custom domain name from an App Runner service.
     #
     # Certificates tracking domain validity are associated with a custom
@@ -1485,6 +1658,7 @@ module Aws::AppRunner
     #   * {Types::DisassociateCustomDomainResponse#dns_target #dns_target} => String
     #   * {Types::DisassociateCustomDomainResponse#service_arn #service_arn} => String
     #   * {Types::DisassociateCustomDomainResponse#custom_domain #custom_domain} => Types::CustomDomain
+    #   * {Types::DisassociateCustomDomainResponse#vpc_dns_targets #vpc_dns_targets} => Array&lt;Types::VpcDNSTarget&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1505,6 +1679,10 @@ module Aws::AppRunner
     #   resp.custom_domain.certificate_validation_records[0].value #=> String
     #   resp.custom_domain.certificate_validation_records[0].status #=> String, one of "PENDING_VALIDATION", "SUCCESS", "FAILED"
     #   resp.custom_domain.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "DELETING", "DELETE_FAILED", "PENDING_CERTIFICATE_DNS_VALIDATION", "BINDING_CERTIFICATE"
+    #   resp.vpc_dns_targets #=> Array
+    #   resp.vpc_dns_targets[0].vpc_ingress_connection_arn #=> String
+    #   resp.vpc_dns_targets[0].vpc_id #=> String
+    #   resp.vpc_dns_targets[0].domain_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DisassociateCustomDomain AWS API Documentation
     #
@@ -1925,6 +2103,63 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
+    # Return a list of App Runner VPC Ingress Connections in your Amazon Web
+    # Services account.
+    #
+    # @option params [Types::ListVpcIngressConnectionsFilter] :filter
+    #   The VPC Ingress Connections to be listed based on either the Service
+    #   Arn or Vpc Endpoint Id, or both.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to include in each response (result
+    #   page). It's used for a paginated request.
+    #
+    #   If you don't specify `MaxResults`, the request retrieves all
+    #   available results in a single response.
+    #
+    # @option params [String] :next_token
+    #   A token from a previous result page. It's used for a paginated
+    #   request. The request retrieves the next result page. All other
+    #   parameter values must be identical to the ones that are specified in
+    #   the initial request.
+    #
+    #   If you don't specify `NextToken`, the request retrieves the first
+    #   result page.
+    #
+    # @return [Types::ListVpcIngressConnectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVpcIngressConnectionsResponse#vpc_ingress_connection_summary_list #vpc_ingress_connection_summary_list} => Array&lt;Types::VpcIngressConnectionSummary&gt;
+    #   * {Types::ListVpcIngressConnectionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vpc_ingress_connections({
+    #     filter: {
+    #       service_arn: "AppRunnerResourceArn",
+    #       vpc_endpoint_id: "String",
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_ingress_connection_summary_list #=> Array
+    #   resp.vpc_ingress_connection_summary_list[0].vpc_ingress_connection_arn #=> String
+    #   resp.vpc_ingress_connection_summary_list[0].service_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ListVpcIngressConnections AWS API Documentation
+    #
+    # @overload list_vpc_ingress_connections(params = {})
+    # @param [Hash] params ({})
+    def list_vpc_ingress_connections(params = {}, options = {})
+      req = build_request(:list_vpc_ingress_connections, params)
+      req.send_request(options)
+    end
+
     # Pause an active App Runner service. App Runner reduces compute
     # capacity for the service to zero and loses state (for example,
     # ephemeral storage is removed).
@@ -1992,6 +2227,7 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
+    #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
@@ -2071,6 +2307,7 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
+    #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
@@ -2306,6 +2543,9 @@ module Aws::AppRunner
     #         egress_type: "DEFAULT", # accepts DEFAULT, VPC
     #         vpc_connector_arn: "AppRunnerResourceArn",
     #       },
+    #       ingress_configuration: {
+    #         is_publicly_accessible: false,
+    #       },
     #     },
     #     observability_configuration: {
     #       observability_enabled: false, # required
@@ -2357,6 +2597,7 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
+    #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
@@ -2367,6 +2608,61 @@ module Aws::AppRunner
     # @param [Hash] params ({})
     def update_service(params = {}, options = {})
       req = build_request(:update_service, params)
+      req.send_request(options)
+    end
+
+    # Update an existing App Runner VPC Ingress Connection resource. The VPC
+    # Ingress Connection must be in one of the following states to be
+    # updated:
+    #
+    # * AVAILABLE
+    #
+    # * FAILED\_CREATION
+    #
+    # * FAILED\_UPDATE
+    #
+    # @option params [required, String] :vpc_ingress_connection_arn
+    #   The Amazon Resource Name (Arn) for the App Runner VPC Ingress
+    #   Connection resource that you want to update.
+    #
+    # @option params [required, Types::IngressVpcConfiguration] :ingress_vpc_configuration
+    #   Specifications for the customer’s Amazon VPC and the related Amazon
+    #   Web Services PrivateLink VPC endpoint that are used to update the VPC
+    #   Ingress Connection resource.
+    #
+    # @return [Types::UpdateVpcIngressConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVpcIngressConnectionResponse#vpc_ingress_connection #vpc_ingress_connection} => Types::VpcIngressConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_vpc_ingress_connection({
+    #     vpc_ingress_connection_arn: "AppRunnerResourceArn", # required
+    #     ingress_vpc_configuration: { # required
+    #       vpc_id: "String",
+    #       vpc_endpoint_id: "String",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_ingress_connection.vpc_ingress_connection_arn #=> String
+    #   resp.vpc_ingress_connection.vpc_ingress_connection_name #=> String
+    #   resp.vpc_ingress_connection.service_arn #=> String
+    #   resp.vpc_ingress_connection.status #=> String, one of "AVAILABLE", "PENDING_CREATION", "PENDING_UPDATE", "PENDING_DELETION", "FAILED_CREATION", "FAILED_UPDATE", "FAILED_DELETION", "DELETED"
+    #   resp.vpc_ingress_connection.account_id #=> String
+    #   resp.vpc_ingress_connection.domain_name #=> String
+    #   resp.vpc_ingress_connection.ingress_vpc_configuration.vpc_id #=> String
+    #   resp.vpc_ingress_connection.ingress_vpc_configuration.vpc_endpoint_id #=> String
+    #   resp.vpc_ingress_connection.created_at #=> Time
+    #   resp.vpc_ingress_connection.deleted_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/UpdateVpcIngressConnection AWS API Documentation
+    #
+    # @overload update_vpc_ingress_connection(params = {})
+    # @param [Hash] params ({})
+    def update_vpc_ingress_connection(params = {}, options = {})
+      req = build_request(:update_vpc_ingress_connection, params)
       req.send_request(options)
     end
 
@@ -2383,7 +2679,7 @@ module Aws::AppRunner
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apprunner'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

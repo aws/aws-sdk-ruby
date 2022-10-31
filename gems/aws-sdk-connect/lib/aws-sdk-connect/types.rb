@@ -4133,6 +4133,42 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DismissUserContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "UserId", # required
+    #         instance_id: "InstanceId", # required
+    #         contact_id: "ContactId", # required
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user account.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DismissUserContactRequest AWS API Documentation
+    #
+    class DismissUserContactRequest < Struct.new(
+      :user_id,
+      :instance_id,
+      :contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DismissUserContactResponse AWS API Documentation
+    #
+    class DismissUserContactResponse < Aws::EmptyStructure; end
+
     # Information about a traffic distribution.
     #
     # @note When making an API call, you may pass Distribution

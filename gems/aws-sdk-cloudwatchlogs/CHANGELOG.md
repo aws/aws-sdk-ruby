@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2022-10-31)
+------------------
+
+* Feature - SDK release to support tagging for destinations and log groups with TagResource. Also supports tag on create with PutDestination.
+
 1.54.0 (2022-10-25)
 ------------------
 

@@ -372,6 +372,70 @@ module Aws::EC2
 
     # @!group API Operations
 
+    # Accepts an Elastic IP address transfer. For more information, see
+    # [Accept a transferred Elastic IP address][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#using-instance-addressing-eips-transfer-accept
+    #
+    # @option params [required, String] :address
+    #   The Elastic IP address you are accepting for transfer.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   the resource. Use the tag key in the filter name and the tag value as
+    #   the filter value. For example, to find all resources that have a tag
+    #   with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+    #   the filter name and `TeamA` for the filter value.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AcceptAddressTransferResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptAddressTransferResult#address_transfer #address_transfer} => Types::AddressTransfer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_address_transfer({
+    #     address: "String", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, vpn-connection-device-type
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_transfer.public_ip #=> String
+    #   resp.address_transfer.allocation_id #=> String
+    #   resp.address_transfer.transfer_account_id #=> String
+    #   resp.address_transfer.transfer_offer_expiration_timestamp #=> Time
+    #   resp.address_transfer.transfer_offer_accepted_timestamp #=> Time
+    #   resp.address_transfer.address_transfer_status #=> String, one of "pending", "disabled", "accepted"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptAddressTransfer AWS API Documentation
+    #
+    # @overload accept_address_transfer(params = {})
+    # @param [Hash] params ({})
+    def accept_address_transfer(params = {}, options = {})
+      req = build_request(:accept_address_transfer, params)
+      req.send_request(options)
+    end
+
     # Accepts the Convertible Reserved Instance exchange quote described in
     # the GetReservedInstancesExchangeQuote call.
     #
@@ -17538,6 +17602,67 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes an Elastic IP address transfer. For more information, see
+    # [Transfer Elastic IP addresses][1] in the *Amazon Virtual Private
+    # Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#transfer-EIPs-intro
+    #
+    # @option params [Array<String>] :allocation_ids
+    #   The allocation IDs of Elastic IP addresses.
+    #
+    # @option params [String] :next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of address transfers to return in one page of
+    #   results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeAddressTransfersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAddressTransfersResult#address_transfers #address_transfers} => Array&lt;Types::AddressTransfer&gt;
+    #   * {Types::DescribeAddressTransfersResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_address_transfers({
+    #     allocation_ids: ["AllocationId"],
+    #     next_token: "String",
+    #     max_results: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_transfers #=> Array
+    #   resp.address_transfers[0].public_ip #=> String
+    #   resp.address_transfers[0].allocation_id #=> String
+    #   resp.address_transfers[0].transfer_account_id #=> String
+    #   resp.address_transfers[0].transfer_offer_expiration_timestamp #=> Time
+    #   resp.address_transfers[0].transfer_offer_accepted_timestamp #=> Time
+    #   resp.address_transfers[0].address_transfer_status #=> String, one of "pending", "disabled", "accepted"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddressTransfers AWS API Documentation
+    #
+    # @overload describe_address_transfers(params = {})
+    # @param [Hash] params ({})
+    def describe_address_transfers(params = {}, options = {})
+      req = build_request(:describe_address_transfers, params)
+      req.send_request(options)
+    end
+
     # Describes the specified Elastic IP addresses or all of your Elastic IP
     # addresses.
     #
@@ -34210,6 +34335,52 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Disables Elastic IP address transfer. For more information, see
+    # [Transfer Elastic IP addresses][1] in the *Amazon Virtual Private
+    # Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#transfer-EIPs-intro
+    #
+    # @option params [required, String] :allocation_id
+    #   The allocation ID of an Elastic IP address.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisableAddressTransferResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableAddressTransferResult#address_transfer #address_transfer} => Types::AddressTransfer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_address_transfer({
+    #     allocation_id: "AllocationId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_transfer.public_ip #=> String
+    #   resp.address_transfer.allocation_id #=> String
+    #   resp.address_transfer.transfer_account_id #=> String
+    #   resp.address_transfer.transfer_offer_expiration_timestamp #=> Time
+    #   resp.address_transfer.transfer_offer_accepted_timestamp #=> Time
+    #   resp.address_transfer.address_transfer_status #=> String, one of "pending", "disabled", "accepted"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableAddressTransfer AWS API Documentation
+    #
+    # @overload disable_address_transfer(params = {})
+    # @param [Hash] params ({})
+    def disable_address_transfer(params = {}, options = {})
+      req = build_request(:disable_address_transfer, params)
+      req.send_request(options)
+    end
+
     # Disables EBS encryption by default for your account in the current
     # Region.
     #
@@ -35313,6 +35484,57 @@ module Aws::EC2
     # @param [Hash] params ({})
     def disassociate_vpc_cidr_block(params = {}, options = {})
       req = build_request(:disassociate_vpc_cidr_block, params)
+      req.send_request(options)
+    end
+
+    # Enables Elastic IP address transfer. For more information, see
+    # [Transfer Elastic IP addresses][1] in the *Amazon Virtual Private
+    # Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#transfer-EIPs-intro
+    #
+    # @option params [required, String] :allocation_id
+    #   The allocation ID of an Elastic IP address.
+    #
+    # @option params [required, String] :transfer_account_id
+    #   The ID of the account that you want to transfer the Elastic IP address
+    #   to.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::EnableAddressTransferResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableAddressTransferResult#address_transfer #address_transfer} => Types::AddressTransfer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_address_transfer({
+    #     allocation_id: "AllocationId", # required
+    #     transfer_account_id: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_transfer.public_ip #=> String
+    #   resp.address_transfer.allocation_id #=> String
+    #   resp.address_transfer.transfer_account_id #=> String
+    #   resp.address_transfer.transfer_offer_expiration_timestamp #=> Time
+    #   resp.address_transfer.transfer_offer_accepted_timestamp #=> Time
+    #   resp.address_transfer.address_transfer_status #=> String, one of "pending", "disabled", "accepted"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableAddressTransfer AWS API Documentation
+    #
+    # @overload enable_address_transfer(params = {})
+    # @param [Hash] params ({})
+    def enable_address_transfer(params = {}, options = {})
+      req = build_request(:enable_address_transfer, params)
       req.send_request(options)
     end
 
@@ -37277,7 +37499,7 @@ module Aws::EC2
     #   The resource type.
     #
     # @option params [Types::RequestIpamResourceTag] :resource_tag
-    #   A tag on an IPAM resource.
+    #   The resource tag.
     #
     # @option params [String] :resource_owner
     #   The ID of the Amazon Web Services account that owns the resource.
@@ -52211,7 +52433,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.343.0'
+      context[:gem_version] = '1.344.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

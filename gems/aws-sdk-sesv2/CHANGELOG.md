@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2022-10-31)
+------------------
+
+* Feature - This release includes support for interacting with the Virtual Deliverability Manager, allowing you to opt in/out of the feature and to retrieve recommendations and metric data.
+
 1.29.0 (2022-10-25)
 ------------------
 

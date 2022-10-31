@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2022-10-31)
+------------------
+
+* Feature - Amazon connect now support a new API DismissUserContact to dismiss or remove terminated contacts in Agent CCP
+
 1.80.0 (2022-10-25)
 ------------------
 

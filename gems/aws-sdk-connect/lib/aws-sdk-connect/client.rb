@@ -3538,6 +3538,44 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Dismisses contacts from an agent’s CCP and returns the agent to an
+    # available state, which allows the agent to receive a new routed
+    # contact. Contacts can only be dismissed if they are in a `MISSED`,
+    # `ERROR`, `ENDED`, or `REJECTED` state in the [Agent Event Stream][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user account.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.dismiss_user_contact({
+    #     user_id: "UserId", # required
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DismissUserContact AWS API Documentation
+    #
+    # @overload dismiss_user_contact(params = {})
+    # @param [Hash] params ({})
+    def dismiss_user_contact(params = {}, options = {})
+      req = build_request(:dismiss_user_contact, params)
+      req.send_request(options)
+    end
+
     # Retrieves the contact attributes for the specified contact.
     #
     # @option params [required, String] :instance_id
@@ -8795,9 +8833,11 @@ module Aws::Connect
     end
 
     # Updates the traffic distribution for a given traffic distribution
-    # group. For more information about updating a traffic distribution
-    # group see [Update telephony traffic distribution across Amazon Web
-    # Services Regions ][1] in the *Amazon Connect Administrator Guide*.
+    # group.
+    #
+    # For more information about updating a traffic distribution group, see
+    # [Update telephony traffic distribution across Amazon Web Services
+    # Regions ][1] in the *Amazon Connect Administrator Guide*.
     #
     #
     #
@@ -9103,7 +9143,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

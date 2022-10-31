@@ -190,6 +190,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::DisassociateRoutingProfileQueues.build(context)
           when :disassociate_security_key
             Aws::Connect::Endpoints::DisassociateSecurityKey.build(context)
+          when :dismiss_user_contact
+            Aws::Connect::Endpoints::DismissUserContact.build(context)
           when :get_contact_attributes
             Aws::Connect::Endpoints::GetContactAttributes.build(context)
           when :get_current_metric_data

@@ -1569,6 +1569,50 @@ module Aws::CloudWatchLogs
     #
     class LimitExceededException < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource that you want to view tags for.
+    #
+    #   The ARN format of a log group is
+    #   `arn:aws:logs:Region:account-id:log-group:log-group-name `
+    #
+    #   The ARN format of a destination is
+    #   `arn:aws:logs:Region:account-id:destination:destination-name `
+    #
+    #   For more information about ARN format, see [CloudWatch Logs
+    #   resources and operations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags associated with the requested resource.&gt;
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsLogGroupRequest
     #   data as a hash:
     #
@@ -1614,7 +1658,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] retention_in_days
     #   The number of days to retain the log events in the specified log
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150,
-    #   180, 365, 400, 545, 731, 1827, 2192, 2557, 2922, 3288, and 3653.
+    #   180, 365, 400, 545, 731, 1827, and 3653.
     #
     #   To set a log group to never have log events expire, use
     #   [DeleteRetentionPolicy][1].
@@ -1997,6 +2041,9 @@ module Aws::CloudWatchLogs
     #         destination_name: "DestinationName", # required
     #         target_arn: "TargetArn", # required
     #         role_arn: "RoleArn", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] destination_name
@@ -2014,12 +2061,24 @@ module Aws::CloudWatchLogs
     #   stream.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An optional list of key-value pairs to associate with the resource.
+    #
+    #   For more information about tagging, see [Tagging Amazon Web Services
+    #   resources][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestinationRequest AWS API Documentation
     #
     class PutDestinationRequest < Struct.new(
       :destination_name,
       :target_arn,
-      :role_arn)
+      :role_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2314,7 +2373,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] retention_in_days
     #   The number of days to retain the log events in the specified log
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150,
-    #   180, 365, 400, 545, 731, 1827, 2192, 2557, 2922, 3288, and 3653.
+    #   180, 365, 400, 545, 731, 1827, and 3653.
     #
     #   To set a log group to never have log events expire, use
     #   [DeleteRetentionPolicy][1].
@@ -2860,6 +2919,46 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource that you're adding tags to.
+    #
+    #   The ARN format of a log group is
+    #   `arn:aws:logs:Region:account-id:log-group:log-group-name `
+    #
+    #   The ARN format of a destination is
+    #   `arn:aws:logs:Region:account-id:destination:destination-name `
+    #
+    #   For more information about ARN format, see [CloudWatch Logs
+    #   resources and operations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of key-value pairs to associate with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TestMetricFilterRequest
     #   data as a hash:
     #
@@ -2900,6 +2999,24 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # A resource can have no more than 50 tags.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message,
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The most likely cause is an invalid Amazon Web Services access key ID
     # or secret key.
     #
@@ -2928,6 +3045,45 @@ module Aws::CloudWatchLogs
     class UntagLogGroupRequest < Struct.new(
       :log_group_name,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the CloudWatch Logs resource that you're removing tags
+    #   from.
+    #
+    #   The ARN format of a log group is
+    #   `arn:aws:logs:Region:account-id:log-group:log-group-name `
+    #
+    #   The ARN format of a destination is
+    #   `arn:aws:logs:Region:account-id:destination:destination-name `
+    #
+    #   For more information about ARN format, see [CloudWatch Logs
+    #   resources and operations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of tag keys to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
       SENSITIVE = []
       include Aws::Structure
     end

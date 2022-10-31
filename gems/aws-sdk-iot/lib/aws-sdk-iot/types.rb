@@ -283,6 +283,17 @@ module Aws::IoT
     #           type: "ElasticsearchType", # required
     #           id: "ElasticsearchId", # required
     #         },
+    #         location: {
+    #           role_arn: "AwsArn", # required
+    #           tracker_name: "String", # required
+    #           device_id: "String", # required
+    #           timestamp: {
+    #             value: "String", # required
+    #             unit: "String",
+    #           },
+    #           latitude: "String", # required
+    #           longitude: "String", # required
+    #         },
     #       }
     #
     # @!attribute [rw] dynamo_db
@@ -394,6 +405,11 @@ module Aws::IoT
     #   Write data to an Amazon OpenSearch Service domain.
     #   @return [Types::OpenSearchAction]
     #
+    # @!attribute [rw] location
+    #   The Amazon Location Service rule action sends device location
+    #   updates from an MQTT message to an Amazon Location tracker resource.
+    #   @return [Types::LocationAction]
+    #
     class Action < Struct.new(
       :dynamo_db,
       :dynamo_d_bv_2,
@@ -416,7 +432,8 @@ module Aws::IoT
       :timestream,
       :http,
       :kafka,
-      :open_search)
+      :open_search,
+      :location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4451,7 +4468,13 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] pre_provisioning_hook
-    #   Creates a pre-provisioning hook template.
+    #   Creates a pre-provisioning hook template. Only supports template of
+    #   type `FLEET_PROVISIONING`. For more information about provisioning
+    #   template types, see [type][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_CreateProvisioningTemplate.html#iot-CreateProvisioningTemplate-request-type
     #   @return [Types::ProvisioningHook]
     #
     # @!attribute [rw] tags
@@ -5349,6 +5372,17 @@ module Aws::IoT
     #                 type: "ElasticsearchType", # required
     #                 id: "ElasticsearchId", # required
     #               },
+    #               location: {
+    #                 role_arn: "AwsArn", # required
+    #                 tracker_name: "String", # required
+    #                 device_id: "String", # required
+    #                 timestamp: {
+    #                   value: "String", # required
+    #                   unit: "String",
+    #                 },
+    #                 latitude: "String", # required
+    #                 longitude: "String", # required
+    #               },
     #             },
     #           ],
     #           rule_disabled: false,
@@ -5526,6 +5560,17 @@ module Aws::IoT
     #               index: "ElasticsearchIndex", # required
     #               type: "ElasticsearchType", # required
     #               id: "ElasticsearchId", # required
+    #             },
+    #             location: {
+    #               role_arn: "AwsArn", # required
+    #               tracker_name: "String", # required
+    #               device_id: "String", # required
+    #               timestamp: {
+    #                 value: "String", # required
+    #                 unit: "String",
+    #               },
+    #               latitude: "String", # required
+    #               longitude: "String", # required
     #             },
     #           },
     #         },
@@ -9078,7 +9123,7 @@ module Aws::IoT
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return at one time. The default is
-    #   25.
+    #   10.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -13910,6 +13955,94 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The Amazon Location rule action sends device location updates from an
+    # MQTT message to an Amazon Location tracker resource.
+    #
+    # @note When making an API call, you may pass LocationAction
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "AwsArn", # required
+    #         tracker_name: "String", # required
+    #         device_id: "String", # required
+    #         timestamp: {
+    #           value: "String", # required
+    #           unit: "String",
+    #         },
+    #         latitude: "String", # required
+    #         longitude: "String", # required
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role that grants permission to write to the Amazon Location
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracker_name
+    #   The name of the tracker resource in Amazon Location in which the
+    #   location is updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The unique ID of the device providing the location data.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The time that the location data was sampled. The default value is
+    #   the time the MQTT message was processed.
+    #   @return [Types::LocationTimestamp]
+    #
+    # @!attribute [rw] latitude
+    #   A string that evaluates to a double value that represents the
+    #   latitude of the device's location.
+    #   @return [String]
+    #
+    # @!attribute [rw] longitude
+    #   A string that evaluates to a double value that represents the
+    #   longitude of the device's location.
+    #   @return [String]
+    #
+    class LocationAction < Struct.new(
+      :role_arn,
+      :tracker_name,
+      :device_id,
+      :timestamp,
+      :latitude,
+      :longitude)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes how to interpret an application-defined timestamp value from
+    # an MQTT message payload and the precision of that value.
+    #
+    # @note When making an API call, you may pass LocationTimestamp
+    #   data as a hash:
+    #
+    #       {
+    #         value: "String", # required
+    #         unit: "String",
+    #       }
+    #
+    # @!attribute [rw] value
+    #   An expression that returns a long epoch time value.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The precision of the timestamp value that results from the
+    #   expression described in `value`.
+    #
+    #   Valid values: `SECONDS` \| `MILLISECONDS` \| `MICROSECONDS` \|
+    #   `NANOSECONDS`. The default is `MILLISECONDS`.
+    #   @return [String]
+    #
+    class LocationTimestamp < Struct.new(
+      :value,
+      :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A log target.
     #
     # @note When making an API call, you may pass LogTarget
@@ -14850,7 +14983,7 @@ module Aws::IoT
     # A summary of information about a fleet provision template version.
     #
     # @!attribute [rw] version_id
-    #   The ID of the fleet privisioning template version.
+    #   The ID of the fleet provisioning template version.
     #   @return [Integer]
     #
     # @!attribute [rw] creation_date
@@ -15666,6 +15799,17 @@ module Aws::IoT
     #                 type: "ElasticsearchType", # required
     #                 id: "ElasticsearchId", # required
     #               },
+    #               location: {
+    #                 role_arn: "AwsArn", # required
+    #                 tracker_name: "String", # required
+    #                 device_id: "String", # required
+    #                 timestamp: {
+    #                   value: "String", # required
+    #                   unit: "String",
+    #                 },
+    #                 latitude: "String", # required
+    #                 longitude: "String", # required
+    #               },
     #             },
     #           ],
     #           rule_disabled: false,
@@ -15843,6 +15987,17 @@ module Aws::IoT
     #               index: "ElasticsearchIndex", # required
     #               type: "ElasticsearchType", # required
     #               id: "ElasticsearchId", # required
+    #             },
+    #             location: {
+    #               role_arn: "AwsArn", # required
+    #               tracker_name: "String", # required
+    #               device_id: "String", # required
+    #               timestamp: {
+    #                 value: "String", # required
+    #                 unit: "String",
+    #               },
+    #               latitude: "String", # required
+    #               longitude: "String", # required
     #             },
     #           },
     #         },
@@ -18615,6 +18770,17 @@ module Aws::IoT
     #               type: "ElasticsearchType", # required
     #               id: "ElasticsearchId", # required
     #             },
+    #             location: {
+    #               role_arn: "AwsArn", # required
+    #               tracker_name: "String", # required
+    #               device_id: "String", # required
+    #               timestamp: {
+    #                 value: "String", # required
+    #                 unit: "String",
+    #               },
+    #               latitude: "String", # required
+    #               longitude: "String", # required
+    #             },
     #           },
     #         ],
     #         rule_disabled: false,
@@ -18792,6 +18958,17 @@ module Aws::IoT
     #             index: "ElasticsearchIndex", # required
     #             type: "ElasticsearchType", # required
     #             id: "ElasticsearchId", # required
+    #           },
+    #           location: {
+    #             role_arn: "AwsArn", # required
+    #             tracker_name: "String", # required
+    #             device_id: "String", # required
+    #             timestamp: {
+    #               value: "String", # required
+    #               unit: "String",
+    #             },
+    #             latitude: "String", # required
+    #             longitude: "String", # required
     #           },
     #         },
     #       }
@@ -19957,7 +20134,13 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] pre_provisioning_hook
-    #   Updates the pre-provisioning hook template.
+    #   Updates the pre-provisioning hook template. Only supports template
+    #   of type `FLEET_PROVISIONING`. For more information about
+    #   provisioning template types, see [type][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_CreateProvisioningTemplate.html#iot-CreateProvisioningTemplate-request-type
     #   @return [Types::ProvisioningHook]
     #
     # @!attribute [rw] remove_pre_provisioning_hook
