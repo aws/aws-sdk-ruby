@@ -735,6 +735,35 @@ module Aws::Textract
     #   resp.identity_documents[0].identity_document_fields[0].value_detection.normalized_value.value #=> String
     #   resp.identity_documents[0].identity_document_fields[0].value_detection.normalized_value.value_type #=> String, one of "DATE"
     #   resp.identity_documents[0].identity_document_fields[0].value_detection.confidence #=> Float
+    #   resp.identity_documents[0].blocks #=> Array
+    #   resp.identity_documents[0].blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT"
+    #   resp.identity_documents[0].blocks[0].confidence #=> Float
+    #   resp.identity_documents[0].blocks[0].text #=> String
+    #   resp.identity_documents[0].blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
+    #   resp.identity_documents[0].blocks[0].row_index #=> Integer
+    #   resp.identity_documents[0].blocks[0].column_index #=> Integer
+    #   resp.identity_documents[0].blocks[0].row_span #=> Integer
+    #   resp.identity_documents[0].blocks[0].column_span #=> Integer
+    #   resp.identity_documents[0].blocks[0].geometry.bounding_box.width #=> Float
+    #   resp.identity_documents[0].blocks[0].geometry.bounding_box.height #=> Float
+    #   resp.identity_documents[0].blocks[0].geometry.bounding_box.left #=> Float
+    #   resp.identity_documents[0].blocks[0].geometry.bounding_box.top #=> Float
+    #   resp.identity_documents[0].blocks[0].geometry.polygon #=> Array
+    #   resp.identity_documents[0].blocks[0].geometry.polygon[0].x #=> Float
+    #   resp.identity_documents[0].blocks[0].geometry.polygon[0].y #=> Float
+    #   resp.identity_documents[0].blocks[0].id #=> String
+    #   resp.identity_documents[0].blocks[0].relationships #=> Array
+    #   resp.identity_documents[0].blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES", "MERGED_CELL", "TITLE", "ANSWER"
+    #   resp.identity_documents[0].blocks[0].relationships[0].ids #=> Array
+    #   resp.identity_documents[0].blocks[0].relationships[0].ids[0] #=> String
+    #   resp.identity_documents[0].blocks[0].entity_types #=> Array
+    #   resp.identity_documents[0].blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE", "COLUMN_HEADER"
+    #   resp.identity_documents[0].blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
+    #   resp.identity_documents[0].blocks[0].page #=> Integer
+    #   resp.identity_documents[0].blocks[0].query.text #=> String
+    #   resp.identity_documents[0].blocks[0].query.alias #=> String
+    #   resp.identity_documents[0].blocks[0].query.pages #=> Array
+    #   resp.identity_documents[0].blocks[0].query.pages[0] #=> String
     #   resp.document_metadata.pages #=> Integer
     #   resp.analyze_id_model_version #=> String
     #
@@ -1624,7 +1653,7 @@ module Aws::Textract
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-textract'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

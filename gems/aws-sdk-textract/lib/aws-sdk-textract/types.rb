@@ -674,7 +674,32 @@ module Aws::Textract
     # Returns the kind of currency detected.
     #
     # @!attribute [rw] code
-    #   Currency code for detected currency.
+    #   Currency code for detected currency. the current supported codes
+    #   are:
+    #
+    #   * USD
+    #
+    #   * EUR
+    #
+    #   * GBP
+    #
+    #   * CAD
+    #
+    #   * INR
+    #
+    #   * JPY
+    #
+    #   * CHF
+    #
+    #   * AUD
+    #
+    #   * CNY
+    #
+    #   * BZR
+    #
+    #   * SEK
+    #
+    #   * HKD
     #   @return [String]
     #
     # @!attribute [rw] confidence
@@ -795,11 +820,11 @@ module Aws::Textract
     end
 
     # Shows the group that a certain key belongs to. This helps
-    # differentiate responses like addresses that can appear similar in
-    # response JSON.
+    # differentiate between names and addresses for different organizations,
+    # that can be hard to determine via JSON response.
     #
     # @!attribute [rw] types
-    #   Informs you on the kind of label associated with the group
+    #   Informs you on whether the expense group is a name or an address.
     #   @return [Array<String>]
     #
     # @!attribute [rw] id
@@ -1253,11 +1278,16 @@ module Aws::Textract
     #   text.
     #   @return [Array<Types::IdentityDocumentField>]
     #
+    # @!attribute [rw] blocks
+    #   Individual word recognition, as returned by document detection.
+    #   @return [Array<Types::Block>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/IdentityDocument AWS API Documentation
     #
     class IdentityDocument < Struct.new(
       :document_index,
-      :identity_document_fields)
+      :identity_document_fields,
+      :blocks)
       SENSITIVE = []
       include Aws::Structure
     end

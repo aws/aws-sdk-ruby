@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.158.0 (2022-11-01)
+------------------
+
+* Feature - Relational Database Service - This release adds support for configuring Storage Throughput on RDS database instances.
+
 1.157.0 (2022-10-25)
 ------------------
 

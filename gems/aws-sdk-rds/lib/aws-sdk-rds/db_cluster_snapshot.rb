@@ -853,9 +853,8 @@ module Aws::RDS
     #   be initially allocated for each DB instance in the Multi-AZ DB
     #   cluster.
     #
-    #   For information about valid Iops values, see [Amazon RDS Provisioned
-    #   IOPS Storage to Improve Performance][1] in the *Amazon RDS User
-    #   Guide*.
+    #   For information about valid IOPS values, see [Amazon RDS Provisioned
+    #   IOPS storage][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints: Must be a multiple between .5 and 50 of the storage
     #   amount for the DB instance.

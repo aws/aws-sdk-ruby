@@ -321,7 +321,7 @@ module Aws::RDS
       data[:status_infos]
     end
 
-    # Specifies the storage type associated with DB instance.
+    # Specifies the storage type associated with the DB instance.
     # @return [String]
     def storage_type
       data[:storage_type]
@@ -725,6 +725,12 @@ module Aws::RDS
       data[:activity_stream_policy_status]
     end
 
+    # Specifies the storage throughput for the DB instance.
+    # @return [Integer]
+    def storage_throughput
+      data[:storage_throughput]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -922,6 +928,7 @@ module Aws::RDS
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
     #     network_type: "String",
+    #     storage_throughput: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1055,8 +1062,8 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 40 to
-    #     65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
+    #   * General Purpose (SSD) storage (gp2, gp3): Must be an integer from 40
+    #     to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
     #     Server.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 40 to 65536
@@ -1067,8 +1074,8 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     65536.
+    #   * General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20
+    #     to 65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
     #     65536.
@@ -1080,8 +1087,8 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     65536.
+    #   * General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20
+    #     to 65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
     #     65536.
@@ -1093,8 +1100,8 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     65536.
+    #   * General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20
+    #     to 65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
     #     65536.
@@ -1106,8 +1113,8 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     65536.
+    #   * General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20
+    #     to 65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
     #     65536.
@@ -1119,7 +1126,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2):
+    #   * General Purpose (SSD) storage (gp2, gp3):
     #
     #     * Enterprise and Standard editions: Must be an integer from 20 to
     #       16384.
@@ -1509,8 +1516,8 @@ module Aws::RDS
     # @option options [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for the DB instance. For information about
-    #   valid `Iops` values, see [Amazon RDS Provisioned IOPS storage to
-    #   improve performance][1] in the *Amazon RDS User Guide*.
+    #   valid IOPS values, see [Amazon RDS DB instance storage][1] in the
+    #   *Amazon RDS User Guide*.
     #
     #   Constraints: For MariaDB, MySQL, Oracle, and PostgreSQL DB instances,
     #   must be a multiple between .5 and 50 of the storage amount for the DB
@@ -1523,7 +1530,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html
     # @option options [String] :option_group_name
     #   A value that indicates that the DB instance should be associated with
     #   the specified option group.
@@ -1596,10 +1603,10 @@ module Aws::RDS
     # @option options [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `gp2 | gp3 | io1 | standard`
     #
-    #   If you specify `io1`, you must also include a value for the `Iops`
-    #   parameter.
+    #   If you specify `io1` or `gp3`, you must also include a value for the
+    #   `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     #
@@ -1958,6 +1965,10 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    # @option options [Integer] :storage_throughput
+    #   Specifies the storage throughput value for the DB instance.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2015,6 +2026,7 @@ module Aws::RDS
     #     max_allocated_storage: 1,
     #     custom_iam_instance_profile: "String",
     #     network_type: "String",
+    #     storage_throughput: 1,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -2155,10 +2167,10 @@ module Aws::RDS
     # @option options [String] :storage_type
     #   Specifies the storage type to be associated with the read replica.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `gp2 | gp3 | io1 | standard`
     #
-    #   If you specify `io1`, you must also include a value for the `Iops`
-    #   parameter.
+    #   If you specify `io1` or `gp3`, you must also include a value for the
+    #   `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     # @option options [Boolean] :copy_tags_to_snapshot
@@ -2477,6 +2489,10 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    # @option options [Integer] :storage_throughput
+    #   Specifies the storage throughput value for the read replica.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2659,6 +2675,7 @@ module Aws::RDS
     #     automation_mode: "full", # accepts full, all-paused
     #     resume_full_automation_mode_minutes: 1,
     #     network_type: "String",
+    #     storage_throughput: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -3057,7 +3074,7 @@ module Aws::RDS
     #   rebooting the instance, deleting the instance, creating a read replica
     #   for the instance, and creating a DB snapshot of the instance.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `gp2 | gp3 | io1 | standard`
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     # @option options [String] :tde_credential_arn
@@ -3425,6 +3442,10 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    # @option options [Integer] :storage_throughput
+    #   Specifies the storage throughput value for the DB instance.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -3561,6 +3582,7 @@ module Aws::RDS
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
     #     network_type: "String",
+    #     storage_throughput: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -3737,10 +3759,10 @@ module Aws::RDS
     # @option options [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `gp2 | gp3 | io1 | standard`
     #
-    #   If you specify `io1`, you must also include a value for the `Iops`
-    #   parameter.
+    #   If you specify `io1` or `gp3`, you must also include a value for the
+    #   `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     # @option options [String] :tde_credential_arn
@@ -3934,6 +3956,10 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    # @option options [Integer] :storage_throughput
+    #   Specifies the storage throughput value for the DB instance.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)

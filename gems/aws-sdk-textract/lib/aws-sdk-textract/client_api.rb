@@ -331,6 +331,7 @@ module Aws::Textract
 
     IdentityDocument.add_member(:document_index, Shapes::ShapeRef.new(shape: UInteger, location_name: "DocumentIndex"))
     IdentityDocument.add_member(:identity_document_fields, Shapes::ShapeRef.new(shape: IdentityDocumentFieldList, location_name: "IdentityDocumentFields"))
+    IdentityDocument.add_member(:blocks, Shapes::ShapeRef.new(shape: BlockList, location_name: "Blocks"))
     IdentityDocument.struct_class = Types::IdentityDocument
 
     IdentityDocumentField.add_member(:type, Shapes::ShapeRef.new(shape: AnalyzeIDDetections, location_name: "Type"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2022-11-01)
+------------------
+
+* Feature - Add ocr results in AnalyzeIDResponse as blocks
+
 1.40.0 (2022-10-31)
 ------------------
 
