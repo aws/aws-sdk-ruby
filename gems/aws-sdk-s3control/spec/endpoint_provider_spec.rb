@@ -20,7 +20,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :region=>"us-west-2", :requires_account_id=>true, :s3_control_use_arn_region=>false, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -69,7 +69,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :region=>"us-west-2", :requires_account_id=>true, :s3_control_use_arn_region=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -316,7 +316,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :region=>"us-gov-west-1", :requires_account_id=>true, :s3_control_use_arn_region=>true, :use_dual_stack=>false, :use_fips=>true})
+        params = EndpointParameters.new(**{:access_point_name=>"arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :region=>"us-gov-west-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -467,7 +467,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :region=>"us-gov-west-1", :requires_account_id=>true, :s3_control_use_arn_region=>true, :use_dual_stack=>false, :use_fips=>true})
+        params = EndpointParameters.new(**{:access_point_name=>"arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :region=>"us-gov-west-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -618,7 +618,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :region=>"us-gov-west-1", :requires_account_id=>true, :s3_control_use_arn_region=>true, :use_dual_stack=>false, :use_fips=>true})
+        params = EndpointParameters.new(**{:access_point_name=>"arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :region=>"us-gov-west-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1290,7 +1290,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-west-2", :requires_account_id=>true, :s3_control_use_arn_region=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1321,7 +1321,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-gov-east-1", :requires_account_id=>true, :s3_control_use_arn_region=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-gov-east-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1461,7 +1461,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-west-2", :requires_account_id=>true, :s3_control_use_arn_region=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1492,7 +1492,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-gov-east-1", :requires_account_id=>true, :s3_control_use_arn_region=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-gov-east-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1632,7 +1632,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-west-2", :requires_account_id=>true, :s3_control_use_arn_region=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1663,7 +1663,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-gov-east-1", :requires_account_id=>true, :s3_control_use_arn_region=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-gov-east-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})

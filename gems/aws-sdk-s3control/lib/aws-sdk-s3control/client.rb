@@ -2623,6 +2623,10 @@ module Aws::S3Control
     #   resp.rules[0].filter.and.tags #=> Array
     #   resp.rules[0].filter.and.tags[0].key #=> String
     #   resp.rules[0].filter.and.tags[0].value #=> String
+    #   resp.rules[0].filter.and.object_size_greater_than #=> Integer
+    #   resp.rules[0].filter.and.object_size_less_than #=> Integer
+    #   resp.rules[0].filter.object_size_greater_than #=> Integer
+    #   resp.rules[0].filter.object_size_less_than #=> Integer
     #   resp.rules[0].status #=> String, one of "Enabled", "Disabled"
     #   resp.rules[0].transitions #=> Array
     #   resp.rules[0].transitions[0].date #=> Time
@@ -2632,6 +2636,7 @@ module Aws::S3Control
     #   resp.rules[0].noncurrent_version_transitions[0].noncurrent_days #=> Integer
     #   resp.rules[0].noncurrent_version_transitions[0].storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE"
     #   resp.rules[0].noncurrent_version_expiration.noncurrent_days #=> Integer
+    #   resp.rules[0].noncurrent_version_expiration.newer_noncurrent_versions #=> Integer
     #   resp.rules[0].abort_incomplete_multipart_upload.days_after_initiation #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketLifecycleConfiguration AWS API Documentation
@@ -4027,7 +4032,11 @@ module Aws::S3Control
     #                   value: "TagValueString", # required
     #                 },
     #               ],
+    #               object_size_greater_than: 1,
+    #               object_size_less_than: 1,
     #             },
+    #             object_size_greater_than: 1,
+    #             object_size_less_than: 1,
     #           },
     #           status: "Enabled", # required, accepts Enabled, Disabled
     #           transitions: [
@@ -4045,6 +4054,7 @@ module Aws::S3Control
     #           ],
     #           noncurrent_version_expiration: {
     #             noncurrent_days: 1,
+    #             newer_noncurrent_versions: 1,
     #           },
     #           abort_incomplete_multipart_upload: {
     #             days_after_initiation: 1,
@@ -4923,7 +4933,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

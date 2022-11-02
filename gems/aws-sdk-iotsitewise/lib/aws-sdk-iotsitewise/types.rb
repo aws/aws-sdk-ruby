@@ -18,8 +18,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] identity
-    #   The identity (an Amazon Web Services SSO user, an Amazon Web
-    #   Services SSO group, or an IAM user).
+    #   The identity (an IAM Identity Center user, an IAM Identity Center
+    #   group, or an IAM user).
     #   @return [Types::Identity]
     #
     # @!attribute [rw] resource
@@ -180,11 +180,16 @@ module Aws::IoTSiteWise
     #   The asset properties that this composite model defines.
     #   @return [Array<Types::AssetProperty>]
     #
+    # @!attribute [rw] id
+    #   The ID of the asset composite model.
+    #   @return [String]
+    #
     class AssetCompositeModel < Struct.new(
       :name,
       :description,
       :type,
-      :properties)
+      :properties,
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -324,6 +329,7 @@ module Aws::IoTSiteWise
     #             },
     #           },
     #         ],
+    #         id: "ID",
     #       }
     #
     # @!attribute [rw] name
@@ -343,11 +349,16 @@ module Aws::IoTSiteWise
     #   The asset property definitions for this composite model.
     #   @return [Array<Types::AssetModelProperty>]
     #
+    # @!attribute [rw] id
+    #   The ID of the asset model composite model.
+    #   @return [String]
+    #
     class AssetModelCompositeModel < Struct.new(
       :name,
       :description,
       :type,
-      :properties)
+      :properties,
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -726,6 +737,51 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Contains a summary of a property associated with a model.
+    #
+    # @!attribute [rw] id
+    #   The ID of the property.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the property.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   The data type of the property.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type_spec
+    #   The data type of the structure for this property. This parameter
+    #   exists on properties that have the `STRUCT` data type.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The unit (such as `Newtons` or `RPM`) of the property.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Contains a property type, which can be one of `attribute`,
+    #   `measurement`, `metric`, or `transform`.
+    #   @return [Types::PropertyType]
+    #
+    # @!attribute [rw] asset_model_composite_model_id
+    #   The ID of the composite model that contains the asset model
+    #   property.
+    #   @return [String]
+    #
+    class AssetModelPropertySummary < Struct.new(
+      :id,
+      :name,
+      :data_type,
+      :data_type_spec,
+      :unit,
+      :type,
+      :asset_model_composite_model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains current status information for an asset model. For more
     # information, see [Asset and model states][1] in the *IoT SiteWise User
     # Guide*.
@@ -849,6 +905,54 @@ module Aws::IoTSiteWise
       :data_type,
       :data_type_spec,
       :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a summary of a property associated with an asset.
+    #
+    # @!attribute [rw] id
+    #   The ID of the property.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The alias that identifies the property, such as an OPC-UA server
+    #   data stream path (for example,
+    #   `/company/windfarm/3/turbine/7/temperature`). For more information,
+    #   see [Mapping industrial data streams to asset properties][1] in the
+    #   *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The unit of measure (such as Newtons or RPM) of the asset property.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification
+    #   Contains asset property value notification information. When the
+    #   notification state is enabled, IoT SiteWise publishes property value
+    #   updates to a unique MQTT topic. For more information, see
+    #   [Interacting with other services][1] in the *IoT SiteWise User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/interact-with-other-services.html
+    #   @return [Types::PropertyNotification]
+    #
+    # @!attribute [rw] asset_composite_model_id
+    #   The ID of the composite model that contains the asset property.
+    #   @return [String]
+    #
+    class AssetPropertySummary < Struct.new(
+      :id,
+      :alias,
+      :unit,
+      :notification,
+      :asset_composite_model_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2141,10 +2245,15 @@ module Aws::IoTSiteWise
     #   Contains asset property information.
     #   @return [Types::Property]
     #
+    # @!attribute [rw] id
+    #   The ID of the composite model that contains the property.
+    #   @return [String]
+    #
     class CompositeModelProperty < Struct.new(
       :name,
       :type,
-      :asset_property)
+      :asset_property,
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2240,8 +2349,8 @@ module Aws::IoTSiteWise
     #       }
     #
     # @!attribute [rw] access_policy_identity
-    #   The identity for this access policy. Choose an Amazon Web Services
-    #   SSO user, an Amazon Web Services SSO group, or an IAM user.
+    #   The identity for this access policy. Choose an IAM Identity Center
+    #   user, an IAM Identity Center group, or an IAM user.
     #   @return [Types::Identity]
     #
     # @!attribute [rw] access_policy_resource
@@ -2965,11 +3074,11 @@ module Aws::IoTSiteWise
     #   The service to use to authenticate users to the portal. Choose from
     #   the following options:
     #
-    #   * `SSO` – The portal uses Amazon Web Services Single Sign On to
-    #     authenticate users and manage user permissions. Before you can
-    #     create a portal that uses Amazon Web Services SSO, you must enable
-    #     Amazon Web Services SSO. For more information, see [Enabling
-    #     Amazon Web Services SSO][1] in the *IoT SiteWise User Guide*. This
+    #   * `SSO` – The portal uses IAM Identity Center (successor to Single
+    #     Sign-On) to authenticate users and manage user permissions. Before
+    #     you can create a portal that uses IAM Identity Center, you must
+    #     enable IAM Identity Center. For more information, see [Enabling
+    #     IAM Identity Center][1] in the *IoT SiteWise User Guide*. This
     #     option is only available in Amazon Web Services Regions other than
     #     the China Regions.
     #
@@ -3041,8 +3150,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] portal_start_url
     #   The URL for the IoT SiteWise Monitor portal. You can use this URL to
-    #   access portals that use Amazon Web Services SSO for authentication.
-    #   For portals that use IAM for authentication, you must use the IoT
+    #   access portals that use IAM Identity Center for authentication. For
+    #   portals that use IAM for authentication, you must use the IoT
     #   SiteWise console to get a URL that you can use to access the portal.
     #   @return [String]
     #
@@ -3052,8 +3161,8 @@ module Aws::IoTSiteWise
     #   @return [Types::PortalStatus]
     #
     # @!attribute [rw] sso_application_id
-    #   The associated Amazon Web Services SSO application ID, if the portal
-    #   uses Amazon Web Services SSO.
+    #   The associated IAM Identity Center application ID, if the portal
+    #   uses IAM Identity Center.
     #   @return [String]
     #
     class CreatePortalResponse < Struct.new(
@@ -3525,8 +3634,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] access_policy_identity
-    #   The identity (Amazon Web Services SSO user, Amazon Web Services SSO
-    #   group, or IAM user) to which this access policy applies.
+    #   The identity (IAM Identity Center user, IAM Identity Center group,
+    #   or IAM user) to which this access policy applies.
     #   @return [Types::Identity]
     #
     # @!attribute [rw] access_policy_resource
@@ -3564,14 +3673,20 @@ module Aws::IoTSiteWise
     #
     #       {
     #         asset_model_id: "ID", # required
+    #         exclude_properties: false,
     #       }
     #
     # @!attribute [rw] asset_model_id
     #   The ID of the asset model.
     #   @return [String]
     #
+    # @!attribute [rw] exclude_properties
+    #   Whether or not to exclude asset model properties from the response.
+    #   @return [Boolean]
+    #
     class DescribeAssetModelRequest < Struct.new(
-      :asset_model_id)
+      :asset_model_id,
+      :exclude_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3708,14 +3823,20 @@ module Aws::IoTSiteWise
     #
     #       {
     #         asset_id: "ID", # required
+    #         exclude_properties: false,
     #       }
     #
     # @!attribute [rw] asset_id
     #   The ID of the asset.
     #   @return [String]
     #
+    # @!attribute [rw] exclude_properties
+    #   Whether or not to exclude asset properties from the response.
+    #   @return [Boolean]
+    #
     class DescribeAssetRequest < Struct.new(
-      :asset_id)
+      :asset_id,
+      :exclude_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4176,16 +4297,15 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] portal_client_id
-    #   The Amazon Web Services SSO application generated client ID (used
-    #   with Amazon Web Services SSO APIs). IoT SiteWise includes
-    #   `portalClientId` for only portals that use Amazon Web Services SSO
-    #   to authenticate users.
+    #   The IAM Identity Center application generated client ID (used with
+    #   IAM Identity Center APIs). IoT SiteWise includes `portalClientId`
+    #   for only portals that use IAM Identity Center to authenticate users.
     #   @return [String]
     #
     # @!attribute [rw] portal_start_url
     #   The URL for the IoT SiteWise Monitor portal. You can use this URL to
-    #   access portals that use Amazon Web Services SSO for authentication.
-    #   For portals that use IAM for authentication, you must use the IoT
+    #   access portals that use IAM Identity Center for authentication. For
+    #   portals that use IAM for authentication, you must use the IoT
     #   SiteWise console to get a URL that you can use to access the portal.
     #   @return [String]
     #
@@ -5334,7 +5454,7 @@ module Aws::IoTSiteWise
     #       }
     #
     # @!attribute [rw] id
-    #   The Amazon Web Services SSO ID of the group.
+    #   The IAM Identity Center ID of the group.
     #   @return [String]
     #
     class GroupIdentity < Struct.new(
@@ -5404,10 +5524,10 @@ module Aws::IoTSiteWise
 
     # Contains an identity that can access an IoT SiteWise Monitor resource.
     #
-    # <note markdown="1"> Currently, you can't use Amazon Web Services APIs to retrieve Amazon
-    # Web Services SSO identity IDs. You can find the Amazon Web Services
-    # SSO identity IDs in the URL of user and group pages in the [Amazon Web
-    # Services SSO console][1].
+    # <note markdown="1"> Currently, you can't use Amazon Web Services APIs to retrieve IAM
+    # Identity Center identity IDs. You can find the IAM Identity Center
+    # identity IDs in the URL of user and group pages in the [IAM Identity
+    # Center console][1].
     #
     #  </note>
     #
@@ -5434,11 +5554,11 @@ module Aws::IoTSiteWise
     #       }
     #
     # @!attribute [rw] user
-    #   An Amazon Web Services SSO user identity.
+    #   An IAM Identity Center user identity.
     #   @return [Types::UserIdentity]
     #
     # @!attribute [rw] group
-    #   An Amazon Web Services SSO group identity.
+    #   An IAM Identity Center group identity.
     #   @return [Types::GroupIdentity]
     #
     # @!attribute [rw] iam_user
@@ -5679,9 +5799,9 @@ module Aws::IoTSiteWise
     #       }
     #
     # @!attribute [rw] identity_type
-    #   The type of identity (Amazon Web Services SSO user, Amazon Web
-    #   Services SSO group, or IAM user). This parameter is required if you
-    #   specify `identityId`.
+    #   The type of identity (IAM Identity Center user, IAM Identity Center
+    #   group, or IAM user). This parameter is required if you specify
+    #   `identityId`.
     #   @return [String]
     #
     # @!attribute [rw] identity_id
@@ -5747,6 +5867,68 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAssetModelPropertiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         asset_model_id: "ID", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         filter: "ALL", # accepts ALL, BASE
+    #       }
+    #
+    # @!attribute [rw] asset_model_id
+    #   The ID of the asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for each paginated request.
+    #   If not specified, the default value is 50.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter
+    #   Filters the requested list of asset model properties. You can choose
+    #   one of the following options:
+    #
+    #   * `ALL` – The list includes all asset model properties for a given
+    #     asset model ID.
+    #
+    #   * `BASE` – The list includes only base asset model properties for a
+    #     given asset model ID.
+    #
+    #   Default: `BASE`
+    #   @return [String]
+    #
+    class ListAssetModelPropertiesRequest < Struct.new(
+      :asset_model_id,
+      :next_token,
+      :max_results,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_model_property_summaries
+    #   A list that summarizes the properties associated with the specified
+    #   asset model.
+    #   @return [Array<Types::AssetModelPropertySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    class ListAssetModelPropertiesResponse < Struct.new(
+      :asset_model_property_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAssetModelsRequest
     #   data as a hash:
     #
@@ -5783,6 +5965,68 @@ module Aws::IoTSiteWise
     #
     class ListAssetModelsResponse < Struct.new(
       :asset_model_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAssetPropertiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         asset_id: "ID", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         filter: "ALL", # accepts ALL, BASE
+    #       }
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for each paginated request.
+    #   If not specified, the default value is 50.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter
+    #   Filters the requested list of asset properties. You can choose one
+    #   of the following options:
+    #
+    #   * `ALL` – The list includes all asset properties for a given asset
+    #     model ID.
+    #
+    #   * `BASE` – The list includes only base asset properties for a given
+    #     asset model ID.
+    #
+    #   Default: `BASE`
+    #   @return [String]
+    #
+    class ListAssetPropertiesRequest < Struct.new(
+      :asset_id,
+      :next_token,
+      :max_results,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_property_summaries
+    #   A list that summarizes the properties associated with the specified
+    #   asset.
+    #   @return [Array<Types::AssetPropertySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    class ListAssetPropertiesResponse < Struct.new(
+      :asset_property_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6651,8 +6895,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] start_url
     #   The URL for the IoT SiteWise Monitor portal. You can use this URL to
-    #   access portals that use Amazon Web Services SSO for authentication.
-    #   For portals that use IAM for authentication, you must use the IoT
+    #   access portals that use IAM Identity Center for authentication. For
+    #   portals that use IAM for authentication, you must use the IoT
     #   SiteWise console to get a URL that you can use to access the portal.
     #   @return [String]
     #
@@ -7734,8 +7978,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] access_policy_identity
-    #   The identity for this access policy. Choose an Amazon Web Services
-    #   SSO user, an Amazon Web Services SSO group, or an IAM user.
+    #   The identity for this access policy. Choose an IAM Identity Center
+    #   user, an IAM Identity Center group, or an IAM user.
     #   @return [Types::Identity]
     #
     # @!attribute [rw] access_policy_resource
@@ -7908,6 +8152,7 @@ module Aws::IoTSiteWise
     #                 },
     #               },
     #             ],
+    #             id: "ID",
     #           },
     #         ],
     #         client_token: "ClientToken",
@@ -8426,7 +8671,7 @@ module Aws::IoTSiteWise
     #       }
     #
     # @!attribute [rw] id
-    #   The Amazon Web Services SSO ID of the user.
+    #   The IAM Identity Center ID of the user.
     #   @return [String]
     #
     class UserIdentity < Struct.new(

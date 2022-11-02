@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2022-11-02)
+------------------
+
+* Feature - Adds support for tagging replication-set on creation.
+
 1.17.0 (2022-10-25)
 ------------------
 

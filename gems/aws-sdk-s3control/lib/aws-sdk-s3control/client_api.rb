@@ -227,6 +227,7 @@ module Aws::S3Control
     NonEmptyMaxLength2048String = Shapes::StringShape.new(name: 'NonEmptyMaxLength2048String')
     NonEmptyMaxLength256String = Shapes::StringShape.new(name: 'NonEmptyMaxLength256String')
     NonEmptyMaxLength64String = Shapes::StringShape.new(name: 'NonEmptyMaxLength64String')
+    NoncurrentVersionCount = Shapes::IntegerShape.new(name: 'NoncurrentVersionCount')
     NoncurrentVersionExpiration = Shapes::StructureShape.new(name: 'NoncurrentVersionExpiration')
     NoncurrentVersionTransition = Shapes::StructureShape.new(name: 'NoncurrentVersionTransition')
     NoncurrentVersionTransitionList = Shapes::ListShape.new(name: 'NoncurrentVersionTransitionList')
@@ -247,6 +248,8 @@ module Aws::S3Control
     ObjectLambdaTransformationConfigurationActionsList = Shapes::ListShape.new(name: 'ObjectLambdaTransformationConfigurationActionsList')
     ObjectLambdaTransformationConfigurationsList = Shapes::ListShape.new(name: 'ObjectLambdaTransformationConfigurationsList')
     ObjectLockEnabledForBucket = Shapes::BooleanShape.new(name: 'ObjectLockEnabledForBucket')
+    ObjectSizeGreaterThanBytes = Shapes::IntegerShape.new(name: 'ObjectSizeGreaterThanBytes')
+    ObjectSizeLessThanBytes = Shapes::IntegerShape.new(name: 'ObjectSizeLessThanBytes')
     OperationName = Shapes::StringShape.new(name: 'OperationName')
     OutputSchemaVersion = Shapes::StringShape.new(name: 'OutputSchemaVersion')
     Policy = Shapes::StringShape.new(name: 'Policy')
@@ -873,11 +876,15 @@ module Aws::S3Control
 
     LifecycleRuleAndOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
     LifecycleRuleAndOperator.add_member(:tags, Shapes::ShapeRef.new(shape: S3TagSet, location_name: "Tags"))
+    LifecycleRuleAndOperator.add_member(:object_size_greater_than, Shapes::ShapeRef.new(shape: ObjectSizeGreaterThanBytes, location_name: "ObjectSizeGreaterThan", metadata: {"box"=>true}))
+    LifecycleRuleAndOperator.add_member(:object_size_less_than, Shapes::ShapeRef.new(shape: ObjectSizeLessThanBytes, location_name: "ObjectSizeLessThan", metadata: {"box"=>true}))
     LifecycleRuleAndOperator.struct_class = Types::LifecycleRuleAndOperator
 
     LifecycleRuleFilter.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
     LifecycleRuleFilter.add_member(:tag, Shapes::ShapeRef.new(shape: S3Tag, location_name: "Tag"))
     LifecycleRuleFilter.add_member(:and, Shapes::ShapeRef.new(shape: LifecycleRuleAndOperator, location_name: "And"))
+    LifecycleRuleFilter.add_member(:object_size_greater_than, Shapes::ShapeRef.new(shape: ObjectSizeGreaterThanBytes, location_name: "ObjectSizeGreaterThan", metadata: {"box"=>true}))
+    LifecycleRuleFilter.add_member(:object_size_less_than, Shapes::ShapeRef.new(shape: ObjectSizeLessThanBytes, location_name: "ObjectSizeLessThan", metadata: {"box"=>true}))
     LifecycleRuleFilter.struct_class = Types::LifecycleRuleFilter
 
     LifecycleRules.member = Shapes::ShapeRef.new(shape: LifecycleRule, location_name: "Rule")
@@ -971,6 +978,7 @@ module Aws::S3Control
     NoSuchPublicAccessBlockConfiguration.struct_class = Types::NoSuchPublicAccessBlockConfiguration
 
     NoncurrentVersionExpiration.add_member(:noncurrent_days, Shapes::ShapeRef.new(shape: Days, location_name: "NoncurrentDays"))
+    NoncurrentVersionExpiration.add_member(:newer_noncurrent_versions, Shapes::ShapeRef.new(shape: NoncurrentVersionCount, location_name: "NewerNoncurrentVersions", metadata: {"box"=>true}))
     NoncurrentVersionExpiration.struct_class = Types::NoncurrentVersionExpiration
 
     NoncurrentVersionTransition.add_member(:noncurrent_days, Shapes::ShapeRef.new(shape: Days, location_name: "NoncurrentDays"))

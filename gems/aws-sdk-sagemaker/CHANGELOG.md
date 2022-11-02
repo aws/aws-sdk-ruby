@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2022-11-02)
+------------------
+
+* Feature - This release updates Framework model regex for ModelPackage to support new Framework version xgboost, sklearn.
+
 1.150.0 (2022-10-27)
 ------------------
 

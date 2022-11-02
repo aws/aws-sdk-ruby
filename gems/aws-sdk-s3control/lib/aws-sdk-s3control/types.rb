@@ -3459,7 +3459,11 @@ module Aws::S3Control
     #                     value: "TagValueString", # required
     #                   },
     #                 ],
+    #                 object_size_greater_than: 1,
+    #                 object_size_less_than: 1,
     #               },
+    #               object_size_greater_than: 1,
+    #               object_size_less_than: 1,
     #             },
     #             status: "Enabled", # required, accepts Enabled, Disabled
     #             transitions: [
@@ -3477,6 +3481,7 @@ module Aws::S3Control
     #             ],
     #             noncurrent_version_expiration: {
     #               noncurrent_days: 1,
+    #               newer_noncurrent_versions: 1,
     #             },
     #             abort_incomplete_multipart_upload: {
     #               days_after_initiation: 1,
@@ -3561,7 +3566,11 @@ module Aws::S3Control
     #                 value: "TagValueString", # required
     #               },
     #             ],
+    #             object_size_greater_than: 1,
+    #             object_size_less_than: 1,
     #           },
+    #           object_size_greater_than: 1,
+    #           object_size_less_than: 1,
     #         },
     #         status: "Enabled", # required, accepts Enabled, Disabled
     #         transitions: [
@@ -3579,6 +3588,7 @@ module Aws::S3Control
     #         ],
     #         noncurrent_version_expiration: {
     #           noncurrent_days: 1,
+    #           newer_noncurrent_versions: 1,
     #         },
     #         abort_incomplete_multipart_upload: {
     #           days_after_initiation: 1,
@@ -3628,10 +3638,6 @@ module Aws::S3Control
     #
     # @!attribute [rw] noncurrent_version_expiration
     #   The noncurrent version expiration of the lifecycle rule.
-    #
-    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
-    #
-    #    </note>
     #   @return [Types::NoncurrentVersionExpiration]
     #
     # @!attribute [rw] abort_incomplete_multipart_upload
@@ -3674,6 +3680,8 @@ module Aws::S3Control
     #             value: "TagValueString", # required
     #           },
     #         ],
+    #         object_size_greater_than: 1,
+    #         object_size_less_than: 1,
     #       }
     #
     # @!attribute [rw] prefix
@@ -3685,11 +3693,21 @@ module Aws::S3Control
     #   the rule to apply.
     #   @return [Array<Types::S3Tag>]
     #
+    # @!attribute [rw] object_size_greater_than
+    #   Minimum object size to which the rule applies.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] object_size_less_than
+    #   Maximum object size to which the rule applies.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LifecycleRuleAndOperator AWS API Documentation
     #
     class LifecycleRuleAndOperator < Struct.new(
       :prefix,
-      :tags)
+      :tags,
+      :object_size_greater_than,
+      :object_size_less_than)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3713,7 +3731,11 @@ module Aws::S3Control
     #               value: "TagValueString", # required
     #             },
     #           ],
+    #           object_size_greater_than: 1,
+    #           object_size_less_than: 1,
     #         },
+    #         object_size_greater_than: 1,
+    #         object_size_less_than: 1,
     #       }
     #
     # @!attribute [rw] prefix
@@ -3735,12 +3757,22 @@ module Aws::S3Control
     #   The container for the `AND` condition for the lifecycle rule.
     #   @return [Types::LifecycleRuleAndOperator]
     #
+    # @!attribute [rw] object_size_greater_than
+    #   Minimum object size to which the rule applies.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] object_size_less_than
+    #   Maximum object size to which the rule applies.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LifecycleRuleFilter AWS API Documentation
     #
     class LifecycleRuleFilter < Struct.new(
       :prefix,
       :tag,
-      :and)
+      :and,
+      :object_size_greater_than,
+      :object_size_less_than)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4286,6 +4318,7 @@ module Aws::S3Control
     #
     #       {
     #         noncurrent_days: 1,
+    #         newer_noncurrent_versions: 1,
     #       }
     #
     # @!attribute [rw] noncurrent_days
@@ -4299,10 +4332,23 @@ module Aws::S3Control
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations
     #   @return [Integer]
     #
+    # @!attribute [rw] newer_noncurrent_versions
+    #   Specifies how many noncurrent versions S3 on Outposts will retain.
+    #   If there are this many more recent noncurrent versions, S3 on
+    #   Outposts will take the associated action. For more information about
+    #   noncurrent versions, see [Lifecycle configuration elements][1] in
+    #   the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/NoncurrentVersionExpiration AWS API Documentation
     #
     class NoncurrentVersionExpiration < Struct.new(
-      :noncurrent_days)
+      :noncurrent_days,
+      :newer_noncurrent_versions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4406,8 +4452,9 @@ module Aws::S3Control
     #   @return [Boolean]
     #
     # @!attribute [rw] allowed_features
-    #   A container for allowed features. Valid inputs are `GetObject-Range`
-    #   and `GetObject-PartNumber`.
+    #   A container for allowed features. Valid inputs are
+    #   `GetObject-Range`, `GetObject-PartNumber`, `HeadObject-Range`, and
+    #   `HeadObject-PartNumber`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] transformation_configurations
@@ -4467,7 +4514,8 @@ module Aws::S3Control
     #
     # @!attribute [rw] actions
     #   A container for the action of an Object Lambda Access Point
-    #   configuration. Valid input is `GetObject`.
+    #   configuration. Valid inputs are `GetObject`, `ListObjects`,
+    #   `HeadObject`, and `ListObjectsV2`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] content_transformation
@@ -4831,7 +4879,11 @@ module Aws::S3Control
     #                       value: "TagValueString", # required
     #                     },
     #                   ],
+    #                   object_size_greater_than: 1,
+    #                   object_size_less_than: 1,
     #                 },
+    #                 object_size_greater_than: 1,
+    #                 object_size_less_than: 1,
     #               },
     #               status: "Enabled", # required, accepts Enabled, Disabled
     #               transitions: [
@@ -4849,6 +4901,7 @@ module Aws::S3Control
     #               ],
     #               noncurrent_version_expiration: {
     #                 noncurrent_days: 1,
+    #                 newer_noncurrent_versions: 1,
     #               },
     #               abort_incomplete_multipart_upload: {
     #                 days_after_initiation: 1,

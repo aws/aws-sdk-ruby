@@ -834,7 +834,7 @@ module Aws::SageMaker
     #             data_input_config: "DataInputConfig", # required
     #           },
     #           framework: "String",
-    #           framework_version: "FrameworkVersion",
+    #           framework_version: "ModelPackageFrameworkVersion",
     #           nearest_model_name: "String",
     #         },
     #       ],
@@ -4625,7 +4625,7 @@ module Aws::SageMaker
     #             data_input_config: "DataInputConfig", # required
     #           },
     #           framework: "String",
-    #           framework_version: "FrameworkVersion",
+    #           framework_version: "ModelPackageFrameworkVersion",
     #           nearest_model_name: "String",
     #         },
     #       ],
@@ -4824,7 +4824,7 @@ module Aws::SageMaker
     #               data_input_config: "DataInputConfig", # required
     #             },
     #             framework: "String",
-    #             framework_version: "FrameworkVersion",
+    #             framework_version: "ModelPackageFrameworkVersion",
     #             nearest_model_name: "String",
     #           },
     #         ],
@@ -20032,7 +20032,7 @@ module Aws::SageMaker
     #               data_input_config: "DataInputConfig", # required
     #             },
     #             framework: "String",
-    #             framework_version: "FrameworkVersion",
+    #             framework_version: "ModelPackageFrameworkVersion",
     #             nearest_model_name: "String",
     #           },
     #         ],
@@ -21092,7 +21092,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.150.0'
+      context[:gem_version] = '1.151.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

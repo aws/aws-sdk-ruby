@@ -146,8 +146,12 @@ module Aws::IoTSiteWise
             Aws::IoTSiteWise::Endpoints::GetInterpolatedAssetPropertyValues.build(context)
           when :list_access_policies
             Aws::IoTSiteWise::Endpoints::ListAccessPolicies.build(context)
+          when :list_asset_model_properties
+            Aws::IoTSiteWise::Endpoints::ListAssetModelProperties.build(context)
           when :list_asset_models
             Aws::IoTSiteWise::Endpoints::ListAssetModels.build(context)
+          when :list_asset_properties
+            Aws::IoTSiteWise::Endpoints::ListAssetProperties.build(context)
           when :list_asset_relationships
             Aws::IoTSiteWise::Endpoints::ListAssetRelationships.build(context)
           when :list_assets

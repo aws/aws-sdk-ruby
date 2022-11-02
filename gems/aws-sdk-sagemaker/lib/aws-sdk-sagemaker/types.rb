@@ -227,7 +227,7 @@ module Aws::SageMaker
     #               data_input_config: "DataInputConfig", # required
     #             },
     #             framework: "String",
-    #             framework_version: "FrameworkVersion",
+    #             framework_version: "ModelPackageFrameworkVersion",
     #             nearest_model_name: "String",
     #           },
     #         ],
@@ -4793,7 +4793,7 @@ module Aws::SageMaker
     #                 data_input_config: "DataInputConfig", # required
     #               },
     #               framework: "String",
-    #               framework_version: "FrameworkVersion",
+    #               framework_version: "ModelPackageFrameworkVersion",
     #               nearest_model_name: "String",
     #             },
     #           ],
@@ -8554,7 +8554,7 @@ module Aws::SageMaker
     #                 data_input_config: "DataInputConfig", # required
     #               },
     #               framework: "String",
-    #               framework_version: "FrameworkVersion",
+    #               framework_version: "ModelPackageFrameworkVersion",
     #               nearest_model_name: "String",
     #             },
     #           ],
@@ -8753,7 +8753,7 @@ module Aws::SageMaker
     #                   data_input_config: "DataInputConfig", # required
     #                 },
     #                 framework: "String",
-    #                 framework_version: "FrameworkVersion",
+    #                 framework_version: "ModelPackageFrameworkVersion",
     #                 nearest_model_name: "String",
     #               },
     #             ],
@@ -23820,7 +23820,7 @@ module Aws::SageMaker
     #               data_input_config: "DataInputConfig", # required
     #             },
     #             framework: "String",
-    #             framework_version: "FrameworkVersion",
+    #             framework_version: "ModelPackageFrameworkVersion",
     #             nearest_model_name: "String",
     #           },
     #         ],
@@ -31300,7 +31300,7 @@ module Aws::SageMaker
     #           data_input_config: "DataInputConfig", # required
     #         },
     #         framework: "String",
-    #         framework_version: "FrameworkVersion",
+    #         framework_version: "ModelPackageFrameworkVersion",
     #         nearest_model_name: "String",
     #       }
     #
@@ -43005,7 +43005,7 @@ module Aws::SageMaker
     #                   data_input_config: "DataInputConfig", # required
     #                 },
     #                 framework: "String",
-    #                 framework_version: "FrameworkVersion",
+    #                 framework_version: "ModelPackageFrameworkVersion",
     #                 nearest_model_name: "String",
     #               },
     #             ],

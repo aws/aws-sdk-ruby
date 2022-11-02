@@ -1111,6 +1111,7 @@ module Aws::SageMaker
     ModelPackageArnList = Shapes::ListShape.new(name: 'ModelPackageArnList')
     ModelPackageContainerDefinition = Shapes::StructureShape.new(name: 'ModelPackageContainerDefinition')
     ModelPackageContainerDefinitionList = Shapes::ListShape.new(name: 'ModelPackageContainerDefinitionList')
+    ModelPackageFrameworkVersion = Shapes::StringShape.new(name: 'ModelPackageFrameworkVersion')
     ModelPackageGroup = Shapes::StructureShape.new(name: 'ModelPackageGroup')
     ModelPackageGroupArn = Shapes::StringShape.new(name: 'ModelPackageGroupArn')
     ModelPackageGroupSortBy = Shapes::StringShape.new(name: 'ModelPackageGroupSortBy')
@@ -5951,7 +5952,7 @@ module Aws::SageMaker
     ModelPackageContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentMap, location_name: "Environment"))
     ModelPackageContainerDefinition.add_member(:model_input, Shapes::ShapeRef.new(shape: ModelInput, location_name: "ModelInput"))
     ModelPackageContainerDefinition.add_member(:framework, Shapes::ShapeRef.new(shape: String, location_name: "Framework"))
-    ModelPackageContainerDefinition.add_member(:framework_version, Shapes::ShapeRef.new(shape: FrameworkVersion, location_name: "FrameworkVersion"))
+    ModelPackageContainerDefinition.add_member(:framework_version, Shapes::ShapeRef.new(shape: ModelPackageFrameworkVersion, location_name: "FrameworkVersion"))
     ModelPackageContainerDefinition.add_member(:nearest_model_name, Shapes::ShapeRef.new(shape: String, location_name: "NearestModelName"))
     ModelPackageContainerDefinition.struct_class = Types::ModelPackageContainerDefinition
 
