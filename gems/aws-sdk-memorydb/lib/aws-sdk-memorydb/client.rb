@@ -452,6 +452,7 @@ module Aws::MemoryDB
     #   resp.processed_clusters[0].snapshot_window #=> String
     #   resp.processed_clusters[0].acl_name #=> String
     #   resp.processed_clusters[0].auto_minor_version_upgrade #=> Boolean
+    #   resp.processed_clusters[0].data_tiering #=> String, one of "true", "false"
     #   resp.unprocessed_clusters #=> Array
     #   resp.unprocessed_clusters[0].cluster_name #=> String
     #   resp.unprocessed_clusters[0].error_type #=> String
@@ -540,6 +541,7 @@ module Aws::MemoryDB
     #   resp.snapshot.cluster_configuration.shards[0].configuration.replica_count #=> Integer
     #   resp.snapshot.cluster_configuration.shards[0].size #=> String
     #   resp.snapshot.cluster_configuration.shards[0].snapshot_creation_time #=> Time
+    #   resp.snapshot.data_tiering #=> String, one of "true", "false"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/CopySnapshot AWS API Documentation
     #
@@ -641,8 +643,26 @@ module Aws::MemoryDB
     # @option params [String] :maintenance_window
     #   Specifies the weekly time range during which maintenance on the
     #   cluster is performed. It is specified as a range in the format
-    #   `ddd:hh24:mi-ddd:hh24:mi` (24H Clock UTC). The minimum maintenance
+    #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
     #   window is a 60 minute period.
+    #
+    #   Valid values for `ddd` are:
+    #
+    #   * `sun`
+    #
+    #   * `mon`
+    #
+    #   * `tue`
+    #
+    #   * `wed`
+    #
+    #   * `thu`
+    #
+    #   * `fri`
+    #
+    #   * `sat`
+    #
+    #   Example: `sun:23:00-mon:01:30`
     #
     # @option params [Integer] :port
     #   The port number on which each of the nodes accepts connections.
@@ -699,6 +719,15 @@ module Aws::MemoryDB
     #   When set to true, the cluster will automatically receive minor engine
     #   version upgrades after launch.
     #
+    # @option params [Boolean] :data_tiering
+    #   Enables data tiering. Data tiering is only supported for clusters
+    #   using the r6gd node type. This parameter must be set when using r6gd
+    #   nodes. For more information, see [Data tiering][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster #cluster} => Types::Cluster
@@ -732,6 +761,7 @@ module Aws::MemoryDB
     #     acl_name: "ACLName", # required
     #     engine_version: "String",
     #     auto_minor_version_upgrade: false,
+    #     data_tiering: false,
     #   })
     #
     # @example Response structure
@@ -779,6 +809,7 @@ module Aws::MemoryDB
     #   resp.cluster.snapshot_window #=> String
     #   resp.cluster.acl_name #=> String
     #   resp.cluster.auto_minor_version_upgrade #=> Boolean
+    #   resp.cluster.data_tiering #=> String, one of "true", "false"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/CreateCluster AWS API Documentation
     #
@@ -907,6 +938,7 @@ module Aws::MemoryDB
     #   resp.snapshot.cluster_configuration.shards[0].configuration.replica_count #=> Integer
     #   resp.snapshot.cluster_configuration.shards[0].size #=> String
     #   resp.snapshot.cluster_configuration.shards[0].snapshot_creation_time #=> Time
+    #   resp.snapshot.data_tiering #=> String, one of "true", "false"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/CreateSnapshot AWS API Documentation
     #
@@ -1157,6 +1189,7 @@ module Aws::MemoryDB
     #   resp.cluster.snapshot_window #=> String
     #   resp.cluster.acl_name #=> String
     #   resp.cluster.auto_minor_version_upgrade #=> Boolean
+    #   resp.cluster.data_tiering #=> String, one of "true", "false"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DeleteCluster AWS API Documentation
     #
@@ -1243,6 +1276,7 @@ module Aws::MemoryDB
     #   resp.snapshot.cluster_configuration.shards[0].configuration.replica_count #=> Integer
     #   resp.snapshot.cluster_configuration.shards[0].size #=> String
     #   resp.snapshot.cluster_configuration.shards[0].snapshot_creation_time #=> Time
+    #   resp.snapshot.data_tiering #=> String, one of "true", "false"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DeleteSnapshot AWS API Documentation
     #
@@ -1465,6 +1499,7 @@ module Aws::MemoryDB
     #   resp.clusters[0].snapshot_window #=> String
     #   resp.clusters[0].acl_name #=> String
     #   resp.clusters[0].auto_minor_version_upgrade #=> Boolean
+    #   resp.clusters[0].data_tiering #=> String, one of "true", "false"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DescribeClusters AWS API Documentation
     #
@@ -1843,6 +1878,7 @@ module Aws::MemoryDB
     #   resp.snapshots[0].cluster_configuration.shards[0].configuration.replica_count #=> Integer
     #   resp.snapshots[0].cluster_configuration.shards[0].size #=> String
     #   resp.snapshots[0].cluster_configuration.shards[0].snapshot_creation_time #=> Time
+    #   resp.snapshots[0].data_tiering #=> String, one of "true", "false"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DescribeSnapshots AWS API Documentation
     #
@@ -1967,7 +2003,12 @@ module Aws::MemoryDB
       req.send_request(options)
     end
 
-    # Used to failover a shard
+    # Used to failover a shard. This API is designed for testing the
+    # behavior of your application in case of MemoryDB failover. It is not
+    # designed to be used as a production-level tool for initiating a
+    # failover to overcome a problem you may have with the cluster.
+    # Moreover, in certain conditions such as large scale operational
+    # events, Amazon may block this API.
     #
     # @option params [required, String] :cluster_name
     #   The cluster being failed over
@@ -2031,6 +2072,7 @@ module Aws::MemoryDB
     #   resp.cluster.snapshot_window #=> String
     #   resp.cluster.acl_name #=> String
     #   resp.cluster.auto_minor_version_upgrade #=> Boolean
+    #   resp.cluster.data_tiering #=> String, one of "true", "false"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/FailoverShard AWS API Documentation
     #
@@ -2317,7 +2359,28 @@ module Aws::MemoryDB
     #   The SecurityGroupIds to update
     #
     # @option params [String] :maintenance_window
-    #   The maintenance window to update
+    #   Specifies the weekly time range during which maintenance on the
+    #   cluster is performed. It is specified as a range in the format
+    #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
+    #   window is a 60 minute period.
+    #
+    #   Valid values for `ddd` are:
+    #
+    #   * `sun`
+    #
+    #   * `mon`
+    #
+    #   * `tue`
+    #
+    #   * `wed`
+    #
+    #   * `thu`
+    #
+    #   * `fri`
+    #
+    #   * `sat`
+    #
+    #   Example: `sun:23:00-mon:01:30`
     #
     # @option params [String] :sns_topic_arn
     #   The SNS topic ARN to update
@@ -2430,6 +2493,7 @@ module Aws::MemoryDB
     #   resp.cluster.snapshot_window #=> String
     #   resp.cluster.acl_name #=> String
     #   resp.cluster.auto_minor_version_upgrade #=> Boolean
+    #   resp.cluster.data_tiering #=> String, one of "true", "false"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/UpdateCluster AWS API Documentation
     #
@@ -2593,7 +2657,7 @@ module Aws::MemoryDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-memorydb'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

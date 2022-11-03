@@ -57,6 +57,7 @@ module Aws::MemoryDB
     CreateSubnetGroupResponse = Shapes::StructureShape.new(name: 'CreateSubnetGroupResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
+    DataTieringStatus = Shapes::StringShape.new(name: 'DataTieringStatus')
     DefaultUserRequired = Shapes::StructureShape.new(name: 'DefaultUserRequired')
     DeleteACLRequest = Shapes::StructureShape.new(name: 'DeleteACLRequest')
     DeleteACLResponse = Shapes::StructureShape.new(name: 'DeleteACLResponse')
@@ -296,6 +297,7 @@ module Aws::MemoryDB
     Cluster.add_member(:snapshot_window, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
     Cluster.add_member(:acl_name, Shapes::ShapeRef.new(shape: ACLName, location_name: "ACLName"))
     Cluster.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutoMinorVersionUpgrade"))
+    Cluster.add_member(:data_tiering, Shapes::ShapeRef.new(shape: DataTieringStatus, location_name: "DataTiering"))
     Cluster.struct_class = Types::Cluster
 
     ClusterAlreadyExistsFault.struct_class = Types::ClusterAlreadyExistsFault
@@ -368,6 +370,7 @@ module Aws::MemoryDB
     CreateClusterRequest.add_member(:acl_name, Shapes::ShapeRef.new(shape: ACLName, required: true, location_name: "ACLName"))
     CreateClusterRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     CreateClusterRequest.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutoMinorVersionUpgrade"))
+    CreateClusterRequest.add_member(:data_tiering, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DataTiering"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -769,6 +772,7 @@ module Aws::MemoryDB
     Snapshot.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     Snapshot.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
     Snapshot.add_member(:cluster_configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, location_name: "ClusterConfiguration"))
+    Snapshot.add_member(:data_tiering, Shapes::ShapeRef.new(shape: DataTieringStatus, location_name: "DataTiering"))
     Snapshot.struct_class = Types::Snapshot
 
     SnapshotAlreadyExistsFault.struct_class = Types::SnapshotAlreadyExistsFault

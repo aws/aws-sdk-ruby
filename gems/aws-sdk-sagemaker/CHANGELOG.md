@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.152.0 (2022-11-03)
+------------------
+
+* Feature - Amazon SageMaker now supports running training jobs on ml.trn1 instance types.
+
 1.151.0 (2022-11-02)
 ------------------
 
