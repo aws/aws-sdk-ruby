@@ -108,7 +108,8 @@ module Aws
           )
         )
         client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'sso_creds'
+          profile: 'sso_creds',
+          token_provider: nil
         )
         expect(
           client.config.credentials.credentials.access_key_id
@@ -152,7 +153,8 @@ module Aws
           )
         )
         client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'sso_creds_mixed_legacy'
+          profile: 'sso_creds_mixed_legacy',
+          token_provider: nil,
         )
         expect(
           client.config.credentials.credentials.access_key_id
@@ -376,6 +378,9 @@ module Aws
               credentials: Credentials.new('SSO_AKID', 'sak')
             )
           )
+
+          allow(SSOTokenProvider).to receive(:new)
+           .and_return(double('SSOToken', set?: true))
 
           assume_role_stub(
             'arn:aws:iam:123456789012:role/foo',
