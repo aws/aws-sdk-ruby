@@ -404,6 +404,110 @@ module Aws::EMRContainers
       req.send_request(options)
     end
 
+    # Creates a job template. Job template stores values of StartJobRun API
+    # request in a template and can be used to start a job run. Job template
+    # allows two use cases: avoid repeating recurring StartJobRun API
+    # request values, enforcing certain values in StartJobRun API request.
+    #
+    # @option params [required, String] :name
+    #   The specified name of the job template.
+    #
+    # @option params [required, String] :client_token
+    #   The client token of the job template.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::JobTemplateData] :job_template_data
+    #   The job template data which holds values of StartJobRun API request.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags that are associated with the job template.
+    #
+    # @option params [String] :kms_key_arn
+    #   The KMS key ARN used to encrypt the job template.
+    #
+    # @return [Types::CreateJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateJobTemplateResponse#id #id} => String
+    #   * {Types::CreateJobTemplateResponse#name #name} => String
+    #   * {Types::CreateJobTemplateResponse#arn #arn} => String
+    #   * {Types::CreateJobTemplateResponse#created_at #created_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_job_template({
+    #     name: "ResourceNameString", # required
+    #     client_token: "ClientToken", # required
+    #     job_template_data: { # required
+    #       execution_role_arn: "ParametricIAMRoleArn", # required
+    #       release_label: "ParametricReleaseLabel", # required
+    #       configuration_overrides: {
+    #         application_configuration: [
+    #           {
+    #             classification: "String1024", # required
+    #             properties: {
+    #               "String1024" => "String1024",
+    #             },
+    #             configurations: {
+    #               # recursive ConfigurationList
+    #             },
+    #           },
+    #         ],
+    #         monitoring_configuration: {
+    #           persistent_app_ui: "TemplateParameter",
+    #           cloud_watch_monitoring_configuration: {
+    #             log_group_name: "TemplateParameter",
+    #             log_stream_name_prefix: "String256",
+    #           },
+    #           s3_monitoring_configuration: {
+    #             log_uri: "UriString",
+    #           },
+    #         },
+    #       },
+    #       job_driver: { # required
+    #         spark_submit_job_driver: {
+    #           entry_point: "EntryPointPath", # required
+    #           entry_point_arguments: ["EntryPointArgument"],
+    #           spark_submit_parameters: "SparkSubmitParameters",
+    #         },
+    #         spark_sql_job_driver: {
+    #           entry_point: "EntryPointPath",
+    #           spark_sql_parameters: "SparkSqlParameters",
+    #         },
+    #       },
+    #       parameter_configuration: {
+    #         "TemplateParameterName" => {
+    #           type: "NUMBER", # accepts NUMBER, STRING
+    #           default_value: "String1024",
+    #         },
+    #       },
+    #       job_tags: {
+    #         "String128" => "StringEmpty256",
+    #       },
+    #     },
+    #     tags: {
+    #       "String128" => "StringEmpty256",
+    #     },
+    #     kms_key_arn: "KmsKeyArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/CreateJobTemplate AWS API Documentation
+    #
+    # @overload create_job_template(params = {})
+    # @param [Hash] params ({})
+    def create_job_template(params = {}, options = {})
+      req = build_request(:create_job_template, params)
+      req.send_request(options)
+    end
+
     # Creates a managed endpoint. A managed endpoint is a gateway that
     # connects EMR Studio to Amazon EMR on EKS so that EMR Studio can
     # communicate with your virtual cluster.
@@ -563,6 +667,37 @@ module Aws::EMRContainers
       req.send_request(options)
     end
 
+    # Deletes a job template. Job template stores values of StartJobRun API
+    # request in a template and can be used to start a job run. Job template
+    # allows two use cases: avoid repeating recurring StartJobRun API
+    # request values, enforcing certain values in StartJobRun API request.
+    #
+    # @option params [required, String] :id
+    #   The ID of the job template that will be deleted.
+    #
+    # @return [Types::DeleteJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteJobTemplateResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_job_template({
+    #     id: "ResourceIdString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DeleteJobTemplate AWS API Documentation
+    #
+    # @overload delete_job_template(params = {})
+    # @param [Hash] params ({})
+    def delete_job_template(params = {}, options = {})
+      req = build_request(:delete_job_template, params)
+      req.send_request(options)
+    end
+
     # Deletes a managed endpoint. A managed endpoint is a gateway that
     # connects EMR Studio to Amazon EMR on EKS so that EMR Studio can
     # communicate with your virtual cluster.
@@ -692,6 +827,68 @@ module Aws::EMRContainers
     # @param [Hash] params ({})
     def describe_job_run(params = {}, options = {})
       req = build_request(:describe_job_run, params)
+      req.send_request(options)
+    end
+
+    # Displays detailed information about a specified job template. Job
+    # template stores values of StartJobRun API request in a template and
+    # can be used to start a job run. Job template allows two use cases:
+    # avoid repeating recurring StartJobRun API request values, enforcing
+    # certain values in StartJobRun API request.
+    #
+    # @option params [required, String] :id
+    #   The ID of the job template that will be described.
+    #
+    # @return [Types::DescribeJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeJobTemplateResponse#job_template #job_template} => Types::JobTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_job_template({
+    #     id: "ResourceIdString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_template.name #=> String
+    #   resp.job_template.id #=> String
+    #   resp.job_template.arn #=> String
+    #   resp.job_template.created_at #=> Time
+    #   resp.job_template.created_by #=> String
+    #   resp.job_template.tags #=> Hash
+    #   resp.job_template.tags["String128"] #=> String
+    #   resp.job_template.job_template_data.execution_role_arn #=> String
+    #   resp.job_template.job_template_data.release_label #=> String
+    #   resp.job_template.job_template_data.configuration_overrides.application_configuration #=> Array
+    #   resp.job_template.job_template_data.configuration_overrides.application_configuration[0].classification #=> String
+    #   resp.job_template.job_template_data.configuration_overrides.application_configuration[0].properties #=> Hash
+    #   resp.job_template.job_template_data.configuration_overrides.application_configuration[0].properties["String1024"] #=> String
+    #   resp.job_template.job_template_data.configuration_overrides.application_configuration[0].configurations #=> Types::ConfigurationList
+    #   resp.job_template.job_template_data.configuration_overrides.monitoring_configuration.persistent_app_ui #=> String
+    #   resp.job_template.job_template_data.configuration_overrides.monitoring_configuration.cloud_watch_monitoring_configuration.log_group_name #=> String
+    #   resp.job_template.job_template_data.configuration_overrides.monitoring_configuration.cloud_watch_monitoring_configuration.log_stream_name_prefix #=> String
+    #   resp.job_template.job_template_data.configuration_overrides.monitoring_configuration.s3_monitoring_configuration.log_uri #=> String
+    #   resp.job_template.job_template_data.job_driver.spark_submit_job_driver.entry_point #=> String
+    #   resp.job_template.job_template_data.job_driver.spark_submit_job_driver.entry_point_arguments #=> Array
+    #   resp.job_template.job_template_data.job_driver.spark_submit_job_driver.entry_point_arguments[0] #=> String
+    #   resp.job_template.job_template_data.job_driver.spark_submit_job_driver.spark_submit_parameters #=> String
+    #   resp.job_template.job_template_data.job_driver.spark_sql_job_driver.entry_point #=> String
+    #   resp.job_template.job_template_data.job_driver.spark_sql_job_driver.spark_sql_parameters #=> String
+    #   resp.job_template.job_template_data.parameter_configuration #=> Hash
+    #   resp.job_template.job_template_data.parameter_configuration["TemplateParameterName"].type #=> String, one of "NUMBER", "STRING"
+    #   resp.job_template.job_template_data.parameter_configuration["TemplateParameterName"].default_value #=> String
+    #   resp.job_template.job_template_data.job_tags #=> Hash
+    #   resp.job_template.job_template_data.job_tags["String128"] #=> String
+    #   resp.job_template.kms_key_arn #=> String
+    #   resp.job_template.decryption_error #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DescribeJobTemplate AWS API Documentation
+    #
+    # @overload describe_job_template(params = {})
+    # @param [Hash] params ({})
+    def describe_job_template(params = {}, options = {})
+      req = build_request(:describe_job_template, params)
       req.send_request(options)
     end
 
@@ -885,6 +1082,85 @@ module Aws::EMRContainers
     # @param [Hash] params ({})
     def list_job_runs(params = {}, options = {})
       req = build_request(:list_job_runs, params)
+      req.send_request(options)
+    end
+
+    # Lists job templates based on a set of parameters. Job template stores
+    # values of StartJobRun API request in a template and can be used to
+    # start a job run. Job template allows two use cases: avoid repeating
+    # recurring StartJobRun API request values, enforcing certain values in
+    # StartJobRun API request.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_after
+    #   The date and time after which the job templates were created.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_before
+    #   The date and time before which the job templates were created.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of job templates that can be listed.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of job templates to return.
+    #
+    # @return [Types::ListJobTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListJobTemplatesResponse#templates #templates} => Array&lt;Types::JobTemplate&gt;
+    #   * {Types::ListJobTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_job_templates({
+    #     created_after: Time.now,
+    #     created_before: Time.now,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.templates #=> Array
+    #   resp.templates[0].name #=> String
+    #   resp.templates[0].id #=> String
+    #   resp.templates[0].arn #=> String
+    #   resp.templates[0].created_at #=> Time
+    #   resp.templates[0].created_by #=> String
+    #   resp.templates[0].tags #=> Hash
+    #   resp.templates[0].tags["String128"] #=> String
+    #   resp.templates[0].job_template_data.execution_role_arn #=> String
+    #   resp.templates[0].job_template_data.release_label #=> String
+    #   resp.templates[0].job_template_data.configuration_overrides.application_configuration #=> Array
+    #   resp.templates[0].job_template_data.configuration_overrides.application_configuration[0].classification #=> String
+    #   resp.templates[0].job_template_data.configuration_overrides.application_configuration[0].properties #=> Hash
+    #   resp.templates[0].job_template_data.configuration_overrides.application_configuration[0].properties["String1024"] #=> String
+    #   resp.templates[0].job_template_data.configuration_overrides.application_configuration[0].configurations #=> Types::ConfigurationList
+    #   resp.templates[0].job_template_data.configuration_overrides.monitoring_configuration.persistent_app_ui #=> String
+    #   resp.templates[0].job_template_data.configuration_overrides.monitoring_configuration.cloud_watch_monitoring_configuration.log_group_name #=> String
+    #   resp.templates[0].job_template_data.configuration_overrides.monitoring_configuration.cloud_watch_monitoring_configuration.log_stream_name_prefix #=> String
+    #   resp.templates[0].job_template_data.configuration_overrides.monitoring_configuration.s3_monitoring_configuration.log_uri #=> String
+    #   resp.templates[0].job_template_data.job_driver.spark_submit_job_driver.entry_point #=> String
+    #   resp.templates[0].job_template_data.job_driver.spark_submit_job_driver.entry_point_arguments #=> Array
+    #   resp.templates[0].job_template_data.job_driver.spark_submit_job_driver.entry_point_arguments[0] #=> String
+    #   resp.templates[0].job_template_data.job_driver.spark_submit_job_driver.spark_submit_parameters #=> String
+    #   resp.templates[0].job_template_data.job_driver.spark_sql_job_driver.entry_point #=> String
+    #   resp.templates[0].job_template_data.job_driver.spark_sql_job_driver.spark_sql_parameters #=> String
+    #   resp.templates[0].job_template_data.parameter_configuration #=> Hash
+    #   resp.templates[0].job_template_data.parameter_configuration["TemplateParameterName"].type #=> String, one of "NUMBER", "STRING"
+    #   resp.templates[0].job_template_data.parameter_configuration["TemplateParameterName"].default_value #=> String
+    #   resp.templates[0].job_template_data.job_tags #=> Hash
+    #   resp.templates[0].job_template_data.job_tags["String128"] #=> String
+    #   resp.templates[0].kms_key_arn #=> String
+    #   resp.templates[0].decryption_error #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListJobTemplates AWS API Documentation
+    #
+    # @overload list_job_templates(params = {})
+    # @param [Hash] params ({})
+    def list_job_templates(params = {}, options = {})
+      req = build_request(:list_job_templates, params)
       req.send_request(options)
     end
 
@@ -1093,13 +1369,13 @@ module Aws::EMRContainers
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :execution_role_arn
+    # @option params [String] :execution_role_arn
     #   The execution role ARN for the job run.
     #
-    # @option params [required, String] :release_label
+    # @option params [String] :release_label
     #   The Amazon EMR release version to use for the job run.
     #
-    # @option params [required, Types::JobDriver] :job_driver
+    # @option params [Types::JobDriver] :job_driver
     #   The job driver for the job run.
     #
     # @option params [Types::ConfigurationOverrides] :configuration_overrides
@@ -1107,6 +1383,12 @@ module Aws::EMRContainers
     #
     # @option params [Hash<String,String>] :tags
     #   The tags assigned to job runs.
+    #
+    # @option params [String] :job_template_id
+    #   The job template ID to be used to start the job run.
+    #
+    # @option params [Hash<String,String>] :job_template_parameters
+    #   The values of job template parameters to start a job run.
     #
     # @return [Types::StartJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1121,9 +1403,9 @@ module Aws::EMRContainers
     #     name: "ResourceNameString",
     #     virtual_cluster_id: "ResourceIdString", # required
     #     client_token: "ClientToken", # required
-    #     execution_role_arn: "IAMRoleArn", # required
-    #     release_label: "ReleaseLabel", # required
-    #     job_driver: { # required
+    #     execution_role_arn: "IAMRoleArn",
+    #     release_label: "ReleaseLabel",
+    #     job_driver: {
     #       spark_submit_job_driver: {
     #         entry_point: "EntryPointPath", # required
     #         entry_point_arguments: ["EntryPointArgument"],
@@ -1159,6 +1441,10 @@ module Aws::EMRContainers
     #     },
     #     tags: {
     #       "String128" => "StringEmpty256",
+    #     },
+    #     job_template_id: "ResourceIdString",
+    #     job_template_parameters: {
+    #       "TemplateParameterName" => "String1024",
     #     },
     #   })
     #
@@ -1254,7 +1540,7 @@ module Aws::EMRContainers
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrcontainers'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

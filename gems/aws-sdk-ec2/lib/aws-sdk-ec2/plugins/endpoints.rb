@@ -138,6 +138,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::CancelConversionTask.build(context)
           when :cancel_export_task
             Aws::EC2::Endpoints::CancelExportTask.build(context)
+          when :cancel_image_launch_permission
+            Aws::EC2::Endpoints::CancelImageLaunchPermission.build(context)
           when :cancel_import_task
             Aws::EC2::Endpoints::CancelImportTask.build(context)
           when :cancel_reserved_instances_listing

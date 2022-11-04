@@ -225,6 +225,8 @@ module Aws::EC2
     CancelCapacityReservationResult = Shapes::StructureShape.new(name: 'CancelCapacityReservationResult')
     CancelConversionRequest = Shapes::StructureShape.new(name: 'CancelConversionRequest')
     CancelExportTaskRequest = Shapes::StructureShape.new(name: 'CancelExportTaskRequest')
+    CancelImageLaunchPermissionRequest = Shapes::StructureShape.new(name: 'CancelImageLaunchPermissionRequest')
+    CancelImageLaunchPermissionResult = Shapes::StructureShape.new(name: 'CancelImageLaunchPermissionResult')
     CancelImportTaskRequest = Shapes::StructureShape.new(name: 'CancelImportTaskRequest')
     CancelImportTaskResult = Shapes::StructureShape.new(name: 'CancelImportTaskResult')
     CancelReservedInstancesListingRequest = Shapes::StructureShape.new(name: 'CancelReservedInstancesListingRequest')
@@ -3502,6 +3504,13 @@ module Aws::EC2
 
     CancelExportTaskRequest.add_member(:export_task_id, Shapes::ShapeRef.new(shape: ExportVmTaskId, required: true, location_name: "exportTaskId"))
     CancelExportTaskRequest.struct_class = Types::CancelExportTaskRequest
+
+    CancelImageLaunchPermissionRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    CancelImageLaunchPermissionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CancelImageLaunchPermissionRequest.struct_class = Types::CancelImageLaunchPermissionRequest
+
+    CancelImageLaunchPermissionResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    CancelImageLaunchPermissionResult.struct_class = Types::CancelImageLaunchPermissionResult
 
     CancelImportTaskRequest.add_member(:cancel_reason, Shapes::ShapeRef.new(shape: String, location_name: "CancelReason"))
     CancelImportTaskRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -14052,6 +14061,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CancelExportTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:cancel_image_launch_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelImageLaunchPermission"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelImageLaunchPermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelImageLaunchPermissionResult)
       end)
 
       api.add_operation(:cancel_import_task, Seahorse::Model::Operation.new.tap do |o|

@@ -4238,6 +4238,48 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CancelImageLaunchPermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_id: "ImageId", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI that was shared with your Amazon Web Services
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelImageLaunchPermissionRequest AWS API Documentation
+    #
+    class CancelImageLaunchPermissionRequest < Struct.new(
+      :image_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelImageLaunchPermissionResult AWS API Documentation
+    #
+    class CancelImageLaunchPermissionResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelImportTaskRequest
     #   data as a hash:
     #
@@ -33557,7 +33599,8 @@ module Aws::EC2
     #   for seconds, Amazon EC2 rounds the seconds to the nearest minute.
     #
     #   You can’t specify a date in the past. The upper limit for
-    #   `DeprecateAt` is 10 years from now.
+    #   `DeprecateAt` is 10 years from now, except for public AMIs, where
+    #   the upper limit is 2 years from the creation date.
     #   @return [Time]
     #
     # @!attribute [rw] dry_run

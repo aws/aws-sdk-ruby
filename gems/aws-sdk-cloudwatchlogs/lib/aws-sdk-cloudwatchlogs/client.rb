@@ -464,6 +464,12 @@ module Aws::CloudWatchLogs
     # permission to write to the S3 bucket that you specify as the
     # destination.
     #
+    # Exporting log data to Amazon S3 buckets that are encrypted by KMS is
+    # supported. Exporting log data to Amazon S3 buckets that have S3 Object
+    # Lock enabled with a retention period is also supported.
+    #
+    # Exporting to S3 buckets that are encrypted with AES-256 is supported.
+    #
     # This is an asynchronous call. If all the required information is
     # provided, this operation initiates an export task and responds with
     # the ID of the task. After the task has started, you can use
@@ -476,8 +482,11 @@ module Aws::CloudWatchLogs
     # you can specify a prefix to be used as the Amazon S3 key prefix for
     # all exported objects.
     #
-    # Exporting to S3 buckets that are encrypted with AES-256 is supported.
-    # Exporting to S3 buckets encrypted with SSE-KMS is not supported.
+    # <note markdown="1"> Time-based sorting on chunks of log data inside an exported file is
+    # not guaranteed. You can sort the exported log fild data by using Linux
+    # utilities.
+    #
+    #  </note>
     #
     #
     #
@@ -503,6 +512,9 @@ module Aws::CloudWatchLogs
     #   The end time of the range for the request, expressed as the number of
     #   milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp
     #   later than this time are not exported.
+    #
+    #   You must specify a time that is not earlier than when this log group
+    #   was created.
     #
     # @option params [required, String] :destination
     #   The name of S3 bucket for the exported log data. The bucket must be in
@@ -893,7 +905,7 @@ module Aws::CloudWatchLogs
     #
     # @option params [Integer] :limit
     #   The maximum number of items returned. If you don't specify a value,
-    #   the default is up to 50 items.
+    #   the default maximum value of 50 items is used.
     #
     # @return [Types::DescribeDestinationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1440,6 +1452,9 @@ module Aws::CloudWatchLogs
     # Lists log events from the specified log group. You can list all the
     # log events or filter the results using a filter pattern, a time range,
     # and the name of the log stream.
+    #
+    # You must have the `logs;FilterLogEvents` permission to perform this
+    # operation.
     #
     # By default, this operation returns as many log events as can fit in 1
     # MB (up to 10,000 log events) or all the events found within the time
@@ -2325,13 +2340,29 @@ module Aws::CloudWatchLogs
     # allows you to configure the number of days for which to retain log
     # events in the specified log group.
     #
+    # <note markdown="1"> CloudWatch Logs doesn’t immediately delete log events when they reach
+    # their retention setting. It typically takes up to 72 hours after that
+    # before log events are deleted, but in rare situations might take
+    # longer.
+    #
+    #  This means that if you change a log group to have a longer retention
+    # setting when it contains log events that are past the expiration date,
+    # but haven’t been actually deleted, those log events will take up to 72
+    # hours to be deleted after the new retention date is reached. To make
+    # sure that log data is deleted permanently, keep a log group at its
+    # lower retention setting until 72 hours has passed after the end of the
+    # previous retention period, or you have confirmed that the older log
+    # events are deleted.
+    #
+    #  </note>
+    #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
     #
     # @option params [required, Integer] :retention_in_days
     #   The number of days to retain the log events in the specified log
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180,
-    #   365, 400, 545, 731, 1827, and 3653.
+    #   365, 400, 545, 731, 1827, 2192, 2557, 2922, 3288, and 3653.
     #
     #   To set a log group to never have log events expire, use
     #   [DeleteRetentionPolicy][1].
@@ -2474,6 +2505,9 @@ module Aws::CloudWatchLogs
     # Queries time out after 15 minutes of execution. If your queries are
     # timing out, reduce the time range being searched or partition your
     # query into a number of queries.
+    #
+    # You are limited to 20 concurrent CloudWatch Logs insights queries,
+    # including queries that have been added to dashboards.
     #
     #
     #
@@ -2819,7 +2853,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

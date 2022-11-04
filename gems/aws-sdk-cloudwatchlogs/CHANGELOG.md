@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2022-11-04)
+------------------
+
+* Feature - Doc-only update for bug fixes and support of export to buckets encrypted with SSE-KMS
+
 1.55.0 (2022-10-31)
 ------------------
 

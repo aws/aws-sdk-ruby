@@ -263,6 +263,128 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateJobTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ResourceNameString", # required
+    #         client_token: "ClientToken", # required
+    #         job_template_data: { # required
+    #           execution_role_arn: "ParametricIAMRoleArn", # required
+    #           release_label: "ParametricReleaseLabel", # required
+    #           configuration_overrides: {
+    #             application_configuration: [
+    #               {
+    #                 classification: "String1024", # required
+    #                 properties: {
+    #                   "String1024" => "String1024",
+    #                 },
+    #                 configurations: {
+    #                   # recursive ConfigurationList
+    #                 },
+    #               },
+    #             ],
+    #             monitoring_configuration: {
+    #               persistent_app_ui: "TemplateParameter",
+    #               cloud_watch_monitoring_configuration: {
+    #                 log_group_name: "TemplateParameter",
+    #                 log_stream_name_prefix: "String256",
+    #               },
+    #               s3_monitoring_configuration: {
+    #                 log_uri: "UriString",
+    #               },
+    #             },
+    #           },
+    #           job_driver: { # required
+    #             spark_submit_job_driver: {
+    #               entry_point: "EntryPointPath", # required
+    #               entry_point_arguments: ["EntryPointArgument"],
+    #               spark_submit_parameters: "SparkSubmitParameters",
+    #             },
+    #             spark_sql_job_driver: {
+    #               entry_point: "EntryPointPath",
+    #               spark_sql_parameters: "SparkSqlParameters",
+    #             },
+    #           },
+    #           parameter_configuration: {
+    #             "TemplateParameterName" => {
+    #               type: "NUMBER", # accepts NUMBER, STRING
+    #               default_value: "String1024",
+    #             },
+    #           },
+    #           job_tags: {
+    #             "String128" => "StringEmpty256",
+    #           },
+    #         },
+    #         tags: {
+    #           "String128" => "StringEmpty256",
+    #         },
+    #         kms_key_arn: "KmsKeyArn",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The specified name of the job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The client token of the job template.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_template_data
+    #   The job template data which holds values of StartJobRun API request.
+    #   @return [Types::JobTemplateData]
+    #
+    # @!attribute [rw] tags
+    #   The tags that are associated with the job template.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The KMS key ARN used to encrypt the job template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/CreateJobTemplateRequest AWS API Documentation
+    #
+    class CreateJobTemplateRequest < Struct.new(
+      :name,
+      :client_token,
+      :job_template_data,
+      :tags,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   This output display the created job template ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   This output displays the name of the created job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   This output display the ARN of the created job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   This output displays the date and time when the job template was
+    #   created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/CreateJobTemplateResponse AWS API Documentation
+    #
+    class CreateJobTemplateResponse < Struct.new(
+      :id,
+      :name,
+      :arn,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateManagedEndpointRequest
     #   data as a hash:
     #
@@ -459,6 +581,37 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteJobTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ResourceIdString", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the job template that will be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DeleteJobTemplateRequest AWS API Documentation
+    #
+    class DeleteJobTemplateRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   This output contains the ID of the job template that was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DeleteJobTemplateResponse AWS API Documentation
+    #
+    class DeleteJobTemplateResponse < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteManagedEndpointRequest
     #   data as a hash:
     #
@@ -566,6 +719,37 @@ module Aws::EMRContainers
     #
     class DescribeJobRunResponse < Struct.new(
       :job_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeJobTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ResourceIdString", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the job template that will be described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DescribeJobTemplateRequest AWS API Documentation
+    #
+    class DescribeJobTemplateRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_template
+    #   This output displays information about the specified job template.
+    #   @return [Types::JobTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DescribeJobTemplateResponse AWS API Documentation
+    #
+    class DescribeJobTemplateResponse < Struct.new(
+      :job_template)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -776,7 +960,9 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
-    # Specify the driver that the job runs on.
+    # Specify the driver that the job runs on. Exactly one of the two
+    # available job drivers is required, either sparkSqlJobDriver or
+    # sparkSubmitJobDriver.
     #
     # @note When making an API call, you may pass JobDriver
     #   data as a hash:
@@ -902,6 +1088,158 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
+    # This entity describes a job template. Job template stores values of
+    # StartJobRun API request in a template and can be used to start a job
+    # run. Job template allows two use cases: avoid repeating recurring
+    # StartJobRun API request values, enforcing certain values in
+    # StartJobRun API request.
+    #
+    # @!attribute [rw] name
+    #   The name of the job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the job template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the job template.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] job_template_data
+    #   The job template data which holds values of StartJobRun API request.
+    #   @return [Types::JobTemplateData]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The KMS key ARN used to encrypt the job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] decryption_error
+    #   The error message in case the decryption of job template fails.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/JobTemplate AWS API Documentation
+    #
+    class JobTemplate < Struct.new(
+      :name,
+      :id,
+      :arn,
+      :created_at,
+      :created_by,
+      :tags,
+      :job_template_data,
+      :kms_key_arn,
+      :decryption_error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The values of StartJobRun API requests used in job runs started using
+    # the job template.
+    #
+    # @note When making an API call, you may pass JobTemplateData
+    #   data as a hash:
+    #
+    #       {
+    #         execution_role_arn: "ParametricIAMRoleArn", # required
+    #         release_label: "ParametricReleaseLabel", # required
+    #         configuration_overrides: {
+    #           application_configuration: [
+    #             {
+    #               classification: "String1024", # required
+    #               properties: {
+    #                 "String1024" => "String1024",
+    #               },
+    #               configurations: {
+    #                 # recursive ConfigurationList
+    #               },
+    #             },
+    #           ],
+    #           monitoring_configuration: {
+    #             persistent_app_ui: "TemplateParameter",
+    #             cloud_watch_monitoring_configuration: {
+    #               log_group_name: "TemplateParameter",
+    #               log_stream_name_prefix: "String256",
+    #             },
+    #             s3_monitoring_configuration: {
+    #               log_uri: "UriString",
+    #             },
+    #           },
+    #         },
+    #         job_driver: { # required
+    #           spark_submit_job_driver: {
+    #             entry_point: "EntryPointPath", # required
+    #             entry_point_arguments: ["EntryPointArgument"],
+    #             spark_submit_parameters: "SparkSubmitParameters",
+    #           },
+    #           spark_sql_job_driver: {
+    #             entry_point: "EntryPointPath",
+    #             spark_sql_parameters: "SparkSqlParameters",
+    #           },
+    #         },
+    #         parameter_configuration: {
+    #           "TemplateParameterName" => {
+    #             type: "NUMBER", # accepts NUMBER, STRING
+    #             default_value: "String1024",
+    #           },
+    #         },
+    #         job_tags: {
+    #           "String128" => "StringEmpty256",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The execution role ARN of the job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] release_label
+    #   The release version of Amazon EMR.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_overrides
+    #   The configuration settings that are used to override defaults
+    #   configuration.
+    #   @return [Types::ParametricConfigurationOverrides]
+    #
+    # @!attribute [rw] job_driver
+    #   Specify the driver that the job runs on. Exactly one of the two
+    #   available job drivers is required, either sparkSqlJobDriver or
+    #   sparkSubmitJobDriver.
+    #   @return [Types::JobDriver]
+    #
+    # @!attribute [rw] parameter_configuration
+    #   The configuration of parameters existing in the job template.
+    #   @return [Hash<String,Types::TemplateParameterConfiguration>]
+    #
+    # @!attribute [rw] job_tags
+    #   The tags assigned to jobs started using the job template.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/JobTemplateData AWS API Documentation
+    #
+    class JobTemplateData < Struct.new(
+      :execution_role_arn,
+      :release_label,
+      :configuration_overrides,
+      :job_driver,
+      :parameter_configuration,
+      :job_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListJobRunsRequest
     #   data as a hash:
     #
@@ -969,6 +1307,60 @@ module Aws::EMRContainers
     #
     class ListJobRunsResponse < Struct.new(
       :job_runs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListJobTemplatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         created_after: Time.now,
+    #         created_before: Time.now,
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] created_after
+    #   The date and time after which the job templates were created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_before
+    #   The date and time before which the job templates were created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of job templates that can be listed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of job templates to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListJobTemplatesRequest AWS API Documentation
+    #
+    class ListJobTemplatesRequest < Struct.new(
+      :created_after,
+      :created_before,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] templates
+    #   This output lists information about the specified job templates.
+    #   @return [Array<Types::JobTemplate>]
+    #
+    # @!attribute [rw] next_token
+    #   This output displays the token for the next set of job templates.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListJobTemplatesResponse AWS API Documentation
+    #
+    class ListJobTemplatesResponse < Struct.new(
+      :templates,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1188,6 +1580,145 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
+    # A configuration for CloudWatch monitoring. You can configure your jobs
+    # to send log information to CloudWatch Logs. This data type allows job
+    # template parameters to be specified within.
+    #
+    # @note When making an API call, you may pass ParametricCloudWatchMonitoringConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_name: "TemplateParameter",
+    #         log_stream_name_prefix: "String256",
+    #       }
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group for log publishing.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_stream_name_prefix
+    #   The specified name prefix for log streams.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ParametricCloudWatchMonitoringConfiguration AWS API Documentation
+    #
+    class ParametricCloudWatchMonitoringConfiguration < Struct.new(
+      :log_group_name,
+      :log_stream_name_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A configuration specification to be used to override existing
+    # configurations. This data type allows job template parameters to be
+    # specified within.
+    #
+    # @note When making an API call, you may pass ParametricConfigurationOverrides
+    #   data as a hash:
+    #
+    #       {
+    #         application_configuration: [
+    #           {
+    #             classification: "String1024", # required
+    #             properties: {
+    #               "String1024" => "String1024",
+    #             },
+    #             configurations: {
+    #               # recursive ConfigurationList
+    #             },
+    #           },
+    #         ],
+    #         monitoring_configuration: {
+    #           persistent_app_ui: "TemplateParameter",
+    #           cloud_watch_monitoring_configuration: {
+    #             log_group_name: "TemplateParameter",
+    #             log_stream_name_prefix: "String256",
+    #           },
+    #           s3_monitoring_configuration: {
+    #             log_uri: "UriString",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_configuration
+    #   The configurations for the application running by the job run.
+    #   @return [Array<Types::Configuration>]
+    #
+    # @!attribute [rw] monitoring_configuration
+    #   The configurations for monitoring.
+    #   @return [Types::ParametricMonitoringConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ParametricConfigurationOverrides AWS API Documentation
+    #
+    class ParametricConfigurationOverrides < Struct.new(
+      :application_configuration,
+      :monitoring_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration setting for monitoring. This data type allows job
+    # template parameters to be specified within.
+    #
+    # @note When making an API call, you may pass ParametricMonitoringConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         persistent_app_ui: "TemplateParameter",
+    #         cloud_watch_monitoring_configuration: {
+    #           log_group_name: "TemplateParameter",
+    #           log_stream_name_prefix: "String256",
+    #         },
+    #         s3_monitoring_configuration: {
+    #           log_uri: "UriString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] persistent_app_ui
+    #   Monitoring configurations for the persistent application UI.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_monitoring_configuration
+    #   Monitoring configurations for CloudWatch.
+    #   @return [Types::ParametricCloudWatchMonitoringConfiguration]
+    #
+    # @!attribute [rw] s3_monitoring_configuration
+    #   Amazon S3 configuration for monitoring log publishing.
+    #   @return [Types::ParametricS3MonitoringConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ParametricMonitoringConfiguration AWS API Documentation
+    #
+    class ParametricMonitoringConfiguration < Struct.new(
+      :persistent_app_ui,
+      :cloud_watch_monitoring_configuration,
+      :s3_monitoring_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon S3 configuration for monitoring log publishing. You can
+    # configure your jobs to send log information to Amazon S3. This data
+    # type allows job template parameters to be specified within.
+    #
+    # @note When making an API call, you may pass ParametricS3MonitoringConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         log_uri: "UriString",
+    #       }
+    #
+    # @!attribute [rw] log_uri
+    #   Amazon S3 destination URI for log publishing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ParametricS3MonitoringConfiguration AWS API Documentation
+    #
+    class ParametricS3MonitoringConfiguration < Struct.new(
+      :log_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified resource was not found.
     #
     # @!attribute [rw] message
@@ -1290,9 +1821,9 @@ module Aws::EMRContainers
     #         name: "ResourceNameString",
     #         virtual_cluster_id: "ResourceIdString", # required
     #         client_token: "ClientToken", # required
-    #         execution_role_arn: "IAMRoleArn", # required
-    #         release_label: "ReleaseLabel", # required
-    #         job_driver: { # required
+    #         execution_role_arn: "IAMRoleArn",
+    #         release_label: "ReleaseLabel",
+    #         job_driver: {
     #           spark_submit_job_driver: {
     #             entry_point: "EntryPointPath", # required
     #             entry_point_arguments: ["EntryPointArgument"],
@@ -1328,6 +1859,10 @@ module Aws::EMRContainers
     #         },
     #         tags: {
     #           "String128" => "StringEmpty256",
+    #         },
+    #         job_template_id: "ResourceIdString",
+    #         job_template_parameters: {
+    #           "TemplateParameterName" => "String1024",
     #         },
     #       }
     #
@@ -1366,6 +1901,14 @@ module Aws::EMRContainers
     #   The tags assigned to job runs.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] job_template_id
+    #   The job template ID to be used to start the job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_template_parameters
+    #   The values of job template parameters to start a job run.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/StartJobRunRequest AWS API Documentation
     #
     class StartJobRunRequest < Struct.new(
@@ -1376,7 +1919,9 @@ module Aws::EMRContainers
       :release_label,
       :job_driver,
       :configuration_overrides,
-      :tags)
+      :tags,
+      :job_template_id,
+      :job_template_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1439,6 +1984,34 @@ module Aws::EMRContainers
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The configuration of a job template parameter.
+    #
+    # @note When making an API call, you may pass TemplateParameterConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         type: "NUMBER", # accepts NUMBER, STRING
+    #         default_value: "String1024",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of the job template parameter. Allowed values are:
+    #   ‘String’, ‘Number’.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The default value for the job template parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/TemplateParameterConfiguration AWS API Documentation
+    #
+    class TemplateParameterConfiguration < Struct.new(
+      :type,
+      :default_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:

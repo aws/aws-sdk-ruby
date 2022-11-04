@@ -3638,6 +3638,49 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Removes your Amazon Web Services account from the launch permissions
+    # for the specified AMI. For more information, see [Cancel sharing an
+    # AMI with your Amazon Web Services account][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/
+    #
+    # @option params [required, String] :image_id
+    #   The ID of the AMI that was shared with your Amazon Web Services
+    #   account.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CancelImageLaunchPermissionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelImageLaunchPermissionResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_image_launch_permission({
+    #     image_id: "ImageId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelImageLaunchPermission AWS API Documentation
+    #
+    # @overload cancel_image_launch_permission(params = {})
+    # @param [Hash] params ({})
+    def cancel_image_launch_permission(params = {}, options = {})
+      req = build_request(:cancel_image_launch_permission, params)
+      req.send_request(options)
+    end
+
     # Cancels an in-process import virtual machine or import snapshot task.
     #
     # @option params [String] :cancel_reason
@@ -35774,7 +35817,8 @@ module Aws::EC2
     #   seconds, Amazon EC2 rounds the seconds to the nearest minute.
     #
     #   You can’t specify a date in the past. The upper limit for
-    #   `DeprecateAt` is 10 years from now.
+    #   `DeprecateAt` is 10 years from now, except for public AMIs, where the
+    #   upper limit is 2 years from the creation date.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -52433,7 +52477,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.344.0'
+      context[:gem_version] = '1.345.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

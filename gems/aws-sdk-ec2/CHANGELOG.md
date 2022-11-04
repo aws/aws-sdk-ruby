@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.345.0 (2022-11-04)
+------------------
+
+* Feature - This release adds API support for the recipient of an AMI account share to remove shared AMI launch permissions.
+
 1.344.0 (2022-10-31)
 ------------------
 

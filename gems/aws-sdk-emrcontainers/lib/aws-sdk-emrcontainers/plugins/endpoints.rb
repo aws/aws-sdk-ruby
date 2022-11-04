@@ -58,22 +58,30 @@ module Aws::EMRContainers
           case context.operation_name
           when :cancel_job_run
             Aws::EMRContainers::Endpoints::CancelJobRun.build(context)
+          when :create_job_template
+            Aws::EMRContainers::Endpoints::CreateJobTemplate.build(context)
           when :create_managed_endpoint
             Aws::EMRContainers::Endpoints::CreateManagedEndpoint.build(context)
           when :create_virtual_cluster
             Aws::EMRContainers::Endpoints::CreateVirtualCluster.build(context)
+          when :delete_job_template
+            Aws::EMRContainers::Endpoints::DeleteJobTemplate.build(context)
           when :delete_managed_endpoint
             Aws::EMRContainers::Endpoints::DeleteManagedEndpoint.build(context)
           when :delete_virtual_cluster
             Aws::EMRContainers::Endpoints::DeleteVirtualCluster.build(context)
           when :describe_job_run
             Aws::EMRContainers::Endpoints::DescribeJobRun.build(context)
+          when :describe_job_template
+            Aws::EMRContainers::Endpoints::DescribeJobTemplate.build(context)
           when :describe_managed_endpoint
             Aws::EMRContainers::Endpoints::DescribeManagedEndpoint.build(context)
           when :describe_virtual_cluster
             Aws::EMRContainers::Endpoints::DescribeVirtualCluster.build(context)
           when :list_job_runs
             Aws::EMRContainers::Endpoints::ListJobRuns.build(context)
+          when :list_job_templates
+            Aws::EMRContainers::Endpoints::ListJobTemplates.build(context)
           when :list_managed_endpoints
             Aws::EMRContainers::Endpoints::ListManagedEndpoints.build(context)
           when :list_tags_for_resource

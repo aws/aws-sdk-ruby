@@ -25,6 +25,20 @@ module Aws::EMRContainers
       end
     end
 
+    class CreateJobTemplate
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EMRContainers::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateManagedEndpoint
       def self.build(context)
         unless context.config.regional_endpoint
@@ -40,6 +54,20 @@ module Aws::EMRContainers
     end
 
     class CreateVirtualCluster
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EMRContainers::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeleteJobTemplate
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -95,6 +123,20 @@ module Aws::EMRContainers
       end
     end
 
+    class DescribeJobTemplate
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EMRContainers::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribeManagedEndpoint
       def self.build(context)
         unless context.config.regional_endpoint
@@ -124,6 +166,20 @@ module Aws::EMRContainers
     end
 
     class ListJobRuns
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EMRContainers::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListJobTemplates
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

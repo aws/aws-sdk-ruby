@@ -27,17 +27,23 @@ module Aws::EMRContainers
     ContainerInfo = Shapes::UnionShape.new(name: 'ContainerInfo')
     ContainerProvider = Shapes::StructureShape.new(name: 'ContainerProvider')
     ContainerProviderType = Shapes::StringShape.new(name: 'ContainerProviderType')
+    CreateJobTemplateRequest = Shapes::StructureShape.new(name: 'CreateJobTemplateRequest')
+    CreateJobTemplateResponse = Shapes::StructureShape.new(name: 'CreateJobTemplateResponse')
     CreateManagedEndpointRequest = Shapes::StructureShape.new(name: 'CreateManagedEndpointRequest')
     CreateManagedEndpointResponse = Shapes::StructureShape.new(name: 'CreateManagedEndpointResponse')
     CreateVirtualClusterRequest = Shapes::StructureShape.new(name: 'CreateVirtualClusterRequest')
     CreateVirtualClusterResponse = Shapes::StructureShape.new(name: 'CreateVirtualClusterResponse')
     Date = Shapes::TimestampShape.new(name: 'Date', timestampFormat: "iso8601")
+    DeleteJobTemplateRequest = Shapes::StructureShape.new(name: 'DeleteJobTemplateRequest')
+    DeleteJobTemplateResponse = Shapes::StructureShape.new(name: 'DeleteJobTemplateResponse')
     DeleteManagedEndpointRequest = Shapes::StructureShape.new(name: 'DeleteManagedEndpointRequest')
     DeleteManagedEndpointResponse = Shapes::StructureShape.new(name: 'DeleteManagedEndpointResponse')
     DeleteVirtualClusterRequest = Shapes::StructureShape.new(name: 'DeleteVirtualClusterRequest')
     DeleteVirtualClusterResponse = Shapes::StructureShape.new(name: 'DeleteVirtualClusterResponse')
     DescribeJobRunRequest = Shapes::StructureShape.new(name: 'DescribeJobRunRequest')
     DescribeJobRunResponse = Shapes::StructureShape.new(name: 'DescribeJobRunResponse')
+    DescribeJobTemplateRequest = Shapes::StructureShape.new(name: 'DescribeJobTemplateRequest')
+    DescribeJobTemplateResponse = Shapes::StructureShape.new(name: 'DescribeJobTemplateResponse')
     DescribeManagedEndpointRequest = Shapes::StructureShape.new(name: 'DescribeManagedEndpointRequest')
     DescribeManagedEndpointResponse = Shapes::StructureShape.new(name: 'DescribeManagedEndpointResponse')
     DescribeVirtualClusterRequest = Shapes::StructureShape.new(name: 'DescribeVirtualClusterRequest')
@@ -63,9 +69,16 @@ module Aws::EMRContainers
     JobRunState = Shapes::StringShape.new(name: 'JobRunState')
     JobRunStates = Shapes::ListShape.new(name: 'JobRunStates')
     JobRuns = Shapes::ListShape.new(name: 'JobRuns')
+    JobTemplate = Shapes::StructureShape.new(name: 'JobTemplate')
+    JobTemplateArn = Shapes::StringShape.new(name: 'JobTemplateArn')
+    JobTemplateData = Shapes::StructureShape.new(name: 'JobTemplateData')
+    JobTemplates = Shapes::ListShape.new(name: 'JobTemplates')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     KubernetesNamespace = Shapes::StringShape.new(name: 'KubernetesNamespace')
     ListJobRunsRequest = Shapes::StructureShape.new(name: 'ListJobRunsRequest')
     ListJobRunsResponse = Shapes::StructureShape.new(name: 'ListJobRunsResponse')
+    ListJobTemplatesRequest = Shapes::StructureShape.new(name: 'ListJobTemplatesRequest')
+    ListJobTemplatesResponse = Shapes::StructureShape.new(name: 'ListJobTemplatesResponse')
     ListManagedEndpointsRequest = Shapes::StructureShape.new(name: 'ListManagedEndpointsRequest')
     ListManagedEndpointsResponse = Shapes::StructureShape.new(name: 'ListManagedEndpointsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -75,6 +88,12 @@ module Aws::EMRContainers
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     MonitoringConfiguration = Shapes::StructureShape.new(name: 'MonitoringConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    ParametricCloudWatchMonitoringConfiguration = Shapes::StructureShape.new(name: 'ParametricCloudWatchMonitoringConfiguration')
+    ParametricConfigurationOverrides = Shapes::StructureShape.new(name: 'ParametricConfigurationOverrides')
+    ParametricIAMRoleArn = Shapes::StringShape.new(name: 'ParametricIAMRoleArn')
+    ParametricMonitoringConfiguration = Shapes::StructureShape.new(name: 'ParametricMonitoringConfiguration')
+    ParametricReleaseLabel = Shapes::StringShape.new(name: 'ParametricReleaseLabel')
+    ParametricS3MonitoringConfiguration = Shapes::StructureShape.new(name: 'ParametricS3MonitoringConfiguration')
     PersistentAppUI = Shapes::StringShape.new(name: 'PersistentAppUI')
     ReleaseLabel = Shapes::StringShape.new(name: 'ReleaseLabel')
     RequestIdentityUserArn = Shapes::StringShape.new(name: 'RequestIdentityUserArn')
@@ -92,6 +111,7 @@ module Aws::EMRContainers
     StartJobRunResponse = Shapes::StructureShape.new(name: 'StartJobRunResponse')
     String1024 = Shapes::StringShape.new(name: 'String1024')
     String128 = Shapes::StringShape.new(name: 'String128')
+    String2048 = Shapes::StringShape.new(name: 'String2048')
     String256 = Shapes::StringShape.new(name: 'String256')
     StringEmpty256 = Shapes::StringShape.new(name: 'StringEmpty256')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
@@ -99,6 +119,12 @@ module Aws::EMRContainers
     TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TemplateParameter = Shapes::StringShape.new(name: 'TemplateParameter')
+    TemplateParameterConfiguration = Shapes::StructureShape.new(name: 'TemplateParameterConfiguration')
+    TemplateParameterConfigurationMap = Shapes::MapShape.new(name: 'TemplateParameterConfigurationMap')
+    TemplateParameterDataType = Shapes::StringShape.new(name: 'TemplateParameterDataType')
+    TemplateParameterInputMap = Shapes::MapShape.new(name: 'TemplateParameterInputMap')
+    TemplateParameterName = Shapes::StringShape.new(name: 'TemplateParameterName')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UriString = Shapes::StringShape.new(name: 'UriString')
@@ -147,6 +173,19 @@ module Aws::EMRContainers
     ContainerProvider.add_member(:info, Shapes::ShapeRef.new(shape: ContainerInfo, location_name: "info"))
     ContainerProvider.struct_class = Types::ContainerProvider
 
+    CreateJobTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameString, required: true, location_name: "name"))
+    CreateJobTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateJobTemplateRequest.add_member(:job_template_data, Shapes::ShapeRef.new(shape: JobTemplateData, required: true, location_name: "jobTemplateData"))
+    CreateJobTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateJobTemplateRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    CreateJobTemplateRequest.struct_class = Types::CreateJobTemplateRequest
+
+    CreateJobTemplateResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
+    CreateJobTemplateResponse.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
+    CreateJobTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "arn"))
+    CreateJobTemplateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
+    CreateJobTemplateResponse.struct_class = Types::CreateJobTemplateResponse
+
     CreateManagedEndpointRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameString, required: true, location_name: "name"))
     CreateManagedEndpointRequest.add_member(:virtual_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "virtualClusterId"))
     CreateManagedEndpointRequest.add_member(:type, Shapes::ShapeRef.new(shape: EndpointType, required: true, location_name: "type"))
@@ -175,6 +214,12 @@ module Aws::EMRContainers
     CreateVirtualClusterResponse.add_member(:arn, Shapes::ShapeRef.new(shape: VirtualClusterArn, location_name: "arn"))
     CreateVirtualClusterResponse.struct_class = Types::CreateVirtualClusterResponse
 
+    DeleteJobTemplateRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "templateId"))
+    DeleteJobTemplateRequest.struct_class = Types::DeleteJobTemplateRequest
+
+    DeleteJobTemplateResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
+    DeleteJobTemplateResponse.struct_class = Types::DeleteJobTemplateResponse
+
     DeleteManagedEndpointRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "endpointId"))
     DeleteManagedEndpointRequest.add_member(:virtual_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "virtualClusterId"))
     DeleteManagedEndpointRequest.struct_class = Types::DeleteManagedEndpointRequest
@@ -195,6 +240,12 @@ module Aws::EMRContainers
 
     DescribeJobRunResponse.add_member(:job_run, Shapes::ShapeRef.new(shape: JobRun, location_name: "jobRun"))
     DescribeJobRunResponse.struct_class = Types::DescribeJobRunResponse
+
+    DescribeJobTemplateRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "templateId"))
+    DescribeJobTemplateRequest.struct_class = Types::DescribeJobTemplateRequest
+
+    DescribeJobTemplateResponse.add_member(:job_template, Shapes::ShapeRef.new(shape: JobTemplate, location_name: "jobTemplate"))
+    DescribeJobTemplateResponse.struct_class = Types::DescribeJobTemplateResponse
 
     DescribeManagedEndpointRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "endpointId"))
     DescribeManagedEndpointRequest.add_member(:virtual_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "virtualClusterId"))
@@ -269,6 +320,27 @@ module Aws::EMRContainers
 
     JobRuns.member = Shapes::ShapeRef.new(shape: JobRun)
 
+    JobTemplate.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
+    JobTemplate.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
+    JobTemplate.add_member(:arn, Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "arn"))
+    JobTemplate.add_member(:created_at, Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
+    JobTemplate.add_member(:created_by, Shapes::ShapeRef.new(shape: RequestIdentityUserArn, location_name: "createdBy"))
+    JobTemplate.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    JobTemplate.add_member(:job_template_data, Shapes::ShapeRef.new(shape: JobTemplateData, required: true, location_name: "jobTemplateData"))
+    JobTemplate.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    JobTemplate.add_member(:decryption_error, Shapes::ShapeRef.new(shape: String2048, location_name: "decryptionError"))
+    JobTemplate.struct_class = Types::JobTemplate
+
+    JobTemplateData.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ParametricIAMRoleArn, required: true, location_name: "executionRoleArn"))
+    JobTemplateData.add_member(:release_label, Shapes::ShapeRef.new(shape: ParametricReleaseLabel, required: true, location_name: "releaseLabel"))
+    JobTemplateData.add_member(:configuration_overrides, Shapes::ShapeRef.new(shape: ParametricConfigurationOverrides, location_name: "configurationOverrides"))
+    JobTemplateData.add_member(:job_driver, Shapes::ShapeRef.new(shape: JobDriver, required: true, location_name: "jobDriver"))
+    JobTemplateData.add_member(:parameter_configuration, Shapes::ShapeRef.new(shape: TemplateParameterConfigurationMap, location_name: "parameterConfiguration"))
+    JobTemplateData.add_member(:job_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "jobTags"))
+    JobTemplateData.struct_class = Types::JobTemplateData
+
+    JobTemplates.member = Shapes::ShapeRef.new(shape: JobTemplate)
+
     ListJobRunsRequest.add_member(:virtual_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "virtualClusterId"))
     ListJobRunsRequest.add_member(:created_before, Shapes::ShapeRef.new(shape: Date, location: "querystring", location_name: "createdBefore"))
     ListJobRunsRequest.add_member(:created_after, Shapes::ShapeRef.new(shape: Date, location: "querystring", location_name: "createdAfter"))
@@ -281,6 +353,16 @@ module Aws::EMRContainers
     ListJobRunsResponse.add_member(:job_runs, Shapes::ShapeRef.new(shape: JobRuns, location_name: "jobRuns"))
     ListJobRunsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListJobRunsResponse.struct_class = Types::ListJobRunsResponse
+
+    ListJobTemplatesRequest.add_member(:created_after, Shapes::ShapeRef.new(shape: Date, location: "querystring", location_name: "createdAfter"))
+    ListJobTemplatesRequest.add_member(:created_before, Shapes::ShapeRef.new(shape: Date, location: "querystring", location_name: "createdBefore"))
+    ListJobTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: JavaInteger, location: "querystring", location_name: "maxResults"))
+    ListJobTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListJobTemplatesRequest.struct_class = Types::ListJobTemplatesRequest
+
+    ListJobTemplatesResponse.add_member(:templates, Shapes::ShapeRef.new(shape: JobTemplates, location_name: "templates"))
+    ListJobTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListJobTemplatesResponse.struct_class = Types::ListJobTemplatesResponse
 
     ListManagedEndpointsRequest.add_member(:virtual_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "virtualClusterId"))
     ListManagedEndpointsRequest.add_member(:created_before, Shapes::ShapeRef.new(shape: Date, location: "querystring", location_name: "createdBefore"))
@@ -319,6 +401,22 @@ module Aws::EMRContainers
     MonitoringConfiguration.add_member(:s3_monitoring_configuration, Shapes::ShapeRef.new(shape: S3MonitoringConfiguration, location_name: "s3MonitoringConfiguration"))
     MonitoringConfiguration.struct_class = Types::MonitoringConfiguration
 
+    ParametricCloudWatchMonitoringConfiguration.add_member(:log_group_name, Shapes::ShapeRef.new(shape: TemplateParameter, location_name: "logGroupName"))
+    ParametricCloudWatchMonitoringConfiguration.add_member(:log_stream_name_prefix, Shapes::ShapeRef.new(shape: String256, location_name: "logStreamNamePrefix"))
+    ParametricCloudWatchMonitoringConfiguration.struct_class = Types::ParametricCloudWatchMonitoringConfiguration
+
+    ParametricConfigurationOverrides.add_member(:application_configuration, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "applicationConfiguration"))
+    ParametricConfigurationOverrides.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: ParametricMonitoringConfiguration, location_name: "monitoringConfiguration"))
+    ParametricConfigurationOverrides.struct_class = Types::ParametricConfigurationOverrides
+
+    ParametricMonitoringConfiguration.add_member(:persistent_app_ui, Shapes::ShapeRef.new(shape: TemplateParameter, location_name: "persistentAppUI"))
+    ParametricMonitoringConfiguration.add_member(:cloud_watch_monitoring_configuration, Shapes::ShapeRef.new(shape: ParametricCloudWatchMonitoringConfiguration, location_name: "cloudWatchMonitoringConfiguration"))
+    ParametricMonitoringConfiguration.add_member(:s3_monitoring_configuration, Shapes::ShapeRef.new(shape: ParametricS3MonitoringConfiguration, location_name: "s3MonitoringConfiguration"))
+    ParametricMonitoringConfiguration.struct_class = Types::ParametricMonitoringConfiguration
+
+    ParametricS3MonitoringConfiguration.add_member(:log_uri, Shapes::ShapeRef.new(shape: UriString, location_name: "logUri"))
+    ParametricS3MonitoringConfiguration.struct_class = Types::ParametricS3MonitoringConfiguration
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String1024, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -340,11 +438,13 @@ module Aws::EMRContainers
     StartJobRunRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
     StartJobRunRequest.add_member(:virtual_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "virtualClusterId"))
     StartJobRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    StartJobRunRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "executionRoleArn"))
-    StartJobRunRequest.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, required: true, location_name: "releaseLabel"))
-    StartJobRunRequest.add_member(:job_driver, Shapes::ShapeRef.new(shape: JobDriver, required: true, location_name: "jobDriver"))
+    StartJobRunRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "executionRoleArn"))
+    StartJobRunRequest.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel"))
+    StartJobRunRequest.add_member(:job_driver, Shapes::ShapeRef.new(shape: JobDriver, location_name: "jobDriver"))
     StartJobRunRequest.add_member(:configuration_overrides, Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "configurationOverrides"))
     StartJobRunRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartJobRunRequest.add_member(:job_template_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "jobTemplateId"))
+    StartJobRunRequest.add_member(:job_template_parameters, Shapes::ShapeRef.new(shape: TemplateParameterInputMap, location_name: "jobTemplateParameters"))
     StartJobRunRequest.struct_class = Types::StartJobRunRequest
 
     StartJobRunResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
@@ -365,6 +465,16 @@ module Aws::EMRContainers
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TemplateParameterConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: TemplateParameterDataType, location_name: "type"))
+    TemplateParameterConfiguration.add_member(:default_value, Shapes::ShapeRef.new(shape: String1024, location_name: "defaultValue"))
+    TemplateParameterConfiguration.struct_class = Types::TemplateParameterConfiguration
+
+    TemplateParameterConfigurationMap.key = Shapes::ShapeRef.new(shape: TemplateParameterName)
+    TemplateParameterConfigurationMap.value = Shapes::ShapeRef.new(shape: TemplateParameterConfiguration)
+
+    TemplateParameterInputMap.key = Shapes::ShapeRef.new(shape: TemplateParameterName)
+    TemplateParameterInputMap.value = Shapes::ShapeRef.new(shape: String1024)
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: RsiArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
@@ -416,6 +526,17 @@ module Aws::EMRContainers
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_job_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateJobTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/jobtemplates"
+        o.input = Shapes::ShapeRef.new(shape: CreateJobTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateJobTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_managed_endpoint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateManagedEndpoint"
         o.http_method = "POST"
@@ -435,6 +556,16 @@ module Aws::EMRContainers
         o.output = Shapes::ShapeRef.new(shape: CreateVirtualClusterResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_job_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteJobTemplate"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/jobtemplates/{templateId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteJobTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteJobTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -469,6 +600,17 @@ module Aws::EMRContainers
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:describe_job_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeJobTemplate"
+        o.http_method = "GET"
+        o.http_request_uri = "/jobtemplates/{templateId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeJobTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeJobTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:describe_managed_endpoint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeManagedEndpoint"
         o.http_method = "GET"
@@ -497,6 +639,22 @@ module Aws::EMRContainers
         o.http_request_uri = "/virtualclusters/{virtualClusterId}/jobruns"
         o.input = Shapes::ShapeRef.new(shape: ListJobRunsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListJobRunsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_job_templates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListJobTemplates"
+        o.http_method = "GET"
+        o.http_request_uri = "/jobtemplates"
+        o.input = Shapes::ShapeRef.new(shape: ListJobTemplatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListJobTemplatesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
